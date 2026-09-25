@@ -1,0 +1,9 @@
+item,rail,quantity,current_each_typ_mA,current_each_max_mA,total_typ_mA,total_max_mA,note
+DRV5055A3 reference sensors,HALL_5V,42,6,10,252,420,TI/LCSC current depends on conditions; max budget intentionally conservative
+TMUX1208,HALL_5V,6,0.01,0.1,0.06,0.6,logic current is small compared with sensors; verify from final datasheet and measurement
+RP2040 + flash + support,3V3,1,35,80,35,80,engineering allowance rather than final measured value
+Layer RGB,3V3,1,3,6,3,6,run at low indicator current
+Power LED,3V3,1,1,1.5,1,1.5,always on
+TOTAL from USB,VBUS,1,,,,291.1,508.1,upper estimate exceeds 500mA if every DRV5055 hits max; this is a design gate
+SL3102-3 alternative sensors,HALL_5V,42,5.4,5.4,226.8,226.8,published 5V current; candidate if evaluation quality is acceptable
+TOTAL with SL3102-3 candidate,VBUS,1,,,,265.8,314.9,approximate budget including same MCU/mux/LED allowances
