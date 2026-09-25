@@ -34,7 +34,7 @@ def transform(k):
 
 keys=[transform(k) for k in src["keys"]]
 with (HERE/"key_positions.csv").open("w",newline="",encoding="utf-8") as f:
-    w=csv.writer(f); w.writerow(["id","side","source_x_u","source_y_u","x_mm","y_mm","rotation_deg"])
+    w=csv.writer(f,lineterminator="\n"); w.writerow(["id","side","source_x_u","source_y_u","x_mm","y_mm","rotation_deg"])
     for k in keys:
         w.writerow([k["id"],k["side"],k["x"],k["y"],f'{k["x_mm"]:.4f}',f'{k["y_mm"]:.4f}',f'{k["rotation_deg"]:.1f}'])
 
