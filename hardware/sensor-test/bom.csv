@@ -4,18 +4,20 @@ Flash,U2,1,Winbond,W25Q16JVUXIQ,C2843335,USON-8-EP(2x3),16Mbit QSPI,baseline
 Crystal,Y1,1,Abracon,ABM8-272-T3,C20625731,SMD3225-4P,12MHz 10pF,baseline
 Logic regulator,U3,1,Diodes Inc.,AP2112K-3.3TRG1,C51118,SOT-25-5,3.3V 600mA,baseline
 Hall load switch,U4,1,Texas Instruments,TPS22919DCKR,C2149796,SC-70-6,switched HALL_5V,baseline
+Hall switch input decoupling,C25,1,TBD,TBD,TBD,0603,1uF X7R VBUS-to-GND,baseline
+Hall rail bulk/decoupling,C18,1,TBD,TBD,TBD,0603,1uF X7R HALL_5V-to-GND,baseline
 Analog mux,U5,1,Texas Instruments,TMUX1208PWR,C494728,TSSOP-16,8:1 mux,baseline
-Hall sensor,H1-H4,4,Texas Instruments,DRV5055A3QDBZR,C266128,SOT-23,+/-85mT 25mV/mT@5V,reference build
+Hall sensor,U6-U9,4,Texas Instruments,DRV5055A3QDBZR,C266128,SOT-23,+/-85mT 25mV/mT@5V,reference build
 USB connector,J1,1,Korean Hroparts Elec,TYPE-C-31-M-12,C165948,SMD,USB-C 16P,baseline
 USB CC resistors,R_CC1 R_CC2,2,TBD,TBD,TBD,0603,5.1k 1%,baseline
 USB series resistors,R_USB_DP R_USB_DM,2,TBD,TBD,TBD,0603,27R 1%,baseline
 Crystal series resistor,R_XOUT,1,TBD,TBD,TBD,0603,1k 1%,baseline
 Crystal load capacitors,C_XIN C_XOUT,2,TBD,TBD,TBD,0603,15pF C0G,baseline
-ADC divider top,R_ADC_TOP,1,TBD,TBD,TBD,0603,6.8k 1%,baseline
-ADC divider bottom,R_ADC_BOTTOM,1,TBD,TBD,TBD,0603,10k 1%,baseline
-ADC filter,C_ADC,1,TBD,TBD,TBD,0603,1nF C0G/X7R,baseline
-Hall decoupling,C_H1-C_H4,4,TBD,TBD,TBD,0402/0603,100nF X7R,baseline
-Mux decoupling,C_MUX,1,TBD,TBD,TBD,0603,100nF X7R,baseline
+ADC divider top,R6,1,TBD,TBD,TBD,0603,6.8k 1%,baseline
+ADC divider bottom,R7,1,TBD,TBD,TBD,0603,10k 1%,baseline
+ADC filter,C24,1,TBD,TBD,TBD,0603,1nF C0G/X7R,baseline
+Hall decoupling,C20-C23,4,TBD,TBD,TBD,0603,100nF X7R,baseline
+Mux decoupling,C19,1,TBD,TBD,TBD,0603,100nF X7R,baseline
 Power LED,D_PWR,1,TBD,TBD,TBD,0603/0805,green,baseline
 Power LED resistor,R_PWR,1,TBD,TBD,TBD,0603,target approx 1mA,baseline
 Status LED,D_STATUS,1,TBD,TBD,TBD,0603/0805,diagnostic LED,baseline
