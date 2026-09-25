@@ -1,4 +1,3 @@
-#include <inttypes.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -90,8 +89,8 @@ int main(void) {
             const uint16_t raw = read_adc_average();
             const uint64_t timestamp_us = time_us_64();
 
-            printf("%" PRIu64 ",%u,%u,%u,1,stream\n",
-                   timestamp_us,
+            printf("%llu,%u,%u,%u,1,stream\n",
+                   (unsigned long long)timestamp_us,
                    (unsigned)address,
                    (unsigned)address,
                    (unsigned)raw);
