@@ -1,0 +1,66 @@
+name: engineering-ci
+
+on:
+  push:
+    branches: ["main", "design/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  layout:
+    name: Layout generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate 42-key layout
+        run: |
+          python3 hardware/layout/generate_layout.py
+          git diff --exit-code -- hardware/layout/key_positions.csv hardware/layout/layout_preview.svg
+
+  kicad:
+    name: KiCad ERC / DRC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull official KiCad CLI image
+        run: docker pull kicad/kicad:9.0.9
+      - name: Run ERC and DRC
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-reports
+          found=0
+
+          while IFS= read -r -d '' sch; do
+            found=1
+            base="$(basename "$sch" .kicad_sch)"
+            echo "::group::ERC $sch"
+            docker run --rm -v "$PWD:/work" -w /work kicad/kicad:9.0.9 \
+              kicad-cli sch erc --severity-error --exit-code-violations \
+              --output "ci-reports/${base}-erc.rpt" "$sch"
+            echo "::endgroup::"
+          done < <(find hardware/sensor-test hardware/main -type f -name '*.kicad_sch' -print0 2>/dev/null)
+
+          while IFS= read -r -d '' pcb; do
+            found=1
+            base="$(basename "$pcb" .kicad_pcb)"
+            echo "::group::DRC $pcb"
+            docker run --rm -v "$PWD:/work" -w /work kicad/kicad:9.0.9 \
+              kicad-cli pcb drc --severity-error --exit-code-violations \
+              --output "ci-reports/${base}-drc.rpt" "$pcb"
+            echo "::endgroup::"
+          done < <(find hardware/sensor-test hardware/main -type f -name '*.kicad_pcb' -print0 2>/dev/null)
+
+          if [ "$found" -eq 0 ]; then
+            echo "No project KiCad files yet; reference designs under hardware/lib are intentionally skipped."
+          fi
+
+      - name: Upload KiCad reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kicad-reports
+          path: ci-reports/
+          if-no-files-found: ignore
