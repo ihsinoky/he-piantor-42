@@ -1,13 +1,13 @@
 # HE Piantor 42 - System Specification
 
-Status: Draft / Requirements phase
-Updated: 2026-09-25
+Status: Engineering / sensor-evaluation design
+Updated: 2026-09-26
 
 ## 1. Product concept
 
 A 42-key one-piece Hall-effect keyboard derived from the Beekeeb Piantor layout.
 
-The left and right key fields are joined into one PCB and arranged in a reverse-V shape. The current geometric interpretation is an internal angle of 120 degrees, equivalent to rotating the left and right key fields approximately -30 and +30 degrees from horizontal.
+The left and right key fields are joined into one PCB and arranged in a reverse-V shape. The current geometric interpretation is an internal angle of 120 degrees, equivalent to rotating the left and right key fields approximately +30 degrees for the left field and -30 degrees for the right field in the project coordinate convention (+x right, +y down).
 
 ## 2. Fixed user requirements
 
@@ -56,27 +56,31 @@ Current baseline:
 
 Beekeeb / Tai-Hao MT165-MX is the current reference part because it is explicitly 16.5 x 16.5 mm and supports an MX-style stem. Physical fit with the selected Hall-effect switch will still be checked before committing the main PCB.
 
-## 4. Electrical architecture - provisional
+## 4. Electrical architecture - provisional baseline
 
 The keyboard shall use analog Hall-effect sensing rather than a conventional switch matrix.
 
-Planned functional blocks:
+Current functional baseline:
 
-USB-C
--> ESD / protection
--> 3.3 V power
--> MCU
--> Hall-sensor acquisition
--> 42 Hall sensors
+USB-C / VBUS
+-> 3.3 V logic rail -> RP2040
+-> TPS22919 switched HALL_5V
+-> 42 analog Hall sensors
+-> six TMUX1208 multiplexers arranged as two banks of three
+-> three scaled ADC channels
+-> RP2040 ADC0 / ADC1 / ADC2
 
-The exact Hall sensor, analog multiplexer, and ADC topology are not frozen yet. They will be chosen with the following priorities:
+The production scan topology uses seven active addresses per bank:
+- shared MUX_A0 / MUX_A1 / MUX_A2,
+- MUX_EN0 and MUX_EN1 select one 21-key bank at a time,
+- three mux outputs are sampled in parallel by GPIO26 / GPIO27 / GPIO28,
+- 2 banks x 7 addresses x 3 ADC channels = 42 keys.
 
-1. Adequate magnetic range with the selected switch.
-2. Stable analog readings with enough margin for calibration.
-3. Sufficient scan rate for 42 keys.
-4. Low noise.
-5. Reasonable current consumption.
-6. Parts that can be assembled by JLCPCB without exceptional sourcing cost.
+Each mux output is scaled by a 6.8 kOhm / 10 kOhm divider and uses a 1 nF ADC-node capacitor as the initial settling/noise baseline.
+
+Both the evaluation PCB and production PCB use 1.2 mm PCB thickness as the baseline because the selected switch's published magnetic-flux figures are specified at 1.2 mm.
+
+The Hall sensor itself remains provisional until the evaluation PCB proves signal range, noise, travel curve, cross-key magnetic coupling, settling time, and power consumption. DRV5055A3 is the documented reference sensor; lower-current alternatives may be evaluated before the 42-key release.
 
 ### Power indicator
 
@@ -162,8 +166,7 @@ Required:
 ## 9. Open design questions
 
 - Final Hall sensor part.
-- Final analog multiplexer / ADC architecture.
-- Exact Piantor-to-17-mm coordinate transformation.
 - Exact center gap and wrist/hand spacing.
 - Whether a switch plate is required or PCB mounting alone is sufficient.
 - Whether advanced Rapid Trigger settings are required for v1.0.
+- Final Hall-sensor part after evaluation-board current/noise/travel measurements.
