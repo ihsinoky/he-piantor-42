@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: engineering-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   layout:
     name: Layout generator
