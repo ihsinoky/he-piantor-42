@@ -37,6 +37,7 @@ jobs:
           mkdir -p ci-reports
           chmod 777 ci-reports
           found=0
+          violations=0
 
           while IFS= read -r -d '' sch; do
             found=1
@@ -44,7 +45,7 @@ jobs:
             echo "::group::ERC $sch"
             docker run --rm -v "$PWD:/work" -w /work kicad/kicad:9.0.9 \
               kicad-cli sch erc --severity-error --exit-code-violations \
-              --output "ci-reports/${base}-erc.rpt" "$sch"
+              --output "ci-reports/${base}-erc.rpt" "$sch" || violations=1
             echo "::endgroup::"
           done < <(find hardware/sensor-test hardware/main -type f -name '*.kicad_sch' -print0 2>/dev/null)
 
@@ -54,13 +55,15 @@ jobs:
             echo "::group::DRC $pcb"
             docker run --rm -v "$PWD:/work" -w /work kicad/kicad:9.0.9 \
               kicad-cli pcb drc --severity-error --exit-code-violations \
-              --output "ci-reports/${base}-drc.rpt" "$pcb"
+              --output "ci-reports/${base}-drc.rpt" "$pcb" || violations=1
             echo "::endgroup::"
           done < <(find hardware/sensor-test hardware/main -type f -name '*.kicad_pcb' -print0 2>/dev/null)
 
           if [ "$found" -eq 0 ]; then
             echo "No project KiCad files yet; reference designs under hardware/lib are intentionally skipped."
           fi
+
+          exit "$violations"
 
       - name: Upload KiCad reports
         if: always()
