@@ -15,7 +15,13 @@ USB ESD,U10,1,STMicroelectronics,USBLC6-2SC6,C7519,SOT-23-6L,USB 2.0 two-line ES
 USB CC resistors,R1 R2,2,TBD,TBD,TBD,0603,5.1k 1%,baseline
 USB series resistors,R3 R4,2,TBD,TBD,TBD,0603,27R 1%,baseline
 Crystal series resistor,R5,1,TBD,TBD,TBD,0603,1k 1%,baseline
-Crystal load capacitors,C_XIN C_XOUT,2,TBD,TBD,TBD,0603,15pF C0G,baseline
+Flash decoupling,C3,1,TBD,TBD,TBD,0402,100nF X7R,baseline
+RP2040 high-frequency decoupling,C4-C8 C10 C12 C13 C16,9,TBD,TBD,TBD,0402,100nF X7R,baseline
+RP2040 regulator decoupling,C9 C11,2,TBD,TBD,TBD,0402,1uF X7R,baseline
+RP2040 bulk capacitor,C17,1,TBD,TBD,TBD,0805,10uF X7R,baseline
+QSPI optional resistor,R8,1,TBD,TBD,TBD,0603,DNF,do not fit
+BOOTSEL series resistor,R9,1,TBD,TBD,TBD,0603,1k 1%,baseline
+Crystal load capacitors,C14 C15,2,TBD,TBD,TBD,0402,15pF C0G,baseline
 ADC divider top,R6,1,TBD,TBD,TBD,0603,6.8k 1%,baseline
 ADC divider bottom,R7,1,TBD,TBD,TBD,0603,10k 1%,baseline
 ADC filter,C24,1,TBD,TBD,TBD,0603,1nF C0G/X7R,baseline
@@ -25,5 +31,5 @@ Power LED,D_PWR,1,TBD,TBD,TBD,0603/0805,green,baseline
 Power LED resistor,R_PWR,1,TBD,TBD,TBD,0603,target approx 1mA,baseline
 Status LED,D_STATUS,1,TBD,TBD,TBD,0603/0805,diagnostic LED,baseline
 Status LED resistor,R_STATUS,1,TBD,TBD,TBD,0603,target approx 1mA,baseline
-BOOTSEL switch,SW_BOOT,1,TBD,TBD,TBD,SMD tact,QSPI_SS to GND,baseline
-RESET switch,SW_RESET,1,TBD,TBD,TBD,SMD tact,RUN to GND,baseline
+BOOTSEL switch,SW1,1,TBD,TBD,TBD,PTS810-compatible SMD tact,QSPI_SS to GND through R9,baseline
+RESET switch,SW2,1,TBD,TBD,TBD,PTS810-compatible SMD tact,RUN to GND,baseline
