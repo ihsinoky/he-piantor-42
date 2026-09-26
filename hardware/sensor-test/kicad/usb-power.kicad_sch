@@ -62,8 +62,8 @@
         (rectangle (start -10.16 20.32) (end 10.16 -20.32) (stroke (width 0.254) (type default)) (fill (type background)))
       )
       (symbol "HRO_TYPE-C-31-M-12_1_1"
-        (pin power_out line (at 12.7 15.24 180) (length 2.54) (name "VBUS" (effects (font (size 1.27 1.27)))) (number "A4_B9" (effects (font (size 1.27 1.27)))))
-        (pin power_out line (at 12.7 12.7 180) (length 2.54) (name "VBUS" (effects (font (size 1.27 1.27)))) (number "A9_B4" (effects (font (size 1.27 1.27)))))
+        (pin passive line (at 12.7 15.24 180) (length 2.54) (name "VBUS" (effects (font (size 1.27 1.27)))) (number "A4_B9" (effects (font (size 1.27 1.27)))))
+        (pin passive line (at 12.7 12.7 180) (length 2.54) (name "VBUS" (effects (font (size 1.27 1.27)))) (number "A9_B4" (effects (font (size 1.27 1.27)))))
         (pin passive line (at -2.54 -22.86 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "A1_B12" (effects (font (size 1.27 1.27)))))
         (pin passive line (at 2.54 -22.86 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "A12_B1" (effects (font (size 1.27 1.27)))))
         (pin passive line (at 0 -22.86 90) (length 2.54) (name "SHIELD" (effects (font (size 1.27 1.27)))) (number "S1" (effects (font (size 1.27 1.27)))))
@@ -415,6 +415,27 @@
   (label "GND" (at 160 110 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid c9000000-0000-0000-0000-000000000003)
+  )
+
+  (symbol (lib_id "power:PWR_FLAG") (at 170 45 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid ca000000-0000-0000-0000-000000000001)
+    (property "Reference" "#FLG02" (at 170 46.905 0) (effects (font (size 1.27 1.27)) hide))
+    (property "Value" "PWR_FLAG" (at 170 48.81 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 170 45 0) (effects (font (size 1.27 1.27)) hide))
+    (property "Datasheet" "~" (at 170 45 0) (effects (font (size 1.27 1.27)) hide))
+    (pin "1" (uuid ca000000-0000-0000-0000-000000000002))
+    (instances
+      (project "usb-power"
+        (path "/c0000000-0000-0000-0000-000000000001"
+          (reference "#FLG02") (unit 1)
+        )
+      )
+    )
+  )
+  (label "VBUS" (at 170 45 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid ca000000-0000-0000-0000-000000000003)
   )
 
     (sheet_instances
