@@ -1,0 +1,27 @@
+(() => {
+  "use strict";
+  const P=window.PROJECT_STATUS,R=window.RUNTIME_STATUS,$=id=>document.getElementById(id);
+  const labels={done:"完了",progress:"進行中",blocked:"ブロック",todo:"未着手",hold:"保留","not-ready":"NOT READY",ready:"READY",waiting:"WAITING",approved:"APPROVED"};
+  const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const badge=(value,text=labels[value]||value)=>`<span class="badge s-${esc(value)}">${esc(text)}</span>`;
+  const relative=iso=>{if(!iso)return"記録なし";const s=Math.max(0,Math.floor((Date.now()-new Date(iso))/1000));if(s<60)return`${s}秒前`;if(s<3600)return`${Math.floor(s/60)}分前`;if(s<86400)return`${Math.floor(s/3600)}時間前`;return`${Math.floor(s/86400)}日前`;};
+  const ci=P.evidence.ci, hardFailure=ci.result==="FAILED", declaredBlocked=R.state==="BLOCKED"&&!!R.blocker;
+  const gateReady=P.gates.some(g=>g.status==="ready"||g.status==="waiting");
+  let effective=hardFailure||declaredBlocked?"BLOCKED":R.waitingForUser||gateReady?"WAITING_FOR_USER":R.state;
+  const mismatch=(R.state==="RUNNING"&&hardFailure)||(R.state==="BLOCKED"&&!R.blocker&&!hardFailure)||(R.waitingForUser&&!gateReady);
+  const current=P.milestones.find(m=>m.id===R.milestone)||P.milestones.find(m=>m.status==="current");
+  document.querySelector(".health").classList.add(effective.toLowerCase());$("health-state").textContent=effective;$("health-state").className=`state s-${effective.toLowerCase().replaceAll("_","-")}`;$("mismatch").hidden=!mismatch;
+  $("freshness").textContent=`状態 checkpoint: ${relative(R.lastCheckpoint)}`;
+  const fields=[["Current milestone",`${current.id} ${current.name}`],["Current work",R.work],["Current blocker",hardFailure?`CI: ${ci.detail}`:(R.blocker||"なし")],["Next expected action",R.nextAction],["Last activity",`${relative(R.lastCheckpoint)} · checkpoint`],["Waiting for user",R.waitingForUser?"YES":"NO"]];
+  $("health-summary").innerHTML=fields.map(([k,v])=>`<div><span class="label">${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
+  const ev=[["AI / Codex declaration",`${R.state} · ${R.checkpoint}`],["Git / PR",`${P.evidence.commit.sha} ${P.evidence.commit.summary} · ${relative(P.evidence.commit.at)} / ${P.evidence.pullRequest.label}`],["GitHub Actions / artifacts",`CI ${ci.result} · last success: ${ci.lastSuccess} · ${P.evidence.artifacts.detail}`]];
+  $("health-evidence").innerHTML=ev.map(([k,v])=>`<div><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join("");
+  $("current-milestone").textContent=`${current.id} ${current.name}`;$("milestone-state").outerHTML=badge("progress","CURRENT");$("current-stage").textContent=current.deliverable;const next=P.milestones[P.milestones.indexOf(current)+1];$("next-deliverable").textContent=current.deliverable;$("next-condition").textContent=`次工程 ${next?.id||"—"} へ: ${current.exit}`;
+  $("roadmap").innerHTML=P.milestones.map(m=>`<article class="milestone ${esc(m.status)}"><span class="num">${esc(m.id)} · ${esc(m.status.toUpperCase())}</span><h3>${esc(m.name)}</h3><p><b>成果物</b><br>${esc(m.deliverable)}</p><p class="exit"><b>完了条件</b><br>${esc(m.exit)}</p></article>`).join("");
+  $("streams").innerHTML=`<div class="stream-grid"><div class="corner">WORKSTREAM</div>${P.milestones.map(m=>`<div class="colhead">${esc(m.id)} ${esc(m.name)}</div>`).join("")}${P.streams.map((s,i)=>`<div class="rowhead">${esc(s.name)}</div>${s.cells.map((c,j)=>`<div class="cell-${esc(P.streamStates[i][j])}"><b>${esc(labels[P.streamStates[i][j]]||P.streamStates[i][j])}</b><br>${esc(c)}</div>`).join("")}`).join("")}</div>`;
+  const activeGates=P.gates.filter(g=>g.status==="ready"||g.status==="waiting").length;$("gate-callout").outerHTML=badge(activeGates?"waiting":"not-ready",activeGates?`${activeGates} ACTION REQUIRED`:"現在の確認: なし");
+  $("gates").innerHTML=P.gates.map(g=>`<article class="gate">${badge(g.status)}<h3>${esc(g.name)}</h3><dl><dt>確認内容</dt><dd>${esc(g.check)}</dd><dt>発生条件</dt><dd>${esc(g.trigger)}</dd><dt>通過後</dt><dd>${esc(g.unlocks)}</dd></dl></article>`).join("");
+  const risks=[...(hardFailure?[{kind:"blocker",title:"CI failure",detail:ci.detail}]:[]),...P.risks];$("risks").innerHTML=risks.map(r=>`<article class="risk ${esc(r.kind)}"><span class="label">${r.kind==="blocker"?"CURRENT BLOCKER":"RISK"}</span><h3>${esc(r.title)}</h3><p>${esc(r.detail)}</p></article>`).join("");
+  [...new Set(P.tasks.map(t=>t[1]))].sort().forEach(a=>$("area").insertAdjacentHTML("beforeend",`<option>${esc(a)}</option>`));["done","progress","blocked","todo","hold"].forEach(v=>$("status").insertAdjacentHTML("beforeend",`<option value="${v}">${labels[v]}</option>`));
+  const renderTasks=()=>{const q=$("query").value.toLowerCase(),a=$("area").value,s=$("status").value;$("task-rows").innerHTML=P.tasks.filter(t=>(!q||t.join(" ").toLowerCase().includes(q))&&(!a||t[1]===a)&&(!s||t[3]===s)).map(t=>`<tr><td>${esc(t[0])}</td><td>${esc(t[1])}</td><td>${esc(t[2])}</td><td>${badge(t[3])}</td><td>${esc(t[4])}</td><td>${esc(t[5])}</td></tr>`).join("");};["query","area","status"].forEach(id=>$(id).addEventListener(id==="query"?"input":"change",renderTasks));renderTasks();$("data-version").textContent=`Project data updated ${new Date(P.updatedAt).toLocaleString("ja-JP")} · schema v${P.schemaVersion}`;
+})();
