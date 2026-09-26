@@ -1363,6 +1363,68 @@
             (pin passive line (at 0 -3.81 90) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
           )
         )
+  
+    (symbol "HEP:DRV5055A3QDBZR" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+          (property "Reference" "U" (at -5.08 8.89 0) (effects (font (size 1.27 1.27))))
+          (property "Value" "DRV5055A3QDBZR" (at 5.08 8.89 0) (effects (font (size 1.27 1.27)) (justify right)))
+          (property "Footprint" "marbastlib-he:SW_MX_HE_0deg_1u" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "ki_description" "Bipolar ratiometric Hall-effect sensor, A3 sensitivity, SOT-23" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (symbol "DRV5055A3QDBZR_0_1"
+            (rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+          )
+          (symbol "DRV5055A3QDBZR_1_1"
+            (pin power_in line (at 0 7.62 270) (length 2.54) (name "VCC" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+            (pin output line (at 7.62 0 180) (length 2.54) (name "OUT" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+            (pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+          )
+        )
+    (symbol "HEP:TPS22919DCKR" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+          (property "Reference" "U" (at -6.35 11.43 0) (effects (font (size 1.27 1.27))))
+          (property "Value" "TPS22919DCKR" (at 6.35 11.43 0) (effects (font (size 1.27 1.27)) (justify right)))
+          (property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22919.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "ki_description" "5.5V 1.5A self-protected load switch, SC-70-6" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (symbol "TPS22919DCKR_0_1"
+            (rectangle (start -6.35 7.62) (end 6.35 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
+          )
+          (symbol "TPS22919DCKR_1_1"
+            (pin power_in line (at -8.89 5.08 0) (length 2.54) (name "IN" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+            (pin power_in line (at 0 -10.16 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+            (pin input line (at -8.89 0 0) (length 2.54) (name "ON" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+            (pin passive line (at 8.89 -5.08 180) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+            (pin output line (at 8.89 0 180) (length 2.54) (name "QOD" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+            (pin power_out line (at 8.89 5.08 180) (length 2.54) (name "OUT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+          )
+        )
+    (symbol "HEP:TMUX1208PWR" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+          (property "Reference" "U" (at -10.16 21.59 0) (effects (font (size 1.27 1.27))))
+          (property "Value" "TMUX1208PWR" (at 10.16 21.59 0) (effects (font (size 1.27 1.27)) (justify right)))
+          (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tmux1208.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (property "ki_description" "5V 8:1 analog multiplexer with 1.8V-compatible logic, TSSOP-16" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+          (symbol "TMUX1208PWR_0_1"
+            (rectangle (start -10.16 17.78) (end 10.16 -17.78) (stroke (width 0.254) (type default)) (fill (type background)))
+          )
+          (symbol "TMUX1208PWR_1_1"
+            (pin input line (at 12.7 5.08 180) (length 2.54) (name "A0" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+            (pin input line (at 12.7 -7.62 180) (length 2.54) (name "EN" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+            (pin passive line (at 12.7 -15.24 180) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 12.7 0) (length 2.54) (name "S1" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 7.62 0) (length 2.54) (name "S2" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 2.54 0) (length 2.54) (name "S3" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 -2.54 0) (length 2.54) (name "S4" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at 12.7 12.7 180) (length 2.54) (name "D" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 -15.24 0) (length 2.54) (name "S8" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 -12.7 0) (length 2.54) (name "S7" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 -10.16 0) (length 2.54) (name "S6" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+            (pin bidirectional line (at -12.7 -7.62 0) (length 2.54) (name "S5" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+            (pin power_in line (at 0 20.32 270) (length 2.54) (name "VDD" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+            (pin power_in line (at 0 -20.32 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+            (pin input line (at 12.7 0 180) (length 2.54) (name "A2" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+            (pin input line (at 12.7 2.54 180) (length 2.54) (name "A1" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+          )
+        )
   )
 
   (junction (at 312.42 142.24) (diameter 0) (color 0 0 0 0)
@@ -5204,6 +5266,879 @@
   (label "PWR_LED_A" (at 570 61.19 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid d1030000-0000-0000-0000-000000000001))
 
   (label "GND" (at 570 68.81 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid d1030000-0000-0000-0000-000000000002))
+
+  (no_connect (at 333.89 240.08) (uuid a1000000-0000-0000-0000-000000000073))
+
+  (no_connect (at 333.89 235) (uuid cb000000-0000-0000-0000-000000000001))
+
+  (no_connect (at 422.7 310.24) (uuid a1000000-0000-0000-0000-000000000079))
+
+  (label "VBUS_USB" (at 316.11 229.92 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000045)
+    )
+
+  (label "HALL_PWR_EN" (at 316.11 235 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000046)
+    )
+
+  (label "GND" (at 325 245.16 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000047)
+    )
+
+  (label "HALL_5V" (at 333.89 229.92 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000048)
+    )
+
+  (label "HALL_5V" (at 410 274.68 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004a)
+    )
+
+  (label "GND" (at 410 315.32 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004b)
+    )
+
+  (label "MUX_A0" (at 422.7 289.92 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004c)
+    )
+
+  (label "MUX_A1" (at 422.7 292.46 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004d)
+    )
+
+  (label "MUX_A2" (at 422.7 295 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004e)
+    )
+
+  (label "MUX_EN0" (at 422.7 302.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000004f)
+    )
+
+  (label "MUX_D" (at 422.7 282.3 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000050)
+    )
+
+  (label "H0_RAW" (at 397.3 282.3 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000051)
+    )
+
+  (label "H1_RAW" (at 397.3 287.38 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000052)
+    )
+
+  (label "H2_RAW" (at 397.3 292.46 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000053)
+    )
+
+  (label "H3_RAW" (at 397.3 297.54 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000054)
+    )
+
+  (label "HALL_5V" (at 335 272.38 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000055)
+    )
+
+  (label "H0_RAW" (at 342.62 280 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000056)
+    )
+
+  (label "GND" (at 335 287.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000057)
+    )
+
+  (label "HALL_5V" (at 335 300.38 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000058)
+    )
+
+  (label "H1_RAW" (at 342.62 308 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000059)
+    )
+
+  (label "GND" (at 335 315.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005a)
+    )
+
+  (label "HALL_5V" (at 335 328.38 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005b)
+    )
+
+  (label "H2_RAW" (at 342.62 336 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005c)
+    )
+
+  (label "GND" (at 335 343.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005d)
+    )
+
+  (label "HALL_5V" (at 335 356.38 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005e)
+    )
+
+  (label "H3_RAW" (at 342.62 364 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000005f)
+    )
+
+  (label "GND" (at 335 371.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000060)
+    )
+
+  (label "MUX_D" (at 468 285.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000061)
+    )
+
+  (label "ADC_SENSE" (at 468 278.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000062)
+    )
+
+  (label "ADC_SENSE" (at 468 305.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000063)
+    )
+
+  (label "GND" (at 468 298.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000064)
+    )
+
+  (label "ADC_SENSE" (at 490 305.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000065)
+    )
+
+  (label "GND" (at 490 298.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000066)
+    )
+
+  (label "HALL_5V" (at 370 238.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000067)
+    )
+
+  (label "GND" (at 370 231.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000068)
+    )
+
+  (label "HALL_5V" (at 385 298.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000069)
+    )
+
+  (label "GND" (at 385 291.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006a)
+    )
+
+  (label "HALL_5V" (at 360 283.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006b)
+    )
+
+  (label "GND" (at 360 276.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006c)
+    )
+
+  (label "HALL_5V" (at 360 311.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006d)
+    )
+
+  (label "GND" (at 360 304.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006e)
+    )
+
+  (label "HALL_5V" (at 360 339.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-00000000006f)
+    )
+
+  (label "GND" (at 360 332.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000070)
+    )
+
+  (label "HALL_5V" (at 360 367.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000071)
+    )
+
+  (label "GND" (at 360 360.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid a1000000-0000-0000-0000-000000000072)
+    )
+
+  (symbol (lib_id "HEP:TPS22919DCKR") (at 325 235 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000002)
+      (property "Reference" "U4" (at 319 225 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TPS22919DCKR" (at 331 225 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6" (at 325 235 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22919.pdf" (at 325 235 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C2149796" (at 325 235 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000003))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000004))
+      (pin "3" (uuid a1000000-0000-0000-0000-000000000005))
+      (pin "4" (uuid a1000000-0000-0000-0000-000000000006))
+      (pin "5" (uuid a1000000-0000-0000-0000-000000000007))
+      (pin "6" (uuid a1000000-0000-0000-0000-000000000008))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U4") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "HEP:TMUX1208PWR") (at 410 295 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000009)
+      (property "Reference" "U5" (at 404 285 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TMUX1208PWR" (at 416 285 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 410 295 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tmux1208.pdf" (at 410 295 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C494728" (at 410 295 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000000a))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000000b))
+      (pin "3" (uuid a1000000-0000-0000-0000-00000000000c))
+      (pin "4" (uuid a1000000-0000-0000-0000-00000000000d))
+      (pin "5" (uuid a1000000-0000-0000-0000-00000000000e))
+      (pin "6" (uuid a1000000-0000-0000-0000-00000000000f))
+      (pin "7" (uuid a1000000-0000-0000-0000-000000000010))
+      (pin "8" (uuid a1000000-0000-0000-0000-000000000011))
+      (pin "9" (uuid a1000000-0000-0000-0000-000000000012))
+      (pin "10" (uuid a1000000-0000-0000-0000-000000000013))
+      (pin "11" (uuid a1000000-0000-0000-0000-000000000014))
+      (pin "12" (uuid a1000000-0000-0000-0000-000000000015))
+      (pin "13" (uuid a1000000-0000-0000-0000-000000000016))
+      (pin "14" (uuid a1000000-0000-0000-0000-000000000017))
+      (pin "15" (uuid a1000000-0000-0000-0000-000000000018))
+      (pin "16" (uuid a1000000-0000-0000-0000-000000000019))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U5") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "HEP:DRV5055A3QDBZR") (at 335 280 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000001a)
+      (property "Reference" "U6" (at 329 270 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "DRV5055A3QDBZR" (at 341 270 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "marbastlib-he:SW_MX_HE_0deg_1u" (at 335 280 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055.pdf" (at 335 280 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C266128" (at 335 280 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000001b))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000001c))
+      (pin "3" (uuid a1000000-0000-0000-0000-00000000001d))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U6") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "HEP:DRV5055A3QDBZR") (at 335 308 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000001e)
+      (property "Reference" "U7" (at 329 298 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "DRV5055A3QDBZR" (at 341 298 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "marbastlib-he:SW_MX_HE_0deg_1u" (at 335 308 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055.pdf" (at 335 308 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C266128" (at 335 308 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000001f))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000020))
+      (pin "3" (uuid a1000000-0000-0000-0000-000000000021))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U7") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "HEP:DRV5055A3QDBZR") (at 335 336 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000022)
+      (property "Reference" "U8" (at 329 326 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "DRV5055A3QDBZR" (at 341 326 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "marbastlib-he:SW_MX_HE_0deg_1u" (at 335 336 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055.pdf" (at 335 336 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C266128" (at 335 336 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000023))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000024))
+      (pin "3" (uuid a1000000-0000-0000-0000-000000000025))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U8") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "HEP:DRV5055A3QDBZR") (at 335 364 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000026)
+      (property "Reference" "U9" (at 329 354 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "DRV5055A3QDBZR" (at 341 354 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "marbastlib-he:SW_MX_HE_0deg_1u" (at 335 364 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055.pdf" (at 335 364 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "C266128" (at 335 364 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000027))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000028))
+      (pin "3" (uuid a1000000-0000-0000-0000-000000000029))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "U9") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:R") (at 468 282 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000002a)
+      (property "Reference" "R6" (at 462 272 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "6.8k" (at 474 272 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 468 282 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 468 282 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 468 282 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000002b))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000002c))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "R6") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:R") (at 468 302 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000002d)
+      (property "Reference" "R7" (at 462 292 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "10k" (at 474 292 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 468 302 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 468 302 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 468 302 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000002e))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000002f))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "R7") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 370 235 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000030)
+      (property "Reference" "C18" (at 364 225 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "1u" (at 376 225 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 370 235 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 370 235 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 370 235 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000031))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000032))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C18") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 385 295 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000033)
+      (property "Reference" "C19" (at 379 285 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "100n" (at 391 285 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 385 295 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 385 295 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 385 295 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000034))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000035))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C19") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 360 280 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000036)
+      (property "Reference" "C20" (at 354 270 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "100n" (at 366 270 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 360 280 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 360 280 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 360 280 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000037))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000038))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C20") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 360 308 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000039)
+      (property "Reference" "C21" (at 354 298 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "100n" (at 366 298 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 360 308 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 360 308 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 360 308 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000003a))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000003b))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C21") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 360 336 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000003c)
+      (property "Reference" "C22" (at 354 326 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "100n" (at 366 326 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 360 336 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 360 336 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 360 336 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-00000000003d))
+      (pin "2" (uuid a1000000-0000-0000-0000-00000000003e))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C22") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 360 364 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-00000000003f)
+      (property "Reference" "C23" (at 354 354 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "100n" (at 366 354 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 360 364 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 360 364 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 360 364 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000040))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000041))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C23") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 490 302 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid a1000000-0000-0000-0000-000000000042)
+      (property "Reference" "C24" (at 484 292 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "1n" (at 496 292 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 490 302 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 490 302 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 490 302 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid a1000000-0000-0000-0000-000000000043))
+      (pin "2" (uuid a1000000-0000-0000-0000-000000000044))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C24") (unit 1)
+          )
+        )
+      )
+    )
+
+  (symbol (lib_id "Device:C") (at 352 235 0) (unit 1)
+      (in_bom yes) (on_board yes) (dnp no)
+      (uuid b3000000-0000-0000-0000-000000000001)
+      (property "Reference" "C25" (at 354.54 233.73 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Value" "1u" (at 354.54 236.27 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 352.965 231.19 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 352 235 0) (effects (font (size 1.27 1.27)) hide))
+      (property "LCSC" "" (at 352 235 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b3000000-0000-0000-0000-000000000002))
+      (pin "2" (uuid b3000000-0000-0000-0000-000000000003))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "C25") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "VBUS_USB" (at 352 238.81 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b3000000-0000-0000-0000-000000000004)
+    )
+
+  (label "GND" (at 352 231.19 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b3000000-0000-0000-0000-000000000005)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 230 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000001)
+      (property "Reference" "TP1" (at 515 223.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "VBUS" (at 517.54 225.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 230 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 230 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000001))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP1") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "VBUS_USB" (at 515 230 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000001)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 242 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000002)
+      (property "Reference" "TP2" (at 515 235.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "HALL_5V" (at 517.54 237.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 242 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 242 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000002))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP2") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "HALL_5V" (at 515 242 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000002)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 258 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000003)
+      (property "Reference" "TP3" (at 515 251.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "H0_RAW" (at 517.54 253.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 258 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 258 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000003))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP3") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "H0_RAW" (at 515 258 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000003)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 270 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000004)
+      (property "Reference" "TP4" (at 515 263.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "H1_RAW" (at 517.54 265.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 270 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 270 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000004))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP4") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "H1_RAW" (at 515 270 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000004)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 282 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000005)
+      (property "Reference" "TP5" (at 515 275.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "H2_RAW" (at 517.54 277.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 282 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 282 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000005))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP5") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "H2_RAW" (at 515 282 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000005)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 294 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000006)
+      (property "Reference" "TP6" (at 515 287.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "H3_RAW" (at 517.54 289.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 294 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 294 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000006))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP6") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "H3_RAW" (at 515 294 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000006)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 310 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000007)
+      (property "Reference" "TP7" (at 515 303.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MUX_D" (at 517.54 305.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 310 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 310 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000007))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP7") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "MUX_D" (at 515 310 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000007)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 322 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000008)
+      (property "Reference" "TP8" (at 515 315.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "ADC_SENSE" (at 517.54 317.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 322 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 322 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000008))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP8") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "ADC_SENSE" (at 515 322 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000008)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 515 338 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b2000000-0000-0000-0000-000000000009)
+      (property "Reference" "TP9" (at 515 331.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "GND" (at 517.54 333.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 520.08 338 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 520.08 338 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b2100000-0000-0000-0000-000000000009))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP9") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "GND" (at 515 338 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b2010000-0000-0000-0000-000000000009)
+    )
+
+  (label "MUX_S5_SPARE" (at 397.3 302.62 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4300000-0000-0000-0000-000000000001)
+    )
+
+  (label "MUX_S6_SPARE" (at 397.3 305.16 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4300000-0000-0000-0000-000000000002)
+    )
+
+  (label "MUX_S7_SPARE" (at 397.3 307.7 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4300000-0000-0000-0000-000000000003)
+    )
+
+  (label "MUX_S8_SPARE" (at 397.3 310.24 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4300000-0000-0000-0000-000000000004)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 540 258 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b4000000-0000-0000-0000-000000000010)
+      (property "Reference" "TP10" (at 540 251.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MUX_S5_SPARE" (at 542.54 253.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 545.08 258 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 545.08 258 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b4100000-0000-0000-0000-000000000010))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP10") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "MUX_S5_SPARE" (at 540 258 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4200000-0000-0000-0000-000000000010)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 540 270 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b4000000-0000-0000-0000-000000000011)
+      (property "Reference" "TP11" (at 540 263.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MUX_S6_SPARE" (at 542.54 265.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 545.08 270 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 545.08 270 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b4100000-0000-0000-0000-000000000011))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP11") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "MUX_S6_SPARE" (at 540 270 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4200000-0000-0000-0000-000000000011)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 540 282 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b4000000-0000-0000-0000-000000000012)
+      (property "Reference" "TP12" (at 540 275.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MUX_S7_SPARE" (at 542.54 277.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 545.08 282 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 545.08 282 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b4100000-0000-0000-0000-000000000012))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP12") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "MUX_S7_SPARE" (at 540 282 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4200000-0000-0000-0000-000000000012)
+    )
+
+  (symbol (lib_id "Connector:TestPoint") (at 540 294 0) (unit 1)
+      (in_bom no) (on_board yes) (dnp no)
+      (uuid b4000000-0000-0000-0000-000000000013)
+      (property "Reference" "TP13" (at 540 287.65 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MUX_S8_SPARE" (at 542.54 289.428 0) (effects (font (size 1.27 1.27)) (justify left)))
+      (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 545.08 294 0) (effects (font (size 1.27 1.27)) hide))
+      (property "Datasheet" "~" (at 545.08 294 0) (effects (font (size 1.27 1.27)) hide))
+      (pin "1" (uuid b4100000-0000-0000-0000-000000000013))
+      (instances
+        (project "integrated-sensor-test"
+          (path "/0b572f4d-42c2-4e67-a259-3bf815f1855a"
+            (reference "TP13") (unit 1)
+          )
+        )
+      )
+    )
+
+  (label "MUX_S8_SPARE" (at 540 294 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+      (uuid b4200000-0000-0000-0000-000000000013)
+    )
 
   (sheet_instances
     (path "/" (page "1"))
