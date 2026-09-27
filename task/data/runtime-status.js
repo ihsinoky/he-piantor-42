@@ -1,13 +1,13 @@
-// Codex/AI self-report. Update only at start, meaningful checkpoints, blockers,
-// human gates, and milestone completion — never as a periodic heartbeat.
+// Optional, non-authoritative Dashboard context. Never use as project truth and
+// never update it merely as a heartbeat. See docs/governance.md.
 window.RUNTIME_STATUS = {
   schemaVersion: 1,
-  state: "WAITING_FOR_USER",
+  state: "INFORMATIONAL",
   milestone: "M1",
-  work: "Project dashboard review",
-  lastCheckpoint: "2026-09-26T10:17:49+00:00",
-  checkpoint: "Evidence-aware health, roadmap, workstreams and human gates implemented",
+  work: "See docs/ and GitHub for current project state",
+  lastCheckpoint: null,
+  checkpoint: "Optional display context only",
   blocker: null,
-  nextAction: "User reviews the dashboard PR; after approval, resume the M1 evaluation PCB",
-  waitingForUser: true
+  nextAction: "Follow the Issue-driven workflow in docs/development-workflow.md",
+  waitingForUser: false
 };

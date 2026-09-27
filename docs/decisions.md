@@ -52,7 +52,13 @@ Target JLCPCB PCBA for the assembled PCB and FDM printing for the first enclosur
 
 Status: accepted
 
-task/index.html is the human-readable project dashboard. It is a single self-contained HTML file and will be updated together with engineering work.
+The documents under `docs/` are the authoritative record of project state and
+decisions. The Dashboard is a human-readable project overview and read model,
+not a source of truth. Production Dashboard deployments represent merged
+`main`; a PR Preview may be used to inspect a proposed state before merge.
+
+Reason: separating the reviewed project record from its presentation prevents
+stale runtime, GitHub, or deployment snapshots from overriding design decisions.
 
 
 ## D-008 - PCB thickness

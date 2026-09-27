@@ -1,57 +1,62 @@
 # Development workflow
 
-## Branch and pull-request policy
+## Issue-driven standard flow
 
-`main` is the stable integration branch and the production source for the Vercel dashboard.
+All implementation starts from an approved GitHub Issue, which is the work
+contract for its Purpose, Scope, Out of scope, Acceptance Criteria, verification,
+and Human Gate.
 
-Engineering work is performed on scoped branches and merged through pull requests.
+> Issue → PO instruction to Codex → Issue branch → implementation → Draft PR →
+> CI → PMO review → PO approval → Squash merge → Issue close
 
-Default flow:
+1. The PO selects and prioritizes an Issue and instructs Codex.
+2. Codex creates a dedicated branch from the latest `main`.
+3. Codex implements only the Issue Scope and updates the required documentation.
+4. Codex opens a Draft PR early, links it with `Closes #<issue>`, and records
+   verification and out-of-scope discoveries.
+5. CI checks all automatable Acceptance Criteria, including applicable builds,
+   ERC/DRC, and generated-artifact consistency.
+6. The PMO reviews the Issue, diff, documentation, and CI read-only and gives the
+   PO evidence supporting a MERGE or HOLD decision.
+7. The PO performs the Human Gate and final approval, then squash-merges.
+8. The linked Issue closes when the PR is merged.
 
-1. Create a branch for one reviewable engineering increment.
-2. Implement and update design documents and dashboard state on that branch.
-3. Run GitHub Actions.
-4. Open a draft pull request while work is still in progress.
-5. Continue commits on the same branch until the PR acceptance criteria pass.
-6. Mark the PR ready for review.
-7. Merge to `main`.
-8. Vercel production then reflects the merged dashboard state.
+## Branch, commit, and PR policy
 
-Do not commit implementation work directly to `main`.
+- Implementation must start from an Issue.
+- One Issue equals one PR.
+- Direct implementation commits to `main` are prohibited.
+- A PR may contain iterative or experimental commits while review continues.
+- PRs are squash-merged so `main` retains each reviewed increment as one commit.
+- CI becoming green never authorizes an automatic merge; PO approval is required.
+- Out-of-scope findings are reported in the PR and proposed as follow-up Issues,
+  not fixed in the current branch.
 
-## PR sizing
+## Dashboard and deployments
 
-Prefer one PR per engineering gate, not one PR per file or per small fix.
+The Dashboard is a human-readable overview/read model. It does not own project,
+PR, commit, or CI truth; the precedence policy in [governance](governance.md)
+applies. Production represents merged `main`, while a PR Preview may represent
+the proposed state in that PR. Dashboard heartbeat updates are neither required
+nor permitted as a reason for commits.
 
-Current planned sequence:
-
-- Sensor-test electrical baseline: schematics, firmware logger, BOM, CI.
-- Sensor-test PCB layout and DRC.
-- Sensor-test manufacturing package.
-- Sensor-test bring-up / measurement tooling.
-- Main 42-key schematic.
-- Main PCB layout.
-- Production firmware baseline.
-- Mechanical enclosure.
-- Manufacturing/release package.
-
-A PR may contain multiple commits while the engineering gate is being developed.
-
-## Dashboard behavior
-
-`task/index.html` is updated on the active branch as part of the same PR.
-
-The Vercel production deployment tracks `main`, so it intentionally shows only merged state.
-
-For work-in-progress inspection, use the Vercel preview deployment associated with the branch/PR.
+Dashboard changes needed by an Issue are reviewed in that Issue's PR. Do not add
+a post-merge GitHub Action that writes Dashboard updates to `main`. Structured
+docs/status-to-Dashboard generation may be considered separately in the future.
+When an Issue changes high-level progress, update the authoritative
+[`project-status.md`](project-status.md) and manually synchronize the Dashboard
+read-model copy in `task/data/project-status.js` in the same PR.
 
 ## Merge gates
 
-Before a PR is considered ready:
+Before the PO makes the merge decision:
 
+- the Issue Acceptance Criteria are accounted for,
 - relevant GitHub Actions jobs pass,
-- KiCad ERC/DRC is clean for included manufacturing-intent files,
-- generated artifacts are reproducible,
-- BOM/reference designators are internally consistent,
-- dashboard reflects the PR state,
-- remaining risks and human actions are documented.
+- applicable KiCad ERC/DRC is clean,
+- generated artifacts are reproducible and consistent,
+- required documentation is updated,
+- remaining risks, Human Gates, and out-of-scope findings are documented.
+
+The GitHub merge-method and branch-cleanup settings are manual PO actions listed
+in [governance](governance.md#repository-settings-po-manual-action).

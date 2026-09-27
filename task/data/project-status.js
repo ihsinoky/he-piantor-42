@@ -1,8 +1,9 @@
+// Non-authoritative Dashboard read model. See docs/governance.md.
 window.PROJECT_STATUS = {
-  schemaVersion: 1, updatedAt: "2026-09-26T10:17:49+00:00",
+  schemaVersion: 1, updatedAt: "2026-09-27T00:00:00+00:00",
   evidence: {
     commit: { sha: "cabdde3", at: "2026-09-26T14:26:51+09:00", summary: "Sensor-test electrical baseline (#2)" },
-    pullRequest: { state: "merged", label: "#2 Sensor-test electrical baseline" },
+    pullRequest: { state: "snapshot", label: "Historical snapshot; check GitHub for current PR state" },
     ci: { result: "UNKNOWN", at: null, lastSuccess: "Not recorded", detail: "GitHub Actions の結果はこの静的 snapshot に未同期" },
     artifacts: { state: "UPDATED", detail: "KiCad schematics + sensor-test firmware" }
   },
@@ -26,7 +27,6 @@ window.PROJECT_STATUS = {
     ["done","waiting","todo","todo","todo"]
   ],
   gates: [
-    {name:"Dashboard PRレビュー",status:"waiting",check:"Health判定、ロードマップ、Gate、モバイル表示",trigger:"Dashboard PR作成時",unlocks:"M1評価PCB作業の再開"},
     {name:"G1 評価回路レビュー",status:"not-ready",check:"回路/ERC、BOM、測定計画",trigger:"評価PCB製造データ完成時",unlocks:"評価基板の発注"},
     {name:"G2 磁気方式確定",status:"not-ready",check:"レンジ、ノイズ、走査速度、電力、干渉",trigger:"評価基板の実測完了時",unlocks:"42キー回路の固定"},
     {name:"G3 Rev.A 発注前確認",status:"not-ready",check:"本PCB DRC、BOM、Gerber、コスト",trigger:"42キー製造パッケージ完成時",unlocks:"Rev.A PCBA発注"},

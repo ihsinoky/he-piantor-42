@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HE Piantor 42 · Project Dashboard</title><link rel="stylesheet" href="style.css"></head>
-<body><header><div class="wrap top"><div><h1>HE Piantor 42</h1><span>Project dashboard · evidence-aware</span></div><a href="#tasks">詳細タスク ↓</a></div></header>
+<body><header><div class="wrap top"><div><h1>HE Piantor 42</h1><span>Project overview · read model · Source of truth: docs/</span></div><a href="#tasks">詳細タスク ↓</a></div></header>
 <main class="wrap">
   <section class="card health" aria-labelledby="health-title"><div class="section-title"><div><span class="eyebrow">DEVELOPMENT HEALTH</span><h2 id="health-title"><span id="health-state" class="state">—</span><span id="mismatch" class="mismatch" hidden>STATUS MISMATCH</span></h2></div><div id="freshness" class="asof"></div></div><div id="health-summary" class="health-summary"></div><div id="health-evidence" class="evidence"></div></section>
   <section class="card project"><div class="section-title"><div><span class="eyebrow">PROJECT STATUS</span><h2 id="current-milestone">—</h2></div><span id="milestone-state" class="badge"></span></div><div class="project-grid"><div><span class="label">現在の工程</span><strong id="current-stage"></strong></div><div class="next"><span class="label">NEXT DELIVERABLE</span><strong id="next-deliverable"></strong><small id="next-condition"></small></div></div></section>
@@ -9,5 +9,5 @@
   <section class="card"><div class="section-title"><div><span class="eyebrow">HUMAN GATES</span><h2>ユーザーの確認・判断</h2></div><span id="gate-callout" class="badge"></span></div><div id="gates" class="gate-grid"></div></section>
   <section class="card"><div class="section-title"><div><span class="eyebrow">BLOCKERS / RISKS</span><h2>進行を妨げる要因</h2></div></div><div id="risks" class="risk-grid"></div></section>
   <section class="card" id="tasks"><div class="section-title task-head"><div><span class="eyebrow">TASKS</span><h2>詳細タスク</h2></div><div class="filters"><input id="query" type="search" placeholder="タスクを検索" aria-label="タスクを検索"><select id="area" aria-label="領域"><option value="">全領域</option></select><select id="status" aria-label="状態"><option value="">全状態</option></select></div></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>領域</th><th>タスク</th><th>状態</th><th>担当</th><th>依存</th></tr></thead><tbody id="task-rows"></tbody></table></div></section>
-  <footer>状態は意味のある checkpoint でのみ更新します。heartbeat commit は使用しません。<br><span id="data-version"></span></footer>
+  <footer>Read model only — source of truth: docs/. GitHubでPR / CIの最新情報を確認してください。heartbeat更新は不要です。<br><span id="data-version"></span></footer>
 </main><script src="data/project-status.js"></script><script src="data/runtime-status.js"></script><script src="dashboard.js"></script></body></html>
