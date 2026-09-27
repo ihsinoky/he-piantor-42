@@ -43,6 +43,9 @@ nor permitted as a reason for commits.
 Dashboard changes needed by an Issue are reviewed in that Issue's PR. Do not add
 a post-merge GitHub Action that writes Dashboard updates to `main`. Structured
 docs/status-to-Dashboard generation may be considered separately in the future.
+When an Issue changes high-level progress, update the authoritative
+[`project-status.md`](project-status.md) and manually synchronize the Dashboard
+read-model copy in `task/data/project-status.js` in the same PR.
 
 ## Merge gates
 

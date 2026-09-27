@@ -44,9 +44,12 @@ When project information conflicts, use this precedence order:
 3. GitHub Issues and pull requests
 4. Dashboard
 
-The Dashboard is a human-readable read model, not a source of truth. If the
-Dashboard conflicts with `docs/`, `docs/` is authoritative. Production displays
-merged `main`; a PR Preview may display a proposed, unmerged state.
+[`docs/project-status.md`](project-status.md) is the authoritative high-level
+project-status record. The Dashboard is a human-readable read model, not a source
+of truth, and `task/data/project-status.js` is a manually synchronized copy of
+that record. If they conflict, `docs/project-status.md` is authoritative.
+Production displays merged `main`; a PR Preview may display a proposed,
+unmerged state.
 
 A possible future direction is generation from structured documentation or
 status data into the Dashboard. No post-merge workflow should write an
