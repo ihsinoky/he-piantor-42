@@ -38,17 +38,18 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | M0 design policy is done; M1 evaluation circuit/PCB work is in progress. Rev.A and later hardware remain unstarted. |
+| Hardware | M0 design policy and the M1 evaluation schematic and routed PCB are done. The evaluation manufacturing package and Rev.A remain unstarted. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
 
 ## Current and next work
 
-The project is in M1. The current high-level effort is completing the four-key
-Hall evaluation baseline and its measurement capability. The next planned
-engineering increment is the sensor-test evaluation PCB layout and DRC. Each
-detailed increment is defined and accepted through its own GitHub Issue.
+The project is in M1. The four-key Hall evaluation schematic and PCB layout,
+routing, ERC, and DRC are complete. The next planned engineering increment is
+the evaluation-board manufacturing package and G1 preparation. G1 remains
+`not-ready` until that package is complete and reviewed. Each detailed increment
+is defined and accepted through its own GitHub Issue.
 
 ## Dashboard synchronization
 

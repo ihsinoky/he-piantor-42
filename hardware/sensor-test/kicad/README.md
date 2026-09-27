@@ -21,8 +21,21 @@ GPIO4=`MUX_A2`, GPIO5=`MUX_EN0`, GPIO7=`HALL_PWR_EN`, and GPIO26/ADC0=`ADC_SENSE
 The three older schematics remain as traceable source blocks and standalone ERC
 fixtures. Do not use them independently as the PCB source.
 
-## Scope
+## Evaluation PCB
 
-This milestone stops at an ERC-clean integrated schematic. PCB placement,
-routing, Gerbers and assembly outputs are intentionally deferred. Do not order
-boards from this directory yet.
+`integrated-sensor-test.kicad_pcb` is the routed PCB derived from the integrated
+schematic. It uses four copper layers and a 1.2 mm finished thickness. `In1.Cu`
+is the continuous ground reference; `F.Cu`, `In2.Cu`, and `B.Cu` carry local
+signals and power distribution.
+
+The board outline is 110 mm x 75 mm. The combined Hall/switch footprints are at
+(36, 31), (53, 31), (36, 48), and (53, 48) mm, giving an exact 17.0 mm pitch in
+both axes. The USB connector is on the right board edge. The RP2040, flash,
+crystal, and their local support parts form the digital core to the right of the
+Hall array, while the TMUX1208 is between the array and the ADC input network.
+Probe pads are arranged along the unobstructed top and bottom edges so that
+they remain accessible with switches and keycaps installed.
+
+This directory intentionally contains no Gerber, drill, BOM, CPL, or other
+manufacturing package. Manufacturing output and the G1 review are the next
+increment; do not order boards from this directory yet.
