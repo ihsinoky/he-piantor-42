@@ -1,0 +1,29 @@
+name: bootstrap-kicad-footprints
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/bootstrap-kicad-footprints.yml"
+      - "hardware/sensor-test/kicad/bootstrap_official_footprints.sh"
+      - "hardware/sensor-test/kicad/inventory_footprints.py"
+      - "hardware/sensor-test/kicad/footprint-dependencies.json"
+      - "hardware/sensor-test/kicad/integrated-sensor-test.kicad_sch"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    name: Export official KiCad 9.0.9 footprints
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract required official footprints
+        run: hardware/sensor-test/kicad/bootstrap_official_footprints.sh
+      - name: Upload authoritative footprint snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-11-kicad-9.0.9-footprints
+          path: bootstrap-output/kicad-9-footprints/
+          if-no-files-found: error

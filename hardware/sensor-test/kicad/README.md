@@ -21,6 +21,23 @@ GPIO4=`MUX_A2`, GPIO5=`MUX_EN0`, GPIO7=`HALL_PWR_EN`, and GPIO26/ADC0=`ADC_SENSE
 The three older schematics remain as traceable source blocks and standalone ERC
 fixtures. Do not use them independently as the PCB source.
 
+## Footprint dependency bootstrap
+
+`footprint-dependencies.json` is mechanically generated from the integrated
+schematic by `inventory_footprints.py`. The manually dispatched
+`bootstrap-kicad-footprints` workflow exports only the listed official
+footprints from `kicad/kicad:9.0.9`. It discovers and validates each source path
+inside the image rather than assuming the image layout, preserves the exported
+bytes, and publishes provenance plus SHA-256 hashes in the
+`issue-11-kicad-9.0.9-footprints` artifact. The workflow runs automatically on
+the Issue #11 pull request (and can also be dispatched manually) and includes
+the license/attribution file supplied by the image package.
+
+The artifact must be reviewed and copied to
+`hardware/lib/third_party/kicad-9-footprints/` before the standard logical
+libraries can be rebound in `fp-lib-table`. Do not substitute generated or
+look-alike geometry when the official artifact is unavailable.
+
 ## Scope
 
 This milestone stops at an ERC-clean integrated schematic. PCB placement,
