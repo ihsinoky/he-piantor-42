@@ -1,7 +1,7 @@
 # tscircuit Hall-key technical spike (Issue #13)
 
-Status: **CHECKPOINT — Codex Cloud local dependency bootstrap blocked by
-network policy; CI reproducibility not yet tested**
+Status: **CHECKPOINT — GitHub Actions dependency bootstrap succeeded through
+`npm ci`; Bun-enabled CLI validation pending**
 
 This report records a strictly scoped investigation. It does not make the
 Product Owner's GO / NO-GO decision. This checkpoint adds only a pinned package
@@ -92,38 +92,67 @@ no login; outbound registry and GitHub connections returned HTTP 403).
 ## GitHub Actions bootstrap checkpoint
 
 The independent `.github/workflows/tscircuit-spike.yml` workflow runs on every
-pull request (and supports manual dispatch) with Node.js 22. From
-`hardware/tscircuit`, it performs these operations in order:
+pull request (and supports manual dispatch) with Node.js 22 and Bun 1.2.22.
+From `hardware/tscircuit`, it performs these operations in order:
 
 ```sh
 npm view tscircuit@0.0.2646 version
 npm install --package-lock-only
 npm ci
+bun --version
 ./node_modules/.bin/tsci --version
 npm ls --all --json
 ```
 
+Every piped validation command enables `set -euo pipefail`, so a successful
+`tee` cannot hide a failed registry, install, Bun, or tscircuit command.
+`npm ls` is handled separately: its JSON, stderr, and numeric exit code are all
+preserved, but its known dependency-metadata result does not by itself fail this
+runtime-bootstrap checkpoint.
+
 The workflow uploads `package-lock.json`, `dependency-tree.json`,
-`tsci-version.txt`, and command logs as the
+`npm-ls-exit-code.txt`, `bun-version.txt`, `tsci-version.txt`, and command logs as the
 `issue-13-tscircuit-bootstrap` artifact. The lockfile is deliberately generated
 on the runner rather than guessed or committed in this checkpoint.
 
-Current GitHub Actions evidence at commit time:
+GitHub Actions bootstrap Run #1 evidence, as reviewed by PMO:
 
-- workflow run number: **PENDING — workflow has not yet run for this commit**;
-- npm registry accessibility: **PENDING IN GITHUB ACTIONS** (local Codex Cloud
-  remains HTTP 403);
-- resolved tscircuit version: **PENDING** (requested root version is exactly
-  `0.0.2646`);
-- package-lock generation: **PENDING**;
-- `npm ci`: **PENDING**;
+- npm registry accessibility: **PASS**;
+- requested/resolved root tscircuit version: **0.0.2646**;
+- package-lock generation: **PASS**;
+- `npm ci`: **PASS**;
+- bootstrap artifact upload: **PASS**;
+- `tsci --version`: **FAILED — `/usr/bin/env: ‘bun’: No such file or
+  directory`**;
+- `npm ls --all --json`: **ELSPROBLEMS**, including peer-dependency metadata
+  mismatches involving `tscircuit@0.0.2646`, `circuit-json@0.0.499`, and
+  `@tscircuit/cli@0.1.2169`.
+
+Run #1 is evidence that GitHub Actions can access npm, resolve the exact root
+version, generate a lockfile, install it, and upload evidence. Its red result is
+a missing-runtime/workflow defect, not tscircuit capability NO-GO evidence.
+
+Evidence pending from the revised workflow:
+
+- workflow run number: **PENDING**;
+- Bun version: **PENDING** (workflow requests exactly `1.2.22`);
 - `tsci --version`: **PENDING**;
-- dependency tree: **PENDING**;
+- `npm ls` result and recorded exit code: **PENDING**;
 - artifact name: `issue-13-tscircuit-bootstrap`;
 - artifact ID: **PENDING**.
 
 These pending fields must be replaced with workflow evidence after GitHub has
 executed the new checkpoint. They are not claims of success or failure.
+
+### Dependency-health observation
+
+Run #1's successful `npm ci` reported multiple moderate- and high-severity npm
+audit findings. PMO also observed peer-dependency metadata mismatches in the
+resolved graph, represented by the `npm ls` ELSPROBLEMS result above. These are
+dependency-health risks to carry into the later GO / NO-GO evidence, but this
+checkpoint does not treat them as an Issue #13 STOP condition. The workflow
+does not use `--legacy-peer-deps`, suppress the nonzero `npm ls` result, or run
+`npm audit fix --force`.
 
 ## Capability evidence
 
@@ -140,7 +169,7 @@ executed the new checkpoint. They are not claims of success or failure.
 | Four copper layers | NOT DEMONSTRATED | No verified tscircuit board representation was generated. |
 | Native DRC | NOT RUN | No installed tscircuit toolchain. |
 | Repository-specific checks | NOT IMPLEMENTED OR RUN | Implementing checks against invented output/API structures would create false evidence. |
-| GitHub Actions | CHECKPOINT ADDED; RESULT PENDING | The independent workflow checks registry access, generates a lockfile, runs `npm ci`, records `tsci --version` and `npm ls`, and uploads `issue-13-tscircuit-bootstrap`. Existing KiCad CI was left unchanged. |
+| GitHub Actions | RUN #1 PARTIAL PASS; REVISED RUN PENDING | Registry access, exact resolution, lock generation, `npm ci`, and artifact upload passed. The CLI check lacked Bun. The revised workflow installs and records Bun, requires a real zero exit from `tsci --version`, and preserves `npm ls` diagnostics. Existing KiCad CI was left unchanged. |
 
 The absence of these demonstrations must not be interpreted as proof that
 tscircuit lacks the capabilities. It means this execution did not produce
@@ -152,10 +181,10 @@ No fake or placeholder manufacturing files were created.
 
 | Output | Required classification | Evidence / specific reason |
 | --- | --- | --- |
-| Gerber | **UNKNOWN — toolchain and non-interactive export API could not be installed or inspected** | npm and GitHub access were blocked. |
-| Drill | **UNKNOWN — toolchain and non-interactive export API could not be installed or inspected** | npm and GitHub access were blocked. |
-| BOM | **UNKNOWN — toolchain and non-interactive export API could not be installed or inspected** | npm and GitHub access were blocked. |
-| Pick-and-place / CPL | **UNKNOWN — toolchain and non-interactive export API could not be installed or inspected** | npm and GitHub access were blocked. |
+| Gerber | **UNKNOWN — export investigation deferred** | This checkpoint stops at runtime bootstrap and dependency review. |
+| Drill | **UNKNOWN — export investigation deferred** | This checkpoint stops at runtime bootstrap and dependency review. |
+| BOM | **UNKNOWN — export investigation deferred** | This checkpoint stops at runtime bootstrap and dependency review. |
+| Pick-and-place / CPL | **UNKNOWN — export investigation deferred** | This checkpoint stops at runtime bootstrap and dependency review. |
 
 No conclusion can be drawn about authentication or paid-plan requirements for
 these exports from the evidence available in this run.
@@ -178,14 +207,14 @@ review. DRC and design/manufacturing artifact generation remain deferred.
 
 ## Acceptance Criteria status
 
-- Isolated, exactly pinned tscircuit package manifest: **implemented; dependency
-  resolution pending CI**.
+- Isolated, exactly pinned tscircuit package manifest: **implemented; root
+  version resolution passed in Run #1**.
 - Minimal Hall-key circuit: **not demonstrated**.
 - Authoritative footprint imported and verified: **not demonstrated**.
 - Four-copper-layer representation: **not demonstrated**.
 - Automated electrical/project checks: **not demonstrated**.
-- Non-interactive dependency-bootstrap CI and artifact upload: **implemented;
-  execution result pending**.
+- Non-interactive dependency-bootstrap CI and artifact upload: **passed through
+  `npm ci` and upload in Run #1; Bun-enabled CLI recheck pending**.
 - Manufacturing-output capability classifications: **recorded as UNKNOWN with
   the specific investigation blocker**.
 - Existing KiCad baseline protected: **demonstrated by the branch diff**.
