@@ -30,34 +30,42 @@ jobs:
         with:
           bun-version: 1.2.22
 
-      - name: Check npm registry accessibility
+      - name: Verify committed dependency lockfile
         run: |
           set -euo pipefail
           mkdir -p bootstrap-evidence
-          npm view tscircuit@0.0.2646 version 2>&1 \
-            | tee bootstrap-evidence/npm-registry.txt
-
-      - name: Generate dependency lockfile
-        run: |
-          set -euo pipefail
-          npm install --package-lock-only 2>&1 \
-            | tee bootstrap-evidence/package-lock-generation.txt
+          test -f package-lock.json
+          sha256sum package-lock.json \
+            | tee bootstrap-evidence/package-lock.sha256
+          printf '%s  %s\n' \
+            'a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33' \
+            'package-lock.json' \
+            | sha256sum --check \
+            | tee bootstrap-evidence/package-lock-sha256-verification.txt
 
       - name: Install locked dependencies
         run: |
           set -euo pipefail
           npm ci 2>&1 | tee bootstrap-evidence/npm-ci.txt
 
+      - name: Verify dependency lockfile is unchanged
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- package-lock.json 2>&1 \
+            | tee bootstrap-evidence/package-lock-diff.txt
+
       - name: Record Bun version
         run: |
           set -euo pipefail
           bun --version 2>&1 | tee bootstrap-evidence/bun-version.txt
+          grep -Fx '1.2.22' bootstrap-evidence/bun-version.txt
 
       - name: Record tscircuit CLI version
         run: |
           set -euo pipefail
           ./node_modules/.bin/tsci --version 2>&1 \
             | tee bootstrap-evidence/tsci-version.txt
+          grep -Fx '0.0.2646' bootstrap-evidence/tsci-version.txt
 
       - name: Record dependency tree and peer diagnostics
         run: |
