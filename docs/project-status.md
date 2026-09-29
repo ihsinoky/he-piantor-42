@@ -38,17 +38,33 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | M0 design policy is done; M1 evaluation circuit/PCB work is in progress. Rev.A and later hardware remain unstarted. |
+| Hardware | M0 design policy and the M1 evaluation circuit are established. Before evaluation-PCB implementation, a two-layer native stock-tscircuit feasibility gate is in progress; the KiCad route is retained as a fallback on hold. Rev.A and later hardware remain unstarted. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
 
 ## Current and next work
 
-The project is in M1. The current high-level effort is completing the four-key
-Hall evaluation baseline and its measurement capability. The next planned
-engineering increment is the sensor-test evaluation PCB layout and DRC. Each
-detailed increment is defined and accepted through its own GitHub Issue.
+The project is in M1. The current engineering focus is the EDA strategy
+transition: validate two-layer native stock-tscircuit feasibility as a technical
+gate before implementing the four-key evaluation PCB. The gate must demonstrate
+a non-interactive native TypeScript / TSX build with stock tscircuit and assess
+whether the design can produce the required manufacturing artifacts (Gerber,
+drill, BOM, and PnP). Evaluation-PCB layout and DRC wait for that GO decision.
+
+The previous spike established reproducibility with a committed dependency
+lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
+non-interactive CI bootstrap. Its KiCad footprint-import path stopped at
+footprint integrity: conversion of `SW_MX_HE_0deg_1u.kicad_mod` using
+`kicad-to-circuit-json` 0.0.117 preserved Hall SMD pads, the plated through-hole
+pad, duplicate pad-number semantics, two NPTH switch holes, plated/non-plated
+distinction, mechanical alignment, and an observed Y inversion, but lost two
+copper-pour keepout zones. Therefore KiCad import is not the authoritative
+migration path. This result does not rule out native tscircuit design.
+
+Existing KiCad work remains unchanged as fallback, reference, and prior-design
+evidence while the greenfield evaluation is pending. Each detailed increment is
+defined and accepted through its own GitHub Issue.
 
 ## Dashboard synchronization
 
