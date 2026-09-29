@@ -83,6 +83,13 @@ jobs:
           # runtime-bootstrap checkpoint solely because of dependency metadata.
           exit 0
 
+      - name: Convert and verify authoritative Hall footprint
+        run: |
+          set -euo pipefail
+          npm run footprint:verify 2> >(tee footprint-evidence/converter-stderr.txt >&2) \
+            | tee footprint-evidence/geometry-verification-report.txt
+          node -e 'require("./footprint-evidence/verification-result.json")'
+
       - name: Upload bootstrap evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -91,4 +98,5 @@ jobs:
           path: |
             hardware/tscircuit/package-lock.json
             hardware/tscircuit/bootstrap-evidence/
+            hardware/tscircuit/footprint-evidence/
           if-no-files-found: warn

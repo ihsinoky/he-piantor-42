@@ -2,10 +2,10 @@
 
 Status: **REPRODUCIBILITY GATE — PASS IN GITHUB ACTIONS; PMO / Product Owner review required**
 
-This checkpoint is limited to making the tscircuit dependency bootstrap
-reproducible. It does not make the Product Owner's GO / NO-GO decision and does
-not proceed to Hall-key implementation, footprint import, geometry validation,
-board design, DRC, or manufacturing outputs.
+The reproducibility gate is complete. The current checkpoint is limited to
+STOP 1 Hall-footprint conversion and machine-readable geometry inspection. It
+does not proceed to Hall-key electrical TSX, board design, routing, DRC, or
+manufacturing outputs.
 
 ## Execution context and source protection
 
@@ -51,6 +51,9 @@ PMO-confirmed bootstrap history:
 
 - bootstrap Run #2: **PASS**;
 - bootstrap Run #3: **PASS**;
+- Run #5: **PASS**;
+- Run #5 artifact ID: **11003505777**;
+- committed lockfile reproducibility Gate: **PASS**;
 - GitHub Actions dependency installation (`npm ci`): **PASS**;
 - Bun 1.2.22 runtime check: **PASS**;
 - `tsci` 0.0.2646 runtime check: **PASS**;
@@ -58,13 +61,26 @@ PMO-confirmed bootstrap history:
 - tscircuit spike workflow: **Green**;
 - engineering-ci: **Green**.
 
-Run #3 demonstrated that GitHub Actions can install the committed dependency
-set and execute both pinned runtimes. The workflow change in this checkpoint
-adds the final lockfile-integrity gate: it verifies the committed SHA-256 before
-installation and requires a clean lockfile diff after `npm ci`. The new run
-number and artifact ID produced for this commit must be recorded from PR #14
-before merge; they cannot exist until GitHub Actions executes the committed
-workflow.
+Run #5 demonstrated that GitHub Actions can install the committed dependency
+set and execute both pinned runtimes. The workflow verifies the committed
+SHA-256 before installation and requires a clean lockfile diff after `npm ci`.
+
+## STOP 1 — Hall footprint integrity checkpoint
+
+The workflow now passes the authoritative
+`hardware/lib/third_party/marbastlib-he.pretty/SW_MX_HE_0deg_1u.kicad_mod`
+source text directly to the installed `kicad-to-circuit-json` 0.0.117
+`KicadFootprintToCircuitJsonConverter`. It writes the unedited converter result,
+stderr/warnings, a detailed geometry report, and a compact machine-readable
+decision to the evidence artifact.
+
+The verifier checks SMD pads 1/2/3, both instances of pad number 3, the plated
+through-hole dimensions, the two non-plated holes, and a consistent observed
+coordinate transform. Keepouts receive a deliberately strict check: their
+Circuit JSON elements must expose layer scope and all track, via, pad,
+footprint, and copper-pour permissions. Polygon survival alone is not treated
+as semantic equivalence. A missing or incomplete representation is reported as
+`STOP 1 — FOOTPRINT INTEGRITY`, never replaced with inferred geometry.
 
 ## Dependency diagnostics and residual risk
 
@@ -94,9 +110,9 @@ the toolchain.
 versions. The workflow now additionally makes lockfile existence, SHA-256
 integrity, and a clean post-install diff mandatory.
 
-STOP 1 (footprint integrity), STOP 2, STOP 3, and STOP 5 are outside this
-checkpoint and remain unassessed. No claim about tscircuit's Hall-key, footprint
-import, board, DRC, or manufacturing-output capabilities is made here.
+STOP 2, STOP 3, and STOP 5 remain outside this checkpoint. No claim about
+tscircuit's complete Hall-key, board, DRC, or manufacturing-output capabilities
+is made here.
 
 ## Reproducibility acceptance status
 
@@ -117,7 +133,7 @@ import, board, DRC, or manufacturing-output capabilities is made here.
 
 ## Human Gate
 
-This checkpoint stops at the reproducibility Gate. Do not merge PR #14 or close
-Issue #13 until PMO / Product Owner review. Hall-key TSX, KiCad footprint import,
-geometry verification, four-layer board work, DRC, and Gerber / drill / BOM /
-CPL generation remain explicitly deferred.
+This checkpoint stops after footprint-integrity evidence generation. Do not
+merge PR #14 or close Issue #13 until PMO / Product Owner review. Hall-key TSX,
+four-layer board work, routing, DRC, and Gerber / drill / BOM / CPL generation
+remain explicitly deferred.
