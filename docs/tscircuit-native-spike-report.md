@@ -2,11 +2,13 @@
 
 ## Outcome and scope
 
-This run stopped before Checkpoint A. The Codex Cloud environment could not
-download the pinned stock `tscircuit` package, and it did not contain the pinned
-Bun runtime. Consequently, no claim about native geometry, electrical design,
-PCB generation, or manufacturing feasibility is made. This is **not** a GO or
-NO-GO decision; that decision remains a Human Gate.
+Technical evaluation has not started. Local execution in Codex Cloud is
+**BLOCKED** because the environment cannot download the pinned stock
+`tscircuit` package and does not contain the pinned Bun runtime. This is not a
+tscircuit capability STOP: the verified non-interactive execution path is
+GitHub Actions. Consequently, no claim about native geometry, electrical
+design, PCB generation, or manufacturing feasibility is made. This is **not**
+a GO or NO-GO decision; that decision remains a Human Gate.
 
 The run started at main commit
 `44735c7538cb21230758ba9acd334621ba09ad55`. The existing KiCad designs,
@@ -37,6 +39,19 @@ No alternative tscircuit version was selected. A lockfile could not be produced
 without resolving the real stock dependency graph, so no fabricated or
 hand-written lockfile was committed. `tsci --version`, `npm ci`, and the required
 post-install lockfile-integrity check could not be run.
+
+The instructed first recovery check was run against the current checkout:
+
+```text
+git cat-file -e 400117cfd4d5d203e457dfe413dd3107a9d63375^{blob}
+fatal: Not a valid object name 400117cfd4d5d203e457dfe413dd3107a9d63375^{blob}
+```
+
+The verified blob is unavailable in this checkout's Git object database.
+Accordingly, the lockfile was not guessed, regenerated, or handwritten. The
+required handoff is the verified `hardware/tscircuit/package-lock.json` whose
+SHA-256 is
+`a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33`.
 
 ## Geometry provenance and Checkpoint A
 
@@ -84,20 +99,21 @@ not claimed because the underlying metadata was never generated.
 
 ## CI and evidence artifact
 
-No Issue #19 workflow was added: a workflow using `npm ci` requires a committed,
-genuine `package-lock.json`, which this environment could not create. Adding an
-untested workflow or regenerating a lock in CI would violate the reproducibility
-policy. There is no workflow run number or artifact ID. Existing
-`engineering-ci` was not changed; no result for this branch was available in the
-Codex Cloud task.
+GitHub Actions bootstrap is **pending rerun**, but the bootstrap workflow cannot
+be added until the verified lockfile is handed off. A workflow using `npm ci`
+requires that committed, genuine `package-lock.json`; generating or updating it
+in CI would violate the reproducibility policy. There is no workflow run number
+or artifact ID. Existing `engineering-ci` was not changed, and no result for
+this branch was available in the Codex Cloud task.
 
 ## Codex Cloud limitation
 
 The environment forced npm and HTTPS traffic through `proxy:8080`; access to
 the npm registry and GitHub raw content was rejected with HTTP 403. The required
-Bun version was also absent. These are environment limitations rather than
-evidence of a tscircuit product limitation. A fresh environment with registry
-access and Bun 1.2.22 is required to resume the spike from Checkpoint A.
+Bun version was also absent. These are local Codex Cloud limitations rather than
+evidence of a tscircuit product limitation. Earlier GitHub Actions execution
+established that non-interactive `npm ci` with Bun 1.2.22 is possible, so GitHub
+Actions must be used after the verified lockfile handoff.
 
 ## Stock-only policy and custom repository code
 
@@ -117,15 +133,18 @@ pick-and-place fields, and JLCPCB feasibility.
 - **STOP A — not reached:** native geometry was not evaluated.
 - **STOP B — not reached:** generated-file editing was neither attempted nor
   required.
-- **STOP C — reached for this run:** a non-interactive build could not be
-  established in the provided Codex Cloud environment because the exact stock
-  dependencies/runtime could not be acquired. This does not establish that
-  stock tscircuit intrinsically requires interactive state.
+- **STOP C — not reached:** no browser UI, interactive login, or
+  developer-local hidden state has been shown to be essential. Local Codex
+  Cloud package access is blocked, while GitHub Actions is the verified
+  non-interactive execution path.
 - **STOP D — not reached:** no paid dependency requirement was observed.
 - **STOP E — not reached:** manufacturing export was not reached and therefore
   cannot be judged insufficient.
 
-The Human Gate must decide whether to rerun Issue #19 in a fresh Codex Cloud
-task with npm registry access and Bun 1.2.22. No GO/NO-GO recommendation is made.
+**VERIFIED LOCKFILE HANDOFF REQUIRED.** PMO/Product Owner must provide the
+verified lockfile blob (expected SHA-256 above) to this branch. After that,
+GitHub Actions can run the bootstrap-only workflow. Checkpoint A remains not
+started, no technical tscircuit STOP has been reached, and no GO/NO-GO
+recommendation is made.
 
 PMO / Product Owner review waiting
