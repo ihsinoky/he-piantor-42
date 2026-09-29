@@ -101,3 +101,53 @@ Do not release the 42-key PCB until a four-key Hall evaluation board has measure
 - short-term thermal drift.
 
 Reason: Hall switch behavior depends on the switch magnet, Hall sensor, PCB thickness, physical alignment, analog path and firmware timing as one system. Nominal component specifications alone are not sufficient for the production PCB.
+
+## D-012 - PCB layer baseline
+
+Status: accepted
+
+Use a two-layer PCB for the evaluation board and as the current production
+baseline. Prioritize JLCPCB's low-cost manufacturing options. Four-layer
+capability is not a current project requirement; if it becomes necessary, it
+must be reconsidered through a separate design decision and Human Gate.
+
+This layer baseline does not change D-008: both the Hall evaluation board and
+the production board retain the 1.2 mm PCB-thickness baseline.
+
+Reason: a two-layer baseline keeps the current evaluation aligned with the
+project's low-cost manufacturing objective without treating an unneeded
+four-layer capability as an EDA acceptance criterion.
+
+## D-013 - EDA backend evaluation strategy
+
+Status: accepted evaluation baseline
+
+Do not adopt automatic KiCad-to-tscircuit import as the authoritative migration
+path. Evaluate a greenfield design written in native TypeScript / TSX, using
+stock tscircuit, before implementing the evaluation PCB. The intended flow is:
+
+```text
+requirements / datasheets / verified geometry
+    -> native TypeScript / TSX
+    -> stock tscircuit
+    -> 2-layer PCB
+    -> Gerber / Drill / BOM / PnP
+    -> JLCPCB
+```
+
+Before a GO decision, do not introduce a tscircuit fork, Circuit JSON fork, or
+custom Gerber exporter. Generated Circuit JSON and Gerber files must not be
+edited directly. Repository-owned validation and tests are permitted. Existing
+KiCad designs remain available as fallback, reference, and prior-design
+evidence, and must not be removed before the migration GO decision.
+
+Reason: the earlier Issue #13 spike proved a reproducible non-interactive setup:
+a committed dependency lock, a fresh GitHub Actions `npm ci`, Bun 1.2.22,
+tscircuit 0.0.2646, and CI bootstrap all passed. However, PR #16's conversion of
+`SW_MX_HE_0deg_1u.kicad_mod` with `kicad-to-circuit-json` 0.0.117 reached
+**STOP 1 - FOOTPRINT INTEGRITY**. It preserved the Hall SMD pads, plated
+through-hole pad, duplicate pad-number semantics, two NPTH switch holes,
+plated/non-plated distinction, mechanical alignment, and the observed Y-axis
+inversion, but lost two copper-pour keepout zones. This rejects the import path;
+it does not establish that a native tscircuit design is impossible. Native
+stock-tscircuit feasibility therefore requires a separate technical gate.
