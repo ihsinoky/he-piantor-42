@@ -1,6 +1,6 @@
 # tscircuit Hall-key technical spike (Issue #13)
 
-Status: **REPRODUCIBILITY GATE — PASS IN GITHUB ACTIONS; PMO / Product Owner review required**
+Status: **REPRODUCIBILITY GATE — PASS; RUN #6 HARNESS FAILURE; STOP 1 NOT YET EVALUATED; PMO / Product Owner review required**
 
 The reproducibility gate is complete. The current checkpoint is limited to
 STOP 1 Hall-footprint conversion and machine-readable geometry inspection. It
@@ -11,7 +11,7 @@ manufacturing outputs.
 
 - Execution date: 2026-09-28 (UTC).
 - Checkpoint starting commit: `89a760f3a5aeb02d578dbf6066bde1e77995da48`.
-- Existing PR: #14 for Issue #13.
+- Existing PR: #16 for Issue #13.
 - The committed `hardware/tscircuit/package-lock.json` is the authoritative
   dependency lockfile. Its expected SHA-256 is
   `a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33`.
@@ -54,11 +54,13 @@ PMO-confirmed bootstrap history:
 - Run #5: **PASS**;
 - Run #5 artifact ID: **11003505777**;
 - committed lockfile reproducibility Gate: **PASS**;
+- Run #6: **RED** (verification harness failed before geometry evaluation);
+- engineering-ci #127: **PASS**;
 - GitHub Actions dependency installation (`npm ci`): **PASS**;
 - Bun 1.2.22 runtime check: **PASS**;
 - `tsci` 0.0.2646 runtime check: **PASS**;
 - bootstrap artifact upload: **PASS**;
-- tscircuit spike workflow: **Green**;
+- tscircuit spike workflow through Run #5: **Green**;
 - engineering-ci: **Green**.
 
 Run #5 demonstrated that GitHub Actions can install the committed dependency
@@ -73,6 +75,14 @@ source text directly to the installed `kicad-to-circuit-json` 0.0.117
 `KicadFootprintToCircuitJsonConverter`. It writes the unedited converter result,
 stderr/warnings, a detailed geometry report, and a compact machine-readable
 decision to the evidence artifact.
+
+Run #6 did not produce a footprint-capability conclusion. Its converter step
+failed before geometry evaluation because the evidence directory did not yet
+exist when shell redirections were opened and because the harness called a
+nonexistent `convert()` method. This is a verifier/converter execution failure,
+not a STOP 1 result. **STOP 1 is not yet evaluated.** The corrected harness
+creates the evidence directory before redirection and uses the converter's
+documented `addFile()`, `runUntilFinished()`, and `getOutput()` lifecycle.
 
 The verifier checks SMD pads 1/2/3, both instances of pad number 3, the plated
 through-hole dimensions, the two non-plated holes, and a consistent observed
@@ -129,11 +139,13 @@ is made here.
 - artifact upload: **PASS**;
 - engineering-ci: **Green**;
 - tscircuit spike workflow: **Green**;
+- Run #6 footprint converter invocation: **FAILED before geometry evaluation**;
+- STOP 1: **NOT YET EVALUATED**;
 - existing KiCad files unchanged: **PASS**.
 
 ## Human Gate
 
 This checkpoint stops after footprint-integrity evidence generation. Do not
-merge PR #14 or close Issue #13 until PMO / Product Owner review. Hall-key TSX,
+merge PR #16 or close Issue #13 until PMO / Product Owner review. Hall-key TSX,
 four-layer board work, routing, DRC, and Gerber / drill / BOM / CPL generation
 remain explicitly deferred.

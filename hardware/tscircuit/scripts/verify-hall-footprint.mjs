@@ -23,6 +23,7 @@ while (!fs.existsSync(packageJsonPath) && path.dirname(packageJsonPath) !== pack
 }
 const converterVersion = JSON.parse(fs.readFileSync(packageJsonPath, "utf8")).version
 const warnings = []
+let stats = null
 const originalWarn = console.warn
 console.warn = (...args) => {
   const line = args.map(String).join(" ")
@@ -30,13 +31,18 @@ console.warn = (...args) => {
   originalWarn(...args)
 }
 
-// Version 0.0.117 exposes this class with a source-text constructor and a
-// synchronous convert() method. Deliberately use that public API directly:
-// this is not a handwritten footprint or a Circuit JSON reconstruction.
-const converter = new KicadFootprintToCircuitJsonConverter(source)
-const converted = converter.convert()
+// Use the installed converter's public standalone-footprint lifecycle. The
+// authoritative source text is the only geometry input.
+const converter = new KicadFootprintToCircuitJsonConverter()
+converter.addFile("SW_MX_HE_0deg_1u.kicad_mod", source)
+converter.runUntilFinished()
+const converted = converter.getOutput()
 console.warn = originalWarn
-if (Array.isArray(converter.warnings)) warnings.push(...converter.warnings.map(String))
+if (typeof converter.getWarnings === "function") {
+  const converterWarnings = converter.getWarnings()
+  if (Array.isArray(converterWarnings)) warnings.push(...converterWarnings.map(String))
+}
+if (typeof converter.getStats === "function") stats = converter.getStats()
 
 fs.writeFileSync(
   path.join(evidenceDir, "converter-api.json"),
@@ -67,6 +73,10 @@ fs.writeFileSync(
 fs.writeFileSync(
   path.join(evidenceDir, "converter-warnings.txt"),
   warnings.length ? `${warnings.join("\n")}\n` : "(none)\n",
+)
+fs.writeFileSync(
+  path.join(evidenceDir, "converter-stats.json"),
+  `${JSON.stringify(stats, null, 2)}\n`,
 )
 
 const approx = (a, b) =>
@@ -168,6 +178,7 @@ const report = {
   status,
   checks: { smd: smdChecks, throughHolePad3: th ?? null, npth: npthChecks, keepouts },
   warnings,
+  stats,
   result: stop1 ? "STOP 1 — FOOTPRINT INTEGRITY" : "PASS candidate",
 }
 fs.writeFileSync(path.join(evidenceDir, "geometry-verification-report.json"), `${JSON.stringify(report, null, 2)}\n`)
@@ -177,6 +188,5 @@ fs.writeFileSync(
 )
 console.log(JSON.stringify(report, null, 2))
 
-// A STOP 1 finding is a valid, machine-readable outcome of this capability
-// checkpoint. Exit failure is reserved for inability to run the converter or
-// produce the report; CI separately asserts the expected STOP decision.
+// Conversion/execution exceptions fail this process before a result is
+// produced. CI evaluates a successfully produced STOP 1 result separately.
