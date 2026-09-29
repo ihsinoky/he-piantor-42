@@ -1,6 +1,6 @@
 # tscircuit Hall-key technical spike (Issue #13)
 
-Status: **REPRODUCIBILITY GATE — PASS; RUN #6 HARNESS FAILURE; STOP 1 NOT YET EVALUATED; PMO / Product Owner review required**
+Status: **STOP 1 — FOOTPRINT INTEGRITY: REACHED; PMO / Product Owner Human Gate required**
 
 The reproducibility gate is complete. The current checkpoint is limited to
 STOP 1 Hall-footprint conversion and machine-readable geometry inspection. It
@@ -56,6 +56,11 @@ PMO-confirmed bootstrap history:
 - committed lockfile reproducibility Gate: **PASS**;
 - Run #6: **RED** (verification harness failed before geometry evaluation);
 - engineering-ci #127: **PASS**;
+- Run #7 converter invocation: **PASS**;
+- Run #7 geometry verification: **completed**;
+- Run #7 artifact ID: **11020587967**;
+- Run #7 tscircuit spike bootstrap: **RED because the STOP 1 Gate intentionally failed**;
+- engineering-ci #128: **PASS**;
 - GitHub Actions dependency installation (`npm ci`): **PASS**;
 - Bun 1.2.22 runtime check: **PASS**;
 - `tsci` 0.0.2646 runtime check: **PASS**;
@@ -79,10 +84,38 @@ decision to the evidence artifact.
 Run #6 did not produce a footprint-capability conclusion. Its converter step
 failed before geometry evaluation because the evidence directory did not yet
 exist when shell redirections were opened and because the harness called a
-nonexistent `convert()` method. This is a verifier/converter execution failure,
-not a STOP 1 result. **STOP 1 is not yet evaluated.** The corrected harness
+nonexistent `convert()` method. For Run #6, this was a verifier/converter
+execution failure, not a STOP 1 result; STOP 1 was not evaluated in that run.
+The corrected harness
 creates the evidence directory before redirection and uses the converter's
 documented `addFile()`, `runUntilFinished()`, and `getOutput()` lifecycle.
+
+Run #7 successfully exercised that corrected lifecycle. The converter ran to
+completion, and CI generated the raw Circuit JSON, converter diagnostics,
+geometry report, and `verification-result.json`. The final Gate then failed as
+designed because that machine-readable result established STOP 1. This is not
+a verifier failure, CI infrastructure failure, reproducibility failure, or
+geometry-checker false negative.
+
+### Run #7 geometry result
+
+The following authoritative geometry was preserved:
+
+- Hall SMD pads 1, 2, and 3;
+- plated through-hole pad 3;
+- duplicate pad-number 3 semantics across the SMD and through-hole pads;
+- both non-plated switch holes;
+- the plated/non-plated distinction; and
+- relative Hall-sensor and switch-hole alignment.
+
+The observed coordinate transform was **y-inverted**. This was a consistent
+converter coordinate-system transform, so the relative alignment is preserved
+even though the numeric Y coordinates are transformed.
+
+The authoritative footprint contains two keepout zones, **HE keepout_bot** and
+**HE keepout_top**. The converted Circuit JSON contains no keepout elements, so
+both keepout geometry and semantics are **lost**. The converter emitted no
+warning for this drop.
 
 The verifier checks SMD pads 1/2/3, both instances of pad number 3, the plated
 through-hole dimensions, the two non-plated holes, and a consistent observed
@@ -115,6 +148,18 @@ the toolchain.
 
 ## STOP-condition assessment
 
+**STOP 1 — FOOTPRINT INTEGRITY: REACHED.** The authoritative
+`SW_MX_HE_0deg_1u.kicad_mod` keepout semantics cannot be carried into Circuit
+JSON by `kicad-to-circuit-json` 0.0.117. Because these keepouts are important
+authoritative geometry, their silent loss prevents footprint-integrity
+equivalence even though the pads, holes, plating distinction, and relative
+alignment were preserved.
+
+No workaround is attempted. In particular, this checkpoint does not add
+handwritten keepout geometry, inject keepouts through TSX, edit generated
+Circuit JSON, create a replacement footprint, modify the authoritative KiCad
+footprint, weaken the verifier, or downgrade STOP 1 to a warning.
+
 **STOP 4 is not reached.** A fresh GitHub Actions environment successfully runs
 `npm ci` from the committed lockfile and runs the pinned Bun and tscircuit CLI
 versions. The workflow now additionally makes lockfile existence, SHA-256
@@ -138,14 +183,26 @@ is made here.
 - dependency diagnostics saved: **PASS**;
 - artifact upload: **PASS**;
 - engineering-ci: **Green**;
-- tscircuit spike workflow: **Green**;
-- Run #6 footprint converter invocation: **FAILED before geometry evaluation**;
-- STOP 1: **NOT YET EVALUATED**;
+- Run #7 converter invocation: **PASS**;
+- Run #7 raw Circuit JSON generation: **PASS**;
+- Run #7 geometry report generation: **PASS**;
+- Run #7 `verification-result.json` generation: **PASS**;
+- Run #7 tscircuit workflow: **RED by intentional STOP 1 Gate**;
+- converter warnings: **none**;
+- SMD pads 1/2/3: **preserved**;
+- plated through-hole pad 3: **preserved**;
+- duplicate pad-number 3 semantics: **preserved**;
+- NPTH switch holes: **preserved (2)**;
+- plated/non-plated distinction: **preserved**;
+- coordinate transform: **y-inverted**;
+- relative alignment: **preserved through the consistent transform**;
+- keepouts: **lost**;
+- STOP 1: **REACHED**;
 - existing KiCad files unchanged: **PASS**.
 
 ## Human Gate
 
-This checkpoint stops after footprint-integrity evidence generation. Do not
-merge PR #16 or close Issue #13 until PMO / Product Owner review. Hall-key TSX,
-four-layer board work, routing, DRC, and Gerber / drill / BOM / CPL generation
-remain explicitly deferred.
+This checkpoint stops at **PMO / Product Owner Human Gate**. Keep PR #16 as the
+STOP 1 evidence PR; do not merge it or close Issue #13. Hall-key electrical
+TSX, full migration, four-layer board work, routing, DRC, and Gerber / drill /
+BOM / CPL or pick-and-place generation remain explicitly deferred.
