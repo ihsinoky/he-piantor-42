@@ -4,8 +4,8 @@
 
 Technical evaluation has not started. Local execution in Codex Cloud remains
 **BLOCKED**, but the Product Owner has handed off the verified dependency pair.
-The bootstrap workflow now tests that pair in GitHub Actions, the authoritative
-execution environment. Its result is **PENDING** until that workflow completes.
+The bootstrap workflow tested that pair in GitHub Actions, the authoritative
+execution environment. Run #1 (ID `36653289199`) completed successfully.
 Consequently, no claim about native geometry, electrical design, PCB
 generation, or manufacturing feasibility is made. This is **not** a GO or
 NO-GO decision; that decision remains a Human Gate.
@@ -40,9 +40,20 @@ No alternative tscircuit version was selected. The handed-off `package.json`
 and `package-lock.json` are unchanged. The lockfile SHA-256 is
 `a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33`.
 The workflow hard-gates that digest, runs `npm ci`, checks that the lockfile
-remains unchanged, and exactly asserts both runtime versions. Dependency
-reproducibility and all runtime checks remain **PENDING** until GitHub Actions
-reports a result.
+remains unchanged, and exactly asserts both runtime versions. Run #1 passed the
+digest, install, immutability, Bun 1.2.22, and tscircuit CLI 0.0.2646 gates.
+
+`npm ls --all --json` exited with status 1 and reported peer dependency
+diagnostics involving `circuit-json@0.0.499` and
+`@tscircuit/alphabet@0.0.25`. These diagnostics are retained in the evidence
+artifact but do not invalidate the locked installation. The install output also
+reported 11 vulnerabilities (8 moderate and 3 high), which remain a
+dependency-health and supply-chain risk. This bootstrap checkpoint does not run
+`npm audit fix`, update dependencies, or regenerate the lockfile.
+
+The inherited `footprint:verify` package script is an Issue #13 artifact. It is
+left unchanged to preserve the verified dependency pair and should be reviewed
+as a cleanup candidate when Checkpoint A begins.
 
 ## Geometry provenance and Checkpoint A
 
@@ -90,12 +101,11 @@ not claimed because the underlying metadata was never generated.
 
 ## CI and evidence artifact
 
-GitHub Actions bootstrap is **PENDING**. The new workflow uses Node 22, Bun
-1.2.22, the verified lockfile, and `npm ci`, then uploads diagnostic evidence as
-`issue-19-tscircuit-native-bootstrap`, including evidence from failed runs.
-There is not yet a workflow run number or artifact ID. Existing
-`engineering-ci` was not changed, and no result for this branch is available
-before the new PR runs.
+GitHub Actions bootstrap run #1 (ID `36653289199`) is **PASS**. It used Node 22,
+Bun 1.2.22, the verified lockfile, and `npm ci`. Evidence was uploaded as
+`issue-19-tscircuit-native-bootstrap`, artifact ID `11071322288`, with digest
+`sha256:1c05dbe5c3e7b462b5ec807e559df045060937cdd896c91e89e687fe8eeacc66`.
+Existing `engineering-ci` was not changed; run #137 is also **PASS**.
 
 ## Codex Cloud limitation
 
@@ -135,15 +145,16 @@ pick-and-place fields, and JLCPCB feasibility.
 Current bootstrap status matrix:
 
 - Codex Cloud local npm access: **BLOCKED**
-- GitHub Actions bootstrap: **PENDING**
-- Dependency reproducibility: **PENDING**
-- Bun 1.2.22: **PENDING**
-- tscircuit 0.0.2646: **PENDING**
-- Lock integrity: **PENDING**
+- GitHub Actions bootstrap: **PASS**
+- Dependency reproducibility: **PASS**
+- npm ci: **PASS**
+- Bun 1.2.22: **PASS**
+- tscircuit 0.0.2646: **PASS**
+- Lock integrity: **PASS**
 - Checkpoint A: **NOT STARTED**
 
 Checkpoint A remains not started, no technical tscircuit STOP has been reached,
-and no GO/NO-GO recommendation is made. The report will only record
-**BOOTSTRAP GATE — PASS** after GitHub Actions supplies the required evidence.
+and no GO/NO-GO recommendation is made. This evidence establishes
+**BOOTSTRAP GATE — PASS**, not a GO for Issue #19 as a whole.
 
 PMO / Product Owner review waiting
