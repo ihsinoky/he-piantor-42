@@ -4,11 +4,10 @@
 
 Checkpoint A has a native TSX implementation and machine-readable stock
 tscircuit verification. GitHub Actions remains the authoritative execution
-environment. PR #23 run #3 (ID `36770701295`) failed because the initial
-verifier expected duplicate pin 3 features to share a physical `pcb_port_id`
-and the copper-pour fixture omitted the required `connectsTo` property. Those
-fixture and verification defects are corrected in the current revision; a new
-authoritative workflow result is pending.
+environment. PR #23 run #4 (ID `36778588388`) passed the complete Checkpoint A
+verification. It generated three SMD pads, one plated hole, two mechanical
+NPTHs, two keepouts, and two BRep copper pours, with zero source component
+creation errors.
 This is a Checkpoint A result only, not a GO or NO-GO decision for Issue #19;
 Checkpoints B/C and the final decision remain a Human Gate.
 
@@ -55,8 +54,8 @@ dependency-health and supply-chain risk. This bootstrap checkpoint does not run
 `npm audit fix`, update dependencies, or regenerate the lockfile.
 
 The inherited `footprint:verify` package script is an Issue #13 artifact. It is
-left unchanged to preserve the verified dependency pair and should be reviewed
-as a cleanup candidate when Checkpoint A begins.
+left unchanged to preserve the verified dependency pair and remains a future
+cleanup candidate outside this checkpoint.
 
 ## Geometry provenance and Checkpoint A
 
@@ -70,6 +69,21 @@ Checkpoint A uses only the pinned stock native `footprint`, `smtpad`,
 `platedhole`, `hole`, and `keepout` primitives. The fixture also places stock
 top and bottom copper pours. Repository-owned assertions inspect the resulting
 Circuit JSON with an absolute tolerance of 0.001 mm.
+
+The authoritative Checkpoint A conclusions are:
+
+- **Native geometry — PASS:** three SMD pads, one PTH, two NPTHs, and all six
+  generated positions verified within 0.001 mm.
+- **Pin semantics — PASS:** DRV5055 DBZ pin 1 is VCC, pin 2 is OUT, and pin 3
+  is GND. SMD pad 3 and PTH pad 3 are distinct physical PCB ports. Stock
+  tscircuit represents them as internally connected source ports using
+  `source_component_internal_connection`.
+- **Keepout — PASS:** native top and bottom keepouts exist with
+  `allow_traces = true` and `allow_placements = true`; actual copper-pour
+  exclusion is demonstrated on both layers.
+- **Copper pour — PASS:** top and bottom BRep pours were generated, both have
+  an exclusion ring spanning the conservative keepout envelope, and the source
+  render error count is zero.
 
 | Feature | Native value | Provenance | Verification result |
 | --- | --- | --- | --- |
@@ -118,11 +132,19 @@ not claimed because the underlying metadata was never generated.
 PR #23 workflow run #3 (ID `36770701295`) is **FAIL** for the two implementation
 defects described above. Its Checkpoint A artifact ID is `11123790964`, digest
 `sha256:1162fc507e20ad94806b1214e56531cef63a6271209c23cc67bce74328f62b0d`.
-The artifact already proved SMD, PTH, NPTH, and pin mapping. The corrected local
-stock render additionally passes internal pin-3 connection, independent
-alignment, zero source creation errors, both keepouts, both BRep pours, and
-both exclusion rings. A new authoritative workflow result and artifact are
-pending. Existing `engineering-ci` run #140 is **PASS**.
+That run exposed the initial verifier's incorrect shared-`pcb_port_id`
+assumption and the copper-pour fixture's missing required `connectsTo` prop.
+Both defects were corrected in the subsequent revision.
+
+PR #23 workflow run #4 (ID `36778588388`) is **PASS**. Its Checkpoint A artifact
+`issue-19-tscircuit-native-checkpoint-a` has artifact ID `11126467110` and
+digest
+`sha256:071f9856bd37782197fc6f434c3dac8bc27cfc1aed724696164cffefbfa02094`.
+PMO inspection confirmed every mandatory result is PASS, with Circuit JSON
+counts of three `pcb_smtpad`, one `pcb_plated_hole`, two `pcb_hole`, two
+`pcb_keepout`, two `pcb_copper_pour`, and zero
+`source_failed_to_create_component_error` records. Existing `engineering-ci`
+run #141 is also **PASS**.
 
 ## Codex Cloud limitation
 
@@ -147,8 +169,8 @@ feasibility.
 
 ## STOP status and Human Gate
 
-- **STOP A — not reached:** run #3 exposed fixture/verifier defects rather than
-  a missing stock capability; correction validation is in progress.
+- **STOP A — not reached:** run #4 passed all mandatory native geometry and
+  functional copper-pour exclusion checks.
 - **STOP B — not reached:** generated-file editing was neither attempted nor
   required.
 - **STOP C — not reached:** no browser UI, interactive login, or
@@ -168,13 +190,14 @@ Current bootstrap status matrix:
 - Bun 1.2.22: **PASS**
 - tscircuit 0.0.2646: **PASS**
 - Lock integrity: **PASS**
-- Checkpoint A: **FAIL / CORRECTION IN PROGRESS**
+- Checkpoint A: **PASS**
 - Checkpoint B: **NOT STARTED**
 - Checkpoint C: **NOT STARTED**
 
-Checkpoint A has not reached a technical tscircuit STOP, but it remains failed
-until the corrected GitHub Actions run is green. STOP B, C, D, and E are not
-reached. No GO/NO-GO recommendation is made. **BOOTSTRAP GATE — PASS** remains
-unchanged. Checkpoints B and C are explicitly not started.
+Checkpoint A passes without reaching a technical tscircuit STOP. STOP B, C, D,
+and E are not reached. No GO/NO-GO recommendation is made. **BOOTSTRAP GATE —
+PASS** and **CHECKPOINT A — PASS** do not constitute a GO for Issue #19 as a
+whole. Checkpoints B and C are explicitly not started, and the final GO/NO-GO
+decision remains a pending Human Gate.
 
 PMO / Product Owner review waiting
