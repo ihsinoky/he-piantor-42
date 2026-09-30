@@ -2,15 +2,16 @@
 
 ## Outcome and scope
 
-Technical evaluation has not started. Local execution in Codex Cloud is
-**BLOCKED** because the environment cannot download the pinned stock
-`tscircuit` package and does not contain the pinned Bun runtime. This is not a
-tscircuit capability STOP: the verified non-interactive execution path is
-GitHub Actions. Consequently, no claim about native geometry, electrical
-design, PCB generation, or manufacturing feasibility is made. This is **not**
-a GO or NO-GO decision; that decision remains a Human Gate.
+Technical evaluation has not started. Local execution in Codex Cloud remains
+**BLOCKED**, but the Product Owner has handed off the verified dependency pair.
+The bootstrap workflow now tests that pair in GitHub Actions, the authoritative
+execution environment. Its result is **PENDING** until that workflow completes.
+Consequently, no claim about native geometry, electrical design, PCB
+generation, or manufacturing feasibility is made. This is **not** a GO or
+NO-GO decision; that decision remains a Human Gate.
 
-The run started at main commit
+The bootstrap task started at handoff commit
+`e6ca2dfb0d2d3963bb9bd67fe15b7107af973b36`, which descends from main commit
 `44735c7538cb21230758ba9acd334621ba09ad55`. The existing KiCad designs,
 firmware, Hall sensor selection, ADC/MUX architecture, and production layout
 were not modified.
@@ -25,8 +26,8 @@ no TSX design or generated output was created.
 
 ## Tested versions and dependency reproducibility
 
-The requested baseline was `tscircuit` **0.0.2646** and Bun **1.2.22**. Neither
-version could be executed in this run:
+The requested baseline is `tscircuit` **0.0.2646** and Bun **1.2.22**. Local
+Codex Cloud execution remains unavailable:
 
 - `npm view tscircuit@0.0.2646 version bin dependencies --json` returned
   `E403 Forbidden` for `https://registry.npmjs.org/tscircuit`.
@@ -35,23 +36,13 @@ version could be executed in this run:
 - The installed Bun was 1.2.14, not the required 1.2.22.
 - Node was v24.15.0 and npm was 11.4.2.
 
-No alternative tscircuit version was selected. A lockfile could not be produced
-without resolving the real stock dependency graph, so no fabricated or
-hand-written lockfile was committed. `tsci --version`, `npm ci`, and the required
-post-install lockfile-integrity check could not be run.
-
-The instructed first recovery check was run against the current checkout:
-
-```text
-git cat-file -e 400117cfd4d5d203e457dfe413dd3107a9d63375^{blob}
-fatal: Not a valid object name 400117cfd4d5d203e457dfe413dd3107a9d63375^{blob}
-```
-
-The verified blob is unavailable in this checkout's Git object database.
-Accordingly, the lockfile was not guessed, regenerated, or handwritten. The
-required handoff is the verified `hardware/tscircuit/package-lock.json` whose
-SHA-256 is
+No alternative tscircuit version was selected. The handed-off `package.json`
+and `package-lock.json` are unchanged. The lockfile SHA-256 is
 `a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33`.
+The workflow hard-gates that digest, runs `npm ci`, checks that the lockfile
+remains unchanged, and exactly asserts both runtime versions. Dependency
+reproducibility and all runtime checks remain **PENDING** until GitHub Actions
+reports a result.
 
 ## Geometry provenance and Checkpoint A
 
@@ -99,27 +90,27 @@ not claimed because the underlying metadata was never generated.
 
 ## CI and evidence artifact
 
-GitHub Actions bootstrap is **pending rerun**, but the bootstrap workflow cannot
-be added until the verified lockfile is handed off. A workflow using `npm ci`
-requires that committed, genuine `package-lock.json`; generating or updating it
-in CI would violate the reproducibility policy. There is no workflow run number
-or artifact ID. Existing `engineering-ci` was not changed, and no result for
-this branch was available in the Codex Cloud task.
+GitHub Actions bootstrap is **PENDING**. The new workflow uses Node 22, Bun
+1.2.22, the verified lockfile, and `npm ci`, then uploads diagnostic evidence as
+`issue-19-tscircuit-native-bootstrap`, including evidence from failed runs.
+There is not yet a workflow run number or artifact ID. Existing
+`engineering-ci` was not changed, and no result for this branch is available
+before the new PR runs.
 
 ## Codex Cloud limitation
 
 The environment forced npm and HTTPS traffic through `proxy:8080`; access to
 the npm registry and GitHub raw content was rejected with HTTP 403. The required
 Bun version was also absent. These are local Codex Cloud limitations rather than
-evidence of a tscircuit product limitation. Earlier GitHub Actions execution
-established that non-interactive `npm ci` with Bun 1.2.22 is possible, so GitHub
-Actions must be used after the verified lockfile handoff.
+evidence of a tscircuit product limitation. GitHub Actions is therefore used to
+validate the handed-off dependency pair without developer-local hidden state.
 
 ## Stock-only policy and custom repository code
 
 Stock-only policy was maintained. There are zero lines of custom EDA,
-validation, routing, exporter, or format-adapter code. The only repository
-change is this evidence report. No hidden patch or workaround was introduced.
+validation, routing, exporter, or format-adapter code. Repository changes are
+limited to the bootstrap workflow and this evidence report. No hidden patch or
+workaround was introduced.
 
 ## Remaining unsupported or unverified features
 
@@ -141,10 +132,18 @@ pick-and-place fields, and JLCPCB feasibility.
 - **STOP E — not reached:** manufacturing export was not reached and therefore
   cannot be judged insufficient.
 
-**VERIFIED LOCKFILE HANDOFF REQUIRED.** PMO/Product Owner must provide the
-verified lockfile blob (expected SHA-256 above) to this branch. After that,
-GitHub Actions can run the bootstrap-only workflow. Checkpoint A remains not
-started, no technical tscircuit STOP has been reached, and no GO/NO-GO
-recommendation is made.
+Current bootstrap status matrix:
+
+- Codex Cloud local npm access: **BLOCKED**
+- GitHub Actions bootstrap: **PENDING**
+- Dependency reproducibility: **PENDING**
+- Bun 1.2.22: **PENDING**
+- tscircuit 0.0.2646: **PENDING**
+- Lock integrity: **PENDING**
+- Checkpoint A: **NOT STARTED**
+
+Checkpoint A remains not started, no technical tscircuit STOP has been reached,
+and no GO/NO-GO recommendation is made. The report will only record
+**BOOTSTRAP GATE — PASS** after GitHub Actions supplies the required evidence.
 
 PMO / Product Owner review waiting

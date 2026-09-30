@@ -1,0 +1,94 @@
+name: Issue 19 tscircuit native bootstrap
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/tscircuit-native-spike.yml"
+      - "hardware/tscircuit/package.json"
+      - "hardware/tscircuit/package-lock.json"
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hardware/tscircuit
+        shell: bash
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: hardware/tscircuit/package-lock.json
+
+      - name: Set up Bun 1.2.22
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.22
+
+      - name: Create evidence directory
+        run: mkdir -p tscircuit-native-bootstrap
+
+      - name: Verify package-lock SHA-256
+        run: |
+          set -o pipefail
+          test -f package-lock.json
+          sha256sum package-lock.json | tee tscircuit-native-bootstrap/package-lock.sha256
+          printf '%s  %s\n' \
+            'a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33' \
+            'package-lock.json' \
+            | sha256sum --check \
+            | tee tscircuit-native-bootstrap/package-lock-sha256-verification.txt
+
+      - name: Install locked dependencies
+        run: |
+          set -o pipefail
+          npm ci 2>&1 | tee tscircuit-native-bootstrap/npm-ci.txt
+
+      - name: Verify package-lock remains unchanged
+        run: |
+          set -o pipefail
+          git diff --exit-code -- package-lock.json 2>&1 \
+            | tee tscircuit-native-bootstrap/package-lock-diff.txt
+
+      - name: Verify Bun version
+        run: |
+          set -o pipefail
+          bun --version | tee tscircuit-native-bootstrap/bun-version.txt
+          test "$(cat tscircuit-native-bootstrap/bun-version.txt)" = "1.2.22"
+
+      - name: Verify tscircuit CLI version
+        run: |
+          set -o pipefail
+          ./node_modules/.bin/tsci --version \
+            | tee tscircuit-native-bootstrap/tsci-version.txt
+          test "$(cat tscircuit-native-bootstrap/tsci-version.txt)" = "0.0.2646"
+
+      - name: Collect dependency diagnostics
+        if: always()
+        run: |
+          set +e
+          npm ls --all --json \
+            > tscircuit-native-bootstrap/dependency-tree.json \
+            2> tscircuit-native-bootstrap/dependency-tree.stderr.txt
+          status=$?
+          printf '%s\n' "$status" \
+            | tee tscircuit-native-bootstrap/npm-ls-exit-code.txt
+          exit 0
+
+      - name: Upload bootstrap evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-19-tscircuit-native-bootstrap
+          path: hardware/tscircuit/tscircuit-native-bootstrap/
+          if-no-files-found: warn
