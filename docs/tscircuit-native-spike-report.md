@@ -2,11 +2,13 @@
 
 ## Outcome and scope
 
-Checkpoint A now has a native TSX implementation and machine-readable stock
-tscircuit verification. Local execution in Codex Cloud remains **BLOCKED** by
-registry HTTP 403, so the GitHub Actions run is the authoritative execution.
-The bootstrap workflow tested that pair in GitHub Actions, the authoritative
-execution environment. Run #1 (ID `36653289199`) completed successfully.
+Checkpoint A has a native TSX implementation and machine-readable stock
+tscircuit verification. GitHub Actions remains the authoritative execution
+environment. PR #23 run #3 (ID `36770701295`) failed because the initial
+verifier expected duplicate pin 3 features to share a physical `pcb_port_id`
+and the copper-pour fixture omitted the required `connectsTo` property. Those
+fixture and verification defects are corrected in the current revision; a new
+authoritative workflow result is pending.
 This is a Checkpoint A result only, not a GO or NO-GO decision for Issue #19;
 Checkpoints B/C and the final decision remain a Human Gate.
 
@@ -74,7 +76,7 @@ Circuit JSON with an absolute tolerance of 0.001 mm.
 | Hall SMD pads | Pin 1 `(-0.9375, -0.95)`, pin 2 `(-0.9375, +0.95)`, pin 3 `(+0.9375, 0)` mm; each `1.475 × 0.6` mm, top | Existing verified project footprint `hardware/lib/third_party/marbastlib-he.pretty/SW_MX_HE_0deg_1u.kicad_mod` | Circuit JSON asserts count, position, size, layer, and port hints |
 | Pin 3 PTH | `(2.3, 0)` mm; 0.3 mm drill, 0.6 mm outer diameter | Existing verified project footprint | Circuit JSON asserts geometry and port hint `3` |
 | Switch NPTH | `(-5.08, 0)` and `(+5.08, 0)` mm; 1.7 mm diameter | Existing verified project footprint; Gateron Magnetic Jade / KS-20 project reference | Circuit JSON asserts two circular holes and geometry |
-| Hall pin mapping | `1=VCC`, `2=OUT`, `3=GND` | TI DRV5055 DBZ | Source ports are asserted; SMD 3 and PTH 3 must share one `pcb_port_id` |
+| Hall pin mapping | `1=VCC`, `2=OUT`, `3=GND` | TI DRV5055 DBZ | Primary source ports are asserted; SMD 3 and PTH 3 resolve through distinct physical `pcb_port` records to source ports joined by a Hall-owned `source_component_internal_connection` |
 | Relative alignment | Literal component-relative coordinates above | Existing verified project footprint | All six copper/mechanical features asserted within 0.001 mm |
 | Top keepout | Center `(0,0)`, `4.0 × 3.6` mm, traces and placements allowed | Conservative native representation of the existing KiCad verified geometry's outer envelope | `pcb_keepout` fields and applicable stock copper-pour BRep inner ring asserted |
 | Bottom keepout | Center `(0,0)`, `4.0 × 3.6` mm, traces and placements allowed | Conservative native representation of the existing KiCad verified geometry's outer envelope | `pcb_keepout` fields and applicable stock copper-pour BRep inner ring asserted |
@@ -84,7 +86,9 @@ Circuit JSON with an absolute tolerance of 0.001 mm.
 Two independent native keepouts cover the conservative envelope on top and
 bottom. Passing verification requires two `pcb_keepout` records and one stock
 BRep copper pour per layer, each with an inner ring spanning the keepout
-envelope. Merely finding keepout records is not sufficient.
+envelope. The pours use fixture-only `net.GND` because `connectsTo` is required
+by the pinned stock API. They do not connect the Hall sensor and do not start
+Checkpoint B. Merely finding keepout records is not sufficient.
 
 ## Checkpoint B — electrical result
 
@@ -111,11 +115,14 @@ not claimed because the underlying metadata was never generated.
 
 ## CI and evidence artifact
 
-GitHub Actions bootstrap run #1 (ID `36653289199`) is **PASS**. It used Node 22,
-Bun 1.2.22, the verified lockfile, and `npm ci`. Evidence was uploaded as
-`issue-19-tscircuit-native-bootstrap`, artifact ID `11071322288`, with digest
-`sha256:1c05dbe5c3e7b462b5ec807e559df045060937cdd896c91e89e687fe8eeacc66`.
-Existing `engineering-ci` was not changed; run #137 is also **PASS**.
+PR #23 workflow run #3 (ID `36770701295`) is **FAIL** for the two implementation
+defects described above. Its Checkpoint A artifact ID is `11123790964`, digest
+`sha256:1162fc507e20ad94806b1214e56531cef63a6271209c23cc67bce74328f62b0d`.
+The artifact already proved SMD, PTH, NPTH, and pin mapping. The corrected local
+stock render additionally passes internal pin-3 connection, independent
+alignment, zero source creation errors, both keepouts, both BRep pours, and
+both exclusion rings. A new authoritative workflow result and artifact are
+pending. Existing `engineering-ci` run #140 is **PASS**.
 
 ## Codex Cloud limitation
 
@@ -140,7 +147,8 @@ feasibility.
 
 ## STOP status and Human Gate
 
-- **STOP A — not reached:** Checkpoint A verification passed in GitHub Actions.
+- **STOP A — not reached:** run #3 exposed fixture/verifier defects rather than
+  a missing stock capability; correction validation is in progress.
 - **STOP B — not reached:** generated-file editing was neither attempted nor
   required.
 - **STOP C — not reached:** no browser UI, interactive login, or
@@ -160,13 +168,13 @@ Current bootstrap status matrix:
 - Bun 1.2.22: **PASS**
 - tscircuit 0.0.2646: **PASS**
 - Lock integrity: **PASS**
-- Checkpoint A: **PASS**
+- Checkpoint A: **FAIL / CORRECTION IN PROGRESS**
 - Checkpoint B: **NOT STARTED**
 - Checkpoint C: **NOT STARTED**
 
-Checkpoint A passes without reaching a technical tscircuit STOP. STOP B, C, D,
-and E are not reached. No GO/NO-GO recommendation is made. This establishes
-**BOOTSTRAP GATE — PASS** and **CHECKPOINT A — PASS**, not a GO for Issue #19
-as a whole. Checkpoints B and C are explicitly not started.
+Checkpoint A has not reached a technical tscircuit STOP, but it remains failed
+until the corrected GitHub Actions run is green. STOP B, C, D, and E are not
+reached. No GO/NO-GO recommendation is made. **BOOTSTRAP GATE — PASS** remains
+unchanged. Checkpoints B and C are explicitly not started.
 
 PMO / Product Owner review waiting
