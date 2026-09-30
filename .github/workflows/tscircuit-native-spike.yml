@@ -7,6 +7,9 @@ on:
       - ".github/workflows/tscircuit-native-spike.yml"
       - "hardware/tscircuit/package.json"
       - "hardware/tscircuit/package-lock.json"
+      - "hardware/tscircuit/src/**"
+      - "hardware/tscircuit/scripts/**"
+      - "hardware/tscircuit/tests/**"
       - "docs/tscircuit-native-spike-report.md"
 
 permissions:
@@ -74,6 +77,20 @@ jobs:
             | tee tscircuit-native-bootstrap/tsci-version.txt
           test "$(cat tscircuit-native-bootstrap/tsci-version.txt)" = "0.0.2646"
 
+      - name: Verify pinned package versions
+        run: |
+          set -o pipefail
+          node -e 'for (const [name, expected] of Object.entries({"tscircuit":"0.0.2646","@tscircuit/core":"0.0.1971","@tscircuit/props":"0.0.666","circuit-json":"0.0.499","@tscircuit/cli":"0.1.2170"})) { const actual=require(`./node_modules/${name}/package.json`).version; console.log(`${name} ${actual}`); if (actual !== expected) process.exitCode=1 }' \
+            | tee tscircuit-native-bootstrap/runtime-versions.txt
+
+      - name: Execute and verify native Hall Checkpoint A
+        run: |
+          set -o pipefail
+          npm run checkpoint-a:verify 2>&1 \
+            | tee tscircuit-native-checkpoint-a-console.txt
+          mv tscircuit-native-checkpoint-a-console.txt \
+            tscircuit-native-checkpoint-a/execution-log.txt
+
       - name: Collect dependency diagnostics
         if: always()
         run: |
@@ -92,4 +109,12 @@ jobs:
         with:
           name: issue-19-tscircuit-native-bootstrap
           path: hardware/tscircuit/tscircuit-native-bootstrap/
+          if-no-files-found: warn
+
+      - name: Upload Checkpoint A evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-19-tscircuit-native-checkpoint-a
+          path: hardware/tscircuit/tscircuit-native-checkpoint-a/
           if-no-files-found: warn
