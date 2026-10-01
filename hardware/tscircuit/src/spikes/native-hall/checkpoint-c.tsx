@@ -1,5 +1,5 @@
 import React from "react"
-import { HallKey } from "./components/HallKey"
+import { HallKey } from "../../components/HallKey"
 
 /** Small stock-routed fixture for Checkpoint C manufacturing evidence. */
 export const CheckpointCBoard = () => (

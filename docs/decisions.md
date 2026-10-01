@@ -151,3 +151,22 @@ plated/non-plated distinction, mechanical alignment, and the observed Y-axis
 inversion, but lost two copper-pour keepout zones. This rejects the import path;
 it does not establish that a native tscircuit design is impossible. Native
 stock-tscircuit feasibility therefore requires a separate technical gate.
+
+## D-014 - Native tscircuit is the M1 electrical source
+
+Status: accepted
+
+Use native TypeScript / TSX through unmodified stock tscircuit to generate
+Circuit JSON for the M1 four-key Hall evaluation board. The Issue #19 Human
+Gate is **GO**: Checkpoints A, B, and C demonstrated the required Hall geometry,
+source-level electrical connectivity, and two-layer manufacturing pipeline.
+The KiCad design is retired as fallback/reference evidence (`EDA-000`), not an
+authoritative source and not converter input.
+
+This freezes the M1 electrical architecture; it does not approve placement,
+routing, a manufacturing package, an order, or G1. The current evaluation and
+production baselines are two copper layers and 1.2 mm thickness.
+
+Reason: the native spike preserved the Hall geometry and keepouts, resolved
+real source ports/nets/traces, and produced stock outputs without an importer,
+Circuit JSON patch, fork, custom schema, or exporter.

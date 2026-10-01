@@ -99,6 +99,9 @@ jobs:
           mv tscircuit-native-checkpoint-b-console.txt \
             tscircuit-native-checkpoint-b/execution-log.txt
 
+      - name: Verify native M1 four-key electrical model
+        run: npm run m1:verify
+
       - name: Generate native Hall Checkpoint C Circuit JSON
         run: npm run checkpoint-c:generate
 

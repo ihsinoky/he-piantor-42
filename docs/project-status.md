@@ -38,19 +38,18 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | M0 design policy and the M1 evaluation circuit are established. Before evaluation-PCB implementation, a two-layer native stock-tscircuit feasibility gate is in progress; the KiCad route is retained as a fallback on hold. Rev.A and later hardware remain unstarted. |
+| Hardware | EDA-001 is done / GO. Native stock tscircuit is the active M1 source; the four-key electrical model is current work. EDA-000 is retired fallback/reference. Final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
 
 ## Current and next work
 
-The project is in M1. The current engineering focus is the EDA strategy
-transition: validate two-layer native stock-tscircuit feasibility as a technical
-gate before implementing the four-key evaluation PCB. The gate must demonstrate
-a non-interactive native TypeScript / TSX build with stock tscircuit and assess
-whether the design can produce the required manufacturing artifacts (Gerber,
-drill, BOM, and PnP). Evaluation-PCB layout and DRC wait for that GO decision.
+The project is in M1. Issue #19's Human Gate returned GO for native stock
+tscircuit, so EDA-001 is done and EDA-000 is retired fallback/reference. Current
+work is the native four-key electrical model. EVT-002 waits for completion and
+review of this electrical-model increment; final two-layer placement, routing,
+DRC, manufacturing preparation, and G1 readiness remain follow-up work.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
@@ -63,7 +62,7 @@ copper-pour keepout zones. Therefore KiCad import is not the authoritative
 migration path. This result does not rule out native tscircuit design.
 
 Existing KiCad work remains unchanged as fallback, reference, and prior-design
-evidence while the greenfield evaluation is pending. Each detailed increment is
+evidence, but is not the active EDA source. Each detailed increment is
 defined and accepted through its own GitHub Issue.
 
 ## Dashboard synchronization
