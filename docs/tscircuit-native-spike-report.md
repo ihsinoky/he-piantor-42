@@ -147,17 +147,20 @@ Checkpoint B PASS is not an Issue #19 GO decision.
 
 ## Checkpoint C — two-layer PCB and manufacturing result
 
-**PASS in local locked execution; GitHub Actions evidence pending.** The fixture
-uses the stock local `autorouter="default"`, an explicit two-layer 1.2 mm board,
-0.20 mm trace/clearance rules, top and bottom GND pours, and one explicit
-0.30/0.60 mm top-to-bottom GND stitching via. Stock render generated three PCB
-traces, two Hall keepouts, and zero `*_error` records. Checkpoints A and B both
-pass before Checkpoint C in the same prescribed flow.
+**PASS.** The authoritative GitHub Actions run is PR #25 workflow run #8
+(ID `36851569406`, result **success**). The fixture uses stock
+`autorouter="default"`, an explicit two-layer 1.2 mm board, 0.20 mm
+trace/clearance rules, top and bottom GND pours, and one explicit 0.30/0.60 mm
+top-to-bottom GND stitching via. PMO verification of the Checkpoint C artifact
+confirmed one PCB board, three PCB traces, one PCB via, two keepouts, and zero
+Circuit JSON `*_error` records. Physical routing exists for `HALL_5V`, `GND`,
+and `H0_RAW`. Checkpoints A and B regressions also pass in the same workflow.
 
-The stock `tsci build` command exits zero. Supplemental `tsci check` reports
-zero errors and three non-fatal schematic/courtyard warnings. The locked stock
-`tsci check shorts --mode gerber --layer all` is available and reports no
-shorts; no dependency or CDN workaround was used.
+The stock `tsci build` command exits zero. `tsci check` reports zero errors.
+The non-fatal warnings are `schematic_missing_sheet_warning` and
+`pcb_component_missing_courtyard_warning` for U1 and TP_H0_RAW. The locked
+stock `tsci check shorts --mode gerber --layer all` reports zero shorts; no
+dependency or CDN workaround was used.
 
 ## Manufacturing results
 
@@ -173,21 +176,26 @@ no generated output is edited. Machine-readable verification confirms:
 - `pick_and_place.csv` contains U1 and C_HALL1 with designator, finite X/Y,
   top/bottom layer, and finite rotation. The physical test point is normally
   excluded from assembly output.
+- The plated drill contains the Hall PTH at `X2.3000Y0.0000` and the GND
+  stitching via at `X7.0000Y3.0000`, both 0.30 mm. The NPTH drill contains the
+  switch holes at `X-5.0800Y0.0000` and `X5.0800Y0.0000`, diameter 1.70 mm.
+- The actual stock PnP rows are `U1,0.000,0.000,top,0` and
+  `C_HALL1,7.000,-3.000,top,0` (columns: designator, mid X, mid Y, layer,
+  rotation).
 
 **PCB FABRICATION PIPELINE = PASS. PCBA DATA STRUCTURE = PASS. PCBA ORDER
-READINESS = PARTIAL / DESIGN DATA GAP.** The 100 nF 0603 capacitor supplier part
-number remains intentionally TBD, and supplier-specific JLCPCB orientation
-correction is **UNVERIFIED**. Neither is stock exporter data loss. The baseline
-FR4, two layers, 1.2 mm, 0.20 mm trace/clearance, 0.30/0.60 mm via, and 1.70 mm
-NPTH is within the supplied JLCPCB capability baseline. The existing Hall
-0.30 mm PTH is within minimum drilling capability but remains a
-**MANUFACTURABILITY CAUTION** because it is below the general 0.50 mm PTH
-recommendation.
+READINESS = PARTIAL / DESIGN DATA GAP.** The `C_HALL1` 100 nF 0603 capacitor
+supplier identity remains **TBD**, and supplier-specific JLCPCB orientation
+correction is **UNVERIFIED**. These are design-data gaps, not stock exporter
+data loss, and the PCB is not declared ready to order. The baseline FR4, two
+layers, 1.2 mm, 0.20 mm trace/clearance, 0.30/0.60 mm via, and 1.70 mm NPTH is
+within the supplied JLCPCB capability baseline. The existing Hall 0.30 mm PTH
+is within minimum drilling capability but remains a **MANUFACTURABILITY
+CAUTION** because it is below the general 0.50 mm PTH recommendation.
 
 Custom router/exporter/format-workaround count is **zero**. STOP A, B, C, D,
-and E are not reached. The Checkpoint C workflow run, artifact ID/digest, and
-engineering-ci result are pending creation of the draft PR and will be recorded
-from GitHub Actions evidence; they are not guessed locally.
+and E are not reached. The authoritative Checkpoint C workflow and artifact
+details are recorded below.
 
 ## Available DRC/checks
 
@@ -223,6 +231,16 @@ Checkpoint B artifact `issue-19-tscircuit-native-checkpoint-b` has artifact ID
 PMO verified its `verification-result.json`, `electrical-summary.json`,
 `execution-log.txt`, and generated `circuit.json`. The corresponding
 `engineering-ci` run #144 is also **PASS**.
+
+PR #25 workflow run #8 (ID `36851569406`, head
+`b379151529ccaf8bcd1dcfc5cdec0be90cacb399`) is **PASS**. The
+`issue-19-tscircuit-native-checkpoint-c` artifact is ID `11155442692`, digest
+`sha256:943422a9a635dfc8df5a82657e0cd19dc17e6e08d0eafd0af14e8f10e3a16886`.
+PMO verified the artifact and confirmed Checkpoints A, B, and C all **PASS**;
+the stock build exits 0, `tsci check` reports zero errors, and
+`tsci check shorts --mode gerber --layer all` reports zero shorts. Stock
+Gerber, drill, BOM, and PnP export passes. `engineering-ci` run #147
+(ID `36851569279`) is also **PASS**.
 
 ## Codex Cloud limitation
 
@@ -269,13 +287,13 @@ Current bootstrap status matrix:
 - Lock integrity: **PASS**
 - Checkpoint A: **PASS**
 - Checkpoint B: **PASS**
-- Checkpoint C: **PASS (local); CI evidence pending**
+- Checkpoint C: **PASS**
 
-Checkpoint A and Checkpoint B pass without reaching a technical tscircuit STOP.
-STOP B, C, D, and E are not reached.
-No GO/NO-GO recommendation is made. **BOOTSTRAP GATE — PASS**,
-**CHECKPOINT A — PASS**, and **CHECKPOINT B — PASS** do not constitute a GO for
-Issue #19 as a whole. Checkpoint C technical evidence is complete locally, and the final GO/NO-GO
-decision remains a pending Human Gate.
+Checkpoint A, B, and C pass without reaching a technical tscircuit STOP.
+STOP A, B, C, D, and E are not reached. No GO/NO-GO recommendation is made.
+**BOOTSTRAP GATE — PASS**, **CHECKPOINT A — PASS**, **CHECKPOINT B — PASS**, and
+**CHECKPOINT C — PASS** do not constitute a GO for Issue #19 as a whole. The
+technical checkpoints are complete; the final GO/NO-GO decision remains with
+the PO / PMO Human Gate. Issue #19 remains open.
 
-CHECKPOINT C complete — final PO / PMO Human Gate waiting
+CHECKPOINT C evidence finalized — final PO / PMO Human Gate waiting
