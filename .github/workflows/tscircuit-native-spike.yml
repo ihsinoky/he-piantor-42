@@ -91,6 +91,14 @@ jobs:
           mv tscircuit-native-checkpoint-a-console.txt \
             tscircuit-native-checkpoint-a/execution-log.txt
 
+      - name: Execute and verify native Hall Checkpoint B
+        run: |
+          set -o pipefail
+          npm run checkpoint-b:verify 2>&1 \
+            | tee tscircuit-native-checkpoint-b-console.txt
+          mv tscircuit-native-checkpoint-b-console.txt \
+            tscircuit-native-checkpoint-b/execution-log.txt
+
       - name: Collect dependency diagnostics
         if: always()
         run: |
@@ -117,4 +125,12 @@ jobs:
         with:
           name: issue-19-tscircuit-native-checkpoint-a
           path: hardware/tscircuit/tscircuit-native-checkpoint-a/
+          if-no-files-found: warn
+
+      - name: Upload Checkpoint B evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-19-tscircuit-native-checkpoint-b
+          path: hardware/tscircuit/tscircuit-native-checkpoint-b/
           if-no-files-found: warn
