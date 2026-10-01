@@ -1,6 +1,6 @@
 # Sensor-test board electrical design
 
-Status: M1 electrical model frozen in native tscircuit; placement, routing, DRC, and first-board measurement remain pending.
+Status: M1 native electrical-model implementation under review; placement, routing, DRC, and first-board measurement remain pending.
 
 ## Purpose
 
@@ -172,8 +172,9 @@ package descriptions follow the package land-pattern dimensions in the
 respective RP2040, Winbond W25Q16JV, Diodes AP2112, TI TPS22919, TI TMUX1208,
 Abracon ABM8-272-T3, and passive manufacturer data. The HRO
 TYPE-C-31-M-12 native primitive is transcribed from the manufacturer's
-recommended PCB layout; repository verification fixes its 16 contact pads and
-two shell-hole diameters. It is not converted from a KiCad footprint.
+recommended PCB layout; repository verification fixes its 12 physical contact
+lands (including the paired VBUS/GND contacts), four plated shell stakes, and
+two locating NPTHs. It is not converted from a KiCad footprint.
 
 Because stock tscircuit net selectors cannot begin with a digit, the generated
 source-net identifiers `V3V3` and `V1V1` mean the schematic rails **3V3** and

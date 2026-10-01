@@ -5,9 +5,11 @@ import React from "react"
  * two switch locating holes. Values are deliberately literal: this component
  * has no runtime dependency on the KiCad footprint used as its provenance.
  */
-export const HallKey = ({ name = "U1" }: { name?: string }) => (
+export const HallKey = ({ name = "U1", pcbX, pcbY }: { name?: string; pcbX?: number; pcbY?: number }) => (
   <chip
     name={name}
+    pcbX={pcbX}
+    pcbY={pcbY}
     manufacturerPartNumber="DRV5055A3QDBZR"
     supplierPartNumbers={{ jlcpcb: ["C266128"] }}
     pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }}
