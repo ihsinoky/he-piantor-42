@@ -99,6 +99,46 @@ jobs:
           mv tscircuit-native-checkpoint-b-console.txt \
             tscircuit-native-checkpoint-b/execution-log.txt
 
+      - name: Generate native Hall Checkpoint C Circuit JSON
+        run: npm run checkpoint-c:generate
+
+      - name: Run stock build and DRC checks
+        run: |
+          set -o pipefail
+          ./node_modules/.bin/tsci build \
+            src/spikes/native-hall/checkpoint-c.tsx \
+            --disable-parts-engine 2>&1 \
+            | tee tscircuit-native-checkpoint-c/drc-or-check-report.txt
+
+      - name: Run supplemental stock checks
+        run: |
+          set -o pipefail
+          ./node_modules/.bin/tsci check \
+            "$PWD/tscircuit-native-checkpoint-c/circuit.json" 2>&1 \
+            | tee tscircuit-native-checkpoint-c/supplemental-check-report.txt
+          set +e
+          ./node_modules/.bin/tsci check shorts \
+            "$PWD/tscircuit-native-checkpoint-c/circuit.json" \
+            --mode gerber --layer all 2>&1 \
+            | tee tscircuit-native-checkpoint-c/shorts-check-report.txt
+          shorts_status=${PIPESTATUS[0]}
+          printf 'shorts exit=%s\n' "$shorts_status" \
+            >> tscircuit-native-checkpoint-c/shorts-check-report.txt
+          exit 0
+
+      - name: Export stock manufacturing package
+        run: |
+          ./node_modules/.bin/tsci export \
+            "$PWD/tscircuit-native-checkpoint-c/circuit.json" \
+            --format gerbers \
+            --output "$PWD/tscircuit-native-checkpoint-c/manufacturing.zip"
+          mkdir -p tscircuit-native-checkpoint-c/manufacturing
+          unzip -q tscircuit-native-checkpoint-c/manufacturing.zip \
+            -d tscircuit-native-checkpoint-c/manufacturing
+
+      - name: Verify Checkpoint C manufacturing artifacts
+        run: npm run checkpoint-c:verify
+
       - name: Collect dependency diagnostics
         if: always()
         run: |
@@ -134,3 +174,11 @@ jobs:
           name: issue-19-tscircuit-native-checkpoint-b
           path: hardware/tscircuit/tscircuit-native-checkpoint-b/
           if-no-files-found: warn
+
+      - name: Upload Checkpoint C evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-19-tscircuit-native-checkpoint-c
+          path: hardware/tscircuit/tscircuit-native-checkpoint-c/
+          if-no-files-found: error
