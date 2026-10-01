@@ -9,6 +9,16 @@ export const HallKey = () => (
   <chip
     name="U1"
     pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }}
+    pinAttributes={{
+      VCC: {
+        requiresPower: true,
+        mustBeConnected: true,
+        shouldHaveDecouplingCapacitor: true,
+        recommendedDecouplingCapacitorCapacitance: "100nF",
+      },
+      OUT: { mustBeConnected: true },
+      GND: { requiresGround: true, mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <smtpad
