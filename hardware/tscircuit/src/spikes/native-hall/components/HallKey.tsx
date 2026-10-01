@@ -8,6 +8,8 @@ import React from "react"
 export const HallKey = () => (
   <chip
     name="U1"
+    manufacturerPartNumber="DRV5055A3QDBZR"
+    supplierPartNumbers={{ jlcpcb: ["C266128"] }}
     pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }}
     pinAttributes={{
       VCC: {

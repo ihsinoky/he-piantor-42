@@ -2,13 +2,12 @@
 
 ## Outcome and scope
 
-Checkpoints A and B have native TSX implementations and machine-readable stock
+Checkpoints A, B, and C have native TSX implementations and machine-readable stock
 tscircuit verification. GitHub Actions remains the authoritative execution
 environment. PR #24 run #6 (ID `36808045782`) passed the Checkpoint A regression
-and every mandatory Checkpoint B electrical category. Checkpoint B remains a
-source-level fixture with routing disabled. This is not a GO or NO-GO decision
-for Issue #19; Checkpoint C is not started, and the final decision remains a
-Human Gate.
+and every mandatory Checkpoint B electrical category. Checkpoint B remains a source-level fixture with routing disabled, while
+Checkpoint C adds a separate routed manufacturing fixture. This is not a GO or
+NO-GO decision for Issue #19; the final decision remains a Human Gate.
 
 The bootstrap task started at handoff commit
 `e6ca2dfb0d2d3963bb9bd67fe15b7107af973b36`, which descends from main commit
@@ -138,7 +137,7 @@ confirmed that every mandatory category passes:
 - Source electrical errors: `source_failed_to_create_component_error`,
   `source_trace_not_connected_error`, `source_pin_must_be_connected_error`, and
   `pcb_missing_footprint_error` each have count zero.
-- Routing remains intentionally disabled; Checkpoint C has not started.
+- Routing remains intentionally disabled in Checkpoint B; Checkpoint C uses its separate routed fixture.
 - Checkpoint A regression: PASS in the same authoritative workflow.
 
 The Checkpoint B artifact is `issue-19-tscircuit-native-checkpoint-b`, artifact
@@ -146,23 +145,64 @@ ID `11138353031`, digest
 `sha256:a2924fee0e4158fd2677385f7176dd2c108224afc7b06eae0895679c6d4b6c01`.
 Checkpoint B PASS is not an Issue #19 GO decision.
 
-## Checkpoint C — two-layer PCB result
+## Checkpoint C — two-layer PCB and manufacturing result
 
-Not started because it is outside this task. No manufacturing board, routing,
-or production via was generated.
+**PASS.** The authoritative GitHub Actions run is PR #25 workflow run #8
+(ID `36851569406`, result **success**). The fixture uses stock
+`autorouter="default"`, an explicit two-layer 1.2 mm board, 0.20 mm
+trace/clearance rules, top and bottom GND pours, and one explicit 0.30/0.60 mm
+top-to-bottom GND stitching via. PMO verification of the Checkpoint C artifact
+confirmed one PCB board, three PCB traces, one PCB via, two keepouts, and zero
+Circuit JSON `*_error` records. Physical routing exists for `HALL_5V`, `GND`,
+and `H0_RAW`. Checkpoints A and B regressions also pass in the same workflow.
 
-## Available DRC/checks
-
-The available checks are the stock render and copper-pour solver, plus
-repository-owned geometry and electrical assertions over their Circuit JSON
-output. Manufacturing DRC is outside Checkpoints A and B and was not evaluated.
+The stock `tsci build` command exits zero. `tsci check` reports zero errors.
+The non-fatal warnings are `schematic_missing_sheet_warning` and
+`pcb_component_missing_courtyard_warning` for U1 and TP_H0_RAW. The locked
+stock `tsci check shorts --mode gerber --layer all` reports zero shorts; no
+dependency or CDN workaround was used.
 
 ## Manufacturing results
 
-Gerber, plated drill, NPTH drill, BOM, and pick-and-place results are all **not
-generated**. No placeholders were added and no generated file was edited.
-JLCPCB feasibility therefore remains unassessed; `FORMAT ADAPTER REQUIRED` is
-not claimed because the underlying metadata was never generated.
+Stock `tsci export <generated-circuit-json> --format gerbers` produces the ZIP;
+no generated output is edited. Machine-readable verification confirms:
+
+- `F_Cu.gbr`, `B_Cu.gbr`, and `Edge_Cuts.gbr` exist and are non-empty, with no
+  inner-copper Gerber.
+- `drill-L1-L2.drl` retains both 0.30 mm plated drills: the Hall PTH and the GND
+  via. `drill_npth.drl` retains both 1.70 mm switch holes.
+- `bom.csv` contains U1 and C_HALL1. U1 source metadata retains TI
+  `DRV5055A3QDBZR`, and the stock BOM retains JLCPCB part `C266128`.
+- `pick_and_place.csv` contains U1 and C_HALL1 with designator, finite X/Y,
+  top/bottom layer, and finite rotation. The physical test point is normally
+  excluded from assembly output.
+- The plated drill contains the Hall PTH at `X2.3000Y0.0000` and the GND
+  stitching via at `X7.0000Y3.0000`, both 0.30 mm. The NPTH drill contains the
+  switch holes at `X-5.0800Y0.0000` and `X5.0800Y0.0000`, diameter 1.70 mm.
+- The actual stock PnP rows are `U1,0.000,0.000,top,0` and
+  `C_HALL1,7.000,-3.000,top,0` (columns: designator, mid X, mid Y, layer,
+  rotation).
+
+**PCB FABRICATION PIPELINE = PASS. PCBA DATA STRUCTURE = PASS. PCBA ORDER
+READINESS = PARTIAL / DESIGN DATA GAP.** The `C_HALL1` 100 nF 0603 capacitor
+supplier identity remains **TBD**, and supplier-specific JLCPCB orientation
+correction is **UNVERIFIED**. These are design-data gaps, not stock exporter
+data loss, and the PCB is not declared ready to order. The baseline FR4, two
+layers, 1.2 mm, 0.20 mm trace/clearance, 0.30/0.60 mm via, and 1.70 mm NPTH is
+within the supplied JLCPCB capability baseline. The existing Hall 0.30 mm PTH
+is within minimum drilling capability but remains a **MANUFACTURABILITY
+CAUTION** because it is below the general 0.50 mm PTH recommendation.
+
+Custom router/exporter/format-workaround count is **zero**. STOP A, B, C, D,
+and E are not reached. The authoritative Checkpoint C workflow and artifact
+details are recorded below.
+
+## Available DRC/checks
+
+Stock render assertions, `tsci build`, `tsci check`, stock Gerber-mode shorts
+checking, and repository-owned read-only verification of Circuit JSON and
+manufacturing files all pass locally. The repository code does not implement
+EDA, routing, manufacturing export, or generated-file repair.
 
 ## CI and evidence artifact
 
@@ -192,6 +232,16 @@ PMO verified its `verification-result.json`, `electrical-summary.json`,
 `execution-log.txt`, and generated `circuit.json`. The corresponding
 `engineering-ci` run #144 is also **PASS**.
 
+PR #25 workflow run #8 (ID `36851569406`, head
+`b379151529ccaf8bcd1dcfc5cdec0be90cacb399`) is **PASS**. The
+`issue-19-tscircuit-native-checkpoint-c` artifact is ID `11155442692`, digest
+`sha256:943422a9a635dfc8df5a82657e0cd19dc17e6e08d0eafd0af14e8f10e3a16886`.
+PMO verified the artifact and confirmed Checkpoints A, B, and C all **PASS**;
+the stock build exits 0, `tsci check` reports zero errors, and
+`tsci check shorts --mode gerber --layer all` reports zero shorts. Stock
+Gerber, drill, BOM, and PnP export passes. `engineering-ci` run #147
+(ID `36851569279`) is also **PASS**.
+
 ## Codex Cloud limitation
 
 The environment forced npm and HTTPS traffic through `proxy:8080`; access to
@@ -208,10 +258,9 @@ format adapter. No hidden patch or workaround was introduced.
 
 ## Remaining unsupported or unverified features
 
-Capabilities beyond Checkpoint B remain unverified: a manufacturing-feasible
-two-layer routed PCB, manufacturing DRC, Gerber and drill completeness, BOM
-identity, pick-and-place fields, and JLCPCB feasibility. Checkpoint C has not
-started.
+Checkpoint C now verifies the two-layer stock manufacturing pipeline. Full PCBA
+order readiness remains partial because capacitor supplier identity and
+supplier-specific orientation metadata are source-design gaps.
 
 ## STOP status and Human Gate
 
@@ -224,8 +273,8 @@ started.
   Cloud package access is blocked, while GitHub Actions is the verified
   non-interactive execution path.
 - **STOP D — not reached:** no paid dependency requirement was observed.
-- **STOP E — not reached / not evaluated yet:** manufacturing export was not
-  reached and therefore cannot be judged insufficient.
+- **STOP E — not reached:** stock export retains all mandatory Gerber, drill,
+  BOM identity, routing, and pick-and-place fields.
 
 Current bootstrap status matrix:
 
@@ -238,13 +287,13 @@ Current bootstrap status matrix:
 - Lock integrity: **PASS**
 - Checkpoint A: **PASS**
 - Checkpoint B: **PASS**
-- Checkpoint C: **NOT STARTED**
+- Checkpoint C: **PASS**
 
-Checkpoint A and Checkpoint B pass without reaching a technical tscircuit STOP.
-STOP B, C, and D are not reached; STOP E is not reached and not evaluated yet.
-No GO/NO-GO recommendation is made. **BOOTSTRAP GATE — PASS**,
-**CHECKPOINT A — PASS**, and **CHECKPOINT B — PASS** do not constitute a GO for
-Issue #19 as a whole. Checkpoint C is explicitly **NOT STARTED**, and the final
-GO/NO-GO decision remains a pending Human Gate.
+Checkpoint A, B, and C pass without reaching a technical tscircuit STOP.
+STOP A, B, C, D, and E are not reached. No GO/NO-GO recommendation is made.
+**BOOTSTRAP GATE — PASS**, **CHECKPOINT A — PASS**, **CHECKPOINT B — PASS**, and
+**CHECKPOINT C — PASS** do not constitute a GO for Issue #19 as a whole. The
+technical checkpoints are complete; the final GO/NO-GO decision remains with
+the PO / PMO Human Gate. Issue #19 remains open.
 
-PMO / Product Owner review waiting
+CHECKPOINT C evidence finalized — final PO / PMO Human Gate waiting
