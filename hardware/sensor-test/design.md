@@ -1,6 +1,6 @@
 # Sensor-test board electrical design
 
-Status: architecture frozen for schematic capture; component values remain subject to ERC/DRC and first-board measurement.
+Status: M1 native electrical-model implementation under review; placement, routing, DRC, and first-board measurement remain pending.
 
 ## Purpose
 
@@ -15,9 +15,9 @@ It must answer:
 
 ## PCB stack
 
-- 2 or 4 copper layers are acceptable for the evaluation board.
+- The evaluation board and current production baseline use 2 copper layers.
 - Board thickness is fixed at 1.2 mm because switch-to-sensor distance is part of the measurement.
-- Production board is expected to be 4 layers.
+- Production board thickness is also 1.2 mm. A layer-count change requires a separate decision and Human Gate.
 
 ## Functional blocks
 
@@ -34,6 +34,8 @@ USB 2.0 only:
 - shell -> chassis/ground strategy to be finalized in PCB layout
 
 RP2040 USB pins use the 27 ohm series termination required by the RP2040 hardware guide, placed close to the MCU.
+
+- USB shell grounding strategy remains a layout/G1 design decision; the native electrical model exposes `USB_SHIELD` without selecting direct, RC, or chassis coupling.
 
 ### MCU core
 
@@ -163,6 +165,26 @@ Reserved production-compatible pins are allocated now so the evaluation firmware
 7. Place divider/filter parts adjacent to the RP2040 ADC pin.
 8. Include generous labeled test pads; this board is an instrumented prototype.
 9. Avoid ferromagnetic fasteners immediately below a Hall sensor.
+
+## Native electrical source and footprint provenance
+
+The canonical electrical source is
+`hardware/tscircuit/src/evaluation/m1-four-key.tsx`. Its stock footprinter
+package descriptions follow the package land-pattern dimensions in the
+respective RP2040, Winbond W25Q16JV, Diodes AP2112, TI TPS22919, TI TMUX1208,
+Abracon ABM8-272-T3, and passive manufacturer data. The HRO
+TYPE-C-31-M-12 native primitive is transcribed from the manufacturer's
+recommended PCB layout; repository verification fixes its 12 physical contact
+lands (including the paired VBUS/GND contacts), four plated shell stakes, and
+two locating NPTHs. It is not converted from a KiCad footprint.
+
+Because stock tscircuit net selectors cannot begin with a digit, the generated
+source-net identifiers `V3V3` and `V1V1` mean the schematic rails **3V3** and
+**1V1**, respectively. This spelling accommodation does not change either
+rail's electrical identity.
+
+**DESIGN DATA GAP:** supplier part numbers remain unapproved for passives,
+LEDs, buttons, and test points. No supplier identities are invented here.
 
 ## Initial firmware measurement sequence
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { HallKey } from "./components/HallKey"
+import { HallKey } from "../../components/HallKey"
 
 /** A deliberately small geometry fixture, not a manufacturing design. */
 export const CheckpointABoard = () => (

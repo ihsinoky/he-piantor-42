@@ -1,5 +1,5 @@
 import React from "react"
-import { HallKey } from "./components/HallKey"
+import { HallKey } from "../../components/HallKey"
 
 /** Source-level electrical fixture only; routing and manufacturing are out of scope. */
 export const CheckpointBBoard = () => (
