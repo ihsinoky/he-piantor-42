@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 is done / GO. Native stock tscircuit is the active M1 source; the four-key electrical model is current work. EDA-000 is retired fallback/reference. Final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started and are gated on the JITX EDA evaluation. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -46,10 +46,17 @@ here.
 ## Current and next work
 
 The project is in M1. Issue #19's Human Gate returned GO for native stock
-tscircuit, so EDA-001 is done and EDA-000 is retired fallback/reference. Current
-work is the native four-key electrical model. EVT-002 waits for completion and
-review of this electrical-model increment; final two-layer placement, routing,
-DRC, manufacturing preparation, and G1 readiness remain follow-up work.
+tscircuit, so EDA-001 is done and EDA-000 is retired fallback/reference. PR #27
+completed EVT-001 and froze `hardware/tscircuit/src/evaluation/m1-four-key.tsx`
+and its Checkpoint A/B/C evidence as the M1 electrical golden reference. D-014
+remains the accepted historical decision that made native tscircuit the M1
+electrical source.
+
+EVT-002 must not begin until the Product Owner resolves the JITX-versus-frozen-
+baseline EDA evaluation gate. Final two-layer placement, routing, DRC,
+manufacturing preparation, and G1 readiness have not started and remain
+follow-up work. The evaluation does not replace or delete the frozen tscircuit
+baseline.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and

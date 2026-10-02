@@ -2,6 +2,12 @@
 
 42-key one-piece Hall-effect keyboard derived from the Beekeeb Piantor layout.
 
+> [!WARNING]
+> **Experimental hardware:** M1 and the planned Rev.A are engineering work in
+> progress. No PCB has completed physical validation, and this repository does
+> not describe a production-ready keyboard. Do not order or manufacture from
+> the current files without completing the documented review gates.
+
 ## Target
 
 - 42 keys
@@ -27,4 +33,34 @@
 7. Generate JLCPCB and 3D-print manufacturing packages
 8. Bring-up and validation
 
-Project status is tracked in `task/index.html`.
+The authoritative status, including the frozen M1 electrical golden reference
+and the placement/routing gate, is in [`docs/project-status.md`](docs/project-status.md).
+`task/index.html` is a non-authoritative dashboard read model.
+
+## Contribution status
+
+The project is preparing for a public-release Human Gate. Hardware design
+contributions are not currently being accepted while third-party provenance and
+the JITX EDA evaluation gate are unresolved. After the repository is approved
+for public release, prospective contributors should start with an Issue and
+follow [`docs/development-workflow.md`](docs/development-workflow.md); a green
+CI run does not replace Product Owner approval.
+
+## Licensing
+
+This is a mixed-license repository:
+
+- project-authored hardware, mechanical, and manufacturing designs use
+  CERN-OHL-P-2.0;
+- project-authored firmware, software, scripts, dashboard, and documentation
+  use the MIT License; and
+- third-party files retain their original licenses and notices.
+
+See the authoritative [`LICENSE.md`](LICENSE.md) path map, the full texts under
+[`LICENSES/`](LICENSES/), and the canonical
+[third-party inventory](hardware/lib/THIRD_PARTY.md). Items marked **REVIEW
+REQUIRED** are public-release blockers, not an assertion of ownership.
+
+Public-release audit evidence and the current Human Gate result are documented
+in [`docs/public-release-readiness.md`](docs/public-release-readiness.md). This
+repository has not been declared public or production-ready by that report.
