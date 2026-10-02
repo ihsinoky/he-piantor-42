@@ -22,12 +22,13 @@ The audit covered:
 - the local repository configuration and available repository metadata; and
 - the third-party hardware/reference assets enumerated in
   `hardware/lib/THIRD_PARTY.md`; and
-- GitHub-hosted metadata accessible through the repository connection: all 21
-  existing Pull Request discussions, all 7 existing Issue bodies, all 11
-  current remote branch names, current workflow definitions, representative
-  successful and failed Actions logs across workflow types, relevant artifact
-  names and purposes, Codex Task URLs in historical PR bodies, and Vercel bot
-  comments, project/deployment identifiers, and Preview URLs.
+- GitHub-hosted metadata accessible through the repository connection: all
+  Pull Request discussions and Issue bodies existing at the time of review,
+  all remote branch names present during the hosted-metadata audit, current
+  workflow definitions, representative successful and failed Actions logs
+  across workflow types, relevant artifact names and purposes, Codex Task URLs
+  in historical PR bodies, and Vercel bot comments, project/deployment
+  identifiers, and Preview URLs.
 
 The hosted review was risk-based. It did **not** manually inspect every
 historical binary artifact or every individual Actions log line. Repository
@@ -123,12 +124,13 @@ rather than immutable commit SHAs; this is a supply-chain hardening follow-up,
 not evidence of a leaked secret.
 
 **Hosted metadata result: PASS — no public-release security blocker
-identified.** PMO reviewed all 21 existing Pull Request discussions, all 7
-existing Issue bodies, all 11 current remote branch names, and the current
-workflow definitions. Representative successful and failed Actions logs across
-workflow types were inspected for secret/private-data patterns, and relevant
-artifact names and purposes were reviewed. This was not a claim that every log
-line or every historical binary artifact was manually inspected.
+identified.** PMO reviewed all Pull Request discussions and Issue bodies
+existing at the time of review, together with all remote branch names present
+during the hosted-metadata audit and the current workflow definitions.
+Representative successful and failed Actions logs across workflow types were
+inspected for secret/private-data patterns, and relevant artifact names and
+purposes were reviewed. This was not a claim that every log line or every
+historical binary artifact was manually inspected.
 
 Codex Task URLs in historical PR bodies and Vercel bot comments,
 project/deployment identifiers, and Preview URLs were reviewed and
