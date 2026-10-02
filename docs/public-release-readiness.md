@@ -109,8 +109,9 @@ summaries and Issue/PR references; no secret, private URL, password, or private
 email was found in the reachable blobs or displayed commit metadata. No
 history rewrite was attempted or proposed by this change.
 
-The hosted review covered all 11 current remote branch names and found no
-security blocker. The review does not claim that deleted refs or every
+The hosted review covered all remote branch names present during the
+hosted-metadata audit and found no security blocker. The review does not claim
+that deleted refs or every
 historical binary artifact were exhaustively inspected. If content requiring
 removal from Git history is found before release, stop; do not make the
 repository public and handle any rewrite as a separate, owner-approved
