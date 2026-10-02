@@ -4,7 +4,7 @@
 
 **Decision owner:** Product Owner / PMO Human Gate
 
-**Result:** **PENDING HOSTED-METADATA REVIEW / PRODUCT OWNER APPROVAL**
+**Result:** **READY FOR PUBLIC HUMAN GATE**
 
 This report prepares a decision; it does not authorize or perform a repository
 visibility change and does not migrate the authoritative EDA source to JITX.
@@ -21,14 +21,20 @@ The audit covered:
   vendored/reference design assets in the current tree;
 - the local repository configuration and available repository metadata; and
 - the third-party hardware/reference assets enumerated in
-  `hardware/lib/THIRD_PARTY.md`.
+  `hardware/lib/THIRD_PARTY.md`; and
+- GitHub-hosted metadata accessible through the repository connection: all
+  Pull Request discussions and Issue bodies existing at the time of review,
+  all remote branch names present during the hosted-metadata audit, current
+  workflow definitions, representative successful and failed Actions logs
+  across workflow types, relevant artifact names and purposes, Codex Task URLs
+  in historical PR bodies, and Vercel bot comments, project/deployment
+  identifiers, and Preview URLs.
 
-The audit did **not** inspect GitHub Issue or Pull Request bodies/comments,
-reviews, Actions logs/artifacts, releases, repository secrets/variables,
-branch-protection settings, deleted remote refs, forks, or other GitHub-only
-metadata. The checkout has no configured remote and GitHub CLI has no
-credentials, so that material was unavailable. It must be reviewed at the Human
-Gate.
+The hosted review was risk-based. It did **not** manually inspect every
+historical binary artifact or every individual Actions log line. Repository
+secrets (including encrypted secrets), webhooks, deploy keys, and similar
+GitHub configuration are not public repository content and are neither
+required to be disclosed nor enumerated by this report.
 
 ## Frozen engineering state
 
@@ -85,13 +91,16 @@ patterns, private/local URLs, and sensitive filenames. Manual URL review found
 public source, package-registry, manufacturer, and datasheet links; it found no
 private task/session URL. Git config contains no remote or stored credential.
 
-Commit metadata exposes one GitHub noreply address and the public account name
-`ihsinoky`; no private email address was observed. This is appropriate only if
-the account owner confirms that the attribution is intended to become public.
+Commit metadata exposes the public GitHub identity `ihsinoky` and a
+GitHub-generated noreply commit identity; no private email address was
+observed. Confirmation that this expected attribution may become public is an
+item in the final Product Owner Human Gate, rather than a technical STOP
+condition. The act of approving public release constitutes that confirmation.
 
 A negative pattern scan is not proof that no secret exists. GitHub-hosted
-metadata and logs remain unaudited, and the visibility change must stop if the
-owner review finds any committed credential or sensitive information.
+metadata review likewise cannot prove that no secret exists. The visibility
+change must stop if any credential or sensitive information is identified
+before the Product Owner decision.
 
 ## Git-history concerns
 
@@ -100,49 +109,54 @@ summaries and Issue/PR references; no secret, private URL, password, or private
 email was found in the reachable blobs or displayed commit metadata. No
 history rewrite was attempted or proposed by this change.
 
-**Unresolved:** local refs cannot prove that the remote has no additional or
-deleted refs, releases, attachments, Actions artifacts, or sensitive Issue/PR
-content. Fetch all remote refs and complete the hosted-metadata review before a
-public decision. If that review finds content requiring removal from Git
-history, stop; do not make the repository public and handle any rewrite as a
-separate, owner-approved incident procedure.
+The hosted review covered all remote branch names present during the
+hosted-metadata audit and found no security blocker. The review does not claim
+that deleted refs or every
+historical binary artifact were exhaustively inspected. If content requiring
+removal from Git history is found before release, stop; do not make the
+repository public and handle any rewrite as a separate, owner-approved
+incident procedure.
 
 ## Repository-metadata concerns
 
 Workflow files request read-only contents permission and do not contain literal
 credentials. They use third-party Actions by mutable major tags (`@v4`, `@v2`)
 rather than immutable commit SHAs; this is a supply-chain hardening follow-up,
-not evidence of a leaked secret. Workflow artifacts and logs were unavailable.
+not evidence of a leaked secret.
 
-Issue and PR templates contain no sensitive values. Actual Issue/PR bodies,
-comments, reviews, attachments, labels, branch names on the remote, Actions
-settings, secrets/variables, webhooks, deploy keys, collaborators, and release
-assets were not accessible. In particular, PR #27 was established from local
-Git history, not from a hosted-content audit.
+**Hosted metadata result: PASS — no public-release security blocker
+identified.** PMO reviewed all Pull Request discussions and Issue bodies
+existing at the time of review, together with all remote branch names present
+during the hosted-metadata audit and the current workflow definitions.
+Representative successful and failed Actions logs across workflow types were
+inspected for secret/private-data patterns, and relevant artifact names and
+purposes were reviewed. This was not a claim that every log line or every
+historical binary artifact was manually inspected.
 
-## Unresolved concerns and STOP conditions
+Codex Task URLs in historical PR bodies and Vercel bot comments,
+project/deployment identifiers, and Preview URLs were reviewed and
+intentionally accepted; they are not credentials or public-release blockers.
+No credential, private key, GitHub/AWS/Slack token, Cloudflare Access
+credential, or other security blocker was identified. Issue and PR templates
+also contain no sensitive values.
 
-The following blockers require PMO / Product Owner review:
+## Remaining authorization condition
 
-1. **Hosted repository metadata is unaudited.** Authenticate with read access
-   and review Issues, PRs, comments, reviews, attachments, Actions logs and
-   artifacts, releases, all refs, and repository/security settings.
-2. **Attribution confirmation is required.** The owner must confirm that the
-   GitHub account name and noreply commit identity may be published.
-
-These are STOP conditions. Do not change visibility until all are resolved and
-this report is updated to `READY FOR PUBLIC HUMAN GATE`.
+Engineering, security, and license readiness work is complete. Repository
+visibility has not been changed or authorized. The sole remaining decision is
+the Product Owner Human Gate: explicit approval is required before changing
+visibility, and that approval also confirms that the expected public GitHub
+identity and GitHub-generated noreply commit attribution may become public.
 
 ## Proposed visibility-change procedure
 
-After resolving the blockers:
+After Product Owner approval:
 
 1. Freeze merges and record the exact candidate commit and all remote ref tips.
 2. Re-run current-tree and all-ref secret scanning with a maintained scanner,
    then manually review high-entropy findings and all URLs.
-3. Review every Issue, PR, comment, review, attachment, release, Actions
-   log/artifact, branch/tag name, wiki, project board, webhook, deploy key,
-   environment, variable, and collaborator for public suitability.
+3. Reconfirm that no material change since the completed hosted-metadata review
+   introduces a new public-content security blocker.
 4. Reconfirm the pinned third-party inventory and preserve every upstream
    notice without altering upstream content.
 5. Confirm the license map and copyright authority with the Product Owner and,
@@ -171,14 +185,30 @@ removing notices is not a mitigation.
 
 ## Final readiness result
 
-# PENDING HOSTED-METADATA REVIEW / PRODUCT OWNER APPROVAL
+# READY FOR PUBLIC HUMAN GATE
 
 The local code and history scan found no credential or directly unsafe personal
 information, and the two targeted third-party provenance rows are resolved by
 exact revision, path, Git-blob, license, and retained-notice evidence. No
 third-party provenance **REVIEW REQUIRED** row remains for those assets.
 
-The repository must remain private because GitHub-hosted metadata review and
-explicit Product Owner approval remain outstanding. No geometry, electrical
-design, Git history, JITX implementation, upstream notice, or repository
-visibility was changed by this provenance update.
+The hosted GitHub metadata review passed with no public-release security
+blocker identified. Engineering/security/license readiness is complete, but
+repository visibility has not been changed or authorized. The repository must
+remain private until the Product Owner makes the final visibility decision at
+the Human Gate.
+
+## Final Product Owner Human Gate checklist
+
+- ☑ local tree/history audit complete
+- ☑ third-party provenance resolved
+- ☑ required license texts/notices present
+- ☑ hosted GitHub metadata review complete
+- ☑ no known credential/security blocker
+- ☑ M1 tscircuit golden reference preserved
+- ☐ Product Owner explicitly approves public release
+
+The unchecked Product Owner approval is expected at **READY FOR PUBLIC HUMAN
+GATE** and does not make the technical readiness result **NOT READY**. No
+geometry, electrical design, Git history, JITX implementation, upstream notice,
+or repository visibility was changed by this documentation update.
