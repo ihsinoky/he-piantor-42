@@ -6,34 +6,62 @@ license or notice.
 
 ## Audited assets
 
-| Source project | Source URL | Exact committed path(s) | Upstream license | Redistribution | Notice status |
-| --- | --- | --- | --- | --- | --- |
-| marbastlib | https://github.com/ebastler/marbastlib | `hardware/lib/third_party/marbastlib-he.pretty/SW_MX_HE_0deg_1u.kicad_mod` | CERN-OHL-P-2.0 | Allowed when applicable notices are retained | Complete: full upstream text is at `hardware/lib/third_party/marbastlib/LICENSE` |
-| Keebio-Parts.pretty | https://github.com/keebio/Keebio-Parts.pretty | `hardware/lib/third_party/keebio.pretty/USON-8_UX_2x3x0p6_WIN.kicad_mod` | MIT | Allowed with copyright and permission notice | Complete: upstream text and Keebio copyright are at `hardware/lib/third_party/keebio/LICENSE` |
-| RP2040-minimal-design | https://github.com/tommy-gilligan/RP2040-minimal-design | all files under `hardware/lib/reference/rp2040-minimal/` except the local explanatory `README.md` | BSD-3-Clause | Allowed with the BSD copyright, conditions, and disclaimer | Complete for this directory: `hardware/lib/reference/rp2040-minimal/LICENSE.txt` |
-| RP2040-minimal-design (copied/modified working design) | https://github.com/tommy-gilligan/RP2040-minimal-design | `hardware/sensor-test/kicad/he-piantor-sensor-test.kicad_sch`, `MCU_RaspberryPi_RP2040.lib`, `RP2040_minimal-cache.lib`, `RP2040_minimal-rescue.kicad_sym`, `RP2040_minimal.pretty/**`, and portions incorporated into the other project schematics | BSD-3-Clause for upstream portions; CERN-OHL-P-2.0 for project-authored modifications | Allowed if the BSD notice remains with redistributed source/binaries | Present at `hardware/sensor-test/kicad/LICENSE-RP2040-MINIMAL.txt`; exact per-file derivation still requires confirmation as described below |
+| Source project | Exact upstream revision / source | Committed path(s) | Relationship | License / required notice |
+| --- | --- | --- | --- | --- |
+| marbastlib | https://github.com/ebastler/marbastlib | `hardware/lib/third_party/marbastlib-he.pretty/SW_MX_HE_0deg_1u.kicad_mod` | Vendored verbatim | CERN-OHL-P-2.0; full upstream text retained at `hardware/lib/third_party/marbastlib/LICENSE` |
+| Keebio-Parts.pretty | https://github.com/keebio/Keebio-Parts.pretty | `hardware/lib/third_party/keebio.pretty/USON-8_UX_2x3x0p6_WIN.kicad_mod` | Vendored verbatim | MIT; copyright and permission notice retained at `hardware/lib/third_party/keebio/LICENSE` |
+| QMK `qmk_firmware` | revision `d9f6dd215f2c4d295c6ad85b1f602125c2d81db1`; `keyboards/cantor/keyboard.json` (blob `9065e11ae5906756501448a7efe5706f93e53f87`); equivalent `keyboards/beekeeb/piantor/keyboard.json` (blob `94463f6c6d84091e89e907942b4218c514257b81`); layout `LAYOUT_split_3x6_3` | `hardware/layout/layout_source.json`, generated `key_positions.csv`, and generated `layout_preview.svg` | The 42 baseline `(x, y)` tuple sequence corresponds to both named upstream layouts. Identifiers and subsequent 17.0 mm pitch, rotation, pivot, and gap transforms are project-specific, but do not relicense the baseline | GPL-2.0-only, conservatively applied to the coordinate source and generated outputs; text retained at `LICENSES/GPL-2.0-only.txt` |
+| RP2040-minimal-design reference | https://github.com/tommy-gilligan/RP2040-minimal-design at `7a3e5234447a9e01624c6a8de12d510f9e0161a7` | Upstream files under `hardware/lib/reference/rp2040-minimal/` | Vendored reference | BSD-3-Clause; upstream notice retained at `hardware/lib/reference/rp2040-minimal/LICENSE.txt` |
+| RP2040-minimal-design libraries and footprints | same repository and revision | Files enumerated in the blob-verification table below | Verbatim Git-blob matches | BSD-3-Clause; redistribution allowed with notice retained at `hardware/sensor-test/kicad/LICENSE-RP2040-MINIMAL.txt` |
+| RP2040-minimal-derived working schematics | same repository and revision | `hardware/sensor-test/kicad/he-piantor-sensor-test.kicad_sch` and RP2040-derived portions incorporated into other working schematics | Derived/modified | Retain BSD-3-Clause notice for the reference-derived material; project modifications are additionally CERN-OHL-P-2.0 |
 
-The marbastlib and Keebio footprint files are vendored verbatim. Any future
-project-specific edit should use a separately named local footprint or carry the
-upstream notice and a clear modification notice, as its license requires.
-Package dimensions and the Keebio land pattern must still be checked against
-the Winbond datasheet before manufacturing release.
+The marbastlib and Keebio footprint files remain unmodified. Any future
+project-specific edit should use a separately named local footprint or carry
+all notices required by its license. Package dimensions and the Keebio land
+pattern still require checking against the Winbond datasheet before
+manufacturing release.
 
-## REVIEW REQUIRED before public release
+## Verified RP2040-minimal Git-blob matches
 
-These items do not have sufficiently precise provenance to approve public
-redistribution yet. No license is guessed, and no upstream file has been
-changed to simplify the review.
+PMO supplied authoritative external verification against
+`tommy-gilligan/RP2040-minimal-design` revision
+`7a3e5234447a9e01624c6a8de12d510f9e0161a7`. Local `git hash-object` produces
+the same Git blob IDs:
 
-| Claimed/source context | Source URL | Exact committed path(s) | License under review | Redistribution result | Missing evidence/action |
-| --- | --- | --- | --- | --- | --- |
-| QMK `qmk_firmware`, Cantor `keyboard.json` coordinates | https://github.com/qmk/qmk_firmware/tree/master/keyboards/cantor | `hardware/layout/layout_source.json`; generated `hardware/layout/key_positions.csv` and `hardware/layout/layout_preview.svg` | QMK is generally GPL-2.0-or-later, but the applicable per-file notice and whether copyrightable expression was copied were not verified | **Not established** | Compare against the exact upstream revision, record it, determine whether attribution/source-offer requirements apply, and add the required notice/license |
-| KiCad libraries and RP2040-minimal-design | https://gitlab.com/kicad/libraries and https://github.com/tommy-gilligan/RP2040-minimal-design | `hardware/sensor-test/kicad/RP2040_minimal-cache.lib`, `RP2040_minimal-rescue.kicad_sym`, `RP2040_minimal.pretty/**`, and `MCU_RaspberryPi_RP2040.lib` | Likely a mixture of BSD-3-Clause source material and KiCad library terms; exact origin is unrecorded | **Not established per file** | Diff each file/symbol/footprint against the pinned RP2040-minimal and KiCad revisions, then record the applicable notices and modification status |
-| RP2040-minimal-design | https://github.com/tommy-gilligan/RP2040-minimal-design | RP2040-derived portions of `hardware/sensor-test/kicad/*.kicad_sch` | BSD-3-Clause upstream portions plus CERN-OHL-P-2.0 project modifications | **Conditionally allowed, boundary unverified** | Establish the exact upstream revision and record which sheets/embedded symbols were copied or modified; retain both notices |
+| Upstream-relative and local filename | Git blob SHA | State |
+| --- | --- | --- |
+| `MCU_RaspberryPi_RP2040.lib` | `160483336b3889515a359615228dac1efe412b0e` | Verbatim |
+| `RP2040_minimal-cache.lib` | `d4affb88f17632e3b310687a455f9524245ae3e2` | Verbatim |
+| `RP2040_minimal-rescue.kicad_sym` | `7e858c4d003f8478eb7fc438ede32c36d665500d` | Verbatim |
+| `RP2040_minimal.pretty/Crystal_SMD_HC49-US.kicad_mod` | `b367844910882cae9e299ebaef18f2de46c253f7` | Verbatim |
+| `RP2040_minimal.pretty/RP2040-QFN-56.kicad_mod` | `e6eeeb3ffab4457c200a3efec1cd19f72867e652` | Verbatim |
+| `RP2040_minimal.pretty/USB_Micro-B_Amphenol_10103594-0001LF_Horizontal_modified.kicad_mod` | `8b1f07c3552f8c49056a995a46f8392072ff3828` | Verbatim (the upstream filename includes `modified`) |
 
-Because redistribution rights for the first two rows are not yet established,
-this inventory triggers the public-release STOP condition. Resolve the evidence
-and update this table before changing repository visibility.
+These exact matches resolve the former speculative KiCad-standard-library
+provenance row. The working schematics are documented conservatively as
+BSD-derived and modified; an exact line or embedded-symbol boundary is not
+needed to retain the permissive BSD notice across the derived design. No
+existing upstream notice was deleted or replaced.
+
+## Layout license boundary and JITX impact
+
+The QMK evidence resolves the repository, revision, source paths, layout, and
+license provenance. The baseline tuples remain QMK-derived and are not asserted
+to be solely project-owned or CERN-OHL-P-2.0 material. The project-specific
+identifiers and transformations do not alter that conservative exception.
+
+This GPL exception does not affect the current M1 JITX evaluation: the four-key
+M1 electrical/evaluation design does not depend on the 42-key Cantor/Piantor
+coordinate asset. No conclusion is made here about the source or license of the
+future final 42-key JITX Rev.A geometry; that decision remains a future Human
+Gate.
+
+## Remaining review scope
+
+There are no remaining **REVIEW REQUIRED** rows in this inventory for the two
+provenance topics audited here. Public release still requires the separately
+owned hosted-metadata review and Product Owner approval; this inventory does
+not authorize a visibility change.
 
 ## Package dependencies
 

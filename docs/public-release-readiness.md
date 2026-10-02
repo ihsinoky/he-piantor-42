@@ -4,7 +4,7 @@
 
 **Decision owner:** Product Owner / PMO Human Gate
 
-**Result:** **NOT READY**
+**Result:** **PENDING HOSTED-METADATA REVIEW / PRODUCT OWNER APPROVAL**
 
 This report prepares a decision; it does not authorize or perform a repository
 visibility change and does not migrate the authoritative EDA source to JITX.
@@ -48,11 +48,12 @@ Owner resolves the JITX EDA evaluation gate.
 - project-authored firmware, software, scripts, dashboard, and documentation is
   MIT;
 - third-party material retains its upstream license and notices; and
-- unresolved mixed/provenance files are explicitly marked **REVIEW REQUIRED**
-  rather than being relicensed by assumption.
+- QMK-derived layout assets remain under their GPL-2.0-only exception; and
+- RP2040-minimal-derived assets retain their BSD-3-Clause notice.
 
 Full project license texts are present at `LICENSES/CERN-OHL-P-2.0.txt` and
-`LICENSES/MIT.txt`.
+`LICENSES/MIT.txt`; the QMK exception text is at
+`LICENSES/GPL-2.0-only.txt`.
 
 ## Third-party inventory result
 
@@ -60,17 +61,20 @@ The marbastlib Hall footprint (CERN-OHL-P-2.0), Keebio W25Q16 footprint (MIT),
 and RP2040-minimal reference (BSD-3-Clause) have source URLs and license texts
 in the repository. Their notices were preserved.
 
-The detailed inventory found unresolved redistribution provenance for:
+PMO external evidence resolved both targeted provenance rows. The QMK-derived
+42-tuple sequence is pinned to `qmk/qmk_firmware` revision
+`d9f6dd215f2c4d295c6ad85b1f602125c2d81db1`, including the Cantor source and
+equivalent Beekeeb Piantor layout, and is conservatively covered by the QMK
+GPL-2.0-only exception. The RP2040 cache, rescue library, legacy symbol library,
+and three footprints are exact Git-blob matches to RP2040-minimal-design
+revision `7a3e5234447a9e01624c6a8de12d510f9e0161a7` and retain its BSD-3-Clause
+notice. Working schematic derivatives retain that notice, while project
+modifications are additionally CERN-OHL-P-2.0.
 
-1. the QMK Cantor coordinate source identified by
-   `hardware/layout/layout_source.json` and its generated outputs; and
-2. individual cached/rescued KiCad symbols and copied footprints in
-   `hardware/sensor-test/kicad/`, whose exact upstream revisions and per-file
-   license boundaries are not recorded.
-
-The RP2040-derived working schematics carry the BSD text, but their exact copied
-and modified boundaries should also be pinned. See
-`hardware/lib/THIRD_PARTY.md` for paths and required follow-up evidence.
+The QMK exception does not affect the current four-key M1 JITX electrical
+evaluation, which does not consume the 42-key coordinate asset. The source and
+license strategy for final 42-key JITX Rev.A geometry remains a future Human
+Gate, not a conclusion of this audit.
 
 ## Secret and privacy audit result
 
@@ -120,12 +124,10 @@ Git history, not from a hosted-content audit.
 
 The following blockers require PMO / Product Owner review:
 
-1. **Third-party redistribution is not fully established.** Resolve the QMK
-   coordinate and KiCad cache/rescue provenance rows in the canonical inventory.
-2. **Hosted repository metadata is unaudited.** Authenticate with read access
+1. **Hosted repository metadata is unaudited.** Authenticate with read access
    and review Issues, PRs, comments, reviews, attachments, Actions logs and
    artifacts, releases, all refs, and repository/security settings.
-3. **Attribution confirmation is required.** The owner must confirm that the
+2. **Attribution confirmation is required.** The owner must confirm that the
    GitHub account name and noreply commit identity may be published.
 
 These are STOP conditions. Do not change visibility until all are resolved and
@@ -141,8 +143,8 @@ After resolving the blockers:
 3. Review every Issue, PR, comment, review, attachment, release, Actions
    log/artifact, branch/tag name, wiki, project board, webhook, deploy key,
    environment, variable, and collaborator for public suitability.
-4. Resolve every **REVIEW REQUIRED** inventory row; preserve or add the exact
-   upstream notices without altering upstream content.
+4. Reconfirm the pinned third-party inventory and preserve every upstream
+   notice without altering upstream content.
 5. Confirm the license map and copyright authority with the Product Owner and,
    if needed, qualified legal review.
 6. Confirm that no fork, mirror, package, site, JITX upload, or other external
@@ -169,10 +171,14 @@ removing notices is not a mitigation.
 
 ## Final readiness result
 
-# NOT READY
+# PENDING HOSTED-METADATA REVIEW / PRODUCT OWNER APPROVAL
 
 The local code and history scan found no credential or directly unsafe personal
-information, and the mixed-license structure is now explicit. However,
-third-party redistribution provenance and GitHub-hosted metadata remain
-unresolved. The repository must remain private pending the PMO / Product Owner
-Human Gate and resolution of the STOP conditions above.
+information, and the two targeted third-party provenance rows are resolved by
+exact revision, path, Git-blob, license, and retained-notice evidence. No
+third-party provenance **REVIEW REQUIRED** row remains for those assets.
+
+The repository must remain private because GitHub-hosted metadata review and
+explicit Product Owner approval remain outstanding. No geometry, electrical
+design, Git history, JITX implementation, upstream notice, or repository
+visibility was changed by this provenance update.
