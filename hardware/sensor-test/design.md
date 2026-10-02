@@ -35,6 +35,8 @@ USB 2.0 only:
 
 RP2040 USB pins use the 27 ohm series termination required by the RP2040 hardware guide, placed close to the MCU.
 
+- USB shell grounding strategy remains a layout/G1 design decision; the native electrical model exposes `USB_SHIELD` without selecting direct, RC, or chassis coupling.
+
 ### MCU core
 
 MCU: Raspberry Pi RP2040, LCSC C2040.
