@@ -4,10 +4,12 @@
 
 **Decision owner:** Product Owner / PMO Human Gate
 
-**Result:** **READY FOR PUBLIC HUMAN GATE**
+**Result:** **PUBLIC RELEASE COMPLETED**
 
-This report prepares a decision; it does not authorize or perform a repository
-visibility change and does not migrate the authoritative EDA source to JITX.
+This report records both the pre-release audit and the completed publication
+decision. The Product Owner explicitly approved public release before the
+repository visibility was changed. Publication did not migrate the
+authoritative EDA source to JITX.
 
 ## Audit scope
 
@@ -93,14 +95,14 @@ private task/session URL. Git config contains no remote or stored credential.
 
 Commit metadata exposes the public GitHub identity `ihsinoky` and a
 GitHub-generated noreply commit identity; no private email address was
-observed. Confirmation that this expected attribution may become public is an
-item in the final Product Owner Human Gate, rather than a technical STOP
-condition. The act of approving public release constitutes that confirmation.
+observed. The Product Owner's explicit approval at the final Human Gate
+confirmed that this expected attribution could become public, and it is now
+public following the visibility change.
 
 A negative pattern scan is not proof that no secret exists. GitHub-hosted
-metadata review likewise cannot prove that no secret exists. The visibility
-change must stop if any credential or sensitive information is identified
-before the Product Owner decision.
+metadata review likewise cannot prove that no secret exists. Before the
+Product Owner decision, identification of any credential or sensitive
+information would have stopped the visibility change; none was identified.
 
 ## Git-history concerns
 
@@ -113,8 +115,8 @@ The hosted review covered all remote branch names present during the
 hosted-metadata audit and found no security blocker. The review does not claim
 that deleted refs or every
 historical binary artifact were exhaustively inspected. If content requiring
-removal from Git history is found before release, stop; do not make the
-repository public and handle any rewrite as a separate, owner-approved
+removal from Git history had been found before release, publication would have
+stopped and any rewrite would have required a separate, owner-approved
 incident procedure.
 
 ## Repository-metadata concerns
@@ -140,17 +142,18 @@ No credential, private key, GitHub/AWS/Slack token, Cloudflare Access
 credential, or other security blocker was identified. Issue and PR templates
 also contain no sensitive values.
 
-## Remaining authorization condition
+## Product Owner Human Gate outcome
 
 Engineering, security, and license readiness work is complete. Repository
-visibility has not been changed or authorized. The sole remaining decision is
-the Product Owner Human Gate: explicit approval is required before changing
-visibility, and that approval also confirms that the expected public GitHub
-identity and GitHub-generated noreply commit attribution may become public.
+visibility was changed to public only after the Product Owner explicitly
+approved public release. That approval completed the Public Human Gate and
+confirmed publication of the expected GitHub identity and GitHub-generated
+noreply commit attribution. No known public-release blocker remains.
 
-## Proposed visibility-change procedure
+## Pre-publication visibility-change procedure
 
-After Product Owner approval:
+The audit recorded the following procedure to be followed after Product Owner
+approval:
 
 1. Freeze merges and record the exact candidate commit and all remote ref tips.
 2. Re-run current-tree and all-ref secret scanning with a maintained scanner,
@@ -165,7 +168,7 @@ After Product Owner approval:
    publication is triggered unintentionally.
 7. Obtain an explicit, recorded Product Owner approval at the Human Gate.
 8. Change visibility in GitHub settings manually, without changing EDA
-   authority, and immediately verify anonymous access to expected files only.
+   authority, and perform post-publication access verification.
 9. Open a post-publication verification Issue and monitor security reports.
 
 ## Rollback and mitigation considerations
@@ -185,7 +188,7 @@ removing notices is not a mitigation.
 
 ## Final readiness result
 
-# READY FOR PUBLIC HUMAN GATE
+# PUBLIC RELEASE COMPLETED
 
 The local code and history scan found no credential or directly unsafe personal
 information, and the two targeted third-party provenance rows are resolved by
@@ -193,10 +196,10 @@ exact revision, path, Git-blob, license, and retained-notice evidence. No
 third-party provenance **REVIEW REQUIRED** row remains for those assets.
 
 The hosted GitHub metadata review passed with no public-release security
-blocker identified. Engineering/security/license readiness is complete, but
-repository visibility has not been changed or authorized. The repository must
-remain private until the Product Owner makes the final visibility decision at
-the Human Gate.
+blocker identified. Engineering/security/license readiness is complete. The
+Product Owner explicitly approved public release before repository visibility
+was changed to public, completing the Public Human Gate. No known
+public-release blocker remains.
 
 ## Final Product Owner Human Gate checklist
 
@@ -206,9 +209,21 @@ the Human Gate.
 - ☑ hosted GitHub metadata review complete
 - ☑ no known credential/security blocker
 - ☑ M1 tscircuit golden reference preserved
-- ☐ Product Owner explicitly approves public release
+- ☑ Product Owner explicitly approves public release
 
-The unchecked Product Owner approval is expected at **READY FOR PUBLIC HUMAN
-GATE** and does not make the technical readiness result **NOT READY**. No
-geometry, electrical design, Git history, JITX implementation, upstream notice,
-or repository visibility was changed by this documentation update.
+Product Owner approval was explicitly given and recorded before repository
+visibility was changed. The Human Gate is complete.
+
+## Post-publication verification
+
+- GitHub repository metadata reports `visibility = public`.
+- The default branch is `main`.
+- Branch cleanup resulted in `main` being the only remote branch at the time of
+  post-publication verification.
+- The publication operation modified no engineering design.
+- The frozen M1 tscircuit golden reference remains unchanged.
+- JITX implementation has not started.
+
+This documentation synchronization changes no geometry, electrical design,
+Git history, JITX implementation, upstream notice, license decision, or
+repository visibility.
