@@ -162,6 +162,14 @@ jobs:
           path: hardware/tscircuit/tscircuit-native-bootstrap/
           if-no-files-found: warn
 
+      - name: Upload M1 electrical-model evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-26-m1-electrical-model
+          path: hardware/tscircuit/tscircuit-m1-electrical/
+          if-no-files-found: error
+
       - name: Upload Checkpoint A evidence
         if: always()
         uses: actions/upload-artifact@v4
