@@ -29,18 +29,12 @@ The following paths retain their upstream licenses and notices:
 | `hardware/lib/third_party/marbastlib-he.pretty/**` and `hardware/lib/third_party/marbastlib/LICENSE` | `CERN-OHL-P-2.0`; upstream copyright and notices retained |
 | `hardware/lib/third_party/keebio.pretty/**` and `hardware/lib/third_party/keebio/LICENSE` | MIT; Keebio copyright and notice retained |
 | `hardware/lib/reference/rp2040-minimal/**` | BSD-3-Clause; Raspberry Pi Ltd and Tommy Gilligan notice retained in `LICENSE.txt` |
-| RP2040-minimal-derived material under `hardware/sensor-test/kicad/**` | BSD-3-Clause portions retain the notice in `LICENSE-RP2040-MINIMAL.txt`; project modifications are `CERN-OHL-P-2.0` |
-| `hardware/layout/layout_source.json` and its generated `key_positions.csv` / `layout_preview.svg` | **REVIEW REQUIRED** — coordinates identify QMK Cantor as their source, but the precise copied expression and required GPL notices have not been established |
-| KiCad cache/rescue libraries and copied footprints under `hardware/sensor-test/kicad/**` | **REVIEW REQUIRED** — exact upstream file provenance and notice obligations have not been established |
+| `hardware/sensor-test/kicad/MCU_RaspberryPi_RP2040.lib`, `RP2040_minimal-cache.lib`, `RP2040_minimal-rescue.kicad_sym`, and `RP2040_minimal.pretty/**` | Verbatim from RP2040-minimal-design revision `7a3e5234447a9e01624c6a8de12d510f9e0161a7`; BSD-3-Clause notice retained in `LICENSE-RP2040-MINIMAL.txt` |
+| RP2040-minimal-derived working schematics under `hardware/sensor-test/kicad/**` | Upstream-derived portions remain BSD-3-Clause with `LICENSE-RP2040-MINIMAL.txt`; project modifications are additionally `CERN-OHL-P-2.0` |
+| `hardware/layout/layout_source.json` and its generated `key_positions.csv` / `layout_preview.svg` | QMK-derived baseline coordinate sequence, GPL-2.0-only; exact revision and paths are recorded in `layout_source.json`, and the license text is [`LICENSES/GPL-2.0-only.txt`](LICENSES/GPL-2.0-only.txt). Project-specific identifiers and transforms do not relicense the baseline tuples |
 | `hardware/tscircuit/package-lock.json` | Dependency metadata; installed packages retain their individual upstream licenses and are not relicensed |
 
 See [`hardware/lib/THIRD_PARTY.md`](hardware/lib/THIRD_PARTY.md) for the
-canonical redistribution inventory and unresolved provenance work. Files marked
-**REVIEW REQUIRED** are not asserted to be covered solely by a project license
-and block a public-release readiness finding until resolved.
-
-The 2026-10-02 follow-up audit could not recover exact upstream revisions from
-the local repository. It therefore retained both **REVIEW REQUIRED** exceptions
-above and all existing notices; it did not reclassify the coordinate tuples as
-project-owned or assume that a generated KiCad cache/rescue file is free of its
-input assets' license conditions.
+canonical redistribution inventory, exact revisions, Git-blob evidence, and
+notice requirements. The QMK-derived layout assets and BSD-derived working
+designs are explicit exceptions to the general project-authored hardware row.
