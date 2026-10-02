@@ -38,3 +38,9 @@ See [`hardware/lib/THIRD_PARTY.md`](hardware/lib/THIRD_PARTY.md) for the
 canonical redistribution inventory and unresolved provenance work. Files marked
 **REVIEW REQUIRED** are not asserted to be covered solely by a project license
 and block a public-release readiness finding until resolved.
+
+The 2026-10-02 follow-up audit could not recover exact upstream revisions from
+the local repository. It therefore retained both **REVIEW REQUIRED** exceptions
+above and all existing notices; it did not reclassify the coordinate tuples as
+project-owned or assume that a generated KiCad cache/rescue file is free of its
+input assets' license conditions.

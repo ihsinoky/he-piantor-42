@@ -169,10 +169,18 @@ removing notices is not a mitigation.
 
 ## Final readiness result
 
-# NOT READY
+# PENDING HOSTED-METADATA REVIEW — AND THIRD-PARTY PROVENANCE REMAINS BLOCKED
 
 The local code and history scan found no credential or directly unsafe personal
 information, and the mixed-license structure is now explicit. However,
 third-party redistribution provenance and GitHub-hosted metadata remain
 unresolved. The repository must remain private pending the PMO / Product Owner
 Human Gate and resolution of the STOP conditions above.
+
+The targeted 2026-10-02 follow-up audit did not clear the third-party blocker:
+the local history records neither the QMK/Cantor revision used for the layout
+tuples nor the RP2040-minimal/KiCad revisions used for each working asset.
+Because exact provenance cannot be established without upstream evidence, the
+requested STOP condition applies. No geometry, electrical design, upstream
+notice, or repository visibility was changed. Hosted GitHub metadata remains
+explicitly outside this audit and pending PMO review.
