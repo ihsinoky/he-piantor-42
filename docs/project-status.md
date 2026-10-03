@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002A has started but is at a HUMAN / ENVIRONMENT STOP because this environment has no JITX CLI/runtime and cannot reach the required services. JITX is not authoritative. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. Cloud Codex remains unsuitable for JITX execution, but EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate with a real build. JITX remains a challenger; full M1 electrical parity is next. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -58,15 +58,14 @@ manufacturing preparation, and G1 readiness have not started and remain
 follow-up work. The evaluation does not replace or delete the frozen tscircuit
 baseline.
 
-EDA-002A's environment/bootstrap and parity-contract increment has begun, but
-its capability probe reached a HUMAN / ENVIRONMENT STOP before bootstrap: the
-JITX CLI and runtime are unavailable, authentication cannot be inspected, and
-required outbound endpoints are blocked. No JITX version was guessed, no build
-was claimed, and no parity contract was frozen. See
-[`jitx-evaluation.md`](jitx-evaluation.md) for the probe evidence and minimum
-unblock action. After that gate passes, the next increment is full M1 JITX
-electrical parity against the still-authoritative frozen tscircuit reference;
-EVT-002 remains unstarted.
+EDA-002A's Cloud Codex capability probe remains historical evidence of that
+environment's HUMAN / ENVIRONMENT STOP. EDA-002B subsequently passed the
+GitHub Codespaces JITX environment/bootstrap feasibility gate: its canonical
+project uses `jitx==4.4.3`, runs against the already validated Linux runtime
+4.4.2, and completed a real bootstrap build. See
+[`jitx-evaluation.md`](jitx-evaluation.md) for both evidence sets. JITX remains
+a challenger against the still-authoritative frozen tscircuit reference; full
+M1 JITX electrical parity is the next increment and EVT-002 remains unstarted.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
