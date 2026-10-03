@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "contract_id": "he-piantor-42-m1-jitx-parity",
+  "status": "frozen-requirements-for-future-challenger-implementation",
+  "authority": {
+    "electrical_source_of_truth": "hardware/tscircuit/src/evaluation/m1-four-key.tsx",
+    "verification_source": "hardware/tscircuit/scripts/verify-m1-electrical.tsx",
+    "jitx_role": "challenger backend only",
+    "parity_method": "Compare a future JITX design graph and generated design data against these requirements; source-text matching is insufficient."
+  },
+  "source_evidence": {
+    "paths": [
+      "hardware/tscircuit/src/evaluation/m1-four-key.tsx",
+      "hardware/tscircuit/scripts/verify-m1-electrical.tsx",
+      "hardware/sensor-test/design.md",
+      "hardware/sensor-test/pinmap.csv"
+    ],
+    "git_commit": {
+      "sha": "795479ea4ad3654648d91e6c7ed158ffc9965e09",
+      "subject": "Implement native M1 four-key Hall evaluation circuit (#27)",
+      "date": "2026-10-02"
+    },
+    "license_boundary": {
+      "project_files": "CERN-OHL-P-2.0",
+      "excluded_path": "hardware/layout/**",
+      "excluded_reason": "GPL/QMK-derived 42-key coordinate assets must not be consumed."
+    }
+  },
+  "board": {
+    "copper_layers": 2,
+    "thickness_mm": 1.2,
+    "layout_status": "not part of this contract or EDA-002B"
+  },
+  "active_components": [
+    {"reference": "J_USB", "manufacturer_part_number": "TYPE-C-31-M-12", "supplier_part_number": "C165948"},
+    {"reference": "U_ESD", "manufacturer_part_number": "USBLC6-2SC6", "supplier_part_number": "C7519"},
+    {"reference": "U_MCU", "manufacturer_part_number": "RP2040", "supplier_part_number": "C2040"},
+    {"reference": "U_FLASH", "manufacturer_part_number": "W25Q16JVUXIQ", "supplier_part_number": "C2843335"},
+    {"reference": "Y1", "manufacturer_part_number": "ABM8-272-T3", "supplier_part_number": "C20625731"},
+    {"reference": "U_LDO", "manufacturer_part_number": "AP2112K-3.3TRG1", "supplier_part_number": "C51118"},
+    {"reference": "U_LOAD", "manufacturer_part_number": "TPS22919DCKR", "supplier_part_number": "C2149796"},
+    {"reference": "U_MUX", "manufacturer_part_number": "TMUX1208PWR", "supplier_part_number": "C494728"},
+    {"reference_pattern": "U_H0..U_H3", "manufacturer_part_number": "DRV5055A3QDBZR", "supplier_part_number": "C266128"}
+  ],
+  "component_population": {
+    "references": {
+      "resistors": ["R_CC1", "R_CC2", "R_USB_DP", "R_USB_DM", "R_QSPI_SS", "R_ADC_TOP", "R_ADC_BOTTOM", "R_XOUT", "R_POWER_LED", "R_STATUS_LED"],
+      "capacitors": ["C_ADC", "C_XIN", "C_XOUT", "C_MCU_HF1..C_MCU_HF9", "C_VREG_IN", "C_VREG_OUT", "C_MCU_BULK", "C_LDO_IN", "C_LDO_OUT", "C_LOAD_IN", "C_LOAD_OUT", "C_FLASH", "C_MUX", "C_HALL0..C_HALL3"],
+      "indicators": ["D_POWER", "D_STATUS"],
+      "switches": ["SW_BOOT", "SW_RUN"],
+      "test_points": ["TP_VBUS", "TP_3V3", "TP_HALL_5V", "TP_H0_RAW..TP_H3_RAW", "TP_MUX_D", "TP_ADC_SENSE", "TP_GND", "TP_SWDIO", "TP_SWCLK", "TP_RUN", "TP_MUX_S5..TP_MUX_S8"]
+    },
+    "passive_values": {
+      "R_CC1_R_CC2": "5.1 kOhm",
+      "R_USB_DP_R_USB_DM": "27 Ohm",
+      "R_QSPI_SS": "1 kOhm",
+      "R_ADC_TOP": "6.8 kOhm",
+      "R_ADC_BOTTOM": "10 kOhm",
+      "C_ADC": "1 nF",
+      "R_XOUT": "1 kOhm",
+      "C_XIN_C_XOUT": "15 pF",
+      "C_MCU_HF1_C_MCU_HF8": "100 nF on V3V3",
+      "C_MCU_HF9": "100 nF on V1V1",
+      "C_VREG_IN_C_VREG_OUT": "1 uF",
+      "C_MCU_BULK": "10 uF",
+      "C_LDO_IN_C_LDO_OUT_C_LOAD_IN_C_LOAD_OUT": "1 uF",
+      "C_FLASH_C_MUX_C_HALL0_C_HALL1_C_HALL2_C_HALL3": "100 nF",
+      "R_POWER_LED_R_STATUS_LED": "1.5 kOhm"
+    }
+  },
+  "nets": ["VBUS", "V3V3", "V1V1", "GND", "USB_SHIELD", "HALL_5V", "USB_DP_CONN", "USB_DM_CONN", "USB_DP_ESD", "USB_DM_ESD", "USB_DP", "USB_DM", "H0_RAW", "H1_RAW", "H2_RAW", "H3_RAW", "MUX_D", "ADC_SENSE", "HALL_PWR_EN", "MUX_A0", "MUX_A1", "MUX_A2", "MUX_EN0", "STATUS_LED", "RUN", "SWDIO", "SWCLK", "QSPI_SD0", "QSPI_SD1", "QSPI_SD2", "QSPI_SD3", "QSPI_SCLK", "QSPI_SS_MCU", "QSPI_SS_FLASH", "XIN", "XOUT_XTAL", "XOUT", "CC1", "CC2", "MUX_S5", "MUX_S6", "MUX_S7", "MUX_S8"],
+  "structured_graph": {
+    "schema_version": 1,
+    "normalization": {
+      "endpoint_format": "COMPONENT.PORT",
+      "authority": "This graph is derived only from the approved frozen tscircuit source, its verifier, design.md, and pinmap.csv. It is for automated comparison against generated JITX component, port, net, and connection data."
+    },
+    "expected_nets": ["VBUS", "V3V3", "V1V1", "GND", "USB_SHIELD", "HALL_5V", "USB_DP_CONN", "USB_DM_CONN", "USB_DP_ESD", "USB_DM_ESD", "USB_DP", "USB_DM", "H0_RAW", "H1_RAW", "H2_RAW", "H3_RAW", "MUX_D", "ADC_SENSE", "HALL_PWR_EN", "MUX_A0", "MUX_A1", "MUX_A2", "MUX_EN0", "STATUS_LED", "RUN", "SWDIO", "SWCLK", "QSPI_SD0", "QSPI_SD1", "QSPI_SD2", "QSPI_SD3", "QSPI_SCLK", "QSPI_SS_MCU", "QSPI_SS_FLASH", "XIN", "XOUT_XTAL", "XOUT", "CC1", "CC2", "MUX_S5", "MUX_S6", "MUX_S7", "MUX_S8"],
+    "component_port_identities": {
+      "J_USB": ["A1_B12", "A4_B9", "A5", "A6", "A7", "A8", "B8", "B7", "B6", "B5", "A9_B4", "A12_B1", "SHIELD"],
+      "U_ESD": ["IO1_1", "GND", "IO2_1", "IO2_2", "VBUS", "IO1_2"],
+      "U_MCU": ["IOVDD_1", "MUX_A0", "MUX_A1", "MUX_A2", "MUX_EN0", "HALL_PWR_EN", "IOVDD_10", "STATUS_LED", "TESTEN_19", "XIN", "XOUT", "IOVDD_22", "DVDD_23", "SWCLK", "SWDIO", "RUN", "IOVDD_33", "ADC_SENSE", "IOVDD_42", "ADC_AVDD_43", "VREG_IN_44", "VREG_VOUT_45", "USB_DM", "USB_DP", "USB_VDD_48", "IOVDD_49", "DVDD_50", "QSPI_SD3", "QSPI_SCLK", "QSPI_SD0", "QSPI_SD2", "QSPI_SD1", "QSPI_SS", "GND_57"],
+      "U_FLASH": ["CS", "QSPI_SD1", "QSPI_SD2", "GND", "QSPI_SD0", "QSPI_SCLK", "QSPI_SD3", "VCC", "EP"],
+      "Y1": ["XIN", "GND1", "XOUT", "GND2"],
+      "U_LDO": ["VIN", "GND", "EN", "NC", "VOUT"],
+      "U_LOAD": ["IN", "GND", "ON", "NC", "QOD", "OUT"],
+      "U_MUX": ["A0", "EN", "NC", "S1", "S2", "S3", "S4", "D", "S8", "S7", "S6", "S5", "VDD", "GND", "A2", "A1"],
+      "U_H0": ["VCC", "OUT", "GND"], "U_H1": ["VCC", "OUT", "GND"], "U_H2": ["VCC", "OUT", "GND"], "U_H3": ["VCC", "OUT", "GND"],
+      "R_CC1": ["pin1", "pin2"], "R_CC2": ["pin1", "pin2"], "R_USB_DP": ["pin1", "pin2"], "R_USB_DM": ["pin1", "pin2"], "R_QSPI_SS": ["pin1", "pin2"], "R_ADC_TOP": ["pin1", "pin2"], "R_ADC_BOTTOM": ["pin1", "pin2"], "R_XOUT": ["pin1", "pin2"], "R_POWER_LED": ["pin1", "pin2"], "R_STATUS_LED": ["pin1", "pin2"],
+      "C_ADC": ["pin1", "pin2"], "C_XIN": ["pin1", "pin2"], "C_XOUT": ["pin1", "pin2"], "C_MCU_HF1": ["pin1", "pin2"], "C_MCU_HF2": ["pin1", "pin2"], "C_MCU_HF3": ["pin1", "pin2"], "C_MCU_HF4": ["pin1", "pin2"], "C_MCU_HF5": ["pin1", "pin2"], "C_MCU_HF6": ["pin1", "pin2"], "C_MCU_HF7": ["pin1", "pin2"], "C_MCU_HF8": ["pin1", "pin2"], "C_MCU_HF9": ["pin1", "pin2"], "C_VREG_IN": ["pin1", "pin2"], "C_VREG_OUT": ["pin1", "pin2"], "C_MCU_BULK": ["pin1", "pin2"], "C_LDO_IN": ["pin1", "pin2"], "C_LDO_OUT": ["pin1", "pin2"], "C_LOAD_IN": ["pin1", "pin2"], "C_LOAD_OUT": ["pin1", "pin2"], "C_FLASH": ["pin1", "pin2"], "C_MUX": ["pin1", "pin2"], "C_HALL0": ["pin1", "pin2"], "C_HALL1": ["pin1", "pin2"], "C_HALL2": ["pin1", "pin2"], "C_HALL3": ["pin1", "pin2"],
+      "D_POWER": ["anode", "cathode"], "D_STATUS": ["anode", "cathode"], "SW_BOOT": ["pin1", "pin2"], "SW_RUN": ["pin1", "pin2"],
+      "TP_VBUS": ["pin1"], "TP_3V3": ["pin1"], "TP_HALL_5V": ["pin1"], "TP_H0_RAW": ["pin1"], "TP_H1_RAW": ["pin1"], "TP_H2_RAW": ["pin1"], "TP_H3_RAW": ["pin1"], "TP_MUX_D": ["pin1"], "TP_ADC_SENSE": ["pin1"], "TP_GND": ["pin1"], "TP_SWDIO": ["pin1"], "TP_SWCLK": ["pin1"], "TP_RUN": ["pin1"], "TP_MUX_S5": ["pin1"], "TP_MUX_S6": ["pin1"], "TP_MUX_S7": ["pin1"], "TP_MUX_S8": ["pin1"]
+    },
+    "endpoint_to_net_edges": [
+      {"endpoint": "J_USB.A4_B9", "net": "VBUS"}, {"endpoint": "J_USB.A9_B4", "net": "VBUS"}, {"endpoint": "J_USB.A1_B12", "net": "GND"}, {"endpoint": "J_USB.A12_B1", "net": "GND"}, {"endpoint": "J_USB.A6", "net": "USB_DP_CONN"}, {"endpoint": "J_USB.B6", "net": "USB_DP_CONN"}, {"endpoint": "J_USB.A7", "net": "USB_DM_CONN"}, {"endpoint": "J_USB.B7", "net": "USB_DM_CONN"}, {"endpoint": "J_USB.SHIELD", "net": "USB_SHIELD"},
+      {"endpoint": "U_ESD.IO1_1", "net": "USB_DP_CONN"}, {"endpoint": "U_ESD.IO1_2", "net": "USB_DP_ESD"}, {"endpoint": "U_ESD.IO2_1", "net": "USB_DM_CONN"}, {"endpoint": "U_ESD.IO2_2", "net": "USB_DM_ESD"}, {"endpoint": "U_ESD.VBUS", "net": "VBUS"}, {"endpoint": "U_ESD.GND", "net": "GND"},
+      {"endpoint": "U_MCU.IOVDD_1", "net": "V3V3"}, {"endpoint": "U_MCU.IOVDD_10", "net": "V3V3"}, {"endpoint": "U_MCU.IOVDD_22", "net": "V3V3"}, {"endpoint": "U_MCU.IOVDD_33", "net": "V3V3"}, {"endpoint": "U_MCU.IOVDD_42", "net": "V3V3"}, {"endpoint": "U_MCU.IOVDD_49", "net": "V3V3"}, {"endpoint": "U_MCU.USB_VDD_48", "net": "V3V3"}, {"endpoint": "U_MCU.ADC_AVDD_43", "net": "V3V3"}, {"endpoint": "U_MCU.VREG_IN_44", "net": "V3V3"},
+      {"endpoint": "U_MCU.DVDD_23", "net": "V1V1"}, {"endpoint": "U_MCU.DVDD_50", "net": "V1V1"}, {"endpoint": "U_MCU.VREG_VOUT_45", "net": "V1V1"}, {"endpoint": "U_MCU.TESTEN_19", "net": "GND"}, {"endpoint": "U_MCU.GND_57", "net": "GND"},
+      {"endpoint": "U_MCU.MUX_A0", "net": "MUX_A0"}, {"endpoint": "U_MCU.MUX_A1", "net": "MUX_A1"}, {"endpoint": "U_MCU.MUX_A2", "net": "MUX_A2"}, {"endpoint": "U_MCU.MUX_EN0", "net": "MUX_EN0"}, {"endpoint": "U_MCU.HALL_PWR_EN", "net": "HALL_PWR_EN"}, {"endpoint": "U_MCU.STATUS_LED", "net": "STATUS_LED"}, {"endpoint": "U_MCU.ADC_SENSE", "net": "ADC_SENSE"}, {"endpoint": "U_MCU.XIN", "net": "XIN"}, {"endpoint": "U_MCU.XOUT", "net": "XOUT"}, {"endpoint": "U_MCU.SWCLK", "net": "SWCLK"}, {"endpoint": "U_MCU.SWDIO", "net": "SWDIO"}, {"endpoint": "U_MCU.RUN", "net": "RUN"}, {"endpoint": "U_MCU.USB_DM", "net": "USB_DM"}, {"endpoint": "U_MCU.USB_DP", "net": "USB_DP"}, {"endpoint": "U_MCU.QSPI_SD0", "net": "QSPI_SD0"}, {"endpoint": "U_MCU.QSPI_SD1", "net": "QSPI_SD1"}, {"endpoint": "U_MCU.QSPI_SD2", "net": "QSPI_SD2"}, {"endpoint": "U_MCU.QSPI_SD3", "net": "QSPI_SD3"}, {"endpoint": "U_MCU.QSPI_SCLK", "net": "QSPI_SCLK"}, {"endpoint": "U_MCU.QSPI_SS", "net": "QSPI_SS_MCU"},
+      {"endpoint": "U_FLASH.CS", "net": "QSPI_SS_FLASH"}, {"endpoint": "U_FLASH.QSPI_SD1", "net": "QSPI_SD1"}, {"endpoint": "U_FLASH.QSPI_SD2", "net": "QSPI_SD2"}, {"endpoint": "U_FLASH.GND", "net": "GND"}, {"endpoint": "U_FLASH.QSPI_SD0", "net": "QSPI_SD0"}, {"endpoint": "U_FLASH.QSPI_SCLK", "net": "QSPI_SCLK"}, {"endpoint": "U_FLASH.QSPI_SD3", "net": "QSPI_SD3"}, {"endpoint": "U_FLASH.VCC", "net": "V3V3"},
+      {"endpoint": "Y1.XIN", "net": "XIN"}, {"endpoint": "Y1.GND1", "net": "GND"}, {"endpoint": "Y1.XOUT", "net": "XOUT_XTAL"}, {"endpoint": "Y1.GND2", "net": "GND"},
+      {"endpoint": "U_LDO.VIN", "net": "VBUS"}, {"endpoint": "U_LDO.EN", "net": "VBUS"}, {"endpoint": "U_LDO.GND", "net": "GND"}, {"endpoint": "U_LDO.VOUT", "net": "V3V3"},
+      {"endpoint": "U_LOAD.IN", "net": "VBUS"}, {"endpoint": "U_LOAD.OUT", "net": "HALL_5V"}, {"endpoint": "U_LOAD.ON", "net": "HALL_PWR_EN"}, {"endpoint": "U_LOAD.GND", "net": "GND"},
+      {"endpoint": "U_MUX.A0", "net": "MUX_A0"}, {"endpoint": "U_MUX.A1", "net": "MUX_A1"}, {"endpoint": "U_MUX.A2", "net": "MUX_A2"}, {"endpoint": "U_MUX.EN", "net": "MUX_EN0"}, {"endpoint": "U_MUX.S1", "net": "H0_RAW"}, {"endpoint": "U_MUX.S2", "net": "H1_RAW"}, {"endpoint": "U_MUX.S3", "net": "H2_RAW"}, {"endpoint": "U_MUX.S4", "net": "H3_RAW"}, {"endpoint": "U_MUX.S5", "net": "MUX_S5"}, {"endpoint": "U_MUX.S6", "net": "MUX_S6"}, {"endpoint": "U_MUX.S7", "net": "MUX_S7"}, {"endpoint": "U_MUX.S8", "net": "MUX_S8"}, {"endpoint": "U_MUX.D", "net": "MUX_D"}, {"endpoint": "U_MUX.VDD", "net": "HALL_5V"}, {"endpoint": "U_MUX.GND", "net": "GND"},
+      {"endpoint": "U_H0.VCC", "net": "HALL_5V"}, {"endpoint": "U_H0.OUT", "net": "H0_RAW"}, {"endpoint": "U_H0.GND", "net": "GND"}, {"endpoint": "U_H1.VCC", "net": "HALL_5V"}, {"endpoint": "U_H1.OUT", "net": "H1_RAW"}, {"endpoint": "U_H1.GND", "net": "GND"}, {"endpoint": "U_H2.VCC", "net": "HALL_5V"}, {"endpoint": "U_H2.OUT", "net": "H2_RAW"}, {"endpoint": "U_H2.GND", "net": "GND"}, {"endpoint": "U_H3.VCC", "net": "HALL_5V"}, {"endpoint": "U_H3.OUT", "net": "H3_RAW"}, {"endpoint": "U_H3.GND", "net": "GND"},
+      {"endpoint": "R_CC1.pin2", "net": "GND"}, {"endpoint": "R_CC2.pin2", "net": "GND"}, {"endpoint": "R_USB_DP.pin1", "net": "USB_DP_ESD"}, {"endpoint": "R_USB_DP.pin2", "net": "USB_DP"}, {"endpoint": "R_USB_DM.pin1", "net": "USB_DM_ESD"}, {"endpoint": "R_USB_DM.pin2", "net": "USB_DM"}, {"endpoint": "R_QSPI_SS.pin1", "net": "QSPI_SS_MCU"}, {"endpoint": "R_QSPI_SS.pin2", "net": "QSPI_SS_FLASH"}, {"endpoint": "R_ADC_TOP.pin1", "net": "MUX_D"}, {"endpoint": "R_ADC_TOP.pin2", "net": "ADC_SENSE"}, {"endpoint": "R_ADC_BOTTOM.pin1", "net": "ADC_SENSE"}, {"endpoint": "R_ADC_BOTTOM.pin2", "net": "GND"}, {"endpoint": "R_XOUT.pin1", "net": "XOUT_XTAL"}, {"endpoint": "R_XOUT.pin2", "net": "XOUT"}, {"endpoint": "R_POWER_LED.pin2", "net": "GND"}, {"endpoint": "R_STATUS_LED.pin2", "net": "GND"},
+      {"endpoint": "C_ADC.pin1", "net": "ADC_SENSE"}, {"endpoint": "C_ADC.pin2", "net": "GND"}, {"endpoint": "C_XIN.pin1", "net": "XIN"}, {"endpoint": "C_XIN.pin2", "net": "GND"}, {"endpoint": "C_XOUT.pin1", "net": "XOUT_XTAL"}, {"endpoint": "C_XOUT.pin2", "net": "GND"},
+      {"endpoint": "C_MCU_HF1.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF2.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF3.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF4.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF5.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF6.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF7.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF8.pin1", "net": "V3V3"}, {"endpoint": "C_MCU_HF9.pin1", "net": "V1V1"}, {"endpoint": "C_VREG_IN.pin1", "net": "V3V3"}, {"endpoint": "C_VREG_OUT.pin1", "net": "V1V1"}, {"endpoint": "C_MCU_BULK.pin1", "net": "V3V3"},
+      {"endpoint": "C_LDO_IN.pin1", "net": "VBUS"}, {"endpoint": "C_LDO_OUT.pin1", "net": "V3V3"}, {"endpoint": "C_LOAD_IN.pin1", "net": "VBUS"}, {"endpoint": "C_LOAD_OUT.pin1", "net": "HALL_5V"}, {"endpoint": "C_FLASH.pin1", "net": "V3V3"}, {"endpoint": "C_MUX.pin1", "net": "HALL_5V"}, {"endpoint": "C_HALL0.pin1", "net": "HALL_5V"}, {"endpoint": "C_HALL1.pin1", "net": "HALL_5V"}, {"endpoint": "C_HALL2.pin1", "net": "HALL_5V"}, {"endpoint": "C_HALL3.pin1", "net": "HALL_5V"},
+      {"endpoint": "C_MCU_HF1.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF2.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF3.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF4.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF5.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF6.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF7.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF8.pin2", "net": "GND"}, {"endpoint": "C_MCU_HF9.pin2", "net": "GND"}, {"endpoint": "C_VREG_IN.pin2", "net": "GND"}, {"endpoint": "C_VREG_OUT.pin2", "net": "GND"}, {"endpoint": "C_MCU_BULK.pin2", "net": "GND"}, {"endpoint": "C_LDO_IN.pin2", "net": "GND"}, {"endpoint": "C_LDO_OUT.pin2", "net": "GND"}, {"endpoint": "C_LOAD_IN.pin2", "net": "GND"}, {"endpoint": "C_LOAD_OUT.pin2", "net": "GND"}, {"endpoint": "C_FLASH.pin2", "net": "GND"}, {"endpoint": "C_MUX.pin2", "net": "GND"}, {"endpoint": "C_HALL0.pin2", "net": "GND"}, {"endpoint": "C_HALL1.pin2", "net": "GND"}, {"endpoint": "C_HALL2.pin2", "net": "GND"}, {"endpoint": "C_HALL3.pin2", "net": "GND"},
+      {"endpoint": "D_POWER.anode", "net": "V3V3"}, {"endpoint": "D_STATUS.anode", "net": "STATUS_LED"}, {"endpoint": "SW_BOOT.pin1", "net": "QSPI_SS_FLASH"}, {"endpoint": "SW_BOOT.pin2", "net": "GND"}, {"endpoint": "SW_RUN.pin1", "net": "RUN"}, {"endpoint": "SW_RUN.pin2", "net": "GND"},
+      {"endpoint": "TP_VBUS.pin1", "net": "VBUS"}, {"endpoint": "TP_3V3.pin1", "net": "V3V3"}, {"endpoint": "TP_HALL_5V.pin1", "net": "HALL_5V"}, {"endpoint": "TP_H0_RAW.pin1", "net": "H0_RAW"}, {"endpoint": "TP_H1_RAW.pin1", "net": "H1_RAW"}, {"endpoint": "TP_H2_RAW.pin1", "net": "H2_RAW"}, {"endpoint": "TP_H3_RAW.pin1", "net": "H3_RAW"}, {"endpoint": "TP_MUX_D.pin1", "net": "MUX_D"}, {"endpoint": "TP_ADC_SENSE.pin1", "net": "ADC_SENSE"}, {"endpoint": "TP_GND.pin1", "net": "GND"}, {"endpoint": "TP_SWDIO.pin1", "net": "SWDIO"}, {"endpoint": "TP_SWCLK.pin1", "net": "SWCLK"}, {"endpoint": "TP_RUN.pin1", "net": "RUN"}, {"endpoint": "TP_MUX_S5.pin1", "net": "MUX_S5"}, {"endpoint": "TP_MUX_S6.pin1", "net": "MUX_S6"}, {"endpoint": "TP_MUX_S7.pin1", "net": "MUX_S7"}, {"endpoint": "TP_MUX_S8.pin1", "net": "MUX_S8"}
+    ],
+    "direct_endpoint_links": [
+      {"endpoints": ["J_USB.A5", "R_CC1.pin1"]}, {"endpoints": ["J_USB.B5", "R_CC2.pin1"]}, {"endpoints": ["D_POWER.cathode", "R_POWER_LED.pin1"]}, {"endpoints": ["D_STATUS.cathode", "R_STATUS_LED.pin1"]}
+    ],
+    "intentional_no_connect_endpoints": ["J_USB.A8", "J_USB.B8", "U_FLASH.EP", "U_LDO.NC", "U_LOAD.NC", "U_LOAD.QOD", "U_MUX.NC"]
+  },
+  "net_semantics": {
+    "VBUS": "USB 5 V input; feeds LDO VIN/EN, TPS22919 IN, ESD VBUS, input capacitors, and TP_VBUS.",
+    "V3V3": "AP2112K output; RP2040 I/O/analog/USB/regulator-input rail, flash rail, logic indicator, decoupling, and TP_3V3.",
+    "V1V1": "RP2040 internal regulator output and both DVDD pins with decoupling.",
+    "HALL_5V": "TPS22919 switched output feeding Hall sensors, TMUX1208 VDD, local decoupling, and TP_HALL_5V.",
+    "GND": "Common circuit return; USB receptacle ground contacts are on this net. USB shell remains a distinct USB_SHIELD net.",
+    "USB_SHIELD": "Connector shell net; its coupling strategy is intentionally unresolved until layout/G1.",
+    "V3V3_and_V1V1_spelling": "These source-net identifiers represent schematic 3V3 and 1V1 rails."
+  },
+  "rp2040": {
+    "physical_pin_mapping": {
+      "IOVDD_1": 1, "MUX_A0": 4, "MUX_A1": 5, "MUX_A2": 6, "MUX_EN0": 7, "HALL_PWR_EN": 9, "IOVDD_10": 10, "STATUS_LED": 14, "TESTEN_19": 19, "XIN": 20, "XOUT": 21, "IOVDD_22": 22, "DVDD_23": 23, "SWCLK": 24, "SWDIO": 25, "RUN": 26, "IOVDD_33": 33, "ADC_SENSE": 38, "IOVDD_42": 42, "ADC_AVDD_43": 43, "VREG_IN_44": 44, "VREG_VOUT_45": 45, "USB_DM": 46, "USB_DP": 47, "USB_VDD_48": 48, "IOVDD_49": 49, "DVDD_50": 50, "QSPI_SD3": 51, "QSPI_SCLK": 52, "QSPI_SD0": 53, "QSPI_SD2": 54, "QSPI_SD1": 55, "QSPI_SS": 56, "GND_57": 57
+    },
+    "logical_mapping": {
+      "MUX_A0": "GPIO2", "MUX_A1": "GPIO3", "MUX_A2": "GPIO4", "MUX_EN0": "GPIO5", "HALL_PWR_EN": "GPIO7", "STATUS_LED": "GPIO11", "ADC_SENSE": "GPIO26/ADC0", "USB_DP": "USB_DP", "USB_DM": "USB_DM", "SWDIO": "SWDIO", "SWCLK": "SWCLK", "RUN": "RUN"
+    },
+    "supply_connectivity": {
+      "V3V3": ["IOVDD_1", "IOVDD_10", "IOVDD_22", "IOVDD_33", "IOVDD_42", "IOVDD_49", "USB_VDD_48", "ADC_AVDD_43", "VREG_IN_44"],
+      "V1V1": ["DVDD_23", "DVDD_50", "VREG_VOUT_45"],
+      "GND": ["TESTEN_19", "GND_57"]
+    }
+  },
+  "connectivity": {
+    "usb_c_and_esd": {
+      "connector": {"VBUS": ["A4_B9", "A9_B4"], "GND": ["A1_B12", "A12_B1"], "USB_DP_CONN": ["A6", "B6"], "USB_DM_CONN": ["A7", "B7"], "USB_SHIELD": ["SHIELD"]},
+      "cc": ["J_USB.A5 -> R_CC1 -> GND", "J_USB.B5 -> R_CC2 -> GND"],
+      "data_paths": ["D+: J_USB.A6/B6 -> U_ESD.IO1_1 -> U_ESD.IO1_2 -> USB_DP_ESD -> R_USB_DP(27 Ohm) -> USB_DP -> U_MCU.USB_DP", "D-: J_USB.A7/B7 -> U_ESD.IO2_1 -> U_ESD.IO2_2 -> USB_DM_ESD -> R_USB_DM(27 Ohm) -> USB_DM -> U_MCU.USB_DM"],
+      "protection_power": ["U_ESD.VBUS -> VBUS", "U_ESD.GND -> GND"]
+    },
+    "power": ["VBUS -> U_LDO.VIN and U_LDO.EN; U_LDO.VOUT -> V3V3; U_LDO.GND -> GND", "VBUS -> U_LOAD.IN; U_LOAD.OUT -> HALL_5V; U_LOAD.ON -> HALL_PWR_EN; U_LOAD.GND -> GND"],
+    "qspi_and_bootsel": ["U_MCU.QSPI_SS -> QSPI_SS_MCU -> R_QSPI_SS(1 kOhm) -> QSPI_SS_FLASH -> U_FLASH.CS and SW_BOOT.pin1", "SW_BOOT.pin2 -> GND", "U_FLASH.QSPI_SD0/1/2/3 and QSPI_SCLK connect to matching U_MCU nets", "U_FLASH.VCC -> V3V3; U_FLASH.GND -> GND"],
+    "crystal": ["U_MCU.XIN -> XIN -> Y1.XIN and C_XIN -> GND", "Y1.XOUT -> XOUT_XTAL -> C_XOUT -> GND and R_XOUT(1 kOhm) -> XOUT -> U_MCU.XOUT", "Y1.GND1 and Y1.GND2 -> GND"],
+    "hall_mux_adc": ["For each i in 0..3: U_Hi.VCC -> HALL_5V; U_Hi.GND -> GND; U_Hi.OUT -> Hi_RAW -> U_MUX.S(i+1)", "U_MUX.A0/A1/A2/EN -> MUX_A0/MUX_A1/MUX_A2/MUX_EN0; U_MUX.VDD -> HALL_5V; U_MUX.GND -> GND", "U_MUX.D -> MUX_D -> R_ADC_TOP(6.8 kOhm) -> ADC_SENSE -> U_MCU.ADC_SENSE", "ADC_SENSE -> R_ADC_BOTTOM(10 kOhm) -> GND and C_ADC(1 nF) -> GND"],
+    "test_and_control": ["U_MCU.RUN, SW_RUN.pin1, and TP_RUN -> RUN; SW_RUN.pin2 -> GND", "TP_SWDIO -> SWDIO; TP_SWCLK -> SWCLK", "TP_MUX_S5..TP_MUX_S8 connect one-to-one with U_MUX.S5..U_MUX.S8", "TP_VBUS, TP_3V3, TP_HALL_5V, TP_H0_RAW..TP_H3_RAW, TP_MUX_D, TP_ADC_SENSE, and TP_GND connect to their identically named measurements"],
+    "indicators": ["D_POWER -> V3V3 -> R_POWER_LED(1.5 kOhm) -> GND", "D_STATUS -> STATUS_LED -> R_STATUS_LED(1.5 kOhm) -> GND"]
+  },
+  "intentional_no_connects": ["J_USB.A8", "J_USB.B8", "U_FLASH.EP", "U_LDO.NC", "U_LOAD.NC", "U_LOAD.QOD", "U_MUX.NC"],
+  "hall_grid": {
+    "centers": {"U_H0": [-8.5, 8.5], "U_H1": [8.5, 8.5], "U_H2": [-8.5, -8.5], "U_H3": [8.5, -8.5]},
+    "horizontal_pitch_mm": 17.0,
+    "vertical_pitch_mm": 17.0,
+    "source": "Frozen M1 reference and project-owned M1 requirements only."
+  },
+  "critical_footprint_geometry": {
+    "usb_c": "TYPE-C-31-M-12: 12 contacts, four plated shell stakes, and two 0.65 mm locating NPTHs; verifier asserts contact and mechanical geometry within 0.001 mm.",
+    "crystal": "ABM8-272-T3: four 1.30 x 1.05 mm pads at 2.30 x 1.75 mm pitch, bottom-view 1/2 over 4/3.",
+    "flash": "W25Q16JVUXIQ USON-8: eight 0.8128 x 0.254 mm signal pads plus 0.254 x 1.651 mm exposed pad; verifier asserts reviewed geometry."
+  },
+  "known_design_data_gaps": ["Supplier part numbers for passives, LEDs, buttons, and test points are unapproved and must not be invented.", "USB shield grounding/coupling strategy is deferred to layout/G1.", "This contract does not authorize placement, routing, or generated manufacturing output."]
+}

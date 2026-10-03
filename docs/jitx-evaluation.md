@@ -35,6 +35,34 @@ result, or freeze `hardware/jitx/parity/m1-parity-contract.json`. The parity
 contract and full M1 JITX electrical parity remain subsequent work after a
 successful environment/bootstrap gate.
 
+## EDA-002B GitHub Codespaces bootstrap
+
+EDA-002B ran on 2026-10-03 with GitHub Copilot CLI in GitHub Codespaces, a
+separate environment from the historical Cloud Codex probe above. It passed
+the environment/bootstrap feasibility gate without changing the frozen
+tscircuit reference.
+
+| Capability | Observation | Result |
+| --- | --- | --- |
+| Outbound access | Project dependency resolution reached the JITX package index. | Pass |
+| Python | `Python 3.14.2` | Pass |
+| JITX CLI/package | `jitx 4.4.3`; project dependency is exactly `jitx==4.4.3`. | Pass |
+| Linux runtime | Release runtime `4.4.2` on Linux; deliberately not updated. | Pass |
+| Authentication | `Authorized: yes`; plan `free`. | Pass |
+| Headless runtime | `jitx runtime start --background` started a project-local runtime. | Pass |
+| Design discovery | `jitx design find` found `he_piantor_42_jitx.main.HePiantor42Bootstrap`. | Pass |
+| Bootstrap build | `jitx build he_piantor_42_jitx.main.HePiantor42Bootstrap` returned `status: ok`. | Pass |
+
+The canonical CLI-owned project is under `hardware/jitx/`. Its bootstrap design
+is deliberately only the JITX seed design, not an M1 implementation. The
+machine-readable `hardware/jitx/parity/m1-parity-contract.json` freezes the
+future M1 graph and design-data comparison requirements from the project-owned
+frozen sources. Full M1 JITX electrical parity is the next increment.
+
+The external JITX skill, where used, was an execution-time agent aid only. No
+skill source, script, or other proprietary JITX skill material is retained in
+this repository.
+
 ## Authority and license boundary
 
 The frozen M1 electrical golden reference remains
