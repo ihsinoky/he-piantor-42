@@ -80,11 +80,12 @@ data or geometry is sourced from it.
   documents, retaining project-approved semantic identities only as metadata
   for a later top-level assembly. `component-sources.md` is the authoritative
   source-manifest for this increment.
-- **Status:** in progress / blocked — `AP2112K-3.3TRG1` is accepted. RP2040,
-  TYPE-C-31-M-12, USBLC6-2SC6, W25Q16JVUXIQ, ABM8-272-T3, TPS22919DCKR,
-  TMUX1208PWR, and DRV5055A3QDBZR remain blocked by the exact source/package
-  generator limitations recorded in `component-sources.md`. EDA-002C2 must
-  not advance.
+- **Status:** in progress / blocked — `AP2112K-3.3TRG1`, `ABM8-272-T3`,
+  `TPS22919DCKR`, `TMUX1208PWR`, and `DRV5055A3QDBZR` are accepted from
+  manufacturer dimensions. RP2040 is in progress; TYPE-C-31-M-12,
+  USBLC6-2SC6, and W25Q16JVUXIQ remain blocked by the exact outstanding
+  manufacturer-source evidence recorded in `component-sources.md`. EDA-002C2
+  must not advance.
 
 ### [reproducibility-01] Locked Python environment
 

@@ -32,18 +32,17 @@ critical footprint requirements. It must not consume `../layout/**`.
 
 ## Current implementation
 
-`components/power/diodes_ap2112k_3_3trg1.py` contains one accepted,
-manufacturer-source-grounded M1 component model. It has a discoverable
-non-dry build harness and independent JITX structure tests; it does not create
-an M1 circuit, net, placement, or route.
+The accepted manufacturer-source-grounded models are AP2112K-3.3TRG1,
+ABM8-272-T3, TPS22919DCKR, TMUX1208PWR, and DRV5055A3QDBZR. Each has a
+discoverable non-dry build harness and independent JITX structure test; none
+creates an M1 circuit, net, placement, or route.
 
-The eight remaining manufacturer components are intentionally not represented
-by substitute models. `component-sources.md` records the component-specific
-source or faithful-generator STOP evidence. In particular, the non-standard
-HRO TYPE-C-31-M-12 remains blocked without an HRO-authorized/user-provided
-redistributable footprint; no EasyEDA/LCSC footprint ingestion was used.
-Consequently EDA-002C1 remains in progress/blocked, EDA-002C2 is not started,
-and EVT-002 remains unstarted.
+RP2040 remains in source-to-pin reconciliation. USBLC6-2SC6, W25Q16JVUXIQ,
+and the non-standard HRO TYPE-C-31-M-12 are intentionally not represented by
+substitute models until their manufacturer documentation is acquired and
+verified. No EasyEDA/LCSC footprint ingestion was used. Consequently EDA-002C1
+remains in progress/blocked, EDA-002C2 is not started, and EVT-002 remains
+unstarted.
 
 ## EDA-002C0 graph-introspection gate
 

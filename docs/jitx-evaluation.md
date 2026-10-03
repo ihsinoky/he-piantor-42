@@ -181,21 +181,19 @@ lookup-only `parts2jitx-lcsc --pinout` for all nine project-approved JLC
 numbers; no LCSC/EasyEDA footprint data was downloaded or converted.
 `hardware/jitx/component-sources.md` records the result component-by-component.
 
-One model is accepted: Diodes Incorporated AP2112K-3.3TRG1 (`C51118`). Its
-SOT25 model uses the JITX `SOT23_5` generator with dimensions from AP2112
-DS39724 Rev. 2-2, pages 2 and 14; two JITX structural tests and a real
-non-dry component build pass. Its durable component completeness and
-same-model JITX-code-review records are under
+Five models are accepted: Diodes AP2112K-3.3TRG1, Abracon ABM8-272-T3, TI
+TPS22919DCKR, TI TMUX1208PWR, and TI DRV5055A3QDBZR. The TI package generators
+are parameterized from current manufacturer package drawings; ABM8 uses a
+project-authored public JITX landpattern from Abracon's recommended pattern.
+Each has structural tests, an explicit physical pin map, a real non-dry build,
+and a component completeness/self-review record under
 `hardware/jitx/he_piantor_42_jitx/components/COMPLETION.md`.
 
-The other eight models remain legitimately blocked, rather than being filled
-with unverified approximations: RP2040 lacks an auditable extraction of every
-recommended QFN geometry value; TYPE-C-31-M-12 lacks an HRO-authorized/user
-redistributable footprint; USBLC6-2SC6 and W25Q16JVUXIQ manufacturer documents
-could not be acquired through their official endpoints; ABM8-272-T3 lacks a
-faithful supported generator or authorized conversion source; and TPS22919,
-TMUX1208, and DRV5055 package drawings needed for exact geometry were not
-acquired. The exact evidence and source URLs are in the manifest.
+RP2040 remains in manufacturer-figure pin reconciliation. TYPE-C-31-M-12,
+USBLC6-2SC6, and W25Q16JVUXIQ remain blocked pending sufficient official HRO,
+ST, and Winbond source evidence. No part is represented with a substitute
+footprint or guessed geometry; exact source URLs and evidence are in the
+manifest.
 
 **EDA-002C1 is in progress / blocked.** EDA-002C2 cannot advance. The frozen
 tscircuit model remains authoritative, and EVT-002 remains unstarted.
