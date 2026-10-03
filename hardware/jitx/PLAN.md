@@ -67,9 +67,8 @@ sources listed in the Data Sources table for the parity contract.
 - `ruff check`: clean
 - `ruff format --check`: clean
 - `pyright`: not available; not installed in the project environment
-- Grep gates (`python scripts/grep_gates.py he_piantor_42_jitx`): hard-fail 0
-  hits, review-required 0 hits
 - Parity JSON: `python -m json.tool parity/m1-parity-contract.json` passed
+- Frozen M1 verification: `npm --prefix ../tscircuit run m1:verify` passed
 
 **Interface notes:**
 - Ports exposed: bootstrap-only seed circuit; no M1 interface is exposed.
@@ -82,6 +81,10 @@ sources listed in the Data Sources table for the parity contract.
   `he_piantor_42_jitx/`.
 - WARNING: 0
 - NOTE: 0
+
+**JITX skill use:** The JITX code-review skill was an execution-time agent aid
+only. No JITX skill source, script, or other proprietary material is retained
+in this repository.
 
 **Outside-voice review (codex):** not applicable: complete-board, task class
 not in trigger list.

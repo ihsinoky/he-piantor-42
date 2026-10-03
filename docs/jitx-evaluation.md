@@ -37,9 +37,10 @@ successful environment/bootstrap gate.
 
 ## EDA-002B GitHub Codespaces bootstrap
 
-EDA-002B ran on 2026-10-03 in GitHub Codespaces, a separate environment from
-the historical Cloud Codex probe above. It passed the environment/bootstrap
-feasibility gate without changing the frozen tscircuit reference.
+EDA-002B ran on 2026-10-03 with GitHub Copilot CLI in GitHub Codespaces, a
+separate environment from the historical Cloud Codex probe above. It passed
+the environment/bootstrap feasibility gate without changing the frozen
+tscircuit reference.
 
 | Capability | Observation | Result |
 | --- | --- | --- |
@@ -57,6 +58,10 @@ is deliberately only the JITX seed design, not an M1 implementation. The
 machine-readable `hardware/jitx/parity/m1-parity-contract.json` freezes the
 future M1 graph and design-data comparison requirements from the project-owned
 frozen sources. Full M1 JITX electrical parity is the next increment.
+
+The external JITX skill, where used, was an execution-time agent aid only. No
+skill source, script, or other proprietary JITX skill material is retained in
+this repository.
 
 ## Authority and license boundary
 
