@@ -74,11 +74,18 @@ data or geometry is sourced from it.
 
 ### [EDA-002C1] Component modeling
 
-- **Type:** next increment
+- **Type:** component-modeling checkpoint
 - **Dependencies:** EDA-002C0
-- **Description:** Model the M1 components and map project-authored semantic
-  identities to the stable JITX structural paths established by EDA-002C0.
-- **Status:** next; unblocked; not started
+- **Description:** Model the M1 manufacturer components from manufacturer
+  documents, retaining project-approved semantic identities only as metadata
+  for a later top-level assembly. `component-sources.md` is the authoritative
+  source-manifest for this increment.
+- **Status:** done / accepted candidate — all nine manufacturer-specific models
+  have physical inventories, explicit pad maps, structural tests and real builds.
+  PR #36 PMO review waiting. EDA-002C2 is next / unblocked, not started.
+- **Parity qualification:** HRO and Winbond manufacturer geometry differs from
+  frozen M1 geometry. `component-sources.md` enumerates the differences for PMO;
+  no geometric parity claim or authority change is made.
 
 ### [reproducibility-01] Locked Python environment
 
@@ -91,9 +98,10 @@ data or geometry is sourced from it.
 
 ## Deferred work
 
-EDA-002C1 component modeling is the next JITX increment. Board placement,
+EDA-002C1 component modeling is complete as an accepted candidate; PR #36
+awaits PMO review. EDA-002C2 is next / unblocked and remains unstarted. Board placement,
 routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002 are not part
-of EDA-002B or EDA-002C0.
+of EDA-002C1.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 
