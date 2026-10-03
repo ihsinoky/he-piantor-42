@@ -77,3 +77,72 @@ not consumed. Future project-authored `hardware/jitx/**` design material remains
 covered by the repository's CERN-OHL-P-2.0 hardware license map, and the M1
 2-by-2 Hall grid must be reconstructed only from project-owned M1 requirements
 and the frozen M1 golden reference.
+
+## EDA-002C0 built-design graph introspection — PMO STOP
+
+EDA-002C0 ran on 2026-10-03 against the existing bootstrap design. It did not
+implement an M1 component, consume `hardware/layout/**`, modify the frozen
+tscircuit authority, or start EVT-002.
+
+### Reproducible dependency strategy
+
+The JITX project now uses the standard `uv` lock workflow documented for JITX
+CLI projects:
+
+```bash
+cd hardware/jitx
+uv sync --locked --group dev
+uv run jitx build he_piantor_42_jitx.main.HePiantor42Bootstrap
+```
+
+`hardware/jitx/uv.lock` is committed and records every exact resolved package
+and artifact hash. The resolution used for this probe includes:
+
+| Package | Resolved version |
+| --- | --- |
+| `jitx` | `4.4.3` |
+| `jitxlib-standard` | `4.4.0` |
+| `jitxcore` | `4.4.0` |
+| `ruff` | `0.16.10` |
+
+The existing Linux JITX runtime is release `4.4.2`. It was left unchanged;
+the dependency-lock work did not use a runtime update merely to satisfy the
+lock tool.
+
+### Real build and generated data
+
+`uv run jitx build he_piantor_42_jitx.main.HePiantor42Bootstrap` completed with
+`status: ok`. The non-dry build produced:
+
+- `cache/netlist.json`: resolved net names and endpoint groups
+- `cache/design-explorer.json`: a richer internal graph with component,
+  hierarchy, pin, net, package, and geometry entries
+- `design-info/stable.design`: a richer JSON design snapshot
+- `design-info/reference-designators.table`: built component-ID to generated
+  reference-designator mapping
+
+The bootstrap proof shows that the built design, rather than project Python
+source, contains the requested graph facts. However, this does **not** clear
+the graph-export gate. JITX public documentation does not document any of the
+four file names or schemas as a public, stable graph-export API. A second
+identical non-dry build changed the raw SHA-256 hashes of `stable.design` and
+`netlist.json`; the reference-designator table was byte-identical. The richer
+files also use generated identifiers that cannot be accepted as a stable
+semantic identity contract without vendor documentation.
+
+### Decision and limitation
+
+The only currently visible route to a normalized graph with component identity,
+type, pins, nets, endpoints, generated reference designators, and geometry
+would be parsing undocumented JITX-generated internal payloads. EDA-002C0
+does not do that. It adds no exporter and no bootstrap graph self-test, because
+doing so would silently depend on an unsupported schema and weaken the parity
+requirement.
+
+The intended semantic identities (`U_MCU`, `U_FLASH`, `U_MUX`, `J_USB`) cannot
+yet be mapped through a JITX-supported, repeatable object identity mechanism.
+Future work must use a vendor-supported public graph API or documented stable
+output that provides deterministic hierarchical paths or explicit project
+metadata. Until then, full M1 machine graph parity is **not technically
+feasible**. This is an acceptable STOP result for PMO review, not a completion
+claim for M1 electrical parity.
