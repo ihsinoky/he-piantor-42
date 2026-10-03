@@ -5,12 +5,18 @@
 ```text
 hardware/jitx/
 ├── he_piantor_42_jitx/
-│   └── main.py            # CLI-seeded bootstrap design only
+│   ├── main.py            # CLI-seeded bootstrap design
+│   ├── m1.py              # M1 electrical challenger assembly
+│   └── components/        # Accepted manufacturer and generic models
 ├── parity/
 │   ├── exporter.py         # Registered normalized built-design graph exporter
-│   └── m1-parity-contract.json
+│   ├── m1-parity-contract.json # Frozen input
+│   ├── m1-normalization.json   # Explicit identity mapping
+│   ├── m1.py                   # Strict electrical comparator
+│   └── evidence/               # Actual runtime / normalized graphs and result
 ├── tests/
-│   └── test_bootstrap_graph.py
+│   ├── test_bootstrap_graph.py
+│   └── test_m1_electrical_parity.py
 ├── uv.lock                 # Committed exact Python dependency resolution
 ├── PLAN.md
 └── ARCHITECTURE.md
@@ -40,12 +46,13 @@ SOT23_6; Winbond uses SON from exact UX dimensions; HRO uses project-owned
 Landpattern/Pad APIs from its exact M-12 sheet. SHIELD groups four physical
 stakes; the flash EP remains a separate unassigned physical port.
 
-All nine pass component-modeling checks. EDA-002C1 is done / accepted candidate
-pending PR #36 PMO review; EDA-002C2 is next / unblocked and not started.
-Manufacturer HRO and Winbond geometry differs from the frozen parity geometry;
-the concrete differences in `component-sources.md` require PMO reconciliation
-before claiming full M1 parity. No EasyEDA/LCSC or community footprint geometry
-was used. No M1 circuit, placement, routing, DRC or EVT-002 has started.
+All nine pass component-modeling checks. EDA-002C1 is done / accepted: PR #36
+was squash-merged into main at a27fc48. EDA-002C2 is done / accepted candidate:
+complete M1 electrical graph parity PASS, awaiting PMO review. Geometry parity
+is explicitly NOT established. Manufacturer HRO and Winbond geometry differs
+from frozen M1 geometry; `component-sources.md` records the discrepancies for
+EDA-002C3 manufacturer-vs-frozen geometry reconciliation / PMO Human Gate,
+which remains unstarted. No placement, routing, DRC or EVT-002 has started.
 
 ## EDA-002C0 graph-introspection gate
 
@@ -89,5 +96,36 @@ EDA-002C0 is done and accepted as PASS. PMO accepted the category-B
 workflow, but this does not make `RuntimeDesign` a stable API. Any future JITX
 Python package or JITX runtime version change must rerun and pass the EDA-002C0
 normalized graph exporter and bootstrap graph self-test before graph-parity
-compatibility may be assumed. EDA-002C1 is done / accepted candidate and EDA-002C2 is next / unblocked.
+compatibility may be assumed. EDA-002C1 is merged / accepted. EDA-002C2 is an electrical PASS candidate awaiting PMO review.
 The source manifest preserves the explicit geometry-parity differences.
+
+## EDA-002C2 electrical assembly boundary
+
+`he_piantor_42_jitx.m1.M1FourKeyElectrical` owns `M1ElectricalCircuit`: 68
+components, 200 frozen semantic endpoints, 43 named nets, 185 endpoint/net
+edges, four direct links, seven intentional NCs. All nine accepted manufacturer
+classes are used, including four Hall sensors. Twenty-three additional physical
+RP2040 GPIO ports are explicitly inventoried and checked unconnected.
+
+The circuit constructs JITX components and connections directly; it does not
+read the contract or normalization file. `parity/m1-normalization.json` owns
+explicit component paths, physical-to-semantic aliases, approved model types,
+extra unconnected endpoints and passive group references. `parity/m1.py`
+compares actual runtime graph facts against the unchanged frozen contract and
+fails with actionable differences. Unknown/missing/duplicate identities fail
+closed. RP2040 pin numbers come from actual public `PadMapping.items()` and the
+manufacturer model's physical pad inventory, without inspecting pad geometry.
+
+`m1-electrical-graph` extends the C0 exporter through the same documented
+Export lifecycle. At `submitted()`, this runtime's resolved name is unset;
+public named Net objects and Port objects are bound through `nets().find()` to
+the same runtime connectivity object. Empty CC1/CC2 declarations are retained,
+while the CC direct links retain unnamed connectivity as in the golden source.
+No name is guessed from membership. Runtime object IDs are only local grouping
+keys and are never emitted. The C0 exporter and regression remain intact.
+
+The normalized graph excludes transforms, coordinates, footprints and all
+other geometry. Generic capacitor/LED/button SMT choices and test-point lands,
+plus the sample board/substrate, are non-authoritative build scaffolding.
+No final placement, routing, manufacturing output or readiness is implied.
+See `parity/EDA-002C2.md` and `parity/evidence/` for review and validation.

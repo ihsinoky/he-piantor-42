@@ -164,11 +164,11 @@ stable API.
 **Compatibility rule:** Any future JITX Python package or JITX runtime version
 change must rerun and pass the EDA-002C0 normalized graph exporter and
 bootstrap graph self-test before graph-parity compatibility may be assumed.
-EDA-002C1 component modeling is done / accepted candidate; M1 implementation,
+EDA-002C1 component modeling is merged / accepted; at C0, M1 implementation,
 placement, routing, DRC, EVT-002, and changes to frozen tscircuit remain out
 of scope.
 
-## EDA-002C1 manufacturer components — accepted candidate
+## EDA-002C1 manufacturer components — merged / accepted
 
 All nine required manufacturer models now pass their component-modeling checks.
 The five accepted models were preserved; RP2040, USBLC6-2SC6, TYPE-C-31-M-12
@@ -189,12 +189,48 @@ ST's exact family PDF was accessible through the official web PDF reader while
 local curl downloads timed out. No skill source or distributor footprint
 geometry was copied.
 
-**EDA-002C1: done / accepted candidate; PR #36 PMO review waiting.**
-**EDA-002C2: next / unblocked, unstarted.** This does not establish M1 geometric
-parity: official HRO land, shell and locator dimensions and Winbond generator
-lands differ from frozen M1 requirements. The complete discrepancy table is
-in `hardware/jitx/component-sources.md`; PMO must resolve it before full parity
-acceptance. The two frozen tscircuit files and parity contract are unchanged,
-tscircuit remains authoritative, D-014 is unchanged, `hardware/layout/**` was
-neither consumed nor modified, and EVT-002 remains unstarted. No M1 top-level
-JITX circuit, placement, routing, DRC or manufacturing preparation was started.
+**EDA-002C1: done / accepted; PR #36 merged at a27fc48.** Component-modeling
+PASS does not establish geometric parity. Official HRO land/shell/locator
+geometry and Winbond generator lands differ from frozen M1 requirements; the
+complete discrepancy table remains in `hardware/jitx/component-sources.md`.
+
+## EDA-002C2 M1 electrical graph parity — PASS candidate
+
+Issue [#37](https://github.com/ihsinoky/he-piantor-42/issues/37) implements
+`he_piantor_42_jitx.m1.M1FourKeyElectrical` with all nine accepted manufacturer
+models, four Hall sensors, and generic passives/LEDs/buttons/test points.
+`m1-electrical-graph` extends the existing exporter via the documented Export
+boundary, consuming the actual RuntimeDesign. Explicit project-owned
+normalization maps structural instance paths and physical manufacturer ports to
+frozen semantic endpoints; no fuzzy matching or manufacturer-port renaming is
+used. The circuit does not consume normalization or expected contract data.
+
+The comparator reports **PASS** for 68 components, 200 normalized endpoints,
+43 named nets, 185 endpoint/net edges, four direct links and seven intentional
+NCs. It also checks 23 extra physical RP2040 GPIOs remain unconnected, passive
+values, approved model types, MPN/JLC identities and RP2040 physical assignments
+through public pad mappings. Exact connectivity groups catch unexpected shorts
+and edges. Empty named CC1/CC2 nets and unnamed CC direct links are both retained
+from the golden source. Runtime graph names are associated with public named
+Net objects through the same `nets().find()` relation as component ports.
+
+Two independent real exports produced byte-identical raw and normalized JSON.
+Twenty Python tests pass, including unchanged bootstrap regression and eight C2
+integration/fault-injection tests. Locked sync, real M1 build, ruff, pyright for
+all new/changed Python modules, frozen tscircuit verifier and diff checks pass.
+Execution used the unchanged JITX package 4.4.3, standard library 4.4.0 and Linux
+runtime 4.4.2. Detailed reproduction, review and evidence are in
+`hardware/jitx/parity/EDA-002C2.md` and `hardware/jitx/parity/evidence/`.
+
+**EDA-002C2: done / accepted candidate; electrical parity PASS; PMO review waiting.**
+**Geometry parity NOT established.** Geometry is excluded from the verdict;
+generic physical choices and sample board/substrate are non-authoritative build
+scaffolding. No manufacturer geometry, frozen tscircuit source/verifier,
+parity contract or uv.lock changed. `hardware/layout/**` was not consumed or
+modified. No placement, routing, DRC readiness or manufacturing artifacts are
+claimed. D-014 and tscircuit authority remain unchanged.
+
+**EDA-002C3: manufacturer-vs-frozen geometry reconciliation / PMO Human Gate —
+next / unstarted**, especially HRO and Winbond. Their discrepancies remain
+unresolved. **EVT-002 remains blocked/unstarted.** Electrical PASS does not
+release either gate.
