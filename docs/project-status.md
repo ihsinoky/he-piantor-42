@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 is in progress/blocked with five manufacturer-grounded models accepted and four source/modeling items unresolved. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 is done / accepted candidate with all nine manufacturer models passing; PR #36 awaits PMO review. EDA-002C2 is next / unblocked and unstarted; HRO/Winbond geometry-parity differences require PMO reconciliation. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -60,11 +60,14 @@ explicitly experimental; PMO accepted that category-B surface for the JITX
 challenger/parity evaluation workflow without classifying it as stable.
 Any future JITX Python package or runtime version change must rerun and pass
 the EDA-002C0 normalized graph exporter and bootstrap graph self-test before
-graph-parity compatibility may be assumed. EDA-002C1 component modeling is in
-progress/blocked: AP2112K-3.3TRG1, ABM8-272-T3, TPS22919DCKR, TMUX1208PWR, and
-DRV5055A3QDBZR are independently modeled and verified. RP2040 is in progress;
-TYPE-C-31-M-12, USBLC6-2SC6, and W25Q16JVUXIQ have exact manufacturer-source
-STOP evidence in `hardware/jitx/component-sources.md`. EDA-002C2 must not advance.
+graph-parity compatibility may be assumed. EDA-002C1 component modeling is done / accepted candidate:
+all nine manufacturer-specific models have complete physical inventories,
+explicit pad maps, structural tests and real non-dry builds. PR #36 PMO review
+waiting. EDA-002C2 is next / unblocked and remains unstarted. The official HRO
+M-12 dimensions and Winbond UX generator lands differ from frozen M1 geometry;
+`hardware/jitx/component-sources.md` lists the exact differences for PMO.
+Component-modeling PASS does not imply full geometric parity, and neither the
+frozen reference nor D-014 was changed.
 EVT-002 must not begin in this increment; final two-layer
 placement, routing, DRC, manufacturing preparation, and G1 readiness remain
 follow-up work. The evaluation does not replace or delete the frozen tscircuit
@@ -78,7 +81,7 @@ project uses `jitx==4.4.3`, runs against the already validated Linux runtime
 documented graph-introspection proof. See
 [`jitx-evaluation.md`](jitx-evaluation.md) for the evidence and stability
 classification. JITX remains a challenger against the still-authoritative
-frozen tscircuit reference; EDA-002C1 is next and EVT-002 remains unstarted.
+frozen tscircuit reference; EDA-002C1 is a completed candidate awaiting PMO and EVT-002 remains unstarted.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and

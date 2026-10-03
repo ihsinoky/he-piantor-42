@@ -80,12 +80,12 @@ data or geometry is sourced from it.
   documents, retaining project-approved semantic identities only as metadata
   for a later top-level assembly. `component-sources.md` is the authoritative
   source-manifest for this increment.
-- **Status:** in progress / blocked — `AP2112K-3.3TRG1`, `ABM8-272-T3`,
-  `TPS22919DCKR`, `TMUX1208PWR`, and `DRV5055A3QDBZR` are accepted from
-  manufacturer dimensions. RP2040 is in progress; TYPE-C-31-M-12,
-  USBLC6-2SC6, and W25Q16JVUXIQ remain blocked by the exact outstanding
-  manufacturer-source evidence recorded in `component-sources.md`. EDA-002C2
-  must not advance.
+- **Status:** done / accepted candidate — all nine manufacturer-specific models
+  have physical inventories, explicit pad maps, structural tests and real builds.
+  PR #36 PMO review waiting. EDA-002C2 is next / unblocked, not started.
+- **Parity qualification:** HRO and Winbond manufacturer geometry differs from
+  frozen M1 geometry. `component-sources.md` enumerates the differences for PMO;
+  no geometric parity claim or authority change is made.
 
 ### [reproducibility-01] Locked Python environment
 
@@ -98,8 +98,8 @@ data or geometry is sourced from it.
 
 ## Deferred work
 
-EDA-002C1 component modeling is in progress but blocked until all required
-manufacturer package sources can be modeled faithfully. Board placement,
+EDA-002C1 component modeling is complete as an accepted candidate; PR #36
+awaits PMO review. EDA-002C2 is next / unblocked and remains unstarted. Board placement,
 routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002 are not part
 of EDA-002C1.
 

@@ -32,17 +32,20 @@ critical footprint requirements. It must not consume `../layout/**`.
 
 ## Current implementation
 
-The accepted manufacturer-source-grounded models are AP2112K-3.3TRG1,
-ABM8-272-T3, TPS22919DCKR, TMUX1208PWR, and DRV5055A3QDBZR. Each has a
-discoverable non-dry build harness and independent JITX structure test; none
-creates an M1 circuit, net, placement, or route.
+The five previously accepted models are preserved. RP2040, USBLC6-2SC6,
+W25Q16JVUXIQ and HRO TYPE-C-31-M-12 now also have manufacturer-derived models,
+full physical inventories, explicit pad maps, structural tests and real builds.
+RP2040 uses exact recommended copper with its 3.20 mm reduced GND pad; ST uses
+SOT23_6; Winbond uses SON from exact UX dimensions; HRO uses project-owned
+Landpattern/Pad APIs from its exact M-12 sheet. SHIELD groups four physical
+stakes; the flash EP remains a separate unassigned physical port.
 
-RP2040 remains in source-to-pin reconciliation. USBLC6-2SC6, W25Q16JVUXIQ,
-and the non-standard HRO TYPE-C-31-M-12 are intentionally not represented by
-substitute models until their manufacturer documentation is acquired and
-verified. No EasyEDA/LCSC footprint ingestion was used. Consequently EDA-002C1
-remains in progress/blocked, EDA-002C2 is not started, and EVT-002 remains
-unstarted.
+All nine pass component-modeling checks. EDA-002C1 is done / accepted candidate
+pending PR #36 PMO review; EDA-002C2 is next / unblocked and not started.
+Manufacturer HRO and Winbond geometry differs from the frozen parity geometry;
+the concrete differences in `component-sources.md` require PMO reconciliation
+before claiming full M1 parity. No EasyEDA/LCSC or community footprint geometry
+was used. No M1 circuit, placement, routing, DRC or EVT-002 has started.
 
 ## EDA-002C0 graph-introspection gate
 
@@ -86,5 +89,5 @@ EDA-002C0 is done and accepted as PASS. PMO accepted the category-B
 workflow, but this does not make `RuntimeDesign` a stable API. Any future JITX
 Python package or JITX runtime version change must rerun and pass the EDA-002C0
 normalized graph exporter and bootstrap graph self-test before graph-parity
-compatibility may be assumed. EDA-002C1 component modeling is next and
-blocked pending the source conditions in `component-sources.md`.
+compatibility may be assumed. EDA-002C1 is done / accepted candidate and EDA-002C2 is next / unblocked.
+The source manifest preserves the explicit geometry-parity differences.

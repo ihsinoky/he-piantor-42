@@ -164,36 +164,37 @@ stable API.
 **Compatibility rule:** Any future JITX Python package or JITX runtime version
 change must rerun and pass the EDA-002C0 normalized graph exporter and
 bootstrap graph self-test before graph-parity compatibility may be assumed.
-EDA-002C1 component modeling is in progress/blocked; M1 implementation,
+EDA-002C1 component modeling is done / accepted candidate; M1 implementation,
 placement, routing, DRC, EVT-002, and changes to frozen tscircuit remain out
 of scope.
 
-## EDA-002C1 manufacturer-component checkpoint — BLOCKED
+## EDA-002C1 manufacturer components — accepted candidate
 
-EDA-002C1 began without updating the locked Python package (`jitx==4.4.3`),
-resolved `jitxlib-standard` (`4.4.0`), Linux runtime (`4.4.2`), or `uv.lock`.
-It did not consume `hardware/layout/**`, modify the frozen tscircuit authority,
-change D-014, create an M1 top-level circuit, or start EVT-002.
+All nine required manufacturer models now pass their component-modeling checks.
+The five accepted models were preserved; RP2040, USBLC6-2SC6, TYPE-C-31-M-12
+and W25Q16JVUXIQ were completed after manufacturer-primary re-investigation.
+RP2040 retains all 57 physical pins/pads, including ADC0 at pin 38 and its
+manufacturer-specific 3.20 mm exposed GND pad. ST's exact functional map is
+verified. HRO's official PDF Download path yielded the exact M-12 sheet, used
+to author contact lands, four plated shell slots and two locating NPTHs.
+Winbond's official current datasheet defines UX, its eight signals and narrow
+exposed metal; a parameterized SON generator provides the copper lands.
 
-The source audit downloaded manufacturer PDFs only into the ignored
-`hardware/jitx/.sources/` cache and verified their PDF signatures. It also ran
-lookup-only `parts2jitx-lcsc --pinout` for all nine project-approved JLC
-numbers; no LCSC/EasyEDA footprint data was downloaded or converted.
-`hardware/jitx/component-sources.md` records the result component-by-component.
+The locked package 4.4.3, standard library 4.4.0, runtime 4.4.2 and `uv.lock`
+remain unchanged. Twelve structural/regression tests pass, as does the separate
+EDA-002C0 graph-export regression. All four new real non-dry builds pass;
+format/lint, type checks for the four new component modules, frozen M1 verifier
+and `git diff --check` pass. Manufacturer PDFs stay in ignored `.sources/`;
+ST's exact family PDF was accessible through the official web PDF reader while
+local curl downloads timed out. No skill source or distributor footprint
+geometry was copied.
 
-Five models are accepted: Diodes AP2112K-3.3TRG1, Abracon ABM8-272-T3, TI
-TPS22919DCKR, TI TMUX1208PWR, and TI DRV5055A3QDBZR. The TI package generators
-are parameterized from current manufacturer package drawings; ABM8 uses a
-project-authored public JITX landpattern from Abracon's recommended pattern.
-Each has structural tests, an explicit physical pin map, a real non-dry build,
-and a component completeness/self-review record under
-`hardware/jitx/he_piantor_42_jitx/components/COMPLETION.md`.
-
-RP2040 remains in manufacturer-figure pin reconciliation. TYPE-C-31-M-12,
-USBLC6-2SC6, and W25Q16JVUXIQ remain blocked pending sufficient official HRO,
-ST, and Winbond source evidence. No part is represented with a substitute
-footprint or guessed geometry; exact source URLs and evidence are in the
-manifest.
-
-**EDA-002C1 is in progress / blocked.** EDA-002C2 cannot advance. The frozen
-tscircuit model remains authoritative, and EVT-002 remains unstarted.
+**EDA-002C1: done / accepted candidate; PR #36 PMO review waiting.**
+**EDA-002C2: next / unblocked, unstarted.** This does not establish M1 geometric
+parity: official HRO land, shell and locator dimensions and Winbond generator
+lands differ from frozen M1 requirements. The complete discrepancy table is
+in `hardware/jitx/component-sources.md`; PMO must resolve it before full parity
+acceptance. The two frozen tscircuit files and parity contract are unchanged,
+tscircuit remains authoritative, D-014 is unchanged, `hardware/layout/**` was
+neither consumed nor modified, and EVT-002 remains unstarted. No M1 top-level
+JITX circuit, placement, routing, DRC or manufacturing preparation was started.
