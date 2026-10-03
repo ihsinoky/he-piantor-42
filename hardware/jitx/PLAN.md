@@ -40,27 +40,41 @@ data or geometry is sourced from it.
 - **Verification:** `python -m json.tool parity/m1-parity-contract.json`
 - **Status:** accepted
 
-### [parity-02] Built-design graph introspection
+### [EDA-002C0] Built-design graph introspection
 
 - **Type:** reproducibility and capability spike
 - **Dependencies:** bootstrap-01, parity-01
 - **Description:** Establish a reproducible Python dependency resolution and
-  prove whether a real JITX build has a supported, deterministic,
-  machine-readable graph export suitable for M1 parity comparison.
-- **Verification:** real non-dry bootstrap builds, generated-artifact
-  assessment, and frozen-reference verification.
-- **Status:** stopped for PMO review
-- **Stop evidence:** The successful build emits
-  `cache/netlist.json`, `cache/design-explorer.json`,
-  `design-info/stable.design`, and
-  `design-info/reference-designators.table`. `netlist.json` alone only
-  exposes resolved endpoint groups. The other files expose richer hierarchy,
-  type, pin, and reference-designator information, but JITX public
-  documentation does not identify any of them as a supported graph-export
-  contract. Repeating the same build also changed raw hashes for
-  `stable.design` and `netlist.json`; only the reference-designator table was
-  byte-identical. No project-authored exporter or self-test is permitted until
-  JITX provides a supported stable graph API/output contract.
+  prove whether a real JITX build has a deterministic, machine-readable graph
+  export through the documented JITX plugin interface.
+- **Verification:** `jitx design export bootstrap-graph
+  he_piantor_42_jitx.main.HePiantor42Bootstrap --output <path>` and
+  `python -m unittest tests.test_bootstrap_graph`.
+- **Status:** accepted — **PASS**
+- **Evidence:** `parity.exporter` is registered through the standard
+  `jitx-plugin` project entry-point group and invoked by the documented
+  `jitx design export` command. Its `Export.submitted()` hook receives the
+  actual `RuntimeDesign`; the exporter uses only `RuntimeDesign.query()`,
+  `RuntimeDesign.nets().find()`, `jitx.inspect.visit()`, and `Trace.path`.
+  Two real non-dry exports produced semantically identical normalized JSON:
+  two resistor instances, four public `Port` identities, and two resolved
+  port-membership groups. It does not parse project source or any generated
+  JITX artifact, and it uses no private JITX object or module.
+- **Stability:** `jitx.inspect` and `jitx.plugin.export.Export` are documented
+  public APIs. `jitx.run`, which defines `RuntimeDesign.query()` and
+  `RuntimeDesign.nets()`, is documented but explicitly marked experimental.
+  The standardized `Export` hook is the supported boundary supplying the
+  object; the graph mechanism has no category-C dependency. PMO must decide
+  whether the category-B runtime-design methods are acceptable for the future
+  M1 contract.
+
+### [EDA-002C1] Component modeling
+
+- **Type:** next increment
+- **Dependencies:** EDA-002C0
+- **Description:** Model the M1 components and map project-authored semantic
+  identities to the stable JITX structural paths established by EDA-002C0.
+- **Status:** next; not started
 
 ### [reproducibility-01] Locked Python environment
 
@@ -73,9 +87,9 @@ data or geometry is sourced from it.
 
 ## Deferred work
 
-Full M1 JITX electrical parity is blocked on PMO review of EDA-002C0. Board
-placement, routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002
-are not part of EDA-002B or EDA-002C0.
+EDA-002C1 component modeling is the next JITX increment. Board placement,
+routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002 are not part
+of EDA-002B or EDA-002C0.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 

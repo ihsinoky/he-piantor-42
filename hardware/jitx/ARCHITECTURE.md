@@ -7,7 +7,10 @@ hardware/jitx/
 ├── he_piantor_42_jitx/
 │   └── main.py            # CLI-seeded bootstrap design only
 ├── parity/
+│   ├── exporter.py         # Registered normalized built-design graph exporter
 │   └── m1-parity-contract.json
+├── tests/
+│   └── test_bootstrap_graph.py
 ├── uv.lock                 # Committed exact Python dependency resolution
 ├── PLAN.md
 └── ARCHITECTURE.md
@@ -44,20 +47,33 @@ The reproducible project environment uses the standard `uv` lock workflow:
 Linux JITX runtime remains the separately validated release `4.4.2`; this
 increment does not update it.
 
-A real non-dry build of
-`he_piantor_42_jitx.main.HePiantor42Bootstrap` succeeded. It generated a
-minimal `cache/netlist.json` with resolved endpoint groups plus richer
-`cache/design-explorer.json`, `design-info/stable.design`, and
-`design-info/reference-designators.table` files. The latter artifacts appear
-to expose component instances, hierarchy, types, pins, nets, endpoint
-membership, generated reference designators, and physical package data.
+`parity.exporter` is registered in `pyproject.toml` through the standard
+`jitx-plugin` entry-point group. The documented `jitx design export
+bootstrap-graph` command invokes the standardized
+`jitx.plugin.export.Export` lifecycle:
 
-This is not an approved exporter architecture. JITX public documentation does
-not identify those files as supported stable graph-export APIs, and identical
-builds changed raw `stable.design` and `netlist.json` hashes. Depending on
-their undocumented identifiers or schema would violate this project's
-stability requirement. Consequently, no semantic-identity mapping, normalized
-graph exporter, or bootstrap graph self-test is implemented. Stable M1
-machine-parity comparison is **not technically feasible on the current public
-JITX contract**. PMO review must obtain a supported API/output commitment from
-JITX before resuming this work.
+1. `Export.submitted(design)` receives the submitted `RuntimeDesign` and
+   records component instances, `Trace.path` structural identities, component
+   types, ports, resolved nets, and port-to-net membership.
+2. `Export.export(design)` records public captured placement transforms and
+   writes deterministic normalized JSON.
+
+The exporter only calls public/documented JITX objects:
+`Export`, `RuntimeDesign.query`, `RuntimeDesign.nets().find`,
+`jitx.inspect.visit`, and `Trace.path`. It neither parses Python source nor
+any generated JITX artifact, and it never surfaces backend IDs or generated
+reference designators as semantic identity.
+
+`jitx.inspect` and `jitx.plugin.export.Export` are category-A documented
+public APIs. `RuntimeDesign` is supplied through that documented plugin
+boundary, but its defining `jitx.run` module is category-B: documented and
+explicitly experimental. This is not a category-C/private dependency. Two
+real non-dry bootstrap exports produced identical normalized graphs, and
+`tests/test_bootstrap_graph.py` asserts the two resistor identities, their
+ports, and the two resolved connectivity groups. The bootstrap's captured
+public geometry is a placement transform; no richer physical geometry is
+exposed by this minimal design.
+
+EDA-002C0 therefore passes the technical graph-export gate, subject to PMO's
+acceptance of category-B `RuntimeDesign` graph methods for the future M1
+semantic contract. EDA-002C1 component modeling is the next increment.

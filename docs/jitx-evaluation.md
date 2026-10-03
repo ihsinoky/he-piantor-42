@@ -78,7 +78,7 @@ covered by the repository's CERN-OHL-P-2.0 hardware license map, and the M1
 2-by-2 Hall grid must be reconstructed only from project-owned M1 requirements
 and the frozen M1 golden reference.
 
-## EDA-002C0 built-design graph introspection — PMO STOP
+## EDA-002C0 built-design graph introspection — PASS
 
 EDA-002C0 ran on 2026-10-03 against the existing bootstrap design. It did not
 implement an M1 component, consume `hardware/layout/**`, modify the frozen
@@ -109,40 +109,51 @@ The existing Linux JITX runtime is release `4.4.2`. It was left unchanged;
 the dependency-lock work did not use a runtime update merely to satisfy the
 lock tool.
 
-### Real build and generated data
+### Documented plugin and introspection proof
 
-`uv run jitx build he_piantor_42_jitx.main.HePiantor42Bootstrap` completed with
-`status: ok`. The non-dry build produced:
+JITX 4.4.3 exposes the standardized `jitx.plugin.export.Export` interface.
+The project registers `parity.exporter` through the `jitx-plugin` entry-point
+group, and JITX discovers it as the documented command:
 
-- `cache/netlist.json`: resolved net names and endpoint groups
-- `cache/design-explorer.json`: a richer internal graph with component,
-  hierarchy, pin, net, package, and geometry entries
-- `design-info/stable.design`: a richer JSON design snapshot
-- `design-info/reference-designators.table`: built component-ID to generated
-  reference-designator mapping
+```bash
+uv run jitx design export bootstrap-graph \
+  he_piantor_42_jitx.main.HePiantor42Bootstrap --output <path>
+```
 
-The bootstrap proof shows that the built design, rather than project Python
-source, contains the requested graph facts. However, this does **not** clear
-the graph-export gate. JITX public documentation does not document any of the
-four file names or schemas as a public, stable graph-export API. A second
-identical non-dry build changed the raw SHA-256 hashes of `stable.design` and
-`netlist.json`; the reference-designator table was byte-identical. The richer
-files also use generated identifiers that cannot be accepted as a stable
-semantic identity contract without vendor documentation.
+The exporter receives the actual built `RuntimeDesign` in
+`Export.submitted()` and uses `RuntimeDesign.query(Component | Port)`,
+`RuntimeDesign.nets().find(port)`, `jitx.inspect.visit()`, and `Trace.path`.
+It exports component instances, deterministic structural identities, component
+types, ports, resolved net membership, and captured component placement
+transforms. It does not parse project Python source or any generated JITX
+artifact; `cache/netlist.json`, `cache/design-explorer.json`,
+`design-info/stable.design`, and `reference-designators.table` remain
+diagnostic-only evidence.
 
-### Decision and limitation
+The real bootstrap export contains two resistor instances at `circuit.r1` and
+`circuit.r2`, each with `p1` and `p2`, and exactly two resolved groups:
+`{circuit.r1.p1, circuit.r2.p1}` and
+`{circuit.r1.p2, circuit.r2.p2}`. Reference designators are intentionally not
+used as semantic identity. The minimal bootstrap exposes captured placement
+transforms, but no richer public physical geometry.
 
-The only currently visible route to a normalized graph with component identity,
-type, pins, nets, endpoints, generated reference designators, and geometry
-would be parsing undocumented JITX-generated internal payloads. EDA-002C0
-does not do that. It adds no exporter and no bootstrap graph self-test, because
-doing so would silently depend on an unsupported schema and weaken the parity
-requirement.
+`tests/test_bootstrap_graph.py` runs the non-dry export twice, compares the
+normalized JSON objects, and asserts those component, port, and connectivity
+facts. Both exports were semantically identical.
 
-The intended semantic identities (`U_MCU`, `U_FLASH`, `U_MUX`, `J_USB`) cannot
-yet be mapped through a JITX-supported, repeatable object identity mechanism.
-Future work must use a vendor-supported public graph API or documented stable
-output that provides deterministic hierarchical paths or explicit project
-metadata. Until then, full M1 machine graph parity is **not technically
-feasible**. This is an acceptable STOP result for PMO review, not a completion
-claim for M1 electrical parity.
+### Stability classification and decision
+
+| API | Classification | Result |
+| --- | --- | --- |
+| `jitx.inspect.visit`, `jitx.inspect.extract`, `Trace.path` | A — documented public API | Used for structural traversal and identity. |
+| `jitx.plugin.export.Export`, project `jitx-plugin` registration, and `jitx design export` | A — documented public API | Used as the exporter lifecycle boundary. |
+| `RuntimeDesign` supplied to `Export.submitted()` / `Export.export()` | A at the documented plugin boundary | The standardized export hook supplies the built design object. |
+| `RuntimeDesign.query()` and `RuntimeDesign.nets().find()` | B — documented, explicitly experimental (`jitx.run`) | Used for component/port query and resolved connectivity. |
+| Generated graph files and private modules/attributes | C — undocumented/private | Not used by the project parity contract. |
+
+**EDA-002C0: PASS.** A project-authored normalized electrical graph exporter
+works through documented JITX APIs, and no category-C implementation is
+required. PMO must decide whether the category-B `RuntimeDesign` query/net
+methods are acceptable for the future M1 semantic contract. EDA-002C1
+component modeling is the next increment; M1 implementation, placement,
+routing, DRC, EVT-002, and changes to frozen tscircuit remain out of scope.
