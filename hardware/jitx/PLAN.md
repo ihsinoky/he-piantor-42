@@ -64,9 +64,13 @@ data or geometry is sourced from it.
   public APIs. `jitx.run`, which defines `RuntimeDesign.query()` and
   `RuntimeDesign.nets()`, is documented but explicitly marked experimental.
   The standardized `Export` hook is the supported boundary supplying the
-  object; the graph mechanism has no category-C dependency. PMO must decide
-  whether the category-B runtime-design methods are acceptable for the future
-  M1 contract.
+  object; the graph mechanism has no category-C dependency. PMO accepted these
+  category-B runtime-design methods for the JITX challenger/parity evaluation
+  workflow; that acceptance does not classify `RuntimeDesign` as stable.
+- **Compatibility rule:** Any future JITX Python package or JITX runtime
+  version change must rerun and pass the EDA-002C0 normalized graph exporter
+  and bootstrap graph self-test before graph-parity compatibility may be
+  assumed.
 
 ### [EDA-002C1] Component modeling
 
@@ -74,7 +78,7 @@ data or geometry is sourced from it.
 - **Dependencies:** EDA-002C0
 - **Description:** Model the M1 components and map project-authored semantic
   identities to the stable JITX structural paths established by EDA-002C0.
-- **Status:** next; not started
+- **Status:** next; unblocked; not started
 
 ### [reproducibility-01] Locked Python environment
 

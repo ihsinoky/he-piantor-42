@@ -1,7 +1,7 @@
 // Non-authoritative Dashboard read model. See docs/governance.md.
 window.PROJECT_STATUS = {
-  schemaVersion: 1, updatedAt: "2026-10-03T08:46:50+00:00",
-  currentWork: "EDA-002C0 documented JITX graph export PASS; 次はEDA-002C1 component modeling（M1電気モデルは凍結済み）",
+  schemaVersion: 1, updatedAt: "2026-10-03T09:03:33+00:00",
+  currentWork: "EDA-002C0 accepted PASS; 次はunblocked EDA-002C1 component modeling（M1電気モデルは凍結済み）",
   evidence: {
     commit: { sha: "795479e", at: "2026-10-02T22:41:32+09:00", summary: "Implement native M1 four-key Hall evaluation circuit (#27)" },
     pullRequest: { state: "snapshot", label: "Historical snapshot; check GitHub for current PR state" },
@@ -16,7 +16,7 @@ window.PROJECT_STATUS = {
     {id:"M4",name:"完成版リリース",status:"todo",deliverable:"再現可能なv1.0製造・FW・筐体パッケージ",exit:"最終成果物を固定しユーザーが完成版を承認"}
   ],
   streams: [
-    {name:"Hardware",cells:["設計方針 完了","M1 電気モデル凍結 / JITX graph export PASS / EDA-002C1 next","Rev.A PCB","統合改版","製造版"]},
+    {name:"Hardware",cells:["設計方針 完了","M1 電気モデル凍結 / JITX graph export PASS accepted / EDA-002C1 unblocked","Rev.A PCB","統合改版","製造版"]},
     {name:"Firmware",cells:["要件 完了","計測FW","Hall + Vial","統合・校正","v1.0"]},
     {name:"Enclosure / Mechanical",cells:["形状条件 完了","PCB条件待ち","外形連携","STEP / STL","製造版"]},
     {name:"Verification / Test",cells:["計画 完了","磁気・電力実測","Rev.A bring-up","統合試験","受入試験"]}
@@ -39,7 +39,7 @@ window.PROJECT_STATUS = {
     {kind:"risk",title:"磁束レンジと個体差",detail:"スイッチ・センサ・距離を一組として4キー評価基板で先に実測する。"},
     {kind:"risk",title:"42センサの電力",detail:"USB 500 mA近辺の可能性があるため本基板前に電力Gateを通す。"},
     {kind:"risk",title:"中央部のねじり荷重",detail:"一体型PCB外形と筐体補強を並行設計する。"},
-    {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 passed the documented Export-plugin graph proof in Codespaces. RuntimeDesign query and net-resolution methods are documented but explicitly experimental; PMO re-review must decide whether that category-B surface is acceptable for the future M1 contract."},
+    {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 is accepted PASS for the challenger/parity workflow. RuntimeDesign query and net-resolution methods remain documented but explicitly experimental; every future JITX Python package or runtime change must rerun the normalized exporter and bootstrap graph self-test before compatibility is assumed."},
     {kind:"risk",title:"M1 layout gated",detail:"PR #27 native TSX electrical model remains the authoritative frozen golden reference. JITX is only a challenger; EVT-002 and final 2-layer placement/routing/DRC remain gated."}
   ],
   tasks: [
@@ -59,8 +59,8 @@ window.PROJECT_STATUS = {
     ["EDA-001","EDA","2層 native stock tscircuit feasibility","done","Codex + CI","GO"],
     ["EDA-002A","EDA","Cloud Codex JITX capability probe（historical STOP）","hold","Human + Codex","Cloud Codex unsuitable"],
     ["EDA-002B","EDA","Codespaces JITX bootstrap + M1 parity contract","done","Copilot CLI + Codespaces","real bootstrap build PASS"],
-    ["EDA-002C0","EDA","documented JITX graph export","done","Copilot CLI + Codespaces","Export plugin PASS; RuntimeDesign methods experimental"],
-    ["EDA-002C1","EDA","JITX component modeling","todo","Copilot CLI","EDA-002C0 / PMO re-review"],
+    ["EDA-002C0","EDA","documented JITX graph export","done","Copilot CLI + Codespaces","accepted PASS; RuntimeDesign methods experimental"],
+    ["EDA-002C1","EDA","JITX component modeling","next","Copilot CLI","EDA-002C0 accepted"],
     ["EVT-001","EVT","4キー評価基板 native 電気モデル（PR #27 golden）","done","Codex + CI","PR #27"],
     ["EVT-002","EVT","4キー評価基板 PCB配置配線","hold","Codex","M1 JITX electrical parity / product-owner gate"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],

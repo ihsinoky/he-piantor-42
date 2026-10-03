@@ -74,6 +74,10 @@ ports, and the two resolved connectivity groups. The bootstrap's captured
 public geometry is a placement transform; no richer physical geometry is
 exposed by this minimal design.
 
-EDA-002C0 therefore passes the technical graph-export gate, subject to PMO's
-acceptance of category-B `RuntimeDesign` graph methods for the future M1
-semantic contract. EDA-002C1 component modeling is the next increment.
+EDA-002C0 is done and accepted as PASS. PMO accepted the category-B
+`RuntimeDesign` graph methods for the JITX challenger/parity evaluation
+workflow, but this does not make `RuntimeDesign` a stable API. Any future JITX
+Python package or JITX runtime version change must rerun and pass the EDA-002C0
+normalized graph exporter and bootstrap graph self-test before graph-parity
+compatibility may be assumed. EDA-002C1 component modeling is next and
+unblocked.

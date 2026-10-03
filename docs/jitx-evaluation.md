@@ -151,9 +151,19 @@ facts. Both exports were semantically identical.
 | `RuntimeDesign.query()` and `RuntimeDesign.nets().find()` | B — documented, explicitly experimental (`jitx.run`) | Used for component/port query and resolved connectivity. |
 | Generated graph files and private modules/attributes | C — undocumented/private | Not used by the project parity contract. |
 
-**EDA-002C0: PASS.** A project-authored normalized electrical graph exporter
-works through documented JITX APIs, and no category-C implementation is
-required. PMO must decide whether the category-B `RuntimeDesign` query/net
-methods are acceptable for the future M1 semantic contract. EDA-002C1
-component modeling is the next increment; M1 implementation, placement,
-routing, DRC, EVT-002, and changes to frozen tscircuit remain out of scope.
+**EDA-002C0: done / accepted / PASS.** A project-authored normalized
+electrical graph exporter works through documented JITX APIs, and no
+category-C implementation is required. PMO accepted the category-B
+`RuntimeDesign` query/net methods for the JITX challenger/parity evaluation
+workflow because the documented `Export` boundary and `Trace.path` identity
+are used, no private API or generated artifact is consumed, the Python
+environment is locked at `jitx==4.4.3`, and deterministic end-to-end bootstrap
+tests protect the dependency. This acceptance does not make `RuntimeDesign` a
+stable API.
+
+**Compatibility rule:** Any future JITX Python package or JITX runtime version
+change must rerun and pass the EDA-002C0 normalized graph exporter and
+bootstrap graph self-test before graph-parity compatibility may be assumed.
+EDA-002C1 component modeling is next and unblocked; M1 implementation,
+placement, routing, DRC, EVT-002, and changes to frozen tscircuit remain out
+of scope.
