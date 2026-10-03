@@ -1,7 +1,7 @@
 // Non-authoritative Dashboard read model. See docs/governance.md.
 window.PROJECT_STATUS = {
-  schemaVersion: 1, updatedAt: "2026-10-03T12:03:59+00:00",
-  currentWork: "EDA-002C1 done / accepted candidate: 9/9 manufacturer models PASS; PR #36 PMO review waiting; EDA-002C2 next / unblocked; geometry-parity differences recorded（M1電気モデルは凍結済み）",
+  schemaVersion: 1, updatedAt: "2026-10-03T21:51:55+00:00",
+  currentWork: "EDA-002C1 merged / accepted; EDA-002C2 done / accepted candidate: electrical graph parity PASS, PMO review waiting; geometry parity NOT established; EDA-002C3 geometry PMO Human Gate unstarted（M1電気モデルは凍結済み）",
   evidence: {
     commit: { sha: "795479e", at: "2026-10-02T22:41:32+09:00", summary: "Implement native M1 four-key Hall evaluation circuit (#27)" },
     pullRequest: { state: "snapshot", label: "Historical snapshot; check GitHub for current PR state" },
@@ -16,7 +16,7 @@ window.PROJECT_STATUS = {
     {id:"M4",name:"完成版リリース",status:"todo",deliverable:"再現可能なv1.0製造・FW・筐体パッケージ",exit:"最終成果物を固定しユーザーが完成版を承認"}
   ],
   streams: [
-    {name:"Hardware",cells:["設計方針 完了","M1 電気モデル凍結 / JITX graph export PASS accepted / EDA-002C1 9/9 accepted candidate","Rev.A PCB","統合改版","製造版"]},
+    {name:"Hardware",cells:["設計方針 完了","M1 電気モデル凍結 / JITX graph export PASS accepted / EDA-002C1 accepted / EDA-002C2 electrical parity PASS candidate / geometry NOT established","Rev.A PCB","統合改版","製造版"]},
     {name:"Firmware",cells:["要件 完了","計測FW","Hall + Vial","統合・校正","v1.0"]},
     {name:"Enclosure / Mechanical",cells:["形状条件 完了","PCB条件待ち","外形連携","STEP / STL","製造版"]},
     {name:"Verification / Test",cells:["計画 完了","磁気・電力実測","Rev.A bring-up","統合試験","受入試験"]}
@@ -60,10 +60,11 @@ window.PROJECT_STATUS = {
     ["EDA-002A","EDA","Cloud Codex JITX capability probe（historical STOP）","hold","Human + Codex","Cloud Codex unsuitable"],
     ["EDA-002B","EDA","Codespaces JITX bootstrap + M1 parity contract","done","Copilot CLI + Codespaces","real bootstrap build PASS"],
     ["EDA-002C0","EDA","documented JITX graph export","done","Copilot CLI + Codespaces","accepted PASS; RuntimeDesign methods experimental"],
-    ["EDA-002C1","EDA","JITX component modeling","done","Codex","9/9 PASS accepted candidate; PR #36 PMO waiting; geometry differences recorded"],
-    ["EDA-002C2","EDA","M1 JITX electrical parity","todo","Codex","next / unblocked; unstarted; geometry differences require PMO reconciliation"],
+    ["EDA-002C1","EDA","JITX component modeling","done","Codex","9/9 PASS accepted; PR #36 merged; geometry differences preserved"],
+    ["EDA-002C2","EDA","M1 JITX electrical parity","done","Codex","issue #37; accepted candidate; electrical graph PASS; geometry NOT established; PMO waiting"],
+    ["EDA-002C3","EDA","Manufacturer-vs-frozen geometry reconciliation / PMO Human Gate","todo","PMO + Human","next / unstarted; especially HRO/Winbond; discrepancies unresolved"],
     ["EVT-001","EVT","4キー評価基板 native 電気モデル（PR #27 golden）","done","Codex + CI","PR #27"],
-    ["EVT-002","EVT","4キー評価基板 PCB配置配線","hold","Codex","M1 JITX electrical parity / product-owner gate"],
+    ["EVT-002","EVT","4キー評価基板 PCB配置配線","hold","Codex","blocked / unstarted; EDA-002C3 geometry reconciliation / product-owner gate"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],
     ["EVT-004","FW","評価FW・CSV計測","progress","Codex","EVT-001"],
     ["EVT-005","TEST","評価基板を発注","hold","User","EVT-003 / G1"],

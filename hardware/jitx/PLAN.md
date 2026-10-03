@@ -80,9 +80,9 @@ data or geometry is sourced from it.
   documents, retaining project-approved semantic identities only as metadata
   for a later top-level assembly. `component-sources.md` is the authoritative
   source-manifest for this increment.
-- **Status:** done / accepted candidate — all nine manufacturer-specific models
+- **Status:** done / accepted — all nine manufacturer-specific models
   have physical inventories, explicit pad maps, structural tests and real builds.
-  PR #36 PMO review waiting. EDA-002C2 is next / unblocked, not started.
+  PR #36 merged into main at a27fc48; C1 accepted/done. EDA-002C2 is an electrical PASS candidate awaiting PMO review.
 - **Parity qualification:** HRO and Winbond manufacturer geometry differs from
   frozen M1 geometry. `component-sources.md` enumerates the differences for PMO;
   no geometric parity claim or authority change is made.
@@ -96,12 +96,33 @@ data or geometry is sourced from it.
 - **Verification:** `uv sync --locked --group dev`
 - **Status:** accepted
 
+### [EDA-002C2] M1 electrical graph parity
+
+- **Dependencies:** EDA-002C0, accepted EDA-002C1 (merged PR #36)
+- **Issue:** #37
+- **Status:** done / accepted candidate — electrical graph parity **PASS**;
+  PMO review waiting. Geometry parity explicitly **NOT established**.
+- **Evidence:** actual RuntimeDesign exports, deterministic raw and normalized
+  graphs, strict comparator and fault-injection tests. 68 components, 200
+  normalized endpoints, 43 named nets, 185 endpoint/net edges, four direct links,
+  seven intentional NCs; 23 extra physical GPIOs explicitly unconnected.
+- **Verification:** locked sync; 20 Python tests; bootstrap and C2 real-export
+  regressions; ruff; pyright; real M1 build; frozen tscircuit verifier;
+  protected-file checks and git diff --check. `parity/EDA-002C2.md` records
+  commands, review and reproduction instructions.
+
+### [EDA-002C3] Manufacturer-vs-frozen geometry reconciliation / PMO Human Gate
+
+- **Status:** next / unstarted; no implementation in C2.
+- **Focus:** especially HRO TYPE-C-31-M-12 and Winbond W25Q16JVUXIQ discrepancies
+  recorded by C1 in `component-sources.md`. PMO must reconcile manufacturer and
+  frozen geometry before any full parity claim. C2 electrical PASS does not
+  resolve these discrepancies or authorize changes to frozen sources.
+
 ## Deferred work
 
-EDA-002C1 component modeling is complete as an accepted candidate; PR #36
-awaits PMO review. EDA-002C2 is next / unblocked and remains unstarted. Board placement,
-routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002 are not part
-of EDA-002C1.
+EDA-002C3 remains unstarted. EVT-002 remains blocked/unstarted. Final placement,
+routing, DRC, manufacturing artifacts and D-014 changes are outside C2.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 
@@ -148,9 +169,31 @@ not in trigger list.
 
 **Verdict (self):** ready-for-review
 
-**Open issues / deferred:** Full M1 electrical parity, placement, routing, DRC,
-and EVT-002 remain deferred.
+**Open issues / deferred (historical EDA-002B):** Electrical parity was then
+deferred; C2 now passes it. Geometry, placement, routing, DRC and EVT-002 remain
+deferred.
 
 **Verdict (acceptance):** accept
 **Notes:** EDA-002B intentionally supplies a reproducible challenger bootstrap,
 not an M1 board implementation.
+
+## EDA-002C2 execution plan and completed gates (issue #37)
+
+- Phase 0: frozen project sources only; electrical semantics authorized by the
+  implementation request. Existing C1 models retained without edits. Geometry,
+  layout, SI/DRC and manufacturing are explicitly outside this task.
+- Phase 1: project-owned generic components (no invented MPNs), structural
+  validity only; physical implementation choices are non-authoritative.
+- Phases 2/3: idiomatic JITX circuit assembly, explicit nets and object ports;
+  separate machine-readable parity normalization, never used to wire the circuit.
+- Phase 3b: audit complete connectivity against frozen requirements, including
+  supply domains, NCs, RP2040 pin assignments and exact passive values.
+- Phase 4: real build; two independent RuntimeDesign electrical exports;
+  actionable comparator and fault-injection tests; bootstrap regression; locked
+  dependencies, lint/type checks, golden verifier, protected-file checks.
+- Completion: self-review and evidence; update status only upon full PASS; push
+  this branch and open one PMO-review PR without merging. C3 remains unstarted.
+
+Status: done / accepted candidate, electrical PASS; PMO review waiting.
+Runtime startup repaired using existing authorized runtime;
+versions unchanged. No skill source is copied into the repository.
