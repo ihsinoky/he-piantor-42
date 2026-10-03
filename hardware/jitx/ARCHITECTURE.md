@@ -32,10 +32,18 @@ critical footprint requirements. It must not consume `../layout/**`.
 
 ## Current implementation
 
-No M1 components, circuits, substrate, constraints, or physical layout are
-implemented in this increment. This deliberately leaves the package as the
-canonical JITX CLI bootstrap until a separately approved electrical-parity
-increment supplies component sources and a full architecture.
+`components/power/diodes_ap2112k_3_3trg1.py` contains one accepted,
+manufacturer-source-grounded M1 component model. It has a discoverable
+non-dry build harness and independent JITX structure tests; it does not create
+an M1 circuit, net, placement, or route.
+
+The eight remaining manufacturer components are intentionally not represented
+by substitute models. `component-sources.md` records the component-specific
+source or faithful-generator STOP evidence. In particular, the non-standard
+HRO TYPE-C-31-M-12 remains blocked without an HRO-authorized/user-provided
+redistributable footprint; no EasyEDA/LCSC footprint ingestion was used.
+Consequently EDA-002C1 remains in progress/blocked, EDA-002C2 is not started,
+and EVT-002 remains unstarted.
 
 ## EDA-002C0 graph-introspection gate
 
@@ -80,4 +88,4 @@ workflow, but this does not make `RuntimeDesign` a stable API. Any future JITX
 Python package or JITX runtime version change must rerun and pass the EDA-002C0
 normalized graph exporter and bootstrap graph self-test before graph-parity
 compatibility may be assumed. EDA-002C1 component modeling is next and
-unblocked.
+blocked pending the source conditions in `component-sources.md`.

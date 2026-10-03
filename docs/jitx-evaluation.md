@@ -164,6 +164,38 @@ stable API.
 **Compatibility rule:** Any future JITX Python package or JITX runtime version
 change must rerun and pass the EDA-002C0 normalized graph exporter and
 bootstrap graph self-test before graph-parity compatibility may be assumed.
-EDA-002C1 component modeling is next and unblocked; M1 implementation,
+EDA-002C1 component modeling is in progress/blocked; M1 implementation,
 placement, routing, DRC, EVT-002, and changes to frozen tscircuit remain out
 of scope.
+
+## EDA-002C1 manufacturer-component checkpoint — BLOCKED
+
+EDA-002C1 began without updating the locked Python package (`jitx==4.4.3`),
+resolved `jitxlib-standard` (`4.4.0`), Linux runtime (`4.4.2`), or `uv.lock`.
+It did not consume `hardware/layout/**`, modify the frozen tscircuit authority,
+change D-014, create an M1 top-level circuit, or start EVT-002.
+
+The source audit downloaded manufacturer PDFs only into the ignored
+`hardware/jitx/.sources/` cache and verified their PDF signatures. It also ran
+lookup-only `parts2jitx-lcsc --pinout` for all nine project-approved JLC
+numbers; no LCSC/EasyEDA footprint data was downloaded or converted.
+`hardware/jitx/component-sources.md` records the result component-by-component.
+
+One model is accepted: Diodes Incorporated AP2112K-3.3TRG1 (`C51118`). Its
+SOT25 model uses the JITX `SOT23_5` generator with dimensions from AP2112
+DS39724 Rev. 2-2, pages 2 and 14; two JITX structural tests and a real
+non-dry component build pass. Its durable component completeness and
+same-model JITX-code-review records are under
+`hardware/jitx/he_piantor_42_jitx/components/COMPLETION.md`.
+
+The other eight models remain legitimately blocked, rather than being filled
+with unverified approximations: RP2040 lacks an auditable extraction of every
+recommended QFN geometry value; TYPE-C-31-M-12 lacks an HRO-authorized/user
+redistributable footprint; USBLC6-2SC6 and W25Q16JVUXIQ manufacturer documents
+could not be acquired through their official endpoints; ABM8-272-T3 lacks a
+faithful supported generator or authorized conversion source; and TPS22919,
+TMUX1208, and DRV5055 package drawings needed for exact geometry were not
+acquired. The exact evidence and source URLs are in the manifest.
+
+**EDA-002C1 is in progress / blocked.** EDA-002C2 cannot advance. The frozen
+tscircuit model remains authoritative, and EVT-002 remains unstarted.

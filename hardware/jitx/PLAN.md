@@ -74,11 +74,17 @@ data or geometry is sourced from it.
 
 ### [EDA-002C1] Component modeling
 
-- **Type:** next increment
+- **Type:** component-modeling checkpoint
 - **Dependencies:** EDA-002C0
-- **Description:** Model the M1 components and map project-authored semantic
-  identities to the stable JITX structural paths established by EDA-002C0.
-- **Status:** next; unblocked; not started
+- **Description:** Model the M1 manufacturer components from manufacturer
+  documents, retaining project-approved semantic identities only as metadata
+  for a later top-level assembly. `component-sources.md` is the authoritative
+  source-manifest for this increment.
+- **Status:** in progress / blocked — `AP2112K-3.3TRG1` is accepted. RP2040,
+  TYPE-C-31-M-12, USBLC6-2SC6, W25Q16JVUXIQ, ABM8-272-T3, TPS22919DCKR,
+  TMUX1208PWR, and DRV5055A3QDBZR remain blocked by the exact source/package
+  generator limitations recorded in `component-sources.md`. EDA-002C2 must
+  not advance.
 
 ### [reproducibility-01] Locked Python environment
 
@@ -91,9 +97,10 @@ data or geometry is sourced from it.
 
 ## Deferred work
 
-EDA-002C1 component modeling is the next JITX increment. Board placement,
+EDA-002C1 component modeling is in progress but blocked until all required
+manufacturer package sources can be modeled faithfully. Board placement,
 routing, DRC, manufacturing artifacts, D-014 changes, and EVT-002 are not part
-of EDA-002B or EDA-002C0.
+of EDA-002C1.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 

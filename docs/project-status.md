@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 component modeling is next and unblocked. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 is in progress/blocked after accepting AP2112K-3.3TRG1 and documenting eight component-specific source/package STOPs. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -60,8 +60,11 @@ explicitly experimental; PMO accepted that category-B surface for the JITX
 challenger/parity evaluation workflow without classifying it as stable.
 Any future JITX Python package or runtime version change must rerun and pass
 the EDA-002C0 normalized graph exporter and bootstrap graph self-test before
-graph-parity compatibility may be assumed. EDA-002C1 component modeling is
-next and unblocked. EVT-002 must not begin in this increment; final two-layer
+graph-parity compatibility may be assumed. EDA-002C1 component modeling is in
+progress/blocked: AP2112K-3.3TRG1 is independently modeled and verified, while
+the remaining eight required manufacturer models have exact source/package STOP
+evidence in `hardware/jitx/component-sources.md`. EDA-002C2 must not advance.
+EVT-002 must not begin in this increment; final two-layer
 placement, routing, DRC, manufacturing preparation, and G1 readiness remain
 follow-up work. The evaluation does not replace or delete the frozen tscircuit
 baseline.
