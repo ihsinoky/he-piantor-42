@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. Cloud Codex remains unsuitable for JITX execution, but EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate with a real build. JITX remains a challenger; full M1 electrical parity is next. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 component modeling is next and unblocked. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -52,9 +52,17 @@ and its Checkpoint A/B/C evidence as the M1 electrical golden reference. D-014
 remains the accepted historical decision that made native tscircuit the M1
 electrical source.
 
-EVT-002 must not begin until the Product Owner resolves the JITX-versus-frozen-
-baseline EDA evaluation gate. Final two-layer placement, routing, DRC,
-manufacturing preparation, and G1 readiness have not started and remain
+EDA-002C0 passed the technical JITX graph-export gate through the documented
+`Export` plugin boundary: it captures stable structural paths, component types,
+ports, resolved nets, and port membership from the actual bootstrap build.
+`RuntimeDesign.query()` and its net-resolution methods are documented but
+explicitly experimental; PMO accepted that category-B surface for the JITX
+challenger/parity evaluation workflow without classifying it as stable.
+Any future JITX Python package or runtime version change must rerun and pass
+the EDA-002C0 normalized graph exporter and bootstrap graph self-test before
+graph-parity compatibility may be assumed. EDA-002C1 component modeling is
+next and unblocked. EVT-002 must not begin in this increment; final two-layer
+placement, routing, DRC, manufacturing preparation, and G1 readiness remain
 follow-up work. The evaluation does not replace or delete the frozen tscircuit
 baseline.
 
@@ -62,10 +70,11 @@ EDA-002A's Cloud Codex capability probe remains historical evidence of that
 environment's HUMAN / ENVIRONMENT STOP. EDA-002B subsequently passed the
 GitHub Codespaces JITX environment/bootstrap feasibility gate: its canonical
 project uses `jitx==4.4.3`, runs against the already validated Linux runtime
-4.4.2, and completed a real bootstrap build. See
-[`jitx-evaluation.md`](jitx-evaluation.md) for both evidence sets. JITX remains
-a challenger against the still-authoritative frozen tscircuit reference; full
-M1 JITX electrical parity is the next increment and EVT-002 remains unstarted.
+4.4.2, and completed a real bootstrap build. EDA-002C0 then passed its
+documented graph-introspection proof. See
+[`jitx-evaluation.md`](jitx-evaluation.md) for the evidence and stability
+classification. JITX remains a challenger against the still-authoritative
+frozen tscircuit reference; EDA-002C1 is next and EVT-002 remains unstarted.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
