@@ -28,7 +28,7 @@ here.
 
 | Gate | Current status | Check | Trigger | Unlock condition |
 | --- | --- | --- | --- | --- |
-| G0A — JITX Backend Adoption | `not-ready` | C0-C3 accepted evidence and C4B physical/manufacturing pipeline result | C4B proof is complete. | C4C GO / NO-GO selects active EDA backend for physical Rev.M1 implementation. |
+| G0A — JITX Backend Adoption | `ready-for-decision` | C0-C3 accepted evidence and C4B physical/manufacturing pipeline result | C4B BLOCKED evidence is complete for C4C review; successful pipeline proof is not established. | C4C GO / NO-GO selects active EDA backend for physical Rev.M1 implementation. |
 | G0B — Rev.M1 Architecture / Interface Freeze | `not-ready` | Reusable Main / Evaluation Wing architecture, logical interface, exact connector selection/pinout, experiment design, representative interconnect, pitch-test Wing structure, Rev.A reuse assumptions, DFM constraints and project-owned/approved geometry source | Architecture/interface and experiment review package is complete. | Rev.M1 schematic/PCB implementation may proceed to manufacturing-package completion. |
 | G1 — Rev.M1 Main + Evaluation Wing pre-order review | `not-ready` | Actual Main/Wing circuit/ERC, DRC, BOM, manufacturing outputs and measurement plan | Complete manufacturing package exists after G0A/G0B. | Rev.M1 Main + Evaluation Wing ordering may proceed. |
 | G2 — Post-EVT-002 magnetic / pitch / analog-path decision | `not-ready` | Measured range, noise, scan speed, power, interference, actual interconnect path and pitch usability | Physical evaluation measurements and report are complete. | Select among 17.0 / 16.5 / 16.0 mm and production magnetic architecture; the Rev.A circuit may be fixed. |
@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 / EVT-001 historical four-key fixture is frozen under unchanged D-014. C0/C1 accepted; C2 accepted electrical PASS; C3 merged PR #40 retains valid historical geometry discrepancies. C4A issue #41 rebaselines documentation under D-015; PMO review waiting. JITX adoption is undecided: C4B pipeline proof then C4C GO/NO-GO (G0A). New physical Rev.M1 Main/Wing implementation and EVT-002 remain unstarted behind G0A/G0B. |
+| Hardware | EDA-001 / EVT-001 historical four-key fixture is frozen under unchanged D-014. C0/C1 accepted; C2 accepted electrical PASS; C3 merged PR #40 retains valid historical geometry discrepancies. C4A accepted / merged PR #42 under D-015. C4B issue #43 investigation is BLOCKED: partial copper/ODB/CSV demonstrated; full routing/DRC and qualified Gerber/drill handoff remain open. C4C / G0A is next / Human Gate, ready-for-decision; adoption remains undecided. New physical Rev.M1 Main/Wing implementation and EVT-002 remain unstarted behind G0A/G0B. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -79,8 +79,8 @@ Exact geometry convergence against the legacy reference is no longer a JITX
 adoption criterion; manufacturer evidence should inform the new product.
 No old tscircuit geometry is corrected in C4A.
 
-EDA-002C4A (issue #41) is documentation/architecture rebaseline only; PMO
-review waiting. The old footprint-alignment plan is cancelled. The golden is
+EDA-002C4A (issue #41) is accepted / merged PR #42; documentation/architecture
+rebaseline only. The old footprint-alignment plan is cancelled. The golden is
 a permanent qualification oracle, not the physical Rev.M1 manufacturing design.
 [D-015](decisions.md#d-015---revm1-reusable-main--evaluation-wing-architecture)
 accepts reusable Main + Evaluation Wing architecture: Main owns RP2040,
@@ -91,14 +91,19 @@ first-choice is accepted Main reuse + Left/Right 21-key Wings, three TMUX1208
 each, generated from one project-owned definition; separate manufacturing
 outputs are allowed, without a reversible PCBA requirement.
 
-Next is **EDA-002C4B: JITX board-level physical/manufacturing pipeline proof**
-using the four-key JITX qualification topology. Prove substrate, placement,
-two-layer routing, DRC-equivalent validation, deterministic reproduction and
-reviewable Gerber/drill/BOM/PnP plus JLCPCB-required outputs through supported
-workflow as far as practical. No board is ordered and no exact legacy geometry
-equality is required. C4C / G0A then decides GO (JITX active EDA candidate for
-physical Rev.M1 / Rev.A) or NO-GO (supported backend fallback without invalidating
-C0-C3). C4A makes no adoption decision and creates no D-016.
+**EDA-002C4B investigation: BLOCKED** (issue #43). The disposable four-key
+qualification wrapper builds with explicit 68-component placement, partial
+copper on two layers/two vias, ODB++ and public BOM/PnP review exports. The two
+fresh generations repeat captured geometry and CSVs; ODB order/IDs vary.
+Full routing, complete DRC and a qualified Gerber/Excellon JLCPCB handoff remain
+unproven. C2 electrical parity remains PASS. See the
+[C4B evidence](../hardware/jitx/physical/EDA-002C4B.md).
+
+**EDA-002C4C / G0A is next / Human Gate, ready-for-decision** on this blocked
+result. It must decide whether further supported-workflow investment is
+warranted or a supported fallback is preferable. No GO/NO-GO decision or D-016
+is made here. No board is ordered. This geometry is disposable backend
+qualification infrastructure; physical Rev.M1 is unimplemented.
 
 G0B must freeze the architecture/interface, exact connector/pinout and
 representative experiments before implementation. Physical Main/Wing,
@@ -118,7 +123,7 @@ project uses `jitx==4.4.3`, runs against the already validated Linux runtime
 documented graph-introspection proof. See
 [`jitx-evaluation.md`](jitx-evaluation.md) for the evidence and stability
 classification. JITX remains a challenger qualified against the historically authoritative
-frozen tscircuit fixture; C4B/C4C adoption and G0B product freeze remain ahead.
+frozen tscircuit fixture; C4B is BLOCKED; C4C adoption and G0B product freeze remain ahead.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and

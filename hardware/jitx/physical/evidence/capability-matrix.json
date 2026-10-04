@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 43,
-  "phase": "discovery before physical implementation",
+  "phase": "final investigated capability assessment",
   "classification_key": {
     "A": "supported/documented",
     "B": "supported but experimental/qualified",
@@ -14,91 +14,91 @@
       "class": "A",
       "supported_surface": "Board.shape / signal_area; Design.substrate",
       "source": "https://docs.jitx.com/en/latest/api/jitx.board.html",
-      "demonstration": "pending"
+      "demonstration": "PASS: real non-dry build of project-owned 80 x 60 mm fixture"
     },
     {
       "capability": "layer_stack_thickness",
       "class": "A",
       "supported_surface": "Stackup, Conductor, Dielectric; explicit thickness",
       "source": "https://docs.jitx.com/en/latest/api/jitx.stackup.html",
-      "demonstration": "pending"
+      "demonstration": "PASS: five layers / two conductors / nominal 1.2 mm structural check"
     },
     {
       "capability": "explicit_placement",
       "class": "A",
       "supported_surface": "Circuit.place / Placed.at; source-controlled poses",
       "source": "https://docs.jitx.com/en/latest/essentials/physical_design/kinematic-tree.html",
-      "demonstration": "pending"
+      "demonstration": "PASS: 68 source poses preserved; ODB/PnP position+orientation match; zero cross-component pad overlaps/outside-board pads"
     },
     {
       "capability": "two_layer_routing",
       "class": "A",
       "supported_surface": "Route and Via source topology; single-layer router; no complete multilayer auto-route command established",
       "source": "https://docs.jitx.com/en/latest/api/jitx.circuit.html",
-      "demonstration": "pending"
+      "demonstration": "PARTIAL: six realized copper segments on both layers, two vias; all other required endpoints accounted as unrouted"
     },
     {
       "capability": "drc_equivalent",
       "class": "B",
       "supported_surface": "Engine enforces four copper constraints; remaining fab fields documentary; full independent DRC not established",
       "source": "https://docs.jitx.com/en/latest/api/jitx.substrate.html",
-      "demonstration": "pending"
+      "demonstration": "PARTIAL: engine rules and observer checks; no complete board DRC or unrouted certificate"
     },
     {
       "capability": "gerber",
       "class": "C",
       "supported_surface": "No direct supported Gerber command established; CAD export is not proof of this capability",
       "source": "https://docs.jitx.com/en/latest/getting-started/cli/index.html",
-      "demonstration": "pending"
+      "demonstration": "NOT DEMONSTRATED: no direct supported JITX workflow established; legacy KiCad export works but downstream CAM untested"
     },
     {
       "capability": "drill",
       "class": "C",
       "supported_surface": "No direct supported Excellon generation established; investigate ODB++ hole layers",
       "source": "https://docs.jitx.com/en/latest/getting-started/cli/index.html",
-      "demonstration": "pending"
+      "demonstration": "PARTIAL: plated drill and non-plated hole data in ODB++; direct Excellon not established"
     },
     {
       "capability": "bom",
       "class": "B",
       "supported_surface": "Public Export plugin can query captured Component metadata; project CSV exporter needed",
       "source": "https://docs.jitx.com/en/latest/api/jitx.plugin.html",
-      "demonstration": "pending"
+      "demonstration": "PASS WITH QUALIFICATION: 68-row review CSV; generic identities and assembly filtering incomplete"
     },
     {
       "capability": "pnp_centroid",
       "class": "B",
       "supported_surface": "Public captured placements/refdes available; project CSV exporter and orientation review needed",
       "source": "https://docs.jitx.com/en/latest/api/jitx.run.html",
-      "demonstration": "pending"
+      "demonstration": "PASS WITH QUALIFICATION: 68-row review CSV; all coordinates/angles agree with ODB; supplier conventions unqualified"
     },
     {
       "capability": "odb",
       "class": "B",
       "supported_surface": "Installed public legacy-odb++ CLI; assess real output as alternative, not acceptance substitution",
       "source": "https://docs.jitx.com/en/latest/jumpstart-kits/shared/JITX_Architecture_and_Systems_Requirements_v2_0.html",
-      "demonstration": "pending"
+      "demonstration": "PASS WITH QUALIFICATION: archive generated twice; raw order/IDs vary, narrow semantic records match"
     },
     {
       "capability": "paste_assembly",
       "class": "B",
       "supported_surface": "Paste/Silkscreen features and ODB++ export; output assessment pending",
       "source": "https://docs.jitx.com/en/latest/api/jitx.feature.html",
-      "demonstration": "pending"
+      "demonstration": "PARTIAL: top/bottom paste/overlay/component layers in ODB; no standalone Gerber package"
     },
     {
       "capability": "fabrication_documentation",
       "class": "N/A",
       "supported_surface": "Separate fabrication notes can be project-owned; no automatic drawing requirement",
       "source": "https://docs.jitx.com/en/latest/api/jitx.stackup.html",
-      "demonstration": "pending"
+      "demonstration": "N/A: automatic fabrication drawing not required; stack and notes recorded"
     },
     {
       "capability": "noninteractive_build_export",
       "class": "B",
       "supported_surface": "jitx design build/export; RuntimeDesign API experimental; determinism not yet tested",
       "source": "https://docs.jitx.com/en/latest/api/jitx.run.html",
-      "demonstration": "pending"
+      "demonstration": "PASS WITH QUALIFICATION: public build/capture/legacy ODB repeated from fresh generated state; complete pipeline still BLOCKED"
     }
   ]
 }

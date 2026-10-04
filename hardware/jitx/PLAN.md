@@ -123,7 +123,9 @@ data or geometry is sourced from it.
 
 ## EDA-002C4 sequence — evaluation rebaseline (issue #41)
 
-### EDA-002C4A — documentation / architecture rebaseline
+### EDA-002C4A — accepted / merged PR #42
+
+Merged baseline: `8f6c401a902353547dcacbdfc76978ac807ce7f9`.
 
 Completion freezes the legacy four-key golden permanently as a qualification
 fixture, retains C2 electrical PASS and C3 historical geometry evidence,
@@ -135,29 +137,28 @@ occur here. D-014 remains unchanged. C3 discrepancies do not invalidate C2;
 manufacturer evidence informs the new product, without correcting the legacy
 tscircuit geometry or declaring all C3 questions resolved.
 
-### EDA-002C4B — future physical/manufacturing pipeline proof
+### EDA-002C4B — completed investigation / BLOCKED (issue #43)
 
-Use the existing four-key JITX electrical topology as a qualification fixture,
-not the physical Rev.M1 product. Use stock/supported JITX workflow as far as
-practical and record supported surfaces, limitations and reproduction steps.
-Prove and review:
+The disposable four-key physical wrapper builds with a project-owned 80 × 60 mm,
+nominal 1.2 mm two-layer stack and explicit placement of all 68 existing
+components. Six source route segments realize copper on both layers through
+two vias. Public capture, BOM/PnP review CSVs and supported ODB++ exports repeat;
+68 ODB placements/angles agree with the review CSVs. C2 electrical parity
+remains PASS with the accepted counts and unchanged contract.
 
-- board/substrate definition, component placement and two-layer routing;
-- design-rule validation / DRC-equivalent capability with reviewable results;
-- deterministic builds and reproduction from source-controlled inputs;
-- Gerber, drill data, BOM, pick-and-place / centroid data, and other outputs
-  required for the JLCPCB workflow;
-- reviewability of generated outputs and suitability for AI-assisted,
-  source-controlled development.
+**BLOCKED:** full board routing/DRC and a supported, qualified Gerber/Excellon
+handoff are not demonstrated. ODB content order/IDs vary despite matching narrow
+geometric records. Supported KiCad export was investigated; downstream CAM and
+JLCPCB rotation conventions remain unqualified. Generic BOM completeness is a
+separate product sourcing limitation. No private API, artifact patch, external
+CAD round-trip, component redesign, product Main/Wing implementation or order
+was used. See the [C4B report](physical/EDA-002C4B.md) and machine-readable evidence.
 
-The gate needs a reproducible complete output package and documented checks
-for each capability; unsupported steps or gaps must be explicit in the C4B
-result for C4C review. No board is ordered. Geometry equality to frozen
-legacy tscircuit is not required. Accepted C2 topology/parity stays protected;
-manufacturer-correct C1/C3 JITX geometry may be used without rewriting the
-legacy fixture. Physical proof does not itself adopt JITX.
+C4C is next / Human Gate; G0A is ready-for-decision on this blocked evidence,
+not GO. G0B remains not-ready and EVT-002 remains blocked/unstarted. No D-016
+or adoption decision is made here.
 
-### EDA-002C4C — future Human Gate / G0A
+### EDA-002C4C — next / Human Gate / G0A
 
 Inputs: C0-C3 accepted evidence and C4B physical/manufacturing pipeline result.
 Explicit outcome:
@@ -276,3 +277,12 @@ Phase 0 data/requirements gate: accepted inputs from C1/C2; JLCPCB qualification
 defaults explicitly labeled, no production or SI targets. PLAN/ARCHITECTURE
 already exist. Official docs and installed CLI are the workflow authority.
 Mandatory Gerber/drill/PnP and full routing/validation remain open until proven.
+
+C4B execution result: investigation complete / BLOCKED. Supported board, stack,
+explicit placement, partial two-layer source copper, public BOM/PnP observer
+and ODB++ generation are demonstrated. Complete routing/DRC and qualified
+Gerber/drill handoff remain open; complete-board acceptance is not granted.
+All 20 existing tests and final lint/format checks pass; source hashes and
+protected-file checks pass. Independent review warnings were resolved.
+See `physical/EDA-002C4B.md` and `physical/evidence/`. C4C is next / Human Gate;
+G0A ready-for-decision on blocked evidence, G0B not-ready, EVT-002 unstarted.
