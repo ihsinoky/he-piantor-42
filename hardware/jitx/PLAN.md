@@ -14,8 +14,8 @@ M1 JITX board. The frozen electrical authority remains
 | --- | --- |
 | `../tscircuit/src/evaluation/m1-four-key.tsx` | Frozen M1 component, net, connectivity, geometry, and board data |
 | `../tscircuit/scripts/verify-m1-electrical.tsx` | Independently asserted endpoint and critical-footprint requirements |
-| `../sensor-test/design.md` | Project-owned M1 requirements and design-data gaps |
-| `../sensor-test/pinmap.csv` | Project-owned RP2040 logical assignments |
+| `../sensor-test/design.md` | Historical qualification-fixture requirements and design-data gaps |
+| `../sensor-test/pinmap.csv` | Historical qualification-fixture RP2040 logical assignments |
 
 `../layout/**` is GPL/QMK-derived and is explicitly out of scope. No component
 data or geometry is sourced from it.
@@ -110,23 +110,73 @@ data or geometry is sourced from it.
   protected-file checks and git diff --check. `parity/EDA-002C2.md` records
   commands, review and reproduction instructions.
 
-### [EDA-002C3] Manufacturer-vs-frozen geometry reconciliation / PMO Human Gate
+### [EDA-002C3] Historical geometry evidence
 
-- **Issue:** #39
-- **Status:** evidence package prepared; Human Gate decision **PENDING**; not done/accepted.
-- **Evidence:** `geometry/EDA-002C3.md`, `geometry/geometry-reconciliation.json`.
-- **Recommendations:** HRO ADOPT_MANUFACTURER; Winbond NEED_MORE_EVIDENCE.
-  Limited audit adds RP2040 and five derived-land differences; no geometry change.
-- **Focus:** especially HRO TYPE-C-31-M-12 and Winbond W25Q16JVUXIQ discrepancies
-  recorded by C1 in `component-sources.md`. PMO must reconcile manufacturer and
-  frozen geometry before any full parity claim. C2 electrical PASS does not
-  resolve these discrepancies or authorize changes to frozen sources.
+- Issue #39 / merged PR #40, baseline `bc061435`.
+- Evidence package retained and valid: `geometry/EDA-002C3.md` and
+  `geometry/geometry-reconciliation.json` remain unchanged, including their
+  recorded Human Gate dispositions/recommendations.
+- HRO, Winbond, RP2040 and derived-land discrepancies demonstrate manufacturer
+  modeling capability and footprint-policy risks. They are not all resolved.
+- D-015 changes relevance: exact legacy geometry convergence is no longer
+  required for adoption; C2 electrical PASS remains accepted.
 
-## Deferred work
+## EDA-002C4 sequence — evaluation rebaseline (issue #41)
 
-EDA-002C3 Human Gate decisions remain PENDING. EVT-002 remains blocked/unstarted.
-Geometry parity is NOT established. Final placement, routing, DRC, manufacturing
-artifacts and D-014 changes are outside this evidence-only increment.
+### EDA-002C4A — documentation / architecture rebaseline
+
+Completion freezes the legacy four-key golden permanently as a qualification
+fixture, retains C2 electrical PASS and C3 historical geometry evidence,
+removes exact geometric convergence as an adoption criterion, defines physical
+pipeline acceptance criteria, and separates physical Rev.M1 implementation
+under [D-015](../../docs/decisions.md) from JITX qualification. No hardware,
+footprint or PCB geometry changes, connector selection or adoption decision
+occur here. D-014 remains unchanged. C3 discrepancies do not invalidate C2;
+manufacturer evidence informs the new product, without correcting the legacy
+tscircuit geometry or declaring all C3 questions resolved.
+
+### EDA-002C4B — future physical/manufacturing pipeline proof
+
+Use the existing four-key JITX electrical topology as a qualification fixture,
+not the physical Rev.M1 product. Use stock/supported JITX workflow as far as
+practical and record supported surfaces, limitations and reproduction steps.
+Prove and review:
+
+- board/substrate definition, component placement and two-layer routing;
+- design-rule validation / DRC-equivalent capability with reviewable results;
+- deterministic builds and reproduction from source-controlled inputs;
+- Gerber, drill data, BOM, pick-and-place / centroid data, and other outputs
+  required for the JLCPCB workflow;
+- reviewability of generated outputs and suitability for AI-assisted,
+  source-controlled development.
+
+The gate needs a reproducible complete output package and documented checks
+for each capability; unsupported steps or gaps must be explicit in the C4B
+result for C4C review. No board is ordered. Geometry equality to frozen
+legacy tscircuit is not required. Accepted C2 topology/parity stays protected;
+manufacturer-correct C1/C3 JITX geometry may be used without rewriting the
+legacy fixture. Physical proof does not itself adopt JITX.
+
+### EDA-002C4C — future Human Gate / G0A
+
+Inputs: C0-C3 accepted evidence and C4B physical/manufacturing pipeline result.
+Explicit outcome:
+
+- **GO:** JITX becomes the active EDA candidate for physical Rev.M1 / Rev.A.
+- **NO-GO:** retain/fallback to another supported backend without invalidating
+  C0-C3 evidence.
+
+C4A makes neither decision. A future accepted D-016 may record JITX as the
+active EDA for Rev.M1 and Rev.A; D-016 is not created or accepted now.
+G0B separately freezes physical architecture/interface before implementation.
+See [physical architecture](../rev-m1/architecture.md).
+
+## Deferred product work
+
+Physical Rev.M1 Main/Wing schematic, placement, routing, DRC, connector
+selection, manufacturing and EVT-002 remain unstarted behind G0A/G0B.
+`hardware/layout/**` is excluded; future Left/Right generation geometry must
+be project-owned or explicitly approved at a later Human Gate.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 
@@ -197,7 +247,7 @@ not an M1 board implementation.
   dependencies, lint/type checks, golden verifier, protected-file checks.
 - Completion: self-review and evidence; update status only upon full PASS; push
   the C2 branch and open one PMO-review PR without merging (completed as PR #38).
-  C3 now has an evidence package prepared; Human Gate decisions remain PENDING.
+  C3 historical evidence is now retained under the C4A rebaseline.
 
 Status: done / accepted / merged PR #38 at `67b6c302`, electrical PASS.
 Geometry parity NOT established; EVT-002 blocked/unstarted.

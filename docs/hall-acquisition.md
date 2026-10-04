@@ -1,6 +1,6 @@
 # Hall acquisition architecture
 
-Status: provisional baseline, to be proven on sensor-test PCB.
+Status: provisional acquisition baseline, to be proven on physical Rev.M1 Main + Evaluation Wing(s) under D-015.
 
 ## 1. Switch reference
 
@@ -10,7 +10,7 @@ Published magnetic flux at 1.2 mm PCB:
 - top position: 120 +/- 8 G = approximately 12 mT
 - bottom position: 700 +/- 30 G = approximately 70 mT
 
-Both the sensor-test PCB and the production PCB therefore use 1.2 mm board thickness as the baseline.
+Both physical Rev.M1 and Rev.A therefore use 1.2 mm board thickness as the baseline.
 
 ## 2. Hall sensor candidates
 
@@ -48,7 +48,7 @@ Reason to evaluate:
 - lower stated current and lower component cost,
 - but its documentation and long-term field history are weaker than TI.
 
-The sensor-test PCB shall not make the production sensor decision by assumption. It shall produce comparable travel curves and noise measurements.
+The Rev.M1 Evaluation Wing experiments shall not make the production sensor decision by assumption. It shall produce comparable travel curves and noise measurements.
 
 ## 3. Sensor power rail
 
@@ -71,7 +71,7 @@ Forty-two always-powered linear Hall sensors are a meaningful load. Supplying th
 
 The TPS22919 load switch is controlled by an RP2040 GPIO. It defaults off through its internal pull-down behavior, allowing firmware to keep the Hall bank off during early USB startup and fault handling.
 
-## 4. Main-board multiplexing baseline
+## 4. Rev.A Wing multiplexing baseline
 
 ### Device
 
@@ -89,7 +89,8 @@ This avoids the logic-level ambiguity that would occur with a conventional 5 V 7
 
 ### Topology
 
-Use six TMUX1208 devices arranged as two banks of three.
+Use six TMUX1208 devices arranged as two banks of three: Left and Right
+21-key Wings each carry three TMUX1208. Main retains three ADC paths.
 
 Each mux handles seven Hall sensors.
 
@@ -151,39 +152,34 @@ Expected travel span: approximately 0.86 V at the ADC, before tolerance and geom
 
 The opposite magnet polarity produces a decreasing voltage rather than an increasing one. Firmware calibration must therefore derive direction from measured endpoints rather than assume polarity.
 
-## 7. Sensor-test PCB architecture
+## 7. Physical Rev.M1 Main / Evaluation Wing architecture
 
-The evaluation board intentionally includes the same analog concepts as the production board.
+D-015 replaces the manufactured one-piece RP2040 + four-key board assumption.
+The frozen four-key fixture and `hardware/sensor-test/design.md` / `pinmap.csv`
+remain unchanged historical qualification inputs, not the new product design.
 
-Blocks:
+```text
+Main: USB-C / protection -> RP2040 + 3V3 + debug
+      USB VBUS -> switched HALL_5V -> Wing
+Wing: Hall positions -> TMUX1208 -> representative connector/interconnect
+Main: 6.8k / 10k divider + 1 nF -> ADC0/1/2
+```
 
-USB-C
--> USB protection / RP2040 core
--> 3V3 logic rail
--> TPS22919 switched HALL_5V
--> 4 Hall switch positions
--> TMUX1208
--> 6.8k / 10k divider + 1 nF
--> RP2040 ADC0
+Main owns power generation, address/bank control, all ADC dividers/filters,
+ADC and RP2040/USB. Wing owns Hall sensors, TMUX and switch pitch geometry.
+Evaluate 17.0 / 16.5 / 16.0 mm; production pitch remains open. The interface
+must support Rev.A's three-output Wings even if the first Wing uses fewer
+channels. Exact connector and test-Wing channel structure are TBD at G0B.
 
-The four key positions exercise S1-S4 of one TMUX1208. S5-S8 are left available as labeled test pads or unpopulated extension points.
-
-Required test points:
-- VBUS
-- 3V3
-- HALL_5V
-- each raw Hall output H0..H3
-- MUX_D
-- ADC0_FILTERED
-- GND
-- SWDIO / SWCLK
-
-Required controls:
-- BOOTSEL
-- RUN / reset
-- Hall power enable
-- mux enable
-- A0/A1/A2
+Test access must cover VBUS, 3V3, HALL_5V and GND at both boards, raw Hall
+outputs, MUX outputs across the interconnect, filtered ADC nodes, address and
+enable, SWDIO/SWCLK, BOOTSEL and RUN/reset. Evaluate travel/polarity/range,
+noise/repeatability, magnetic coupling, rail current/startup and thermal drift,
+plus settling, source/address changes and connector/cross-channel effects on
+the actual Hall -> TMUX -> Wing connector -> Main divider/filter -> ADC path.
+See [logical interface](../hardware/rev-m1/main-wing-interface.md) and
+[evaluation plan](../hardware/rev-m1/evaluation-plan.md). Divider/filter values
+above remain provisional; no circuit or connector implementation occurs here.
 
 ## 8. Sensor comparison plan
 

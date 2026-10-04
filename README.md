@@ -1,6 +1,8 @@
 # HE Piantor 42
 
-42-key one-piece Hall-effect keyboard derived from the Beekeeb Piantor layout.
+42-key Hall-effect keyboard targeting a unified reverse-V assembly. D-015
+defines reusable Main + Left/Right Wings; future Wing geometry must be
+project-owned or explicitly approved.
 
 > [!WARNING]
 > **Experimental hardware:** M1 and the planned Rev.A are engineering work in
@@ -12,8 +14,8 @@
 
 - 42 keys
 - Piantor-derived column-staggered layout
-- One-piece reverse-V geometry
-- 17.0 mm key pitch target
+- Unified reverse-V keyboard assembly; modular Main + Wings
+- Evaluate 17.0 / 16.5 / 16.0 mm pitch; production pitch remains open
 - Full-height Hall-effect magnetic switches
 - USB-C wired only
 - Vial-compatible keymap, 4 layers
@@ -25,26 +27,28 @@
 ## Development flow
 
 1. Freeze switch / keycap / geometry requirements
-2. Design and manufacture a small Hall-sensor evaluation PCB
-3. Measure sensor range, noise and travel curve
-4. Finalize the 42-key PCB
-5. Implement Vial + Hall-effect firmware
-6. Finalize enclosure
-7. Generate JLCPCB and 3D-print manufacturing packages
-8. Bring-up and validation
+2. Complete G0A EDA adoption and G0B Main/Wing architecture/interface freeze
+3. Design reusable Main + Evaluation Wing(s); complete G1 before ordering
+4. Measure magnetic, pitch and actual interconnect behavior; decide G2
+5. Reuse accepted Main with Left/Right 21-key Wings for Rev.A
+6. Implement Vial + Hall-effect firmware
+7. Finalize enclosure
+8. Generate JLCPCB and 3D-print manufacturing packages
+9. Bring-up and validation
 
-The authoritative status, including the frozen M1 electrical golden reference
-and the placement/routing gate, is in [`docs/project-status.md`](docs/project-status.md).
+The authoritative status, including the permanent frozen four-key qualification
+fixture, separate physical Rev.M1 Main/Wing architecture and implementation gates, is in [`docs/project-status.md`](docs/project-status.md).
 `task/index.html` is a non-authoritative dashboard read model.
 
 ## Contribution status
 
-The project is preparing for a public-release Human Gate. Hardware design
-contributions are not currently being accepted while third-party provenance and
-the JITX EDA evaluation gate are unresolved. After the repository is approved
-for public release, prospective contributors should start with an Issue and
-follow [`docs/development-workflow.md`](docs/development-workflow.md); a green
-CI run does not replace Product Owner approval.
+Public release is completed, as recorded in
+[`docs/public-release-readiness.md`](docs/public-release-readiness.md).
+Hardware design contributions are not currently being accepted while the JITX
+EDA evaluation gate remains unresolved. Prospective contributors should start
+with an Issue and follow
+[`docs/development-workflow.md`](docs/development-workflow.md); a green CI run
+does not replace Product Owner approval.
 
 ## Licensing
 
@@ -63,4 +67,5 @@ REQUIRED** are public-release blockers, not an assertion of ownership.
 
 Public-release audit evidence and the current Human Gate result are documented
 in [`docs/public-release-readiness.md`](docs/public-release-readiness.md). This
-repository has not been declared public or production-ready by that report.
+repository has completed public release; the hardware remains experimental and
+is not production-ready.

@@ -230,9 +230,63 @@ parity contract or uv.lock changed. `hardware/layout/**` was not consumed or
 modified. No placement, routing, DRC readiness or manufacturing artifacts are
 claimed. D-014 and tscircuit authority remain unchanged.
 
-**EDA-002C3 (issue #39): evidence package prepared; Human Gate decision PENDING.**
-See [`EDA-002C3.md`](../hardware/jitx/geometry/EDA-002C3.md). HRO recommendation:
-ADOPT_MANUFACTURER. Winbond recommendation: NEED_MORE_EVIDENCE. RP2040 and five
-additional derived-land differences are recorded by the limited audit. No
-geometry implementation is authorized; C3 is not done/accepted. **EVT-002 remains blocked/unstarted.** Electrical PASS does not
-release either gate.
+## EDA-002C3 historical geometry evidence
+
+Issue #39 / merged PR #40 (`bc061435`) retains the unchanged
+[geometry report](../hardware/jitx/geometry/EDA-002C3.md) and reconciliation
+record. Their historical dispositions remain valid evidence of discrepancies,
+manufacturer modeling capability and footprint-policy risks. D-015 changes
+these questions' relevance, not their underlying facts or all their resolution
+states. C2 electrical PASS remains accepted; exact geometry convergence against
+the legacy fixture is no longer required for JITX adoption. Manufacturer
+evidence should inform new physical Rev.M1; no old tscircuit geometry is fixed.
+
+## EDA-002C4 sequence — evaluation rebaseline (issue #41)
+
+### EDA-002C4A — documentation / architecture rebaseline
+
+Completion freezes the legacy four-key golden permanently as a qualification
+fixture, retains C2 electrical PASS and C3 historical geometry evidence,
+removes exact geometric convergence as an adoption criterion, defines physical
+pipeline acceptance criteria, and separates physical Rev.M1 implementation
+under [D-015](decisions.md) from JITX qualification. No hardware,
+footprint or PCB geometry changes, connector selection or adoption decision
+occur here. D-014 remains unchanged. C3 discrepancies do not invalidate C2;
+manufacturer evidence informs the new product, without correcting the legacy
+tscircuit geometry or declaring all C3 questions resolved.
+
+### EDA-002C4B — future physical/manufacturing pipeline proof
+
+Use the existing four-key JITX electrical topology as a qualification fixture,
+not the physical Rev.M1 product. Use stock/supported JITX workflow as far as
+practical and record supported surfaces, limitations and reproduction steps.
+Prove and review:
+
+- board/substrate definition, component placement and two-layer routing;
+- design-rule validation / DRC-equivalent capability with reviewable results;
+- deterministic builds and reproduction from source-controlled inputs;
+- Gerber, drill data, BOM, pick-and-place / centroid data, and other outputs
+  required for the JLCPCB workflow;
+- reviewability of generated outputs and suitability for AI-assisted,
+  source-controlled development.
+
+The gate needs a reproducible complete output package and documented checks
+for each capability; unsupported steps or gaps must be explicit in the C4B
+result for C4C review. No board is ordered. Geometry equality to frozen
+legacy tscircuit is not required. Accepted C2 topology/parity stays protected;
+manufacturer-correct C1/C3 JITX geometry may be used without rewriting the
+legacy fixture. Physical proof does not itself adopt JITX.
+
+### EDA-002C4C — future Human Gate / G0A
+
+Inputs: C0-C3 accepted evidence and C4B physical/manufacturing pipeline result.
+Explicit outcome:
+
+- **GO:** JITX becomes the active EDA candidate for physical Rev.M1 / Rev.A.
+- **NO-GO:** retain/fallback to another supported backend without invalidating
+  C0-C3 evidence.
+
+C4A makes neither decision. A future accepted D-016 may record JITX as the
+active EDA for Rev.M1 and Rev.A; D-016 is not created or accepted now.
+G0B separately freezes physical architecture/interface before implementation.
+See [physical architecture](../hardware/rev-m1/architecture.md).
