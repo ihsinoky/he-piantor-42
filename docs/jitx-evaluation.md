@@ -291,3 +291,26 @@ C4A makes neither decision. A future accepted D-016 may record JITX as the
 active EDA for Rev.M1 and Rev.A; D-016 is not created or accepted now.
 G0B separately freezes physical architecture/interface before implementation.
 See [physical architecture](../hardware/rev-m1/architecture.md).
+
+## EDA-002C4B2 downstream headless KiCad — BLOCKED
+
+Issue [#45](https://github.com/ihsinoky/he-piantor-42/issues/45) runs the unchanged
+C4B fixture through supported legacy-kicad and official KiCad 9.0.9 twice from
+fresh state. JSON DRC, nine Gerber layers, PTH/NPTH Excellon and 68-row position
+outputs are generated. All 147 known missing connections reconcile against C4B;
+partial routing is expected and does not cause this verdict. C0/C1/C2 regressions
+pass; historical C0–C3 and C4B evidence and versions remain unchanged.
+
+**C4B2: BLOCKED.** Four USB source copper-to-NPTH gaps violate the fixture's
+0.25 mm rule. The supported export also declares 1.6 mm overall thickness,
+contradicting the 1.2 mm source/exported stack, and KiCad propagates 1.6 mm into
+the Gerber job. No repair, generated-artifact editing, upgrade or extra routing
+was attempted. The two runs show no manufacturing-significant difference; raw
+timestamps, via ordering/IDs and unqualified schematic companion variation are
+retained. Library registration, supplier orientation, sourcing and complete
+routing remain limitations. See the [new report and evidence](../hardware/jitx/physical/EDA-002C4B2.md).
+
+This demonstrates downstream DRC/CAM execution, but does not qualify an orderable
+package or change historical C4B's BLOCKED verdict. PMO/PO review precedes any
+merge; C4C / G0A makes the later adoption decision. G0B and physical Rev.M1
+Main/Wing implementation remain ahead.

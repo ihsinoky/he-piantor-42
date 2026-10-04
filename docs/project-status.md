@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 / EVT-001 historical four-key fixture is frozen under unchanged D-014. C0/C1 accepted; C2 accepted electrical PASS; C3 merged PR #40 retains valid historical geometry discrepancies. C4A accepted / merged PR #42 under D-015. C4B issue #43 investigation is BLOCKED: partial copper/ODB/CSV demonstrated; full routing/DRC and qualified Gerber/drill handoff remain open. C4C / G0A is next / Human Gate, ready-for-decision; adoption remains undecided. New physical Rev.M1 Main/Wing implementation and EVT-002 remain unstarted behind G0A/G0B. |
+| Hardware | EDA-001 / EVT-001 historical four-key fixture is frozen under unchanged D-014. C0/C1 accepted; C2 accepted electrical PASS; C3 merged PR #40 retains valid historical geometry discrepancies. C4A accepted / merged PR #42 under D-015. C4B issue #43 investigation is BLOCKED: partial copper/ODB/CSV demonstrated; full routing/DRC and qualified Gerber/drill handoff remain open. C4B2 issue #45 is also BLOCKED: downstream DRC/CAM executes twice, but source hole clearances and exported thickness prevent manufacturing qualification. C4C / G0A remains Human Gate, ready-for-decision; adoption remains undecided. New physical Rev.M1 Main/Wing implementation and EVT-002 remain unstarted behind G0A/G0B. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -98,6 +98,16 @@ fresh generations repeat captured geometry and CSVs; ODB order/IDs vary.
 Full routing, complete DRC and a qualified Gerber/Excellon JLCPCB handoff remain
 unproven. C2 electrical parity remains PASS. See the
 [C4B evidence](../hardware/jitx/physical/EDA-002C4B.md).
+
+**EDA-002C4B2 downstream CAM: BLOCKED** (issue #45; pending PMO/PO review).
+The unchanged fixture generates JSON DRC, nine Gerber layers, PTH/NPTH Excellon
+and 68-row PnP through KiCad 9.0.9 twice from fresh state. Its 147 missing
+connections reconcile with C4B's intentional partial routing. Four USB source
+copper-to-NPTH clearance conflicts and exported 1.6 mm thickness contradicting
+the 1.2 mm source stack block manufacturing qualification. No manufacturing
+geometry/drill/assembly-coordinate difference was found between runs; all raw
+differences are retained. Historical evidence, versions and full routing remain
+unchanged. See [C4B2 evidence](../hardware/jitx/physical/EDA-002C4B2.md).
 
 **EDA-002C4C / G0A is next / Human Gate, ready-for-decision** on this blocked
 result. It must decide whether further supported-workflow investment is
