@@ -1,0 +1,35 @@
+{
+  "versions": {
+    "jitx": "4.4.3",
+    "jitxlib-standard": "4.4.0"
+  },
+  "public_surface_files": {
+    "board.py": {
+      "sha256": "d33e14cba057a48f36974e75184a932806be6c5952286a1cf5b58d2b2f36a0c3"
+    },
+    "stackup.py": {
+      "sha256": "426455dcde9e39e3e4f90cddd64045d56657422a3d87563144af91cb2fca977e"
+    },
+    "substrate.py": {
+      "sha256": "6307b2bc88e32842b5314e53de15af276ba2ce49f8698458a0e8c3fc7a630d87"
+    },
+    "_runtime/_legacy_plugins.py": {
+      "sha256": "f5e4992a61ead17b7d9ab4bb1983c917a46a4d77bc5c36d0e4dd3092c7a3ae6a"
+    },
+    "_cli/design/export.py": {
+      "sha256": "e076c69ff776f4317e50fc4f5ed1da08c051d4b99e3febf3eb0c0da0683d0fde"
+    },
+    "plugin/export.py": {
+      "sha256": "210e75f27f848c82f7f536a5d1f1b0965fff9dbad68987bcc4598a96975e4a54"
+    }
+  },
+  "legacy_adapter_read_only_finding": "KicadExport delegates backend kicad and design name to compiled runtime; no thickness option on registered export",
+  "Board_public_fields": [
+    "shape",
+    "signal_area"
+  ],
+  "Material_public_thickness": "Layer thickness in mm",
+  "stackup_order": "Public visit traversal matches declared ordered layers",
+  "fixed_template": "See thickness-root-cause.json; evidence only, not a solution",
+  "solution_search_result": "No supported source-level or export-level overall thickness override found for pinned environment"
+}

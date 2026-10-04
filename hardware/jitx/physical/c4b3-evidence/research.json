@@ -1,0 +1,63 @@
+{
+  "accessed_utc_date": "2026-10-04",
+  "primary_sources": [
+    {
+      "url": "https://docs.jitx.com/en/latest/api/jitx.stackup.html",
+      "finding": "Material.thickness is per-layer millimetres; ordered materials define stackup; no documented overall legacy export override found"
+    },
+    {
+      "url": "https://docs.jitx.com/en/latest/api/jitx.board.html",
+      "finding": "Board specifies shape and signal_area; no overall thickness property"
+    },
+    {
+      "url": "https://docs.jitx.com/en/latest/api/jitx.substrate.html",
+      "finding": "Substrate owns stackup and fabrication constraints"
+    },
+    {
+      "url": "https://docs.jitx.com/en/latest/getting-started/cli/index.html",
+      "finding": "Supported legacy export path; installed legacy-kicad help offers design argument only"
+    },
+    {
+      "url": "https://docs.kicad.org/9.0/en/pcbnew/pcbnew.html",
+      "section": "Fabrication outputs / Gerber options",
+      "finding": "Gerber job generation is optional; job describes stackup, materials and finish"
+    },
+    {
+      "url": "https://docs.kicad.org/9.0/en/cli/cli.html",
+      "finding": "Supported headless DRC and Gerber/drill/position exports; installed gerbers CLI has no job-disable flag"
+    },
+    {
+      "url": "https://jlcpcb.com/capabilities/pcb-capabilities",
+      "section": "Rigid PCB Capabilities / Traces / NPTH to Track",
+      "finding": "0.20 mm capability. Applies to rigid FR-4; standard two-layer board included. Not the blind-slot, HDI, inner-via or flex rule. Sealing-film explanation in NPTH annular-ring row corroborates clearance around holes. Applying this to adjacent SMD copper is conservative project interpretation. Hole position tolerance is \u00b10.075 mm; no claim that capability is a guaranteed finished gap."
+    },
+    {
+      "url": "https://jlcpcb.com/help/article/how-to-generate-gerber-and-drill-files-in-kicad-9",
+      "section": "Requirements and two-layer file list",
+      "finding": "Nine relevant layer Gerbers including paste plus Excellon are a normal handoff; no job file required in enumerated inputs",
+      "page_updated": "2026-09-24"
+    },
+    {
+      "url": "https://jlcpcb.com/capabilities/pcb-capabilities",
+      "section": "PCB Specifications / Thickness",
+      "finding": "1.2 mm listed among standard FR-4 thickness options; \u22651.0 mm thickness tolerance \u00b110%"
+    },
+    {
+      "url": "https://jlcpcb.com/blog/standard-pcb-thickness",
+      "finding": "Primary JLCPCB standard FR-4 thickness guidance; thickness specified separately from two-dimensional fabrication geometry"
+    }
+  ],
+  "official_skills_reviewed": [
+    "jitx",
+    "jitx-substrate-modeler"
+  ],
+  "skills_finding": "Per-material stackup thickness; no documented legacy-kicad general-thickness override; predefined 4/6-layer substrates irrelevant to fixed two-layer fixture",
+  "installed_public_api_finding": "JITX 4.4.3 Board shape/signal_area; Material thickness; public export registration supported; no documented knob found",
+  "unsupported_paths_rejected": [
+    "runtime template patch",
+    "private export call",
+    "invented Board.thickness attribute",
+    "generated PCB/job edits",
+    "version upgrade"
+  ]
+}

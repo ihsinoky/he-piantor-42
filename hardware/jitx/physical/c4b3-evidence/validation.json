@@ -1,0 +1,42 @@
+{
+  "adoption_decision_made": false,
+  "automation_sha256": {
+    "physical/measure_c4b3.py": "7780c0f5b625b9a4ec917531410497353dec0dfe27c30ed2f7e2ca36c760c2c1",
+    "physical/requalify_c4b3.py": "8ac5ccb28ea8d8dab36b3f894314260e65a30a51b7b65a95292c00641201e6e0"
+  },
+  "baseline": "4768663f259abdce07cdee49bd4688cf3903fcdd",
+  "branch": "eda-002c4b3-manufacturing-blockers",
+  "checks": {
+    "C0_C1_C2": "PASS: 20 unchanged tests in 51.676s; real bootstrap and C2 exports",
+    "applicable_ci": "Pending Draft PR engineering-ci; no layout/product-KiCad/firmware trigger paths",
+    "compileall": "PASS",
+    "determinism": "PASS final observed pair; 69 identical, 14 timestamp-only, two unqualified schematic companion files, one PID/URI log",
+    "diff_whitespace": "PASS",
+    "final_read_only_analysis": "PASS: reconciliation and comparison rerun after DRC fallback safeguard; generation hash retained separately",
+    "gerber_excellon_positions": "PASS generation twice; nine Gerbers, two drills, 68 position rows",
+    "headless_drc": "PASS execution twice; code 5; 147 expected missing connections, four hole errors, 68 library warnings",
+    "historical_evidence": "PASS: baseline protected hashes before/after",
+    "historical_source": "PASS: 35 C4B source/configuration hashes unchanged",
+    "locked_sync": "PASS: uv sync --locked --group dev; no dependency changes",
+    "node_syntax": "PASS",
+    "physical_build_capture_legacy_kicad": "PASS twice, fresh fixture state",
+    "pyright": "UNAVAILABLE in existing environment; not installed",
+    "ruff": "PASS lint and format; 48 Python files",
+    "self_review": "PASS: one warning resolved; 0 critical, 0 unresolved warnings, 2 notes",
+    "source_measurement": "PASS: public TestCase; analytic rectangle/circle distances",
+    "source_output_reconciliation": "PASS narrow geometry/net/route/drill/pose checks; material USB release limitation retained"
+  },
+  "footprint_changed": false,
+  "full_routing_added": false,
+  "remaining_material_blocker": "USB minimum-margin pair requires evidence-backed manufacturing disposition; routing is separate",
+  "thickness_disposition": "Supported limited job-free Gerber/drill handoff with independently specified thickness; CAD/job metadata uncorrected",
+  "topology_changed": false,
+  "unsupported_resolution_used": false,
+  "verdict": "BLOCKED",
+  "versions": {
+    "jitx": "4.4.3",
+    "jitxlib-standard": "4.4.0",
+    "kicad": "9.0.9",
+    "runtime": "4.4.2"
+  }
+}
