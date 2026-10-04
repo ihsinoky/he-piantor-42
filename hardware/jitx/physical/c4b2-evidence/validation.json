@@ -1,0 +1,52 @@
+{
+  "additional_supported_probe": {
+    "command": "Same unmodified run-1 PCB, with docker -w /input; see report",
+    "result": "code 5; same 72 violations and 147 unconnected items"
+  },
+  "adoption_decision_made": false,
+  "baseline": "d085e540aefc76e2dd56b614b2c8141f42facbe9",
+  "branch": "eda-002c4b2-headless-kicad-cam",
+  "checks": {
+    "C0_C1_C2_regressions": "PASS: 20 tests in 25.767s, unchanged suite with real exports",
+    "complete_issue_and_historical_evidence_read": "PASS",
+    "diff_whitespace": "PASS",
+    "engineering_ci": "PASS: Detect engineering changes and Engineering gate; layout/KiCad product/firmware jobs correctly skipped",
+    "gerber_excellon_position_twice": "PASS generation; manufacturing qualification BLOCKED",
+    "headless_drc_twice": "PASS execution; code 5 each; 147 expected missing connections + 4 clearance errors + 68 warnings",
+    "historical_source_hashes": "PASS: 35 source/config hashes match C4B",
+    "initial_head_merge_base_local_and_live_main": "PASS: exact expected baseline",
+    "initial_working_tree": "clean",
+    "javascript_syntax": "PASS",
+    "locked_environment": "PASS: versions and uv.lock unchanged",
+    "manufacturing_determinism": "PASS for the observed pair; raw differences retained",
+    "physical_build_legacy_kicad_twice": "PASS",
+    "protected_tracked_files": "PASS: only requested status documents modified; all historical evidence/design/config/lockfiles unchanged",
+    "pyright": "UNAVAILABLE in existing environment; not installed",
+    "python_compile": "PASS",
+    "read_only_geometry_net_drill_position_reconciliation": "PASS narrow checks; material findings retained",
+    "ruff": "PASS: lint and 45 files formatted",
+    "tscircuit_ci": "NOT APPLICABLE: no triggering paths changed"
+  },
+  "ci_snapshot": {
+    "conclusion": "success",
+    "jobs": {
+      "Detect engineering changes": "success",
+      "Engineering gate": "success",
+      "KiCad ERC / DRC": "skipped",
+      "Layout generator": "skipped",
+      "Sensor-test firmware": "skipped"
+    },
+    "run_url": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37190341466",
+    "scope": "Report/source/evidence commit; subsequent update only records this CI result",
+    "tested_commit": "24a81944ce70ee1ee9b312f53c227c8c31b3d705"
+  },
+  "full_routing_completed": false,
+  "out_of_scope_discoveries": [
+    "Existing accepted USB footprint conflicts with qualification copper-hole rule",
+    "Exported overall thickness disagrees with source stack",
+    "Generated-library registration warnings",
+    "Schematic companion content varies; semantic equivalence unqualified"
+  ],
+  "unsupported_workarounds_used": false,
+  "verdict": "BLOCKED"
+}

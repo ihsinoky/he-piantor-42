@@ -1,0 +1,1134 @@
+{
+  "automation_sha256": {
+    "physical/reproduce_c4b2.py": "03fd0c4d77f59ccdcce1b0a0bdae0db8cda77e44823e26f6a676a927fcc747dd"
+  },
+  "baseline": "d085e540aefc76e2dd56b614b2c8141f42facbe9",
+  "branch": "eda-002c4b2-headless-kicad-cam",
+  "commands": [
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "introspect"
+      ],
+      "log": "designs/c4b2/runtime.json",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "version"
+      ],
+      "log": "designs/c4b2/kicad-version.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "kicad/kicad:9.0.9",
+        "--format",
+        "{{.Id}}"
+      ],
+      "log": "designs/c4b2/image-id.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "stop"
+      ],
+      "log": "designs/c4b2/runtime-stop-1.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "start",
+        "--background"
+      ],
+      "log": "designs/c4b2/run-1/runtime-start.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "build",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification",
+        "--no-dependency-check"
+      ],
+      "log": "designs/c4b2/run-1/build.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "physical-qualification",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1"
+      ],
+      "log": "designs/c4b2/run-1/capture.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "legacy-kicad",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification"
+      ],
+      "log": "designs/c4b2/run-1/kicad-export.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "drc",
+        "--format",
+        "json",
+        "--severity-all",
+        "--exit-code-violations",
+        "--output",
+        "/out/drc.json",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-1/drc.log",
+      "returncode": 5
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "gerbers",
+        "--layers",
+        "F.Cu,B.Cu,F.Mask,B.Mask,F.Paste,B.Paste,F.SilkS,B.SilkS,Edge.Cuts",
+        "--output",
+        "/out/gerber/",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-1/gerber.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "drill",
+        "--format",
+        "excellon",
+        "--excellon-units",
+        "mm",
+        "--excellon-separate-th",
+        "--generate-report",
+        "--report-path",
+        "/out/drill-report.txt",
+        "--output",
+        "/out/drill/",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-1/drill.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-1/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "pos",
+        "--format",
+        "csv",
+        "--units",
+        "mm",
+        "--side",
+        "both",
+        "--output",
+        "/out/positions.csv",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-1/pos.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "stop"
+      ],
+      "log": "designs/c4b2/runtime-stop-2.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "start",
+        "--background"
+      ],
+      "log": "designs/c4b2/run-2/runtime-start.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "build",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification",
+        "--no-dependency-check"
+      ],
+      "log": "designs/c4b2/run-2/build.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "physical-qualification",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2"
+      ],
+      "log": "designs/c4b2/run-2/capture.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "legacy-kicad",
+        "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification"
+      ],
+      "log": "designs/c4b2/run-2/kicad-export.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "drc",
+        "--format",
+        "json",
+        "--severity-all",
+        "--exit-code-violations",
+        "--output",
+        "/out/drc.json",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-2/drc.log",
+      "returncode": 5
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "gerbers",
+        "--layers",
+        "F.Cu,B.Cu,F.Mask,B.Mask,F.Paste,B.Paste,F.SilkS,B.SilkS,Edge.Cuts",
+        "--output",
+        "/out/gerber/",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-2/gerber.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "drill",
+        "--format",
+        "excellon",
+        "--excellon-units",
+        "mm",
+        "--excellon-separate-th",
+        "--generate-report",
+        "--report-path",
+        "/out/drill-report.txt",
+        "--output",
+        "/out/drill/",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-2/drill.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/run-2/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "export",
+        "pos",
+        "--format",
+        "csv",
+        "--units",
+        "mm",
+        "--side",
+        "both",
+        "--output",
+        "/out/positions.csv",
+        "/input/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b2/run-2/pos.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "m1-electrical-graph",
+        "he_piantor_42_jitx.m1.M1FourKeyElectrical",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b2/c2-regression.json"
+      ],
+      "log": "designs/c4b2/c2.log",
+      "returncode": 0
+    }
+  ],
+  "historical_source_unchanged": true,
+  "image": "kicad/kicad:9.0.9",
+  "image_id": "sha256:e638b79b0321f29395a5b783e94bb9f3c73303e8da15da27b8f5cb4b67a37729",
+  "issue": 45,
+  "runs": [
+    {
+      "files": {
+        "bom-review.csv": {
+          "bytes": 2783,
+          "sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d"
+        },
+        "build.log": {
+          "bytes": 313,
+          "sha256": "2beb06c5dba80d33f9a8b9bb4887c4404da340a1a402e082f7ebff07d5424b04"
+        },
+        "cam/drc.json": {
+          "bytes": 160083,
+          "sha256": "aca361473c08066b8dfb94fa50d4c6e5b26ed0eaed8274387da8f9cd2c67f5bd"
+        },
+        "cam/drill-report.txt": {
+          "bytes": 895,
+          "sha256": "f6c28b9d525126f244dcf88d8695447b94b7b80dc75d96cb2b0f23d6f1c40794"
+        },
+        "cam/drill/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-NPTH.drl": {
+          "bytes": 363,
+          "sha256": "c2d44d16602304c67bfbb280a1ccfec34e8c20b0286b5fb7d1193cfec5105eb3"
+        },
+        "cam/drill/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-PTH.drl": {
+          "bytes": 567,
+          "sha256": "3ee92fcfb5c8b28d4413ced5731dddcf3983c8543879f3163230b7461ddaec81"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Cu.gbl": {
+          "bytes": 1123,
+          "sha256": "709bc806c8b59a917beeea0442f98354c00bdb7872d64745389f54d1d47c87e7"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Mask.gbs": {
+          "bytes": 7758,
+          "sha256": "35fda8b87ab2857981b76a92f307bed46ebd48cc02bed244f76c2606b7997e45"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Paste.gbp": {
+          "bytes": 515,
+          "sha256": "8205309195be82280fd94fcd29bd6395ac0de6836d460a72112d5bc57a59b92c"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Silkscreen.gbo": {
+          "bytes": 516,
+          "sha256": "7d9b72fd8e2f085ea6f57d16b3272151839806e8809b8eba0b8850586174d7f8"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-Edge_Cuts.gm1": {
+          "bytes": 745,
+          "sha256": "0eef4eb18ba794fd41f570b83e2b86277c55e0ff584ee0abfdca0a82bd554340"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Cu.gtl": {
+          "bytes": 17818,
+          "sha256": "b3d6c6e77a3c946dda8ffa75a316efbae73f118ac15dc25f3de0a1f283caf48d"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Mask.gts": {
+          "bytes": 38735,
+          "sha256": "f6f070a5cfb7534bf0a2f209b7503b4b9f5de059ee50e1590aebaa55c2b6faed"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Paste.gtp": {
+          "bytes": 31533,
+          "sha256": "83ef3c1644f5cec1237dc39d40813a7573557e30c8b8b1444ff079115d4f2009"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Silkscreen.gto": {
+          "bytes": 154943,
+          "sha256": "c7decffa0838ac98c24b27bb0dcc50f93521b9337bb8346792b366726230bf49"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-job.gbrjob": {
+          "bytes": 3237,
+          "sha256": "99178eae66ec7a0fb88576f815d4fa80b8fea71c625e6e9c70dc4d2fa58a8d56"
+        },
+        "cam/positions.csv": {
+          "bytes": 4584,
+          "sha256": "9f233dbe9a0a5446e1e9df2a9f53236bdc1aaf793bc589b1113b7fb1d58f07d8"
+        },
+        "capture.log": {
+          "bytes": 772,
+          "sha256": "4ffb79b79f228617eb6ab374cbc3f879479e48b921fbf0ef4b78a483e5693331"
+        },
+        "drc.log": {
+          "bytes": 82,
+          "sha256": "b502bc5904cca151e5f73eed88b7ceec16299ea408b640030bcf2e81d47415be"
+        },
+        "drill.log": {
+          "bytes": 221,
+          "sha256": "87dae6abdefcc12720d87879e16795b87748c2260b094929062e32339b409e4f"
+        },
+        "electrical-graph.json": {
+          "bytes": 76733,
+          "sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60"
+        },
+        "gerber.log": {
+          "bytes": 1003,
+          "sha256": "7f05756ef74845bf4e785ef2e25b5c07e0354992aa6223e7e235714695dae704"
+        },
+        "kicad-export.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "kicad/fp-lib-table": {
+          "bytes": 250,
+          "sha256": "a5bbf3df8f8b1bdee35c8278953e5c0455f70d786a275ea4424c17c3fab15dbb"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_kws": {
+          "bytes": 414,
+          "sha256": "e3289ab29fc8360ef675f301e9eafa285361d59fc7bef9cb2ace68b996957084"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb": {
+          "bytes": 672671,
+          "sha256": "98c6e4a408d3e72161e34daf8bbf41fb50c0e3088a7607a18b983822c4e7102b"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pro": {
+          "bytes": 5260,
+          "sha256": "fa84c2b3cf9ef6c54a5ba77b943d975c0a6a9dcc8c2bab60acaf09808768bb4a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_sch": {
+          "bytes": 371586,
+          "sha256": "a6610f1131f9713b034090d6d0a705815fc4407f1e8f7a049b1f98a5f80142fa"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/ABM8LANDPATTERN.kicad_mod": {
+          "bytes": 2775,
+          "sha256": "33bbd2dd95c1df351456c44bfd61e376898a729066954fbf1003cfadf9201a42"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/RP2040LANDPATTERN.kicad_mod": {
+          "bytes": 34065,
+          "sha256": "caddf8f2bfcc53f8cbd24c666d8d6ac86b8364ebb215935297393a659a26a75e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT.kicad_mod": {
+          "bytes": 12365,
+          "sha256": "cc70ad144ffb24a4ea4a8b4d86828a7406378aadf65b7abb8d7bcbdc8f2f84c9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_1.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "3f9f4078d82ba704c219fd5b9eb6cc6ccf05676a260a24537b0be9c0acbf2855"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_10.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a0c25f53d7ffe52fcbc3daeffa0114b39100a3a4aa428c29937576e1bc4afcab"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_11.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "65e66ca1eda66bec07b1ffc4b760b0b792adb3d2c79344dd831356f6c514a899"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_12.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "4a344a6476054333767489f320b770bef2b52375edb55665904a49281d86425c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_13.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "2de12d5c198bc2c6827ce15bb014f36dd86d9c360166992031bfd6843391e148"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_14.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5f346ca503d2f6f06db84cca5e940c2a6e8fe0337246a500f686c442e09a9d54"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_15.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f0d05bcd56af88bcb62156c0117643370abc90fc175b404c209eff62828f8fc7"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_16.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "0f361cca0b5c2af71f618b81964456ab75c895f7645019490068c877474a575a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_17.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f573793c33fb2e6d74042d3493a01a2f874ef2034094c361d40b94437f169007"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_18.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "455e05243d2c563a4396c5f53220053799437fce1d613f704aa7378743fb3b0c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_19.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f3632a0a04c89b59737b9ea3bc164a2cea7827b6ef5c5688305a1da4e3133178"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_2.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "96093d954cf629588161c62b1c3b46846d8484ed686b2447aedece0d01e3c0b9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_20.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "cf196de3696e01c0a4fb9893d83fb874bda750c29b7e5309c3d357850c9d7b54"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_21.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a856856e999245810f06a2fbb35b815d8a3bc18927e16ca42841c6aaa284238f"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_22.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a8669ef8eeefc11a9a7d06312f023a8efe99b95588386975db152a9adbb9973e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_23.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "c20dd7f66c4c3e102d6ce6c895a21d46d62b758bb78703dfa6fe690d8d2f55fc"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_24.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e3771f545e4498ff9ce1faeb5acd7ea881a8e3520f7cb03b6ab31abd87738898"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_25.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "b9315c409e85c855b72882acf7bac52ecd7d25256aa5408c99a706ebba6a09aa"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_26.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "33b5d26c981e76aceafd8acc47b48539500a17aa18ed85955b9f1f315484004d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_27.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "9983f3c7140f08f4117a555a9720cf1f048a1c0d9cce43f19ae0665a920f71dd"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_28.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5dee937a5684d0055a3ecc2bbd6bc050b7e4019b99dddab707c80c1ab444c835"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_29.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e8ddfef8358e6a747164058165b02ce20de1d274a891474d0fed4d41a5168f9c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_3.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "fddb6fc96e76f93990173692c794b040db45d9c34b808d7ae730c89627369ea1"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_30.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "6f33d41a78f90325ecfadab4662a2efbeae90cf144fabf5df87daf7fa97ae0e8"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_31.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "bb005af95e566244d1eabc382d0b2e555877bc5206ed7e3d76f7b1b7d7c9c6bc"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_32.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "46409f4711baa54dd48b63e4d90ae8531c60aec7f0b1b947b0f6076fe4264bdf"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_33.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5648bc479161d2a496d4e0a8ca954f40626107a0a1ba8b34cbea8736f6469065"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_34.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "361a30ef8b9fc333d4dac63e9917efc25ae371d7010c5c00da4aa007d570d9d9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_35.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "1679846de9b3757f83b22eaca024e2952b7ee1a082b6c0dcf746687ba2960082"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_36.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "01c35a5fb36fc99069d69c891fc18b59d6dbe9ec64141e8c47822d2bbd3d299b"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_37.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "accbe8cac85c136ff3a79d7d29e76468d91ac07b7cc5998e6810bd3976d6d793"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_38.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "a85712cadfb8e034e7d9e82e795a1982636d3f61f8ccb7f133ae38fc6dd26e8e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_4.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "b8be59872111b8fac149002c900ab785bc994c16b327cfc743c946a02b57760a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_5.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "cc8385ddfee5011196f057f8004610e6b9e06ee2d2d74d26106c1c410e212d8c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_6.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "49c686b9123525599e0f78ca8a006db4ffdd80d83489f4cc41d70c1598f06a5b"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_7.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "0dd1e5b3b82da90764c0b9a5cbb70f8f4f8a2216228625f6af9d1e43e87299e5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_8.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "16489e271748ce46d802a447cadb783463c045cd2fae683719924211c9631a18"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_9.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "a609936f1031e3c8b882a35fd9cdf5b13fc33d82e9fc9749f372fa2aa8bf078d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOIC.kicad_mod": {
+          "bytes": 16882,
+          "sha256": "041e9540f8402273ffe5ef25a9311bf14eb70c99948072d23d61406f99dfcb98"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SON.kicad_mod": {
+          "bytes": 11472,
+          "sha256": "1a939b170aaf6c0c3943f87fbe58e1b2c2e61d21405e019a90f3fb1602cacad5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3.kicad_mod": {
+          "bytes": 7139,
+          "sha256": "996aaacc591ceda46a8c42fbdbed2d05af5fc3b881b2f2ad9b7c0ff336c2bc5e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_1.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "8222c45778256250ad406aeb47acb6a08574aa200039431a473314308437c341"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_2.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "33f741e5dcb380106688bd20311deacb3c46a45a938c21a5814199f33f1f1c3d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_3.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "c975c623fc47ce14e32e99a0d44ee63b9ce58338051194956e244191edae2c74"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_5.kicad_mod": {
+          "bytes": 8736,
+          "sha256": "b5fd10adcbe1977c97c648d669bebde46912ee2b97c4fd04f3552a3b79c30e09"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_6.kicad_mod": {
+          "bytes": 8807,
+          "sha256": "6e3f42edf84af31d362018ea2b7f95e16bdfc659ba60a3a030e6af98f8d8b0a5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_6_1.kicad_mod": {
+          "bytes": 9381,
+          "sha256": "2a3254e6256dfe204372e6dae5f9958bc560f01aaf36d89581c89d321e6fc67e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/TESTPOINTLANDPATTERN.kicad_mod": {
+          "bytes": 686,
+          "sha256": "ecebc6c4263f6616ed5fa09e1a78829c620832a77ae68f31af71427a62c16fb9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/TYPEC31M12LANDPATTERN.kicad_mod": {
+          "bytes": 29797,
+          "sha256": "b18fa78d1bc66cb2d36126cb5559ae40c434a7d26df2f582ebcf0304d47db42a"
+        },
+        "kicad/project_symbols.lib": {
+          "bytes": 221685,
+          "sha256": "c7d229589c20e8a167b724647ccd48ed302bcbafae658cdf294ea52fa8fa2559"
+        },
+        "kicad/sym-lib-table": {
+          "bytes": 135,
+          "sha256": "0c2c80f8c4307ed592e170f9e23b27cfacb35a88ad33a0889f50abb4d64048c0"
+        },
+        "physical-observation.json": {
+          "bytes": 40123,
+          "sha256": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b"
+        },
+        "pnp-review.csv": {
+          "bytes": 1214,
+          "sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+        },
+        "pos.log": {
+          "bytes": 45,
+          "sha256": "f6671ab25c934b8f81c4aa4d4b06275c131de73c287b640835e224e3472dab7b"
+        },
+        "runtime-start.log": {
+          "bytes": 183,
+          "sha256": "756e25d1f31539b16b67ee4d58001f52e40c39a810e7ff39748d03a2dbd7bc93"
+        }
+      },
+      "input_unchanged": true,
+      "run": 1
+    },
+    {
+      "files": {
+        "bom-review.csv": {
+          "bytes": 2783,
+          "sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d"
+        },
+        "build.log": {
+          "bytes": 313,
+          "sha256": "2beb06c5dba80d33f9a8b9bb4887c4404da340a1a402e082f7ebff07d5424b04"
+        },
+        "cam/drc.json": {
+          "bytes": 160083,
+          "sha256": "6dbd9a3d56af2e8d540f01d59a730b979b6380618b8eacc03353bf5d63f4f7f3"
+        },
+        "cam/drill-report.txt": {
+          "bytes": 895,
+          "sha256": "bff220466338f29424195462c8f527945857ebae59c05cc355ce273d291b9b21"
+        },
+        "cam/drill/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-NPTH.drl": {
+          "bytes": 363,
+          "sha256": "92288e7bc006947901ebb065c99814def6bd68d088d3bee77882a05b8f57a31a"
+        },
+        "cam/drill/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-PTH.drl": {
+          "bytes": 567,
+          "sha256": "eab522b7f628ccaede4198c65547f3699e3e79d6b8829cf423a7041bffa7180e"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Cu.gbl": {
+          "bytes": 1123,
+          "sha256": "1eb284352f2d99361f4911f5c5461a78228016393dbc2ef4d3fe0a952c1a16c9"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Mask.gbs": {
+          "bytes": 7758,
+          "sha256": "7bcbf9abb758f19ccbb14a55db86bdf80cbd2b6df341167d34ebc9109e43c6d9"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Paste.gbp": {
+          "bytes": 515,
+          "sha256": "3849f90ee6edd9358e4da782862e734f2cbc1ae0f0744d1cc01f84aa5e4ef59e"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Silkscreen.gbo": {
+          "bytes": 516,
+          "sha256": "e836cdffa13918addca07be7064649c23fed9caaecbc207615e6ec72fa913aeb"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-Edge_Cuts.gm1": {
+          "bytes": 745,
+          "sha256": "929e34b83d25339d3b9af4743aabf5a88c631e77109fb3ef6b9040132e44e989"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Cu.gtl": {
+          "bytes": 17818,
+          "sha256": "ddb856360e3136a1e53aa85975fb16f2630ea3a2ac91977b604d0381555483b6"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Mask.gts": {
+          "bytes": 38735,
+          "sha256": "50f8e24d3bba760ab28e925b269ca93d02edf918d4a6e4d88f1fbd62fbd0af9d"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Paste.gtp": {
+          "bytes": 31533,
+          "sha256": "fd7452ef60b9114a3434dd048eb101abca27cb6c69b1d28734688e51e86730dd"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Silkscreen.gto": {
+          "bytes": 154943,
+          "sha256": "e1844dfe862a1fdc386c5e55217d14d06777c7ee47189a6133ade9d203701ca1"
+        },
+        "cam/gerber/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-job.gbrjob": {
+          "bytes": 3237,
+          "sha256": "b7333fe7254c3c5cf6851ca91f0aa04c51e7891f46400d6b55962c26b81530e1"
+        },
+        "cam/positions.csv": {
+          "bytes": 4584,
+          "sha256": "9f233dbe9a0a5446e1e9df2a9f53236bdc1aaf793bc589b1113b7fb1d58f07d8"
+        },
+        "capture.log": {
+          "bytes": 772,
+          "sha256": "4ffb79b79f228617eb6ab374cbc3f879479e48b921fbf0ef4b78a483e5693331"
+        },
+        "drc.log": {
+          "bytes": 82,
+          "sha256": "b502bc5904cca151e5f73eed88b7ceec16299ea408b640030bcf2e81d47415be"
+        },
+        "drill.log": {
+          "bytes": 221,
+          "sha256": "87dae6abdefcc12720d87879e16795b87748c2260b094929062e32339b409e4f"
+        },
+        "electrical-graph.json": {
+          "bytes": 76733,
+          "sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60"
+        },
+        "gerber.log": {
+          "bytes": 1003,
+          "sha256": "7f05756ef74845bf4e785ef2e25b5c07e0354992aa6223e7e235714695dae704"
+        },
+        "kicad-export.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "kicad/fp-lib-table": {
+          "bytes": 250,
+          "sha256": "a5bbf3df8f8b1bdee35c8278953e5c0455f70d786a275ea4424c17c3fab15dbb"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_kws": {
+          "bytes": 414,
+          "sha256": "e3289ab29fc8360ef675f301e9eafa285361d59fc7bef9cb2ace68b996957084"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pcb": {
+          "bytes": 672671,
+          "sha256": "e1c6af8b65d3d469ba54110845a5c269459797f66b4860ea107f137bd61e30ee"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_pro": {
+          "bytes": 5260,
+          "sha256": "fa84c2b3cf9ef6c54a5ba77b943d975c0a6a9dcc8c2bab60acaf09808768bb4a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.kicad_sch": {
+          "bytes": 371586,
+          "sha256": "d6a7ba2e8a14475020422829014b5ce587d058975cc230ad0cc042528b056d6e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/ABM8LANDPATTERN.kicad_mod": {
+          "bytes": 2775,
+          "sha256": "33bbd2dd95c1df351456c44bfd61e376898a729066954fbf1003cfadf9201a42"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/RP2040LANDPATTERN.kicad_mod": {
+          "bytes": 34065,
+          "sha256": "caddf8f2bfcc53f8cbd24c666d8d6ac86b8364ebb215935297393a659a26a75e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT.kicad_mod": {
+          "bytes": 12365,
+          "sha256": "cc70ad144ffb24a4ea4a8b4d86828a7406378aadf65b7abb8d7bcbdc8f2f84c9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_1.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "3f9f4078d82ba704c219fd5b9eb6cc6ccf05676a260a24537b0be9c0acbf2855"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_10.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a0c25f53d7ffe52fcbc3daeffa0114b39100a3a4aa428c29937576e1bc4afcab"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_11.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "65e66ca1eda66bec07b1ffc4b760b0b792adb3d2c79344dd831356f6c514a899"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_12.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "4a344a6476054333767489f320b770bef2b52375edb55665904a49281d86425c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_13.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "2de12d5c198bc2c6827ce15bb014f36dd86d9c360166992031bfd6843391e148"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_14.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5f346ca503d2f6f06db84cca5e940c2a6e8fe0337246a500f686c442e09a9d54"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_15.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f0d05bcd56af88bcb62156c0117643370abc90fc175b404c209eff62828f8fc7"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_16.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "0f361cca0b5c2af71f618b81964456ab75c895f7645019490068c877474a575a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_17.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f573793c33fb2e6d74042d3493a01a2f874ef2034094c361d40b94437f169007"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_18.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "455e05243d2c563a4396c5f53220053799437fce1d613f704aa7378743fb3b0c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_19.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f3632a0a04c89b59737b9ea3bc164a2cea7827b6ef5c5688305a1da4e3133178"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_2.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "96093d954cf629588161c62b1c3b46846d8484ed686b2447aedece0d01e3c0b9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_20.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "cf196de3696e01c0a4fb9893d83fb874bda750c29b7e5309c3d357850c9d7b54"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_21.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a856856e999245810f06a2fbb35b815d8a3bc18927e16ca42841c6aaa284238f"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_22.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a8669ef8eeefc11a9a7d06312f023a8efe99b95588386975db152a9adbb9973e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_23.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "c20dd7f66c4c3e102d6ce6c895a21d46d62b758bb78703dfa6fe690d8d2f55fc"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_24.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e3771f545e4498ff9ce1faeb5acd7ea881a8e3520f7cb03b6ab31abd87738898"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_25.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "b9315c409e85c855b72882acf7bac52ecd7d25256aa5408c99a706ebba6a09aa"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_26.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "33b5d26c981e76aceafd8acc47b48539500a17aa18ed85955b9f1f315484004d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_27.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "9983f3c7140f08f4117a555a9720cf1f048a1c0d9cce43f19ae0665a920f71dd"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_28.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5dee937a5684d0055a3ecc2bbd6bc050b7e4019b99dddab707c80c1ab444c835"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_29.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e8ddfef8358e6a747164058165b02ce20de1d274a891474d0fed4d41a5168f9c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_3.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "fddb6fc96e76f93990173692c794b040db45d9c34b808d7ae730c89627369ea1"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_30.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "6f33d41a78f90325ecfadab4662a2efbeae90cf144fabf5df87daf7fa97ae0e8"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_31.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "bb005af95e566244d1eabc382d0b2e555877bc5206ed7e3d76f7b1b7d7c9c6bc"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_32.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "46409f4711baa54dd48b63e4d90ae8531c60aec7f0b1b947b0f6076fe4264bdf"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_33.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5648bc479161d2a496d4e0a8ca954f40626107a0a1ba8b34cbea8736f6469065"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_34.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "361a30ef8b9fc333d4dac63e9917efc25ae371d7010c5c00da4aa007d570d9d9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_35.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "1679846de9b3757f83b22eaca024e2952b7ee1a082b6c0dcf746687ba2960082"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_36.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "01c35a5fb36fc99069d69c891fc18b59d6dbe9ec64141e8c47822d2bbd3d299b"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_37.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "accbe8cac85c136ff3a79d7d29e76468d91ac07b7cc5998e6810bd3976d6d793"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_38.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "a85712cadfb8e034e7d9e82e795a1982636d3f61f8ccb7f133ae38fc6dd26e8e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_4.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "b8be59872111b8fac149002c900ab785bc994c16b327cfc743c946a02b57760a"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_5.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "cc8385ddfee5011196f057f8004610e6b9e06ee2d2d74d26106c1c410e212d8c"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_6.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "49c686b9123525599e0f78ca8a006db4ffdd80d83489f4cc41d70c1598f06a5b"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_7.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "0dd1e5b3b82da90764c0b9a5cbb70f8f4f8a2216228625f6af9d1e43e87299e5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_8.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "16489e271748ce46d802a447cadb783463c045cd2fae683719924211c9631a18"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SMT_9.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "a609936f1031e3c8b882a35fd9cdf5b13fc33d82e9fc9749f372fa2aa8bf078d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOIC.kicad_mod": {
+          "bytes": 16882,
+          "sha256": "041e9540f8402273ffe5ef25a9311bf14eb70c99948072d23d61406f99dfcb98"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SON.kicad_mod": {
+          "bytes": 11472,
+          "sha256": "1a939b170aaf6c0c3943f87fbe58e1b2c2e61d21405e019a90f3fb1602cacad5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3.kicad_mod": {
+          "bytes": 7139,
+          "sha256": "996aaacc591ceda46a8c42fbdbed2d05af5fc3b881b2f2ad9b7c0ff336c2bc5e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_1.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "8222c45778256250ad406aeb47acb6a08574aa200039431a473314308437c341"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_2.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "33f741e5dcb380106688bd20311deacb3c46a45a938c21a5814199f33f1f1c3d"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_3_3.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "c975c623fc47ce14e32e99a0d44ee63b9ce58338051194956e244191edae2c74"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_5.kicad_mod": {
+          "bytes": 8736,
+          "sha256": "b5fd10adcbe1977c97c648d669bebde46912ee2b97c4fd04f3552a3b79c30e09"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_6.kicad_mod": {
+          "bytes": 8807,
+          "sha256": "6e3f42edf84af31d362018ea2b7f95e16bdfc659ba60a3a030e6af98f8d8b0a5"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/SOT23_6_1.kicad_mod": {
+          "bytes": 9381,
+          "sha256": "2a3254e6256dfe204372e6dae5f9958bc560f01aaf36d89581c89d321e6fc67e"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/TESTPOINTLANDPATTERN.kicad_mod": {
+          "bytes": 686,
+          "sha256": "ecebc6c4263f6616ed5fa09e1a78829c620832a77ae68f31af71427a62c16fb9"
+        },
+        "kicad/he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification.pretty/TYPEC31M12LANDPATTERN.kicad_mod": {
+          "bytes": 29797,
+          "sha256": "b18fa78d1bc66cb2d36126cb5559ae40c434a7d26df2f582ebcf0304d47db42a"
+        },
+        "kicad/project_symbols.lib": {
+          "bytes": 221685,
+          "sha256": "235b8ad0d2d15c40fd49c8c2000eee3664350eb70b1b4d5a7b935164c60215d9"
+        },
+        "kicad/sym-lib-table": {
+          "bytes": 135,
+          "sha256": "0c2c80f8c4307ed592e170f9e23b27cfacb35a88ad33a0889f50abb4d64048c0"
+        },
+        "physical-observation.json": {
+          "bytes": 40123,
+          "sha256": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b"
+        },
+        "pnp-review.csv": {
+          "bytes": 1214,
+          "sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+        },
+        "pos.log": {
+          "bytes": 45,
+          "sha256": "f6671ab25c934b8f81c4aa4d4b06275c131de73c287b640835e224e3472dab7b"
+        },
+        "runtime-start.log": {
+          "bytes": 183,
+          "sha256": "fe6050ee4ef21bf9a0744c01080a27f008f7e9adecd9930c7bf3053d25fb75ff"
+        }
+      },
+      "input_unchanged": true,
+      "run": 2
+    }
+  ],
+  "source_sha256": {
+    "he_piantor_42_jitx/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/component_test_designs.py": "a9520ac528b1cc986376290a66d8b1b667508a630db1e2371eb1ba8592a9860d",
+    "he_piantor_42_jitx/components/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/hro_type_c_31_m_12.py": "cd2a6fb603ccf22addebe810807793e786dc9d2fb1c5a3aa853771baf7418eb1",
+    "he_piantor_42_jitx/components/crystals/__init__.py": "b8956389ed1d44d6ae653e657d6d6fe87bc2ef448dde30d081850bd3ead6c775",
+    "he_piantor_42_jitx/components/crystals/abracon_abm8_272_t3.py": "9b235ed3def042ff472cc0b7e7bf14cf80b1be9e05ef1f4423f45cc4af10d50f",
+    "he_piantor_42_jitx/components/generic_electrical.py": "90a89067cd00eeb43f5310a676d8e4f49f9aa8cb11ab50a175bb9ccaa33905f3",
+    "he_piantor_42_jitx/components/mcu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/mcu/raspberry_pi_rp2040.py": "3c867ffca15f7da8781c8623a6c23ba378b4428bb1cfbd0f22598cc3da1fe566",
+    "he_piantor_42_jitx/components/memory/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/memory/winbond_w25q16jvuxiq.py": "c7f6973d2fb6e287ce6d0edd30d009ed6abfda084f2c4b7b4af7775cee9d3602",
+    "he_piantor_42_jitx/components/power/__init__.py": "7b544e8a0cba403fa60e99d509559ae4af0f40568a334657175faf2fe039181c",
+    "he_piantor_42_jitx/components/power/diodes_ap2112k_3_3trg1.py": "2ab32372b566db3f1caae7f0e8495a504057d652e19d0919d9be9e96c4e0062a",
+    "he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py": "8cd4ae0920a257278aba61f341b9e979f1cf3d9d182d79d6a7f51ee44ee39703",
+    "he_piantor_42_jitx/components/protection/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/protection/st_usblc6_2sc6.py": "2156f468378ac6a2b3d73f5473277c72a2af21fc2db62bc7327f00b2d5cbed48",
+    "he_piantor_42_jitx/components/resistor.py": "76df134f2bd5d8a139ee3c4c1d1e614cae4ea1a2baaacf4b5579911a28607e0a",
+    "he_piantor_42_jitx/components/sensors/__init__.py": "bb9ee80ce8bfb9777d2ab5343aad00ba69b0eca5a5dfedcacdc7c8bcb31e1f9b",
+    "he_piantor_42_jitx/components/sensors/texas_instruments_drv5055a3qdbzr.py": "d42de4035298b946a0d3714ea34acb0c63ff0cd3950b74e9c3b9df504f4e2340",
+    "he_piantor_42_jitx/components/switches/__init__.py": "6e4180198ff27c2a704e238306c7d85c86ce48e03c6ca15cfaeea9be1a83825c",
+    "he_piantor_42_jitx/components/switches/texas_instruments_tmux1208pwr.py": "df52a31e9e74b90962351892d444270d201b4121f4f6cdc78c99bf8305592523",
+    "he_piantor_42_jitx/m1.py": "4a1f13c169da45681e375a42e5b2b6475cec9a09899b06fcee346cddad6fbfc2",
+    "he_piantor_42_jitx/main.py": "12e7b6445b3b339cc9df3e6dd0564c589c585179ee01c09487f1536be19ce690",
+    "he_piantor_42_jitx/physical_qualification.py": "70f4ca2fce1834ea2e0054b141ed29aeeeb2c5b072ff7f883d90b19e1c074df7",
+    "parity/__init__.py": "a5cc953bcaf54795d8e789f79e15d77add0f6874265c935058ce6f3e2c9d5048",
+    "parity/exporter.py": "a4251ed79f679af18d749208f08ab4b85164bf210f1ab5bcb5b83eac5db8ee97",
+    "parity/m1-normalization.json": "11125d2a935ef676e5774a3080de62f194ac91c1a7d1ae56ebce6c0fa1948476",
+    "parity/m1-parity-contract.json": "90caed2ea13186183a06a9d8c135908a35658a6caf0c35dd8522e2fccfa07cb9",
+    "parity/m1.py": "a7f41868b065dcf8fdd26c1279b579e1416497caa9729064929ffb0c311984a4",
+    "physical/__init__.py": "f9639744e592d6335a351148d4c97db66687dc71ab5a9a111b2af85b0631b0ad",
+    "physical/exporter.py": "e7f320eb3dfc42359f03ca6c08ed85c9620dc937d9d41592df4846fcf7fe2bc9",
+    "physical/reproduce.py": "ce4915f2d4c72e3be53a19d1655ce050275bcbfdd303a4b734969ddd29b2817d",
+    "pyproject.toml": "222dfac2d4571f8bebf8b3e4493a6ced49fcb68ff27e413b45a493a359b6dee7",
+    "uv.lock": "be6a128df630881604b0472922bee10f1129fbeed67986c43da3ebb2fd0fe29d"
+  },
+  "versions": {
+    "jitx": "4.4.3",
+    "jitxlib-standard": "4.4.0",
+    "kicad": "9.0.9",
+    "runtime": "4.4.2"
+  }
+}
