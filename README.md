@@ -42,12 +42,13 @@ fixture, separate physical Rev.M1 Main/Wing architecture and implementation gate
 
 ## Contribution status
 
-The project is preparing for a public-release Human Gate. Hardware design
-contributions are not currently being accepted while third-party provenance and
-the JITX EDA evaluation gate are unresolved. After the repository is approved
-for public release, prospective contributors should start with an Issue and
-follow [`docs/development-workflow.md`](docs/development-workflow.md); a green
-CI run does not replace Product Owner approval.
+Public release is completed, as recorded in
+[`docs/public-release-readiness.md`](docs/public-release-readiness.md).
+Hardware design contributions are not currently being accepted while the JITX
+EDA evaluation gate remains unresolved. Prospective contributors should start
+with an Issue and follow
+[`docs/development-workflow.md`](docs/development-workflow.md); a green CI run
+does not replace Product Owner approval.
 
 ## Licensing
 
@@ -66,4 +67,5 @@ REQUIRED** are public-release blockers, not an assertion of ownership.
 
 Public-release audit evidence and the current Human Gate result are documented
 in [`docs/public-release-readiness.md`](docs/public-release-readiness.md). This
-repository has not been declared public or production-ready by that report.
+repository has completed public release; the hardware remains experimental and
+is not production-ready.

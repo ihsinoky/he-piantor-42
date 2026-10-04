@@ -138,7 +138,10 @@ Mechanical design shall account for:
 ## 7. Development sequence
 
 1. Freeze magnetic switch and narrow keycap candidates.
-2. Extract Piantor key-center geometry.
+2. Complete the Rev.A Wing geometry source / license Human Gate before
+   defining project-owned or explicitly approved Left/Right geometry. Historical
+   QMK/Piantor coordinate provenance/reference (REQ-004) is not an input to
+   future project-owned Rev.A geometry.
 3. Select Hall sensor and acquisition architecture.
 4. Pass G0A/G0B and design reusable Main + Evaluation Wing(s).
 5. Pass G1, manufacture and measure the actual Main/Wing path.
