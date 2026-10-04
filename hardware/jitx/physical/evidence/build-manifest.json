@@ -1,0 +1,898 @@
+{
+  "comparisons": [
+    {
+      "classification": "identical",
+      "file": "bom-review.csv",
+      "run_1_sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d",
+      "run_2_sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d"
+    },
+    {
+      "classification": "identical",
+      "file": "electrical-graph.json",
+      "run_1_sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60",
+      "run_2_sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60"
+    },
+    {
+      "classification": "non-deterministic content",
+      "file": "odb.zip",
+      "run_1_sha256": "ce6c4b364fcf212d0c671165a6a402a9c11fd15e8275e81c18ab26f0c3ebc431",
+      "run_2_sha256": "e97ab341aa53552fa73795c3e0f2b074adfc15e40d9ecbc4b6eaa8feb8f7c119"
+    },
+    {
+      "classification": "identical",
+      "file": "physical-observation.json",
+      "run_1_sha256": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b",
+      "run_2_sha256": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b"
+    },
+    {
+      "classification": "identical",
+      "file": "pnp-review.csv",
+      "run_1_sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16",
+      "run_2_sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+    }
+  ],
+  "electrical_parity": {
+    "compared_component_count": 68,
+    "compared_edge_count": 185,
+    "compared_endpoint_count": 200,
+    "compared_named_net_count": 43,
+    "differences": [],
+    "direct_link_count": 4,
+    "geometry_excluded": true,
+    "intentional_nc_count": 7,
+    "note": "Electrical semantics only. Geometry parity NOT established; HRO/Winbond reconciliation deferred to EDA-002C3.",
+    "result": "PASS"
+  },
+  "endpoint_routing_accounting": [
+    {
+      "component_endpoints": [
+        "circuit.D_POWER.cathode",
+        "circuit.R_POWER_LED.p1"
+      ],
+      "net": null,
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.D_STATUS.cathode",
+        "circuit.R_STATUS_LED.p1"
+      ],
+      "net": null,
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.J_USB.A5",
+        "circuit.R_CC1.p1"
+      ],
+      "net": null,
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.J_USB.B5",
+        "circuit.R_CC2.p1"
+      ],
+      "net": null,
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_ADC.p1",
+        "circuit.R_ADC_BOTTOM.p1",
+        "circuit.R_ADC_TOP.p2",
+        "circuit.TP_ADC_SENSE.pin1",
+        "circuit.U_MCU.GPIO26"
+      ],
+      "net": "ADC_SENSE",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [],
+      "net": "CC1",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [],
+      "net": "CC2",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_ADC.p2",
+        "circuit.C_FLASH.p2",
+        "circuit.C_HALL0.p2",
+        "circuit.C_HALL1.p2",
+        "circuit.C_HALL2.p2",
+        "circuit.C_HALL3.p2",
+        "circuit.C_LDO_IN.p2",
+        "circuit.C_LDO_OUT.p2",
+        "circuit.C_LOAD_IN.p2",
+        "circuit.C_LOAD_OUT.p2",
+        "circuit.C_MCU_BULK.p2",
+        "circuit.C_MCU_HF1.p2",
+        "circuit.C_MCU_HF2.p2",
+        "circuit.C_MCU_HF3.p2",
+        "circuit.C_MCU_HF4.p2",
+        "circuit.C_MCU_HF5.p2",
+        "circuit.C_MCU_HF6.p2",
+        "circuit.C_MCU_HF7.p2",
+        "circuit.C_MCU_HF8.p2",
+        "circuit.C_MCU_HF9.p2",
+        "circuit.C_MUX.p2",
+        "circuit.C_VREG_IN.p2",
+        "circuit.C_VREG_OUT.p2",
+        "circuit.C_XIN.p2",
+        "circuit.C_XOUT.p2",
+        "circuit.J_USB.A12_B1",
+        "circuit.J_USB.A1_B12",
+        "circuit.R_ADC_BOTTOM.p2",
+        "circuit.R_CC1.p2",
+        "circuit.R_CC2.p2",
+        "circuit.R_POWER_LED.p2",
+        "circuit.R_STATUS_LED.p2",
+        "circuit.SW_BOOT.pin2",
+        "circuit.SW_RUN.pin2",
+        "circuit.TP_GND.pin1",
+        "circuit.U_ESD.GND",
+        "circuit.U_FLASH.GND",
+        "circuit.U_H0.GND",
+        "circuit.U_H1.GND",
+        "circuit.U_H2.GND",
+        "circuit.U_H3.GND",
+        "circuit.U_LDO.GND",
+        "circuit.U_LOAD.GND",
+        "circuit.U_MCU.GND",
+        "circuit.U_MCU.TESTEN",
+        "circuit.U_MUX.GND",
+        "circuit.Y1.GND1",
+        "circuit.Y1.GND2"
+      ],
+      "net": "GND",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_H0_RAW.pin1",
+        "circuit.U_H0.OUT",
+        "circuit.U_MUX.S1"
+      ],
+      "net": "H0_RAW",
+      "routing_status": "partial: Hall OUT/probe only"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_H1_RAW.pin1",
+        "circuit.U_H1.OUT",
+        "circuit.U_MUX.S2"
+      ],
+      "net": "H1_RAW",
+      "routing_status": "partial: Hall OUT/probe only"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_H2_RAW.pin1",
+        "circuit.U_H2.OUT",
+        "circuit.U_MUX.S3"
+      ],
+      "net": "H2_RAW",
+      "routing_status": "partial: Hall OUT/probe only"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_H3_RAW.pin1",
+        "circuit.U_H3.OUT",
+        "circuit.U_MUX.S4"
+      ],
+      "net": "H3_RAW",
+      "routing_status": "partial: Hall OUT/probe only"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_HALL0.p1",
+        "circuit.C_HALL1.p1",
+        "circuit.C_HALL2.p1",
+        "circuit.C_HALL3.p1",
+        "circuit.C_LOAD_OUT.p1",
+        "circuit.C_MUX.p1",
+        "circuit.TP_HALL_5V.pin1",
+        "circuit.U_H0.VCC",
+        "circuit.U_H1.VCC",
+        "circuit.U_H2.VCC",
+        "circuit.U_H3.VCC",
+        "circuit.U_LOAD.OUT",
+        "circuit.U_MUX.VDD"
+      ],
+      "net": "HALL_5V",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_LOAD.ON",
+        "circuit.U_MCU.GPIO7"
+      ],
+      "net": "HALL_PWR_EN",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_MCU.GPIO2",
+        "circuit.U_MUX.A0"
+      ],
+      "net": "MUX_A0",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_MCU.GPIO3",
+        "circuit.U_MUX.A1"
+      ],
+      "net": "MUX_A1",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_MCU.GPIO4",
+        "circuit.U_MUX.A2"
+      ],
+      "net": "MUX_A2",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_ADC_TOP.p1",
+        "circuit.TP_MUX_D.pin1",
+        "circuit.U_MUX.D"
+      ],
+      "net": "MUX_D",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_MCU.GPIO5",
+        "circuit.U_MUX.EN"
+      ],
+      "net": "MUX_EN0",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_MUX_S5.pin1",
+        "circuit.U_MUX.S5"
+      ],
+      "net": "MUX_S5",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_MUX_S6.pin1",
+        "circuit.U_MUX.S6"
+      ],
+      "net": "MUX_S6",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_MUX_S7.pin1",
+        "circuit.U_MUX.S7"
+      ],
+      "net": "MUX_S7",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_MUX_S8.pin1",
+        "circuit.U_MUX.S8"
+      ],
+      "net": "MUX_S8",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_FLASH.QSPI_SCLK",
+        "circuit.U_MCU.QSPI_SCLK"
+      ],
+      "net": "QSPI_SCLK",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_FLASH.QSPI_SD0",
+        "circuit.U_MCU.QSPI_SD0"
+      ],
+      "net": "QSPI_SD0",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_FLASH.QSPI_SD1",
+        "circuit.U_MCU.QSPI_SD1"
+      ],
+      "net": "QSPI_SD1",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_FLASH.QSPI_SD2",
+        "circuit.U_MCU.QSPI_SD2"
+      ],
+      "net": "QSPI_SD2",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.U_FLASH.QSPI_SD3",
+        "circuit.U_MCU.QSPI_SD3"
+      ],
+      "net": "QSPI_SD3",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_QSPI_SS.p2",
+        "circuit.SW_BOOT.pin1",
+        "circuit.U_FLASH.CS"
+      ],
+      "net": "QSPI_SS_FLASH",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_QSPI_SS.p1",
+        "circuit.U_MCU.QSPI_CSn"
+      ],
+      "net": "QSPI_SS_MCU",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.SW_RUN.pin1",
+        "circuit.TP_RUN.pin1",
+        "circuit.U_MCU.RUN"
+      ],
+      "net": "RUN",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.D_STATUS.anode",
+        "circuit.U_MCU.GPIO11"
+      ],
+      "net": "STATUS_LED",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_SWCLK.pin1",
+        "circuit.U_MCU.SWCLK"
+      ],
+      "net": "SWCLK",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.TP_SWDIO.pin1",
+        "circuit.U_MCU.SWDIO"
+      ],
+      "net": "SWDIO",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_USB_DM.p2",
+        "circuit.U_MCU.USB_DM"
+      ],
+      "net": "USB_DM",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.J_USB.A7",
+        "circuit.J_USB.B7",
+        "circuit.U_ESD.IO2_1"
+      ],
+      "net": "USB_DM_CONN",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_USB_DM.p1",
+        "circuit.U_ESD.IO2_2"
+      ],
+      "net": "USB_DM_ESD",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_USB_DP.p2",
+        "circuit.U_MCU.USB_DP"
+      ],
+      "net": "USB_DP",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.J_USB.A6",
+        "circuit.J_USB.B6",
+        "circuit.U_ESD.IO1_1"
+      ],
+      "net": "USB_DP_CONN",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_USB_DP.p1",
+        "circuit.U_ESD.IO1_2"
+      ],
+      "net": "USB_DP_ESD",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.J_USB.SHIELD"
+      ],
+      "net": "USB_SHIELD",
+      "routing_status": "no source routes; singleton requires physical pad review"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_MCU_HF9.p1",
+        "circuit.C_VREG_OUT.p1",
+        "circuit.U_MCU.DVDD_23",
+        "circuit.U_MCU.DVDD_50",
+        "circuit.U_MCU.VREG_VOUT"
+      ],
+      "net": "V1V1",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_FLASH.p1",
+        "circuit.C_LDO_OUT.p1",
+        "circuit.C_MCU_BULK.p1",
+        "circuit.C_MCU_HF1.p1",
+        "circuit.C_MCU_HF2.p1",
+        "circuit.C_MCU_HF3.p1",
+        "circuit.C_MCU_HF4.p1",
+        "circuit.C_MCU_HF5.p1",
+        "circuit.C_MCU_HF6.p1",
+        "circuit.C_MCU_HF7.p1",
+        "circuit.C_MCU_HF8.p1",
+        "circuit.C_VREG_IN.p1",
+        "circuit.D_POWER.anode",
+        "circuit.TP_3V3.pin1",
+        "circuit.U_FLASH.VCC",
+        "circuit.U_LDO.VOUT",
+        "circuit.U_MCU.ADC_AVDD",
+        "circuit.U_MCU.IOVDD_1",
+        "circuit.U_MCU.IOVDD_10",
+        "circuit.U_MCU.IOVDD_22",
+        "circuit.U_MCU.IOVDD_33",
+        "circuit.U_MCU.IOVDD_42",
+        "circuit.U_MCU.IOVDD_49",
+        "circuit.U_MCU.USB_VDD",
+        "circuit.U_MCU.VREG_IN"
+      ],
+      "net": "V3V3",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_LDO_IN.p1",
+        "circuit.C_LOAD_IN.p1",
+        "circuit.J_USB.A4_B9",
+        "circuit.J_USB.A9_B4",
+        "circuit.TP_VBUS.pin1",
+        "circuit.U_ESD.VBUS",
+        "circuit.U_LDO.EN",
+        "circuit.U_LDO.VIN",
+        "circuit.U_LOAD.IN"
+      ],
+      "net": "VBUS",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_XIN.p1",
+        "circuit.U_MCU.XIN",
+        "circuit.Y1.XIN"
+      ],
+      "net": "XIN",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.R_XOUT.p2",
+        "circuit.U_MCU.XOUT"
+      ],
+      "net": "XOUT",
+      "routing_status": "unrouted"
+    },
+    {
+      "component_endpoints": [
+        "circuit.C_XOUT.p1",
+        "circuit.R_XOUT.p1",
+        "circuit.Y1.XOUT"
+      ],
+      "net": "XOUT_XTAL",
+      "routing_status": "unrouted"
+    }
+  ],
+  "full_drc_pass": false,
+  "full_routing_complete": false,
+  "issue": 43,
+  "mandatory_gerber_excellon": "not generated: no supported direct workflow established",
+  "odb_entry_comparisons": [
+    {
+      "classification": "identical",
+      "file": "fonts/standard"
+    },
+    {
+      "classification": "identical",
+      "file": "matrix/matrix"
+    },
+    {
+      "classification": "identical",
+      "file": "misc/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "misc/info"
+    },
+    {
+      "classification": "identical",
+      "file": "misc/last_read"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/eda/data"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/comp_+_bot/components"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/comp_+_bot/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/comp_+_top/components"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/comp_+_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/custom_origin_top/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/custom_origin_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/drill_0_1_plated/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/drill_0_1_plated/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/drill_0_1_plated/tools"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/l1_top/attrlist"
+    },
+    {
+      "classification": "non-deterministic content",
+      "file": "steps/pcb/layers/l1_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/l2_2/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/l2_2/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/l3_bottom/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/l3_bottom/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/overlay_bot/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/overlay_bot/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/overlay_top/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/overlay_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/paste_bot/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/paste_bot/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/paste_top/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/paste_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/rout_0_1_nonplated/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/rout_0_1_nonplated/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/soldermask_bot/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/soldermask_bot/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/soldermask_top/attrlist"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/layers/soldermask_top/features",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/netlists/cadnet/netlist",
+      "unordered_records_excluding_feature_ids_equal": true
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/profile"
+    },
+    {
+      "classification": "identical",
+      "file": "steps/pcb/stephdr"
+    }
+  ],
+  "runs": [
+    {
+      "files": {
+        "bom-review.csv": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d",
+        "electrical-graph.json": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60",
+        "odb.zip": "ce6c4b364fcf212d0c671165a6a402a9c11fd15e8275e81c18ab26f0c3ebc431",
+        "physical-observation.json": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b",
+        "pnp-review.csv": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+      },
+      "odb_entries": {
+        "fonts/standard": "fcccfda5573a4ccb10860978d579cc890ef137898e6627949e98050c9da2f70e",
+        "matrix/matrix": "272d7c2c47250300e225c2bf7d71ebed1c5d1f6d1c96d487bed919c49dead20d",
+        "misc/attrlist": "e778ab779e762c739cf7ca0163982b622bac35742a8b1dc89ce5707cdbb7419d",
+        "misc/info": "35b735fc301c26b7bb90a80cc7c249e5c5ad5a7a4402d15be86b8f0a3516cd3f",
+        "misc/last_read": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/attrlist": "4522cf39711dadefbc345c5eac2d22fd603b5788ec7662cc8ec502530d39f613",
+        "steps/pcb/eda/data": "8421111381df9c78a9309b17916e61e3b7a0b97d28dad818b24169ffcdd999d5",
+        "steps/pcb/layers/comp_+_bot/components": "a9566c0e15ef2168c5474a1f955c1feef95bc929df8d6f823372a52c2fc577fe",
+        "steps/pcb/layers/comp_+_bot/features": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/layers/comp_+_top/components": "bb5e38c264d9ffa12ac7d06058b4a5da748b704d0e3760aad37902756fd73f32",
+        "steps/pcb/layers/comp_+_top/features": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/layers/custom_origin_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/custom_origin_top/features": "6087edf774a4f06b413a7f705d0c3cf99e7df066ee2c1ed995330b6cb45aa01e",
+        "steps/pcb/layers/drill_0_1_plated/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/drill_0_1_plated/features": "15947a30451a33313805f5f11fa8a950f617ef99d1c3f31452daf200b039846f",
+        "steps/pcb/layers/drill_0_1_plated/tools": "7fa0b93958ce63005a149c01b550c8d32036eed2702f1414ef13639a1da89173",
+        "steps/pcb/layers/l1_top/attrlist": "d2e16e1ace576126a88694d808496cfceaa2a3d6433085358cbe5e0830cefd7e",
+        "steps/pcb/layers/l1_top/features": "6bab2850a213d1bd7b7f949acac47930ca7244bdeb1e9f1988127628f9ff8813",
+        "steps/pcb/layers/l2_2/attrlist": "aa3e4118d4612b58c9ab010c5f4f394f157125ec1eeeee9c8bda66e6948ec8a5",
+        "steps/pcb/layers/l2_2/features": "e778ab779e762c739cf7ca0163982b622bac35742a8b1dc89ce5707cdbb7419d",
+        "steps/pcb/layers/l3_bottom/attrlist": "b6cfdd75a9b5bfc3dbb08f3f77d1dfdc2bc71796997901b2e5293c564d07f1b5",
+        "steps/pcb/layers/l3_bottom/features": "a55f95fdd34da14db3ce6295517ce57b2a7a0b91ec5b45fb805e5e6d4a273657",
+        "steps/pcb/layers/overlay_bot/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/overlay_bot/features": "39c681b16a7b31d47523a869038843e88027c6a50fa1280b59572621ee93e2df",
+        "steps/pcb/layers/overlay_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/overlay_top/features": "c6c4ef9285d8d06cf00d212cb71925272c4a14b1b50675bfef3dd26c09335a67",
+        "steps/pcb/layers/paste_bot/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/paste_bot/features": "aba62f01218f0c3c0d5dd5e8d637f59fc1754bcd7db56b645a47de303f4813d1",
+        "steps/pcb/layers/paste_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/paste_top/features": "b1c8a20b6c86b87d81dc008a967e7ffd72c1720478810481e980e8724b119bc3",
+        "steps/pcb/layers/rout_0_1_nonplated/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/rout_0_1_nonplated/features": "2038e5e50e9bee752799b46d2f959559184674bd8bd4493d2e2a990ef07f3ecf",
+        "steps/pcb/layers/soldermask_bot/attrlist": "a26d932ecda0745ca0722d56de062fe9a29a081648b6eb959fc57c995ad2eb4e",
+        "steps/pcb/layers/soldermask_bot/features": "854bf309a145abc4cf2e0252150a42d052972a5c83cfc816c19abe0af8406f0a",
+        "steps/pcb/layers/soldermask_top/attrlist": "ef8809c4cec1dae1006a2edc67ffa600e4303fc7f0559b310143aa50d9afe3c2",
+        "steps/pcb/layers/soldermask_top/features": "745bdb1dea8bc43380c74ab4c9f2cc8087dee78d2eeda498f45437703a653d73",
+        "steps/pcb/netlists/cadnet/netlist": "fc2ac14d086746536b7df9f29444f84c8357012271b030fd7b4a51b8faae6666",
+        "steps/pcb/profile": "7051a47cc85142becf58acd58157dcdc4793caa8b57b133ea6e0c38dbb8cd1bc",
+        "steps/pcb/stephdr": "bd7ef16f3019cf53f1053d4006595d029fbcd80e1de21900d5d2a09033fa84b1"
+      },
+      "odb_pnp_comparison": {
+        "component_count": 68,
+        "differences": [],
+        "result": "PASS"
+      },
+      "placement_count": 68,
+      "realized_route_count": 6,
+      "route_layers": [
+        0,
+        1
+      ],
+      "run": 1,
+      "via_count": 2
+    },
+    {
+      "files": {
+        "bom-review.csv": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d",
+        "electrical-graph.json": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60",
+        "odb.zip": "e97ab341aa53552fa73795c3e0f2b074adfc15e40d9ecbc4b6eaa8feb8f7c119",
+        "physical-observation.json": "4a8ca9bd4690ee7afedb44c1859bb9fe518293c3d08c950bd4c8b38cd7bca58b",
+        "pnp-review.csv": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+      },
+      "odb_entries": {
+        "fonts/standard": "fcccfda5573a4ccb10860978d579cc890ef137898e6627949e98050c9da2f70e",
+        "matrix/matrix": "272d7c2c47250300e225c2bf7d71ebed1c5d1f6d1c96d487bed919c49dead20d",
+        "misc/attrlist": "e778ab779e762c739cf7ca0163982b622bac35742a8b1dc89ce5707cdbb7419d",
+        "misc/info": "35b735fc301c26b7bb90a80cc7c249e5c5ad5a7a4402d15be86b8f0a3516cd3f",
+        "misc/last_read": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/attrlist": "4522cf39711dadefbc345c5eac2d22fd603b5788ec7662cc8ec502530d39f613",
+        "steps/pcb/eda/data": "8421111381df9c78a9309b17916e61e3b7a0b97d28dad818b24169ffcdd999d5",
+        "steps/pcb/layers/comp_+_bot/components": "a9566c0e15ef2168c5474a1f955c1feef95bc929df8d6f823372a52c2fc577fe",
+        "steps/pcb/layers/comp_+_bot/features": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/layers/comp_+_top/components": "bb5e38c264d9ffa12ac7d06058b4a5da748b704d0e3760aad37902756fd73f32",
+        "steps/pcb/layers/comp_+_top/features": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "steps/pcb/layers/custom_origin_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/custom_origin_top/features": "6087edf774a4f06b413a7f705d0c3cf99e7df066ee2c1ed995330b6cb45aa01e",
+        "steps/pcb/layers/drill_0_1_plated/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/drill_0_1_plated/features": "15947a30451a33313805f5f11fa8a950f617ef99d1c3f31452daf200b039846f",
+        "steps/pcb/layers/drill_0_1_plated/tools": "7fa0b93958ce63005a149c01b550c8d32036eed2702f1414ef13639a1da89173",
+        "steps/pcb/layers/l1_top/attrlist": "d2e16e1ace576126a88694d808496cfceaa2a3d6433085358cbe5e0830cefd7e",
+        "steps/pcb/layers/l1_top/features": "112b21bfe9b8f32d26256d898365e479e3a82027c4304e345035643fe857a753",
+        "steps/pcb/layers/l2_2/attrlist": "aa3e4118d4612b58c9ab010c5f4f394f157125ec1eeeee9c8bda66e6948ec8a5",
+        "steps/pcb/layers/l2_2/features": "e778ab779e762c739cf7ca0163982b622bac35742a8b1dc89ce5707cdbb7419d",
+        "steps/pcb/layers/l3_bottom/attrlist": "b6cfdd75a9b5bfc3dbb08f3f77d1dfdc2bc71796997901b2e5293c564d07f1b5",
+        "steps/pcb/layers/l3_bottom/features": "a55f95fdd34da14db3ce6295517ce57b2a7a0b91ec5b45fb805e5e6d4a273657",
+        "steps/pcb/layers/overlay_bot/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/overlay_bot/features": "39c681b16a7b31d47523a869038843e88027c6a50fa1280b59572621ee93e2df",
+        "steps/pcb/layers/overlay_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/overlay_top/features": "c6c4ef9285d8d06cf00d212cb71925272c4a14b1b50675bfef3dd26c09335a67",
+        "steps/pcb/layers/paste_bot/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/paste_bot/features": "aba62f01218f0c3c0d5dd5e8d637f59fc1754bcd7db56b645a47de303f4813d1",
+        "steps/pcb/layers/paste_top/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/paste_top/features": "b1c8a20b6c86b87d81dc008a967e7ffd72c1720478810481e980e8724b119bc3",
+        "steps/pcb/layers/rout_0_1_nonplated/attrlist": "a0e59b8496598c6674b96c2db871ba9b83440ddea65b00bf8940ef6e5bbf1b7d",
+        "steps/pcb/layers/rout_0_1_nonplated/features": "2038e5e50e9bee752799b46d2f959559184674bd8bd4493d2e2a990ef07f3ecf",
+        "steps/pcb/layers/soldermask_bot/attrlist": "a26d932ecda0745ca0722d56de062fe9a29a081648b6eb959fc57c995ad2eb4e",
+        "steps/pcb/layers/soldermask_bot/features": "854bf309a145abc4cf2e0252150a42d052972a5c83cfc816c19abe0af8406f0a",
+        "steps/pcb/layers/soldermask_top/attrlist": "ef8809c4cec1dae1006a2edc67ffa600e4303fc7f0559b310143aa50d9afe3c2",
+        "steps/pcb/layers/soldermask_top/features": "745bdb1dea8bc43380c74ab4c9f2cc8087dee78d2eeda498f45437703a653d73",
+        "steps/pcb/netlists/cadnet/netlist": "fc2ac14d086746536b7df9f29444f84c8357012271b030fd7b4a51b8faae6666",
+        "steps/pcb/profile": "7051a47cc85142becf58acd58157dcdc4793caa8b57b133ea6e0c38dbb8cd1bc",
+        "steps/pcb/stephdr": "bd7ef16f3019cf53f1053d4006595d029fbcd80e1de21900d5d2a09033fa84b1"
+      },
+      "odb_pnp_comparison": {
+        "component_count": 68,
+        "differences": [],
+        "result": "PASS"
+      },
+      "placement_count": 68,
+      "realized_route_count": 6,
+      "route_layers": [
+        0,
+        1
+      ],
+      "run": 2,
+      "via_count": 2
+    }
+  ],
+  "schema_version": 1,
+  "source_sha256": {
+    "he_piantor_42_jitx/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/component_test_designs.py": "a9520ac528b1cc986376290a66d8b1b667508a630db1e2371eb1ba8592a9860d",
+    "he_piantor_42_jitx/components/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/hro_type_c_31_m_12.py": "cd2a6fb603ccf22addebe810807793e786dc9d2fb1c5a3aa853771baf7418eb1",
+    "he_piantor_42_jitx/components/crystals/__init__.py": "b8956389ed1d44d6ae653e657d6d6fe87bc2ef448dde30d081850bd3ead6c775",
+    "he_piantor_42_jitx/components/crystals/abracon_abm8_272_t3.py": "9b235ed3def042ff472cc0b7e7bf14cf80b1be9e05ef1f4423f45cc4af10d50f",
+    "he_piantor_42_jitx/components/generic_electrical.py": "90a89067cd00eeb43f5310a676d8e4f49f9aa8cb11ab50a175bb9ccaa33905f3",
+    "he_piantor_42_jitx/components/mcu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/mcu/raspberry_pi_rp2040.py": "3c867ffca15f7da8781c8623a6c23ba378b4428bb1cfbd0f22598cc3da1fe566",
+    "he_piantor_42_jitx/components/memory/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/memory/winbond_w25q16jvuxiq.py": "c7f6973d2fb6e287ce6d0edd30d009ed6abfda084f2c4b7b4af7775cee9d3602",
+    "he_piantor_42_jitx/components/power/__init__.py": "7b544e8a0cba403fa60e99d509559ae4af0f40568a334657175faf2fe039181c",
+    "he_piantor_42_jitx/components/power/diodes_ap2112k_3_3trg1.py": "2ab32372b566db3f1caae7f0e8495a504057d652e19d0919d9be9e96c4e0062a",
+    "he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py": "8cd4ae0920a257278aba61f341b9e979f1cf3d9d182d79d6a7f51ee44ee39703",
+    "he_piantor_42_jitx/components/protection/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/protection/st_usblc6_2sc6.py": "2156f468378ac6a2b3d73f5473277c72a2af21fc2db62bc7327f00b2d5cbed48",
+    "he_piantor_42_jitx/components/resistor.py": "76df134f2bd5d8a139ee3c4c1d1e614cae4ea1a2baaacf4b5579911a28607e0a",
+    "he_piantor_42_jitx/components/sensors/__init__.py": "bb9ee80ce8bfb9777d2ab5343aad00ba69b0eca5a5dfedcacdc7c8bcb31e1f9b",
+    "he_piantor_42_jitx/components/sensors/texas_instruments_drv5055a3qdbzr.py": "d42de4035298b946a0d3714ea34acb0c63ff0cd3950b74e9c3b9df504f4e2340",
+    "he_piantor_42_jitx/components/switches/__init__.py": "6e4180198ff27c2a704e238306c7d85c86ce48e03c6ca15cfaeea9be1a83825c",
+    "he_piantor_42_jitx/components/switches/texas_instruments_tmux1208pwr.py": "df52a31e9e74b90962351892d444270d201b4121f4f6cdc78c99bf8305592523",
+    "he_piantor_42_jitx/m1.py": "4a1f13c169da45681e375a42e5b2b6475cec9a09899b06fcee346cddad6fbfc2",
+    "he_piantor_42_jitx/main.py": "12e7b6445b3b339cc9df3e6dd0564c589c585179ee01c09487f1536be19ce690",
+    "he_piantor_42_jitx/physical_qualification.py": "70f4ca2fce1834ea2e0054b141ed29aeeeb2c5b072ff7f883d90b19e1c074df7",
+    "parity/__init__.py": "a5cc953bcaf54795d8e789f79e15d77add0f6874265c935058ce6f3e2c9d5048",
+    "parity/exporter.py": "a4251ed79f679af18d749208f08ab4b85164bf210f1ab5bcb5b83eac5db8ee97",
+    "parity/m1-normalization.json": "11125d2a935ef676e5774a3080de62f194ac91c1a7d1ae56ebce6c0fa1948476",
+    "parity/m1-parity-contract.json": "90caed2ea13186183a06a9d8c135908a35658a6caf0c35dd8522e2fccfa07cb9",
+    "parity/m1.py": "a7f41868b065dcf8fdd26c1279b579e1416497caa9729064929ffb0c311984a4",
+    "physical/__init__.py": "f9639744e592d6335a351148d4c97db66687dc71ab5a9a111b2af85b0631b0ad",
+    "physical/exporter.py": "e7f320eb3dfc42359f03ca6c08ed85c9620dc937d9d41592df4846fcf7fe2bc9",
+    "physical/reproduce.py": "ce4915f2d4c72e3be53a19d1655ce050275bcbfdd303a4b734969ddd29b2817d",
+    "pyproject.toml": "222dfac2d4571f8bebf8b3e4493a6ced49fcb68ff27e413b45a493a359b6dee7",
+    "uv.lock": "be6a128df630881604b0472922bee10f1129fbeed67986c43da3ebb2fd0fe29d"
+  },
+  "unconnected_component_endpoints": [
+    "circuit.J_USB.A8",
+    "circuit.J_USB.B8",
+    "circuit.U_FLASH.EP",
+    "circuit.U_LDO.NC",
+    "circuit.U_LOAD.NC",
+    "circuit.U_LOAD.QOD",
+    "circuit.U_MCU.GPIO0",
+    "circuit.U_MCU.GPIO1",
+    "circuit.U_MCU.GPIO10",
+    "circuit.U_MCU.GPIO12",
+    "circuit.U_MCU.GPIO13",
+    "circuit.U_MCU.GPIO14",
+    "circuit.U_MCU.GPIO15",
+    "circuit.U_MCU.GPIO16",
+    "circuit.U_MCU.GPIO17",
+    "circuit.U_MCU.GPIO18",
+    "circuit.U_MCU.GPIO19",
+    "circuit.U_MCU.GPIO20",
+    "circuit.U_MCU.GPIO21",
+    "circuit.U_MCU.GPIO22",
+    "circuit.U_MCU.GPIO23",
+    "circuit.U_MCU.GPIO24",
+    "circuit.U_MCU.GPIO25",
+    "circuit.U_MCU.GPIO27",
+    "circuit.U_MCU.GPIO28",
+    "circuit.U_MCU.GPIO29",
+    "circuit.U_MCU.GPIO6",
+    "circuit.U_MCU.GPIO8",
+    "circuit.U_MCU.GPIO9",
+    "circuit.U_MUX.NC"
+  ],
+  "verdict": "BLOCKED",
+  "wrapper_component_topology_preserved": true
+}

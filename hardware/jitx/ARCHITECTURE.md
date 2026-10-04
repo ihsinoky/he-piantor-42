@@ -7,6 +7,7 @@ hardware/jitx/
 ├── he_piantor_42_jitx/
 │   ├── main.py            # CLI-seeded bootstrap design
 │   ├── m1.py              # M1 electrical challenger assembly
+│   ├── physical_qualification.py # Disposable C4B wrapper; not physical Rev.M1
 │   └── components/        # Accepted manufacturer and generic models
 ├── parity/
 │   ├── exporter.py         # Registered normalized built-design graph exporter
@@ -14,6 +15,7 @@ hardware/jitx/
 │   ├── m1-normalization.json   # Explicit identity mapping
 │   ├── m1.py                   # Strict electrical comparator
 │   └── evidence/               # Actual runtime / normalized graphs and result
+├── physical/              # C4B observer, reproduction runner and evidence
 ├── tests/
 │   ├── test_bootstrap_graph.py
 │   └── test_m1_electrical_parity.py
@@ -24,8 +26,8 @@ hardware/jitx/
 
 ## Backend role and product boundary
 
-JITX remains a challenger pending C4B physical/manufacturing proof and C4C
-adoption Human Gate (G0A). The frozen tscircuit four-key source and verifier
+JITX remains a challenger: C4B investigation is BLOCKED; C4C / G0A is next
+for a Human Gate decision on the concrete evidence and remaining investment. The frozen tscircuit four-key source and verifier
 remain the historical electrical authority under unchanged D-014 and a
 permanent qualification oracle. They do not define the physical Rev.M1 product.
 The bootstrap seed is not the four-key parity implementation.
@@ -139,7 +141,9 @@ See `parity/EDA-002C2.md` and `parity/evidence/` for review and validation.
 
 ## EDA-002C4 sequence — evaluation rebaseline (issue #41)
 
-### EDA-002C4A — documentation / architecture rebaseline
+### EDA-002C4A — accepted / merged PR #42
+
+Merged baseline: `8f6c401a902353547dcacbdfc76978ac807ce7f9`.
 
 Completion freezes the legacy four-key golden permanently as a qualification
 fixture, retains C2 electrical PASS and C3 historical geometry evidence,
@@ -151,29 +155,28 @@ occur here. D-014 remains unchanged. C3 discrepancies do not invalidate C2;
 manufacturer evidence informs the new product, without correcting the legacy
 tscircuit geometry or declaring all C3 questions resolved.
 
-### EDA-002C4B — future physical/manufacturing pipeline proof
+### EDA-002C4B — completed investigation / BLOCKED (issue #43)
 
-Use the existing four-key JITX electrical topology as a qualification fixture,
-not the physical Rev.M1 product. Use stock/supported JITX workflow as far as
-practical and record supported surfaces, limitations and reproduction steps.
-Prove and review:
+The disposable four-key physical wrapper builds with a project-owned 80 × 60 mm,
+nominal 1.2 mm two-layer stack and explicit placement of all 68 existing
+components. Six source route segments realize copper on both layers through
+two vias. Public capture, BOM/PnP review CSVs and supported ODB++ exports repeat;
+68 ODB placements/angles agree with the review CSVs. C2 electrical parity
+remains PASS with the accepted counts and unchanged contract.
 
-- board/substrate definition, component placement and two-layer routing;
-- design-rule validation / DRC-equivalent capability with reviewable results;
-- deterministic builds and reproduction from source-controlled inputs;
-- Gerber, drill data, BOM, pick-and-place / centroid data, and other outputs
-  required for the JLCPCB workflow;
-- reviewability of generated outputs and suitability for AI-assisted,
-  source-controlled development.
+**BLOCKED:** full board routing/DRC and a supported, qualified Gerber/Excellon
+handoff are not demonstrated. ODB content order/IDs vary despite matching narrow
+geometric records. Supported KiCad export was investigated; downstream CAM and
+JLCPCB rotation conventions remain unqualified. Generic BOM completeness is a
+separate product sourcing limitation. No private API, artifact patch, external
+CAD round-trip, component redesign, product Main/Wing implementation or order
+was used. See the [C4B report](physical/EDA-002C4B.md) and machine-readable evidence.
 
-The gate needs a reproducible complete output package and documented checks
-for each capability; unsupported steps or gaps must be explicit in the C4B
-result for C4C review. No board is ordered. Geometry equality to frozen
-legacy tscircuit is not required. Accepted C2 topology/parity stays protected;
-manufacturer-correct C1/C3 JITX geometry may be used without rewriting the
-legacy fixture. Physical proof does not itself adopt JITX.
+C4C is next / Human Gate; G0A is ready-for-decision on this blocked evidence,
+not GO. G0B remains not-ready and EVT-002 remains blocked/unstarted. No D-016
+or adoption decision is made here.
 
-### EDA-002C4C — future Human Gate / G0A
+### EDA-002C4C — next / Human Gate / G0A
 
 Inputs: C0-C3 accepted evidence and C4B physical/manufacturing pipeline result.
 Explicit outcome:
