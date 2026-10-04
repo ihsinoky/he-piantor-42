@@ -10,7 +10,7 @@
     "C0_C1_C2_regressions": "PASS: 20 tests in 25.767s, unchanged suite with real exports",
     "complete_issue_and_historical_evidence_read": "PASS",
     "diff_whitespace": "PASS",
-    "engineering_ci": "PENDING Draft PR; scope classifier expects layout/kicad/firmware skipped",
+    "engineering_ci": "PASS: Detect engineering changes and Engineering gate; layout/KiCad product/firmware jobs correctly skipped",
     "gerber_excellon_position_twice": "PASS generation; manufacturing qualification BLOCKED",
     "headless_drc_twice": "PASS execution; code 5 each; 147 expected missing connections + 4 clearance errors + 68 warnings",
     "historical_source_hashes": "PASS: 35 source/config hashes match C4B",
@@ -26,6 +26,19 @@
     "read_only_geometry_net_drill_position_reconciliation": "PASS narrow checks; material findings retained",
     "ruff": "PASS: lint and 45 files formatted",
     "tscircuit_ci": "NOT APPLICABLE: no triggering paths changed"
+  },
+  "ci_snapshot": {
+    "conclusion": "success",
+    "jobs": {
+      "Detect engineering changes": "success",
+      "Engineering gate": "success",
+      "KiCad ERC / DRC": "skipped",
+      "Layout generator": "skipped",
+      "Sensor-test firmware": "skipped"
+    },
+    "run_url": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37190341466",
+    "scope": "Report/source/evidence commit; subsequent update only records this CI result",
+    "tested_commit": "24a81944ce70ee1ee9b312f53c227c8c31b3d705"
   },
   "full_routing_completed": false,
   "out_of_scope_discoveries": [
