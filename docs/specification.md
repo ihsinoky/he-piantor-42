@@ -1,20 +1,29 @@
 # HE Piantor 42 - System Specification
 
 Status: Engineering / sensor-evaluation design
-Updated: 2026-09-26
+Updated: 2026-10-04 (D-015 architecture disposition)
+
+D-015 rebaselines physical Rev.M1 as reusable Main + Evaluation Wing(s) and
+Rev.A as accepted Main + Left/Right 21-key Wings. The historical one-PCB
+implementation and fixed 17.0 mm pitch below are superseded/reopened; prior
+geometry/keycap rationale remains evidence. Production pitch is selected at G2
+after 17.0 / 16.5 / 16.0 mm experiments. See the authoritative
+[project gates](project-status.md#human-gates) and
+[physical architecture](../hardware/rev-m1/architecture.md). The frozen four-key
+fixture remains separate; no physical hardware is implemented in C4A.
 
 ## 1. Product concept
 
 A 42-key one-piece Hall-effect keyboard derived from the Beekeeb Piantor layout.
 
-The left and right key fields are joined into one PCB and arranged in a reverse-V shape. The current geometric interpretation is an internal angle of 120 degrees, equivalent to rotating the left and right key fields approximately +30 degrees for the left field and -30 degrees for the right field in the project coordinate convention (+x right, +y down).
+Historical implementation concept: the left and right key fields were joined into one PCB and arranged in a reverse-V shape. D-015 now proposes separate Left/Right Wings connected to reusable Main; the unified keyboard intent remains. The current geometric interpretation is an internal angle of 120 degrees, equivalent to rotating the left and right key fields approximately +30 degrees for the left field and -30 degrees for the right field in the project coordinate convention (+x right, +y down).
 
 ## 2. Fixed user requirements
 
 - 42 keys.
 - Piantor-derived column stagger and thumb cluster.
 - One-piece keyboard; not a split keyboard.
-- Target key pitch: 17.0 mm.
+- Production pitch open under D-015: compare 17.0 / 16.5 / 16.0 mm.
 - Full-height Hall-effect magnetic switches; low-profile switches are not desired.
 - Wired USB only.
 - Vial-compatible keymap.
@@ -76,6 +85,9 @@ The production scan topology uses seven active addresses per bank:
 - three mux outputs are sampled in parallel by GPIO26 / GPIO27 / GPIO28,
 - 2 banks x 7 addresses x 3 ADC channels = 42 keys.
 
+Hall and TMUX reside on Wings; three ADC dividers/filters and RP2040 reside
+on Main. The Main/Wing interconnect is part of the measured analog path.
+
 Each mux output is scaled by a 6.8 kOhm / 10 kOhm divider and uses a 1 nF ADC-node capacitor as the initial settling/noise baseline.
 
 Both the evaluation PCB and production PCB use 1.2 mm PCB thickness as the baseline because the selected switch's published magnetic-flux figures are specified at 1.2 mm.
@@ -107,7 +119,10 @@ The first firmware milestones are:
 
 ## 6. Mechanical architecture
 
-The main PCB will also define the switch locations and the one-piece reverse-V geometry.
+D-015 places switch geometry on Left/Right Wings generated from the same
+project-owned or explicitly approved definition; Main carries MCU/power/ADC
+conditioning. Historical one-piece PCB geometry is reference evidence, not the
+new manufacturing design.
 
 The enclosure will be parameterized and generated as STEP and STL. The first design target is FDM printing.
 
@@ -125,10 +140,10 @@ Mechanical design shall account for:
 1. Freeze magnetic switch and narrow keycap candidates.
 2. Extract Piantor key-center geometry.
 3. Select Hall sensor and acquisition architecture.
-4. Design a small Hall-effect evaluation PCB.
-5. Manufacture and measure it.
-6. Freeze sensor range and calibration method.
-7. Design the 42-key main PCB.
+4. Pass G0A/G0B and design reusable Main + Evaluation Wing(s).
+5. Pass G1, manufacture and measure the actual Main/Wing path.
+6. At G2 select pitch/magnetic architecture, sensor range and calibration method.
+7. Reuse accepted Main with Left/Right 21-key Wings for Rev.A.
 8. Implement Vial and Hall firmware.
 9. Design enclosure.
 10. Generate JLCPCB and 3D-print packages.
@@ -136,12 +151,16 @@ Mechanical design shall account for:
 
 ## 8. Validation gates
 
+The following historical technical checklists remain useful measurement intent;
+G0A/G0B and G1-G5 in [project status](project-status.md#human-gates) govern
+current release authority. No fixed-pitch or single-PCB requirement is inferred.
+
 ### Gate 1 - Requirements freeze
 
 Required:
 - Switch selected.
 - Keycap fit judged acceptable.
-- 17.0 mm pitch retained or intentionally changed.
+- Production pitch selected by G2 among 17.0 / 16.5 / 16.0 mm.
 - 120-degree geometry definition confirmed.
 - Hall sensor candidate selected.
 
