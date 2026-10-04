@@ -1,0 +1,734 @@
+{
+  "blockers": [
+    "Four source USB copper-to-NPTH gaps below 0.25 mm qualification rule",
+    "KiCad general thickness 1.6 mm contradicts 1.2 mm source/exported stackup"
+  ],
+  "electrical_parity": {
+    "compared_component_count": 68,
+    "compared_edge_count": 185,
+    "compared_endpoint_count": 200,
+    "compared_named_net_count": 43,
+    "differences": [],
+    "direct_link_count": 4,
+    "geometry_excluded": true,
+    "intentional_nc_count": 7,
+    "note": "Electrical semantics only. Geometry parity NOT established; HRO/Winbond reconciliation deferred to EDA-002C3.",
+    "result": "PASS"
+  },
+  "limitations": [
+    "68 generated library-registration warnings",
+    "Fixture partial routing remains independent of CAM",
+    "Supplier rotation and assembly sourcing remain unqualified"
+  ],
+  "original_component_topology_preserved": true,
+  "pcb_semantics_equal_excluding_ids_net_numbers_order": true,
+  "runs": [
+    {
+      "component_count": 68,
+      "copper_layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drc_counts": {
+        "hole_clearance": 4,
+        "lib_footprint_issues": 68
+      },
+      "drill_hits": {
+        "NPTH": [
+          [
+            0.6,
+            111.61,
+            -132.5
+          ],
+          [
+            0.6,
+            117.39,
+            -132.5
+          ]
+        ],
+        "PTH": [
+          [
+            0.3,
+            170.5,
+            -120.0
+          ],
+          [
+            0.3,
+            172.5,
+            -120.0
+          ],
+          [
+            0.6,
+            110.175,
+            -136.58,
+            110.175,
+            -135.78
+          ],
+          [
+            0.6,
+            110.175,
+            -132.55,
+            110.175,
+            -131.45
+          ],
+          [
+            0.6,
+            118.825,
+            -136.58,
+            118.825,
+            -135.78
+          ],
+          [
+            0.6,
+            118.825,
+            -132.55,
+            118.825,
+            -131.45
+          ]
+        ]
+      },
+      "expected_unconnected_per_net": {
+        "ADC_SENSE": 4,
+        "D_STATUS_cathode": 1,
+        "GND": 47,
+        "H0_RAW": 1,
+        "H1_RAW": 1,
+        "H2_RAW": 1,
+        "H3_RAW": 1,
+        "HALL_5V": 12,
+        "HALL_PWR_EN": 1,
+        "MUX_A0": 1,
+        "MUX_A1": 1,
+        "MUX_A2": 1,
+        "MUX_D": 2,
+        "MUX_EN0": 1,
+        "MUX_S5": 1,
+        "MUX_S6": 1,
+        "MUX_S7": 1,
+        "MUX_S8": 1,
+        "QSPI_SCLK": 1,
+        "QSPI_SD0": 1,
+        "QSPI_SD1": 1,
+        "QSPI_SD2": 1,
+        "QSPI_SD3": 1,
+        "QSPI_SS_FLASH": 2,
+        "QSPI_SS_MCU": 1,
+        "RUN": 2,
+        "R_CC2_p1": 1,
+        "STATUS_LED": 1,
+        "SWCLK": 1,
+        "SWDIO": 1,
+        "USB_DM": 1,
+        "USB_DM_CONN": 2,
+        "USB_DM_ESD": 1,
+        "USB_DP": 1,
+        "USB_DP_CONN": 2,
+        "USB_DP_ESD": 1,
+        "USB_SHIELD": 3,
+        "V1V1": 4,
+        "V3V3": 24,
+        "VBUS": 8,
+        "XIN": 2,
+        "XOUT": 1,
+        "XOUT_XTAL": 2,
+        "cathode": 1,
+        "p1": 1
+      },
+      "general_thickness_mm": 1.6,
+      "gerber_file_functions": [
+        {
+          "FileFunction": "Copper,L1,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Cu.gtl"
+        },
+        {
+          "FileFunction": "Copper,L2,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Cu.gbl"
+        },
+        {
+          "FileFunction": "SolderPaste,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Paste.gtp"
+        },
+        {
+          "FileFunction": "SolderPaste,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Paste.gbp"
+        },
+        {
+          "FileFunction": "Legend,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Silkscreen.gto"
+        },
+        {
+          "FileFunction": "Legend,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Silkscreen.gbo"
+        },
+        {
+          "FileFunction": "SolderMask,Top",
+          "FilePolarity": "Negative",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Mask.gts"
+        },
+        {
+          "FileFunction": "SolderMask,Bot",
+          "FilePolarity": "Negative",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Mask.gbs"
+        },
+        {
+          "FileFunction": "Profile",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-Edge_Cuts.gm1"
+        }
+      ],
+      "gerber_job_thickness_mm": 1.6,
+      "historical_c4b_capture_hashes_match": true,
+      "net_differences": [],
+      "outline": [
+        [
+          [
+            99.5,
+            78.0
+          ],
+          [
+            99.5,
+            138.0
+          ]
+        ],
+        [
+          [
+            99.5,
+            138.0
+          ],
+          [
+            179.5,
+            138.0
+          ]
+        ],
+        [
+          [
+            179.5,
+            78.0
+          ],
+          [
+            99.5,
+            78.0
+          ]
+        ],
+        [
+          [
+            179.5,
+            138.0
+          ],
+          [
+            179.5,
+            78.0
+          ]
+        ]
+      ],
+      "pad_geometry_differences": [],
+      "physical_pad_count": 228,
+      "placement_differences": [],
+      "position_rows": 68,
+      "route_observation_arc_tolerance_mm": 0.01,
+      "run": 1,
+      "source_hole_clearance": [
+        {
+          "endpoint": "circuit.J_USB.A1_B12",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2001 mm)",
+          "source_gap_mm": 0.20010773853102662
+        },
+        {
+          "endpoint": "circuit.J_USB.A4_B9",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2349 mm)",
+          "source_gap_mm": 0.23489173289962853
+        },
+        {
+          "endpoint": "circuit.J_USB.A9_B4",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2349 mm)",
+          "source_gap_mm": 0.23489173289962853
+        },
+        {
+          "endpoint": "circuit.J_USB.A12_B1",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2001 mm)",
+          "source_gap_mm": 0.20010773853102662
+        }
+      ],
+      "source_route_comparison": [
+        {
+          "hausdorff_mm": 0.002185177107387374,
+          "layer": 0,
+          "symmetric_difference_mm2": 0.00044864537060117487
+        },
+        {
+          "hausdorff_mm": 0.00012045437949558919,
+          "layer": 1,
+          "symmetric_difference_mm2": 4.7287603889059794e-05
+        }
+      ],
+      "stackup_total_mm": 1.2000000000000002,
+      "unconnected_count": 147,
+      "unconnected_per_net": {
+        "ADC_SENSE": 4,
+        "D_STATUS_cathode": 1,
+        "GND": 47,
+        "H0_RAW": 1,
+        "H1_RAW": 1,
+        "H2_RAW": 1,
+        "H3_RAW": 1,
+        "HALL_5V": 12,
+        "HALL_PWR_EN": 1,
+        "MUX_A0": 1,
+        "MUX_A1": 1,
+        "MUX_A2": 1,
+        "MUX_D": 2,
+        "MUX_EN0": 1,
+        "MUX_S5": 1,
+        "MUX_S6": 1,
+        "MUX_S7": 1,
+        "MUX_S8": 1,
+        "QSPI_SCLK": 1,
+        "QSPI_SD0": 1,
+        "QSPI_SD1": 1,
+        "QSPI_SD2": 1,
+        "QSPI_SD3": 1,
+        "QSPI_SS_FLASH": 2,
+        "QSPI_SS_MCU": 1,
+        "RUN": 2,
+        "R_CC2_p1": 1,
+        "STATUS_LED": 1,
+        "SWCLK": 1,
+        "SWDIO": 1,
+        "USB_DM": 1,
+        "USB_DM_CONN": 2,
+        "USB_DM_ESD": 1,
+        "USB_DP": 1,
+        "USB_DP_CONN": 2,
+        "USB_DP_ESD": 1,
+        "USB_SHIELD": 3,
+        "V1V1": 4,
+        "V3V3": 24,
+        "VBUS": 8,
+        "XIN": 2,
+        "XOUT": 1,
+        "XOUT_XTAL": 2,
+        "cathode": 1,
+        "p1": 1
+      },
+      "unnamed_net_aliases": [
+        {
+          "endpoints": [
+            "circuit.D_POWER.cathode",
+            "circuit.R_POWER_LED.p1"
+          ],
+          "kicad_net": "cathode"
+        },
+        {
+          "endpoints": [
+            "circuit.D_STATUS.cathode",
+            "circuit.R_STATUS_LED.p1"
+          ],
+          "kicad_net": "D_STATUS_cathode"
+        },
+        {
+          "endpoints": [
+            "circuit.J_USB.A5",
+            "circuit.R_CC1.p1"
+          ],
+          "kicad_net": "p1"
+        },
+        {
+          "endpoints": [
+            "circuit.J_USB.B5",
+            "circuit.R_CC2.p1"
+          ],
+          "kicad_net": "R_CC2_p1"
+        }
+      ],
+      "unrouted_reconciliation": "PASS",
+      "vias": [
+        {
+          "at": [
+            170.5,
+            120.0
+          ],
+          "drill": 0.3,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ],
+          "net": "H0_RAW",
+          "size": 0.65
+        },
+        {
+          "at": [
+            172.5,
+            120.0
+          ],
+          "drill": 0.3,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ],
+          "net": "H0_RAW",
+          "size": 0.65
+        }
+      ]
+    },
+    {
+      "component_count": 68,
+      "copper_layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drc_counts": {
+        "hole_clearance": 4,
+        "lib_footprint_issues": 68
+      },
+      "drill_hits": {
+        "NPTH": [
+          [
+            0.6,
+            111.61,
+            -132.5
+          ],
+          [
+            0.6,
+            117.39,
+            -132.5
+          ]
+        ],
+        "PTH": [
+          [
+            0.3,
+            170.5,
+            -120.0
+          ],
+          [
+            0.3,
+            172.5,
+            -120.0
+          ],
+          [
+            0.6,
+            110.175,
+            -136.58,
+            110.175,
+            -135.78
+          ],
+          [
+            0.6,
+            110.175,
+            -132.55,
+            110.175,
+            -131.45
+          ],
+          [
+            0.6,
+            118.825,
+            -136.58,
+            118.825,
+            -135.78
+          ],
+          [
+            0.6,
+            118.825,
+            -132.55,
+            118.825,
+            -131.45
+          ]
+        ]
+      },
+      "expected_unconnected_per_net": {
+        "ADC_SENSE": 4,
+        "D_STATUS_cathode": 1,
+        "GND": 47,
+        "H0_RAW": 1,
+        "H1_RAW": 1,
+        "H2_RAW": 1,
+        "H3_RAW": 1,
+        "HALL_5V": 12,
+        "HALL_PWR_EN": 1,
+        "MUX_A0": 1,
+        "MUX_A1": 1,
+        "MUX_A2": 1,
+        "MUX_D": 2,
+        "MUX_EN0": 1,
+        "MUX_S5": 1,
+        "MUX_S6": 1,
+        "MUX_S7": 1,
+        "MUX_S8": 1,
+        "QSPI_SCLK": 1,
+        "QSPI_SD0": 1,
+        "QSPI_SD1": 1,
+        "QSPI_SD2": 1,
+        "QSPI_SD3": 1,
+        "QSPI_SS_FLASH": 2,
+        "QSPI_SS_MCU": 1,
+        "RUN": 2,
+        "R_CC2_p1": 1,
+        "STATUS_LED": 1,
+        "SWCLK": 1,
+        "SWDIO": 1,
+        "USB_DM": 1,
+        "USB_DM_CONN": 2,
+        "USB_DM_ESD": 1,
+        "USB_DP": 1,
+        "USB_DP_CONN": 2,
+        "USB_DP_ESD": 1,
+        "USB_SHIELD": 3,
+        "V1V1": 4,
+        "V3V3": 24,
+        "VBUS": 8,
+        "XIN": 2,
+        "XOUT": 1,
+        "XOUT_XTAL": 2,
+        "cathode": 1,
+        "p1": 1
+      },
+      "general_thickness_mm": 1.6,
+      "gerber_file_functions": [
+        {
+          "FileFunction": "Copper,L1,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Cu.gtl"
+        },
+        {
+          "FileFunction": "Copper,L2,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Cu.gbl"
+        },
+        {
+          "FileFunction": "SolderPaste,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Paste.gtp"
+        },
+        {
+          "FileFunction": "SolderPaste,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Paste.gbp"
+        },
+        {
+          "FileFunction": "Legend,Top",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Silkscreen.gto"
+        },
+        {
+          "FileFunction": "Legend,Bot",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Silkscreen.gbo"
+        },
+        {
+          "FileFunction": "SolderMask,Top",
+          "FilePolarity": "Negative",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-F_Mask.gts"
+        },
+        {
+          "FileFunction": "SolderMask,Bot",
+          "FilePolarity": "Negative",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-B_Mask.gbs"
+        },
+        {
+          "FileFunction": "Profile",
+          "FilePolarity": "Positive",
+          "Path": "he_piantor_42_jitx.physical_qualification.M1FourKeyPhysicalQualification-Edge_Cuts.gm1"
+        }
+      ],
+      "gerber_job_thickness_mm": 1.6,
+      "historical_c4b_capture_hashes_match": true,
+      "net_differences": [],
+      "outline": [
+        [
+          [
+            99.5,
+            78.0
+          ],
+          [
+            99.5,
+            138.0
+          ]
+        ],
+        [
+          [
+            99.5,
+            138.0
+          ],
+          [
+            179.5,
+            138.0
+          ]
+        ],
+        [
+          [
+            179.5,
+            78.0
+          ],
+          [
+            99.5,
+            78.0
+          ]
+        ],
+        [
+          [
+            179.5,
+            138.0
+          ],
+          [
+            179.5,
+            78.0
+          ]
+        ]
+      ],
+      "pad_geometry_differences": [],
+      "physical_pad_count": 228,
+      "placement_differences": [],
+      "position_rows": 68,
+      "route_observation_arc_tolerance_mm": 0.01,
+      "run": 2,
+      "source_hole_clearance": [
+        {
+          "endpoint": "circuit.J_USB.A1_B12",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2001 mm)",
+          "source_gap_mm": 0.20010773853102662
+        },
+        {
+          "endpoint": "circuit.J_USB.A4_B9",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2349 mm)",
+          "source_gap_mm": 0.23489173289962853
+        },
+        {
+          "endpoint": "circuit.J_USB.A9_B4",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2349 mm)",
+          "source_gap_mm": 0.23489173289962853
+        },
+        {
+          "endpoint": "circuit.J_USB.A12_B1",
+          "kicad_description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2001 mm)",
+          "source_gap_mm": 0.20010773853102662
+        }
+      ],
+      "source_route_comparison": [
+        {
+          "hausdorff_mm": 0.002185177107387374,
+          "layer": 0,
+          "symmetric_difference_mm2": 0.00044864537060117487
+        },
+        {
+          "hausdorff_mm": 0.00012045437949558919,
+          "layer": 1,
+          "symmetric_difference_mm2": 4.7287603889059794e-05
+        }
+      ],
+      "stackup_total_mm": 1.2000000000000002,
+      "unconnected_count": 147,
+      "unconnected_per_net": {
+        "ADC_SENSE": 4,
+        "D_STATUS_cathode": 1,
+        "GND": 47,
+        "H0_RAW": 1,
+        "H1_RAW": 1,
+        "H2_RAW": 1,
+        "H3_RAW": 1,
+        "HALL_5V": 12,
+        "HALL_PWR_EN": 1,
+        "MUX_A0": 1,
+        "MUX_A1": 1,
+        "MUX_A2": 1,
+        "MUX_D": 2,
+        "MUX_EN0": 1,
+        "MUX_S5": 1,
+        "MUX_S6": 1,
+        "MUX_S7": 1,
+        "MUX_S8": 1,
+        "QSPI_SCLK": 1,
+        "QSPI_SD0": 1,
+        "QSPI_SD1": 1,
+        "QSPI_SD2": 1,
+        "QSPI_SD3": 1,
+        "QSPI_SS_FLASH": 2,
+        "QSPI_SS_MCU": 1,
+        "RUN": 2,
+        "R_CC2_p1": 1,
+        "STATUS_LED": 1,
+        "SWCLK": 1,
+        "SWDIO": 1,
+        "USB_DM": 1,
+        "USB_DM_CONN": 2,
+        "USB_DM_ESD": 1,
+        "USB_DP": 1,
+        "USB_DP_CONN": 2,
+        "USB_DP_ESD": 1,
+        "USB_SHIELD": 3,
+        "V1V1": 4,
+        "V3V3": 24,
+        "VBUS": 8,
+        "XIN": 2,
+        "XOUT": 1,
+        "XOUT_XTAL": 2,
+        "cathode": 1,
+        "p1": 1
+      },
+      "unnamed_net_aliases": [
+        {
+          "endpoints": [
+            "circuit.D_POWER.cathode",
+            "circuit.R_POWER_LED.p1"
+          ],
+          "kicad_net": "cathode"
+        },
+        {
+          "endpoints": [
+            "circuit.D_STATUS.cathode",
+            "circuit.R_STATUS_LED.p1"
+          ],
+          "kicad_net": "D_STATUS_cathode"
+        },
+        {
+          "endpoints": [
+            "circuit.J_USB.A5",
+            "circuit.R_CC1.p1"
+          ],
+          "kicad_net": "p1"
+        },
+        {
+          "endpoints": [
+            "circuit.J_USB.B5",
+            "circuit.R_CC2.p1"
+          ],
+          "kicad_net": "R_CC2_p1"
+        }
+      ],
+      "unrouted_reconciliation": "PASS",
+      "vias": [
+        {
+          "at": [
+            170.5,
+            120.0
+          ],
+          "drill": 0.3,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ],
+          "net": "H0_RAW",
+          "size": 0.65
+        },
+        {
+          "at": [
+            172.5,
+            120.0
+          ],
+          "drill": 0.3,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ],
+          "net": "H0_RAW",
+          "size": 0.65
+        }
+      ]
+    }
+  ],
+  "verdict": "BLOCKED"
+}

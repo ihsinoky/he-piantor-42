@@ -280,7 +280,7 @@ or adoption decision is made here.
 
 ### EDA-002C4C — next / Human Gate / G0A
 
-Inputs: C0-C3 accepted evidence and C4B physical/manufacturing pipeline result.
+Inputs: C0-C3 accepted evidence and C4B/C4B2/C4B3 physical/manufacturing results.
 Explicit outcome:
 
 - **GO:** JITX becomes the active EDA candidate for physical Rev.M1 / Rev.A.
@@ -314,3 +314,29 @@ This demonstrates downstream DRC/CAM execution, but does not qualify an orderabl
 package or change historical C4B's BLOCKED verdict. PMO/PO review precedes any
 merge; C4C / G0A makes the later adoption decision. G0B and physical Rev.M1
 Main/Wing implementation remain ahead.
+
+## EDA-002C4B3 manufacturing blockers — BLOCKED
+
+Issue [#47](https://github.com/ihsinoky/he-piantor-42/issues/47) independently
+measures the unchanged 1.2 mm source stack and identifies the literal 1.6 mm
+overall thickness in runtime 4.4.2's KiCad template. No supported CAD/job
+thickness override was found. A normal handoff of unchanged individual Gerbers
+and Excellon can exclude the optional misleading job, with an explicit future
+1.2 mm fabrication specification. This is a supported handoff limitation that
+must follow Rev.M1; the generated PCB/job remain incorrect.
+
+The 0.25 mm rule was a qualification default. Current primary JLCPCB rigid
+FR-4 evidence lists a 0.20 mm NPTH clearance capability. Analytic USB gaps are
+0.20009999 / 0.23488316 mm in symmetric pairs. All nominally meet that minimum,
+but the smaller pair has only 0.10 µm headroom and remains a manufacturing
+release blocker. Forward DFM policy separates the 0.20 mm floor, 0.25 mm design
+target and 0.001 mm numerical review guard; below-target footprints need a
+documented exception. No footprint or historical rule was changed to pass DRC.
+
+Fresh supported JITX → legacy-kicad → KiCad 9.0.9 DRC/Gerber/Excellon/position
+runs reconcile the expected partial state. All 20 C0/C1/C2 regressions pass;
+historical source and evidence remain unchanged. **Incomplete routing is not
+the only major remaining issue**: USB margin remains unresolved. See the
+[C4B3 report and primary-source evidence](../hardware/jitx/physical/EDA-002C4B3.md).
+PMO/PO review remains pending; C4C/G0A adoption is undecided, G0B not-ready,
+and physical Rev.M1/EVT-002 unstarted.
