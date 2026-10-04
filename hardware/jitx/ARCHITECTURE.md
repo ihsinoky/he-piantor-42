@@ -47,12 +47,15 @@ Landpattern/Pad APIs from its exact M-12 sheet. SHIELD groups four physical
 stakes; the flash EP remains a separate unassigned physical port.
 
 All nine pass component-modeling checks. EDA-002C1 is done / accepted: PR #36
-was squash-merged into main at a27fc48. EDA-002C2 is done / accepted candidate:
-complete M1 electrical graph parity PASS, awaiting PMO review. Geometry parity
+was squash-merged into main at a27fc48. EDA-002C2 is done / accepted / merged
+PR #38 at `67b6c302`: complete M1 electrical graph parity PASS. Geometry parity
 is explicitly NOT established. Manufacturer HRO and Winbond geometry differs
 from frozen M1 geometry; `component-sources.md` records the discrepancies for
-EDA-002C3 manufacturer-vs-frozen geometry reconciliation / PMO Human Gate,
-which remains unstarted. No placement, routing, DRC or EVT-002 has started.
+EDA-002C3 (issue #39): evidence package prepared in `geometry/EDA-002C3.md` and
+`geometry/geometry-reconciliation.json`; PMO Human Gate decisions PENDING.
+HRO: ADOPT_MANUFACTURER; Winbond: NEED_MORE_EVIDENCE. The limited audit records
+RP2040 and five additional derived-land differences. No geometry changes; C3
+is not done/accepted. No placement, routing, DRC or EVT-002 has started.
 
 ## EDA-002C0 graph-introspection gate
 
@@ -96,7 +99,7 @@ EDA-002C0 is done and accepted as PASS. PMO accepted the category-B
 workflow, but this does not make `RuntimeDesign` a stable API. Any future JITX
 Python package or JITX runtime version change must rerun and pass the EDA-002C0
 normalized graph exporter and bootstrap graph self-test before graph-parity
-compatibility may be assumed. EDA-002C1 is merged / accepted. EDA-002C2 is an electrical PASS candidate awaiting PMO review.
+compatibility may be assumed. EDA-002C1 is merged / accepted. EDA-002C2 is done / accepted / merged PR #38 with electrical parity PASS.
 The source manifest preserves the explicit geometry-parity differences.
 
 ## EDA-002C2 electrical assembly boundary

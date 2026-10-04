@@ -1,0 +1,1584 @@
+{
+  "schema_version": 1,
+  "issue": 39,
+  "baseline": "67b6c3026b9931883b5699f0cecd73ea79996676",
+  "prepared_date": "2026-10-04",
+  "status": "EVIDENCE_PREPARED_HUMAN_GATE_PENDING",
+  "geometry_changes_authorized": false,
+  "geometry_parity": "NOT_ESTABLISHED",
+  "evt_002": "BLOCKED_UNSTARTED",
+  "sources": {
+    "hro": {
+      "url": "https://en.krhro.com/Product-Details/726.html",
+      "pdf_url": "https://omo-oss-file110.thefastfile.com/portal-saas/pg2026081913505947704/cms/file/type-c-31-m-12%2612a%2612b%2612c%281%29.pdf",
+      "page": 4,
+      "variant": "TYPE-C-31-M-12",
+      "date": "2020-12-08",
+      "sha256": "1c23b78973c56e8dd83f1b46b8c31226f31ba0ea136ce3babd9f80bbaf2e7345",
+      "kind": "recommended PCB layout, component side; mechanical view only for body"
+    },
+    "winbond": {
+      "url": "https://www.winbond.com/hq/support/documentation/levelOne.jsp?__locale=en&DocNo=DA00-W25Q16JV.1",
+      "pdf_url": "https://www.winbond.com/resource-files/W25Q16JV%20SPI%20RevJ%2005202026%20Plus.pdf",
+      "revision": "J",
+      "date": "2026-05-28",
+      "printed_pages": [
+        5,
+        67,
+        72,
+        73
+      ],
+      "sha256": "0a7d2859578bdf11ca5519d444c11cdc790fcbe6921989689b9c1ae4599780ef",
+      "kind": "exact UX package metal and ordering; no exact UX recommended PCB lands found in reviewed official trail"
+    },
+    "frozen": {
+      "path": "hardware/tscircuit/src/evaluation/m1-four-key.tsx",
+      "verifier": "hardware/tscircuit/scripts/verify-m1-electrical.tsx",
+      "baseline": "67b6c3026b9931883b5699f0cecd73ea79996676"
+    },
+    "frozen_winbond_provenance": {
+      "upstream": "https://github.com/keebio/Keebio-Parts.pretty",
+      "inventory": "hardware/lib/THIRD_PARTY.md",
+      "asset": "USON-8_UX_2x3x0p6_WIN",
+      "license": "MIT",
+      "baseline_git_blob": "a8d20d514acc922c04199154de73d22ea76d58f9",
+      "vendor_commit": "cabdde34c7a5127fc697e46bb05d47d082163d2a",
+      "native_transcription_commit": "795479e",
+      "upstream_revision": "not recorded by inventory",
+      "derivation": "not established; Tier 4 community provenance, Tier 3 project baseline"
+    },
+    "jitx": {
+      "observation": "hardware/jitx/geometry/evidence/geometry-observation.json",
+      "observer": "hardware/jitx/geometry/capture_geometry.py",
+      "versions": {
+        "jitx": "4.4.3",
+        "jitxlib-standard": "4.4.0"
+      },
+      "generator_sha256": {
+        "ipc.py": "6262eaa67ce861e02c79931aa00ce6273cb723c8bbcf4e58542d488df7dc7616",
+        "leads/__init__.py": "bdd4975f77dbfed393c1a11aede79ca959f63b574582cfe0f1bc077b82adb353",
+        "leads/protrusions.py": "470a17dd5cec5b4cb5703d0df27d1195f6b0ecdd58ebbc8e10d68c4d5485f5c4"
+      }
+    },
+    "c1": {
+      "manifest": "hardware/jitx/component-sources.md",
+      "completion": "hardware/jitx/he_piantor_42_jitx/components/COMPLETION.md",
+      "status": "accepted / merged PR #36; source investigation reused"
+    },
+    "native_observation": {
+      "command": "npm --prefix hardware/tscircuit run m1:verify",
+      "artifact": "hardware/tscircuit/tscircuit-m1-electrical/circuit.json (temporary; not committed)",
+      "kind": "fresh native generated geometry from unchanged source; not manufacturing or DRC acceptance"
+    }
+  },
+  "coordinate_conventions": {
+    "hro_dimension_comparison": "x=frozen pcbX; y=-(frozen pcbY+2.60); reflection for dimensional comparison only, no physical mapping parity",
+    "audit_copper_sizes": "short/long sides; rotation normalized; numbered orientation not assessed"
+  },
+  "human_gate": [
+    {
+      "component": "TYPE-C-31-M-12",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "RP2040",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "USBLC6-2SC6",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "AP2112K-3.3TRG1",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "TPS22919DCKR",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "TMUX1208PWR",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    },
+    {
+      "component": "DRV5055A3QDBZR",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING"
+    }
+  ],
+  "comparisons": [
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A1_B12 x center",
+      "unit": "mm",
+      "manufacturer_value": -3.2,
+      "frozen_value": -3.25,
+      "jitx_value": -3.2,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact opposing span; frozen span exceeds drawing tolerance."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A4_B9 x center",
+      "unit": "mm",
+      "manufacturer_value": -2.4,
+      "frozen_value": -2.45,
+      "jitx_value": -2.4,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact opposing span; frozen span exceeds drawing tolerance."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact B8 x center",
+      "unit": "mm",
+      "manufacturer_value": -1.75,
+      "frozen_value": -1.75,
+      "jitx_value": -1.75,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A5 x center",
+      "unit": "mm",
+      "manufacturer_value": -1.25,
+      "frozen_value": -1.25,
+      "jitx_value": -1.25,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact B7 x center",
+      "unit": "mm",
+      "manufacturer_value": -0.75,
+      "frozen_value": -0.75,
+      "jitx_value": -0.75,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A6 x center",
+      "unit": "mm",
+      "manufacturer_value": -0.25,
+      "frozen_value": -0.25,
+      "jitx_value": -0.25,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A7 x center",
+      "unit": "mm",
+      "manufacturer_value": 0.25,
+      "frozen_value": 0.25,
+      "jitx_value": 0.25,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact B6 x center",
+      "unit": "mm",
+      "manufacturer_value": 0.75,
+      "frozen_value": 0.75,
+      "jitx_value": 0.75,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A8 x center",
+      "unit": "mm",
+      "manufacturer_value": 1.25,
+      "frozen_value": 1.25,
+      "jitx_value": 1.25,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact B5 x center",
+      "unit": "mm",
+      "manufacturer_value": 1.75,
+      "frozen_value": 1.75,
+      "jitx_value": 1.75,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A9_B4 x center",
+      "unit": "mm",
+      "manufacturer_value": 2.4,
+      "frozen_value": 2.45,
+      "jitx_value": 2.4,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact opposing span; frozen span exceeds drawing tolerance."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact A12_B1 x center",
+      "unit": "mm",
+      "manufacturer_value": 3.2,
+      "frozen_value": 3.25,
+      "jitx_value": 3.2,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact opposing span; frozen span exceeds drawing tolerance."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact widths left to right",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.6,
+        0.6,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.6,
+        0.6
+      ],
+      "frozen_value": [
+        0.6,
+        0.6,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.6,
+        0.6
+      ],
+      "jitx_value": [
+        0.6,
+        0.6,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.6,
+        0.6
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact length",
+      "unit": "mm",
+      "manufacturer_value": 1.14,
+      "frozen_value": 1.45,
+      "jitx_value": 1.14,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve correction from 1.64-0.50 dimension-line derivation."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact center above locator row",
+      "unit": "mm",
+      "manufacturer_value": 1.07,
+      "frozen_value": 1.445,
+      "jitx_value": 1.07,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve locator-relative datum; resolve tool views before physical parity."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "contact lower/upper edges",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.5,
+        1.64
+      ],
+      "frozen_value": [
+        0.72,
+        2.17
+      ],
+      "jitx_value": [
+        0.5,
+        1.64
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact contact edges."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "locating NPTH diameter",
+      "unit": "mm",
+      "manufacturer_value": 0.6,
+      "frozen_value": 0.65,
+      "jitx_value": 0.6,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "At +0.05 drawing boundary; fit/process margin still requires review."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "locating NPTH separation",
+      "unit": "mm",
+      "manufacturer_value": 5.78,
+      "frozen_value": 5.78,
+      "jitx_value": 5.78,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "locator centers",
+      "unit": "mm",
+      "manufacturer_value": [
+        [
+          -2.89,
+          0
+        ],
+        [
+          2.89,
+          0
+        ]
+      ],
+      "frozen_value": [
+        [
+          -2.89,
+          0
+        ],
+        [
+          2.89,
+          0
+        ]
+      ],
+      "jitx_value": [
+        [
+          -2.89,
+          0
+        ],
+        [
+          2.89,
+          0
+        ]
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "upper shell centers",
+      "unit": "mm",
+      "manufacturer_value": [
+        [
+          -4.325,
+          0.5
+        ],
+        [
+          4.325,
+          0.5
+        ]
+      ],
+      "frozen_value": [
+        [
+          -4.32,
+          0.53
+        ],
+        [
+          4.32,
+          0.53
+        ]
+      ],
+      "jitx_value": [
+        [
+          -4.325,
+          0.5
+        ],
+        [
+          4.325,
+          0.5
+        ]
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Drawing tolerance only; no full fit assertion."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "lower shell centers",
+      "unit": "mm",
+      "manufacturer_value": [
+        [
+          -4.325,
+          -3.68
+        ],
+        [
+          4.325,
+          -3.68
+        ]
+      ],
+      "frozen_value": [
+        [
+          -4.32,
+          -3.65
+        ],
+        [
+          4.32,
+          -3.65
+        ]
+      ],
+      "jitx_value": [
+        [
+          -4.325,
+          -3.68
+        ],
+        [
+          4.325,
+          -3.68
+        ]
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Drawing tolerance only; no full fit assertion."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "shell horizontal center span",
+      "unit": "mm",
+      "manufacturer_value": 8.65,
+      "frozen_value": 8.64,
+      "jitx_value": 8.65,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "shell row separation",
+      "unit": "mm",
+      "manufacturer_value": 4.18,
+      "frozen_value": 4.18,
+      "jitx_value": 4.18,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "upper shell copper",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.9,
+        2.0
+      ],
+      "frozen_value": [
+        1.0,
+        2.1
+      ],
+      "jitx_value": [
+        0.9,
+        2.0
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Manufacturer nominal or explicitly justified copper exception?"
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "upper shell slot",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.6,
+        1.7
+      ],
+      "frozen_value": [
+        0.6,
+        1.7
+      ],
+      "jitx_value": [
+        0.6,
+        1.7
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": null
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "lower shell copper",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.9,
+        1.7
+      ],
+      "frozen_value": [
+        1.0,
+        1.6
+      ],
+      "jitx_value": [
+        0.9,
+        1.7
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Manufacturer nominal or explicitly justified copper exception?"
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "lower shell slot",
+      "unit": "mm",
+      "manufacturer_value": [
+        0.6,
+        1.4
+      ],
+      "frozen_value": [
+        0.6,
+        1.2
+      ],
+      "jitx_value": [
+        0.6,
+        1.4
+      ],
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve longer recommended slot; no assembly exception established."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "PCB edge relative to locator row",
+      "unit": "mm",
+      "manufacturer_value": -4.15,
+      "frozen_value": null,
+      "jitx_value": null,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "SOURCE_AMBIGUITY",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Frozen and JITX footprints have no explicit board-edge geometry; establish registration before implementation."
+    },
+    {
+      "component": "TYPE-C-31-M-12",
+      "feature": "body width/depth",
+      "unit": "mm",
+      "manufacturer_value": [
+        8.94,
+        7.35
+      ],
+      "frozen_value": null,
+      "jitx_value": null,
+      "source": [
+        "hro",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "SOURCE_AMBIGUITY",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Mechanical envelope is not explicit footprint or board geometry."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "package metal tolerance inputs",
+      "unit": "mm",
+      "manufacturer_value": {
+        "package_code": "UX",
+        "D": [
+          2.9,
+          3,
+          3.1
+        ],
+        "E": [
+          1.9,
+          2,
+          2.1
+        ],
+        "A": [
+          0.5,
+          0.55,
+          0.6
+        ],
+        "b": [
+          0.2,
+          0.25,
+          0.3
+        ],
+        "L": [
+          0.4,
+          0.45,
+          0.5
+        ],
+        "e_bsc": 0.5
+      },
+      "frozen_value": null,
+      "jitx_value": {
+        "package_code": "UX",
+        "D": [
+          2.9,
+          3,
+          3.1
+        ],
+        "E": [
+          1.9,
+          2,
+          2.1
+        ],
+        "A": [
+          0.5,
+          0.55,
+          0.6
+        ],
+        "b": [
+          0.2,
+          0.25,
+          0.3
+        ],
+        "L": [
+          0.4,
+          0.45,
+          0.5
+        ],
+        "e_bsc": 0.5
+      },
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Exact UX identity and generator package/lead inputs match; frozen copper does not encode a package-tolerance model. This does not approve any PCB lands."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "signal land length",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": 0.8128,
+      "jitx_value": 0.7118033988749897,
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "No official UX land length found; review frozen and IPC derivations, accuracy and density."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "signal land width",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": 0.254,
+      "jitx_value": 0.22,
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "No official UX land width found; review assembly margin and fillets."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "signal column center span",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": 2.8956,
+      "jitx_value": 2.7881966011250103,
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Package D is not a PCB copper center span."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "signal row pitch",
+      "unit": "mm",
+      "manufacturer_value": 0.5,
+      "frozen_value": [
+        0.500001,
+        0.5,
+        0.500001
+      ],
+      "jitx_value": 0.5,
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Numerical rounding within frozen verifier 0.001 mm; not a manufacturer BSC tolerance grant."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "signal first-to-fourth row center span",
+      "unit": "mm",
+      "manufacturer_value": 1.5,
+      "frozen_value": 1.500002,
+      "jitx_value": 1.5,
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "TOLERANCE_EQUIVALENT",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Numerical rounding only."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "central copper land",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        0.254,
+        1.651
+      ],
+      "jitx_value": [
+        0.2,
+        1.6
+      ],
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Nominal D1/E1 metal is not land approval; specify copper/mask/paste and tolerance rationale."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "pin 1 local center",
+      "unit": "mm",
+      "manufacturer_value": {
+        "view": "top; pin1 upper left"
+      },
+      "frozen_value": [
+        -1.4478,
+        -0.750001
+      ],
+      "jitx_value": [
+        -1.3940983005625052,
+        0.75
+      ],
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "SOURCE_AMBIGUITY",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Resolve axes, side/layer and numbered orientation; reflection is not in-plane rotation."
+    },
+    {
+      "component": "W25Q16JVUXIQ",
+      "feature": "central exposed metal min/nom/max",
+      "unit": "mm",
+      "manufacturer_value": {
+        "D1": [
+          0.15,
+          0.2,
+          0.25
+        ],
+        "E1": [
+          1.55,
+          1.6,
+          1.65
+        ]
+      },
+      "frozen_value": {
+        "copper_land": [
+          0.254,
+          1.651
+        ]
+      },
+      "jitx_value": {
+        "nominal_copper_land": [
+          0.2,
+          1.6
+        ]
+      },
+      "source": [
+        "winbond",
+        "frozen",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Manufacturer exposed metal dimensions are unambiguous; PCB copper/paste treatment across tolerance remains a design choice."
+    },
+    {
+      "component": "RP2040",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": [
+        [
+          0.2,
+          0.875
+        ],
+        [
+          0.2,
+          1.175
+        ],
+        [
+          3.2,
+          3.2
+        ]
+      ],
+      "frozen_value": [
+        [
+          0.25,
+          0.875
+        ],
+        [
+          5.45,
+          5.45
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.2,
+          0.875
+        ],
+        [
+          0.2,
+          1.175
+        ],
+        [
+          3.2,
+          3.2
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "FROZEN_BASELINE_ERROR",
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "unresolved_question": "Approve exact recommended RP2040 geometry."
+    },
+    {
+      "component": "USBLC6-2SC6",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        [
+          0.6,
+          1
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.42,
+          0.95
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Review exact-package guidance and explicit stock versus derived land policy before choosing."
+    },
+    {
+      "component": "ABM8-272-T3",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": [
+        [
+          1.05,
+          1.3
+        ]
+      ],
+      "frozen_value": [
+        [
+          1.05,
+          1.3
+        ]
+      ],
+      "jitx_value": [
+        [
+          1.05,
+          1.3
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 1
+      },
+      "classification": "IDENTICAL",
+      "agent_recommendation": "NO_CHANGE_RECOMMENDED",
+      "unresolved_question": null
+    },
+    {
+      "component": "AP2112K-3.3TRG1",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        [
+          0.6,
+          1.325
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.16,
+          1.191421356
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Review exact-package guidance and explicit stock versus derived land policy before choosing."
+    },
+    {
+      "component": "TPS22919DCKR",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        [
+          0.35,
+          1.03
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.26,
+          1.276227766
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Review exact-package guidance and explicit stock versus derived land policy before choosing."
+    },
+    {
+      "component": "TMUX1208PWR",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        [
+          0.3,
+          1.45
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.36,
+          1.435849528
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Review exact-package guidance and explicit stock versus derived land policy before choosing."
+    },
+    {
+      "component": "DRV5055A3QDBZR",
+      "feature": "limited audit distinct copper sizes (short/long)",
+      "unit": "mm",
+      "manufacturer_value": null,
+      "frozen_value": [
+        [
+          0.6,
+          1.475
+        ]
+      ],
+      "jitx_value": [
+        [
+          0.46,
+          1.308868904
+        ]
+      ],
+      "source": [
+        "c1",
+        "frozen",
+        "native_observation",
+        "jitx"
+      ],
+      "evidence_tier": {
+        "manufacturer": 1,
+        "frozen": 3,
+        "jitx": 2
+      },
+      "classification": "PROJECT_DESIGN_CHOICE",
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "unresolved_question": "Review exact-package guidance and explicit stock versus derived land policy before choosing."
+    }
+  ],
+  "other_seven_audit": [
+    {
+      "component": "RP2040",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.25,
+          0.875
+        ],
+        [
+          5.45,
+          5.45
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.2,
+          0.875
+        ],
+        [
+          0.2,
+          1.175
+        ],
+        [
+          3.2,
+          3.2
+        ]
+      ],
+      "agent_recommendation": "ADOPT_MANUFACTURER",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "USBLC6-2SC6",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.6,
+          1
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.42,
+          0.95
+        ]
+      ],
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "ABM8-272-T3",
+      "audit_status": "NO_KNOWN_BLOCKER",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          1.05,
+          1.3
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          1.05,
+          1.3
+        ]
+      ],
+      "agent_recommendation": "NO_CHANGE_RECOMMENDED",
+      "pmo_decision": "NO_NEW_DECISION_REQUESTED",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "AP2112K-3.3TRG1",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.6,
+          1.325
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.16,
+          1.191421356
+        ]
+      ],
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "TPS22919DCKR",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.35,
+          1.03
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.26,
+          1.276227766
+        ]
+      ],
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "TMUX1208PWR",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.3,
+          1.45
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.36,
+          1.435849528
+        ]
+      ],
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; not full geometry parity."
+    },
+    {
+      "component": "DRV5055A3QDBZR",
+      "audit_status": "NEW_DISCREPANCY",
+      "frozen_distinct_copper_sizes_short_long_mm": [
+        [
+          0.6,
+          1.475
+        ]
+      ],
+      "jitx_distinct_copper_sizes_short_long_mm": [
+        [
+          0.46,
+          1.308868904
+        ]
+      ],
+      "agent_recommendation": "NEED_MORE_EVIDENCE",
+      "pmo_decision": "PENDING",
+      "scope_limit": "Dimensions only; no labeled orientation or full geometry acceptance. HallKey fixture mechanics not comparable to standalone sensor."
+    }
+  ]
+}
