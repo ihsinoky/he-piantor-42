@@ -194,7 +194,7 @@ PASS does not establish geometric parity. Official HRO land/shell/locator
 geometry and Winbond generator lands differ from frozen M1 requirements; the
 complete discrepancy table remains in `hardware/jitx/component-sources.md`.
 
-## EDA-002C2 M1 electrical graph parity — PASS candidate
+## EDA-002C2 M1 electrical graph parity — accepted / merged PR #38
 
 Issue [#37](https://github.com/ihsinoky/he-piantor-42/issues/37) implements
 `he_piantor_42_jitx.m1.M1FourKeyElectrical` with all nine accepted manufacturer
@@ -222,7 +222,7 @@ Execution used the unchanged JITX package 4.4.3, standard library 4.4.0 and Linu
 runtime 4.4.2. Detailed reproduction, review and evidence are in
 `hardware/jitx/parity/EDA-002C2.md` and `hardware/jitx/parity/evidence/`.
 
-**EDA-002C2: done / accepted candidate; electrical parity PASS; PMO review waiting.**
+**EDA-002C2: done / accepted / merged PR #38 at `67b6c302`; electrical parity PASS.**
 **Geometry parity NOT established.** Geometry is excluded from the verdict;
 generic physical choices and sample board/substrate are non-authoritative build
 scaffolding. No manufacturer geometry, frozen tscircuit source/verifier,
@@ -230,7 +230,9 @@ parity contract or uv.lock changed. `hardware/layout/**` was not consumed or
 modified. No placement, routing, DRC readiness or manufacturing artifacts are
 claimed. D-014 and tscircuit authority remain unchanged.
 
-**EDA-002C3: manufacturer-vs-frozen geometry reconciliation / PMO Human Gate —
-next / unstarted**, especially HRO and Winbond. Their discrepancies remain
-unresolved. **EVT-002 remains blocked/unstarted.** Electrical PASS does not
+**EDA-002C3 (issue #39): evidence package prepared; Human Gate decision PENDING.**
+See [`EDA-002C3.md`](../hardware/jitx/geometry/EDA-002C3.md). HRO recommendation:
+ADOPT_MANUFACTURER. Winbond recommendation: NEED_MORE_EVIDENCE. RP2040 and five
+additional derived-land differences are recorded by the limited audit. No
+geometry implementation is authorized; C3 is not done/accepted. **EVT-002 remains blocked/unstarted.** Electrical PASS does not
 release either gate.

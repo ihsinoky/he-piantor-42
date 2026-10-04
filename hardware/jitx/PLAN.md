@@ -82,7 +82,7 @@ data or geometry is sourced from it.
   source-manifest for this increment.
 - **Status:** done / accepted — all nine manufacturer-specific models
   have physical inventories, explicit pad maps, structural tests and real builds.
-  PR #36 merged into main at a27fc48; C1 accepted/done. EDA-002C2 is an electrical PASS candidate awaiting PMO review.
+  PR #36 merged into main at a27fc48; C1 accepted/done. EDA-002C2 is done / accepted / merged PR #38 with electrical parity PASS.
 - **Parity qualification:** HRO and Winbond manufacturer geometry differs from
   frozen M1 geometry. `component-sources.md` enumerates the differences for PMO;
   no geometric parity claim or authority change is made.
@@ -100,8 +100,7 @@ data or geometry is sourced from it.
 
 - **Dependencies:** EDA-002C0, accepted EDA-002C1 (merged PR #36)
 - **Issue:** #37
-- **Status:** done / accepted candidate — electrical graph parity **PASS**;
-  PMO review waiting. Geometry parity explicitly **NOT established**.
+- **Status:** done / accepted / merged PR #38 at `67b6c302` — electrical graph parity **PASS**. Geometry parity explicitly **NOT established**.
 - **Evidence:** actual RuntimeDesign exports, deterministic raw and normalized
   graphs, strict comparator and fault-injection tests. 68 components, 200
   normalized endpoints, 43 named nets, 185 endpoint/net edges, four direct links,
@@ -113,7 +112,11 @@ data or geometry is sourced from it.
 
 ### [EDA-002C3] Manufacturer-vs-frozen geometry reconciliation / PMO Human Gate
 
-- **Status:** next / unstarted; no implementation in C2.
+- **Issue:** #39
+- **Status:** evidence package prepared; Human Gate decision **PENDING**; not done/accepted.
+- **Evidence:** `geometry/EDA-002C3.md`, `geometry/geometry-reconciliation.json`.
+- **Recommendations:** HRO ADOPT_MANUFACTURER; Winbond NEED_MORE_EVIDENCE.
+  Limited audit adds RP2040 and five derived-land differences; no geometry change.
 - **Focus:** especially HRO TYPE-C-31-M-12 and Winbond W25Q16JVUXIQ discrepancies
   recorded by C1 in `component-sources.md`. PMO must reconcile manufacturer and
   frozen geometry before any full parity claim. C2 electrical PASS does not
@@ -121,8 +124,9 @@ data or geometry is sourced from it.
 
 ## Deferred work
 
-EDA-002C3 remains unstarted. EVT-002 remains blocked/unstarted. Final placement,
-routing, DRC, manufacturing artifacts and D-014 changes are outside C2.
+EDA-002C3 Human Gate decisions remain PENDING. EVT-002 remains blocked/unstarted.
+Geometry parity is NOT established. Final placement, routing, DRC, manufacturing
+artifacts and D-014 changes are outside this evidence-only increment.
 
 ## Task complete: EDA-002B bootstrap and parity contract
 
@@ -192,8 +196,10 @@ not an M1 board implementation.
   actionable comparator and fault-injection tests; bootstrap regression; locked
   dependencies, lint/type checks, golden verifier, protected-file checks.
 - Completion: self-review and evidence; update status only upon full PASS; push
-  this branch and open one PMO-review PR without merging. C3 remains unstarted.
+  the C2 branch and open one PMO-review PR without merging (completed as PR #38).
+  C3 now has an evidence package prepared; Human Gate decisions remain PENDING.
 
-Status: done / accepted candidate, electrical PASS; PMO review waiting.
+Status: done / accepted / merged PR #38 at `67b6c302`, electrical PASS.
+Geometry parity NOT established; EVT-002 blocked/unstarted.
 Runtime startup repaired using existing authorized runtime;
 versions unchanged. No skill source is copied into the repository.

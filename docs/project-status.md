@@ -38,7 +38,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 is done / accepted with PR #36 merged. EDA-002C2 is done / accepted candidate: electrical graph parity PASS, PMO review waiting; geometry parity NOT established. EDA-002C3 manufacturer-vs-frozen geometry reconciliation / PMO Human Gate is next / unstarted, especially HRO/Winbond. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
+| Hardware | EDA-001 and EVT-001 are done. PR #27's native tscircuit four-key electrical model is the frozen M1 golden reference. EDA-002B passed the GitHub Codespaces JITX environment/bootstrap gate, and EDA-002C0 is done/accepted as PASS. JITX remains a challenger; EDA-002C1 is done / accepted with PR #36 merged. EDA-002C2 is done / accepted / merged PR #38: electrical graph parity PASS; geometry parity NOT established. EDA-002C3 issue #39 evidence package is prepared; PMO Human Gate decisions are PENDING for HRO/Winbond and additional limited-audit discrepancies. EDA-000 is retired fallback/reference. EVT-002 and final placement, routing, and DRC have not started. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -62,16 +62,20 @@ Any future JITX Python package or runtime version change must rerun and pass
 the EDA-002C0 normalized graph exporter and bootstrap graph self-test before
 graph-parity compatibility may be assumed. EDA-002C1 is accepted/done: all nine
 manufacturer models passed and PR #36 was merged into main at a27fc48.
-EDA-002C2 (issue #37) is done / accepted candidate, electrical graph parity
-PASS, PMO review waiting: 68 components, 200 normalized endpoints, 43 named
+EDA-002C2 (issue #37) is done / accepted / merged PR #38 at `67b6c302`,
+electrical graph parity PASS: 68 components, 200 normalized endpoints, 43 named
 nets, 185 endpoint/net edges, four direct links and seven intentional NCs.
 Actual RuntimeDesign exports are deterministic; the 20-test suite includes
 bootstrap regression and C2 fault-injection coverage. Geometry parity is
 explicitly NOT established.
 
-EDA-002C3 is next / unstarted: manufacturer-vs-frozen geometry reconciliation /
-PMO Human Gate, especially HRO and Winbond. Their known differences remain
-unresolved in `hardware/jitx/component-sources.md`. The frozen reference and
+EDA-002C3 (issue #39) evidence package is prepared; PMO / Product Owner
+Human Gate decisions remain **PENDING**. See
+[`EDA-002C3.md`](../hardware/jitx/geometry/EDA-002C3.md) and its machine-readable
+reconciliation record. HRO recommendation is ADOPT_MANUFACTURER; Winbond is
+NEED_MORE_EVIDENCE. The limited other-seven audit adds RP2040 manufacturer-layout
+and five derived-land differences to the gate. C3 is not done/accepted; no
+geometry changes are authorized or applied. The frozen reference and
 D-014 are unchanged. EVT-002 remains blocked/unstarted.
 EVT-002 must not begin in this increment; final two-layer
 placement, routing, DRC, manufacturing preparation, and G1 readiness remain
@@ -86,7 +90,7 @@ project uses `jitx==4.4.3`, runs against the already validated Linux runtime
 documented graph-introspection proof. See
 [`jitx-evaluation.md`](jitx-evaluation.md) for the evidence and stability
 classification. JITX remains a challenger against the still-authoritative
-frozen tscircuit reference; EDA-002C1 is merged/accepted, EDA-002C2 is an electrical PASS candidate awaiting PMO, and EVT-002 remains blocked/unstarted.
+frozen tscircuit reference; EDA-002C1 is merged/accepted, EDA-002C2 is done / accepted / merged PR #38 with electrical PASS, and EVT-002 remains blocked/unstarted.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
