@@ -253,3 +253,26 @@ Status: done / accepted / merged PR #38 at `67b6c302`, electrical PASS.
 Geometry parity NOT established; EVT-002 blocked/unstarted.
 Runtime startup repaired using existing authorized runtime;
 versions unchanged. No skill source is copied into the repository.
+
+## EDA-002C4B execution plan (issue #43)
+
+Disposable backend qualification only. The user authorized autonomous execution;
+existing C1 models and C2 topology are locked inputs. No new sourcing, product
+architecture, production geometry, layout-directory consumption or dependency
+change is planned. Complete-board capability investigation; unsupported gates
+remain failures, rather than being waived by the skill workflow.
+
+1. Discover public supported surfaces and record an early capability matrix.
+2. Define a project-owned two-layer, 1.2 mm substrate and simple board; compose
+   the existing M1ElectricalCircuit with explicit placement, without rewiring.
+3. Test source Route/Via realization and supported validation; account for
+   incomplete routing rather than undertaking an unreasonable hand route.
+4. Assess built-in manufacturing exports and public project BOM/PnP export,
+   repeat generation and compare. Preserve separate EDA/BOM conclusions.
+5. Run C0/C1/C2 and physical checks, code review, protected-file checks; record
+   actual verdict and update only authorized status documents; commit/push/PR.
+
+Phase 0 data/requirements gate: accepted inputs from C1/C2; JLCPCB qualification
+defaults explicitly labeled, no production or SI targets. PLAN/ARCHITECTURE
+already exist. Official docs and installed CLI are the workflow authority.
+Mandatory Gerber/drill/PnP and full routing/validation remain open until proven.

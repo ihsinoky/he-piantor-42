@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "issue": 43,
+  "phase": "discovery before physical implementation",
+  "classification_key": {
+    "A": "supported/documented",
+    "B": "supported but experimental/qualified",
+    "C": "unsupported/private/manual workaround required",
+    "N/A": "not actually required for JLCPCB handoff"
+  },
+  "capabilities": [
+    {
+      "capability": "board_substrate",
+      "class": "A",
+      "supported_surface": "Board.shape / signal_area; Design.substrate",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.board.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "layer_stack_thickness",
+      "class": "A",
+      "supported_surface": "Stackup, Conductor, Dielectric; explicit thickness",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.stackup.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "explicit_placement",
+      "class": "A",
+      "supported_surface": "Circuit.place / Placed.at; source-controlled poses",
+      "source": "https://docs.jitx.com/en/latest/essentials/physical_design/kinematic-tree.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "two_layer_routing",
+      "class": "A",
+      "supported_surface": "Route and Via source topology; single-layer router; no complete multilayer auto-route command established",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.circuit.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "drc_equivalent",
+      "class": "B",
+      "supported_surface": "Engine enforces four copper constraints; remaining fab fields documentary; full independent DRC not established",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.substrate.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "gerber",
+      "class": "C",
+      "supported_surface": "No direct supported Gerber command established; CAD export is not proof of this capability",
+      "source": "https://docs.jitx.com/en/latest/getting-started/cli/index.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "drill",
+      "class": "C",
+      "supported_surface": "No direct supported Excellon generation established; investigate ODB++ hole layers",
+      "source": "https://docs.jitx.com/en/latest/getting-started/cli/index.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "bom",
+      "class": "B",
+      "supported_surface": "Public Export plugin can query captured Component metadata; project CSV exporter needed",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.plugin.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "pnp_centroid",
+      "class": "B",
+      "supported_surface": "Public captured placements/refdes available; project CSV exporter and orientation review needed",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.run.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "odb",
+      "class": "B",
+      "supported_surface": "Installed public legacy-odb++ CLI; assess real output as alternative, not acceptance substitution",
+      "source": "https://docs.jitx.com/en/latest/jumpstart-kits/shared/JITX_Architecture_and_Systems_Requirements_v2_0.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "paste_assembly",
+      "class": "B",
+      "supported_surface": "Paste/Silkscreen features and ODB++ export; output assessment pending",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.feature.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "fabrication_documentation",
+      "class": "N/A",
+      "supported_surface": "Separate fabrication notes can be project-owned; no automatic drawing requirement",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.stackup.html",
+      "demonstration": "pending"
+    },
+    {
+      "capability": "noninteractive_build_export",
+      "class": "B",
+      "supported_surface": "jitx design build/export; RuntimeDesign API experimental; determinism not yet tested",
+      "source": "https://docs.jitx.com/en/latest/api/jitx.run.html",
+      "demonstration": "pending"
+    }
+  ]
+}
