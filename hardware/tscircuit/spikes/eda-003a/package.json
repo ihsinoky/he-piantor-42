@@ -1,0 +1,19 @@
+{
+  "name": "he-piantor-42-eda-003a",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "experiment": "node experiment.mjs",
+    "test": "node verifier.test.mjs",
+    "verify": "node experiment.mjs --gate",
+    "check": "node --check experiment.mjs && node --check verifier.mjs && node --check verifier.test.mjs"
+  },
+  "dependencies": {
+    "kicad-to-circuit-json": "0.0.142",
+    "kicadts": "0.0.58",
+    "@tscircuit/circuit-json-util": "0.0.120",
+    "@flatten-js/core": "1.6.14",
+    "transformation-matrix": "2.16.1",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "version": "0.0.117",
+  "conversion_succeeded": true,
+  "counts": {
+    "cad_component": 0,
+    "pcb_component": 1,
+    "pcb_copper_pour": 0,
+    "pcb_courtyard_outline": 8,
+    "pcb_fabrication_note_path": 5,
+    "pcb_fabrication_note_text": 2,
+    "pcb_hole": 2,
+    "pcb_keepout": 0,
+    "pcb_plated_hole": 1,
+    "pcb_port": 4,
+    "pcb_silkscreen_path": 13,
+    "pcb_silkscreen_text": 1,
+    "pcb_smtpad": 3,
+    "source_component": 1,
+    "source_port": 0
+  },
+  "material_records": [
+    {
+      "type": "pcb_component",
+      "pcb_component_id": "pcb_component_0",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "layer": "top",
+      "rotation": 0,
+      "width": 0,
+      "height": 0,
+      "source_component_id": "source_component_0"
+    },
+    {
+      "type": "pcb_hole",
+      "pcb_hole_id": "pcb_hole_0",
+      "hole_shape": "circle",
+      "pcb_component_id": "pcb_component_0",
+      "x": -5.08,
+      "y": 0,
+      "hole_diameter": 1.7
+    },
+    {
+      "type": "pcb_hole",
+      "pcb_hole_id": "pcb_hole_1",
+      "hole_shape": "circle",
+      "pcb_component_id": "pcb_component_0",
+      "x": 5.08,
+      "y": 0,
+      "hole_diameter": 1.7
+    },
+    {
+      "type": "pcb_port",
+      "pcb_port_id": "pcb_port_0",
+      "pcb_component_id": "pcb_component_0",
+      "source_port_id": "pcb_component_0_port_1",
+      "x": -0.9375,
+      "y": 0.95,
+      "layers": [
+        "top"
+      ]
+    },
+    {
+      "type": "pcb_smtpad",
+      "pcb_smtpad_id": "pcb_smtpad_0",
+      "pcb_component_id": "pcb_component_0",
+      "x": -0.9375,
+      "y": 0.95,
+      "width": 1.475,
+      "height": 0.6,
+      "layer": "top",
+      "pcb_port_id": "pcb_port_0",
+      "port_hints": [
+        "1"
+      ],
+      "shape": "rect",
+      "corner_radius": 0.075
+    },
+    {
+      "type": "pcb_port",
+      "pcb_port_id": "pcb_port_1",
+      "pcb_component_id": "pcb_component_0",
+      "source_port_id": "pcb_component_0_port_2",
+      "x": -0.9375,
+      "y": -0.95,
+      "layers": [
+        "top"
+      ]
+    },
+    {
+      "type": "pcb_smtpad",
+      "pcb_smtpad_id": "pcb_smtpad_1",
+      "pcb_component_id": "pcb_component_0",
+      "x": -0.9375,
+      "y": -0.95,
+      "width": 1.475,
+      "height": 0.6,
+      "layer": "top",
+      "pcb_port_id": "pcb_port_1",
+      "port_hints": [
+        "2"
+      ],
+      "shape": "rect",
+      "corner_radius": 0.075
+    },
+    {
+      "type": "pcb_port",
+      "pcb_port_id": "pcb_port_2",
+      "pcb_component_id": "pcb_component_0",
+      "source_port_id": "pcb_component_0_port_3",
+      "x": 0.9375,
+      "y": 0,
+      "layers": [
+        "top"
+      ]
+    },
+    {
+      "type": "pcb_smtpad",
+      "pcb_smtpad_id": "pcb_smtpad_2",
+      "pcb_component_id": "pcb_component_0",
+      "x": 0.9375,
+      "y": 0,
+      "width": 1.475,
+      "height": 0.6,
+      "layer": "top",
+      "pcb_port_id": "pcb_port_2",
+      "port_hints": [
+        "3"
+      ],
+      "shape": "rect",
+      "corner_radius": 0.075
+    },
+    {
+      "type": "pcb_port",
+      "pcb_port_id": "pcb_port_3",
+      "pcb_component_id": "pcb_component_0",
+      "source_port_id": "pcb_component_0_port_3",
+      "x": 2.3,
+      "y": 0,
+      "layers": [
+        "top",
+        "bottom"
+      ]
+    },
+    {
+      "type": "pcb_plated_hole",
+      "pcb_plated_hole_id": "pcb_plated_hole_0",
+      "shape": "circle",
+      "pcb_component_id": "pcb_component_0",
+      "pcb_port_id": "pcb_port_3",
+      "x": 2.3,
+      "y": 0,
+      "port_hints": [
+        "3"
+      ],
+      "hole_diameter": 0.3,
+      "outer_diameter": 0.6,
+      "layers": [
+        "top",
+        "bottom"
+      ]
+    }
+  ],
+  "geometry": {
+    "pass": false,
+    "checks": {
+      "smd": {
+        "pass": true
+      },
+      "roundedPadCopper": {
+        "pass": false,
+        "reason": "SMD 1 corner_radius: expected 0.15, received 0.075"
+      },
+      "pth": {
+        "pass": true
+      },
+      "npth": {
+        "pass": true
+      },
+      "duplicatePin3": {
+        "pass": true
+      },
+      "transform": {
+        "pass": true
+      },
+      "topKeepout": {
+        "pass": false,
+        "reason": "both material keepout records required\n\n0 !== 2\n"
+      },
+      "bottomKeepout": {
+        "pass": false,
+        "reason": "both material keepout records required\n\n0 !== 2\n"
+      }
+    }
+  },
+  "warnings": [],
+  "console_warnings": [],
+  "console_errors": [],
+  "source_ports_resolve": false
+}

@@ -1,0 +1,31 @@
+{
+  "upstream_surface": "getWarnings(): string[]",
+  "upstream": [],
+  "project": [],
+  "console_warnings": [],
+  "console_errors": [],
+  "specific_keepout_warning": false,
+  "machine_gate": "reject warnings.length > 0; also independently reject geometry failures, including silent loss",
+  "supported_keepout_warning_case": "not applicable: keepout conversion fails",
+  "silent_material_losses": [
+    "two copper-pour keepouts",
+    "roundrect corner_radius 0.075 instead of 0.15 mm"
+  ],
+  "other_observed_unsupported_source_constructs": [
+    {
+      "construct": "pad 3 SMD and PTH zone_connect=2 (solid copper connection)",
+      "warning": false,
+      "assessment": "not represented on imported pad records; future pour behavior unqualified"
+    },
+    {
+      "construct": "model SOT-23.step",
+      "warning": false,
+      "assessment": "no cad_component; mechanical metadata loss"
+    },
+    {
+      "construct": "Dwgs.User and Eco2.User graphics",
+      "warning": false,
+      "assessment": "reference graphics omitted; not material copper/drill geometry"
+    }
+  ]
+}

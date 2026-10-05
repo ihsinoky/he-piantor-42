@@ -1,0 +1,83 @@
+{
+  "result": "PASS",
+  "tests": 18,
+  "passed": 18,
+  "failed": [],
+  "fault_injections": [
+    {
+      "name": "missing SMD",
+      "category": "smd",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "missing NPTH",
+      "category": "npth",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "NPTH incorrectly plated",
+      "category": "npth",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "PTH incorrectly non-plated",
+      "category": "pth",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "geometry displacement",
+      "category": "smd",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "missing keepout",
+      "category": "topKeepout",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "wrong keepout layer",
+      "category": "bottomKeepout",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "wrong keepout exclusion",
+      "category": "topKeepout",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "wrong keepout polygon",
+      "category": "topKeepout",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "wrong rounded copper",
+      "category": "roundedPadCopper",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    },
+    {
+      "name": "collapsed duplicate port",
+      "category": "duplicatePin3",
+      "category_failed": true,
+      "safety_gate_rejected": true
+    }
+  ],
+  "positive_fixture": "independent synthetic assertion fixture; never patched conversion output",
+  "supplemental_probes": [
+    "0.0009 mm accepted; NaN rejected",
+    "warnings and unavailable warnings rejected",
+    "unaltered asset fails fidelity gate",
+    "nonzero origin and 90 degree rotation",
+    "minimal keepout silently dropped",
+    "upstream Manufacturer diagnostic available"
+  ]
+}
