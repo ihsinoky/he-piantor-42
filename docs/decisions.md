@@ -234,3 +234,53 @@ interface and experiments before physical implementation. C4A does not adopt
 JITX or create D-016. See [architecture](../hardware/rev-m1/architecture.md),
 [interface](../hardware/rev-m1/main-wing-interface.md) and
 [evaluation plan](../hardware/rev-m1/evaluation-plan.md).
+
+## D-016 - JITX physical backend NO-GO; native tscircuit resumes as active Rev.M1 EDA candidate
+
+Status: accepted
+
+The [Product Owner decision on Issue #55](https://github.com/ihsinoky/he-piantor-42/issues/55#issuecomment-5991285003)
+completes EDA-002C4C / G0A: **NO-GO — JITX physical backend** for Rev.M1 / Rev.A.
+JITX is not selected as the active physical EDA backend under the qualified
+versions and workflow. Native stock tscircuit resumes as the active forward EDA
+candidate/path for physical Rev.M1, subject to G0B and later product,
+ERC/DRC and manufacturing gates. This is a project-fit decision, not a claim
+that JITX is generally incapable or that routing completion is impossible.
+
+Primary reason: [C4B5's accepted BLOCKED evidence](../hardware/jitx/physical/EDA-002C4B5.md).
+Source-level routing worked materially, reducing the historical 147 downstream
+unconnected items substantially. The retained multilayer experiment still had
+39 downstream unconnected items plus a dangling via. No supported public
+headless global multilayer routing workflow was demonstrated in the pinned
+JITX environment. The complete, reproducible AI/source-controlled physical-routing
+workflow required by this project was therefore not demonstrated. Further
+investment in global fanout, layer allocation, via placement, route ordering
+and conflict avoidance would require substantial routing strategy/tooling or
+interactive work; the PO judged that investment a poor fit for completing the
+keyboard. These bounded results do not prove that an expert cannot route the
+board or that other placements and strategies cannot succeed.
+
+Accepted positive results remain valid: graph introspection, manufacturer
+component modeling, electrical parity, source-controlled design representation,
+headless build and verification, and the downstream KiCad/CAM path with known
+limitations. Retain all JITX source, manufacturer models, qualification code and
+C0-C4B5 evidence unchanged for reference or possible future reevaluation. Carry
+forward useful manufacturer-model, DFM, architecture and validation knowledge.
+
+USB NPTH DFM is **OPEN — PRE-ORDER DFM REVIEW REQUIRED**, a separate product
+manufacturing risk and not a reason for JITX NO-GO. The generated 1.6 mm
+overall-thickness metadata problem remains historical JITX downstream-path
+evidence/limitation, not the primary NO-GO reason; that path requires an
+independent 1.2 mm finished-thickness handoff.
+
+D-014 remains valid historical authority for the permanent frozen M1 electrical
+fixture and is not rewritten. D-015 remains valid and continues to define the
+reusable Main + Evaluation Wing architecture. No historical C0-C4B5 verdict
+is changed by this adoption decision.
+
+**G0A is complete. G0B — Rev.M1 Architecture / Interface Freeze is next and
+remains not-ready.** This decision does not authorize physical Rev.M1
+implementation. Physical Main/Wing remains unimplemented; G0B must accept the
+architecture/interface freeze package before implementation begins. Native
+tscircuit is the forward candidate/path, not an already implemented or
+production-qualified physical Rev.M1 design.

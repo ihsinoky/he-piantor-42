@@ -1,5 +1,15 @@
 # JITX EDA evaluation
 
+Current disposition: **C4C / G0A complete — JITX physical backend NO-GO**
+([Issue #55 PO decision](https://github.com/ihsinoky/he-piantor-42/issues/55#issuecomment-5991285003),
+[D-016](decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)).
+Native stock tscircuit is the active forward Rev.M1 EDA candidate/path.
+All JITX electrical/component/modeling evidence and source are retained.
+G0B architecture/interface freeze is next, remains not-ready, and must complete
+before physical Rev.M1 implementation. The increment summaries below preserve
+historical PASS/BLOCKED/PASS_WITH_LIMITATIONS results and the state at each
+increment; their past gate wording is not the current project disposition.
+
 ## EDA-002A capability checkpoint
 
 EDA-002A started on 2026-10-02 with an environment capability probe against
@@ -274,23 +284,45 @@ separate product sourcing limitation. No private API, artifact patch, external
 CAD round-trip, component redesign, product Main/Wing implementation or order
 was used. See the [C4B report](../hardware/jitx/physical/EDA-002C4B.md) and machine-readable evidence.
 
-C4C is next / Human Gate; G0A is ready-for-decision on this blocked evidence,
-not GO. G0B remains not-ready and EVT-002 remains blocked/unstarted. No D-016
-or adoption decision is made here.
+At the C4B increment, C4C was next / Human Gate; G0A was ready-for-decision
+on this blocked evidence, not GO. G0B remained not-ready and EVT-002 remained
+blocked/unstarted. No D-016 or adoption decision was made in that increment.
 
-### EDA-002C4C — next / Human Gate / G0A
+### EDA-002C4C — complete / Human Gate / G0A NO-GO
 
-Inputs: C0-C3 accepted evidence and C4B/C4B2/C4B3 physical/manufacturing results.
-Explicit outcome:
+Issue [#55](https://github.com/ihsinoky/he-piantor-42/issues/55) records the PO's
+completed decision: **NO-GO — JITX physical backend** for Rev.M1 / Rev.A.
+[D-016](decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)
+records this decision without changing C0-C4B5 historical verdicts.
 
-- **GO:** JITX becomes the active EDA candidate for physical Rev.M1 / Rev.A.
-- **NO-GO:** retain/fallback to another supported backend without invalidating
-  C0-C3 evidence.
+The primary rationale is accepted [C4B5 BLOCKED evidence](../hardware/jitx/physical/EDA-002C4B5.md)
+(issue #53 / merged PR #54). Source-level routing materially reduced the
+historical 147 downstream unconnected items; the retained multilayer experiment
+still had 39 plus a dangling via. No supported public headless global multilayer
+routing workflow was demonstrated in the pinned environment, so the complete
+AI/source-controlled physical-routing workflow required by this project was
+not demonstrated. This is a project-fit decision, not proof of impossibility.
 
-C4A makes neither decision. A future accepted D-016 may record JITX as the
-active EDA for Rev.M1 and Rev.A; D-016 is not created or accepted now.
-G0B separately freezes physical architecture/interface before implementation.
-See [physical architecture](../hardware/rev-m1/architecture.md).
+Graph introspection, manufacturer component modeling, electrical parity,
+source-controlled representation, headless build and the demonstrated downstream
+KiCad/CAM path remain accepted successes, with their known limitations. All
+JITX source, models, qualification code and evidence remain retained unchanged
+for reference or possible future reevaluation. Useful manufacturer-model, DFM,
+architecture and validation knowledge carries forward.
+
+USB remains **OPEN — PRE-ORDER DFM REVIEW REQUIRED**, a separate product
+manufacturing risk and not a NO-GO reason. The generated 1.6 mm overall-thickness
+metadata limitation is retained as historical downstream-path evidence, not
+the primary rejection reason; the demonstrated path requires an independent
+1.2 mm finished-thickness handoff.
+
+Native stock tscircuit is restored as the active forward Rev.M1 EDA
+candidate/path, subject to G0B and later product/manufacturing gates. D-014's
+frozen electrical fixture authority and D-015's reusable Main + Evaluation Wing
+architecture remain valid. **G0B is next and not-ready** until its freeze package
+is accepted. Physical Main/Wing and EVT-002 remain unimplemented; C4C/G0A does
+not authorize implementation or claim production qualification. See
+[physical architecture](../hardware/rev-m1/architecture.md).
 
 ## EDA-002C4B2 downstream headless KiCad — BLOCKED
 
@@ -338,5 +370,5 @@ runs reconcile the expected partial state. All 20 C0/C1/C2 regressions pass;
 historical source and evidence remain unchanged. **Incomplete routing is not
 the only major remaining issue**: USB margin remains unresolved. See the
 [C4B3 report and primary-source evidence](../hardware/jitx/physical/EDA-002C4B3.md).
-PMO/PO review remains pending; C4C/G0A adoption is undecided, G0B not-ready,
-and physical Rev.M1/EVT-002 unstarted.
+At the C4B3 increment, PMO/PO review remained pending; C4C/G0A adoption was
+undecided, G0B not-ready, and physical Rev.M1/EVT-002 unstarted.
