@@ -28,7 +28,7 @@ here.
 
 | Gate | Current status | Check | Trigger | Unlock condition |
 | --- | --- | --- | --- | --- |
-| G0A — JITX Backend Adoption | `ready-for-decision` | C0-C3 accepted evidence and C4B/C4B2/C4B3 physical/manufacturing results | C4B3 BLOCKED: supported job-free thickness handoff identified; USB margin unresolved; routing remains separate. | C4C GO / NO-GO selects active EDA backend for physical Rev.M1 implementation. |
+| G0A — JITX Backend Adoption | `not-ready` | C0-C3 accepted evidence, historical C4B-C4B4A, C4B4B disposition and future C4B5 routing evidence | After C4B5 complete-routing feasibility. Downstream path PASS_WITH_LIMITATIONS; USB is a separate pre-order product DFM risk. | C4C GO / NO-GO selects active EDA backend for physical Rev.M1 implementation; no adoption decision yet. |
 | G0B — Rev.M1 Architecture / Interface Freeze | `not-ready` | Reusable Main / Evaluation Wing architecture, logical interface, exact connector selection/pinout, experiment design, representative interconnect, pitch-test Wing structure, Rev.A reuse assumptions, DFM constraints and project-owned/approved geometry source | Architecture/interface and experiment review package is complete. | Rev.M1 schematic/PCB implementation may proceed to manufacturing-package completion. |
 | G1 — Rev.M1 Main + Evaluation Wing pre-order review | `not-ready` | Actual Main/Wing circuit/ERC, DRC, BOM, manufacturing outputs and measurement plan | Complete manufacturing package exists after G0A/G0B. | Rev.M1 Main + Evaluation Wing ordering may proceed. |
 | G2 — Post-EVT-002 magnetic / pitch / analog-path decision | `not-ready` | Measured range, noise, scan speed, power, interference, actual interconnect path and pitch usability | Physical evaluation measurements and report are complete. | Select among 17.0 / 16.5 / 16.0 mm and production magnetic architecture; the Rev.A circuit may be fixed. |
@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-001 / EVT-001 historical four-key fixture is frozen under unchanged D-014. C0/C1 accepted; C2 accepted electrical PASS; C3 merged PR #40 retains valid historical geometry discrepancies. C4A accepted / merged PR #42 under D-015. C4B issue #43 investigation is BLOCKED: partial copper/ODB/CSV demonstrated; full routing/DRC and qualified Gerber/drill handoff remain open. C4B2 issue #45 is also BLOCKED: downstream DRC/CAM executes twice, but source hole clearances and exported thickness prevent manufacturing qualification. C4B3 issue #47 is BLOCKED: thickness has a supported job-free handoff limitation; near-limit USB margin remains unresolved. C4C / G0A remains Human Gate, ready-for-decision; adoption remains undecided. New physical Rev.M1 Main/Wing implementation and EVT-002 remain unstarted behind G0A/G0B. |
+| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 complete-routing feasibility is next; C4C / G0A Human Gate follows C4B5. Adoption undecided; physical Main/Wing and EVT-002 remain unstarted behind G0A/G0B. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -91,6 +91,10 @@ first-choice is accepted Main reuse + Left/Right 21-key Wings, three TMUX1208
 each, generated from one project-owned definition; separate manufacturing
 outputs are allowed, without a reversible PCBA requirement.
 
+The following C4B-C4B3 summaries record historical results; the forward C4B4B
+disposition below governs current path/product status. Their reports and evidence
+remain unchanged.
+
 **EDA-002C4B investigation: BLOCKED** (issue #43). The disposable four-key
 qualification wrapper builds with explicit 68-component placement, partial
 copper on two layers/two vias, ODB++ and public BOM/PnP review exports. The two
@@ -99,7 +103,7 @@ Full routing, complete DRC and a qualified Gerber/Excellon JLCPCB handoff remain
 unproven. C2 electrical parity remains PASS. See the
 [C4B evidence](../hardware/jitx/physical/EDA-002C4B.md).
 
-**EDA-002C4B2 downstream CAM: BLOCKED** (issue #45; pending PMO/PO review).
+**EDA-002C4B2 downstream CAM: BLOCKED** (issue #45 / merged PR #46).
 The unchanged fixture generates JSON DRC, nine Gerber layers, PTH/NPTH Excellon
 and 68-row PnP through KiCad 9.0.9 twice from fresh state. Its 147 missing
 connections reconcile with C4B's intentional partial routing. Four USB source
@@ -109,7 +113,7 @@ geometry/drill/assembly-coordinate difference was found between runs; all raw
 differences are retained. Historical evidence, versions and full routing remain
 unchanged. See [C4B2 evidence](../hardware/jitx/physical/EDA-002C4B2.md).
 
-**EDA-002C4B3 manufacturing disposition: BLOCKED** (issue #47; PMO/PO review pending).
+**EDA-002C4B3 manufacturing disposition: BLOCKED** (issue #47 / merged PR #48).
 The thickness mismatch originates in a fixed 1.6 mm runtime export template;
 no supported overall CAD/job override was found. A supported limited handoff
 excludes the optional job and specifies 1.2 mm independently, preserving all
@@ -122,11 +126,38 @@ exceptions require evidence. Fresh two-run CAM/source reconciliation and all
 geometry and partial routing remain unchanged. Incomplete routing is **not**
 the only major remaining issue. See [C4B3 evidence](../hardware/jitx/physical/EDA-002C4B3.md).
 
-**EDA-002C4C / G0A is next / Human Gate, ready-for-decision** on this blocked
-result. It must decide whether further supported-workflow investment is
-warranted or a supported fallback is preferable. No GO/NO-GO decision or D-016
-is made here. No board is ordered. This geometry is disposable backend
-qualification infrastructure; physical Rev.M1 is unimplemented.
+**EDA-002C4B4A completed / merged PR #50** (issue #49): the qualification-only
+coupon preserved accepted connector geometry and provided the exact human-upload
+ZIP. See [C4B4A](../hardware/jitx/physical/EDA-002C4B4A.md).
+
+**EDA-002C4B4B external evidence classified** (issue #51; proposed disposition
+pending PMO/PO review). Human JLCDFM observation is **INCONCLUSIVE** for the exact
+NPTH-to-adjacent-pad-copper measurement; the viewer exposed no measured result.
+Absence of a warning is not production approval. The JLCPCB Japan support/sales
+response received 2026-10-05 confirms a **0.20 mm minimum capability**, numerically
+met by all four accepted-source gaps (0.2000999900 / 0.2348831648 mm).
+JLCPCB recommends additional clearance where feasible without specifying 0.25 mm.
+The **0.25 mm preferred target** and **0.001 mm numerical review guard** remain
+project-owned, not JLCPCB requirements or recommendations.
+
+**JITX -> legacy-kicad -> KiCad -> Gerber/Excellon: PASS_WITH_LIMITATIONS.**
+Accepted source geometry was preserved; USB gaps are connector properties,
+not export distortions. The misleading generated CAD/Gerber-job overall thickness
+metadata must be excluded from production handoff; independently select/confirm
+**1.2 mm finished thickness**. This does not qualify a production PCB or complete
+routing/DRC.
+
+**USB product release: OPEN — PRE-ORDER DFM REVIEW REQUIRED.** USB margin is
+reclassified from a JITX-backend qualification blocker to a product manufacturing
+risk. Before any actual Rev.M1 / Rev.A fabrication order, increase clearance
+where feasible, or explicitly accept/document manufacturer-minimum geometry and
+pass actual order-time CAM/process review. No production exception is granted.
+See [C4B4B disposition and external evidence](../hardware/jitx/physical/EDA-002C4B4B.md).
+
+**EDA-002C4B5 — complete-routing feasibility is next** (`todo`, unimplemented).
+**C4C / G0A Human Gate follows C4B5**, and is not ready pending that evidence.
+No GO/NO-GO adoption decision or D-016 is made here. Physical Rev.M1 remains
+unimplemented; no board is ordered.
 
 G0B must freeze the architecture/interface, exact connector/pinout and
 representative experiments before implementation. Physical Main/Wing,
@@ -146,7 +177,9 @@ project uses `jitx==4.4.3`, runs against the already validated Linux runtime
 documented graph-introspection proof. See
 [`jitx-evaluation.md`](jitx-evaluation.md) for the evidence and stability
 classification. JITX remains a challenger qualified against the historically authoritative
-frozen tscircuit fixture; C4B is BLOCKED; C4C adoption and G0B product freeze remain ahead.
+frozen tscircuit fixture; historical C4B BLOCKED evidence is retained. C4B4B
+classifies the downstream path PASS_WITH_LIMITATIONS; C4B5, then C4C adoption,
+and G0B product freeze remain ahead.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
