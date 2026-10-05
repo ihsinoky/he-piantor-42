@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-05",
+  "versions": {
+    "python": "3.14.2",
+    "jitx": "4.4.3",
+    "jitxlib-standard": "4.4.0",
+    "runtime": "4.4.2"
+  },
+  "symbols": [
+    {
+      "symbol": "jitx.circuit.Route",
+      "signature": "(source: 'Port | Pad | Via | RouteConnectionEndpoint | RoutePoint', destination: 'Port | Pad | Via | RouteConnectionEndpoint | RoutePoint', layer: 'int', sketch: 'Route.Sketch | Sequence[Point] | None' = None)",
+      "installed_file": "jitx/circuit.py",
+      "line": 466,
+      "module_sha256": "79740a1626882c0420922002327198dd46b217dc3023772d1d51e02410c13132"
+    },
+    {
+      "symbol": "jitx.circuit.Route.Sketch",
+      "signature": "(start: 'Route.Sketch.Terminal', turns_or_end: 'Sequence[Point] | Route.Sketch.Terminal', end: 'Route.Sketch.Terminal | None' = None, /)",
+      "installed_file": "jitx/circuit.py",
+      "line": 476,
+      "module_sha256": "79740a1626882c0420922002327198dd46b217dc3023772d1d51e02410c13132"
+    },
+    {
+      "symbol": "jitx.via.Via",
+      "signature": "()",
+      "installed_file": "jitx/via.py",
+      "line": 36,
+      "module_sha256": "e815641d87b8bdb7248b23d1c65666af9d35fe50f02a7047cd8adffb9426f918"
+    },
+    {
+      "symbol": "jitx.net.PortAttachment",
+      "signature": "(port: 'Port | Sequence[Port]', attachment: 'Copper | Via | ControlPoint')",
+      "installed_file": "jitx/net.py",
+      "line": 1005,
+      "module_sha256": "9291564e7b172803871e30f94fa49af77d552ad73f7bceb705fb8d76a9ca8a0a"
+    },
+    {
+      "symbol": "jitx.controlpoint.RoutePoint",
+      "signature": "(*, layer: 'int', shape: 'Shape | None' = None, bundle: 'type' = <class 'jitx.net.Port'>)",
+      "installed_file": "jitx/controlpoint.py",
+      "line": 61,
+      "module_sha256": "4b3efa514f46bc5ba95a64919b9cdc2870e549fc73371bd647916a2ca636f41d"
+    },
+    {
+      "symbol": "jitx.controlpoint.PairInsertion",
+      "signature": "(*, layer: 'int', bundle: 'type' = <class 'jitx.net.DiffPair'>, invert: 'bool' = False)",
+      "installed_file": "jitx/controlpoint.py",
+      "line": 79,
+      "module_sha256": "4b3efa514f46bc5ba95a64919b9cdc2870e549fc73371bd647916a2ca636f41d"
+    },
+    {
+      "symbol": "jitx.controlpoint.PairPoint",
+      "signature": "(*, layer: 'int', bundle: 'type' = <class 'jitx.net.DiffPair'>, invert: 'bool' = False)",
+      "installed_file": "jitx/controlpoint.py",
+      "line": 157,
+      "module_sha256": "4b3efa514f46bc5ba95a64919b9cdc2870e549fc73371bd647916a2ca636f41d"
+    },
+    {
+      "symbol": "jitx.net.TopologyNet",
+      "signature": "(sequence: 'T | Via | ControlPoint | Sequence[T | Via | ControlPoint]', *args: 'T | Via | ControlPoint', name: 'str | None' = None)",
+      "installed_file": "jitx/net.py",
+      "line": 867,
+      "module_sha256": "9291564e7b172803871e30f94fa49af77d552ad73f7bceb705fb8d76a9ca8a0a"
+    },
+    {
+      "symbol": "jitx.net.Net",
+      "signature": "(ports: 'Iterable[T | Net[T] | Copper | Via | ControlPoint]' = (), *, name: 'str | None' = None, symbol: 'Symbol | None' = None)",
+      "installed_file": "jitx/net.py",
+      "line": 645,
+      "module_sha256": "9291564e7b172803871e30f94fa49af77d552ad73f7bceb705fb8d76a9ca8a0a"
+    },
+    {
+      "symbol": "jitx.constraints.design_constraint",
+      "signature": "(condition1: 'Tag | BoolExpr | bool', condition2: 'Tag | BoolExpr | bool | None' = None, /, *, priority: 'int' = 0, name: 'str | None' = None)",
+      "installed_file": "jitx/constraints.py",
+      "line": 91,
+      "module_sha256": "521999e536ea3230e244e60845f14ee34b41fccf48fad48e6b5188d7ab6828f3"
+    },
+    {
+      "symbol": "jitx.circuit.Circuit.at",
+      "signature": "(self, x: 'Placement | Transform | Point | float | None' = None, y: 'float | None' = None, /, *, on: 'Side' = <Side.Top: 0>, rotate: 'float' = 0, floating: 'bool' = False) -> 'Self'",
+      "installed_file": "jitx/circuit.py",
+      "line": 292,
+      "module_sha256": "79740a1626882c0420922002327198dd46b217dc3023772d1d51e02410c13132"
+    },
+    {
+      "symbol": "jitx.circuit.Circuit.place",
+      "signature": "(self, instance: 'T', placement: 'Placement | Transform | Point', /, *, on: 'Side' = <Side.Top: 0>, relative_to: 'Component | Circuit | None' = None) -> 'T'",
+      "installed_file": "jitx/circuit.py",
+      "line": 212,
+      "module_sha256": "79740a1626882c0420922002327198dd46b217dc3023772d1d51e02410c13132"
+    },
+    {
+      "symbol": "jitx.run.runtime.Runtime.submit",
+      "signature": "(self, design: 'T | type[T]', *, name: 'str | None' = None)",
+      "installed_file": "jitx/run/runtime.py",
+      "line": 140,
+      "module_sha256": "31cbddd64a272a9b08d9eca9a0de908dc0a0d5c6bda8510b51ab3c7443567f5b"
+    },
+    {
+      "symbol": "jitx.run.runtime.Runtime.capture",
+      "signature": "(self, design: 'T', *, name: 'str | None' = None) -> 'T'",
+      "installed_file": "jitx/run/runtime.py",
+      "line": 197,
+      "module_sha256": "31cbddd64a272a9b08d9eca9a0de908dc0a0d5c6bda8510b51ab3c7443567f5b"
+    },
+    {
+      "symbol": "jitx.run.runtime.RuntimeDesign.query",
+      "signature": "(self, target: 'type[Q] | tuple[type[Q], ...]', /, *, through: 'tuple[type, ...] | UnionType | None' = None, transform: 'Transform | None' = Transform((0, 0), 0, (1, 1)), opaque: 'tuple[type, ...] | UnionType | None' = None, refs: 'bool' = False, filter: 'Callable[[Q], bool] | None' = None) -> 'Generator[tuple[Trace, Q], None, None]'",
+      "installed_file": "jitx/run/runtime.py",
+      "line": 421,
+      "module_sha256": "31cbddd64a272a9b08d9eca9a0de908dc0a0d5c6bda8510b51ab3c7443567f5b"
+    }
+  ],
+  "cli_help": {
+    "jitx --help": {
+      "returncode": 0,
+      "stdout": "Usage: jitx [OPTIONS] [COMMAND] [ARGS]...\n\nOptions:\n  --version                       Show the installed jitx version and exit.\n  --format [json|text]\n  --logging [DEBUG|INFO|NOTICE|WARNING|ERROR|CRITICAL]\n                                  [default: NOTICE]\n  -l, --logger TEXT               Per-logger level override as NAME=LEVEL\n                                  (repeatable).\n  --install-completion            Install completion for the current shell.\n  --show-completion               Show completion for the current shell, to\n                                  copy it or customize the installation.\n  --help                          Show this message and exit.\n\nCommands:\n  project  Manage the project: filesystem scaffolding (layout) and Python...\n  runtime  Inspect and manage the JITX runtime.\n  auth     Sign in to a JITX account.\n  support  Collect diagnostics and file JITX support tickets (uploads are...\n  design   Inspect and query designs.\n  ui       Open the interactive board / schematic editor in a native window.\n",
+      "stderr": ""
+    },
+    "jitx design --help": {
+      "returncode": 0,
+      "stdout": "Usage: jitx design [OPTIONS] COMMAND [ARGS]...\n\n  Inspect and query designs.\n\nOptions:\n  --help  Show this message and exit.\n\nCommands:\n  find    List discoverable designs.\n  build   Build one or more designs in the project.\n  export  Export\n",
+      "stderr": ""
+    },
+    "jitx design build --help": {
+      "returncode": 0,
+      "stdout": "Usage: jitx design build [OPTIONS] [DESIGN]...\n\n  Build one or more designs in the project.\n\nPositional arguments:\n  [DESIGN]...\n\nArguments:\n  [DESIGN]...\n\nOptions:\n  --all                       Build every design discoverable in the resolved\n                              project.\n  --dump TEXT                 Write the translated design payload to this path\n                              before sending it to the runtime \u2014 useful for\n                              debugging.\n  --dry                       Translate but don't connect to the runtime.\n                              Skips the runtime probe and dependency check.\n  --host TEXT                 Hostname the runtime is listening on. Only\n                              consulted when ``--port`` is supplied without\n                              ``--uri``.  [default: localhost]\n  --port INTEGER              Port the runtime is listening on. Skips the\n                              project-local probe and connects to\n                              ``ws://<host>:<port>``.\n  --uri TEXT                  Full URI of the runtime (e.g.\n                              ``ws://localhost:39365/abc123``). Takes\n                              precedence over ``--port`` / ``--socket`` /\n                              project probe.\n  --socket FILE               Path to a socket file describing the runtime's\n                              connection parameters. Used when targeting a\n                              runtime outside the resolved project's\n                              directory.\n  --generate-config           After building, write/refresh the VS Code launch\n                              configuration for each discovered design. Only\n                              meaningful with ``--all``.\n  --no-dependency-check       Skip the pyproject.toml dependency sync step.\n  --check-include-group TEXT  Include this dependency group in the pre-build\n                              sync check. Repeatable.\n  --project PATH              JITX project root (directory containing\n                              pyproject.toml with `jitx` as a dependency).\n                              Defaults to walking up from the current\n                              directory.\n  --help                      Show this message and exit.\n",
+      "stderr": ""
+    },
+    "jitx design export --help": {
+      "returncode": 0,
+      "stdout": "Usage: jitx design export [OPTIONS] COMMAND [ARGS]...\n\n  Export\n\nOptions:\n  --help  Show this message and exit.\n\nCommands:\n  bootstrap-graph         Export a deterministic electrical graph using...\n  m1-electrical-graph     Extend C0 capture with electrical metadata;...\n  physical-qualification  Capture source-controlled placement and copper...\n  legacy-kicad            Export design to KiCad using the legacy export...\n  legacy-altium           Export design to Altium using the legacy export...\n  legacy-edx              Export design to EDX using the legacy export flow\n  legacy-odb++            Export board to ODB++ using the legacy export flow\n  legacy-step             Export board to STEP using the legacy export flow\n",
+      "stderr": ""
+    },
+    "jitx ui --help": {
+      "returncode": 0,
+      "stdout": "Usage: jitx ui [OPTIONS] COMMAND [ARGS]...\n\n  Open the interactive board / schematic editor in a native window.\n\nOptions:\n  --help  Show this message and exit.\n\nCommands:\n  open  Open the popout interactive editor for a design.\n",
+      "stderr": ""
+    }
+  },
+  "preflight": {
+    "clean_before_edit": true,
+    "fetch_origin_prune": "PASS after sandbox escalation",
+    "all_checked_refs_and_merge_bases": "69dd846ac76d40f333b1b099a13d2a4720cfe758",
+    "issue_53_read_completely": true,
+    "issue_comments": 0
+  }
+}

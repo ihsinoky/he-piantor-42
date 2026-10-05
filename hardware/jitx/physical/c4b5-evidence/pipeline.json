@@ -1,0 +1,859 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "introspect"
+      ],
+      "log": "designs/c4b5/runtime.json",
+      "log_sha256": "dacbb35c183a47b8c37277a42019b6ab17d219dc3aae705ed89fc420b52a5da2",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "version"
+      ],
+      "log": "designs/c4b5/kicad.log",
+      "log_sha256": "79a34d175ba9ede3a6092221f311e06d9f1aa335883439e5a5f1d427699f0d1c",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "stop"
+      ],
+      "log": "designs/c4b5/experiment-1/stop.log",
+      "log_sha256": "c3f640a1a0b97bcc67b348dafa1421745f6d65aa96742c88aca4116d461bd762",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "start",
+        "--background"
+      ],
+      "log": "designs/c4b5/experiment-1/start.log",
+      "log_sha256": "f3b26b3798272bf2254a4f5e7b632e105bd298588539aa468402434bfc4ccfc5",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "build",
+        "he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification",
+        "--no-dependency-check"
+      ],
+      "log": "designs/c4b5/experiment-1/build.log",
+      "log_sha256": "0151e7a60d97ff550c1b910c717f11c2eb641ab1d3493ad4891a4349e2409ae2",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "physical-qualification",
+        "he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-1"
+      ],
+      "log": "designs/c4b5/experiment-1/capture.log",
+      "log_sha256": "4ffb79b79f228617eb6ab374cbc3f879479e48b921fbf0ef4b78a483e5693331",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "legacy-kicad",
+        "he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification"
+      ],
+      "log": "designs/c4b5/experiment-1/export.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-1/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-1/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "drc",
+        "--format",
+        "json",
+        "--severity-all",
+        "--exit-code-violations",
+        "--output",
+        "/out/drc.json",
+        "/input/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b5/experiment-1/drc.log",
+      "log_sha256": "19f5ca1c6b66ef36eb6fc53c3fa474a8b14dd7f259b535080d3b3806f579c5f4",
+      "returncode": 5
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "stop"
+      ],
+      "log": "designs/c4b5/experiment-2/stop.log",
+      "log_sha256": "4ed00bd8ee24b5c0c9ee49ad9bf37a16a9ec45e60d9e9a27c97804c9e13ac0b2",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "runtime",
+        "start",
+        "--background"
+      ],
+      "log": "designs/c4b5/experiment-2/start.log",
+      "log_sha256": "90e9af8496903103e5ffb534ee869e4ab8b94b3d0e4df04cc3bca8d1fbfd1df4",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "build",
+        "he_piantor_42_jitx.routing_qualification.ViaRoutingQualification",
+        "--no-dependency-check"
+      ],
+      "log": "designs/c4b5/experiment-2/build.log",
+      "log_sha256": "0cc28eec3d7c768a37392055c588d2ed609a0d261ed295c66f92bb6baeac91f6",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "physical-qualification",
+        "he_piantor_42_jitx.routing_qualification.ViaRoutingQualification",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-2"
+      ],
+      "log": "designs/c4b5/experiment-2/capture.log",
+      "log_sha256": "7773f6b32d0aa6b14436619f289235af4b829d0f122ed23ffce8d34ac3dceba1",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "legacy-kicad",
+        "he_piantor_42_jitx.routing_qualification.ViaRoutingQualification"
+      ],
+      "log": "designs/c4b5/experiment-2/export.log",
+      "log_sha256": "b0f1978308ff309a1ce634d93bf2c75648ebf1f481e1796bec9148d57f0222f4",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-2/kicad:/input:ro",
+        "-v",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/experiment-2/cam:/out",
+        "kicad/kicad:9.0.9",
+        "kicad-cli",
+        "pcb",
+        "drc",
+        "--format",
+        "json",
+        "--severity-all",
+        "--exit-code-violations",
+        "--output",
+        "/out/drc.json",
+        "/input/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.kicad_pcb"
+      ],
+      "log": "designs/c4b5/experiment-2/drc.log",
+      "log_sha256": "4619ab20a67a7f1ab35969ce9575372739b68666bb1cc1e12111c3f90346b15d",
+      "returncode": 5
+    },
+    {
+      "argv": [
+        "jitx",
+        "design",
+        "export",
+        "m1-electrical-graph",
+        "he_piantor_42_jitx.m1.M1FourKeyElectrical",
+        "--output",
+        "/workspaces/he-piantor-42/hardware/jitx/designs/c4b5/c2.json"
+      ],
+      "log": "designs/c4b5/c2.log",
+      "log_sha256": "4ffb79b79f228617eb6ab374cbc3f879479e48b921fbf0ef4b78a483e5693331",
+      "returncode": 0
+    }
+  ],
+  "runs": [
+    {
+      "design": "he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification",
+      "experiment": 1,
+      "files": {
+        "bom-review.csv": {
+          "bytes": 2783,
+          "sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d"
+        },
+        "build.log": {
+          "bytes": 304,
+          "sha256": "0151e7a60d97ff550c1b910c717f11c2eb641ab1d3493ad4891a4349e2409ae2"
+        },
+        "cam/drc.json": {
+          "bytes": 75603,
+          "sha256": "b778f78aadb7187ce0bbfd0cf4b72143f439886d55e542677e247b0a721767f3"
+        },
+        "capture.log": {
+          "bytes": 772,
+          "sha256": "4ffb79b79f228617eb6ab374cbc3f879479e48b921fbf0ef4b78a483e5693331"
+        },
+        "drc.log": {
+          "bytes": 81,
+          "sha256": "19f5ca1c6b66ef36eb6fc53c3fa474a8b14dd7f259b535080d3b3806f579c5f4"
+        },
+        "electrical-graph.json": {
+          "bytes": 76733,
+          "sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60"
+        },
+        "export.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "kicad/fp-lib-table": {
+          "bytes": 244,
+          "sha256": "2f3246bf85930743cfdded33474ccfaad00c5db7679110731467ec9db2c0c566"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.kicad_kws": {
+          "bytes": 414,
+          "sha256": "e3289ab29fc8360ef675f301e9eafa285361d59fc7bef9cb2ace68b996957084"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.kicad_pcb": {
+          "bytes": 751461,
+          "sha256": "72e2c880df4aa82a1af5afc71ecefb9607eb37c449d56a32b2d53808ccb90625"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.kicad_pro": {
+          "bytes": 5254,
+          "sha256": "586b5f993070ac85f14f33279b510425121b6ce1ca6c69ed34616799b248254c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.kicad_sch": {
+          "bytes": 371175,
+          "sha256": "06593008d9e0ff1797425a08aebdbbe697c15e2556d74811d986fe565acdf255"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/ABM8LANDPATTERN.kicad_mod": {
+          "bytes": 2775,
+          "sha256": "bc96fd8130d732da83d8a7ad1adeda76af66f3134f21793cb15575f86a5f1338"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/RP2040LANDPATTERN.kicad_mod": {
+          "bytes": 34065,
+          "sha256": "d3f13edd0e2c939a7bffbc0c5f324c420415b53aadd07c2c2d72ccce552e4f42"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT.kicad_mod": {
+          "bytes": 12365,
+          "sha256": "1af6349d2ca8e2695085db578284d410c9ae2f5b321c62c5b6f9ba74720480db"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_1.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "c6f853b784f498f177782191c167bf4a31bb0e646850bb1524ac4e7c719e00d2"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_10.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "527393f2ace5996d49480df02f8fc99c7bf65bc9a8ad3072548e86189118c073"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_11.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "1f4f2c7db47e666da1d7d862b7d5d154ccca7e29374da85b357eae683c1d6985"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_12.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "516acfa1e1113a6d4f970429593d7d8c1999654b894673e722f210adef47deac"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_13.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "8dd80852edef5fc2966d264562bdcfafcd9f2bbfeba492ff88ddfee9d9fc1d3d"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_14.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "969ffa20dca3e70c8dc04e75b1265deae61b0a4e3498ead133a803b97b6ded88"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_15.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "1cf8040faf2d2e639a521ac404a3c94e7051d2b6378f5a8664436dc522e05188"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_16.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "776a247df6fc8a0a1b61a1010b9a69184506fca7c110e8155ce1807aa9e9c21f"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_17.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "be140c35d636823b7340efe1fe9a52fd8cd8a9b346df2a06ba58477301690f97"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_18.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e514d56408eddc65a5ab0e4de67fcfeca01a76aea0d8f323ec174c2c4877b52e"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_19.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "89b1a15e679b4217e361b0a1e6b1065ef049705fcd7f020cc01cd29fd370f626"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_2.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "a576da78221350551d615a9f3dc9f72826d05966eaf98f53928c09f5e3fdb693"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_20.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "2c75e58beee3889b95f98b0ddb02cce33bfc9c9b09cf20de39e6eb573ddd39d1"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_21.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "1d52c149f1ce476f74d17230cfb8479ab64bc75680da2312c370e4514cf6ffb6"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_22.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "b2bd48c973cd7f08f4e88f63c6976f4ca19b9618a4f14831b7b781832919460b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_23.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "2cf9767e393eaf0eb9bb87525988e89a7225aa6f9e2fcdd65bada5b2469ae847"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_24.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "d6fb53130878288be14ae02f08291a828fb994672600fa3753ca6b54d1972f1b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_25.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "8de37c13489f41a7b0b5134771e3acde3141a1387ca7ae554e7e5db715e0e2e7"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_26.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "31f7e96183d656cb94c4bd2371e731be69a469b1b37f1bc0164cacaa71cb3e1b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_27.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "ec3d1afea0fa663568cab2384dbb6327cc247d38c88f30bb60b096d4c6248f21"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_28.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a9161bb4058aeb3a0d8a754beae4c27c9ca8ad54fd709a3a17a19492e8a0f7b5"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_29.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "93338f8176f708f5c472d5a4c80723e115fc729f37b0fe5150dcde9a542fb3f2"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_3.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "b0670a89355372fa036396b4756ac8855936cbc221b4641beffef50e4fe9911b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_30.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "02d122d728fb8ac7ba635a328f1269d50ac7268111f16ab461b9d2eeb33843b3"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_31.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a75bb8fae2386f1d5d6caa4578beab43859f8bce98d8448bddd5d28141bba252"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_32.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a0d4bb0e9c6612490a03a5fd776dfc7951fd5d1fad39fa03ba45e7e63bc06ae2"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_33.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f2eb3d36f798cc1157faf3b95e452e228a9f8730d2e8eec0c6e589d5c7aba4e8"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_34.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "3479c57bc3b5f7f1054b55a99181ab3af6050e79d01190722002adb4c7477766"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_35.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "eb7e47607203921b31d0c57f90ecffc3386e4e814f468e26a8cc70d815d167a8"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_36.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "5dd78e44199e5a1d59440343cb910ee9b7df685b1d1ed32f480df2bc58043a20"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_37.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "3c351b7d7200278f76d5cb139002c076efa9f0bab2f4dff481d7eb0d6c9c8fa4"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_38.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "4ed8409d1731be81c111c9afafeab6bc56c0c1e3b09b0bf990ccae95d5c63bfb"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_4.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "d2484af64d7bad11d31ec0561977e48d99fe88abd7c6c4d544252952b89db42b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_5.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "e73ff95143613ad0512c3a2b9e8ef40d4b9a1e9737a055cffc499f97ace13584"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_6.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "f1c60fd44986601ab71742776d5d7aba602e9b1457515123646c2ca144c924fb"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_7.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "1698cbda5372c6b5ab8e68ae200716932b222a143ce1ed98a1889d6f3ee0e002"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_8.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "8af007a7e63c39f0fa4f738f977ed61ab30cee61b8725c9266292f47d5d60f64"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SMT_9.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "a61092d52d7dba96cb5646799d59717183e1e2eda38272e7c6c61977e19f26e8"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOIC.kicad_mod": {
+          "bytes": 16882,
+          "sha256": "5f29a77b7a4e469d02f318d82bf902614e12006f096276ea54780705e73a5a74"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SON.kicad_mod": {
+          "bytes": 11472,
+          "sha256": "c0c9d69c09e61a228f729bd75e07e7996526ad7e7532012d6eceb70cfef3d514"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_3.kicad_mod": {
+          "bytes": 7139,
+          "sha256": "45260ee379c0440801914264ffcc5347330ee7eaa5edee60eac8257f666f430b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_3_1.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "f83910becea43b56001cc0d2af33a4ec12d556772ac81cd90dedf904199f1717"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_3_2.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "fb9659c68a5c563d003c1617563b5020f63341f35457d0049d9d6e87577c6e88"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_3_3.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "156a35834a1c6cc5f9e7eb84806af5649071a0d16a7b1d5325668255e0da726c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_5.kicad_mod": {
+          "bytes": 8736,
+          "sha256": "243441d8c4a26b1f624cf030b1628fffbdf14d39b9c30884f7cc16c71e5bdb48"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_6.kicad_mod": {
+          "bytes": 8807,
+          "sha256": "c09560d61d1b10fe3590266e9014b3480697fa47dc4bbaa1fa138dc9c07f5ac4"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/SOT23_6_1.kicad_mod": {
+          "bytes": 9381,
+          "sha256": "57fc7ee68805209fbe883f507e26956cbc2e78bcb5834ad6cb81cc2b7f9b7e0b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/TESTPOINTLANDPATTERN.kicad_mod": {
+          "bytes": 686,
+          "sha256": "4c69903bc95553a0e888848186501dc703555be0e7eeb14920e20b757cae3eef"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.CompleteRoutingQualification.pretty/TYPEC31M12LANDPATTERN.kicad_mod": {
+          "bytes": 29797,
+          "sha256": "d18e2ef293f2f3af8b122cccd904d88e049063c8222d968d1d1806653a3f1292"
+        },
+        "kicad/project_symbols.lib": {
+          "bytes": 221685,
+          "sha256": "d0791431f3fc6502d7497588cd54120c7b2cffda3d7bbf2434cdfc93fba2afa7"
+        },
+        "kicad/sym-lib-table": {
+          "bytes": 135,
+          "sha256": "0c2c80f8c4307ed592e170f9e23b27cfacb35a88ad33a0889f50abb4d64048c0"
+        },
+        "physical-observation.json": {
+          "bytes": 405605,
+          "sha256": "69c1ae403201804f889fbb93ef3beae11ff6ded813ee282274933573104451ce"
+        },
+        "pnp-review.csv": {
+          "bytes": 1214,
+          "sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+        },
+        "start.log": {
+          "bytes": 183,
+          "sha256": "f3b26b3798272bf2254a4f5e7b632e105bd298588539aa468402434bfc4ccfc5"
+        },
+        "stop.log": {
+          "bytes": 92,
+          "sha256": "c3f640a1a0b97bcc67b348dafa1421745f6d65aa96742c88aca4116d461bd762"
+        }
+      },
+      "fresh_generated_state": true,
+      "input_unchanged": true,
+      "realized_requests": 113,
+      "route_requests": 153,
+      "unconnected_items": 40,
+      "via_count": 2,
+      "violations_by_type": {
+        "copper_sliver": 1,
+        "hole_clearance": 4,
+        "lib_footprint_issues": 68
+      }
+    },
+    {
+      "design": "he_piantor_42_jitx.routing_qualification.ViaRoutingQualification",
+      "experiment": 2,
+      "files": {
+        "bom-review.csv": {
+          "bytes": 2783,
+          "sha256": "fb5f2b3e10e296eb23ac984084ab309dbe6804c1205f4cde6307ae8190aa4b7d"
+        },
+        "build.log": {
+          "bytes": 515,
+          "sha256": "0cc28eec3d7c768a37392055c588d2ed609a0d261ed295c66f92bb6baeac91f6"
+        },
+        "cam/drc.json": {
+          "bytes": 74738,
+          "sha256": "f86da6841aa42670276a2300604467a6002ecf2d074d0e198a7dffc49693d2e6"
+        },
+        "capture.log": {
+          "bytes": 998,
+          "sha256": "7773f6b32d0aa6b14436619f289235af4b829d0f122ed23ffce8d34ac3dceba1"
+        },
+        "drc.log": {
+          "bytes": 81,
+          "sha256": "4619ab20a67a7f1ab35969ce9575372739b68666bb1cc1e12111c3f90346b15d"
+        },
+        "electrical-graph.json": {
+          "bytes": 76733,
+          "sha256": "b910bd267d1be0adb70ef40905802a025a288408c290850244929a93ebd67f60"
+        },
+        "export.log": {
+          "bytes": 226,
+          "sha256": "b0f1978308ff309a1ce634d93bf2c75648ebf1f481e1796bec9148d57f0222f4"
+        },
+        "kicad/fp-lib-table": {
+          "bytes": 234,
+          "sha256": "c9be16b3b4eb160a288dc1a9c88014a949ea64cbb076090d2cb4b9b33966199c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.kicad_kws": {
+          "bytes": 414,
+          "sha256": "e3289ab29fc8360ef675f301e9eafa285361d59fc7bef9cb2ace68b996957084"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.kicad_pcb": {
+          "bytes": 759529,
+          "sha256": "1246fce8cd806791655d536329a7f2de027cc3481c5b93176f1f05fe7d2d2812"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.kicad_pro": {
+          "bytes": 5244,
+          "sha256": "8932165f43f28190281871291422e2a796d3fdfb9a4dc59457d17eee569f0e07"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.kicad_sch": {
+          "bytes": 370042,
+          "sha256": "02e1e04b53fe9d66f7e9ee1fff7e591feb4b70db883a667927fa3ae41498bf2d"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/ABM8LANDPATTERN.kicad_mod": {
+          "bytes": 2775,
+          "sha256": "a2efd853b18d68ff229c11f822d4b23475da6ef3a1be39fa0c5709f19f31cf45"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/RP2040LANDPATTERN.kicad_mod": {
+          "bytes": 34065,
+          "sha256": "e949cd5c19af2d3be63ab046cbe1e8a83c0eff7fa14bdc2168a246700e0e55cf"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT.kicad_mod": {
+          "bytes": 12365,
+          "sha256": "f59a6b51712bc78f10c507f22ea005fd5ff16e1449034d33eb7eaf14a0166898"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_1.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "acb1d7cbbb17cc3ae502740420dcba258e5093054fe2e251fd913eb00d130114"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_10.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "0902175e4509650ae1cb0a40b9e835ab7cb6830f64405fb126177a93fc4ed973"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_11.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "0a5a164462dc8d08fbd3b1a9b399f3fce9e538df40f6a98b3889d7bf56241457"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_12.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "b4cd556d8ff21b637390d23afc691ad1e4ded0970aa423129acea3d54667b4f8"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_13.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "6c5140203c32fa4e5c280abf508a0e9ae64bd7a9b2305f771820bda9676ce298"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_14.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "1903b84b402ffe5be5d412420dbe27c18e31d4dca831c27d2641d4fd65e06dff"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_15.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "0a36c997d0d9c8d497a42af6d7f629283783da4930dd0cd420c0c9a0b31c8c5c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_16.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "e97a6b8a1e6cca2a8006b47b17d5bc2884943f59a59987b85201baedcb67dc17"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_17.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "a31658f70720fd4b948ca3a22fa27fcd7d0a209f179e1b89cb188bc9515a7d3c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_18.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "5ab3d283ac706202bbda0c497b979905f112fef83927395ef80df447a09f95c5"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_19.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "97c41e032c8488216cd8393208a68a9ff0bb5c4fe964b2a462de8abfaa34a0f8"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_2.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "aa7740d89a342c05b0c2d25ddeb216875fa3268fd55166fddbccddd1ef0795b4"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_20.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "77a9e3fc7e67249bd9bd4dd120c099d6070cc408f9420acc373737f253a4a0fe"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_21.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "f6b04f9c37e7a79e7878140232093dc630ac45babb3a937af3b771ce271f2b9e"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_22.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "9c1c7e76820af16689a478d8eb8474a3295f8ab1d8f010d2bb9f20fbeafea2aa"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_23.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "d7c543673258ecca21c113bd1ba91bcaec43f7309a1871c04dcf1a7fd635aa57"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_24.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "1f0e636958058aa17fb93f51f2addabea4b26e1a840a17f5b580d65bab1a619e"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_25.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "d53428fad539600dbfb5fc900686d9775bb76188c8df5960084bfee43d7513ee"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_26.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "4f19888d886d72fdd0648ff03b3ee4b127ab311481cb471f73b926ff4c28eb2b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_27.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "db85b8d3aa55eac989e0f80a13aae1d4b28bee6e2ad2904a3bf9b2bac34f0001"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_28.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "9c084daac525147817f878c7ddad10365f364d00d8b789a59be710c698ee2623"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_29.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "cf64ae2f47ef22724f44ceab8eeb5576c7ca11736a970b70dd003f1dc130dd53"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_3.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "c09b7aaa18737d8a89b83b21b84c1e8a44b6690ad10f6d92366c29939fa502ff"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_30.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "54cc903783755fdb26319a515c8ca6ee75efdbfa29672d2eb09a9d84bd285afd"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_31.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "c8210326ef56a78568698171aa514d765d1851187e8564cd44d9b41c6606aa65"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_32.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "c5240ad7dd4e1287f9077b05fa19ee7e83cbff509f06de79bad105c30db35835"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_33.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "07e662c7ae3b9cd1f27beaa0b4c6946037ba5e90918d009b6c5038054a95f33b"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_34.kicad_mod": {
+          "bytes": 12368,
+          "sha256": "ffccdfcac9f1453b33ac7fe50b531c2d4a2bf0a3d2957de65902642f5bc3109d"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_35.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "8859eba05d79cf1f4b662a8f12b7b375dfd4aad46ae1f86111d8f6be2b943a66"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_36.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "cccd12a31945135a91c571a9b8d8ff3f89c7f91494af13380658169d2930d835"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_37.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "eeffb135b93fb46895660f0abf2af79e5b29212232466787ee7f9fdca6008bac"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_38.kicad_mod": {
+          "bytes": 13724,
+          "sha256": "6ceb73b32139891a3ae78df83881e5b073a1c03b67e4cae11d7509aa39da70ff"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_4.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "02250fcf93fd61952eff277327eb12b310aec7d19d985ddab6c03ff45e448673"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_5.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "52c591593bb2f814b643af29ae66844b5a2b17bb81e8080f5f4588f5f907d402"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_6.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "94053806b45ca1c8d323926b61c010ce261dcb68ae275d63538a10ec1d5fb034"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_7.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "79432859eba586de11fcf421215294d2addf5a1b938360d01c3d8e7f92bfe633"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_8.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "f51426d9cacba06fbec5954a7b9f069f6c7402defbbd0d6dfc5b2ef9030a46c7"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SMT_9.kicad_mod": {
+          "bytes": 12367,
+          "sha256": "1a013bd118df2d8a649720ef7714a23d0d1dbcbb41e3574d2d512e4d8832dd98"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOIC.kicad_mod": {
+          "bytes": 16882,
+          "sha256": "237e9e15d6de7d55cc6779b38902689aa943575a5732ddfa7df154939dde3bc1"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SON.kicad_mod": {
+          "bytes": 11472,
+          "sha256": "59d979eea031a2783038e859d1f553ffa417c02c2aa837f7fa01e8f6ea93dbfa"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_3.kicad_mod": {
+          "bytes": 7139,
+          "sha256": "3563c57b95bcdfb6a5f6ffdf30d7b020cec06e4fcd889cf0f910d5b845cb1632"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_3_1.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "d293c7e060e4d08e520cfe7aafc08b0ab997c84be56c29278cab0346378d26ab"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_3_2.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "a950e48b8d69927599a6c7358be6478226640daee93f71871e768f7ca41d6a50"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_3_3.kicad_mod": {
+          "bytes": 7141,
+          "sha256": "4af2cfc1036c84999863867d10c15444889e4dc64391a4a03330652d29003819"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_5.kicad_mod": {
+          "bytes": 8736,
+          "sha256": "25af686275424a126c437268aadd456b1e1f8e71ab7fb7c37aa2f89c794a2cad"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_6.kicad_mod": {
+          "bytes": 8807,
+          "sha256": "d17952d4a1d48311bc3e15d9add16a15e9428e25774f49ec5a24e1721b071391"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/SOT23_6_1.kicad_mod": {
+          "bytes": 9381,
+          "sha256": "e2e9c9f26cfc9a73eb22c6efb1d4a61b9b13fbdb18f76f58405de0bbbb20671c"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/TESTPOINTLANDPATTERN.kicad_mod": {
+          "bytes": 686,
+          "sha256": "034f6469b196d01ecf0d4972c2eee74ef72be5d8236e992112c99ff4e9c56eed"
+        },
+        "kicad/he_piantor_42_jitx.routing_qualification.ViaRoutingQualification.pretty/TYPEC31M12LANDPATTERN.kicad_mod": {
+          "bytes": 29797,
+          "sha256": "5a728b7f25881714710425e35ad543f7d5259ff4ca1c658e08040c936148461a"
+        },
+        "kicad/project_symbols.lib": {
+          "bytes": 221685,
+          "sha256": "15e089126a4746d93b142be730b9da01d6955f4a06de1271e192f4dc5515087e"
+        },
+        "kicad/sym-lib-table": {
+          "bytes": 135,
+          "sha256": "0c2c80f8c4307ed592e170f9e23b27cfacb35a88ad33a0889f50abb4d64048c0"
+        },
+        "physical-observation.json": {
+          "bytes": 422303,
+          "sha256": "abd389ee829bde4d86a4d01d49fd55728f37fb84f6ade4fcf6d9ef9addb5b128"
+        },
+        "pnp-review.csv": {
+          "bytes": 1214,
+          "sha256": "4d57f0c9227778fd665552040bd0204b1f3d6c50eb8c83a5e4ea858ef0149a16"
+        },
+        "start.log": {
+          "bytes": 183,
+          "sha256": "90e9af8496903103e5ffb534ee869e4ab8b94b3d0e4df04cc3bca8d1fbfd1df4"
+        },
+        "stop.log": {
+          "bytes": 92,
+          "sha256": "4ed00bd8ee24b5c0c9ee49ad9bf37a16a9ec45e60d9e9a27c97804c9e13ac0b2"
+        }
+      },
+      "fresh_generated_state": true,
+      "input_unchanged": true,
+      "realized_requests": 116,
+      "route_requests": 155,
+      "unconnected_items": 39,
+      "via_count": 4,
+      "violations_by_type": {
+        "hole_clearance": 4,
+        "lib_footprint_issues": 68,
+        "via_dangling": 1
+      }
+    }
+  ],
+  "source_sha256": {
+    "he_piantor_42_jitx/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/component_test_designs.py": "a9520ac528b1cc986376290a66d8b1b667508a630db1e2371eb1ba8592a9860d",
+    "he_piantor_42_jitx/components/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/connectors/hro_type_c_31_m_12.py": "cd2a6fb603ccf22addebe810807793e786dc9d2fb1c5a3aa853771baf7418eb1",
+    "he_piantor_42_jitx/components/crystals/__init__.py": "b8956389ed1d44d6ae653e657d6d6fe87bc2ef448dde30d081850bd3ead6c775",
+    "he_piantor_42_jitx/components/crystals/abracon_abm8_272_t3.py": "9b235ed3def042ff472cc0b7e7bf14cf80b1be9e05ef1f4423f45cc4af10d50f",
+    "he_piantor_42_jitx/components/generic_electrical.py": "90a89067cd00eeb43f5310a676d8e4f49f9aa8cb11ab50a175bb9ccaa33905f3",
+    "he_piantor_42_jitx/components/mcu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/mcu/raspberry_pi_rp2040.py": "3c867ffca15f7da8781c8623a6c23ba378b4428bb1cfbd0f22598cc3da1fe566",
+    "he_piantor_42_jitx/components/memory/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/memory/winbond_w25q16jvuxiq.py": "c7f6973d2fb6e287ce6d0edd30d009ed6abfda084f2c4b7b4af7775cee9d3602",
+    "he_piantor_42_jitx/components/power/__init__.py": "7b544e8a0cba403fa60e99d509559ae4af0f40568a334657175faf2fe039181c",
+    "he_piantor_42_jitx/components/power/diodes_ap2112k_3_3trg1.py": "2ab32372b566db3f1caae7f0e8495a504057d652e19d0919d9be9e96c4e0062a",
+    "he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py": "8cd4ae0920a257278aba61f341b9e979f1cf3d9d182d79d6a7f51ee44ee39703",
+    "he_piantor_42_jitx/components/protection/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "he_piantor_42_jitx/components/protection/st_usblc6_2sc6.py": "2156f468378ac6a2b3d73f5473277c72a2af21fc2db62bc7327f00b2d5cbed48",
+    "he_piantor_42_jitx/components/resistor.py": "76df134f2bd5d8a139ee3c4c1d1e614cae4ea1a2baaacf4b5579911a28607e0a",
+    "he_piantor_42_jitx/components/sensors/__init__.py": "bb9ee80ce8bfb9777d2ab5343aad00ba69b0eca5a5dfedcacdc7c8bcb31e1f9b",
+    "he_piantor_42_jitx/components/sensors/texas_instruments_drv5055a3qdbzr.py": "d42de4035298b946a0d3714ea34acb0c63ff0cd3950b74e9c3b9df504f4e2340",
+    "he_piantor_42_jitx/components/switches/__init__.py": "6e4180198ff27c2a704e238306c7d85c86ce48e03c6ca15cfaeea9be1a83825c",
+    "he_piantor_42_jitx/components/switches/texas_instruments_tmux1208pwr.py": "df52a31e9e74b90962351892d444270d201b4121f4f6cdc78c99bf8305592523",
+    "he_piantor_42_jitx/m1.py": "4a1f13c169da45681e375a42e5b2b6475cec9a09899b06fcee346cddad6fbfc2",
+    "he_piantor_42_jitx/main.py": "12e7b6445b3b339cc9df3e6dd0564c589c585179ee01c09487f1536be19ce690",
+    "he_piantor_42_jitx/physical_qualification.py": "70f4ca2fce1834ea2e0054b141ed29aeeeb2c5b072ff7f883d90b19e1c074df7",
+    "he_piantor_42_jitx/routing_qualification.py": "a0ce72d4e8fb021e7de560f5dfad7c3deedc520dbff8fa26194e76f2fb4a2d71",
+    "he_piantor_42_jitx/usb_dfm_coupon.py": "1581253ffd143ff2c97d4d85d018e7973074b210c01fcfc124db40dc1330aa67",
+    "parity/__init__.py": "a5cc953bcaf54795d8e789f79e15d77add0f6874265c935058ce6f3e2c9d5048",
+    "parity/exporter.py": "a4251ed79f679af18d749208f08ab4b85164bf210f1ab5bcb5b83eac5db8ee97",
+    "parity/m1.py": "a7f41868b065dcf8fdd26c1279b579e1416497caa9729064929ffb0c311984a4",
+    "physical/__init__.py": "f9639744e592d6335a351148d4c97db66687dc71ab5a9a111b2af85b0631b0ad",
+    "physical/compare_c4b2.py": "092fb6b143c62a05b89987ee2efd0b4464c7023a0d953fd20d321982f37c35e9",
+    "physical/exporter.py": "e7f320eb3dfc42359f03ca6c08ed85c9620dc937d9d41592df4846fcf7fe2bc9",
+    "physical/measure_c4b3.py": "7780c0f5b625b9a4ec917531410497353dec0dfe27c30ed2f7e2ca36c760c2c1",
+    "physical/measure_c4b4a.py": "6fffde7e8e710e747c51ce6987da8de93aec95eb01bffc59ccf7f3e53992deda",
+    "physical/qualify_c4b2.py": "061317f56aae5b306bafd02ad8493f66b23a8cfb1bb5f519b0f9480d8fa0eac6",
+    "physical/qualify_c4b4a.py": "fdb2248ba67b57f7e941e0f341990f53a6b58b5fc3b59e4b49c1e86568334f6a",
+    "physical/reproduce.py": "ce4915f2d4c72e3be53a19d1655ce050275bcbfdd303a4b734969ddd29b2817d",
+    "physical/reproduce_c4b2.py": "03fd0c4d77f59ccdcce1b0a0bdae0db8cda77e44823e26f6a676a927fcc747dd",
+    "physical/reproduce_c4b4a.py": "5c7d56940f160cf4596e48734ec6278d44cd2d7caa8439a5c63caea2ac2ed6d0",
+    "physical/reproduce_c4b5.py": "0bef84b100786868ded0456f3534655b5fb8fb92ea1cf1e8b0833ba952625fa3",
+    "physical/requalify_c4b3.py": "8ac5ccb28ea8d8dab36b3f894314260e65a30a51b7b65a95292c00641201e6e0"
+  },
+  "versions": {
+    "jitx": "4.4.3",
+    "jitxlib-standard": "4.4.0",
+    "kicad": "9.0.9",
+    "runtime": "4.4.2"
+  }
+}
