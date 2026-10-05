@@ -46,7 +46,11 @@ shielding/ground allocation, mechanics, test-Wing structure, additional
 control/reference signals and future Wing geometry source approval remain
 TBD at G0B/later Human Gates. Do not consume `hardware/layout/**`.
 
-[G0A/G0B](../../docs/project-status.md#human-gates) are not-ready. JITX adoption
-requires C4B proof then C4C Human Gate; C4A does not select an active backend.
+[G0A](../../docs/project-status.md#human-gates) is complete: Issue #55 /
+[D-016](../../docs/decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)
+records JITX physical-backend NO-GO and native stock tscircuit as the active
+forward Rev.M1 EDA candidate/path. G0B is the next Human Gate and remains
+not-ready; its architecture/interface freeze must complete before physical
+implementation. C4A itself did not select an active backend.
 See [logical interface](main-wing-interface.md), [experiments](evaluation-plan.md)
 and [DFM policy](dfm-policy.md). No physical hardware is claimed implemented.
