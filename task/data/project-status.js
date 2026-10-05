@@ -1,7 +1,7 @@
 // Non-authoritative Dashboard read model. See docs/governance.md.
 window.PROJECT_STATUS = {
-  schemaVersion: 1, updatedAt: "2026-10-04T10:01:39+00:00",
-  currentWork: "C4A accepted / merged PR #42; C4B issue #43 BLOCKED (partial copper/ODB/CSV; full routing/DRC and qualified Gerber/drill open); C4B2 #45 BLOCKED (DRC/CAM twice; source hole clearance + exported thickness conflicts); C4B3 #47 BLOCKED (fixed export thickness; supported job-free handoff; USB minimum met nominally but margin unresolved); C2 electrical PASS preserved; C4C next / Human Gate; G0A ready-for-decision / G0B not-ready / EVT-002 blocked-unstarted",
+  schemaVersion: 1, updatedAt: "2026-10-05T04:43:57+00:00",
+  currentWork: "C4A accepted / merged PR #42; C4B/C4B2/C4B3 historical BLOCKED records preserved; C4B4A completed / merged PR #50; C4B4B #51 external evidence classified: JLCDFM INCONCLUSIVE, downstream manufacturing path PASS_WITH_LIMITATIONS; USB OPEN — PRE-ORDER DFM REVIEW REQUIRED (product risk); C2 electrical PASS preserved; C4B5 complete-routing feasibility next; C4C / G0A Human Gate after C4B5; G0B not-ready / EVT-002 blocked-unstarted",
   evidence: {
     commit: { sha: "795479e", at: "2026-10-02T22:41:32+09:00", summary: "Implement native M1 four-key Hall evaluation circuit (#27)" },
     pullRequest: { state: "snapshot", label: "Historical snapshot; check GitHub for current PR state" },
@@ -16,7 +16,7 @@ window.PROJECT_STATUS = {
     {id:"M4",name:"完成版リリース",status:"todo",deliverable:"再現可能なv1.0製造・FW・筐体パッケージ",exit:"最終成果物を固定しユーザーが完成版を承認"}
   ],
   streams: [
-    {name:"Hardware",cells:["設計方針 完了","四キーfixture凍結 / C0-C2 accepted / C3 historical valid / C4A merged #42 / C4B historical BLOCKED / C4B2 BLOCKED: downstream DRC-CAM generated, hole clearance and thickness conflicts / C4B3 BLOCKED: supported job-free thickness handoff, USB margin unresolved / C4C next Human Gate / physical Main-Wing unimplemented / G0A ready-for-decision / G0B not-ready","Main再利用 + Left/Right Wings","統合改版","製造版"]},
+    {name:"Hardware",cells:["設計方針 完了","四キーfixture凍結 / C0-C2 accepted / C3 historical valid / C4A merged #42 / C4B-C4B3 historical BLOCKED / C4B4A completed, merged #50 / C4B4B #51 external evidence classified / downstream path PASS_WITH_LIMITATIONS / USB OPEN — PRE-ORDER DFM REVIEW REQUIRED (product risk) / C4B5 complete-routing feasibility next / C4C-G0A Human Gate after C4B5 / physical Main-Wing unimplemented / G0B not-ready","Main再利用 + Left/Right Wings","統合改版","製造版"]},
     {name:"Firmware",cells:["要件 完了","計測FW","Hall + Vial","統合・校正","v1.0"]},
     {name:"Enclosure / Mechanical",cells:["形状条件 完了","PCB条件待ち","外形連携","STEP / STL","製造版"]},
     {name:"Verification / Test",cells:["計画 完了","磁気・電力実測","Rev.A bring-up","統合試験","受入試験"]}
@@ -28,7 +28,7 @@ window.PROJECT_STATUS = {
     ["done","waiting","todo","todo","todo"]
   ],
   gates: [
-    {name:"G0A JITX Backend Adoption",status:"ready-for-decision",check:"C0-C3 accepted evidence + historical C4B + C4B2/C4B3 downstream manufacturing evidence",trigger:"C4B3 BLOCKED evidence for C4C; thickness handoff limitation classified, USB margin unresolved; routing separate",unlocks:"C4C GO/NO-GO: active EDA backend for physical Rev.M1"},
+    {name:"G0A JITX Backend Adoption",status:"not-ready",check:"C0-C3 accepted evidence + historical C4B-C4B4A + C4B4B external disposition + future C4B5 routing evidence",trigger:"After C4B5 complete-routing feasibility; downstream path PASS_WITH_LIMITATIONS; USB is a separate pre-order product DFM risk; no adoption decision",unlocks:"C4C GO/NO-GO: active EDA backend for physical Rev.M1"},
     {name:"G0B Rev.M1 Architecture / Interface Freeze",status:"not-ready",check:"Main/Wing architecture, logical interface, exact connector/pinout, experiment design, representative interconnect, pitch-test structure, Rev.A reuse, DFM, approved geometry source",trigger:"architecture/interface review package complete",unlocks:"Rev.M1 schematic/PCB through manufacturing-package completion"},
     {name:"G1 Rev.M1 Main + Evaluation Wing pre-order review",status:"not-ready",check:"Main/Wing circuit/ERC, DRC, BOM, actual manufacturing outputs, measurement plan",trigger:"manufacturing package complete after G0A/G0B",unlocks:"Rev.M1 Main + Evaluation Wing order"},
     {name:"G2 post-EVT-002 magnetic / pitch / analog-path decision",status:"not-ready",check:"range, noise, scan speed, power, interference, interconnect, 17.0/16.5/16.0 mm usability",trigger:"physical measurements/report complete",unlocks:"production pitch and magnetic architecture / Rev.A circuit freeze"},
@@ -37,12 +37,14 @@ window.PROJECT_STATUS = {
     {name:"G5 最終版承認",status:"not-ready",check:"v1.0の全製造物と手順",trigger:"受入試験合格時",unlocks:"v1.0リリース"}
   ],
   risks: [
+    {kind:"risk",title:"USB product manufacturing release",detail:"OPEN — PRE-ORDER DFM REVIEW REQUIRED for Rev.M1 / Rev.A. All four nominal gaps meet JLCPCB 0.20 mm capability floor, not production approval. 0.25 mm preferred target and 0.001 mm numerical review guard are project-owned, not JLCPCB requirements or recommendations. Increase margin where feasible, or explicitly accept/document minimum geometry and pass actual order-time CAM/process review; no production exception granted."},
+    {kind:"risk",title:"Downstream thickness handoff",detail:"PASS_WITH_LIMITATIONS: generated CAD/Gerber-job overall thickness metadata is misleading (1.6 mm); exclude it from manufacturing handoff and independently select/confirm 1.2 mm finished thickness."},
     {kind:"risk",title:"pitch / キーキャップ干渉",detail:"17.0 / 16.5 / 16.0 mmで使用感・磁気・switch/keycap干渉を比較。100 x 100 mmはcost targetのみ。"},
     {kind:"risk",title:"磁束レンジと個体差",detail:"Main + Evaluation Wingでスイッチ・センサ・距離・interconnectを一組として実測する。"},
     {kind:"risk",title:"42センサの電力",detail:"USB 500 mA近辺の可能性があるため本基板前に電力Gateを通す。"},
     {kind:"risk",title:"中央部のねじり荷重",detail:"Main/Wingの接続・固定と筐体補強は後続mechanical gateで検証する。"},
     {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 is accepted PASS for the challenger/parity workflow. RuntimeDesign query and net-resolution methods remain documented but explicitly experimental; every future JITX Python package or runtime change must rerun the normalized exporter and bootstrap graph self-test before compatibility is assumed."},
-    {kind:"risk",title:"M1 layout gated",detail:"PR #27 is the frozen historical qualification oracle under unchanged D-014. Physical Main/Wing is separate; C4B/C4C adoption and G0B interface freeze gate implementation."}
+    {kind:"risk",title:"M1 layout gated",detail:"PR #27 is the frozen historical qualification oracle under unchanged D-014. Physical Main/Wing is separate; C4B5 precedes C4C/G0A adoption; G0B interface freeze also gates implementation."}
   ],
   tasks: [
     ["DSH-001","PM","専用HTMLダッシュボード","done","Codex","-"],
@@ -67,10 +69,13 @@ window.PROJECT_STATUS = {
     ["EDA-002C2","EDA","M1 JITX electrical parity","done","Codex","issue #37; done / accepted / merged PR #38; electrical PASS; geometry NOT established"],
     ["EDA-002C3","EDA","Historical manufacturer/frozen geometry evidence","done","PMO + Human","issue #39 / merged PR #40; evidence retained, not all questions resolved; convergence no longer adoption criterion"],
     ["EDA-002C4A","EDA","Evaluation / architecture rebaseline","done","Codex","issue #41; accepted / merged PR #42; no adoption decision"],
-    ["EDA-002C4B","EDA","JITX board-level physical/manufacturing pipeline proof","hold","Codex","issue #43; investigation complete / BLOCKED; partial copper/ODB/CSV; full routing/DRC + Gerber/drill open; qualification only / no order"],
-    ["EDA-002C4B2","EDA","JITX → headless KiCad downstream CAM","hold","Codex","issue #45; BLOCKED; DRC/Gerber/Excellon/PnP twice; known partial routing reconciled; source hole clearance + exported thickness conflicts; PMO/PO review pending"],
-    ["EDA-002C4B3","EDA","JITX downstream manufacturing blocker disposition","hold","Codex","issue #47; investigation complete / BLOCKED; fixed 1.6 mm export template; supported job-free handoff; USB gaps nominally meet 0.20 mm but smallest pair marginal; routing not sole blocker; PMO/PO review pending"],
-    ["EDA-002C4C","EDA","JITX adoption Human Gate","hold","PMO + Human","next / Human Gate; C0-C3 + C4B BLOCKED evidence; G0A ready-for-decision, no adoption decision"],
+    ["EDA-002C4B","EDA","JITX board-level physical/manufacturing pipeline proof","done","Codex","issue #43; historical BLOCKED investigation retained; current path disposition in C4B4B; routing in C4B5"],
+    ["EDA-002C4B2","EDA","JITX → headless KiCad downstream CAM","done","Codex","issue #45 / merged PR #46; historical BLOCKED evidence retained; current disposition in C4B4B"],
+    ["EDA-002C4B3","EDA","JITX downstream manufacturing blocker disposition","done","Codex","issue #47 / merged PR #48; historical BLOCKED investigation retained; USB reclassified by C4B4B as product pre-order DFM risk"],
+    ["EDA-002C4B4A","EDA","USB NPTH JLCPCB DFM qualification coupon","done","Codex","issue #49 / merged PR #50; unchanged geometry and human-upload package completed"],
+    ["EDA-002C4B4B","EDA","JLCPCB external DFM evidence and disposition","done","Codex","issue #51; external evidence classified; JLCDFM INCONCLUSIVE; downstream path PASS_WITH_LIMITATIONS; USB OPEN — PRE-ORDER DFM REVIEW REQUIRED; proposed disposition pending PMO/PO review"],
+    ["EDA-002C4B5","EDA","Complete-routing feasibility","todo","Codex","next after C4B4B; unimplemented; precedes C4C / G0A Human Gate"],
+    ["EDA-002C4C","EDA","JITX adoption Human Gate","hold","PMO + Human","after C4B5 complete-routing feasibility; G0A not-ready pending C4B5; no adoption decision"],
     ["EVT-001","EVT","historical 4-key native electrical qualification fixture（PR #27 golden）","done","Codex + CI","PR #27"],
     ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","unstarted; G0A backend adoption + G0B architecture/interface freeze"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],
