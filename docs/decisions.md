@@ -210,8 +210,10 @@ later Human Gate. `hardware/layout/**` must not be consumed.
 The logical Main/Wing interface includes HALL_5V, GND, MUX_A0/A1/A2, Wing/bank
 enable, three analog MUX outputs for production-compatible Wings, and any
 additional required control/reference signals identified at interface design.
-ADC dividers/filters stay on Main. Exact connector, pin count/order, shielding,
-ground allocation and mechanical implementation remain TBD at G0B.
+ADC dividers/filters stay on Main. At D-015 acceptance, exact connector, pin
+count/order, shielding, ground allocation and mechanical implementation were
+TBD at G0B. D-017 now records the accepted interface and evaluation harness;
+final Rev.A cable mechanics remain open.
 
 Compare 17.0, 16.5 and 16.0 mm pitches experimentally for typing feel/mechanical
 usability, neighboring-magnet Hall interference, signal range, repeatability,
@@ -278,9 +280,80 @@ fixture and is not rewritten. D-015 remains valid and continues to define the
 reusable Main + Evaluation Wing architecture. No historical C0-C4B5 verdict
 is changed by this adoption decision.
 
-**G0A is complete. G0B — Rev.M1 Architecture / Interface Freeze is next and
-remains not-ready.** This decision does not authorize physical Rev.M1
-implementation. Physical Main/Wing remains unimplemented; G0B must accept the
-architecture/interface freeze package before implementation begins. Native
+**At D-016 acceptance, G0A was complete and G0B was next / not-ready.**
+D-017 below now completes G0B; EDA-003B acceptance remains necessary before
+full Rev.M1 implementation. This decision does not authorize physical Rev.M1
+implementation. Physical Main/Wing remains unimplemented; at this decision,
+G0B acceptance was still required. Native
 tscircuit is the forward candidate/path, not an already implemented or
 production-qualified physical Rev.M1 design.
+
+
+## D-017 - Rev.M1 Main/Wing architecture and interface freeze
+
+Status: accepted
+
+The [Issue #57 PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587)
+on 2026-10-06 accepts the [reviewed G0B record](../hardware/rev-m1/g0b-freeze-proposal.md).
+**G0B is complete.** The frozen values are authoritative within this boundary;
+implementation items explicitly left open remain open. D-014/D-015/D-016 and
+historical qualification evidence remain valid.
+
+### Connector and interface
+
+JST GH 14-position: `BM14B-GHS-TBT(LF)(SN)` Main/Wing headers,
+`GHR-14V-S` housings, `SSHL-002T-P0.2` contacts. The exact accepted pin allocation
+is in [G0B section 3](../hardware/rev-m1/g0b-freeze-proposal.md#3-accepted-exact-14-pin-interface):
+`HALL_5V`, six physical GND/return contacts on common `GND`, `MUX_A0`, `MUX_A1`,
+`MUX_A2`, `WING_EN`, `MUX_OUT_A`, `MUX_OUT_B`, `MUX_OUT_C`.
+
+Switched `HALL_5V` remains default-off. Each `WING_EN` requires its own explicit
+external Main-side hardware pull-down; firmware/internal pulls are insufficient.
+The exact resistor value remains implementation work. The evaluation harness
+is nominal 100 mm, 14 conductors, wired 1:1.
+
+### Evaluation and current planning basis
+
+Use three pitch-specific Evaluation Wings: **17.0 / 16.5 / 16.0 mm**. Preserve
+production-equivalent/full-load electrical coverage, three TMUX1208 / three ADC
+path coverage and the 21-sensor full-load/electrical-load path. The reviewed
+[G0B coverage, test-access and measurement framework](../hardware/rev-m1/g0b-freeze-proposal.md#6-production-equivalent-mux-and-bank-evidence)
+is accepted. Production pitch is not selected.
+
+DRV5055 at 5 V: **3 mA typical / 5 mA maximum**. Planning estimates are
+approximately **127 mA per 21-key Wing / 254 mA for 42 sensors / two Wings**.
+These are planning estimates, not final USB/system power qualification; MCU,
+other loads and startup/inrush remain subject to later verification. The final
+Hall sensor is not selected by this planning basis.
+
+### PCB / DFM
+
+Two copper layers, 1.2 mm thickness, SMD one side preferred, and JLCPCB Economic
+PCBA preferred where practical. **100 x 100 mm is optimization only.**
+
+**USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED**
+
+No manufacturing exception or release is approved.
+
+### EDA authority and sequence
+
+Native stock tscircuit remains active forward physical EDA; native TSX remains
+authoritative. [EDA-003A](tscircuit-kicad-importer-requalification.md) / merged
+PR #59 is accepted as **UPSTREAM_FIX_CANDIDATE**: both copper-pour keepouts were
+silently lost, warnings did not report the material loss, and rounded-pad
+corner radius was incorrect. Current KiCad footprint importer reuse is **NOT
+approved**. KiCad assets remain reference / secondary evidence. Future importer
+reuse requires separately accepted fidelity evidence after fixes.
+
+**G0B accepted -> EDA-003B representative stock-tscircuit physical/routing proof
+-> if accepted, full Rev.M1 implementation.** EVT-002's G0B prerequisite is
+satisfied; full implementation is not yet active. No schematic/PCB/manufacturing
+package completion is claimed.
+
+### Remaining open
+
+Production key pitch; final Hall sensor choice; final Rev.A cable mechanics/length;
+exact `WING_EN` pull-down resistor; final placement; PCB routing; representative
+stock-tscircuit routing capability; USB NPTH manufacturing disposition; final
+USB/system power budget; manufacturing release. Planning values do not become
+final production requirements.

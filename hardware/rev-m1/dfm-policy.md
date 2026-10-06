@@ -1,7 +1,7 @@
 # Rev.M1 / Rev.A DFM policy
 
-Architecture baseline only; no panel, PCB or manufacturing dataset is designed
-in EDA-002C4A. See [D-015](../../docs/decisions.md) and
+Accepted DFM baseline under [D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze); no panel, PCB or manufacturing
+dataset is designed here. See [D-015](../../docs/decisions.md) and
 [project gates](../../docs/project-status.md#human-gates).
 
 Prefer JLCPCB Economic PCBA where practical, two copper layers unless separately
@@ -27,7 +27,12 @@ performance and usability take priority. Future geometry source must be
 project-owned or explicitly approved at a later Human Gate; do not consume
 `hardware/layout/**`.
 
-G0B reviews DFM constraints with architecture/interface and Main reuse. G1
+G0B accepted these DFM constraints with architecture/interface and Main reuse.
+EDA-003B representative stock-tscircuit physical/routing proof is next; if
+accepted, full Rev.M1 implementation follows. G1
 requires actual Main + Evaluation Wing manufacturing package, DRC/ERC, BOM,
 Gerber, drill and placement outputs and pre-order review. G3 applies to the
-later complete Rev.A package. No order is authorized by C4A or C4B.
+later complete Rev.A package. No order or manufacturing release is authorized
+by G0B. **USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED** remains unchanged;
+no manufacturing exception is granted. Final placement/routing and final
+USB/system power qualification remain open.

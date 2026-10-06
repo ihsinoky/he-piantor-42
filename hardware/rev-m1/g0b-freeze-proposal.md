@@ -1,16 +1,25 @@
-# G0B Rev.M1 architecture and interface freeze proposal
+# G0B Rev.M1 architecture and interface freeze — accepted record
 
-Status: **DRAFT PROPOSAL FOR PMO REVIEW AND PRODUCT OWNER HUMAN GATE**
+Status: **ACCEPTED — G0B COMPLETE**
 
 Issue: [#57](https://github.com/ihsinoky/he-piantor-42/issues/57)
 
-Baseline: `7d7f3cffe4fb98771e3ca47f800a54de22fa8c4f`
+Proposal review baseline: `7d7f3cffe4fb98771e3ca47f800a54de22fa8c4f`
 
-This document is a review package, not an accepted design decision. **G0B is
-not accepted or complete**, EVT-002 remains locked, and physical implementation
-has not started. Values labelled “proposed” below have no authority until the
-Product Owner accepts the Human Gate. This proposal does not modify D-014,
-D-015, or D-016 and does not reopen the JITX decision.
+Acceptance integration baseline (includes merged PR #59):
+`0dcc1140db22770b1d021f2967e5134c5b31c370`
+
+The [Issue #57 PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587) on 2026-10-06 accepted this freeze. **G0B is complete**;
+[D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze) records the authoritative accepted boundary. The reviewed
+technical rationale and option comparisons are retained below. Historical
+“proposed”/“recommended” labels describe the review history; values frozen by
+the PO are authoritative, while planning estimates and explicitly open
+implementation items retain their limited scope. D-014/D-015/D-016 and the
+JITX verdict are preserved. Full physical implementation has not started.
+
+Sequence: **G0B accepted -> EDA-003B representative stock-tscircuit
+physical/routing proof -> if accepted, full Rev.M1 implementation**. EVT-002
+has satisfied its G0B prerequisite but is not yet active.
 
 ## 1. Authority and scope
 
@@ -35,21 +44,21 @@ D-015, or D-016 and does not reopen the JITX decision.
 * Evaluate 17.0, 16.5, and 16.0 mm; two copper layers and 1.2 mm thickness are
   the baselines. The 100 x 100 mm region is an optimization, not a pitch rule.
 
-### 1.2 Proposed G0B freeze
+### 1.2 Accepted G0B freeze
 
-Subject to PO acceptance, freeze the 14-contact JST GH cable interface and
+The PO accepted the 14-contact JST GH cable interface and
 pinout in section 3, the 100 mm nominal evaluation cable in section 4, three
 separate pitch-specific Wings plus an electrically full-load variant in
 section 5, the coverage contract in section 6, and test access and evaluation
 methods below.
 
-### 1.3 Explicitly outside this proposal
+### 1.3 Explicitly outside this freeze
 
 Schematics, placement, routing, production Gerbers, manufacturing approval,
 an order, a production pitch or Hall choice, measured acceptance, and final
 Rev.A reuse approval remain future work. Divider/filter values remain the
-accepted provisional baseline until G2 evidence. This proposal creates no
-accepted D-017 and grants no USB manufacturing exception.
+accepted provisional baseline until G2 evidence. D-017 records this freeze
+and grants no USB manufacturing exception.
 
 ## 2. Connector recommendation
 
@@ -113,7 +122,7 @@ EVT-002 must measure typical, maximum-observed, startup, and temperature-related
 current at the Wing end and validate cable/connector drop. The optional
 SL3102-3 current is not used to relax this reference calculation.
 
-## 3. Proposed exact 14-pin interface
+## 3. Accepted exact 14-pin interface
 
 Pin numbers are the JST manufacturer circuit numbers viewed at the mating face;
 native tscircuit implementation must also place a pin-1 mark on both boards and
@@ -153,7 +162,7 @@ and every analog signal is ratiometric to its local Hall supply and returned to
 the common ground. If implementation discovers another required signal, it
 must reopen G0B rather than repurpose a ground silently.
 
-## 4. Representative interconnect proposal
+## 4. Accepted representative evaluation interconnect
 
 Use two `BM14B-GHS-TBT(LF)(SN)` top-entry board headers and a **100 mm nominal
 contact-to-contact, 1:1, 14-conductor cable** with `GHR-14V-S` housings and
@@ -230,7 +239,7 @@ variant generation are post-G0B implementation work.
 | Production Hall current | Direct for one 21-sensor full-load Wing; two-Wing total is direct when it and another loaded Wing are connected, otherwise bounded by the datasheet calculation and remains a Rev.A validation item. |
 | All-key spatial coupling and final cable mechanics | Not represented by a 3 x 3 matrix. G2 selects pitch/magnetic architecture; final 21-key geometry, enclosure cable restraint, and whole-Wing spatial effects remain Rev.A pre-release validation. |
 
-Safe startup proposal: **each physical Main `MUX_EN0` / `MUX_EN1` output must
+Accepted safe startup requirement: **each physical Main `MUX_EN0` / `MUX_EN1` output must
 have its own explicit external pull-down resistor on Main**. The resistor holds
 the corresponding Wing's three TMUX1208 `EN` inputs low while the RP2040 pin is
 reset, high impedance, or not yet configured; both Wings therefore remain
@@ -239,8 +248,8 @@ drives the output high to override the pull-down. Do not rely on an RP2040
 internal pull or firmware setup for this power-on state. Freeze the external
 pull-down requirement here, but select its resistance during schematic work
 from RP2040 guaranteed drive/leakage, three TMUX1208 input leakages, routing
-leakage, and acceptable static current; this proposal has insufficient
-evidence for an exact value.
+leakage, and acceptable static current; the exact resistor value remains
+implementation work.
 
 The external Wing-enable pull-downs are separate from the accepted TPS22919
 behavior: its own default-off control keeps `HALL_5V` off. After Main enables
@@ -301,7 +310,7 @@ not only averages.
 | Usable sampling delay | **B** | From settling data, choose the shortest delay whose distribution is statistically indistinguishable, under a predeclared test, from the long-delay reference for every tested worst transition and channel. Record first-sample discard policy. |
 | Scan-speed implication | **A + C** | Architecture requires `2 banks x 7 addresses = 14` slots per full 42-key scan. Derived scan time is the measured per-slot acquisition time times 14 plus bank overhead; publish rate and latency. No minimum scan-rate requirement has accepted provenance, so adequacy remains G2 characterization/user evaluation. |
 | `HALL_5V` voltage drop | **A + C** | At the Wing, remain within the common DRV5055/TMUX recommended supply intersection, **4.5–5.5 V**. Separately characterize `V_Main - V_Wing` at steady/startup and compare to the revised 6.35 mV contact-only calculation; cable and PCB are additional. |
-| Hall rail current | **A + C** | A production-like Wing must not exceed the proposed 127 mA connector design-current estimate and must remain below the 1 A contact rating. Measure steady and peak current; the estimate is not a final USB/load-switch/full-product power disposition. |
+| Hall rail current | **A + C** | Compare measured steady and peak Wing current against the accepted 127 mA planning estimate; any exceedance requires investigation and revised power-budget review, not automatic production rejection. Remain below the 1 A contact rating. The estimate is not a final USB/load-switch/full-product power disposition. |
 | Startup behavior | **A + C** | The two external Main pull-downs must hold both `WING_EN` signals low throughout MCU reset/high impedance and until firmware has confirmed `HALL_5V` is in the 4.5–5.5 V operating range; no ADC pin may exceed its recommended range. Characterize rise time, inrush, Hall output recovery, first-valid-sample time, reset/brownout, and repeated starts. |
 | Short-term thermal drift | **B** | At fixed travel, log rail, raw output, ADC value, board/ambient temperature, and time from cold start under identical power. Compare normalized drift and stabilization across candidates; no temperature/time limit has accepted provenance. |
 
@@ -326,16 +335,17 @@ forward geometry path, and existing KiCad assets remain secondary/reference
 evidence. Importer work remains non-blocking to G0B; future importer reuse
 requires a separately accepted fidelity result after upstream fixes.
 
-The available checkout has no configured Git remote, so PR #59's final merge
-state could not be independently fetched. The paragraph above records the
-candidate result reported by PR #59 and does not elevate it to an accepted
-decision in this proposal. If that PR is confirmed merged, its merged EDA-003A
-report—not this summary—is the accepted evidence. Any reused item still needs
-explicit provenance and fidelity acceptance in its own scope.
+PR #59 is merged and EDA-003A is accepted as **UPSTREAM_FIX_CANDIDATE**.
+Both copper-pour keepouts were silently lost, the warning surface did not
+report that material loss, and rounded-pad corner radius was incorrect.
+Current KiCad footprint importer reuse is **NOT approved**; native TSX remains
+authoritative. Detailed evidence stays in the
+[EDA-003A report](../../docs/tscircuit-kicad-importer-requalification.md).
+Future reuse needs separately accepted fidelity evidence after fixes.
 
 ## 10. DFM disposition
 
-The proposal retains two copper layers, 1.2 mm finished PCB, SMD on one side
+The accepted freeze retains two copper layers, 1.2 mm finished PCB, SMD on one side
 preferred, JLCPCB Economic PCBA preferred where practical, and Basic then
 Promotional Extended part preference. Electrical/magnetic performance takes
 priority over supplier class. The 100 x 100 mm area remains an optimization;
@@ -346,12 +356,17 @@ contacts is not treated as casual assembly.
 Actual service eligibility, stock, BOM classification, footprint, assembly
 orientation, cable availability, and quote remain G1/pre-order checks.
 
-**USB NPTH: OPEN — PRE-ORDER DFM REVIEW REQUIRED.** No production exception is
-granted, and this proposal authorizes no order.
+**USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED**. No production exception is
+granted, and this freeze authorizes no order.
 
 ## 11. Unresolved evidence gaps
 
-1. PO/PMO acceptance of every proposed freeze value in this document.
+1. PO acceptance is complete. Remaining open: production key pitch, final Hall
+   sensor choice, final Rev.A cable mechanics/length, exact `WING_EN` pull-down
+   resistor, final placement, PCB routing, representative stock-tscircuit
+   routing capability, USB NPTH manufacturing disposition, final USB/system
+   power budget, and manufacturing release. Planning values are not final
+   production requirements.
 2. JST GH mating-cycle rating was not specified in the consulted manufacturer
    catalogue; housing/contact current stock, precrimped cable availability,
    and JLCPCB assembly class remain unverified.
@@ -369,10 +384,11 @@ granted, and this proposal authorizes no order.
    footprint availability, and Main unchanged-reuse suitability remain later
    Rev.A gates.
 
-## 12. Post-G0B routing-proof boundary (next gate; not performed here)
+## 12. EDA-003B routing-proof boundary (next step; not performed here)
 
-Only after PO acceptance, implement a representative stock-tscircuit physical
-and two-layer routing proof. Main subset: RP2040, USB-C/ESD, QSPI flash,
+G0B is accepted. The next technical step is EDA-003B — representative
+stock-tscircuit physical/routing proof. Its intended scope is a representative
+physical and two-layer routing proof. Main subset: RP2040, USB-C/ESD, QSPI flash,
 crystal, 3V3, switched `HALL_5V`, three ADC divider/filter paths, and the actual
 14-pin JST GH connector. Wing subset: actual connector, three-output-relevant
 TMUX1208 circuitry, and representative Hall load. Exercise the test access and
@@ -384,9 +400,12 @@ automatic G0B consequence, is not performed in Issue #57, and must not update
 the tscircuit dependency, fork tscircuit, modify JITX, or import a full KiCad
 board.
 
-## 13. Requested Human Gate disposition
+## 13. Human Gate disposition and review history
 
-PMO should review source accuracy, pinout, connector mechanics, coverage, and
-open gaps, then make a recommendation. The Product Owner—not this document—may
-accept, reject, or request changes. Until that recorded decision, **G0B remains
-not-ready, EVT-002 remains locked, and physical implementation must not begin**.
+The original package requested PMO review followed by Product Owner GO /
+changes required / NO-GO. PR #60 preserves that proposal and correction history.
+The [PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587) accepts the reviewed freeze, including the corrected
+DRV5055 current basis and external Main-side `WING_EN` pull-down requirement.
+**G0B is done.** EDA-003B is next; only if that proof is accepted does full
+Rev.M1 implementation follow. No schematic, PCB, routing, manufacturing
+package completion, order, or manufacturing release is claimed here.
