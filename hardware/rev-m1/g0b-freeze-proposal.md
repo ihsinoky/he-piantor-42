@@ -86,25 +86,28 @@ three-mux production Wing, rather than an arbitrary budget.
 
 | Item | Primary-source value | 21-key calculation |
 | --- | --- | --- |
-| DRV5055 supply current | 6 mA typical, **10 mA maximum** over the stated operating conditions. [TI DRV5055 datasheet, electrical characteristics](https://www.ti.com/lit/ds/symlink/drv5055.pdf) | Typical `21 x 6 = 126 mA`; datasheet-bounded `21 x 10 = 210 mA`. |
-| TMUX1208 supply current | 10 nA headline typical; the electrical table specifies up to 1 microampere across temperature at 5.5 V (logic held at a rail). [TI TMUX1208 datasheet](https://www.ti.com/lit/ds/symlink/tmux1209.pdf) | Three muxes contribute negligibly: headline typical `0.00003 mA`; conservative datasheet bound `0.003 mA`. |
-| Proposed engineering allowance | Assumption, not a measured component requirement: 20% above the component maximum sum for tolerances, local indicators/leakage if later approved, and estimation error. It is **not** permission to add loads silently. | `(210 + 0.003) x 1.20 = 252.004 mA`, rounded up to **253 mA per Wing design current**. |
+| DRV5055 supply current | **3 mA typical and 5 mA maximum** at `VCC = 5.0 V`, `B = 0 mT`. Source: current TI datasheet **SBAS640C, Rev. C, revised June 2026**, section 5.5. [TI DRV5055 datasheet](https://www.ti.com/lit/ds/symlink/drv5055.pdf) | Typical `21 x 3 = 63 mA`; datasheet-bounded `21 x 5 = 105 mA`. These values supersede the 6 mA / 10 mA values in the first proposal revision. |
+| TMUX1208 supply current | **0.02 microampere typical at 25 °C and 2.7 microamperes maximum from -40 °C to +125 °C** at the 5 V operating condition with logic inputs at 0 V or 5.5 V. Source: current TI datasheet **SCDS389C, Rev. C, revised December 2018**, section 7.5. [TI TMUX1208 datasheet](https://www.ti.com/lit/ds/symlink/tmux1209.pdf) | Three muxes: typical `3 x 0.02 microampere = 0.00006 mA`; datasheet-bounded `3 x 2.7 microamperes = 0.0081 mA`. |
+| Proposed engineering allowance | Project assumption, not a measured component requirement: 20% above the component maximum sum for tolerances, local indicators/leakage if later approved, and estimation error. It is **not** permission to add loads silently. | `(105 + 0.0081) x 1.20 = 126.00972 mA`, rounded up to **127 mA per Wing design-current estimate**. |
 
 Only one Wing is enabled for analog selection, but disabling TMUX outputs does
 not necessarily remove Hall power; therefore Rev.A with both Wings connected
 may draw twice the Hall contribution unless the implemented power architecture
-separately switches Wings. The system-level conservative Hall/mux estimate is
-about **506 mA for 42 DRV5055 sensors**, which must be reconciled later against
-USB enumeration policy and load-switch capacity. This proposal rates the
-single Wing connector path, not the whole USB product.
+separately switches Wings. The two-Wing datasheet-maximum component sum is
+`2 x 105.0081 = 210.0162 mA`; applying the same project allowance gives a
+**254 mA 42-sensor/two-Wing design-current estimate**. This lower revised
+estimate is not final USB product power qualification. MCU, flash, regulators,
+LEDs, load-switch loss, startup/inrush and applicable USB current policy still
+belong to the later product power-budget gate. This proposal rates the single
+Wing connector path, not the whole USB product.
 
-One JST GH contact rated 1 A carries the proposed 253 mA with a 3.95x rating
+One JST GH contact rated 1 A carries the proposed 127 mA with a 7.87x rating
 ratio. At the manufacturer's 50 mOhm post-test contact-resistance limit, its
-illustrative connector drop is `0.253 A x 0.050 ohm = 12.7 mV` and dissipation
-is 3.2 mW. These are calculations, not measurements and not a cable-drop
-guarantee. Six return contacts share signal and supply return by layout; even
-the conservative worst case of all 253 mA through one rated return remains
-under 1 A, so no unsafe current-sharing assumption is needed.
+illustrative connector drop is `0.127 A x 0.050 ohm = 6.35 mV` and dissipation
+is approximately 0.81 mW. These are calculations, not measurements and not a
+cable-drop guarantee. Six return contacts share signal and supply return by
+layout; even the conservative worst case of all 127 mA through one rated return
+remains under 1 A, so no unsafe current-sharing assumption is needed.
 
 EVT-002 must measure typical, maximum-observed, startup, and temperature-related
 current at the Wing end and validate cable/connector drop. The optional
@@ -119,7 +122,7 @@ do not mirror conductors by visual wire order.
 
 | Pin | Signal | Direction at Main | Domain / implementation purpose |
 | ---: | --- | --- | --- |
-| 1 | `HALL_5V` | power out | Wing Hall and three TMUX supplies; one 1 A contact is adequate for the derived 253 mA. |
+| 1 | `HALL_5V` | power out | Wing Hall and three TMUX supplies; one 1 A contact is adequate for the derived 127 mA estimate. |
 | 2 | `GND_PWR` | return | Dedicated adjacency for Hall-rail supply/decoupling current. Joins the common `GND` plane at both PCBs; it is not a separate net. |
 | 3 | `MUX_A0` | output | 3.3 V shared address bit. |
 | 4 | `GND_CTRL` | return | Control reference and break between power and remaining controls; common `GND` net. |
@@ -227,9 +230,22 @@ variant generation are post-G0B implementation work.
 | Production Hall current | Direct for one 21-sensor full-load Wing; two-Wing total is direct when it and another loaded Wing are connected, otherwise bounded by the datasheet calculation and remains a Rev.A validation item. |
 | All-key spatial coupling and final cable mechanics | Not represented by a 3 x 3 matrix. G2 selects pitch/magnetic architecture; final 21-key geometry, enclosure cable restraint, and whole-Wing spatial effects remain Rev.A pre-release validation. |
 
-Safe startup proposal: Main GPIO pulldowns keep both enables low while
-`HALL_5V` rises. Firmware confirms rail startup, sets an address, waits the
-measured sensor/mux/RC interval, and only then asserts one `WING_EN`. Hardware
+Safe startup proposal: **each physical Main `MUX_EN0` / `MUX_EN1` output must
+have its own explicit external pull-down resistor on Main**. The resistor holds
+the corresponding Wing's three TMUX1208 `EN` inputs low while the RP2040 pin is
+reset, high impedance, or not yet configured; both Wings therefore remain
+disabled independently of firmware initialization. Normal firmware actively
+drives the output high to override the pull-down. Do not rely on an RP2040
+internal pull or firmware setup for this power-on state. Freeze the external
+pull-down requirement here, but select its resistance during schematic work
+from RP2040 guaranteed drive/leakage, three TMUX1208 input leakages, routing
+leakage, and acceptable static current; this proposal has insufficient
+evidence for an exact value.
+
+The external Wing-enable pull-downs are separate from the accepted TPS22919
+behavior: its own default-off control keeps `HALL_5V` off. After Main enables
+and confirms the rail, firmware sets an address, waits the measured
+sensor/mux/RC interval, and only then actively asserts one `WING_EN`. Hardware
 implementation must prevent or explicitly test the two-enabled state.
 
 ## 7. Required test access
@@ -284,9 +300,9 @@ not only averages.
 | Settling time | **C** | For address and bank transitions, sweep delay logarithmically then around the knee; measure error relative to a long-delay reference at Wing mux and ADC node. No pre-data error band is justified. |
 | Usable sampling delay | **B** | From settling data, choose the shortest delay whose distribution is statistically indistinguishable, under a predeclared test, from the long-delay reference for every tested worst transition and channel. Record first-sample discard policy. |
 | Scan-speed implication | **A + C** | Architecture requires `2 banks x 7 addresses = 14` slots per full 42-key scan. Derived scan time is the measured per-slot acquisition time times 14 plus bank overhead; publish rate and latency. No minimum scan-rate requirement has accepted provenance, so adequacy remains G2 characterization/user evaluation. |
-| `HALL_5V` voltage drop | **A + C** | At the Wing, remain within the common DRV5055/TMUX recommended supply intersection, **4.5–5.5 V**. Separately characterize `V_Main - V_Wing` at steady/startup and compare to the 12.7 mV contact-only calculation; cable and PCB are additional. |
-| Hall rail current | **A + C** | A production-like Wing must not exceed the proposed 253 mA connector design current and must remain below the 1 A contact rating. Measure steady and peak current; system USB/load-switch disposition requires full-product data and is not passed here. |
-| Startup behavior | **A + C** | Both `WING_EN` signals remain low until `HALL_5V` is in the 4.5–5.5 V operating range; no ADC pin may exceed its recommended range. Characterize rise time, inrush, Hall output recovery, first-valid-sample time, reset/brownout, and repeated starts. |
+| `HALL_5V` voltage drop | **A + C** | At the Wing, remain within the common DRV5055/TMUX recommended supply intersection, **4.5–5.5 V**. Separately characterize `V_Main - V_Wing` at steady/startup and compare to the revised 6.35 mV contact-only calculation; cable and PCB are additional. |
+| Hall rail current | **A + C** | A production-like Wing must not exceed the proposed 127 mA connector design-current estimate and must remain below the 1 A contact rating. Measure steady and peak current; the estimate is not a final USB/load-switch/full-product power disposition. |
+| Startup behavior | **A + C** | The two external Main pull-downs must hold both `WING_EN` signals low throughout MCU reset/high impedance and until firmware has confirmed `HALL_5V` is in the 4.5–5.5 V operating range; no ADC pin may exceed its recommended range. Characterize rise time, inrush, Hall output recovery, first-valid-sample time, reset/brownout, and repeated starts. |
 | Short-term thermal drift | **B** | At fixed travel, log rail, raw output, ADC value, board/ambient temperature, and time from cold start under identical power. Compare normalized drift and stabilization across candidates; no temperature/time limit has accepted provenance. |
 
 The nominal 175 mV headroom is not a tolerance proof and therefore cannot by
@@ -302,9 +318,20 @@ layout evidence, and previously accepted fixtures are secondary references.
 
 `hardware/layout/**`, old KiCad placement/routing, and converter output without
 a dedicated fidelity qualification are **not automatically authoritative** and
-must not be consumed as forward geometry. Issue #58 independently evaluates
-KiCad footprint/library reuse; it does not block G0B. Any reused item still
-needs explicit provenance and fidelity acceptance in its own scope.
+must not be consumed as forward geometry. [Issue #58](https://github.com/ihsinoky/he-piantor-42/issues/58) /
+[PR #59](https://github.com/ihsinoky/he-piantor-42/pull/59)'s EDA-003A report
+classifies the observed importer result as **`UPSTREAM_FIX_CANDIDATE`**: current
+importer reuse is not approved for he-piantor-42, native TSX remains the
+forward geometry path, and existing KiCad assets remain secondary/reference
+evidence. Importer work remains non-blocking to G0B; future importer reuse
+requires a separately accepted fidelity result after upstream fixes.
+
+The available checkout has no configured Git remote, so PR #59's final merge
+state could not be independently fetched. The paragraph above records the
+candidate result reported by PR #59 and does not elevate it to an accepted
+decision in this proposal. If that PR is confirmed merged, its merged EDA-003A
+report—not this summary—is the accepted evidence. Any reused item still needs
+explicit provenance and fidelity acceptance in its own scope.
 
 ## 10. DFM disposition
 
