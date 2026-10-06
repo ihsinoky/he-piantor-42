@@ -1,0 +1,100 @@
+{
+  "evidence_authority": "clean npm ci from unchanged production lock; installed source/types",
+  "versions": {
+    "tscircuit": "0.0.2646",
+    "@tscircuit/core": "0.0.1971",
+    "@tscircuit/props": "0.0.666",
+    "@tscircuit/capacity-autorouter": "0.0.919",
+    "@tscircuit/checks": "0.0.208",
+    "@tscircuit/cli": "0.1.2170",
+    "circuit-json": "0.0.499",
+    "circuit-json-to-connectivity-map": "0.0.30"
+  },
+  "source_sha256": {
+    "@tscircuit/core/dist/index.js": "705da3be2fa9db137735f6fcce0518cf1c67496bde6e7421a329bf515467a4cd",
+    "@tscircuit/core/dist/index.d.ts": "ba3855b290b8291b9e52e7e28ee11b81567a14b91cb89fe4079333aea15dd0c1",
+    "@tscircuit/props/dist/index.d.ts": "f281ddec0d09e1bfa3c53750b51cb895c5238428523bea35bdf1ee9e1e3c92aa",
+    "@tscircuit/checks/dist/index.js": "08ec66b22ea595e76687bcb1d87e2d973bd74257ef751d3c2b29377b2f5559c7",
+    "@tscircuit/checks/dist/index.d.ts": "325c71b1454857743b73bc6693c2122dc93bd3cde2b5eb253daecd93fcf6120e",
+    "circuit-json/dist/index.d.mts": "7e6878056420274adfb8d7d5f3c5d580142f14ad58ecf1e1dd50892898d34c7f",
+    "circuit-json-to-connectivity-map/dist/index.js": "918045dd917789ae571fffe74c4ecaa4b76b02a8e4ee0542e44baeecf72d5ad6",
+    "circuit-json-to-connectivity-map/dist/index.d.ts": "5cde7c2c0d8630d9a4b2a815f0c67e497556c23c7ba7165ac66fbd9ea5a71ee4"
+  },
+  "default": {
+    "public_api": "board autorouter=\"default\"",
+    "local": true,
+    "cloud_required": false,
+    "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+    "representative_execution": false
+  },
+  "board": {
+    "two_layers_supported": true,
+    "thickness_supported": true,
+    "autorouted_via_materialization_supported": true,
+    "blind_buried_vias_default": false
+  },
+  "constraints": [
+    "pcbX/pcbY/pcbRotation",
+    "minTraceWidth",
+    "defaultTraceWidth",
+    "minTraceToPadEdgeClearance",
+    "minPadEdgeToPadEdgeClearance",
+    "minBoardEdgeClearance",
+    "minViaHoleDiameter",
+    "minViaPadDiameter",
+    "minViaEdgeToPadEdgeClearance",
+    "minViaHoleEdgeToViaHoleEdgeClearance",
+    "minPlatedHoleDrillEdgeToDrillEdgeClearance",
+    "trace width/maxLength/maxViaCount/pcbPath/pcbPaths/routingPhaseIndex",
+    "tracehint",
+    "autoroutingphase",
+    "autorouterEffortLevel"
+  ],
+  "diagnostics": {
+    "public_events": [
+      "autorouting:start",
+      "autorouting:end",
+      "autorouting:error",
+      "autorouting:progress",
+      "solver:started",
+      "solver:ended"
+    ],
+    "render_until_settled_wall_clock_deadline": false,
+    "placement_errors_can_skip_routing": true,
+    "physical_error_records": [
+      "pcb_autorouting_error",
+      "pcb_trace_error",
+      "pcb_trace_missing_error",
+      "pcb_port_not_connected_error",
+      "pcb_placement_error",
+      "pcb_component_outside_board_error",
+      "pcb_via_clearance_error",
+      "pcb_via_trace_clearance_error",
+      "pcb_pad_pad_clearance_error",
+      "pcb_pad_trace_clearance_error"
+    ],
+    "keepout_warnings_must_also_be_inspected": true
+  },
+  "connectivity": {
+    "physical_public_api": "PcbConnectivityMap",
+    "logical_map_alone_is_insufficient": true,
+    "stock_contiguity_api": "checkTracesAreContiguous",
+    "complete_qualification_verifier_implemented": false,
+    "runAllRoutingChecks_mutates_endpoint_annotations": true,
+    "read_only_wrapper_requires_clone": true,
+    "exhaustive_invalid_layer_transition_check_established": false
+  },
+  "manufacturing": {
+    "proven_repository_command": "tsci export circuit.json --format gerbers --output manufacturing.zip",
+    "outputs": [
+      "F_Cu.gbr",
+      "B_Cu.gbr",
+      "Edge_Cuts.gbr",
+      "drill-L1-L2.drl",
+      "drill_npth.drl",
+      "bom.csv",
+      "pick_and_place.csv"
+    ],
+    "qualification_executed": false
+  }
+}
