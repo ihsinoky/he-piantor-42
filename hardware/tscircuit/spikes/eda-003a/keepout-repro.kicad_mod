@@ -1,0 +1,15 @@
+(footprint "keepout-repro"
+  (version 20260206)
+  (generator "eda-003a-reproducer")
+  (layer "F.Cu")
+  (zone
+    (layer "F.Cu")
+    (name "copper-pour-only")
+    (hatch edge 0.5)
+    (connect_pads (clearance 0))
+    (min_thickness 0.25)
+    (keepout (tracks allowed) (vias allowed) (pads allowed)
+      (copperpour not_allowed) (footprints allowed))
+    (polygon (pts (xy -2 -1.8) (xy 2 -1.8) (xy 2 1.8) (xy -2 1.8)))
+  )
+)
