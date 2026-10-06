@@ -1,0 +1,178 @@
+{
+  "result": "PASS",
+  "purpose": "Two fresh rendering processes per board from identical source; reproduction of failed physical routing, not qualification acceptance",
+  "run_1_provenance": "Retained first fresh-process artifacts and generation source hashes verified; restored byte-for-byte after interrupted /tmp outputs were absent",
+  "run_2_provenance": "Fresh output directories /tmp/eda-003b-repro-run2-main and /tmp/eda-003b-repro-run2-wing; separate generator processes; no in-memory re-render",
+  "material_reproducibility_established": true,
+  "manufacturing_reproducibility_established": true,
+  "main": {
+    "result": "PASS",
+    "run_1": {
+      "raw_circuit_sha256": "1f9c600a0203c968f37eec4fe1d8fe49661092ee5cde1f6cd77b4cc94c8ac7b9",
+      "source_sha256": {
+        "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+        "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+        "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+        "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+        "../package-lock.json": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33"
+      },
+      "normalized_material_sha256": "060d5da96b2c955e9bf86dff1ec8d02255bef0ba5dd54bda5fa1928ea5778c81",
+      "category_sha256": {
+        "board": "41c0e6e47fbe63d9a073d5e2d80589e24255ef56d48f62cbb7f0f74b8bf9c609",
+        "placement": "25653bccd7a075bfc73704209bfa3aa3dfbe70dc35f9056e37c2b0d7c647e213",
+        "pads": "eb4b3ce87fcd51087b0d6013503b78a624ee51a5090d01dd1230a808e30e6a5e",
+        "vias": "ae20635baa4644b13d197b928216e8fe2b04529b0e5317ad5e27adc59119f0d2",
+        "mechanical_and_keepout": "299b9c0f769417e8ddf18ed7489e352157ae3b2fb862fc85a1786d75b09fffcc",
+        "routes": "4b541fbfa2fc6cd4bb32c43e8c232d3481d2da89f22a5c906c19f3794e946181",
+        "source_requirements": "b457658ca25e6c8b9c4fa23ecadcd4d7af1f824e7496c2085956bd50427ca9c1",
+        "connectivity": "8fc20944fbe347abef686c1df733c88b6a50d94e1ea9792203519698637ba125"
+      },
+      "raw_manufacturing_sha256": {
+        "F_Cu.gbr": "caa6b06ab8ae630d5a09d5b290afde1abb32ad375c28a6e72d17a1c07faa474b",
+        "B_Cu.gbr": "6f7ef26f5b5629fcecdbc0afc59b98b21f729acd50979d5cbfdc9caa7a40d0b3",
+        "Edge_Cuts.gbr": "f5c5f737e4e79e69b64ab8c49a41205af2e9a5365c2552c697584bc85627350d",
+        "drill-L1-L2.drl": "9023abf981f5d387304e767dffde75799de7f8bc958bd996cc84277bcbf473c4",
+        "drill_npth.drl": "68451e2cba75a7544081652ca5461ac6e8570e5d5eea3cbc7b35fa5640ee8cb5",
+        "bom.csv": "7366c1c9c5e8cbae58d1e9759cbffc12e1ca80b9babea4b209cb73f91f694d80",
+        "pick_and_place.csv": "c9f17bbc85eb62945ebd0287b166bf1c040f1a7530f42338321209636252ebdb"
+      },
+      "normalized_manufacturing_sha256": {
+        "F_Cu.gbr": "1f48318616623e222c00b3e1413a36e53f83dc369d3f6fb8185a9e65296f169f",
+        "B_Cu.gbr": "261d1554cf7997e14546904da8e5340178f599ccf8ac1bc62441e899f0c5d56c",
+        "Edge_Cuts.gbr": "b6802c75cb8f4783a5916212ba1dfc8405fe9e8bb78b7e56eb632f36431f0310",
+        "drill-L1-L2.drl": "c919d73d6254eaddf38f26fa04f94a7f9cc05d06bc12fa48ea9f20805914c337",
+        "drill_npth.drl": "51fd2ee09fc9abe86e22b417569345a6ac5e164072a720d5bd799000a043feeb",
+        "bom.csv": "8c9a49ded54f48ed9eb8fc629ccf8695a49bb94288b76024745a300b0e36546a",
+        "pick_and_place.csv": "b725159eb70ff71ba246b31f86d7020ad5c7292c84c5eab817ba49cc2fdbc142"
+      }
+    },
+    "run_2": {
+      "raw_circuit_sha256": "1f9c600a0203c968f37eec4fe1d8fe49661092ee5cde1f6cd77b4cc94c8ac7b9",
+      "source_sha256": {
+        "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+        "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+        "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+        "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+        "../package-lock.json": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33"
+      },
+      "normalized_material_sha256": "060d5da96b2c955e9bf86dff1ec8d02255bef0ba5dd54bda5fa1928ea5778c81",
+      "category_sha256": {
+        "board": "41c0e6e47fbe63d9a073d5e2d80589e24255ef56d48f62cbb7f0f74b8bf9c609",
+        "placement": "25653bccd7a075bfc73704209bfa3aa3dfbe70dc35f9056e37c2b0d7c647e213",
+        "pads": "eb4b3ce87fcd51087b0d6013503b78a624ee51a5090d01dd1230a808e30e6a5e",
+        "vias": "ae20635baa4644b13d197b928216e8fe2b04529b0e5317ad5e27adc59119f0d2",
+        "mechanical_and_keepout": "299b9c0f769417e8ddf18ed7489e352157ae3b2fb862fc85a1786d75b09fffcc",
+        "routes": "4b541fbfa2fc6cd4bb32c43e8c232d3481d2da89f22a5c906c19f3794e946181",
+        "source_requirements": "b457658ca25e6c8b9c4fa23ecadcd4d7af1f824e7496c2085956bd50427ca9c1",
+        "connectivity": "8fc20944fbe347abef686c1df733c88b6a50d94e1ea9792203519698637ba125"
+      },
+      "raw_manufacturing_sha256": {
+        "F_Cu.gbr": "3c57c170d0d039fda7f77d079714240bcee10317945d1f43791e8abef34feedb",
+        "B_Cu.gbr": "a2c94687fde55a273e2b9393b2033f689bac0b8d3923e1cf636d1e088a3d8ebe",
+        "Edge_Cuts.gbr": "08ae7977336ac06c5de44bb173abb9e08aea9cfda4426bf6cf9fc2d218c940c1",
+        "drill-L1-L2.drl": "e103bf2dcf684783ee93a17602b6e64a241037fe86aa8b71a296baf9595d8c14",
+        "drill_npth.drl": "feadfa57964f711e31a676ed9a91a3114cc5f9a758518d13de3b186f7743ff49",
+        "bom.csv": "7366c1c9c5e8cbae58d1e9759cbffc12e1ca80b9babea4b209cb73f91f694d80",
+        "pick_and_place.csv": "c9f17bbc85eb62945ebd0287b166bf1c040f1a7530f42338321209636252ebdb"
+      },
+      "normalized_manufacturing_sha256": {
+        "F_Cu.gbr": "1f48318616623e222c00b3e1413a36e53f83dc369d3f6fb8185a9e65296f169f",
+        "B_Cu.gbr": "261d1554cf7997e14546904da8e5340178f599ccf8ac1bc62441e899f0c5d56c",
+        "Edge_Cuts.gbr": "b6802c75cb8f4783a5916212ba1dfc8405fe9e8bb78b7e56eb632f36431f0310",
+        "drill-L1-L2.drl": "c919d73d6254eaddf38f26fa04f94a7f9cc05d06bc12fa48ea9f20805914c337",
+        "drill_npth.drl": "51fd2ee09fc9abe86e22b417569345a6ac5e164072a720d5bd799000a043feeb",
+        "bom.csv": "8c9a49ded54f48ed9eb8fc629ccf8695a49bb94288b76024745a300b0e36546a",
+        "pick_and_place.csv": "b725159eb70ff71ba246b31f86d7020ad5c7292c84c5eab817ba49cc2fdbc142"
+      }
+    },
+    "different_categories": [],
+    "different_manufacturing_files": [],
+    "normalization_fault_checks": 6,
+    "limitation": "Reproducibility does not waive either run's physical validation failures"
+  },
+  "wing": {
+    "result": "PASS",
+    "run_1": {
+      "raw_circuit_sha256": "71034f787cfc97be72436d0b20a4a01dad508fd19782f5de49119fa0a9b2e69e",
+      "source_sha256": {
+        "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+        "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+        "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+        "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+        "../package-lock.json": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33"
+      },
+      "normalized_material_sha256": "6bbd398a14281376939a5f269232dcd5940d7105fac64f77637d18e6042ebe12",
+      "category_sha256": {
+        "board": "25619a94c704adca99bc0d8683fd21116fac2bd96c7445356caf4a13dda63620",
+        "placement": "558e76cbc5746b3f9f3ab359bd1328cbf975354272ef8298fe7f9acf300540e8",
+        "pads": "bf22d988ecfd6919a2608ac4c70fee51a1197f134f961fdf4437e5a3ec111a1a",
+        "vias": "cf95086ac5e55cfc82119ff09b9e65e5cac7167cd240f37c3c5c4a06bd35819b",
+        "mechanical_and_keepout": "051e0d2201b28f67e1942e2362f32c820ac6d84d6dd0be7bf20b12c7b3b0e5b1",
+        "routes": "89b7fd9795bf1d0fc5e2936c65666d8b8fce74a28ac69e78b26409b8c7b620f0",
+        "source_requirements": "c95034bfa556c4db47e3420c225663fc3d198c537a712b3472d7e24071ce6096",
+        "connectivity": "9b58b681a2c1452ee0ed964d42adcafad8e6a1467b778533b25f4d8cf2d1e3d3"
+      },
+      "raw_manufacturing_sha256": {
+        "F_Cu.gbr": "abd952407628d43046899e9a2d86d28e1920e17216f0681fd8bde717d8e701ec",
+        "B_Cu.gbr": "fc8a737bb09bfdf1d631f99f334c7b38f66254136221e81f1a4edf4794cc06a8",
+        "Edge_Cuts.gbr": "5413068454730d4e42250fd47af5973df5bd4a8c56d86d98740e25a3a4e88f63",
+        "drill-L1-L2.drl": "9a7188766e7623fb7f63587bcc7c65b871f95ce1543653115a8e9bf1d2770205",
+        "drill_npth.drl": "3403e5b8345488020b049f20a946cd04d65afc638b77eef109a45a11ddd869a8",
+        "bom.csv": "7f1211d98c0a1b41abce1d6d4c953887db70d11c31b3dc403b1c5e6d199d2e5c",
+        "pick_and_place.csv": "7f571060bb893982b236ab88ccadd4bc65e77feb13d986997cc57ebb9bc6b77e"
+      },
+      "normalized_manufacturing_sha256": {
+        "F_Cu.gbr": "4d01ed8ac6943c80959c50d7c3d67cc71bffc54c745195a66fda0a7a99a54760",
+        "B_Cu.gbr": "a360052e981efdf91e5fbb0bb409e99cebc99c7243ef9c1fe7053bf5c7a099be",
+        "Edge_Cuts.gbr": "dfbf99c1cd3511de52b62d17226369ef9a684ec288eecb756162919ebd074988",
+        "drill-L1-L2.drl": "0d891934f09e219f5452cba8cac9a05707525b56b74baf2136c0b943297538ee",
+        "drill_npth.drl": "e8c385e047728bc7f6cdbe2542e1f5ffe042934d6cac730d27de3aaabc01b4f9",
+        "bom.csv": "e95612c6c12c4f2af913425a2ef6a41b92d81f03f198ac65bf7af7ad3c757377",
+        "pick_and_place.csv": "e712227e94e4621b26b4099dca47cbf21f438f3c625e7f60b8eec3a5d04e02df"
+      }
+    },
+    "run_2": {
+      "raw_circuit_sha256": "71034f787cfc97be72436d0b20a4a01dad508fd19782f5de49119fa0a9b2e69e",
+      "source_sha256": {
+        "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+        "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+        "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+        "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+        "../package-lock.json": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33"
+      },
+      "normalized_material_sha256": "6bbd398a14281376939a5f269232dcd5940d7105fac64f77637d18e6042ebe12",
+      "category_sha256": {
+        "board": "25619a94c704adca99bc0d8683fd21116fac2bd96c7445356caf4a13dda63620",
+        "placement": "558e76cbc5746b3f9f3ab359bd1328cbf975354272ef8298fe7f9acf300540e8",
+        "pads": "bf22d988ecfd6919a2608ac4c70fee51a1197f134f961fdf4437e5a3ec111a1a",
+        "vias": "cf95086ac5e55cfc82119ff09b9e65e5cac7167cd240f37c3c5c4a06bd35819b",
+        "mechanical_and_keepout": "051e0d2201b28f67e1942e2362f32c820ac6d84d6dd0be7bf20b12c7b3b0e5b1",
+        "routes": "89b7fd9795bf1d0fc5e2936c65666d8b8fce74a28ac69e78b26409b8c7b620f0",
+        "source_requirements": "c95034bfa556c4db47e3420c225663fc3d198c537a712b3472d7e24071ce6096",
+        "connectivity": "9b58b681a2c1452ee0ed964d42adcafad8e6a1467b778533b25f4d8cf2d1e3d3"
+      },
+      "raw_manufacturing_sha256": {
+        "F_Cu.gbr": "6c274c329f53815712f06f091cd5af0628127504984c034273bc07722829e5e6",
+        "B_Cu.gbr": "bf866215ccadc088e94c64ae1b31e60624820ce75409bdf468e7d03fe757e20e",
+        "Edge_Cuts.gbr": "b7a270f8ef9384564cc08b631669fdccd5c226092a470c620f48376af134d317",
+        "drill-L1-L2.drl": "423425ab9027c3c6bac188b00dce4da43b0078bb537dde9650277ae3910d579f",
+        "drill_npth.drl": "1b4c92e5eca7379e21a4307d37768c48c1eb3ab30a90375719377e03a9dfd158",
+        "bom.csv": "7f1211d98c0a1b41abce1d6d4c953887db70d11c31b3dc403b1c5e6d199d2e5c",
+        "pick_and_place.csv": "7f571060bb893982b236ab88ccadd4bc65e77feb13d986997cc57ebb9bc6b77e"
+      },
+      "normalized_manufacturing_sha256": {
+        "F_Cu.gbr": "4d01ed8ac6943c80959c50d7c3d67cc71bffc54c745195a66fda0a7a99a54760",
+        "B_Cu.gbr": "a360052e981efdf91e5fbb0bb409e99cebc99c7243ef9c1fe7053bf5c7a099be",
+        "Edge_Cuts.gbr": "dfbf99c1cd3511de52b62d17226369ef9a684ec288eecb756162919ebd074988",
+        "drill-L1-L2.drl": "0d891934f09e219f5452cba8cac9a05707525b56b74baf2136c0b943297538ee",
+        "drill_npth.drl": "e8c385e047728bc7f6cdbe2542e1f5ffe042934d6cac730d27de3aaabc01b4f9",
+        "bom.csv": "e95612c6c12c4f2af913425a2ef6a41b92d81f03f198ac65bf7af7ad3c757377",
+        "pick_and_place.csv": "e712227e94e4621b26b4099dca47cbf21f438f3c625e7f60b8eec3a5d04e02df"
+      }
+    },
+    "different_categories": [],
+    "different_manufacturing_files": [],
+    "normalization_fault_checks": 6,
+    "limitation": "Reproducibility does not waive either run's physical validation failures"
+  }
+}

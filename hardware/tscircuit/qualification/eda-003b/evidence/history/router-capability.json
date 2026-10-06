@@ -25,7 +25,7 @@
     "local": true,
     "cloud_required": false,
     "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
-    "representative_execution": true
+    "representative_execution": false
   },
   "board": {
     "two_layers_supported": true,
@@ -79,12 +79,10 @@
     "physical_public_api": "PcbConnectivityMap",
     "logical_map_alone_is_insufficient": true,
     "stock_contiguity_api": "checkTracesAreContiguous",
-    "complete_qualification_verifier_implemented": true,
+    "complete_qualification_verifier_implemented": false,
     "runAllRoutingChecks_mutates_endpoint_annotations": true,
     "read_only_wrapper_requires_clone": true,
-    "exhaustive_invalid_layer_transition_check_established": false,
-    "verifier_geometry_scope": "fixture rect/circle pads, circular/oval PTH, circular through vias, capsule wires; unsupported geometry fails closed; copper-only independent DSU excludes logical internal shortcuts",
-    "fixture_two_layer_transition_checks_established": true
+    "exhaustive_invalid_layer_transition_check_established": false
   },
   "manufacturing": {
     "proven_repository_command": "tsci export circuit.json --format gerbers --output manufacturing.zip",
@@ -97,13 +95,6 @@
       "bom.csv",
       "pick_and_place.csv"
     ],
-    "qualification_executed": "Both boards: diagnostic exports, route/via/connector/outline verification and two-run material comparison"
-  },
-  "pinned_keepout_mismatch": {
-    "core_source": "@tscircuit/core/dist/index.js:3223",
-    "behavior": "allow_traces causes entire keepout obstacle to be skipped",
-    "checks_source": "@tscircuit/checks/dist/index.js:3297",
-    "behavior_check": "allow_placements exempts pads, but explicitly does not exempt pcb_via",
-    "observed": "automatic vias enter Hall keepouts and stock checks emit pcb_placement_error"
+    "qualification_executed": false
   }
 }

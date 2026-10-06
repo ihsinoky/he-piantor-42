@@ -1,0 +1,451 @@
+{
+  "source_net_count": 13,
+  "required_physical_endpoint_count": 69,
+  "routed_trace_count": 56,
+  "via_count": 51,
+  "electrically_required_unrouted_count": 0,
+  "intentional_nc_count": 25,
+  "unassigned_non_nc_ports": [],
+  "wrong_net_copper_components": [],
+  "unsupported_geometry": [],
+  "invalid_layer_transitions": [],
+  "net_results": [
+    {
+      "nets": [
+        "HALL_5V"
+      ],
+      "required_endpoints": 15,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "GND"
+      ],
+      "required_endpoints": 24,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A0"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A1"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A2"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "WING_EN"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_A"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_B"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_C"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H0_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H1_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H2_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H3_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    }
+  ],
+  "complete": true,
+  "board": {
+    "width_mm": 44,
+    "height_mm": 44,
+    "layers": 2,
+    "thickness_mm": 1.2,
+    "valid": true
+  },
+  "raw_sha256": "71034f787cfc97be72436d0b20a4a01dad508fd19782f5de49119fa0a9b2e69e",
+  "generated_diagnostic_counts": {
+    "pcb_component_missing_courtyard_warning": 5,
+    "pcb_connector_not_in_accessible_orientation_warning": 1,
+    "pcb_placement_error": 12,
+    "pcb_trace_error": 1,
+    "source_no_ground_pin_defined_warning": 4,
+    "source_no_power_pin_defined_warning": 4,
+    "source_refdes_convention_warning": 1
+  },
+  "stock_check_counts": {
+    "pcb_component_missing_courtyard_warning": 5,
+    "pcb_placement_error": 12,
+    "pcb_trace_error": 1
+  },
+  "generated_diagnostics": [
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
+    },
+    {
+      "type": "pcb_connector_not_in_accessible_orientation_warning",
+      "message": "component is inferred to face y- from its cable insertion center because no explicit footprint insertionDirection is defined, but should face y+ so the connector is accessible from the board edge. Set insertionDirection on the <footprint> to specify the actual direction in the footprint's unrotated orientation; for example, <footprint insertionDirection=\"from_above\"> for a connector accessed from above the PCB (+Z)."
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "J_WING has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H0 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H1 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H2 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H3 has no courtyard"
+    },
+    {
+      "type": "pcb_trace_error",
+      "message": "PCB trace trace[.J_WING > port.pin6, .U_MUX_B > port.pin15] is too close to pcb_hole \"pcb_hole[#pcb_hole_2]\" (gap: 0.134mm)"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_0 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_35 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_0 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_35 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_45 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_45 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_31 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_41 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_31 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_41 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_43 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_43 overlaps a PCB keepout"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "J_WING has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_A has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_B has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_C has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "J_WING has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_A has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_B has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_C has no pin with requires_ground=true"
+    }
+  ],
+  "stock_material_diagnostics": [
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_0 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_35 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_0 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_35 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_45 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_45 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_31 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_41 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_31 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_41 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_43 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via pcb_via_43 overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_trace_error",
+      "message": "PCB trace trace[.J_WING > port.pin6, .U_MUX_B > port.pin15] is too close to pcb_hole \"pcb_hole[#pcb_hole_2]\" (gap: 0.134mm)"
+    }
+  ],
+  "result": "FAIL",
+  "generation": {
+    "board": "wing",
+    "strategy": 3,
+    "elapsed_ms": 64702,
+    "timed_out": false,
+    "source_sha256": {
+      "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+      "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+      "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+      "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+      "../package-lock.json": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33"
+    },
+    "events": [
+      {
+        "event": "solver:started",
+        "elapsed_ms": 556,
+        "solverName": "LayoutPipelineSolver"
+      },
+      {
+        "event": "autorouting:start",
+        "elapsed_ms": 1593,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      },
+      {
+        "event": "solver:started",
+        "elapsed_ms": 1612,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      },
+      {
+        "event": "phase",
+        "phase": "topologyPlanningSolver",
+        "elapsed_ms": 1908
+      },
+      {
+        "event": "phase",
+        "phase": "topologyMergingSolver",
+        "elapsed_ms": 2244
+      },
+      {
+        "event": "phase",
+        "phase": "edgeSolver",
+        "elapsed_ms": 2545
+      },
+      {
+        "event": "phase",
+        "phase": "necessaryCrampedPortPointSolver",
+        "elapsed_ms": 2864
+      },
+      {
+        "event": "phase",
+        "phase": "portPointPathingSolver",
+        "elapsed_ms": 3748
+      },
+      {
+        "event": "phase",
+        "phase": "uniformPortDistributionSolver",
+        "elapsed_ms": 30832
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityRouteSolver",
+        "elapsed_ms": 31127
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityForceImproveSolver",
+        "elapsed_ms": 36904
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityRepairSolver",
+        "elapsed_ms": 40280
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityStitchSolver",
+        "elapsed_ms": 42288
+      },
+      {
+        "event": "phase",
+        "phase": "traceSimplificationSolver",
+        "elapsed_ms": 42567
+      },
+      {
+        "event": "phase",
+        "phase": "traceWidthSolver",
+        "elapsed_ms": 43496
+      },
+      {
+        "event": "phase",
+        "phase": "globalDrcForceImproveSolver",
+        "elapsed_ms": 43909
+      },
+      {
+        "event": "phase",
+        "phase": "pipeline9JointDrcRepairSolver",
+        "elapsed_ms": 44660
+      },
+      {
+        "event": "phase",
+        "phase": "lengthMatchingPostProcessingSolver",
+        "elapsed_ms": 63320
+      },
+      {
+        "event": "phase",
+        "phase": "none",
+        "elapsed_ms": 63494
+      },
+      {
+        "event": "autorouting:end",
+        "elapsed_ms": 63638,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      }
+    ]
+  }
+}

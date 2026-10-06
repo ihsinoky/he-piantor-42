@@ -1,31 +1,179 @@
 {
   "primary_result": "BLOCKED",
-  "blocker_category": "ACCEPTED_CONNECTOR_EVIDENCE_PREREQUISITE",
-  "execution_stopped": true,
-  "qualification_complete": false,
-  "router_failure_demonstrated": false,
+  "blocker_category": "ROUTING_CAUSED_PHYSICAL_ERRORS",
+  "connector_prerequisite": "RESOLVED",
+  "qualification_execution_complete": true,
+  "complete_routing_qualified": false,
   "issue_should_close": false,
-  "main_implemented": false,
-  "wing_implemented": false,
-  "main_dimensions_mm": null,
-  "wing_dimensions_mm": null,
-  "routing_attempts": [],
-  "source_net_count": null,
-  "required_physical_endpoint_count": null,
-  "routed_trace_count": null,
-  "via_count": null,
-  "electrically_required_unrouted_count": null,
-  "intentional_nc_count": null,
-  "physical_error_records": null,
-  "manufacturing_result": "NOT_RUN",
-  "reproducibility_result": "NOT_RUN",
   "production_tscircuit": "0.0.2646",
+  "main_implemented": true,
+  "wing_implemented": true,
+  "main_dimensions_mm": [
+    48,
+    44
+  ],
+  "wing_dimensions_mm": [
+    44,
+    44
+  ],
+  "layers": 2,
+  "thickness_mm": 1.2,
+  "materially_distinct_strategies": 3,
+  "electrically_required_unrouted_count": 0,
+  "main_metrics": {
+    "source_net_count": 37,
+    "required_physical_endpoint_count": 167,
+    "routed_trace_count": 128,
+    "via_count": 135,
+    "electrically_required_unrouted_count": 0,
+    "intentional_nc_count": 30,
+    "generated_diagnostic_counts": {
+      "pcb_component_missing_courtyard_warning": 9,
+      "pcb_pad_pad_clearance_error": 2,
+      "pcb_pad_trace_clearance_error": 11,
+      "pcb_trace_error": 19,
+      "pcb_via_trace_clearance_error": 44,
+      "source_component_pins_underspecified_warning": 2,
+      "source_no_ground_pin_defined_warning": 8,
+      "source_no_power_pin_defined_warning": 8,
+      "source_refdes_convention_warning": 3
+    },
+    "stock_check_counts": {
+      "pcb_component_missing_courtyard_warning": 9,
+      "pcb_pad_pad_clearance_error": 2,
+      "pcb_pad_trace_clearance_error": 11,
+      "pcb_trace_error": 19,
+      "pcb_via_trace_clearance_error": 44
+    },
+    "wrong_net_copper_components": [
+      [
+        [
+          "V3V3"
+        ],
+        [
+          "USB_DP"
+        ],
+        [
+          "QSPI_SD0"
+        ],
+        [
+          "QSPI_SD2"
+        ]
+      ],
+      [
+        [
+          "MUX_A0"
+        ],
+        [
+          "MUX_A2"
+        ]
+      ],
+      [
+        [
+          "GND"
+        ],
+        [
+          "ADC_A"
+        ]
+      ],
+      [
+        [
+          "V1V1"
+        ],
+        [
+          "USB_DM"
+        ]
+      ],
+      [
+        [
+          "ADC_B"
+        ],
+        [
+          "ADC_C"
+        ]
+      ],
+      [
+        [
+          "QSPI_SD3"
+        ],
+        [
+          "QSPI_SCLK"
+        ]
+      ],
+      [
+        [
+          "QSPI_SD1"
+        ],
+        [
+          "QSPI_SS_MCU"
+        ]
+      ]
+    ],
+    "invalid_layer_transitions": [],
+    "unsupported_geometry": [],
+    "unassigned_non_nc_ports": [],
+    "raw_sha256": "1f9c600a0203c968f37eec4fe1d8fe49661092ee5cde1f6cd77b4cc94c8ac7b9",
+    "result": "FAIL"
+  },
+  "wing_metrics": {
+    "source_net_count": 13,
+    "required_physical_endpoint_count": 69,
+    "routed_trace_count": 56,
+    "via_count": 51,
+    "electrically_required_unrouted_count": 0,
+    "intentional_nc_count": 25,
+    "generated_diagnostic_counts": {
+      "pcb_component_missing_courtyard_warning": 5,
+      "pcb_connector_not_in_accessible_orientation_warning": 1,
+      "pcb_placement_error": 12,
+      "pcb_trace_error": 1,
+      "source_no_ground_pin_defined_warning": 4,
+      "source_no_power_pin_defined_warning": 4,
+      "source_refdes_convention_warning": 1
+    },
+    "stock_check_counts": {
+      "pcb_component_missing_courtyard_warning": 5,
+      "pcb_placement_error": 12,
+      "pcb_trace_error": 1
+    },
+    "wrong_net_copper_components": [],
+    "invalid_layer_transitions": [],
+    "unsupported_geometry": [],
+    "unassigned_non_nc_ports": [],
+    "raw_sha256": "71034f787cfc97be72436d0b20a4a01dad508fd19782f5de49119fa0a9b2e69e",
+    "result": "FAIL"
+  },
+  "physical_short_components_main": 7,
+  "manufacturing_result": "Both boards: stock export geometry verified; physical DRC failed; no manufacturing release",
+  "reproducibility_result": "PASS; raw Circuit JSON identical and normalized copper/drill/BOM/PnP identical across two fresh processes per board",
   "external_router_used": false,
   "fork_or_private_api_used": false,
   "generated_data_edited": false,
   "hidden_gui_state_used": false,
-  "handwritten_route_geometry_added": false,
+  "handwritten_route_geometry_added": true,
+  "handwritten_route_geometry": {
+    "source_traces": 5,
+    "wing_distinct_bond_length_mm": 5.45,
+    "main_distinct_bond_length_mm": 17.0,
+    "purpose": "ordinary supported local duplicated-ground-land bonds only"
+  },
   "full_revm1_implementation_started": false,
   "human_gate_changed": false,
-  "usb_npth_disposition": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED"
+  "usb_npth_disposition": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED",
+  "execution_stopped": false,
+  "qualification_complete": false,
+  "router_failure_demonstrated": true,
+  "routing_attempts_evidence": "routing-attempts.json",
+  "physical_error_classification": {
+    "missing_connectivity": "0 final deficits per board",
+    "wrong_net_short": "7 Main physical copper components join different nets",
+    "trace_clearance": "Main19 pcb_trace_error; Wing1 PCB-hole clearance error",
+    "pad_and_via_clearance": "Main2 pad-pad,11 pad-trace,44 via-trace records",
+    "layer_transitions": "0 invalid transitions or via spans on both boards",
+    "board_boundary": "0 emitted or stock-check boundary errors",
+    "keepout": "Wing12 via-over-keepout records; six vias each touch top and bottom keepouts",
+    "placement": "No final initial placement failure; Wing pcb_placement_error records are routing-created via/keepout violations",
+    "autorouting": "Both final stock router processes settled; no final pcb_autorouting_error",
+    "known_usb_npth": "Unchanged product footprint risk remains OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED; source footprint untouched; new trace-to-hole errors classified separately"
+  }
 }

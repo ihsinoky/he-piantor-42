@@ -1,0 +1,94 @@
+{
+  "purpose": "Diagnostic stock exports from zero-unrouted designs; retained errors prohibit manufacturing release",
+  "main": {
+    "result": "PASS",
+    "purpose": "diagnostic export geometry only; physical DRC still FAIL",
+    "route_segments_checked": 1135,
+    "via_count_checked": 135,
+    "connector_lands_checked": 16,
+    "all_smt_pads_checked": 193,
+    "all_plated_lands_checked": 4,
+    "all_component_rows_present": true,
+    "required_routed_net_disappeared": false,
+    "bare_copper_test_pads_checked": [
+      "TP_SWDIO",
+      "TP_SWCLK",
+      "TP_RUN",
+      "TP_QSPI_SS_FLASH"
+    ],
+    "net_survival_method": "every physical route segment survives on its original layer with its width; Gerber has no net names",
+    "raw_file_sha256": {
+      "F_Cu.gbr": "caa6b06ab8ae630d5a09d5b290afde1abb32ad375c28a6e72d17a1c07faa474b",
+      "B_Cu.gbr": "6f7ef26f5b5629fcecdbc0afc59b98b21f729acd50979d5cbfdc9caa7a40d0b3",
+      "Edge_Cuts.gbr": "f5c5f737e4e79e69b64ab8c49a41205af2e9a5365c2552c697584bc85627350d",
+      "drill-L1-L2.drl": "9023abf981f5d387304e767dffde75799de7f8bc958bd996cc84277bcbf473c4",
+      "bom.csv": "7366c1c9c5e8cbae58d1e9759cbffc12e1ca80b9babea4b209cb73f91f694d80",
+      "pick_and_place.csv": "c9f17bbc85eb62945ebd0287b166bf1c040f1a7530f42338321209636252ebdb"
+    },
+    "limitations": [
+      "supplier PnP rotations unverified",
+      "BOM supplier identities incomplete; not procurement data"
+    ]
+  },
+  "wing": {
+    "result": "PASS",
+    "purpose": "diagnostic export geometry only; physical DRC still FAIL",
+    "route_segments_checked": 482,
+    "via_count_checked": 51,
+    "connector_lands_checked": 16,
+    "all_smt_pads_checked": 90,
+    "all_plated_lands_checked": 4,
+    "all_component_rows_present": true,
+    "required_routed_net_disappeared": false,
+    "bare_copper_test_pads_checked": [],
+    "net_survival_method": "every physical route segment survives on its original layer with its width; Gerber has no net names",
+    "raw_file_sha256": {
+      "F_Cu.gbr": "6c274c329f53815712f06f091cd5af0628127504984c034273bc07722829e5e6",
+      "B_Cu.gbr": "bf866215ccadc088e94c64ae1b31e60624820ce75409bdf468e7d03fe757e20e",
+      "Edge_Cuts.gbr": "b7a270f8ef9384564cc08b631669fdccd5c226092a470c620f48376af134d317",
+      "drill-L1-L2.drl": "423425ab9027c3c6bac188b00dce4da43b0078bb537dde9650277ae3910d579f",
+      "bom.csv": "7f1211d98c0a1b41abce1d6d4c953887db70d11c31b3dc403b1c5e6d199d2e5c",
+      "pick_and_place.csv": "7f571060bb893982b236ab88ccadd4bc65e77feb13d986997cc57ebb9bc6b77e"
+    },
+    "limitations": [
+      "supplier PnP rotations unverified",
+      "BOM supplier identities incomplete; not procurement data"
+    ]
+  },
+  "run_2_main": {
+    "result": "PASS",
+    "purpose": "diagnostic export geometry only; physical DRC still FAIL",
+    "route_segments_checked": 1135,
+    "via_count_checked": 135,
+    "connector_lands_checked": 16,
+    "all_smt_pads_checked": 193,
+    "all_plated_lands_checked": 4,
+    "all_component_rows_present": true,
+    "required_routed_net_disappeared": false,
+    "bare_copper_test_pads_checked": [
+      "TP_SWDIO",
+      "TP_SWCLK",
+      "TP_RUN",
+      "TP_QSPI_SS_FLASH"
+    ],
+    "net_survival_method": "every physical route segment survives on its original layer with its width; Gerber has no net names",
+    "raw_file_sha256": {
+      "F_Cu.gbr": "3c57c170d0d039fda7f77d079714240bcee10317945d1f43791e8abef34feedb",
+      "B_Cu.gbr": "a2c94687fde55a273e2b9393b2033f689bac0b8d3923e1cf636d1e088a3d8ebe",
+      "Edge_Cuts.gbr": "08ae7977336ac06c5de44bb173abb9e08aea9cfda4426bf6cf9fc2d218c940c1",
+      "drill-L1-L2.drl": "e103bf2dcf684783ee93a17602b6e64a241037fe86aa8b71a296baf9595d8c14",
+      "bom.csv": "7366c1c9c5e8cbae58d1e9759cbffc12e1ca80b9babea4b209cb73f91f694d80",
+      "pick_and_place.csv": "c9f17bbc85eb62945ebd0287b166bf1c040f1a7530f42338321209636252ebdb"
+    },
+    "limitations": [
+      "supplier PnP rotations unverified",
+      "BOM supplier identities incomplete; not procurement data"
+    ]
+  },
+  "qualification_manufacturing_result": "EXPORT_GEOMETRY_VERIFIED_PHYSICAL_DRC_FAILED",
+  "environment_fixes": [
+    "Existing Bun runtime handles CLI Node ESM directory-import incompatibility",
+    "Approved execution permits CLI config-directory initialization"
+  ],
+  "test_pad_disposition": "Four Main source-authored bare copper test pads intentionally absent from BOM/PnP; their actual copper flashes verified"
+}

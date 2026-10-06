@@ -1,103 +1,29 @@
 {
+  "clean_npm_ci": "PASS",
+  "connector_geometry": "PASS",
+  "representative_scope": "PASS",
+  "physical_verifier_fault_fixtures": {
+    "result": "PASS",
+    "checks": 12
+  },
+  "generation": "six final strategy/board generation processes settled; strategy3 construction corrections separately recorded",
+  "connectivity_and_physical_errors": "FAIL; intended nonzero verifier exits on all strategies; final zero unrouted does not waive shorts/clearance/keepouts",
+  "wing_export_geometry": "PASS:482 segments,51 vias,90 SMT lands,4 plated lands,16 GH lands,outline,all assembly BOM/PnP rows",
+  "main_export": "PASS diagnostic geometry:1135 segments,135 vias,193 SMT lands,4 plated lands/slots,16 GH lands,4 bare test-pad flashes,45 assembly component rows",
+  "two_fresh_run_reproducibility": "PASS for both boards; exact raw Circuit JSON; normalized physical and manufacturing data identical",
   "native_regressions": {
-    "checkpoint_a": {
-      "exit_code": 0,
-      "result": "PASS",
-      "assertions": {
-        "smdPads": "PASS: 3 native top-layer pads match within 0.001 mm",
-        "platedHole": "PASS: native pin-3 PTH geometry matches within 0.001 mm",
-        "npth": "PASS: 2 native circular NPTHs match within 0.001 mm",
-        "pinMapping": "PASS: DRV5055 DBZ primary pins are 1=VCC, 2=OUT, 3=GND",
-        "duplicatePin3": "PASS: separate physical PCB ports are internally connected by stock tscircuit source_component_internal_connection",
-        "alignment": "PASS: all six generated feature positions independently match within 0.001 mm",
-        "sourceRenderErrors": "PASS: source_failed_to_create_component_error count = 0",
-        "topKeepout": "PASS: 4.0 x 3.6 mm copper-only exclusion at (0, 0)",
-        "bottomKeepout": "PASS: 4.0 x 3.6 mm copper-only exclusion at (0, 0)",
-        "topCopperPour": "PASS: stock top BRep pour generated with keepout exclusion ring",
-        "bottomCopperPour": "PASS: stock bottom BRep pour generated with keepout exclusion ring",
-        "copperPourExclusion": "PASS: both stock BRep pours contain a ring spanning the 4.0 x 3.6 mm keepout envelope"
-      }
-    },
-    "checkpoint_b": {
-      "exit_code": 0,
-      "result": "PASS",
-      "assertions": {
-        "hallSensorCount": "PASS: exactly one U1 source component with ftype simple_chip",
-        "requiredNets": "PASS: unique HALL_5V power, GND ground, and H0_RAW source nets",
-        "hallPinMapping": "PASS: U1 primary pins are 1=VCC, 2=OUT, 3=GND",
-        "hallPinAttributes": "PASS: stock source_port power, ground, connection, and 100nF decoupling attributes",
-        "hallVccConnectivity": "PASS: HALL_VCC_TO_HALL_5V resolves U1.VCC to HALL_5V",
-        "hallGroundConnectivity": "PASS: HALL_GND_TO_GND resolves U1.GND to GND",
-        "hallOutConnectivity": "PASS: HALL_OUT_TO_H0_RAW resolves U1.OUT to H0_RAW",
-        "duplicatePin3": "PASS: secondary PTH pin 3 is internally connected to primary U1.GND",
-        "decouplingCapacitor": "PASS: one C_HALL1 simple_capacitor is 100nF within 1e-12F",
-        "decouplingConnectivity": "PASS: C_HALL1.pin1 -> HALL_5V and pin2 -> GND",
-        "capacitorFootprint": "PASS: stock 0603 footprint generated one PCB component and two SMT pads",
-        "rawTestPoint": "PASS: TP_H0_RAW circular 1.2mm pad generated with at least one SMT pad",
-        "testPointConnectivity": "PASS: U1.OUT and TP_H0_RAW.pin1 both resolve to H0_RAW via named source traces",
-        "sourceElectricalErrors": "PASS: source_failed_to_create_component_error, source_trace_not_connected_error, source_pin_must_be_connected_error, pcb_missing_footprint_error count = 0"
-      }
-    },
-    "checkpoint_c_generation": {
-      "exit_code": 0,
-      "result": "PASS",
-      "assertions": {
-        "boardTwoLayers": "PASS: one board, num_layers=2",
-        "boardThickness": "PASS: 1.2mm",
-        "boardOutline": "PASS: board outline present",
-        "components": "PASS: U1, C_HALL1, TP_H0_RAW represented",
-        "geometry": "PASS: Hall 3 SMD, 1 PTH, 2 NPTH",
-        "keepoutsPreserved": "PASS: 2 keepouts",
-        "routingGenerated": "PASS: 3 PCB traces",
-        "viaGenerated": "PASS: 0.30/0.60mm top-bottom GND via",
-        "topCopperPour": "PASS: present",
-        "bottomCopperPour": "PASS: present",
-        "circuitJsonErrors": "PASS: 0"
-      }
-    },
-    "m1_electrical": {
-      "exit_code": 0,
-      "result": "PASS",
-      "assertions": {
-        "rp2040PhysicalPins": "PASS: authoritative RP2040 QFN-56 signal and supply pin numbers",
-        "pinmapLogicalAssignments": "PASS: logical functions independently match pinmap.csv",
-        "rp2040Power": "PASS: all distinct IOVDD, DVDD, analog, USB, regulator, TESTEN, and exposed-pad connections",
-        "rp2040Decoupling": "PASS: BOM baseline: 9x100nF 0402, 2x1uF 0402, and 10uF 0805 bulk on established rails",
-        "crystal": "PASS: 12MHz crystal, 15pF loads, and 1k XOUT series path terminate on pins 20/21",
-        "crystalGeometry": "PASS: 4x 1.30x1.05mm pads; 2.30x1.75mm pitch; bottom-view 1/2 over 4/3; electrical mapping PASS",
-        "bootselQspi": "PASS: RP2040 pin 56 -> 1k -> flash CS, BOOTSEL pulls flash side low",
-        "packagePhysicalPins": "PASS: independent package pin maps and all intentional NC/structural-pin dispositions pass",
-        "componentCounts": "PASS: all required active blocks including four Hall sensors and USB ESD",
-        "partIdentity": "PASS: all approved manufacturer and JLCPCB identities retained",
-        "hallMuxAdc": "PASS: S1-S4 mapping and MUX_D -> 6.8k/10k/1nF ADC_SENSE -> physical pin 38",
-        "tmuxSpares": "PASS: S5-S8 each terminate at a labeled extension test point",
-        "loadSwitchDecoupling": "PASS: TPS22919 IN and OUT each have established 1uF local decoupling",
-        "runTestPoint": "PASS: RUN pin 26, reset button, and TP_RUN share RUN",
-        "usbSemantics": "PASS: Type-C named contacts preserve VBUS/GND pairs, A6/B6 D+, A7/B7 D-, CC and explicit SBU NC ports",
-        "usbEsdPath": "PASS: connector -> USBLC6-2SC6 exact feedthrough pins -> 27ohm -> RP2040 for D+/D-",
-        "usbGeometry": "PASS: authoritative 12 contacts, four plated shell stakes, and two locating NPTHs within 0.001mm",
-        "flashGeometry": "PASS: 8 numbered signal pads plus exposed pad preserve reviewed USON geometry",
-        "bomPassives": "PASS: approved 0402/0805 geometry, 1.5k LED resistors, and pending USB_SHIELD net",
-        "hallGrid": "PASS: explicit 2x2 switch centers have 17.0mm horizontal and vertical pitch",
-        "testPoints": "PASS: all required measurement points resolve to actual source traces/nets",
-        "circuitJsonErrors": "PASS: all generated Circuit JSON *_error elements = 0"
-      }
-    }
+    "checkpoint_a": "PASS",
+    "checkpoint_b": "PASS",
+    "checkpoint_c_generation": "PASS",
+    "frozen_m1_electrical": "PASS"
   },
-  "checkpoint_c_historical_summary": {
-    "board_layer_count": 2,
-    "board_thickness_mm": 1.2,
-    "pcb_trace_count": 3,
-    "pcb_via_count": 1,
-    "pcb_keepout_count": 2,
-    "circuit_json_error_count": 0
-  },
-  "qualification_generation": "NOT_RUN_PREREQUISITE_STOP",
-  "qualification_connectivity_verifier": "NOT_IMPLEMENTED_PREREQUISITE_STOP",
-  "qualification_physical_error_verifier": "NOT_IMPLEMENTED_PREREQUISITE_STOP",
-  "qualification_manufacturing": "NOT_RUN_PREREQUISITE_STOP",
-  "qualification_two_run_reproducibility": "NOT_RUN_PREREQUISITE_STOP",
-  "historical_manufacturing_ci": "NOT_RERUN",
+  "production_package_and_lock": "BYTE_UNCHANGED",
+  "frozen_m1_four_key": "BYTE_UNCHANGED",
+  "eda003a_jitx_kicad_and_accepted_authority": "BYTE_UNCHANGED",
+  "historical_prerequisite_stop": "BYTE_PRESERVED",
   "git_diff_check": "PASS",
-  "protected_baseline_comparison": "PASS"
+  "reproducibility_normalization_fault_checks": 6,
+  "recovery_integrity": "PASS; source and retained artifact SHA256 match; no unrelated changes",
+  "qualification_result": "BLOCKED; material physical errors unchanged by reproducibility",
+  "raw_archiving": "PASS byte-identical gzip wrappers; original local archives preserved"
 }

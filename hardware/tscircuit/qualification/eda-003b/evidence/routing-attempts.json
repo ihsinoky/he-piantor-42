@@ -1,0 +1,1567 @@
+{
+  "materially_distinct_strategies": 3,
+  "outlines_never_enlarged": true,
+  "required_circuitry_never_deleted": true,
+  "strategy_descriptions": {
+    "1": "compact baseline; stock generic QFN and default 1x router",
+    "2": "manufacturer-native RP2040 EP/lands; two initial overlaps fixed; ADC bank and Wing TMUX staggered",
+    "3": "QSPI placement partition; Wing central TMUX shifted; supported 5x effort; explicit local ground-land bonds"
+  },
+  "strategy3_construction_defects": {
+    "description": "Numeric pcbPath was first interpreted as global, then as port-relative; installed code transforms it in the anchor component frame. Corrected this bounded coordinate defect. Also cleared the initial Wing C_HALL3/TMUX courtyard collision before final routing. Both intermediate coordinate interpretations and renderer results remain visible here. These were construction corrections within strategy 3, not additional routing-placement searches.",
+    "probes": [
+      {
+        "label": "eda-003b-attempt3-main-source-defect",
+        "elapsed_ms": 113529,
+        "raw_sha256": "98598fad4e1b975bb3cef54a28037267d2e44ddbe2bfda30dedea08699b22931",
+        "error_counts": {
+          "pcb_trace_error": 39,
+          "pcb_pad_trace_clearance_error": 25,
+          "pcb_via_trace_clearance_error": 39,
+          "pcb_pad_pad_clearance_error": 1,
+          "pcb_via_clearance_error": 1
+        },
+        "retained_as_metrics_only": true
+      },
+      {
+        "label": "eda-003b-attempt3-wing-source-defect",
+        "elapsed_ms": 1796,
+        "raw_sha256": "0088573fd9cee3baa07a8c27f3846701ddf90563ae2ae547026ca43067820be1",
+        "error_counts": {
+          "pcb_courtyard_overlap_error": 1,
+          "pcb_autorouting_error": 1,
+          "pcb_port_not_connected_error": 61,
+          "pcb_trace_error": 2,
+          "pcb_pad_trace_clearance_error": 1
+        },
+        "retained_as_metrics_only": true
+      },
+      {
+        "label": "eda-003b-attempt3-main",
+        "elapsed_ms": 224520,
+        "raw_sha256": "04907fb187410065e1d055effc5fe8105373b282a43edb8455d228a2a69737f2",
+        "error_counts": {
+          "pcb_trace_error": 25,
+          "pcb_pad_trace_clearance_error": 22,
+          "pcb_via_trace_clearance_error": 54,
+          "pcb_pad_pad_clearance_error": 1
+        },
+        "retained_as_metrics_only": true
+      },
+      {
+        "label": "eda-003b-attempt3-wing",
+        "elapsed_ms": 42032,
+        "raw_sha256": "be4ee0386ebb45eea93acfc588022d9f4261e243cf270ef353c727bd2e96614b",
+        "error_counts": {
+          "pcb_trace_error": 2,
+          "pcb_pad_pad_clearance_error": 1,
+          "pcb_placement_error": 14
+        },
+        "retained_as_metrics_only": true
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "strategy": 1,
+      "board": "main",
+      "elapsed_ms": 3477,
+      "timed_out": false,
+      "source_net_count": 37,
+      "required_physical_endpoint_count": 167,
+      "routed_trace_count": 0,
+      "via_count": 0,
+      "electrically_required_unrouted_count": 119,
+      "intentional_nc_count": 30,
+      "generated_diagnostic_counts": {
+        "pcb_autorouting_error": 1,
+        "pcb_component_missing_courtyard_warning": 8,
+        "pcb_footprint_overlap_error": 2,
+        "pcb_pad_pad_clearance_error": 59,
+        "pcb_port_not_connected_error": 163,
+        "source_component_pins_underspecified_warning": 2,
+        "source_no_ground_pin_defined_warning": 8,
+        "source_no_power_pin_defined_warning": 8,
+        "source_refdes_convention_warning": 3
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 8,
+        "pcb_footprint_overlap_error": 2,
+        "pcb_pad_pad_clearance_error": 59,
+        "pcb_port_not_connected_error": 163
+      },
+      "wrong_net_copper_components": [
+        [
+          [
+            "V3V3"
+          ],
+          [
+            "MUX_A0"
+          ],
+          [
+            "MUX_A1"
+          ],
+          [
+            "MUX_A2"
+          ],
+          [
+            "WING_EN"
+          ],
+          [
+            "HALL_PWR_EN"
+          ],
+          [
+            "GND"
+          ],
+          [
+            "XIN"
+          ],
+          [
+            "XOUT"
+          ],
+          [
+            "V1V1"
+          ],
+          [
+            "SWCLK"
+          ],
+          [
+            "SWDIO"
+          ],
+          [
+            "RUN"
+          ],
+          [
+            "ADC_A"
+          ],
+          [
+            "ADC_B"
+          ],
+          [
+            "ADC_C"
+          ],
+          [
+            "USB_DM"
+          ],
+          [
+            "USB_DP"
+          ],
+          [
+            "QSPI_SD3"
+          ],
+          [
+            "QSPI_SCLK"
+          ],
+          [
+            "QSPI_SD0"
+          ],
+          [
+            "QSPI_SD2"
+          ],
+          [
+            "QSPI_SD1"
+          ],
+          [
+            "QSPI_SS_MCU"
+          ]
+        ],
+        [
+          [
+            "GND"
+          ],
+          [
+            "HALL_5V"
+          ]
+        ]
+      ],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "49125b4c6fab18a0997e2f06a29dacfb024a007116e0bd41434e5118e5cfc01d",
+      "result": "FAIL",
+      "remaining_nets": [
+        {
+          "nets": [
+            "V3V3"
+          ],
+          "required_endpoints": 24,
+          "copper_islands": 16,
+          "disconnected_islands": [
+            [
+              "U_MCU.PWR1:pcb_port_0",
+              "U_MCU.PWR10:pcb_port_9",
+              "U_MCU.PWR22:pcb_port_21",
+              "U_MCU.PWR33:pcb_port_32",
+              "U_MCU.PWR42:pcb_port_41",
+              "U_MCU.PWR43:pcb_port_42",
+              "U_MCU.PWR44:pcb_port_43",
+              "U_MCU.PWR48:pcb_port_47",
+              "U_MCU.PWR49:pcb_port_48"
+            ],
+            [
+              "U_LDO.VOUT:pcb_port_95"
+            ],
+            [
+              "U_FLASH.VCC:pcb_port_85"
+            ],
+            [
+              "R_RUN.pin1:pcb_port_132"
+            ],
+            [
+              "C_MCU_HF1.pin1:pcb_port_140"
+            ],
+            [
+              "C_MCU_HF2.pin1:pcb_port_142"
+            ],
+            [
+              "C_MCU_HF3.pin1:pcb_port_144"
+            ],
+            [
+              "C_MCU_HF4.pin1:pcb_port_146"
+            ],
+            [
+              "C_MCU_HF5.pin1:pcb_port_148"
+            ],
+            [
+              "C_MCU_HF6.pin1:pcb_port_150"
+            ],
+            [
+              "C_MCU_HF7.pin1:pcb_port_152"
+            ],
+            [
+              "C_MCU_HF8.pin1:pcb_port_154"
+            ],
+            [
+              "C_VREG_IN.pin1:pcb_port_158"
+            ],
+            [
+              "C_MCU_BULK.pin1:pcb_port_162"
+            ],
+            [
+              "C_FLASH.pin1:pcb_port_164"
+            ],
+            [
+              "C_LDO_OUT.pin1:pcb_port_168"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 15
+        },
+        {
+          "nets": [
+            "MUX_A0"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.MUX_A0:pcb_port_3"
+            ],
+            [
+              "J_WING.P3:pcb_port_104"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "MUX_A1"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.MUX_A1:pcb_port_4"
+            ],
+            [
+              "J_WING.P5:pcb_port_106"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "MUX_A2"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.MUX_A2:pcb_port_5"
+            ],
+            [
+              "J_WING.P6:pcb_port_107"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "WING_EN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.WING_EN:pcb_port_6"
+            ],
+            [
+              "J_WING.P7:pcb_port_108"
+            ],
+            [
+              "R_WING_PD.pin1:pcb_port_128"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "HALL_PWR_EN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.HALL_PWR_EN:pcb_port_8"
+            ],
+            [
+              "U_LOAD.ON:pcb_port_98"
+            ],
+            [
+              "R_HALL_PD.pin1:pcb_port_130"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "GND"
+          ],
+          "required_endpoints": 49,
+          "copper_islands": 47,
+          "disconnected_islands": [
+            [
+              "U_MCU.TESTEN:pcb_port_18"
+            ],
+            [
+              "J_WING.P2:pcb_port_103"
+            ],
+            [
+              "J_WING.P4:pcb_port_105"
+            ],
+            [
+              "J_WING.P8:pcb_port_109"
+            ],
+            [
+              "J_WING.P10:pcb_port_111"
+            ],
+            [
+              "J_WING.P12:pcb_port_113"
+            ],
+            [
+              "J_WING.P14:pcb_port_115"
+            ],
+            [
+              "J_USB.A1_B12:pcb_port_56"
+            ],
+            [
+              "J_USB.A12_B1:pcb_port_67"
+            ],
+            [
+              "J_USB.SHIELD:pcb_port_68"
+            ],
+            [
+              "U_ESD.GND:pcb_port_73"
+            ],
+            [
+              "U_LDO.GND:pcb_port_92"
+            ],
+            [
+              "U_LOAD.GND:pcb_port_97"
+            ],
+            [
+              "U_FLASH.GND:pcb_port_81"
+            ],
+            [
+              "Y1.GND1:pcb_port_88"
+            ],
+            [
+              "Y1.GND2:pcb_port_90",
+              "C_LOAD_OUT.pin2:pcb_port_173"
+            ],
+            [
+              "R_CC1.pin2:pcb_port_119"
+            ],
+            [
+              "R_CC2.pin2:pcb_port_121"
+            ],
+            [
+              "R_WING_PD.pin2:pcb_port_129"
+            ],
+            [
+              "R_HALL_PD.pin2:pcb_port_131"
+            ],
+            [
+              "C_XIN.pin2:pcb_port_137"
+            ],
+            [
+              "C_XOUT.pin2:pcb_port_139"
+            ],
+            [
+              "C_MCU_HF1.pin2:pcb_port_141"
+            ],
+            [
+              "C_MCU_HF2.pin2:pcb_port_143"
+            ],
+            [
+              "C_MCU_HF3.pin2:pcb_port_145"
+            ],
+            [
+              "C_MCU_HF4.pin2:pcb_port_147"
+            ],
+            [
+              "C_MCU_HF5.pin2:pcb_port_149"
+            ],
+            [
+              "C_MCU_HF6.pin2:pcb_port_151"
+            ],
+            [
+              "C_MCU_HF7.pin2:pcb_port_153"
+            ],
+            [
+              "C_MCU_HF8.pin2:pcb_port_155"
+            ],
+            [
+              "C_MCU_HF9.pin2:pcb_port_157"
+            ],
+            [
+              "C_VREG_IN.pin2:pcb_port_159"
+            ],
+            [
+              "C_VREG_OUT.pin2:pcb_port_161"
+            ],
+            [
+              "C_MCU_BULK.pin2:pcb_port_163"
+            ],
+            [
+              "C_FLASH.pin2:pcb_port_165"
+            ],
+            [
+              "C_LDO_IN.pin2:pcb_port_167"
+            ],
+            [
+              "C_LDO_OUT.pin2:pcb_port_169"
+            ],
+            [
+              "C_LOAD_IN.pin2:pcb_port_171"
+            ],
+            [
+              "R_ADC_A_BOTTOM.pin2:pcb_port_177"
+            ],
+            [
+              "C_ADC_A.pin2:pcb_port_179"
+            ],
+            [
+              "R_ADC_B_BOTTOM.pin2:pcb_port_183"
+            ],
+            [
+              "C_ADC_B.pin2:pcb_port_185"
+            ],
+            [
+              "R_ADC_C_BOTTOM.pin2:pcb_port_189"
+            ],
+            [
+              "C_ADC_C.pin2:pcb_port_191"
+            ],
+            [
+              "J_USB.pin13_internal_1:pcb_port_69"
+            ],
+            [
+              "J_USB.pin13_internal_2:pcb_port_70"
+            ],
+            [
+              "J_USB.pin13_internal_3:pcb_port_71"
+            ]
+          ],
+          "missing_physical_ports": [
+            "U_MCU.GND_EP"
+          ],
+          "unrouted_connections": 47
+        },
+        {
+          "nets": [
+            "XIN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.XIN:pcb_port_19"
+            ],
+            [
+              "Y1.XIN:pcb_port_87"
+            ],
+            [
+              "C_XIN.pin1:pcb_port_136"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "XOUT"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.XOUT:pcb_port_20"
+            ],
+            [
+              "R_XOUT.pin2:pcb_port_135"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "V1V1"
+          ],
+          "required_endpoints": 5,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.DVDD23:pcb_port_22",
+              "U_MCU.VREG_OUT:pcb_port_44",
+              "U_MCU.DVDD50:pcb_port_49"
+            ],
+            [
+              "C_MCU_HF9.pin1:pcb_port_156"
+            ],
+            [
+              "C_VREG_OUT.pin1:pcb_port_160"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "SWCLK"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.SWCLK:pcb_port_23"
+            ],
+            [
+              "TP_SWCLK.pin1:pcb_port_193"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "SWDIO"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.SWDIO:pcb_port_24"
+            ],
+            [
+              "TP_SWDIO.pin1:pcb_port_192"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "RUN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.RUN:pcb_port_25"
+            ],
+            [
+              "R_RUN.pin2:pcb_port_133"
+            ],
+            [
+              "TP_RUN.pin1:pcb_port_194"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "ADC_A"
+          ],
+          "required_endpoints": 4,
+          "copper_islands": 4,
+          "disconnected_islands": [
+            [
+              "U_MCU.ADC_A:pcb_port_37"
+            ],
+            [
+              "R_ADC_A_TOP.pin2:pcb_port_175"
+            ],
+            [
+              "R_ADC_A_BOTTOM.pin1:pcb_port_176"
+            ],
+            [
+              "C_ADC_A.pin1:pcb_port_178"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 3
+        },
+        {
+          "nets": [
+            "ADC_B"
+          ],
+          "required_endpoints": 4,
+          "copper_islands": 4,
+          "disconnected_islands": [
+            [
+              "U_MCU.ADC_B:pcb_port_38"
+            ],
+            [
+              "R_ADC_B_TOP.pin2:pcb_port_181"
+            ],
+            [
+              "R_ADC_B_BOTTOM.pin1:pcb_port_182"
+            ],
+            [
+              "C_ADC_B.pin1:pcb_port_184"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 3
+        },
+        {
+          "nets": [
+            "ADC_C"
+          ],
+          "required_endpoints": 4,
+          "copper_islands": 4,
+          "disconnected_islands": [
+            [
+              "U_MCU.ADC_C:pcb_port_39"
+            ],
+            [
+              "R_ADC_C_TOP.pin2:pcb_port_187"
+            ],
+            [
+              "R_ADC_C_BOTTOM.pin1:pcb_port_188"
+            ],
+            [
+              "C_ADC_C.pin1:pcb_port_190"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 3
+        },
+        {
+          "nets": [
+            "USB_DM"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.USB_DM:pcb_port_45"
+            ],
+            [
+              "R_USB_DM.pin2:pcb_port_125"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "USB_DP"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.USB_DP:pcb_port_46"
+            ],
+            [
+              "R_USB_DP.pin2:pcb_port_123"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SD3"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SD3:pcb_port_50"
+            ],
+            [
+              "U_FLASH.QSPI_SD3:pcb_port_84"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SCLK"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SCLK:pcb_port_51"
+            ],
+            [
+              "U_FLASH.QSPI_SCLK:pcb_port_83"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SD0"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SD0:pcb_port_52"
+            ],
+            [
+              "U_FLASH.QSPI_SD0:pcb_port_82"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SD2"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SD2:pcb_port_53"
+            ],
+            [
+              "U_FLASH.QSPI_SD2:pcb_port_80"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SD1"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SD1:pcb_port_54"
+            ],
+            [
+              "U_FLASH.QSPI_SD1:pcb_port_79"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SS_MCU"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_MCU.QSPI_SS:pcb_port_55"
+            ],
+            [
+              "R_QSPI_SS.pin1:pcb_port_126"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "HALL_5V"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "J_WING.P1:pcb_port_102"
+            ],
+            [
+              "U_LOAD.OUT:pcb_port_101"
+            ],
+            [
+              "C_LOAD_OUT.pin1:pcb_port_172"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "MUX_OUT_A"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "J_WING.P9:pcb_port_110"
+            ],
+            [
+              "R_ADC_A_TOP.pin1:pcb_port_174"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "MUX_OUT_B"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "J_WING.P11:pcb_port_112"
+            ],
+            [
+              "R_ADC_B_TOP.pin1:pcb_port_180"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "MUX_OUT_C"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "J_WING.P13:pcb_port_114"
+            ],
+            [
+              "R_ADC_C_TOP.pin1:pcb_port_186"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "VBUS"
+          ],
+          "required_endpoints": 8,
+          "copper_islands": 8,
+          "disconnected_islands": [
+            [
+              "J_USB.A4_B9:pcb_port_57"
+            ],
+            [
+              "J_USB.A9_B4:pcb_port_66"
+            ],
+            [
+              "U_ESD.VBUS:pcb_port_76"
+            ],
+            [
+              "U_LDO.VIN:pcb_port_91"
+            ],
+            [
+              "U_LDO.EN:pcb_port_93"
+            ],
+            [
+              "U_LOAD.IN:pcb_port_96"
+            ],
+            [
+              "C_LDO_IN.pin1:pcb_port_166"
+            ],
+            [
+              "C_LOAD_IN.pin1:pcb_port_170"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 7
+        },
+        {
+          "nets": [
+            "USB_DP_CONN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "J_USB.A6:pcb_port_59"
+            ],
+            [
+              "J_USB.B6:pcb_port_64"
+            ],
+            [
+              "U_ESD.IO1_1:pcb_port_72"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "USB_DM_CONN"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "J_USB.A7:pcb_port_60"
+            ],
+            [
+              "J_USB.B7:pcb_port_63"
+            ],
+            [
+              "U_ESD.IO2_1:pcb_port_74"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "CC1"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "J_USB.A5:pcb_port_58"
+            ],
+            [
+              "R_CC1.pin1:pcb_port_118"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "CC2"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "J_USB.B5:pcb_port_65"
+            ],
+            [
+              "R_CC2.pin1:pcb_port_120"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "USB_DP_ESD"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_ESD.IO1_2:pcb_port_77"
+            ],
+            [
+              "R_USB_DP.pin1:pcb_port_122"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "USB_DM_ESD"
+          ],
+          "required_endpoints": 2,
+          "copper_islands": 2,
+          "disconnected_islands": [
+            [
+              "U_ESD.IO2_2:pcb_port_75"
+            ],
+            [
+              "R_USB_DM.pin1:pcb_port_124"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 1
+        },
+        {
+          "nets": [
+            "QSPI_SS_FLASH"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_FLASH.CS:pcb_port_78"
+            ],
+            [
+              "R_QSPI_SS.pin2:pcb_port_127"
+            ],
+            [
+              "TP_QSPI_SS_FLASH.pin1:pcb_port_195"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        },
+        {
+          "nets": [
+            "XOUT_XTAL"
+          ],
+          "required_endpoints": 3,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "Y1.XOUT:pcb_port_89"
+            ],
+            [
+              "R_XOUT.pin1:pcb_port_134"
+            ],
+            [
+              "C_XOUT.pin1:pcb_port_138"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        }
+      ],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_footprint_overlap_error",
+          "message": "C_LOAD_OUT overlaps Y1: 1 footprint overlap, 1 pad clearance violation. Move the components apart."
+        },
+        {
+          "type": "pcb_footprint_overlap_error",
+          "message": "TP_QSPI_SS_FLASH overlaps J_WING: 1 footprint overlap, 1 pad clearance violation. Move the components apart."
+        },
+        {
+          "type": "pcb_pad_pad_clearance_error",
+          "message": "Pads pcb_port[.U_MCU > .PWR1] and smtpad[pcb_smtpad_56] are too close (clearance: 0mm, minimum: 0.1mm)"
+        }
+      ]
+    },
+    {
+      "strategy": 1,
+      "board": "wing",
+      "elapsed_ms": 20913,
+      "timed_out": false,
+      "source_net_count": 13,
+      "required_physical_endpoint_count": 69,
+      "routed_trace_count": 52,
+      "via_count": 53,
+      "electrically_required_unrouted_count": 4,
+      "intentional_nc_count": 25,
+      "generated_diagnostic_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_connector_not_in_accessible_orientation_warning": 1,
+        "pcb_placement_error": 14,
+        "source_no_ground_pin_defined_warning": 4,
+        "source_no_power_pin_defined_warning": 4,
+        "source_refdes_convention_warning": 1
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_placement_error": 14
+      },
+      "wrong_net_copper_components": [],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "4f62c8732b2a52c5e12055aaaf1aa74fd2dc164304336e8d0b1b49b26bf3f72a",
+      "result": "FAIL",
+      "remaining_nets": [
+        {
+          "nets": [
+            "GND"
+          ],
+          "required_endpoints": 24,
+          "copper_islands": 5,
+          "disconnected_islands": [
+            [
+              "J_WING.P2:pcb_port_1",
+              "J_WING.P4:pcb_port_3",
+              "J_WING.P8:pcb_port_7",
+              "J_WING.P10:pcb_port_9",
+              "J_WING.P12:pcb_port_11",
+              "J_WING.P14:pcb_port_13",
+              "U_H0.GND:pcb_port_18",
+              "C_HALL0.pin2:pcb_port_21",
+              "U_H1.GND:pcb_port_24",
+              "C_HALL1.pin2:pcb_port_27",
+              "U_H2.GND:pcb_port_30",
+              "C_HALL2.pin2:pcb_port_33",
+              "U_H3.GND:pcb_port_36",
+              "C_HALL3.pin2:pcb_port_39",
+              "U_MUX_A.GND:pcb_port_53",
+              "C_MUX_A.pin2:pcb_port_57",
+              "U_MUX_B.GND:pcb_port_71",
+              "C_MUX_B.pin2:pcb_port_75",
+              "U_MUX_C.GND:pcb_port_89",
+              "C_MUX_C.pin2:pcb_port_93"
+            ],
+            [
+              "U_H0.pin3_internal_1:pcb_port_19"
+            ],
+            [
+              "U_H1.pin3_internal_1:pcb_port_25"
+            ],
+            [
+              "U_H2.pin3_internal_1:pcb_port_31"
+            ],
+            [
+              "U_H3.pin3_internal_1:pcb_port_37"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 4
+        }
+      ],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_4 overlaps a PCB keepout"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_37 overlaps a PCB keepout"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_4 overlaps a PCB keepout"
+        }
+      ]
+    },
+    {
+      "strategy": 2,
+      "board": "main",
+      "elapsed_ms": 130722,
+      "timed_out": false,
+      "source_net_count": 37,
+      "required_physical_endpoint_count": 167,
+      "routed_trace_count": 127,
+      "via_count": 120,
+      "electrically_required_unrouted_count": 2,
+      "intentional_nc_count": 30,
+      "generated_diagnostic_counts": {
+        "pcb_component_missing_courtyard_warning": 9,
+        "pcb_pad_pad_clearance_error": 5,
+        "pcb_pad_trace_clearance_error": 28,
+        "pcb_placement_error": 2,
+        "pcb_trace_error": 30,
+        "pcb_via_trace_clearance_error": 89,
+        "source_component_pins_underspecified_warning": 2,
+        "source_no_ground_pin_defined_warning": 8,
+        "source_no_power_pin_defined_warning": 8,
+        "source_refdes_convention_warning": 3
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 9,
+        "pcb_pad_pad_clearance_error": 5,
+        "pcb_pad_trace_clearance_error": 28,
+        "pcb_placement_error": 2,
+        "pcb_trace_error": 30,
+        "pcb_via_trace_clearance_error": 89
+      },
+      "wrong_net_copper_components": [
+        [
+          [
+            "V3V3"
+          ],
+          [
+            "V1V1"
+          ]
+        ],
+        [
+          [
+            "MUX_A0"
+          ],
+          [
+            "MUX_A1"
+          ]
+        ]
+      ],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "98e7eab0ee3363261fe0229e5458fba16774d2f6cc677172112dc9dd46c20ef2",
+      "result": "FAIL",
+      "remaining_nets": [
+        {
+          "nets": [
+            "GND"
+          ],
+          "required_endpoints": 49,
+          "copper_islands": 3,
+          "disconnected_islands": [
+            [
+              "U_MCU.TESTEN:pcb_port_18",
+              "U_MCU.GND_EP:pcb_port_56",
+              "J_WING.P2:pcb_port_104",
+              "J_WING.P4:pcb_port_106",
+              "J_WING.P8:pcb_port_110",
+              "J_WING.P10:pcb_port_112",
+              "J_WING.P12:pcb_port_114",
+              "J_WING.P14:pcb_port_116",
+              "J_USB.A1_B12:pcb_port_57",
+              "J_USB.A12_B1:pcb_port_68",
+              "J_USB.SHIELD:pcb_port_69",
+              "U_ESD.GND:pcb_port_74",
+              "U_LDO.GND:pcb_port_93",
+              "U_LOAD.GND:pcb_port_98",
+              "U_FLASH.GND:pcb_port_82",
+              "Y1.GND1:pcb_port_89",
+              "Y1.GND2:pcb_port_91",
+              "R_CC1.pin2:pcb_port_120",
+              "R_CC2.pin2:pcb_port_122",
+              "R_WING_PD.pin2:pcb_port_130",
+              "R_HALL_PD.pin2:pcb_port_132",
+              "C_XIN.pin2:pcb_port_138",
+              "C_XOUT.pin2:pcb_port_140",
+              "C_MCU_HF1.pin2:pcb_port_142",
+              "C_MCU_HF2.pin2:pcb_port_144",
+              "C_MCU_HF3.pin2:pcb_port_146",
+              "C_MCU_HF4.pin2:pcb_port_148",
+              "C_MCU_HF5.pin2:pcb_port_150",
+              "C_MCU_HF6.pin2:pcb_port_152",
+              "C_MCU_HF7.pin2:pcb_port_154",
+              "C_MCU_HF8.pin2:pcb_port_156",
+              "C_MCU_HF9.pin2:pcb_port_158",
+              "C_VREG_IN.pin2:pcb_port_160",
+              "C_VREG_OUT.pin2:pcb_port_162",
+              "C_MCU_BULK.pin2:pcb_port_164",
+              "C_FLASH.pin2:pcb_port_166",
+              "C_LDO_IN.pin2:pcb_port_168",
+              "C_LDO_OUT.pin2:pcb_port_170",
+              "C_LOAD_IN.pin2:pcb_port_172",
+              "C_LOAD_OUT.pin2:pcb_port_174",
+              "R_ADC_A_BOTTOM.pin2:pcb_port_178",
+              "C_ADC_A.pin2:pcb_port_180",
+              "R_ADC_B_BOTTOM.pin2:pcb_port_184",
+              "C_ADC_B.pin2:pcb_port_186",
+              "R_ADC_C_BOTTOM.pin2:pcb_port_190",
+              "C_ADC_C.pin2:pcb_port_192",
+              "J_USB.pin13_internal_1:pcb_port_70"
+            ],
+            [
+              "J_USB.pin13_internal_2:pcb_port_71"
+            ],
+            [
+              "J_USB.pin13_internal_3:pcb_port_72"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 2
+        }
+      ],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.J_USB > port.pin4, .U_ESD > port.pin1] is too close to pcb_hole \"pcb_hole[#pcb_hole_0]\" (gap: 0.180mm)"
+        },
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.U_ESD > port.pin5, .C_LDO_IN > port.pos] is too close to trace[.U_ESD > port.pin2, .C_LDO_OUT > port.neg] (gap: 0.180mm)"
+        },
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.J_WING > port.pin11, .R_ADC_B_TOP > port.anode] is too close to trace[.U_MCU > port.pin6, .J_WING > port.pin6] (gap: 0.137mm)"
+        }
+      ]
+    },
+    {
+      "strategy": 2,
+      "board": "wing",
+      "elapsed_ms": 36535,
+      "timed_out": false,
+      "source_net_count": 13,
+      "required_physical_endpoint_count": 69,
+      "routed_trace_count": 52,
+      "via_count": 51,
+      "electrically_required_unrouted_count": 4,
+      "intentional_nc_count": 25,
+      "generated_diagnostic_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_connector_not_in_accessible_orientation_warning": 1,
+        "pcb_placement_error": 8,
+        "pcb_trace_error": 1,
+        "source_no_ground_pin_defined_warning": 4,
+        "source_no_power_pin_defined_warning": 4,
+        "source_refdes_convention_warning": 1
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_placement_error": 8,
+        "pcb_trace_error": 1
+      },
+      "wrong_net_copper_components": [],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "9826e92f7c0ab742427e496799013a4db29d4d6d9965ead3625b320437ab636b",
+      "result": "FAIL",
+      "remaining_nets": [
+        {
+          "nets": [
+            "GND"
+          ],
+          "required_endpoints": 24,
+          "copper_islands": 5,
+          "disconnected_islands": [
+            [
+              "J_WING.P2:pcb_port_1",
+              "J_WING.P4:pcb_port_3",
+              "J_WING.P8:pcb_port_7",
+              "J_WING.P10:pcb_port_9",
+              "J_WING.P12:pcb_port_11",
+              "J_WING.P14:pcb_port_13",
+              "U_H0.GND:pcb_port_18",
+              "C_HALL0.pin2:pcb_port_21",
+              "U_H1.GND:pcb_port_24",
+              "C_HALL1.pin2:pcb_port_27",
+              "U_H2.GND:pcb_port_30",
+              "C_HALL2.pin2:pcb_port_33",
+              "U_H3.GND:pcb_port_36",
+              "C_HALL3.pin2:pcb_port_39",
+              "U_MUX_A.GND:pcb_port_53",
+              "C_MUX_A.pin2:pcb_port_57",
+              "U_MUX_B.GND:pcb_port_71",
+              "C_MUX_B.pin2:pcb_port_75",
+              "U_MUX_C.GND:pcb_port_89",
+              "C_MUX_C.pin2:pcb_port_93"
+            ],
+            [
+              "U_H0.pin3_internal_1:pcb_port_19"
+            ],
+            [
+              "U_H1.pin3_internal_1:pcb_port_25"
+            ],
+            [
+              "U_H2.pin3_internal_1:pcb_port_31"
+            ],
+            [
+              "U_H3.pin3_internal_1:pcb_port_37"
+            ]
+          ],
+          "missing_physical_ports": [],
+          "unrouted_connections": 4
+        }
+      ],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.U_H1 > port.pin1, .U_MUX_C > port.pin13] is too close to pcb_hole \"pcb_hole[#pcb_hole_3]\" (gap: 0.132mm)"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_34 overlaps a PCB keepout"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_46 overlaps a PCB keepout"
+        }
+      ]
+    },
+    {
+      "strategy": 3,
+      "board": "main",
+      "elapsed_ms": 178229,
+      "timed_out": false,
+      "source_net_count": 37,
+      "required_physical_endpoint_count": 167,
+      "routed_trace_count": 128,
+      "via_count": 135,
+      "electrically_required_unrouted_count": 0,
+      "intentional_nc_count": 30,
+      "generated_diagnostic_counts": {
+        "pcb_component_missing_courtyard_warning": 9,
+        "pcb_pad_pad_clearance_error": 2,
+        "pcb_pad_trace_clearance_error": 11,
+        "pcb_trace_error": 19,
+        "pcb_via_trace_clearance_error": 44,
+        "source_component_pins_underspecified_warning": 2,
+        "source_no_ground_pin_defined_warning": 8,
+        "source_no_power_pin_defined_warning": 8,
+        "source_refdes_convention_warning": 3
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 9,
+        "pcb_pad_pad_clearance_error": 2,
+        "pcb_pad_trace_clearance_error": 11,
+        "pcb_trace_error": 19,
+        "pcb_via_trace_clearance_error": 44
+      },
+      "wrong_net_copper_components": [
+        [
+          [
+            "V3V3"
+          ],
+          [
+            "USB_DP"
+          ],
+          [
+            "QSPI_SD0"
+          ],
+          [
+            "QSPI_SD2"
+          ]
+        ],
+        [
+          [
+            "MUX_A0"
+          ],
+          [
+            "MUX_A2"
+          ]
+        ],
+        [
+          [
+            "GND"
+          ],
+          [
+            "ADC_A"
+          ]
+        ],
+        [
+          [
+            "V1V1"
+          ],
+          [
+            "USB_DM"
+          ]
+        ],
+        [
+          [
+            "ADC_B"
+          ],
+          [
+            "ADC_C"
+          ]
+        ],
+        [
+          [
+            "QSPI_SD3"
+          ],
+          [
+            "QSPI_SCLK"
+          ]
+        ],
+        [
+          [
+            "QSPI_SD1"
+          ],
+          [
+            "QSPI_SS_MCU"
+          ]
+        ]
+      ],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "1f9c600a0203c968f37eec4fe1d8fe49661092ee5cde1f6cd77b4cc94c8ac7b9",
+      "result": "FAIL",
+      "remaining_nets": [],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.U_MCU > port.pin56, .R_QSPI_SS > port.anode] is too close to trace[.U_MCU > port.pin55, .U_FLASH > port.pin2] (gap: 0.150mm)"
+        },
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.U_MCU > port.pin56, .R_QSPI_SS > port.anode] is too close to trace[.U_MCU > port.pin53, .U_FLASH > port.pin5] (gap: 0.106mm)"
+        },
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.U_MCU > port.pin55, .U_FLASH > port.pin2] is too close to trace[.U_MCU > port.pin54, .U_FLASH > port.pin3] (gap: 0.174mm)"
+        }
+      ]
+    },
+    {
+      "strategy": 3,
+      "board": "wing",
+      "elapsed_ms": 64702,
+      "timed_out": false,
+      "source_net_count": 13,
+      "required_physical_endpoint_count": 69,
+      "routed_trace_count": 56,
+      "via_count": 51,
+      "electrically_required_unrouted_count": 0,
+      "intentional_nc_count": 25,
+      "generated_diagnostic_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_connector_not_in_accessible_orientation_warning": 1,
+        "pcb_placement_error": 12,
+        "pcb_trace_error": 1,
+        "source_no_ground_pin_defined_warning": 4,
+        "source_no_power_pin_defined_warning": 4,
+        "source_refdes_convention_warning": 1
+      },
+      "stock_check_counts": {
+        "pcb_component_missing_courtyard_warning": 5,
+        "pcb_placement_error": 12,
+        "pcb_trace_error": 1
+      },
+      "wrong_net_copper_components": [],
+      "invalid_layer_transitions": [],
+      "unsupported_geometry": [],
+      "unassigned_non_nc_ports": [],
+      "raw_sha256": "71034f787cfc97be72436d0b20a4a01dad508fd19782f5de49119fa0a9b2e69e",
+      "result": "FAIL",
+      "remaining_nets": [],
+      "sample_physical_errors": [
+        {
+          "type": "pcb_trace_error",
+          "message": "PCB trace trace[.J_WING > port.pin6, .U_MUX_B > port.pin15] is too close to pcb_hole \"pcb_hole[#pcb_hole_2]\" (gap: 0.134mm)"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_0 overlaps a PCB keepout"
+        },
+        {
+          "type": "pcb_placement_error",
+          "message": "Copper for via pcb_via_35 overlaps a PCB keepout"
+        }
+      ]
+    }
+  ]
+}
