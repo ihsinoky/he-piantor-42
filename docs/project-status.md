@@ -28,9 +28,9 @@ here.
 
 | Gate | Current status | Check | Trigger | Unlock condition |
 | --- | --- | --- | --- | --- |
-| G0A — JITX Backend Adoption | `done` | C0-C4B5 accepted evidence; Issue #55 PO decision recorded in D-016 | C4C / G0A completed: JITX active physical backend NO-GO for Rev.M1 / Rev.A. | Native stock tscircuit is the active forward Rev.M1 EDA candidate/path; G0B must complete before physical implementation. |
-| G0B — Rev.M1 Architecture / Interface Freeze | `not-ready` | Reusable Main / Evaluation Wing architecture, logical interface, exact connector selection/pinout, experiment design, representative interconnect, pitch-test Wing structure, Rev.A reuse assumptions, DFM constraints and project-owned/approved geometry source | Next Human Gate; architecture/interface and experiment review package must be complete and accepted. | Rev.M1 schematic/PCB implementation may proceed to manufacturing-package completion. |
-| G1 — Rev.M1 Main + Evaluation Wing pre-order review | `not-ready` | Actual Main/Wing circuit/ERC, DRC, BOM, manufacturing outputs and measurement plan | Complete manufacturing package exists after G0A/G0B. | Rev.M1 Main + Evaluation Wing ordering may proceed. |
+| G0A — JITX Backend Adoption | `done` | C0-C4B5 accepted evidence; Issue #55 PO decision recorded in D-016 | C4C / G0A completed: JITX active physical backend NO-GO for Rev.M1 / Rev.A. | Native stock tscircuit is the active forward Rev.M1 EDA candidate/path; G0B is now done under D-017; EDA-003B proof acceptance precedes full physical implementation. |
+| G0B — Rev.M1 Architecture / Interface Freeze | `done` | Accepted connector/pinout, external WING_EN pull-down requirement, evaluation harness, Wings/coverage, test access, measurement framework and DFM boundary in D-017 | Issue #57 PO GO accepted the freeze. | EDA-003B representative stock-tscircuit physical/routing proof is next; if accepted, full Rev.M1 implementation follows. |
+| G1 — Rev.M1 Main + Evaluation Wing pre-order review | `not-ready` | Actual Main/Wing circuit/ERC, DRC, BOM, manufacturing outputs and measurement plan | Complete manufacturing package exists after accepted EDA-003B and full Rev.M1 implementation. | Rev.M1 Main + Evaluation Wing ordering may proceed. |
 | G2 — Post-EVT-002 magnetic / pitch / analog-path decision | `not-ready` | Measured range, noise, scan speed, power, interference, actual interconnect path and pitch usability | Physical evaluation measurements and report are complete. | Select among 17.0 / 16.5 / 16.0 mm and production magnetic architecture; the Rev.A circuit may be fixed. |
 | G3 — Rev.A pre-order review | `not-ready` | Main/Left/Right Wing DRC, BOM, Gerbers, drill/placement outputs and cost | The 42-key manufacturing package is complete. | Rev.A PCBA ordering may proceed. |
 | G4 — Physical operation review | `not-ready` | Typing, calibration, Vial, USB, and enclosure fit | Integrated-unit bring-up is complete. | The final design may be fixed. |
@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit is the active forward Rev.M1 EDA candidate/path under D-016. All JITX source/evidence retained. G0B is next, not-ready; physical Main/Wing and EVT-002 remain unstarted behind G0B. |
+| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit is the active forward Rev.M1 EDA candidate/path under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B representative stock-tscircuit physical/routing proof is next. EVT-002 has satisfied G0B but full physical Main/Wing implementation remains unstarted pending EDA-003B acceptance. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -168,13 +168,24 @@ electrical/component/modeling successes and all JITX source/evidence remain
 valid and retained. Native stock tscircuit resumes as the active forward Rev.M1
 EDA candidate/path, subject to later ERC/DRC and manufacturing gates; physical
 Main/Wing remains unimplemented and is not production-qualified.
-**G0B is the next Human Gate and remains not-ready.** EVT-002 is blocked by G0B;
-G0A is no longer an unresolved prerequisite. No board is ordered.
+**G0B is done / accepted** by the [Issue #57 PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587) and
+[D-017](decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze).
+The JST GH 14-position connector/pinout, six common-GND return contacts, nominal
+100 mm 1:1 evaluation harness, external Main-side pull-down per `WING_EN`,
+three pitch Wings and full-load three-TMUX/three-ADC coverage are frozen.
+The exact pull-down resistor value remains implementation work.
 
-G0B must freeze the architecture/interface, exact connector/pinout and
-representative experiments before implementation. Physical Main/Wing,
-connector selection, schematic, placement, routing, DRC and manufacturing are
-not implemented here. `hardware/layout/**` is not consumed; future Wing
+**EVT-002: G0B prerequisite satisfied; full Rev.M1 implementation not yet active.**
+Sequence: **G0B accepted -> EDA-003B representative stock-tscircuit
+physical/routing proof -> if accepted, full Rev.M1 implementation**. No
+schematic/PCB/manufacturing package completion, placement, routing or order
+is claimed. Production pitch, final Hall choice, final Rev.A cable mechanics/length,
+exact pull-down resistor, final placement, PCB routing, representative stock-tscircuit
+routing capability, USB NPTH manufacturing disposition, final USB/system
+power budget and manufacturing release remain open. The accepted DRV5055 5 V
+basis (3 mA typical / 5 mA maximum) yields approximately 127 mA per 21-key Wing
+and 254 mA for 42 sensors / two Wings: planning estimates, not final USB/system
+power qualification or final production requirements. `hardware/layout/**` is not consumed; future Wing
 geometry must be project-owned or explicitly approved at a later Human Gate.
 See [Rev.M1 architecture](../hardware/rev-m1/architecture.md),
 [interface](../hardware/rev-m1/main-wing-interface.md),
@@ -191,8 +202,8 @@ documented graph-introspection proof. See
 classification. The JITX challenger evaluation ended in physical-backend
 NO-GO at C4C/G0A; all historical qualification evidence is retained. C4B4B
 classifies the demonstrated JITX downstream path PASS_WITH_LIMITATIONS; C4B5
-remains accepted BLOCKED for complete routing. G0B product architecture/interface
-freeze is next before physical implementation using native stock tscircuit.
+remains accepted BLOCKED for complete routing. G0B is now accepted; EDA-003B
+is next before full physical implementation using native stock tscircuit.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
@@ -204,8 +215,16 @@ distinction, mechanical alignment, and an observed Y inversion, but lost two
 copper-pour keepout zones. Therefore KiCad import is not the authoritative
 migration path. This result does not rule out native tscircuit design.
 
-Existing KiCad work remains unchanged as fallback, reference, and prior-design
-evidence, but is not the active EDA source. Each detailed increment is
+**EDA-003A / merged PR #59: accepted UPSTREAM_FIX_CANDIDATE.** Both copper-pour
+keepouts were silently lost, warnings did not report the material loss, and
+rounded-pad corner radius was incorrect. Current KiCad footprint importer
+reuse is **NOT approved**. Native TSX remains authoritative; KiCad assets
+remain reference / secondary evidence. Future importer reuse needs separately
+accepted fidelity evidence after fixes. Details remain in the
+[requalification report](tscircuit-kicad-importer-requalification.md).
+
+Existing KiCad work remains unchanged as reference and prior-design evidence,
+but is not the active EDA source. Each detailed increment is
 defined and accepted through its own GitHub Issue.
 
 ## Dashboard synchronization

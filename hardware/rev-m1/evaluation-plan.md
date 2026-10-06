@@ -1,8 +1,14 @@
 # Rev.M1 evaluation plan
 
 Requirements only. The modular hardware and measurement firmware are not
-claimed complete. G0B freezes the experiment structure and representative
-Main/Wing interconnect; G1 reviews the completed package before ordering.
+claimed complete. [D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze) / Issue #57 PO GO
+accepted G0B and freezes the experiment structure and representative Main/Wing
+interconnect. EDA-003B representative routing proof is next; if accepted, full
+Rev.M1 implementation follows. G1 reviews the completed package before ordering.
+
+The [accepted G0B record](g0b-freeze-proposal.md) is authoritative for the
+three pitch-specific 3 x 3 Wings, 21-sensor full-load/electrical-load coverage,
+three TMUX1208 / three ADC paths, test access and A/B/C measurement framework.
 
 ## Pitch / mechanical
 
@@ -21,7 +27,10 @@ key stationary, and combined key positions/travel. Record sensor/switch sample
 identity, spacing, alignment, travel reference, supply, temperature, sample
 count and acquisition settings so comparisons are reproducible. Include
 short-term thermal drift, Hall current and rail turn-on behavior retained from
-D-011, plus the 42-key power-budget extrapolation.
+D-011, plus the 42-key power-budget extrapolation. The accepted DRV5055 5 V
+planning basis is 3 mA typical / 5 mA maximum, approximately 127 mA per
+21-key Wing / 254 mA for two Wings; final USB/system power qualification
+remains open.
 
 ## Analog interconnect
 
@@ -41,9 +50,10 @@ The setup must represent Rev.A closely enough that connector/MUX behavior is
 useful for the two-bank/three-ADC architecture: document interconnect length,
 return path, loads, populated/unused channels, three-output coverage and
 production-equivalence limitations. A smaller first Wing must not silently
-substitute a direct Hall-to-ADC path for the real connector/MUX path. G0B
-reviews how test fixtures or later Wing variants cover missing bank/channel
-conditions. No exact connector is selected here.
+substitute a direct Hall-to-ADC path for the real connector/MUX path. The
+[accepted coverage contract](g0b-freeze-proposal.md#6-production-equivalent-mux-and-bank-evidence)
+defines bank/channel coverage; the JST GH 14-position connector and nominal
+100 mm 1:1 harness are frozen in the [interface](main-wing-interface.md).
 
 ## Cost / geometry
 
@@ -62,8 +72,10 @@ hardware revision identifiers, calibration method, sample identities, rail
 voltage/current, temperature, timing settings, repeat statistics and plots.
 Record each pitch's usability, interference, range, repeatability, settling,
 noise/coupling, power and dimensional results, including failures and gaps.
-G0B must approve numeric acceptance limits and methods before measurements;
-C4A does not invent measured thresholds or claim a passing result.
+G0B accepted the [measurement framework](g0b-freeze-proposal.md#8-measurement-acceptance-framework):
+derivable numeric limits, comparative G2 decisions and characterization are
+distinguished. Planning current estimates are not final production power
+requirements. No measured passing result is claimed.
 
 The post-EVT-002 G2 output is a measured-results report and explicit Human
 Gate decision selecting production pitch among 17.0 / 16.5 / 16.0 mm and

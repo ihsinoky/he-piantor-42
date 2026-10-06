@@ -1,6 +1,6 @@
 # Physical Rev.M1 architecture
 
-Requirements only — EDA-002C4A, issue #41. No schematic, footprint, PCB,
+Accepted architecture requirements — D-015 / D-017, Issues #41 / #57. No schematic, footprint, PCB,
 routing, panel or manufacturing output is implemented here.
 
 [D-015](../../docs/decisions.md#d-015---revm1-reusable-main--evaluation-wing-architecture)
@@ -41,16 +41,22 @@ represented in M1 measurements before reuse is accepted.
 
 Fixed by D-015: modular responsibilities, Main-side ADC conditioning, Main
 reuse intent, three-TMUX/21-key-per-Wing Rev.A candidate, and evaluation of
-17.0 / 16.5 / 16.0 mm. Production pitch is not fixed. Connector MPN, pinout,
-shielding/ground allocation, mechanics, test-Wing structure, additional
-control/reference signals and future Wing geometry source approval remain
-TBD at G0B/later Human Gates. Do not consume `hardware/layout/**`.
+17.0 / 16.5 / 16.0 mm. [D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze) and the
+[accepted G0B record](g0b-freeze-proposal.md) freeze the exact JST GH 14-position
+connector/pinout, six common-GND returns, nominal 100 mm 1:1 evaluation
+harness, external Main-side pull-down for each `WING_EN`, pitch-specific
+Wings and full-load three-TMUX/three-ADC coverage. Production pitch, final
+Hall choice, final cable mechanics, resistor value and physical implementation
+remain open. Do not consume `hardware/layout/**`.
 
 [G0A](../../docs/project-status.md#human-gates) is complete: Issue #55 /
 [D-016](../../docs/decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)
 records JITX physical-backend NO-GO and native stock tscircuit as the active
-forward Rev.M1 EDA candidate/path. G0B is the next Human Gate and remains
-not-ready; its architecture/interface freeze must complete before physical
-implementation. C4A itself did not select an active backend.
+forward Rev.M1 EDA path. G0B is accepted / done under D-017. Sequence:
+G0B accepted -> EDA-003B representative stock-tscircuit physical/routing proof
+-> if accepted, full Rev.M1 implementation. EVT-002 is not yet active.
+EDA-003A is accepted as UPSTREAM_FIX_CANDIDATE; current importer reuse is
+not approved and native TSX remains authoritative. C4A itself did not select
+an active backend.
 See [logical interface](main-wing-interface.md), [experiments](evaluation-plan.md)
 and [DFM policy](dfm-policy.md). No physical hardware is claimed implemented.
