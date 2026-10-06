@@ -4,7 +4,7 @@
   "connector_prerequisite": "RESOLVED",
   "qualification_execution_complete": true,
   "complete_routing_qualified": false,
-  "issue_should_close": false,
+  "issue_should_close": true,
   "production_tscircuit": "0.0.2646",
   "main_implemented": true,
   "wing_implemented": true,
@@ -161,7 +161,7 @@
   "human_gate_changed": false,
   "usb_npth_disposition": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED",
   "execution_stopped": false,
-  "qualification_complete": false,
+  "qualification_complete": true,
   "router_failure_demonstrated": true,
   "routing_attempts_evidence": "routing-attempts.json",
   "physical_error_classification": {
@@ -175,5 +175,20 @@
     "placement": "No final initial placement failure; Wing pcb_placement_error records are routing-created via/keepout violations",
     "autorouting": "Both final stock router processes settled; no final pcb_autorouting_error",
     "known_usb_npth": "Unchanged product footprint risk remains OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED; source footprint untouched; new trace-to-hole errors classified separately"
+  },
+  "bounded_conclusion": "Stock tscircuit 0.0.2646, under the three representative source-controlled strategies evaluated in EDA-003B, did not produce a physically valid representative Rev.M1 Main/Wing result. This does not imply general incapability of routing PCB designs.",
+  "qualification_completion_meaning": "The planned Issue #61 qualification execution reached the PMO-accepted terminal BLOCKED result; complete_routing_qualified remains false because routing acceptance criteria failed.",
+  "issue_closure_condition": "Close Issue #61 when this evidence is merged; BLOCKED is an allowed terminal outcome.",
+  "full_revm1_implementation_blocked": true,
+  "follow_up_recommendation": {
+    "action": "Do not continue placement tuning indefinitely on 0.0.2646; pursue a separate, explicitly authorized stock-tscircuit version-up qualification.",
+    "blockers_to_investigate": [
+      "Main wrong-net copper / short generation",
+      "Main pad/trace/via clearance failures",
+      "Wing via behavior around Hall keepouts",
+      "Router/check semantic mismatch: obstacle conversion permits behavior that stock validation later rejects"
+    ],
+    "performed_in_issue_61": false,
+    "production_dependency_change_authorized_here": false
   }
 }

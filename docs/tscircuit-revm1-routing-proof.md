@@ -6,8 +6,19 @@ the final stock router produces zero electrically required unrouted connections.
 That necessary condition is insufficient: Main has seven physical copper
 components joining different nets, and both boards retain material routing DRC
 errors. The failed results and their manufacturing geometry reproduce exactly.
-Issue #61 remains open. This report makes no adoption, Human Gate, order, or
-full Rev.M1 implementation decision.
+PMO review accepts this as a valid terminal **BLOCKED** result: the planned
+qualification execution is complete, and Issue #61 should close when this
+evidence is merged. `qualification_complete = true` means the planned
+qualification reached its terminal result; `complete_routing_qualified = false`
+means the tested workflow failed routing acceptance and did not achieve PASS.
+Full Rev.M1 implementation remains blocked. This report authorizes no adoption,
+Human Gate, order, manufacturing release or full Rev.M1 implementation.
+
+The bounded conclusion is: stock tscircuit **0.0.2646**, under the three
+representative source-controlled strategies evaluated in EDA-003B, did not
+produce a physically valid representative Rev.M1 Main/Wing result. This
+demonstrates router failure for the bounded design and strategies; it does not
+imply that tscircuit is generally incapable of routing PCB designs.
 
 ## Recovery and authority
 
@@ -132,8 +143,19 @@ checks explicitly continue rejecting vias even when `allow_placements` is true.
 The unchanged HallKey's keepouts therefore permit traces/pads yet reject the
 router's vias. Reading this implementation established capability; none of its
 private functions was invoked or changed. No newer release was installed,
-qualified or claimed to fix it. Any version-up investigation requires separate
-qualification of this exact mismatch and the Main clearance/short failures.
+qualified or claimed to fix it. Do not continue placement tuning indefinitely
+on 0.0.2646. The next investigation should be a separate, explicitly authorized
+version-up qualification against these exact EDA-003B blockers, determining
+whether a newer stock version fixes:
+
+1. Main wrong-net copper / short generation;
+2. Main pad/trace/via clearance failures;
+3. Wing via behavior around Hall keepouts;
+4. The router/check semantic mismatch where obstacle conversion permits
+   behavior that stock validation later rejects.
+
+That experiment is separate work, is not performed in Issue #61, and does not
+authorize a production dependency change here.
 
 ## Representative design and placement pressure
 
@@ -278,7 +300,9 @@ stake and NPTH geometry is unchanged. No new tool-specific geometry corruption
 was found. Attempt 2's additional routed trace-to-USB-hole clearance failure
 was classified as routing-created; the pre-existing product geometry risk
 was not blamed for the final verdict. Final Main emits no trace-to-USB-NPTH
-error, and the independent shorts alone prohibit qualification.
+error, and the independent shorts alone prohibit a complete-routing
+qualification PASS. They do not make the completed BLOCKED qualification
+execution incomplete.
 
 ## Manufacturing and two fresh-run reproducibility
 
@@ -369,8 +393,9 @@ Manifest and lock remain byte-identical to baseline with **0.0.2646**. Frozen
 old KiCad assets and accepted authority are byte-unchanged. Historical STOP
 copies are byte-verified against `1626211`. No production upgrade, generated-data
 edit, external router, fork/private API or GUI state is used. No PR, new Issue,
-merge, order, D-018, acceptance/status change, EVT-002 start or Human Gate
-change is made.
+merge, order, D-018, EVT-002 start or Human Gate change is made. Accepted
+decision/project-status files remain unchanged; PMO's acceptance of this
+terminal technical result does not authorize full Rev.M1 implementation.
 
 Compact evidence includes the connector/scope results, three-strategy summaries,
 final/run-2 physical summaries, source/package hashes, manufacturing summaries,
@@ -414,4 +439,8 @@ python scripts/verify-revm1-reproducibility.py /tmp/proof-run1-wing /tmp/proof-r
 
 Primary classification: **BLOCKED** — current representative stock-routing
 short/clearance/keepout failures after the bounded sequence. Connector evidence
-is resolved. Issue #61 needs PO/PMO review and remains open (`Refs #61`).
+is resolved. PMO accepts the terminal technical result; qualification execution
+and qualification are complete with BLOCKED, while complete-routing PASS was
+not achieved. Issue #61 should close when this evidence is merged (`Closes #61`).
+Full Rev.M1 implementation remains blocked; any version-up qualification is
+separate, explicitly authorized work.
