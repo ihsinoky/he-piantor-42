@@ -1,0 +1,62 @@
+{
+  "stage": "After first serious source and captured-boundary pass; before reduction/upstream/patch expansion",
+  "population": {
+    "raw_records": 15,
+    "distinct_vias": 14,
+    "distinct_traces": 12,
+    "distinct_net_pairs": 14,
+    "physical_clusters": 16,
+    "via_center_bounds_mm": {
+      "x": [
+        -20.10227411674614,
+        18.05773973480598
+      ],
+      "y": [
+        -17.52250746996362,
+        7.238310482053972
+      ]
+    },
+    "layers": {
+      "top": 8,
+      "bottom": 7
+    },
+    "spacing_range_mm": [
+      0.11484654915764028,
+      0.11500000000000069
+    ]
+  },
+  "numeric_result": "Exact target arithmetic .10 + .015 = .115 in more than one stock repair module; strong population correlation, per-record causal invocation UNKNOWN",
+  "earliest_invalid_boundary": "Raw highDensityRouteSolver owner/trace candidates already fail .20 in three selected cases; exact final target for these three emerges at joint repair output. No one common originating defect localized.",
+  "confidence": "HIGH geometry/target correlation; LOW one economically fixable common origin",
+  "inspected_packages": [
+    "@tscircuit/core",
+    "@tscircuit/capacity-autorouter",
+    "@tscircuit/checks",
+    "high-density-repair01 (embedded source)",
+    "high-density-repair03 (embedded source)",
+    "@tscircuit/repair04 embedded high-density-repair03"
+  ],
+  "candidate_responsibility_modules": [
+    "HighDensityForceImproveSolver.projectViaSegmentClearance",
+    "GlobalDrcForceImproveSolver.pushViaSegmentPair",
+    "Pipeline9JointDrcRepairSolver and its embedded repair helpers"
+  ],
+  "modules_proven_to_require_changes": null,
+  "stable_small_reproducer_likely": "UNQUALIFIED: no shared originating callback identified; final .115 may be a lower-bound repair attractor for different pre-existing defects",
+  "stable_reproducer": false,
+  "repair_size": "UNKNOWN",
+  "regression_test_quality": "Analysis geometry tests and selected final-board check replay; no routing regression for a repair",
+  "upstream_suitability": "UNQUALIFIED",
+  "temporary_fork_suitability": "UNQUALIFIED",
+  "maintenance_burden": "UNKNOWN; duplicated targets and multiple transformation stages prevent a narrow estimate",
+  "expected_coverage": {
+    "demonstrated_fixed_conflicts": 0,
+    "selected_population_clusters": 16,
+    "all_main_clusters": 54,
+    "selected_population_percent": 29.62962962962963,
+    "caveat": "29.63% is selected population scope, not promised fix coverage. Some selected clusters contain independent non-signature records; no evidence even all 16 would be cleared."
+  },
+  "expected_value_another_substantial_cycle": "Would require attributing individual repair callbacks and reducing topology before estimating a safe fix; not authorized within this one-cycle gate.",
+  "decision": "STOP",
+  "classification": "BACKEND_DECISION_REQUIRED"
+}

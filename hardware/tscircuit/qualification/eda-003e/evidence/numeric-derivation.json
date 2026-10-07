@@ -1,0 +1,873 @@
+{
+  "result": "Exact stock target arithmetic .10 + .015 = .115; STRONG_CORRELATION to accepted population, not exact common-cause proof.",
+  "target_centerline_mm": 0.515,
+  "valid_centerline_mm": 0.6000000000000001,
+  "hypotheses": [
+    {
+      "id": "repair_target",
+      "formula": "r_via + half_width + relaxed_trace_clearance + slack - r_via - half_width",
+      "inputs": {
+        "r_via": 0.3,
+        "half_width": 0.1,
+        "relaxed_trace_clearance": 0.1,
+        "slack": 0.015
+      },
+      "expected_result_mm": 0.115,
+      "classification": "STRONG_CORRELATION",
+      "source_code_evidence": "high-density-repair01 projection and both high-density-repair03 pushViaSegmentPair versions explicitly use this target. Exact arithmetic; per-record callback attribution unproved.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": -8.028283772082423e-07
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": -5.041486994400435e-07
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": -4.673512917649503e-06
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": -0.00015345084235972306
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": -0.00011225082954967325
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": -3.0575350242617594e-06
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": -3.261132571739933e-05
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": -1.6851078775553807e-06
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": -1.3478487553703067e-06
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": -1.0952190434426745e-06
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": -1.9016774929075941e-06
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": -1.063233570283706e-06
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": -2.1014913616917985e-06
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": -5.571226962373943e-05
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": 6.800116025829084e-16
+        }
+      ]
+    },
+    {
+      "id": "requested_rule",
+      "formula": "requested_clearance",
+      "inputs": {
+        "requested_clearance": 0.2
+      },
+      "expected_result_mm": 0.2,
+      "classification": "REJECTED",
+      "source_code_evidence": "Captured source and SRJ preserve .20; not the observed target.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": -0.08500080282837721
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": -0.08500050414869945
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": -0.08500467351291766
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": -0.08515345084235973
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": -0.08511225082954968
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": -0.08500305753502427
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": -0.0850326113257174
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": -0.08500168510787756
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": -0.08500134784875538
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": -0.08500109521904345
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": -0.08500190167749291
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": -0.08500106323357029
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": -0.0850021014913617
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": -0.08505571226962375
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": -0.08499999999999933
+        }
+      ]
+    },
+    {
+      "id": "drill_instead_of_copper",
+      "formula": "requested_clearance + drill_radius - copper_radius",
+      "inputs": {
+        "requested_clearance": 0.2,
+        "drill_radius": 0.15,
+        "copper_radius": 0.3
+      },
+      "expected_result_mm": 0.05,
+      "classification": "REJECTED",
+      "source_code_evidence": "Does not match; stock checker uses outer copper radius.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": 0.0649991971716228
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": 0.06499949585130056
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": 0.06499532648708235
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": 0.06484654915764028
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": 0.06488774917045033
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": 0.06499694246497574
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": 0.0649673886742826
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": 0.06499831489212245
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": 0.06499865215124463
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": 0.06499890478095656
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": 0.0649980983225071
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": 0.06499893676642972
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": 0.06499789850863831
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": 0.06494428773037626
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": 0.06500000000000068
+        }
+      ]
+    },
+    {
+      "id": "missing_half_width",
+      "formula": "requested_clearance - half_width",
+      "inputs": {
+        "requested_clearance": 0.2,
+        "half_width": 0.1
+      },
+      "expected_result_mm": 0.1,
+      "classification": "REJECTED",
+      "source_code_evidence": "Missing half width alone does not explain .115.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": 0.014999197171622791
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": 0.01499949585130056
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": 0.01499532648708235
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": 0.014846549157640276
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": 0.014887749170450326
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": 0.014996942464975738
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": 0.0149673886742826
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": 0.014998314892122444
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": 0.01499865215124463
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": 0.014998904780956557
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": 0.014998098322507092
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": 0.014998936766429716
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": 0.014997898508638308
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": 0.01494428773037626
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": 0.01500000000000068
+        }
+      ]
+    },
+    {
+      "id": "margin_as_center_budget",
+      "formula": "router_margin - half_width",
+      "inputs": {
+        "router_margin": 0.15,
+        "half_width": 0.1
+      },
+      "expected_result_mm": 0.05,
+      "classification": "REJECTED",
+      "source_code_evidence": "Pipeline default obstacle margin is .15; no observed derivation of .115 from this alone.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": 0.0649991971716228
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": 0.06499949585130056
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": 0.06499532648708235
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": 0.06484654915764028
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": 0.06488774917045033
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": 0.06499694246497574
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": 0.0649673886742826
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": 0.06499831489212245
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": 0.06499865215124463
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": 0.06499890478095656
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": 0.0649980983225071
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": 0.06499893676642972
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": 0.06499789850863831
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": 0.06494428773037626
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": 0.06500000000000068
+        }
+      ]
+    },
+    {
+      "id": "radius_only",
+      "formula": "copper_radius - drill_radius",
+      "inputs": {
+        "copper_radius": 0.3,
+        "drill_radius": 0.15
+      },
+      "expected_result_mm": 0.15,
+      "classification": "REJECTED",
+      "source_code_evidence": "Actual annulus radial thickness is .15, not .115.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": -0.0350008028283772
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": -0.03500050414869943
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": -0.03500467351291764
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": -0.03515345084235971
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": -0.03511225082954966
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": -0.03500305753502425
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": -0.03503261132571739
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": -0.035001685107877545
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": -0.03500134784875536
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": -0.03500109521904343
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": -0.0350019016774929
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": -0.03500106323357027
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": -0.03500210149136168
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": -0.03505571226962373
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": -0.03499999999999931
+        }
+      ]
+    },
+    {
+      "id": "rounding",
+      "formula": "rounding_only",
+      "inputs": {
+        "local_rounding_step_mm": 0.001,
+        "observed_rule_deficit_mm": 0.085
+      },
+      "expected_result_mm": null,
+      "classification": "REJECTED",
+      "source_code_evidence": "Sub-mm rounding can perturb projection targets; .001 mm quantization cannot account for .085 mm deficit alone. Final coordinates are not on that grid.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": null
+        }
+      ]
+    },
+    {
+      "id": "grid",
+      "formula": "grid_or_cell_size",
+      "inputs": {},
+      "expected_result_mm": null,
+      "classification": "UNKNOWN",
+      "source_code_evidence": "No common generating cell size measured. Broad repair spatial cell is a search accelerator, not proven spacing target.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": null
+        }
+      ]
+    },
+    {
+      "id": "postprocess",
+      "formula": "unknown_postprocessing_offset",
+      "inputs": {},
+      "expected_result_mm": null,
+      "classification": "UNKNOWN",
+      "source_code_evidence": "Later stages mutate spacing; no common explicit .085 offset identified.",
+      "per_record": [
+        {
+          "record_id": "R039",
+          "observed_mm": 0.1149991971716228,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R041",
+          "observed_mm": 0.11499949585130056,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R043",
+          "observed_mm": 0.11499532648708236,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R044",
+          "observed_mm": 0.11484654915764028,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R046",
+          "observed_mm": 0.11488774917045033,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R048",
+          "observed_mm": 0.11499694246497574,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R049",
+          "observed_mm": 0.1149673886742826,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R055",
+          "observed_mm": 0.11499831489212245,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R056",
+          "observed_mm": 0.11499865215124463,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R058",
+          "observed_mm": 0.11499890478095656,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R061",
+          "observed_mm": 0.1149980983225071,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R065",
+          "observed_mm": 0.11499893676642972,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R067",
+          "observed_mm": 0.11499789850863831,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R068",
+          "observed_mm": 0.11494428773037627,
+          "observed_delta_mm": null
+        },
+        {
+          "record_id": "R070",
+          "observed_mm": 0.11500000000000069,
+          "observed_delta_mm": null
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "local_projection": {
+      "source_map_path": "deps/node_modules/high-density-repair01/lib/HighDensityForceImproveSolver.ts",
+      "sha256": "3e1465801470c5f0bfb3160f97a2547dccd0e437af6c8c74dc1d4708e64a2201",
+      "excerpts": [
+        {
+          "start_line": 190,
+          "text": "const COORDINATE_MATCH_EPSILON = 1e-3\nconst BOUNDARY_INSET = 1 / ROUNDING_PRECISION\nconst RELAXED_VIA_CLEARANCE = 0.1\nconst RELAXED_TRACE_CLEARANCE = 0.1\nconst CLEARANCE_SLACK = 0.015\nconst VIA_PROJECTION_PASSES = 10\nconst MAX_VIA_MOVE_PER_PASS = 0.04\nconst MAX_TRACE_MOVE_PER_PASS = 0.025\n\nconst roundCoordinate = (value: number) =>\n  Math.round(value * ROUNDING_PRECISION) / ROUNDING_PRECISION"
+        },
+        {
+          "start_line": 1019,
+          "text": "const projectViaSegmentClearance = (params: {\n  routes: HighDensityRoute[]\n  node: NodeWithPortPoints\n  vias: ProjectionViaNode[]\n  segments: ProjectionSegment[]\n}) => {\n  const { routes, node, vias, segments } = params\n  let changed = false\n\n  for (let viaIndex = 0; viaIndex < vias.length; viaIndex += 1) {\n    const via = vias[viaIndex]\n    if (!via?.movable) continue\n\n    for (const segment of segments) {\n      if (via.rootConnectionName === segment.rootConnectionName) continue\n\n      const projection = pointToProjectionSegment(via, segment)\n      const separationX = via.x - projection.x\n      const separationY = via.y - projection.y\n      const distance = getVectorLength(separationX, separationY)\n      const requiredDistance =\n        via.radius +\n        segment.traceRadius +\n        RELAXED_TRACE_CLEARANCE +\n        CLEARANCE_SLACK\n      const penetration = requiredDistance - distance\n      if (penetration <= 0) continue\n\n      const segmentX = segment.end.x - segment.start.x"
+        }
+      ]
+    },
+    "global_projection": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "sha256": "32b0180c475f4df30c1ccacd335b78d61518a2d14ea653ee76d693d45b32eec3",
+      "excerpts": [
+        {
+          "start_line": 2580,
+          "text": "const pushViaSegmentPair = (\n  routes: MutableRoute[],\n  via: ViaNode,\n  segment: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n  maxMove = BROAD_MAX_MOVE,\n  moveDivisor = 2,\n  translateSharedViaSite = false,\n) => {\n  if (sharesNet(via.rootConnectionName, segment.rootConnectionName, connMap))\n    return false\n\n  const projection = pointToSegmentProjection(via, segment)\n  const separationX = via.x - projection.x\n  const separationY = via.y - projection.y\n  const distance = Math.hypot(separationX, separationY)\n  const requiredDistance =\n    via.radius +\n    segment.radius +\n    (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) +\n    CLEARANCE_SLACK\n  const penetration = requiredDistance - distance\n  if (penetration <= 0) return false\n"
+        }
+      ]
+    },
+    "global_config": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverConfig.ts",
+      "sha256": "aa75848eecdd7dbfd61188421efd42c62921c88bde4d5fe15631c982ba2de9ce",
+      "excerpts": [
+        {
+          "start_line": 13,
+          "text": "export const POSITION_EPSILON = 1e-6\nexport const COORDINATE_EPSILON = 1e-3\nexport const MAX_ERROR_MOVE = 0.14\nexport const BROAD_FORCE_PASSES = 12\nexport const EXTENDED_BROAD_FORCE_PASS_MULTIPLIER = 2\nexport const BROAD_MAX_MOVE = 0.035\nexport const BROAD_FALLBACK_SMALL_ROUTE_LIMIT = 120\nexport const MIN_ITERATIONS_FOR_LARGE_BOARD_BROAD_FALLBACK = 192\nexport const CLEARANCE_SLACK = 0.015\nexport const VIA_PAIR_REPAIR_MAX_MOVE = 0.16\nexport const TRACE_PAD_REPAIR_MAX_MOVE = 0.3\nexport const PREFERRED_TRACE_TO_PAD_CLEARANCE = 0.16\nexport const PREFERRED_VIA_TO_PAD_CLEARANCE = 0.1\nexport const getTraceToPadEdgeClearance = (srj: SimpleRouteJson) =>\n  srj.minTraceToPadEdgeClearance ?? PREFERRED_TRACE_TO_PAD_CLEARANCE\nexport const getViaEdgeToPadEdgeClearance = (srj: SimpleRouteJson) =>\n  srj.minViaEdgeToPadEdgeClearance ?? PREFERRED_VIA_TO_PAD_CLEARANCE"
+        }
+      ]
+    },
+    "global_preset": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/drcPresets.ts",
+      "sha256": "28676dfc06a0ce9c31139d7e5745d872c8d27fe0c5f3972360a4fd1ce73518bf",
+      "excerpts": [
+        {
+          "start_line": 1,
+          "text": "import type { GetDrcErrorsOptions } from \"./getDrcErrors\"\nimport { MIN_VIA_TO_VIA_CLEARANCE } from \"./getDrcErrors\"\n\nexport const RELAXED_DRC_OPTIONS: GetDrcErrorsOptions = {\n  traceClearance: 0.1,\n  viaClearance: MIN_VIA_TO_VIA_CLEARANCE,\n}"
+        }
+      ]
+    },
+    "joint_projection": {
+      "source_map_path": "deps/node_modules/@tscircuit/repair04/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "sha256": "e94cf39d674b2cd68317823e171cfde8b313f18458a02cb8bae992c15c05d8d1",
+      "excerpts": [
+        {
+          "start_line": 2548,
+          "text": "const pushViaSegmentPair = (\n  routes: MutableRoute[],\n  via: ViaNode,\n  segment: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n  maxMove = BROAD_MAX_MOVE,\n  moveDivisor = 2,\n  translateSharedViaSite = false,\n) => {\n  if (sharesNet(via.rootConnectionName, segment.rootConnectionName, connMap))\n    return false\n\n  const projection = pointToSegmentProjection(via, segment)\n  const separationX = via.x - projection.x\n  const separationY = via.y - projection.y\n  const distance = Math.hypot(separationX, separationY)\n  const requiredDistance =\n    via.radius +\n    segment.radius +\n    (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) +\n    CLEARANCE_SLACK\n  const penetration = requiredDistance - distance\n  if (penetration <= 0) return false\n\n  const segmentX = segment.end.x - segment.start.x"
+        }
+      ]
+    },
+    "pipeline": {
+      "source_map_path": "lib/autorouter-pipelines/AutoroutingPipeline9_PreloadedTraceGraph/AutoroutingPipelineSolver9_PreloadedTraceGraph.ts",
+      "sha256": "5d457af3c7899e5cd754539ac445bf9dd75b2309b1a5dbca03d65e0f01c27041",
+      "excerpts": [
+        {
+          "start_line": 625,
+          "text": "              minBoardEdgeClearance: cms.originalSrj.minBoardEdgeClearance,\n            },\n            fixedHdRoutes,\n            connMap: cms.connMap,\n            colorMap: cms.colorMap,\n            obstacles: cms.srj.obstacles,\n            layerCount: cms.srj.layerCount,\n            allowBlindAndBuriedVias: cms.srj.allowBlindAndBuriedVias,\n            viaDiameter: cms.viaDiameter,\n            traceWidth: cms.minTraceWidth,\n            obstacleMargin: cms.srj.defaultObstacleMargin ?? 0.15,\n            viaToPadClearance: cms.srj.minViaEdgeToPadEdgeClearance,\n            effort: Math.min(1, cms.effort),\n            includeBoardObstacles: true,\n            nodePfById: portPointPathingSolver.computeNodePfMap(),\n            preserveTerminalPcbPortIds: true,"
+        },
+        {
+          "start_line": 645,
+          "text": "    definePipelineStep(\n      \"highDensityForceImproveSolver\",\n      HighDensityForceImproveSolver,\n      (cms) => [\n        {\n          nodeWithPortPoints: cms.highDensityNodePortPoints ?? [],\n          hdRoutes: simplifyPipeline9CollinearRoutePoints(\n            materializePipeline9HdRouteVias(cms.highDensityRouteSolver!.routes),\n          ),\n          colorMap: cms.colorMap,\n          totalStepsPerNode: Math.max(\n            12,\n            Math.round(20 * Math.min(1, cms.effort)),\n          ),\n          nodeAssignmentMargin: cms.srj.defaultObstacleMargin ?? 0.2,\n        },\n      ],\n    ),\n    definePipelineStep(\n      \"highDensityRepairSolver\",\n      Pipeline4HighDensityRepairSolver,\n      (cms) => [\n        {\n          nodeWithPortPoints: cms.highDensityNodePortPoints ?? [],\n          hdRoutes:\n            cms.highDensityForceImproveSolver?.getOutput() ??\n            cms.highDensityRouteSolver!.routes,\n          obstacles: cms.srj.obstacles,\n          colorMap: cms.colorMap,\n          repairMargin: cms.srj.defaultObstacleMargin ?? 0.2,\n          minimumTraceWidth: cms.srj.minTraceWidth,\n          connMap: cms.connMap,\n        },\n      ],\n    ),\n    definePipelineStep("
+        },
+        {
+          "start_line": 810,
+          "text": "      (cms) => {\n        const srjWithMaterializedPreloadedTraces =\n          cms.getSrjWithMaterializedPreloadedTraces()\n        return [\n          {\n            srj: srjWithMaterializedPreloadedTraces as any,\n            hdRoutes: lockHdRouteTerminals(\n              canonicalizePipeline9HdRoutes(\n                cms.traceWidthSolver!.getHdRoutesWithWidths(),\n              ),\n              cms.netToPointPairsSolver?.newConnections ?? [],\n              new Map(\n                (cms.highDensityStitchSolver?.mergedHdRoutes ?? []).map(\n                  (route) => [route.connectionName, route],\n                ),\n              ),\n            ),\n            connMap: cms.connMap,\n            effort: Math.min(1, cms.effort),\n            maxIterations: 16,\n            enableLargeBoardBroadFallback: false,\n            enablePostSolveClearanceRelaxation: false,\n          },\n        ]\n      },\n    ),\n    definePipelineStep(\n      \"pipeline9JointDrcRepairSolver\","
+        },
+        {
+          "start_line": 840,
+          "text": "        const preloadedTraceUpdates =\n          cms.getPreloadedTraceUpdatesAfterHighDensity()\n        const srjWithMaterializedPreloadedTraces =\n          cms.getSrjWithMaterializedPreloadedTraces()\n        return [\n          {\n            srj: srjWithMaterializedPreloadedTraces,\n            srjWithPointPairs: srjWithMaterializedPreloadedTraces,\n            originalSrj: cms.originalSrj,\n            newConnections: cms.netToPointPairsSolver?.newConnections ?? [],\n            newHdRoutes: cms.globalDrcForceImproveSolver!.getOutput(),\n            updatedPreloadedTraces:\n              preloadedTraceUpdates.updatedPreloadedTraces,\n            mutatedPreloadedTraceIds: new Set(\n              preloadedTraceUpdates.mutatedPreloadedTraces.map(\n                (trace) => trace.pcb_trace_id,\n              ),\n            ),\n            connMap: cms.connMap,\n            obstacles: cms.srj.obstacles,\n            layerCount: cms.srj.layerCount,\n            defaultViaDiameter: cms.viaDiameter,\n            defaultViaHoleDiameter: cms.viaHoleDiameter,\n            effort: Math.min(1, cms.effort),\n            colorMap: cms.colorMap,\n          },\n        ]\n      },\n    ),\n    definePipelineStep("
+        }
+      ]
+    }
+  }
+}
