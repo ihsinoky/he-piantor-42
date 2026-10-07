@@ -1,0 +1,525 @@
+{
+  "source_net_count": 13,
+  "required_physical_endpoint_count": 69,
+  "routed_trace_count": 56,
+  "via_count": 55,
+  "electrically_required_unrouted_count": 0,
+  "intentional_nc_count": 25,
+  "unassigned_non_nc_ports": [],
+  "wrong_net_copper_components": [],
+  "unsupported_geometry": [],
+  "invalid_layer_transitions": [],
+  "net_results": [
+    {
+      "nets": [
+        "HALL_5V"
+      ],
+      "required_endpoints": 15,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "GND"
+      ],
+      "required_endpoints": 24,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A0"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A1"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_A2"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "WING_EN"
+      ],
+      "required_endpoints": 4,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_A"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_B"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "MUX_OUT_C"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H0_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H1_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H2_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    },
+    {
+      "nets": [
+        "H3_RAW"
+      ],
+      "required_endpoints": 2,
+      "copper_islands": 1,
+      "disconnected_islands": [],
+      "missing_physical_ports": [],
+      "unrouted_connections": 0
+    }
+  ],
+  "complete": true,
+  "board": {
+    "width_mm": 44,
+    "height_mm": 44,
+    "layers": 2,
+    "thickness_mm": 1.2,
+    "valid": true
+  },
+  "raw_sha256": "d7ba31c830fb041aa58f490cc03c14fde46e48f407c188fdea4abbdf602160dc",
+  "generated_diagnostic_counts": {
+    "pcb_component_missing_courtyard_warning": 5,
+    "pcb_connector_not_in_accessible_orientation_warning": 1,
+    "pcb_placement_error": 18,
+    "source_missing_manufacturer_part_number_warning": 7,
+    "source_no_ground_pin_defined_warning": 4,
+    "source_no_power_pin_defined_warning": 4,
+    "source_refdes_convention_warning": 1
+  },
+  "stock_check_counts": {
+    "pcb_component_missing_courtyard_warning": 5,
+    "pcb_placement_error": 18
+  },
+  "generated_diagnostics": [
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "J_WING has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "J_WING has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_A has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_A has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_B has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_B has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "U_MUX_C has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "U_MUX_C has no pin with requires_ground=true"
+    },
+    {
+      "type": "pcb_connector_not_in_accessible_orientation_warning",
+      "message": "J_WING is inferred to face y- from its cable insertion center because no explicit footprint insertionDirection is defined, but should face y+ so the connector is accessible from the board edge. Set insertionDirection on the <footprint> to specify the actual direction in the footprint's unrotated orientation; for example, <footprint insertionDirection=\"from_above\"> for a connector accessed from above the PCB (+Z)."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#20 name=\".C_HALL0\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#36 name=\".C_HALL1\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#52 name=\".C_HALL2\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#68 name=\".C_HALL3\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#148 name=\".C_MUX_A\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#228 name=\".C_MUX_B\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#308 name=\".C_MUX_C\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "J_WING has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H0 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H1 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H2 has no courtyard"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "message": "U_H3 has no courtyard"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Via hole at (16.84mm, 1.03mm) overlaps SMD pad U_MUX_C.GND at (16.23mm, 0.98mm)"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Via hole at (-11.78mm, 0.98mm) overlaps SMD pad U_MUX_A.GND at (-11.78mm, 0.98mm)"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    }
+  ],
+  "stock_material_diagnostics": [
+    {
+      "type": "pcb_placement_error",
+      "message": "Via hole at (16.84mm, 1.03mm) overlaps SMD pad U_MUX_C.GND at (16.23mm, 0.98mm)"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Via hole at (-11.78mm, 0.98mm) overlaps SMD pad U_MUX_A.GND at (-11.78mm, 0.98mm)"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    },
+    {
+      "type": "pcb_placement_error",
+      "message": "Copper for via unnamed via overlaps a PCB keepout"
+    }
+  ],
+  "result": "FAIL",
+  "generation": {
+    "board": "wing",
+    "strategy": 3,
+    "elapsed_ms": 37769,
+    "timed_out": false,
+    "source_sha256": {
+      "../src/qualification/revm1-routing-proof.tsx": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+      "../src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+      "../src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+      "../src/components/HallKey.tsx": "0241daa3e2640bc870537ba3fa6571868858345f361456d80f73849dad32495c",
+      "../package-lock.json": "dec21cc020344ce8c8a769bd3ec92d99186546034974bcb702fc68f9dd7a455f"
+    },
+    "events": [
+      {
+        "event": "solver:started",
+        "elapsed_ms": 689,
+        "solverName": "LayoutPipelineSolver"
+      },
+      {
+        "event": "autorouting:start",
+        "elapsed_ms": 1431,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      },
+      {
+        "event": "solver:started",
+        "elapsed_ms": 1449,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      },
+      {
+        "event": "phase",
+        "phase": "topologyPlanningSolver",
+        "elapsed_ms": 1700
+      },
+      {
+        "event": "phase",
+        "phase": "nodeDimensionSubdivisionSolver",
+        "elapsed_ms": 2345
+      },
+      {
+        "event": "phase",
+        "phase": "portPointPathingSolver",
+        "elapsed_ms": 2966
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityRouteSolver",
+        "elapsed_ms": 6834
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityForceImproveSolver",
+        "elapsed_ms": 12529
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityRepairSolver",
+        "elapsed_ms": 13373
+      },
+      {
+        "event": "phase",
+        "phase": "highDensityStitchSolver",
+        "elapsed_ms": 16181
+      },
+      {
+        "event": "phase",
+        "phase": "traceSimplificationSolver",
+        "elapsed_ms": 16432
+      },
+      {
+        "event": "phase",
+        "phase": "traceWidthSolver",
+        "elapsed_ms": 17233
+      },
+      {
+        "event": "phase",
+        "phase": "globalDrcForceImproveSolver",
+        "elapsed_ms": 18167
+      },
+      {
+        "event": "phase",
+        "phase": "pipeline9JointDrcRepairSolver",
+        "elapsed_ms": 21105
+      },
+      {
+        "event": "phase",
+        "phase": "effortCleanupSolver",
+        "elapsed_ms": 29831
+      },
+      {
+        "event": "phase",
+        "phase": "lengthMatchingPostProcessingSolver",
+        "elapsed_ms": 35030
+      },
+      {
+        "event": "phase",
+        "phase": "none",
+        "elapsed_ms": 35219
+      },
+      {
+        "event": "autorouting:end",
+        "elapsed_ms": 35406,
+        "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph"
+      }
+    ]
+  },
+  "router_settled": true,
+  "screening_metrics": {
+    "electrically_required_unrouted_count": 0,
+    "wrong_net_copper_components": [],
+    "wrong_net_copper_component_count": 0,
+    "trace_count": 56,
+    "via_count": 55,
+    "pad_pad_errors": 0,
+    "pad_trace_errors": 0,
+    "via_trace_errors": 0,
+    "trace_errors": 0,
+    "autorouter_errors": 0,
+    "placement_routing_created_errors": 18,
+    "keepout_via_errors": 16,
+    "hole_trace_errors": 0,
+    "result": "FAIL"
+  }
+}

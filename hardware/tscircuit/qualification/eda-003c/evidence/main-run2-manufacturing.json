@@ -1,0 +1,7 @@
+{
+  "result": "FAIL",
+  "export_command_exit_code": 0,
+  "verifier_exit_code": 1,
+  "verifier_output": "Traceback (most recent call last):\n  File \"/workspaces/he-piantor-42/hardware/tscircuit/qualification/eda-003c/latest-stock/scripts/verify-revm1-manufacturing.py\", line 61, in <module>\n    assert (segment(pa, pb), (\"C\", (width,))) in copper[layer][0], f\"Missing routed segment: {trace['pcb_trace_id']} {pa} {pb} {layer} {width}\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Missing routed segment: source_net_9_mst1_0 (1.8, 3.4375) (1.8, 3.671562) top 0.2\n",
+  "scope": "Existing segment-survival assertion; later checks not completed; no geometry-loss root cause inferred."
+}
