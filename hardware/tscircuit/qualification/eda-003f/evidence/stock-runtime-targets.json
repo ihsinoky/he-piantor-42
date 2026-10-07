@@ -1,0 +1,20 @@
+{
+  "parse_diagnostics": 0,
+  "functions": [
+    {
+      "start": 1085274,
+      "end": 1086055,
+      "text": "(e,t,n,o,i,r=.035,s=2,a=!1)=>{if(JA(t.rootConnectionName,n.rootConnectionName,i))return!1;const c=YO(t,n),l=t.x-c.x,h=t.y-c.y,d=Math.hypot(l,h),u=t.radius+n.radius+(WA.traceClearance??.1)+ow-d;if(u<=0)return!1;const p=n.end.x-n.start.x,m=n.end.y-n.start.y,g=Math.hypot(p,m),f=t.routeIndex%2==0?1:-1,_=d>KM?l/d:g>KM?-m/g*f:1,y=d>KM?h/d:g>KM?p/g*f:0,b=Math.min(r,u/s),x=a?((e,t,n,o,i)=>{const r=Mk(e,t,i);if(0===r.length||r.some(t=>!t.movable||void 0===e[t.routeIndex]))return!1;const s=r.reduce((e,t)=>t.radius>e.radius?t:e);if(!Pk(e,s,n,o,i))return!1;for(const t of r){if(t===s)continue;t.x=s.x,t.y=s.y;const n=e[t.routeIndex];for(const e of t.pointIndexes){const t=n.route[e];t&&(t.x=s.x,t.y=s.y)}}return!0})(e,t,_*b,y*b,o):wk(e,t,_*b,y*b,o),v=Dk(e,n,-_*b,-y*b,o,c.t);return x||v}"
+    },
+    {
+      "start": 1086059,
+      "end": 1086549,
+      "text": "(e,t,n,o,i)=>{if(t.z!==n.z||JA(t.rootConnectionName,n.rootConnectionName,i))return!1;const r=kk(t,n),s=r.leftPoint.x-r.rightPoint.x,a=r.leftPoint.y-r.rightPoint.y,c=Math.hypot(s,a),l=t.radius+n.radius+(WA.traceClearance??.1)+ow-c;if(l<=0)return!1;const h=t.end.x-t.start.x,d=t.end.y-t.start.y,u=Math.hypot(h,d),p=(t.routeIndex+n.routeIndex)%2==0?1:-1,m=c>KM?s/c:u>KM?-d/u*p:1,g=c>KM?a/c:u>KM?h/u*p:0,f=Math.min(nw,l/2),_=Dk(e,t,m*f,g*f,o,r.leftT),y=Dk(e,n,-m*f,-g*f,o,r.rightT);return _||y}"
+    },
+    {
+      "start": 1843467,
+      "end": 1843943,
+      "text": "e=>{const{routes:t,node:n,vias:o,segments:i}=e;let r=!1;for(let e=0;e<o.length;e+=1){const s=o[e];if(s?.movable)for(const o of i){if(s.rootConnectionName===o.rootConnectionName)continue;const i=yG(s,o),a=s.x-i.x,c=s.y-i.y,l=pG(a,c),h=s.radius+o.traceRadius+.1+DG-l;if(h<=0)continue;const d=o.end.x-o.start.x,u=o.end.y-o.start.y,p=pG(d,u),m=e%2==0?1:-1,g=l>kG?a/l:p>kG?-u/p*m:1,f=l>kG?c/l:p>kG?d/p*m:0,_=Math.min(.04,h);r=dU({routes:t,via:s,dx:g*_,dy:f*_,node:n})||r}}return r}"
+    }
+  ]
+}

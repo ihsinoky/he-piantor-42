@@ -1,0 +1,108 @@
+{
+  "router_settled_completed": true,
+  "electrically_required_unrouted_count": 0,
+  "wrong_net_copper_components": 2,
+  "wrong_net_component_nets": [
+    [
+      [
+        "V3V3"
+      ],
+      [
+        "USB_DM"
+      ],
+      [
+        "USB_DP"
+      ],
+      [
+        "QSPI_SD3"
+      ]
+    ],
+    [
+      [
+        "QSPI_SD0"
+      ],
+      [
+        "QSPI_SD2"
+      ]
+    ]
+  ],
+  "trace_count": 128,
+  "via_count": 128,
+  "material_drc_record_count": 49,
+  "conservative_physical_conflict_count": null,
+  "pad_pad": 3,
+  "pad_trace": 24,
+  "via_trace": 4,
+  "trace_clearance": 16,
+  "via_hole_smd_pad": 2,
+  "signature_0115_count": 0,
+  "minimum_observed_via_trace_clearance_mm": 0.14175727706481514,
+  "via_trace_minima_mm": [
+    {
+      "id": "pcb_via_trace_clearance_error_0",
+      "via": "pcb_via_24",
+      "trace": "source_net_23_0",
+      "gap_mm": 0.18438219825399796
+    },
+    {
+      "id": "pcb_via_trace_clearance_error_1",
+      "via": "pcb_via_24",
+      "trace": "source_net_20_0",
+      "gap_mm": 0.14175727706481514
+    },
+    {
+      "id": "pcb_via_trace_clearance_error_2",
+      "via": "pcb_via_70",
+      "trace": "source_net_16_0",
+      "gap_mm": 0.190453790088182
+    },
+    {
+      "id": "pcb_via_trace_clearance_error_3",
+      "via": "pcb_via_94",
+      "trace": "source_net_3_0",
+      "gap_mm": 0.1920001695786792
+    }
+  ],
+  "raw_sha256": "7c1601b5d6599e76665be70f4ba6f45afe561e8b02994bf41d1c06739d155d1b",
+  "elapsed_ms": 91045,
+  "board_rules": {
+    "type": "pcb_board",
+    "pcb_board_id": "pcb_board_0",
+    "source_board_id": "source_board_0",
+    "subcircuit_id": "subcircuit_source_group_0",
+    "center": {
+      "x": 0,
+      "y": 0
+    },
+    "thickness": 1.2,
+    "num_layers": 2,
+    "width": 48,
+    "height": 44,
+    "material": "fr4",
+    "min_trace_width": 0.2,
+    "min_via_hole_diameter": 0.3,
+    "min_via_pad_diameter": 0.6,
+    "min_via_hole_edge_to_via_hole_edge_clearance": 0.1,
+    "min_trace_to_hole_edge_clearance": 0.2,
+    "min_trace_to_pad_edge_clearance": 0.2,
+    "min_pad_edge_to_pad_edge_clearance": 0.1,
+    "min_plated_hole_drill_edge_to_drill_edge_clearance": 0.15,
+    "min_board_edge_clearance": 0.2
+  },
+  "stock_check_counts": {
+    "pcb_component_missing_courtyard_warning": 9,
+    "pcb_pad_pad_clearance_error": 3,
+    "pcb_pad_trace_clearance_error": 24,
+    "pcb_placement_error": 2,
+    "pcb_trace_error": 16,
+    "pcb_via_trace_clearance_error": 4
+  },
+  "result": "FAIL",
+  "safety_kill_gate": {
+    "first_trigger": "K1",
+    "wrong_net_regression": true,
+    "action": "STOP; no additional routing, patching, physical-conflict comparison or confirmation"
+  },
+  "physical_conflict_count_status": "NOT ENTERED after K1; raw error records are not interchangeable with conservative physical conflicts",
+  "diagnostics_generated_match_stock_replay": true
+}

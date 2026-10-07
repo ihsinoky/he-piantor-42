@@ -1,0 +1,55 @@
+{
+  "issue": 69,
+  "classification": "INTERVENTION_UNSAFE_REGRESSION",
+  "terminal_gate": "K1",
+  "reason": "One predeclared .200 mm via-segment repair target intervention introduced two wrong-net copper components in an otherwise settled route with zero required unrouted connections.",
+  "control_A": "Byte-identical EDA-003C Main and all 54 EDA-003D clusters identical",
+  "effective_A_target_mm": 0.115,
+  "effective_B_target_mm": 0.2,
+  "B_wrong_net_component_nets": [
+    [
+      [
+        "V3V3"
+      ],
+      [
+        "USB_DM"
+      ],
+      [
+        "USB_DP"
+      ],
+      [
+        "QSPI_SD3"
+      ]
+    ],
+    [
+      [
+        "QSPI_SD0"
+      ],
+      [
+        "QSPI_SD2"
+      ]
+    ]
+  ],
+  "raw_DRC_A_B": [
+    71,
+    49
+  ],
+  "signature_A_B": [
+    15,
+    0
+  ],
+  "physical_conflict_A_B": [
+    54,
+    null
+  ],
+  "physical_comparison": "NOT ENTERED after K1 STOP",
+  "confirmation_run": "NOT PERFORMED; unsafe B is not potentially positive",
+  "backend_investment_recommendation": "NO",
+  "next_human_gate_question": "After PMO review of the K1 regression, should PO choose alternate routing architecture/backend evaluation or tscircuit NO-GO?",
+  "production_tscircuit": "0.0.2646",
+  "production_upgrade": false,
+  "permanent_fork": false,
+  "upstream_submission": false,
+  "no_external_router": true,
+  "no_generated_data_edit": true
+}
