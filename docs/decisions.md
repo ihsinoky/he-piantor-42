@@ -357,3 +357,55 @@ exact `WING_EN` pull-down resistor; final placement; PCB routing; representative
 stock-tscircuit routing capability; USB NPTH manufacturing disposition; final
 USB/system power budget; manufacturing release. Planning values do not become
 final production requirements.
+
+
+## D-018 - Bounded alternate physical backend qualification planning
+
+Status: accepted PO planning decision; qualification execution not authorized
+
+The [Issue #71 PO Human Gate comment](https://github.com/ihsinoky/he-piantor-42/issues/71#issuecomment-6046244229)
+on 2026-10-07 approves decision recording, documentation/Dashboard alignment,
+a bounded qualification plan and a draft of the next execution Issue body.
+It approves ending additional product-track exploration of the internal
+tscircuit router evaluated in EDA-003F. The accepted EDA-003F result remains
+**INTERVENTION_UNSAFE_REGRESSION**, terminal **K1**: zero required unrouted,
+but two wrong-net copper components. Neither reduced diagnostic counts nor
+signature disappearance establishes a safe improvement.
+
+Retention of the tscircuit frontend is still being evaluated; it has not been
+abandoned. **Candidate B is the first qualification candidate, not an adopted
+backend**: native TSX -> genuinely unrouted Circuit JSON -> KiCad -> DSN ->
+local headless Freerouting -> SES -> KiCad verification/manufacturing.
+Prefer existing converters and public APIs. No private API, permanent fork,
+large custom interchange implementation or new manufacturing exporter is
+approved. A and C remain comparison candidates, with no automatic fallback.
+
+The first Main evaluation has a **two-workday engineering-effort cap**, including
+preparation, interchange and reconciliation. Permit one initial Main routing
+run and one fresh confirmation only if the first passes. Preserve components,
+connectivity, placement, outline, two copper layers, 1.2 mm thickness and the
+unchanged **0.20 mm material-clearance requirement**. Stop on material transfer
+loss, headless failure, shorts, incomplete routing, targeted physical violations,
+non-reproducibility, excessive adapter work or exceeded budget. Main must pass
+before Wing/export work advances. Candidate/placement changes, retries/tuning
+or exceptions require a new PO decision.
+
+Issue #71 authorizes **documentation and planning only**. Actual qualification
+requires a separate **PO-created execution Issue** and a subsequent **PO
+instruction after its number is confirmed**. Full Rev.M1 implementation,
+backend adoption and ordering remain blocked. CI success cannot pass these
+gates. Existing G0A/G0B decisions remain completed; no Human Gate is reopened
+or newly passed by Codex.
+
+D-014 remains historical electrical authority for the permanent frozen fixture.
+D-015/D-017 Main/Wing architecture and interface, D-016 JITX physical backend
+NO-GO, all historical verdicts and design/evidence bytes remain unchanged.
+Production **tscircuit 0.0.2646** remains pinned. **USB NPTH OPEN — PRE-ORDER
+DFM REVIEW REQUIRED** remains a product risk with no manufacturing exception.
+Production pitch is unselected; final Hall choice, Rev.A cable mechanics,
+exact WING_EN pull-down, final placement/routing and USB/system power remain
+open. This forward planning decision supersedes the old future EDA-003B
+sequence without rewriting D-016/D-017's historical authority.
+
+See the [bounded qualification plan](alternate-physical-backend-qualification-plan.md)
+and [execution Issue body draft](alternate-physical-backend-main-qualification-issue-draft.md).
