@@ -1,0 +1,69 @@
+{
+  "issue": {
+    "issue": {
+      "url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+      "title": "EDA-004B: Qualify representative Main with headless KiCad + Freerouting",
+      "issue_number": 73,
+      "body": "## 目的と承認範囲\n\n候補Bについて、既存representative Mainを正確にKiCadへ変換し、\nlocal headless Freeroutingで完全・安全・再現可能に配線できるか検証する。\n\n根拠:\n- Issue #71のPO判断:\n  https://github.com/ihsinoky/he-piantor-42/issues/71#issuecomment-6046244229\n- merged PR #72 / D-018\n\n本Issueは、以下の詳細条件に従う限定的な検証を対象とする。\n実行はIssue番号確定後のPO指示で開始する。\nbackend採用、full Rev.M1実装、発注は承認しない。\n\n## 詳細条件の正本\n\n次の2文書を、この固定commitの内容で本Issueの作業契約に含める。\n本Issueは、文書内の「次の実行Issue」に該当する。\n\n計画:\nhttps://github.com/ihsinoky/he-piantor-42/blob/20b25914cc7515ab8ba191f5fdcbba6217a37d23/docs/alternate-physical-backend-qualification-plan.md\n\n実行条件:\nhttps://github.com/ihsinoky/he-piantor-42/blob/20b25914cc7515ab8ba191f5fdcbba6217a37d23/docs/alternate-physical-backend-main-qualification-issue-draft.md\n\n詳細条件と本Issueに矛盾があれば、条件を自己判断で緩めず報告する。\n\n## 実行環境と基準\n\n実行場所:\nGitHub Codespaces\n\ncwd:\n/workspaces/he-piantor-42\n\nIssue作成時点のmain:\n20b25914cc7515ab8ba191f5fdcbba6217a37d23\n\n作業ブランチと実行開始HEADは、Issue番号確定後にPO指示で指定する。\n代表Mainの設計基準は、実行checkoutと区別する。\n\n代表Mainの設計基準commit:\nb84585ecc2cf32000285bbf389d9fea255436980\n\n対象:\nhardware/tscircuit/src/qualification/revm1-routing-proof.tsx\nRepresentativeMain strategy={3}\n\n保持する条件:\n- 49 components / 37 named nets\n- 167 required physical endpoints / 30 NC ports\n- strategy-3の配置・回転と48 × 44 mm外形\n- 2-layer / 1.2 mm\n- 0.20 mm material clearance / 0.20 mm trace width\n- 0.60 mm via copper / 0.30 mm drill\n- 既存の局所GND接続と全設計ルール\n\n元ファイルとlockのSHA-256は、詳細条件の正本に従って確認する。\n\n## Scope\n\n候補Bのみを評価する:\n\nnative TSX\n→ genuinely unrouted Circuit JSON\n→ KiCad\n→ DSN\n→ local headless Freerouting\n→ SES\n→ KiCad検査と独立した接続・形状照合\n\n以下の順に進める:\n\n1. 最小のheadless受け渡し確認\n2. representative Mainの正確な変換・電気的意味の確認\n3. 固定条件でMainを1回配線し、検査する\n4. 初回が全条件に合格した場合だけ、fresh環境で1回確認する\n\n環境確認用の小さな試験はMain成立の証拠と扱わない。\n全体移行や製品用CI整備をMain検証より先に始めない。\n\n## 環境固定と実行前記録\n\nqualification専用frontend:\naccepted EDA-003C isolated lock\ntscircuit 0.0.2748 / core 0.0.2097 / props 0.0.689\ncircuit-json 0.0.516 / Bun 1.2.22\n\nKiCad:\n9.0.9\n\nproduction tscircuit 0.0.2646は変更しない。\n\nconverter、Freerouting、Java、Python、Node/npm、ライブラリ、\nOS、インストール方法とchecksumを実行前に記録する。\nlatestやfloating tagだけを固定条件としない。\n\n配線前にrun contractを作成し、hashを記録する:\n- 配線timeout\n- 最大pass数\n- thread数と再現性の確保方法\n- optimizer設定\n- layer、width、via、clearance設定\n- 実行commandと設定ファイル\n\nMainを繰り返し試して設定を選ばない。\n指定バージョンや公開機能が使えなければ、無断で置き換えず停止する。\n\n## 変換と検査の条件\n\n既存の短絡した生成済み配線は入力に使わない。\n隔離したsource copyから、既存routerを無効にして生成する。\n\n論理接続の宣言を保持する。\nUSB_SHELL_BONDは元source由来の正確な局所銅箔として保持する。\n全体の手配線、生成済み配線の手修正は行わない。\n\n部品・pin・net・NC、重複する物理pad、座標・回転、\npad形状、穴・めっき、層、禁止領域、局所接続、ルールを\n各変換境界で照合する。個数一致だけで合格にしない。\n\n元TSXはschematicDisabledである。\n汎用symbolや全端子passiveの回路図でERC合格を主張しない。\n検査に必要な端子属性を確認し、独立したsourceとの接続照合を行う。\n\n既存Circuit JSON verifierを、そのままKiCadの検査器と扱わない。\n限定的な適応を行う場合は、形状対応範囲と故障を注入する検証を\n記録し、正しい結果を出せることを確認してから使う。\n\nKiCad検査と独立した接続・形状照合を併用する。\nrouter自身の完了・検査報告だけで合格にしない。\n\n## 必須合格条件\n\n初回と確認runの両方で:\n- required unrouted = 0\n- wrong-net copper components = 0\n- 対象のmaterial violations = 0\n- unexplained conversion loss = 0\n\n詳細な対象違反・照合条件は正本に従う。\n\nUSB NPTH:\nOPEN — PRE-ORDER DFM REVIEW REQUIREDを維持する。\n\n元形状に由来する違反が見つかった場合も、証拠を残して停止する。\nCodexは検査除外や製造例外を承認しない。\n\n## 予算と停止条件\n\n総上限:\n2作業日相当、最大16 engineer-hours。\n準備、導入、変換、検査器適応、配線、分析、報告を含める。\n\n正本のP0〜P4 checkpointと累積作業時間を記録する。\nAI実行の作業時間と、人の作業時間、無人process経過時間を\n区別して記録し、推定値を実測値として扱わない。\n\nMain配線:\n初回1回。\n全条件合格時だけfresh確認1回。\ntimeout/crash/partial resultも1回として数え、resume/retryしない。\n\n以下では直ちに停止し、最初の失敗の証拠を保存する:\n- 重要情報の変換損失\n- headless実行不可\n- 短絡、未配線、対象の物理違反\n- 再現性不成立\n- 大規模な独自変換器・router内部修正が必要\n- 予算・checkpoint上限超過\n\n配置変更、条件緩和、追加試行、候補A/Cへの変更を自動実行しない。\n必要なら理由を報告し、別のPO判断に戻す。\n\n## Out of scope\n\nWing、製造出力調査、保守性probe、full frontend移行、\n製品用CI整備、候補A/C、router内部修正、private API、\n恒久fork、新規製造exporter、production依存変更、\nupstream contribution、発注。\n\n既存設計、qualification evidence、過去の判断は変更しない。\n\n## 成果物と最終分類\n\n新しい隔離qualificationディレクトリに以下を保存する:\n- preflightと保護ファイルhash\n- 環境・設定・run contract\n- source copyの差分\n- 端子属性と変換対応表\n- raw入力・出力と実行log\n- ERC/DRC、独立照合、検査器の検証結果\n- 工数・checkpoint・実行回数\n- 初回／条件付き確認の比較\n- 最初の停止条件と最終報告\n\n未実施の検査はNOT ENTEREDとし、0件・PASSにしない。\n\n主分類は次のいずれか:\nENVIRONMENT_BLOCKED\nCONVERSION_BLOCKED\nROUTING_BLOCKED\nREPRODUCIBILITY_BLOCKED\nBUDGET_OR_ADAPTER_BLOCKED\nMAIN_PASS\n\nMAIN_PASSは両runと全条件の合格時のみ。\nBLOCKEDも、正しい証拠を残せば完了成果として扱う。\n固定配置の失敗をEDA一般の能力不足と断定しない。\n\n## Validation / PR / Human Gate\n\n詳細条件の正本に従って証拠・hash・検査結果を検証する。\nproject-statusとDashboardを実際の結果に合わせる。\ngit diff --checkと関連CIを確認する。\n\n1 Issue / 1 branch / 1 PR。\n早期Draft PRを作成し、この実際のIssue番号にClosesで紐付ける。\n作業・検証完了後にReady for Reviewにする。\nCodexはmerge、auto-merge、別Issue作成をしない。\n\nPMOが証拠とCIをレビューし、POがmergeと次のHuman Gateを決める。\nMAIN_PASSでもWing、移行、backend採用、発注へ自動で進めない。",
+      "state": "open",
+      "user": {
+        "login": "ihsinoky",
+        "name": "ihsinoky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+        "id": 42207341
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 0,
+      "created_at": "2026-10-07T22:14:02Z",
+      "updated_at": "2026-10-07T22:14:02Z",
+      "closed_at": null,
+      "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+      "display_title": "EDA-004B: Qualify representative Main with headless KiCad + Freerouting"
+    },
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+    "title": "EDA-004B: Qualify representative Main with headless KiCad + Freerouting",
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+    "display_title": "EDA-004B: Qualify representative Main with headless KiCad + Freerouting"
+  },
+  "comments": {
+    "comments": [],
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+    "title": "ihsinoky/he-piantor-42 Issue #73 comments",
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/73",
+    "display_title": "ihsinoky/he-piantor-42 Issue #73 comments"
+  },
+  "po_comment": {
+    "comments": [
+      {
+        "url": "https://github.com/ihsinoky/he-piantor-42/issues/71#issuecomment-6046244229",
+        "body": "PO Human Gate: GO — bounded backend qualificationの計画策定\n\n以下を承認します。\n\n1. EDA-003Fで評価したtscircuit内蔵routerへの追加探索を終了する。\n   tscircuit frontend自体の廃棄は、まだ決定しない。\n\n2. 第一候補B:\n   native TSX → 配線前Circuit JSON → KiCad → DSN\n   → local headless Freerouting → SES → KiCad検査・製造出力\n   を、次のbounded qualification計画の第一候補とする。\n\n3. 最初のMain評価は、準備・接続・照合を含めて2作業日相当を上限とする。\n   Main配線は初回1回、合格時だけ確認1回とする。\n   Issue本文の停止条件と評価境界を承認する。\n\nIssue #71では、この判断の記録、docsとDashboardの整合、\n評価計画、次の実行Issue本文案までを作成する。\n\n評価の実行は、別の実行Issueを私が作成し、\n番号確認後に作業指示を出してから開始する。\n\nこのGOは、backend採用、full Rev.M1実装、製造発注の承認ではない。\nJITX NO-GO、既存設計・evidence、production tscircuit 0.0.2646は維持する。",
+        "user": {
+          "login": "ihsinoky",
+          "name": "ihsinoky",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+          "id": 42207341
+        },
+        "id": 6046244229,
+        "pull_request_review_id": null,
+        "in_reply_to_id": null,
+        "created_at": null,
+        "updated_at": null,
+        "review": null,
+        "side": null,
+        "line": null,
+        "start_line": null,
+        "path": null,
+        "body_html": "<p dir=\"auto\">PO Human Gate: GO — bounded backend qualificationの計画策定</p>\n<p dir=\"auto\">以下を承認します。</p>\n<ol dir=\"auto\">\n<li>\n<p dir=\"auto\">EDA-003Fで評価したtscircuit内蔵routerへの追加探索を終了する。<br>\ntscircuit frontend自体の廃棄は、まだ決定しない。</p>\n</li>\n<li>\n<p dir=\"auto\">第一候補B:<br>\nnative TSX → 配線前Circuit JSON → KiCad → DSN<br>\n→ local headless Freerouting → SES → KiCad検査・製造出力<br>\nを、次のbounded qualification計画の第一候補とする。</p>\n</li>\n<li>\n<p dir=\"auto\">最初のMain評価は、準備・接続・照合を含めて2作業日相当を上限とする。<br>\nMain配線は初回1回、合格時だけ確認1回とする。<br>\nIssue本文の停止条件と評価境界を承認する。</p>\n</li>\n</ol>\n<p dir=\"auto\">Issue #71では、この判断の記録、docsとDashboardの整合、<br>\n評価計画、次の実行Issue本文案までを作成する。</p>\n<p dir=\"auto\">評価の実行は、別の実行Issueを私が作成し、<br>\n番号確認後に作業指示を出してから開始する。</p>\n<p dir=\"auto\">このGOは、backend採用、full Rev.M1実装、製造発注の承認ではない。<br>\nJITX NO-GO、既存設計・evidence、production tscircuit 0.0.2646は維持する。</p>"
+      }
+    ],
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/71",
+    "title": "ihsinoky/he-piantor-42 Issue #71 comments",
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/71",
+    "display_title": "ihsinoky/he-piantor-42 Issue #71 comments"
+  }
+}
