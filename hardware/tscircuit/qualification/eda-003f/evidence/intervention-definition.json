@@ -1,0 +1,76 @@
+{
+  "declared_before_B_patch_and_run": true,
+  "candidate_count": 1,
+  "control_A_validated": true,
+  "package": "@tscircuit/capacity-autorouter 0.0.958",
+  "file": "node_modules/@tscircuit/capacity-autorouter/dist/index.js",
+  "original_sha256": "27a4994f3dc580138a64fbbb73d5f574a7e06dd0f12e7deff6dc5d669dfdd402",
+  "source_map_sha256": "5b266716e1ed5271662a8687888715ea2402cdb0977569c9333c71cb25a9bf66",
+  "A": {
+    "formula": "r_via + r_trace + relaxed_clearance + slack",
+    "relaxed_clearance_mm": 0.1,
+    "slack_mm": 0.015,
+    "effective_material_target_mm": 0.115,
+    "representative_centerline_target_mm": 0.515
+  },
+  "B": {
+    "formula": "r_via + r_trace + 0.185 + slack",
+    "relaxed_clearance_mm": 0.185,
+    "slack_mm": 0.015,
+    "effective_material_target_mm": 0.2,
+    "representative_centerline_target_mm": 0.6
+  },
+  "slack_semantics": "Added to requiredDistance before penetration calculation and movement; intentional positive overshoot beyond the nominal relaxed threshold. Retained as .015. This sets a .20 target, not a guaranteed .20 final result after movement limits/rounding/other stages.",
+  "minimality": "Only via-segment requiredDistance expressions change. Shared RELAXED_TRACE_CLEARANCE / RELAXED_DRC_OPTIONS and trace-trace repair stay unchanged. Local and global live implementations must agree to avoid one stage pulling toward the lower target.",
+  "duplicate_analysis": {
+    "source_map_contains_older_repair04_copy": true,
+    "older_copy_live_in_installed_bundle": false,
+    "evidence": "Bundle AST enumeration finds one global pushViaSegmentPair function Bk and one local projection pU. Joint source imports GlobalDrcBranchPortfolioSolver from top-level high-density-repair03; it shares Bk with global repair. Old repair04 source-map material is not a separate runtime implementation.",
+    "source_map_mapping_limitation": "Installed map has 182678 mapping lines; minified JS has 64 lines. Mappings are not usable to place edits; exact source semantics and installed AST/expression identity are used instead."
+  },
+  "sites": [
+    {
+      "name": "local projectViaSegmentClearance",
+      "source_suffix": "node_modules/high-density-repair01/lib/HighDensityForceImproveSolver.ts",
+      "before": "h=s.radius+o.traceRadius+.1+DG-l",
+      "after": "h=s.radius+o.traceRadius+.185+DG-l",
+      "source_before": "via.radius + segment.traceRadius + RELAXED_TRACE_CLEARANCE + CLEARANCE_SLACK",
+      "source_after": "via.radius + segment.traceRadius + 0.185 + CLEARANCE_SLACK",
+      "compiled_context": "(s.rootConnectionName===o.rootConnectionName)continue;const i=yG(s,o),a=s.x-i.x,c=s.y-i.y,l=pG(a,c),h=s.radius+o.traceRadius+.1+DG-l;if(h<=0)continue;const d=o.end.x-o.start.x,u=o.end.y-o.start.y,p=pG(d,u),m=e%2==0?1:-1,g=l>kG?a/l:p>kG?-u/p*m:1,f=l>kG?c/l:p>kG?d/p*m:0,_=Math.min(.0",
+      "source_map_path": "../node_modules/high-density-repair01/lib/HighDensityForceImproveSolver.ts",
+      "source_sha256": "3e1465801470c5f0bfb3160f97a2547dccd0e437af6c8c74dc1d4708e64a2201",
+      "source_excerpt": "const projectViaSegmentClearance = (params: {\n  routes: HighDensityRoute[]\n  node: NodeWithPortPoints\n  vias: ProjectionViaNode[]\n  segments: ProjectionSegment[]\n}) => {\n  const { routes, node, vias, segments } = params\n  let changed = false\n\n  for (let viaIndex = 0; viaIndex < vias.length; viaIndex += 1) {\n    const via = vias[viaIndex]\n    if (!via?.movable) continue\n\n    for (const segment of segments) {\n      if (via.rootConnectionName === segment.rootConnectionName) continue\n\n      const projection = pointToProjectionSegment(via, segment)\n      const separationX = via.x - projection.x\n      const separationY = via.y - projection.y\n      const distance = getVectorLength(separationX, separationY)\n      const requiredDistance =\n        via.radius +\n        segment.traceRadius +\n        RELAXED_TRACE_CLEARANCE +\n        CLEARANCE_SLACK\n      const penetration = requiredDistance - distance\n      if (penetration <= 0) continue\n\n      const segmentX = segment.end.x - segment.start.x\n      const segmentY = segment.end.y - segment.start.y\n      const normalMagnitude = getVectorLength(segmentX, segmentY)\n      const fallbackSign = viaIndex % 2 === 0 ? 1 : -1\n      const directionX =\n        distance > POSITION_EPSILON\n          ? separationX / distance\n          : normalMagnitude > POSITION_EPSILON\n            ? (-segmentY / normalMagnitude) * fallbackSign\n            : 1\n      const directionY =\n        distance > POSITION_EPSILON\n          ? separationY / distance\n          : normalMagnitude > POSITION_EPSILON\n            ? (segmentX / normalMagnitude) * fallbackSign\n            : 0\n      const move = Math.min(MAX_VIA_MOVE_PER_PASS, penetration)\n\n      changed =\n        applyProjectionViaMove({\n          routes,\n          via,\n          dx: directionX * move,\n          dy: directionY * move,\n          node,\n        }) || changed\n    }\n  }\n\n  return changed\n}\n\nconst applyProjectionRoutePointMove = (params: {\n  routes: HighDensityRoute[]\n  routeIndex: number\n  pointIndex",
+      "original_character_offset": 1843699
+    },
+    {
+      "name": "global pushViaSegmentPair (global and joint Pipeline9 repair)",
+      "source_suffix": "node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "before": "u=t.radius+n.radius+(WA.traceClearance??.1)+ow-d",
+      "after": "u=t.radius+n.radius+.185+ow-d",
+      "source_before": "via.radius + segment.radius + (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) + CLEARANCE_SLACK",
+      "source_after": "via.radius + segment.radius + 0.185 + CLEARANCE_SLACK",
+      "compiled_context": "nnectionName,n.rootConnectionName,i))return!1;const c=YO(t,n),l=t.x-c.x,h=t.y-c.y,d=Math.hypot(l,h),u=t.radius+n.radius+(WA.traceClearance??.1)+ow-d;if(u<=0)return!1;const p=n.end.x-n.start.x,m=n.end.y-n.start.y,g=Math.hypot(p,m),f=t.routeIndex%2==0?1:-1,_=d>KM?l/d:g>KM?-m/g*f:1,y=d>KM?h/d:g>KM?p/",
+      "source_map_path": "../node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "source_sha256": "32b0180c475f4df30c1ccacd335b78d61518a2d14ea653ee76d693d45b32eec3",
+      "source_excerpt": "const pushViaSegmentPair = (\n  routes: MutableRoute[],\n  via: ViaNode,\n  segment: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n  maxMove = BROAD_MAX_MOVE,\n  moveDivisor = 2,\n  translateSharedViaSite = false,\n) => {\n  if (sharesNet(via.rootConnectionName, segment.rootConnectionName, connMap))\n    return false\n\n  const projection = pointToSegmentProjection(via, segment)\n  const separationX = via.x - projection.x\n  const separationY = via.y - projection.y\n  const distance = Math.hypot(separationX, separationY)\n  const requiredDistance =\n    via.radius +\n    segment.radius +\n    (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) +\n    CLEARANCE_SLACK\n  const penetration = requiredDistance - distance\n  if (penetration <= 0) return false\n\n  const segmentX = segment.end.x - segment.start.x\n  const segmentY = segment.end.y - segment.start.y\n  const segmentLength = Math.hypot(segmentX, segmentY)\n  const fallbackSign = via.routeIndex % 2 === 0 ? 1 : -1\n  const directionX =\n    distance > POSITION_EPSILON\n      ? separationX / distance\n      : segmentLength > POSITION_EPSILON\n        ? (-segmentY / segmentLength) * fallbackSign\n        : 1\n  const directionY =\n    distance > POSITION_EPSILON\n      ? separationY / distance\n      : segmentLength > POSITION_EPSILON\n        ? (segmentX / segmentLength) * fallbackSign\n        : 0\n  const move = Math.min(maxMove, penetration / moveDivisor)\n  const movedVia = translateSharedViaSite\n    ? translateSameRootViaSite(\n        routes,\n        via,\n        directionX * move,\n        directionY * move,\n        srj,\n      )\n    : moveVia(routes, via, directionX * move, directionY * move, srj)\n  const movedSegment = moveSegmentByDistribution(\n    routes,\n    segment,\n    -directionX * move,\n    -directionY * move,\n    srj,\n    projection.t,\n  )\n  return movedVia || movedSegment\n}\n\nconst pushSegmentSegmentPair = (\n  routes: MutableRoute[],\n  left: Segment,\n  right: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n) => {\n ",
+      "original_character_offset": 1085418
+    }
+  ],
+  "modified_packages": 1,
+  "modified_runtime_files": 1,
+  "modified_target_expressions": 2,
+  "scope_exclusions": [
+    "TSX",
+    "placement",
+    "board",
+    "nets",
+    "rules",
+    "checkers",
+    "via size",
+    "trace width",
+    "routing strategy",
+    "shared trace-trace target",
+    "generated data"
+  ],
+  "no_parameter_tuning": true
+}

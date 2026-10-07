@@ -1,0 +1,33 @@
+{
+  "intervention_patch_surface": {
+    "installed_packages": 1,
+    "runtime_files": 1,
+    "target_expressions": 2,
+    "logical_source_modules": [
+      "high-density-repair01 HighDensityForceImproveSolver.projectViaSegmentClearance",
+      "high-density-repair03 GlobalDrcForceImproveSolver.pushViaSegmentPair (shared by global/joint Pipeline9 repair)"
+    ],
+    "net_byte_delta": -17,
+    "package": "@tscircuit/capacity-autorouter 0.0.958",
+    "file": "dist/index.js"
+  },
+  "upstream_general": "The via-segment clearance policy is general, but this literal/bundle experiment is not an upstream-ready fix. A general fix would derive the material target from design rules and preserve electrical topology under movement.",
+  "regression_test_feasibility": "Full representative Main/Bun routing regression is feasible (~90 seconds each). Connectivity verifies two new wrong-net components. A small upstream fixture is unqualified; no reduction was attempted.",
+  "fork_maintenance_burden": "High risk despite small edit: minified expression identities change by release, shared targets and source-map dead copies require reinspection, and the intervention is electrically unsafe. Permanent fork unsuitable.",
+  "demonstrated_Main_physical_conflicts_removed": 0,
+  "measured_physical_conflicts_removed": null,
+  "remaining_Main_physical_conflicts": "Accepted A has 54; B count not measured after K1. B still has 49 material DRC records and two new wrong-net components.",
+  "remaining_independent_failure_families": {
+    "pad_pad": 3,
+    "pad_trace": 24,
+    "via_trace": 4,
+    "trace_clearance": 16,
+    "via_hole_smd_pad": 2,
+    "wrong_net_components": 2
+  },
+  "Wing_keepout": "UNRESOLVED; outside scope",
+  "Main_manufacturing_export": "UNRESOLVED; outside scope",
+  "does_result_justify_another_engineering_cycle_on_tscircuit": "NO",
+  "reason": "The final bounded Main-clearance intervention removes the numeric signature but reintroduces the higher-priority electrical failure. Lower raw DRC count cannot justify continuing this backend exploration. Return to alternate routing/backend evaluation or tscircuit NO-GO at Human Gate.",
+  "further_router_work_performed": false
+}
