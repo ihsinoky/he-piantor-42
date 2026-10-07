@@ -1,0 +1,42 @@
+{
+  "raw_error_record_count": 71,
+  "independent_physical_fault_count": 54,
+  "count_caveat": "Conservative local conflict components with proved merges; finite convex feasibility search can leave an unresolved merge. The 37 distinct net/NC pairs are an independent lower bound regardless of such merges.",
+  "independent_net_pair_lower_bound": 37,
+  "candidate_root_cause_family_count": 5,
+  "dominant_cluster": {
+    "cluster_id": "C012",
+    "raw_records": 6,
+    "percent": 8.450704225352112
+  },
+  "top_three_clusters": {
+    "cluster_ids": [
+      "C012",
+      "C006",
+      "C009"
+    ],
+    "raw_records": 14,
+    "percent": 19.718309859154928
+  },
+  "largest_candidate_symptom_family": {
+    "family_id": "F3",
+    "raw_records": 32,
+    "percent": 45.070422535211264,
+    "causal_explanation_proven": false
+  },
+  "stage_1": "BROAD / DISTRIBUTED",
+  "representative_reproducer_status": "NOT ENTERED: Stage 1 STOP",
+  "root_cause_localization_confidence": "LOW: final material geometry is proved; earliest internal boundary unknown",
+  "likely_repositories": "UNKNOWN; possible responsibility candidates are tscircuit/core, tscircuit/capacity-autorouter, tscircuit/checks; not a claim all need changes",
+  "likely_modules_files": "UNKNOWN: no solver-stage or conversion boundary captured in accepted evidence",
+  "regression_test_feasibility": "Full retained board/check replay feasible; isolated stock-routing regression unqualified",
+  "expected_upstream_suitability": "UNKNOWN until a bounded cause and stable stock-routing reduction exist",
+  "repair_size_band": "UNKNOWN",
+  "temporary_fork_patch_size": "UNKNOWN: no patch exists",
+  "temporary_fork_maintenance": "UNKNOWN; no narrow maintenance boundary established",
+  "hidden_additional_fault_risk": "SUBSTANTIAL: 37 net/NC pairs and several diagnostics hide multiple local regions; this is not exhaustive new DRC",
+  "geometry_stability": "Accepted EDA-003C two fresh processes have byte-identical Main geometry",
+  "value_of_another_cycle": "Not justified within this Kill Gate. Repeated 0.115 mm via spacing is a useful lead if the PO explicitly authorizes a separate bounded cycle; it does not qualify an overall repair.",
+  "decision": "STOP",
+  "final_classification": "BACKEND_DECISION_REQUIRED"
+}
