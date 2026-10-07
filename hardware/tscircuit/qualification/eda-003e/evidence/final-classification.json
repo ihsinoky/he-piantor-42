@@ -1,0 +1,29 @@
+{
+  "issue": 67,
+  "classification": "BACKEND_DECISION_REQUIRED",
+  "reason": "Strong source-supported numeric lead, but no demonstrated single originating failure or qualified stable small stock-routing reproducer; repair responsibility remains uncertain across routing and repair stages.",
+  "common_cause_confidence": "LOW for single defect; HIGH shared target correlation",
+  "numeric_relationship": ".10 + .015 = .115 mm; .30 + .10 + .115 = .515 mm centerline distance",
+  "earliest_failure_boundary": "Raw highDensityRouteSolver owner/trace candidates already fail .20 in three selected cases; exact final target for these three emerges at joint repair output. No one common originating defect localized.",
+  "minimal_reproducer": "NOT ENTERED: localization prerequisite unmet at cost STOP",
+  "upstream_comparison": "NOT ENTERED",
+  "proof_of_fix": "NOT ENTERED",
+  "repair_size": "UNKNOWN",
+  "regression_quality": "Analysis geometry tests and selected final-board check replay; no routing regression for a repair",
+  "upstream_viability": "UNQUALIFIED",
+  "temporary_fork_viability": "UNQUALIFIED",
+  "maintenance_burden": "UNKNOWN",
+  "coverage": {
+    "demonstrated_fixed_conflicts": 0,
+    "selected_population_clusters": 16,
+    "all_main_clusters": 54,
+    "selected_population_percent": 29.62962962962963,
+    "caveat": "29.63% is selected population scope, not promised fix coverage. Some selected clusters contain independent non-signature records; no evidence even all 16 would be cleared."
+  },
+  "remaining_independent_risks": "Other via/trace clearances, MCU pad/trace and inter-route faults, same-net SMD drill intrusion and NC-pad clearance remain; accepted Wing keepout and Main export blockers remain outside scope.",
+  "next_human_gate_question": "After PMO review, should PO choose alternate router/backend evaluation or tscircuit NO-GO, or explicitly authorize another bounded callback-attribution/reduction cycle for the relaxed .115 mm repair target?",
+  "production_tscircuit": "0.0.2646",
+  "production_upgrade": false,
+  "upstream_submission": false,
+  "permanent_fork": false
+}

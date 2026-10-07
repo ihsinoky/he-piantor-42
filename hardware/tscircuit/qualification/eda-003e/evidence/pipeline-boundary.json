@@ -1,0 +1,1033 @@
+{
+  "method": "One stock process; public Pipeline9 _step wrapper records outputs without changing arguments/results. Unchanged TSX transpiled with installed TypeScript to Node in /tmp; no dependency files edited.",
+  "capture_command": "node capture-pipeline.mjs /tmp/eda003e-capture; node /tmp/eda003e-capture/run.mjs; python3 collect-boundary.py /tmp/eda003e-capture /tmp/eda003e-source",
+  "lineage_caveat": "Before stitching, select closest via to accepted final position within exact owner connectionName, and closest same-layer segment within exact conflicting connectionName. This is a lineage candidate, not a proved one-to-one via ancestry across topology changes.",
+  "source_board_rule": {
+    "type": "pcb_board",
+    "pcb_board_id": "pcb_board_0",
+    "source_board_id": "source_board_0",
+    "subcircuit_id": "subcircuit_source_group_0",
+    "center": {
+      "x": 0,
+      "y": 0
+    },
+    "thickness": 1.2,
+    "num_layers": 2,
+    "width": 48,
+    "height": 44,
+    "material": "fr4",
+    "min_trace_width": 0.2,
+    "min_via_hole_diameter": 0.3,
+    "min_via_pad_diameter": 0.6,
+    "min_via_hole_edge_to_via_hole_edge_clearance": 0.1,
+    "min_trace_to_hole_edge_clearance": 0.2,
+    "min_trace_to_pad_edge_clearance": 0.2,
+    "min_pad_edge_to_pad_edge_clearance": 0.1,
+    "min_plated_hole_drill_edge_to_drill_edge_clearance": 0.15,
+    "min_board_edge_clearance": 0.2
+  },
+  "solver_input_rules": {
+    "layerCount": 2,
+    "allowBlindAndBuriedVias": false,
+    "minTraceWidth": 0.2,
+    "minViaDiameter": 0.6,
+    "minViaHoleDiameter": 0.3,
+    "minViaPadDiameter": 0.6,
+    "min_via_hole_diameter": 0.3,
+    "min_via_pad_diameter": 0.6,
+    "minTraceToPadEdgeClearance": 0.2,
+    "minTraceToHoleEdgeClearance": 0.2,
+    "minViaHoleEdgeToViaHoleEdgeClearance": 0.1,
+    "minPlatedHoleDrillEdgeToDrillEdgeClearance": 0.15,
+    "minPadEdgeToPadEdgeClearance": 0.1,
+    "minBoardEdgeClearance": 0.2,
+    "nominalTraceWidth": 0.2
+  },
+  "obstacle_creation": {
+    "input_obstacle_count": 206,
+    "signature_vias_and_traces_present": false,
+    "reason": "Selected vias/traces are generated; they are absent as finished copper in initial input.",
+    "via_location": null,
+    "trace_geometry": null
+  },
+  "obstacle_inflation": {
+    "stock_pipeline_margin_mm": 0.15,
+    "evidence": "Pipeline9 highDensityRouteSolver receives cms.srj.defaultObstacleMargin ?? 0.15; captured original input omits defaultObstacleMargin. Effective per-case inflated geometry was not captured.",
+    "effective_radius_mm": null,
+    "violation_present": null
+  },
+  "observations": [
+    {
+      "phase": "highDensityRouteSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.107317073170726,
+        1.5377615062761514
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.31219512195122,
+        2.1452928870292896
+      ],
+      "trace_b_mm": [
+        -20.31219512195122,
+        2.0440376569037664
+      ],
+      "trace_width_mm": 0.1,
+      "layer": "top",
+      "gap_mm": 0.19615982602752624,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.036148291705446874
+    },
+    {
+      "phase": "highDensityRouteSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.5724999999999993,
+        6.250574712643679
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.675,
+        5.844137931034482
+      ],
+      "trace_b_mm": [
+        -3.5724999999999993,
+        5.844137931034482
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": 0.006436781609196279,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.061556582711124956
+    },
+    {
+      "phase": "highDensityRouteSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        17.932407407407407,
+        -5.621238938053099
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15.675,
+        -6.2194690265486745
+      ],
+      "trace_b_mm": [
+        18.325,
+        -6.2194690265486745
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.19823008849557536,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.13118972082589445
+    },
+    {
+      "phase": "highDensityForceImproveSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.625,
+        1.664
+      ],
+      "trace_b_mm": [
+        -20.637,
+        1.417
+      ],
+      "trace_width_mm": 0.1,
+      "layer": "top",
+      "gap_mm": 0.1566291727222333,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "highDensityForceImproveSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.463,
+        6.189
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_b_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08499634315756602,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18702217772793076
+    },
+    {
+      "phase": "highDensityForceImproveSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.058,
+        -5.674
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15.685,
+        -6.178
+      ],
+      "trace_b_mm": [
+        18.319,
+        -6.19
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11480559147243721,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.014000734187543527
+    },
+    {
+      "phase": "highDensityRepairSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.625,
+        1.664
+      ],
+      "trace_b_mm": [
+        -20.637,
+        1.417
+      ],
+      "trace_width_mm": 0.1,
+      "layer": "top",
+      "gap_mm": 0.1566291727222333,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "highDensityRepairSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.4626574823751,
+        6.1888246508453735
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_b_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08500000000000027,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18740695075334837
+    },
+    {
+      "phase": "highDensityRepairSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.6738044037365105
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15.685,
+        -6.178
+      ],
+      "trace_b_mm": [
+        18.319,
+        -6.19
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11500000000000046,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.013802718628633137
+    },
+    {
+      "phase": "highDensityStitchSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.625,
+        1.664
+      ],
+      "trace_b_mm": [
+        -20.637,
+        1.417
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.1066291727222333,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "highDensityStitchSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.4626574823751,
+        6.1888246508453735
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_b_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08500000000000027,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18740695075334837
+    },
+    {
+      "phase": "highDensityStitchSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.6738044037365105
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15.685,
+        -6.178
+      ],
+      "trace_b_mm": [
+        18.319,
+        -6.19
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11500000000000046,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.013802718628633137
+    },
+    {
+      "phase": "traceSimplificationSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.60657310574563,
+        1.8070313368361266
+      ],
+      "trace_b_mm": [
+        -20.60657310574563,
+        0.734187883989051
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.0845731057456284,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "traceSimplificationSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.4626574823751,
+        6.1888246508453735
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_b_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08500000000000027,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18740695075334837
+    },
+    {
+      "phase": "traceSimplificationSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.6738044037365105
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.10119559626348931,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.013802718628633137
+    },
+    {
+      "phase": "traceWidthSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.60657310574563,
+        1.8070313368361266
+      ],
+      "trace_b_mm": [
+        -20.60657310574563,
+        0.734187883989051
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.0845731057456284,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "traceWidthSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.4626574823751,
+        6.1888246508453735
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_b_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08500000000000027,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18740695075334837
+    },
+    {
+      "phase": "traceWidthSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.6738044037365105
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.10119559626348931,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.013802718628633137
+    },
+    {
+      "phase": "globalDrcForceImproveSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.122,
+        1.577
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.60657310574563,
+        1.8070313368361266
+      ],
+      "trace_b_mm": [
+        -20.60657310574563,
+        0.734187883989051
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.0845731057456284,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.020024223042918707
+    },
+    {
+      "phase": "globalDrcForceImproveSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.4626574823751,
+        6.1888246508453735
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.73,
+        5.799
+      ],
+      "trace_b_mm": [
+        -3.6037030381293755,
+        5.907166788888766
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": -0.08500000000000027,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.18740695075334837
+    },
+    {
+      "phase": "globalDrcForceImproveSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.6738044037365105
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.10119559626348931,
+      "violates_020": true,
+      "near_signature": false,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.013802718628633137
+    },
+    {
+      "phase": "pipeline9JointDrcRepairSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.10227411674614,
+        1.57355630455358
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.619286612159126,
+        1.807017551455632
+      ],
+      "trace_b_mm": [
+        -20.610121181982755,
+        0.7341833877983711
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.1149991971716228,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    },
+    {
+      "phase": "pipeline9JointDrcRepairSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.628597121706407,
+        6.275918860120527
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.0870690266526695,
+        6.075846281856731
+      ],
+      "trace_b_mm": [
+        -3.217490800989209,
+        5.965985702414065
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": 0.11484654915764006,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 1.3322676295501878e-15
+    },
+    {
+      "phase": "pipeline9JointDrcRepairSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.660001685107877
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11499831489212245,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    },
+    {
+      "phase": "effortCleanupSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.10227411674614,
+        1.57355630455358
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.619286612159126,
+        1.807017551455632
+      ],
+      "trace_b_mm": [
+        -20.610121181982755,
+        0.7341833877983711
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.1149991971716228,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    },
+    {
+      "phase": "effortCleanupSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.628597121706407,
+        6.275918860120527
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.0870690266526695,
+        6.075846281856731
+      ],
+      "trace_b_mm": [
+        -3.217490800989209,
+        5.965985702414065
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": 0.11484654915764006,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 1.3322676295501878e-15
+    },
+    {
+      "phase": "effortCleanupSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.660001685107877
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11499831489212245,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    },
+    {
+      "phase": "lengthMatchingPostProcessingSolver",
+      "record_id": "R039",
+      "via_center_mm": [
+        -20.10227411674614,
+        1.57355630455358
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -20.619286612159126,
+        1.807017551455632
+      ],
+      "trace_b_mm": [
+        -20.610121181982755,
+        0.7341833877983711
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.1149991971716228,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    },
+    {
+      "phase": "lengthMatchingPostProcessingSolver",
+      "record_id": "R044",
+      "via_center_mm": [
+        -3.628597121706407,
+        6.275918860120527
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        -3.0870690266526695,
+        6.075846281856731
+      ],
+      "trace_b_mm": [
+        -3.217490800989209,
+        5.965985702414065
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "bottom",
+      "gap_mm": 0.11484654915764006,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 1.3322676295501878e-15
+    },
+    {
+      "phase": "lengthMatchingPostProcessingSolver",
+      "record_id": "R055",
+      "via_center_mm": [
+        18.05773973480598,
+        -5.660001685107877
+      ],
+      "via_diameter_mm": 0.6,
+      "via_radius_mm": 0.3,
+      "trace_a_mm": [
+        15,
+        -6.175
+      ],
+      "trace_b_mm": [
+        19,
+        -6.175
+      ],
+      "trace_width_mm": 0.2,
+      "layer": "top",
+      "gap_mm": 0.11499831489212245,
+      "violates_020": true,
+      "near_signature": true,
+      "effective_target_radius_mm": null,
+      "position_delta_from_final_mm": 0.0
+    }
+  ],
+  "selected_final_comparison": [
+    {
+      "record_id": "R039",
+      "captured_gap_mm": 0.1149991971716228,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 0.0
+    },
+    {
+      "record_id": "R041",
+      "captured_gap_mm": 0.11499949585130056,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 0.0
+    },
+    {
+      "record_id": "R043",
+      "captured_gap_mm": 0.11499532648708036,
+      "accepted_gap_delta_mm": -1.9984014443252818e-15,
+      "via_position_delta_mm": 2.3914935841127266e-15
+    },
+    {
+      "record_id": "R044",
+      "captured_gap_mm": 0.11484654915764006,
+      "accepted_gap_delta_mm": -2.220446049250313e-16,
+      "via_position_delta_mm": 1.3322676295501878e-15
+    },
+    {
+      "record_id": "R046",
+      "captured_gap_mm": 0.11488774917044989,
+      "accepted_gap_delta_mm": -4.440892098500626e-16,
+      "via_position_delta_mm": 1.3322676295501878e-15
+    },
+    {
+      "record_id": "R048",
+      "captured_gap_mm": 0.11499694246497608,
+      "accepted_gap_delta_mm": 3.3306690738754696e-16,
+      "via_position_delta_mm": 9.930136612989092e-16
+    },
+    {
+      "record_id": "R049",
+      "captured_gap_mm": 0.11496738867428305,
+      "accepted_gap_delta_mm": 4.440892098500626e-16,
+      "via_position_delta_mm": 1.7763568394002505e-15
+    },
+    {
+      "record_id": "R055",
+      "captured_gap_mm": 0.11499831489212245,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 0.0
+    },
+    {
+      "record_id": "R056",
+      "captured_gap_mm": 0.11499865215124452,
+      "accepted_gap_delta_mm": -1.1102230246251565e-16,
+      "via_position_delta_mm": 2.094764613337708e-15
+    },
+    {
+      "record_id": "R058",
+      "captured_gap_mm": 0.11499890478095745,
+      "accepted_gap_delta_mm": 8.881784197001252e-16,
+      "via_position_delta_mm": 3.972054645195637e-15
+    },
+    {
+      "record_id": "R061",
+      "captured_gap_mm": 0.11499809832250776,
+      "accepted_gap_delta_mm": 6.661338147750939e-16,
+      "via_position_delta_mm": 2.220446049250313e-16
+    },
+    {
+      "record_id": "R065",
+      "captured_gap_mm": 0.11499893676642972,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 0.0
+    },
+    {
+      "record_id": "R067",
+      "captured_gap_mm": 0.11499789850863831,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 0.0
+    },
+    {
+      "record_id": "R068",
+      "captured_gap_mm": 0.11494428773037627,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 1.790180836524724e-15
+    },
+    {
+      "record_id": "R070",
+      "captured_gap_mm": 0.11500000000000069,
+      "accepted_gap_delta_mm": 0.0,
+      "via_position_delta_mm": 1.2560739669470201e-15
+    }
+  ],
+  "conversion": {
+    "signature_spacing_preserved": true,
+    "selected_via_copper_diameter_mm": 0.6,
+    "selected_trace_width_mm": 0.2,
+    "earliest_proven_final_signature_boundary": "pipeline9JointDrcRepairSolver output for three selected cases; R055 also has near-signature at earlier local force output",
+    "source": "Captured HD output and material Circuit JSON comparisons"
+  },
+  "checker": {
+    "package": "@tscircuit/checks 0.0.241",
+    "function": "checkViaTraceClearance",
+    "rule": "min_trace_to_pad_edge_clearance",
+    "rule_mm": 0.2,
+    "uses_copper_outer_radius": true
+  },
+  "earliest_observed_invalid_boundary": "highDensityRouteSolver output for three owner/trace lineage candidates; common causal boundary UNKNOWN",
+  "comparability": {
+    "entire_generated_json_byte_identical": false,
+    "all_15_selected_final_minima_match_tolerance_mm": 1e-10,
+    "all_selected_via_centers_match_tolerance_mm": 1e-10,
+    "note": "Node observation run is not the accepted Bun qualification. It has changes outside the selected population; no board-wide determinism or new qualification claim."
+  },
+  "snapshot_hashes": {
+    "availableSegmentPointSolver.json": "4c6fc8526c6d1a409d105902c994a9738bc8535ab7fbfe4dee4f9ecf253bb190",
+    "circuit.json": "9fe2a3108d7b45dd49702299b4986b3757586b8df3123100164691a9783061e2",
+    "componentDetectionSolver.json": "bc99b8a743e07827154ee8ac11e08021d70745a73b82b28651222cab96ba23e0",
+    "edgeSolver.json": "8c1a75aec0d006e21b7dd01bbe760d16f408a4659fba6e8846ad1751208e33fd",
+    "effortCleanupSolver.json": "8c6f68f3c6a93a62b37000278716540037f461e47d8d21d2f15ac9e0d0c83a64",
+    "escapeViaLocationSolver.json": "ce262205a7c16e090298ded33f20b4fe1f706f5f0c03ffa04f5f8a8e7113ee70",
+    "globalDrcForceImproveSolver.json": "740c97617b8a46a7bc4ae366d2ad56cbb22fc183499c87985554d88f8dab9e48",
+    "highDensityForceImproveSolver.json": "e3f169f65af23233d8a7a3acb33259c5a6d2312ccbb45a760fd0a5b9e8dfdcd6",
+    "highDensityRepairSolver.json": "7ced4ef66aa0abbff4c66645600e01654cc93c3be48bf0537572e1590ea5cdf0",
+    "highDensityRouteSolver.json": "d412e6dc50956e4154d26de3619ea0edd0d8fecfcf030e624336ab895ea2462c",
+    "highDensityStitchSolver.json": "e7d1a1187fdda2ca938eb931607435c045913ad39d31a46a514eb8567dbcbc15",
+    "input.json": "2c1d1d2856c15445e093cd70fc8bd277ab98bb08d2e91d8edaa33018183cb0f3",
+    "lengthMatchingPostProcessingSolver.json": "14f1ea1b756df4be07fc2f36f9d77ef4bcf525a8426361ac2b61fe2482834325",
+    "mutatedPreloadedTraceSimplificationSolver.json": "f73fbd16db5127e705bc73c77033189bc15cb7c9fccb5c35f4d6019ab28e5bd2",
+    "necessaryCrampedPortPointSolver.json": "921a2603034692fe22a00b99a0767d89febbb132e2a8a39d1fc53b8d32a68c5d",
+    "netToPointPairsSolver.json": "501af924f2d99758ad039b934e0675e6dfe5b810cbddd057eefe00923f2e6040",
+    "nodeDimensionSubdivisionSolver.json": "00a25ed957ac33bbaf6e48c5b6e3c5df55b4a91bbfe717adba5b96130eec291b",
+    "package.json": "6dc1b06d6b093e9cccb20bee06a93836eee0420ae26803ca2ce4065d82f070d1",
+    "pipeline9JointDrcRepairSolver.json": "7d9f083d8e8af5b445013f012671fd981ee250de052e06d9480fba2a3d58b63e",
+    "portPointPathingSolver.json": "c3f85bdf2ca78c315b5c0b8ec6358ae1cd647490a889baf251872370fdf47651",
+    "powerTraceExpansionSolver.json": "3121b751d68f71bb58a58003e48cf3add05d073295461effd3e28ca903b1a134",
+    "preloadedTraceGraphSolver.json": "8291ee20f6409c1d92c1e9e36c669e9b124ff6e954d63090236fa0524340f27b",
+    "preprocessSimpleRouteJsonSolver.json": "5cab5506766f5a55f185db942d0081d05e34f4ea19bd94a5f2949bb772714534",
+    "solver-output.json": "61e9a9a33c6a408de959228a12720d21e0ca0d1ec1dc28dcdf0c9bf0d2a38169",
+    "topologyMergingSolver.json": "0177595d48d12044cae74a64eab3f8af0f9c275ac1f0072c2df2153fd5227a98",
+    "topologyPlanningSolver.json": "8ce55d3bcc50ad5bfa7760061cf66eb8f641d93add6c5ab32b033f9fe6b16faf",
+    "traceSimplificationSolver.json": "0933c0c558db8fe1d7ab95e56d260fa97e1a6dc5a67ebf7b306e2b86ee58497f",
+    "traceWidthSolver.json": "b626810341c487a1efc21757088e5e93153992e4bac47b867103d8031d38b60c",
+    "uniformPortDistributionSolver.json": "9fa5f3354302bc0783be0abd1b7e389bd83c7b7f2698b70e940632413478b2dc"
+  },
+  "sources": {
+    "local_projection": {
+      "source_map_path": "deps/node_modules/high-density-repair01/lib/HighDensityForceImproveSolver.ts",
+      "sha256": "3e1465801470c5f0bfb3160f97a2547dccd0e437af6c8c74dc1d4708e64a2201",
+      "excerpts": [
+        {
+          "start_line": 190,
+          "text": "const COORDINATE_MATCH_EPSILON = 1e-3\nconst BOUNDARY_INSET = 1 / ROUNDING_PRECISION\nconst RELAXED_VIA_CLEARANCE = 0.1\nconst RELAXED_TRACE_CLEARANCE = 0.1\nconst CLEARANCE_SLACK = 0.015\nconst VIA_PROJECTION_PASSES = 10\nconst MAX_VIA_MOVE_PER_PASS = 0.04\nconst MAX_TRACE_MOVE_PER_PASS = 0.025\n\nconst roundCoordinate = (value: number) =>\n  Math.round(value * ROUNDING_PRECISION) / ROUNDING_PRECISION"
+        },
+        {
+          "start_line": 1019,
+          "text": "const projectViaSegmentClearance = (params: {\n  routes: HighDensityRoute[]\n  node: NodeWithPortPoints\n  vias: ProjectionViaNode[]\n  segments: ProjectionSegment[]\n}) => {\n  const { routes, node, vias, segments } = params\n  let changed = false\n\n  for (let viaIndex = 0; viaIndex < vias.length; viaIndex += 1) {\n    const via = vias[viaIndex]\n    if (!via?.movable) continue\n\n    for (const segment of segments) {\n      if (via.rootConnectionName === segment.rootConnectionName) continue\n\n      const projection = pointToProjectionSegment(via, segment)\n      const separationX = via.x - projection.x\n      const separationY = via.y - projection.y\n      const distance = getVectorLength(separationX, separationY)\n      const requiredDistance =\n        via.radius +\n        segment.traceRadius +\n        RELAXED_TRACE_CLEARANCE +\n        CLEARANCE_SLACK\n      const penetration = requiredDistance - distance\n      if (penetration <= 0) continue\n\n      const segmentX = segment.end.x - segment.start.x"
+        }
+      ]
+    },
+    "global_projection": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "sha256": "32b0180c475f4df30c1ccacd335b78d61518a2d14ea653ee76d693d45b32eec3",
+      "excerpts": [
+        {
+          "start_line": 2580,
+          "text": "const pushViaSegmentPair = (\n  routes: MutableRoute[],\n  via: ViaNode,\n  segment: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n  maxMove = BROAD_MAX_MOVE,\n  moveDivisor = 2,\n  translateSharedViaSite = false,\n) => {\n  if (sharesNet(via.rootConnectionName, segment.rootConnectionName, connMap))\n    return false\n\n  const projection = pointToSegmentProjection(via, segment)\n  const separationX = via.x - projection.x\n  const separationY = via.y - projection.y\n  const distance = Math.hypot(separationX, separationY)\n  const requiredDistance =\n    via.radius +\n    segment.radius +\n    (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) +\n    CLEARANCE_SLACK\n  const penetration = requiredDistance - distance\n  if (penetration <= 0) return false\n"
+        }
+      ]
+    },
+    "global_config": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverConfig.ts",
+      "sha256": "aa75848eecdd7dbfd61188421efd42c62921c88bde4d5fe15631c982ba2de9ce",
+      "excerpts": [
+        {
+          "start_line": 13,
+          "text": "export const POSITION_EPSILON = 1e-6\nexport const COORDINATE_EPSILON = 1e-3\nexport const MAX_ERROR_MOVE = 0.14\nexport const BROAD_FORCE_PASSES = 12\nexport const EXTENDED_BROAD_FORCE_PASS_MULTIPLIER = 2\nexport const BROAD_MAX_MOVE = 0.035\nexport const BROAD_FALLBACK_SMALL_ROUTE_LIMIT = 120\nexport const MIN_ITERATIONS_FOR_LARGE_BOARD_BROAD_FALLBACK = 192\nexport const CLEARANCE_SLACK = 0.015\nexport const VIA_PAIR_REPAIR_MAX_MOVE = 0.16\nexport const TRACE_PAD_REPAIR_MAX_MOVE = 0.3\nexport const PREFERRED_TRACE_TO_PAD_CLEARANCE = 0.16\nexport const PREFERRED_VIA_TO_PAD_CLEARANCE = 0.1\nexport const getTraceToPadEdgeClearance = (srj: SimpleRouteJson) =>\n  srj.minTraceToPadEdgeClearance ?? PREFERRED_TRACE_TO_PAD_CLEARANCE\nexport const getViaEdgeToPadEdgeClearance = (srj: SimpleRouteJson) =>\n  srj.minViaEdgeToPadEdgeClearance ?? PREFERRED_VIA_TO_PAD_CLEARANCE"
+        }
+      ]
+    },
+    "global_preset": {
+      "source_map_path": "deps/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/drcPresets.ts",
+      "sha256": "28676dfc06a0ce9c31139d7e5745d872c8d27fe0c5f3972360a4fd1ce73518bf",
+      "excerpts": [
+        {
+          "start_line": 1,
+          "text": "import type { GetDrcErrorsOptions } from \"./getDrcErrors\"\nimport { MIN_VIA_TO_VIA_CLEARANCE } from \"./getDrcErrors\"\n\nexport const RELAXED_DRC_OPTIONS: GetDrcErrorsOptions = {\n  traceClearance: 0.1,\n  viaClearance: MIN_VIA_TO_VIA_CLEARANCE,\n}"
+        }
+      ]
+    },
+    "joint_projection": {
+      "source_map_path": "deps/node_modules/@tscircuit/repair04/node_modules/high-density-repair03/lib/solvers/GlobalDrcForceImproveSolver/solverHelpers.ts",
+      "sha256": "e94cf39d674b2cd68317823e171cfde8b313f18458a02cb8bae992c15c05d8d1",
+      "excerpts": [
+        {
+          "start_line": 2548,
+          "text": "const pushViaSegmentPair = (\n  routes: MutableRoute[],\n  via: ViaNode,\n  segment: Segment,\n  srj: SimpleRouteJson,\n  connMap?: ConnectivityMap,\n  maxMove = BROAD_MAX_MOVE,\n  moveDivisor = 2,\n  translateSharedViaSite = false,\n) => {\n  if (sharesNet(via.rootConnectionName, segment.rootConnectionName, connMap))\n    return false\n\n  const projection = pointToSegmentProjection(via, segment)\n  const separationX = via.x - projection.x\n  const separationY = via.y - projection.y\n  const distance = Math.hypot(separationX, separationY)\n  const requiredDistance =\n    via.radius +\n    segment.radius +\n    (RELAXED_DRC_OPTIONS.traceClearance ?? 0.1) +\n    CLEARANCE_SLACK\n  const penetration = requiredDistance - distance\n  if (penetration <= 0) return false\n\n  const segmentX = segment.end.x - segment.start.x"
+        }
+      ]
+    },
+    "pipeline": {
+      "source_map_path": "lib/autorouter-pipelines/AutoroutingPipeline9_PreloadedTraceGraph/AutoroutingPipelineSolver9_PreloadedTraceGraph.ts",
+      "sha256": "5d457af3c7899e5cd754539ac445bf9dd75b2309b1a5dbca03d65e0f01c27041",
+      "excerpts": [
+        {
+          "start_line": 625,
+          "text": "              minBoardEdgeClearance: cms.originalSrj.minBoardEdgeClearance,\n            },\n            fixedHdRoutes,\n            connMap: cms.connMap,\n            colorMap: cms.colorMap,\n            obstacles: cms.srj.obstacles,\n            layerCount: cms.srj.layerCount,\n            allowBlindAndBuriedVias: cms.srj.allowBlindAndBuriedVias,\n            viaDiameter: cms.viaDiameter,\n            traceWidth: cms.minTraceWidth,\n            obstacleMargin: cms.srj.defaultObstacleMargin ?? 0.15,\n            viaToPadClearance: cms.srj.minViaEdgeToPadEdgeClearance,\n            effort: Math.min(1, cms.effort),\n            includeBoardObstacles: true,\n            nodePfById: portPointPathingSolver.computeNodePfMap(),\n            preserveTerminalPcbPortIds: true,"
+        },
+        {
+          "start_line": 645,
+          "text": "    definePipelineStep(\n      \"highDensityForceImproveSolver\",\n      HighDensityForceImproveSolver,\n      (cms) => [\n        {\n          nodeWithPortPoints: cms.highDensityNodePortPoints ?? [],\n          hdRoutes: simplifyPipeline9CollinearRoutePoints(\n            materializePipeline9HdRouteVias(cms.highDensityRouteSolver!.routes),\n          ),\n          colorMap: cms.colorMap,\n          totalStepsPerNode: Math.max(\n            12,\n            Math.round(20 * Math.min(1, cms.effort)),\n          ),\n          nodeAssignmentMargin: cms.srj.defaultObstacleMargin ?? 0.2,\n        },\n      ],\n    ),\n    definePipelineStep(\n      \"highDensityRepairSolver\",\n      Pipeline4HighDensityRepairSolver,\n      (cms) => [\n        {\n          nodeWithPortPoints: cms.highDensityNodePortPoints ?? [],\n          hdRoutes:\n            cms.highDensityForceImproveSolver?.getOutput() ??\n            cms.highDensityRouteSolver!.routes,\n          obstacles: cms.srj.obstacles,\n          colorMap: cms.colorMap,\n          repairMargin: cms.srj.defaultObstacleMargin ?? 0.2,\n          minimumTraceWidth: cms.srj.minTraceWidth,\n          connMap: cms.connMap,\n        },\n      ],\n    ),\n    definePipelineStep("
+        },
+        {
+          "start_line": 810,
+          "text": "      (cms) => {\n        const srjWithMaterializedPreloadedTraces =\n          cms.getSrjWithMaterializedPreloadedTraces()\n        return [\n          {\n            srj: srjWithMaterializedPreloadedTraces as any,\n            hdRoutes: lockHdRouteTerminals(\n              canonicalizePipeline9HdRoutes(\n                cms.traceWidthSolver!.getHdRoutesWithWidths(),\n              ),\n              cms.netToPointPairsSolver?.newConnections ?? [],\n              new Map(\n                (cms.highDensityStitchSolver?.mergedHdRoutes ?? []).map(\n                  (route) => [route.connectionName, route],\n                ),\n              ),\n            ),\n            connMap: cms.connMap,\n            effort: Math.min(1, cms.effort),\n            maxIterations: 16,\n            enableLargeBoardBroadFallback: false,\n            enablePostSolveClearanceRelaxation: false,\n          },\n        ]\n      },\n    ),\n    definePipelineStep(\n      \"pipeline9JointDrcRepairSolver\","
+        },
+        {
+          "start_line": 840,
+          "text": "        const preloadedTraceUpdates =\n          cms.getPreloadedTraceUpdatesAfterHighDensity()\n        const srjWithMaterializedPreloadedTraces =\n          cms.getSrjWithMaterializedPreloadedTraces()\n        return [\n          {\n            srj: srjWithMaterializedPreloadedTraces,\n            srjWithPointPairs: srjWithMaterializedPreloadedTraces,\n            originalSrj: cms.originalSrj,\n            newConnections: cms.netToPointPairsSolver?.newConnections ?? [],\n            newHdRoutes: cms.globalDrcForceImproveSolver!.getOutput(),\n            updatedPreloadedTraces:\n              preloadedTraceUpdates.updatedPreloadedTraces,\n            mutatedPreloadedTraceIds: new Set(\n              preloadedTraceUpdates.mutatedPreloadedTraces.map(\n                (trace) => trace.pcb_trace_id,\n              ),\n            ),\n            connMap: cms.connMap,\n            obstacles: cms.srj.obstacles,\n            layerCount: cms.srj.layerCount,\n            defaultViaDiameter: cms.viaDiameter,\n            defaultViaHoleDiameter: cms.viaHoleDiameter,\n            effort: Math.min(1, cms.effort),\n            colorMap: cms.colorMap,\n          },\n        ]\n      },\n    ),\n    definePipelineStep("
+        }
+      ]
+    }
+  }
+}
