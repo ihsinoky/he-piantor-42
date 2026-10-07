@@ -1,0 +1,50 @@
+{
+  "primary_classification": "WRONG_NET_FIXED_LOWER_RISKS_REMAIN",
+  "issue": 63,
+  "qualification_complete": true,
+  "complete_routing_qualified": false,
+  "tested_stock_tscircuit": "0.0.2748",
+  "production_tscircuit": "0.0.2646",
+  "stage_1_decision": "Case B: zero wrong-net components on both representative boards; material lower-risk errors remain.",
+  "main_wrong_net_copper_component_count": 0,
+  "wing_wrong_net_copper_component_count": 0,
+  "main_electrically_required_unrouted_count": 0,
+  "wing_electrically_required_unrouted_count": 0,
+  "fresh_processes_per_board": 2,
+  "physical_and_manufacturing_reproducibility": "PASS",
+  "remaining_blockers": {
+    "main": {
+      "pad_pad": 1,
+      "pad_trace": 19,
+      "via_trace": 32,
+      "trace": 17,
+      "via_hole_smd_pad": 2,
+      "manufacturing_segment_survival_assertion": "FAIL in both runs"
+    },
+    "wing": {
+      "via_keepout_records": 16,
+      "via_hole_smd_pad": 2
+    }
+  },
+  "stage_2_entered": false,
+  "stage_3_entered": false,
+  "minimal_reproducer": "Not applicable; Case B STOP",
+  "upstream_issue_comparison": "Not performed; Case B STOP",
+  "root_cause_fixability_repair_scope": "Not investigated; Case B STOP",
+  "upstream_fix_viability": "Not assessed; no current wrong-net failure",
+  "project_fork_patch_viability": "Not assessed; no patch pursued",
+  "cost_checkpoint": "Serious wrong-net root-cause pass not entered. Stop at Case B; further wrong-net investigation has no justified value for this fixture. Remaining blockers require a separate task.",
+  "next_human_gate_question": "After PMO review, authorize a separate latest-stock qualification of Main clearance/via-pad blockers, then Wing keepout/via behavior and Main export-survival acceptance, while retaining production pin, or choose another backend path?",
+  "production_dependencies_changed": false,
+  "historical_eda_003b_changed": false,
+  "upstream_issue_or_pr_submitted": false,
+  "fork_created": false,
+  "upstream_packages_patched": false,
+  "generated_circuit_json_or_gerbers_edited": false,
+  "external_router_used": false,
+  "lower_risk_fixes_performed": false,
+  "full_revm1_implementation_started": false,
+  "manufacturing_release": false,
+  "human_gate_decision_made": false,
+  "bounded_conclusion": "Latest stock resolves observed wrong-net failures in the unchanged representative strategy-3 fixture across two fresh processes; does not prove all stock routing is short-free."
+}

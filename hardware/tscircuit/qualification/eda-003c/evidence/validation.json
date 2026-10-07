@@ -1,0 +1,76 @@
+{
+  "isolated_clean_install": {
+    "command": "npm ci --ignore-scripts",
+    "exit_code": 0,
+    "packages_added": 329,
+    "fork_or_overrides": false
+  },
+  "stock_generation": "4 fresh processes completed; no timeout",
+  "physical_wrong_net_verification": {
+    "exit_code_per_run": 1,
+    "reason": "Material lower-risk DRC fails; zero independent short components and zero required deficits in every run"
+  },
+  "physical_fault_fixtures": {
+    "result": "PASS",
+    "checks": 12
+  },
+  "scope": "PASS",
+  "baseline_regression": {
+    "main_shorts": 7,
+    "wing_shorts": 0,
+    "main_unrouted": 0,
+    "wing_unrouted": 0,
+    "retained_eda_003b_results_reproduced": true
+  },
+  "manufacturing": {
+    "stock_cli_export_exit_code_each_run": 0,
+    "wing_verifier": "PASS both runs",
+    "main_verifier": "FAIL both runs: first segment-survival assertion"
+  },
+  "reproducibility": {
+    "main": "PASS",
+    "wing": "PASS",
+    "normalization_fault_checks_per_board": 6
+  },
+  "production_file_integrity": {
+    "hardware/tscircuit/package.json": {
+      "sha256": "6221aa0f87f0a13f2d4abb9824533d269b90c76d77b8db1df6de13ddb19ba467",
+      "byte_identical_to_baseline": true
+    },
+    "hardware/tscircuit/package-lock.json": {
+      "sha256": "a6bd33cc9d0cfdd6f9f60fa343bf413fae4de33b62a8f4c26141857763cf9d33",
+      "byte_identical_to_baseline": true
+    }
+  },
+  "historical_eda_003b_unchanged": true,
+  "run_exit_codes": {
+    "generate-main-1": 0,
+    "verify-main-1": 1,
+    "export-main-1": 0,
+    "manufacturing-main-1": 1,
+    "generate-main-2": 0,
+    "verify-main-2": 1,
+    "export-main-2": 0,
+    "manufacturing-main-2": 1,
+    "reproducibility-main": 0,
+    "generate-wing-1": 0,
+    "verify-wing-1": 1,
+    "export-wing-1": 0,
+    "manufacturing-wing-1": 0,
+    "generate-wing-2": 0,
+    "verify-wing-2": 1,
+    "export-wing-2": 0,
+    "manufacturing-wing-2": 0,
+    "reproducibility-wing": 0,
+    "scope": 0,
+    "verifier-fault-fixtures": 0
+  },
+  "json_parse": "PASS",
+  "python_syntax": "PASS",
+  "compressed_artifact_integrity": "PASS",
+  "git_diff_check": "PASS",
+  "raw_circuit_json_identical_between_runs": {
+    "main": true,
+    "wing": true
+  }
+}
