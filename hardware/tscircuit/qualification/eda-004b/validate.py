@@ -99,5 +99,5 @@ if __name__ == '__main__':
    'docs/alternate-physical-backend-main-qualification.md', 'docs/project-status.md', 'task/data/project-status.js'
   }, f'Out-of-scope change: {path}'
  subprocess.run(['node','--check','task/data/project-status.js'],cwd=ROOT,check=True)
- subprocess.run(['git','diff','--check'],cwd=ROOT,check=True)
+ subprocess.run(['git','diff','--check',BASE],cwd=ROOT,check=True)
  print(json.dumps({'result':'PASS','meaning':'Blocked evidence integrity; no board/geometry qualification','protected_file_count':len(protected),'fixed_input_hashes':len(EXPECTED),'main_attempts':0,'confirmation_attempts':0,'geometry_reconciliation':'NOT ENTERED','raw_smoke_capture':'MISSING / disclosed'}))
