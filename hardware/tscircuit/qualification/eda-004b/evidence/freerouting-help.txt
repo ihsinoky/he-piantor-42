@@ -1,0 +1,152 @@
+WARNING: Could not create user-data directory '/home/codespace/.config/freerouting' (source: default (OS standard user-data path)). Freerouting will attempt to create it when writing files. If this persists, check permissions for the specified path.
+2026-10-07T22:24:13.282475526Z main ERROR FileManager (/home/codespace/.local/state/freerouting/logs/freerouting.log): java.io.IOException: Could not create directory /home/codespace/.local/state/freerouting/logs
+2026-10-07T22:24:13.284891979Z main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$$Lambda/0x00000000240ee4d8@36fc695d] unable to create manager for [/home/codespace/.local/state/freerouting/logs/freerouting.log] with data [org.apache.logging.log4j.core.appender.ConfigurationFactoryData@28701274]
+java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$$Lambda/0x00000000240ee4d8@36fc695d] unable to create manager for [/home/codespace/.local/state/freerouting/logs/freerouting.log] with data [org.apache.logging.log4j.core.appender.ConfigurationFactoryData@28701274]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:149)
+	at org.apache.logging.log4j.core.appender.FileManager.getFileManager(FileManager.java:222)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:102)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:55)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1215)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1134)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1126)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:734)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:271)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:235)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:194)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:70)
+	at app.freerouting.logger.Log4j2ConfigurationFactory.getConfiguration(Log4j2ConfigurationFactory.java:117)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:497)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:323)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:311)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:264)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:48)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:119)
+	at app.freerouting.startup.LoggingBootstrap.initialize(LoggingBootstrap.java:132)
+	at app.freerouting.Freerouting.main(Freerouting.java:536)
+
+2026-10-07T22:24:13.286481588Z main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender
+java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:268)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:140)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1215)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1134)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1126)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:734)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:271)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:235)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:194)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:70)
+	at app.freerouting.logger.Log4j2ConfigurationFactory.getConfiguration(Log4j2ConfigurationFactory.java:117)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:497)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:323)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:311)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:264)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:48)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:119)
+	at app.freerouting.startup.LoggingBootstrap.initialize(LoggingBootstrap.java:132)
+	at app.freerouting.Freerouting.main(Freerouting.java:536)
+
+2026-10-07T22:24:13.290624096Z main ERROR Null object returned for File in Appenders.
+2026-10-07T22:24:13.291058336Z main ERROR Unable to locate appender "File" for logger config "root"
+2026-10-07T22:24:13.318678213Z main ERROR FileManager (/home/codespace/.local/state/freerouting/logs/freerouting.log): java.io.IOException: Could not create directory /home/codespace/.local/state/freerouting/logs
+2026-10-07T22:24:13.318929792Z main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$$Lambda/0x00000000240ee4d8@4116aac9] unable to create manager for [/home/codespace/.local/state/freerouting/logs/freerouting.log] with data [org.apache.logging.log4j.core.appender.ConfigurationFactoryData@62ddbd7e]
+java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$$Lambda/0x00000000240ee4d8@4116aac9] unable to create manager for [/home/codespace/.local/state/freerouting/logs/freerouting.log] with data [org.apache.logging.log4j.core.appender.ConfigurationFactoryData@62ddbd7e]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:149)
+	at org.apache.logging.log4j.core.appender.FileManager.getFileManager(FileManager.java:222)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:102)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:55)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1215)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1134)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1126)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:734)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:271)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:235)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:194)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:70)
+	at app.freerouting.logger.Log4j2ConfigurationFactory.getConfiguration(Log4j2ConfigurationFactory.java:117)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:497)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:323)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at app.freerouting.startup.LoggingBootstrap.initialize(LoggingBootstrap.java:132)
+	at app.freerouting.Freerouting.main(Freerouting.java:536)
+
+2026-10-07T22:24:13.319760263Z main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender
+java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:268)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:140)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1215)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1134)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1126)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:734)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:271)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:235)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:194)
+	at org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder.build(DefaultConfigurationBuilder.java:70)
+	at app.freerouting.logger.Log4j2ConfigurationFactory.getConfiguration(Log4j2ConfigurationFactory.java:117)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:497)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:323)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at app.freerouting.startup.LoggingBootstrap.initialize(LoggingBootstrap.java:132)
+	at app.freerouting.Freerouting.main(Freerouting.java:536)
+
+2026-10-07T22:24:13.323024630Z main ERROR Null object returned for File in Appenders.
+2026-10-07T22:24:13.323219685Z main ERROR Unable to locate appender "File" for logger config "root"
+2026-10-07 22:24:13.789 INFO   Freerouting v2.5.0 (build-date: 2026-10-05)
+2026-10-07 22:24:13.810 WARN   Failed to save freerouting.json to '/home/codespace/.config/freerouting/freerouting.json': Failed to create the user-data directory '/home/codespace/.config/freerouting': /home/codespace/.config/freerouting: Read-only file system. freerouting.json cannot be saved.. Settings won't be persisted across restarts.
+2026-10-07 22:24:14.035 INFO   Hardware: 2 CPU cores, 394 CPU score, 1986 MB RAM
+2026-10-07 22:24:14.036 WARN   Couldn't get screen resolution. If you are running in a headless environment, disable the GUI by setting gui.enabled to false.
+2026-10-07 22:24:14.832 WARN   Analytics tracking: first delivery failure in this window - /v1/analytics/identify - SocketException: Operation not permitted. Further failures will be aggregated and reported every 60 minutes.
+USAGE
+
+  freerouting [PARAMETERS]
+
+PARAMETERS
+
+  -de <design.dsn>
+      Load the Specctra .dsn file
+
+  -di <design_directory>
+      Set the default folder used by open-design dialogs
+
+  -dr <design_rules_file>
+      Read routing rules from a .rules file
+
+  -do <output_file>
+      Save the board (.dsn), session (.ses), or
+      Autodesk Fusion script (.scr) at the end
+
+  -mp <number_of_passes>
+      Set the maximum number of auto-routing passes to perform
+
+  -l  <language>
+      "en" for English, "de" for German, or "zh" for Simplified Chinese; otherwise, use the system default. English is used by default for unsupported languages.
+
+  -mt <number_of_threads>
+      Set the thread-pool size for route optimization. The default is
+      one fewer than the number of logical processors in the system.
+
+  -us <updating_strategy>
+      Greedy, Global, or Hybrid. Set the board update strategy for route
+      optimization. The default is greedy. When Hybrid is selected,
+      use the "hr" option to specify the hybrid ratio.
+
+  -hr <m:n>
+      Set the hybrid ratio in the format of
+      #_global_optimal_passes:#_prioritized_passes.
+      The default is 1:1. This option is effective only when the
+      Hybrid strategy is selected.
+
+  -is <selection_strategy>
+      Sequential, random, or prioritized. Set the item-selection strategy
+      for route optimization. The default is prioritized, which selects
+      items based on scores calculated during the previous round.
+
+  -h Display this help

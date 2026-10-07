@@ -1,8 +1,23 @@
 {
   "issue": 73,
-  "status": "PRE_ROUTE",
+  "status": "TERMINAL_STOP",
+  "first_terminal_gate": "P1_CONVERTER_MODULE_LOAD",
+  "frontend_smoke_generation_processes": 1,
+  "frontend_smoke_generation_outcome": "Guard exception before raw capture; routingDisabled source fixture; global-route event count not captured",
   "smoke": [],
   "main_initial": [],
   "main_confirmation": [],
-  "rule": "Persist launch record before process creation; timeout/crash/partial consumes attempt. No retry/resume. Confirmation only after all initial checks PASS."
+  "actual_freerouting_processes": [
+    {
+      "purpose": "help only",
+      "input_design": null,
+      "output_session": null,
+      "routing": false,
+      "count": 2
+    }
+  ],
+  "smoke_routing_process_count": 0,
+  "main_initial_count": 0,
+  "main_confirmation_count": 0,
+  "rule": "No retry/resume/tuning. No routing process launched; no Main source rendered."
 }

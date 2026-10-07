@@ -1,14 +1,42 @@
 # EDA-004B — Issue #73
 
-Candidate B bounded qualification, fixed source baseline
-`b84585ecc2cf32000285bbf389d9fea255436980`, execution checkout
-`20b25914cc7515ab8ba191f5fdcbba6217a37d23`.
+**ENVIRONMENT_BLOCKED / P1_CONVERTER_MODULE_LOAD**, Main initial/confirmation 0/0,
+smoke routing 0. See the [terminal report](../../../../docs/alternate-physical-backend-main-qualification.md).
+Evidence is **PARTIAL**: the executor's guard rejected allowed local copper before
+raw smoke JSON capture; the following converter invocation failed at module load.
+No retry or further experiment occurred after STOP. Stage 2–4, meaningful ERC/DRC,
+geometry reconciliation/fault injection and all Main metrics are NOT ENTERED/null.
 
-Authority and preflight are retained in `evidence/`. All pre-existing tracked
-files except the two authorized status copies are protected by SHA-256.
-Dependencies and disposable installations live in `/tmp/eda004b`, outside
-tracked source. Routing has not started. The persistent attempt ledger must be
-updated before any routing process; interrupted/partial Main counts as an attempt.
+Execution checkout: `20b25914cc7515ab8ba191f5fdcbba6217a37d23`.
+Fixed source baseline: `b84585ecc2cf32000285bbf389d9fea255436980`.
+All pre-existing tracked files except the two authorized status copies are
+protected in `evidence/protected-files.json`. Production remains 0.0.2646.
+Dependencies/disposable installs live under `/tmp/eda004b` and are not committed.
 
-This evidence does not adopt a backend or authorize manufacturing.
+Evidence scripts:
+
+```sh
+python3 hardware/tscircuit/qualification/eda-004b/validate.py
+python3 hardware/tscircuit/qualification/eda-004b/test-evidence.py
+node --check task/data/project-status.js
+git diff --check
+```
+
+These read/validate the blocked record; they do not route. `reproduce-package-load.sh`
+is an unexecuted convenience wrapper for the exact recorded installation failure
+in a new /tmp directory, requiring network and the pinned Node/npm. Reproduction
+of that error does not qualify a backend. It must not be used as an automatic retry.
+The retained `evidence/executed-smoke.tsx` and `executed-convert.mjs` are the exact
+failed scripts, not recommended launchers. The smoke guard is known wrong and
+must not be credited with copper validation. The hashed run contract is explicitly
+incomplete and post-STOP; it cannot authorize a route.
+
+Raw evidence contains the selected converter package and the installed missing-dist
+kicadts tree losslessly. `raw-manifest.json` records compressed and uncompressed
+hashes. Full failure/install/help logs, selected metadata, converter lock, KiCad
+package hashes/extracted file snapshot, authority, checkpoint/effort/attempt records
+and evidence integrity manifest are retained. The missing smoke JSON is disclosed,
+not reconstructed. No PCB/DSN/SES exists.
+
+No backend adoption, Human Gate, manufacturing exception, merge or follow-up work.
 USB NPTH OPEN — PRE-ORDER DFM REVIEW REQUIRED.

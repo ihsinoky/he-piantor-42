@@ -1,0 +1,40 @@
+{
+  "issue": 73,
+  "primary_classification": "ENVIRONMENT_BLOCKED",
+  "first_terminal_gate": "P1_CONVERTER_MODULE_LOAD",
+  "reason": "Selected scripts-disabled converter deployment cannot load the upstream-pinned kicadts Git dependency: dist/index.js absent. No replacement or rebuild tried after STOP.",
+  "qualification_execution_complete": true,
+  "main_qualified": false,
+  "stages": {
+    "1": "PARTIAL \u2014 frontend render guard error; converter module load failed; no transport roundtrip",
+    "2": "NOT ENTERED",
+    "3": "NOT ENTERED",
+    "4": "NOT ENTERED"
+  },
+  "main_metrics": {
+    "required_unrouted": null,
+    "wrong_net_copper_components": null,
+    "targeted_material_violations": null,
+    "unexplained_conversion_loss": null
+  },
+  "erc_status": "NOT ENTERED",
+  "drc_status": "NOT ENTERED",
+  "source_schematic_pcb_parity": "NOT ENTERED",
+  "independent_kicad_reconciliation": "NOT ENTERED",
+  "geometry_fault_injection": "NOT ENTERED",
+  "main_initial_count": 0,
+  "main_confirmation_count": 0,
+  "smoke_router_count": 0,
+  "evidence_completeness": "PARTIAL",
+  "missing_raw_smoke_json": true,
+  "additional_observed_failures": [
+    "Smoke guard erroneously rejected permitted local trace and threw before raw JSON capture. No raw smoke geometry recovered; no re-render after STOP.",
+    "Converter attempted after the smoke render failed; no input existed. Module-load exception precedes input access.",
+    "P0 package/config/library/run-contract freeze incomplete; the smoke render was entered prematurely. No routing occurred.",
+    "KiCad extracted CLI help emitted missing schema warning; DSN/SES and meaningful ERC/DRC remain untested."
+  ],
+  "production_tscircuit": "0.0.2646",
+  "usb_npth": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED",
+  "pmo_review_occurred": false,
+  "next_question": "After PMO assesses the partial evidence and executor capture/sequence errors, should PO authorize a separately bounded environment packaging/capture correction and renewed smoke gate for B? No converter fidelity or routing conclusion supports automatic candidate switching."
+}
