@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit resumed as the historical forward candidate under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B/C/D/E/F are completed historical qualification work (classifications below); representative Main routing remains unqualified. D-018 records Issue #71 PO planning GO: evaluated internal router exploration ended; frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted. EVT-002 has satisfied G0B but full implementation remains blocked; EDA-004B / Issue #73 has reached ENVIRONMENT_BLOCKED / P1_CONVERTER_MODULE_LOAD with partial evidence; Main initial/confirmation attempts 0/0; PMO/PO review is next. |
+| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit resumed as the historical forward candidate under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B/C/D/E/F are completed historical qualification work (classifications below); representative Main routing remains unqualified. D-018 records Issue #71 PO planning GO: evaluated internal router exploration ended; frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted. EVT-002 has satisfied G0B but full implementation remains blocked; EDA-004B / Issue #73 has reached ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR with partial evidence; Main initial/confirmation attempts 0/0; PMO/PO review is next. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -252,18 +252,22 @@ bounded qualification candidate, **not adopted**. Production tscircuit remains
 **0.0.2646**; representative Main routing remains **unqualified**.
 
 **EDA-004B / [Issue #73](https://github.com/ihsinoky/he-piantor-42/issues/73):
-ENVIRONMENT_BLOCKED — P1_CONVERTER_MODULE_LOAD.** The PO authorized the actual
-execution Issue incorporated from the fixed planning documents. The selected
-scripts-disabled converter installation could not load its pinned kicadts Git
-dependency (`dist/index.js` absent). Stage 1 was partial; Main transfer, ERC/DRC,
+ENVIRONMENT_BLOCKED — P1_SMOKE_CAPTURE_GUARD_ERROR.** The PO authorized the actual
+execution Issue incorporated from the fixed planning documents. The first failure
+was the executor smoke guard rejecting permitted local copper before raw JSON
+capture. This is an executor verification/capture error, not EDA/backend incapability.
+A subsequent converter invocation, despite that failure, observed the secondary
+environment obstacle **P1_CONVERTER_MODULE_LOAD** (`dist/index.js` absent).
+Immediate-stop discipline was not followed. Stage 1 was partial; Main transfer, ERC/DRC,
 independent KiCad reconciliation, initial routing and fresh confirmation were
 **NOT ENTERED**. Main initial/confirmation counts are **0/0**, smoke routing **0**.
 All Main acceptance metrics are null. The executor's smoke guard rejected allowed
 local bond copper before raw JSON capture, and the converter was attempted after
 that capture failure; P0 freeze was incomplete. Evidence is **PARTIAL**, with
 these limitations disclosed in the [terminal report](alternate-physical-backend-main-qualification.md).
-The reporting deliverable is complete for review; no PMO review or backend PASS
-is claimed. Next is PMO/PO disposition of the environment/capture correction,
+Terminal reporting is complete; technical qualification is incomplete. The PO
+relayed a PMO chronology finding; correction acceptance and backend PASS are not
+claimed. Next is PMO/PO disposition of the environment/capture correction,
 without automatic retry or candidate switch. Issue #71's historical planning
 and [execution draft](alternate-physical-backend-main-qualification-issue-draft.md)
 remain unchanged. Aggregate cap remains 16 engineer-hours; later work still needs

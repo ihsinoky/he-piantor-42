@@ -1,18 +1,26 @@
 {
   "evidence_validation": {
     "result": "PASS",
-    "meaning": "Blocked evidence integrity; no board/geometry qualification",
+    "meaning": "Reporting chronology/integrity only; no board/geometry/backend qualification",
+    "first_terminal_gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+    "secondary_environment_gate": "P1_CONVERTER_MODULE_LOAD",
+    "immediate_stop_compliance": false,
+    "terminal_reporting_complete": true,
+    "technical_qualification_complete": false,
     "protected_file_count": 369,
+    "review_evidence_preserved_file_count": 31,
     "fixed_input_hashes": 5,
     "main_attempts": 0,
     "confirmation_attempts": 0,
+    "smoke_routing": 0,
     "geometry_reconciliation": "NOT ENTERED",
     "raw_smoke_capture": "MISSING / disclosed"
   },
   "reporting_adversarial_validation": {
     "result": "PASS",
-    "adversarial_reporting_cases": 6,
-    "geometry_fault_cases": "NOT ENTERED"
+    "adversarial_reporting_cases": 16,
+    "geometry_fault_cases": "NOT ENTERED",
+    "meaning": "Reporting tests only; not geometry/backend qualification PASS"
   },
   "node_check": "PASS",
   "git_diff_check": "PASS against starting commit including added files. Initial staged/base checks exposed raw KiCad help whitespace and raw package-index blank EOF; both preserved losslessly in gzip and hashes, not normalized.",
@@ -22,7 +30,11 @@
   "input_output_integrity": "Retained artifacts verified; raw smoke Circuit JSON missing and disclosed; no board/DSN/SES exists",
   "independent_reconciliation": "NOT ENTERED",
   "geometry_adversarial_checks": "NOT ENTERED",
-  "ci": "Early Draft c097cc8 engineering-ci PASS; layout/KiCad/firmware skipped. Final HEAD CI recorded in PR body.",
-  "pmo_review": "NOT PERFORMED",
-  "meaning": "Evidence hygiene passes; environment blocked and evidence partial. This is not qualification acceptance."
+  "ci": "Original CI results retained in ci-record.json; current correction HEAD CI is checked and reported in PR #74 body.",
+  "pmo_review": "PMO chronology finding relayed by PO; acceptance of this correction not claimed",
+  "meaning": "Reporting chronology/integrity validation only. Evidence remains PARTIAL; geometry/backend qualification is NOT ENTERED. No experiment resumed.",
+  "review_record_only_byte_preservation": "PASS: 31 non-editable qualification files including original raw logs/package archives/executed scripts byte-identical to reviewed HEAD 137f2e5e5cf267177899b06ca824f2daa29153dc",
+  "failure_chronology": "PASS: first P1_SMOKE_CAPTURE_GUARD_ERROR (executor validation/capture); secondary P1_CONVERTER_MODULE_LOAD after first failure; immediate_stop_compliance=false",
+  "technical_qualification_complete": false,
+  "terminal_reporting_complete": true
 }

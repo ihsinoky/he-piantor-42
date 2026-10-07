@@ -1,14 +1,21 @@
 # EDA-004B — bounded representative Main qualification
 
-**ENVIRONMENT_BLOCKED — P1_CONVERTER_MODULE_LOAD.** Issue #73 reached an
-environment STOP before a usable converter deployment or a transport roundtrip.
+**ENVIRONMENT_BLOCKED — P1_SMOKE_CAPTURE_GUARD_ERROR.** The first observed Stage-1 failure
+was the executor smoke capture guard exception before raw JSON was saved. This
+classification describes an executor verification/capture procedure failure,
+not an EDA/backend capability limit. A usable transport roundtrip was not proved.
 Main routing is unqualified. Initial Main attempts **0**, confirmations **0**,
 Freerouting smoke routes **0**. No backend, Human Gate, manufacturing exception
 or order is approved. USB NPTH **OPEN — PRE-ORDER DFM REVIEW REQUIRED**.
 
 This is a completed terminal reporting deliverable with **PARTIAL evidence**,
 including executor capture/sequence errors. It is not a completed technical
-qualification or a converter-fidelity finding. PMO has not reviewed this work.
+qualification or a converter-fidelity finding. PO relayed a PMO chronology finding
+on review HEAD `137f2e5e5cf267177899b06ca824f2daa29153dc`; this records the
+requested correction. PMO acceptance of the correction is not claimed.
+The [review correction record](../hardware/tscircuit/qualification/eda-004b/evidence/review-correction.json)
+documents the records-only scope; original logs, archives and executed scripts
+are byte-identical to the reviewed HEAD. No experiment was resumed.
 
 ## Authority and preserved baseline
 
@@ -78,13 +85,16 @@ completed, but installed kicadts contained only README, LICENSE and package.json
 That package's `main` points to `dist/index.js`; its referenced prepare script and
 library sources were also absent from the installed packed tree. The converter's
 first actual module load raised `ERR_MODULE_NOT_FOUND`, before input access.
+That invocation occurred **after** the smoke guard exception and was an additional
+operation violating the required immediate stop. `P1_CONVERTER_MODULE_LOAD` is a
+**secondary environment obstacle**, not the first terminal gate.
 The [failure](../hardware/tscircuit/qualification/eda-004b/evidence/converter-package-failure.json)
 and original stderr preserve this exact deployment failure.
 
 This establishes failure of the recorded **scripts-disabled installation**.
 A scripts-enabled install, source build, alternative published kicadts package or
-converter release was not tested after STOP. It does not establish that upstream
-packaging is generally unusable, that B cannot work, or that a frontend change is
+converter release was not tested after the secondary module-load failure.
+It does not establish that upstream packaging is generally unusable, that B cannot work, or that a frontend change is
 necessary. No dependency substitution, fork or converter/router patch was made.
 
 KiCad CLI version/help and standalone pcbnew import worked without DISPLAY or
@@ -107,7 +117,7 @@ version-contained qualification dependency, not an adopted architecture.
 | Stage | Performed / outcome |
 | --- | --- |
 | P0 / setup | Checkout and fixed hashes passed; packages/runtime help inspected. Complete library/config/routing-contract freeze **not achieved**. |
-| Stage 1 / P1 | One synthetic frontend render attempted; converter module load failed. No complete minimal roundtrip. |
+| Stage 1 / P1 | First: executor smoke capture guard error. Then: additional converter invocation failed at module load (secondary environment obstacle / sequence deviation). No complete minimal roundtrip. |
 | Stage 2 / P2 | **NOT ENTERED**: no Main generation, USB_SHELL_BOND bridge, source-intent/geometry maps, semantic map, meaningful ERC or source/schematic/PCB parity. |
 | Stage 3 / P3 | **NOT ENTERED**: no initial Main routing/import/DRC or independent physical reconciliation. |
 | Stage 4 / P4 | **NOT ENTERED**: initial PASS prerequisite absent; no fresh confirmation or reproducibility comparison. |
@@ -119,9 +129,11 @@ JSON. Therefore global copper counts, local-bond shape and source pin semantics
 cannot be verified from raw output. A converter command was then attempted despite
 that preceding failure; its import failed before it could access the missing input.
 The full raw frontend/Node exception logs and exact executed scripts are retained.
-There was no regeneration/retry after the terminal STOP. The missing raw JSON cannot
-be restored or given a fabricated hash. Shell command groups also did not preserve
-individual numeric exits; those are unknown, not reported as zero.
+The first failure is `P1_SMOKE_CAPTURE_GUARD_ERROR`; the later converter invocation
+is a sequence deviation. **Immediate-stop discipline was not followed.** No further
+generation/conversion/routing was attempted after the secondary module-load failure.
+The missing raw JSON cannot be restored or given a fabricated hash. Shell command
+groups also did not preserve individual numeric exits; those are unknown, not reported as zero.
 
 The smoke render was attempted before a complete P0 freeze. This sequence deviation
 is disclosed; P0 and Stage 1 are not claimed PASS. The erroneous copper assertion
@@ -156,8 +168,10 @@ Main hash, retained JSON/package/log integrity including uncompressed archive
 hashes, the failure/attempt ledger, null metrics, report/status/Dashboard agreement,
 `node --check task/data/project-status.js` and `git diff --check`.
 [test-evidence.py](../hardware/tscircuit/qualification/eda-004b/test-evidence.py)
-rejects six adversarial **reporting** mutations (false PASS/zero/ERC, hidden attempts
-or route count, false evidence completeness). Neither script installs or routes.
+rejects 16 adversarial **reporting** mutations, including promoting the secondary
+converter failure to first gate, reversing failure order, claiming immediate stop
+and claiming technical completion. Neither script installs or routes; reporting
+PASS does not establish geometry/backend qualification PASS.
 
 D-014–D-018, JITX NO-GO, production dependencies, all accepted EDA-003B–F evidence,
 pre-existing designs, verifiers, architecture/interface/DFM and CI remain unchanged.
@@ -175,9 +189,9 @@ The [effort ledger](../hardware/tscircuit/qualification/eda-004b/evidence/effort
 separates observed UTC/file/process observations from estimates. AI active effort
 is an estimate; no token/time observation is presented as measured engineer-hours.
 Human effort and fully unattended process time are unobserved/null. Parallel
-installation elapsed time is not added again as human or AI effort. The execution
-STOP occurred well inside P1's four-hour ceiling; P0 was incomplete. Later technical
-checkpoints were not entered. Reporting/validation is reserved within the aggregate
+installation elapsed time is not added again as human or AI effort. The first
+executor failure was observed within P1's four-hour ceiling, followed by the converter sequence
+deviation; P0 was incomplete. Later technical checkpoints were not entered. Reporting/validation is reserved within the aggregate
 16-hour ceiling, with no further experimentation.
 
 Reusable findings are the exact package/lock/hash record, standalone binding/help

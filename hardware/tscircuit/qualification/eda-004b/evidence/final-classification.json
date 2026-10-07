@@ -1,9 +1,8 @@
 {
   "issue": 73,
   "primary_classification": "ENVIRONMENT_BLOCKED",
-  "first_terminal_gate": "P1_CONVERTER_MODULE_LOAD",
-  "reason": "Selected scripts-disabled converter deployment cannot load the upstream-pinned kicadts Git dependency: dist/index.js absent. No replacement or rebuild tried after STOP.",
-  "qualification_execution_complete": true,
+  "first_terminal_gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+  "reason": "Smoke capture guard rejected permitted local bond copper and threw before raw Circuit JSON write. This is an executor verification/capture error, not evidence of EDA/backend incapability.",
   "main_qualified": false,
   "stages": {
     "1": "PARTIAL \u2014 frontend render guard error; converter module load failed; no transport roundtrip",
@@ -28,13 +27,39 @@
   "evidence_completeness": "PARTIAL",
   "missing_raw_smoke_json": true,
   "additional_observed_failures": [
-    "Smoke guard erroneously rejected permitted local trace and threw before raw JSON capture. No raw smoke geometry recovered; no re-render after STOP.",
-    "Converter attempted after the smoke render failed; no input existed. Module-load exception precedes input access.",
+    "Converter module load failed during an additional operation after the first smoke guard failure; this secondary environment obstacle does not replace the first executor failure.",
+    "Converter was invoked after the smoke render failed. Immediate-stop discipline was not followed; no further generation/conversion/routing was attempted after that secondary module-load failure.",
     "P0 package/config/library/run-contract freeze incomplete; the smoke render was entered prematurely. No routing occurred.",
     "KiCad extracted CLI help emitted missing schema warning; DSN/SES and meaningful ERC/DRC remain untested."
   ],
   "production_tscircuit": "0.0.2646",
   "usb_npth": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED",
-  "pmo_review_occurred": false,
-  "next_question": "After PMO assesses the partial evidence and executor capture/sequence errors, should PO authorize a separately bounded environment packaging/capture correction and renewed smoke gate for B? No converter fidelity or routing conclusion supports automatic candidate switching."
+  "next_question": "After PMO assesses the partial evidence and executor capture/sequence errors, should PO authorize a separately bounded environment packaging/capture correction and renewed smoke gate for B? No converter fidelity or routing conclusion supports automatic candidate switching.",
+  "terminal_reporting_complete": true,
+  "technical_qualification_complete": false,
+  "failure_origin": "EXECUTOR_VALIDATION_CAPTURE",
+  "ordered_failure_observations": [
+    {
+      "sequence": 1,
+      "gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+      "origin": "EXECUTOR_VALIDATION_CAPTURE",
+      "description": "Smoke capture guard rejected permitted local bond copper and threw before raw Circuit JSON write. This is an executor verification/capture error, not evidence of EDA/backend incapability.",
+      "evidence_log": "smoke-generation.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    },
+    {
+      "sequence": 2,
+      "gate": "P1_CONVERTER_MODULE_LOAD",
+      "origin": "SECONDARY_ENVIRONMENT_OBSTACLE",
+      "description": "Converter was invoked after the smoke guard failure (sequence deviation) and raised ERR_MODULE_NOT_FOUND before input access.",
+      "evidence_log": "smoke-conversion.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    }
+  ],
+  "sequence_deviation": true,
+  "immediate_stop_compliance": false,
+  "secondary_environment_gate": "P1_CONVERTER_MODULE_LOAD",
+  "pmo_review_status": "PMO chronology finding relayed by PO; record correction completed for review, PMO acceptance not claimed."
 }

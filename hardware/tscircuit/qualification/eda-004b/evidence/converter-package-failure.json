@@ -1,7 +1,7 @@
 {
   "observed_at_utc": "2026-10-07T22:26:44.815484+00:00",
   "primary_classification": "ENVIRONMENT_BLOCKED",
-  "first_terminal_gate": "P1_CONVERTER_MODULE_LOAD",
+  "first_terminal_gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
   "error_code": "ERR_MODULE_NOT_FOUND",
   "missing_entry": "node_modules/kicadts/dist/index.js",
   "selected_dependency": "github:tscircuit/kicadts#f3ea106bdc65ca901e9b23255ad3be0bd2a624ab",
@@ -25,5 +25,11 @@
   "lib_exists": false,
   "prepare_script_target_exists": false,
   "claim_limit": "The recorded scripts-disabled installation cannot load. A scripts-enabled/source-build installation was not tested. This does not prove upstream packaging is generally unusable or candidate B cannot work.",
-  "smoke_capture_error": "Executed guard rejected all pcb_trace, including the permitted explicit LOCAL_BOND; throw occurred before raw JSON write. No geometry conclusion is supported. No rerender after STOP."
+  "smoke_capture_error": "First failure: executor capture guard rejected permitted local copper before raw JSON write. The converter module-load failure followed during an additional operation; immediate-stop discipline was not followed. No missing raw geometry or numeric exit is reconstructed.",
+  "observed_gate": "P1_CONVERTER_MODULE_LOAD",
+  "observation_role": "SECONDARY_ENVIRONMENT_OBSTACLE",
+  "failure_sequence": 2,
+  "operation_after_first_failure": true,
+  "sequence_deviation": true,
+  "timestamp_basis": "observed_at_utc retains the previously recorded converter log mtime; it is not the exact exception time and does not date the first smoke guard failure."
 }

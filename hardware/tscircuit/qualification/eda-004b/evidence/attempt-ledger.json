@@ -1,7 +1,7 @@
 {
   "issue": 73,
   "status": "TERMINAL_STOP",
-  "first_terminal_gate": "P1_CONVERTER_MODULE_LOAD",
+  "first_terminal_gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
   "frontend_smoke_generation_processes": 1,
   "frontend_smoke_generation_outcome": "Guard exception before raw capture; routingDisabled source fixture; global-route event count not captured",
   "smoke": [],
@@ -19,5 +19,39 @@
   "smoke_routing_process_count": 0,
   "main_initial_count": 0,
   "main_confirmation_count": 0,
-  "rule": "No retry/resume/tuning. No routing process launched; no Main source rendered."
+  "rule": "No retry/resume/tuning. No routing process launched; no Main source rendered.",
+  "failure_origin": "EXECUTOR_VALIDATION_CAPTURE",
+  "ordered_failure_observations": [
+    {
+      "sequence": 1,
+      "gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+      "origin": "EXECUTOR_VALIDATION_CAPTURE",
+      "description": "Smoke capture guard rejected permitted local bond copper and threw before raw Circuit JSON write. This is an executor verification/capture error, not evidence of EDA/backend incapability.",
+      "evidence_log": "smoke-generation.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    },
+    {
+      "sequence": 2,
+      "gate": "P1_CONVERTER_MODULE_LOAD",
+      "origin": "SECONDARY_ENVIRONMENT_OBSTACLE",
+      "description": "Converter was invoked after the smoke guard failure (sequence deviation) and raised ERR_MODULE_NOT_FOUND before input access.",
+      "evidence_log": "smoke-conversion.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    }
+  ],
+  "sequence_deviation": true,
+  "immediate_stop_compliance": false,
+  "operations_after_first_failure": [
+    {
+      "operation": "converter module load",
+      "count": 1,
+      "observed_gate": "P1_CONVERTER_MODULE_LOAD",
+      "sequence_deviation": true,
+      "exit_code": null
+    }
+  ],
+  "terminal_reporting_complete": true,
+  "technical_qualification_complete": false
 }

@@ -1,10 +1,15 @@
 # EDA-004B — Issue #73
 
-**ENVIRONMENT_BLOCKED / P1_CONVERTER_MODULE_LOAD**, Main initial/confirmation 0/0,
+**ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR**, Main initial/confirmation 0/0,
 smoke routing 0. See the [terminal report](../../../../docs/alternate-physical-backend-main-qualification.md).
 Evidence is **PARTIAL**: the executor's guard rejected allowed local copper before
 raw smoke JSON capture; the following converter invocation failed at module load.
-No retry or further experiment occurred after STOP. Stage 2–4, meaningful ERC/DRC,
+First failure: executor verification/capture error, not EDA/backend incapability.
+The subsequent converter invocation was a sequence deviation; its
+P1_CONVERTER_MODULE_LOAD is a secondary environment obstacle. Immediate-stop
+discipline was not followed. Terminal reporting is complete; technical
+qualification is incomplete. No further experiment followed the secondary failure.
+Stage 2–4, meaningful ERC/DRC,
 geometry reconciliation/fault injection and all Main metrics are NOT ENTERED/null.
 
 Execution checkout: `20b25914cc7515ab8ba191f5fdcbba6217a37d23`.
