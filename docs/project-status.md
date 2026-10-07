@@ -165,9 +165,9 @@ in [D-016](decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-res
 The primary reason is the complete-routing workflow not demonstrated in C4B5,
 not USB DFM or the separate generated-thickness metadata limitation. Accepted
 electrical/component/modeling successes and all JITX source/evidence remain
-valid and retained. Native stock tscircuit resumes as the active forward Rev.M1
-EDA candidate/path, subject to later ERC/DRC and manufacturing gates; physical
-Main/Wing remains unimplemented and is not production-qualified.
+valid and retained. At that historical D-016 acceptance, native stock tscircuit
+resumed as the forward candidate/path, subject to later ERC/DRC and manufacturing
+gates; physical Main/Wing remains unimplemented and is not production-qualified.
 **G0B is done / accepted** by the [Issue #57 PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587) and
 [D-017](decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze).
 The JST GH 14-position connector/pinout, six common-GND return contacts, nominal
@@ -182,8 +182,8 @@ only after Main PASS, separately authorized Wing/export work and adoption review
 Full Rev.M1 implementation requires separate authorization. No
 schematic/PCB/manufacturing package completion, placement, routing or order
 is claimed. Production pitch, final Hall choice, final Rev.A cable mechanics/length,
-exact pull-down resistor, final placement, PCB routing, representative stock-tscircuit
-routing capability, USB NPTH manufacturing disposition, final USB/system
+exact pull-down resistor, final placement, PCB routing, representative Main
+routing qualification, USB NPTH manufacturing disposition, final USB/system
 power budget and manufacturing release remain open. The accepted DRV5055 5 V
 basis (3 mA typical / 5 mA maximum) yields approximately 127 mA per 21-key Wing
 and 254 mA for 42 sensors / two Wings: planning estimates, not final USB/system
@@ -204,7 +204,8 @@ documented graph-introspection proof. See
 classification. The JITX challenger evaluation ended in physical-backend
 NO-GO at C4C/G0A; all historical qualification evidence is retained. C4B4B
 classifies the demonstrated JITX downstream path PASS_WITH_LIMITATIONS; C4B5
-remains accepted BLOCKED for complete routing. G0B remains accepted. EDA-003B through F are completed historical work;
+remains accepted BLOCKED for complete routing. G0B remains accepted.
+EDA-003B through F are completed historical work;
 D-018 now governs the next bounded alternate-backend planning step.
 
 The previous spike established reproducibility with a committed dependency
