@@ -223,7 +223,13 @@ zero attempts, checker replay, docs/status links and scope. Existing EDA-004B's
 16 reporting-fault tests are also retained and run; eight new reporting-fault
 cases reject false PASS/zero/attempt/completion claims; its original validator has
 historical branch-specific diff restrictions and is not modified to accept this
-new scope. `node --check task/data/project-status.js` and `git diff --check` pass.
+new scope. `node --check task/data/project-status.js` and final staged/committed
+`git diff --check` pass. Initial unstaged checks did not cover new untracked raw
+files; staging exposed public help/probe trailing whitespace. Those two raw
+streams are losslessly gzipped with both byte hashes, and the original full-context
+fixture diff is retained compressed alongside a zero-context review diff. The
+first grouped commit command continued after that diff failure; this management
+sequence deviation is disclosed and the final gate is checked explicitly.
 The first reporting validation failed because its no-route guard mistook the
 JAR download command for a Java invocation. Its raw failure, v1 validator and
 correction diff are retained; the guard now checks `-jar` invocations. This is
@@ -236,8 +242,9 @@ elapsed time and unobserved human/unattended time. Issue #75 remains within its
 four-hour cap, including reporting/validation/PR completion. The original 16-hour
 budget was not reset: EDA-004B records **0.286 h** estimated AI effort through its
 historical checkpoint; its later reporting/review correction and human time were
-not quantified in the final PR. Known cumulative estimate and nominal remaining
-allowance are recorded separately; a measured total or exact remaining budget
+not quantified in the final PR. This Issue uses a conservative **0.750 h** AI estimate including final PR/CI
+reserve; the known cumulative estimate is **1.036 h**, with **14.964 h** nominal
+remaining under the original 16-hour cap. Those estimates are not measured totals; a measured total or exact remaining budget
 cannot be inferred. Process elapsed overlaps active AI work and is not added as
 engineer-hours; complete unattended elapsed and human effort remain null.
 

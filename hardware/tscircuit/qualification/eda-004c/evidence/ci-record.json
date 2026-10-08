@@ -1,5 +1,76 @@
 {
-  "status": "PENDING",
-  "final_head_check_location": "PR #76 final body",
-  "note": "Current HEAD must be checked after the final evidence commit; CI is PR hygiene, not EDA qualification."
+  "status": "CHECKPOINT_SUCCESS",
+  "checked_utc": "2026-10-08T11:34:05.144568+00:00",
+  "head": "1ca75c9e379fea0dfecb42a7ace6839ab15b8586",
+  "checks": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37770754461/job/113289454207",
+      "name": "Detect engineering changes",
+      "startedAt": "2026-10-08T11:32:48Z",
+      "status": "COMPLETED",
+      "workflowName": "engineering-ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:52Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37770754461/job/113289489974",
+      "name": "Layout generator",
+      "startedAt": "2026-10-08T11:32:52Z",
+      "status": "COMPLETED",
+      "workflowName": "engineering-ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:52Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37770754461/job/113289490502",
+      "name": "KiCad ERC / DRC",
+      "startedAt": "2026-10-08T11:32:52Z",
+      "status": "COMPLETED",
+      "workflowName": "engineering-ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:52Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37770754461/job/113289490343",
+      "name": "Sensor-test firmware",
+      "startedAt": "2026-10-08T11:32:52Z",
+      "status": "COMPLETED",
+      "workflowName": "engineering-ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:57Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37770754461/job/113289489105",
+      "name": "Engineering gate",
+      "startedAt": "2026-10-08T11:32:54Z",
+      "status": "COMPLETED",
+      "workflowName": "engineering-ci"
+    },
+    {
+      "__typename": "StatusContext",
+      "context": "Vercel",
+      "startedAt": "2026-10-08T11:32:49Z",
+      "state": "SUCCESS",
+      "targetUrl": "https://vercel.com/ihsinoky/he-piantor-42/CasbdmxfXSsikydsyReB8bCWxvZv"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T11:32:50Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://vercel.com/github",
+      "name": "Vercel Preview Comments",
+      "startedAt": "2026-10-08T11:32:50Z",
+      "status": "COMPLETED",
+      "workflowName": ""
+    }
+  ],
+  "final_head_check_location": "PR #76 final body; final evidence commit necessarily follows this recorded checkpoint",
+  "limitations": "Product KiCad/layout/firmware skipped by existing filters; no native-spike trigger. CI is evidence/PR hygiene, not EDA pass."
 }

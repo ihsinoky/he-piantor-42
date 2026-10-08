@@ -1,5 +1,5 @@
 """Read-only validation of a stopped experiment; never installs/generates/routes."""
-import datetime,hashlib,importlib.util,json,re,subprocess
+import datetime,gzip,hashlib,importlib.util,json,re,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parents[3]
@@ -57,7 +57,12 @@ if __name__=='__main__':
   assert isinstance(r['exit_code'],int) or 'launch_error' in r
   assert datetime.datetime.fromisoformat(r['end_utc'])>=datetime.datetime.fromisoformat(r['start_utc'])
   for stream in ['stdout','stderr']:
-   assert digest(record_path.parent/stream)==r[stream+'_sha256']
+   stream_path=record_path.parent/r.get(stream+'_saved_path',stream)
+   data=stream_path.read_bytes()
+   if r.get(stream+'_encoding')=='gzip':
+    assert digest(stream_path)==r[stream+'_compressed_sha256']
+    data=gzip.decompress(data)
+   assert hashlib.sha256(data).hexdigest()==r[stream+'_sha256']
   evidence_base=record_path.parents[2]
   for a in r['artifacts']:
    if a['present']:assert digest(evidence_base/a['saved_path'])==a['sha256']
