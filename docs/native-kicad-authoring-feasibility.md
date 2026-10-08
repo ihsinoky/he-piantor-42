@@ -170,3 +170,9 @@ Completion time and CI observation are recorded in the PR/ledger.
 They do not qualify the frontend. CI uses unchanged path filters: product
 KiCad/layout/firmware checks may be SKIPPED, not a technical PASS. See the PR
 for observed current-head CI; no CI configuration was changed.
+
+The first staged diff check found whitespace in verbatim KiCad help/traceback
+raw. The shell command sequence still proceeded to the initial commit/push.
+A reporting correction losslessly compresses these streams without changing
+bytes, hashes or generated files; the immutable first-commit failing diff and
+reason are retained. The final baseline diff check passes.

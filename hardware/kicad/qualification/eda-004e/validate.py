@@ -22,6 +22,7 @@ def verify_record(record,out,err):
         if a['present']:assert sha(R/a['saved_path'])==a['sha256']
 
 if __name__=='__main__':
+    for name,digest in read(R/'integrity.json')['sha256'].items():assert sha(ROOT/name)==digest,name
     errors=[];files=json.loads(gzip.decompress((R/'starting-files.json.gz').read_bytes()))
     for name,digest in files.items():
         if name not in ALLOWED:assert sha(REPO/name)==digest,name

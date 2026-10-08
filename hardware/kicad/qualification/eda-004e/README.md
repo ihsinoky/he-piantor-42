@@ -14,7 +14,7 @@ recreated KiCad 9.0.9 once in new `/tmp/eda004e`. It requires network access,
 the same Debian/Ubuntu-compatible host and an absent work root. Dependency
 closure hashes are recorded but APT repositories may change. No Codex or GUI
 setup was performed. Per-package commands/times/exits/raw are losslessly grouped
-in `package-extractions.json.gz`; large stdout is losslessly gzip compressed.
+in `package-extractions.json.gz`; nonempty process stdout/stderr are losslessly gzip compressed.
 
 `author.py /absolute/empty/new/directory` loads the unchanged official footprint
 and saves only through public KiCad functions. `inspect.py input.kicad_pcb
