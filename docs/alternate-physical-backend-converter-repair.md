@@ -43,7 +43,7 @@ Maintenance would require retaining these three source changes, reviewing
 upstream net/schema/symbol APIs, and re-running identity/semantic/failure tests
 on any upgrade. This is a qualification patch, not a permanent product dependency
 replacement or upstream PR. It does not fix footprint identity, schematic
-connection precision or library portability. No further fixes were attempted.
+connectivity or library portability. No further fixes were attempted.
 
 No existing `/tmp/eda004c` environment existed. Original source archive,
 source/patch hashes, exact runtime/build locks and same-source kicadts
