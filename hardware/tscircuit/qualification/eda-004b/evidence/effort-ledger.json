@@ -1,0 +1,47 @@
+{
+  "operator": "Codex / AI session",
+  "start_utc_estimate": "2026-10-07T22:17:00+00:00",
+  "first_exact_clock_observation_utc": "2026-10-07T22:21:39+00:00",
+  "reporting_checkpoint_utc_observed": "2026-10-07T22:34:08.294723+00:00",
+  "observable_window_seconds": 749.294723,
+  "ai_active_minutes_estimate": 17.14,
+  "accounting_basis": "Conservative continuous session-wall estimate through final local validation checkpoint, including parallel setup/reporting; not measured engineer-hours. Subsequent commit/push/CI observation time is reported separately in the final PR body.",
+  "human_active_minutes": null,
+  "human_status": "Unobserved; no claim of human work",
+  "unattended_process_elapsed_seconds": null,
+  "unattended_status": "Total unobserved; installation ran alongside AI work. No double-counting as active engineering effort. APT log reports transfer-only 105 MB / 13s, not complete process or unattended duration.",
+  "engineer_hours_measured": null,
+  "engineer_hours_estimate_upper_bound": 0.286,
+  "engineer_hours_cap": 16,
+  "checkpoints": {
+    "P0": {
+      "ceiling_hours": 1,
+      "status": "INCOMPLETE",
+      "reason": "Source/tool acquisition and hashes; no complete library/config/run freeze. Smoke render entered prematurely before P0 completion; disclosed sequencing error."
+    },
+    "P1": {
+      "ceiling_hours": 4,
+      "status": "EXECUTOR CAPTURE FAILURE; converter invoked afterward as sequence deviation",
+      "gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+      "estimated_within_ceiling": true
+    },
+    "P2": {
+      "ceiling_hours": 10,
+      "status": "NOT ENTERED"
+    },
+    "P3": {
+      "ceiling_hours": 13,
+      "status": "NOT ENTERED"
+    },
+    "P4": {
+      "ceiling_hours": 16,
+      "status": "TECHNICAL CONFIRMATION NOT ENTERED; terminal reporting/validation continuing inside reserved budget"
+    }
+  },
+  "experimentation_after_terminal_gate": true,
+  "secondary_environment_failure_log_mtime_utc": "2026-10-07T22:26:44.815484+00:00",
+  "first_failure_observed_at_utc": null,
+  "first_failure_time_limit": "First failure order follows command record and preserved logs; exact guard exception time was not recorded. The retained converter log mtime belongs to the secondary obstacle.",
+  "operations_after_first_failure": "One converter invocation; secondary module-load failure. No immediate-stop compliance claimed; no further experiment after that secondary operation.",
+  "immediate_stop_compliance": false
+}

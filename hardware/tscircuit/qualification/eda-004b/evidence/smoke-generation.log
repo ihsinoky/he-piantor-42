@@ -1,0 +1,11 @@
+29 |     pcbPath={[{x:-1,y:0},{x:1,y:0},{x:-1,y:0}]}/>
+30 | </board>)
+31 | await c.renderUntilSettled()
+32 | const json=c.getCircuitJson()
+33 | if(json.some((x:any)=>["pcb_trace","pcb_via","pcb_copper_pour"].includes(x.type)))
+34 |   throw new Error("routingDisabled retained copper; STOP")
+                 ^
+error: routingDisabled retained copper; STOP
+      at /tmp/eda004b/frontend/smoke.tsx:34:13
+
+Bun v1.2.22 (Linux x64)

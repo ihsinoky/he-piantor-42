@@ -1,0 +1,65 @@
+{
+  "issue": 73,
+  "primary_classification": "ENVIRONMENT_BLOCKED",
+  "first_terminal_gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+  "reason": "Smoke capture guard rejected permitted local bond copper and threw before raw Circuit JSON write. This is an executor verification/capture error, not evidence of EDA/backend incapability.",
+  "main_qualified": false,
+  "stages": {
+    "1": "PARTIAL \u2014 frontend render guard error; converter module load failed; no transport roundtrip",
+    "2": "NOT ENTERED",
+    "3": "NOT ENTERED",
+    "4": "NOT ENTERED"
+  },
+  "main_metrics": {
+    "required_unrouted": null,
+    "wrong_net_copper_components": null,
+    "targeted_material_violations": null,
+    "unexplained_conversion_loss": null
+  },
+  "erc_status": "NOT ENTERED",
+  "drc_status": "NOT ENTERED",
+  "source_schematic_pcb_parity": "NOT ENTERED",
+  "independent_kicad_reconciliation": "NOT ENTERED",
+  "geometry_fault_injection": "NOT ENTERED",
+  "main_initial_count": 0,
+  "main_confirmation_count": 0,
+  "smoke_router_count": 0,
+  "evidence_completeness": "PARTIAL",
+  "missing_raw_smoke_json": true,
+  "additional_observed_failures": [
+    "Converter module load failed during an additional operation after the first smoke guard failure; this secondary environment obstacle does not replace the first executor failure.",
+    "Converter was invoked after the smoke render failed. Immediate-stop discipline was not followed; no further generation/conversion/routing was attempted after that secondary module-load failure.",
+    "P0 package/config/library/run-contract freeze incomplete; the smoke render was entered prematurely. No routing occurred.",
+    "KiCad extracted CLI help emitted missing schema warning; DSN/SES and meaningful ERC/DRC remain untested."
+  ],
+  "production_tscircuit": "0.0.2646",
+  "usb_npth": "OPEN \u2014 PRE-ORDER DFM REVIEW REQUIRED",
+  "next_question": "After PMO assesses the partial evidence and executor capture/sequence errors, should PO authorize a separately bounded environment packaging/capture correction and renewed smoke gate for B? No converter fidelity or routing conclusion supports automatic candidate switching.",
+  "terminal_reporting_complete": true,
+  "technical_qualification_complete": false,
+  "failure_origin": "EXECUTOR_VALIDATION_CAPTURE",
+  "ordered_failure_observations": [
+    {
+      "sequence": 1,
+      "gate": "P1_SMOKE_CAPTURE_GUARD_ERROR",
+      "origin": "EXECUTOR_VALIDATION_CAPTURE",
+      "description": "Smoke capture guard rejected permitted local bond copper and threw before raw Circuit JSON write. This is an executor verification/capture error, not evidence of EDA/backend incapability.",
+      "evidence_log": "smoke-generation.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    },
+    {
+      "sequence": 2,
+      "gate": "P1_CONVERTER_MODULE_LOAD",
+      "origin": "SECONDARY_ENVIRONMENT_OBSTACLE",
+      "description": "Converter was invoked after the smoke guard failure (sequence deviation) and raised ERR_MODULE_NOT_FOUND before input access.",
+      "evidence_log": "smoke-conversion.log",
+      "exit_code": null,
+      "observed_at_utc": null
+    }
+  ],
+  "sequence_deviation": true,
+  "immediate_stop_compliance": false,
+  "secondary_environment_gate": "P1_CONVERTER_MODULE_LOAD",
+  "pmo_review_status": "PMO chronology finding relayed by PO; record correction completed for review, PMO acceptance not claimed."
+}

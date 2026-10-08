@@ -1,0 +1,67 @@
+{
+  "commands": [
+    {
+      "phase": "preflight",
+      "command": "git fetch origin",
+      "result": "PASS after sandbox escalation"
+    },
+    {
+      "phase": "metadata",
+      "command": "python3 /tmp/eda004b/probe.py",
+      "result": "Exact official packages/metadata downloaded"
+    },
+    {
+      "phase": "installation",
+      "command": "dpkg-deb -x /tmp/eda004b/kicad-deb /tmp/eda004b/kicad",
+      "result": "Extracted; initial direct invocation lacked wx libraries"
+    },
+    {
+      "phase": "installation",
+      "command": "apt-get -c /tmp/eda004b/apt.conf update",
+      "result": "exit 0; isolated /tmp indexes"
+    },
+    {
+      "phase": "installation",
+      "command": "apt-get -c /tmp/eda004b/apt.conf --download-only --no-install-recommends -y install /tmp/eda004b/kicad-deb",
+      "result": "exit 100; filename lacked .deb; preserved"
+    },
+    {
+      "phase": "installation",
+      "command": "apt-get -c /tmp/eda004b/apt.conf --download-only --no-install-recommends -y install /tmp/eda004b/kicad_9.0.9_amd64.deb",
+      "result": "exit 0; 106 dependency archives; extracted into /tmp; no system installation"
+    },
+    {
+      "phase": "installation",
+      "cwd": "/tmp/eda004b/frontend",
+      "command": "npm ci --ignore-scripts --cache /tmp/eda004b/npm-cache",
+      "result": "completed; preserved install log; accepted lock unchanged"
+    },
+    {
+      "phase": "installation",
+      "cwd": "/tmp/eda004b/converter-env",
+      "command": "npm install --ignore-scripts --cache /tmp/eda004b/npm-cache",
+      "result": "completed; pinned imports; resolved lock retained; kicadts dist missing"
+    },
+    {
+      "phase": "help",
+      "command": "env -u DISPLAY -u WAYLAND_DISPLAY java -Djava.awt.headless=true -jar /tmp/eda004b/freerouting.jar -help",
+      "result": "help only, default path warning; no -de/-do"
+    },
+    {
+      "phase": "help",
+      "command": "env -u DISPLAY -u WAYLAND_DISPLAY XDG_CONFIG_HOME=/tmp/eda004b/config XDG_STATE_HOME=/tmp/eda004b/state java -Djava.awt.headless=true -jar /tmp/eda004b/freerouting.jar --user_data_path=/tmp/eda004b/config/freerouting -help",
+      "result": "isolated help only; no -de/-do"
+    },
+    {
+      "phase": "Stage 1",
+      "command": "/tmp/eda004b/bun-linux-x64/bun /tmp/eda004b/frontend/smoke.tsx /tmp/eda004b/smoke.circuit.json",
+      "result": "exception before raw write; individual numeric exit code not separately captured"
+    },
+    {
+      "phase": "Stage 1",
+      "command": "node /tmp/eda004b/converter-env/convert.mjs /tmp/eda004b/smoke.circuit.json /tmp/eda004b/smoke",
+      "result": "ERR_MODULE_NOT_FOUND before input access; individual numeric exit code not separately captured"
+    }
+  ],
+  "limit": "Historical tool results/logs, not a complete timed process wrapper. Shell groups masked individual exits by ending with cat. Numeric exits not observed are null, not inferred zero. No routing command executed."
+}

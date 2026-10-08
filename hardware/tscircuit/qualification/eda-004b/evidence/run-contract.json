@@ -1,0 +1,69 @@
+{
+  "issue": 73,
+  "status": "INCOMPLETE / NOT ENTERED",
+  "frozen_for_routing": false,
+  "reason": "First failure P1_SMOKE_CAPTURE_GUARD_ERROR (executor verification/capture error), followed by converter module load as a sequence deviation and secondary environment obstacle. No DSN/routing process; effective rule/config/library reconciliation absent.",
+  "main_attempt_limit": 1,
+  "confirmation_limit": 1,
+  "smoke_routing_limit": 1,
+  "proposed_timeout_seconds": {
+    "smoke": 120,
+    "main": 1800
+  },
+  "proposed_maximum_passes": 100,
+  "proposed_optimizer_threads": 1,
+  "proposed_optimizer_strategy": {
+    "update": "greedy",
+    "item_selection": "sequential",
+    "improvement_threshold_percent": 2.5
+  },
+  "proposed_layers": {
+    "routable": [
+      true,
+      true
+    ],
+    "preferred_direction_horizontal": [
+      true,
+      false
+    ]
+  },
+  "required_rules_mm": {
+    "trace_width": 0.2,
+    "material_clearance": 0.2,
+    "via_copper": 0.6,
+    "via_drill": 0.3,
+    "thickness": 1.2
+  },
+  "proposed_command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-jar",
+    "/tmp/eda004b/freerouting.jar",
+    "--gui.enabled=false",
+    "--api_server.enabled=false",
+    "--user_data_path=/tmp/eda004b/run/config",
+    "-da",
+    "-de",
+    "/tmp/eda004b/run/input.dsn",
+    "-do",
+    "/tmp/eda004b/run/output.ses",
+    "-mp",
+    "100",
+    "-mt",
+    "1",
+    "-us",
+    "greedy",
+    "-is",
+    "sequential",
+    "--router.optimizer.improvement_threshold=2.5",
+    "--router.layers.routable=true,true",
+    "--router.layers.preferred_direction_horizontal=true,false"
+  ],
+  "dsn_sha256": null,
+  "effective_rules_sha256": null,
+  "config_sha256": null,
+  "library_snapshot_sha256": null,
+  "numerical_reconciliation_tolerance_mm": null,
+  "command_execution_count": 0,
+  "notes": "Documentation-supported proposed values only. No Main tuning or supported-settings execution claim. Missing fields prohibit launch. This post-STOP record is not a pre-route freeze."
+}

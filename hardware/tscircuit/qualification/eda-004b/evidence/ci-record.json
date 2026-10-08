@@ -1,0 +1,104 @@
+{
+  "commit": "c097cc80fa5ba13ce5ffc4e38075baea451c7ce2",
+  "run_url": "https://github.com/ihsinoky/he-piantor-42/actions/runs/37695954959",
+  "jobs": {
+    "jobs": [
+      {
+        "id": 113047598511,
+        "name": "Detect engineering changes",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37695954959,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Classify changed paths",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          }
+        ]
+      },
+      {
+        "id": 113047633245,
+        "name": "Engineering gate",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37695954959,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Verify engineering jobs",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          }
+        ]
+      },
+      {
+        "id": 113047634447,
+        "name": "Sensor-test firmware",
+        "status": "completed",
+        "conclusion": "skipped",
+        "run_id": 37695954959,
+        "logs_url": null,
+        "steps": null
+      },
+      {
+        "id": 113047634450,
+        "name": "KiCad ERC / DRC",
+        "status": "completed",
+        "conclusion": "skipped",
+        "run_id": 37695954959,
+        "logs_url": null,
+        "steps": null
+      },
+      {
+        "id": 113047634865,
+        "name": "Layout generator",
+        "status": "completed",
+        "conclusion": "skipped",
+        "run_id": 37695954959,
+        "logs_url": null,
+        "steps": null
+      }
+    ]
+  },
+  "limitations": "Early draft commit CI only. Final head CI is checked and reported in the final PR body. Skipped KiCad job is not an ERC/DRC PASS."
+}
