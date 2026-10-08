@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004e/inspect.py", line 54, in <module>
+    path=Path(sys.argv[1]);out=snapshot(path);Path(sys.argv[2]).write_text(json.dumps(out,indent=2)+'\n')
+                               ^^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004e/inspect.py", line 31, in snapshot
+    actual_layers=[b.GetLayerName(layer) for layer in pad.GetLayerSet().Seq()];assert sorted(actual_layers)==sorted(x['layers']),(actual_layers,x['layers'])
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (['F.Cu', 'F.Mask', 'B.Cu', 'B.Mask', 'In1.Cu', 'In2.Cu', 'In3.Cu', 'In4.Cu', 'In5.Cu', 'In6.Cu', 'In7.Cu', 'In8.Cu', 'In9.Cu', 'In10.Cu', 'In11.Cu', 'In12.Cu', 'In13.Cu', 'In14.Cu', 'In15.Cu', 'In16.Cu', 'In17.Cu', 'In18.Cu', 'In19.Cu', 'In20.Cu', 'In21.Cu', 'In22.Cu', 'In23.Cu', 'In24.Cu', 'In25.Cu', 'In26.Cu', 'In27.Cu', 'In28.Cu', 'In29.Cu', 'In30.Cu'], ['F.Cu', 'B.Cu', 'F.Mask', 'B.Mask'])

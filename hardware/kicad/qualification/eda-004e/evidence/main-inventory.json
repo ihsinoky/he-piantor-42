@@ -1,0 +1,732 @@
+{
+  "baseline_commit": "67b0523b513742fa7e3cc2f09b710a79eef2e6ac",
+  "source_paths": [
+    "hardware/tscircuit/src/qualification/revm1-routing-proof.tsx",
+    "hardware/tscircuit/src/qualification/native-support-footprints.tsx",
+    "hardware/tscircuit/src/qualification/JstGh14.tsx"
+  ],
+  "historical_raw": {
+    "path": "hardware/tscircuit/qualification/eda-003c/evidence/raw/latest-main.circuit.json.gz",
+    "sha256": "0fbf192de02584520b9b53ac505ab0987d784eb0b0139077971901ab3c389ef2",
+    "fresh_generated": false
+  },
+  "type_counts": {
+    "source_project_metadata": 1,
+    "source_group": 1,
+    "source_port": 197,
+    "source_component": 49,
+    "source_net": 37,
+    "source_board": 1,
+    "source_refdes_convention_warning": 3,
+    "source_component_internal_connection": 4,
+    "source_trace": 165,
+    "source_no_power_pin_defined_warning": 8,
+    "source_no_ground_pin_defined_warning": 8,
+    "source_component_pins_underspecified_warning": 2,
+    "pcb_component": 49,
+    "pcb_board": 1,
+    "pcb_smtpad": 193,
+    "pcb_solder_paste": 201,
+    "pcb_plated_hole": 4,
+    "pcb_hole": 2,
+    "pcb_silkscreen_path": 59,
+    "pcb_silkscreen_text": 45,
+    "pcb_courtyard_outline": 3,
+    "pcb_silkscreen_rect": 1,
+    "pcb_courtyard_rect": 37,
+    "pcb_port": 197,
+    "pcb_trace": 128,
+    "cad_component": 49,
+    "source_missing_manufacturer_part_number_warning": 41,
+    "pcb_component_missing_courtyard_warning": 9,
+    "pcb_via": 126,
+    "pcb_trace_error": 17,
+    "pcb_pad_trace_clearance_error": 19,
+    "pcb_via_trace_clearance_error": 32,
+    "pcb_pad_pad_clearance_error": 1,
+    "pcb_placement_error": 2
+  },
+  "components": [
+    {
+      "name": "U_MCU",
+      "kind": "simple_chip",
+      "mpn": "RP2040"
+    },
+    {
+      "name": "J_USB",
+      "kind": "simple_chip",
+      "mpn": "TYPE-C-31-M-12"
+    },
+    {
+      "name": "U_ESD",
+      "kind": "simple_chip",
+      "mpn": "USBLC6-2SC6"
+    },
+    {
+      "name": "U_FLASH",
+      "kind": "simple_chip",
+      "mpn": "W25Q16JVUXIQ"
+    },
+    {
+      "name": "Y1",
+      "kind": "simple_chip",
+      "mpn": "ABM8-272-T3"
+    },
+    {
+      "name": "U_LDO",
+      "kind": "simple_chip",
+      "mpn": "AP2112K-3.3TRG1"
+    },
+    {
+      "name": "U_LOAD",
+      "kind": "simple_chip",
+      "mpn": "TPS22919DCKR"
+    },
+    {
+      "name": "J_WING",
+      "kind": "simple_chip",
+      "mpn": "BM14B-GHS-TBT(LF)(SN)"
+    },
+    {
+      "name": "R_CC1",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_CC2",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_USB_DP",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_USB_DM",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_QSPI_SS",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_WING_PD",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_HALL_PD",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_RUN",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_XOUT",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "C_XIN",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_XOUT",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF1",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF2",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF3",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF4",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF5",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF6",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF7",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF8",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_HF9",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_VREG_IN",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_VREG_OUT",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_MCU_BULK",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_FLASH",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_LDO_IN",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_LDO_OUT",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_LOAD_IN",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "C_LOAD_OUT",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_A_TOP",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_A_BOTTOM",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "C_ADC_A",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_B_TOP",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_B_BOTTOM",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "C_ADC_B",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_C_TOP",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "R_ADC_C_BOTTOM",
+      "kind": "simple_resistor",
+      "mpn": null
+    },
+    {
+      "name": "C_ADC_C",
+      "kind": "simple_capacitor",
+      "mpn": null
+    },
+    {
+      "name": "TP_SWDIO",
+      "kind": "simple_test_point",
+      "mpn": null
+    },
+    {
+      "name": "TP_SWCLK",
+      "kind": "simple_test_point",
+      "mpn": null
+    },
+    {
+      "name": "TP_RUN",
+      "kind": "simple_test_point",
+      "mpn": null
+    },
+    {
+      "name": "TP_QSPI_SS_FLASH",
+      "kind": "simple_test_point",
+      "mpn": null
+    }
+  ],
+  "nets": [
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_0",
+      "name": "V3V3",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": true,
+      "is_positive_voltage_source": true,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net0"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_1",
+      "name": "MUX_A0",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net1"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_2",
+      "name": "MUX_A1",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net2"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_3",
+      "name": "MUX_A2",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net3"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_4",
+      "name": "WING_EN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net4"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_5",
+      "name": "HALL_PWR_EN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net5"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_6",
+      "name": "GND",
+      "member_source_group_ids": [],
+      "is_ground": true,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net6"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_7",
+      "name": "XIN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net7"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_8",
+      "name": "XOUT",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net8"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_9",
+      "name": "V1V1",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": true,
+      "is_positive_voltage_source": true,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net9"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_10",
+      "name": "SWCLK",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net10"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_11",
+      "name": "SWDIO",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net11"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_12",
+      "name": "RUN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net12"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_13",
+      "name": "ADC_A",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net13"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_14",
+      "name": "ADC_B",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net14"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_15",
+      "name": "ADC_C",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net15"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_16",
+      "name": "USB_DM",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net16"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_17",
+      "name": "USB_DP",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net17"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_18",
+      "name": "QSPI_SD3",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net18"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_19",
+      "name": "QSPI_SCLK",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net19"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_20",
+      "name": "QSPI_SD0",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net20"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_21",
+      "name": "QSPI_SD2",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net21"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_22",
+      "name": "QSPI_SD1",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net22"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_23",
+      "name": "QSPI_SS_MCU",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net23"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_24",
+      "name": "HALL_5V",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": true,
+      "is_positive_voltage_source": true,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net24"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_25",
+      "name": "MUX_OUT_A",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net25"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_26",
+      "name": "MUX_OUT_B",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net26"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_27",
+      "name": "MUX_OUT_C",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net27"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_28",
+      "name": "VBUS",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": true,
+      "is_positive_voltage_source": true,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net28"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_29",
+      "name": "USB_DP_CONN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net29"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_30",
+      "name": "USB_DM_CONN",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net30"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_31",
+      "name": "CC1",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net31"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_32",
+      "name": "CC2",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net32"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_33",
+      "name": "USB_DP_ESD",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net33"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_34",
+      "name": "USB_DM_ESD",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net34"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_35",
+      "name": "QSPI_SS_FLASH",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net35"
+    },
+    {
+      "type": "source_net",
+      "source_net_id": "source_net_36",
+      "name": "XOUT_XTAL",
+      "member_source_group_ids": [],
+      "is_ground": false,
+      "is_power": false,
+      "is_positive_voltage_source": false,
+      "subcircuit_id": "subcircuit_source_group_0",
+      "subcircuit_connectivity_map_key": "unnamedsubcircuitsubcircuit_source_group_0_connectivity_net36"
+    }
+  ],
+  "board": [
+    {
+      "type": "pcb_board",
+      "pcb_board_id": "pcb_board_0",
+      "source_board_id": "source_board_0",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "thickness": 1.2,
+      "num_layers": 2,
+      "width": 48,
+      "height": 44,
+      "material": "fr4",
+      "min_trace_width": 0.2,
+      "min_via_hole_diameter": 0.3,
+      "min_via_pad_diameter": 0.6,
+      "min_via_hole_edge_to_via_hole_edge_clearance": 0.1,
+      "min_trace_to_hole_edge_clearance": 0.2,
+      "min_trace_to_pad_edge_clearance": 0.2,
+      "min_pad_edge_to_pad_edge_clearance": 0.1,
+      "min_plated_hole_drill_edge_to_drill_edge_clearance": 0.15,
+      "min_board_edge_clearance": 0.2
+    }
+  ],
+  "no_main_generation_conversion_routing": true
+}

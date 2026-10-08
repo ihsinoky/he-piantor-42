@@ -60,3 +60,12 @@ Before the PO makes the merge decision:
 
 The GitHub merge-method and branch-cleanup settings are manual PO actions listed
 in [governance](governance.md#repository-settings-po-manual-action).
+
+## EDA method changes and retries
+
+Before proposing an EDA method change or retry, read
+[`eda-path-history.md`](eda-path-history.md) and state the previous stop reason,
+the concrete difference in the proposed method, and the first hypothesis to
+verify. Separate observed evidence, PO supplements and unconfirmed causes.
+Carry forward existing evaluation effort and limits; a candidate change does not
+reset the budget. Existing decisions remain intact until a separate Human Gate.

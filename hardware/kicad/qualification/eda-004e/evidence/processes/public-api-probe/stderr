@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004e/probe.py", line 5, in <module>
+    for obj in [p,p.BOARD(),p.BOARD_DESIGN_SETTINGS(),p.PAD,p.FOOTPRINT]:
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/eda004e/kicad/usr/lib/python3/dist-packages/pcbnew.py", line 11147, in __init__
+    _pcbnew.BOARD_DESIGN_SETTINGS_swiginit(self, _pcbnew.new_BOARD_DESIGN_SETTINGS(*args))
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Wrong number or type of arguments for overloaded function 'new_BOARD_DESIGN_SETTINGS'.
+  Possible C/C++ prototypes are:
+    BOARD_DESIGN_SETTINGS::BOARD_DESIGN_SETTINGS(JSON_SETTINGS *,std::string const &)
+    BOARD_DESIGN_SETTINGS::BOARD_DESIGN_SETTINGS(BOARD_DESIGN_SETTINGS const &)
+

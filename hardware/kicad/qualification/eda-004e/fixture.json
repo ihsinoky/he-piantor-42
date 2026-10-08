@@ -1,0 +1,24 @@
+{
+  "frozen_before_creation": true,
+  "board": {"outline_mm": [[100,100],[130,100],[130,124],[100,124]], "copper_layers": 2, "thickness_mm": 1.2, "edge_width_mm": 0.05},
+  "rules": {"min_clearance_mm": 0.2, "default_clearance_mm": 0.2, "min_track_width_mm": 0.2, "default_track_width_mm": 0.2, "via_diameter_mm": 0.6, "via_drill_mm": 0.3, "copper_edge_clearance_mm": 0.5},
+  "nets": ["GND", "SIG"],
+  "official": {"reference":"R1", "library":"Resistor_SMD", "name":"R_0603_1608Metric", "position_mm":[106,106], "rotation_deg":90,
+    "pads":[
+      {"number":"1","local_mm":[-0.825,0],"size_mm":[0.8,0.95],"shape":"ROUNDRECT","roundrect_ratio":0.25,"attribute":"SMD","layers":["F.Cu","F.Paste","F.Mask"],"drill_mm":[0,0],"net":"SIG"},
+      {"number":"2","local_mm":[0.825,0],"size_mm":[0.8,0.95],"shape":"ROUNDRECT","roundrect_ratio":0.25,"attribute":"SMD","layers":["F.Cu","F.Paste","F.Mask"],"drill_mm":[0,0],"net":"GND"}
+    ]},
+  "special": {"reference":"U1", "position_mm":[115,112], "rotation_deg":30,
+    "pads":[
+      {"number":"1","local_mm":[-2,0],"size_mm":[1,1],"shape":"ROUNDRECT","roundrect_ratio":0.25,"attribute":"SMD","layers":["F.Cu","F.Paste","F.Mask"],"drill_mm":[0,0],"net":"GND"},
+      {"number":"1","local_mm":[0,0],"size_mm":[1,1],"shape":"CIRCLE","roundrect_ratio":0,"attribute":"SMD","layers":["F.Cu","F.Paste","F.Mask"],"drill_mm":[0,0],"net":"GND"},
+      {"number":"2","local_mm":[2,0],"size_mm":[1,1],"shape":"RECT","roundrect_ratio":0,"attribute":"SMD","layers":["F.Cu","F.Paste","F.Mask"],"drill_mm":[0,0],"net":"SIG"},
+      {"number":"1","local_mm":[0,4],"size_mm":[1.6,2.6],"shape":"OVAL","roundrect_ratio":0,"attribute":"PTH","layers":["F.Cu","B.Cu","F.Mask","B.Mask"],"drill_mm":[0.6,1.6],"drill_shape":"OBLONG","net":"GND"},
+      {"number":"","local_mm":[4,4],"size_mm":[1,1],"shape":"CIRCLE","roundrect_ratio":0,"attribute":"NPTH","layers":["F.Cu","B.Cu","F.Mask","B.Mask"],"drill_mm":[1,1],"drill_shape":"CIRCLE","net":""}
+    ]},
+  "local_ground_tracks": [{"from_local_mm":[-2,0],"to_local_mm":[0,0],"width_mm":0.2,"layer":"F.Cu","net":"GND"},{"from_local_mm":[0,0],"to_local_mm":[0,4],"width_mm":0.2,"layer":"F.Cu","net":"GND"}],
+  "planned_unconnected": [{"net":"SIG","ends":["R1.1","U1.2"]},{"net":"GND","ends":["R1.2","U1.1 ground cluster"]}],
+  "rule_effect_probe": {"method":"separate non-fixture board, API objects and settings only", "foreign_net_edge_gap_mm":0.15, "required_clearance_mm":0.2, "expected_drc":"clearance", "not_a_fixture_repair":true},
+  "required_unexpected_drc":0,
+  "fresh_policy":"one empty-directory regeneration only after full initial PCB acceptance"
+}
