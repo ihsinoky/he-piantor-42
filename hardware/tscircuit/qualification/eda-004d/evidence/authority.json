@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/77",
+    "title": "EDA-004D: bounded converter repair and headless smoke qualification",
+    "issue_number": 77,
+    "body": "目的\nhe-piantor-42を実物Rev.M1へ進めるため、candidate Bの既知の\nCircuit JSON→KiCad変換欠落が、小さな保守範囲で解消可能か判断する。\n\nBaseline\nmain: 6684821a00bc2ebe368dcc78495d013eb5dd47d9\nIssue #75 / PR #76 / EDA-004C\nclassification: CONVERSION_BLOCKED — C1_DUPLICATE_GND_PAD_NET_LOSS\n\nこれはbackend採用、Main qualification、製造承認を意味しない。\n\n時間上限\n準備・修正・実験・報告を含め最大3 engineer-hours。\n既存のbackend評価予算に加算し、予算をリセットしない。\n観測できない人間作業時間はunknownとして記録する。\n\n許可範囲\n- 既存の固定版・lock・fixture・checkerを基礎とする。\n- isolated converter source copyへの限定パッチを許可する。\n- 原本、patch、build手順、依存lock、hashを保存する。\n- 既知の問題を対象とする:\n  1. 内部接続されたduplicate physical padのネット継承\n  2. 異なる回路図シンボルの識別子と参照の整合\n  3. sourceの入力・出力等の電気属性の保持\n- 必要なsource属性が存在しない場合、推測で補わずSTOPする。\n- library設定と実効ルールを明示し、未解決警告を評価する。\n- 実routing前の単体検証・変換検証は時間上限内で許可する。\n- 完全なpre-route acceptance後、既存synthetic smokeを1回実行する。\n- 初回がすべてPASSした場合のみ、fresh environmentで1回確認する。\n\n禁止\n- Main生成・変換・配線\n- production tscircuit pinや製品設計の変更\n- fixtureからduplicate pad等を削除して問題を回避すること\n- 生成後KiCadファイルの手修正やネット再割当\n- 全ピンpassive化、DRC/ERC除外、clearance緩和\n- router変更、無制限のreroute、追加backend探索\n- 既存evidenceの上書き\n- merge、Human Gate、backend adoption\n\nKill Gates\n- 3時間以内に既知の変換欠落を解消できない → STOP。\n- 新たな変換欠落や、広範なschema/変換器再設計が必要 → STOP。\n- pre-routeでネット、ピン属性、geometry、local copper、\n  effective rulesの不一致が残る → routingせずSTOP。\n- 初回routing/round-tripでshort、接続欠落、material DRC違反、\n  rule loss、必要なexport failureが出る → 保存後STOP。\n- fresh確認が不一致 → STOP。追加実行しない。\n\nAcceptance\n- duplicate padを含む全物理端点のネットがsourceと一致。\n- 回路図シンボルの定義・参照・ピン番号・電気属性が一致。\n- ERCを実行し、output/output等の意図的な誤りを検出できる。\n- library未設定や接続曖昧性を未解決のままPASSにしない。\n- KiCad→DSN→Freerouting→SES→KiCadがheadlessで成立。\n- required unrouted=0、wrong-net physical copper=0、\n  project-required material DRC=0。\n- local copper、geometry、drill/plating/layers、実効ルールを保持。\n- 独立checkerとfresh確認がPASS。\n- raw outputs、exit code、時刻、hashを保存してから判定する。\n\n成果物\n- 新規EDA-004D evidence root\n- 再現可能な限定patchと検証\n- 短いqualification report\n- 継続的に保守する必要があるpatch範囲の説明\n- PASS、または最初の失敗gateと未実施項目を明示したPR\n\n判定後\nPASS: 次の別Issueで代表Mainのphysical routing qualification。\nFAIL: converter追加探索を停止し、PO/PMOがnative KiCad案への\n切り替えを判断する。Codexは候補変更を自動実行しない。",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-10-08T19:48:07Z",
+    "updated_at": "2026-10-08T19:48:07Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/77",
+    "display_title": "EDA-004D: bounded converter repair and headless smoke qualification"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/77",
+  "title": "EDA-004D: bounded converter repair and headless smoke qualification",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/77",
+  "display_title": "EDA-004D: bounded converter repair and headless smoke qualification"
+}

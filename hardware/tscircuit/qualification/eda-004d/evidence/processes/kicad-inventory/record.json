@@ -1,0 +1,39 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/workspaces/he-piantor-42/hardware/tscircuit/qualification/eda-004c/inspect-board.py",
+    "/tmp/eda004d/smoke.kicad_pcb",
+    "/tmp/eda004d/board-inventory.json"
+  ],
+  "cwd": "/tmp/eda004d",
+  "start_utc": "2026-10-08T20:04:26.217560+00:00",
+  "end_utc": "2026-10-08T20:04:26.739605+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004d/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004d/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004d/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004d/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004d/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004d/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004d/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004d/config",
+    "XDG_CACHE_HOME": "/tmp/eda004d/cache",
+    "XDG_DATA_HOME": "/tmp/eda004d/data",
+    "XDG_STATE_HOME": "/tmp/eda004d/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "board-inventory.json",
+      "original_path": "/tmp/eda004d/board-inventory.json",
+      "present": true,
+      "saved_path": "processes/kicad-inventory/board-inventory.json",
+      "sha256": "6de5ef67ba35b614b8f303dfd88182fb7ae06d7bba2f7b98790170a98777de93"
+    }
+  ],
+  "elapsed_seconds": 0.5185244419999435,
+  "stdout_sha256": "a6788f895774df4a36c3de0d737b6f3be3da14b30552634da43013d60ec1ecdb",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,84 @@
+--- a/lib/pcb/stages/AddFootprintsStage.ts
++++ b/lib/pcb/stages/AddFootprintsStage.ts
+@@ -65,4 +65,21 @@
+-    const keys = [
+-      ...(this.sourcePortNetKeys[sourcePortId] ?? []),
+-      sourcePort.subcircuit_connectivity_map_key,
+-    ]
++    // Traverse only explicit internal connections; never union KiCad nets.
++    const connected = new Set<string>([sourcePortId])
++    const pending = [sourcePortId]
++    while (pending.length) {
++      const current = pending.pop()!
++      for (const internal of this.ctx.db.source_component_internal_connection.list()) {
++        if (!internal.source_port_ids.includes(current)) continue
++        for (const id of internal.source_port_ids) {
++          const port = this.ctx.db.source_port.get(id)
++          if (!port || port.source_component_id !== sourcePort.source_component_id ||
++              internal.source_component_id !== sourcePort.source_component_id) {
++            throw new Error(`Invalid internal connection for ${sourcePortId}: ${id}`)
++          }
++          if (!connected.has(id)) { connected.add(id); pending.push(id) }
++        }
++      }
++    }
++    const keys = [...connected].flatMap((id) => [
++      ...(this.sourcePortNetKeys[id] ?? []),
++      this.ctx.db.source_port.get(id)?.subcircuit_connectivity_map_key,
++    ])
+--- a/lib/schematic/getLibraryId.ts
++++ b/lib/schematic/getLibraryId.ts
+@@ -38 +38 @@
+-export function getLibraryId(
++function getBaseLibraryId(
+@@ -89,0 +90,13 @@
++// Definitions and instances use this shared function. Component identity avoids
++// assuming equal artwork names imply equal pin names or electrical semantics.
++export function getLibraryId(
++  sourceComp: SourceComponentBase,
++  schematicComp: SchematicComponent,
++  cadComponent?: CadComponent | null,
++  schematicSymbolName?: string,
++): string {
++  const identity = Array.from(sourceComp.source_component_id)
++    .map((character) => character.codePointAt(0)!.toString(16)).join("_")
++  return `${getBaseLibraryId(sourceComp, schematicComp, cadComponent, schematicSymbolName)}_${identity}`
++}
++
+--- a/lib/schematic/stages/utils/createPinSubsymbol.ts
++++ b/lib/schematic/stages/utils/createPinSubsymbol.ts
+@@ -15,0 +16,23 @@
++
++function sourceElectricalType(port: SourcePort): SymbolPin["pinElectricalType"] {
++  const types: SymbolPin["pinElectricalType"][] = []
++  if (port.is_input) types.push("input")
++  if (port.is_output) types.push("output")
++  if (port.is_bidirectional) types.push("bidirectional")
++  if (port.is_passive) types.push("passive")
++  if (port.provides_power || port.provides_ground) types.push("power_out")
++  if (port.requires_power || port.requires_ground) types.push("power_in")
++  if (port.do_not_connect) types.push("no_connect")
++  if (types.length !== 1) {
++    throw new Error(`Missing or conflicting electrical type: ${port.source_port_id}`)
++  }
++  const special = [port.is_using_tri_state, port.is_using_open_collector,
++    port.is_using_open_emitter].filter(Boolean).length
++  if (special > 1 || (special && types[0] !== "output")) {
++    throw new Error(`Conflicting output mode: ${port.source_port_id}`)
++  }
++  if (port.is_using_tri_state) return "tri_state"
++  if (port.is_using_open_collector) return "open_collector"
++  if (port.is_using_open_emitter) return "open_emitter"
++  return types[0]
++}
+@@ -223,0 +247,10 @@
++    if (schematicComponent) {
++      const matches = schematicPorts.filter((candidate) =>
++        candidate.schematic_component_id === schematicComponent.schematic_component_id &&
++        String(candidate.pin_number) === pinNum)
++      const source = matches.length === 1
++        ? sourcePorts.find((candidate) => candidate.source_port_id === matches[0].source_port_id)
++        : undefined
++      if (!source) throw new Error(`Ambiguous source pin: ${libId} ${pinNum}`)
++      pin.pinElectricalType = sourceElectricalType(source)
++    }

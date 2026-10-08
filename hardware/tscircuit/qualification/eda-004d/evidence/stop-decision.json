@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-08T20:04:57.972413+00:00",
+  "classification": "CONVERSION_BLOCKED",
+  "first_failure_gate": "D1_FOOTPRINT_LIBRARY_ID_COLLISION",
+  "authority": "Issue #77: new conversion loss -> STOP; unresolved pre-route mismatch -> no routing",
+  "finding": "U_TX and U_RX have different physical footprints but both reference tscircuit:chip. Upstream ExtractFootprintsStage keeps only the first entry for a footprintName. Configuring one library cannot faithfully resolve both; requires an additional footprint identity/export repair outside the three known fixes.",
+  "secondary_failures": [
+    "Real ERC: two pin_not_connected and one pin_not_driven; off-grid/unconnected endpoints remain",
+    "Unconfigured footprint/symbol libraries: two DRC and four ERC warnings; no PASS",
+    "Effective-rule precedence and schematic/PCB parity not qualified"
+  ],
+  "route_attempts": 0,
+  "initial": "NOT ENTERED",
+  "fresh": "NOT ENTERED",
+  "main": "NOT ENTERED",
+  "policy": "No further EDA build/generation/conversion/export/router processes; only read-only verification, records, commit/push/PR"
+}
