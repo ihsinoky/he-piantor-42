@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "count": 13,
+  "tests": [
+    {
+      "name": "duplicate GND net loss",
+      "detected": true,
+      "kind": "physical_pad_net"
+    },
+    {
+      "name": "wrong net",
+      "detected": true,
+      "kind": "physical_pad_net"
+    },
+    {
+      "name": "missing land",
+      "detected": true,
+      "kind": "physical_pad_inventory"
+    },
+    {
+      "name": "pad position",
+      "detected": true,
+      "kind": "physical_pad_identity_position"
+    },
+    {
+      "name": "component rotation",
+      "detected": true,
+      "kind": "component_transform"
+    },
+    {
+      "name": "plating",
+      "detected": true,
+      "kind": "pad_plating"
+    },
+    {
+      "name": "drill",
+      "detected": true,
+      "kind": "pad_drill"
+    },
+    {
+      "name": "layer",
+      "detected": true,
+      "kind": "pad_layers"
+    },
+    {
+      "name": "local copper missing",
+      "detected": true,
+      "kind": "unexpected_copper"
+    },
+    {
+      "name": "local copper wrong net",
+      "detected": true,
+      "kind": "local_bond_geometry_net"
+    },
+    {
+      "name": "weakened clearance",
+      "detected": true,
+      "kind": "netclass_rules"
+    },
+    {
+      "name": "output becomes passive",
+      "detected": true,
+      "kind": "pin_semantics_name"
+    },
+    {
+      "name": "input becomes output",
+      "detected": true,
+      "kind": "pin_semantics_name"
+    }
+  ],
+  "positive_control": "Actual patched board/project/schematic raw, with no mutation or synthetic replacement",
+  "limitations": "Historical per-object checker omits footprint library identity, real schematic connectivity, rail definition duplication, full effective rules, geometric islands/short/clearance and missing-via qualification. Extended read-only assessment detects footprint identity collision. Real output/output ERC and fresh agreement NOT ENTERED."
+}

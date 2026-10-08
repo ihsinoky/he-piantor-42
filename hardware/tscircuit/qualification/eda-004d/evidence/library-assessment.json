@@ -1,0 +1,235 @@
+{
+  "status": "FAIL",
+  "configured_libraries": [],
+  "not_configured": [
+    "tscircuit",
+    "Device",
+    "Custom"
+  ],
+  "footprint_reference_map": [
+    {
+      "ref": "U_TX",
+      "library_id": "tscircuit:chip",
+      "geometry": [
+        {
+          "number": "1",
+          "size": [
+            1.0,
+            1.0
+          ],
+          "drill": [
+            0.0,
+            0.0
+          ],
+          "drill_shape": 1,
+          "shape": 1,
+          "attribute": 1,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "F.Paste"
+          ]
+        },
+        {
+          "number": "2",
+          "size": [
+            1.0,
+            2.1
+          ],
+          "drill": [
+            0.6,
+            1.7
+          ],
+          "drill_shape": 2,
+          "shape": 2,
+          "attribute": 0,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "B.Cu",
+            "B.Mask",
+            "In1.Cu",
+            "In2.Cu",
+            "In3.Cu",
+            "In4.Cu",
+            "In5.Cu",
+            "In6.Cu",
+            "In7.Cu",
+            "In8.Cu",
+            "In9.Cu",
+            "In10.Cu",
+            "In11.Cu",
+            "In12.Cu",
+            "In13.Cu",
+            "In14.Cu",
+            "In15.Cu",
+            "In16.Cu",
+            "In17.Cu",
+            "In18.Cu",
+            "In19.Cu",
+            "In20.Cu",
+            "In21.Cu",
+            "In22.Cu",
+            "In23.Cu",
+            "In24.Cu",
+            "In25.Cu",
+            "In26.Cu",
+            "In27.Cu",
+            "In28.Cu",
+            "In29.Cu",
+            "In30.Cu"
+          ]
+        },
+        {
+          "number": "2",
+          "size": [
+            1.0,
+            1.6
+          ],
+          "drill": [
+            0.6,
+            1.2
+          ],
+          "drill_shape": 2,
+          "shape": 2,
+          "attribute": 0,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "B.Cu",
+            "B.Mask",
+            "In1.Cu",
+            "In2.Cu",
+            "In3.Cu",
+            "In4.Cu",
+            "In5.Cu",
+            "In6.Cu",
+            "In7.Cu",
+            "In8.Cu",
+            "In9.Cu",
+            "In10.Cu",
+            "In11.Cu",
+            "In12.Cu",
+            "In13.Cu",
+            "In14.Cu",
+            "In15.Cu",
+            "In16.Cu",
+            "In17.Cu",
+            "In18.Cu",
+            "In19.Cu",
+            "In20.Cu",
+            "In21.Cu",
+            "In22.Cu",
+            "In23.Cu",
+            "In24.Cu",
+            "In25.Cu",
+            "In26.Cu",
+            "In27.Cu",
+            "In28.Cu",
+            "In29.Cu",
+            "In30.Cu"
+          ]
+        },
+        {
+          "number": "",
+          "size": [
+            0.65,
+            0.65
+          ],
+          "drill": [
+            0.65,
+            0.65
+          ],
+          "drill_shape": 1,
+          "shape": 0,
+          "attribute": 3,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "B.Cu",
+            "B.Mask",
+            "In1.Cu",
+            "In2.Cu",
+            "In3.Cu",
+            "In4.Cu",
+            "In5.Cu",
+            "In6.Cu",
+            "In7.Cu",
+            "In8.Cu",
+            "In9.Cu",
+            "In10.Cu",
+            "In11.Cu",
+            "In12.Cu",
+            "In13.Cu",
+            "In14.Cu",
+            "In15.Cu",
+            "In16.Cu",
+            "In17.Cu",
+            "In18.Cu",
+            "In19.Cu",
+            "In20.Cu",
+            "In21.Cu",
+            "In22.Cu",
+            "In23.Cu",
+            "In24.Cu",
+            "In25.Cu",
+            "In26.Cu",
+            "In27.Cu",
+            "In28.Cu",
+            "In29.Cu",
+            "In30.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "ref": "U_RX",
+      "library_id": "tscircuit:chip",
+      "geometry": [
+        {
+          "number": "1",
+          "size": [
+            1.0,
+            1.0
+          ],
+          "drill": [
+            0.0,
+            0.0
+          ],
+          "drill_shape": 1,
+          "shape": 1,
+          "attribute": 1,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "F.Paste"
+          ]
+        },
+        {
+          "number": "2",
+          "size": [
+            1.0,
+            1.0
+          ],
+          "drill": [
+            0.0,
+            0.0
+          ],
+          "drill_shape": 1,
+          "shape": 1,
+          "attribute": 1,
+          "layers": [
+            "F.Cu",
+            "F.Mask",
+            "F.Paste"
+          ]
+        }
+      ]
+    }
+  ],
+  "finding": "Two distinct source/board footprints share one library ID. Existing ExtractFootprintsStage deduplicates by that ID, retaining first only. Adding settings cannot faithfully resolve both. No library exported or generated board changed.",
+  "source_file": "lib/kicad-library/stages/ExtractFootprintsStage.ts",
+  "source_sha256": "63014ad2627fd8b90718cb9991881d763c749732736aa405592a0bbb34ca1db5",
+  "source_commit": "8dee5b926f5db28800292b46b66a712c71aba055",
+  "export_execution": "NOT ENTERED; source inspection plus actual board proves identity collision; no claim of measured export failure"
+}
