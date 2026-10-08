@@ -1,0 +1,11 @@
+--- check-input-v1.py
++++ check-input.py
+@@ -32,7 +32,7 @@
+   return k
+  def union(a,b):parent[find(b)]=find(a)
+  for x in rows('source_component_internal_connection'):
+-  ids=x['connected_source_port_ids']
++  ids=x['source_port_ids']
+   for p in ids[1:]:union(ids[0],p)
+  assignments={}
+  nets=index('source_net','source_net_id')

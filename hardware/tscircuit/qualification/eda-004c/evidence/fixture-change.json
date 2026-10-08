@@ -1,0 +1,26 @@
+{
+  "recorded_utc": "2026-10-08T11:14:35.379096+00:00",
+  "original_sha256": "d64bf6e5ced69bd8966aef3313f4e2f131b6613c46c259f174e0ec56dcb44b61",
+  "copy_sha256": "516522b7bf9dbe550eaba097b5d439f1e90627d52f03ad67cb79905447a3a154",
+  "reasons": [
+    "Save raw and hash before any content validation; removed blanket pcb_trace rejection",
+    "LOCAL_BOND uses pinned public pcbPath component-anchor transform: endpoint (1,0) with implicit start land (-5,0) reaches duplicate land (-3,0); remove backtracking.",
+    "Rotate U_RX 90 degrees to exercise pad transform reconciliation"
+  ],
+  "historical_raw_restored": false,
+  "source_semantics": {
+    "U_TX.1": "output",
+    "U_TX.2": "passive ground",
+    "U_RX.1": "input",
+    "U_RX.2": "passive ground"
+  },
+  "scope": "synthetic definitions only, no real-device/Main ERC claim",
+  "preparation_correction": {
+    "error": "Executor assumed pcbPath global coordinates; new raw showed anchor transform double applied, route (-5,0)->(-9,0)->(-7,0).",
+    "cause": "Pinned core anchors pcbPath coordinates in component frame and prepends actual start port.",
+    "fix": "One component-local point (1,0) yields source-derived physical bond (-5,0)->(-3,0), no backtracking. Explicit material clearances raised synthetic defaults to 0.20 mm.",
+    "preserved_raw": "processes/smoke-generation/smoke.circuit.json",
+    "permission": "Issue #75 permits preparation fixture/checker corrections before routing",
+    "no_converter_patch": true
+  }
+}

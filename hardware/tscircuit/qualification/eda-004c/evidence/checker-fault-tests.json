@@ -1,0 +1,130 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "name": "missing physical pad",
+      "detected": true
+    },
+    {
+      "name": "wrong net false source label",
+      "detected": true
+    },
+    {
+      "name": "local copper displaced",
+      "detected": true
+    },
+    {
+      "name": "local copper layer loss",
+      "detected": true
+    },
+    {
+      "name": "pad shape",
+      "detected": true
+    },
+    {
+      "name": "oval drill size",
+      "detected": true
+    },
+    {
+      "name": "duplicate land omitted",
+      "detected": true
+    },
+    {
+      "name": "duplicate internal connection omitted",
+      "detected": true
+    },
+    {
+      "name": "clearance rule lowered",
+      "detected": true
+    },
+    {
+      "name": "extra global stock copper",
+      "detected": true
+    },
+    {
+      "name": "output-output circuit fault",
+      "detected": true
+    },
+    {
+      "name": "KiCad duplicate GND land net absent",
+      "detected": true,
+      "error_kind": "physical_pad_net"
+    },
+    {
+      "name": "KiCad wrong-net label",
+      "detected": true,
+      "error_kind": "physical_pad_net"
+    },
+    {
+      "name": "KiCad missing physical pad",
+      "detected": true,
+      "error_kind": "physical_pad_inventory"
+    },
+    {
+      "name": "KiCad plating changed",
+      "detected": true,
+      "error_kind": "pad_plating"
+    },
+    {
+      "name": "KiCad pad transform shifted",
+      "detected": true,
+      "error_kind": "physical_pad_identity_position"
+    },
+    {
+      "name": "KiCad component rotation changed",
+      "detected": true,
+      "error_kind": "component_transform"
+    },
+    {
+      "name": "KiCad layer changed",
+      "detected": true,
+      "error_kind": "pad_layers"
+    },
+    {
+      "name": "KiCad oval drill changed",
+      "detected": true,
+      "error_kind": "pad_drill"
+    },
+    {
+      "name": "KiCad pad shape changed",
+      "detected": true,
+      "error_kind": "pad_shape"
+    },
+    {
+      "name": "KiCad board thickness changed",
+      "detected": true,
+      "error_kind": "stack"
+    },
+    {
+      "name": "KiCad outline changed",
+      "detected": true,
+      "error_kind": "outline"
+    },
+    {
+      "name": "KiCad local bond missing",
+      "detected": true,
+      "error_kind": "unexpected_copper"
+    },
+    {
+      "name": "KiCad local bond wrong net",
+      "detected": true,
+      "error_kind": "local_bond_geometry_net"
+    },
+    {
+      "name": "KiCad rule weakened",
+      "detected": true,
+      "error_kind": "netclass_rules"
+    },
+    {
+      "name": "KiCad all-passive semantic loss",
+      "detected": true,
+      "error_kind": "pin_semantics_name"
+    }
+  ],
+  "count": 26,
+  "positive_controls": [
+    "source-derived input matches fixed synthetic intent",
+    "metadata-only KiCad parity control with distinct typed synthetic definitions"
+  ],
+  "limitations": "Read-only mutation replay; no KiCad board repaired/regenerated. Not full copper-island/short/clearance geometry or missing-via fault qualification; those are NOT ENTERED. No real-device/Main ERC claim."
+}
