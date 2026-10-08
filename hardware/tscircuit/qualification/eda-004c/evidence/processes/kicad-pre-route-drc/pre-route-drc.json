@@ -1,0 +1,138 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-08T11:19:13+0000",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "smoke.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [SIG] of U_TX on F.Cu",
+                    "pos": {
+                        "x": 96.0,
+                        "y": 98.0
+                    },
+                    "uuid": "6de4a7e0-587c-e9df-4315-2bde2dad6ddd"
+                },
+                {
+                    "description": "Pad 1 [SIG] of U_RX on F.Cu",
+                    "pos": {
+                        "x": 102.0,
+                        "y": 100.0
+                    },
+                    "uuid": "77e7d976-5c61-1856-40da-573625539616"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 2.0000 mm",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 100.0
+                    },
+                    "uuid": "13adb46e-6080-42ae-52ad-2f1205daa0d2"
+                },
+                {
+                    "description": "Pad 2 [GND] of U_RX on F.Cu",
+                    "pos": {
+                        "x": 104.0,
+                        "y": 100.0
+                    },
+                    "uuid": "3680c7a0-2372-9d81-7d66-02a228a6983d"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 2.0000 mm",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 100.0
+                    },
+                    "uuid": "13adb46e-6080-42ae-52ad-2f1205daa0d2"
+                },
+                {
+                    "description": "PTH pad 2 [<no net>] of U_TX",
+                    "pos": {
+                        "x": 97.0,
+                        "y": 100.0
+                    },
+                    "uuid": "4ff70054-5b2e-02ac-0653-05ac4e87f754"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Items shorting two nets (nets GND and )",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 2.0000 mm",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 100.0
+                    },
+                    "uuid": "13adb46e-6080-42ae-52ad-2f1205daa0d2"
+                },
+                {
+                    "description": "PTH pad 2 [<no net>] of U_TX",
+                    "pos": {
+                        "x": 97.0,
+                        "y": 100.0
+                    },
+                    "uuid": "4ff70054-5b2e-02ac-0653-05ac4e87f754"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "The current configuration does not include the footprint library 'tscircuit'.",
+            "items": [
+                {
+                    "description": "Footprint U_TX",
+                    "pos": {
+                        "x": 96.0,
+                        "y": 100.4125
+                    },
+                    "uuid": "02e30920-077a-cc81-11d8-a2221c3677c3"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "The current configuration does not include the footprint library 'tscircuit'.",
+            "items": [
+                {
+                    "description": "Footprint U_RX",
+                    "pos": {
+                        "x": 103.0,
+                        "y": 100.0
+                    },
+                    "uuid": "313caba0-7453-167f-19e2-d89e408d6543"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        }
+    ]
+}

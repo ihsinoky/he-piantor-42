@@ -1,0 +1,21 @@
+--- smoke-v1.tsx
++++ smoke.tsx
+@@ -10,7 +10,8 @@
+ const c = new Circuit()
+ c.add(<board width={20} height={16} layers={2} thickness="1.2mm"
+   routingDisabled minTraceWidth="0.2mm" defaultTraceWidth="0.2mm"
+-  minTraceToPadEdgeClearance="0.2mm" minViaHoleDiameter="0.3mm" minViaPadDiameter="0.6mm">
++  minTraceToPadEdgeClearance="0.2mm" minPadEdgeToPadEdgeClearance="0.2mm"
++  minViaHoleEdgeToViaHoleEdgeClearance="0.2mm" minPlatedHoleDrillEdgeToDrillEdgeClearance="0.2mm" minViaHoleDiameter="0.3mm" minViaPadDiameter="0.6mm">
+   <chip name="U_TX" pcbX={-4} pcbY={0} schX={-4} pinLabels={{pin1:"OUT",pin2:"GND"}}
+     pinAttributes={{OUT:{isOutput:true},GND:{isPassive:true}}}
+     footprint={<footprint>{pad("pin1",0,2)}
+@@ -27,7 +28,7 @@
+   <trace from=".U_TX > .GND" to="net.GND"/>
+   <trace from=".U_RX > .GND" to="net.GND"/>
+   <trace name="LOCAL_BOND" from=".U_TX > .GND" to="net.GND" thickness="0.2mm"
+-    pcbPath={[{x:-5,y:0},{x:-3,y:0}]}/>
++    pcbPath={[{x:1,y:0}]}/>
+ </board>)
+ await c.renderUntilSettled()
+ const json=c.getCircuitJson()

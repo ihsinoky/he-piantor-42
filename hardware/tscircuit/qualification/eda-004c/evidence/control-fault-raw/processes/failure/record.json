@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/home/codespace/.python/current/bin/python3",
+    "-c",
+    "from pathlib import Path; import sys; Path(sys.argv[1]).write_text('{\\\"partial\\\":true}'); print('raw captured'); print('injected failure',file=sys.stderr); sys.exit(7)",
+    "/tmp/eda004c-control-i3tasp_o/partial.json"
+  ],
+  "cwd": "/tmp/eda004c-control-i3tasp_o",
+  "start_utc": "2026-10-08T11:12:02.765265+00:00",
+  "end_utc": "2026-10-08T11:12:02.799203+00:00",
+  "exit_code": 7,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {},
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "partial.json",
+      "original_path": "/tmp/eda004c-control-i3tasp_o/partial.json",
+      "present": true,
+      "saved_path": "processes/failure/partial.json",
+      "sha256": "7d3b606eab18f6220a39a3ec42a3760966325cb782b0a1fe6df1fc6cbeabf25b"
+    }
+  ],
+  "elapsed_seconds": 0.033103544999903534,
+  "stdout_sha256": "5db28c107a7178f566707601cea9112608e71feb70f3fcfd5559222e1c5c8d8d",
+  "stderr_sha256": "df2367efe987f58cb8e9352fbec3b0558d1ed9bdfb9f243dd74af08c9e72dfe7"
+}

@@ -1,0 +1,22 @@
+--- EDA-004B/executed-smoke.tsx
++++ EDA-004C/smoke.tsx
+@@ -3,0 +4 @@
++import { createHash } from "node:crypto"
+@@ -12 +13,2 @@
+-  minTraceToPadEdgeClearance="0.2mm" minViaHoleDiameter="0.3mm" minViaPadDiameter="0.6mm">
++  minTraceToPadEdgeClearance="0.2mm" minPadEdgeToPadEdgeClearance="0.2mm"
++  minViaHoleEdgeToViaHoleEdgeClearance="0.2mm" minPlatedHoleDrillEdgeToDrillEdgeClearance="0.2mm" minViaHoleDiameter="0.3mm" minViaPadDiameter="0.6mm">
+@@ -20 +22 @@
+-  <chip name="U_RX" pcbX={4} pcbY={0} schX={4} pinLabels={{pin1:"IN",pin2:"GND"}}
++  <chip name="U_RX" pcbX={4} pcbY={0} pcbRotation={90} schX={4} pinLabels={{pin1:"IN",pin2:"GND"}}
+@@ -29 +31 @@
+-    pcbPath={[{x:-1,y:0},{x:1,y:0},{x:-1,y:0}]}/>
++    pcbPath={[{x:1,y:0}]}/>
+@@ -33,4 +35,3 @@
+-if(json.some((x:any)=>["pcb_trace","pcb_via","pcb_copper_pour"].includes(x.type)))
+-  throw new Error("routingDisabled retained copper; STOP")
+-writeFileSync(process.argv[2],JSON.stringify(json,null,2)+"\n")
+-console.log(JSON.stringify({routingDisabled:true,globalTracks:0,vias:0,sourceTraces:json.filter((x:any)=>x.type==="source_trace").length}))
++const raw=JSON.stringify(json,null,2)+"\n"
++writeFileSync(process.argv[2],raw)
++console.log(JSON.stringify({rawSaved:true,sha256:createHash("sha256").update(raw).digest("hex")}))

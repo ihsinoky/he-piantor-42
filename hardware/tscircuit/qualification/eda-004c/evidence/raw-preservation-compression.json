@@ -1,0 +1,15 @@
+{
+  "reason": "Staged diff --check detected whitespace already present in public help/probe raw output and blank unified-diff context. Preserve raw bytes by lossless compression; no EDA restart.",
+  "observed_check_exit_code": null,
+  "management_limit": "Grouped commit shell continued after failed staged diff check; commit/push occurred. Not an EDA sequence failure. Corrected final diff gate is checked before final commit.",
+  "streams": {
+    "kicad-help": "processes/kicad-help/stdout.gz",
+    "pcbnew-probe": "processes/pcbnew-probe/stdout.gz"
+  },
+  "stream_original_hashes": "record.json stdout_sha256 retains uncompressed hash; compressed hash added",
+  "original_context_diff": {
+    "path": "raw/fixture-full-context.diff.gz",
+    "uncompressed_sha256": "1381b51127dc163057b2b9ede233a7e5f3fe975063e1b0d6ed868ee236a29a07"
+  },
+  "reviewable_diff": "fixture.diff regenerated with zero context from same sources"
+}

@@ -1,0 +1,77 @@
+{
+  "classification": "CONVERSION_BLOCKED",
+  "first_terminal_gate": "C1_DUPLICATE_GND_PAD_NET_LOSS",
+  "technical_qualification_complete": false,
+  "terminal_reporting_complete": true,
+  "stages": {
+    "process_capture_stop_control": "PASS after disclosed preparation correction",
+    "fixed_source_build_module_load": "PASS",
+    "KiCad_headless_version_binding_schema": "PASS",
+    "complete_library_semantic_rule_environment": "INCOMPLETE / warnings retained",
+    "source_to_Circuit_JSON": "PASS after disclosed fixture/checker preparation corrections",
+    "Circuit_JSON_to_KiCad": "FAIL",
+    "KiCad_to_DSN": "NOT ENTERED",
+    "local_headless_Freerouting": "NOT ENTERED",
+    "SES_to_KiCad": "NOT ENTERED",
+    "post_route_DRC_independent_island_checks": "NOT ENTERED",
+    "fresh_confirmation": "NOT ENTERED",
+    "byte_reproducibility": "NOT ENTERED",
+    "normalized_connection_shape_reproducibility": "NOT ENTERED"
+  },
+  "route_counts": {
+    "initial": 0,
+    "fresh_confirmation": 0,
+    "main": 0
+  },
+  "observed_invocations": {
+    "synthetic_frontend": 2,
+    "converter": 1,
+    "Freerouting_help_only": 1,
+    "DSN_export": 0,
+    "SES_import": 0
+  },
+  "required_acceptance_metrics": {
+    "required_unconnected": {
+      "initial": null,
+      "confirmation": null,
+      "status": "NOT ENTERED"
+    },
+    "different_net_shorts": {
+      "initial": null,
+      "confirmation": null,
+      "status": "NOT ENTERED"
+    },
+    "target_physical_rule_violations": {
+      "initial": null,
+      "confirmation": null,
+      "status": "NOT ENTERED"
+    },
+    "unexplained_conversion_loss": {
+      "initial": null,
+      "confirmation": null,
+      "status": "NOT ENTERED"
+    }
+  },
+  "observed_pre_route_findings": {
+    "missing_GND_net_physical_pads": 1,
+    "KiCad_shorting_items": 1,
+    "KiCad_solder_mask_bridge_errors": 1,
+    "KiCad_intentionally_unrouted_items": 2,
+    "KiCad_ERC_pin_not_connected_errors": 2,
+    "schematic_pin_semantics": "All source output/input pins converted to passive; duplicated Device:U_chip definitions",
+    "library_warnings": "tscircuit footprint library and Device/Custom symbol libraries not configured; never waived",
+    "independent_per_object_reconciliation": "FAIL; boundary-reconciliation.json",
+    "source_circuit_check": "PASS for defined synthetic semantics only",
+    "meaningful_KiCad_ERC": "UNQUALIFIED / FAIL"
+  },
+  "evidence_limitations": [
+    "Original control wrapper fault deleted temporary original process files before path fix; traceback and v1 source retained, original timestamps/exit unknown. Corrected tests preserve complete records.",
+    "Preflight and Git/PR management tool groups lack individual timing capture; no unknown times fabricated. All installation/generation/conversion/inspection processes use process.py.",
+    "No full effective-rule/DSN semantics qualification, post-route geometry checker, missing-via/physical-short adversarial tests, Main ERC or routing.",
+    "EDA-004B missing raw remains missing; new Circuit JSON is EDA-004C only."
+  ],
+  "after_stop_experiment_count": 0,
+  "backend_adopted": false,
+  "Main_qualified": false,
+  "human_gate_decision": null
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "Post-STOP read-only reporting verification; no EDA rerun or output repair",
+  "failures": [
+    {
+      "step": "validation-local-v1",
+      "process_record": "processes/validation-local-v1/record.json",
+      "exit_code": 1,
+      "cause": "No-route guard misidentified curl archive download containing freerouting.jar as Java router invocation.",
+      "fix": "Restrict help-only routing check to -jar process commands.",
+      "eda_processes_after_stop": 0
+    }
+  ]
+}

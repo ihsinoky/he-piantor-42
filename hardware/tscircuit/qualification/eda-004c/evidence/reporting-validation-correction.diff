@@ -1,0 +1,11 @@
+--- validate-v1.py
++++ validate.py
+@@ -70,7 +70,7 @@
+    assert datetime.datetime.fromisoformat(r['end_utc'])<=datetime.datetime.fromisoformat(stop['recorded_utc']), 'Experiment after stop'
+   command=' '.join(r['command'])
+   assert 'ExportSpecctraDSN(' not in command and 'ImportSpecctraSES(' not in command
+-  if 'freerouting.jar' in command:assert '-help' in r['command'] and '-de' not in r['command'] and '-do' not in r['command']
++  if '-jar' in r['command'] and 'freerouting.jar' in command:assert '-help' in r['command'] and '-de' not in r['command'] and '-do' not in r['command']
+  contract=read('run-contract.json')
+  assert contract['frozen_for_routing'] is False and contract['route_attempt_count']==0
+  assert contract['route_command'] is None and contract['maximum_passes'] is None

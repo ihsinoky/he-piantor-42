@@ -1,0 +1,267 @@
+(kicad_pcb
+  (version 20241229)
+  (generator circuit-json-to-kicad)
+  (generator_version 0.0.1)
+  (general
+    (thickness 1.2)
+  )
+  (paper
+    A4
+  )
+  (layers
+    (0 "F.Cu" signal)
+    (31 "B.Cu" signal)
+    (32 "B.Adhes" user)
+    (33 "F.Adhes" user)
+    (34 "B.Paste" user)
+    (35 "F.Paste" user)
+    (36 "B.SilkS" user)
+    (37 "F.SilkS" user)
+    (38 "B.Mask" user)
+    (39 "F.Mask" user)
+    (40 "Dwgs.User" user)
+    (41 "Cmts.User" user)
+    (42 "Eco1.User" user)
+    (43 "Eco2.User" user)
+    (44 "Edge.Cuts" user)
+    (45 "Margin" user)
+    (46 "B.CrtYd" user)
+    (47 "F.CrtYd" user)
+    (48 "B.Fab" user)
+    (49 "F.Fab" user)
+  )
+  (setup
+    (pad_to_mask_clearance 0)
+  )
+  (net 0 "")
+  (net 1 "SIG")
+  (net 2 "GND")
+  (footprint
+    "tscircuit:chip"
+    (layer F.Cu)
+    (uuid 02e30920-077a-cc81-11d8-a2221c3677c3)
+    (at 96 100.4125 0)
+    (property "Reference" "U_TX"
+      (at 0 -3 0)
+      (layer F.SilkS)
+      (hide yes)
+      (uuid 46b9e840-2c9d-093f-600c-0542134aec3d)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Value" ""
+      (at 0 3 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 76734f00-2391-ca3f-4269-1c82579bfcbd)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Datasheet" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 2da60780-45b0-e9ff-46f8-24822c5eccfd)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Description" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 3c290d60-3589-9eff-2eea-309e284ac23d)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Supplier Part Number" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 2b800d02-6c0f-f4fe-039f-f6fe64d00702)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (fp_line
+      (start -1 -0.4125000000000001)
+      (end 1 -0.4125000000000001)
+      (stroke
+        (width 0.05)
+        (type default)
+      )
+      (layer F.Fab)
+    )
+    (pad "1" smd rect
+      (at 0 -2.4125 0)
+      (size 1 1)
+      (layers F.Cu F.Paste F.Mask)
+      (net 1 "SIG")
+      (uuid 6de4a7e0-587c-e9df-4315-2bde2dad6ddd)
+    )
+    (pad "2" thru_hole oval
+      (at -1 -0.4125000000000001 0)
+      (size 1 2.1)
+      (drill oval 0.6 1.7)
+      (layers *.Cu *.Mask)
+      (net 2 "GND")
+      (uuid 636a9b60-5610-c181-0f8c-1e6236f884bd)
+    )
+    (pad "2" thru_hole oval
+      (at 1 -0.4125000000000001 0)
+      (size 1 1.6)
+      (drill oval 0.6 1.2)
+      (layers *.Cu *.Mask)
+      (uuid 4ff70054-5b2e-02ac-0653-05ac4e87f754)
+    )
+    (pad "" np_thru_hole circle
+      (at 0 2.5875 0)
+      (size 0.65 0.65)
+      (drill 0.65)
+      (layers *.Cu *.Mask)
+      (uuid 3df2d44c-a32b-4863-a202-c1bc0c405323)
+    )
+  )
+  (footprint
+    "tscircuit:chip"
+    (layer F.Cu)
+    (uuid 313caba0-7453-167f-19e2-d89e408d6543)
+    (at 103 100 90)
+    (property "Reference" "U_RX"
+      (at 0 -3 0)
+      (layer F.SilkS)
+      (hide yes)
+      (uuid 1a3b5a00-726d-b481-00e9-3cfe74402e7d)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Value" ""
+      (at 0 3 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 00457bc0-6640-6281-33c4-b6be32363003)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Datasheet" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 334f3ac0-5959-d3c1-19fd-1dbe72abf0c3)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Description" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 34309720-2d91-28bf-26f1-ba5e20524bfd)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (property "Supplier Part Number" ""
+      (at 0 0 0)
+      (layer F.Fab)
+      (hide yes)
+      (uuid 01a9d686-6a19-d486-2d76-2d7a3af9d086)
+      (effects
+        (font
+          (size 1.27 1.27)
+          (thickness 0.15)
+        )
+      )
+    )
+    (pad "1" smd rect
+      (at 5.721188726109846e-18 -1 0)
+      (size 1 1)
+      (layers F.Cu F.Paste F.Mask)
+      (net 1 "SIG")
+      (uuid 77e7d976-5c61-1856-40da-573625539616)
+    )
+    (pad "2" smd rect
+      (at 5.721188726109846e-18 1 0)
+      (size 1 1)
+      (layers F.Cu F.Paste F.Mask)
+      (net 2 "GND")
+      (uuid 3680c7a0-2372-9d81-7d66-02a228a6983d)
+    )
+  )
+  (segment
+    (start 95 100)
+    (end 97 100)
+    (width 0.2)
+    (layer F.Cu)
+    (net 2)
+    (uuid 13adb46e-6080-42ae-52ad-2f1205daa0d2)
+  )
+  (gr_line
+    (start 90 108)
+    (end 110 108)
+    (width 0.1)
+    (layer Edge.Cuts)
+  )
+  (gr_line
+    (start 110 108)
+    (end 110 92)
+    (width 0.1)
+    (layer Edge.Cuts)
+  )
+  (gr_line
+    (start 110 92)
+    (end 90 92)
+    (width 0.1)
+    (layer Edge.Cuts)
+  )
+  (gr_line
+    (start 90 92)
+    (end 90 108)
+    (width 0.1)
+    (layer Edge.Cuts)
+  )
+  (gr_text
+    "MARKED INTERNALLY CONNECTED"
+    (at 96 99.88 0)
+    (layer F.Fab)
+    (uuid 5a50df80-36ce-35c1-134b-8c0210371dbd)
+    (effects
+      (font
+        (size 0.12 0.12)
+        (thickness 0.15)
+      )
+    )
+  )
+)

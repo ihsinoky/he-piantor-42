@@ -1,0 +1,122 @@
+{
+  "observed_utc": "2026-10-08T11:10:23.370633+00:00",
+  "cwd": "/workspaces/he-piantor-42",
+  "expected_head": "ca0c98db53ddd22ca2365246d67589e42fb7c9a5",
+  "agents": [],
+  "commands": [
+    {
+      "command": [
+        "git",
+        "remote",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "origin\thttps://github.com/ihsinoky/he-piantor-42 (fetch)\norigin\thttps://github.com/ihsinoky/he-piantor-42 (push)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exit_code": 0,
+      "stdout": "eda-004c-headless-smoke-requalification\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "ca0c98db53ddd22ca2365246d67589e42fb7c9a5\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "ca0c98db53ddd22ca2365246d67589e42fb7c9a5\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "worktree",
+        "list"
+      ],
+      "exit_code": 0,
+      "stdout": "/workspaces/he-piantor-42 ca0c98d [eda-004c-headless-smoke-requalification]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "?? hardware/tscircuit/qualification/eda-004c/\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v24.21.0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "11.19.0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.14.2\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.12.3\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "openjdk version \"25.0.4.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Microsoft-14951822 (build 25.0.4.1+1-LTS)\nOpenJDK 64-Bit Server VM Microsoft-14951822 (build 25.0.4.1+1-LTS, mixed mode, sharing)\n"
+    },
+    {
+      "command": [
+        "uname",
+        "-a"
+      ],
+      "exit_code": 0,
+      "stdout": "Linux codespaces-0c3539 6.8.0-1064-azure #72~22.04.1-Ubuntu SMP Wed Jul 22 23:39:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "stderr": ""
+    }
+  ]
+}

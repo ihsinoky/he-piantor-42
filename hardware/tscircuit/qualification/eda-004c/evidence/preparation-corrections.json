@@ -1,0 +1,33 @@
+{
+  "failures": [
+    {
+      "step": "control-test v1",
+      "error": "ValueError: temporary evidence target not under ROOT",
+      "numeric_exit_observed": null,
+      "timestamps": null,
+      "raw_limit": "TemporaryDirectory removed original failure files; no hashes claimed. Tool traceback observed and recorded here. v1 source retained.",
+      "fix": "saved_path relative to EVIDENCE instead of ROOT",
+      "recheck": "control-fault-tests.json"
+    },
+    {
+      "step": "early commit",
+      "exit_code": 128,
+      "error": "index.lock: Read-only file system",
+      "fix": "use authorized sandbox escalation for git metadata writes"
+    },
+    {
+      "step": "early Draft PR before successful commit",
+      "exit_code": 1,
+      "error": "No commits between main and branch",
+      "fix": "commit then push/create Draft PR"
+    },
+    {
+      "step": "input checker v1",
+      "error": "KeyError: connected_source_port_ids for internal connection",
+      "numeric_exit_observed": 1,
+      "process_record": "processes/input-reconciliation/record.json",
+      "fix": "Use actual pinned circuit-json source_port_ids schema; no input/converter mutation",
+      "downstream_converter_started": false
+    }
+  ]
+}
