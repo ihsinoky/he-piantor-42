@@ -1,0 +1,11 @@
+--- process-v1.py
++++ process.py
+@@ -79,7 +79,7 @@
+             target = directory / label
+             with target.open("wb") as f:
+                 f.write(path.read_bytes()); f.flush(); os.fsync(f.fileno())
+-            item.update(saved_path=str(target.relative_to(ROOT)), sha256=digest(target))
++            item.update(saved_path=str(target.relative_to(EVIDENCE)), sha256=digest(target))
+         record["artifacts"].append(item)
+     record["stdout_sha256"] = digest(directory / "stdout")
+     record["stderr_sha256"] = digest(directory / "stderr")
