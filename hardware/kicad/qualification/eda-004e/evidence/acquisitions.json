@@ -1,0 +1,87 @@
+{
+  "recorded_utc": "2026-10-08T22:32:08.897192+00:00",
+  "entries": [
+    {
+      "path": "authority.json",
+      "sha256": "40219a311bd1892e003c009e995c101a70af12965658ef919d0ee1a3e5f2898c",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "remote-main.json",
+      "sha256": "7d280230a5f608d3d3aefe4cd98971738487d10f309a54a9282c3f63532af4ec",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "pr-6.json",
+      "sha256": "d5154ba1bb3cc6fa9f6bf465e3f9ee2d9c95218c9bbf2fa0fbf66024588c21ff",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "pr-10.json",
+      "sha256": "8dd8c3bba032e71363fa9b811dd25ceb15cc71b4694dd0d50f750945e29710f8",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "pr-10-checker.py.txt",
+      "sha256": "fa77b79e5113a4f9f163cb6e1db1c09f19a2b481c142fbd5e75767a15c2587d8",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "pr-10-failed-ci.txt.gz",
+      "sha256": "f3d60b51fa68b9a99b4ed3675d99fae6bfb13d0f513bb71f4f1adb3e0c9be4bc",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "official-library-ref.json",
+      "sha256": "c23a2e21f1a59b50b5a329d59f79b812a21908a517dfbbe7b6c475718c1a3f75",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    },
+    {
+      "path": "official-footprint-response.json",
+      "sha256": "87332ac257788c73a56b250a9746b2c23addac98b42cb960b67576b088c5c10e",
+      "source": "GitHub gh API / PR / Issue read-only",
+      "start_utc": "unknown: tools transcript only before process wrapper",
+      "end_utc": "unknown: tools transcript only",
+      "exit_code": 0
+    }
+  ],
+  "commands": [
+    "gh issue view 79 --repo ihsinoky/he-piantor-42 --json title,body,url,state",
+    "gh api repos/ihsinoky/he-piantor-42/git/ref/heads/main",
+    "gh pr view 6 --repo ihsinoky/he-piantor-42 --json title,body,commits",
+    "gh pr view 10 --repo ihsinoky/he-piantor-42 --json title,body,commits,files,state,statusCheckRollup",
+    "gh api repos/ihsinoky/he-piantor-42/contents/hardware/sensor-test/kicad/verify_footprint_integrity.py?ref=0a78f2d86a452c4bee1e00e5ab9fbbf67e26d9e2 --jq .content | base64 -d",
+    "gh run view 36312143080 --repo ihsinoky/he-piantor-42 --log-failed",
+    "gh api repos/KiCad/kicad-footprints/git/ref/heads/master",
+    "gh api repos/KiCad/kicad-footprints/contents/Resistor_SMD.pretty/R_0603_1608Metric.kicad_mod?ref=7ebfa6b23cc292a56f751b7b5f4a0e12eeef69dd"
+  ],
+  "missing_raw": "First preparation wrapper FileNotFoundError exists in session tool output and retained v1 code; durable per-process traceback was not captured. Tag lookup failure status/error is recorded from tool output; exact timing is unknown. These are capture limitations, not zero-duration operations.",
+  "old_pr10_board_read_only": {
+    "commit": "0a78f2d86a452c4bee1e00e5ab9fbbf67e26d9e2",
+    "path": "hardware/sensor-test/kicad/integrated-sensor-test.kicad_pcb",
+    "blob_sha": "a939db96eee9e23c487a0aa719b052197d86557c",
+    "sha256": "b6692e9bb9a9f0eb47b9d99767b1e428cd6be85f927d388afa7f58a7349fbf53",
+    "duplicate_raw_not_stored": true
+  }
+}

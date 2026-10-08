@@ -1,0 +1,41 @@
+{
+  "preparation": [
+    {
+      "original": "prepare-v1.py.txt",
+      "failure": "FileNotFoundError /tmp/eda004e/apt; unchanged installer expects preexisting work root",
+      "raw_traceback": "First tool process output; prior preparation had no durable capture yet. Exact launch UTC unknown.",
+      "exit_code": 1,
+      "fix": "Create new work root before installer; no fixture change"
+    },
+    {
+      "original": "probe-v1.py.txt",
+      "failure_record": "processes/public-api-probe/record.json",
+      "fix": "GetDesignSettings from BOARD; no default constructor exists"
+    }
+  ],
+  "saved_data_checker": [
+    {
+      "original": "inspect-v1.py.txt",
+      "failure_record": "processes/initial-reload-resave/record.json",
+      "fix": "Compare enabled physical layers, retaining KiCad normalized *.Cu raw; no generated data edits",
+      "corrected_record": "processes/initial-reload-resave-corrected/record.json"
+    }
+  ],
+  "library_acquisition": [
+    {
+      "attempt": "9.0.9 tag",
+      "exit_code": 1,
+      "http_status": 404,
+      "utc": "unknown"
+    },
+    {
+      "attempt": "9.0.0 tag",
+      "exit_code": 1,
+      "http_status": 404,
+      "utc": "unknown"
+    }
+  ],
+  "fixture_author_changed_after_creation": false,
+  "rules_relaxed": false,
+  "raw_failures_preserved": true
+}

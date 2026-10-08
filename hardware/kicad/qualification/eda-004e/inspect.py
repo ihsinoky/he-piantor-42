@@ -1,0 +1,59 @@
+"""Independent saved-object expectations; never repairs generated KiCad data."""
+import json
+import math
+import sys
+from pathlib import Path
+import pcbnew as p
+ROOT=Path(__file__).resolve().parent
+C=json.loads((ROOT/'fixture.json').read_text())
+
+def xy(v):return [round(p.ToMM(v.x),6),round(p.ToMM(v.y),6)]
+def transform(local,spec):
+    # Positive KiCad angle rotates toward negative Y.
+    a=math.radians(spec['rotation_deg']);x,y=local;ox,oy=spec['position_mm']
+    return [round(ox+x*math.cos(a)+y*math.sin(a),6),round(oy-x*math.sin(a)+y*math.cos(a),6)]
+def close(a,b):assert all(abs(x-y)<=.000002 for x,y in zip(a,b)),(a,b)
+def snapshot(path):
+    b=p.LoadBoard(str(path));s=b.GetDesignSettings();out={'copper_layers':b.GetCopperLayerCount(),'thickness_mm':p.ToMM(s.GetBoardThickness()),'footprints':[],'tracks':[],'edges':[]}
+    assert out['copper_layers']==C['board']['copper_layers'];assert out['thickness_mm']==C['board']['thickness_mm']
+    footprints=sorted(b.GetFootprints(),key=lambda f:f.GetReference());assert len(footprints)==2
+    for fp in footprints:
+        spec=C['official'] if fp.GetReference()=='R1' else C['special'];assert fp.GetReference()==spec['reference']
+        close(xy(fp.GetPosition()),spec['position_mm']);assert fp.GetOrientationDegrees()==spec['rotation_deg']
+        entry={'reference':fp.GetReference(),'position_mm':xy(fp.GetPosition()),'rotation_deg':fp.GetOrientationDegrees(),'library_id':fp.GetFPID().GetUniStringLibId(),'pads':[]}
+        pads=sorted(fp.Pads(),key=lambda pad:(pad.GetNumber(),xy(pad.GetFPRelativePosition())))
+        expected=sorted(spec['pads'],key=lambda x:(x['number'],x['local_mm']));assert len(pads)==len(expected)
+        for pad,x in zip(pads,expected):
+            close(xy(pad.GetFPRelativePosition()),x['local_mm']);close(xy(pad.GetPosition()),transform(x['local_mm'],spec));close(xy(pad.GetSize()),x['size_mm']);close(xy(pad.GetDrillSize()),x['drill_mm'])
+            assert pad.GetNumber()==x['number'];assert pad.GetNetname()==x['net']
+            assert pad.GetShape()==getattr(p,'PAD_SHAPE_'+x['shape'])
+            assert pad.GetAttribute()=={'SMD':p.PAD_ATTRIB_SMD,'PTH':p.PAD_ATTRIB_PTH,'NPTH':p.PAD_ATTRIB_NPTH}[x['attribute']]
+            raw_layers=[b.GetLayerName(layer) for layer in pad.GetLayerSet().Seq()]
+            actual_layers=[b.GetLayerName(layer) for layer in pad.GetLayerSet().Seq() if b.IsLayerEnabled(layer)];assert sorted(actual_layers)==sorted(x['layers']),(actual_layers,x['layers'])
+            if any(x['drill_mm']):assert pad.GetDrillShape()==getattr(p,'PAD_DRILL_SHAPE_'+x['drill_shape'])
+            if x['shape']=='ROUNDRECT':assert pad.GetRoundRectRadiusRatio()==x['roundrect_ratio']
+            assert abs(pad.GetOrientationDegrees()-spec['rotation_deg'])<.00001
+            entry['pads'].append({'number':pad.GetNumber(),'local_mm':xy(pad.GetFPRelativePosition()),'position_mm':xy(pad.GetPosition()),'size_mm':xy(pad.GetSize()),'drill_mm':xy(pad.GetDrillSize()),'drill_shape':pad.GetDrillShape(),'shape':pad.GetShape(),'roundrect_ratio':pad.GetRoundRectRadiusRatio() if x['shape']=='ROUNDRECT' else None,'attribute':pad.GetAttribute(),'layers':sorted(actual_layers),'net':pad.GetNetname(),'rotation_deg':pad.GetOrientationDegrees()})
+        out['footprints'].append(entry)
+    tracks=sorted(b.GetTracks(),key=lambda t:xy(t.GetStart()));expected=sorted(C['local_ground_tracks'],key=lambda t:transform(t['from_local_mm'],C['special']));assert len(tracks)==2
+    for t,x in zip(tracks,expected):
+        close(xy(t.GetStart()),transform(x['from_local_mm'],C['special']));close(xy(t.GetEnd()),transform(x['to_local_mm'],C['special']))
+        assert p.ToMM(t.GetWidth())==x['width_mm'];assert t.GetNetname()==x['net'];assert b.GetLayerName(t.GetLayer())==x['layer']
+        out['tracks'].append({'start':xy(t.GetStart()),'end':xy(t.GetEnd()),'width_mm':p.ToMM(t.GetWidth()),'layer':b.GetLayerName(t.GetLayer()),'net':t.GetNetname()})
+    edges=sorted(b.GetDrawings(),key=lambda e:xy(e.GetStart()));corners=C['board']['outline_mm'];expected=sorted(zip(corners,corners[1:]+corners[:1]));assert len(edges)==4
+    for e,(a,z) in zip(edges,expected):
+        close(xy(e.GetStart()),a);close(xy(e.GetEnd()),z);assert e.GetLayer()==p.Edge_Cuts;assert e.GetShape()==p.SHAPE_T_SEGMENT;assert p.ToMM(e.GetWidth())==C['board']['edge_width_mm']
+        out['edges'].append({'start':xy(e.GetStart()),'end':xy(e.GetEnd()),'width_mm':p.ToMM(e.GetWidth()),'layer':'Edge.Cuts'})
+    project=json.loads(path.with_suffix('.kicad_pro').read_text());r=project['board']['design_settings']['rules'];n=project['net_settings']['classes'];assert len(n)==1
+    assert r['min_clearance']==.2 and r['min_track_width']==.2 and r['min_copper_edge_clearance']==.5
+    assert n[0]['clearance']==.2 and n[0]['track_width']==.2 and n[0]['via_diameter']==.6 and n[0]['via_drill']==.3
+    assert project['board']['design_settings'].get('drc_exclusions',[])==[]
+    out['rules']=r;out['netclasses']=n
+    return out
+
+if __name__=='__main__':
+    path=Path(sys.argv[1]);out=snapshot(path);Path(sys.argv[2]).write_text(json.dumps(out,indent=2)+'\n')
+    if len(sys.argv)>3:
+        b=p.LoadBoard(str(path));dest=Path(sys.argv[3]);assert p.SaveBoard(str(dest),b)
+        assert p.GetSettingsManager().SaveProject(str(dest.with_suffix('.kicad_pro')))
+    print('saved object expectations PASS')
