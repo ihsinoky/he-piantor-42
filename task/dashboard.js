@@ -29,7 +29,7 @@
     <h3>${esc(step.name)}</h3>${index === 0 ? `<p><b>目的:</b> ${esc(step.purpose)}</p>` : ""}
     <p><b>得るもの:</b> ${esc(step.output)}</p><p><b>次へ進む確認:</b> ${esc(step.confirm)}</p>
     ${index === 0 ? `<p><b>完了条件:</b> ${esc(step.completion)}</p><p><b>担当:</b> ${esc(step.owner)}</p>` : ""}
-    <p><b>依存:</b> ${esc(step.dependency)}</p>${index === 0 ? `<small>${esc(step.source)}</small>` : ""}
+    <p><b>依存:</b> ${esc(step.dependency)}</p>${index === 0 ? `<details><summary>根拠と詳細</summary><small>${esc(step.source)}</small></details>` : ""}
   </article>`).join("");
 
   const qualification = P.plan.qualification;
@@ -38,6 +38,9 @@
   $("qualification-output").textContent = `得るもの: ${qualification.output}`;
   $("qualification-completion").textContent = qualification.completion;
   $("qualification-owner").textContent = qualification.owner;
+  $("qualification-established").innerHTML = `<b>既存の条件:</b> ${esc(qualification.establishedSummary)}`;
+  $("qualification-established-detail").textContent = qualification.establishedDetail;
+  $("qualification-established-source").innerHTML = `<b>出典:</b> ${(qualification.establishedSources || []).map(item => link(item.label, item.href)).join(" · ")}`;
   $("qualification-notice").textContent = qualification.notice;
   const evaluation = P.latestEvaluation;
   const coverage = new Map((evaluation?.coverage || []).map(item => [item.stepId, item]));
@@ -83,13 +86,15 @@
   $("history-link").href = P.source.historyUrl;
 
   const riskCard = item => `<article class="risk-card">
-    <h3>${esc(item.title)}</h3><p><b>根拠:</b> ${esc(item.basis || item.detail)}</p>
-    <p><b>起きると困ること:</b> ${esc(item.impact || item.consequence || "詳細未記載")}</p>
-    <p><b>判断に必要な証拠:</b> ${esc(item.proof || "別途確認が必要")}</p>
-    <p><b>対処状況:</b> ${esc(item.handling || "現在の対処状況は未確認")}</p>
-    <p><b>担当:</b> ${esc(item.owner || "担当未定")}</p>
-    <p><b>出典:</b> ${item.href ? link(item.source || item.title, item.href) : esc(item.source || "未記載")}</p>
-    ${item.proposal ? `<p class="unapproved"><b>対策案:</b> ${esc(item.proposal)}</p>` : ""}
+    <h3>${esc(item.title)}</h3><p class="risk-impact">${esc(item.impact || item.consequence || "影響は未確認です。")}</p>
+    <details><summary>根拠・必要な確認・担当・出典</summary>
+      <p><b>根拠:</b> ${esc(item.basis || item.detail || "根拠未記載")}</p>
+      <p><b>判断に必要な証拠:</b> ${esc(item.proof || "別途確認が必要")}</p>
+      <p><b>対処状況:</b> ${esc(item.handling || "現在の対処状況は未確認")}</p>
+      <p><b>担当:</b> ${esc(item.owner || "担当未定")}</p>
+      <p><b>出典:</b> ${item.href ? link(item.source || item.title, item.href) : esc(item.source || "未記載")}</p>
+      ${item.proposal ? `<p class="unapproved"><b>対策案:</b> ${esc(item.proposal)}</p>` : ""}
+    </details>
   </article>`;
   $("current-problems").innerHTML = evaluation?.currentProblem ? riskCard(evaluation.currentProblem) : "<p>現在の評価に記録された問題はありません。</p>";
   $("uncertainties").innerHTML = P.uncertainties.map(riskCard).join("");

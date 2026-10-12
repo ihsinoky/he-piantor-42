@@ -25,43 +25,67 @@ and spacing-compliant routing, effective-rule checking, manufacturing data and
 clean-workspace regeneration remain unconfirmed or untested. See the
 [EDA-004E report](native-kicad-authoring-feasibility.md).
 
-**Next decision:** No next technical evaluation plan, owner, exit criteria or
-schedule is approved. The PO decides whether to continue planning, hold, or
-reconsider direction. PMO can organize the accepted report and missing evidence;
-a technical owner remains unassigned. The decision evidence still lacks an
-approved schematic/Main-connectivity route, Main-scale applicability, joint
-connectivity/spacing proof, repeatable manufacturing outputs and a supported
-maintenance scope. No next experiment is selected here.
+**Next decision:** Existing constraints and the earlier bounded plan remain
+recorded; they are not an authorization for another run after EDA-004E. D-018
+prioritized Candidate B for its qualification plan, kept two copper layers,
+1.2 mm thickness and 0.20 mm material clearance, put Main before Wing/export,
+and capped that plan's first Main evaluation at two workdays. EDA-004B–D are
+completed reports from that plan but stopped before routing. The next experiment
+after EDA-004E has no approved target, method, implementer or individual
+acceptance conditions. PMO prepares a technically bounded proposal and missing
+evidence; the PO decides whether to proceed, hold or reconsider direction.
+Execution requires a separate PO-created Issue and subsequent PO instruction.
+See [D-018](decisions.md#d-018---bounded-alternate-physical-backend-qualification-planning)
+and the [historical qualification plan](alternate-physical-backend-qualification-plan.md).
 
 ### Current qualification work and product lifecycle
 
-The plan summary uses IEC 62304 development-planning concepts only to organize
-purpose, deliverable, confirmation, completion criteria and owner. It does not
-claim standards conformity, assign a medical-device class, or create an
-additional approval process.
+The qualification goal is already defined: demonstrate a suitable path for
+creating product-board design data, checking circuit connectivity, routing,
+checking the routed connections and required spacing, producing manufacturing
+data, and reproducing the result under recorded conditions. These are required
+capabilities, **not an approved experiment sequence**.
 
-The method-qualification work must ultimately provide a product-scale circuit
-definition and its circuit-level connectivity checks; PCB data with correct
-parts, nets and rules; actual routing; distinct circuit and post-route checks;
-manufacturing outputs; and evidence of regeneration under recorded conditions.
-These describe needed capabilities, **not an approved experiment sequence**.
-The required deliverable and completion criteria for this qualification work
-are **not yet planned**. Direction/plan approval belongs to the PO; technical
-preparation may be assigned later. The six capability links, result scope and
-current risks are summarized by the Dashboard from structured fields.
+Existing decisions and limits remain in force within their stated scope:
+
+- D-015/D-017 retain a two-copper-layer, 1.2 mm board baseline; D-018 carries
+  the **0.20 mm material-clearance requirement** into its bounded qualification
+  plan. These constraints do not prove that a candidate meets them.
+- D-018's accepted plan prioritized Candidate B for qualification, not adoption.
+  For that plan, Main must pass before Wing/export work; its first Main evaluation
+  had a two-workday effort cap, one initial routing run, and one fresh confirmation
+  only if the first passed. These limits do not authorize a new run or transfer
+  automatically to another candidate.
+- The D-018 plan and EDA-004B–D reports are completed planning/evaluation records.
+  They do not define an approved next experiment after EDA-004E. That next
+  experiment's target, method, implementer and individual acceptance conditions
+  remain undecided. PMO prepares the technical proposal and evidence for PO
+  decision; execution requires a separate PO-created Issue and PO instruction.
+
+The capability map, latest evaluation coverage and current risks are summarized
+by the Dashboard from structured fields.
 
 | Needed capability | Intended output and confirmation | EDA-004E evidence / open state |
 | --- | --- | --- |
 | Circuit/connectivity definition | Schematic or equivalent circuit definition; separately check component/pin/net consistency before PCB routing. | No pinned headless schematic authoring path found; current Main ERC/connectivity not entered. |
-| PCB data | Board parts/shapes/nets/outline/stack/rules; save/reload object comparison and acceptance DRC. | KiCad 9.0.9 fixed small fixture create/save/separate-process reload and fixture object parity passed. Initial acceptance failed on two unexpected warnings. No evidence transfers automatically to Main. |
+| PCB data | Board parts/shapes/nets/outline/stack/rules; confirm save/reload preserves shape and connection information and check acceptance DRC. | KiCad 9.0.9 fixed small trial-board create/save/separate-process reload and shape/connection preservation passed in part. Initial acceptance failed on two unexpected warnings. No evidence transfers automatically to Main. |
 | Routing | Copper connectivity under physical constraints. | Routing not entered. |
 | Circuit and post-route checks | Circuit-level consistency; separately verify routed nets and effective clearance rules. | Current Main connectivity, effective 0.20 mm spacing-rule probe and post-route DRC not entered. |
 | Manufacturing output | Board-matched Gerber/drill/BOM/placement and pre-order DFM review. | Not entered for the native KiCad fixture. |
 | Reproducible execution | Regenerate equivalent outputs from recorded conditions in a clean workspace. | Empty-workspace regeneration not entered after the initial fixture acceptance failure. |
 
+The accepted D-018 Candidate B plan and its EDA-004B–D reports are historical
+planning/execution records, not a current authorization. Their scope, candidate
+and stop results remain intact. EDA-004E is a separate later evaluation of native
+KiCad board saving; it does not erase D-018's constraints or restart its plan.
+Any next evaluation after EDA-004E needs a newly defined target, method, owner and
+individual acceptance conditions. PMO prepares that bounded technical proposal;
+the PO decides whether it may proceed. No prior candidate's run permission carries
+forward automatically.
+
 These functions are related capabilities, not an authorized execution order.
 Circuit-level connectivity is distinct from PCB/post-route checks. The two DRC
-warnings explain why this fixture failed its acceptance; they do not prove
+warnings explain why this trial board failed its acceptance; they do not prove
 method-wide impossibility, and resolving them alone would not establish the
 other capabilities.
 

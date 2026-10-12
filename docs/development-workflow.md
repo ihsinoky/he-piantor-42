@@ -66,6 +66,11 @@ When accepting an evaluation result, the PR must update both records with:
   derived from the same structured data. Keep stable decision/history references
   separate from fields that follow the latest evaluation identifier, links, and
   status.
+- distinguish retained decisions/constraints and completed historical plans from
+  the next experiment. Record each constraint's scope and source; PMO prepares the
+  next target, method, implementer, individual acceptance conditions and investment
+  boundary for the PO to decide. Prior execution permission does not transfer to a
+  new candidate or run.
 
 For a Dashboard review, substitute a temporary latest-evaluation record and
 verify the current-stage and evaluation panels update IDs, links, title, and

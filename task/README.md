@@ -28,6 +28,11 @@ generator or automatic synchronization at present.
 
 ## Accepting an evaluation result
 
+For planning terminology, the Dashboard groups purpose, deliverables, confirmation,
+completion conditions and owners as commonly found in development plans. IEC 62304
+is a reference for that organization only: this project makes no conformity claim,
+medical-device classification, or additional approval process.
+
 In the result-acceptance PR, update the opening status in
 `../docs/project-status.md` and the matching structured fields in
 `data/project-status.js`. State the product-development location and current
@@ -39,6 +44,15 @@ problems/unresolved uncertainties with evidence, consequence, needed proof,
 disposition, owner and source.
 If PO/PMO has not selected or authorized a next technical step, show that as
 undecided rather than instructing an experiment.
+
+Keep established decisions and constraints separate from the next unapproved
+experiment. Record their scope and source (for example, D-015/D-017's two-layer,
+1.2 mm board baseline and D-018's 0.20 mm clearance and Main-first qualification
+plan). Mark completed historical plans/reports as completed history, not renewed
+permission. State which target, method, implementer, individual acceptance
+conditions and investment boundary still need definition. PMO prepares the
+technical proposal and evidence; the PO decides. A past candidate's authorization
+does not transfer to a new run.
 
 Keep the report and method-history links. Verify that completed evaluation
 recording is not described as technical pass, adoption, or manufacturing
