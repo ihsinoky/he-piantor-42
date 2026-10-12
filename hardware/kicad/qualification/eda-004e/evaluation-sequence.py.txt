@@ -1,0 +1,11 @@
+import sys,json
+from pathlib import Path
+sys.path.insert(0,str(Path.cwd()/'hardware/kicad/qualification/eda-004e'))
+from capture import *
+r=ROOT/'evidence';env=json.loads((r/'kicad-env.json').read_text());base=Path('/tmp/eda004e/initial')
+run('initial-reload-resave-corrected',['/usr/bin/python3',str(ROOT/'inspect.py'),str(base/'fixture.kicad_pcb'),str(base/'before.json'),str(base/'roundtrip.kicad_pcb')],Path.cwd(),env=env,artifacts=[('before.json',base/'before.json'),('roundtrip.kicad_pcb',base/'roundtrip.kicad_pcb'),('roundtrip.kicad_pro',base/'roundtrip.kicad_pro')])
+run('initial-resaved-inspect',['/usr/bin/python3',str(ROOT/'inspect.py'),str(base/'roundtrip.kicad_pcb'),str(base/'after.json')],Path.cwd(),env=env,artifacts=[('after.json',base/'after.json')])
+assert json.loads((base/'before.json').read_text())==json.loads((base/'after.json').read_text())
+cli='/tmp/eda004e/kicad/usr/bin/kicad-cli'
+for name,args in [('pcb-help',['pcb','--help']),('sch-help',['sch','--help']),('drc-help',['pcb','drc','--help']),('erc-help',['sch','erc','--help'])]:run(name,[cli]+args,Path.cwd(),env=env)
+run('initial-drc',[cli,'pcb','drc','--format','json','--output',str(base/'drc.json'),str(base/'roundtrip.kicad_pcb')],Path.cwd(),env=env,artifacts=[('drc.json',base/'drc.json')])

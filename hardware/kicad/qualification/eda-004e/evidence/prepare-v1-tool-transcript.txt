@@ -1,0 +1,12 @@
+Retained text from the first prepare.py tool output (exact byte stream/start UTC unavailable):
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004e/prepare.py", line 11, in <module>
+    runpy.run_path(str(PRIOR / 'install-kicad.py'), run_name='__main__')
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "/workspaces/he-piantor-42/hardware/tscircuit/qualification/eda-004d/install-kicad.py", line 3, in <module>
+    apt=base/'apt';apt.mkdir()
+  File "/home/codespace/.python/current/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/eda004e/apt'
+Observed exit code: 1. Fix: create the empty work root before unchanged installer.

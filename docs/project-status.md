@@ -40,7 +40,7 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit resumed as the historical forward candidate under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B/C/D/E/F are completed historical qualification work (classifications below); representative Main routing remains unqualified. D-018 records Issue #71 PO planning GO: evaluated internal router exploration ended; frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted. EVT-002 has satisfied G0B but full implementation remains blocked; EDA-004B / Issue #73 has reached ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR with partial evidence; Main initial/confirmation attempts 0/0; EDA-004C / Issue #75 / PR #76 now ends CONVERSION_BLOCKED: duplicate GND pad net loss, KiCad shorting_items, unqualified synthetic ERC; smoke initial/fresh 0/0. PMO/PO review is next. |
+| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit resumed as the historical forward candidate under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B/C/D/E/F are completed historical qualification work (classifications below); representative Main routing remains unqualified. D-018 records Issue #71 PO planning GO: evaluated internal router exploration ended; frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted. EVT-002 has satisfied G0B but full implementation remains blocked; EDA-004B / Issue #73 has reached ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR with partial evidence; Main initial/confirmation attempts 0/0; EDA-004C / Issue #75 / PR #76 now ends CONVERSION_BLOCKED: duplicate GND pad net loss, KiCad shorting_items, unqualified synthetic ERC; smoke initial/fresh 0/0. PMO/PO review is next. Latest: EDA-004D #77 / PR #78 CONVERSION_BLOCKED; EDA-004E #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED, initial fixture acceptance FAIL (two unexpected DRC warnings), effective rules/fresh trial NOT ENTERED; no pinned public headless schematic authoring path; STOP before Main, PO/PMO review pending. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -176,9 +176,11 @@ three pitch Wings and full-load three-TMUX/three-ADC coverage are frozen.
 The exact pull-down resistor value remains implementation work.
 
 **EVT-002: G0B prerequisite satisfied; full Rev.M1 implementation not yet active.**
-Current sequence: **EDA-004C / Issue #75 terminal CONVERSION_BLOCKED -> PMO/PO
-review of duplicate GND pad net loss and synthetic schematic conversion failures;
-Main PASS still precedes Wing/export and adoption review**.
+Current sequence: **EDA-004D / Issue #77 / PR #78 CONVERSION_BLOCKED ->
+EDA-004E / Issue #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED -> PMO/PO review;
+Main remains unqualified and full implementation/adoption remains blocked**.
+See [EDA path history](eda-path-history.md) and
+[native KiCad feasibility](native-kicad-authoring-feasibility.md).
 Full Rev.M1 implementation requires separate authorization. No
 schematic/PCB/manufacturing package completion, placement, routing or order
 is claimed. Production pitch, final Hall choice, final Rev.A cable mechanics/length,
@@ -305,3 +307,20 @@ and the other product risks listed above remain unchanged.
 copy. If they conflict, this document is correct. Synchronization is reviewed in
 the same pull request as a status change; there is currently no generator or
 automatic synchronization.
+
+## EDA-004E native KiCad feasibility
+
+[Issue #79](https://github.com/ihsinoky/he-piantor-42/issues/79) evaluation is complete:
+**PCB_IO_PASS / FRONTEND_UNQUALIFIED**, STOP recommended before Main.
+KiCad 9.0.9 public PCB object creation/save/separate-process reload/resave and
+frozen endpoint/geometry parity pass. Initial fixture acceptance fails two
+unexpected DRC warnings (U1 silkscreen overlap, unconfigured official footprint
+library); the two expected unconnected links are identified separately.
+Effective-rule negative test and conditional empty-directory regeneration are
+NOT ENTERED. No pinned public headless schematic authoring route was found;
+current Main ERC/parity and Main generation/routing/manufacturing are NOT ENTERED.
+Deprecated SWIG binding and exact-library/rule maintenance remain additional work.
+[Result/evidence](native-kicad-authoring-feasibility.md) and
+[history/retry conditions](eda-path-history.md) preserve prior decisions.
+EDA-004D's merged PR #78 retains its footprint-library identity collision STOP.
+No backend adoption, Human Gate or full implementation authorization is implied.

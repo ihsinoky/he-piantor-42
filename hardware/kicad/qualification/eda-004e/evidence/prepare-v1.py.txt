@@ -1,0 +1,11 @@
+"""Reuse the immutable EDA-004D installer and durable process recorder."""
+import os
+import runpy
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent
+PRIOR = ROOT.parents[2] / 'tscircuit/qualification/eda-004d'
+os.environ['EDA004D_WORK_DIR'] = '/tmp/eda004e'
+os.environ['EDA004D_EVIDENCE_DIR'] = str(ROOT / 'evidence')
+sys.path.insert(0, str(PRIOR))
+runpy.run_path(str(PRIOR / 'install-kicad.py'), run_name='__main__')
