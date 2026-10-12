@@ -30,6 +30,7 @@ main{display:grid;gap:.8rem}
 .s-done,.s-success{color:var(--green)}.s-current,.s-progress{color:var(--blue)}.s-blocked,.s-fail{color:var(--red)}.s-waiting,.s-partial,.s-hold{color:var(--yellow)}.s-todo,.s-not-ready,.s-unknown,.s-notDone{color:var(--muted)}
 .product-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}
 .product-stage,.qualification-step{position:relative;min-width:0;border:1px solid var(--line);border-radius:.65rem;background:var(--panel2);padding:.65rem}
+.rev-m1-stage{grid-column:span 2;border-color:var(--blue)}
 .product-stage h3,.qualification-step h3{font-size:.92rem;margin:.45rem 0}
 .product-stage p,.qualification-step p,.product-stage small{display:block;color:var(--muted);margin:.35rem 0 0;overflow-wrap:anywhere}
 .product-stage p b,.qualification-step p b{color:var(--text)}
@@ -99,6 +100,7 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;padding:.8rem;overf
   .wrap{padding:.6rem}
   .card{padding:.75rem}
   .summary-grid,.product-path,.qualification-summary,.qualification-map,.risk-list,.eval-grid,.history-list,.roadmap,.gate-grid,.evidence-list{grid-template-columns:minmax(0,1fr)}
+  .rev-m1-stage{grid-column:auto}
   .product-path{gap:.4rem}
   .path-step{padding:.6rem}
   .asof{max-width:45%;text-align:left}

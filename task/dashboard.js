@@ -13,7 +13,7 @@
   $("source-date").textContent = `main記録の確認: ${P.source.confirmedAt.replace("T", " ").replace("Z", " UTC")} · ${P.source.reference}`;
   $("current-location").textContent = valueOr(P.current?.location);
   $("current-blocker").textContent = valueOr(P.current?.blocker);
-  $("current-change").textContent = valueOr(P.current?.change);
+  $("current-change").textContent = valueOr(P.latestEvaluation?.currentSummary);
   $("action-status").textContent = valueOr(P.nextAction?.status);
   $("action-status").className = "badge s-waiting";
   $("action-details").innerHTML = [
@@ -24,32 +24,39 @@
   ].map(([term, detail]) => `<dt>${esc(term)}</dt><dd>${esc(valueOr(detail))}</dd>`).join("");
 
   $("planning-note").textContent = P.plan.planningNote;
-  $("product-path").innerHTML = P.plan.product.map((step, index) => `<article class="product-stage">
-    <span class="path-number">${index + 1}</span><h3>${esc(step.name)}</h3>
-    <p><b>目的:</b> ${esc(step.purpose)}</p><p><b>得るもの:</b> ${esc(step.output)}</p>
-    <p><b>次へ進む確認:</b> ${esc(step.confirm)}</p><p><b>完了条件:</b> ${esc(step.completion)}</p>
-    <p><b>担当:</b> ${esc(step.owner)}</p><p><b>依存:</b> ${esc(step.dependency)}</p>
-    <small>${esc(step.source)}</small>
+  $("product-path").innerHTML = P.plan.product.map((step, index) => `<article class="product-stage ${index === 0 ? "rev-m1-stage" : "later-stage"}">
+    ${index === 0 ? `<span class="badge s-waiting">${esc(step.status)}</span>` : ""}
+    <h3>${esc(step.name)}</h3>${index === 0 ? `<p><b>目的:</b> ${esc(step.purpose)}</p>` : ""}
+    <p><b>得るもの:</b> ${esc(step.output)}</p><p><b>次へ進む確認:</b> ${esc(step.confirm)}</p>
+    ${index === 0 ? `<p><b>完了条件:</b> ${esc(step.completion)}</p><p><b>担当:</b> ${esc(step.owner)}</p>` : ""}
+    <p><b>依存:</b> ${esc(step.dependency)}</p>${index === 0 ? `<small>${esc(step.source)}</small>` : ""}
   </article>`).join("");
 
   const qualification = P.plan.qualification;
-  $("qualification-status").textContent = "計画未承認";
+  $("qualification-status").textContent = qualification.status;
   $("qualification-purpose").textContent = qualification.purpose;
   $("qualification-output").textContent = `得るもの: ${qualification.output}`;
   $("qualification-completion").textContent = qualification.completion;
   $("qualification-owner").textContent = qualification.owner;
   $("qualification-notice").textContent = qualification.notice;
-  $("qualification-map").innerHTML = qualification.steps.map((step, index) => `<article class="qualification-step ${step.result === "一部確認・初回受入失敗" ? "partial" : "unconfirmed"}">
-    <span class="path-number">${index + 1}</span>${badge(step.result === "一部確認・初回受入失敗" ? "partial" : step.result === "未実施" ? "notEntered" : "unconfirmed", step.result)}
-    <h3>${esc(step.name)}</h3><p><b>得るもの:</b> ${esc(step.output)}</p>
-    <p><b>確認方法:</b> ${esc(step.check)}</p><p><b>今回の範囲:</b> ${esc(step.evidence)}</p>
-  </article>`).join("");
-
   const evaluation = P.latestEvaluation;
+  const coverage = new Map((evaluation?.coverage || []).map(item => [item.stepId, item]));
+  $("qualification-map").innerHTML = qualification.steps.map(step => {
+    const result = coverage.get(step.id) || { result:"未確認", detail:"最新評価にはこの範囲の証拠がありません。" };
+    const resultClass = result.result.includes("一部確認") ? "partial" : "unconfirmed";
+    const badgeStatus = result.result === "未実施" ? "notEntered" : result.result.includes("一部確認") ? "partial" : "unconfirmed";
+    return `<article class="qualification-step ${resultClass}">
+    ${badge(badgeStatus, result.result)}
+    <h3>${esc(step.name)}</h3><p><b>得るもの:</b> ${esc(step.output)}</p>
+    <p><b>確認方法:</b> ${esc(step.check)}</p><p><b>今回の証拠（${esc(evaluation?.id || "評価ID未確認")}）:</b> ${esc(result.detail)}</p>
+  </article>`;
+  }).join("");
+
   $("evaluation-title").textContent = valueOr(evaluation?.title);
   $("evaluation-id").textContent = evaluation?.id ? `評価 ${evaluation.id}` : "評価ID未確認";
   $("work-status").textContent = valueOr(evaluation?.workStatus);
   $("technical-status").textContent = valueOr(evaluation?.technicalStatus);
+  $("evaluation-purpose").textContent = valueOr(evaluation?.purpose);
   $("tested-question").textContent = valueOr(evaluation?.testedQuestion);
   $("evidence-boundary").textContent = valueOr(evaluation?.evidenceBoundary);
   $("learned").textContent = valueOr(evaluation?.learned);
@@ -65,7 +72,7 @@
   $("pr-link").href = evaluation.acceptedRecord?.url || "#";
   $("pr-link").textContent = evaluation.acceptedRecord?.id ? `PR #${evaluation.acceptedRecord.id}（${evaluation.acceptedRecord.status}）` : "受入記録未確認";
   $("report-link").href = P.source.reportUrl;
-  $("report-link").textContent = `報告書（${evaluation.id || "評価ID未確認"}）`;
+  $("report-link").textContent = `報告書（${evaluation?.id || "評価ID未確認"}）`;
 
   $("history-list").innerHTML = P.history.map(item => `<article class="history-item">
     <h3>${esc(item.name)}</h3><p><b>試した範囲:</b> ${esc(item.tested)}</p>
@@ -84,20 +91,21 @@
     <p><b>出典:</b> ${item.href ? link(item.source || item.title, item.href) : esc(item.source || "未記載")}</p>
     ${item.proposal ? `<p class="unapproved"><b>対策案:</b> ${esc(item.proposal)}</p>` : ""}
   </article>`;
-  $("current-problems").innerHTML = P.currentProblems.map(riskCard).join("");
+  $("current-problems").innerHTML = evaluation?.currentProblem ? riskCard(evaluation.currentProblem) : "<p>現在の評価に記録された問題はありません。</p>";
   $("uncertainties").innerHTML = P.uncertainties.map(riskCard).join("");
   $("later-risks").innerHTML = P.risks.map(item => riskCard({ ...item,
-    title:`過去・後工程: ${item.title}`,
+    title:`後工程・過去方式: ${item.title}`,
     basis:item.detail,
     impact:"現在のEDA経路に対する判定とは分けて扱う。",
     proof:"該当製品段階または過去方式を再検討する場合に出典の最新性を確認。",
     handling:"参考情報。現在の技術候補の合格・不合格には転用しない。",
-    owner:"該当段階の担当者（未定）",
-    source:"task/data/project-status.js の過去リスク記録",
-    proposal:"提案・未承認"
+    owner:item.owner||"該当段階の担当者（未定）",
+    source:item.source||"project-status.md",
+    href:item.href||"../../docs/project-status.md"
   })).join("");
 
   $("decision-question").textContent = P.decision.question;
+  $("decision-status").textContent = P.decision.status;
   $("decision-details").innerHTML = [
     ["不足する判断材料", P.decision.evidence],
     ["判断・整理の担当", P.decision.owner],

@@ -3,7 +3,7 @@ window.PROJECT_STATUS = {
   schemaVersion: 2,
   source: {
     confirmedAt: "2026-10-12T20:08:22Z",
-    reference: "PR #80 merged into main",
+    reference: "main status record",
     statusUrl: "https://github.com/ihsinoky/he-piantor-42/pull/80",
     reportUrl: "../docs/native-kicad-authoring-feasibility.md",
     historyUrl: "../docs/eda-path-history.md"
@@ -11,8 +11,7 @@ window.PROJECT_STATUS = {
   current: {
     heading: "実物Rev.M1の設計前",
     location: "実物Rev.M1の設計前。設計・配線方法の成立を評価中ですが、現時点の候補は未認定です。",
-    blocker: "実物基板に必要な設計データ作成・接続検査・配線・間隔検査・製造出力・再現実行を一通り成立させる経路が未認定です。EDA-004Eの初回fixture受入も警告2件で不成立でした。",
-    change: "小規模fixtureの保存・別プロセス再読込と形状・接続情報の保持を確認しました。これは実物Mainの成立確認ではなく、初回受入の警告も残っています。"
+    blocker: "実物基板に必要な設計データ作成・接続検査・配線・間隔検査・製造出力・再現実行を一通り成立させる経路が未認定です。"
   },
   nextAction: {
     status: "次の技術計画は未承認 — 方針判断が必要",
@@ -22,25 +21,26 @@ window.PROJECT_STATUS = {
     startCondition: "判断材料の不足、技術担当、完了条件、日程は未定です。"
   },
   plan: {
-    planningNote: "目的・成果物・確認方法・完了条件・担当の見方で整理。正式な規格適合計画や追加の承認制度ではありません。",
+    planningNote: "IEC 62304の開発計画の考え方も参考に、目的・成果物・確認方法・完了条件・担当を整理。規格適合や医療機器クラスを示さず、追加承認制度も導入しません。",
     product: [
-      { name:"実物Rev.M1の設計・製造・実測", purpose:"磁気方式・ピッチ・電力と代表的な信号経路を評価する。", output:"Main + pitch / 磁気Evaluation Wing(s)、計測FW、製造前パッケージ、測定結果レポート。", confirm:"G1: ERC/DRC、BOM、製造出力、測定計画を発注前に確認。G2: 磁気範囲、ノイズ、scan speed、電力、pitch usability等を実測。", completion:"実物で測定しG2判断の根拠を記録。注文承認は別判断。", owner:"技術担当未定。G1/G2判断はPO。", dependency:"EDA方法の承認が必要。計測FWとPCBに依存し、筐体はPCB条件後に連携。", source:"hardware/rev-m1/evaluation-plan.md · hardware/rev-m1/architecture.md" },
+      { name:"実物Rev.M1の設計・製造・実測", status:"実装未着手・技術経路の判断待ち", purpose:"磁気方式・ピッチ・電力と代表的な信号経路を評価する。", output:"Main + pitch / 磁気Evaluation Wing(s)、計測FW、製造前パッケージ、測定結果レポート。", confirm:"G1: ERC/DRC、BOM、製造出力、測定計画を発注前に確認。G2: 磁気範囲、ノイズ、scan speed、電力、pitch usability等を実測。", completion:"実物で測定しG2判断の根拠を記録。注文承認は別判断。", owner:"技術担当未定。G1/G2判断はPO。", dependency:"EDA方法の承認が必要。計測FWとPCBに依存し、筐体はPCB条件後に連携。", source:"hardware/rev-m1/evaluation-plan.md · hardware/rev-m1/architecture.md" },
       { name:"測定結果を42キーRev.Aへ反映", purpose:"G2の方式・pitch判断を42キー設計へ反映する。", output:"accepted Main + project-owned Left/Right 21-key Wings + firmware。", confirm:"ERC/DRC、製造性、FW build、G3発注前レビュー。", completion:"必要packageとG3判断材料を用意。承認・発注は別判断。", owner:"技術担当未定。G2/G3判断はPO。", dependency:"Rev.M1実測、G2判断、Wing geometry承認。", source:"D-015 / hardware/rev-m1/architecture.md" },
       { name:"統合・実機確認", purpose:"筐体・基板・firmwareを統合して動作を確認する。", output:"組立済み機器、校正・試験手順。", confirm:"打鍵、全キー校正、USB/Vial、筐体適合。", completion:"統合試験とG4確認。", owner:"技術担当未定。G4判断はPO。", dependency:"Rev.A相当基板/FW。筐体はPCB条件に依存。", source:"docs/project-status.md · G4" },
       { name:"完成版", purpose:"再現可能な成果物を固定する。", output:"v1.0製造・firmware・筐体packageと手順。", confirm:"受入試験と成果物/製造手順の再現性。", completion:"G5でPOが完成版を承認。", owner:"技術担当未定。承認はPO。", dependency:"統合試験、校正、製造package。", source:"docs/project-status.md · G5" }
     ],
     qualification: {
+      status:"計画未承認・完了条件未定",
       purpose:"実物基板の設計データから製造データまでを作成・検証し、同じ条件で再現できる技術経路を確立する。",
       output:"承認された工程計画、回路/PCBデータ、回路接続・配線・間隔の検査証拠、製造出力、再生成結果。",
       completion:"承認済みの計画がまだありません。必要な技術的exit条件、対象、担当をPOが計画決定時に補完します。",
       owner:"方針・計画の判断: PO、材料整理: PMO。技術実施担当は未定／未承認。",
       steps:[
-        { id:"circuit", name:"回路・接続情報を作る", output:"回路図または同等の電気接続定義。", check:"部品/ピン/ネットの整合を回路レベルで検査。PCB配線後のDRCとは別。", result:"未認定", evidence:"固定版KiCadにpublicなheadless schematic作成経路を確認できず、現MainのERC/接続一致は未実施。" },
-        { id:"board", name:"基板形状・接続・設計ルールへ反映", output:"部品形状・net割当・outline・stackとruleを持つPCB。", check:"保存再読込で定義した対象を比較し、初回DRC受入を確認。", result:"一部確認・初回受入失敗", evidence:"EDA-004EはKiCad 9.0.9の固定小規模fixtureのみ。PCB作成・保存・別process再読込とfixtureのobject parityは確認、DRC warning 2件でacceptance FAIL。" },
-        { id:"route", name:"基板を配線する", output:"接続が保たれ、物理制約内に配線されたPCB。", check:"実際の銅配線で全対象netを接続し、電気・物理検証へ渡す。", result:"未実施", evidence:"EDA-004Eではrouteを行っていない。固定fixture内のlocal trackはMain配線の認定ではない。" },
-        { id:"verify", name:"接続と間隔を検査する", output:"schematic/PCB接続一致と、配線後のclearance検査結果。", check:"回路レベル接続検査と配線後DRC/実効spacing rule検査を別々に確認。", result:"未認定", evidence:"Current Mainの接続検査・有効0.20 mm spacing ruleのnegative test・配線後DRCは未実施。" },
-        { id:"manufacture", name:"製造データを出力する", output:"対象基板のGerber/drill/BOM/placement等の製造一式。", check:"PCB設計との一致、製造前DFMとG1 reviewを確認。", result:"未実施", evidence:"EDA-004Eの対象外。native KiCad fixtureから製造データを認定していない。" },
-        { id:"reproduce", name:"同じ条件で再生成する", output:"記録済み固定環境から再生成した結果。", check:"新しい空のwork areaで成果物・意味の差を比較。", result:"未実施", evidence:"初回fixture acceptanceが失敗したため、empty-workspace regenerationを開始していない。" }
+        { id:"circuit", name:"回路・接続情報を作る", output:"回路図または同等の電気接続定義。", check:"部品/ピン/ネットの整合を回路レベルで検査。PCB配線後のDRCとは別。" },
+        { id:"board", name:"基板形状・接続・設計ルールへ反映", output:"部品形状・net割当・outline・stackとruleを持つPCB。", check:"保存再読込で定義した対象を比較し、初回DRC受入を確認。" },
+        { id:"route", name:"基板を配線する", output:"接続が保たれ、物理制約内に配線されたPCB。", check:"実際の銅配線で全対象netを接続し、電気・物理検証へ渡す。" },
+        { id:"verify", name:"接続と間隔を検査する", output:"schematic/PCB接続一致と、配線後のclearance検査結果。", check:"回路レベル接続検査と配線後DRC/実効spacing rule検査を別々に確認。" },
+        { id:"manufacture", name:"製造データを出力する", output:"対象基板のGerber/drill/BOM/placement等の製造一式。", check:"PCB設計との一致、製造前DFMとG1 reviewを確認。" },
+        { id:"reproduce", name:"同じ条件で再生成する", output:"記録済み固定環境から再生成した結果。", check:"新しい空のwork areaで成果物・意味の差を比較。" }
       ],
       notice:"この機能関係図は必要能力の説明です。次の実験順序・技術案・着手承認を表しません。"
     }
@@ -53,12 +53,22 @@ window.PROJECT_STATUS = {
     acceptedRecord: { id:"80", url:"https://github.com/ihsinoky/he-piantor-42/pull/80", status:"mainで記録受入済み" },
     workStatus: "評価作業完了・記録受入済み",
     technicalStatus: "初回受入不成立 — PCB I/Oの一部確認であり、方式採用や製品合格ではありません。",
+    currentSummary:"小規模fixtureを保存し、別process再読込後も対象の形状・接続情報が保たれることを確認。一方、初回受入は警告2件で不成立。Mainへの適用は未確認です。",
+    currentProblem: { title:"小規模fixtureの初回受入失敗", basis:"KiCad 9.0.9 DRCで予期しないwarningが2件。U1 referenceのsilk overlapと未設定のResistor_SMD library。", impact:"このfixtureの受入条件を満たさず、評価はSTOP。", proof:"両warningの根拠を扱った条件での受入証拠が必要。", handling:"warning修正だけではschematic/Main/配線/製造経路の認定にならない。方式全体の不可能性を示す証拠でもない。", owner:"次計画が未承認のため担当未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
     learned: "KiCad 9.0.9で固定した小規模試験基板を作成・保存し、別プロセスで再読込できました。初回DRCに予期しない警告が2件あり、試験の受入条件は満たしませんでした。",
     unknown: "回路図作成経路・現在Mainの接続検査・実際の配線・配線後の間隔ルール・製造データ・空の作業場所からの再生成は、未認定または未実施です。",
     impact: "実物Rev.M1の設計開始、KiCad方式の採用、製造への移行は承認されていません。",
     nextCondition: "POが続行/保留/方針見直しを判断する場合、未認定範囲・担当・完了条件を埋めた計画を先に決めること。計画は未承認です。",
     testedQuestion:"KiCad 9.0.9で、小規模試験基板を作成・保存し、別processで再読込したときに固定fixtureの形状・接続情報が保持されるか。",
     evidenceBoundary:"fixture上のPCB I/Oとobject parityの証拠です。実物Mainの回路図/接続、配線、実効間隔、製造出力、再生成には適用できると確認していません。",
+    coverage: [
+      { stepId:"circuit", result:"未認定", detail:"固定版KiCadにpublicなheadless schematic作成経路を確認できず、現MainのERC/接続一致は未実施。" },
+      { stepId:"board", result:"一部確認・初回受入失敗", detail:"KiCad 9.0.9の固定小規模fixtureでPCB作成・保存・別process再読込とobject parityを確認。DRC warning 2件で受入不成立。" },
+      { stepId:"route", result:"未実施", detail:"routeなし。fixture内local trackはMain配線の認定ではない。" },
+      { stepId:"verify", result:"未認定", detail:"current Main接続検査、有効0.20 mm spacing negative test、配線後DRCは未実施。" },
+      { stepId:"manufacture", result:"未実施", detail:"この評価の対象外。製造データの証拠なし。" },
+      { stepId:"reproduce", result:"未実施", detail:"初回acceptance失敗後のempty-workspace regenerationは未実施。" }
+    ],
     evidence: [
       { label: "保存・別プロセス再読込", result: "成功", detail: "KiCad 9.0.9の固定小規模fixture" },
       { label: "接続情報・部品形状の保持", result: "一部のみ確認", detail: "固定fixtureの保存前後を比較" },
@@ -68,20 +78,18 @@ window.PROJECT_STATUS = {
       { label: "製造データ・空の場所からの再生成", result: "未実施", detail: "製造出力と再現性を示す証拠なし" }
     ]
   },
-  currentProblems: [
-    { title:"初回fixtureの受入失敗", basis:"KiCad 9.0.9 DRCで予期しないwarningが2件。U1 referenceのsilk overlapと未設定のResistor_SMD library。", impact:"このfixtureの受入条件を満たさず、評価はSTOP。", proof:"両warningの根拠を扱った条件での受入証拠が必要。", handling:"現在未解決。warning修正だけではschematic/Main/配線/製造経路の認定にならない。方式全体の不可能性を示す証拠でもない。", owner:"次計画が未承認のため担当未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" }
-  ],
   uncertainties: [
     { title:"固定版のschematic作成・回路接続検査", basis:"KiCad 9.0.9にpinned public headless schematic authoring pathを確認できず、current Main ERC/parityも未実施。", impact:"正しい回路をPCBへ渡す方法が不明で、実物Main設計へ進めない。", proof:"承認対象となるschematic/connectivity routeと、Mainでの回路検査・一致証拠。", handling:"未認定。次の技術work/packageは未承認。", owner:"未定。POが計画を承認後に割当。", source:"docs/native-kicad-authoring-feasibility.md § Public functions and fixed environment", href:"../docs/native-kicad-authoring-feasibility.md" },
-    { title:"小規模fixtureから実規模Mainへの適用", basis:"EDA-004Eは小さいfixture。一方、read-only inventoryは49 components、37 netsで、完全なMain generation/connection proofはない。", impact:"fixture parityが実Mainの部品、pins、networks、librariesを保証しない。", proof:"許可されたcurrent Main対象と製品要件に対する部品/接続/geometry reconciliation。", handling:"未確認。Mainへ適用できると推定しない。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Representative Main read-only coverage", href:"../docs/native-kicad-authoring-feasibility.md" },
-    { title:"接続正しさと必要な配線間隔の両立", basis:"EDA-004Eでは配線未実施。strict 0.20 mm effective-rule negative probe未実施。", impact:"connected copperと安全なspacingを同時に満たすと示せず、製造へ進めない。", proof:"対象回路に対する配線後の電気的接続確認と実効spacing rule/DRC証拠。", handling:"未実証。特定routerや次の実験順序は選定していない。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
+    { title:"小規模fixtureから実規模Mainへの適用", basis:"直近の固定fixtureは小規模。一方、read-only inventoryは49 components、37 netsで、完全なMain generation/connection proofはない。", impact:"fixture parityが実Mainの部品、pins、networks、librariesを保証しない。", proof:"許可されたcurrent Main対象と製品要件に対する部品/接続/geometry reconciliation。", handling:"未確認。Mainへ適用できると推定しない。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Representative Main read-only coverage", href:"../docs/native-kicad-authoring-feasibility.md" },
+    { title:"接続正しさと必要な配線間隔の両立", basis:"直近の小規模fixture評価では配線未実施。strict 0.20 mm effective-rule negative probe未実施。", impact:"connected copperと安全なspacingを同時に満たすと示せず、製造へ進めない。", proof:"対象回路に対する配線後の電気的接続確認と実効spacing rule/DRC証拠。", handling:"未実証。特定routerや次の実験順序は選定していない。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
     { title:"rule有効性と条件を揃えた再生成", basis:"保存された0.20 mm settingsは実効rule enforcementの証拠ではない。empty-directory rerunも未実施。", impact:"設定どおりの判定や再現可能な製造生成を保証できない。", proof:"必要間隔を判別するnegative testと、許可された固定条件でのfresh regeneration比較。", handling:"未認定・未実施。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
     { title:"固定環境/API/部品libraryの維持負担", basis:"評価環境はKiCad 9.0.9のPython SWIG PCB APIでdeprecated（公開removal planはKiCad 11）。exact library config不足が初回fixtureのwarning原因。package/API/library更新は未検証。", impact:"版更新、ABI、license/hash、library identityやrule設定の保守が必要になる可能性がある。具体的な維持費・工数は不明。", proof:"承認する保守範囲、再現可能な環境/ライブラリ手順、移行負担の根拠。", handling:"cost unknown。工数や寿命を推定していない。", owner:"未定。", source:"docs/native-kicad-authoring-feasibility.md § Public functions and fixed environment / Representative Main read-only coverage", href:"../docs/native-kicad-authoring-feasibility.md" },
-    { title:"評価反復による製品工程の停滞", basis:"EDA-004B〜Eの履歴で技術経路は未認定。EDA-004E reportの0.750hはAI effortの保守的推定で、active engineer-hoursの計測値ではない。", impact:"経路評価を続けても実物Rev.M1の設計・製造・実測へ移れない可能性。発生率と残工数は不明。", proof:"製品段階へ移る判断条件、残す技術ゲート、予算/担当についてPOが選択。", handling:"判断が必要。新しい実験、対策、予算は未承認。", owner:"POが判断。次の技術担当未定。", source:"docs/eda-path-history.md · docs/native-kicad-authoring-feasibility.md § STOP, reporting and effort", href:"../docs/eda-path-history.md" }
+    { title:"評価反復による製品工程の停滞", basis:"複数の過去評価でも技術経路は未認定。受入済み報告の0.750hはAI effortの保守的推定で、active engineer-hoursの計測値ではない。", impact:"経路評価を続けても実物Rev.M1の設計・製造・実測へ移れない可能性。発生率と残工数は不明。", proof:"製品段階へ移る判断条件、残す技術ゲート、予算/担当についてPOが選択。", handling:"判断が必要。新しい実験、対策、予算は未承認。", owner:"POが判断。次の技術担当未定。", source:"docs/eda-path-history.md · docs/native-kicad-authoring-feasibility.md § STOP, reporting and effort", href:"../docs/eda-path-history.md" }
   ],
   decision: {
+    status:"承認済みの次工程計画なし",
     question:"次の計画を作るか、現状を保留するか、方針を見直すか。方式採用やRev.M1設計開始は別判断です。",
-    evidence:"受入済みEDA-004E report/history、回路図/Main接続の未確認、Main規模へ適用する証拠不足、電気接続とspacingを両立する配線/有効rule証拠不足、manufacturing/reproducibility未実施、API/library維持負担不明。",
+    evidence:"受入済みの直近評価report/history、回路図/Main接続の未確認、Main規模へ適用する証拠不足、電気接続とspacingを両立する配線/有効rule証拠不足、manufacturing/reproducibility未実施、API/library維持負担不明。",
     owner:"POが判断。PMOは既存記録と不足証拠を整理。技術計画の担当は未割当。",
     planStatus:"承認済みの次工程計画・担当・完了条件・日程はありません。具体的な次の実験は提案・未承認であり、ここでは提示しません。",
     proposal:"未承認の提案をこのPRでは追加しない。"
@@ -120,8 +128,8 @@ window.PROJECT_STATUS = {
     ["done","waiting","todo","todo","todo"]
   ],
   gates: [
-    {name:"G0A JITX Backend Adoption",status:"done",check:"C0-C3 accepted evidence + historical C4B-C4B4A + C4B4B external disposition + C4B5 routing BLOCKED evidence",trigger:"Completed PO decision, issue #55 / D-016: JITX active physical backend NO-GO for Rev.M1 / Rev.A; C4B5 complete-routing workflow not demonstrated",unlocks:"Historical JITX NO-GO preserved; G0B remains done; EDA-004B #73 ENVIRONMENT_BLOCKED, representative Main unqualified; full implementation blocked"},
-    {name:"G0B Rev.M1 Architecture / Interface Freeze",status:"done",check:"D-017: exact JST GH 14-position connector/pinout, six common-GND returns, external WING_EN pull-down, nominal 100 mm 1:1 harness, pitch Wings/full-load three-TMUX-three-ADC coverage, test access, measurement framework, DFM",trigger:"Issue #57 PO GO accepted the freeze",unlocks:"Architecture/interface remain frozen; EDA-004B #73 ENVIRONMENT_BLOCKED; EDA-004C #75 CONVERSION_BLOCKED; further work requires PO disposition; full implementation blocked"},
+    {name:"G0A JITX Backend Adoption",status:"done",check:"C0-C3 accepted evidence + historical C4B-C4B4A + C4B4B external disposition + C4B5 routing BLOCKED evidence",trigger:"Completed PO decision, issue #55 / D-016: JITX physical backend NO-GO for Rev.M1 / Rev.A; C4B5 complete-routing workflow not demonstrated",unlocks:"Historical JITX NO-GO remains. D-018 accepted planning scope only; later EDA-004B–E evaluations did not qualify a product method or authorize implementation."},
+    {name:"G0B Rev.M1 Architecture / Interface Freeze",status:"done",check:"D-017: exact JST GH 14-position connector/pinout, six common-GND returns, external WING_EN pull-down, nominal 100 mm 1:1 harness, pitch Wings/full-load three-TMUX-three-ADC coverage, test access, measurement framework, DFM",trigger:"Issue #57 PO GO accepted the freeze",unlocks:"Accepted interface and architecture remain frozen. Later method evaluations did not qualify the product path; full implementation is not authorized."},
     {name:"G1 Rev.M1 Main + Evaluation Wing pre-order review",status:"not-ready",check:"Main/Wing circuit/ERC, DRC, BOM, actual manufacturing outputs, measurement plan",trigger:"manufacturing package complete after separately accepted backend qualification and authorized full Rev.M1 implementation",unlocks:"Rev.M1 Main + Evaluation Wing order"},
     {name:"G2 post-EVT-002 magnetic / pitch / analog-path decision",status:"not-ready",check:"range, noise, scan speed, power, interference, interconnect, 17.0/16.5/16.0 mm usability",trigger:"physical measurements/report complete",unlocks:"production pitch and magnetic architecture / Rev.A circuit freeze"},
     {name:"G3 Rev.A 発注前確認",status:"not-ready",check:"Main/Left/Right DRC, BOM, Gerber, drill/PnP, cost",trigger:"42-key manufacturing package complete",unlocks:"Rev.A PCBA order"},
@@ -129,15 +137,15 @@ window.PROJECT_STATUS = {
     {name:"G5 最終版承認",status:"not-ready",check:"v1.0の全製造物と手順",trigger:"受入試験合格時",unlocks:"v1.0リリース"}
   ],
   risks: [
-    {kind:"risk",title:"USB product manufacturing release",detail:"OPEN — PRE-ORDER DFM REVIEW REQUIRED for Rev.M1 / Rev.A. All four nominal gaps meet JLCPCB 0.20 mm capability floor, not production approval. 0.25 mm preferred target and 0.001 mm numerical review guard are project-owned, not JLCPCB requirements or recommendations. Increase margin where feasible, or explicitly accept/document minimum geometry and pass actual order-time CAM/process review; no production exception granted."},
-    {kind:"risk",title:"Historical JITX downstream thickness handoff",detail:"Retained JITX path evidence/limitation, not the primary NO-GO reason. PASS_WITH_LIMITATIONS: generated CAD/Gerber-job overall thickness metadata is misleading (1.6 mm); exclude it from manufacturing handoff and independently select/confirm 1.2 mm finished thickness."},
-    {kind:"risk",title:"pitch / キーキャップ干渉",detail:"17.0 / 16.5 / 16.0 mmで使用感・磁気・switch/keycap干渉を比較。100 x 100 mmはcost targetのみ。"},
-    {kind:"risk",title:"磁束レンジと個体差",detail:"Main + Evaluation Wingでスイッチ・センサ・距離・interconnectを一組として実測する。"},
-    {kind:"risk",title:"42センサの電力",detail:"Accepted DRV5055 at 5 V: 3 mA typical / 5 mA maximum; approximately 127 mA per 21-key Wing / 254 mA for 42 sensors-two Wings. Planning estimates only; final USB/system power budget, other loads and startup/inrush qualification remain open."},
-    {kind:"risk",title:"中央部のねじり荷重",detail:"Main/Wingの接続・固定と筐体補強は後続mechanical gateで検証する。"},
-    {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 is accepted PASS for the challenger/parity workflow. RuntimeDesign query and net-resolution methods remain documented but explicitly experimental; every future JITX Python package or runtime change must rerun the normalized exporter and bootstrap graph self-test before compatibility is assumed."},
-    {kind:"risk",title:"KiCad importer reuse",detail:"EDA-003A accepted UPSTREAM_FIX_CANDIDATE. Both copper-pour keepouts silently lost without material-loss warnings; rounded-pad corner radius incorrect. Reuse NOT approved; native TSX authoritative, KiCad reference-secondary evidence. Future reuse needs separately accepted fidelity evidence after fixes."},
-    {kind:"risk",title:"Historical alternate-method evaluation",detail:"EDA-004B through EDA-004E are completed reports with different targets and results. Their CI, partial checks, or historical success do not qualify the current Rev.M1 design path."}
+    {kind:"risk",title:"USB product manufacturing release",detail:"OPEN — PRE-ORDER DFM REVIEW REQUIRED for Rev.M1 / Rev.A. All four nominal gaps meet JLCPCB 0.20 mm capability floor, not production approval. 0.25 mm preferred target and 0.001 mm numerical review guard are project-owned, not JLCPCB requirements or recommendations. Any manufacturing disposition remains a separate gate; no production exception granted.",owner:"G1 / PO review; implementation owner unassigned",source:"Rev.M1 DFM policy",href:"../hardware/rev-m1/dfm-policy.md"},
+    {kind:"risk",title:"Historical JITX downstream thickness handoff",detail:"Retained JITX path evidence/limitation, not the primary NO-GO reason. PASS_WITH_LIMITATIONS: generated CAD/Gerber-job overall thickness metadata is misleading (1.6 mm); independently confirm 1.2 mm if this historical handoff is reused.",owner:"Only if historical JITX handoff is reconsidered",source:"EDA-002C4B4B report",href:"../hardware/jitx/physical/EDA-002C4B4B.md"},
+    {kind:"risk",title:"pitch / キーキャップ干渉",detail:"17.0 / 16.5 / 16.0 mmで使用感・磁気・switch/keycap干渉を比較。100 x 100 mmはcost targetのみ。",owner:"M1 measurement owner unassigned; G2 PO decision",source:"Rev.M1 evaluation plan",href:"../hardware/rev-m1/evaluation-plan.md"},
+    {kind:"risk",title:"磁束レンジと個体差",detail:"Main + Evaluation Wingでスイッチ・センサ・距離・interconnectを一組として実測する。",owner:"M1 measurement owner unassigned; G2 PO decision",source:"Rev.M1 evaluation plan",href:"../hardware/rev-m1/evaluation-plan.md"},
+    {kind:"risk",title:"42センサの電力",detail:"Accepted DRV5055 at 5 V: 3 mA typical / 5 mA maximum; approximately 127 mA per 21-key Wing / 254 mA for 42 sensors-two Wings. Planning estimates only; final USB/system power budget, other loads and startup/inrush qualification remain open.",owner:"Technical owner unassigned; PO decides G2",source:"Rev.M1 main/Wing interface",href:"../hardware/rev-m1/main-wing-interface.md"},
+    {kind:"risk",title:"中央部のねじり荷重",detail:"Main/Wingの接続・固定と筐体補強は後続mechanical gateで検証する。",owner:"Mechanical owner unassigned",source:"Rev.M1 architecture",href:"../hardware/rev-m1/architecture.md"},
+    {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 is accepted PASS for the challenger/parity workflow. RuntimeDesign query and net-resolution methods remain documented but explicitly experimental; this is not current-candidate evidence.",owner:"Only if JITX is reconsidered",source:"JITX evaluation",href:"../docs/jitx-evaluation.md"},
+    {kind:"risk",title:"KiCad importer reuse",detail:"EDA-003A accepted UPSTREAM_FIX_CANDIDATE. Both copper-pour keepouts silently lost without material-loss warnings; rounded-pad corner radius incorrect. Reuse NOT approved; native TSX authoritative at that earlier decision.",owner:"Only if importer reuse is reconsidered",source:"Importer requalification report",href:"../docs/tscircuit-kicad-importer-requalification.md"},
+    {kind:"risk",title:"Historical alternate-method evaluation",detail:"EDA-004B through EDA-004E are completed reports with different targets and results. Their CI, partial checks, or historical success do not qualify the current Rev.M1 design path.",owner:"Historical context; current planning owner is PO",source:"EDA path history",href:"../docs/eda-path-history.md"}
   ],
   tasks: [
     ["DSH-001","PM","専用HTMLダッシュボード","done","Codex","-"],

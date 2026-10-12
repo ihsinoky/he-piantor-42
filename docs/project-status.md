@@ -35,6 +35,11 @@ maintenance scope. No next experiment is selected here.
 
 ### Current qualification work and product lifecycle
 
+The plan summary uses IEC 62304 development-planning concepts only to organize
+purpose, deliverable, confirmation, completion criteria and owner. It does not
+claim standards conformity, assign a medical-device class, or create an
+additional approval process.
+
 The method-qualification work must ultimately provide a product-scale circuit
 definition and its circuit-level connectivity checks; PCB data with correct
 parts, nets and rules; actual routing; distinct circuit and post-route checks;
@@ -44,6 +49,31 @@ The required deliverable and completion criteria for this qualification work
 are **not yet planned**. Direction/plan approval belongs to the PO; technical
 preparation may be assigned later. The six capability links, result scope and
 current risks are summarized by the Dashboard from structured fields.
+
+| Needed capability | Intended output and confirmation | EDA-004E evidence / open state |
+| --- | --- | --- |
+| Circuit/connectivity definition | Schematic or equivalent circuit definition; separately check component/pin/net consistency before PCB routing. | No pinned headless schematic authoring path found; current Main ERC/connectivity not entered. |
+| PCB data | Board parts/shapes/nets/outline/stack/rules; save/reload object comparison and acceptance DRC. | KiCad 9.0.9 fixed small fixture create/save/separate-process reload and fixture object parity passed. Initial acceptance failed on two unexpected warnings. No evidence transfers automatically to Main. |
+| Routing | Copper connectivity under physical constraints. | Routing not entered. |
+| Circuit and post-route checks | Circuit-level consistency; separately verify routed nets and effective clearance rules. | Current Main connectivity, effective 0.20 mm spacing-rule probe and post-route DRC not entered. |
+| Manufacturing output | Board-matched Gerber/drill/BOM/placement and pre-order DFM review. | Not entered for the native KiCad fixture. |
+| Reproducible execution | Regenerate equivalent outputs from recorded conditions in a clean workspace. | Empty-workspace regeneration not entered after the initial fixture acceptance failure. |
+
+These functions are related capabilities, not an authorized execution order.
+Circuit-level connectivity is distinct from PCB/post-route checks. The two DRC
+warnings explain why this fixture failed its acceptance; they do not prove
+method-wide impossibility, and resolving them alone would not establish the
+other capabilities.
+
+| Current problem / uncertainty | Evidence and consequence | Needed proof / disposition | Owner / source |
+| --- | --- | --- | --- |
+| Two unexpected DRC warnings stopped initial fixture acceptance. | U1 reference silkscreen overlap and unconfigured `Resistor_SMD` library; the fixed-fixture acceptance criteria were not met. | Warning disposition is unresolved. Any fix is not authorization to continue or sufficient evidence for real-board design. | Technical owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Fixed-version schematic creation and circuit checking are unqualified. | No public pinned KiCad 9.0.9 headless schematic create/edit/save path was found; current Main ERC/parity was not entered. | Approved circuit-authoring route and current Main circuit/connectivity evidence; not planned or authorized. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
+| Small-fixture results may not apply to production-scale Main. | Fixture-only parity; the read-only Main inventory lists 49 components and 37 nets but is not accepted Main generation/connectivity proof. | Separately authorized Main-scale reconciliation for parts, pins, nets, geometry and libraries. | Owner unassigned; [Main coverage](native-kicad-authoring-feasibility.md#representative-main-read-only-coverage). |
+| Correct connectivity and required spacing have not been demonstrated together. | EDA-004E did not route; the effective 0.20 mm rule probe was not entered. | Routed connectivity and independent effective-spacing evidence for the authorized target. No router or trial is selected. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Rule enforcement and clean-workspace regeneration are unknown. | Saved rule settings alone do not prove enforcement; empty-workspace rerun was not entered. | Effective-rule test and regeneration comparison, only if a future plan authorizes them. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Fixed environment, deprecated PCB API and library maintenance may constrain use. | KiCad 9.0.9 Python SWIG PCB bindings are deprecated (published removal plan: 11); library configuration caused a real warning. Upgrade/maintenance cost is unknown. | Supported maintenance boundary, library/environment reproduction and any migration-cost evidence. No cost estimate is asserted. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
+| Repeated method qualification may delay product work. | EDA-004B–E remain unqualified method evidence. EDA-004E's 0.750 h is an estimated AI-effort allowance, not measured active engineer-hours. | PO chooses continue/hold/reconsider direction and the needed gate/budget. Likelihood and remaining effort are unknown; no mitigation is approved. | PO decision; PMO can organize existing evidence; [history](eda-path-history.md) and [effort record](native-kicad-authoring-feasibility.md#stop-reporting-and-effort). |
 
 The separate product lifecycle is:
 

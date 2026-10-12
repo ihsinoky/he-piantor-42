@@ -1,5 +1,11 @@
 # EDA-004E — native KiCad authoring feasibility
 
+> **Evaluation-time report (2026-10-08):** STOP and PO/PMO-review wording below
+> records the recommendation at report completion. PR #80 later accepted this
+> report into `main`; that did not establish method adoption or authorize Main.
+> The current direction and unresolved plan are in
+> [project status](project-status.md).
+
 **PCB_IO_PASS / FRONTEND_UNQUALIFIED — STOP recommended.** Issue
 [#79](https://github.com/ihsinoky/he-piantor-42/issues/79) evaluation is complete;
 Main qualification, adoption and full migration are not established.

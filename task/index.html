@@ -45,7 +45,7 @@
         <div><span class="label">作業状態</span><strong id="work-status"></strong></div>
         <div><span class="label">技術結果</span><strong id="technical-status"></strong></div>
       </div>
-      <div class="tested-scope"><span class="label">工程全体のうち今回確かめた範囲</span><p id="tested-question"></p><p id="evidence-boundary"></p></div>
+      <div class="tested-scope"><span class="label">工程全体のうち今回確かめた範囲</span><p id="evaluation-purpose"></p><p id="tested-question"></p><p id="evidence-boundary"></p></div>
       <div class="eval-grid">
         <article><h3>何を確かめたか・分かったこと</h3><p id="learned"></p></article>
         <article><h3>まだ分からないこと</h3><p id="unknown"></p></article>
@@ -68,7 +68,7 @@
     </section>
 
     <section class="card decision" aria-labelledby="decision-title">
-      <div class="section-title"><div><span class="eyebrow">次の判断</span><h2 id="decision-title">選ぶ必要があること</h2></div><span class="badge s-waiting">計画未承認</span></div>
+      <div class="section-title"><div><span class="eyebrow">次の判断</span><h2 id="decision-title">選ぶ必要があること</h2></div><span id="decision-status" class="badge s-waiting"></span></div>
       <p id="decision-question"></p>
       <dl id="decision-details" class="decision-details"></dl>
       <p id="decision-plan-status" class="note"></p>
@@ -89,6 +89,7 @@
       <section aria-labelledby="streams-title"><h2 id="streams-title">分野別の進行状況</h2><div id="streams" class="streams"></div></section>
       <section aria-labelledby="gates-title"><h2 id="gates-title">Human Gate</h2><div id="gates" class="gate-grid"></div></section>
       <section id="tasks" aria-labelledby="tasks-title"><h2 id="tasks-title">詳細タスク</h2>
+        <p class="note">評価Issue行は各Issue完了時の作業記録です。現在の技術判定は上の「直近の技術評価」を正とし、過去方式の結果を現候補の合否に引き継ぎません。</p>
         <div class="filters"><input id="query" type="search" placeholder="タスクを検索" aria-label="タスクを検索"><select id="area" aria-label="領域"><option value="">全領域</option></select><select id="status" aria-label="状態"><option value="">全状態</option></select></div>
         <div class="table-wrap"><table><thead><tr><th>ID</th><th>領域</th><th>タスク</th><th>状態</th><th>担当</th><th>依存</th></tr></thead><tbody id="task-rows"></tbody></table></div>
       </section>
