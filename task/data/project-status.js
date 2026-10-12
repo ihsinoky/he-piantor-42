@@ -1,12 +1,59 @@
 // Non-authoritative Dashboard read model. See docs/governance.md.
 window.PROJECT_STATUS = {
-  schemaVersion: 1, updatedAt: "2026-10-07T23:07:19+00:00",
-  currentWork: "EDA-004D #77 / PR #78 CONVERSION_BLOCKED (footprint library identity); EDA-004E #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED: PCB save-reload semantics pass, initial acceptance FAIL (two unexpected DRC warnings), effective rules and fresh regeneration NOT ENTERED, no pinned headless schematic authoring path; STOP before Main, next PO/PMO review; C4A accepted / merged PR #42; C4B/C4B2/C4B3 historical BLOCKED records preserved; C4B4A completed / merged PR #50; C4B4B #51 external evidence classified: JLCDFM INCONCLUSIVE, downstream manufacturing path PASS_WITH_LIMITATIONS; USB OPEN — PRE-ORDER DFM REVIEW REQUIRED (product risk); C2 electrical PASS preserved; C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 unconnected, dangling via); C4C / G0A complete, Issue #55 / D-016: JITX physical backend NO-GO; native stock tscircuit historical forward candidate under D-016; JITX source/evidence retained; G0B done / Issue #57 PO GO / D-017 accepted; connector-pinout and external WING_EN pull-down requirement frozen; EDA-003A accepted UPSTREAM_FIX_CANDIDATE / merged PR #59; importer reuse NOT approved / native TSX authoritative; EDA-003B BLOCKED / C WRONG_NET_FIXED_LOWER_RISKS_REMAIN / D-E BACKEND_DECISION_REQUIRED / F INTERVENTION_UNSAFE_REGRESSION K1: completed historical work; D-018 / #71 PO planning GO; evaluated internal router exploration ended, frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted; Main routing unqualified; EDA-004B #73 ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR; executor verification/capture failure, not backend incapability; secondary P1_CONVERTER_MODULE_LOAD after first failure, immediate stop not followed; partial evidence; Main initial-confirmation 0/0, smoke routing 0; stages 2-4 NOT ENTERED; EDA-004C #75 / PR #76 CONVERSION_BLOCKED / C1_DUPLICATE_GND_PAD_NET_LOSS; fixed-source build and input checks succeeded after disclosed preparation corrections; second duplicate GND land net absent in KiCad, DRC shorting_items; synthetic ERC unqualified; smoke initial-fresh 0/0, Main 0; DSN-SES/post-route/reproducibility NOT ENTERED; 26 parity fault replays detected; next PMO/PO review; Main PASS before Wing-export; no full implementation authorization; EVT-002 G0B prerequisite satisfied / full implementation not active",
-  evidence: {
-    commit: { sha: "795479e", at: "2026-10-02T22:41:32+09:00", summary: "Implement native M1 four-key Hall evaluation circuit (#27)" },
-    pullRequest: { state: "snapshot", label: "Historical snapshot; check GitHub for current PR state" },
-    ci: { result: "UNKNOWN", at: null, lastSuccess: "Not recorded", detail: "GitHub Actions の結果はこの静的 snapshot に未同期" },
-    artifacts: { state: "FROZEN", detail: "PR #27 permanent frozen four-key qualification fixture; not physical Rev.M1" }
+  schemaVersion: 2,
+  source: {
+    confirmedAt: "2026-10-12T20:08:22Z",
+    reference: "PR #80 merged into main",
+    statusUrl: "https://github.com/ihsinoky/he-piantor-42/pull/80",
+    reportUrl: "../docs/native-kicad-authoring-feasibility.md",
+    historyUrl: "../docs/eda-path-history.md"
+  },
+  current: {
+    location: "実物Rev.M1の設計前。設計・配線方法の成立を評価中ですが、現時点の候補は未認定です。",
+    blocker: "小規模基板の初回受入で予期しないDRC警告が2件あり、受入条件を満たしませんでした。回路図作成とMain接続検査の経路も未確認のため、実物Main設計へ進めません。",
+    change: "EDA-004Eで基板の保存・別プロセス再読込と固定試験対象の形状・接続情報保持を確認。一方、初回DRC警告は解消せず、実物設計に必要な回路図・配線・製造の成立は未確認です。"
+  },
+  nextAction: {
+    status: "PO/PMOの方針判断待ち — 次の技術評価は未決定",
+    owner: "PO / PMO",
+    action: "受入済みEDA-004Eの結果と再開条件を確認し、次の評価を別途指示するか判断する。",
+    target: "Issue #79 / PR #80 と EDA-004E報告",
+    startCondition: "記録はmainに受け入れ済み。次の実験やRev.M1設計の着手には、別途POの判断・承認が必要です。"
+  },
+  latestEvaluation: {
+    id: "EDA-004E",
+    title: "KiCadの基板作成・保存・再読込が小規模試験で成立するか",
+    priorityReason: "実物Mainや配線へ進む前に、基板の保存・再読込という入口を固定した小規模fixtureで切り分けるための評価です。今回確認できたのはその一部だけです。",
+    issueUrl: "https://github.com/ihsinoky/he-piantor-42/issues/79",
+    prUrl: "https://github.com/ihsinoky/he-piantor-42/pull/80",
+    workStatus: "評価終了・記録受入済み（PR #80）",
+    technicalStatus: "初回受入不成立 — PCB I/Oの一部確認であり、方式採用や製品合格ではありません。",
+    learned: "KiCad 9.0.9で固定した小規模試験基板を作成・保存し、別プロセスで再読込できました。初回DRCに予期しない警告が2件あり、試験の受入条件は満たしませんでした。",
+    unknown: "回路図作成経路・現在Mainの接続検査・実際の配線・配線後の間隔ルール・製造データ・空の作業場所からの再生成は、未認定または未実施です。",
+    impact: "実物Rev.M1の設計開始、KiCad方式の採用、製造への移行は承認されていません。",
+    nextCondition: "PO/PMOが結果を確認し、次の技術評価を実施する場合は内容と着手条件を別途承認すること。",
+    evidence: [
+      { label: "保存・別プロセス再読込", result: "成功", detail: "KiCad 9.0.9の固定小規模fixture" },
+      { label: "接続情報・部品形状の保持", result: "一部のみ確認", detail: "固定fixtureの保存前後を比較" },
+      { label: "初回fixtureのDRC受入", result: "失敗", detail: "予期しない警告2件。受入条件未達" },
+      { label: "回路図作成・現在Mainの接続検査", result: "未確認", detail: "Main ERC/接続一致の評価に未着手" },
+      { label: "実際の配線・配線後の間隔検査", result: "未実施", detail: "有効な配線ルールも未認定" },
+      { label: "製造データ・空の場所からの再生成", result: "未実施", detail: "製造出力と再現性を示す証拠なし" }
+    ]
+  },
+  history: [
+    { name: "初期KiCad", tested: "旧4キー回路図とPCBの修正・CI検査", stopped: "繰り返したファイル形式修正の記録があり、PR #10 CIのPCB DRCは587違反・未接続40件。個々の原因とwriterは不明。", reuse: "既存シンボル・footprint・要求を検証済み参照として再利用。", retry: "異なる保存/検証方式と、現在の電気・形状の証拠が必要。", refs: "PR #6 / #10、D-014、Issue #79", href: "https://github.com/ihsinoky/he-piantor-42/pull/10" },
+    { name: "JITX", tested: "部品モデル、電気的整合、headless物理・後工程", stopped: "PO判断D-016でRev.M1/Rev.Aの物理backendはNO-GO。完全な対応済みheadless多層配線は実証されず。", reuse: "受入済みの部品・電気・DFM・後工程の知見。", retry: "対応済みの完全配線手順と、投資・保守範囲の別途承認が必要。", refs: "D-016、Issue #55、C4B5", href: "../docs/eda-path-history.md" },
+    { name: "stock tscircuit", tested: "native stock物理配線とMainのclearance介入", stopped: "評価した内部router探索は終了。介入A/Bで誤配線回帰があり、backendは未採用。", reuse: "native electrical source、固定モデル、独立物理検証。", retry: "対応済み機構で接続性と0.20 mm間隔を同時に示す必要。", refs: "D-018、Issue #61–#71、EDA-003B–F", href: "../docs/eda-path-history.md" },
+    { name: "Circuit JSON → KiCad", tested: "bounded converter repairと小規模/Main前段の検査", stopped: "別々の試行でGND landのnet欠落/short、footprint library ID衝突、schematic ERC未成立。配線試行なし。", reuse: "raw fixture、固定環境、capture手順と限られたcheckerの知見。", retry: "正確なfootprint identityと接続済みschematic/ERC等の条件が必要。", refs: "EDA-004B–D、Issue #73 / #75 / #77、PR #76 / #78", href: "../docs/eda-path-history.md" },
+    { name: "native KiCad objects", tested: "KiCad 9.0.9の固定小規模PCB作成・保存・別プロセス読込", stopped: "初回DRCに予期しない警告2件。回路図経路がなく、Mainへ進む前にSTOP。", reuse: "PCB I/Oと固定fixtureの保存前後の比較結果。", retry: "PO/PMOが具体的な回路図経路を承認し、限定した修正・実効ルール試験・条件付き再評価を許可した場合のみ。", refs: "EDA-004E、Issue #79、PR #80、D-014", href: "../docs/native-kicad-authoring-feasibility.md" }
+  ],
+  evidenceLinks: {
+    latestReport: "../docs/native-kicad-authoring-feasibility.md",
+    pathHistory: "../docs/eda-path-history.md",
+    githubActions: "https://github.com/ihsinoky/he-piantor-42/actions",
+    issue79: "https://github.com/ihsinoky/he-piantor-42/issues/79",
+    pr80: "https://github.com/ihsinoky/he-piantor-42/pull/80"
   },
   milestones: [
     {id:"M0",name:"設計方針・基本形状",status:"done",deliverable:"過去の42キー要件・17 mm配置・取得方針（D-015でpitch再評価）",exit:"主要要件・キー中心座標・評価方針が文書化済み"},
@@ -16,7 +63,7 @@ window.PROJECT_STATUS = {
     {id:"M4",name:"完成版リリース",status:"todo",deliverable:"再現可能なv1.0製造・FW・筐体パッケージ",exit:"最終成果物を固定しユーザーが完成版を承認"}
   ],
   streams: [
-    {name:"Hardware",cells:["設計方針 完了","EDA-004D #77 / PR #78 CONVERSION_BLOCKED (footprint library identity); EDA-004E #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED: PCB save-reload semantics pass, initial acceptance FAIL (two unexpected DRC warnings), effective rules and fresh regeneration NOT ENTERED, no pinned headless schematic authoring path; STOP before Main, next PO/PMO review; 四キーfixture凍結 / C0-C2 accepted / C3 historical valid / C4A merged #42 / C4B-C4B3 historical BLOCKED / C4B4A completed, merged #50 / C4B4B #51 external evidence classified / downstream path PASS_WITH_LIMITATIONS / USB OPEN — PRE-ORDER DFM REVIEW REQUIRED (product risk) / C4B5 done, accepted BLOCKED (merged #54; 39 unconnected, dangling via) / C4C-G0A complete, #55 / D-016: JITX physical NO-GO / native stock tscircuit historical forward candidate under D-016 / JITX source-evidence retained / G0B done / #57 PO GO / D-017; EDA-003A accepted UPSTREAM_FIX_CANDIDATE / importer reuse NOT approved; EDA-003B BLOCKED / C WRONG_NET_FIXED_LOWER_RISKS_REMAIN / D-E BACKEND_DECISION_REQUIRED / F INTERVENTION_UNSAFE_REGRESSION K1: completed historical work; D-018 / #71 PO planning GO, evaluated internal router exploration ended; frontend retention under evaluation; B first bounded candidate, not adopted; Main unqualified; EDA-004B #73 ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR; executor capture failure; secondary converter obstacle after first failure / immediate stop not followed; partial evidence, Main initial-confirmation 0/0, smoke routing 0; stages 2-4 NOT ENTERED; EDA-004C #75 / PR #76 CONVERSION_BLOCKED / C1_DUPLICATE_GND_PAD_NET_LOSS; fixed-source build and input checks succeeded after disclosed preparation corrections; second duplicate GND land net absent in KiCad, DRC shorting_items; synthetic ERC unqualified; smoke initial-fresh 0/0, Main 0; DSN-SES/post-route/reproducibility NOT ENTERED; 26 parity fault replays detected; next PMO/PO review; Main PASS before Wing-export; EVT-002 full implementation blocked","Main再利用 + Left/Right Wings","統合改版","製造版"]},
+    {name:"Hardware",cells:["設計方針 完了","成立確認中: EDA-004Eの固定fixtureはPCB I/Oの一部確認、初回DRC受入不成立。実物Mainは未認定。","Main再利用 + Left/Right Wings","統合改版","製造版"]},
     {name:"Firmware",cells:["要件 完了","計測FW","Hall + Vial","統合・校正","v1.0"]},
     {name:"Enclosure / Mechanical",cells:["形状条件 完了","PCB条件待ち","外形連携","STEP / STL","製造版"]},
     {name:"Verification / Test",cells:["計画 完了","磁気・電力実測","Rev.A bring-up","統合試験","受入試験"]}
@@ -45,7 +92,7 @@ window.PROJECT_STATUS = {
     {kind:"risk",title:"中央部のねじり荷重",detail:"Main/Wingの接続・固定と筐体補強は後続mechanical gateで検証する。"},
     {kind:"risk",title:"JITX RuntimeDesign stability",detail:"EDA-002C0 is accepted PASS for the challenger/parity workflow. RuntimeDesign query and net-resolution methods remain documented but explicitly experimental; every future JITX Python package or runtime change must rerun the normalized exporter and bootstrap graph self-test before compatibility is assumed."},
     {kind:"risk",title:"KiCad importer reuse",detail:"EDA-003A accepted UPSTREAM_FIX_CANDIDATE. Both copper-pour keepouts silently lost without material-loss warnings; rounded-pad corner radius incorrect. Reuse NOT approved; native TSX authoritative, KiCad reference-secondary evidence. Future reuse needs separately accepted fidelity evidence after fixes."},
-    {kind:"risk",title:"M1 layout gated",detail:"PR #27 is the frozen historical qualification oracle under unchanged D-014. Physical Main/Wing is separate; C4C/G0A complete with JITX physical NO-GO; G0B remains accepted / done under D-017. D-018 planning GO ends evaluated internal router exploration; frontend retention under evaluation; B first qualification candidate, not adopted. Representative Main routing unqualified; full implementation/adoption/ordering blocked. Two-workday cap including preparation/interchange/reconciliation; one initial route, one fresh confirmation only if it passes; Main before Wing/export. EDA-004B #73 was authorized and reached ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR; executor capture failure, not backend incapability; secondary P1_CONVERTER_MODULE_LOAD after first failure; immediate stop not followed; partial evidence, all Main metrics null, no ERC/DRC or routes. EDA-004C #75 / PR #76 CONVERSION_BLOCKED / C1_DUPLICATE_GND_PAD_NET_LOSS; fixed-source build and input checks succeeded after disclosed preparation corrections; second duplicate GND land net absent in KiCad, DRC shorting_items; synthetic ERC unqualified; smoke initial-fresh 0/0, Main 0; DSN-SES/post-route/reproducibility NOT ENTERED; 26 parity fault replays detected; next PMO/PO review. Later ERC/DRC and manufacturing gates still apply."}
+    {kind:"risk",title:"M1 design entry gated",detail:"実物Rev.M1/Mainは未実装。EDA-004Eは固定小規模fixtureの初回受入が不成立で、Mainの回路図・配線・製造工程は未確認。次の技術評価と実物設計開始にはPOの別途判断が必要。USB等の後工程リスクは現在の停止理由と区別する."}
   ],
   tasks: [
     ["DSH-001","PM","専用HTMLダッシュボード","done","Codex","-"],
@@ -88,8 +135,8 @@ window.PROJECT_STATUS = {
     ["EDA-004C","EDA","Candidate B headless smoke requalification","done","Codex","EDA-004C #75 / PR #76 CONVERSION_BLOCKED / C1_DUPLICATE_GND_PAD_NET_LOSS; fixed-source build and input checks succeeded after disclosed preparation corrections; second duplicate GND land net absent in KiCad, DRC shorting_items; synthetic ERC unqualified; smoke initial-fresh 0/0, Main 0; DSN-SES/post-route/reproducibility NOT ENTERED; 26 parity fault replays detected; next PMO/PO review; terminal reporting complete; no backend adoption or Main PASS"],
     ["EVT-001","EVT","historical 4-key native electrical qualification fixture（PR #27 golden）","done","Codex + CI","PR #27"],
     ["EDA-004D","EDA","Bounded converter repair","done","Codex","#77 / PR #78 CONVERSION_BLOCKED: D1_FOOTPRINT_LIBRARY_ID_COLLISION; limited repair parity pass, remaining ERC failures; no routes"],
-    ["EDA-004E","EDA","Native KiCad authoring feasibility and history","done","Codex","#79 PCB_IO_PASS / FRONTEND_UNQUALIFIED; initial fixture acceptance FAIL: two unexpected DRC warnings; saved-object parity PASS; effective rules and fresh trial NOT ENTERED; no pinned public headless schematic authoring path; STOP before Main; docs/native-kicad-authoring-feasibility.md and docs/eda-path-history.md"],
-    ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","EDA-004D #77 / PR #78 CONVERSION_BLOCKED (footprint library identity); EDA-004E #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED: PCB save-reload semantics pass, initial acceptance FAIL (two unexpected DRC warnings), effective rules and fresh regeneration NOT ENTERED, no pinned headless schematic authoring path; STOP before Main, next PO/PMO review; G0B prerequisite satisfied; EDA-004C #75 CONVERSION_BLOCKED; no smoke route; PMO/PO disposition required; representative Main unqualified; Main before Wing-export; adoption and full implementation blocked"],
+    ["EDA-004E","EDA","Native KiCad authoring feasibility and history","done","Codex","#79 / PR #80: 固定fixtureのPCB I/Oと形状保持を一部確認。初回受入は予期しないDRC警告2件で不成立。Main・配線・製造・再生成は未認定。"],
+    ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","未承認。次の技術評価方針についてPO/PMOの判断待ち。詳細: ../docs/native-kicad-authoring-feasibility.md"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],
     ["EVT-004","FW","評価FW・CSV計測","progress","Codex","EVT-001"],
     ["EVT-005","TEST","評価基板を発注","hold","User","EVT-003 / G1"],

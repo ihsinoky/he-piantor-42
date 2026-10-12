@@ -26,6 +26,23 @@ If `data/project-status.js` and `../docs/project-status.md` conflict, the docume
 is correct. Status changes update both files in the same reviewed PR; there is no
 generator or automatic synchronization at present.
 
+## Accepting an evaluation result
+
+In the result-acceptance PR, update the opening status in
+`../docs/project-status.md` and the matching structured fields in
+`data/project-status.js`. State the product-development location and current
+blocker; the latest evaluation's work state, technical result, tested scope and
+what remains unverified; and the next owner's action, target and start condition.
+If PO/PMO has not selected or authorized a next technical step, show that as
+undecided rather than instructing an experiment.
+
+Keep the report and method-history links. Verify that completed evaluation
+recording is not described as technical pass, adoption, or manufacturing
+approval. Record the source-confirmation time, not the page-view time. Production
+is the merged `main` record; a PR Preview shows a proposal. Review the related
+procedure and status distinctions in
+[`development-workflow.md`](../docs/development-workflow.md#dashboard-and-deployments).
+
 The static Dashboard has no build step. Open it locally or deploy it as static
 files. Do not create heartbeat commits. Do not add a merge-triggered Action that
 writes Dashboard updates to `main`. A future, separately reviewed solution may

@@ -4,6 +4,37 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+## Current situation (recorded in main: 2026-10-12)
+
+**Location:** Before real Rev.M1/Main design, at the design-and-routing method
+qualification stage. EDA-004E's evaluation and report were accepted by merged
+[PR #80](https://github.com/ihsinoky/he-piantor-42/pull/80); that means the
+recording work is complete, not that KiCad or a product board passed.
+
+**Current blocker:** The fixed small-board trial failed its initial acceptance
+because of two unexpected DRC warnings. Schematic authoring and current Main
+connectivity are also unqualified, so the evidence does not support entering
+real Main design. The fixture is not a Rev.M1 board.
+
+**Latest result:** KiCad 9.0.9 created, saved and reloaded the fixed disposable
+PCB in a separate process; object/geometry parity was confirmed for that
+fixture. The two unexpected warnings remain. Effective spacing rules, a
+schematic route, Main connectivity, actual routing, manufacturing outputs and
+empty-workspace regeneration are unqualified or not entered. See the
+[EDA-004E report](native-kicad-authoring-feasibility.md) for the detailed
+evidence and limits.
+
+**Next action:** PO/PMO reviews the accepted EDA-004E result and decides whether
+to authorize a separately defined next evaluation. No next technical
+experiment has been selected or authorized. The EDA-004E STOP does not approve
+KiCad adoption or real Rev.M1 design; either requires a separate PO decision.
+
+**Product sequence:** design policy → design/routing method qualification
+(**current, stopped pending direction**) → real Rev.M1 design (**not
+authorized**) → manufacturing and assembly → physical measurements → Rev.A.
+The EDA-004E fixture is only a test article and does not satisfy the real-board
+stage.
+
 ## Current milestone
 
 **M1 — Magnetic approach / evaluation board** (`current`)

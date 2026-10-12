@@ -47,6 +47,25 @@ When an Issue changes high-level progress, update the authoritative
 [`project-status.md`](project-status.md) and manually synchronize the Dashboard
 read-model copy in `task/data/project-status.js` in the same PR.
 
+When accepting an evaluation result, the PR must update both records with:
+
+- product-development location and the blocker preventing the next stage;
+- latest evaluation's work state, technical result, tested scope and explicit
+  successful, failed, unverified, or not-entered evidence;
+- next owner's concrete decision/action, target, and start condition. If no
+  next technical step is authorized, state that plainly instead of proposing
+  an experiment as an instruction;
+- links to the authoritative report and history, with the Dashboard fields
+  derived from the same recorded facts.
+
+Review the wording separately for assessment/report completion, technical
+acceptance, method adoption, and manufacturing approval. A merged report,
+green CI, completed issue, or finished fixture does not by itself establish
+technical success, approve a design method, or pass a manufacturing gate.
+Record the status confirmation timestamp from its source; do not use page-view
+time. Production reflects merged `main`; PR Preview content is a proposal, not
+current accepted status.
+
 ## Merge gates
 
 Before the PO makes the merge decision:
