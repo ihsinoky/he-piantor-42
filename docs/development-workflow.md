@@ -49,14 +49,27 @@ read-model copy in `task/data/project-status.js` in the same PR.
 
 When accepting an evaluation result, the PR must update both records with:
 
-- product-development location and the blocker preventing the next stage;
+- product-development location, separate from the current technical evaluation
+  stage; record each stage's purpose/output, confirmation, completion condition,
+  accountable decision owner, and known dependencies. Mark missing plan details
+  as unplanned instead of inferring them;
 - latest evaluation's work state, technical result, tested scope and explicit
   successful, failed, unverified, or not-entered evidence;
 - next owner's concrete decision/action, target, and start condition. If no
   next technical step is authorized, state that plainly instead of proposing
   an experiment as an instruction;
+- current problems and unresolved uncertainties, including their evidence,
+  consequence, needed proof, disposition, owner (or unassigned), and source.
+  Keep downstream and historical-method risks separate. Label any mitigation
+  proposal unapproved;
 - links to the authoritative report and history, with the Dashboard fields
-  derived from the same recorded facts.
+  derived from the same structured data. Keep stable decision/history references
+  separate from fields that follow the latest evaluation identifier, links, and
+  status.
+
+For a Dashboard review, substitute a temporary latest-evaluation record and
+verify the current-stage and evaluation panels update IDs, links, title, and
+status without stale current references. Do not commit the temporary record.
 
 Review the wording separately for assessment/report completion, technical
 acceptance, method adoption, and manufacturing approval. A merged report,

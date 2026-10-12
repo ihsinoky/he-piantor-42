@@ -31,8 +31,12 @@ generator or automatic synchronization at present.
 In the result-acceptance PR, update the opening status in
 `../docs/project-status.md` and the matching structured fields in
 `data/project-status.js`. State the product-development location and current
-blocker; the latest evaluation's work state, technical result, tested scope and
-what remains unverified; and the next owner's action, target and start condition.
+technical-evaluation stage separately. For each, record purpose/output,
+confirmation, completion condition, owner and dependencies; label missing plan
+details unplanned. Also synchronize latest evaluation work/technical status and
+evidence scope, next owner's decision/action and start condition, and current
+problems/unresolved uncertainties with evidence, consequence, needed proof,
+disposition, owner and source.
 If PO/PMO has not selected or authorized a next technical step, show that as
 undecided rather than instructing an experiment.
 
@@ -42,6 +46,10 @@ approval. Record the source-confirmation time, not the page-view time. Productio
 is the merged `main` record; a PR Preview shows a proposal. Review the related
 procedure and status distinctions in
 [`development-workflow.md`](../docs/development-workflow.md#dashboard-and-deployments).
+Mark downstream/historical-method risks separately and label any unapproved
+mitigation as a proposal. Keep decision history separate from latest-evaluation
+IDs/links/status; temporarily substitute an evaluation record in browser checks
+to catch stale current labels, then discard that test data.
 
 The static Dashboard has no build step. Open it locally or deploy it as static
 files. Do not create heartbeat commits. Do not add a merge-triggered Action that

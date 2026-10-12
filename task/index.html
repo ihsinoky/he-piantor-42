@@ -10,7 +10,7 @@
   <header><div class="wrap top"><div><h1>HE Piantor 42</h1><span>プロジェクト状況 · mainの記録を要約</span></div><a href="#evaluation">直近の評価 ↓</a></div></header>
   <main class="wrap">
     <section class="card current" aria-labelledby="current-title">
-      <div class="section-title"><div><span class="eyebrow">いまの状況</span><h2 id="current-title">実物Rev.M1の設計前</h2></div><span id="source-date" class="asof"></span></div>
+      <div class="section-title"><div><span class="eyebrow">いまの状況</span><h2 id="current-title"></h2></div><span id="source-date" class="asof"></span></div>
       <div class="summary-grid">
         <article><span class="label">現在地</span><p id="current-location"></p></article>
         <article class="blocker"><span class="label">進行を止めている最大の障害</span><p id="current-blocker"></p></article>
@@ -24,8 +24,19 @@
     </section>
 
     <section class="card" aria-labelledby="path-title">
-      <div class="section-title"><div><span class="eyebrow">製品完成まで</span><h2 id="path-title">技術評価から実測まで</h2></div></div>
+      <div class="section-title"><div><span class="eyebrow">製品工程 · 技術経路の評価とは別</span><h2 id="path-title">実物Rev.M1の実測からRev.Aへ</h2></div></div>
+      <p id="planning-note" class="note"></p>
       <div id="product-path" class="product-path"></div>
+    </section>
+
+    <section class="card" aria-labelledby="qualification-title">
+      <div class="section-title"><div><span class="eyebrow">現在の評価工程 · 製品用EDA経路</span><h2 id="qualification-title">実物基板を作るために必要な機能</h2></div><span id="qualification-status" class="badge"></span></div>
+      <div class="qualification-summary">
+        <article><span class="label">目的・成果物</span><p id="qualification-purpose"></p><p id="qualification-output"></p></article>
+        <article><span class="label">完了条件・担当</span><p id="qualification-completion"></p><p id="qualification-owner"></p></article>
+      </div>
+      <p id="qualification-notice" class="note"></p>
+      <div id="qualification-map" class="qualification-map"></div>
     </section>
 
     <section id="evaluation" class="card evaluation" aria-labelledby="evaluation-title">
@@ -34,7 +45,7 @@
         <div><span class="label">作業状態</span><strong id="work-status"></strong></div>
         <div><span class="label">技術結果</span><strong id="technical-status"></strong></div>
       </div>
-      <p class="priority-reason"><b>なぜこの評価を先に行ったか:</b> <span id="priority-reason"></span></p>
+      <div class="tested-scope"><span class="label">工程全体のうち今回確かめた範囲</span><p id="tested-question"></p><p id="evidence-boundary"></p></div>
       <div class="eval-grid">
         <article><h3>何を確かめたか・分かったこと</h3><p id="learned"></p></article>
         <article><h3>まだ分からないこと</h3><p id="unknown"></p></article>
@@ -43,7 +54,24 @@
       </div>
       <h3 class="evidence-title">証拠の範囲</h3>
       <div id="evaluation-evidence" class="evidence-list"></div>
-      <div class="source-links"><a id="issue-link">Issue</a><a id="pr-link">記録を受け入れたPR</a><a id="report-link">技術評価の詳細</a></div>
+      <div class="source-links"><a id="issue-link"></a><a id="pr-link"></a><a id="report-link">技術評価の詳細</a></div>
+    </section>
+
+    <section class="card" aria-labelledby="current-problems-title">
+      <div class="section-title"><div><span class="eyebrow">現工程</span><h2 id="current-problems-title">いま起きている問題</h2></div></div>
+      <div id="current-problems" class="risk-list"></div>
+    </section>
+
+    <section class="card" aria-labelledby="uncertainties-title">
+      <div class="section-title"><div><span class="eyebrow">現工程</span><h2 id="uncertainties-title">未解決の不確実性</h2></div></div>
+      <div id="uncertainties" class="risk-list"></div>
+    </section>
+
+    <section class="card decision" aria-labelledby="decision-title">
+      <div class="section-title"><div><span class="eyebrow">次の判断</span><h2 id="decision-title">選ぶ必要があること</h2></div><span class="badge s-waiting">計画未承認</span></div>
+      <p id="decision-question"></p>
+      <dl id="decision-details" class="decision-details"></dl>
+      <p id="decision-plan-status" class="note"></p>
     </section>
 
     <details class="card" id="path-history">
@@ -54,12 +82,12 @@
     </details>
 
     <details class="card">
-      <summary><span class="eyebrow">参考情報</span><strong>工程・Human Gate・後工程リスク・詳細タスク</strong></summary>
-      <p class="note">下記は工程の詳細です。製品完成率や現在の承認状態を表すものではありません。</p>
+      <summary><span class="eyebrow">参考情報</span><strong>後工程リスク・Human Gate・詳細タスク</strong></summary>
+      <p class="note">後工程と過去方式の参考情報です。現在の設計経路が認定されたことを示しません。</p>
+      <section aria-labelledby="later-risks-title"><h2 id="later-risks-title">後工程のリスク／過去方式固有の制約</h2><div id="later-risks" class="risk-list"></div></section>
       <section aria-labelledby="roadmap-title"><h2 id="roadmap-title">製品工程</h2><div id="roadmap" class="roadmap"></div></section>
       <section aria-labelledby="streams-title"><h2 id="streams-title">分野別の進行状況</h2><div id="streams" class="streams"></div></section>
       <section aria-labelledby="gates-title"><h2 id="gates-title">Human Gate</h2><div id="gates" class="gate-grid"></div></section>
-      <section aria-labelledby="risks-title"><h2 id="risks-title">後工程のリスク</h2><div id="risks" class="risk-grid"></div></section>
       <section id="tasks" aria-labelledby="tasks-title"><h2 id="tasks-title">詳細タスク</h2>
         <div class="filters"><input id="query" type="search" placeholder="タスクを検索" aria-label="タスクを検索"><select id="area" aria-label="領域"><option value="">全領域</option></select><select id="status" aria-label="状態"><option value="">全状態</option></select></div>
         <div class="table-wrap"><table><thead><tr><th>ID</th><th>領域</th><th>タスク</th><th>状態</th><th>担当</th><th>依存</th></tr></thead><tbody id="task-rows"></tbody></table></div>

@@ -2,9 +2,13 @@
 
 Requirements only. The modular hardware and measurement firmware are not
 claimed complete. [D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze) / Issue #57 PO GO
-accepted G0B and freezes the experiment structure and representative Main/Wing
-interconnect. EDA-003B representative routing proof is next; if accepted, full
-Rev.M1 implementation follows. G1 reviews the completed package before ordering.
+accepted G0B and froze the experiment structure and representative Main/Wing
+interconnect. The original plan named EDA-003B representative routing proof as
+the next step, with full Rev.M1 implementation conditional on acceptance.
+EDA-003B was later completed as blocked evidence; EDA-004B–E followed as
+separate historical evaluations. That earlier sequence is not an authorized
+current plan. See the [current project status](../../docs/project-status.md).
+G1 reviews a completed package before ordering.
 
 The [accepted G0B record](g0b-freeze-proposal.md) is authoritative for the
 three pitch-specific 3 x 3 Wings, 21-sensor full-load/electrical-load coverage,
