@@ -17,9 +17,14 @@ the PO are authoritative, while planning estimates and explicitly open
 implementation items retain their limited scope. D-014/D-015/D-016 and the
 JITX verdict are preserved. Full physical implementation has not started.
 
-Sequence: **G0B accepted -> EDA-003B representative stock-tscircuit
+> **Planning-time record:** The G0B-era sequence below is historical. EDA-003B
+> and later EDA-004B–E evaluations have since been recorded without qualifying
+> the current Rev.M1 method. It is not an authorized next step. See the
+> [current project status](../../docs/project-status.md).
+
+Historical sequence: **G0B accepted -> EDA-003B representative stock-tscircuit
 physical/routing proof -> if accepted, full Rev.M1 implementation**. EVT-002
-has satisfied its G0B prerequisite but is not yet active.
+has satisfied its G0B prerequisite but is not active.
 
 ## 1. Authority and scope
 
@@ -384,9 +389,10 @@ granted, and this freeze authorizes no order.
    footprint availability, and Main unchanged-reuse suitability remain later
    Rev.A gates.
 
-## 12. EDA-003B routing-proof boundary (next step; not performed here)
+## 12. EDA-003B routing-proof boundary (historical planned step)
 
-G0B is accepted. The next technical step is EDA-003B — representative
+At this record's planning time, G0B was accepted and EDA-003B was identified as
+the next technical step — representative
 stock-tscircuit physical/routing proof. Its intended scope is a representative
 physical and two-layer routing proof. Main subset: RP2040, USB-C/ESD, QSPI flash,
 crystal, 3V3, switched `HALL_5V`, three ADC divider/filter paths, and the actual
@@ -406,6 +412,7 @@ The original package requested PMO review followed by Product Owner GO /
 changes required / NO-GO. PR #60 preserves that proposal and correction history.
 The [PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587) accepts the reviewed freeze, including the corrected
 DRV5055 current basis and external Main-side `WING_EN` pull-down requirement.
-**G0B is done.** EDA-003B is next; only if that proof is accepted does full
-Rev.M1 implementation follow. No schematic, PCB, routing, manufacturing
+**At this record's acceptance:** G0B was done and EDA-003B was next; only if
+that proof were accepted would full Rev.M1 implementation follow. That is
+historical, not a current experiment plan. No schematic, PCB, routing, manufacturing
 package completion, order, or manufacturing release is claimed here.

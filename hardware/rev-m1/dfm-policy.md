@@ -28,8 +28,12 @@ project-owned or explicitly approved at a later Human Gate; do not consume
 `hardware/layout/**`.
 
 G0B accepted these DFM constraints with architecture/interface and Main reuse.
-EDA-003B representative stock-tscircuit physical/routing proof is next; if
-accepted, full Rev.M1 implementation follows. G1
+The original D-017-era plan named EDA-003B representative stock-tscircuit
+physical/routing proof next, with full Rev.M1 implementation conditional on
+acceptance. EDA-003B and later method evaluations have since ended without
+qualifying the current product path; that sequence is historical, not an
+authorized next step. See the [current project status](../../docs/project-status.md).
+G1
 requires actual Main + Evaluation Wing manufacturing package, DRC/ERC, BOM,
 Gerber, drill and placement outputs and pre-order review. G3 applies to the
 later complete Rev.A package. No order or manufacturing release is authorized

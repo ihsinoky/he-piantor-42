@@ -3,6 +3,11 @@
 Accepted architecture requirements — D-015 / D-017, Issues #41 / #57. No schematic, footprint, PCB,
 routing, panel or manufacturing output is implemented here.
 
+> **Planning-time record:** The EDA direction and sequence below describe the
+> D-016/D-017 acceptance-time plan. EDA-004B–E later qualified none of these
+> product-design routes; no current backend or next experiment is approved.
+> See the [current project status](../../docs/project-status.md).
+
 [D-015](../../docs/decisions.md#d-015---revm1-reusable-main--evaluation-wing-architecture)
 separates physical Rev.M1 from the permanent four-key qualification fixture.
 The frozen native tscircuit source/verifier, C2 parity contract/evidence, C3
@@ -49,12 +54,15 @@ Wings and full-load three-TMUX/three-ADC coverage. Production pitch, final
 Hall choice, final cable mechanics, resistor value and physical implementation
 remain open. Do not consume `hardware/layout/**`.
 
-[G0A](../../docs/project-status.md#human-gates) is complete: Issue #55 /
+[G0A](../../docs/project-status.md#human-gates) was completed at D-016: Issue #55 /
 [D-016](../../docs/decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)
-records JITX physical-backend NO-GO and native stock tscircuit as the active
-forward Rev.M1 EDA path. G0B is accepted / done under D-017. Sequence:
-G0B accepted -> EDA-003B representative stock-tscircuit physical/routing proof
--> if accepted, full Rev.M1 implementation. EVT-002 is not yet active.
+records JITX physical-backend NO-GO and, at that decision, native stock
+tscircuit as the forward Rev.M1 EDA path. G0B is accepted / done under D-017.
+The original planned sequence was G0B -> EDA-003B representative
+stock-tscircuit physical/routing proof -> if accepted, full Rev.M1
+implementation. EDA-003B through EDA-004E have since completed with
+unqualified/blocked outcomes; that sequence is historical, not the current
+authorized plan. EVT-002 is not active.
 EDA-003A is accepted as UPSTREAM_FIX_CANDIDATE; current importer reuse is
 not approved and native TSX remains authoritative. C4A itself did not select
 an active backend.

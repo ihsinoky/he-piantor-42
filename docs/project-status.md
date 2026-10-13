@@ -4,6 +4,125 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+## Current situation (main record confirmed 2026-10-12)
+
+**Location:** Before real Rev.M1/Main design. The current work is qualification
+of a repeatable design-to-manufacturing-data method, not product-board design.
+EDA-004E's evaluation record was accepted in merged [PR #80](https://github.com/ihsinoky/he-piantor-42/pull/80);
+accepting its report is not technical acceptance of KiCad or a product board.
+
+**Current blocker:** No complete design, circuit-check, routing, spacing-check,
+manufacturing-output and repeatable-run path is qualified. EDA-004E's fixed
+small-fixture acceptance also stopped at two unexpected DRC warnings. Those
+warnings are that trial's stop reason, not proof that a method is impossible;
+fixing them alone would not qualify the missing product-design path.
+
+**Latest evidence:** With KiCad 9.0.9, the fixed small trial board was created and
+saved; the saved file was reopened in a separate program execution. The checked
+geometry and connection information were retained for this trial board. This
+reduces uncertainty about that board's save/reload behavior only. Main
+applicability, a public method in fixed KiCad 9.0.9 for automatically creating a
+schematic without GUI interaction, electrically correct
+and spacing-compliant routing, effective-rule checking, manufacturing data and
+clean-workspace regeneration remain unconfirmed or untested. See the
+[EDA-004E report](native-kicad-authoring-feasibility.md).
+
+**Next decision:** Existing constraints and the earlier bounded plan remain
+recorded; they are not an authorization for another run after EDA-004E. D-018
+prioritized Candidate B for its qualification plan, kept two copper layers,
+1.2 mm thickness and 0.20 mm material clearance, put Main before Wing/export,
+and capped that plan's first Main evaluation at two workdays. EDA-004B–D are
+completed reports from that plan but stopped before routing. The next experiment
+after EDA-004E has no approved target, method, implementer or individual
+acceptance conditions. PMO prepares a technically bounded proposal and missing
+evidence; the PO decides whether to proceed, hold or reconsider direction.
+Execution requires a separate PO-created Issue and subsequent PO instruction.
+See [D-018](decisions.md#d-018---bounded-alternate-physical-backend-qualification-planning)
+and the [historical qualification plan](alternate-physical-backend-qualification-plan.md).
+
+### Current qualification work and product lifecycle
+
+The qualification goal is already defined: demonstrate a suitable path for
+creating product-board design data, checking circuit connectivity, routing,
+checking the routed connections and required spacing, producing manufacturing
+data, and reproducing the result under recorded conditions. These are required
+capabilities, **not an approved experiment sequence**.
+
+Existing decisions and limits remain in force within their stated scope:
+
+- D-015/D-017 retain a two-copper-layer, 1.2 mm board baseline; D-018 carries
+  the **0.20 mm material-clearance requirement** into its bounded qualification
+  plan. These constraints do not prove that a candidate meets them.
+- D-018's accepted plan prioritized Candidate B for qualification, not adoption.
+  For that plan, Main must pass before Wing/export work; its first Main evaluation
+  had a two-workday effort cap, one initial routing run, and one fresh confirmation
+  only if the first passed. These limits do not authorize a new run or transfer
+  automatically to another candidate.
+- The D-018 plan and EDA-004B–D reports are completed planning/evaluation records.
+  They do not define an approved next experiment after EDA-004E. That next
+  experiment's target, method, implementer and individual acceptance conditions
+  remain undecided. PMO prepares the technical proposal and evidence for PO
+  decision; execution requires a separate PO-created Issue and PO instruction.
+
+The capability map, latest evaluation coverage and current risks are summarized
+by the Dashboard from structured fields.
+
+| Needed capability | Intended output and confirmation | EDA-004E evidence / open state |
+| --- | --- | --- |
+| Circuit/connectivity definition | Schematic or equivalent circuit definition; separately check component/pin/net consistency before PCB routing. | In fixed KiCad 9.0.9, no public method for automatically creating a schematic without GUI interaction was identified; current Main circuit/connectivity check not entered. |
+| PCB data | Board parts/shapes/nets/outline/stack/rules; confirm save/reload preserves shape and connection information and check acceptance DRC. | For the fixed small trial board, the checked shape and connection information were preserved after reopening the saved file in a separate program execution. Initial acceptance failed on two unexpected warnings. Applicability to Main is unconfirmed. |
+| Routing | Copper connectivity under physical constraints. | Routing not entered. |
+| Circuit and post-route checks | Circuit-level consistency; separately verify routed nets and effective clearance rules. | Current Main connectivity, effective 0.20 mm spacing-rule probe and post-route DRC not entered. |
+| Manufacturing output | Board-matched Gerber/drill/BOM/placement and pre-order DFM review. | Not entered for the native KiCad fixture. |
+| Reproducible execution | Regenerate equivalent outputs from recorded conditions in a clean workspace. | Empty-workspace regeneration not entered after the initial fixture acceptance failure. |
+
+The accepted D-018 Candidate B plan and its EDA-004B–D reports are historical
+planning/execution records, not a current authorization. Their scope, candidate
+and stop results remain intact. EDA-004E is a separate later evaluation of native
+KiCad board saving; it does not erase D-018's constraints or restart its plan.
+Any next evaluation after EDA-004E needs a newly defined target, method, owner and
+individual acceptance conditions. PMO prepares that bounded technical proposal;
+the PO decides whether it may proceed. No prior candidate's run permission carries
+forward automatically.
+
+These functions are related capabilities, not an authorized execution order.
+Circuit-level connectivity is distinct from PCB/post-route checks. The two DRC
+warnings explain why this trial board failed its acceptance; they do not prove
+method-wide impossibility, and resolving them alone would not establish the
+other capabilities.
+
+| Current problem / uncertainty | Evidence and consequence | Needed proof / disposition | Owner / source |
+| --- | --- | --- | --- |
+| Two unexpected DRC warnings stopped initial fixture acceptance. | U1's reference-number printing overlaps a soldering area; the `Resistor_SMD` library is unconfigured. The fixed-trial acceptance criteria were not met. | Warning disposition is unresolved. Any fix is not authorization to continue or sufficient evidence for real-board design. | Technical owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Fixed-version schematic creation and circuit checking are unqualified. | No public method was identified for automatically creating a schematic without GUI interaction in fixed KiCad 9.0.9; current Main circuit/connectivity check was not entered. | Approved circuit-authoring route and current Main circuit/connectivity evidence; not planned or authorized. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
+| Small-trial results may not apply to Main at product scale. | The read-only Main inventory lists 49 components and 37 electrical connection groups (nets), but is not accepted Main generation/connectivity proof. | Separately authorized Main-scale confirmation for parts, pins, nets, geometry and libraries. | Owner unassigned; [Main coverage](native-kicad-authoring-feasibility.md#representative-main-read-only-coverage). |
+| Correct connectivity and required spacing have not been demonstrated together. | EDA-004E did not route; the effective 0.20 mm rule probe was not entered. | Routed connectivity and independent effective-spacing evidence for the authorized target. No router or trial is selected. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Rule enforcement and clean-workspace regeneration are unknown. | Saved rule settings alone do not prove enforcement; empty-workspace rerun was not entered. | Effective-rule test and regeneration comparison, only if a future plan authorizes them. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Fixed environment, deprecated PCB API and library maintenance may constrain use. | KiCad 9.0.9 Python SWIG PCB bindings are deprecated (published removal plan: 11); library configuration caused a real warning. Upgrade/maintenance cost is unknown. | Supported maintenance boundary, library/environment reproduction and any migration-cost evidence. No cost estimate is asserted. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
+| Repeated method qualification may delay product work. | EDA-004B–E remain unqualified method evidence. EDA-004E's 0.750 h is an estimated AI-effort allowance, not measured active engineer-hours. | PO chooses continue/hold/reconsider direction and the needed gate/budget. Likelihood and remaining effort are unknown; no mitigation is approved. | PO decision; PMO can organize existing evidence; [history](eda-path-history.md) and [effort record](native-kicad-authoring-feasibility.md#stop-reporting-and-effort). |
+
+The separate product lifecycle is:
+
+1. **Rev.M1 build and measurement:** deliver reusable Main + pitch/magnetic
+   Evaluation Wing(s), measurement firmware, pre-order package and measured
+   report. G1 reviews ERC/DRC, BOM, manufacturing outputs and measurement plan;
+   physical measurements support G2 decisions on range/noise/scan speed/power,
+   pitch usability and representative analog path. Firmware is required for
+   measurement; the enclosure follows PCB constraints. Hardware implementation
+   and the measurement plan are not yet complete.
+2. **42-key Rev.A:** use the accepted Main and project-owned Left/Right 21-key
+   Wings, subject to G2 and geometry-source approval. Check Main/Wing ERC/DRC,
+   manufacturability and firmware build; G3 is a separate pre-order review.
+3. **Integration and physical checks:** obtain an assembled unit and procedures;
+   verify typing, calibration, USB/Vial and enclosure fit at G4.
+4. **Release:** prepare reproducible v1.0 manufacturing, firmware, enclosure and
+   procedures for G5 / PO approval.
+
+The specific Rev.M1 board design, firmware milestones, enclosure handoff,
+schedule and several acceptance details need planning completion. G1/G2 and
+later PO decisions remain distinct from EDA evaluation completion. The disposable
+EDA-004E fixture is not the Rev.M1 deliverable.
+
 ## Current milestone
 
 **M1 — Magnetic approach / evaluation board** (`current`)
@@ -28,8 +147,8 @@ here.
 
 | Gate | Current status | Check | Trigger | Unlock condition |
 | --- | --- | --- | --- | --- |
-| G0A — JITX Backend Adoption | `done` | C0-C4B5 accepted evidence; Issue #55 PO decision recorded in D-016 | C4C / G0A completed: JITX active physical backend NO-GO for Rev.M1 / Rev.A. | Historical JITX NO-GO remains valid; G0B is done under D-017. D-018 now selects bounded alternate-backend planning; representative Main routing remains unqualified. |
-| G0B — Rev.M1 Architecture / Interface Freeze | `done` | Accepted connector/pinout, external WING_EN pull-down requirement, evaluation harness, Wings/coverage, test access, measurement framework and DFM boundary in D-017 | Issue #57 PO GO accepted the freeze. | Architecture/interface remain frozen. D-018 planning precedes separately authorized Main qualification; full implementation remains blocked. |
+| G0A — JITX Backend Adoption | `done` | C0-C4B5 accepted evidence; Issue #55 PO decision recorded in D-016 | C4C / G0A completed: JITX active physical backend NO-GO for Rev.M1 / Rev.A. | Historical JITX NO-GO remains valid; G0B is done under D-017. D-018's planning scope was accepted at that decision; it did not adopt a candidate or authorize Main. |
+| G0B — Rev.M1 Architecture / Interface Freeze | `done` | Accepted connector/pinout, external WING_EN pull-down requirement, evaluation harness, Wings/coverage, test access, measurement framework and DFM boundary in D-017 | Issue #57 PO GO accepted the freeze. | Architecture/interface remain frozen. Subsequent EDA evaluations did not qualify the path; full implementation remains unapproved. |
 | G1 — Rev.M1 Main + Evaluation Wing pre-order review | `not-ready` | Actual Main/Wing circuit/ERC, DRC, BOM, manufacturing outputs and measurement plan | Complete manufacturing package exists after separately accepted backend qualification and authorized full Rev.M1 implementation. | Rev.M1 Main + Evaluation Wing ordering may proceed. |
 | G2 — Post-EVT-002 magnetic / pitch / analog-path decision | `not-ready` | Measured range, noise, scan speed, power, interference, actual interconnect path and pitch usability | Physical evaluation measurements and report are complete. | Select among 17.0 / 16.5 / 16.0 mm and production magnetic architecture; the Rev.A circuit may be fixed. |
 | G3 — Rev.A pre-order review | `not-ready` | Main/Left/Right Wing DRC, BOM, Gerbers, drill/placement outputs and cost | The 42-key manufacturing package is complete. | Rev.A PCBA ordering may proceed. |
@@ -40,14 +159,16 @@ here.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | Frozen four-key fixture; C0/C1 accepted, C2 electrical PASS, C3 historical evidence valid, C4A merged PR #42. C4B/C4B2/C4B3 historical BLOCKED records retained. C4B4A completed / merged PR #50. C4B4B issue #51 external evidence classified: JLCDFM INCONCLUSIVE; downstream manufacturing path PASS_WITH_LIMITATIONS with independent 1.2 mm thickness handoff. USB OPEN — PRE-ORDER DFM REVIEW REQUIRED is a product risk. C4B5 done / accepted BLOCKED evidence (merged PR #54; 39 downstream unconnected items; dangling via). C4C / G0A completed in Issue #55: JITX active physical backend NO-GO; native stock tscircuit resumed as the historical forward candidate under D-016. All JITX source/evidence retained. G0B is done / accepted (Issue #57 PO GO / D-017). EDA-003A / merged PR #59 accepted UPSTREAM_FIX_CANDIDATE; current KiCad importer reuse not approved, native TSX authoritative. EDA-003B/C/D/E/F are completed historical qualification work (classifications below); representative Main routing remains unqualified. D-018 records Issue #71 PO planning GO: evaluated internal router exploration ended; frontend retention under evaluation; candidate B first bounded qualification candidate, not adopted. EVT-002 has satisfied G0B but full implementation remains blocked; EDA-004B / Issue #73 has reached ENVIRONMENT_BLOCKED / P1_SMOKE_CAPTURE_GUARD_ERROR with partial evidence; Main initial/confirmation attempts 0/0; EDA-004C / Issue #75 / PR #76 now ends CONVERSION_BLOCKED: duplicate GND pad net loss, KiCad shorting_items, unqualified synthetic ERC; smoke initial/fresh 0/0. PMO/PO review is next. Latest: EDA-004D #77 / PR #78 CONVERSION_BLOCKED; EDA-004E #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED, initial fixture acceptance FAIL (two unexpected DRC warnings), effective rules/fresh trial NOT ENTERED; no pinned public headless schematic authoring path; STOP before Main, PO/PMO review pending. |
+| Hardware | Historical C0-C4 and EDA-003 results remain in their reports; none qualifies the current Rev.M1 method. D-016 / D-017 / D-018 record their acceptance-time decisions, not a current execution plan. EDA-004B through EDA-004E are completed evaluation records; EDA-004E (Issue #79 / merged PR #80) confirmed save/reload and checked shape/connection information for a fixed small trial board, but failed initial DRC acceptance on two unexpected warnings. Current Main/schematic/routing/manufacturing qualification remains open. Current next direction is undecided; see the current situation above. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
 
-## Current and next work
+## Historical engineering evidence and accepted product requirements
 
-The project is in M1. Issue #19's Human Gate returned GO for native stock
+This section records accepted historical evidence and product requirements; it
+is not the current next-step plan. The current location and unresolved method
+qualification are summarized at the top of this document. Issue #19's Human Gate returned GO for native stock
 tscircuit, so EDA-001 is done and EDA-000 is retired fallback/reference. PR #27
 completed EVT-001 and froze `hardware/tscircuit/src/evaluation/m1-four-key.tsx`
 and its Checkpoint A/B/C evidence as the M1 electrical golden reference. D-014
@@ -91,9 +212,10 @@ first-choice is accepted Main reuse + Left/Right 21-key Wings, three TMUX1208
 each, generated from one project-owned definition; separate manufacturing
 outputs are allowed, without a reversible PCBA requirement.
 
-The following C4B-C4B3 summaries record historical results; the forward C4B4B
-disposition below governs current path/product status. Their reports and evidence
-remain unchanged.
+The following C4B-C4B3 summaries record historical results. The C4B4B
+disposition below records the then-current path/product status at its acceptance;
+later EDA-004B–E evaluations supersede that historical EDA-route state. Their
+reports and evidence remain unchanged.
 
 **EDA-002C4B investigation: BLOCKED** (issue #43). The disposable four-key
 qualification wrapper builds with explicit 68-component placement, partial
@@ -175,10 +297,12 @@ The JST GH 14-position connector/pinout, six common-GND return contacts, nominal
 three pitch Wings and full-load three-TMUX/three-ADC coverage are frozen.
 The exact pull-down resistor value remains implementation work.
 
-**EVT-002: G0B prerequisite satisfied; full Rev.M1 implementation not yet active.**
-Current sequence: **EDA-004D / Issue #77 / PR #78 CONVERSION_BLOCKED ->
-EDA-004E / Issue #79 PCB_IO_PASS / FRONTEND_UNQUALIFIED -> PMO/PO review;
-Main remains unqualified and full implementation/adoption remains blocked**.
+**Historical EDA evaluation sequence (completed through EDA-004E):**
+EDA-004D / Issue #77 / PR #78 CONVERSION_BLOCKED -> EDA-004E / Issue #79 /
+PR #80 PCB_IO_PASS / FRONTEND_UNQUALIFIED. This records the evaluation history,
+not a current next-step plan. Main remains unqualified and full implementation/
+adoption remains unapproved. Current next direction is undecided as stated at the
+top of this document.
 See [EDA path history](eda-path-history.md) and
 [native KiCad feasibility](native-kicad-authoring-feasibility.md).
 Full Rev.M1 implementation requires separate authorization. No
@@ -208,7 +332,9 @@ NO-GO at C4C/G0A; all historical qualification evidence is retained. C4B4B
 classifies the demonstrated JITX downstream path PASS_WITH_LIMITATIONS; C4B5
 remains accepted BLOCKED for complete routing. G0B remains accepted.
 EDA-003B through F are completed historical work;
-D-018 remains unchanged; EDA-004B preserves its environment STOP and EDA-004C / Issue #75 records a new conversion STOP.
+D-018 remains unchanged. EDA-004B's environment STOP and EDA-004C / Issue #75's
+conversion STOP are historical results, superseded as the latest evaluation by
+the later EDA-004D/#77 and EDA-004E/#79 records.
 
 The previous spike established reproducibility with a committed dependency
 lock, fresh GitHub Actions `npm ci`, Bun 1.2.22, tscircuit 0.0.2646, and
@@ -308,16 +434,18 @@ copy. If they conflict, this document is correct. Synchronization is reviewed in
 the same pull request as a status change; there is currently no generator or
 automatic synchronization.
 
-## EDA-004E native KiCad feasibility
+## EDA-004E native KiCad feasibility (accepted report; evaluation-time result)
 
-[Issue #79](https://github.com/ihsinoky/he-piantor-42/issues/79) evaluation is complete:
+[Issue #79](https://github.com/ihsinoky/he-piantor-42/issues/79) evaluation record was accepted in merged PR #80:
 **PCB_IO_PASS / FRONTEND_UNQUALIFIED**, STOP recommended before Main.
-KiCad 9.0.9 public PCB object creation/save/separate-process reload/resave and
-frozen endpoint/geometry parity pass. Initial fixture acceptance fails two
-unexpected DRC warnings (U1 silkscreen overlap, unconfigured official footprint
+In KiCad 9.0.9, the fixed small trial board's checked shape/connection information
+was retained after its saved file was reopened in a separate program execution.
+Initial trial acceptance fails two unexpected DRC warnings (U1 reference-number
+printing over a soldering area, unconfigured official footprint
 library); the two expected unconnected links are identified separately.
 Effective-rule negative test and conditional empty-directory regeneration are
-NOT ENTERED. No pinned public headless schematic authoring route was found;
+NOT ENTERED. No public method for automatically creating a schematic without
+GUI interaction was identified for fixed KiCad 9.0.9;
 current Main ERC/parity and Main generation/routing/manufacturing are NOT ENTERED.
 Deprecated SWIG binding and exact-library/rule maintenance remain additional work.
 [Result/evidence](native-kicad-authoring-feasibility.md) and
