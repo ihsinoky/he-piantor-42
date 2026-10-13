@@ -59,26 +59,26 @@ window.PROJECT_STATUS = {
     issue: { id:"79", url:"https://github.com/ihsinoky/he-piantor-42/issues/79" },
     acceptedRecord: { id:"80", url:"https://github.com/ihsinoky/he-piantor-42/pull/80", status:"mainで記録受入済み" },
     workStatus: "評価作業完了・記録受入済み",
-    technicalStatus: "初回受入条件は未達。保存・再読込の一部確認であり、方式採用や製品合格ではありません。",
-    currentSummary:"小規模な試験基板を保存・再読込し、形状と接続情報が保たれることを一部確認。警告2件で受入条件は未達。実物Mainへの適用は未確認です。",
-    currentProblem: { title:"試験基板で警告が2件あり、受入条件に達しなかった", basis:"KiCad 9.0.9の基板検査で予期しない警告が2件。U1の部品名とシルク印刷の重なり、Resistor_SMD部品ライブラリの未設定。", impact:"この試験基板は受入条件未達。警告の解消だけでは、実物基板を設計できるとは判断できません。", proof:"両警告を扱った条件での受入証拠が必要。", handling:"次の実験は未承認。警告はこの試験の停止理由であり、方式全体が実現不能という証拠ではない。", owner:"PMOが材料を整理し、POが方針判断。実施担当は未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
-    learned: "基板設計ツールの固定版で小規模な試験基板を作成・保存し、別の実行環境で再読込できました。形状と接続情報は一部保たれましたが、基板検査の警告2件で受入条件は未達でした。",
+    technicalStatus: "小規模試験基板の保存・再読込と確認対象の形状・接続情報の保持は成功。初回受入条件は未達で、方式採用や製品合格ではありません。",
+    currentSummary:"保存ファイルを別のプログラム実行で開き直し、確認対象の形状・接続情報は小規模試験基板上で保持。警告2件で初回受入未達、実物Mainへの適用は未確認です。",
+    currentProblem: { title:"試験基板で警告が2件あり、受入条件に達しなかった", basis:"KiCad 9.0.9の基板検査で予期しない警告が2件。U1の部品番号の印刷が、はんだ付け部分に重なる警告と、Resistor_SMD部品ライブラリの未設定。", impact:"この試験基板は受入条件未達。警告の解消だけでは、実物基板を設計できるとは判断できません。", proof:"両警告を扱った条件での受入証拠が必要。", handling:"次の実験は未承認。警告はこの試験の停止理由であり、方式全体が実現不能という証拠ではない。", owner:"PMOが材料を整理し、POが方針判断。実施担当は未定。", source:"docs/native-kicad-authoring-feasibility.md § Fixed fixture and measured results", href:"../docs/native-kicad-authoring-feasibility.md" },
+    learned: "小規模な試験基板を作成・保存し、保存したファイルを別のプログラム実行で開き直しました。今回の試験基板では、確認対象の形状と接続情報が保たれました。実物Mainへの適用は未確認です。初回の基板検査では警告2件があり、受入条件は未達でした。",
     unknown: "実物Mainへの適用、回路図の作成と接続確認、実際の配線、必要な配線間隔の確認、製造データ、空の作業場所からの再生成は未認定または未実施です。",
     impact: "実物Rev.M1の設計開始、方式の採用、製造への移行は承認されていません。",
     nextCondition: "次の実験は未承認です。PMOが既存条件・不足証拠・対象・方法・担当案・個別受入条件を整理し、POが判断します。実施には別IssueとPO指示が必要です。",
-    testedQuestion:"基板設計ツールの固定版（9.0.9）で小規模な試験基板を作成・保存し、別プロセスで再読込したときに形状と接続情報が保たれるか。",
-    evidenceBoundary:"成功したのは固定した小規模試験基板での保存・再読込の一部です。実物Mainの回路・接続、配線、必要な間隔、製造データ、再生成には適用できると確認していません。",
+    testedQuestion:"KiCad 9.0.9で小規模な試験基板を作成・保存し、保存したファイルを別のプログラム実行で開き直したとき、確認対象の形状と接続情報が保たれるか。",
+    evidenceBoundary:"指定した小規模試験基板では確認対象の形状と接続情報が保たれました。この結果は試験対象内での成功であり、実物Mainの回路・接続、配線、必要な間隔、製造データ、再生成への適用は未確認です。",
     coverage: [
-      { stepId:"circuit", result:"未認定", detail:"固定版で使える回路図の作成方法を確認できず、実物Mainの接続検査も未実施。" },
-      { stepId:"board", result:"一部確認・初回受入失敗", detail:"KiCad 9.0.9の小規模試験基板で作成・保存・別プロセス再読込と形状・接続の保持を一部確認。警告2件で受入条件未達。" },
+      { stepId:"circuit", result:"未認定", detail:"KiCad 9.0.9で画面操作なしに回路図を自動作成する公開の方法を確認できず、実物Mainの接続検査も未実施。" },
+      { stepId:"board", result:"試験対象内で成功", detail:"KiCad 9.0.9の小規模試験基板で、保存したファイルを別のプログラム実行で開き直し、確認対象の形状と接続情報が保たれることを確認。初回検査は警告2件で受入条件未達。実物Mainへの適用は未確認。" },
       { stepId:"route", result:"未実施", detail:"実際の配線は行っていません。試験基板の短い配線はMainの配線能力を示しません。" },
       { stepId:"verify", result:"未認定", detail:"実物Mainの接続検査、0.20 mm間隔設定が働くかの確認、配線後の基板検査は未実施。" },
       { stepId:"manufacture", result:"未実施", detail:"この評価の対象外。製造データの証拠なし。" },
       { stepId:"reproduce", result:"未実施", detail:"初回受入条件未達のため、空の作業場所からの再生成は未実施。" }
     ],
     evidence: [
-      { label: "保存・別プロセス再読込", result: "成功", detail: "固定版9.0.9の小規模な試験基板" },
-      { label: "接続情報・部品形状の保持", result: "一部のみ確認", detail: "試験基板の保存前後を比較" },
+      { label: "保存ファイルの開き直し", result: "成功", detail: "KiCad 9.0.9の小規模な試験基板を別のプログラム実行で確認" },
+      { label: "確認対象の形状・接続情報の保持", result: "成功", detail: "指定した小規模試験基板の保存前後を比較。実物Mainへの適用は未確認" },
       { label: "試験基板の初回検査", result: "失敗", detail: "予期しない警告2件。受入条件未達" },
       { label: "回路図作成・実物Mainの接続検査", result: "未確認", detail: "実物Mainの回路・接続確認は未実施" },
       { label: "実際の配線・配線後の間隔検査", result: "未実施", detail: "配線と配線間隔の検査は未実施" },
@@ -86,8 +86,8 @@ window.PROJECT_STATUS = {
     ]
   },
   uncertainties: [
-    { title:"回路図を作り、回路の接続を確かめる方法が未確認", basis:"KiCad 9.0.9で使える回路図の作成方法を特定できず、実物Mainの接続検査も未実施。", impact:"正しい回路を基板へ反映できると確認できず、実物設計へ進めません。", proof:"回路図の作成方法と、対象Mainで回路のつながりが合う証拠。", handling:"未認定。次の実験は未承認。", owner:"PMOが案と材料を整理し、POが判断。実施担当未定。", source:"回路図・接続経路の技術報告", href:"../docs/native-kicad-authoring-feasibility.md" },
-    { title:"小規模試験の結果を実物Mainに適用できるか不明", basis:"直近評価は小規模基板のみ。読み取り調査には部品49個・接続37本があるが、Mainの生成・接続確認ではない。", impact:"試験基板の成功だけでは実物Mainの部品・端子・接続を保証できません。", proof:"許可されたMain設計で部品・端子・接続・形状が一致する証拠。", handling:"未確認。Mainに適用可能とは扱わない。", owner:"PMOが不足証拠を整理。実施担当未定、判断はPO。", source:"実物Mainの読み取り範囲", href:"../docs/native-kicad-authoring-feasibility.md" },
+    { title:"回路図を作り、回路の接続を確かめる方法が未確認", basis:"KiCad 9.0.9で画面操作なしに回路図を自動作成する公開の方法を確認できず、実物Mainの接続検査も未実施。", impact:"正しい回路を基板へ反映できると確認できず、実物設計へ進めません。", proof:"回路図の作成方法と、対象Mainで回路のつながりが合う証拠。", handling:"未認定。次の実験は未承認。", owner:"PMOが案と材料を整理し、POが判断。実施担当未定。", source:"回路図・接続経路の技術報告", href:"../docs/native-kicad-authoring-feasibility.md" },
+    { title:"小規模試験の結果を実物Mainに適用できるか不明", basis:"直近評価は小規模基板のみ。読み取り調査では部品49個、電気的につながるグループ37個（ネット）があるが、Mainの生成・接続確認ではない。", impact:"試験基板の成功だけでは実物Mainの部品・端子・接続を保証できません。", proof:"許可されたMain設計で部品・端子・接続・形状が一致する証拠。", handling:"未確認。Mainに適用可能とは扱わない。", owner:"PMOが不足証拠を整理。実施担当未定、判断はPO。", source:"実物Mainの読み取り範囲", href:"../docs/native-kicad-authoring-feasibility.md" },
     { title:"正しい接続と必要な配線間隔の両立が未実証", basis:"直近の小規模基板では配線しておらず、0.20 mm間隔設定が実際に検出できるかも未確認。", impact:"接続と安全な間隔を同時に満たす基板と示せず、製造へ進めません。", proof:"対象基板で配線接続と必要な間隔を確認した証拠。", handling:"未実証。次の配線方法や試験順序は未承認。", owner:"PMOが案と材料を整理し、POが判断。実施担当未定。", source:"試験基板の検査・配線結果", href:"../docs/native-kicad-authoring-feasibility.md" },
     { title:"配線間隔の検査と条件をそろえた再生成が未確認", basis:"間隔設定が実際に働くかの確認と、空の作業場所からの再生成は未実施。", impact:"設定した間隔が守られることや、製造データを再現できることを保証できません。", proof:"必要間隔を検出する確認と、記録条件による再生成の比較。", handling:"未認定・未実施。", owner:"実施担当未定。対象・方法・受入条件をPMOが整理し、POが判断。", source:"試験基板の検査・再生成結果", href:"../docs/native-kicad-authoring-feasibility.md" },
     { title:"固定環境・廃止予定の基板設計用プログラム・部品情報の維持負担", basis:"KiCad 9.0.9のPython基板APIは廃止予定で、部品ライブラリ設定不足が今回の警告原因の一つ。更新時の検証は未実施。", impact:"環境や部品情報を保守できる範囲が不明で、長期利用の判断材料が不足しています。", proof:"維持する環境・部品情報と、更新・再現に必要な作業の証拠。", handling:"維持費・工数は不明。推定していません。", owner:"PMOが判断材料を整理。担当と維持範囲は未定。", source:"固定環境と部品ライブラリの評価", href:"../docs/native-kicad-authoring-feasibility.md" },
@@ -106,7 +106,7 @@ window.PROJECT_STATUS = {
     { name: "JITX", tested: "部品モデル、電気的整合、headless物理・後工程", stopped: "PO判断D-016でRev.M1/Rev.Aの物理backendはNO-GO。完全な対応済みheadless多層配線は実証されず。", reuse: "受入済みの部品・電気・DFM・後工程の知見。", retry: "対応済みの完全配線手順と、投資・保守範囲の別途承認が必要。", refs: "D-016、Issue #55、C4B5", href: "../docs/eda-path-history.md" },
     { name: "stock tscircuit", tested: "native stock物理配線とMainのclearance介入", stopped: "評価した内部router探索は終了。介入A/Bで誤配線回帰があり、backendは未採用。", reuse: "native electrical source、固定モデル、独立物理検証。", retry: "対応済み機構で接続性と0.20 mm間隔を同時に示す必要。", refs: "D-018、Issue #61–#71、EDA-003B–F", href: "../docs/eda-path-history.md" },
     { name: "Circuit JSON → KiCad", tested: "bounded converter repairと小規模/Main前段の検査", stopped: "別々の試行でGND landのnet欠落/short、footprint library ID衝突、schematic ERC未成立。配線試行なし。", reuse: "raw fixture、固定環境、capture手順と限られたcheckerの知見。", retry: "正確なfootprint identityと接続済みschematic/ERC等の条件が必要。", refs: "EDA-004B–D、Issue #73 / #75 / #77、PR #76 / #78", href: "../docs/eda-path-history.md" },
-    { name: "native KiCad objects", tested: "KiCad 9.0.9の固定小規模PCB作成・保存・別プロセス読込", stopped: "初回DRCに予期しない警告2件。回路図経路がなく、Mainへ進む前にSTOP。", reuse: "PCB I/Oと固定fixtureの保存前後の比較結果。", retry: "PO/PMOが具体的な回路図経路を承認し、限定した修正・実効ルール試験・条件付き再評価を許可した場合のみ。", refs: "EDA-004E、Issue #79、PR #80、D-014", href: "../docs/native-kicad-authoring-feasibility.md" }
+    { name: "native KiCad objects", tested: "KiCad 9.0.9の固定小規模基板を作成・保存し、別のプログラム実行で開き直し", stopped: "初回DRCに予期しない警告2件。回路図経路がなく、Mainへ進む前にSTOP。", reuse: "試験対象内で確認した基板データの保存・再読込と形状・接続情報の保持。", retry: "PO/PMOが具体的な回路図経路を承認し、限定した修正・実効ルール試験・条件付き再評価を許可した場合のみ。", refs: "EDA-004E、Issue #79、PR #80、D-014", href: "../docs/native-kicad-authoring-feasibility.md" }
   ],
   evidenceLinks: {
     latestReport: "../docs/native-kicad-authoring-feasibility.md",
@@ -123,7 +123,7 @@ window.PROJECT_STATUS = {
     {id:"M4",name:"完成版リリース",status:"todo",deliverable:"再現可能なv1.0製造・FW・筐体パッケージ",exit:"最終成果物を固定しユーザーが完成版を承認"}
   ],
   streams: [
-    {name:"Hardware",cells:["設計方針 完了","成立確認中: EDA-004Eの固定fixtureはPCB I/Oの一部確認、初回DRC受入不成立。実物Mainは未認定。","Main再利用 + Left/Right Wings","統合改版","製造版"]},
+    {name:"Hardware",cells:["設計方針 完了","成立確認中: 小規模試験基板の保存・再読込で対象情報の保持を確認。初回検査受入未達、実物Mainは未認定。","Main再利用 + Left/Right Wings","統合改版","製造版"]},
     {name:"Firmware",cells:["要件 完了","計測FW","Hall + Vial","統合・校正","v1.0"]},
     {name:"Enclosure / Mechanical",cells:["形状条件 完了","PCB条件待ち","外形連携","STEP / STL","製造版"]},
     {name:"Verification / Test",cells:["計画 完了","磁気・電力実測","Rev.A bring-up","統合試験","受入試験"]}
@@ -195,7 +195,7 @@ window.PROJECT_STATUS = {
     ["EDA-004C","EDA","Candidate B headless smoke requalification","done","Codex","EDA-004C #75 / PR #76 CONVERSION_BLOCKED / C1_DUPLICATE_GND_PAD_NET_LOSS; fixed-source build and input checks succeeded after disclosed preparation corrections; second duplicate GND land net absent in KiCad, DRC shorting_items; synthetic ERC unqualified; smoke initial-fresh 0/0, Main 0; DSN-SES/post-route/reproducibility NOT ENTERED; 26 parity fault replays detected; next PMO/PO review; terminal reporting complete; no backend adoption or Main PASS"],
     ["EVT-001","EVT","historical 4-key native electrical qualification fixture（PR #27 golden）","done","Codex + CI","PR #27"],
     ["EDA-004D","EDA","Bounded converter repair","done","Codex","#77 / PR #78 CONVERSION_BLOCKED: D1_FOOTPRINT_LIBRARY_ID_COLLISION; limited repair parity pass, remaining ERC failures; no routes"],
-    ["EDA-004E","EDA","Native KiCad authoring feasibility and history","done","Codex","#79 / PR #80: 固定fixtureのPCB I/Oと形状保持を一部確認。初回受入は予期しないDRC警告2件で不成立。Main・配線・製造・再生成は未認定。"],
+    ["EDA-004E","EDA","Native KiCad authoring feasibility and history","done","Codex","#79 / PR #80: 固定小規模試験基板の保存・再読込で確認対象の形状と接続情報の保持を確認。初回受入は予期しないDRC警告2件で不成立。実物Main・配線・製造・再生成は未認定。"],
     ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","未承認。次の技術評価方針についてPO/PMOの判断待ち。詳細: ../docs/native-kicad-authoring-feasibility.md"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],
     ["EVT-004","FW","評価FW・CSV計測","progress","Codex","EVT-001"],

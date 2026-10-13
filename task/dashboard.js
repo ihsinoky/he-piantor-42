@@ -2,7 +2,7 @@
   "use strict";
   const P = window.PROJECT_STATUS;
   const $ = id => document.getElementById(id);
-  const statusLabels = {done:"完了",current:"現在地",blocked:"未承認・停止中",next:"次の工程",todo:"未着手",hold:"保留",progress:"進行中",ready:"準備完了","not-ready":"未準備",waiting:"判断待ち",unconfirmed:"未認定",partial:"一部のみ確認",fail:"受入不成立",notEntered:"未実施"};
+  const statusLabels = {done:"完了",current:"現在地",blocked:"未承認・停止中",next:"次の工程",todo:"未着手",hold:"保留",progress:"進行中",ready:"準備完了","not-ready":"未準備",waiting:"判断待ち",unconfirmed:"未認定",partial:"一部のみ確認",success:"試験対象内で成功",fail:"受入不成立",notEntered:"未実施"};
   const taskStatusLabels = {...statusLabels, done:"作業完了"};
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
   const badge = (status, label) => `<span class="badge s-${esc(status)}">${esc(label)}</span>`;
@@ -46,8 +46,8 @@
   const coverage = new Map((evaluation?.coverage || []).map(item => [item.stepId, item]));
   $("qualification-map").innerHTML = qualification.steps.map(step => {
     const result = coverage.get(step.id) || { result:"未確認", detail:"最新評価にはこの範囲の証拠がありません。" };
-    const resultClass = result.result.includes("一部確認") ? "partial" : "unconfirmed";
-    const badgeStatus = result.result === "未実施" ? "notEntered" : result.result.includes("一部確認") ? "partial" : "unconfirmed";
+    const resultClass = result.result === "試験対象内で成功" ? "success" : result.result.includes("一部確認") ? "partial" : "unconfirmed";
+    const badgeStatus = result.result === "試験対象内で成功" ? "success" : result.result === "未実施" ? "notEntered" : result.result.includes("一部確認") ? "partial" : "unconfirmed";
     return `<article class="qualification-step ${resultClass}">
     ${badge(badgeStatus, result.result)}
     <h3>${esc(step.name)}</h3><p><b>得るもの:</b> ${esc(step.output)}</p>

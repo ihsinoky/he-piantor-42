@@ -17,10 +17,12 @@ small-fixture acceptance also stopped at two unexpected DRC warnings. Those
 warnings are that trial's stop reason, not proof that a method is impossible;
 fixing them alone would not qualify the missing product-design path.
 
-**Latest evidence:** KiCad 9.0.9 created/saved and separately reloaded the fixed
-small PCB; saved fixture geometry and connection objects retained their
-contracted properties. This reduces uncertainty about that fixture's PCB I/O
-only. Main applicability, a pinned schematic/check path, electrically correct
+**Latest evidence:** With KiCad 9.0.9, the fixed small trial board was created and
+saved; the saved file was reopened in a separate program execution. The checked
+geometry and connection information were retained for this trial board. This
+reduces uncertainty about that board's save/reload behavior only. Main
+applicability, a public method in fixed KiCad 9.0.9 for automatically creating a
+schematic without GUI interaction, electrically correct
 and spacing-compliant routing, effective-rule checking, manufacturing data and
 clean-workspace regeneration remain unconfirmed or untested. See the
 [EDA-004E report](native-kicad-authoring-feasibility.md).
@@ -67,8 +69,8 @@ by the Dashboard from structured fields.
 
 | Needed capability | Intended output and confirmation | EDA-004E evidence / open state |
 | --- | --- | --- |
-| Circuit/connectivity definition | Schematic or equivalent circuit definition; separately check component/pin/net consistency before PCB routing. | No pinned headless schematic authoring path found; current Main ERC/connectivity not entered. |
-| PCB data | Board parts/shapes/nets/outline/stack/rules; confirm save/reload preserves shape and connection information and check acceptance DRC. | KiCad 9.0.9 fixed small trial-board create/save/separate-process reload and shape/connection preservation passed in part. Initial acceptance failed on two unexpected warnings. No evidence transfers automatically to Main. |
+| Circuit/connectivity definition | Schematic or equivalent circuit definition; separately check component/pin/net consistency before PCB routing. | In fixed KiCad 9.0.9, no public method for automatically creating a schematic without GUI interaction was identified; current Main circuit/connectivity check not entered. |
+| PCB data | Board parts/shapes/nets/outline/stack/rules; confirm save/reload preserves shape and connection information and check acceptance DRC. | For the fixed small trial board, the checked shape and connection information were preserved after reopening the saved file in a separate program execution. Initial acceptance failed on two unexpected warnings. Applicability to Main is unconfirmed. |
 | Routing | Copper connectivity under physical constraints. | Routing not entered. |
 | Circuit and post-route checks | Circuit-level consistency; separately verify routed nets and effective clearance rules. | Current Main connectivity, effective 0.20 mm spacing-rule probe and post-route DRC not entered. |
 | Manufacturing output | Board-matched Gerber/drill/BOM/placement and pre-order DFM review. | Not entered for the native KiCad fixture. |
@@ -91,9 +93,9 @@ other capabilities.
 
 | Current problem / uncertainty | Evidence and consequence | Needed proof / disposition | Owner / source |
 | --- | --- | --- | --- |
-| Two unexpected DRC warnings stopped initial fixture acceptance. | U1 reference silkscreen overlap and unconfigured `Resistor_SMD` library; the fixed-fixture acceptance criteria were not met. | Warning disposition is unresolved. Any fix is not authorization to continue or sufficient evidence for real-board design. | Technical owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
-| Fixed-version schematic creation and circuit checking are unqualified. | No public pinned KiCad 9.0.9 headless schematic create/edit/save path was found; current Main ERC/parity was not entered. | Approved circuit-authoring route and current Main circuit/connectivity evidence; not planned or authorized. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
-| Small-fixture results may not apply to production-scale Main. | Fixture-only parity; the read-only Main inventory lists 49 components and 37 nets but is not accepted Main generation/connectivity proof. | Separately authorized Main-scale reconciliation for parts, pins, nets, geometry and libraries. | Owner unassigned; [Main coverage](native-kicad-authoring-feasibility.md#representative-main-read-only-coverage). |
+| Two unexpected DRC warnings stopped initial fixture acceptance. | U1's reference-number printing overlaps a soldering area; the `Resistor_SMD` library is unconfigured. The fixed-trial acceptance criteria were not met. | Warning disposition is unresolved. Any fix is not authorization to continue or sufficient evidence for real-board design. | Technical owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
+| Fixed-version schematic creation and circuit checking are unqualified. | No public method was identified for automatically creating a schematic without GUI interaction in fixed KiCad 9.0.9; current Main circuit/connectivity check was not entered. | Approved circuit-authoring route and current Main circuit/connectivity evidence; not planned or authorized. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
+| Small-trial results may not apply to Main at product scale. | The read-only Main inventory lists 49 components and 37 electrical connection groups (nets), but is not accepted Main generation/connectivity proof. | Separately authorized Main-scale confirmation for parts, pins, nets, geometry and libraries. | Owner unassigned; [Main coverage](native-kicad-authoring-feasibility.md#representative-main-read-only-coverage). |
 | Correct connectivity and required spacing have not been demonstrated together. | EDA-004E did not route; the effective 0.20 mm rule probe was not entered. | Routed connectivity and independent effective-spacing evidence for the authorized target. No router or trial is selected. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
 | Rule enforcement and clean-workspace regeneration are unknown. | Saved rule settings alone do not prove enforcement; empty-workspace rerun was not entered. | Effective-rule test and regeneration comparison, only if a future plan authorizes them. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#fixed-fixture-and-measured-results). |
 | Fixed environment, deprecated PCB API and library maintenance may constrain use. | KiCad 9.0.9 Python SWIG PCB bindings are deprecated (published removal plan: 11); library configuration caused a real warning. Upgrade/maintenance cost is unknown. | Supported maintenance boundary, library/environment reproduction and any migration-cost evidence. No cost estimate is asserted. | Owner unassigned; [EDA-004E report](native-kicad-authoring-feasibility.md#public-functions-and-fixed-environment). |
@@ -157,7 +159,7 @@ EDA-004E fixture is not the Rev.M1 deliverable.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | Historical C0-C4 and EDA-003 results remain in their reports; none qualifies the current Rev.M1 method. D-016 / D-017 / D-018 record their acceptance-time decisions, not a current execution plan. EDA-004B through EDA-004E are completed evaluation records; EDA-004E (Issue #79 / merged PR #80) has fixed-fixture PCB I/O/object-parity evidence but failed initial DRC acceptance on two unexpected warnings. Current Main/schematic/routing/manufacturing qualification remains open. Current next direction is undecided; see the current situation above. |
+| Hardware | Historical C0-C4 and EDA-003 results remain in their reports; none qualifies the current Rev.M1 method. D-016 / D-017 / D-018 record their acceptance-time decisions, not a current execution plan. EDA-004B through EDA-004E are completed evaluation records; EDA-004E (Issue #79 / merged PR #80) confirmed save/reload and checked shape/connection information for a fixed small trial board, but failed initial DRC acceptance on two unexpected warnings. Current Main/schematic/routing/manufacturing qualification remains open. Current next direction is undecided; see the current situation above. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |
@@ -436,12 +438,14 @@ automatic synchronization.
 
 [Issue #79](https://github.com/ihsinoky/he-piantor-42/issues/79) evaluation record was accepted in merged PR #80:
 **PCB_IO_PASS / FRONTEND_UNQUALIFIED**, STOP recommended before Main.
-KiCad 9.0.9 public PCB object creation/save/separate-process reload/resave and
-frozen endpoint/geometry parity pass. Initial fixture acceptance fails two
-unexpected DRC warnings (U1 silkscreen overlap, unconfigured official footprint
+In KiCad 9.0.9, the fixed small trial board's checked shape/connection information
+was retained after its saved file was reopened in a separate program execution.
+Initial trial acceptance fails two unexpected DRC warnings (U1 reference-number
+printing over a soldering area, unconfigured official footprint
 library); the two expected unconnected links are identified separately.
 Effective-rule negative test and conditional empty-directory regeneration are
-NOT ENTERED. No pinned public headless schematic authoring route was found;
+NOT ENTERED. No public method for automatically creating a schematic without
+GUI interaction was identified for fixed KiCad 9.0.9;
 current Main ERC/parity and Main generation/routing/manufacturing are NOT ENTERED.
 Deprecated SWIG binding and exact-library/rule maintenance remain additional work.
 [Result/evidence](native-kicad-authoring-feasibility.md) and
