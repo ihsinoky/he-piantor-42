@@ -1,0 +1,143 @@
+{
+  "recorded_utc": "2026-10-13T22:20:14.138099+00:00",
+  "all_conditions_pass": true,
+  "erc_exit_code": 0,
+  "result": {
+    "case": "normal",
+    "parity_pass": true,
+    "failures": [],
+    "source_component_count": 6,
+    "source_pin_count": 16,
+    "xml_component_count": 4,
+    "xml_pin_count": 14,
+    "normalized": {
+      "components": {
+        "U1": {
+          "lib_id": "74xGxx:74LVC1G04",
+          "value": "74LVC1G04",
+          "pins": {
+            "2": [
+              "~",
+              "input"
+            ],
+            "5": [
+              "VCC",
+              "power_in"
+            ],
+            "3": [
+              "GND",
+              "power_in"
+            ],
+            "1": [
+              "NC",
+              "no_connect"
+            ],
+            "4": [
+              "~",
+              "output"
+            ]
+          }
+        },
+        "U2": {
+          "lib_id": "74xGxx:74LVC1G04",
+          "value": "74LVC1G04",
+          "pins": {
+            "2": [
+              "~",
+              "input"
+            ],
+            "5": [
+              "VCC",
+              "power_in"
+            ],
+            "3": [
+              "GND",
+              "power_in"
+            ],
+            "1": [
+              "NC",
+              "no_connect"
+            ],
+            "4": [
+              "~",
+              "output"
+            ]
+          }
+        },
+        "R1": {
+          "lib_id": "Device:R",
+          "value": "10k",
+          "pins": {
+            "1": [
+              "~",
+              "passive"
+            ],
+            "2": [
+              "~",
+              "passive"
+            ]
+          }
+        },
+        "R2": {
+          "lib_id": "Device:R",
+          "value": "1k",
+          "pins": {
+            "1": [
+              "~",
+              "passive"
+            ],
+            "2": [
+              "~",
+              "passive"
+            ]
+          }
+        },
+        "#FLG01": {
+          "lib_id": "power:PWR_FLAG",
+          "value": "PWR_FLAG",
+          "pins": {
+            "1": [
+              "~",
+              "power_out"
+            ]
+          }
+        },
+        "#FLG02": {
+          "lib_id": "power:PWR_FLAG",
+          "value": "PWR_FLAG",
+          "pins": {
+            "1": [
+              "~",
+              "power_out"
+            ]
+          }
+        }
+      },
+      "nets": {
+        "U1.2": "INPUT",
+        "U1.5": "VCC",
+        "U1.3": "GND",
+        "U1.1": null,
+        "U1.4": "SIGNAL",
+        "U2.2": "SIGNAL",
+        "U2.5": "VCC",
+        "U2.3": "GND",
+        "U2.1": null,
+        "U2.4": null,
+        "R1.1": "VCC",
+        "R1.2": "INPUT",
+        "R2.1": "SIGNAL",
+        "R2.2": "GND",
+        "#FLG01.1": "VCC",
+        "#FLG02.1": "GND"
+      },
+      "intentional_nc": [
+        "U1.1",
+        "U2.1",
+        "U2.4"
+      ]
+    },
+    "erc_version": "9.0.9",
+    "erc_violations": []
+  }
+}

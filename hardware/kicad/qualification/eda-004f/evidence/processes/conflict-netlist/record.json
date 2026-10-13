@@ -1,0 +1,44 @@
+{
+  "command": [
+    "/tmp/eda004f/kicad/usr/bin/kicad-cli",
+    "sch",
+    "export",
+    "netlist",
+    "--format",
+    "kicadxml",
+    "-o",
+    "/tmp/eda004f/conflict/fixture.xml",
+    "/tmp/eda004f/conflict/fixture.kicad_sch"
+  ],
+  "cwd": "/tmp/eda004f/conflict",
+  "start_utc": "2026-10-13T22:20:09.369330+00:00",
+  "end_utc": "2026-10-13T22:20:09.637663+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004f/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004f/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004f/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004f/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004f/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004f/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004f/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004f/config",
+    "XDG_CACHE_HOME": "/tmp/eda004f/cache",
+    "XDG_DATA_HOME": "/tmp/eda004f/data",
+    "XDG_STATE_HOME": "/tmp/eda004f/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "fixture.xml",
+      "original_path": "/tmp/eda004f/conflict/fixture.xml",
+      "present": true,
+      "saved_path": "processes/conflict-netlist/fixture.xml",
+      "sha256": "6a0026042648c159e640cf11c2a86643d7e1afbf2c069361d36c7992c107304d"
+    }
+  ],
+  "elapsed_seconds": 0.2663961860000654,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
