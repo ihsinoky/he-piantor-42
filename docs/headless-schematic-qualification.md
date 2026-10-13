@@ -1,6 +1,6 @@
 # EDA-004F — headless schematic qualification
 
-**SMALL_SCHEMATIC_CANDIDATE_PASS**, proposed evaluation record under
+**SMALL_SCHEMATIC_CANDIDATE_PASS**, proposed evaluation record in [Draft PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) under
 [Issue #83](https://github.com/ihsinoky/he-piantor-42/issues/83).
 The configured small schematic passed KiCad **9.0.9** ERC and independent
 pin/connectivity reconciliation; both intentional faults were detected, a resistor

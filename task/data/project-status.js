@@ -4,7 +4,7 @@ window.PROJECT_STATUS = {
   source: {
     "confirmedAt": "2026-10-13T22:20:14Z",
     "reference": "Issue #83の限定評価結果（PR提案・受入待ち）",
-    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/issues/83",
+    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/84",
     "reportUrl": "../docs/headless-schematic-qualification.md",
     "historyUrl": "../docs/eda-path-history.md"
   },
@@ -61,9 +61,9 @@ window.PROJECT_STATUS = {
       "url": "https://github.com/ihsinoky/he-piantor-42/issues/83"
     },
     "acceptedRecord": {
-      "id": null,
-      "url": null,
-      "status": "PR提案・受入待ち"
+      "id": "84",
+      "url": "https://github.com/ihsinoky/he-piantor-42/pull/84",
+      "status": "Draft PR提案・未受入"
     },
     "workStatus": "限定評価と報告完了・PR提案（受入待ち）",
     "technicalStatus": "小規模回路図経路の候補成立。初回受入は設定警告6件で失敗。同じ回路図を設定修正後に検査し全個別試験成立。製品合格・方式採用ではありません。",
