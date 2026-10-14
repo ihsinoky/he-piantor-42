@@ -4,63 +4,68 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
-## Current situation (Issue #87 DSN rule-transfer STOP, 2026-10-14)
+## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
-**Location:** Before real Rev.M1/Main product design. PR #86 merged at
-20:40:00 UTC as `49ebe146a586bf820a747b93951a29fe94f08623`, accepting the
-historical STOP report and its authority correction. That acceptance does not
-retroactively authorize the prior scope excess or certify prior budget compliance.
-The current PO instruction separately authorized Issue #87 with a new maximum
-six-hour elapsed-work frame; past resume instructions were not inherited.
+**Location:** Before real Rev.M1/Main product design. Same Draft
+[PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88), Issue87. PR #86 is an
+accepted historical STOP, with prior authority/budget corrections retained.
+Current PO limited-resume authority permits the small structural DSN restoration;
+utilization reset does not reset the6h Issue frame or add attempts.
 
-**Latest result:** **CONVERSION_BLOCKED / DSN_RULE_TRANSFER_UNQUALIFIED /
-MAIN_UNQUALIFIED**, first terminal STOP **20:52:37.127596 UTC**.
-[New report](issue-87-native-main-routing.md),
-[Issue #87](https://github.com/ihsinoky/he-piantor-42/issues/87).
-Saved Main/contracts/code/libraries were hash-checked and reused. New raw Main
-ERC has **0 violations**, DRC retains the known **61 printing warnings** and
-127 expected pre-route unconnected items. Actual **0.10 mm** gap injection into
-a Main copy is detected against **0.20 mm**. Actual saved/reloaded PCBs establish
-via joining, missing-via disconnection and wrong-net contact detection; Main
-baseline parity remains identical after checker graph factoring.
+**Latest result:** **ROUTING_BLOCKED / MAIN_OUTPUT_INCOMPLETE /
+RUN_CONTRACT_UNQUALIFIED / MAIN_UNQUALIFIED**, recovery STOP
+**2026-10-14 22:23:18.672066 UTC**. [Latest report](issue-87-native-main-routing.md#resume-01).
+The existing Main wrapper exited0 at21:41:53.513 UTC after1203.752s and saved SES,
+but final router telemetry has35 incomplete connections. Logs reach512 passes
+instead of declared100: the public parsed-settings probe did not establish the
+effective runtime cap. No claim that the fixed100-pass trial was valid. The
+precise timeout/job termination cause is not certified; outer1260s timeout did
+not fire. Codex utilization interruption is a separate event. No replacement or
+resume routing process was launched during recovery.
 
-The public KiCad 9.0.9 DSN exports for both small fixture and Main introduce
-**0.05 mm smd_smd clearance**, despite ordinary clearance 0.20 mm. Fixed official
-source hardcodes /4. The documented Freerouting 2.1.0 `-dr` function is removed
-in that version's own source; the inspected public CLI settings have no clearance
-override. Faithful rule transfer through the evaluated API/configuration path
-was not established. No weakened-rule routing or custom corrective integration
-followed. This is a bounded prerequisite STOP, not routing failure or proof of
-method-wide incapability/mandatory large work.
+**Established in limited resume:** only typed smd_smd50→200um changed, raw kept,
+independent AST/byte diff and public fixed-JAR effective F/B matrix readback pass.
+Ordinary/netclass rules and all other loaded objects remain unchanged. Full
+individual Main input DSN pad/net/NC/duplicate/pose/shape/outline/layer/local-copper/
+hole-obstacle reconciliation passes; DSN omissions vs native retained properties
+are explicit. Small roundtrip **1 PASS WITH SCOPE**: returned KiCad nonroute
+semantics unchanged, DRC/unconnected0, actual copper graph and all4 metrics0.
+Prior actual.10mm gap/via fault evidence is hash-verified and reused.
 
-**Attempts:** Main initial/confirmation **0/0**, small roundtrip **0**; DSN exports
-**2** are preparation only. All four routed acceptance metrics remain **null**.
-Full individual DSN geometry/net/NC/duplicate/holes/local-copper reconciliation,
-SES return, initial/confirmation and full environment qualification are unverified.
-The existing 197 pads (167 required/30 NC), 2 NPTH, fixed poses/outline/layers and
-USB bond passed their existing pre-route individual checker on fresh readback.
+**Attempts:** small **1**, Main initial **1**, confirmation **0**. Main four
+post-return physical metrics are **null**, not router35 or clearance0. The latest
+PO recovery caseC requires STOP on incomplete output; no new Main SES-import/
+DRC/graph experiment followed that finding. Prepared code was not executed.
+Main post-return parity, material acceptance, complete routing and confirmation
+remain unqualified. This is not a valid fixed100-pass placement result or proof
+of method-wide inability. No retry, setting exploration or confirmation.
 
-**Next owner/action:** PMO reviews the bounded rule-transfer STOP and evidence;
-PO decides record acceptance and whether a specifically scoped correction or hold
-is justified. No next technical execution is authorized. Target, method,
-implementer, individual acceptance and investment for a new correction remain
-unplanned; this report does not grant a retry or backend/product/Human Gate.
+Baseline Main ERC0 and61 known printing warnings are retained. No new Main DRC
+was run, so no post-route print/material status is inferred. Printing/glyphs are
+still manufacturing work; no deletion/suppression/exception. USB NPTH DFM,
+product source/production0.0.2646/D-014–18, Wing/manufacturing/Gates remain unchanged.
 
-| Needed capability | Latest evidence / limit |
+**Next owner/action:** PMO reviews bounded restoration/small success, incomplete
+Main and runtime-contract failure; PO decides record acceptance and any new
+scope/investment or hold. No next technical execution is authorized. Target,
+method, implementer, independent acceptance and investment remain unplanned.
+
+| Capability | Evidence / practical limit |
 | --- | --- |
-| Circuit / core PCB | Saved Main hashes and fresh readback/individual parity pass; new ERC0. No Main regeneration needed. |
-| Error detection / effective spacing | Actual 0.10mm track gap detected; actual via/missing-via/short PCB tests pass within tiny-fixture scope. Full routed Main spacing/islands remain untested. |
-| Transfer | Raw small/Main public DSN rule check FAIL: smd_smd0.05mm. Complete individual transport/SES comparison not completed. |
-| Routing / confirmation | NOT ENTERED,0/0/0; route metrics null. No fixed-placement routing result. |
-| Printing / product | 61 warnings and glyph uncertainty remain pre-manufacturing work, expressly excluded only as Issue #87 routing blockers. No suppression or exception. |
+| Core Main / earlier real faults | Hash-verified reuse; individual input parity and prior actual gap/via/short proof. |
+| DSN rules / individual transfer | Known token restored only; independent diff, effective class matrix and full input reconciliation pass. Native drilling/thickness/printing retention distinguished from router obstacles. |
+| Small roundtrip | One route; native nonroute geometry/drill/NC preserved, four metrics0 in tiny fixture only. |
+| Main initial | One incomplete output; public parser said100passes, actual512. No physical terminal qualification; metrics null. |
+| Confirmation |0, not entered; initial all-condition pass absent. |
+| Product/manufacturing | No start/approval;61baseline warnings/glyph/USB DFM remain open. |
 
-| Current uncertainty | Evidence / consequence | Review / disposition | Owner |
+| Uncertainty | Evidence / consequence | Needed disposition | Owner |
 | --- | --- | --- | --- |
-| Material-rule handoff | Both DSNs relax typed SMD clearance; public fixed-version configuration remedy not established. | Review bounded corrective scope/proof before any new experiment. | PMO/PO |
-| Full transport / routed acceptance | Individual DSN geometry/NC/duplicates/holes/local copper, SES return and Main routing/confirmation uncompleted. | Main remains unqualified; no PASS from process exits or CI. | PMO/PO; next implementer unassigned |
-| Printing / glyphs / product DFM | 61 raw warnings retained; exact native glyph equivalence unknown; USB NPTH pre-order DFM remains open. | Resolve before manufacturing; no manufacturing exception. | PO; product technical owner unassigned |
-| Maintenance / environment | Fixed binary/Java/router hashes checked, mutable APT dependencies and deprecated SWIG remain. | Full environment reconstruction not certified. | PMO/PO |
-| Time / investment | New frame starts20:46:26 UTC, experiments STOP after6m11.128s; reporting/submission/CI additionally charged in new ledger/PR. | Past unknown effort, authority breach and budget uncertainty remain; no exact old remainder/compliance claim. | PO/PMO |
+| Effective run contract | Requested100, observed512; parsed-setting success insufficient. Exact runtime cause unqualified. | Review run validity and any separately scoped proof, no automatic retry. | PMO/PO |
+| Main physical result | Router35 incomplete is telemetry; returned Main physical graph/DRC/parity unmeasured after caseC STOP. | Retain partial SES and null metrics; no method-wide claim. | PMO/PO |
+| Printing/product | Baseline61warnings and glyph/USB DFM unresolved; no post-route DRC. | Resolve before manufacturing; no exception. | PO; product implementer unassigned |
+| Interruption/time | Prior13min + charged resume/unattended route + recovery/report/submission. Utilization-wait boundary uncertain. | Lower/upper ledger, upper used for6h; no reset, no fabricated1h contemporaneous note. | PO/PMO |
+| Maintenance | Public binding/parser/config integration and whole-environment reconstruction remain unqualified. | Evaluate bounded maintenance/investment only under new authority. | PMO/PO |
 
 The separate product lifecycle remains:
 

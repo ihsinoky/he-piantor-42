@@ -1,5 +1,186 @@
 # Issue #87 — fixed Main routing qualification
 
+<a id="resume-01"></a>
+## Latest: limited resume and utilization-interruption recovery
+
+- **Established:** the authorized DSN repair restores exactly one `smd_smd` numeric token per input from **0.05 to0.20 mm**. Separate AST/byte comparison passes for small/Main. Public fixed-JAR readback confirms both-layer effective matrix values, NC/required-net class relationships and unchanged other loaded objects. Individual Main DSN/input reconciliation passes.
+- **Actual trials:** small **1 — PASS WITH SCOPE**; Main initial **1 — incomplete, run contract unqualified**; confirmation **0 — NOT ENTERED**. Old two DSN exports remain preparation, not route attempts. No new route was launched during recovery.
+- **Terminal result:** **ROUTING_BLOCKED / MAIN_OUTPUT_INCOMPLETE / RUN_CONTRACT_UNQUALIFIED / MAIN_UNQUALIFIED**. The existing Main wrapper exited0 at **2026-10-14 21:41:53.512901 UTC**, with a saved SES and final router **35 incomplete connections**. Logs reach **512 passes**, despite declared100. This violates the intended run contract; the public settings-parser check did not prove the effective pass cap. The fixed-100-pass condition was not demonstrated. No general method or placement infeasibility is inferred.
+- **Four metrics:** small return has **required unconnected0 / actual wrong-net contacts0 / targeted material violations0 / unexplained transfer changes0**. Main post-return physical metrics are **null / null / null / null (not measured)**; router35 incomplete and its reported clearance0 are not independent physical metrics. Under recovery caseC, the incomplete result/contract discrepancy triggers STOP before a new Main SES-import/DRC/graph experiment. Main input transfer parity is established; returned Main parity is unqualified.
+- **Printing/product:** baseline61 known printing warnings and exact glyph uncertainty remain unresolved manufacturing work; no suppression/removal/exception. No new Main DRC was run, so no post-route warning/material PASS is claimed. USB NPTH DFM, product design, Wing, manufacturing/adoption/Gates remain open.
+- **Time:** prior13min is carried forward. Resume work starts21:13:54 UTC; router continues unattended and finishes21:41:53.513. Recovery starts22:21:46 UTC. The uncertain utilization-wait boundary is represented by lower/upper totals in the [new effort ledger](../hardware/kicad/qualification/issue-87-native-main-routing/resume-01/evidence/effort-ledger.json); **the upper bound is used against6h**. Commit/push/report/CI add to both totals. No utilization reset is a time reset. A retrospective checkpoint is recorded, not a fabricated contemporaneous1h update.
+- **Next PO decision:** PMO reviews the bounded DSN/small success, incomplete Main, runtime pass-cap failure and interruption/time uncertainty; PO decides whether any new scope/investment is justified. This report authorizes no retry, setting search, confirmation, adoption or product start. Same Draft [PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88), no merge.
+
+### Authority, start and recovery state
+
+The current PO limited-resume instruction explicitly lifted the earlier STOP
+only for bounded typed-rule restoration and the remaining Issue87 stages.
+[Authority scope](../hardware/kicad/qualification/issue-87-native-main-routing/resume-01/authority.md).
+At21:13:54 UTC the same branch/HEAD `47bb0e62f4e60b469139bd4584383e67f5de8eaf`
+and clean worktree matched GitHub; 966 prior tracked code/evidence files were
+frozen by hash. The existing KiCad/Java/router/geometry environment and previous
+Main parity/actual-gap/via proofs were reused. No unaffected PCB tests were rerun.
+
+The later PO recovery instruction identifies the interruption as a Codex
+utilization limit. At22:21:46 UTC cwd/branch/HEAD were unchanged; uncommitted
+resume code, raw logs, generated objects and temporary environment were preserved.
+No checkout/reset/clean or environment rebuild occurred. GitHub still showed the
+same open Draft PR and HEAD. The completed original wrapper handle37396 was
+recovered, its command/start/end/input/output paths and raw hashes matched, and
+its completion was returned without launching another process. The original
+recorder has **no PID field**; no router/wrapper PID is invented or inferred from
+a reused PID. Current sandbox process visibility alone is not treated as a
+cross-namespace census.
+
+Wrapper execution: **21:21:49.756590–21:41:53.512901 UTC**, elapsed1203.752s,
+outer timeout1260s **not triggered**, exit0. Configured router job timeout1200s;
+the duration is consistent with that bound, but no explicit final timeout/job
+state was captured, so the precise reason for process termination is not certified.
+The output is technically incomplete regardless. The first terminal disposition
+was recorded on recovery at22:23:18.672066 UTC. The utilization interruption,
+process exit and technical STOP are separate events.
+
+### Bounded restoration and independent input reconciliation
+
+`restore-clearance.py` uses the existing pinned sexpdata parser to establish
+`unit um`, resolution10/um, one global `structure/rule` target with exactly50um,
+then writes a separate corrected file by patching only that numeric token to200.
+It records AST index path, line/column/byte span, units/values and both hashes.
+Unexpected unit/resolution/count/value/location fails closed. Six such negative
+cases were detected, and an unrelated literal50 remained unchanged. Raw DSNs
+remain immutable at prior commit/path/hash, without needless new copies.
+
+A separate checker imports no mutation code: raw/fixed AST differ at one allowed
+value, and the byte diff is confined to `5`→`20` within50→200. No reserialization,
+shape/net/placement change or other rule change occurs. Both ordinary and
+netclass rules remain200um; the complete rule inventory contains no other layer/
+type/class override. [Mutation and independent-diff records](../hardware/kicad/qualification/issue-87-native-main-routing/resume-01/README.md).
+
+A small Java reader calls **public** HeadlessBoardManager and BoardRules getters
+from the unmodified, hash-verified2.1.0 JAR. It loads raw and corrected DSNs
+without routing. Exactly two matrix entries change: F.Cu/B.Cu smd–smd .05→.20mm;
+all other loaded pins/nets/shapes/obstacles/traces/widths are identical. All actual
+non-sentinel class pairs are>=.20mm. Sentinel `null` class0 has0 entries and is
+not used by any actual input pad, obstacle or track. Net-associated pins use
+`kicad_default`, while NC pins use `smd`; the class override relationships are
+observed in readback rather than assumed from the edited string.
+
+Fixed official `Structure.set_clearance_rule` splits the type pair and assigns
+the symmetric matrix on all layers; `Network` maps explicit netclass rules to
+real items. Source inspection records and exact bytes are retained. No KiCad/
+router internal source or JAR was changed, compiled as a replacement, or forked.
+The inspector only compiles a small public-API caller.
+
+Individual DSN reconciliation covers all49 component poses/PN values and197
+physical pin geometries/net/NC memberships, including four shield13 variants and
+both mechanical15 variants. Shape-sharing image aliases are identified explicitly;
+original KiCad footprint/SourceID/electrical-role identity remains in the import
+target. Rect/circle/oval geometry, both layers, complete outline edges, three USB
+bond centerlines/width/net/layer, via600:300 definition and four NPTH layer
+obstacles reconcile. The existing2nm numeric tolerance is unchanged and is not
+a spacing waiver. Raw/fixed effective readback also matches each pad and obstacle.
+
+DSN does not serialize all native KiCad information. Thickness1.2mm, print/paste/
+mask/typed schematic and actual PTH drilling/annuli remain in the original board;
+SES is imported into that board rather than used to replace it. Each .65mm NPTH
+becomes a1.05mm circular obstacle on both layers (original hole plus .20mm radial
+margin), and public readback confirms those obstacles. Plated drill geometry is
+not independently encoded in the DSN outer-pad shapes; it remains in KiCad and
+requires final hole/material checking. This is an explicit boundary, not silent
+loss acceptance. Main post-return checking remains unperformed after its STOP.
+
+### Small roundtrip and checker corrections
+
+One small route process ran for5.437s. The fixture includes duplicate-number
+required lands, existing local copper, an NC SMD, a PTH and NPTH. Its SES imports
+through the public API into the original board copy. All nonroute native PCB
+semantics (including physical drills/NC and other retained information) match,
+KiCad DRC/unconnected are0, and the independent actual pad/track/layer graph has
+no required disconnection or wrong-net contact. All four acceptance metrics are0
+**within this fixture only**. The via positive/missing/short proof from the
+previous epoch is reused; this tiny returned route contains no new via.
+
+Two ordinary checker corrections preserve their original failures and old code:
+
+- Standard Lisp sexpdata treats bare `Rect[T]Pad...` brackets as list syntax;
+  Specctra treats them as identifier characters. The bounded checker quotes these
+  known identifiers **in reader memory only**. Raw/fixed DSN bytes are untouched,
+  and the independent fixed-JAR reader confirms the actual interpretation.
+- A new junction splits the existing small local trace into two collinear
+  segments. Comparing segment-record identity incorrectly reported a loss.
+  Corrected verification requires complete original centerline coverage by
+  same-width/layer/net returned copper; crossings or nearby tracks cannot hide a
+  missing bond. Native nonroute parity and the independent graph/DRC still apply.
+  No routing trial was repeated or expected geometry changed for this correction.
+
+### Fixed Main initial and observed execution-contract failure
+
+Before launch, raw/input/board/project/contract/JAR/Java/settings/code hashes,
+command, passes100, routing thread1, optimizer threads0/disabled, neckdown off,
+job timeout1200s and wrapper1260s were frozen. Public settings-parser inspection
+returned those requested values. Seed was not exposed; the declared reproduction
+strategy used fixed inputs/settings, one routing thread, no optimizer, fresh
+process/config/temp and conditional semantic confirmation, without claiming bit
+determinism. The prior budget allowed both bounded runs plus checking/reporting.
+
+[Actual run contract](../hardware/kicad/qualification/issue-87-native-main-routing/resume-01/evidence/run-contract.json).
+Corrected Main input SHA256:
+`75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2`;
+settings `3499c12f249de20b8eeae770e68b08b5518d4bc963bcb665df1fb4f48adc8181`;
+returned partial SES
+`75156694793b0aa7594dd0d310b228b2db9b755f429e01506801473a0e24e8e6`.
+
+The requested100-pass cap was **not effective**: raw logs show pass100 at
+21:26:39.837, pass101 at21:26:41.455 and pass512 at21:41:52.778. No executor
+changed the command/input/settings or launched another trial. Nevertheless,
+checking the public parsed field was insufficient to establish runtime cap
+behavior. The executor's earlier “fixed100passes” progress statement therefore
+needs this explicit limitation; it is not evidence that the actual trial honored
+that cap. The exact runtime cause is unqualified; no speculative fix, further
+router investigation/experiment or retry follows this result.
+
+Main log also records internal maze-search NullPointerExceptions. A separate
+asynchronous update-check network error appears under the restricted environment;
+small post-return acceptance still passed. These diagnostics are retained and
+are **not printing warnings**. Router-reported accumulated CPU/memory values are
+not certified physical resource measurements. Final router connections35 and
+reported clearance0 are telemetry, not independent acceptance.
+
+The latest PO instruction's caseC explicitly applies to incomplete output. After
+recovery established that result and the pass discrepancy, a new Main SES import/
+DRC/graph run was not launched. Prepared import/inspection code is retained as
+**unexecuted**; no “0”, PASS or successful post-return preservation is inferred
+from its existence. Initial1 is consumed; confirmation0 and no fresh generation.
+A valid fixed100-pass layout outcome and all four physical Main metrics remain
+unqualified. No placement change, hand routing, setting exploration, additional
+Main trial, manufacturer exception, product source/dependency/CI change or merge.
+
+### Time and submission limits
+
+Prior13min is charged. The continuous21:13:54→21:41:53.513 interval is charged in
+full, including unattended router time; operator stop time is not known precisely.
+Last observed pre-limit tool21:26:03 bounds the possible unattended tail at
+0–15m50.513s, already included rather than added twice. The following
+21:41:53.513→22:21:46 interval39m52.487s is a candidate utilization-wait interval
+with both processing and recorded work stopped. Its uncertainty is retained:
+lower total excludes it, **conservative upper charges it**, plus all current
+recovery/report/commit/push/CI time. No convenient exclusion of the whole unknown
+period is used to enforce the cap. Final PR observation supplies later totals;
+final-response seconds and exact interruption boundaries remain measurement limits.
+The1h checkpoint is retrospective because no agent was available at its earlier
+continuous-wall projection; it is labelled as such in the ledger.
+
+Saved-evidence/static verification and final-head CI are submission checks only.
+The final PR distinguishes management CI success, skipped engineering jobs and
+technical Main failure. Earlier STOPs and raw artifacts remain immutable.
+
+## Historical first Issue87 epoch — preserved original report
+
+The following report describes only the earlier pre-resume epoch. Its statements
+about zero routing attempts and unestablished DSN correction refer to that epoch;
+they are retained as history and do not override the latest result above.
+
+
 Submitted as Draft [PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88);
 review/merge and technical qualification remain separate.
 

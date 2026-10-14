@@ -1,0 +1,42 @@
+"""Independent original/returned KiCad semantic parity + required real copper graph."""
+import json,sys,importlib.util,collections
+from pathlib import Path
+import sexpdata as sx
+ROOT=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('checker',ROOT.parent/'check-main.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+
+def nonroute(path):
+    tree=sx.loads(Path(path).read_text());assert str(tree[0])=='kicad_pcb'
+    return collections.Counter(sx.dumps(n) for n in tree[1:] if not isinstance(n,list) or not n or str(n[0]) not in ['segment','via'])
+name,before_file,after_file,before_snapshot,after_snapshot,drc_file,out=sys.argv[1:]
+a=json.loads(Path(before_snapshot).read_text());b=json.loads(Path(after_snapshot).read_text());drc=json.loads(Path(drc_file).read_text())
+assert nonroute(before_file)==nonroute(after_file),'non-route KiCad semantic change'
+for key in a:
+    if key!='tracks':assert a[key]==b[key],('snapshot nonroute change',key)
+# Source local copper survives as the same physical segments, not only same net names.
+def trackkey(t):return json.dumps({k:v for k,v in t.items() if k!='uuid'},sort_keys=True)
+from shapely.geometry import LineString
+from shapely.ops import unary_union
+for oldtrack in a['tracks']:
+    assert oldtrack['kind']=='track'
+    candidates=[t for t in b['tracks'] if t['kind']=='track' and all(t[k]==oldtrack[k] for k in ['width','net','layer'])]
+    source=LineString([oldtrack['start'],oldtrack['end']])
+    actual=unary_union([LineString([t['start'],t['end']]) for t in candidates])
+    # Collinear split at a new junction is the same copper, not a missing bond.
+    # Crossing/nearby/new-branch tracks cannot cover the source centerline length.
+    assert source.difference(actual).length<=m.C['tolerance_mm'],('original local copper changed',oldtrack)
+
+assert not drc['unconnected_items'],'KiCad unconnected remains'
+printing={'text_height','silk_overlap','silk_over_copper'}
+violations=drc['violations'];material=[v for v in violations if v['type'] not in printing]
+assert not material,('non-printing DRC',material)
+if name=='main':
+    assert len(violations)==61 and collections.Counter(v['type'] for v in violations)==dict(text_height=44,silk_overlap=12,silk_over_copper=5)
+    graph=m.pcb(b,True)
+else:
+    assert not violations
+    for t in b['tracks']:
+        assert (t['width']==.2) if t['kind']=='track' else (t['size']==.6 and t['drill']==.3 and t['layers']==[0,2])
+    graph=m.snapshot_graph(b);assert not graph['shorts'] and not graph['disconnected']
+Path(out).write_text(json.dumps(dict(status='PASS_WITH_SCOPE' if name=='smoke' else 'INITIAL_PASS_PENDING_CONFIRMATION',nonroute_semantics_identical=True,source_local_copper_preserved=True,required_unconnected=0,wrong_net_actual_copper_contacts=0,targeted_material_violations=0,unexplained_transfer_changes=0,printing_warning_count=len(violations),graph=graph,tracks=len(b['tracks']),drc_unconnected_items=0),indent=2)+'\n')
+print(name,'returned KiCad semantic parity/physical copper/DRC pass')

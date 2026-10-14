@@ -1,0 +1,1024 @@
+java.util.concurrent.CompletionException: java.lang.InternalError: java.net.SocketException: Operation not permitted
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
+	at java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1159)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1773)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.InternalError: java.net.SocketException: Operation not permitted
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.<init>(PlainHttpConnection.java:343)
+	at java.net.http/jdk.internal.net.http.AsyncSSLConnection.<init>(AsyncSSLConnection.java:49)
+	at java.net.http/jdk.internal.net.http.HttpConnection.getSSLConnection(HttpConnection.java:306)
+	at java.net.http/jdk.internal.net.http.HttpConnection.getConnection(HttpConnection.java:292)
+	at java.net.http/jdk.internal.net.http.Http2Connection.createAsync(Http2Connection.java:520)
+	at java.net.http/jdk.internal.net.http.Http2ClientImpl.getConnectionFor(Http2ClientImpl.java:140)
+	at java.net.http/jdk.internal.net.http.ExchangeImpl.get(ExchangeImpl.java:98)
+	at java.net.http/jdk.internal.net.http.Exchange.establishExchange(Exchange.java:391)
+	at java.net.http/jdk.internal.net.http.Exchange.responseAsyncImpl0(Exchange.java:584)
+	at java.net.http/jdk.internal.net.http.Exchange.responseAsyncImpl(Exchange.java:428)
+	at java.net.http/jdk.internal.net.http.Exchange.responseAsync(Exchange.java:420)
+	at java.net.http/jdk.internal.net.http.MultiExchange.responseAsyncImpl(MultiExchange.java:435)
+	at java.net.http/jdk.internal.net.http.MultiExchange.lambda$responseAsync0$2(MultiExchange.java:355)
+	at java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1150)
+	... 5 more
+Caused by: java.net.SocketException: Operation not permitted
+	at java.base/sun.nio.ch.Net.socket0(Native Method)
+	at java.base/sun.nio.ch.Net.socket(Net.java:546)
+	at java.base/sun.nio.ch.SocketChannelImpl.<init>(SocketChannelImpl.java:153)
+	at java.base/sun.nio.ch.SocketChannelImpl.<init>(SocketChannelImpl.java:136)
+	at java.base/sun.nio.ch.SelectorProviderImpl.openSocketChannel(SelectorProviderImpl.java:77)
+	at java.base/java.nio.channels.SocketChannel.open(SocketChannel.java:192)
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.<init>(PlainHttpConnection.java:319)
+	... 18 more
+2026-10-14 21:22:01.930 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:02.582 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:03.316 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:05.214 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:18.160 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:28.626 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:28.972 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:29.668 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:30.211 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:22:43.218 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:22:49.975 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:22:58.911 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:22:58.991 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:22:59.180 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:02.841 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:03.001 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:13.752 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:17.252 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:51.130 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:23:57.439 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:00.281 ERROR  [C99424\15B94C] Error during autoroute_item
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "from_corner" is null
+	at app.freerouting.board.RoutingBoard.insert_forced_trace_polyline(RoutingBoard.java:637) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.InsertFoundConnectionAlgo.insert_trace(InsertFoundConnectionAlgo.java:145) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.InsertFoundConnectionAlgo.get_instance(InsertFoundConnectionAlgo.java:55) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:239) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:24:06.934 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:09.645 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:09.991 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:24:13.565 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:14.567 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:14.589 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:14.938 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:15.179 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:20.253 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:20.571 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:22.391 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:22.422 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:23.158 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:23.982 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:26.943 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:30.004 ERROR  [C99424\15B94C] Error during autoroute_item
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "from_corner" is null
+	at app.freerouting.board.RoutingBoard.insert_forced_trace_polyline(RoutingBoard.java:637) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.InsertFoundConnectionAlgo.insert_trace(InsertFoundConnectionAlgo.java:145) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.InsertFoundConnectionAlgo.get_instance(InsertFoundConnectionAlgo.java:55) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:239) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:24:31.164 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:31.361 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:31.994 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.052 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.229 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.318 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.371 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.481 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:32.544 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:37.451 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:38.073 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:38.413 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:24:57.236 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:13.240 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:13.680 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:14.326 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:14.691 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:14.708 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:14.749 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:15.107 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:15.180 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:16.126 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:16.291 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:21.265 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:34.513 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:35.365 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:25:43.959 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:00.985 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:01.031 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:14.330 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:22.474 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:23.949 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:23.959 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:24.050 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:24.086 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:24.162 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:24.213 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:42.796 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:43.211 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:43.446 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:43.527 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:43.564 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:43.628 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:44.627 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:44.682 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:44.726 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:55.137 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 9 out of bounds for length 9
+	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:26:58.901 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:26:59.990 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:02.136 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:02.633 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:16.966 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:17.150 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:17.184 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:18.640 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:18.781 ERROR  [C99424\15B94C] Error during autoroute_item
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.033 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.353 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.421 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.608 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.836 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:19.964 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: null
+2026-10-14 21:27:26.752 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:27.247 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:32.656 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:33.423 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:36.781 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:36.835 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:36.866 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:36.968 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:37.123 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:37.614 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:42.217 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:44.017 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:45.661 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:46.467 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: null
+2026-10-14 21:27:46.639 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:50.103 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:50.258 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:50.626 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:51.663 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:51.771 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:55.803 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:55.975 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:56.041 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:56.055 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:56.332 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:56.570 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:56.893 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:57.634 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:27:58.292 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:05.988 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:06.310 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:06.326 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:06.456 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:06.731 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:07.512 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:08.050 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:08.082 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:15.906 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:16.992 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:17.030 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:29.337 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:30.334 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:32.076 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:32.354 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:38.887 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:39.007 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:47.710 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:48.064 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:48.650 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:49.139 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:49.284 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:50.181 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:50.314 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:50.393 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:28:58.655 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:07.156 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:09.658 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:09.820 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:10.344 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:10.473 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:12.949 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:28.100 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:28.497 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:29.336 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:34.625 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:34.733 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:34.891 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:37.572 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:37.917 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:38.272 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:57.017 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:57.185 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:57.197 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:29:58.035 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:07.209 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:07.529 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:12.136 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.157 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.515 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.747 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.843 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.872 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.970 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:12.986 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot read field "item" because "p_other" is null
+	at app.freerouting.autoroute.ObstacleExpansionRoom.create_overlap_door(ObstacleExpansionRoom.java:98) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate_neighbours(SortedRoomNeighbours.java:178) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.SortedRoomNeighbours.calculate(SortedRoomNeighbours.java:45) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.calculate_doors(AutorouteEngine.java:520) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.complete_neighbour_rooms(AutorouteEngine.java:560) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:335) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-14 21:30:19.087 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:25.049 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:35.656 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:35.787 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:36.313 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:45.817 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:45.914 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:46.258 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:46.379 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:47.757 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:48.244 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:48.321 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:48.340 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:49.030 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:30:56.908 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:04.844 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:08.712 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:09.012 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:09.050 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:09.242 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:09.783 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:15.638 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:15.976 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:25.628 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:25.756 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:25.830 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:25.843 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:26.020 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:26.070 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:26.305 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:26.357 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:26.441 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:27.575 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:27.885 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:33.497 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:35.449 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:36.203 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:36.250 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:37.376 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:37.676 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:38.036 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:44.505 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:51.138 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:31:51.525 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:03.939 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:11.970 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:15.739 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:16.134 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:18.395 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:18.550 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:22.690 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:23.362 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:29.911 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:34.827 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:35.222 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:39.584 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:39.994 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:40.335 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:47.241 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:48.685 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:32:49.575 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:11.795 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:12.045 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:12.382 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:12.951 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:19.330 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:22.593 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:24.300 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:28.759 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:32.274 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:32.590 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:38.713 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:38.784 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:39.769 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:47.726 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:49.265 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:49.577 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:33:58.242 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:06.940 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:07.109 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:19.974 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:20.913 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:21.720 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:22.552 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:22.663 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:22.954 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:24.367 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:32.099 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:32.222 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:33.902 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:34.282 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:35.636 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:35.740 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:35.917 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:36.828 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:36.969 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:37.749 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:40.735 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:34:59.189 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:00.500 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:00.580 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:06.308 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:07.125 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:07.640 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:08.325 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:12.537 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:22.730 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:22.835 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:22.912 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:23.187 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:23.596 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:24.839 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:26.346 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:40.376 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:42.025 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:47.400 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:48.396 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:48.723 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:49.199 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:54.575 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:54.620 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:54.767 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:35:59.211 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:16.534 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:19.027 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:19.102 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:20.870 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:23.271 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:36:23.439 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:08.145 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:08.568 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:10.887 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:10.920 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:10.970 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:11.280 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:11.297 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:11.856 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:11.880 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:11.909 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:27.898 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:27.926 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:32.570 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:32.803 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:33.005 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:37.905 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:48.074 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:56.334 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:37:56.491 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:06.500 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:06.902 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:07.880 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:15.882 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:24.237 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:25.949 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:47.184 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:47.389 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:38:47.458 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:11.013 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:11.189 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:24.474 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:29.766 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:39.001 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:40.256 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:40.303 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:40.788 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:41.798 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:42.363 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:54.123 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:39:55.051 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:12.768 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:12.828 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:12.876 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:13.586 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:13.662 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:25.288 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:25.418 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:39.596 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:39.721 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:40.040 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:56.424 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:40:57.101 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:04.226 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:04.531 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:18.281 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:18.406 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:30.782 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:40.016 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:40.166 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:42.109 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:44.961 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-14 21:41:45.764 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null

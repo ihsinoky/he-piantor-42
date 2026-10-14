@@ -2,23 +2,23 @@
 window.PROJECT_STATUS = {
   schemaVersion: 2,
   source: {
-    "confirmedAt": "2026-10-14T20:52:37.127596Z",
-    "reference": "Issue #87工程C STOP提案。PR #86は20:40UTC受入済みmerge。productionはmerged main。",
+    "confirmedAt": "2026-10-14T22:23:18.672066Z",
+    "reference": "Issue87限定再開/利用制限復旧のSTOP提案、Draft PR88。productionはmerged main。",
     "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/88",
-    "reportUrl": "../docs/issue-87-native-main-routing.md",
+    "reportUrl": "../docs/issue-87-native-main-routing.md#resume-01",
     "historyUrl": "../docs/eda-path-history.md"
   },
   current: {
     "heading": "実物Rev.M1の設計前",
-    "location": "Issue #87限定評価:実効間隔・実PCB via負例成立、公開DSNのtyped clearance緩和でSTOP。PR #86は受入済み過去報告、権限逸脱の追認ではない。",
-    "blocker": "0.20mm材料条件を保つ受け渡しが未成立。Main配線は未実施。"
+    "location": "DSN復元・個別入力・小規模往復が限定成立。Main初回は未完了で実効pass契約も未認定。利用制限は技術結果と分離。",
+    "blocker": "Main35未接続はrouter値、物理4指標未測定。実512passes vs宣言100。追加試行なし。"
   },
   nextAction: {
-    "status": "DSN rule-transfer STOPの報告レビュー・追加実験停止",
+    "status": "Main未完了/実行契約のSTOPレビュー",
     "owner": "PMO: ChatGPT、判断: PO",
-    "action": "PMOがraw DSN/固定版公式sourceと検査範囲をレビュー。POが限定した受け渡し修正への投資か保留を決める。",
-    "target": "固定0.20mmの公開API受け渡し条件",
-    "startCondition": "次対象・方法・担当・個別受入・投資範囲の別途PO承認。過去許可は継承しない。"
+    "action": "限定DSN/small成功を残し、未完了Main・実効pass上限・時間境界をレビュー。POが次投資か保留を判断。",
+    "target": "Issue87 Main初回未認定結果と次の投資範囲",
+    "startCondition": "次対象/方法/担当/独立受入/投資の別途承認。利用枠resetは試行・時間・scope拡張でない。"
   },
   plan: {
     planningNote: "既存の製品条件と、次の未承認の試験計画を分けて表示します。",
@@ -29,13 +29,13 @@ window.PROJECT_STATUS = {
       { name:"完成版", purpose:"再現可能な成果物を固定する。", output:"v1.0製造・ファームウェア・筐体一式と手順。", confirm:"受入試験と成果物・製造手順の再現性。", completion:"G5でPOが完成版を承認。", owner:"技術担当未定。承認はPO。", dependency:"統合試験、校正、製造データ一式。", source:"docs/project-status.md · G5" }
     ],
     qualification: {
-      status:"Issue #87 rule-transfer STOP・報告レビュー待ち",
+      status:"Issue87限定再開: Main未完了/実効契約未認定・レビュー待ち",
       purpose:"実物基板の設計データを作り、接続・配線・間隔・製造出力を確かめ、同じ条件で再現できる方法を成立させる。",
       output:"回路・基板データと、接続・配線・間隔・製造出力・再生成の確認記録。",
-      completion:"保存Main/契約hashと新ERC0/core照合成立。実効.10mm gapと実PCB via/欠落/short検出成立。工程CのDSN typed.05mmでSTOP。配線0/0/0。",
+      completion:"DSN typed.05→.20だけ復元、独立diff/実効行列/個別Main照合と小規模1が成立。Main初回1未完了、実512 vs100passes、確認0。Main4物理指標null。",
       owner:"Issue #87実装・評価: Codex。PMO: ChatGPT。記録受入と次範囲/投資判断: PO。次実施担当は未定。",
       establishedSummary:"2層・厚さ1.2 mm・配線間隔0.20 mmを維持。D-018はMain先行・初回Main評価の技術作業上限2人日を定めた限定計画で、次の実験許可ではありません。",
-      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。resume01の独立期待表不一致STOPは保持。resume02 fresh Main/ERC/DRCはPOが明示した最大1時間の保存証拠再照合範囲を超過。別途許可は確認できず、PO-authorized表記を撤回。初回STOP・過去結果と予算不明を維持し、過去許可は継承しません。PR #86は受入済み過去STOP。Issue #87と現在PO指示だけが、新6hと既知印刷61件/glyphの配線停止条件からの分離を許可。今回も工程CでSTOPし、追加試験権限は残りません。",
+      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。resume01の独立期待表不一致STOPは保持。resume02 fresh Main/ERC/DRCはPOが明示した最大1時間の保存証拠再照合範囲を超過。別途許可は確認できず、PO-authorized表記を撤回。初回STOP・過去結果と予算不明を維持し、過去許可は継承しません。PR #86は受入済み過去STOP。Issue #87と現在PO指示だけが、新6hと既知印刷61件/glyphの配線停止条件からの分離を許可。初回工程C STOP後、POが限定typed修正と利用制限復旧を別途許可。最新結果はMain未完了/実効pass契約未認定STOPで、追加試験権限はありません。",
       establishedSources:[
         {label:"project decisions D-015 / D-017 / D-018",href:"../docs/decisions.md"},
         {label:"bounded historical qualification plan",href:"../docs/alternate-physical-backend-qualification-plan.md"},
@@ -54,7 +54,7 @@ window.PROJECT_STATUS = {
   },
   latestEvaluation: {
     "id": "ISSUE-87",
-    "title": "固定Mainの実効間隔・データ受け渡し・配線成立性",
+    "title": "Issue87限定再開：DSN修正・小規模成立、Main未完了",
     "purpose": "印刷課題を製造前事項として残し、固定0.20mm条件でMainを安全に自動配線できるか評価。",
     "issue": {
       "id": "87",
@@ -63,133 +63,139 @@ window.PROJECT_STATUS = {
     "acceptedRecord": {
       "id": "88",
       "url": "https://github.com/ihsinoky/he-piantor-42/pull/88",
-      "status": "今回STOP報告は未受入。PR #86は過去STOPの受入済み報告。"
+      "status": "Draft STOP報告・未受入。PR86過去STOP受入済み。"
     },
-    "workStatus": "工程CでSTOP・証拠提出（提案）。STOP後の実験は禁止。",
-    "technicalStatus": "CONVERSION_BLOCKED / DSN_RULE_TRANSFER_UNQUALIFIED / MAIN_UNQUALIFIED",
-    "currentSummary": "Mainの保存済みhash/新規ERC0/個別core照合成立。実際.10mm gap検出とvia/欠落/異net PCB負例成立。公開small/Main DSNがsmd_smd.05mmへ緩和。Main0/0、小規模往復0、DSN export2。",
+    "workStatus": "利用制限から既存実行を読み取り復旧。技術STOP記録・同じDraft PR88へ提出。",
+    "technicalStatus": "ROUTING_BLOCKED / MAIN_OUTPUT_INCOMPLETE / RUN_CONTRACT_UNQUALIFIED / MAIN_UNQUALIFIED",
+    "currentSummary": "typed.05→.20mmだけ復元、独立diff/実効行列/個別Main DSN照合成立。小規模1は4指標0。Main初回1はrouter35未接続、実行512passes vs宣言100。確認0、Main4物理指標null。",
     "currentProblem": {
-      "title": "DSNの材料間隔条件が未保持",
-      "basis": "small/Mainの公開DSNに通常.20mmとsmd_smd.05mm。KiCad9.0.9は/4を固定出力。",
-      "impact": "工程Cの前提停止。Main配線成立性は未認定。",
-      "proof": "0.20mmの全対象ルールを保つ、独立照合済みの受け渡し。",
-      "handling": "配線せずSTOP。-drは固定版sourceで機能削除。確認した公開設定経路の限界で、方式全体不成立ではない。",
-      "owner": "PMO/reviewer: ChatGPT、次の範囲・投資判断: PO。次担当未定。",
-      "source": "Issue #87 report / raw DSN / fixed official source",
-      "href": "../docs/issue-87-native-main-routing.md"
+      "title": "Main未完了・実効pass上限未認定",
+      "basis": "既存wrapperはexit0/SES保存。最終router35未接続。宣言100passesに対し実ログ512。",
+      "impact": "Main未認定。固定100pass条件の有効な配線結果でもない。",
+      "proof": "実効実行条件と、必要物理端子/実銅箔/材料/戻しの独立照合。",
+      "handling": "最新PO復旧指示CによりSTOP。追加配線/途中再開/新規Main取込検査/確認なし。",
+      "owner": "PMO: ChatGPT、次範囲/投資/merge判断: PO。次担当未定。",
+      "source": "Issue87 resume01/recovery evidence",
+      "href": "../docs/issue-87-native-main-routing.md#resume-01"
     },
-    "learned": "実効.20mmのtrack間隔違反と実PCBのvia接続・欠落・短絡を確認。typed DSN rule不一致を配線前に検出。",
-    "unknown": "完全なDSN個別形状/NC/重複/穴/局所銅箔照合、SES戻し、Main配線・確認、全環境再構築。",
-    "impact": "Main技術合格、方式採用、製品設計、製造/Human Gateは未承認。",
-    "nextCondition": "PMO/POが限定rule-transfer修正への投資か保留を判断。次対象/方法/担当/個別受入/予算は別途承認。",
-    "testedQuestion": "固定Mainと既存公開APIの受け渡しは0.20mm材料条件を維持するか。",
-    "evidenceBoundary": "保存Main再利用と実PCB負例、DSN規則でSTOP。DSN export成功は往復/配線成功ではない。",
+    "learned": "限定DSN復元と公開headless読込の実効条件・個別形状照合、小規模往復が成立。公開設定parser100はruntime上限の証明でなかった。",
+    "unknown": "Main戻しの4物理指標/完全配線/確認、512passへ進んだ厳密原因、全環境資格と利用制限待ち境界。",
+    "impact": "方式採用/製品/製造/Human Gateなし。固定配置や方式全体の不成立と一般化しない。",
+    "nextCondition": "PMO/POが不完全Mainと実行契約をレビューし、次の範囲/方法/担当/受入/投資を別途判断。",
+    "testedQuestion": "限定DSN修正は要求を保ち、固定Mainの1回の実行は条件を満たすか。",
+    "evidenceBoundary": "DSN入力と小規模のみ限定成立。Main incomplete/契約未認定。exit0・SES存在・router clearance0は技術合格でない。",
     "coverage": [
       {
         "stepId": "circuit",
-        "result": "限定成立",
-        "detail": "既存期待表/保存回路図を再利用、新規ERC0。"
+        "result": "限定成立・再利用",
+        "detail": "既存hash/個別対応とERC0を再利用。"
       },
       {
         "stepId": "board",
-        "result": "core成立・印刷未解決",
-        "detail": "197pads/2holes/pose/layer/outline/USB銅箔を新規readbackで照合。印刷61件は今回の配線停止条件外。"
+        "result": "入力照合成立",
+        "detail": "197物理pad/NC/重複/穴障害物/層/外形/USB局所銅箔を個別DSN/公開読込で確認。"
       },
       {
         "stepId": "route",
-        "result": "未実施",
-        "detail": "Main初回/確認0/0、小規模往復0。DSN規則照合でSTOP。"
+        "result": "小規模成立・Main未完了",
+        "detail": "小規模1/Main初回1/確認0。Main最終router35、実512 vs宣言100。"
       },
       {
         "stepId": "verify",
-        "result": "限定成立・Main未認定",
-        "detail": "実際.10mm gapのKiCad検出、実PCB via/欠落/短絡検出。配線済みMainの全対象検査は未実施。"
+        "result": "小規模限定成立・Main未測定",
+        "detail": "小規模4指標0。復旧CのSTOPでMain新規取込/DRC/graphなし、Main4指標null。"
       },
       {
         "stepId": "manufacture",
         "result": "対象外",
-        "detail": "製造出力/Wing/発注/Human Gateなし。"
+        "detail": "baseline印刷61/glyph/USB DFM未解決。製造・Wing・例外なし。"
       },
       {
         "stepId": "reproduce",
         "result": "未実施",
-        "detail": "初回配線なし、条件付き新規確認なし。"
+        "detail": "Main初回全条件合格なし。新規生成/確認は0。"
       }
     ],
     "evidence": [
       {
-        "label": "固定入力・契約・Mainの再利用",
-        "result": "成功（限定）",
-        "detail": "保存artifactと5不変sourceのhash照合、Main再生成なし。"
+        "label": "DSNルール復元・実効条件",
+        "result": "限定成立",
+        "detail": "各1数値のみ、独立AST/byte diff、両層matrix.20mm。"
       },
       {
-        "label": "実効間隔・実銅箔検出",
-        "result": "成功（限定）",
-        "detail": "Mainコピー.10mm gap、実PCB via接続/欠落/異net。"
+        "label": "Main個別DSN入力",
+        "result": "限定成立",
+        "detail": "接続/NC/重複/形状/配置/層/穴障害物/局所銅箔一致。native保持情報とDSN非表現情報を区別。"
       },
       {
-        "label": "DSN rule transfer",
-        "result": "失敗・STOP",
-        "detail": "small/Mainともsmd_smd.05mm。通常.20mmだけでは成立しない。"
+        "label": "小規模往復1回",
+        "result": "成功（fixture限定）",
+        "detail": "native nonroute保持、KiCad DRC/未接続0、独立graph4指標0。"
       },
       {
-        "label": "Main初回・確認／小規模往復",
-        "result": "未実施",
-        "detail": "0/0/0、routed metrics null。"
+        "label": "Main初回1回",
+        "result": "未完了・契約未認定",
+        "detail": "exit0、SES保存、router35。100上限に対し512。Main物理検査未測定・確認0。"
+      },
+      {
+        "label": "利用制限と時間",
+        "result": "境界不確かさ保持",
+        "detail": "無人router加算。待ち候補39m52sの下限/上限を記録し、上限で6hを管理。"
       }
     ]
   },
   uncertainties: [
     {
-      "title": "DSNの材料間隔条件が未保持",
-      "basis": "small/Mainの公開DSNに通常.20mmとsmd_smd.05mm。KiCad9.0.9は/4を固定出力。",
-      "impact": "工程Cの前提停止。Main配線成立性は未認定。",
-      "proof": "0.20mmの全対象ルールを保つ、独立照合済みの受け渡し。",
-      "handling": "配線せずSTOP。-drは固定版sourceで機能削除。確認した公開設定経路の限界で、方式全体不成立ではない。",
-      "owner": "PMO/reviewer: ChatGPT、次の範囲・投資判断: PO。次担当未定。",
-      "source": "Issue #87 report / raw DSN / fixed official source",
-      "href": "../docs/issue-87-native-main-routing.md"
+      "title": "Main未完了・実効pass上限未認定",
+      "basis": "既存wrapperはexit0/SES保存。最終router35未接続。宣言100passesに対し実ログ512。",
+      "impact": "Main未認定。固定100pass条件の有効な配線結果でもない。",
+      "proof": "実効実行条件と、必要物理端子/実銅箔/材料/戻しの独立照合。",
+      "handling": "最新PO復旧指示CによりSTOP。追加配線/途中再開/新規Main取込検査/確認なし。",
+      "owner": "PMO: ChatGPT、次範囲/投資/merge判断: PO。次担当未定。",
+      "source": "Issue87 resume01/recovery evidence",
+      "href": "../docs/issue-87-native-main-routing.md#resume-01"
     },
     {
-      "title": "完全受け渡しと配線結果",
-      "basis": "DSN rule照合で停止。実PCB小例の検出のみ確認。",
-      "impact": "固定Mainの配線成立性は不明。",
-      "proof": "個別DSN/SES、Main初回・新規確認の独立実銅箔/層間/材料検査。",
-      "handling": "次実験は自動開始しない。",
-      "owner": "PMO/PO、次担当未定",
-      "source": "Issue #87",
-      "href": "../docs/issue-87-native-main-routing.md"
+      "title": "Main物理/戻し未認定",
+      "basis": "最終router35 incomplete、caseC STOPでMain SES取込/DRC/graphは未実施。",
+      "impact": "物理未接続/異net/材料/戻し差分はnull。",
+      "proof": "4物理指標と実効実行契約の別途証拠。",
+      "handling": "未測定を0にしない。追加実験なし。",
+      "owner": "PMO/PO",
+      "source": "Issue87 latest report",
+      "href": "../docs/issue-87-native-main-routing.md#resume-01"
     },
     {
-      "title": "印刷・字体・製品課題",
-      "basis": "61印刷warning保持、glyph未認定。USB NPTH製造前DFM、pitch/Hall/power/cable未決。",
-      "impact": "今回の配線停止条件外でも製造承認ではない。",
-      "proof": "製造前の印刷/実物条件確認。",
-      "handling": "抑制・削除・材料緩和・例外なし。",
-      "owner": "PO、製品技術担当未定",
-      "source": "Issue #87 / retained product risks",
-      "href": "../docs/issue-87-native-main-routing.md"
+      "title": "印刷・製品・環境",
+      "basis": "baseline印刷61/glyphとUSB DFM未解決。Main戻しDRC未実施、全環境再構築未認定。",
+      "impact": "製造/採用/製品着手は未承認。",
+      "proof": "別途製造前の実物条件確認。",
+      "handling": "印刷保持、抑制/例外/材料緩和なし。",
+      "owner": "PO、次製品担当未定",
+      "source": "retained product risks",
+      "href": "../docs/issue-87-native-main-routing.md#resume-01"
     },
     {
-      "title": "環境保守・時間",
-      "basis": "固定KiCad/Java/router hash一致、mutable APT/SWIG限界。新6h開始20:46:26、実験STOP6m11.128s、提出時間も加算。",
-      "impact": "全環境再構築と過去予算遵守/正確残予算は未認定。",
-      "proof": "新時間ledger/PR最終観測、必要なら別途再構築評価。",
-      "handling": "過去の指示範囲超過・予算不明を保持。無人時間も除外しない。",
+      "title": "利用制限・予算境界",
+      "basis": "prior13min継承。無人routerを加算、待ち候補39m52sを下限/上限で区別。",
+      "impact": "正確な活動境界と過去予算は未認定。",
+      "proof": "新ledger/PR終了観測。",
+      "handling": "保守的上限で6h管理、最後30分確保。resetによる自動延長なし。",
       "owner": "PO/PMO",
-      "source": "Issue #87 effort ledger / PR #86 historical correction",
-      "href": "../docs/issue-87-native-main-routing.md"
+      "source": "resume01 effort ledger",
+      "href": "../docs/issue-87-native-main-routing.md#resume-01"
     }
   ],
   decision: {
-    "status": "Issue #87 STOP提案・記録受入判断待ち",
-    "question": "限定rule-transfer correctionを別途委任するか、保留するか。",
-    "evidence": "0.10mm gapと実PCB via/欠落/short検出成立。small/Main DSNでtyped.05mm、固定版-dr機能削除。配線0/0/0。",
-    "owner": "PMOが材料を整理、POが判断。次実施担当未定。",
-    "planStatus": "完全DSN/SES/Main配線・確認は未実施。次の方法/個別受入/担当/予算は未計画。D-014〜18維持。",
-    "proposal": "この報告は再試行・別候補・採用・製品設計・製造例外を承認しない。"
+    "status": "同じDraft PR88でSTOPレビュー待ち",
+    "question": "限定成功とMain未完了/契約逸脱を受け入れ、次投資か保留をどう判断するか。",
+    "evidence": "DSN/small限定成立。Main最終router35、実512 vs100、物理指標null。",
+    "owner": "PMOが材料整理、POが判断。",
+    "planStatus": "新試行/確認/実効pass補正の対象/方法/担当/受入/予算は未計画。",
+    "proposal": "本報告は再試行・別設定・採用・製品設計・製造例外を許可しない。"
   },
   history: [
+    {"name": "Issue87 limited resume / utilization recovery", "tested": "typed間隔復元・実効行列・個別DSN・小規模1・Main初回1", "stopped": "Main incomplete35はrouter値、512passes vs100。復旧caseC STOP、Main物理4指標null、確認0。", "reuse": "DSN/small限定成立と過去gap/via証拠。原STOP/失敗は保持。", "retry": "PMO/POが実効契約と次投資を別途判断。自動追加試行なし。", "refs": "Issue87 / same Draft PR88", "href": "../docs/issue-87-native-main-routing.md#resume-01"},
     {"name": "Issue #87 fixed native Main", "tested": "保存Main再利用・新ERC/DRC・実効gap/実PCB via負例・公開DSN", "stopped": "工程C:small/Main DSNがtyped smd_smd.05mm。Main0/0、小規模往復0、export2。", "reuse": "固定入力、.10mm gap検出、実PCB via/欠落/short検出。完全受け渡し/配線は未認定。", "retry": "新しい限定修正/証明の範囲と投資をPOが別途決定。", "refs": "Issue #87（STOP提案）", "href": "../docs/issue-87-native-main-routing.md"},
     { name: "初期KiCad", tested: "旧4キー回路図とPCBの修正・CI検査", stopped: "繰り返したファイル形式修正の記録があり、PR #10 CIのPCB DRCは587違反・未接続40件。個々の原因とwriterは不明。", reuse: "既存シンボル・footprint・要求を検証済み参照として再利用。", retry: "異なる保存/検証方式と、現在の電気・形状の証拠が必要。", refs: "PR #6 / #10、D-014、Issue #79", href: "https://github.com/ihsinoky/he-piantor-42/pull/10" },
     { name: "JITX", tested: "部品モデル、電気的整合、headless物理・後工程", stopped: "PO判断D-016でRev.M1/Rev.Aの物理backendはNO-GO。完全な対応済みheadless多層配線は実証されず。", reuse: "受入済みの部品・電気・DFM・後工程の知見。", retry: "対応済みの完全配線手順と、投資・保守範囲の別途承認が必要。", refs: "D-016、Issue #55、C4B5", href: "../docs/eda-path-history.md" },
@@ -200,7 +206,7 @@ window.PROJECT_STATUS = {
     { name:"public native Main prerequisite", tested:"固定Main入力・4限定symbol対応・fresh native形状・Main生成/raw検査", stopped:"resume02のfresh Main/ERC/DRCは指示範囲超過。技術結果はERC0/個別照合成立、印刷警告61件によるPRE_ROUTE_PHYSICAL_DRC_STOP。実効間隔/受け渡し/配線未実施、0/0/0。", reuse:"入力hashと部分対応表、版・公開pin表観察。完全Mainへ結果を一般化しない。", retry:"PR #86受入済み。Issue #87は別途新規許可され、そのSTOPは最新評価に分離。", refs:"EDA-004G / Issue #85 / merged PR #86（過去STOP受入）", href:"../docs/native-main-routing-qualification.md" }
   ],
   evidenceLinks: {
-    "latestReport": "../docs/issue-87-native-main-routing.md",
+    "latestReport": "../docs/issue-87-native-main-routing.md#resume-01",
     "pathHistory": "../docs/eda-path-history.md",
     "githubActions": "https://github.com/ihsinoky/he-piantor-42/actions",
     "issue79": "https://github.com/ihsinoky/he-piantor-42/issues/79",
@@ -222,7 +228,7 @@ window.PROJECT_STATUS = {
       "name": "Hardware",
       "cells": [
         "設計方針 完了",
-        "Issue #87:実効間隔/実via負例成立、DSN typed.05mmでSTOP。Main0/0、小規模往復0。PR #86過去STOP受入済み、印刷61件は製造前課題。",
+        "Issue87再開: DSN修正/実効行列/個別入力と小規模1成立。Main初回1未完了、実512 vs100、確認0。Main物理指標null。印刷61は製造前事項。",
         "Main再利用 + Left/Right Wings",
         "統合改版",
         "製造版"

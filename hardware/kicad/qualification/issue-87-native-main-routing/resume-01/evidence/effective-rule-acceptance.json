@@ -1,0 +1,79 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "fixtures": {
+    "smoke": {
+      "router_readback_only_changes": [
+        [
+          {
+            "layer": "F.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.05
+          },
+          {
+            "layer": "F.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.2
+          }
+        ],
+        [
+          {
+            "layer": "B.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.05
+          },
+          {
+            "layer": "B.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.2
+          }
+        ]
+      ],
+      "other_readback_objects_equal": true,
+      "real_matrix_pairs_ge020": true,
+      "null_class": "sentinel class0 has zero matrix entries; no input pads/obstacles/traces use null, verified separately",
+      "public_api": "HeadlessBoardManager.loadFromSpecctraDsn + public BoardRules/ClearanceMatrix getters; no routing or rule mutation"
+    },
+    "main": {
+      "router_readback_only_changes": [
+        [
+          {
+            "layer": "F.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.05
+          },
+          {
+            "layer": "F.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.2
+          }
+        ],
+        [
+          {
+            "layer": "B.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.05
+          },
+          {
+            "layer": "B.Cu",
+            "class_a": "smd",
+            "class_b": "smd",
+            "clearance_mm": 0.2
+          }
+        ]
+      ],
+      "other_readback_objects_equal": true,
+      "real_matrix_pairs_ge020": true,
+      "null_class": "sentinel class0 has zero matrix entries; no input pads/obstacles/traces use null, verified separately",
+      "public_api": "HeadlessBoardManager.loadFromSpecctraDsn + public BoardRules/ClearanceMatrix getters; no routing or rule mutation"
+    }
+  },
+  "source_meaning": "Structure.set_clearance_rule splits smd_smd into two classes and sets symmetric matrix pairs on all layers. Netclass explicit rules create kicad_default assignments; readback covers that class and NC smd/default obstacle pairs. Only sentinel null class0 excluded, not a physical input class.",
+  "readback_is_not_postroute_acceptance": true
+}

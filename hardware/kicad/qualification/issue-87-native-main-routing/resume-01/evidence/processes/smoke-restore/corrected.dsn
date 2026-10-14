@@ -1,0 +1,94 @@
+(pcb /tmp/issue87/smoke/input.dsn
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "9.0.9-9.0.9~ubuntu24.04.1")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  18000 -18000  8000 -18000  8000 -8000  18000 -8000  18000 -18000)
+    )
+    (via "Via[0-1]_600:300_um")
+    (rule
+      (width 200)
+      (clearance 200)
+      (clearance 200 (type smd_smd))
+    )
+  )
+  (placement
+    (component Probe:U2
+      (place U2 0.000000 0.000000 front 0.000000 (PN probe))
+    )
+    (component Probe:U1
+      (place U1 0.000000 0.000000 front 0.000000 (PN probe))
+    )
+    (component Probe:U3
+      (place U3 0.000000 0.000000 front 0.000000 (PN probe))
+    )
+    (component Probe:H1
+      (place H1 0.000000 0.000000 front 0.000000 (PN probe))
+    )
+  )
+  (library
+    (image Probe:U2
+      (pin Round[A]Pad_1000.000000_um 1 16000 -10000)
+    )
+    (image Probe:U1
+      (pin Round[T]Pad_1000.000000_um 1 10000 -10000)
+      (pin Round[T]Pad_1000.000000_um 1@1 10000 -12000)
+    )
+    (image Probe:U3
+      (pin Round[T]Pad_1000.000000_um 1 14000 -14000)
+    )
+    (image Probe:H1
+      (keepout "" (circle F.Cu 1050 16000 -16000))
+      (keepout "" (circle B.Cu 1050 16000 -16000))
+    )
+    (padstack Round[T]Pad_1000.000000_um
+      (shape (circle F.Cu 1000))
+      (attach off)
+    )
+    (padstack Round[A]Pad_1000.000000_um
+      (shape (circle F.Cu 1000))
+      (shape (circle B.Cu 1000))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:300_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+  )
+  (network
+    (net N
+      (pins U2-1 U1-1 U1-1@1)
+    )
+    (class kicad_default N
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 200)
+        (clearance 200)
+      )
+    )
+  )
+  (wiring
+    (wire (path F.Cu 200  10000 -10000  10000 -12000)(net N)(type route))
+  )
+)
