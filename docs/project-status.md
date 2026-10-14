@@ -39,6 +39,13 @@ SMALL_SCHEMATIC_CANDIDATE_PASS, initial acceptance FAIL and configured subsequen
 success remain historical results; no test result is rewritten. EDA-004E PR #80
 and all earlier evidence/decisions remain retained.
 
+**PMO supplement / merge HOLD:** The STOP means **selected-library prerequisite
+not established**, not method failure or demonstrated large custom implementation.
+Read-only review found legacy TPS/Flash/HRO symbol definitions and validated-pin
+reuse candidates; generic GH/Flash symbol reuse is separate from footprint
+substitution. EP/MP/composite-contact handling and complete Main checking remain
+unqualified. No experiment resumes. [Four-part scope and evidence](native-main-routing-qualification.md#pmo-read-only-supplement-2026-10-14-merge-hold).
+
 **Next decision:** PMO reviews Issue #85's limited STOP, incomplete expectation/
 checker and possible boundedness of missing model work. PO decides record
 acceptance and continue/hold/reconsider investment. No next technical experiment

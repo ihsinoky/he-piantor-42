@@ -66,14 +66,14 @@ window.PROJECT_STATUS = {
       "status": "Draft PR提案・未受入"
     },
     "workStatus": "工程1で停止・部分証拠と提案報告を提出",
-    "technicalStatus": "CONVERSION_BLOCKED / ERC_UNQUALIFIED。完全Mainモデル対応が未成立。Main配線失敗や一般的なAPI能力不足の実証ではありません。",
+    "technicalStatus": "CONVERSION_BLOCKED / ERC_UNQUALIFIEDは選択したライブラリで前提未成立の意味。PMOマージ保留。読み取り補足で旧TPS/Flash/HRO定義と既存symbolの再利用候補を確認。方式全体の不成立・大規模実装必須の実証ではありません。",
     "currentSummary": "固定入力hash一致。部分期待表は49部品・37ネット・193論理端子番号・197物理端子意図（必要167＋NC30）。モデル不足で工程1 STOP。Main生成/配線0回、全Main指標null。",
     "currentProblem": {
       "title": "Mainの端子モデルと独立検査の対応が未成立",
       "basis": "選択した公式9.0.9シンボルにTPS22919がなく、正しい参照番号の公開追加APIがLibraryError。Flash/USB/GH対応も未認定。完全な形状/役割表・Main実銅箔checker・4種の誤り検出が未成立。",
       "impact": "Main生成と配線へ進めない。Main配線不可能や公開API全般の限界を示した結果ではない。",
       "proof": "検証済みの忠実な全モデルと端子/物理対応、実銅箔・実効ルールの独立検査と予定した誤り検出。",
-      "handling": "限定再利用のexecutor STOP。小規模独自ライブラリ等の可否を網羅的に調べておらず、大規模実装や予算超過の実測証拠はない。PMO/POへ戻す。",
+      "handling": "選択したライブラリで前提未成立のSTOP。PMOマージ保留。旧定義・既存symbolの個別再利用候補を読み取り確認し、footprint置換と区別。大規模実装必須の証拠はない。追加実験なし。",
       "owner": "PMO/reviewer: ChatGPT、PO: ユーザー。次回技術担当未定。",
       "source": "docs/native-main-routing-qualification.md",
       "href": "../docs/native-main-routing-qualification.md"
@@ -150,7 +150,7 @@ window.PROJECT_STATUS = {
       "basis": "選択した公式9.0.9シンボルにTPS22919がなく、正しい参照番号の公開追加APIがLibraryError。Flash/USB/GH対応も未認定。完全な形状/役割表・Main実銅箔checker・4種の誤り検出が未成立。",
       "impact": "Main生成と配線へ進めない。Main配線不可能や公開API全般の限界を示した結果ではない。",
       "proof": "検証済みの忠実な全モデルと端子/物理対応、実銅箔・実効ルールの独立検査と予定した誤り検出。",
-      "handling": "限定再利用のexecutor STOP。小規模独自ライブラリ等の可否を網羅的に調べておらず、大規模実装や予算超過の実測証拠はない。PMO/POへ戻す。",
+      "handling": "選択したライブラリで前提未成立のSTOP。PMOマージ保留。旧定義・既存symbolの個別再利用候補を読み取り確認し、footprint置換と区別。大規模実装必須の証拠はない。追加実験なし。",
       "owner": "PMO/reviewer: ChatGPT、PO: ユーザー。次回技術担当未定。",
       "source": "docs/native-main-routing-qualification.md",
       "href": "../docs/native-main-routing-qualification.md"
