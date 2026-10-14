@@ -1,0 +1,43 @@
+{
+  "recorded_utc": "2026-10-14T01:31:39.130453+00:00",
+  "classification": "CONVERSION_BLOCKED",
+  "technical_result": "ERC_UNQUALIFIED / MAIN_PIN_MODEL_COVERAGE_UNQUALIFIED",
+  "first_terminal_gate": "Stage 1: complete faithful Main pin-model coverage not established",
+  "primary_evidence": "processes/public-model-assessment-corrected/public-model-assessment.json",
+  "primary_observation": {
+    "rejected": true,
+    "exception_type": "LibraryError",
+    "exception": "Symbol 'Power_Management:TPS22919' not found in KiCAD libraries. Please verify the library name 'Power_Management' and symbol name are correct. Common libraries include: Device, Connector_Generic, Regulator_Linear, RF_Module"
+  },
+  "reason": "Fixed 9.0.9 official library lacks required TPS22919 definition; public component add rejects it. No qualified source-faithful custom definition is available in the reused EDA-004F set. Stop without substituting passive generic pins or bypassing public library/validation boundaries.",
+  "decision_basis": "Executor bounded reuse/coverage assessment, not an exhaustive proof that a small custom library or another public library could not work.",
+  "secondary_constraints": [
+    "Exact selected-library lookups also lack W25Q16JVUXIQ, TYPE-C-31-M-12, BM14B-GHS-TBT. Nearby definitions need explicit pin/EP/MP/combined-contact qualification.",
+    "Main pin-role/full shape expectation is partial. Main ERC, schematic/PCB parity and actual-copper verifier are not established.",
+    "Existing EDA-004E/F checkers are small fixtures. Required four Main negative tests have not run and are not accepted."
+  ],
+  "main_initial_attempts": 0,
+  "main_confirmation_attempts": 0,
+  "small_transport_attempts": 0,
+  "main_metrics": {
+    "required_unconnected": null,
+    "wrong_net_copper_components": null,
+    "targeted_material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "post_stop_allowed": [
+    "read-only evidence verification",
+    "evidence organization",
+    "report and management updates",
+    "commit/push/Draft PR submission"
+  ],
+  "not_claimed": [
+    "Main PASS",
+    "Main routing failure",
+    "public API universal incapability",
+    "budget exhaustion",
+    "method adoption",
+    "Human Gate",
+    "product design approval"
+  ]
+}
