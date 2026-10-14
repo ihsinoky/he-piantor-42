@@ -4,7 +4,7 @@ window.PROJECT_STATUS = {
   source: {
     "confirmedAt": "2026-10-14T01:31:39Z",
     "reference": "Issue #85の工程1 STOP（提案記録・未受入。productionはmerged main）",
-    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/issues/85",
+    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/86",
     "reportUrl": "../docs/native-main-routing-qualification.md",
     "historyUrl": "../docs/eda-path-history.md"
   },
@@ -61,9 +61,9 @@ window.PROJECT_STATUS = {
       "url": "https://github.com/ihsinoky/he-piantor-42/issues/85"
     },
     "acceptedRecord": {
-      "id": null,
-      "url": "https://github.com/ihsinoky/he-piantor-42/issues/85",
-      "status": "提案STOP報告・受入未確認"
+      "id": "86",
+      "url": "https://github.com/ihsinoky/he-piantor-42/pull/86",
+      "status": "Draft PR提案・未受入"
     },
     "workStatus": "工程1で停止・部分証拠と提案報告を提出",
     "technicalStatus": "CONVERSION_BLOCKED / ERC_UNQUALIFIED。完全Mainモデル対応が未成立。Main配線失敗や一般的なAPI能力不足の実証ではありません。",
