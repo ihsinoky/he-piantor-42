@@ -1,0 +1,35 @@
+{
+  "command": [
+    "apt-get",
+    "-c",
+    "/tmp/issue87/apt/apt.conf",
+    "update"
+  ],
+  "cwd": "/tmp/issue87",
+  "start_utc": "2026-10-14T20:47:54.882621+00:00",
+  "end_utc": "2026-10-14T20:48:00.945258+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "env_overrides": {},
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "apt.conf",
+      "original_path": "/tmp/issue87/apt/apt.conf",
+      "present": true,
+      "saved_path": "processes/kicad-apt-update/apt.conf",
+      "sha256": "b52c23f20f49068775695b44280e1fbae963b79598b3a6f929c48fea8c6dd813"
+    },
+    {
+      "label": "sources.list",
+      "original_path": "/tmp/issue87/apt/sources.list",
+      "present": true,
+      "saved_path": "processes/kicad-apt-update/sources.list",
+      "sha256": "870055a33b128133745d7445281bbc3b2be21cb26fed2b91a96f0887fb78e06f"
+    }
+  ],
+  "elapsed_seconds": 6.059800804000133,
+  "stdout_sha256": "baf2a08d99dc2edd281c5557b29fb67f894c1ccdc8ce1cf72bfe5dc0eefe4d4b",
+  "stderr_sha256": "c8cac0f3dc250b149f78da3b426701807ef3373a4c529b4bb2f0aec392356b03"
+}

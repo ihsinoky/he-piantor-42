@@ -1,0 +1,53 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/read-pcb.py",
+    "/tmp/issue87/smoke/main.kicad_pcb",
+    "/tmp/issue87/smoke/before.json"
+  ],
+  "cwd": "/tmp/issue87/smoke",
+  "start_utc": "2026-10-14T20:50:49.926370+00:00",
+  "end_utc": "2026-10-14T20:50:50.094792+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/issue87/kicad/usr/lib/x86_64-linux-gnu:/tmp/issue87/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/issue87/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/issue87/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/issue87/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/issue87/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/issue87/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/issue87/config",
+    "XDG_CACHE_HOME": "/tmp/issue87/cache",
+    "XDG_DATA_HOME": "/tmp/issue87/data",
+    "XDG_STATE_HOME": "/tmp/issue87/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "snapshot.json",
+      "original_path": "/tmp/issue87/smoke/before.json",
+      "present": true,
+      "saved_path": "processes/smoke-read-before/snapshot.json",
+      "sha256": "ce5cefd3631d59b2f7c7ad2206745ba823905824d0b928f638715335c867ad2e"
+    },
+    {
+      "label": "main.kicad_pcb",
+      "original_path": "/tmp/issue87/smoke/main.kicad_pcb",
+      "present": true,
+      "saved_path": "processes/smoke-read-before/main.kicad_pcb",
+      "sha256": "3f70465774f577ffe803f88de017004d164f045e6415ade22766a461a2454bec"
+    },
+    {
+      "label": "main.kicad_pro",
+      "original_path": "/tmp/issue87/smoke/main.kicad_pro",
+      "present": true,
+      "saved_path": "processes/smoke-read-before/main.kicad_pro",
+      "sha256": "a5bc2aea160cc9a8b3035f77f0167c26a1de7ffdb749740c94fb7a9e9a3c87d5"
+    }
+  ],
+  "elapsed_seconds": 0.16638324599989573,
+  "stdout_sha256": "35decc411d07b79048d75e4e0159cd526dc3c603e3651f2b601b43f1f594da4f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

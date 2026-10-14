@@ -1,0 +1,67 @@
+"""Tiny public PCB API probes; test copper never becomes Main input."""
+import sys,json
+from pathlib import Path
+import pcbnew as p
+ROOT=Path(__file__).resolve().parent
+BASE=Path('/tmp/issue87')
+def v(x,y):return p.VECTOR2I(round(x*1e6),round(y*1e6))
+def load(file):
+    b=p.LoadBoard(str(file));assert b is not None
+    m=p.GetSettingsManager();m.LoadProject(str(Path(file).with_suffix('.kicad_pro')));b.SetProject(m.Prj());return b
+
+def track(b,start,end,net,layer=p.F_Cu):
+    t=p.PCB_TRACK(b);t.SetStart(v(*start));t.SetEnd(v(*end));t.SetWidth(p.FromMM(.2));t.SetLayer(layer);t.SetNet(net);b.Add(t);return t
+
+def board(file):
+    b=p.BOARD();b.SetFileName(str(file));m=p.GetSettingsManager();m.LoadProject(str(file.with_suffix('.kicad_pro')));b.SetProject(m.Prj());b.SetCopperLayerCount(2)
+    s=b.GetDesignSettings();s.SetBoardThickness(p.FromMM(1.2))
+    for name,val in [('m_MinClearance',.2),('m_TrackMinWidth',.2),('m_CopperEdgeClearance',.2),('m_HoleClearance',.2),('m_HoleToHoleMin',.2),('m_ViasMinSize',.6),('m_MinThroughDrill',.3)]:setattr(s,name,p.FromMM(val))
+    n=s.m_NetSettings.GetDefaultNetclass();n.SetClearance(p.FromMM(.2));n.SetTrackWidth(p.FromMM(.2));n.SetViaDiameter(p.FromMM(.6));n.SetViaDrill(p.FromMM(.3))
+    for a,z in zip([(8,8),(18,8),(18,18),(8,18)],[(18,8),(18,18),(8,18),(8,8)]):
+        e=p.PCB_SHAPE(b);e.SetShape(p.SHAPE_T_SEGMENT);e.SetLayer(p.Edge_Cuts);e.SetStart(v(*a));e.SetEnd(v(*z));e.SetWidth(p.FromMM(.05));b.Add(e)
+    return b
+
+def pad(b,ref,num,pos,net,layer=p.F_Cu,pth=False):
+    f=p.FOOTPRINT(b);f.SetReference(ref);f.SetValue('probe');f.SetLibDescription(ref);f.SetFPIDAsString('Probe:'+ref);f.Reference().SetVisible(False);f.Value().SetVisible(False);b.Add(f)
+    a=p.PAD(f);a.SetNumber(num);a.SetPosition(v(*pos));a.SetSize(v(1,1));a.SetShape(p.PAD_SHAPE_CIRCLE);a.SetAttribute(p.PAD_ATTRIB_PTH if pth else p.PAD_ATTRIB_SMD)
+    layers=p.LSET()
+    for l in ([p.F_Cu,p.B_Cu,p.F_Mask,p.B_Mask] if pth else [layer,p.F_Mask if layer==p.F_Cu else p.B_Mask]):layers.AddLayer(l)
+    a.SetLayerSet(layers)
+    if pth:a.SetDrillSize(v(.3,.3))
+    if net:a.SetNet(net)
+    f.Add(a);return a
+
+def save(b,file):
+    assert p.SaveBoard(str(file),b);assert p.GetSettingsManager().SaveProject(str(file.with_suffix('.kicad_pro')))
+
+mode=sys.argv[1];out=Path(sys.argv[2]);out.mkdir(exist_ok=True)
+if mode=='spacing':
+    b=load(BASE/'main/main.kicad_pcb')
+    a=track(b,(77,120),(79,120),b.FindNet('VBUS'));z=track(b,(77,120.3),(79,120.3),b.FindNet('GND'))
+    save(b,out/'main.kicad_pcb')
+    (out/'injection.json').write_text(json.dumps(dict(edge_gap_mm=.1,required_mm=.2,uuids=[a.m_Uuid.AsString(),z.m_Uuid.AsString()],geometry='two parallel 0.20mm tracks, center separation 0.30mm; test copy only'),indent=2)+'\n')
+elif mode=='via':
+    for kind in ['connected','missing-via','short']:
+        directory=out/kind;directory.mkdir();file=directory/'probe.kicad_pcb';b=board(file)
+        n=p.NETINFO_ITEM(b,'N');b.Add(n);z=p.NETINFO_ITEM(b,'OTHER');b.Add(z)
+        pad(b,'U1','1',(10,10),n);pad(b,'U2','1',(14,10),n,p.B_Cu);pad(b,'U3','1',(12,14),z)
+        track(b,(10,10),(12,10),n);track(b,(12,10),(14,10),n,p.B_Cu)
+        if kind!='missing-via':
+            t=p.PCB_VIA(b);t.SetPosition(v(12,10));t.SetWidth(p.FromMM(.6));t.SetDrill(p.FromMM(.3));t.SetViaType(p.VIATYPE_THROUGH);t.SetLayerPair(p.F_Cu,p.B_Cu);t.SetNet(n);b.Add(t)
+        if kind=='short':track(b,(12,10),(12,14),n)
+        save(b,file)
+elif mode=='smoke':
+    file=out/'main.kicad_pcb';b=board(file)
+    n=p.NETINFO_ITEM(b,'N');b.Add(n)
+    a=pad(b,'U1','1',(10,10),n)
+    f=a.GetParent();duplicate=p.PAD(f);duplicate.SetNumber('1');duplicate.SetPosition(v(10,12));duplicate.SetSize(v(1,1));duplicate.SetShape(p.PAD_SHAPE_CIRCLE);duplicate.SetAttribute(p.PAD_ATTRIB_SMD);duplicate.SetLayerSet(a.GetLayerSet());duplicate.SetNet(n);f.Add(duplicate)
+    track(b,(10,10),(10,12),n)
+    pad(b,'U2','1',(16,10),n,p.B_Cu,pth=True)
+    pad(b,'U3','1',(14,14),None)
+    h=pad(b,'H1','',(16,16),None,pth=True);h.SetAttribute(p.PAD_ATTRIB_NPTH);h.SetSize(v(.65,.65));h.SetDrillSize(v(.65,.65))
+    save(b,file)
+elif mode=='dsn':
+    b=load(sys.argv[3]);assert p.ExportSpecctraDSN(b,str(out/'input.dsn'))
+elif mode=='ses':
+    b=load(sys.argv[3]);assert p.ImportSpecctraSES(b,sys.argv[4]);save(b,out/'main.kicad_pcb')
+else:raise ValueError(mode)

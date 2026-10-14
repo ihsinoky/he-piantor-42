@@ -4,66 +4,63 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
-## Current situation (EDA-004G resume02 physical DRC STOP, 2026-10-14)
+## Current situation (Issue #87 DSN rule-transfer STOP, 2026-10-14)
 
-**Location:** Before real Rev.M1/Main product design. Resume02 fresh Main generation
-and ERC/DRC exceeded the PO-clarified one-hour saved-evidence/checker scope.
-The “PO-authorized resume02” claim is withdrawn; its technical evidence is retained. Start
-13:07:55 UTC, clean HEAD `bf3d7eb`, same branch and Draft [PR #86](https://github.com/ihsinoky/he-piantor-42/pull/86).
-Initial library-shortage STOP and resume01 role-oracle failure remain historical
-and hash-preserved. No merge, adoption, product start or Human Gate.
+**Location:** Before real Rev.M1/Main product design. PR #86 merged at
+20:40:00 UTC as `49ebe146a586bf820a747b93951a29fe94f08623`, accepting the
+historical STOP report and its authority correction. That acceptance does not
+retroactively authorize the prior scope excess or certify prior budget compliance.
+The current PO instruction separately authorized Issue #87 with a new maximum
+six-hour elapsed-work frame; past resume instructions were not inherited.
 
-**Latest result:** **PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED**,
-13:40:11 UTC. Four bounded models were individually verified/reused. A new v2
-expectation was frozen before a fresh target using all193 raw official typed-pin
-definitions/inheritance; no cache default or retrospective old-result acceptance.
-New **ERC has0 violations**. Individual circuit net/NC/role correspondence and
-197 physical pads (167 required/30 NC),2 NPTH, values/poses/layers/outline and the
-actual three-segment USB bond pass their scoped checks. Four Main-shaped synthetic
-short/missing-pad/duplicate-copper/missing-rule cases were detected.
+**Latest result:** **CONVERSION_BLOCKED / DSN_RULE_TRANSFER_UNQUALIFIED /
+MAIN_UNQUALIFIED**, first terminal STOP **20:52:37.127596 UTC**.
+[New report](issue-87-native-main-routing.md),
+[Issue #87](https://github.com/ihsinoky/he-piantor-42/issues/87).
+Saved Main/contracts/code/libraries were hash-checked and reused. New raw Main
+ERC has **0 violations**, DRC retains the known **61 printing warnings** and
+127 expected pre-route unconnected items. Actual **0.10 mm** gap injection into
+a Main copy is detected against **0.20 mm**. Actual saved/reloaded PCBs establish
+via joining, missing-via disconnection and wrong-net contact detection; Main
+baseline parity remains identical after checker graph factoring.
 
-Complete physical acceptance failed: final PCB DRC retains **61 printing violations**
-(44 text height,12 silk overlap,5 silk over copper). Source-native primitive
-parameters match, but actual native text glyph equivalence is unqualified. Example
-height0.4000mm vs active minimum0.8000mm cannot be solved by moving print position.
-No severity/minimum suppression or frozen print-geometry change followed STOP.
-Baseline target copper/hole/edge DRC0 does not prove effective .20mm enforcement;
-its negative injection and DSN/SES were **NOT ENTERED**. Unrouted127 deficits are
-expected, not routed Main failure. Main initial/confirmation **0/0**, transport**0**;
-routed metrics **null**. See [resume02 report](native-main-routing-qualification.md#resume-02-2026-10-14--out-of-scope-execution-and-retained-technical-stop).
-The result proves neither method-wide infeasibility nor mandatory large work.
+The public KiCad 9.0.9 DSN exports for both small fixture and Main introduce
+**0.05 mm smd_smd clearance**, despite ordinary clearance 0.20 mm. Fixed official
+source hardcodes /4. The documented Freerouting 2.1.0 `-dr` function is removed
+in that version's own source; the inspected public CLI settings have no clearance
+override. Faithful rule transfer through the evaluated API/configuration path
+was not established. No weakened-rule routing or custom corrective integration
+followed. This is a bounded prerequisite STOP, not routing failure or proof of
+method-wide incapability/mandatory large work.
 
-[PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) remains accepted merged
-EDA-004F history with old results unchanged. Current main/source hashes match
-immutable `b84585e`; product source authority, production0.0.2646, D-014–18, past
-evidence and CI's experimental execution conditions remain unchanged. The vanished
-fixed tmp environment was re-prepared and hashed; full reconstruction qualification
-is unqualified and router was never launched.
+**Attempts:** Main initial/confirmation **0/0**, small roundtrip **0**; DSN exports
+**2** are preparation only. All four routed acceptance metrics remain **null**.
+Full individual DSN geometry/net/NC/duplicate/holes/local-copper reconciliation,
+SES return, initial/confirmation and full environment qualification are unverified.
+The existing 197 pads (167 required/30 NC), 2 NPTH, fixed poses/outline/layers and
+USB bond passed their existing pre-route individual checker on fresh readback.
 
-**Next owner/action:** ChatGPT PMO/reviewer reviews the authority correction,
-unapproved budget reinterpretation and printing/glyph/constraint
-scope, full physical acceptance, checker coverage and time accounting. PO owns
-record acceptance/investment/direction and any new scope. After this STOP no
-further experiment is authorized by inference; next target, corrective scope,
-independent expectations, acceptance, implementer and budget are **unplanned**.
-
-### Current qualification work and product lifecycle
+**Next owner/action:** PMO reviews the bounded rule-transfer STOP and evidence;
+PO decides record acceptance and whether a specifically scoped correction or hold
+is justified. No next technical execution is authorized. Target, method,
+implementer, individual acceptance and investment for a new correction remain
+unplanned; this report does not grant a retry or backend/product/Human Gate.
 
 | Needed capability | Latest evidence / limit |
 | --- | --- |
-| Models / circuit | Four bounded models and193 raw typed pins verified; fresh schematic ERC0 and individual net/NC parity pass. Old v1 remains failed. |
-| Core PCB / actual copper |197 pads/2 holes/pose/layers/outline/source USB bond independently checked, including same-number land copper. No global routing. |
-| Complete physical acceptance |557 auxiliary primitive parameters match; exact glyph geometry unqualified and61 printing DRC violations stop acceptance. |
-| Error detection / rules | Four synthetic faults detected; real .20mm violation injection NOT ENTERED. Settings alone insufficient. |
-| Transfer / routing / confirmation | DSN/SES, small trial and Main initial/confirmation NOT ENTERED;0/0/0. Whole-environment qualification unproved. |
-| Product output | Manufacturing/Wing/adoption/Human Gate not started or decided. |
+| Circuit / core PCB | Saved Main hashes and fresh readback/individual parity pass; new ERC0. No Main regeneration needed. |
+| Error detection / effective spacing | Actual 0.10mm track gap detected; actual via/missing-via/short PCB tests pass within tiny-fixture scope. Full routed Main spacing/islands remain untested. |
+| Transfer | Raw small/Main public DSN rule check FAIL: smd_smd0.05mm. Complete individual transport/SES comparison not completed. |
+| Routing / confirmation | NOT ENTERED,0/0/0; route metrics null. No fixed-placement routing result. |
+| Printing / product | 61 warnings and glyph uncertainty remain pre-manufacturing work, expressly excluded only as Issue #87 routing blockers. No suppression or exception. |
 
 | Current uncertainty | Evidence / consequence | Review / disposition | Owner |
 | --- | --- | --- | --- |
-| Printing physical fidelity / violations | Source parameter height.4mm vs active .8mm minimum; overlaps include backend stroke text whose exact source glyph equivalence is unknown. Violations are not excluded as historical exceptions. | Review allowed physical/printing scope before any new correction. | PMO/PO |
-| Rule / transport / routed checker | Baseline target DRC0; effective test/DSN/SES and routed-via/spacing coverage unqualified. | Review remaining bounded proof; no Main PASS from current partial results. | PMO/PO |
-| Library/environment maintenance | Public pretty-print and explicit library I/O resolve prior warnings; all49 source-native footprints registered. SWIG/version/inheritance/geometry limits remain. | Distinguish preparation/reuse from qualified whole rebuild. | PMO/PO |
-| Time/investment | Executor reinterpreted six-hour accounting without verified PO approval. Prior reservations2.25h and additional observed1.260h are not measured engineer time or proof of compliance. Historical3.286h/4.036h/5.536h estimates retained; active/human time unknown. | Review authority breach separately from actual extra elapsed time and unapproved cutoff reinterpretation; no experiments reopened. | PO/PMO |
+| Material-rule handoff | Both DSNs relax typed SMD clearance; public fixed-version configuration remedy not established. | Review bounded corrective scope/proof before any new experiment. | PMO/PO |
+| Full transport / routed acceptance | Individual DSN geometry/NC/duplicates/holes/local copper, SES return and Main routing/confirmation uncompleted. | Main remains unqualified; no PASS from process exits or CI. | PMO/PO; next implementer unassigned |
+| Printing / glyphs / product DFM | 61 raw warnings retained; exact native glyph equivalence unknown; USB NPTH pre-order DFM remains open. | Resolve before manufacturing; no manufacturing exception. | PO; product technical owner unassigned |
+| Maintenance / environment | Fixed binary/Java/router hashes checked, mutable APT dependencies and deprecated SWIG remain. | Full environment reconstruction not certified. | PMO/PO |
+| Time / investment | New frame starts20:46:26 UTC, experiments STOP after6m11.128s; reporting/submission/CI additionally charged in new ledger/PR. | Past unknown effort, authority breach and budget uncertainty remain; no exact old remainder/compliance claim. | PO/PMO |
 
 The separate product lifecycle remains:
 

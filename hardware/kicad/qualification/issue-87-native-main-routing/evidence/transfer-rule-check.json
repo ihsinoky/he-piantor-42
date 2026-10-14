@@ -1,0 +1,31 @@
+{
+  "result": "FAIL_RULE_TRANSFER",
+  "exports": {
+    "smoke": {
+      "input_sha256": "984a86e7f2ea7b976e4efe98cae0570e22609973125d472f58b28406a29416e6",
+      "ordinary_clearance_mm": 0.2,
+      "typed_clearances_mm": {
+        "smd_smd": 0.05
+      },
+      "status": "FAIL_RULE_TRANSFER",
+      "ses": null,
+      "router_launched": false,
+      "individual_DSN_geometry_reconciliation": "NOT_COMPLETED: rule prerequisite fails first"
+    },
+    "main": {
+      "input_sha256": "f30358addc070bd0aa32c3580ee290cb6b22e9e1d68adc8759f69c4a0de4c76e",
+      "ordinary_clearance_mm": 0.2,
+      "typed_clearances_mm": {
+        "smd_smd": 0.05
+      },
+      "status": "FAIL_RULE_TRANSFER",
+      "ses": null,
+      "router_launched": false,
+      "individual_DSN_geometry_reconciliation": "NOT_COMPLETED: rule prerequisite fails first"
+    }
+  },
+  "public_export_signatures": "processes/pcbnew-probe/stdout",
+  "official_export_source": "specctra_export.cpp:1151",
+  "official_override_limit": "GlobalSettings.java:75-79 (.rules function removed); InitializeCLI only copies RouterSettings, whose public configuration has no clearance override",
+  "bounds": "No claim of exhaustive API impossibility; no DSN editing, router internals, different version, rule relaxation or speculative -dr invocation used."
+}
