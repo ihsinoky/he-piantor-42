@@ -6,8 +6,9 @@ here.
 
 ## Current situation (EDA-004G resume02 physical DRC STOP, 2026-10-14)
 
-**Location:** Before real Rev.M1/Main product design. The PO authorized fresh
-bounded verification within Issue #85's same six-hour work frame. Start
+**Location:** Before real Rev.M1/Main product design. Resume02 fresh Main generation
+and ERC/DRC exceeded the PO-clarified one-hour saved-evidence/checker scope.
+The “PO-authorized resume02” claim is withdrawn; its technical evidence is retained. Start
 13:07:55 UTC, clean HEAD `bf3d7eb`, same branch and Draft [PR #86](https://github.com/ihsinoky/he-piantor-42/pull/86).
 Initial library-shortage STOP and resume01 role-oracle failure remain historical
 and hash-preserved. No merge, adoption, product start or Human Gate.
@@ -29,7 +30,7 @@ No severity/minimum suppression or frozen print-geometry change followed STOP.
 Baseline target copper/hole/edge DRC0 does not prove effective .20mm enforcement;
 its negative injection and DSN/SES were **NOT ENTERED**. Unrouted127 deficits are
 expected, not routed Main failure. Main initial/confirmation **0/0**, transport**0**;
-routed metrics **null**. See [resume02 report](native-main-routing-qualification.md#po-authorized-resume-02-2026-10-14--pre-route-physical-drc-stop).
+routed metrics **null**. See [resume02 report](native-main-routing-qualification.md#resume-02-2026-10-14--out-of-scope-execution-and-retained-technical-stop).
 The result proves neither method-wide infeasibility nor mandatory large work.
 
 [PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) remains accepted merged
@@ -39,7 +40,8 @@ evidence and CI's experimental execution conditions remain unchanged. The vanish
 fixed tmp environment was re-prepared and hashed; full reconstruction qualification
 is unqualified and router was never launched.
 
-**Next owner/action:** ChatGPT PMO/reviewer reviews printing/glyph/constraint
+**Next owner/action:** ChatGPT PMO/reviewer reviews the authority correction,
+unapproved budget reinterpretation and printing/glyph/constraint
 scope, full physical acceptance, checker coverage and time accounting. PO owns
 record acceptance/investment/direction and any new scope. After this STOP no
 further experiment is authorized by inference; next target, corrective scope,
@@ -61,7 +63,7 @@ independent expectations, acceptance, implementer and budget are **unplanned**.
 | Printing physical fidelity / violations | Source parameter height.4mm vs active .8mm minimum; overlaps include backend stroke text whose exact source glyph equivalence is unknown. Violations are not excluded as historical exceptions. | Review allowed physical/printing scope before any new correction. | PMO/PO |
 | Rule / transport / routed checker | Baseline target DRC0; effective test/DSN/SES and routed-via/spacing coverage unqualified. | Review remaining bounded proof; no Main PASS from current partial results. | PMO/PO |
 | Library/environment maintenance | Public pretty-print and explicit library I/O resolve prior warnings; all49 source-native footprints registered. SWIG/version/inheritance/geometry limits remain. | Distinguish preparation/reuse from qualified whole rebuild. | PMO/PO |
-| Time/investment | Same6h work frame: prior conservative reservations2.25h, current wall separately charged; long inactive waiting is not engineer time. Prior3.286h estimate/4.036h allowance preserved; new pre-resume conservative total5.536h is an allowance. | Review disclosed reinterpretation of old executor wall cutoff, not a budget reset or measured-hours claim. | PO/PMO |
+| Time/investment | Executor reinterpreted six-hour accounting without verified PO approval. Prior reservations2.25h and additional observed1.260h are not measured engineer time or proof of compliance. Historical3.286h/4.036h/5.536h estimates retained; active/human time unknown. | Review authority breach separately from actual extra elapsed time and unapproved cutoff reinterpretation; no experiments reopened. | PO/PMO |
 
 The separate product lifecycle remains:
 
@@ -118,7 +120,7 @@ product implementation or passes a manufacturing gate.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-004G resume02 / PR #86: PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED. Four models/raw roles, fresh ERC0, core pads/holes/poses/copper and four synthetic faults pass scoped checks;61 printing violations/full glyph uncertainty stop before effective rules/DSN/SES/routes.0/0/0. Prior STOPs/records unchanged; EDA-004F PR #84 accepted. PMO/PO review; no inferred further experiment. |
+| Hardware | EDA-004G resume02 / PR #86: fresh Main/ERC/DRC out of scope; authority claim withdrawn. Retained technical result: PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED. Four models/raw roles, fresh ERC0, core pads/holes/poses/copper and four synthetic faults pass scoped checks;61 printing violations/full glyph uncertainty stop before effective rules/DSN/SES/routes.0/0/0. Prior STOPs/records unchanged; EDA-004F PR #84 accepted. PMO/PO review; no inferred further experiment. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |

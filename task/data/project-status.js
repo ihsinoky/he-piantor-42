@@ -3,20 +3,20 @@ window.PROJECT_STATUS = {
   schemaVersion: 2,
   source: {
     "confirmedAt": "2026-10-14T13:40:11Z",
-    "reference": "Issue #85 resume02 印刷DRC STOP（PR #86未受入。productionはmerged main）",
+    "reference": "Issue #85 resume02 権限訂正・技術STOP保持（PR #86未受入。productionはmerged main）",
     "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/86",
     "reportUrl": "../docs/native-main-routing-qualification.md",
     "historyUrl": "../docs/eda-path-history.md"
   },
   current: {
     "heading": "実物Rev.M1の設計前",
-    "location": "実物Rev.M1設計前。EDA-004G resume02は4モデル・生定義役割・ERC0・core PCB照合が成立、印刷DRC61件で停止。EDA-004FはPR #84受入済み。",
+    "location": "実物Rev.M1設計前。resume02のfresh Main/ERC/DRCは指示範囲超過として訂正。技術結果は保持:4モデル・生定義役割・ERC0・core PCB照合が成立、印刷DRC61件で停止。EDA-004FはPR #84受入済み。",
     "blocker": "完全な印刷形状/物理受入・実効0.20 mm・DSN/SES・Main配線は未認定。"
   },
   nextAction: {
-    "status": "resume02 印刷DRC/形状・時間記録をレビュー・追加実験は未承認",
+    "status": "resume02権限逸脱・時間再解釈の訂正をレビュー・追加実験停止",
     "owner": "PMO/reviewer: ChatGPT、判断: PO（ユーザー）",
-    "action": "PMOが61印刷違反、glyph同等性と物理受入の範囲、残る検査と時間計上をレビュー。POが記録受入・投資・次の権限を判断。",
+    "action": "PMOが指示範囲超過、未承認の6時間再解釈と追加経過時間を技術結果と分けてレビュー。61印刷警告によるSTOP、ERC0と個別照合、実効間隔/受け渡し/配線未実施を保持。POが記録受入・投資・次の権限を判断。",
     "target": "EDA-004G resume02の物理DRC STOPと未認定範囲",
     "startCondition": "停止後の追加実験は未承認。次対象・方法・担当・個別受入条件・投資範囲は未計画で、別途POの実施権限が必要。"
   },
@@ -29,13 +29,13 @@ window.PROJECT_STATUS = {
       { name:"完成版", purpose:"再現可能な成果物を固定する。", output:"v1.0製造・ファームウェア・筐体一式と手順。", confirm:"受入試験と成果物・製造手順の再現性。", completion:"G5でPOが完成版を承認。", owner:"技術担当未定。承認はPO。", dependency:"統合試験、校正、製造データ一式。", source:"docs/project-status.md · G5" }
     ],
     qualification: {
-      status:"resume02物理DRC STOP・報告レビュー待ち",
+      status:"resume02指示範囲超過・技術STOP保持、報告レビュー待ち",
       purpose:"実物基板の設計データを作り、接続・配線・間隔・製造出力を確かめ、同じ条件で再現できる方法を成立させる。",
       output:"回路・基板データと、接続・配線・間隔・製造出力・再生成の確認記録。",
       completion:"4部品/193生定義役割、ERC0、core197pads/2holes/USB実銅箔、4synthetic負例が限定成立。印刷61違反で工程2受入停止。実効ルール/工程3〜5は未実施、配線0/0/0。",
       owner:"今回の実装・評価: Codex。PMO/reviewer: ChatGPT。記録受入と次回実施判断: PO。次回実施担当は未定。",
       establishedSummary:"2層・厚さ1.2 mm・配線間隔0.20 mmを維持。D-018はMain先行・初回Main評価の技術作業上限2人日を定めた限定計画で、次の実験許可ではありません。",
-      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。Issue #85の6時間枠内でPOが限定対応再開を承認。独立期待表不一致で再停止。初回STOP・過去結果と予算を維持し、過去許可は継承しません。",
+      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。resume01の独立期待表不一致STOPは保持。resume02 fresh Main/ERC/DRCはPOが明示した最大1時間の保存証拠再照合範囲を超過。別途許可は確認できず、PO-authorized表記を撤回。初回STOP・過去結果と予算を維持し、過去許可は継承しません。",
       establishedSources:[
         {label:"project decisions D-015 / D-017 / D-018",href:"../docs/decisions.md"},
         {label:"bounded historical qualification plan",href:"../docs/alternate-physical-backend-qualification-plan.md"},
@@ -65,7 +65,7 @@ window.PROJECT_STATUS = {
       "url": "https://github.com/ihsinoky/he-piantor-42/pull/86",
       "status": "Draft PR提案・未受入"
     },
-    "workStatus": "resume02限定検証と新規Main生成・印刷DRCで停止、証拠報告提出",
+    "workStatus": "resume02新規Main/ERC/DRCは指示範囲超過。PO-authorized表記撤回・技術証拠保持、追加実験停止",
     "technicalStatus": "PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED。4モデルと新規raw役割/ERC0/core PCB照合は成立。61印刷違反とglyph未認定で完全物理受入停止。旧STOP/凍結表は失敗のまま保持。方式全体不成立・大規模実装必須の証明ではない。",
     "currentSummary": "新規v2を生成前固定。49部品・37nets・193論理pins・197物理pads（167必要/30NC）・2NPTHを個別確認、USB4lands実銅箔接続、557補助primitiveパラメータ一致。ERC0。印刷高さ44/重なり12/銅箔上5でSTOP、route0/0/0。",
     "currentProblem": {
@@ -177,7 +177,7 @@ window.PROJECT_STATUS = {
     },
     {
       "title": "評価投資と製品への進行",
-      "basis": "既知AI推定3.286h/以前のallowance4.036h保持。prior work保守予約2.25h＋今回wallを6h内計上。待機・engineer不明時間別記。旧wall cutoffはexecutor規約という解釈を開示。",
+      "basis": "既知AI推定3.286h/以前のallowance4.036h保持。旧cutoffを変更した6時間再解釈はexecutor判断でPO承認未確認。追加経過1.260h（丸め値、実作業時間不明）とprior予約2.25hは別記し、予算内の証明にしない。待機・human不明時間保持。",
       "impact": "正確な残予算と製品着手時期は不明。",
       "proof": "POが投資・続行/保留/方向を判断。",
       "handling": "予算リセットなし。名目11.964 hは残予算認定ではない。",
@@ -201,7 +201,7 @@ window.PROJECT_STATUS = {
     { name: "Circuit JSON → KiCad", tested: "bounded converter repairと小規模/Main前段の検査", stopped: "別々の試行でGND landのnet欠落/short、footprint library ID衝突、schematic ERC未成立。配線試行なし。", reuse: "raw fixture、固定環境、capture手順と限られたcheckerの知見。", retry: "正確なfootprint identityと接続済みschematic/ERC等の条件が必要。", refs: "EDA-004B–D、Issue #73 / #75 / #77、PR #76 / #78", href: "../docs/eda-path-history.md" },
     { name: "native KiCad objects", tested: "KiCad 9.0.9の固定小規模基板を作成・保存し、別のプログラム実行で開き直し", stopped: "初回DRCに予期しない警告2件。回路図経路がなく、Mainへ進む前にSTOP。", reuse: "試験対象内で確認した基板データの保存・再読込と形状・接続情報の保持。", retry: "PO/PMOが具体的な回路図経路を承認し、限定した修正・実効ルール試験・条件付き再評価を許可した場合のみ。", refs: "EDA-004E、Issue #79、PR #80、D-014", href: "../docs/native-kicad-authoring-feasibility.md" },
     { name:"external kicad-sch-api", tested:"固定KiCad 9.0.9で小規模回路図作成・検査", stopped:"停止条件なし、限定試験完了。初回受入は設定警告6件で失敗、同一ファイル設定修正後に候補成立。", reuse:"独立端子表、公開API生成、固定CLI検査とfault検出。", retry:"Main以降は別途計画・PO許可が必要。", refs:"EDA-004F / Issue #83 / merged PR #84（受入済み）", href:"../docs/headless-schematic-qualification.md" },
-    { name:"public native Main prerequisite", tested:"固定Main入力・4限定symbol対応・fresh native形状・Main生成/raw検査", stopped:"再開CONVERSION_BLOCKED / ERC_UNQUALIFIED。4symbol検証とMain生成、61印刷違反/未認定glyph形状。配線0/0。", reuse:"入力hashと部分対応表、版・公開pin表観察。完全Mainへ結果を一般化しない。", retry:"限定STOPと不足作業の限定性をPMO/POがレビュー。追加試験権限はない。", refs:"EDA-004G / Issue #85（提案STOP）", href:"../docs/native-main-routing-qualification.md" }
+    { name:"public native Main prerequisite", tested:"固定Main入力・4限定symbol対応・fresh native形状・Main生成/raw検査", stopped:"resume02のfresh Main/ERC/DRCは指示範囲超過。技術結果はERC0/個別照合成立、印刷警告61件によるPRE_ROUTE_PHYSICAL_DRC_STOP。実効間隔/受け渡し/配線未実施、0/0/0。", reuse:"入力hashと部分対応表、版・公開pin表観察。完全Mainへ結果を一般化しない。", retry:"限定STOPと不足作業の限定性をPMO/POがレビュー。追加試験権限はない。", refs:"EDA-004G / Issue #85（提案STOP）", href:"../docs/native-main-routing-qualification.md" }
   ],
   evidenceLinks: {
     "latestReport": "../docs/native-main-routing-qualification.md",
