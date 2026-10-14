@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/check-auxiliary.py", line 62, in <module>
+    exp,got=expected(),actual(sys.argv[1]);diff=dict(missing=list((exp-got).elements()),added=list((got-exp).elements()))
+                       ~~~~~~^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/check-auxiliary.py", line 59, in actual
+    if prop[1] in ['Reference','Value']:assert str(one(one(prop,'effects'),'hide')[1])=='yes'
+                                                   ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/check-auxiliary.py", line 11, in one
+    xs=kids(n,k);assert len(xs)==1,(k,len(xs));return xs[0]
+                        ^^^^^^^^^^
+AssertionError: ('hide', 0)

@@ -1,11 +1,13 @@
 # EDA-004G — native Main routing qualification
 
-**Latest: PO-authorized resume stopped on independent Main role-expectation mismatch.**
-Four bounded symbols loaded; Main schematic/unrouted PCB generated, raw ERC errors0.
-Complete independent acceptance remains unqualified; routing attempts **0/0/0**.
-See [resume 01](#po-authorized-resume-01-2026-10-14--terminal-independent-expectation-stop).
-Original STOP/failures/frozen evidence remain historical records below; no method-wide
-failure or mandatory large implementation is claimed. PR #86 remains under review.
+**Latest: resume02 — PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED.**
+Four bounded models and a new raw-definition expectation passed scoped checks.
+New Main ERC has0 violations; core pad/hole/pose/net/local-copper parity passed.
+Final PCB DRC has61 printing violations; no suppression/exclusion or route launch.
+Main initial/confirmation/transport counts remain **0/0/0**. See
+[resume02](#po-authorized-resume-02-2026-10-14--pre-route-physical-drc-stop).
+Original STOP, resume01 role-oracle failure and frozen evidence remain historical;
+no method-wide failure or mandatory large implementation is claimed.
 
 ## Initial execution and read-only supplement — retained historical record
 
@@ -467,3 +469,178 @@ KiCad enum/version dependence, polygonal connectivity approximation requiring
 validation, and compressed library restoration. No fork/private API/general
 writer was introduced. Existing decisions, prior evidence, product files,
 production dependencies and CI experiment execution conditions are unchanged.
+
+## PO-authorized resume 02 (2026-10-14) — pre-route physical DRC STOP
+
+**PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED.** At **13:07:55 UTC**, cwd,
+branch and HEAD `bf3d7eb56a2d8f82a52aff23e77761f36ee053be` matched the submitted
+state; worktree was clean. GitHub confirmed PR #86 Draft/OPEN, same branch/head,
+no auto-merge, and Issue #85 OPEN with unchanged latest body. The PO's new resume
+instruction authorized bounded reuse and fresh verification, conditional on all
+prerequisites. New [resume-02 evidence](../hardware/kicad/qualification/eda-004g/resume-02/README.md)
+is separate. All initial/resume01 failures, STOPs, snapshots and frozen tables are
+retained byte-for-byte; no old result was retrospectively accepted.
+
+The initial STOP remains **selected-library prepared-model shortage / intermediate**,
+not method-wide failure. Resume01's AP2112K expectation failure remains a failed
+old trial. A new independent **v2** expectation was frozen **before a fresh target**
+from source geometry transcription and **all 193 raw official typed pin definitions,
+including inheritance**. The observed role difference is AP2112K pin4 (`passive`
+cache fallback vs raw `no_connect`); no connectivity/shape/pose was changed. This
+is a fresh-target version, not editing the oracle for existing generated files.
+Both old and new hashes/comparisons remain for review.
+
+### Four-part bounded implementation and Stage 1
+
+The four definitions already implemented in resume01 were reused after fresh
+structured-data and public-load/instance verification against
+[model-contract-v2](../hardware/kicad/qualification/eda-004g/resume-02/model-contract-v2.json).
+No old default footprint was adopted. Their reuse remains bounded individual
+model data/correspondence, not a generic writer, private API or fork.
+
+| Part | Verified correspondence / physical boundary |
+| --- | --- |
+| TPS22919DCKR | Existing six typed pins and manufacturer-backed functions/numbering; NC4/QOD5 NC retained. Source six-pad sot363 geometry/pose preserved. |
+| W25Q16JVUXIQ | Eight typed signal/supply pins plus independent EP9 annotation/NC. GND4 and EP9 have distinct schematic endpoints; source nine copper lands preserved. UX internal EP disposition remains unconfirmed; no grounding/internal-isolation statement from a different package was adopted. |
+| TYPE-C-31-M-12 | Combined A/B contact mapping, SBU6/7 NC, shield13→four unique physical stakes, plus two NPTH. All12 contact lands and source slot/copper dimensions retained. All four shield lands are joined by measured PCB copper; identical numbers are not a substitute. |
+| BM14B-GHS-TBT | Fourteen passive electrical contacts, separate MP15 annotation and **two distinct NC mechanical lands**, with source pad geometry/pose. No contact15 or footprint substitution. |
+
+Full Main roles now come from structured official definitions rather than the
+public cache's five-type/default-passive mapping. The inherited AP2112K raw pin4
+is checked as `no_connect`. Values, source aliases, net/NC, coordinates and role
+observations are retained individually in
+[main-contract-v2](../hardware/kicad/qualification/eda-004g/resume-02/main-contract-v2.json)
+and its pre-generation freeze record.
+
+Before fresh Main generation, the bounded two-layer copper reader was tested with
+independently specified Main-shaped data: all197 pads, two NPTH and original
+three-segment USB bond. **All four fault cases were detected for the intended
+reason**: wrong-net actual copper contact; missing required pad; one omitted USB
+shield branch leaving a same-number land physically disconnected; zero/missing
+material-clearance setting. See
+[fixture results](../hardware/kicad/qualification/eda-004g/resume-02/evidence/checker-fault-acceptance.json).
+This is synthetic checker validity evidence, not a physical rule-enforcement test
+or proof of routed-via/general-geometry coverage. Rect/circle/oval pads, straight
+round-ended tracks and through-via annuli are the declared scope. Drill voids are
+subtracted from copper; no net-name/shared-number graph joins. Unknown geometry
+and ambiguous sub-resolution contacts fail. No accepted general checker is claimed.
+
+### Fresh target, independent reconciliation and new STOP
+
+Current main was remotely confirmed as `4a96d6ff6ddca3fd19330e392ae8cf91c39f6b6c`;
+all five source/transitive/isolated-lock files equal immutable `b84585e` and main
+individually. The isolated fixed frontend used only the public
+`routingDisabled:true` source-copy addition. **Fresh** source output contains
+49 components,37 nets,193 logical pin numbers,197 runtime source ports,197 physical
+pads (167 required/30 NC),2 NPTH and only the explicit USB bond. Source geometry,
+poses, layers and each net/NC were individually checked. No historical routed
+copper was read as authoring/router input, stripped or copied.
+
+The historical fixed source was used **read-only for non-copper comparison**:
+source identities/poses were checked, then original silk/courtyard/paste records
+were frozen before the fresh target. The generator consumes fresh source only.
+Native text uses KiCad's stroke glyphs, while the source declares `tscircuit2024`;
+**exact glyph-shape equivalence remains unqualified**. Primitive/content/position/
+size/rotation/layer reconciliation is narrower than glyph equivalence.
+
+Public kicad-sch-api and KiCad PCB API created/read the new schematic and PCB.
+The original six-hour input conditions were retained:48×44mm, two copper layers,
+1.2mm, .20mm stored width/material clearance and .60/.30mm via values. All49 native
+individual footprints were publicly saved and registered without swapping their
+geometry. Default CAD ref/value ink absent from the source is hidden; all45 native
+visible text labels and the source paths remain. This removes unrequested output
+ink, not a DRC-rule suppression or removal of source printing.
+
+The source-derived USB bond is **three distinct segments /17mm material union**;
+its doubled-back source path is34mm. All four actual plated lands have a single
+actual-copper connected component, including the two active copper layers through
+plating. No global tracks/vias were generated.
+
+| Stage / boundary | Result |
+| --- | --- |
+| 1: four model additions and full raw-role table | Scoped model checks **PASS**; all193 official/explicit-definition role/number checks **PASS**. Four Main-shaped synthetic fault detections **PASS WITH SCOPE**. Source glyph equivalence/general geometry remain unqualified. |
+| 2: circuit / core PCB reconciliation | KiCad reads new files. **ERC0 errors and0 warnings**. Individual193 logical pins/37 nets/29 logical NC match. All197 physical pads/30 physical NC,2 holes, component values/pose, layers/outline and actual USB bond match. |
+| 2: auxiliary / complete physical acceptance | **557 visible primitive parameters match individually**, not just counts. Exact glyph geometry **UNQUALIFIED**. Saved final PCB DRC has **61 printing violations**, so **STOP / stage NOT ACCEPTED**. |
+| 3: effective rule / DSN / SES | **NOT ENTERED**. Stored .20mm values and baseline zero target violations are insufficient to establish effective enforcement. Small transport routing0. |
+| 4: initial Main | **NOT ENTERED /0 attempts**. No DSN/SES, route settings contract or routed PCB. |
+| 5: conditional confirmation | **NOT ENTERED /0 attempts**. No initial pass. |
+| Whole-environment rebuild | Disappeared tmp tools re-prepared/hash-recorded; complete rebuild qualification **UNQUALIFIED**. |
+| Product / manufacturing / adoption / Human Gate | **NOT STARTED / NOT DECIDED**. |
+
+At **13:40:11 UTC**, the new
+[terminal decision](../hardware/kicad/qualification/eda-004g/resume-02/evidence/stop-decision.json)
+was recorded. DRC counts are **44 text_height,12 silk_overlap,5 silk_over_copper**,
+all raw severity `warning`; they are retained as violations and **not excluded**.
+One concrete case is native label `C_LDO_IN`, actual height **0.4000mm** against
+active KiCad silk text-height minimum **0.8000mm**. Moving print positions does
+not resolve that height violation. No print-size/geometry change, severity
+suppression, minimum-rule lowering or other corrective exploration followed STOP.
+
+The final baseline DRC has **0 observed copper-clearance/short/hole/edge target
+violations**, but the effective .20mm negative test was not entered, so this is
+not a certified spacing result. Its **127 unconnected items** are expected on the
+unrouted board and agree with the independent required-net island deficit; they
+are not a routed Main failure or an accepted routed-zero metric. Route metrics
+remain **null**. Printing-overlap causation is not proved historical-source-only:
+source parameters are retained, but backend glyphs differ. USB NPTH's earlier
+product risk remains separate and is not waived. Source/new printing warnings
+were not disposed of as manufacturing exceptions by the executor.
+
+`PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED` identifies the latest complete
+native Main physical/printing acceptance block. Earlier `CONVERSION_BLOCKED`
+classifications remain their historical records; the latest block does **not**
+mean the four symbol additions or circuit conversion failed. No evidence proves
+method-wide infeasibility or mandatory large implementation. PMO/PO owns review
+and any subsequent scope/investment, not an automatic follow-up.
+
+### Corrections, environment, effort and submission boundary
+
+All pre-STOP failures remain: the public `FootprintSave` path-guess helper returned
+no plugin for a new empty library; using published
+`PCB_IO_KICAD_SEXPR.FootprintSave` resolved it. The library-call correction did not
+change role/oracle/copper/pose. An independent reader initially looked for `hide`
+inside effects; KiCad9 emits it on the property itself. That reader was corrected,
+with original code/log retained. Int/float representation is normalized at the
+KiCad nanometre grid, not a physical-clearance relaxation. No generated-file hand
+patch occurred. Public sexpdata `pretty_print=True` reformatted library inputs,
+with parsed-tree equality verified; this resolved the old long-line library
+reading warnings without electrical-definition changes. All49 source-native
+footprints are registered, and ERC is now0 violations.
+
+Previous `/tmp` KiCad/Python/frontend files were absent. They were re-prepared with
+KiCad9.0.9's fixed package hash, EDA-004F source commit/hashed dependencies, fixed
+isolated frontend/Bun lock and prior Shapely wheel/dependency hashes. Current
+package/dependency/library/command hashes and versions are recorded, including
+Node/npm and selected Java/router. Freerouting2.1.0 jar hash matches resume01;
+Microsoft Java21.0.12.1+1-LTS is reused/hash-checked. **Router never launched**.
+OS/base/Java reuse and changed package-resolution context mean this is not an
+accepted full-environment reconstruction or same-environment routing confirmation.
+Production0.0.2646, product source authority, D-014–18, prior evidence and CI's
+experiment execution conditions remain unchanged.
+
+The Issue says a maximum **six-hour cumulative work frame**, separating waiting
+and measured/estimated/unattended time. Earlier **07:17:56 UTC absolute cutoff**
+was an executor's conservative wall-clock convention, not an Issue deadline.
+The intervening inactive turn gap is waiting, not evidence of six work-hours used.
+This restart retains the **same6h**, conservatively charging prior initial .75h,
+read-only supplement .25h and resume01/report/submission1.25h = **2.25h reserved
+prior work**. Those are disclosed allowances, **not measured engineer-hours**.
+New remaining allowance3.75h; work window starts13:07:55, experiment/report
+cutoffs16:22:55/16:52:55 preserve the final30min. No second6h allowance was created.
+Known historical AI estimate3.286h and previous4.036h allowance remain; adding prior
+supplement/resume reservations gives5.536h conservative cumulative allowance
+before this restart, not a measured total. Active engineer/human/reviewer time
+remains unknown. The prior absolute-time records are unchanged and the new time
+interpretation is explicitly disclosed for PMO review.
+
+Preparation, verification and STOP occurred within about32m16s observed restart
+wall; report/submission time follows separately. Command elapsed times may overlap
+and are not summed into active engineer hours. The one-hour checkpoint and final
+ledger preserve established work, residual submission work, waiting and outlook.
+No mandatory-large-work or precise implementation-hours estimate is asserted.
+Maintenance limits include fixed raw-inheritance semantics, public library/enum
+version dependence, narrow geometry reader, unexercised routed-via transfer,
+polygon near-contact ambiguity, native text glyph/printing constraints and .20mm
+rule/DSN/SES still unqualified. The partial Stage2 success does not certify Main.
+
+Checkpoint was scheduled14:07:55 UTC and actually recorded 2026-10-14T14:11:56.968237+00:00 (242.0s late, not backdated). Reporting delayed recording; a recorder indentation error also occurred. Experiments had already stopped. At that observation the conservative Issue charge was 3.317h of6h; active engineer-hours remain unknown.
