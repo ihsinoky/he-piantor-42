@@ -1,0 +1,17 @@
+[
+  {
+    "recorded_utc": "2026-10-14T01:23:19.874584+00:00",
+    "failure": "symbol-package-download curl exit22 HTTP404",
+    "reason": "Executor transcribed binary package directory instead of source package directory. apt-get --print-uris identifies kicad-library-symbols. Same fixed package hash.",
+    "original": "prepare-v1.py.txt",
+    "change": "download path only; no symbol/input/checker change"
+  },
+  {
+    "recorded_utc": "2026-10-14T01:30:17.243628+00:00",
+    "failure": "First public component-add probe failed reference validation before symbol lookup (U_LOAD).",
+    "reason": "KiCad instance reference must use the public API reference format. A source-identity mapping would be separately required for Main.",
+    "change": "Feasibility probe uses U1; same library id and TPS22919DCKR value; no suppression or Main output.",
+    "original": "assess-public-models-v1.py.txt",
+    "source_intent_changed": false
+  }
+]

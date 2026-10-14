@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01/check-main.py", line 115, in <module>
+    result=dict(circuit=circuit(sys.argv[1]),pcb=pcb(json.loads(Path(sys.argv[2]).read_text()),'--routed' in sys.argv))
+                        ~~~~~~~^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01/check-main.py", line 51, in circuit
+    else:assert name==intent['named_net'];endpoints[(ref,pin)]=name
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/tmp/eda004g-resume01/diagnostic-2.kicad_sch</source>
+    <date>2026-10-14T03:28:41+0000</date>
+    <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>public-symbol-read-diagnostic</title>
+        <company/>
+        <rev/>
+        <date/>
+        <source>diagnostic-2.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>probe</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Power_Protection" part="USBLC6-2SC6" description="Very low capacitance ESD protection diode, 2 data-line, SOT-23-6"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="../../../../../../../tmp/eda004g-resume01/diagnostic-2.kicad_sch"/>
+      <property name="ki_keywords" value="usb ethernet video"/>
+      <property name="ki_fp_filters" value="SOT?23*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9fdbb6c9-ddc5-4232-b6a8-046b6e7ddb1b</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Power_Protection" part="USBLC6-2SC6">
+      <description>Very low capacitance ESD protection diode, 2 data-line, SOT-23-6</description>
+      <docs>https://www.st.com/resource/en/datasheet/usblc6-2.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">USBLC6-2SC6</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-6</field>
+        <field name="Datasheet">https://www.st.com/resource/en/datasheet/usblc6-2.pdf</field>
+        <field name="Description">Very low capacitance ESD protection diode, 2 data-line, SOT-23-6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="I/O1" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="I/O2" type="passive"/>
+        <pin num="4" name="I/O2" type="passive"/>
+        <pin num="5" name="VBUS" type="passive"/>
+        <pin num="6" name="I/O1" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-GND-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="GND" pintype="passive"/>
+    </net>
+    <net code="2" name="unconnected-(U1-I/O1-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="I/O1" pintype="passive"/>
+    </net>
+    <net code="3" name="unconnected-(U1-I/O1-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="I/O1" pintype="passive"/>
+    </net>
+    <net code="4" name="unconnected-(U1-I/O2-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="I/O2" pintype="passive"/>
+    </net>
+    <net code="5" name="unconnected-(U1-I/O2-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="I/O2" pintype="passive"/>
+    </net>
+    <net code="6" name="unconnected-(U1-VBUS-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="VBUS" pintype="passive"/>
+    </net>
+  </nets>
+</export>

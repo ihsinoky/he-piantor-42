@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/tmp/eda004g-resume01/diagnostic-6.kicad_sch</source>
+    <date>2026-10-14T03:28:46+0000</date>
+    <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>public-symbol-read-diagnostic</title>
+        <company/>
+        <rev/>
+        <date/>
+        <source>diagnostic-6.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>probe</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Qualification" part="TPS22919DCKR" description="5.5V 1.5A self-protected load switch, SC-70-6"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="../../../../../../../tmp/eda004g-resume01/diagnostic-6.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3d3e487e-7a07-4538-9e6d-de2f24e7400c</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Qualification" part="TPS22919DCKR">
+      <description>5.5V 1.5A self-protected load switch, SC-70-6</description>
+      <docs>https://www.ti.com/lit/ds/symlink/tps22919.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS22919DCKR</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps22919.pdf</field>
+        <field name="Description">5.5V 1.5A self-protected load switch, SC-70-6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IN" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="ON" type="input"/>
+        <pin num="4" name="NC" type="passive"/>
+        <pin num="5" name="QOD" type="output"/>
+        <pin num="6" name="OUT" type="power_out"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-GND-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="2" name="unconnected-(U1-IN-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="IN" pintype="power_in"/>
+    </net>
+    <net code="3" name="unconnected-(U1-NC-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="NC" pintype="passive"/>
+    </net>
+    <net code="4" name="unconnected-(U1-ON-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="ON" pintype="input"/>
+    </net>
+    <net code="5" name="unconnected-(U1-OUT-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="OUT" pintype="power_out"/>
+    </net>
+    <net code="6" name="unconnected-(U1-QOD-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="QOD" pintype="output"/>
+    </net>
+  </nets>
+</export>

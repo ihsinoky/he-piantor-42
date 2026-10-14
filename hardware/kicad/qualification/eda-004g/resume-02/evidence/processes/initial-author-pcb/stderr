@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/author-main-pcb.py", line 81, in <module>
+    if __name__=='__main__':generate(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-02/author-main-pcb.py", line 48, in generate
+    assert p.FootprintSave(str(library),fp)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/eda004g-resume02/kicad/usr/lib/python3/dist-packages/pcbnew.py", line 21669, in FootprintSave
+    return plug.FootprintSave(libname,module)
+           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'FootprintSave'

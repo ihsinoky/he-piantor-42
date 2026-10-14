@@ -1,0 +1,911 @@
+{
+  "summary": {
+    "individual_components_pins_nets_geometry": true,
+    "physical_pads": 197,
+    "required": 167,
+    "nc": 30,
+    "npth": 2,
+    "copper_global_tracks": 0,
+    "vias": 0,
+    "source_bond_path_length": 34,
+    "distinct_bond_length": 17,
+    "no_historical_input": true,
+    "auxiliary_source_kinds": [
+      "pcb_board",
+      "pcb_component",
+      "pcb_component_missing_courtyard_warning",
+      "pcb_courtyard_outline",
+      "pcb_courtyard_rect",
+      "pcb_hole",
+      "pcb_plated_hole",
+      "pcb_port",
+      "pcb_silkscreen_path",
+      "pcb_silkscreen_rect",
+      "pcb_silkscreen_text",
+      "pcb_smtpad",
+      "pcb_solder_paste",
+      "pcb_trace"
+    ]
+  },
+  "warnings": [
+    {
+      "type": "source_refdes_convention_warning",
+      "source_refdes_convention_warning_id": "source_refdes_convention_warning_0",
+      "warning_type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />",
+      "source_component_id": "source_component_1",
+      "refdes": "J_USB",
+      "source_component_ftype": "simple_chip",
+      "expected_prefixes": [
+        "U",
+        "IC"
+      ],
+      "actual_prefix": "J"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "source_refdes_convention_warning_id": "source_refdes_convention_warning_1",
+      "warning_type": "source_refdes_convention_warning",
+      "message": "The \"Y\" prefix is being used with a <chip />, try using it with a <crystal />",
+      "source_component_id": "source_component_4",
+      "refdes": "Y1",
+      "source_component_ftype": "simple_chip",
+      "expected_prefixes": [
+        "U",
+        "IC"
+      ],
+      "actual_prefix": "Y"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "source_refdes_convention_warning_id": "source_refdes_convention_warning_2",
+      "warning_type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />",
+      "source_component_id": "source_component_7",
+      "refdes": "J_WING",
+      "source_component_ftype": "simple_chip",
+      "expected_prefixes": [
+        "U",
+        "IC"
+      ],
+      "actual_prefix": "J"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_0",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "U_MCU has no pin with requires_power=true",
+      "source_component_id": "source_component_0",
+      "source_port_ids": [
+        "source_port_0",
+        "source_port_1",
+        "source_port_2",
+        "source_port_3",
+        "source_port_4",
+        "source_port_5",
+        "source_port_6",
+        "source_port_7",
+        "source_port_8",
+        "source_port_9",
+        "source_port_10",
+        "source_port_11",
+        "source_port_12",
+        "source_port_13",
+        "source_port_14",
+        "source_port_15",
+        "source_port_16",
+        "source_port_17",
+        "source_port_18",
+        "source_port_19",
+        "source_port_20",
+        "source_port_21",
+        "source_port_22",
+        "source_port_23",
+        "source_port_24",
+        "source_port_25",
+        "source_port_26",
+        "source_port_27",
+        "source_port_28",
+        "source_port_29",
+        "source_port_30",
+        "source_port_31",
+        "source_port_32",
+        "source_port_33",
+        "source_port_34",
+        "source_port_35",
+        "source_port_36",
+        "source_port_37",
+        "source_port_38",
+        "source_port_39",
+        "source_port_40",
+        "source_port_41",
+        "source_port_42",
+        "source_port_43",
+        "source_port_44",
+        "source_port_45",
+        "source_port_46",
+        "source_port_47",
+        "source_port_48",
+        "source_port_49",
+        "source_port_50",
+        "source_port_51",
+        "source_port_52",
+        "source_port_53",
+        "source_port_54",
+        "source_port_55",
+        "source_port_56"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_0",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "U_MCU has no pin with requires_ground=true",
+      "source_component_id": "source_component_0",
+      "source_port_ids": [
+        "source_port_0",
+        "source_port_1",
+        "source_port_2",
+        "source_port_3",
+        "source_port_4",
+        "source_port_5",
+        "source_port_6",
+        "source_port_7",
+        "source_port_8",
+        "source_port_9",
+        "source_port_10",
+        "source_port_11",
+        "source_port_12",
+        "source_port_13",
+        "source_port_14",
+        "source_port_15",
+        "source_port_16",
+        "source_port_17",
+        "source_port_18",
+        "source_port_19",
+        "source_port_20",
+        "source_port_21",
+        "source_port_22",
+        "source_port_23",
+        "source_port_24",
+        "source_port_25",
+        "source_port_26",
+        "source_port_27",
+        "source_port_28",
+        "source_port_29",
+        "source_port_30",
+        "source_port_31",
+        "source_port_32",
+        "source_port_33",
+        "source_port_34",
+        "source_port_35",
+        "source_port_36",
+        "source_port_37",
+        "source_port_38",
+        "source_port_39",
+        "source_port_40",
+        "source_port_41",
+        "source_port_42",
+        "source_port_43",
+        "source_port_44",
+        "source_port_45",
+        "source_port_46",
+        "source_port_47",
+        "source_port_48",
+        "source_port_49",
+        "source_port_50",
+        "source_port_51",
+        "source_port_52",
+        "source_port_53",
+        "source_port_54",
+        "source_port_55",
+        "source_port_56"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_1",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "J_USB has no pin with requires_power=true",
+      "source_component_id": "source_component_1",
+      "source_port_ids": [
+        "source_port_57",
+        "source_port_58",
+        "source_port_59",
+        "source_port_60",
+        "source_port_61",
+        "source_port_62",
+        "source_port_63",
+        "source_port_64",
+        "source_port_65",
+        "source_port_66",
+        "source_port_67",
+        "source_port_68",
+        "source_port_69",
+        "source_port_70",
+        "source_port_71",
+        "source_port_72"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_1",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "J_USB has no pin with requires_ground=true",
+      "source_component_id": "source_component_1",
+      "source_port_ids": [
+        "source_port_57",
+        "source_port_58",
+        "source_port_59",
+        "source_port_60",
+        "source_port_61",
+        "source_port_62",
+        "source_port_63",
+        "source_port_64",
+        "source_port_65",
+        "source_port_66",
+        "source_port_67",
+        "source_port_68",
+        "source_port_69",
+        "source_port_70",
+        "source_port_71",
+        "source_port_72"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_2",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "U_ESD has no pin with requires_power=true",
+      "source_component_id": "source_component_2",
+      "source_port_ids": [
+        "source_port_73",
+        "source_port_74",
+        "source_port_75",
+        "source_port_76",
+        "source_port_77",
+        "source_port_78"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_2",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "U_ESD has no pin with requires_ground=true",
+      "source_component_id": "source_component_2",
+      "source_port_ids": [
+        "source_port_73",
+        "source_port_74",
+        "source_port_75",
+        "source_port_76",
+        "source_port_77",
+        "source_port_78"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "source_component_pins_underspecified_warning_id": "source_component_pins_underspecified_warning_0",
+      "source_component_id": "source_component_2",
+      "source_port_ids": [
+        "source_port_73",
+        "source_port_74",
+        "source_port_75",
+        "source_port_76",
+        "source_port_77",
+        "source_port_78"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_component_pins_underspecified_warning",
+      "message": "All pins on U_ESD are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_3",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "U_FLASH has no pin with requires_power=true",
+      "source_component_id": "source_component_3",
+      "source_port_ids": [
+        "source_port_79",
+        "source_port_80",
+        "source_port_81",
+        "source_port_82",
+        "source_port_83",
+        "source_port_84",
+        "source_port_85",
+        "source_port_86",
+        "source_port_87"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_3",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "U_FLASH has no pin with requires_ground=true",
+      "source_component_id": "source_component_3",
+      "source_port_ids": [
+        "source_port_79",
+        "source_port_80",
+        "source_port_81",
+        "source_port_82",
+        "source_port_83",
+        "source_port_84",
+        "source_port_85",
+        "source_port_86",
+        "source_port_87"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_4",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "Y1 has no pin with requires_power=true",
+      "source_component_id": "source_component_4",
+      "source_port_ids": [
+        "source_port_88",
+        "source_port_89",
+        "source_port_90",
+        "source_port_91"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_4",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "Y1 has no pin with requires_ground=true",
+      "source_component_id": "source_component_4",
+      "source_port_ids": [
+        "source_port_88",
+        "source_port_89",
+        "source_port_90",
+        "source_port_91"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "source_component_pins_underspecified_warning_id": "source_component_pins_underspecified_warning_1",
+      "source_component_id": "source_component_4",
+      "source_port_ids": [
+        "source_port_88",
+        "source_port_89",
+        "source_port_90",
+        "source_port_91"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_component_pins_underspecified_warning",
+      "message": "All pins on Y1 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_5",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "U_LDO has no pin with requires_power=true",
+      "source_component_id": "source_component_5",
+      "source_port_ids": [
+        "source_port_92",
+        "source_port_93",
+        "source_port_94",
+        "source_port_95",
+        "source_port_96"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_5",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "U_LDO has no pin with requires_ground=true",
+      "source_component_id": "source_component_5",
+      "source_port_ids": [
+        "source_port_92",
+        "source_port_93",
+        "source_port_94",
+        "source_port_95",
+        "source_port_96"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_6",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "U_LOAD has no pin with requires_power=true",
+      "source_component_id": "source_component_6",
+      "source_port_ids": [
+        "source_port_97",
+        "source_port_98",
+        "source_port_99",
+        "source_port_100",
+        "source_port_101",
+        "source_port_102"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_6",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "U_LOAD has no pin with requires_ground=true",
+      "source_component_id": "source_component_6",
+      "source_port_ids": [
+        "source_port_97",
+        "source_port_98",
+        "source_port_99",
+        "source_port_100",
+        "source_port_101",
+        "source_port_102"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "source_no_power_pin_defined_warning_id": "source_no_power_pin_defined_warning_7",
+      "warning_type": "source_no_power_pin_defined_warning",
+      "message": "J_WING has no pin with requires_power=true",
+      "source_component_id": "source_component_7",
+      "source_port_ids": [
+        "source_port_103",
+        "source_port_104",
+        "source_port_105",
+        "source_port_106",
+        "source_port_107",
+        "source_port_108",
+        "source_port_109",
+        "source_port_110",
+        "source_port_111",
+        "source_port_112",
+        "source_port_113",
+        "source_port_114",
+        "source_port_115",
+        "source_port_116",
+        "source_port_117",
+        "source_port_118"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "source_no_ground_pin_defined_warning_id": "source_no_ground_pin_defined_warning_7",
+      "warning_type": "source_no_ground_pin_defined_warning",
+      "message": "J_WING has no pin with requires_ground=true",
+      "source_component_id": "source_component_7",
+      "source_port_ids": [
+        "source_port_103",
+        "source_port_104",
+        "source_port_105",
+        "source_port_106",
+        "source_port_107",
+        "source_port_108",
+        "source_port_109",
+        "source_port_110",
+        "source_port_111",
+        "source_port_112",
+        "source_port_113",
+        "source_port_114",
+        "source_port_115",
+        "source_port_116",
+        "source_port_117",
+        "source_port_118"
+      ],
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_0",
+      "source_component_id": "source_component_8",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#187 name=\".R_CC1\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_1",
+      "source_component_id": "source_component_9",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#200 name=\".R_CC2\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_2",
+      "source_component_id": "source_component_10",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#213 name=\".R_USB_DP\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_3",
+      "source_component_id": "source_component_11",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#226 name=\".R_USB_DM\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_4",
+      "source_component_id": "source_component_12",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#239 name=\".R_QSPI_SS\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_5",
+      "source_component_id": "source_component_13",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#252 name=\".R_WING_PD\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_6",
+      "source_component_id": "source_component_14",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#265 name=\".R_HALL_PD\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_7",
+      "source_component_id": "source_component_15",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#278 name=\".R_RUN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_8",
+      "source_component_id": "source_component_16",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#291 name=\".R_XOUT\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_9",
+      "source_component_id": "source_component_17",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#304 name=\".C_XIN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_10",
+      "source_component_id": "source_component_18",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#316 name=\".C_XOUT\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_11",
+      "source_component_id": "source_component_19",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#328 name=\".C_MCU_HF1\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_12",
+      "source_component_id": "source_component_20",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#340 name=\".C_MCU_HF2\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_13",
+      "source_component_id": "source_component_21",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#352 name=\".C_MCU_HF3\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_14",
+      "source_component_id": "source_component_22",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#364 name=\".C_MCU_HF4\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_15",
+      "source_component_id": "source_component_23",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#376 name=\".C_MCU_HF5\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_16",
+      "source_component_id": "source_component_24",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#388 name=\".C_MCU_HF6\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_17",
+      "source_component_id": "source_component_25",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#400 name=\".C_MCU_HF7\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_18",
+      "source_component_id": "source_component_26",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#412 name=\".C_MCU_HF8\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_19",
+      "source_component_id": "source_component_27",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#424 name=\".C_MCU_HF9\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_20",
+      "source_component_id": "source_component_28",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#436 name=\".C_VREG_IN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_21",
+      "source_component_id": "source_component_29",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#448 name=\".C_VREG_OUT\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_22",
+      "source_component_id": "source_component_30",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#460 name=\".C_MCU_BULK\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_23",
+      "source_component_id": "source_component_31",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#472 name=\".C_FLASH\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_24",
+      "source_component_id": "source_component_32",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#484 name=\".C_LDO_IN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_25",
+      "source_component_id": "source_component_33",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#496 name=\".C_LDO_OUT\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_26",
+      "source_component_id": "source_component_34",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#508 name=\".C_LOAD_IN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_27",
+      "source_component_id": "source_component_35",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#520 name=\".C_LOAD_OUT\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_28",
+      "source_component_id": "source_component_36",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#532 name=\".R_ADC_A_TOP\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_29",
+      "source_component_id": "source_component_37",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#545 name=\".R_ADC_A_BOTTOM\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_30",
+      "source_component_id": "source_component_38",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#558 name=\".C_ADC_A\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_31",
+      "source_component_id": "source_component_39",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#570 name=\".R_ADC_B_TOP\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_32",
+      "source_component_id": "source_component_40",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#583 name=\".R_ADC_B_BOTTOM\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_33",
+      "source_component_id": "source_component_41",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#596 name=\".C_ADC_B\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_34",
+      "source_component_id": "source_component_42",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#608 name=\".R_ADC_C_TOP\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_35",
+      "source_component_id": "source_component_43",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<resistor#621 name=\".R_ADC_C_BOTTOM\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_36",
+      "source_component_id": "source_component_44",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<capacitor#634 name=\".C_ADC_C\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_37",
+      "source_component_id": "source_component_45",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<testpoint#646 name=\".TP_SWDIO\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_38",
+      "source_component_id": "source_component_46",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<testpoint#652 name=\".TP_SWCLK\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_39",
+      "source_component_id": "source_component_47",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<testpoint#658 name=\".TP_RUN\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "source_missing_manufacturer_part_number_warning",
+      "source_missing_manufacturer_part_number_warning_id": "source_missing_manufacturer_part_number_warning_40",
+      "source_component_id": "source_component_48",
+      "subcircuit_id": "subcircuit_source_group_0",
+      "warning_type": "source_missing_manufacturer_part_number_warning",
+      "message": "<testpoint#664 name=\".TP_QSPI_SS_FLASH\" /> is missing a manufacturer part number and could not be resolved to a supplier part. Specify mpn, manufacturerPartNumber, or mfn, provide supplierPartNumbers, or configure a parts engine to select a part. If this part will not be assembled, mark it doNotPlace."
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_0",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "U_MCU has no courtyard",
+      "pcb_component_id": "pcb_component_0",
+      "source_component_id": "source_component_0",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_1",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "J_USB has no courtyard",
+      "pcb_component_id": "pcb_component_1",
+      "source_component_id": "source_component_1",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_2",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "U_FLASH has no courtyard",
+      "pcb_component_id": "pcb_component_3",
+      "source_component_id": "source_component_3",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_3",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "Y1 has no courtyard",
+      "pcb_component_id": "pcb_component_4",
+      "source_component_id": "source_component_4",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_4",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "J_WING has no courtyard",
+      "pcb_component_id": "pcb_component_7",
+      "source_component_id": "source_component_7",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_5",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "TP_SWDIO has no courtyard",
+      "pcb_component_id": "pcb_component_45",
+      "source_component_id": "source_component_45",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_6",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "TP_SWCLK has no courtyard",
+      "pcb_component_id": "pcb_component_46",
+      "source_component_id": "source_component_46",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_7",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "TP_RUN has no courtyard",
+      "pcb_component_id": "pcb_component_47",
+      "source_component_id": "source_component_47",
+      "subcircuit_id": "subcircuit_source_group_0"
+    },
+    {
+      "type": "pcb_component_missing_courtyard_warning",
+      "pcb_component_missing_courtyard_warning_id": "pcb_component_missing_courtyard_warning_8",
+      "warning_type": "pcb_component_missing_courtyard_warning",
+      "message": "TP_QSPI_SS_FLASH has no courtyard",
+      "pcb_component_id": "pcb_component_48",
+      "source_component_id": "source_component_48",
+      "subcircuit_id": "subcircuit_source_group_0"
+    }
+  ]
+}

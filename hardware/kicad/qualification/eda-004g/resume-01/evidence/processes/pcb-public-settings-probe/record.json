@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-c",
+    "import pcbnew as p; b=p.BOARD(); s=b.GetDesignSettings(); print([n for n in dir(s) if any(k in n.lower() for k in ['clearance','drill','viasmin','through','hole'])]); print(p.FootprintSave.__doc__); print(p.FOOTPRINT.SetProperty.__doc__); print(p.FOOTPRINT.SetPath.__doc__)"
+  ],
+  "cwd": "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01",
+  "start_utc": "2026-10-14T03:08:25.097396+00:00",
+  "end_utc": "2026-10-14T03:08:27.855867+00:00",
+  "exit_code": 1,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004g/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004g/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004g/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004g/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004g/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004g/config",
+    "XDG_CACHE_HOME": "/tmp/eda004g/cache",
+    "XDG_DATA_HOME": "/tmp/eda004g/data",
+    "XDG_STATE_HOME": "/tmp/eda004g/state"
+  },
+  "display_unset": true,
+  "artifacts": [],
+  "elapsed_seconds": 2.5911628870007917,
+  "stdout_sha256": "09090d150121801fedc1851ea63da8e13df7232de436551702ec1938fccf154d",
+  "stderr_sha256": "621a02e5f7c590e15486a641fd2996fb9093ae50646efc6e48343ccd30e2cddc"
+}

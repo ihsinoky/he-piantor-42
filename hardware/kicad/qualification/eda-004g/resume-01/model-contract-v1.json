@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "status": "FROZEN_BEFORE_PACKAGING",
+  "frozen_utc": "2026-10-14T02:59:16.723842+00:00",
+  "models": {
+    "U_LOAD": {
+      "symbol": "TPS22919DCKR",
+      "pins": {
+        "1": {
+          "name": "IN",
+          "role": "power_in",
+          "local_schematic_mm": [
+            -8.89,
+            5.08
+          ],
+          "net": "VBUS",
+          "nc": false
+        },
+        "2": {
+          "name": "GND",
+          "role": "power_in",
+          "local_schematic_mm": [
+            0,
+            -10.16
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "3": {
+          "name": "ON",
+          "role": "input",
+          "local_schematic_mm": [
+            -8.89,
+            0
+          ],
+          "net": "HALL_PWR_EN",
+          "nc": false
+        },
+        "4": {
+          "name": "NC",
+          "role": "passive",
+          "local_schematic_mm": [
+            8.89,
+            -5.08
+          ],
+          "net": null,
+          "nc": true
+        },
+        "5": {
+          "name": "QOD",
+          "role": "output",
+          "local_schematic_mm": [
+            8.89,
+            0
+          ],
+          "net": null,
+          "nc": true
+        },
+        "6": {
+          "name": "OUT",
+          "role": "power_out",
+          "local_schematic_mm": [
+            8.89,
+            5.08
+          ],
+          "net": "HALL_5V",
+          "nc": false
+        }
+      }
+    },
+    "U_FLASH": {
+      "symbol": "W25Q16JVUXIQ",
+      "pins": {
+        "1": {
+          "name": "~{CS}",
+          "role": "input",
+          "local_schematic_mm": [
+            -12.7,
+            2.54
+          ],
+          "net": "QSPI_SS_FLASH",
+          "nc": false
+        },
+        "2": {
+          "name": "DO(IO1)",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            2.54
+          ],
+          "net": "QSPI_SD1",
+          "nc": false
+        },
+        "3": {
+          "name": "~{WP}(IO2)",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            -2.54
+          ],
+          "net": "QSPI_SD2",
+          "nc": false
+        },
+        "4": {
+          "name": "GND",
+          "role": "power_in",
+          "local_schematic_mm": [
+            0,
+            -10.16
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "5": {
+          "name": "DI(IO0)",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            5.08
+          ],
+          "net": "QSPI_SD0",
+          "nc": false
+        },
+        "6": {
+          "name": "CLK",
+          "role": "input",
+          "local_schematic_mm": [
+            -12.7,
+            -2.54
+          ],
+          "net": "QSPI_SCLK",
+          "nc": false
+        },
+        "7": {
+          "name": "~{HOLD}(IO3)",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            -5.08
+          ],
+          "net": "QSPI_SD3",
+          "nc": false
+        },
+        "8": {
+          "name": "VCC",
+          "role": "power_in",
+          "local_schematic_mm": [
+            0,
+            10.16
+          ],
+          "net": "V3V3",
+          "nc": false
+        },
+        "9": {
+          "name": "EP",
+          "role": "passive",
+          "local_schematic_mm": [
+            5.08,
+            -10.16
+          ],
+          "net": null,
+          "nc": true
+        }
+      }
+    },
+    "J_USB": {
+      "symbol": "HRO_TYPE_C_31_M_12",
+      "pins": {
+        "1": {
+          "name": "GND",
+          "role": "passive",
+          "local_schematic_mm": [
+            -2.54,
+            -22.86
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "2": {
+          "name": "VBUS",
+          "role": "passive",
+          "local_schematic_mm": [
+            12.7,
+            15.24
+          ],
+          "net": "VBUS",
+          "nc": false
+        },
+        "3": {
+          "name": "CC1",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            7.62
+          ],
+          "net": "CC1",
+          "nc": false
+        },
+        "4": {
+          "name": "D+",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            0
+          ],
+          "net": "USB_DP_CONN",
+          "nc": false
+        },
+        "5": {
+          "name": "D-",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            -7.62
+          ],
+          "net": "USB_DM_CONN",
+          "nc": false
+        },
+        "6": {
+          "name": "SBU1",
+          "role": "passive",
+          "local_schematic_mm": [
+            12.7,
+            -15.24
+          ],
+          "net": null,
+          "nc": true
+        },
+        "7": {
+          "name": "SBU2",
+          "role": "passive",
+          "local_schematic_mm": [
+            12.7,
+            -17.78
+          ],
+          "net": null,
+          "nc": true
+        },
+        "8": {
+          "name": "D-",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            -10.16
+          ],
+          "net": "USB_DM_CONN",
+          "nc": false
+        },
+        "9": {
+          "name": "D+",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            -2.54
+          ],
+          "net": "USB_DP_CONN",
+          "nc": false
+        },
+        "10": {
+          "name": "CC2",
+          "role": "bidirectional",
+          "local_schematic_mm": [
+            12.7,
+            5.08
+          ],
+          "net": "CC2",
+          "nc": false
+        },
+        "11": {
+          "name": "VBUS",
+          "role": "passive",
+          "local_schematic_mm": [
+            12.7,
+            12.7
+          ],
+          "net": "VBUS",
+          "nc": false
+        },
+        "12": {
+          "name": "GND",
+          "role": "passive",
+          "local_schematic_mm": [
+            2.54,
+            -22.86
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "13": {
+          "name": "SHIELD",
+          "role": "passive",
+          "local_schematic_mm": [
+            0,
+            -22.86
+          ],
+          "net": "GND",
+          "nc": false
+        }
+      },
+      "old_to_source_number": {
+        "A1_B12": "1",
+        "A4_B9": "2",
+        "A5": "3",
+        "A6": "4",
+        "A7": "5",
+        "A8": "6",
+        "B8": "7",
+        "B7": "8",
+        "B6": "9",
+        "B5": "10",
+        "A9_B4": "11",
+        "A12_B1": "12",
+        "S1": "13"
+      },
+      "physical_duplicates": {
+        "13": 4
+      },
+      "mechanical_holes": 2
+    },
+    "J_WING": {
+      "symbol": "BM14B_GHS_TBT",
+      "pins": {
+        "1": {
+          "name": "Pin_1",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            15.24
+          ],
+          "net": "HALL_5V",
+          "nc": false
+        },
+        "2": {
+          "name": "Pin_2",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            12.7
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "3": {
+          "name": "Pin_3",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            10.16
+          ],
+          "net": "MUX_A0",
+          "nc": false
+        },
+        "4": {
+          "name": "Pin_4",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            7.62
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "5": {
+          "name": "Pin_5",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            5.08
+          ],
+          "net": "MUX_A1",
+          "nc": false
+        },
+        "6": {
+          "name": "Pin_6",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            2.54
+          ],
+          "net": "MUX_A2",
+          "nc": false
+        },
+        "7": {
+          "name": "Pin_7",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            0.0
+          ],
+          "net": "WING_EN",
+          "nc": false
+        },
+        "8": {
+          "name": "Pin_8",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -2.54
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "9": {
+          "name": "Pin_9",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -5.08
+          ],
+          "net": "MUX_OUT_A",
+          "nc": false
+        },
+        "10": {
+          "name": "Pin_10",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -7.62
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "11": {
+          "name": "Pin_11",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -10.16
+          ],
+          "net": "MUX_OUT_B",
+          "nc": false
+        },
+        "12": {
+          "name": "Pin_12",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -12.7
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "13": {
+          "name": "Pin_13",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -15.24
+          ],
+          "net": "MUX_OUT_C",
+          "nc": false
+        },
+        "14": {
+          "name": "Pin_14",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -17.78
+          ],
+          "net": "GND",
+          "nc": false
+        },
+        "15": {
+          "name": "MP",
+          "role": "passive",
+          "local_schematic_mm": [
+            -5.08,
+            -22.86
+          ],
+          "net": null,
+          "nc": true
+        }
+      },
+      "physical_duplicates": {
+        "15": 2
+      },
+      "mechanical_land_is_not_contact": true
+    }
+  },
+  "independent_of_packager": true,
+  "source_intent_sha256": "338a9821c6760da3e9a37516222046a5ae01ae9fa02607941f0e32df96cf46e1",
+  "evidence": {
+    "TPS22919": {
+      "path": "hardware/jitx/.sources/datasheets/TPS22919.pdf",
+      "basis": "TI SLVSEN5B p3: six functions; NC4 floating, QOD5 may float; inherited verified six-pin model and explicit typed legacy definition.",
+      "sha256": "743c59b01fb0891d2d0f1faba779161cd2d2b6c18edf68e6d5b3279016240c84"
+    },
+    "W25Q16JVUXIQ": {
+      "path": "hardware/jitx/.sources/winbond.pdf",
+      "basis": "Winbond Rev J printed p5 8-signal pin table, p67 UX physical metal D1/E1. Source EP9 is unassigned physical metal, passive annotation + NC, not a claimed manufacturer power or ninth signal pin. Floating note for ZP/UU is not falsely assigned to UX.",
+      "sha256": "0a7d2859578bdf11ca5519d444c11cdc790fcbe6921989689b9c1ae4599780ef"
+    },
+    "TYPE_C_31_M_12": {
+      "path": "hardware/jitx/.sources/hro.pdf",
+      "basis": "Exact M-12 sheet4, paired lands, 12 contacts/4 shield stakes/2 locators. Source logical aliases and source bond retained.",
+      "sha256": "1c23b78973c56e8dd83f1b46b8c31226f31ba0ea136ce3babd9f80bbaf2e7345"
+    },
+    "BM14B_GHS_TBT": {
+      "path": "hardware/tscircuit/src/qualification/JstGh14.tsx",
+      "basis": "PO-confirmed KRD-32980-5 R0, hash in source; 14 passive contacts plus two mechanical NC MP lands. D-017 interface.",
+      "sha256": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c"
+    }
+  },
+  "allowed_symbol_only_change": "Flash EP9 schematic endpoint moves from shared GND4 coordinate to (5.08,-10.16); GH adds MP physical-land annotation; USB literal number correspondence. No PCB or net changes.",
+  "old_default_footprints_forbidden": true,
+  "physical_geometry_qualification": "Separate full Main contract required before Main generation; this role/number contract does not substitute geometry.",
+  "manufacturer_internal_EP_electrical_connection": "Not specified for UX in inspected drawing; no supply claim or inherited GND connection. Preserve fixed source NC physical metal, with product disposition unqualified."
+}

@@ -1,0 +1,49 @@
+{
+  "command": [
+    "/tmp/eda004g/kicad/usr/bin/kicad-cli",
+    "sch",
+    "export",
+    "netlist",
+    "--format",
+    "kicadxml",
+    "-o",
+    "/tmp/eda004g-resume01/diagnostic-0.xml",
+    "/tmp/eda004g-resume01/diagnostic-0.kicad_sch"
+  ],
+  "cwd": "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01",
+  "start_utc": "2026-10-14T03:28:39.382796+00:00",
+  "end_utc": "2026-10-14T03:28:39.610628+00:00",
+  "exit_code": 3,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004g/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004g/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004g/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004g/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004g/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004g-resume01/config",
+    "XDG_CACHE_HOME": "/tmp/eda004g/cache",
+    "XDG_DATA_HOME": "/tmp/eda004g/data",
+    "XDG_STATE_HOME": "/tmp/eda004g/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "input.kicad_sch",
+      "original_path": "/tmp/eda004g-resume01/diagnostic-0.kicad_sch",
+      "present": true,
+      "saved_path": "processes/symbol-read-diagnostic-0/input.kicad_sch",
+      "sha256": "b33847334b2b47a682cdb7c7104e6a81b33616bd0d6cbe98db74baf5e6df78bd"
+    },
+    {
+      "label": "output.xml",
+      "original_path": "/tmp/eda004g-resume01/diagnostic-0.xml",
+      "present": false
+    }
+  ],
+  "elapsed_seconds": 0.22343200399882335,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "9ff2f0864e42ac7ca22c7d48d8ac94b591173260f4f44a62085b40a2ac48418c"
+}

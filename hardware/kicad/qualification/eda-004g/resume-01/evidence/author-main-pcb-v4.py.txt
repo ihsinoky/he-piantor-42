@@ -1,0 +1,76 @@
+"""Bounded Main native geometry through KiCad public PCB objects/save only."""
+import importlib.util
+import json
+import math
+import sys
+from pathlib import Path
+import pcbnew as p
+ROOT=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('native',ROOT/'native-intent.py')
+native=importlib.util.module_from_spec(spec);spec.loader.exec_module(native)
+def v(x,y):return p.VECTOR2I(p.FromMM(x),p.FromMM(y))
+def world(x,y):return v(100+x,100-y)
+def layer_id(board,name):
+    return {'F.SilkS':p.F_SilkS,'B.SilkS':p.B_SilkS,'F.CrtYd':p.F_CrtYd,'B.CrtYd':p.B_CrtYd}.get(name,board.GetLayerID(name))
+
+def generate(source,directory):
+    d=native.read(source);directory=Path(directory);b=p.BOARD();file=directory/'main.kicad_pcb';b.SetFileName(str(file))
+    manager=p.GetSettingsManager();manager.LoadProject(str(file.with_suffix('.kicad_pro')));b.SetProject(manager.Prj())
+    s=b.GetDesignSettings();b.SetCopperLayerCount(2);s.SetBoardThickness(p.FromMM(1.2))
+    for name,val in [('m_MinClearance',.2),('m_TrackMinWidth',.2),('m_CopperEdgeClearance',.2),('m_HoleClearance',.2),('m_HoleToHoleMin',.2),('m_ViasMinSize',.6),('m_MinThroughDrill',.3)]:setattr(s,name,p.FromMM(val))
+    nc=s.m_NetSettings.GetDefaultNetclass();nc.SetClearance(p.FromMM(.2));nc.SetTrackWidth(p.FromMM(.2));nc.SetViaDiameter(p.FromMM(.6));nc.SetViaDrill(p.FromMM(.3))
+    nets={}
+    for name in d['contract']['named_nets']:
+        net=p.NETINFO_ITEM(b,name);b.Add(net);nets[name]=net
+    footprints={}
+    for c in d['contract']['components']:
+        fp=p.FOOTPRINT(b);fp.SetReference(c['cad_reference']);fp.SetValue(c['display_value']);fp.SetLibDescription(c['reference']);fp.SetFPIDAsString(c['footprint_id']);fp.SetAttributes(p.FP_SMD)
+        footprints[c['reference']]=fp;b.Add(fp)
+        angle=c['source_ccw_rotation_deg'];a=math.radians(angle);cx,cy=c['source_position_mm']
+        for e in [x for x in d['material'] if x['source_id']==c['reference']]:
+            raw=e['raw'];dx,dy=raw['x']-cx,raw['y']-cy
+            lx=dx*math.cos(a)+dy*math.sin(a);ly=-dx*math.sin(a)+dy*math.cos(a)
+            w,h=e['source_global_size_mm'];w,h=(h,w) if angle==90 else (w,h)
+            pad=p.PAD(fp);pad.SetNumber(e['number']);pad.SetShape({'rect':p.PAD_SHAPE_RECT,'circle':p.PAD_SHAPE_CIRCLE,'oval':p.PAD_SHAPE_OVAL}[e['shape']]);pad.SetAttribute(p.PAD_ATTRIB_PTH if e['attribute']=='PTH' else p.PAD_ATTRIB_SMD)
+            pad.SetPosition(v(lx,-ly));pad.SetSize(v(w,h));layers=p.LSET()
+            for layer in e['layers']+(['F.Mask','B.Mask'] if e['attribute']=='PTH' else ['F.Mask']):layers.AddLayer(b.GetLayerID(layer))
+            pad.SetLayerSet(layers)
+            if e['attribute']=='PTH':pad.SetDrillSize(v(*e['drill_mm']));pad.SetDrillShape(p.PAD_DRILL_SHAPE_OBLONG)
+            if e['net']:pad.SetNet(nets[e['net']])
+            fp.Add(pad)
+        if c['reference']=='J_USB':
+            for e in d['holes']:
+                pad=p.PAD(fp);pad.SetShape(p.PAD_SHAPE_CIRCLE);pad.SetAttribute(p.PAD_ATTRIB_NPTH);pad.SetNumber('');pad.SetPosition(v(e['x']-cx,cy-e['y']));pad.SetSize(v(e['hole_diameter'],e['hole_diameter']));pad.SetDrillSize(v(e['hole_diameter'],e['hole_diameter']));pad.SetLayerSet(p.LSET.AllCuMask());fp.Add(pad)
+        fp.SetPosition(world(cx,cy));fp.SetOrientationDegrees(angle)
+    def line(a,z,layer,width):
+        shape=p.PCB_SHAPE(b);shape.SetShape(p.SHAPE_T_SEGMENT);shape.SetStart(world(*a));shape.SetEnd(world(*z));shape.SetLayer(layer_id(b,layer));shape.SetWidth(p.FromMM(width));b.Add(shape)
+    for e in d['local_bond']:
+        t=p.PCB_TRACK(b);t.SetStart(world(*e['a']));t.SetEnd(world(*e['b']));t.SetWidth(p.FromMM(.2));t.SetLayer(p.F_Cu);t.SetNet(nets['GND']);b.Add(t)
+    corners=[[-24,-22],[24,-22],[24,22],[-24,22]]
+    for a,z in zip(corners,corners[1:]+corners[:1]):line(a,z,'Edge.Cuts',.05)
+    # Preserve non-copper native marks and paste apertures. No footprint substitute.
+    for e in d['data']:
+        kind=e['type'];layer='F.SilkS' if e.get('layer')=='top' else 'B.SilkS'
+        if kind in ('pcb_silkscreen_path','pcb_courtyard_outline'):
+            pts=e['route'] if kind=='pcb_silkscreen_path' else e['outline'];pts=[[x['x'],x['y']] for x in pts]
+            if kind=='pcb_courtyard_outline':pts.append(pts[0]);layer='F.CrtYd'
+            for a,z in zip(pts,pts[1:]):line(a,z,layer,e.get('stroke_width',.05))
+        elif kind in ('pcb_silkscreen_rect','pcb_courtyard_rect'):
+            x,y=e['center']['x'],e['center']['y'];w,h=e['width'],e['height'];angle=math.radians(e.get('ccw_rotation',0))
+            pts=[[x+dx*math.cos(angle)-dy*math.sin(angle),y+dx*math.sin(angle)+dy*math.cos(angle)] for dx,dy in [(-w/2,-h/2),(w/2,-h/2),(w/2,h/2),(-w/2,h/2)]]
+            if kind=='pcb_courtyard_rect':layer='F.CrtYd'
+            for a,z in zip(pts,pts[1:]+pts[:1]):line(a,z,layer,e.get('stroke_width',.05))
+        elif kind=='pcb_silkscreen_text':
+            text=p.PCB_TEXT(b);text.SetText(e['text']);text.SetPosition(world(e['anchor_position']['x'],e['anchor_position']['y']));text.SetTextSize(v(e['font_size'],e['font_size']));text.SetTextThickness(p.FromMM(.1));text.SetTextAngle(p.EDA_ANGLE(e.get('ccw_rotation',0),p.DEGREES_T));text.SetLayer(layer_id(b,layer));b.Add(text)
+        elif kind=='pcb_solder_paste':
+            shape=p.PCB_SHAPE(b);shape.SetLayer(p.F_Paste if e['layer']=='top' else p.B_Paste);shape.SetWidth(0);shape.SetFilled(True)
+            if e['shape']=='rect':shape.SetShape(p.SHAPE_T_RECT);shape.SetStart(world(e['x']-e['width']/2,e['y']-e['height']/2));shape.SetEnd(world(e['x']+e['width']/2,e['y']+e['height']/2))
+            elif e['shape']=='circle':shape.SetShape(p.SHAPE_T_CIRCLE);shape.SetStart(world(e['x'],e['y']));shape.SetEnd(world(e['x']+e['radius'],e['y']))
+            elif e['shape']=='oval':
+                w,h=e['width'],e['height'];dx,dy=(max(w-h,0)/2,max(h-w,0)/2)
+                shape.SetShape(p.SHAPE_T_SEGMENT);shape.SetStart(world(e['x']-dx,e['y']-dy));shape.SetEnd(world(e['x']+dx,e['y']+dy));shape.SetWidth(p.FromMM(min(w,h)))
+            else:raise ValueError(('unsupported paste',e))
+            b.Add(shape)
+    assert p.SaveBoard(str(file),b);assert manager.SaveProject(str(file.with_suffix('.kicad_pro')))
+    print('saved public PCB objects: 49 footprints / 197 copper pads / 2 NPTH / 3 source-local tracks')
+if __name__=='__main__':generate(sys.argv[1],sys.argv[2])

@@ -1,0 +1,50 @@
+{
+  "recorded_utc": "2026-10-14T01:33:46.813174+00:00",
+  "main_checker_qualified": false,
+  "predecessors": [
+    {
+      "path": "hardware/kicad/qualification/eda-004f/reconcile.py",
+      "sha256": "a49d9ed4e6a2cd27d6e84c2946eada7498bba06a061ea5c2758f66396bca6aa5",
+      "supported": "Frozen six-symbol/16-pin, unrotated wire-stub/local-label schematic + four-component/14-pin XML. No PCB copper reader."
+    },
+    {
+      "path": "hardware/kicad/qualification/eda-004e/inspect.py",
+      "sha256": "e8a07bbf6a044f9c28283648794fda1949d48ec7f5446504ff36b44e69126bce",
+      "supported": "Frozen R1/U1, seven pads, two local tracks, four outline edges, object fields and configured rule values. No general copper-island/rule-enforcement verifier."
+    },
+    {
+      "path": "hardware/tscircuit/scripts/revm1-physical-connectivity.ts",
+      "sha256": "713b6fb8f66cdc1594ec0552e0a5d25ed924ad3818d8a948d0093b860608b67b",
+      "supported": "Circuit JSON actual copper geometry; not a KiCad reader. Separate reviewed adaptation and negative tests required."
+    }
+  ],
+  "required_main_fault_tests": [
+    {
+      "fault": "wrong-net actual copper short",
+      "result": "NOT ENTERED",
+      "qualified": false
+    },
+    {
+      "fault": "missing required physical pad",
+      "result": "NOT ENTERED",
+      "qualified": false
+    },
+    {
+      "fault": "duplicate-number land loses physical connection",
+      "result": "NOT ENTERED",
+      "qualified": false
+    },
+    {
+      "fault": "effective 0.20 mm rule missing",
+      "result": "NOT ENTERED",
+      "qualified": false
+    }
+  ],
+  "gaps": [
+    "Complete independent source pad/drill/shape/layer/rotation/outline map",
+    "KiCad actual-copper shape extraction, islands and layer transitions",
+    "NC obstacles and hole/boundary spacing",
+    "positive Main baseline and specific negative detections"
+  ],
+  "inference": "These are implementation/coverage gaps, not observed Main routing violations. No predecessor is promoted to a Main verifier."
+}

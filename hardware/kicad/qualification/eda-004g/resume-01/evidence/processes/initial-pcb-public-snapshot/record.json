@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-c",
+    "import pcbnew as p,json; b=p.LoadBoard(\"/tmp/eda004g-resume01/initial/main.kicad_pcb\"); print(json.dumps([dict(ref=f.GetReference(),number=a.GetNumber(),position=[p.ToMM(a.GetPosition().x),p.ToMM(a.GetPosition().y)],size=[p.ToMM(a.GetSize().x),p.ToMM(a.GetSize().y)],angle=a.GetOrientationDegrees(),net=a.GetNetname(),attribute=a.GetAttribute(),shape=a.GetShape(),drill=[p.ToMM(a.GetDrillSize().x),p.ToMM(a.GetDrillSize().y)]) for f in b.GetFootprints() for a in f.Pads()]))"
+  ],
+  "cwd": "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01",
+  "start_utc": "2026-10-14T03:28:53.771721+00:00",
+  "end_utc": "2026-10-14T03:28:54.100522+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004g/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004g/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004g/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004g/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004g/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004g-resume01/config",
+    "XDG_CACHE_HOME": "/tmp/eda004g/cache",
+    "XDG_DATA_HOME": "/tmp/eda004g/data",
+    "XDG_STATE_HOME": "/tmp/eda004g/state"
+  },
+  "display_unset": true,
+  "artifacts": [],
+  "elapsed_seconds": 0.3207113339994976,
+  "stdout_sha256": "e0ba0733aad73ec675a9e4a5be58be719331cca27202bd4a1f51ce060bc0153b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

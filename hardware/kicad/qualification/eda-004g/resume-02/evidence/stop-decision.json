@@ -1,0 +1,48 @@
+{
+  "utc": "2026-10-14T13:40:11.899345+00:00",
+  "status": "STOP",
+  "stage": "2 PCB physical/printing DRC acceptance",
+  "reason": "Source-native PCB printing geometry has 61 KiCad DRC violations:44 text_height,12 silk_overlap,5 silk_over_copper. Do not exclude existing geometry violations, suppress rules or change frozen printing size/geometry. Position-only changes cannot remedy text_height.",
+  "counts": {
+    "silk_overlap": 12,
+    "silk_over_copper": 5,
+    "text_height": 44
+  },
+  "raw_severity": "warning; retained as violations, not automatically excluded",
+  "minimum_text_height_case": {
+    "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)",
+    "items": [
+      {
+        "description": "PCB text 'C_LDO_IN' on F.Silkscreen",
+        "pos": {
+          "x": 80.0,
+          "y": 95.625
+        },
+        "uuid": "b4fd727a-15b3-444c-a3d9-12d7c0114afe"
+      }
+    ],
+    "severity": "warning",
+    "type": "text_height"
+  },
+  "raw_drc_sha256": "fcab57ce5a7ef3e41886ecaaa0c2f37eaa9a173f4916292b28c1dcf2149b50e7",
+  "four_part_definition_scope": "PASS",
+  "circuit_roles_nets_nc": "PASS_193_LOGICAL_PINS",
+  "raw_erc_violations": 0,
+  "individual_copper_pad_hole_pose_net_geometry": "PASS_WITH_SCOPE",
+  "auxiliary_primitive_parameter_parity": true,
+  "native_text_glyph_renderer": "KiCad stroke vs source tscircuit2024; exact glyph-shape equivalence not qualified",
+  "core_material_target_drc_violations": 0,
+  "full_main_pass": false,
+  "main_initial_attempts": 0,
+  "main_confirmation_attempts": 0,
+  "small_transport_attempts": 0,
+  "after_stop_allowed": [
+    "read-only evidence reconciliation",
+    "report/status/history/dashboard",
+    "submission"
+  ],
+  "experiment_restart_forbidden": true,
+  "prior_stops_preserved": true,
+  "method_wide_infeasible": "not demonstrated",
+  "large_implementation_mandatory": "not demonstrated"
+}

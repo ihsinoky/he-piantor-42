@@ -1,0 +1,74 @@
+{
+  "utc": "2026-10-14T13:22:48.332469+00:00",
+  "positive": {
+    "individual_pads": 197,
+    "required_physical_pads": 167,
+    "nc_physical_pads": 30,
+    "npth": 2,
+    "wrong_net_actual_copper_contacts": [],
+    "actual_connected_components": 194,
+    "required_net_disconnected_component_counts": {
+      "V3V3": 24,
+      "MUX_A0": 2,
+      "MUX_A1": 2,
+      "MUX_A2": 2,
+      "WING_EN": 3,
+      "HALL_PWR_EN": 3,
+      "GND": 46,
+      "XIN": 3,
+      "XOUT": 2,
+      "V1V1": 5,
+      "SWCLK": 2,
+      "SWDIO": 2,
+      "RUN": 3,
+      "ADC_A": 4,
+      "ADC_B": 4,
+      "ADC_C": 4,
+      "USB_DM": 2,
+      "USB_DP": 2,
+      "QSPI_SD3": 2,
+      "QSPI_SCLK": 2,
+      "QSPI_SD0": 2,
+      "QSPI_SD2": 2,
+      "QSPI_SD1": 2,
+      "QSPI_SS_MCU": 2,
+      "VBUS": 8,
+      "CC1": 2,
+      "USB_DM_CONN": 3,
+      "USB_DP_CONN": 3,
+      "CC2": 2,
+      "USB_DM_ESD": 2,
+      "USB_DP_ESD": 2,
+      "QSPI_SS_FLASH": 3,
+      "XOUT_XTAL": 3,
+      "HALL_5V": 3,
+      "MUX_OUT_A": 2,
+      "MUX_OUT_B": 2,
+      "MUX_OUT_C": 2
+    },
+    "duplicate_shield_actual_connectivity": true,
+    "full_routed_acceptance": false
+  },
+  "cases": {
+    "wrong-net-real-copper": {
+      "detected": true,
+      "reason": "('actual wrong-net copper short', [['copper-3', 'J_USB.1.0', 'VBUS', 'GND']])"
+    },
+    "required-pad-missing": {
+      "detected": true,
+      "reason": "required/NC pad missing"
+    },
+    "duplicate-shield-copper-missing": {
+      "detected": true,
+      "reason": "duplicate shield actual copper missing"
+    },
+    "material-rule-missing": {
+      "detected": true,
+      "reason": "('missing material rule', 'm_MinClearance', 0)"
+    }
+  },
+  "status": "PASS_WITH_SCOPE",
+  "actual_main_generation_acceptance": false,
+  "spacing_enforcement": false,
+  "scope": "Main-shaped independently specified data; does not replace fresh KiCad read/geometry/ERC/parity or physical rule injection."
+}

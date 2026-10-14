@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/tmp/eda004g-resume01/diagnostic-3.kicad_sch</source>
+    <date>2026-10-14T03:28:41+0000</date>
+    <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>public-symbol-read-diagnostic</title>
+        <company/>
+        <rev/>
+        <date/>
+        <source>diagnostic-3.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>probe</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Qualification" part="W25Q16JVUXIQ" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="../../../../../../../tmp/eda004g-resume01/diagnostic-3.kicad_sch"/>
+      <property name="ki_fp_filters" value="USON*2x3*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>75bd1ed7-a59f-4879-bb2c-2318913cb056</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Qualification" part="W25Q16JVUXIQ">
+      <docs>https://www.winbond.com/resource-files/w25q16jv%20spi%20revg%2003222018%20plus.pdf</docs>
+      <footprints>
+        <fp>USON*2x3*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">W25Q16JVUXIQ</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.winbond.com/resource-files/w25q16jv%20spi%20revg%2003222018%20plus.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="~{CS}" type="input"/>
+        <pin num="2" name="DO(IO1)" type="bidirectional"/>
+        <pin num="3" name="~{WP}(IO2)" type="bidirectional"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="DI(IO0)" type="bidirectional"/>
+        <pin num="6" name="CLK" type="input"/>
+        <pin num="7" name="~{HOLD}(IO3)" type="bidirectional"/>
+        <pin num="8" name="VCC" type="power_in"/>
+        <pin num="9" name="EP" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-CLK-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="CLK" pintype="input"/>
+    </net>
+    <net code="2" name="unconnected-(U1-DI(IO0)-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="DI(IO0)" pintype="bidirectional"/>
+    </net>
+    <net code="3" name="unconnected-(U1-DO(IO1)-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="DO(IO1)" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="unconnected-(U1-EP-Pad9)" class="Default">
+      <node ref="U1" pin="9" pinfunction="EP" pintype="passive"/>
+    </net>
+    <net code="5" name="unconnected-(U1-GND-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="6" name="unconnected-(U1-VCC-Pad8)" class="Default">
+      <node ref="U1" pin="8" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="7" name="unconnected-(U1-~{CS}-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="~{CS}" pintype="input"/>
+    </net>
+    <net code="8" name="unconnected-(U1-~{HOLD}(IO3)-Pad7)" class="Default">
+      <node ref="U1" pin="7" pinfunction="~{HOLD}(IO3)" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="unconnected-(U1-~{WP}(IO2)-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="~{WP}(IO2)" pintype="bidirectional"/>
+    </net>
+  </nets>
+</export>

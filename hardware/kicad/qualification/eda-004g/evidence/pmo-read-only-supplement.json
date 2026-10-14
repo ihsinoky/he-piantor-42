@@ -1,0 +1,335 @@
+{
+  "kind": "READ_ONLY_PMO_REPORT_SUPPLEMENT_NOT_AN_EDA_EXPERIMENT",
+  "start_utc": "2026-10-14T01:58:57Z",
+  "read_end_utc": "2026-10-14T02:04:04.278895+00:00",
+  "limit_minutes": 30,
+  "review_base_head": "c337ee28b2f0e9450b9af70a26715289b8752ef7",
+  "source_sha256": {
+    "hardware/sensor-test/kicad/integrated-sensor-test.kicad_sch": "e546a22043ec5baf5dee544e15cc3de936f70ad06b9a7cad24a7e6978118bc3a",
+    "hardware/jitx/component-sources.md": "8061c3b463de93622d7ec81f5fd98cce122a0fab979a66e9a5217b4dca87b337",
+    "hardware/jitx/he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py": "8cd4ae0920a257278aba61f341b9e979f1cf3d9d182d79d6a7f51ee44ee39703",
+    "hardware/jitx/he_piantor_42_jitx/components/memory/winbond_w25q16jvuxiq.py": "c7f6973d2fb6e287ce6d0edd30d009ed6abfda084f2c4b7b4af7775cee9d3602",
+    "hardware/jitx/he_piantor_42_jitx/components/connectors/hro_type_c_31_m_12.py": "cd2a6fb603ccf22addebe810807793e786dc9d2fb1c5a3aa853771baf7418eb1",
+    "hardware/jitx/tests/test_ti_m1_components.py": "3f3de7ce862039d05dca7f01efe6c82c25e388f7f791fb40aec2149358c0766a",
+    "hardware/jitx/tests/test_remaining_components.py": "16c5350607238682a1078b872e39cda95c41bb3296045415a31562997bd83db5",
+    "hardware/tscircuit/src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c",
+    "hardware/tscircuit/src/qualification/native-support-footprints.tsx": "7b0efff9f5178b589c2ef7085625549bc4701ee24d2841ee7b46785921db55fe",
+    "hardware/tscircuit/qualification/eda-003c/latest-stock/package-lock.json": "dec21cc020344ce8c8a769bd3ec92d99186546034974bcb702fc68f9dd7a455f"
+  },
+  "legacy_embedded_definitions": {
+    "HEP:W25Q16JVUXIQ": {
+      "pins": [
+        {
+          "number": "1",
+          "name": "~{CS}",
+          "type": "input",
+          "local_position_mm": [
+            -12.7,
+            2.54
+          ]
+        },
+        {
+          "number": "2",
+          "name": "DO(IO1)",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            2.54
+          ]
+        },
+        {
+          "number": "3",
+          "name": "~{WP}(IO2)",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            -2.54
+          ]
+        },
+        {
+          "number": "4",
+          "name": "GND",
+          "type": "power_in",
+          "local_position_mm": [
+            0,
+            -10.16
+          ]
+        },
+        {
+          "number": "9",
+          "name": "EP",
+          "type": "passive",
+          "local_position_mm": [
+            0,
+            -10.16
+          ]
+        },
+        {
+          "number": "5",
+          "name": "DI(IO0)",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            5.08
+          ]
+        },
+        {
+          "number": "6",
+          "name": "CLK",
+          "type": "input",
+          "local_position_mm": [
+            -12.7,
+            -2.54
+          ]
+        },
+        {
+          "number": "7",
+          "name": "~{HOLD}(IO3)",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            -5.08
+          ]
+        },
+        {
+          "number": "8",
+          "name": "VCC",
+          "type": "power_in",
+          "local_position_mm": [
+            0,
+            10.16
+          ]
+        }
+      ],
+      "properties": {
+        "Reference": "U",
+        "Value": "W25Q16JVUXIQ",
+        "Footprint": "keebio:USON-8_UX_2x3x0p6_WIN",
+        "Datasheet": "https://www.winbond.com/resource-files/w25q16jv%20spi%20revg%2003222018%20plus.pdf",
+        "ki_fp_filters": "USON*2x3*"
+      }
+    },
+    "HEP:HRO_TYPE-C-31-M-12": {
+      "pins": [
+        {
+          "number": "A4_B9",
+          "name": "VBUS",
+          "type": "passive",
+          "local_position_mm": [
+            12.7,
+            15.24
+          ]
+        },
+        {
+          "number": "A9_B4",
+          "name": "VBUS",
+          "type": "passive",
+          "local_position_mm": [
+            12.7,
+            12.7
+          ]
+        },
+        {
+          "number": "A1_B12",
+          "name": "GND",
+          "type": "passive",
+          "local_position_mm": [
+            -2.54,
+            -22.86
+          ]
+        },
+        {
+          "number": "A12_B1",
+          "name": "GND",
+          "type": "passive",
+          "local_position_mm": [
+            2.54,
+            -22.86
+          ]
+        },
+        {
+          "number": "S1",
+          "name": "SHIELD",
+          "type": "passive",
+          "local_position_mm": [
+            0,
+            -22.86
+          ]
+        },
+        {
+          "number": "A5",
+          "name": "CC1",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            7.62
+          ]
+        },
+        {
+          "number": "B5",
+          "name": "CC2",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            5.08
+          ]
+        },
+        {
+          "number": "A6",
+          "name": "D+",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            0
+          ]
+        },
+        {
+          "number": "B6",
+          "name": "D+",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            -2.54
+          ]
+        },
+        {
+          "number": "A7",
+          "name": "D-",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            -7.62
+          ]
+        },
+        {
+          "number": "B7",
+          "name": "D-",
+          "type": "bidirectional",
+          "local_position_mm": [
+            12.7,
+            -10.16
+          ]
+        },
+        {
+          "number": "A8",
+          "name": "SBU1",
+          "type": "passive",
+          "local_position_mm": [
+            12.7,
+            -15.24
+          ]
+        },
+        {
+          "number": "B8",
+          "name": "SBU2",
+          "type": "passive",
+          "local_position_mm": [
+            12.7,
+            -17.78
+          ]
+        }
+      ],
+      "properties": {
+        "Reference": "J",
+        "Value": "TYPE-C-31-M-12",
+        "Footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+        "Datasheet": "https://datasheet.lcsc.com/lcsc/1903211732_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
+        "ki_description": "USB Type-C USB2 sink receptacle, HRO TYPE-C-31-M-12"
+      }
+    },
+    "HEP:TPS22919DCKR": {
+      "pins": [
+        {
+          "number": "1",
+          "name": "IN",
+          "type": "power_in",
+          "local_position_mm": [
+            -8.89,
+            5.08
+          ]
+        },
+        {
+          "number": "2",
+          "name": "GND",
+          "type": "power_in",
+          "local_position_mm": [
+            0,
+            -10.16
+          ]
+        },
+        {
+          "number": "3",
+          "name": "ON",
+          "type": "input",
+          "local_position_mm": [
+            -8.89,
+            0
+          ]
+        },
+        {
+          "number": "4",
+          "name": "NC",
+          "type": "passive",
+          "local_position_mm": [
+            8.89,
+            -5.08
+          ]
+        },
+        {
+          "number": "5",
+          "name": "QOD",
+          "type": "output",
+          "local_position_mm": [
+            8.89,
+            0
+          ]
+        },
+        {
+          "number": "6",
+          "name": "OUT",
+          "type": "power_out",
+          "local_position_mm": [
+            8.89,
+            5.08
+          ]
+        }
+      ],
+      "properties": {
+        "Reference": "U",
+        "Value": "TPS22919DCKR",
+        "Footprint": "Package_TO_SOT_SMD:SOT-363_SC-70-6",
+        "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22919.pdf",
+        "ki_description": "5.5V 1.5A self-protected load switch, SC-70-6"
+      }
+    }
+  },
+  "original_stop_evidence_changed": false,
+  "generated_or_routed_files": 0,
+  "implementation_hours_measured": null,
+  "generic_writer_or_fork_necessity_demonstrated": false,
+  "manufacturer_web_observations": [
+    {
+      "url": "https://www.ti.com/product/TPS22919",
+      "observation": "Exact product page links TPS22919/DCK/6-pin Ultra Librarian CAD offering."
+    },
+    {
+      "url": "https://vendor.ultralibrarian.com/TI/embedded/?gpn=TPS22919&package=DCK&pin=6",
+      "observation": "Displayed PTPS22919DCKR, symbol/footprint previews, KiCad v6+ option; exported file not acquired or validated. Cookie/registration workflow not used."
+    },
+    {
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=105",
+      "observation": "BM14B-GHS-TBT row offers 2D/3D CAD; drawing link leads to terms/contact/email-delivery form; no request sent."
+    },
+    {
+      "url": "https://www.winbond.com/resource-files/W25Q16JV%20SPI%20RevJ%2005202026%20Plus.pdf",
+      "observation": "Web reader Internal Error; existing repository verified model/datasheet provenance used as historical reference, not newly verified PDF."
+    },
+    {
+      "url": "https://en.krhro.com/Product-Details/726.html",
+      "observation": "Search indexed exact product and PDF Download; direct web reader Internal Error. Historical manufacturer drawing/model provenance retained."
+    }
+  ],
+  "original_files_preservation_verified_count": 114,
+  "preservation_compared_to_head": "c337ee28b2f0e9450b9af70a26715289b8752ef7",
+  "preservation_result": "Every originally tracked EDA-004G code/evidence file byte-identical; original immutable manifest not edited."
+}
