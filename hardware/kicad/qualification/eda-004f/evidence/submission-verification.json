@@ -1,0 +1,97 @@
+{
+  "recorded_utc": "2026-10-13T22:32:09.254516+00:00",
+  "checks": [
+    {
+      "name": "evidence-replay",
+      "command": [
+        "/tmp/eda004f/venv/bin/python",
+        "-B",
+        "hardware/kicad/qualification/eda-004f/validate.py"
+      ],
+      "start_utc": "2026-10-13T22:32:08.882136+00:00",
+      "end_utc": "2026-10-13T22:32:09.105727+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"saved_process_records\": 308,\n  \"replayed_cases\": [\n    \"normal\",\n    \"disconnect\",\n    \"conflict\",\n    \"value\",\n    \"fresh\"\n  ],\n  \"frozen_contract\": true,\n  \"raw_hashes\": true,\n  \"prior_evidence_and_decisions_unchanged\": true,\n  \"changed_scope_only\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "dashboard-data-syntax",
+      "command": [
+        "node",
+        "--check",
+        "task/data/project-status.js"
+      ],
+      "start_utc": "2026-10-13T22:32:09.105791+00:00",
+      "end_utc": "2026-10-13T22:32:09.131997+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "dashboard-renderer-syntax",
+      "command": [
+        "node",
+        "--check",
+        "task/dashboard.js"
+      ],
+      "start_utc": "2026-10-13T22:32:09.132013+00:00",
+      "end_utc": "2026-10-13T22:32:09.160095+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "staged-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "start_utc": "2026-10-13T22:32:09.160111+00:00",
+      "end_utc": "2026-10-13T22:32:09.164464+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "baseline-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "3ed5558855c7d95951ea4a728f755707061279b4"
+      ],
+      "start_utc": "2026-10-13T22:32:09.164475+00:00",
+      "end_utc": "2026-10-13T22:32:09.214118+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "dashboard-substitution",
+      "command": [
+        "node",
+        "/tmp/eda004f-dashboard-verify.cjs"
+      ],
+      "start_utc": "2026-10-13T22:32:09.214138+00:00",
+      "end_utc": "2026-10-13T22:32:09.254485+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"javascriptSyntax\": true,\n  \"currentEvaluation\": \"EDA-004F\",\n  \"temporaryRecordSubstitution\": \"PASS\",\n  \"temporaryDataPersisted\": false,\n  \"renderMethod\": \"Node vm DOM stub; no real browser/visual check claimed\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "prior_failures": [
+    {
+      "check": "Initial Node DOM substitution",
+      "result": "FAIL: current evaluation coverage contained literal EDA-004F; data text changed to current-relative wording, corrected check PASS",
+      "raw": "processes/verify-dashboard-initial"
+    },
+    {
+      "check": "Initial staged git diff --check",
+      "result": "FAIL: space-before-tab in verbatim normalized unified diff context; losslessly gzip-wrapped diff, then check PASS",
+      "raw_preservation": "value-uuid-normalized.diff.gz decompresses to original diff bytes"
+    }
+  ],
+  "visual_browser_test": "NOT RUN; Node DOM stub only, UI structure unchanged"
+}

@@ -1,0 +1,19 @@
+{
+  "recorded_utc": "2026-10-13T22:21:17.218892+00:00",
+  "corrections": [
+    {
+      "failure": "Official GitHub repository master was an obsolete 2020 tree; raw .kicad_sym 404",
+      "evidence": "processes/symbols-74xGxx-kicad_sym",
+      "action": "Use official kicad-symbols 9.0.9~ubuntu24.04.1 package from the already prepared APT source; no candidate/version switch"
+    },
+    {
+      "failure": "Package has LICENSE.md rather than Debian copyright file; FileNotFoundError after symbols copied",
+      "action": "Copy unchanged usr/share/doc/kicad-symbols/LICENSE.md; no fixture generated yet"
+    },
+    {
+      "failure": "Standalone CLI ignored neighboring sym-lib-table without project file; six ERC library warnings",
+      "action": "Register byte-identical table at isolated XDG_CONFIG_HOME/kicad/9.0/sym-lib-table; generated schematic and contract untouched",
+      "evidence": "configuration-correction.json"
+    }
+  ]
+}

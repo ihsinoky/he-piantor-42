@@ -1,0 +1,45 @@
+{
+  "command": [
+    "/tmp/eda004f/kicad/usr/bin/kicad-cli",
+    "sch",
+    "erc",
+    "--format",
+    "json",
+    "--severity-all",
+    "--exit-code-violations",
+    "-o",
+    "/tmp/eda004f/disconnect/erc.json",
+    "/tmp/eda004f/disconnect/fixture.kicad_sch"
+  ],
+  "cwd": "/tmp/eda004f/disconnect",
+  "start_utc": "2026-10-13T22:20:07.485271+00:00",
+  "end_utc": "2026-10-13T22:20:07.857145+00:00",
+  "exit_code": 5,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004f/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004f/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004f/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004f/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004f/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004f/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004f/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004f/config",
+    "XDG_CACHE_HOME": "/tmp/eda004f/cache",
+    "XDG_DATA_HOME": "/tmp/eda004f/data",
+    "XDG_STATE_HOME": "/tmp/eda004f/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "erc.json",
+      "original_path": "/tmp/eda004f/disconnect/erc.json",
+      "present": true,
+      "saved_path": "processes/disconnect-erc/erc.json",
+      "sha256": "acdc58628406ae4520bc164ea29919b182ac2a560df08786779225244233520d"
+    }
+  ],
+  "elapsed_seconds": 0.36996314900011384,
+  "stdout_sha256": "5f22eeb24edcbb9021faa1cac7118563c3864940dfe18a73e26bf079ce1411fd",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

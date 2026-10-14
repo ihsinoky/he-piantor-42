@@ -1,0 +1,33 @@
+{
+  "completed_utc": "2026-10-13T22:16:50Z",
+  "completion_time_basis": "Estimated sequence before contract freeze, not exact clock observation",
+  "source_commit": "505bca23e91cf3fa6e3b66976e529e775eada3ba",
+  "distribution_version": "0.5.6",
+  "module_version": "0.5.5",
+  "VERSION_INFO": [
+    0,
+    4,
+    0
+  ],
+  "license": "MIT",
+  "readme_claim": "KiCad 7/8",
+  "source_defaults": "20250114 / generator_version 9.0",
+  "reference_tests": "KiCad 9 reference files; no 9.0.9 executable installed in inspected upstream CI",
+  "tests_executed": "Own fixed contract with real KiCad; upstream full suite NOT RUN",
+  "known_issues": "Multi-unit detection and grid tolerance in KNOWN_ISSUES.md; six open upstream issue snapshots retained",
+  "scope": "Single unit, rotation 0, official symbols, local labels, wires, explicit NC markers; no mirror/global labels/hierarchy/custom-symbol trial",
+  "public_api": [
+    "SymbolLibraryCache(enable_persistence=False)",
+    "discover_libraries",
+    "set_symbol_cache (public function with docstring, used by upstream tests)",
+    "create_schematic",
+    "components.add",
+    "get_component_pin_position",
+    "wires.add",
+    "add_label",
+    "no_connects.add",
+    "save"
+  ],
+  "dependency_lock": "requirements-lock.txt with hashes from install report, prepared before first generation in process dependencies record; excludes own local source wheel and environment pip",
+  "maintenance": "MCP dependencies are required by package metadata although unused here; build backend uses setuptools>=68 and wheel with isolated build, exact isolated build versions not retained"
+}

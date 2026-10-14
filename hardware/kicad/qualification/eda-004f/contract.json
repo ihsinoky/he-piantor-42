@@ -1,0 +1,168 @@
+{
+  "status": "FROZEN",
+  "frozen_utc": "2026-10-13T22:17:17.953826+00:00",
+  "basis": "Manual independent table from pinned official KiCad symbol package; no generated output used",
+  "components": {
+    "U1": {
+      "lib_id": "74xGxx:74LVC1G04",
+      "value": "74LVC1G04",
+      "pins": {
+        "1": [
+          "NC",
+          "no_connect",
+          null
+        ],
+        "2": [
+          "~",
+          "input",
+          "INPUT"
+        ],
+        "3": [
+          "GND",
+          "power_in",
+          "GND"
+        ],
+        "4": [
+          "~",
+          "output",
+          "SIGNAL"
+        ],
+        "5": [
+          "VCC",
+          "power_in",
+          "VCC"
+        ]
+      }
+    },
+    "U2": {
+      "lib_id": "74xGxx:74LVC1G04",
+      "value": "74LVC1G04",
+      "pins": {
+        "1": [
+          "NC",
+          "no_connect",
+          null
+        ],
+        "2": [
+          "~",
+          "input",
+          "SIGNAL"
+        ],
+        "3": [
+          "GND",
+          "power_in",
+          "GND"
+        ],
+        "4": [
+          "~",
+          "output",
+          null
+        ],
+        "5": [
+          "VCC",
+          "power_in",
+          "VCC"
+        ]
+      }
+    },
+    "R1": {
+      "lib_id": "Device:R",
+      "value": "10k",
+      "pins": {
+        "1": [
+          "~",
+          "passive",
+          "VCC"
+        ],
+        "2": [
+          "~",
+          "passive",
+          "INPUT"
+        ]
+      }
+    },
+    "R2": {
+      "lib_id": "Device:R",
+      "value": "1k",
+      "pins": {
+        "1": [
+          "~",
+          "passive",
+          "SIGNAL"
+        ],
+        "2": [
+          "~",
+          "passive",
+          "GND"
+        ]
+      }
+    },
+    "#FLG01": {
+      "lib_id": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "pins": {
+        "1": [
+          "~",
+          "power_out",
+          "VCC"
+        ]
+      }
+    },
+    "#FLG02": {
+      "lib_id": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "pins": {
+        "1": [
+          "~",
+          "power_out",
+          "GND"
+        ]
+      }
+    }
+  },
+  "intentional_nc": [
+    "U1.1",
+    "U2.1",
+    "U2.4"
+  ],
+  "normal": {
+    "erc_exit": 0,
+    "erc_violations": 0,
+    "independent_parity": true
+  },
+  "disconnect": {
+    "mutation": "Omit U2.2 wire and label, no NC marker",
+    "erc_exit": 5,
+    "required_erc_types": [
+      "pin_not_connected"
+    ],
+    "required_erc_endpoint": "U2.2",
+    "independent_parity": false,
+    "required_net_mismatch_endpoint": "U2.2"
+  },
+  "conflict": {
+    "mutation": "Connect U2.4 to SIGNAL instead of its NC marker",
+    "erc_exit": 5,
+    "required_erc_types": [
+      "pin_to_pin"
+    ],
+    "required_erc_endpoints": [
+      "U1.4",
+      "U2.4"
+    ],
+    "independent_parity": false,
+    "required_net_mismatch_endpoint": "U2.4"
+  },
+  "value": {
+    "mutation": "R1 10k -> 12k only",
+    "erc_exit": 0,
+    "erc_violations": 0,
+    "independent_parity": true
+  },
+  "fresh": {
+    "empty_directory_required": true,
+    "same_environment": true,
+    "normalized_semantics_equal": true
+  },
+  "stop": "First semantic/format/negative-detection failure stops experiments. Ordinary public-call mistakes may be corrected with evidence. No expectation changes, generated-file edits, severity overrides or fork."
+}
