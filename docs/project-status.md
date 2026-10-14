@@ -4,80 +4,64 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
-## Current situation (EDA-004G proposed STOP confirmed 2026-10-14)
+## Current situation (EDA-004G PO-authorized resume STOP, 2026-10-14)
 
-**Location:** Before real Rev.M1/Main design. Issue #85 authorized Codex's
-six-hour non-product RepresentativeMain strategy=3 evaluation. At Stage 1,
-complete faithful Main pin-model coverage was not established through the
-selected pinned library/public-API reuse path. Evaluation stopped before Main
-creation or routing. This is a proposed partial prerequisite/STOP report,
-awaiting PMO/reviewer ChatGPT and PO/user review.
+**Location:** Before real Rev.M1/Main product design. PO authorized bounded reuse
+of four individual models and conditional continuation of Issue #85 within the
+original six-hour frame. The initial selected-library shortage STOP remains an
+intermediate historical record. Resume stopped **03:35:11.510027 UTC** on an
+immutable Main role-expectation mismatch; the same Draft [PR #86](https://github.com/ihsinoky/he-piantor-42/pull/86)
+remains under PMO/PO review. No merge, adoption or Human Gate was performed.
 
-**Latest result:** **CONVERSION_BLOCKED / ERC_UNQUALIFIED**. All immutable/current-
-main/source hashes match. Manual partial source intent records 49 components,
-37 nets, 193 logical pin numbers and 197 physical endpoint intents (167 required
-and 30 NC); 29 logical NC numbers differ from 30 physical NC lands. The fixed
-official symbol snapshot lacks TPS22919, and public component addition with a
-valid reference returns `LibraryError`. Exact Flash/USB/GH model correspondence
-and a complete Main independent copper/shape/role verifier are also unqualified.
-This is a bounded executor reuse/coverage stop, not proof that small custom
-libraries or another verified public library cannot work. No measured large-
-implementation requirement or budget exhaustion is claimed.
+**Latest result:** **CONVERSION_BLOCKED / ERC_UNQUALIFIED — complete independent
+Main acceptance not established.** Four bounded definitions passed their public
+symbol load/role/correspondence checks. Fresh native input reconciled 49 parts,
+37 nets, 197 physical pads (167 required / 30 NC) and 2 NPTH against source shape
+intent. Main schematic/unrouted PCB were generated with public APIs. Raw ERC has
+0 errors/83 warnings and pre-route DRC has 0 target spacing/short/hole/boundary
+violations/237 printing or library warnings. These are limited observations,
+not complete Main qualification or effective-rule proof.
 
-**Scope:** Stage 1 partial / prerequisite FAIL. Main schematic/unrouted PCB,
-ERC/DRC/parity, effective 0.20 mm negative test, DSN/SES and all four required Main
-fault tests NOT ENTERED. Small transport attempts 0; Main initial/confirmation
-0/0. All Main metrics null. Full environment reconstruction confirmation is
-UNQUALIFIED; initial tool re-preparation is not such confirmation. Product
-implementation, Wing/manufacturing, method adoption and Human Gates unchanged.
-[Report/evidence](native-main-routing-qualification.md).
+The fixed expectation incorrectly records AP2112K pin4 as `passive` from public
+cache fallback, while official/raw generated pin4 is `no_connect`. Post-generation
+oracle changes are prohibited; no repair/experiment followed STOP. The unfinished
+PCB checker also misidentifies the NPTH enum. Full parity/actual-copper checking,
+four negative tests and effective 0.20 mm enforcement are unqualified. See
+[resume report](native-main-routing-qualification.md#po-authorized-resume-01-2026-10-14--terminal-independent-expectation-stop)
+and [terminal evidence](../hardware/kicad/qualification/eda-004g/resume-01/evidence/stop-decision.json).
+This is no proof of method-wide infeasibility or mandatory large implementation.
+Main initial/confirmation routing **0/0**, transport trials **0**; routed metrics
+remain **null**, not zero/PASS. DSN/SES and confirmation were not entered.
 
-**Accepted history:** EDA-004F's small-schematic report was accepted in merged
-[PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) at 2026-10-14 00:39:55
-UTC, merge commit `4a96d6ff6ddca3fd19330e392ae8cf91c39f6b6c`.
-SMALL_SCHEMATIC_CANDIDATE_PASS, initial acceptance FAIL and configured subsequent
-success remain historical results; no test result is rewritten. EDA-004E PR #80
-and all earlier evidence/decisions remain retained.
+[PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) remains merged/accepted
+EDA-004F small-fixture history. Its original results and all prior EDA evidence,
+D-014–D-018, product source authority, production tscircuit0.0.2646 and CI experiment
+conditions are unchanged. Product design/manufacturing remain unstarted.
 
-**PMO supplement / merge HOLD:** The STOP means **selected-library prerequisite
-not established**, not method failure or demonstrated large custom implementation.
-Read-only review found legacy TPS/Flash/HRO symbol definitions and validated-pin
-reuse candidates; generic GH/Flash symbol reuse is separate from footprint
-substitution. EP/MP/composite-contact handling and complete Main checking remain
-unqualified. No experiment resumes. [Four-part scope and evidence](native-main-routing-qualification.md#pmo-read-only-supplement-2026-10-14-merge-hold).
-
-**Next decision:** PMO reviews Issue #85's limited STOP, incomplete expectation/
-checker and possible boundedness of missing model work. PO decides record
-acceptance and continue/hold/reconsider investment. No next technical experiment
-is authorized after STOP. A next target/method/implementer/individual acceptance
-condition/investment boundary remains unplanned and needs separate PO authority.
-No alternate candidate, Wing/export, placement change or extra route starts.
+**Next owner/action:** ChatGPT PMO/reviewer reviews the new evidence, expectation
+pipeline defect, checker scope, sequencing limitation and remaining boundedness.
+PO decides acceptance/investment/direction. The present resume authorization does
+not authorize further experiments after the new STOP. A future target, independent
+expectation plan, acceptance/coverage, implementer and investment require new
+review/PO authority; they are **unplanned**, not automatic follow-up work.
 
 ### Current qualification work and product lifecycle
 
-D-014–D-018, native product source authority and production tscircuit 0.0.2646
-remain unchanged. D-015/D-017 retain two layers/1.2 mm; D-018's historical Main-
-first plan retains 0.20 mm, the two-workday convention and bounded initial/
-conditional routing. Prior trial permission does not transfer to another run.
-Issue #85's new six-hour frame was an additional limited authorization, not a
-certified remaining aggregate budget. Codex stopped at 01:31:39.130453 UTC;
-report submission is separate from technical qualification or adoption.
+| Needed capability | Latest evidence / limit |
+| --- | --- |
+| Circuit definition / independent roles | Four scoped definitions verified; full Main frozen role expectation FAIL at AP2112K pin4. Raw ERC0 errors is insufficient. |
+| PCB data / parity | Public files created/read; source shapes individually reconciled at fresh native boundary. Full KiCad physical/auxiliary parity and actual copper remain unqualified. |
+| Routing / spacing | Main0/0, transport0. Effective-rule injection, DSN/SES and routes NOT ENTERED. |
+| Error detection | Four required short/missing-pad/duplicate-copper/rule-negative tests NOT ENTERED. Observed role mismatch caught but does not replace those tests. |
+| Reproducibility | Partial environment reuse/preparation recorded; fresh confirmation and whole-environment qualification NOT ENTERED/UNQUALIFIED. |
+| Product outputs | Manufacturing, Wing, adoption and Human Gate outside this execution; no product start. |
 
-| Needed capability | Output / confirmation | Latest EDA-004G evidence |
-| --- | --- | --- |
-| Circuit/connectivity definition | Complete identities, roles, pins/nets/NC and independent consistency. | Partial individual source-intent table and pinned public-library coverage probe; complete model/role coverage unqualified. EDA-004F small success is accepted history only. |
-| PCB data | Physical pads/holes/placement/layers/outline and rules, independently reconciled. | NOT ENTERED; complete physical expectation unqualified. |
-| Routing | Physically connected copper under fixed constraints. | NOT ENTERED, Main attempts 0/0. |
-| Electrical and physical checks | Meaningful ERC, schematic/PCB parity, actual copper islands and spacing. | NOT ENTERED; required four Main fault tests and effective rule enforcement unqualified. |
-| Manufacturing output | Board-matched fabrication/assembly data and pre-order DFM. | NOT ENTERED / outside this Issue. |
-| Reproducible execution | Equivalent Main runs from recorded inputs; distinct full environment proof. | Main confirmation NOT ENTERED; full environment reconstruction confirmation UNQUALIFIED. |
-
-| Current problem / uncertainty | Evidence / consequence | Needed proof / disposition | Owner / source |
+| Current uncertainty | Evidence / consequence | Needed disposition | Owner |
 | --- | --- | --- | --- |
-| Main models incomplete in reused public-library path. | Exact TPS22919 absent; public add rejects it. Nearby Flash/USB/GH definitions need EP/MP/composite-pin correspondence. Main creation did not start. | Faithful verified definitions and independent correspondence. Current STOP needs review; alternatives were not exhausted and no excessive-work measurement is claimed. | PMO review / PO disposition; [EDA-004G](native-main-routing-qualification.md#public-model-assessment-and-first-stop). |
-| Main physical expectation/checker not established. | EDA-004E/F check only small fixtures; Main Circuit JSON checker is not a KiCad reader. Four required negative tests NOT ENTERED. | Complete actual pad/drill/track/via/layer/outline proof and effective spacing detection; no Main PASS without it. | Technical owner for future work unassigned; [coverage](../hardware/kicad/qualification/eda-004g/evidence/checker-coverage.json). |
-| Environment/maintenance and route contract incomplete. | Initial KiCad/library preparation succeeded after disclosed call/path corrections. Router/compatible Java artifact/hash and run settings not frozen. SWIG deprecated; model and adaptation cost unmeasured. | Review reproducibility and bounded maintenance scope before any separately authorized follow-up. | PMO / PO; [EDA-004G environment](native-main-routing-qualification.md#environment-evidence-and-maintenance-boundary). |
-| Evaluation investment and product start remain uncertain. | Prior known AI estimate 3.286 h + current 0.750 h allowance = 4.036 h. Active engineer/historical human/review and unattended time unknown. | PO investment decision; nominal 11.964 h arithmetic remainder is not certified remaining budget. No reset. | PO / PMO; [effort ledger](../hardware/kicad/qualification/eda-004g/evidence/effort-ledger.json). |
+| Independent expectation pipeline | Cache default incorrectly freezes NC role; post-hoc oracle repair forbidden. Original failed contract preserved. | Review a fresh independently verified expectation plan, not retrospective correction. | PMO/PO |
+| Complete physical checker | Hardcoded NPTH enum, missing required negative detection and actual routed copper/spacing proof. | Review narrow geometry/coverage and maintenance bounds before further authority. | PMO/PO; next technical owner unassigned |
+| Library/environment maintenance | Four bounded definitions work; serializer editorial compatibility and enum corrections needed. Router2.1.0/Java21 artifacts hashed but never run; launch settings not frozen. | Distinguish prepared artifacts from qualified transfer/rebuild. | PMO/PO |
+| Time/investment | Original six-hour clock/cutoffs retained; resume experiment wall46m34.510s, reporting separately. Prior3.286h and earlier4.036h cumulative allowances remain estimates; active/human/review hours unknown. | Review ledger; do not reset budget or infer measured implementation cost. | PO/PMO |
 
 The separate product lifecycle remains:
 
@@ -134,7 +118,7 @@ product implementation or passes a manufacturing gate.
 
 | Workstream | Current high-level state |
 | --- | --- |
-| Hardware | EDA-004G/#85 proposed CONVERSION_BLOCKED / ERC_UNQUALIFIED at Stage 1. Models/complete independent Main checks unqualified; no Main creation/routing, attempts 0/0. PMO/PO reviews STOP; no next trial authorized. EDA-004F accepted in merged PR #84; original small-fixture results retained. |
+| Hardware | EDA-004G/#85 PO-authorized resume STOP: four scoped symbols verified, Main files generated/raw ERC0 errors; immutable Main role expectation mismatch and incomplete physical checker prevent qualification. Routes0/0, transport0. PR #86 under PMO/PO review; no further experiments. EDA-004F accepted in merged PR #84; old results preserved. |
 | Firmware | M0 requirements are done; M1 measurement firmware is in progress. Hall/Vial integration and later firmware remain unstarted. |
 | Enclosure / Mechanical | M0 geometry constraints are done; M1 is waiting for PCB constraints. Later enclosure integration and manufacturing artifacts remain unstarted. |
 | Verification / Test | M0 planning is done; M1 magnetic and power measurement is waiting for the evaluation hardware. Rev.A bring-up and later testing remain unstarted. |

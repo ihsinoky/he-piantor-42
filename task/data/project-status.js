@@ -2,22 +2,22 @@
 window.PROJECT_STATUS = {
   schemaVersion: 2,
   source: {
-    "confirmedAt": "2026-10-14T01:31:39Z",
-    "reference": "Issue #85の工程1 STOP（提案記録・未受入。productionはmerged main）",
+    "confirmedAt": "2026-10-14T03:35:11.510027Z",
+    "reference": "Issue #85 PO承認再開の独立期待表STOP（PR #86未受入。productionはmerged main）",
     "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/86",
     "reportUrl": "../docs/native-main-routing-qualification.md",
     "historyUrl": "../docs/eda-path-history.md"
   },
   current: {
     "heading": "実物Rev.M1の設計前",
-    "location": "実物Rev.M1の設計前。EDA-004GはMainの前提モデル対応が未成立で停止。EDA-004Fの小規模結果はPR #84で受入済み。",
+    "location": "実物Rev.M1の設計前。EDA-004G再開で4部品対応とMainファイル生成、独立期待表の役割不一致で停止。EDA-004FはPR #84で受入済み。",
     "blocker": "Mainモデル・形状・実銅箔検査が未認定。接続と0.20 mm間隔を同時に満たす配線・製造経路は未認定。"
   },
   nextAction: {
-    "status": "工程1 STOPの提案報告をレビュー・追加試験は未承認",
+    "status": "再開STOPの期待表・検査不足をレビュー・追加試験は未承認",
     "owner": "PMO/reviewer: ChatGPT、判断: PO（ユーザー）",
-    "action": "Issue #85の限定的なモデル対応STOP、検査不足と不足作業の限定性をPMOがレビューし、POが記録受入・続行/保留/方向見直しと投資を判断。",
-    "target": "EDA-004Gの提案STOP記録と未成立の前提条件",
+    "action": "Issue #85再開の凍結期待表不一致・検査不足・工程成立の限界をPMOがレビューし、POが記録受入・投資と方向を判断。",
+    "target": "EDA-004G再開STOP記録と独立期待表・検査の不足",
     "startCondition": "停止後の追加実験は未承認。次対象・方法・担当・個別受入条件・投資範囲は未計画で、別途POの実施権限が必要。"
   },
   plan: {
@@ -29,13 +29,13 @@ window.PROJECT_STATUS = {
       { name:"完成版", purpose:"再現可能な成果物を固定する。", output:"v1.0製造・ファームウェア・筐体一式と手順。", confirm:"受入試験と成果物・製造手順の再現性。", completion:"G5でPOが完成版を承認。", owner:"技術担当未定。承認はPO。", dependency:"統合試験、校正、製造データ一式。", source:"docs/project-status.md · G5" }
     ],
     qualification: {
-      status:"工程1 STOP・提案報告レビュー待ち",
+      status:"再開の独立期待表STOP・報告レビュー待ち",
       purpose:"実物基板の設計データを作り、接続・配線・間隔・製造出力を確かめ、同じ条件で再現できる方法を成立させる。",
       output:"回路・基板データと、接続・配線・間隔・製造出力・再生成の確認記録。",
-      completion:"Issue #85は工程1のモデル対応で停止し、部分証拠と報告を提出。工程2〜5・Mainの4種の誤り検出は未実施。全工程目標は未達、追加試験は未承認です。",
+      completion:"Issue #85のPO承認再開で4部品の限定対応とMainファイル生成。凍結期待表のNC役割不一致で停止。完全な工程1/2成立、4負例、工程3〜5は未認定・未実施。配線0/0。追加試験は未承認です。",
       owner:"今回の実装・評価: Codex。PMO/reviewer: ChatGPT。記録受入と次回実施判断: PO。次回実施担当は未定。",
       establishedSummary:"2層・厚さ1.2 mm・配線間隔0.20 mmを維持。D-018はMain先行・初回Main評価の技術作業上限2人日を定めた限定計画で、次の実験許可ではありません。",
-      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。Issue #85は別途6時間のMain限定評価を許可しましたが、工程1で停止。過去許可は継承しません。",
+      establishedDetail:"D-015/D-017: 2層・1.2 mmの基板基準。D-018: 0.20 mmの材料間隔、Main合格後にWing/出力へ進む順序、初回Main配線1回と初回合格時のみ新規確認1回、初回Main評価の技術作業上限2人日。候補Bの限定計画に対する条件で、他候補や次回実験へ自動適用・実施許可しません。候補Bは優先された評価候補であり、採用済み方式ではありません。EDA-004B〜Eは過去の報告。EDA-004FはPR #84で小規模結果を受入。Issue #85の6時間枠内でPOが限定対応再開を承認。独立期待表不一致で再停止。初回STOP・過去結果と予算を維持し、過去許可は継承しません。",
       establishedSources:[
         {label:"project decisions D-015 / D-017 / D-018",href:"../docs/decisions.md"},
         {label:"bounded historical qualification plan",href:"../docs/alternate-physical-backend-qualification-plan.md"},
@@ -65,35 +65,35 @@ window.PROJECT_STATUS = {
       "url": "https://github.com/ihsinoky/he-piantor-42/pull/86",
       "status": "Draft PR提案・未受入"
     },
-    "workStatus": "工程1で停止・部分証拠と提案報告を提出",
-    "technicalStatus": "CONVERSION_BLOCKED / ERC_UNQUALIFIEDは選択したライブラリで前提未成立の意味。PMOマージ保留。読み取り補足で旧TPS/Flash/HRO定義と既存symbolの再利用候補を確認。方式全体の不成立・大規模実装必須の実証ではありません。",
-    "currentSummary": "固定入力hash一致。部分期待表は49部品・37ネット・193論理端子番号・197物理端子意図（必要167＋NC30）。モデル不足で工程1 STOP。Main生成/配線0回、全Main指標null。",
+    "workStatus": "PO承認再開で限定対応・Main生成、独立期待表不一致で停止・報告提出",
+    "technicalStatus": "CONVERSION_BLOCKED / ERC_UNQUALIFIEDは完全Main独立受入の未成立。4部品は公開追加成功。AP2112K端子4の凍結期待表passiveと公式/generated no_connectが不一致。事後変更せず停止。方式全体の不成立・大規模実装必須の実証ではありません。",
+    "currentSummary": "固定入力維持。4限定symbol検証・fresh nativeの個別形状照合・Main回路図/未配線PCB生成。raw ERC0 errors。期待表役割不一致とNPTH checker不足で未認定。Main配線0/0、transport0、配線指標null。",
     "currentProblem": {
-      "title": "Mainの端子モデルと独立検査の対応が未成立",
-      "basis": "選択した公式9.0.9シンボルにTPS22919がなく、正しい参照番号の公開追加APIがLibraryError。Flash/USB/GH対応も未認定。完全な形状/役割表・Main実銅箔checker・4種の誤り検出が未成立。",
-      "impact": "Main生成と配線へ進めない。Main配線不可能や公開API全般の限界を示した結果ではない。",
+      "title": "Mainの凍結期待表と独立検査の受入が未成立",
+      "basis": "初回LibraryErrorは中間停止として保持。再開4symbol追加成功。AP2112K pin4の公開cache fallbackで凍結期待表がpassive、公式/XMLはno_connect。NPTH enum checkerも不足。4負例未実施。",
+      "impact": "Mainファイルは生成済みだが独立受入に進めず配線0/0。方式不成立の証明ではない。",
       "proof": "検証済みの忠実な全モデルと端子/物理対応、実銅箔・実効ルールの独立検査と予定した誤り検出。",
-      "handling": "選択したライブラリで前提未成立のSTOP。PMOマージ保留。旧定義・既存symbolの個別再利用候補を読み取り確認し、footprint置換と区別。大規模実装必須の証拠はない。追加実験なし。",
+      "handling": "新STOP以降は事後期待表変更・checker修復・追加実験なし。失敗と元STOPを保持。PMO/POが期待表独立性・検査範囲と次の権限を判断。",
       "owner": "PMO/reviewer: ChatGPT、PO: ユーザー。次回技術担当未定。",
       "source": "docs/native-main-routing-qualification.md",
       "href": "../docs/native-main-routing-qualification.md"
     },
-    "learned": "固定ライブラリ再準備と個別pin表観察を保持。TPS22919公開追加のLibraryErrorを確認。193論理番号と197物理端子を区別。",
-    "unknown": "完全モデル/役割/形状、Main誤り検出、ERC/DRC、PCB整合、実効0.20 mm、DSN/SES、配線、確認、全環境再構築。",
+    "learned": "4個別定義は限定対応で公開追加可能。193論理番号/197物理pad/197runtime portを区別。公式NC役割がcacheでpassiveになるため独立raw照合が必要。",
+    "unknown": "完全役割期待表とPCB/実銅箔受入、4負例、実効0.20 mm、DSN/SES、配線、確認、全環境再構築。raw ERC/DRCの限定結果は記録済み。",
     "impact": "Main成立・製品設計・方式採用・Human Gateは認定/承認されていません。",
     "nextCondition": "PMOが限定STOPと不足作業の限定性をレビュー、POが受入・投資と方向を判断。追加試験は別途権限が必要。",
     "testedQuestion": "受入済み小規模経路と限定した対応で、Main全端子を忠実に表せるか。",
-    "evidenceBoundary": "工程1の公開モデル対応と部分期待表のみ。ルール/形状/接続のMain技術合格はない。代替モデル準備を網羅的に試した結果ではありません。",
+    "evidenceBoundary": "4限定モデル・fresh native照合・Main生成/raw ERC/DRCの部分証拠。凍結期待表失敗。完全Main受入なし。代替手法を網羅した結論ではない。",
     "coverage": [
       {
         "stepId": "circuit",
         "result": "一部確認・前提不成立",
-        "detail": "部分入力表と公開モデル観察のみ。TPS22919 LibraryError、完全役割・ERC未成立。"
+        "detail": "4symbol検証と回路図生成/raw ERC0 errors。Main固定役割期待表不一致で完全回路受入FAIL。"
       },
       {
         "stepId": "board",
-        "result": "未実施",
-        "detail": "Main PCB生成・形状/接続/層/外形照合は未実施。"
+        "result": "生成のみ・未認定",
+        "detail": "Main未配線PCBを公開API生成/read。fresh native形状照合は成立、完全KiCad形状/接続/実銅箔は未認定。"
       },
       {
         "stepId": "route",
@@ -125,12 +125,12 @@ window.PROJECT_STATUS = {
       {
         "label": "独立したMain期待表",
         "result": "一部のみ確認",
-        "detail": "各部品・論理pin・net/NC・source位置/回転を部分表に保持。完全形状・役割の受入なし。"
+        "detail": "部分表保持＋版付き4部品/全Main期待表を生成前固定。AP2112K pin4誤期待を事後変更せず保持。"
       },
       {
-        "label": "必要モデルの公開追加",
-        "result": "失敗",
-        "detail": "参照番号修正後のTPS22919追加はLibraryError。初回の参照番号エラーと区別。"
+        "label": "4部品の限定公開追加",
+        "result": "成功（限定範囲）",
+        "detail": "再開4symbol追加・KiCad読込成功。元LibraryErrorとgrid失敗の証拠を保持。"
       },
       {
         "label": "Mainの4種の誤り検出",
@@ -138,26 +138,26 @@ window.PROJECT_STATUS = {
         "detail": "短絡、pad欠落、重複端子の物理接続欠落、実効ルール欠落のMain検出は未認定。"
       },
       {
-        "label": "Main生成・配線・確認",
-        "result": "未実施",
-        "detail": "工程2〜5未実施。全Main指標null、route試行0/0。"
+        "label": "Main生成と配線・確認",
+        "result": "生成のみ・完全受入未認定",
+        "detail": "Main生成/raw検査のみ実施。完全工程2未認定、工程3〜5未実施、配線指標null、route0/0。"
       }
     ]
   },
   uncertainties: [
     {
-      "title": "Mainの端子モデルと独立検査の対応が未成立",
-      "basis": "選択した公式9.0.9シンボルにTPS22919がなく、正しい参照番号の公開追加APIがLibraryError。Flash/USB/GH対応も未認定。完全な形状/役割表・Main実銅箔checker・4種の誤り検出が未成立。",
-      "impact": "Main生成と配線へ進めない。Main配線不可能や公開API全般の限界を示した結果ではない。",
+      "title": "Mainの凍結期待表と独立検査の受入が未成立",
+      "basis": "初回LibraryErrorは中間停止として保持。再開4symbol追加成功。AP2112K pin4の公開cache fallbackで凍結期待表がpassive、公式/XMLはno_connect。NPTH enum checkerも不足。4負例未実施。",
+      "impact": "Mainファイルは生成済みだが独立受入に進めず配線0/0。方式不成立の証明ではない。",
       "proof": "検証済みの忠実な全モデルと端子/物理対応、実銅箔・実効ルールの独立検査と予定した誤り検出。",
-      "handling": "選択したライブラリで前提未成立のSTOP。PMOマージ保留。旧定義・既存symbolの個別再利用候補を読み取り確認し、footprint置換と区別。大規模実装必須の証拠はない。追加実験なし。",
+      "handling": "新STOP以降は事後期待表変更・checker修復・追加実験なし。失敗と元STOPを保持。PMO/POが期待表独立性・検査範囲と次の権限を判断。",
       "owner": "PMO/reviewer: ChatGPT、PO: ユーザー。次回技術担当未定。",
       "source": "docs/native-main-routing-qualification.md",
       "href": "../docs/native-main-routing-qualification.md"
     },
     {
       "title": "Mainの実銅箔・間隔検査が未認定",
-      "basis": "EDA-004E/Fは小規模固定checker。Circuit JSON checkerはKiCad readerではなく、4種のMain負例未実施。",
+      "basis": "再開にMain限定readerを追加したが役割期待表・NPTH enum不足。4種のMain負例未実施。",
       "impact": "routerの表示やnet名でMain合格にできない。",
       "proof": "完全な物理形状表、実銅箔と層間接続、NC/穴/境界と0.20 mmの有効な検査。",
       "handling": "停止後に追加実験を開始しない。",
@@ -167,7 +167,7 @@ window.PROJECT_STATUS = {
     },
     {
       "title": "モデル・環境・受け渡しの保守範囲",
-      "basis": "初回KiCad/library再準備のみ。対応済み全Mainモデル・router/Java hash/設定と全環境確認は未成立。SWIG deprecated。",
+      "basis": "4限定symbol・public parser/serializer・API correctionを記録。router2.1.0/Java21 hash準備済みだが実行/設定/DSNSES未成立。SWIG依存。",
       "impact": "後工程と保守工数が不明。",
       "proof": "限定性・完全モデル/環境とDSN/SES保持の別途証拠。",
       "handling": "不足作業の限定性をPMOがレビュー、POが投資判断。",
@@ -177,7 +177,7 @@ window.PROJECT_STATUS = {
     },
     {
       "title": "評価投資と製品への進行",
-      "basis": "既知累積AI推定3.286＋今回0.750 hの提出/CI予約込みallowance＝4.036 h。実測技術者・過去人間/レビュー時間は不明。",
+      "basis": "既知累積推定3.286hと以前のallowance4.036hを保持。補足・再開/報告wallを別記、active engineer/人間/レビューは不明。元6h枠をリセットしない。",
       "impact": "正確な残予算と製品着手時期は不明。",
       "proof": "POが投資・続行/保留/方向を判断。",
       "handling": "予算リセットなし。名目11.964 hは残予算認定ではない。",
@@ -187,11 +187,11 @@ window.PROJECT_STATUS = {
     }
   ],
   decision: {
-    "status": "工程1 STOP報告の記録受入判断待ち・追加試験は未承認",
+    "status": "再開STOPの記録受入判断待ち・追加試験は未承認",
     "question": "EDA-004Gの限定STOPをどう受け入れ、不足作業への投資・続行/保留/方向をどう判断するか。",
     "evidence": "モデル/完全期待表/checkerが未成立。代替の小規模モデル準備を網羅的に試しておらず、大規模実装・予算超過の実測証拠はない。",
     "owner": "PMOが技術材料を整理し、POが判断。次回実施担当未定。",
-    "planStatus": "Issue #85工程1で停止。工程2〜5未実施。次回の対象・方法・担当・個別受入条件・投資範囲は未計画。D-014〜18を維持。",
+    "planStatus": "Issue #85再開でMainファイル生成、完全工程1/2未成立。工程3〜5未実施。次回の独立期待表/coverage/担当/個別受入/投資は未計画。D-014〜18維持。",
     "proposal": "この報告で再試行・別候補・方式採用・製品設計を承認しません。"
   },
   history: [
@@ -201,7 +201,7 @@ window.PROJECT_STATUS = {
     { name: "Circuit JSON → KiCad", tested: "bounded converter repairと小規模/Main前段の検査", stopped: "別々の試行でGND landのnet欠落/short、footprint library ID衝突、schematic ERC未成立。配線試行なし。", reuse: "raw fixture、固定環境、capture手順と限られたcheckerの知見。", retry: "正確なfootprint identityと接続済みschematic/ERC等の条件が必要。", refs: "EDA-004B–D、Issue #73 / #75 / #77、PR #76 / #78", href: "../docs/eda-path-history.md" },
     { name: "native KiCad objects", tested: "KiCad 9.0.9の固定小規模基板を作成・保存し、別のプログラム実行で開き直し", stopped: "初回DRCに予期しない警告2件。回路図経路がなく、Mainへ進む前にSTOP。", reuse: "試験対象内で確認した基板データの保存・再読込と形状・接続情報の保持。", retry: "PO/PMOが具体的な回路図経路を承認し、限定した修正・実効ルール試験・条件付き再評価を許可した場合のみ。", refs: "EDA-004E、Issue #79、PR #80、D-014", href: "../docs/native-kicad-authoring-feasibility.md" },
     { name:"external kicad-sch-api", tested:"固定KiCad 9.0.9で小規模回路図作成・検査", stopped:"停止条件なし、限定試験完了。初回受入は設定警告6件で失敗、同一ファイル設定修正後に候補成立。", reuse:"独立端子表、公開API生成、固定CLI検査とfault検出。", retry:"Main以降は別途計画・PO許可が必要。", refs:"EDA-004F / Issue #83 / merged PR #84（受入済み）", href:"../docs/headless-schematic-qualification.md" },
-    { name:"public native Main prerequisite", tested:"固定Main入力・部分端子表と公開シンボル対応", stopped:"工程1 CONVERSION_BLOCKED / ERC_UNQUALIFIED。TPS22919公開追加LibraryError、完全Mainモデル/checker未認定。配線0/0。", reuse:"入力hashと部分対応表、版・公開pin表観察。完全Mainへ結果を一般化しない。", retry:"限定STOPと不足作業の限定性をPMO/POがレビュー。追加試験権限はない。", refs:"EDA-004G / Issue #85（提案STOP）", href:"../docs/native-main-routing-qualification.md" }
+    { name:"public native Main prerequisite", tested:"固定Main入力・4限定symbol対応・fresh native形状・Main生成/raw検査", stopped:"再開CONVERSION_BLOCKED / ERC_UNQUALIFIED。4symbol検証とMain生成、凍結NC役割不一致/NPTH checker不足。配線0/0。", reuse:"入力hashと部分対応表、版・公開pin表観察。完全Mainへ結果を一般化しない。", retry:"限定STOPと不足作業の限定性をPMO/POがレビュー。追加試験権限はない。", refs:"EDA-004G / Issue #85（提案STOP）", href:"../docs/native-main-routing-qualification.md" }
   ],
   evidenceLinks: {
     "latestReport": "../docs/native-main-routing-qualification.md",
@@ -225,7 +225,7 @@ window.PROJECT_STATUS = {
       "name": "Hardware",
       "cells": [
         "設計方針 完了",
-        "EDA-004G工程1 STOPの提案報告。Mainモデル/checker未認定、配線0/0。EDA-004FはPR #84で受入済み。",
+        "EDA-004G再開STOP。4symbol対応とMain生成、凍結期待表/独立checker未成立、配線0/0。EDA-004FはPR #84で受入済み。",
         "Main再利用 + Left/Right Wings",
         "統合改版",
         "製造版"
@@ -331,8 +331,8 @@ window.PROJECT_STATUS = {
     ["EDA-004D","EDA","Bounded converter repair","done","Codex","#77 / PR #78 CONVERSION_BLOCKED: D1_FOOTPRINT_LIBRARY_ID_COLLISION; limited repair parity pass, remaining ERC failures; no routes"],
     ["EDA-004E","EDA","Native KiCad authoring feasibility and history","done","Codex","#79 / PR #80: 固定小規模試験基板の保存・再読込で確認対象の形状と接続情報の保持を確認。初回受入は予期しないDRC警告2件で不成立。実物Main・配線・製造・再生成は未認定。"],
     ["EDA-004F","EDA","Headless小規模回路図作成・検査","done","Codex","#83 / merged PR #84受入記録: SMALL_SCHEMATIC_CANDIDATE_PASS。初回受入FAIL、設定修正後全個別試験成立。Main/PCB/製造未実施。"],
-    ["EDA-004G","EDA","代表Mainの公開モデル・整合・headless配線限定評価","done","Codex","#85提案STOP: 工程1 CONVERSION_BLOCKED / ERC_UNQUALIFIED。部分期待表、モデル/checker未認定。Main生成/配線0/0、全Main指標null。"],
-    ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","Main実装未承認。EDA-004G工程1 STOP提案報告のPMO/POレビュー待ち。詳細: ../docs/native-main-routing-qualification.md"],
+    ["EDA-004G","EDA","代表Mainの公開モデル・整合・headless配線限定評価","done","Codex","#85/PR #86再開STOP: 4限定symbol対応、Main生成/raw ERC0 errors。固定NC役割不一致とchecker不足で完全受入未認定。配線0/0/transport0、配線指標null。"],
+    ["EVT-002","EVT","Rev.M1 Main + Evaluation Wing physical implementation","hold","Codex","製品Main実装未承認。EDA-004G再開STOP報告のPMO/POレビュー待ち。詳細: ../docs/native-main-routing-qualification.md"],
     ["EVT-003","MFG","評価基板 JLCPCBパッケージ","todo","Codex","EVT-002"],
     ["EVT-004","FW","評価FW・CSV計測","progress","Codex","EVT-001"],
     ["EVT-005","TEST","評価基板を発注","hold","User","EVT-003 / G1"],

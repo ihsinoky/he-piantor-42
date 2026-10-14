@@ -1,0 +1,51 @@
+{
+  "command": [
+    "/tmp/eda004g/kicad/usr/bin/kicad-cli",
+    "sch",
+    "export",
+    "netlist",
+    "--format",
+    "kicadxml",
+    "-o",
+    "/tmp/eda004g-resume01/diagnostic-2.xml",
+    "/tmp/eda004g-resume01/diagnostic-2.kicad_sch"
+  ],
+  "cwd": "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01",
+  "start_utc": "2026-10-14T03:28:40.754080+00:00",
+  "end_utc": "2026-10-14T03:28:41.238374+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/eda004g/kicad/usr/lib/x86_64-linux-gnu:/tmp/eda004g/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/eda004g/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/eda004g/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/eda004g/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/eda004g/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/eda004g-resume01/config",
+    "XDG_CACHE_HOME": "/tmp/eda004g/cache",
+    "XDG_DATA_HOME": "/tmp/eda004g/data",
+    "XDG_STATE_HOME": "/tmp/eda004g/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "input.kicad_sch",
+      "original_path": "/tmp/eda004g-resume01/diagnostic-2.kicad_sch",
+      "present": true,
+      "saved_path": "processes/symbol-read-diagnostic-2/input.kicad_sch",
+      "sha256": "a34add23b9785af9f55a8a72af3e767563dfd08b6384729be5302fbf0c3a4b2e"
+    },
+    {
+      "label": "output.xml",
+      "original_path": "/tmp/eda004g-resume01/diagnostic-2.xml",
+      "present": true,
+      "saved_path": "processes/symbol-read-diagnostic-2/output.xml",
+      "sha256": "7c8930bb2f827a3a1018f18632623a85b201445b727951ee75ddf365775826ff"
+    }
+  ],
+  "elapsed_seconds": 0.48104395199879946,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

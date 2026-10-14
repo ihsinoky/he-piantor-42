@@ -1,0 +1,120 @@
+"""Independent frozen Main oracle: XML circuit, physical identity and copper graph.
+
+Coverage: this two-layer fixture's rect/circle/oval pads, round straight tracks,
+circular plated through vias, NPTH. Unknown geometry/zones fail. Shapely is used
+for actual copper connectivity (holes subtracted), never net-name union.
+Clearance acceptance additionally requires KiCad effective-rule tests and DRC.
+"""
+import json
+import math
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+from shapely.geometry import Point,LineString,box
+from shapely import affinity
+ROOT=Path(__file__).resolve().parent
+C=json.loads((ROOT/'main-contract-v1.json').read_text())
+def near(a,b):return abs(a-b)<=C['tolerance_mm']
+def capsule(position,size,angle=0):
+    x,y=position;w,h=size
+    if w==h:return Point(x,y).buffer(w/2,quad_segs=512)
+    dx,dy=max(w-h,0)/2,max(h-w,0)/2
+    g=LineString([(x-dx,y-dy),(x+dx,y+dy)]).buffer(min(w,h)/2,quad_segs=512)
+    return affinity.rotate(g,-angle,origin=(x,y))
+def shape(a):
+    x,y=a['position'];w,h=a['size']
+    if a['shape']==1:g=affinity.rotate(box(x-w/2,y-h/2,x+w/2,y+h/2),-a['angle'],origin=(x,y))
+    elif a['shape'] in (0,2):g=capsule([x,y],[w,h],a['angle'])
+    else:raise AssertionError(('unknown pad geometry',a))
+    if any(a['drill']):g=g.difference(capsule([x,y],a['drill'],a['angle']))
+    return g
+def circuit(path):
+    tree=ET.parse(path);comps=tree.findall('./components/comp')
+    exp={c['cad_reference']:c for c in C['components']};assert len(comps)==49
+    for x in comps:
+        e=exp[x.attrib['ref']]
+        assert x.findtext('value')==e['display_value'] and x.findtext('footprint')==e['footprint_id']
+        assert x.find("property[@name='SourceID']").attrib['value']==e['reference']
+    endpoints={}
+    named=set()
+    for n in tree.findall('./nets/net'):
+        name=n.attrib['name'];nodes=n.findall('node')
+        # KiCad local-label XML qualifies root-sheet names with exactly '/'.
+        if name.startswith('/'):
+            assert name.count('/')==1 and name[1:] in C['named_nets']
+            name=name[1:]
+        if not name.startswith('unconnected-'):named.add(name)
+        for x in nodes:
+            ref,pin=x.attrib['ref'],x.attrib['pin'];assert (ref,pin) not in endpoints
+            e=exp[ref];intent=e['pins'][pin];role=e['pin_roles'][pin]
+            assert x.attrib.get('pinfunction','~')==role['name']
+            actual=x.attrib['pintype'];assert actual.split('+')[0]==role['role']
+            if intent['intentional_nc']:
+                assert len(nodes)==1 and name.startswith('unconnected-') and (actual.endswith('+no_connect') or actual=='no_connect')
+                endpoints[(ref,pin)]=None
+            else:assert name==intent['named_net'];endpoints[(ref,pin)]=name
+    assert named==set(C['named_nets']) and len(endpoints)==193
+    return dict(components=49,individual_logical_pins=193,named_nets=37,nc=sum(x is None for x in endpoints.values()),typed_roles_verified=True)
+def pcb(s,require_routed=False):
+    exp={c['cad_reference']:c for c in C['components']};assert len(s['components'])==49
+    for x in s['components']:
+        e=exp[x['ref']];assert x['source_id']==e['reference'] and x['value']==e['display_value'] and x['footprint']==e['footprint_id']
+        assert all(near(a,b) for a,b in zip(x['position'],[100+e['source_position_mm'][0],100-e['source_position_mm'][1]])) and near(x['angle'],e['source_ccw_rotation_deg'])
+    assert s['layers']==2 and s['thickness']==1.2 and s['zones']==0
+    for key,value in s['rules'].items():assert value>=.2,('missing material rule',key,value)
+    assert s['default']==dict(clearance=.2,width=.2,via=.6,drill=.3)
+    expected=list(C['pads']);matched={};copper=[];holes=[]
+    for a in s['pads']:
+        if a['attribute']==2:
+            assert not a['number'] and a['drill']==[.65,.65];holes.append(a);continue
+        candidates=[e for e in expected if e['cad_reference']==a['ref'] and e['number']==a['number'] and all(near(x,y) for x,y in zip(a['position'],[100+e['source_position_mm'][0],100-e['source_position_mm'][1]]))]
+        assert len(candidates)==1,('pad identity mismatch',a)
+        e=candidates[0];assert e['id'] not in matched;matched[e['id']]=a
+        w,h=a['size'];size=[h,w] if round(a['angle'])%180==90 else [w,h]
+        assert all(near(x,y) for x,y in zip(size,e['source_global_size_mm']))
+        assert a['shape']=={'rect':1,'circle':0,'oval':2}[e['shape']] and a['drill']==e['drill_mm'] and a['layers']==([0,2] if e['attribute']=='PTH' else [0])
+        assert a['attribute']==(0 if e['attribute']=='PTH' else 1) and a['net']==(e['net'] or '')
+        copper.append(dict(id=e['id'],net=e['net'],layers=a['layers'],geometry=shape(a),pad=True,nc=e['nc']))
+    assert set(matched)=={e['id'] for e in expected},'required/NC pad missing'
+    assert len(holes)==2
+    for a in holes:
+        assert any(all(near(x,y) for x,y in zip(a['position'],[100+e['source_position_mm'][0],100-e['source_position_mm'][1]])) for e in C['holes'])
+    for i,t in enumerate(s['tracks']):
+        if t['kind']=='track':g=LineString([t['start'],t['end']]).buffer(t['width']/2,quad_segs=512);layers=[t['layer']];assert near(t['width'],.2)
+        elif t['kind']=='via':g=capsule(t['position'],[t['size']]*2).difference(capsule(t['position'],[t['drill']]*2));layers=t['layers'];assert t['size']==.6 and t['drill']==.3
+        else:raise AssertionError('unknown copper kind')
+        copper.append(dict(id=f'copper-{i}',net=t['net'],layers=layers,geometry=g,pad=False,nc=False))
+    parent=list(range(len(copper)))
+    def find(i):
+        while parent[i]!=i:i=parent[i]
+        return i
+    shorts=[]
+    for i,a in enumerate(copper):
+        for j in range(i):
+            z=copper[j]
+            if not set(a['layers'])&set(z['layers']):continue
+            if a['geometry'].intersects(z['geometry']):
+                parent[find(i)]=find(j)
+                if a['net']!=z['net']:shorts.append([a['id'],z['id'],a['net'],z['net']])
+    groups={}
+    for i,a in enumerate(copper):groups.setdefault(find(i),[]).append(a['id'])
+    required={}
+    for i,a in enumerate(copper):
+        if a['pad'] and not a['nc']:required.setdefault(a['net'],set()).add(find(i))
+    disconnected={n:len(v) for n,v in required.items() if len(v)>1}
+    shield=[i for i,a in enumerate(copper) if a['id'].startswith('J_USB.13.')]
+    assert len({find(i) for i in shield})==1,'duplicate shield actual copper missing'
+    assert not shorts,('actual wrong-net copper short',shorts)
+    if require_routed:assert not disconnected,('required physical pad unconnected',disconnected)
+    else:
+        assert len(s['tracks'])==3 and all(t['net']=='GND' and t['kind']=='track' for t in s['tracks'])
+        points=[[-19.32,15.87],[-19.32,20.05],[-10.68,20.05],[-10.68,15.87]]
+        expected_edges={tuple(sorted(((round(100+a[0],6),round(100-a[1],6)),(round(100+z[0],6),round(100-z[1],6))))) for a,z in zip(points,points[1:])}
+        actual_edges={tuple(sorted((tuple(t['start']),tuple(t['end'])))) for t in s['tracks']};assert actual_edges==expected_edges
+    edges={tuple(sorted((tuple(x['start']),tuple(x['end'])))) for x in s['edges']}
+    points=[[76,78],[124,78],[124,122],[76,122]]
+    assert edges=={tuple(sorted((tuple(a),tuple(z)))) for a,z in zip(points,points[1:]+points[:1])}
+    return dict(individual_pads=197,required_physical_pads=167,nc_physical_pads=30,npth=2,wrong_net_actual_copper_contacts=shorts,actual_connected_components=len(groups),required_net_disconnected_component_counts=disconnected,duplicate_shield_actual_connectivity=True,full_routed_acceptance=require_routed)
+if __name__=='__main__':
+    result=dict(circuit=circuit(sys.argv[1]),pcb=pcb(json.loads(Path(sys.argv[2]).read_text()),'--routed' in sys.argv))
+    Path(sys.argv[3]).write_text(json.dumps(result,indent=2)+'\n');print('independent circuit/PCB identity + actual copper graph passed for requested scope')

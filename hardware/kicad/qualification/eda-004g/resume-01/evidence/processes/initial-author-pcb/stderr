@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01/author-main-pcb.py", line 71, in <module>
+    if __name__=='__main__':generate(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/he-piantor-42/hardware/kicad/qualification/eda-004g/resume-01/author-main-pcb.py", line 25, in generate
+    fp=p.FOOTPRINT(b);fp.SetReference(c['cad_reference']);fp.SetValue(c['display_value']);fp.SetDescription(c['reference']);fp.SetFPIDAsString(c['footprint_id']);fp.SetAttributes(p.FP_SMD)
+                                                                                          ^^^^^^^^^^^^^^^^^
+AttributeError: 'FOOTPRINT' object has no attribute 'SetDescription'. Did you mean: 'SetLibDescription'?

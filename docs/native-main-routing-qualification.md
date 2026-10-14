@@ -1,5 +1,17 @@
 # EDA-004G — native Main routing qualification
 
+**Latest: PO-authorized resume stopped on independent Main role-expectation mismatch.**
+Four bounded symbols loaded; Main schematic/unrouted PCB generated, raw ERC errors0.
+Complete independent acceptance remains unqualified; routing attempts **0/0/0**.
+See [resume 01](#po-authorized-resume-01-2026-10-14--terminal-independent-expectation-stop).
+Original STOP/failures/frozen evidence remain historical records below; no method-wide
+failure or mandatory large implementation is claimed. PR #86 remains under review.
+
+## Initial execution and read-only supplement — retained historical record
+
+The following original narrative records its earlier epoch only. Its statements
+that Main generation had not started are not the latest resume status.
+
 **CONVERSION_BLOCKED / ERC_UNQUALIFIED — selected-library prerequisite not established; Stage 1 STOP.**
 [Issue #85](https://github.com/ihsinoky/he-piantor-42/issues/85) authorized the
 non-product `RepresentativeMain strategy=3` evaluation. Complete Main pin-model
@@ -304,3 +316,154 @@ PMOの**merge HOLD**は解消したとの判定をしていません。現在の
 確認0/0、小規模transport0、全Main指標null、4負例未実施も不変です。汎用writer/forkの
 必要性を実証した証拠はなく、方式全体は未評価です。この補足は実験再開、merge、
 方式採用、Human Gate、製品設計やIssue closeの承認ではありません。
+
+## PO-authorized resume 01 (2026-10-14) — terminal independent-expectation STOP
+
+The PO authorized bounded implementation of the four reuse candidates and
+conditional continuation within the **same six-hour frame**, not another budget.
+At **02:48:37 UTC**, branch was unchanged, HEAD was
+`b3b6302a80799ccab2fcaed768199c5831a5d6ca`, worktree clean, PR #86 OPEN/Draft with
+matching head and no auto-merge, and Issue #85 OPEN. The latest Issue snapshot and
+[restart record](../hardware/kicad/qualification/eda-004g/resume-01/evidence/restart-record.json)
+are retained. All previously tracked EDA-004G evidence is hash-preserved. The
+initial STOP remains an **intermediate selected-library prepared-model shortage**;
+its original failure/freeze files and the read-only supplement were not rewritten.
+
+**Latest STOP: 03:35:11.510027 UTC**, before any router launch. Full Main typed-role
+acceptance failed: `U_LDO`/AP2112K pin 4 is `no_connect` in the official inherited
+definition and generated XML, but **`passive` in the immutable Main expectation**.
+Pinned public cache code handles five explicit electrical types and defaults
+unhandled types to passive. The executor failed to independently reconcile this
+cache result with the raw official definition before freezing the expectation.
+The [root-cause evidence](../hardware/kicad/qualification/eda-004g/resume-01/evidence/post-stop-root-cause.json)
+retains the official pin, cache excerpt/hash and observed XML. This is an
+expectation/checking defect; it does not show a wrong generated circuit or method
+infeasibility. The post-generation expectation correction prohibition applies,
+so **no repair, regeneration, transfer or routing followed this STOP**.
+
+`CONVERSION_BLOCKED / ERC_UNQUALIFIED` now means **complete independent Main role
+and physical-check acceptance not established**. It does not describe the four
+symbols' public addition, which succeeded, or claim mandatory large custom
+implementation. Raw ERC error count zero is a limited observation; it does not
+satisfy Issue #85's complete circuit/checker requirements.
+
+### Four-part implementation and verified scope
+
+[Versioned four-part contract](../hardware/kicad/qualification/eda-004g/resume-01/model-contract-v1.json)
+was frozen before public-parser packaging. It records each pin name, role,
+number, net/NC, schematic location and duplicate-land mapping. Public sexpdata
+extracted the selected existing definitions; public cache/add/pin-position calls
+verified them; KiCad CLI independently read each of the four generated symbols.
+Old symbol default footprints were cleared and never automatically adopted.
+
+| Component | Implemented/verified schematic correspondence | Physical scope and remaining limit |
+| --- | --- | --- |
+| TPS22919DCKR | Six typed pins: 1 IN / 2 GND / 3 ON / 4 NC / 5 QOD / 6 OUT. Official TI SLVSEN5B roles and NC/QOD floating disposition checked; pin 4/5 NC preserved. Existing six-pin definition registered. | Original sot363 six rectangles, source pose and nets retained in the independent physical contract and fresh native comparison. No substitute footprint. |
+| W25Q16JVUXIQ | Eight signal/supply pins retained; EP9 is an independent passive **physical-metal annotation** with source-owned NC, not an invented ninth signal or GND supply. GND4 and EP9 have distinct schematic endpoints; only EP's schematic endpoint moved. | Source nine-land UX geometry retained; EP `.254 × 1.651 mm`. UX package drawing shows metal independently; optional grounding/internal-isolation notes on other packages were **not** applied to UX. Manufacturer-internal EP disposition and manufacturing approval remain unconfirmed. |
+| TYPE-C-31-M-12 | Explicit original A/B combined contacts → source pin 1–12 correspondence, SBU6/7 NC, shield pin13 → four distinct lands. Signal roles retained individually. | Source 12 contact lands, four oval plated stakes and two NPTH retained. Manufacturer/repository footprint differences were not substituted. Same pad number is not accepted as proof of shield copper connectivity. |
+| BM14B-GHS-TBT | Verified generic 14 passive contact pins; individual MP15 annotation/NC added, with separate physical-land mapping. Contact numbers 1–14 remain electrical contacts; MP15 is not contact15. | Fourteen signal/contact pads plus **two distinct NC mechanical lands**, source drawing/geometry/pose retained. No official/default GH footprint replacement. |
+
+These are **bounded individual definitions/correspondence**, not a general writer,
+fork or private API. `four-model-acceptance.json` expressly covers those symbol
+loads/roles/positions and declared correspondence, not full Main/physical/ERC
+qualification. Initial grid-snapping failure and corrected grid-aligned schematic
+check are separately retained. No implementation engineer-hours were measured;
+no estimate of mandatory large work is asserted.
+
+### Generated evidence, corrections and stage results
+
+The new [Main expectation v1](../hardware/kicad/qualification/eda-004g/resume-01/main-contract-v1.json)
+was frozen before generation and is retained **unaccepted**. Source nets/aliases
+for generation were independently derived from a **fresh native source run** with
+public `routingDisabled:true`; expected geometry was transcribed from fixed source
+and locked footprinter constants. Routed historical copper was not used. The
+fresh reader compared all identities, pin/net/NC correspondence, poses and pad
+shapes: 49 components, 193 logical pin numbers, 197 runtime source ports, 197
+physical pads (167 required / 30 NC), 2 NPTH and 37 named nets. These different
+counting conventions are not interchangeable. Source's doubled-back USB bond is
+34 mm path length but 17 mm distinct material; three distinct original segments
+represent its material union, without additional hand routing.
+
+Public kicad-sch-api generated the Main schematic; public KiCad PCB objects/save
+created the PCB/project. The schema's component references use an explicit frozen
+valid-KiCad reference ↔ original `SourceID` mapping. PCB source position/rotation,
+shape, outline, layer, fixed width/spacing/via rules were not deliberately changed.
+Complete independent PCB acceptance was **not** achieved.
+
+Pre-STOP fixes and their failed files/logs are retained: public `SetLibDescription`
+name; oval paste via public round-ended segment; KiCad9 silk/courtyard enum values
+(invalid string lookup had produced `UNDEFINED` layers); nanometre rounding of
+public vector coordinates; grid-aligned schematic positions; and **editorial
+annotation syntax** compatibility for official RP2040/crystal input libraries.
+The serializer misread `(property private name value)`; public parser/serializer
+removed only its syntax marker while retaining hidden name/value/effects. Original
+library bytes are archived. No pin/role/graphic shape change or generated-file hand
+patch occurred. This latter correction affects two official symbols' non-electric
+metadata, beyond the four custom electrical definitions, and is disclosed for
+review rather than hidden as an unchanged input.
+
+| Stage | Result / evidence boundary |
+| --- | --- |
+| 1: independent expectations/check methods | Four-part bounded symbol checks succeeded. Complete Main role expectation **FAIL / STOP** at AP2112K pin4. Required short/missing-pad/duplicate-copper/rule-missing fault injections **NOT ENTERED**, not PASS. |
+| 2: schematic/unrouted PCB | Files generated and read by KiCad. Raw ERC **0 errors / 83 warnings**. Pre-route DRC **0 target clearance/short/hole/boundary violations**, 237 printing/library warnings. These observations precede full independent acceptance; **stage NOT QUALIFIED**. |
+| 3: effective rules / DSN / SES | Rule values stored `.20 mm`, but effective violation injection and DSN/SES retention **NOT ENTERED**. No transport routing trial. |
+| 4: initial Main routing | **NOT ENTERED**, attempt count **0**; no DSN/SES/routed PCB, no launch settings contract. |
+| 5: conditional confirmation | **NOT ENTERED**, attempt count **0**; initial pass absent. |
+| Whole-environment reconstruction | Some environment preparation/reuse recorded; complete environment reconstruction/qualification **UNQUALIFIED**. |
+| Product design / manufacturing / adoption / Human Gate | **NOT ENTERED / not decided**. |
+
+The first XML checker failure was an omitted passive pinfunction (`~`); the next
+164 name differences were exactly KiCad's root-sheet `/` prefix, not connectivity
+errors. Both reader corrections/logs precede the actual typed-role STOP. The
+post-STOP read-only PCB reconciliation also failed because the unfinished checker
+hardcoded NPTH attribute2 while KiCad's snapshot exposes NPTH3. Its geometry was
+not repaired or declared wrong. Thus actual-copper island checking and all physical
+parity remain **unqualified**, despite raw DRC's limited zero target violations.
+Other unverified areas include auxiliary marking/paste parity, footprint-library
+registration, ERC library warnings, four Main negative detections, effective rule
+enforcement and routed copper/layer connectivity. Existing USB NPTH product risk
+remains recorded; this partial DRC result does not waive it or product DFM.
+The saved zero-target DRC is for the successful layer-enum generation, **before**
+the last public vector nanometre-rounding correction. The final saved PCB was read
+and snapshotted, but DRC was not repeated before STOP; the earlier result must not
+be represented as a final-file DRC pass.
+
+All failures remain in [the new epoch](../hardware/kicad/qualification/eda-004g/resume-01/README.md).
+No post-STOP code/expectation repair was performed. Generating files before the
+complete Stage1 acceptance had been demonstrated was insufficient to establish
+Stage2 readiness; the executor does not claim a compliant complete Stage1/2 pass.
+A later correction would require a separately reviewed expectation/coverage plan
+and fresh authorized epoch, rather than changing this frozen test retrospectively.
+
+### Environment, time and maintenance
+
+Retained EDA-004F kicad-sch-api commit `505bca23e91cf3fa6e3b66976e529e775eada3ba`,
+KiCad **9.0.9**, official symbol package, public sexpdata **1.0.2**, isolated
+frontend tscircuit **0.0.2748** / Bun **1.2.22** were recorded/reused. Production
+**0.0.2646** and source authority remain unchanged. New pypdf **6.0.0** and Shapely
+**2.1.2** installation records retain artifact/dependency hashes. Freerouting
+**2.1.0** official release/documentation and Microsoft Java **21.0.12.1+1-LTS**
+were selected from public Java21 compatibility, with jar/JDK hashes and version
+output recorded. **Router never ran**; passes/threads/seed/timeout/DSN/SES were
+not frozen or tested. JAVA selection is preparation, not routing reproducibility.
+
+The unchanged conservative experiment/report cutoffs are **06:47:56 / 07:17:56
+UTC**, derived from the original **01:17:56 UTC** six-hour start. Resume experiment
+window **02:48:37 → 03:35:11.510027** is **46m34.510s wall**, not measured engineer
+work. Initial window 13m43.130s, read-only supplement 5m7.279s, intervening
+report/turn windows and 43m26s observed between-turn waiting remain distinct in the
+ledger. Active engineer time and historical human/reviewer time remain unknown.
+Known prior cumulative AI estimate **3.286 h**, then earlier submitted allowance
+**4.036 h**, are preserved as estimates, not clocks or reset budgets. New resume/
+report wall and command elapsed/unattended maxima are reported separately; no
+unmeasured implementation cost is presented as measured. The one-hour checkpoint
+records early STOP, residual work and that submission fits the original frame;
+it does not authorize continuing experiments. Reporting began before budget
+pressure and leaves the required final 30 minutes unconsumed.
+
+Maintenance limits: fixture-specific unfinished reader/authoring, public cache
+fallback and serializer compatibility, inherited official pin semantics, explicit
+KiCad enum/version dependence, polygonal connectivity approximation requiring
+validation, and compressed library restoration. No fork/private API/general
+writer was introduced. Existing decisions, prior evidence, product files,
+production dependencies and CI experiment execution conditions are unchanged.
