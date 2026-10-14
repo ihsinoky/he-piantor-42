@@ -1,5 +1,8 @@
 # Issue #87 — fixed Main routing qualification
 
+Submitted as Draft [PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88);
+review/merge and technical qualification remain separate.
+
 - **Learned:** KiCad detects a real **0.10 mm** copper gap against the retained **0.20 mm** rule. Actual saved/reloaded PCB tests establish via connectivity, missing-via disconnection and wrong-net contact detection. However, both raw public DSN exports introduce **0.05 mm `smd_smd` clearance**. The fixed public API/configuration handoff remains **DSN_RULE_TRANSFER_UNQUALIFIED / MAIN_UNQUALIFIED**.
 - **Attempts:** Main initial **0**, confirmation **0**, small DSN→router→SES roundtrip **0**. Two successful DSN exports are preparation, not roundtrip attempts. No router routing process, SES or routed Main exists.
 - **First STOP:** stage C, rule reconciliation before any routing; **2026-10-14 20:52:37.127596 UTC**. The raw DSN relaxes a material condition; a supported configuration preserving it was not established. Individual DSN geometry, NC/duplicate/holes/local-copper reconciliation and SES return remain incomplete. This is neither a fixed-placement routing failure nor method-wide incapability.

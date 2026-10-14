@@ -4,7 +4,7 @@ window.PROJECT_STATUS = {
   source: {
     "confirmedAt": "2026-10-14T20:52:37.127596Z",
     "reference": "Issue #87工程C STOP提案。PR #86は20:40UTC受入済みmerge。productionはmerged main。",
-    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/issues/87",
+    "statusUrl": "https://github.com/ihsinoky/he-piantor-42/pull/88",
     "reportUrl": "../docs/issue-87-native-main-routing.md",
     "historyUrl": "../docs/eda-path-history.md"
   },
@@ -61,8 +61,8 @@ window.PROJECT_STATUS = {
       "url": "https://github.com/ihsinoky/he-piantor-42/issues/87"
     },
     "acceptedRecord": {
-      "id": "87",
-      "url": "https://github.com/ihsinoky/he-piantor-42/issues/87",
+      "id": "88",
+      "url": "https://github.com/ihsinoky/he-piantor-42/pull/88",
       "status": "今回STOP報告は未受入。PR #86は過去STOPの受入済み報告。"
     },
     "workStatus": "工程CでSTOP・証拠提出（提案）。STOP後の実験は禁止。",
