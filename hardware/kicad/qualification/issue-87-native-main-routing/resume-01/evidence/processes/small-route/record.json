@@ -1,0 +1,62 @@
+{
+  "command": [
+    "/home/codespace/java/21.0.12+1-ms/bin/java",
+    "-Djava.awt.headless=true",
+    "-Duser.language=en",
+    "-Duser.country=US",
+    "-Xmx2g",
+    "-Djava.io.tmpdir=/tmp/issue87-resume01/smoke-route/temp",
+    "-jar",
+    "/tmp/issue87/freerouting.jar",
+    "--user_data_path=/tmp/issue87-resume01/smoke-route/user-data",
+    "--gui.enabled=false",
+    "--api_server.enabled=false",
+    "-da",
+    "--profile.allow_telemetry=false",
+    "--router.automatic_neckdown=false",
+    "--router.max_threads=1",
+    "--router.optimizer.enabled=false",
+    "--router.fanout.enabled=false",
+    "--router.job_timeout=00:20:00",
+    "-mp",
+    "100",
+    "-mt",
+    "0",
+    "-is",
+    "sequential",
+    "-de",
+    "/tmp/issue87-resume01/smoke-route/input.dsn",
+    "-do",
+    "/tmp/issue87-resume01/smoke-route/output.ses"
+  ],
+  "cwd": "/tmp/issue87-resume01/smoke-route",
+  "start_utc": "2026-10-14T21:19:57.965075+00:00",
+  "end_utc": "2026-10-14T21:20:03.404365+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "env_overrides": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "output.ses",
+      "original_path": "/tmp/issue87-resume01/smoke-route/output.ses",
+      "present": true,
+      "saved_path": "processes/small-route/output.ses",
+      "sha256": "436de0b87c8effd5342835428cd98a7b0e6b0d15c7fe1cf72284ceb6a65077ba"
+    },
+    {
+      "label": "effective-start-settings.json",
+      "original_path": "/tmp/issue87-resume01/smoke-route/user-data/freerouting.json",
+      "present": true,
+      "saved_path": "processes/small-route/effective-start-settings.json",
+      "sha256": "3499c12f249de20b8eeae770e68b08b5518d4bc963bcb665df1fb4f48adc8181"
+    }
+  ],
+  "elapsed_seconds": 5.437255177000225,
+  "stdout_sha256": "2b3d8ef6f79138e3196e156d3acf11cc976bb88d880124d1b443293ff0796dba",
+  "stderr_sha256": "838c34f1ddc14df12ca180db6e2b8e339ad7766b838da6fc8ed4e833d1645c9b"
+}

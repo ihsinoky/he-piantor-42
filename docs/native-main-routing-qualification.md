@@ -1,5 +1,15 @@
 # EDA-004G — native Main routing qualification
 
+**Historical accepted STOP report:** PR #86 merged at 2026-10-14 20:40:00 UTC,
+`49ebe146a586bf820a747b93951a29fe94f08623`. The authority correction and prior
+results below remain unchanged. Separately authorized Issue #87 has its own
+[new report](issue-87-native-main-routing.md): historical stage-C **DSN_RULE_TRANSFER_UNQUALIFIED**, followed by an explicitly
+authorized typed-rule resume: small roundtrip1 PASS WITH SCOPE, Main initial1
+incomplete/run-contract unqualified, confirmation0. Main physical metrics remain
+null; see the new report’s latest section. Its new budget and printing-scope
+change do not retroactively authorize prior work or certify older budgets.
+
+
 **Latest authority correction: resume02 fresh generation/ERC/DRC exceeded the PO instruction scope.**
 **Retained technical result: PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED.**
 Four bounded models and a new raw-definition expectation passed scoped checks.

@@ -1,0 +1,70 @@
+{
+  "profile": {
+    "id": "3209e04e-3ad0-4c4a-bed1-3bd71c459c62",
+    "email": "",
+    "allow_telemetry": false,
+    "allow_contact": true
+  },
+  "gui": {
+    "enabled": false,
+    "input_directory": "",
+    "dialog_confirmation_timeout": 5
+  },
+  "router": {
+    "algorithm": "freerouting-router",
+    "job_timeout": "00:20:00",
+    "max_passes": 100,
+    "trace_pull_tight_accuracy": 500,
+    "allowed_via_types": true,
+    "automatic_neckdown": false,
+    "fanout": {
+      "enabled": false,
+      "algorithm": "freerouting-fanout",
+      "max_passes": 100
+    },
+    "optimizer": {
+      "algorithm": "freerouting-optimizer",
+      "max_passes": 100,
+      "max_threads": 0,
+      "improvement_threshold": 0.01
+    },
+    "scoring": {
+      "default_preferred_direction_trace_cost": 1.0,
+      "default_undesired_direction_trace_cost": 2.5,
+      "via_costs": 50,
+      "plane_via_costs": 5,
+      "start_ripup_costs": 100,
+      "unroutedNetPenalty": 4000.0,
+      "clearanceViolationPenalty": 1000.0,
+      "bendPenalty": 10.0
+    },
+    "max_threads": 1
+  },
+  "usage_and_diagnostic_data": {
+    "disable_analytics": true
+  },
+  "feature_flags": {
+    "logging": true,
+    "multi_threading": true,
+    "select_mode": false,
+    "macros": false,
+    "other_menu": false,
+    "snapshots": false,
+    "file_load_dialog_at_startup": false,
+    "save_jobs": false
+  },
+  "api_server": {
+    "enabled": false,
+    "http_allowed": false,
+    "endpoints": [
+      "https://0.0.0.0:37864"
+    ]
+  },
+  "statistics": {
+    "start_time": "2026-10-14 21:19:23",
+    "sessions_total": 0,
+    "jobs_started": 0,
+    "jobs_completed": 0
+  },
+  "version": "2.1.0"
+}

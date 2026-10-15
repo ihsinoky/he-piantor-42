@@ -1,0 +1,30 @@
+{
+  "negative_cases": {
+    "unexpected-unit": {
+      "rejected": true,
+      "reason": "[Symbol('unit'), Symbol('mm')]"
+    },
+    "unexpected-resolution": {
+      "rejected": true,
+      "reason": "[Symbol('resolution'), Symbol('um'), 100]"
+    },
+    "wrong-target-value": {
+      "rejected": true,
+      "reason": "[[Symbol('clearance'), 40, [Symbol('type'), Symbol('smd_smd')]]]"
+    },
+    "duplicate-target": {
+      "rejected": true,
+      "reason": "[[Symbol('clearance'), 50, [Symbol('type'), Symbol('smd_smd')]], [Symbol('clearance'), 50, [Symbol('type'), Symbol('smd_smd')]]]"
+    },
+    "missing-target": {
+      "rejected": true,
+      "reason": "[]"
+    },
+    "target-outside-global-rule": {
+      "rejected": true,
+      "reason": "[]"
+    }
+  },
+  "unrelated50_preserved": true,
+  "status": "PASS_WITH_SCOPE"
+}

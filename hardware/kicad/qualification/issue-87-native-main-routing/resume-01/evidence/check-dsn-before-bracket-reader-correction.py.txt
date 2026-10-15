@@ -1,0 +1,124 @@
+"""Bounded individual reconciliation for the two fixed DSN fixtures, not a converter."""
+import json,math,sys,importlib.util
+from pathlib import Path
+import sexpdata as sx
+from shapely.geometry import Point,LineString,box
+from shapely import affinity
+ROOT=Path(__file__).resolve().parent;PREV=ROOT.parent
+spec=importlib.util.spec_from_file_location('copper',PREV/'check-main.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+TOL=m.C['tolerance_mm']
+def children(n,tag):return [x for x in n if isinstance(x,list) and x and str(x[0])==tag]
+def one(n,tag):
+    r=children(n,tag);assert len(r)==1,(tag,len(r));return r[0]
+def parse(path):
+    text=Path(path).read_text();assert text.count('(string_quote ")')==1
+    return sx.loads(text.replace('(string_quote ")','(string_quote quote_character)'))
+def word(x):return str(x)
+def geometric(n):
+    typ=word(n[0]);layer=word(n[1]);nums=[float(x)/1000 for x in n[2:]]
+    if typ=='rect':assert len(nums)==4;g=box(*nums)
+    elif typ=='circle':
+        assert len(nums) in [1,3];diam=nums[0];x,y=nums[1:] if len(nums)==3 else (0,0);g=Point(x,y).buffer(diam/2,quad_segs=512)
+    elif typ=='path':
+        assert len(nums)==5;w=nums[0];g=LineString([nums[1:3],nums[3:5]]).buffer(w/2,quad_segs=512)
+    else:raise AssertionError(('unsupported DSN shape',n))
+    return layer,g
+
+def compare(name,dsn,snapshot,effective,out):
+    t=parse(dsn);s=json.loads(Path(snapshot).read_text());e=json.loads(Path(effective).read_text())
+    assert one(t,'unit')==[sx.Symbol('unit'),sx.Symbol('um')]
+    assert one(t,'resolution')==[sx.Symbol('resolution'),sx.Symbol('um'),10]
+    structure=one(t,'structure');lib=one(t,'library');placement=one(t,'placement');network=one(t,'network')
+    assert [word(l[1]) for l in children(structure,'layer')]==['F.Cu','B.Cu']
+    assert not children(structure,'plane')
+    images={word(x[1]):x for x in children(lib,'image')};pads={word(x[1]):x for x in children(lib,'padstack')}
+    netmap={};nets=children(network,'net')
+    for n in nets:
+        for p in one(n,'pins')[1:]:
+            assert word(p) not in netmap;netmap[word(p)]=word(n[1])
+    assert {word(n[1]) for n in nets}=={x['net'] for x in s['pads'] if x['net']}
+    classes=children(network,'class');assert len(classes)==1
+    assert word(classes[0][1])=='kicad_default'
+    assert {word(x) for x in classes[0][2:] if not isinstance(x,list)}=={word(n[1]) for n in nets}
+    assert children(network,'class_class')==[]
+    # Rules examined globally, per-layer and per-netclass; no unrecognized override.
+    def rules(n,path=()):
+        if isinstance(n,list):
+            if n and word(n[0]) in ['rule','layer_rule']:yield path,n
+            for i,x in enumerate(n):yield from rules(x,path+(i,))
+    allrules=list(rules(t));assert len(allrules)==2 and all(word(n[0])=='rule' for _,n in allrules)
+    assert one(structure,'rule')[1:]==[[sx.Symbol('width'),200],[sx.Symbol('clearance'),200],[sx.Symbol('clearance'),200,[sx.Symbol('type'),sx.Symbol('smd_smd')]]]
+    assert one(classes[0],'rule')[1:]==[[sx.Symbol('width'),200],[sx.Symbol('clearance'),200]]
+    actual=[];holes=[];component_rows=[]
+    for comp in children(placement,'component'):
+        image=images[word(comp[1])]
+        for place in children(comp,'place'):
+            ref=word(place[1]);x,y=float(place[2])/1000,float(place[3])/1000;rotation=float(place[5]);assert word(place[4])=='front'
+            expected=next(c for c in s['components'] if c['ref']==ref)
+            assert abs(x-expected['position'][0])<=TOL and abs(-y-expected['position'][1])<=TOL and rotation==expected['angle']
+            assert word(one(place,'PN')[1])==expected['value']
+            component_rows.append(dict(ref=ref,dsn_image=word(comp[1]),retained_original_footprint=expected['footprint'],position=[x,-y],rotation=rotation,value=expected['value']))
+            def world(g):return affinity.translate(affinity.rotate(g,rotation,origin=(0,0)),xoff=x,yoff=y)
+            for pin in children(image,'pin'):
+                assert len(pin)==5,('unknown pin rotation',pin)
+                ps=pads[word(pin[1])];pinname=word(pin[2]);px,py=float(pin[3])/1000,float(pin[4])/1000
+                shapes={}
+                for shape in children(ps,'shape'):
+                    assert len(shape)==2;layer,g=geometric(shape[1]);g=world(affinity.translate(g,xoff=px,yoff=py));assert layer not in shapes;shapes[layer]=g
+                assert one(ps,'attach')==[sx.Symbol('attach'),sx.Symbol('off')]
+                cx,cy=world(Point(px,py)).coords[0]
+                candidates=[p for p in s['pads'] if p['attribute']!='NPTH' and p['ref']==ref and p['number']==pinname.split('@')[0] and math.dist(p['position'],[cx,-cy])<=TOL]
+                assert len(candidates)==1,(ref,pinname,cx,cy,candidates)
+                p=candidates[0];net=netmap.get(ref+'-'+pinname,'');assert net==p['net']
+                expected_layers=['F.Cu','B.Cu'] if p['attribute']=='PTH' else ['F.Cu' if p['layers']==[0] else 'B.Cu']
+                assert set(shapes)==set(expected_layers)
+                envelope=m.shape(dict(p,drill=[0,0]));envelope=affinity.scale(envelope,xfact=1,yfact=-1,origin=(0,0))
+                for layer,g in shapes.items():assert g.hausdorff_distance(envelope)<=TOL,('pad shape',ref,pinname,layer,g.bounds,envelope.bounds)
+                actual.append(dict(ref=ref,dsn_pin=pinname,number=p['number'],position=p['position'],net=net,nc=not net,shape=p['shape'],size=p['size'],layers=expected_layers,attribute=p['attribute'],retained_drill=p['drill'],uuid=p['uuid'],bbox=[list(shapes[l].bounds) for l in expected_layers]))
+            for keepout in children(image,'keepout'):
+                assert len(keepout)==3 and word(keepout[1])=='';layer,g=geometric(keepout[2]);assert word(keepout[2][0])=='circle';g=world(g)
+                cx,cy=g.centroid.coords[0];diam=(g.bounds[2]-g.bounds[0])
+                candidates=[h for h in s['pads'] if h['attribute']=='NPTH' and h['ref']==ref and math.dist(h['position'],[cx,-cy])<=TOL and abs(diam-h['drill'][0]-.4)<=TOL]
+                assert len(candidates)==1,('NPTH obstacle',ref,cx,cy,diam)
+                holes.append(dict(ref=ref,position=[cx,-cy],layer=layer,physical_drill=candidates[0]['drill'],dsn_keepout_diameter=diam,bbox=list(g.bounds)))
+    assert len(component_rows)==len(s['components']) and {r['ref'] for r in component_rows}=={c['ref'] for c in s['components']}
+    assert len(actual)==sum(p['attribute']!='NPTH' for p in s['pads']) and len({p['uuid'] for p in actual})==len(actual)
+    assert len(holes)==2*sum(p['attribute']=='NPTH' for p in s['pads'])
+    for h in [p for p in s['pads'] if p['attribute']=='NPTH']:
+        assert {a['layer'] for a in holes if math.dist(a['position'],h['position'])<=TOL}=={'F.Cu','B.Cu'}
+    # Outline vertices/edge inventory, not merely overall board dimensions.
+    boundary=one(one(structure,'boundary'),'path');assert word(boundary[1])=='pcb' and boundary[2]==0
+    vertices=[(float(boundary[i])/1000,-float(boundary[i+1])/1000) for i in range(3,len(boundary),2)]
+    edges={tuple(sorted((tuple(a),tuple(z)))) for a,z in zip(vertices,vertices[1:])}
+    assert edges=={tuple(sorted((tuple(x['start']),tuple(x['end'])))) for x in s['edges']}
+    wires=children(one(t,'wiring'),'wire');segments=[]
+    for wire in wires:
+        path=one(wire,'path');layer=word(path[1]);width=float(path[2])/1000
+        pts=[[float(path[i])/1000,-float(path[i+1])/1000] for i in range(3,len(path),2)]
+        assert one(wire,'type')==[sx.Symbol('type'),sx.Symbol('route')]
+        for a,z in zip(pts,pts[1:]):segments.append(dict(start=a,end=z,width=width,layer=layer,net=word(one(wire,'net')[1])))
+    expected={(tuple(sorted((tuple(x['start']),tuple(x['end'])))),x['width'],x['net'],'F.Cu' if x['layer']==0 else 'B.Cu') for x in s['tracks']}
+    assert {(tuple(sorted((tuple(x['start']),tuple(x['end'])))),x['width'],x['net'],x['layer']) for x in segments}==expected
+    via=word(one(structure,'via')[1]);assert via=='Via[0-1]_600:300_um'
+    assert {geometric(x[1])[0] for x in children(pads[via],'shape')}=={'F.Cu','B.Cu'}
+    for x in children(pads[via],'shape'):assert word(x[1][0])=='circle' and x[1][2]==600
+    assert one(one(classes[0],'circuit'),'use_via')==[sx.Symbol('use_via'),via]
+    # Public router readback must agree with each reconstructed pad/net/layer/bounds.
+    assert e['components']==len(s['components']) and e['layers']==2
+    ep={(x['component'],x['pin']):x for x in e['pins']};assert len(ep)==len(actual)
+    for p in actual:
+        q=ep[(p['ref'],p['dsn_pin'])];assert q['nets']==([p['net']] if p['net'] else [])
+        assert [x['layer'] for x in q['shapes']]==p['layers']
+        for shape,bbox in zip(q['shapes'],p['bbox']):assert all(abs(a-b)<=TOL for a,b in zip(shape['bbox_dsn_mm'],bbox)),('router bounds',p,q)
+        assert q['clearance_class']!='null'
+    obs=e['obstacles'];assert len(obs)==len(holes)
+    for h in holes:
+        candidates=[o for o in obs if o['component']==h['ref'] and o['first_layer']==o['last_layer']==(['F.Cu','B.Cu'].index(h['layer'])) and all(abs(a-b)<=TOL for a,b in zip(o['bbox_dsn_mm'],h['bbox']))]
+        assert len(candidates)==1 and candidates[0]['clearance_class']!='null'
+    # Every real matrix pair, including NC SMD / netclass / obstacle / wire, >=.20mm.
+    matrix=[r for r in e['clearance_matrix'] if r['class_a']!='null' and r['class_b']!='null'];assert matrix and all(r['clearance_mm']>=.2 for r in matrix)
+    assert all(w==.2 for c in e['netclasses'] for w in c['widths_mm'])
+    assert all(t['fixed_state']=='USER_FIXED' for t in e['traces']) and len(e['traces'])==len(segments)
+    result=dict(status='PASS_WITH_SCOPE',tolerance_mm=TOL,components=component_rows,pads=actual,npth_obstacles=holes,local_tracks=segments,all_real_router_matrix_pairs_at_least_020=True,netclass_widths_020=True,router_readback_individual_pads_verified=True,dsn_nonrepresented_information=dict(part_identity='original KiCad FPID/SourceID and schematic typed roles retained in source board; DSN reuses identical shape image aliases with individual PN values verified',thickness='not serialized into routing DSN; retained unchanged original KiCad project/PCB1.2mm',drills='NPTH become inflated two-layer obstacles; PTH hole geometry is not serialized separately from outer copper, original KiCad annulus/drills preserved; via600:300 padstack maps into original KiCad via definition; final KiCad/independent hole checks required',nc='pins absent from DSN network have no net but retain padstack shapes; public router readback confirms zero-net obstacles',soldermask_paste_printing='not router copper; original KiCad is import target, no replacement or deletion; retained board items checked after SES'),post_SES_still_required=True)
+    Path(out).write_text(json.dumps(result,indent=2)+'\n');print(name,'individual DSN/router input parity passed',len(actual),'pads',len(holes),'hole-layer obstacles')
+if __name__=='__main__':compare(*sys.argv[1:])

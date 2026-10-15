@@ -1,0 +1,23 @@
+{
+  "changes": [
+    {
+      "failure": "processes/smoke-dsn-parity/stderr",
+      "old": "check-dsn-before-bracket-reader-correction.py.txt",
+      "basis": "DSN bracket characters are part of bare padstack identifiers; Lisp reader sexpdata interprets [] as lists. Fixed JAR independently reads the same raw DSN correctly.",
+      "fix": "Quote only known KiCad bracket-bearing padstack tokens in reader memory; no DSN bytes/expectations changed",
+      "scope": "DSN checker lexical adaptation",
+      "acceptance": "smoke/main dsn-parity-reader-corrected"
+    },
+    {
+      "failure": "processes/small-acceptance/stderr",
+      "old": "check-import-before-segment-split-correction.py.txt",
+      "basis": "SES has source10,10->10,12 split at10,10.3775; both original endpoints and the full original same-width/layer/net centerline are physically retained. Source requirement is copper geometry, not one segment record.",
+      "fix": "Require full source centerline coverage by same-width/layer/net returned copper; collinear split accepted, crossing/nearby lines cannot hide missing original copper. Other nonroute object semantics and exact pads/holes/rules remain unchanged.",
+      "scope": "checker segment representation only, no router rerun; no oracle or material condition change",
+      "acceptance": "small-acceptance-segment-invariant; KiCad DRC0/unconnected0 and physical graph independently confirm"
+    }
+  ],
+  "expectations_modified": false,
+  "small_router_attempts": 1,
+  "main_router_attempts": 0
+}

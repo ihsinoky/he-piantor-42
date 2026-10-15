@@ -1,0 +1,9 @@
+{
+  "failure": "processes/smoke-create/stderr",
+  "old_code": "pcb-probes-before-parent-correction.py.txt",
+  "basis": "Public PAD constructor requires FOOTPRINT*. Generic GetParent() wrapper loses derived SWIG type; existing BOARD.GetFootprints() returns FOOTPRINT wrappers.",
+  "change": "Select U1 FOOTPRINT through BOARD.GetFootprints() before public PAD(f)",
+  "scope": "tiny transport fixture creation only; no fixed Main model/placement/rule changes; no router attempt had started",
+  "success": "processes/smoke-create-typed-footprint/record.json",
+  "expectations_changed": false
+}

@@ -1,0 +1,64 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "scope": "three actual saved/reloaded tiny two-layer PCBs; via barrel joins both copper annuli; no via leaves overlapping F/B tracks electrically separate; wrong-net physical track contact detected",
+  "cases": {
+    "connected": {
+      "shorts": [],
+      "groups": {
+        "0": [
+          "U1.1",
+          "U2.1",
+          "copper-0",
+          "copper-1",
+          "copper-2"
+        ],
+        "2": [
+          "U3.1"
+        ]
+      },
+      "disconnected": {}
+    },
+    "missing-via": {
+      "shorts": [],
+      "groups": {
+        "0": [
+          "U1.1",
+          "copper-0"
+        ],
+        "1": [
+          "U2.1",
+          "copper-1"
+        ],
+        "2": [
+          "U3.1"
+        ]
+      },
+      "disconnected": {
+        "N": 2
+      }
+    },
+    "short": {
+      "shorts": [
+        [
+          "copper-1",
+          "U3.1",
+          "N",
+          "OTHER"
+        ]
+      ],
+      "groups": {
+        "0": [
+          "U1.1",
+          "U2.1",
+          "U3.1",
+          "copper-0",
+          "copper-1",
+          "copper-2",
+          "copper-3"
+        ]
+      },
+      "disconnected": {}
+    }
+  },
+  "main_baseline_regression_equal": true
+}

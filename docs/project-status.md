@@ -4,66 +4,68 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
-## Current situation (EDA-004G resume02 physical DRC STOP, 2026-10-14)
+## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
-**Location:** Before real Rev.M1/Main product design. Resume02 fresh Main generation
-and ERC/DRC exceeded the PO-clarified one-hour saved-evidence/checker scope.
-The “PO-authorized resume02” claim is withdrawn; its technical evidence is retained. Start
-13:07:55 UTC, clean HEAD `bf3d7eb`, same branch and Draft [PR #86](https://github.com/ihsinoky/he-piantor-42/pull/86).
-Initial library-shortage STOP and resume01 role-oracle failure remain historical
-and hash-preserved. No merge, adoption, product start or Human Gate.
+**Location:** Before real Rev.M1/Main product design. Same Draft
+[PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88), Issue87. PR #86 is an
+accepted historical STOP, with prior authority/budget corrections retained.
+Current PO limited-resume authority permits the small structural DSN restoration;
+utilization reset does not reset the6h Issue frame or add attempts.
 
-**Latest result:** **PRE_ROUTE_PHYSICAL_DRC_STOP / MAIN_UNQUALIFIED**,
-13:40:11 UTC. Four bounded models were individually verified/reused. A new v2
-expectation was frozen before a fresh target using all193 raw official typed-pin
-definitions/inheritance; no cache default or retrospective old-result acceptance.
-New **ERC has0 violations**. Individual circuit net/NC/role correspondence and
-197 physical pads (167 required/30 NC),2 NPTH, values/poses/layers/outline and the
-actual three-segment USB bond pass their scoped checks. Four Main-shaped synthetic
-short/missing-pad/duplicate-copper/missing-rule cases were detected.
+**Latest result:** **ROUTING_BLOCKED / MAIN_OUTPUT_INCOMPLETE /
+RUN_CONTRACT_UNQUALIFIED / MAIN_UNQUALIFIED**, recovery STOP
+**2026-10-14 22:23:18.672066 UTC**. [Latest report](issue-87-native-main-routing.md#resume-01).
+The existing Main wrapper exited0 at21:41:53.513 UTC after1203.752s and saved SES,
+but final router telemetry has35 incomplete connections. Logs reach512 passes
+instead of declared100: the public parsed-settings probe did not establish the
+effective runtime cap. No claim that the fixed100-pass trial was valid. The
+precise timeout/job termination cause is not certified; outer1260s timeout did
+not fire. Codex utilization interruption is a separate event. No replacement or
+resume routing process was launched during recovery.
 
-Complete physical acceptance failed: final PCB DRC retains **61 printing violations**
-(44 text height,12 silk overlap,5 silk over copper). Source-native primitive
-parameters match, but actual native text glyph equivalence is unqualified. Example
-height0.4000mm vs active minimum0.8000mm cannot be solved by moving print position.
-No severity/minimum suppression or frozen print-geometry change followed STOP.
-Baseline target copper/hole/edge DRC0 does not prove effective .20mm enforcement;
-its negative injection and DSN/SES were **NOT ENTERED**. Unrouted127 deficits are
-expected, not routed Main failure. Main initial/confirmation **0/0**, transport**0**;
-routed metrics **null**. See [resume02 report](native-main-routing-qualification.md#resume-02-2026-10-14--out-of-scope-execution-and-retained-technical-stop).
-The result proves neither method-wide infeasibility nor mandatory large work.
+**Established in limited resume:** only typed smd_smd50→200um changed, raw kept,
+independent AST/byte diff and public fixed-JAR effective F/B matrix readback pass.
+Ordinary/netclass rules and all other loaded objects remain unchanged. Full
+individual Main input DSN pad/net/NC/duplicate/pose/shape/outline/layer/local-copper/
+hole-obstacle reconciliation passes; DSN omissions vs native retained properties
+are explicit. Small roundtrip **1 PASS WITH SCOPE**: returned KiCad nonroute
+semantics unchanged, DRC/unconnected0, actual copper graph and all4 metrics0.
+Prior actual.10mm gap/via fault evidence is hash-verified and reused.
 
-[PR #84](https://github.com/ihsinoky/he-piantor-42/pull/84) remains accepted merged
-EDA-004F history with old results unchanged. Current main/source hashes match
-immutable `b84585e`; product source authority, production0.0.2646, D-014–18, past
-evidence and CI's experimental execution conditions remain unchanged. The vanished
-fixed tmp environment was re-prepared and hashed; full reconstruction qualification
-is unqualified and router was never launched.
+**Attempts:** small **1**, Main initial **1**, confirmation **0**. Main four
+post-return physical metrics are **null**, not router35 or clearance0. The latest
+PO recovery caseC requires STOP on incomplete output; no new Main SES-import/
+DRC/graph experiment followed that finding. Prepared code was not executed.
+Main post-return parity, material acceptance, complete routing and confirmation
+remain unqualified. This is not a valid fixed100-pass placement result or proof
+of method-wide inability. No retry, setting exploration or confirmation.
 
-**Next owner/action:** ChatGPT PMO/reviewer reviews the authority correction,
-unapproved budget reinterpretation and printing/glyph/constraint
-scope, full physical acceptance, checker coverage and time accounting. PO owns
-record acceptance/investment/direction and any new scope. After this STOP no
-further experiment is authorized by inference; next target, corrective scope,
-independent expectations, acceptance, implementer and budget are **unplanned**.
+Baseline Main ERC0 and61 known printing warnings are retained. No new Main DRC
+was run, so no post-route print/material status is inferred. Printing/glyphs are
+still manufacturing work; no deletion/suppression/exception. USB NPTH DFM,
+product source/production0.0.2646/D-014–18, Wing/manufacturing/Gates remain unchanged.
 
-### Current qualification work and product lifecycle
+**Next owner/action:** PMO reviews bounded restoration/small success, incomplete
+Main and runtime-contract failure; PO decides record acceptance and any new
+scope/investment or hold. No next technical execution is authorized. Target,
+method, implementer, independent acceptance and investment remain unplanned.
 
-| Needed capability | Latest evidence / limit |
+| Capability | Evidence / practical limit |
 | --- | --- |
-| Models / circuit | Four bounded models and193 raw typed pins verified; fresh schematic ERC0 and individual net/NC parity pass. Old v1 remains failed. |
-| Core PCB / actual copper |197 pads/2 holes/pose/layers/outline/source USB bond independently checked, including same-number land copper. No global routing. |
-| Complete physical acceptance |557 auxiliary primitive parameters match; exact glyph geometry unqualified and61 printing DRC violations stop acceptance. |
-| Error detection / rules | Four synthetic faults detected; real .20mm violation injection NOT ENTERED. Settings alone insufficient. |
-| Transfer / routing / confirmation | DSN/SES, small trial and Main initial/confirmation NOT ENTERED;0/0/0. Whole-environment qualification unproved. |
-| Product output | Manufacturing/Wing/adoption/Human Gate not started or decided. |
+| Core Main / earlier real faults | Hash-verified reuse; individual input parity and prior actual gap/via/short proof. |
+| DSN rules / individual transfer | Known token restored only; independent diff, effective class matrix and full input reconciliation pass. Native drilling/thickness/printing retention distinguished from router obstacles. |
+| Small roundtrip | One route; native nonroute geometry/drill/NC preserved, four metrics0 in tiny fixture only. |
+| Main initial | One incomplete output; public parser said100passes, actual512. No physical terminal qualification; metrics null. |
+| Confirmation |0, not entered; initial all-condition pass absent. |
+| Product/manufacturing | No start/approval;61baseline warnings/glyph/USB DFM remain open. |
 
-| Current uncertainty | Evidence / consequence | Review / disposition | Owner |
+| Uncertainty | Evidence / consequence | Needed disposition | Owner |
 | --- | --- | --- | --- |
-| Printing physical fidelity / violations | Source parameter height.4mm vs active .8mm minimum; overlaps include backend stroke text whose exact source glyph equivalence is unknown. Violations are not excluded as historical exceptions. | Review allowed physical/printing scope before any new correction. | PMO/PO |
-| Rule / transport / routed checker | Baseline target DRC0; effective test/DSN/SES and routed-via/spacing coverage unqualified. | Review remaining bounded proof; no Main PASS from current partial results. | PMO/PO |
-| Library/environment maintenance | Public pretty-print and explicit library I/O resolve prior warnings; all49 source-native footprints registered. SWIG/version/inheritance/geometry limits remain. | Distinguish preparation/reuse from qualified whole rebuild. | PMO/PO |
-| Time/investment | Executor reinterpreted six-hour accounting without verified PO approval. Prior reservations2.25h and additional observed1.260h are not measured engineer time or proof of compliance. Historical3.286h/4.036h/5.536h estimates retained; active/human time unknown. | Review authority breach separately from actual extra elapsed time and unapproved cutoff reinterpretation; no experiments reopened. | PO/PMO |
+| Effective run contract | Requested100, observed512; parsed-setting success insufficient. Exact runtime cause unqualified. | Review run validity and any separately scoped proof, no automatic retry. | PMO/PO |
+| Main physical result | Router35 incomplete is telemetry; returned Main physical graph/DRC/parity unmeasured after caseC STOP. | Retain partial SES and null metrics; no method-wide claim. | PMO/PO |
+| Printing/product | Baseline61warnings and glyph/USB DFM unresolved; no post-route DRC. | Resolve before manufacturing; no exception. | PO; product implementer unassigned |
+| Interruption/time | Prior13min + charged resume/unattended route + recovery/report/submission. Utilization-wait boundary uncertain. | Lower/upper ledger, upper used for6h; no reset, no fabricated1h contemporaneous note. | PO/PMO |
+| Maintenance | Public binding/parser/config integration and whole-environment reconstruction remain unqualified. | Evaluate bounded maintenance/investment only under new authority. | PMO/PO |
 
 The separate product lifecycle remains:
 

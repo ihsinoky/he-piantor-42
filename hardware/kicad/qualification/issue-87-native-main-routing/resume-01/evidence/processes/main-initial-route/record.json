@@ -1,0 +1,62 @@
+{
+  "command": [
+    "/home/codespace/java/21.0.12+1-ms/bin/java",
+    "-Djava.awt.headless=true",
+    "-Duser.language=en",
+    "-Duser.country=US",
+    "-Xmx2g",
+    "-Djava.io.tmpdir=/tmp/issue87-resume01/main-initial-route/temp",
+    "-jar",
+    "/tmp/issue87/freerouting.jar",
+    "--user_data_path=/tmp/issue87-resume01/main-initial-route/user-data",
+    "--gui.enabled=false",
+    "--api_server.enabled=false",
+    "-da",
+    "--profile.allow_telemetry=false",
+    "--router.automatic_neckdown=false",
+    "--router.max_threads=1",
+    "--router.optimizer.enabled=false",
+    "--router.fanout.enabled=false",
+    "--router.job_timeout=00:20:00",
+    "-mp",
+    "100",
+    "-mt",
+    "0",
+    "-is",
+    "sequential",
+    "-de",
+    "/tmp/issue87-resume01/main-initial-route/input.dsn",
+    "-do",
+    "/tmp/issue87-resume01/main-initial-route/output.ses"
+  ],
+  "cwd": "/tmp/issue87-resume01/main-initial-route",
+  "start_utc": "2026-10-14T21:21:49.756590+00:00",
+  "end_utc": "2026-10-14T21:41:53.512901+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 1260,
+  "timed_out": false,
+  "env_overrides": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "output.ses",
+      "original_path": "/tmp/issue87-resume01/main-initial-route/output.ses",
+      "present": true,
+      "saved_path": "processes/main-initial-route/output.ses",
+      "sha256": "75156694793b0aa7594dd0d310b228b2db9b755f429e01506801473a0e24e8e6"
+    },
+    {
+      "label": "effective-start-settings.json",
+      "original_path": "/tmp/issue87-resume01/main-initial-route/user-data/freerouting.json",
+      "present": true,
+      "saved_path": "processes/main-initial-route/effective-start-settings.json",
+      "sha256": "3499c12f249de20b8eeae770e68b08b5518d4bc963bcb665df1fb4f48adc8181"
+    }
+  ],
+  "elapsed_seconds": 1203.7524132630006,
+  "stdout_sha256": "588f31d82f5cab4959d248f46fdc030cbbb45288d2cfb6e8341d086694e5684e",
+  "stderr_sha256": "6194fdcec149cfc201cbe83f89e81a21b66a95a9f5a32332be006c3026ab5855"
+}

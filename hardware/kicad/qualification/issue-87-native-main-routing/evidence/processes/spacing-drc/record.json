@@ -1,0 +1,58 @@
+{
+  "command": [
+    "/tmp/issue87/kicad/usr/bin/kicad-cli",
+    "pcb",
+    "drc",
+    "--format",
+    "json",
+    "--severity-all",
+    "-o",
+    "/tmp/issue87/spacing/drc.json",
+    "/tmp/issue87/spacing/main.kicad_pcb"
+  ],
+  "cwd": "/tmp/issue87/spacing",
+  "start_utc": "2026-10-14T20:49:45.661982+00:00",
+  "end_utc": "2026-10-14T20:49:46.535582+00:00",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "timed_out": false,
+  "env_overrides": {
+    "LD_LIBRARY_PATH": "/tmp/issue87/kicad/usr/lib/x86_64-linux-gnu:/tmp/issue87/kicad/usr/lib/kicad",
+    "PYTHONPATH": "/tmp/issue87/kicad/usr/lib/python3/dist-packages",
+    "KICAD9_SYMBOL_DIR": "/tmp/issue87/kicad/usr/share/kicad/symbols",
+    "KICAD9_FOOTPRINT_DIR": "/tmp/issue87/kicad/usr/share/kicad/footprints",
+    "KICAD9_3DMODEL_DIR": "/tmp/issue87/kicad/usr/share/kicad/3dmodels",
+    "KICAD_STOCK_DATA_HOME": "/tmp/issue87/kicad/usr/share/kicad",
+    "XDG_CONFIG_HOME": "/tmp/issue87/config",
+    "XDG_CACHE_HOME": "/tmp/issue87/cache",
+    "XDG_DATA_HOME": "/tmp/issue87/data",
+    "XDG_STATE_HOME": "/tmp/issue87/state"
+  },
+  "display_unset": true,
+  "artifacts": [
+    {
+      "label": "drc.json",
+      "original_path": "/tmp/issue87/spacing/drc.json",
+      "present": true,
+      "saved_path": "processes/spacing-drc/drc.json",
+      "sha256": "87936934e3c3b3c2b28f8742b3940616d8a947ba3a3c13257e9cf278fa44477f"
+    },
+    {
+      "label": "injection.json",
+      "original_path": "/tmp/issue87/spacing/injection.json",
+      "present": true,
+      "saved_path": "processes/spacing-drc/injection.json",
+      "sha256": "7caacfa22a3231ed0534c024759686c42c505bd9d1f26f6b2d5ca6472f2a4fb7"
+    },
+    {
+      "label": "main.kicad_pcb",
+      "original_path": "/tmp/issue87/spacing/main.kicad_pcb",
+      "present": true,
+      "saved_path": "processes/spacing-drc/main.kicad_pcb",
+      "sha256": "9ca0d4d5b66f6598c07f63a1034c03efbd22359724c0db4edf5c5d7d2ab3b265"
+    }
+  ],
+  "elapsed_seconds": 0.8706948840003861,
+  "stdout_sha256": "d7d14acdae70ad66e374fc7d51e388329116a81d54e826413f8a38661bfe4e8f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
