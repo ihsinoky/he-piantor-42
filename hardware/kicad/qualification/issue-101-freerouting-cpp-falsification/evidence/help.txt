@@ -1,0 +1,18 @@
+FreeRouting version 2.0.1
+command line options are:
+-de  provide design file
+-di  design folder used in file dialog
+-l <lang>   language (en, de, fr, ja, ru, it, es, zh-CN, auto); default: LayoutEditor setting
+-s   spectra session file is automatic saved on exit
+-t   debug option
+-white   white background
+-h   this help
+--selftest   run geometry/runtime checks
+--dump <dsn>  load design and print board dump (headless)
+--autoroute <dsn>  batch autoroute then write SES
+--angle 90|45|any   snap angle for the GUI and --autoroute (default 45)
+--no-postroute   skip the route optimizer after --autoroute
+--ses <dsn>   export SES and exit
+--manual-test <dsn>  headless route with push, pull tight, delete, via move, undo
+--gui-smoke <dsn>  load GUI, exercise mouse/zoom/resize, exit
+--repro-change-layer <dsn>  Manual Route, pin click, right-click change layer

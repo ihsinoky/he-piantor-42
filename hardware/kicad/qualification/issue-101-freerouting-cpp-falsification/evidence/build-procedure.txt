@@ -1,0 +1,23 @@
+Official procedure: https://freerouting.org/freerouting/building-from-source
+Download official freeRouting-2.0.1.tar.gz; tar -xzf into disposable runtime.
+Compiler and make were already installed (compiler.txt).
+Qt package commands and versions: apt-options.json, qt-download-azure.log, qt-package-hashes.json.
+APT download-only, no package installation. Initial default apt sandbox UID switching failed;
+APT::Sandbox::User=root used. Default source list also tried unreachable mirrors;
+isolated Azure Ubuntu list used instead (apt-update-azure.log).
+Extract debs with dpkg-deb -x to .issue101-runtime/qt; qt.conf relocates package paths.
+LD_LIBRARY_PATH=.issue101-runtime/qt/usr/lib/x86_64-linux-gnu
+cd .issue101-runtime/freeRouting
+qmake6 -v
+qmake6
+make -j2
+Exact absolute paths, UTC times, exit codes: build.py, build-record.json.
+No source/project modification. source-manifest.json hashes every official archive member.
+Qt offscreen platform is used for --autoroute to permit QApplication without display.
+It changes the Qt platform backend only; no router CLI setting is added.
+
+First link failed: relocated libGLX.so pointed to absent libGLX.so.0, and -lGLX/-lOpenGL lacked search path.
+Download libglx0/libgl1 Ubuntu runtime debs explicitly (already system-installed packages skipped by apt download-only install).
+Extract to runtime Qt prefix; set LIBRARY_PATH to same lib directory as LD_LIBRARY_PATH.
+Resume make -j2; make-resume.log and appended build-record.json retain both attempts.
+This changes dependency setup only, never source or router settings.
