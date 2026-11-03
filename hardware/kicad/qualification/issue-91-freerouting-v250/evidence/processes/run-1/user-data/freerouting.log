@@ -1,0 +1,55 @@
+2026-11-03 10:52:23.011 INFO   Freerouting CLI v2.5.0 (build-date: 2026-10-05)
+2026-11-03 10:52:23.011 DEBUG  No freerouting.json found at '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/user-data/freerouting.json' — will create one with default settings.
+2026-11-03 10:52:23.013 DEBUG  Default settings saved to '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/user-data/freerouting.json'.
+2026-11-03 10:52:23.013 INFO   Hardware: 4 CPU cores, 6347 MB RAM
+2026-11-03 10:52:23.013 DEBUG  UTC Time: 2026-11-03T10:52:23.013422020Z
+2026-11-03 10:52:23.013 WARN   Deprecated settings path '-mp / --router.max_passes'; use '--router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-03 10:52:23.016 INFO   Configured network proxy: hatch-egress-proxy:3128
+2026-11-03 10:52:23.016 DEBUG  Analytics are disabled
+2026-11-03 10:52:23.021 DEBUG  Loaded router settings from: /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/user-data/freerouting.json
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.automatic_neckdown = false
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.max_threads = 1
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.optimizer.enabled = false
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.fanout.enabled = false
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.job_timeout = 00:20:00
+2026-11-03 10:52:23.022 WARN   Deprecated settings path 'router.max_passes'; use 'router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.max_passes = 100
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.result_json = /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/result.json
+2026-11-03 10:52:23.022 DEBUG  Applied CLI router setting: router.autorouter.enabled = true (implicit from -de/-do batch mode)
+2026-11-03 10:52:23.022 DEBUG  No router settings found in environment variables
+2026-11-03 10:52:23.024 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 10:52:23.024 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 10:52:23.024 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 10:52:23.024 DEBUG  Loaded router settings from DSN file: input.dsn (2 layers)
+2026-11-03 10:52:23.024 DEBUG  Merging settings from 5 sources:
+2026-11-03 10:52:23.024 DEBUG    - Default Settings (priority 0): base settings
+2026-11-03 10:52:23.024 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-11-03 10:52:23.024 DEBUG    - DSN file: input.dsn (priority 20): 5 fields changed
+2026-11-03 10:52:23.024 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-11-03 10:52:23.025 DEBUG  Version check skipped or timed out: java.net.ProtocolException: Invalid status line: "muse: Other TCP connections is turned off for this assistant. To allow it, ask the user to open Muse settings -> Permissions -> Direct network protocols and switch other_tcp from Deny to Ask."
+2026-11-03 10:52:23.025 DEBUG    - CLI Arguments (priority 60): 7 fields changed
+2026-11-03 10:52:23.027 DEBUG  Settings merged successfully from 5 source(s)
+2026-11-03 10:52:23.273 INFO   [8440D2\E30C20] Loading board file 'input.dsn'...
+2026-11-03 10:52:23.278 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 10:52:23.278 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 10:52:23.278 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 10:52:23.281 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionHorizontal: null -> true; undesiredDirectionTraceCost: 1.0 -> 2.1;
+  Layer 1: bendCost: null -> 0.0; preferredDirectionHorizontal: null -> false; undesiredDirectionTraceCost: 1.0 -> 1.9;
+2026-11-03 10:52:23.281 DEBUG  Applied copper-to-edge clearance override: 250.0 um (2500 board units).
+2026-11-03 10:52:23.281 DEBUG  Applied plane_as_obstacle override: false
+2026-11-03 10:52:23.281 DEBUG  Applied clearance tolerance: 1.0 um.
+2026-11-03 10:52:23.282 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 10:52:23.282 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 10:52:23.282 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 10:52:23.282 DEBUG  Loaded router settings from DSN file: input.dsn (2 layers)
+2026-11-03 10:52:23.282 DEBUG  Merging settings from 6 sources:
+2026-11-03 10:52:23.282 DEBUG    - Default Settings (priority 0): base settings
+2026-11-03 10:52:23.282 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-11-03 10:52:23.282 DEBUG    - DSN file: input.dsn (priority 20): 5 fields changed
+2026-11-03 10:52:23.282 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-11-03 10:52:23.282 DEBUG    - CLI Arguments (priority 60): 7 fields changed
+2026-11-03 10:52:23.282 DEBUG    - API Settings (priority 70): 45 fields changed
+2026-11-03 10:52:23.282 DEBUG  Settings merged successfully from 6 source(s)
+2026-11-03 10:52:23.282 INFO   [8440D2\E30C20] Job '8440D2\E30C20' started at 2026-11-03T10:52:23.282763720Z.
