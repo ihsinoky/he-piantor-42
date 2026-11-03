@@ -1,0 +1,69 @@
+{
+  "command": [
+    "/home/hatch/workspace/tools/freerouting-2.5.0/freerouting-cli",
+    "--user_data_path=/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/user-data",
+    "--gui.enabled=false",
+    "--api_server.enabled=false",
+    "-da",
+    "--profile.allow_telemetry=false",
+    "--router.automatic_neckdown=false",
+    "--router.max_threads=1",
+    "--router.optimizer.enabled=false",
+    "--router.fanout.enabled=false",
+    "--router.job_timeout=00:20:00",
+    "-mp",
+    "100",
+    "-mt",
+    "0",
+    "-is",
+    "sequential",
+    "-de",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/input.dsn",
+    "-do",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/output.ses",
+    "--router.result_json=/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1/result.json"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-91-freerouting-v250/evidence/processes/run-1",
+  "start_utc": "2026-11-03T10:52:22.885045+00:00",
+  "timeout_seconds": 1260,
+  "env_overrides": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "TZ": "UTC"
+  },
+  "display_unset": true,
+  "freerouting_environment_removed": true,
+  "input_sha256": "75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2",
+  "end_utc": "2026-11-03T10:52:50.239174+00:00",
+  "elapsed_seconds": 27.35381899799995,
+  "exit_code": 143,
+  "timed_out": false,
+  "stdout_sha256": "821bc1efc5cceb0a34dd3c98b27ce6421f0e784c74ff6be957f9cf8629790229",
+  "stderr_sha256": "e61f6d7171e02de0c7dfefdd7595cfd3258e6fc2983f89a60bfb3a1543d1a1b1",
+  "artifacts": [
+    {
+      "path": "processes/run-1/input.dsn",
+      "sha256": "75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2"
+    },
+    {
+      "path": "processes/run-1/stderr",
+      "sha256": "e61f6d7171e02de0c7dfefdd7595cfd3258e6fc2983f89a60bfb3a1543d1a1b1"
+    },
+    {
+      "path": "processes/run-1/stdout",
+      "sha256": "821bc1efc5cceb0a34dd3c98b27ce6421f0e784c74ff6be957f9cf8629790229"
+    },
+    {
+      "path": "processes/run-1/user-data/freerouting.json",
+      "sha256": "10d7076290495ba4904afcc67bb593e10de92a70ddbeffc4b8af14465c0ee13a"
+    },
+    {
+      "path": "processes/run-1/user-data/freerouting.log",
+      "sha256": "2304342bc9b985f9bf62638c2b79987fd72c5621270f4a43d3fbe186d8446726"
+    },
+    {
+      "path": "processes/run-1/worker-stop.json",
+      "sha256": "0cbeafd58d925760931c7b654716de30869ae853ddd2f9257cbd930e23e62604"
+    }
+  ]
+}
