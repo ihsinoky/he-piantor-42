@@ -1,0 +1,74 @@
+{
+  "baseline_v210": {
+    "completed_passes": 512,
+    "last_pass": 512,
+    "best_pass_unrouted": 35,
+    "first_best_pass": 201,
+    "last_pass_unrouted": 36,
+    "autorouter_final_unrouted": null,
+    "maze_exception_events": 371,
+    "maze_exception_types": {
+      "NullPointerException": 367,
+      "ArrayIndexOutOfBoundsException": 4
+    },
+    "stdout_ERROR_events": 374,
+    "error_types": {
+      "NullPointerException": 370,
+      "ArrayIndexOutOfBoundsException": 4
+    },
+    "elapsed_seconds": 1203.7524132630006,
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "run1": {
+    "completed_passes": 18,
+    "last_pass": 18,
+    "best_pass_unrouted": 58,
+    "first_best_pass": 1,
+    "last_pass_unrouted": 103,
+    "autorouter_final_unrouted": 58,
+    "maze_exception_events": 0,
+    "maze_exception_types": {},
+    "stdout_ERROR_events": 0,
+    "error_types": {},
+    "elapsed_seconds": 112.00414123900003,
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "run2": {
+    "completed_passes": 18,
+    "last_pass": 18,
+    "best_pass_unrouted": 38,
+    "first_best_pass": 1,
+    "last_pass_unrouted": 98,
+    "autorouter_final_unrouted": 38,
+    "maze_exception_events": 0,
+    "maze_exception_types": {},
+    "stdout_ERROR_events": 0,
+    "error_types": {},
+    "elapsed_seconds": 159.8630432949999,
+    "exit_code": 0,
+    "timed_out": false,
+    "stderr_bytes": 0,
+    "stderr_exception_lines": [],
+    "detail_exception_lines": [
+      {
+        "line": 25,
+        "text": "2026-11-03 11:18:46.364 DEBUG  Version check skipped or timed out: java.net.ProtocolException: Invalid status line: \"muse: Other TCP connections is turned off for this assistant. To allow it, ask the user to open Muse settings -> Permissions -> Direct network protocols and switch other_tcp from Deny to Ask.\""
+      }
+    ],
+    "stop_reason": [
+      "2026-11-03 11:21:21.145 INFO   [A43A35\\072D83] The router's best score (610.26) has not improved by more than 0.5 points since pass #8. Stopping the auto-router after 18 passes (38 items still unconnected)."
+    ],
+    "fanout_completed_passes": 12,
+    "fanout_stage": [
+      "2026-11-03 11:19:01.902 INFO   [A43A35\\072D83] Fanout stage completed: started with 163 total SMD pins, completed in 14.85 seconds, escaped pins: 145/163 (89.0%), using 9.11 total CPU seconds, 3.66 GB total allocated, and 123.2 MB peak heap usage."
+    ],
+    "optimizer_enabled_cli": true,
+    "optimizer_executed": false,
+    "optimizer_skip_reason": [
+      "2026-11-03 11:21:21.287 INFO   [A43A35\\072D83] Skipping optimization stage: the board has 38 unrouted connection(s) (optimizer only runs on completely routed boards)."
+    ],
+    "final_unrouted": 38
+  }
+}
