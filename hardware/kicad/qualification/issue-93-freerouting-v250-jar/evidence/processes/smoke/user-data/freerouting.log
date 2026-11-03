@@ -1,0 +1,91 @@
+2026-11-03 11:03:10.014 INFO   Freerouting v2.5.0 (build-date: 2026-10-05)
+2026-11-03 11:03:10.019 DEBUG  [startup] user-data path : /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/user-data  (source: CLI argument --user_data_path)
+2026-11-03 11:03:10.019 DEBUG  [startup] log file       : /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/user-data/freerouting.log
+2026-11-03 11:03:10.031 DEBUG  No freerouting.json found at '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/user-data/freerouting.json' — will create one with default settings.
+2026-11-03 11:03:10.223 DEBUG  Default settings saved to '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/user-data/freerouting.json'.
+2026-11-03 11:03:10.447 INFO   Hardware: 4 CPU cores, 203 CPU score, 2048 MB RAM
+2026-11-03 11:03:10.448 DEBUG  UTC Time: 2026-11-03T11:03:10.223440687Z
+2026-11-03 11:03:10.452 WARN   Deprecated settings path '-mp / --router.max_passes'; use '--router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-03 11:03:10.453 WARN   GUI is disabled and you don't have a console available, so the only feedback from Freerouting is in the log.
+2026-11-03 11:03:10.453 DEBUG  GUI Language: en_US
+2026-11-03 11:03:10.454 DEBUG  Host: N/A
+2026-11-03 11:03:10.459 INFO   Configured network proxy: hatch-egress-proxy:3128
+2026-11-03 11:03:10.461 DEBUG  Analytics are disabled
+2026-11-03 11:03:11.670 DEBUG  Loaded router settings from: /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/user-data/freerouting.json
+2026-11-03 11:03:11.671 DEBUG  Applied CLI router setting: router.automatic_neckdown = false
+2026-11-03 11:03:11.671 DEBUG  Applied CLI router setting: router.max_threads = 1
+2026-11-03 11:03:11.671 DEBUG  Applied CLI router setting: router.optimizer.enabled = false
+2026-11-03 11:03:11.672 DEBUG  Applied CLI router setting: router.fanout.enabled = false
+2026-11-03 11:03:11.709 DEBUG  Applied CLI router setting: router.job_timeout = 00:20:00
+2026-11-03 11:03:11.709 WARN   Deprecated settings path 'router.max_passes'; use 'router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-03 11:03:11.709 DEBUG  Applied CLI router setting: router.max_passes = 100
+2026-11-03 11:03:11.710 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-11-03 11:03:11.710 DEBUG  Applied CLI router setting: router.autorouter.enabled = true (implicit from -de/-do batch mode)
+2026-11-03 11:03:11.711 DEBUG  No router settings found in environment variables
+2026-11-03 11:03:11.835 DEBUG  Version check skipped or timed out: java.net.ProtocolException: Invalid status line: "muse: Other TCP connections is turned off for this assistant. To allow it, ask the user to open Muse settings -> Permissions -> Direct network protocols and switch other_tcp from Deny to Ask."
+2026-11-03 11:03:11.937 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 11:03:11.951 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 11:03:11.953 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 11:03:11.973 DEBUG  Loaded router settings from DSN file: input.dsn (2 layers)
+2026-11-03 11:03:11.974 DEBUG  Merging settings from 5 sources:
+2026-11-03 11:03:11.975 DEBUG    - Default Settings (priority 0): base settings
+2026-11-03 11:03:11.977 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-11-03 11:03:11.977 DEBUG    - DSN file: input.dsn (priority 20): 5 fields changed
+2026-11-03 11:03:11.979 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-11-03 11:03:11.979 DEBUG    - CLI Arguments (priority 60): 6 fields changed
+2026-11-03 11:03:11.979 DEBUG  Settings merged successfully from 5 source(s)
+2026-11-03 11:03:12.001 INFO   [B7B82C\80DBBF] Loading board file 'input.dsn'...
+2026-11-03 11:03:12.021 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 11:03:12.022 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 11:03:12.022 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 11:03:12.048 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionHorizontal: null -> true; undesiredDirectionTraceCost: 1.0 -> 2.0;
+  Layer 1: bendCost: null -> 0.0; preferredDirectionHorizontal: null -> false; undesiredDirectionTraceCost: 1.0 -> 2.0;
+2026-11-03 11:03:12.053 DEBUG  Applied copper-to-edge clearance override: 250.0 um (2500 board units).
+2026-11-03 11:03:12.053 DEBUG  Applied plane_as_obstacle override: false
+2026-11-03 11:03:12.054 DEBUG  Applied clearance tolerance: 1.0 um.
+2026-11-03 11:03:12.068 DEBUG  Set DEFAULT clearance (all layers): 2000 (0.05 mm) from DSN value 200.0
+2026-11-03 11:03:12.068 DEBUG  Set clearance (all layers): smd_smd = 2000 (0.05 mm), classes [2,2]
+2026-11-03 11:03:12.068 DEBUG  Set default trace width (all layers): DSN=200.0 → board=2000 (0.05 mm)
+2026-11-03 11:03:12.070 DEBUG  Loaded router settings from DSN file: input.dsn (2 layers)
+2026-11-03 11:03:12.072 DEBUG  Merging settings from 6 sources:
+2026-11-03 11:03:12.072 DEBUG    - Default Settings (priority 0): base settings
+2026-11-03 11:03:12.072 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-11-03 11:03:12.073 DEBUG    - DSN file: input.dsn (priority 20): 5 fields changed
+2026-11-03 11:03:12.073 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-11-03 11:03:12.073 DEBUG    - CLI Arguments (priority 60): 6 fields changed
+2026-11-03 11:03:12.074 DEBUG    - API Settings (priority 70): 45 fields changed
+2026-11-03 11:03:12.074 DEBUG  Settings merged successfully from 6 source(s)
+2026-11-03 11:03:12.076 INFO   [B7B82C\80DBBF] Job 'B7B82C\80DBBF' started at 2026-11-03T11:03:12.075904916Z.
+2026-11-03 11:03:12.157 INFO   [B7B82C\80DBBF] Pipeline thread limits: autorouter pass is single-threaded, optimizer.max_threads=3.
+2026-11-03 11:03:12.216 DEBUG  [B7B82C\80DBBF] Checking fanout pre-pass. settings.fanout.enabled=false, smdPins=3
+2026-11-03 11:03:12.231 INFO   [B7B82C\80DBBF] Auto-routing stage started on board 'eb8c7b5997777d1d62e584a1b43575ae' with baseline score 333.33 for 1 unrouted item.
+2026-11-03 11:03:12.342 DEBUG  Queuing item for routing: PolylineTrace on net 'N' (connected: 3/4, plane: false)
+2026-11-03 11:03:12.342 DEBUG  Queuing item for routing: Pin on net 'N' (connected: 1/4, plane: false)
+2026-11-03 11:03:12.348 DEBUG  [B7B82C\80DBBF] Pass #1: 1 incompletes across 2 items to route
+2026-11-03 11:03:12.349 DEBUG  [B7B82C\80DBBF]   Net 'N' has 1 incomplete(s)
+2026-11-03 11:03:12.373 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.409 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.413 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.414 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.542 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.543 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.544 DEBUG  ShapeSearchTree45Degree.restrain_shape: shapeToBeContained is empty
+2026-11-03 11:03:12.642 INFO   [B7B82C\80DBBF] Auto-routing pass #1 on board 'eb8c7b5997777d1d62e584a1b43575ae' was completed in 0.30 seconds with score 1000.00 (0 unrouted and 0 violations).
+2026-11-03 11:03:12.650 INFO   [B7B82C\80DBBF] Auto-routing pass #2 on board '15b1380a139ec35961c90ad66d5a1a4f' was completed in 0.00 seconds with score 1000.00 (0 unrouted and 0 violations).
+2026-11-03 11:03:12.653 DEBUG  === Performance Profile ===
+2026-11-03 11:03:12.653 DEBUG  === Routing Parameters ===
+2026-11-03 11:03:12.653 DEBUG    Via Costs: 50, Plane Via Costs: 5
+2026-11-03 11:03:12.653 DEBUG    Layer Costs (Preferred / Against):
+2026-11-03 11:03:12.654 DEBUG      Layer 1: 1.0 / 2.0
+2026-11-03 11:03:12.654 DEBUG      Layer 2: 1.0 / 2.0
+2026-11-03 11:03:12.654 DEBUG  
+2026-11-03 11:03:12.656 DEBUG    autoroute_item                          :      264 ms total,        2 calls,    132 ms avg
+2026-11-03 11:03:12.656 DEBUG  
+2026-11-03 11:03:12.656 DEBUG  === Pass History ===
+2026-11-03 11:03:12.657 DEBUG    Pass 1  :    0 unrouted items,     0.30 s,   100 ripup cost
+2026-11-03 11:03:12.657 DEBUG  ===========================
+2026-11-03 11:03:12.660 INFO   [B7B82C\80DBBF] Auto-routing stage completed: started with 1 unrouted nets, completed in 0.50 seconds, final score: 1000.00 (0 unrouted and 0 violations), using 0.00 total CPU seconds, 0.00 GB total allocated, and 0.0 MB peak heap usage.
+2026-11-03 11:03:12.664 INFO   [B7B82C\80DBBF] Job 'B7B82C\80DBBF' finished with state: COMPLETED (elapsed: 0.59 seconds, finished at UTC: 2026-11-03T11:03:12.663133079Z).
+2026-11-03 11:03:12.710 INFO   Saving output file '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/output.ses' (SES)...
+2026-11-03 11:03:12.713 INFO   Successfully saved output file '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-93-freerouting-v250-jar/evidence/processes/smoke/output.ses' (976 bytes).
