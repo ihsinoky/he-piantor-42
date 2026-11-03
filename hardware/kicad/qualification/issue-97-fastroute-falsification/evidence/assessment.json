@@ -1,0 +1,66 @@
+{
+  "classification": "FALSIFIED / FIXED_CONDITION_FAIL",
+  "success": false,
+  "router_unrouted": 1,
+  "router_unrouted_details": [
+    {
+      "net": "GND",
+      "length_mm": 3.6363,
+      "from": {
+        "kind": "pin",
+        "component": "J1",
+        "pin": "13@2",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      },
+      "from_xy": [
+        89.32,
+        79.95
+      ],
+      "to": {
+        "kind": "pin",
+        "component": "R2",
+        "pin": "2",
+        "layers": [
+          "F.Cu",
+          "F.Cu"
+        ]
+      },
+      "to_xy": [
+        91,
+        83.175
+      ]
+    }
+  ],
+  "router_clearance_violations": 0,
+  "minimum_ses_width_mm": 0.1,
+  "ses_paths_below_020mm": 71,
+  "failure_reasons": [
+    "One unrouted GND connection remains in router report",
+    "71 serialized SES paths are below 0.20 mm; minimum width 0.10 mm"
+  ],
+  "main_ses_import_performed": false,
+  "main_independent_checks_performed": false,
+  "independent_metrics": {
+    "required_unconnected": null,
+    "wrong_net_contacts": null,
+    "material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "metric_policy": "Main has unrouted connection; all four independent acceptance metrics remain null. SES width evidence is a separate static measurement, not a material-violations metric.",
+  "optimizer_executed_on_incomplete_board": true,
+  "optimizer_completed_passes": 3,
+  "multi_start_selected_variant": 1,
+  "main_invocations": 1,
+  "smoke_invocations": 1,
+  "reroute_or_settings_search": false,
+  "limitations": [
+    "Unrouted count comes from router report, not independent KiCad measurement",
+    "Main clearance and handoff acceptance not measured because zero-unrouted gate failed",
+    "Report/SES consistency checked for trace count, via count and centerline length, not independent connectivity",
+    "Narrow-output results cannot establish improvement at the fixed 0.20 mm material condition"
+  ],
+  "recommendation": "Do not qualify this default fastroute condition for Main completion. Mechanism changes are observed, but unconnected and width gates fail. No further invocation or setting search in this issue."
+}

@@ -1,0 +1,128 @@
+{
+  "router_invocations": {
+    "smoke": 1,
+    "main": 1
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 190.034297166,
+  "outer_timeout": false,
+  "final_unrouted": 1,
+  "final_clearance_violations": 0,
+  "first_run_completed_passes": 20,
+  "first_run_last_pass": 20,
+  "first_run_best_pass_unrouted": 6,
+  "autorouter_completed_pass_events_all_runs": 84,
+  "parallel_variant_completed_pass_events": 64,
+  "parallel_variant_identity_limitation": "Concurrent logs have no variant labels on pass lines; do not reconstruct per-variant histories.",
+  "autorouter_stage_completions": [
+    {
+      "line": 45,
+      "text": "   32.095 INFO  Auto-routing stage completed: started with 128 unrouted nets, completed in 30.59 seconds, final score: 938.46 (6 unrouted and 0 violations)."
+    },
+    {
+      "line": 122,
+      "text": "   78.639 INFO  Auto-routing stage completed: started with 128 unrouted nets, completed in 43.31 seconds, final score: 989.74 (1 unrouted and 0 violations)."
+    },
+    {
+      "line": 150,
+      "text": "  112.323 INFO  Auto-routing stage completed: started with 128 unrouted nets, completed in 77.08 seconds, final score: 948.72 (5 unrouted and 0 violations)."
+    },
+    {
+      "line": 156,
+      "text": "  116.222 INFO  Auto-routing stage completed: started with 128 unrouted nets, completed in 80.99 seconds, final score: 958.97 (4 unrouted and 0 violations)."
+    }
+  ],
+  "multi_start": [
+    {
+      "line": 158,
+      "text": "  116.232 INFO  Multi-start variant 1: 1 unrouted, 0 violations, router score 989.74."
+    },
+    {
+      "line": 159,
+      "text": "  116.232 INFO  Multi-start variant 2: 5 unrouted, 0 violations, router score 948.72."
+    },
+    {
+      "line": 160,
+      "text": "  116.234 INFO  Multi-start variant 3: 4 unrouted, 0 violations, router score 958.97."
+    },
+    {
+      "line": 161,
+      "text": "  116.236 INFO  Multi-start: variant 1 is better (1 unrouted, 0 violations; first run 6 unrouted, 0 violations)."
+    }
+  ],
+  "warning_lines": [],
+  "error_lines": [],
+  "exception_or_panic_lines": [],
+  "scope": "Count of observed panic/exception diagnostics only; no claim about unlogged internally handled failures or equivalence to Java exception classes.",
+  "optimizer_stage_lines": [
+    {
+      "line": 162,
+      "text": "  116.251 INFO  Optimization stage started. Baseline router score: 989.74, optimizer score: 180.48, incomplete connections: 1, clearance violations: 0."
+    },
+    {
+      "line": 163,
+      "text": "  116.251 INFO  Optimizer time budget: 116 s (as long as routing took; set router.optimizer.timeout to change)."
+    },
+    {
+      "line": 166,
+      "text": "  133.475 INFO  Optimizer pass #1: applied 11 more improving candidate(s)."
+    },
+    {
+      "line": 167,
+      "text": "  133.485 INFO  Optimizer pass #1 was completed in 17.23 seconds (122 of 215 candidates) with the score of 225.11 (1 unrouted and 0 violations)."
+    },
+    {
+      "line": 169,
+      "text": "  133.489 INFO  Optimizer pass #1: optimizer score 180.48 -> 225.11 (IMPROVED, 24.7268%), router score: 989.74, incomplete connections: 1, clearance violations: 0."
+    },
+    {
+      "line": 171,
+      "text": "  159.023 INFO  Optimizer pass #2: applied 13 more improving candidate(s)."
+    },
+    {
+      "line": 172,
+      "text": "  159.035 INFO  Optimizer pass #2 was completed in 25.55 seconds (214 of 214 candidates) with the score of 247.69 (1 unrouted and 0 violations)."
+    },
+    {
+      "line": 174,
+      "text": "  159.038 INFO  Optimizer pass #2: optimizer score 225.11 -> 247.69 (IMPROVED, 10.0303%), router score: 989.74, incomplete connections: 1, clearance violations: 0."
+    },
+    {
+      "line": 176,
+      "text": "  189.918 INFO  Optimizer pass #3: applied 3 more improving candidate(s)."
+    },
+    {
+      "line": 177,
+      "text": "  189.918 INFO  Optimizer pass #3 was completed in 30.88 seconds (219 of 219 candidates) with the score of 251.86 (1 unrouted and 0 violations)."
+    },
+    {
+      "line": 179,
+      "text": "  189.921 INFO  Optimizer pass #3: optimizer score 247.69 -> 251.86 (IMPROVED, 1.6854%), router score: 989.74, incomplete connections: 1, clearance violations: 0."
+    },
+    {
+      "line": 181,
+      "text": "  189.922 INFO  Optimization stage completed: Baseline router score: 989.74, baseline optimizer score: 180.48, final router score: 989.74, final optimizer score: 251.86, completed in 73.67 seconds."
+    }
+  ],
+  "report_stats": {
+    "layers": 2,
+    "components": 49,
+    "nets": 37,
+    "pins": 197,
+    "connections": 130,
+    "unrouted": 1,
+    "unrouted_ignored_classes": 0,
+    "violations": 0,
+    "violations_unfixable": 0,
+    "vias": 66,
+    "vias_blind": 0,
+    "vias_buried": 0,
+    "traces": 406,
+    "trace_length_mm": 1095.0717,
+    "bends_90": 2,
+    "bends_45": 309,
+    "bends_other": 0,
+    "router_score": 989.7436,
+    "optimizer_score": 251.864
+  }
+}
