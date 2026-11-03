@@ -1,0 +1,8 @@
+{
+  "only_router_override": "--router.min_trace_width_um=200",
+  "automatic_neckdown": "default true; no override",
+  "official_commit": "19c3b75322da6a0dc2f87a616fc0afe34a98f07e",
+  "reason": "Help says never neck traces below W um; official control.rs:113-119 clamps positive half width to minimum, :348-362 converts um and rounds half up; inserter.rs:223,288 and maze.rs:350,878 apply clamp. No primary-source evidence found requiring disabling automatic_neckdown.",
+  "primary_source_url": "https://github.com/parisxmas/fastroute/blob/v0.1.14/crates/fr-engine/src/autoroute/control.rs",
+  "source_build": false
+}

@@ -1,0 +1,23 @@
+/tmp/issue-99-fastroute/source/crates/fastroute/src/main.rs:274:  --router.min_trace_width_um=W             never neck traces below W um
+/tmp/issue-99-fastroute/source/crates/fr-engine/src/autoroute/control.rs:51:    /// (`router.min_trace_width_um`; 0 = Java behaviour).
+/tmp/issue-99-fastroute/source/crates/fr-engine/src/autoroute/control.rs:112:    /// (`router.min_trace_width_um`); unchanged when no minimum is set.
+/tmp/issue-99-fastroute/source/crates/fr-engine/src/autoroute/control.rs:155:            with_neckdown: settings.get_automatic_neckdown(),
+/tmp/issue-99-fastroute/source/crates/fr-engine/src/autoroute/control.rs:346:/// Board-unit half width for `router.min_trace_width_um` (0 if unset); converted
+/tmp/issue-99-fastroute/source/crates/fr-engine/src/autoroute/control.rs:349:    let um = settings.get_min_trace_width_um();
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/defaults.rs:53:    s.automatic_neckdown = Some(true);
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/reflect.rs:164:    ("minTraceWidthUm", &["min_trace_width_um"]),
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/reflect.rs:174:    ("automaticNeckdown", &["automatic_neckdown", "automaticNeckdown"]),
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/reflect.rs:223:        "minTraceWidthUm" => set_f64(&mut s.min_trace_width_um, f, v),
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/reflect.rs:228:        "automaticNeckdown" => set_bool(&mut s.automatic_neckdown, v),
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:193:    pub min_trace_width_um: Option<f64>,
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:202:    pub automatic_neckdown: Option<bool>,
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:430:        copy(&mut self.min_trace_width_um, &s.min_trace_width_um, &mut n);
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:456:        copy(&mut self.automatic_neckdown, &s.automatic_neckdown, &mut n);
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:514:    /// fastroute extension, see [`RouterSettings::min_trace_width_um`].
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:515:    pub fn get_min_trace_width_um(&self) -> f64 {
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:516:        match self.min_trace_width_um {
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:595:    pub fn get_automatic_neckdown(&self) -> bool {
+/tmp/issue-99-fastroute/source/crates/fr-settings/src/settings.rs:596:        self.automatic_neckdown == Some(true)
+/tmp/issue-99-fastroute/source/crates/fr-settings/tests/effective_defaults.rs:37:        min_trace_width_um: None,
+/tmp/issue-99-fastroute/source/crates/fr-settings/tests/effective_defaults.rs:44:        automatic_neckdown: Some(true),
+/tmp/issue-99-fastroute/source/crates/fr-engine/tests/common/autoroute_ops.rs:187:            s.automatic_neckdown = Some(t.bool());
