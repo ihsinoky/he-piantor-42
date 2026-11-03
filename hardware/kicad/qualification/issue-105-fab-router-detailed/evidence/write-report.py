@@ -1,0 +1,99 @@
+"""Generate the additive report from measured, saved evidence only."""
+import pathlib,json
+E=pathlib.Path(__file__).resolve().parent;R=E.parents[4]
+load=lambda p:json.loads((E/p).read_text())
+a=load('assessment.json');m=load('processes/main/record.json');s=load('processes/smoke/record.json');w=load('main-ses-inspection.json');b=load('baseline-103/main-result.json');bw=load('baseline-103/main-ses-inspection.json');bm=load('baseline-103/main-record.json');ev=load('main-events.json');be=load('baseline-103/main-events.json');cfg=load('settings-comparison-before-main.json');gate=load('smoke-gate.json')
+fmt=lambda x:json.dumps(x,ensure_ascii=False)
+settings='\n'.join('| `'+k+'` | `'+fmt(v['before'])+'` | `'+fmt(v['after'])+'` | '+('変更' if v['changed'] else '同一')+' |' for k,v in cfg['all_declared_fields'].items())
+seq=lambda e:' → '.join(str(p['incomplete']) for p in e['passes'])
+text=f'''# Issue #105 — fab_router 詳細ルーター有効の単一条件
+
+**判定：{a['status']}。Main の最終未配線は {a['main_unrouted_measured']} 件（#103 は16件）。** 詳細ルーター `tiles` を有効にした1条件を1回だけ実行した。保存 SES の全 {w['paths']} paths が {w['minimum_width_mm']:.2f}mm 以上、0.20mm 未満は {w['paths_below_020mm']} 本。Main の独立4指標は未配線が残るためすべて **null**。自前 checkDrc と Main の独立検査との一致は **未確認**。
+
+対象は [Issue #105](https://github.com/ihsinoky/he-piantor-42/issues/105)。以下 `E/` は [証跡](../hardware/kicad/qualification/issue-105-fab-router-detailed/evidence/) を指す。指示書全文 `E/instructions.md`、Issue 本文 `E/issue105.json`。Main 再実行・追加条件・追加調整は実施していない。
+
+## 一次情報からの条件特定
+
+[fabPlane/fab_router の固定コミット](https://github.com/fabPlane/fab_router/tree/69cf598db98c136bff16bbe02bccdded95674b18) **`69cf598db98c136bff16bbe02bccdded95674b18`** を GPL-3.0-only 側で利用。本体 `src/`・`spec/` は無改変で、#103 の hash と全件一致した（`source-manifest.json`、`source-identity-vs-103.json`）。一次情報のコピーは `E/official/`。
+
+- README は詳細ルーターを搭載し、global planning は既定 off の独立サブシステムと説明する。完全配線を保証するとはしておらず、密集基板の completion frontier を明記している。
+- `spec/api/settings.md:42` は `detailedRouter` を `off`（fast）/ `tiles`（slow）と定義する。
+- `tools/acceptance/run-case.ts:269–276` は開発元の slow/SRJ 向け詳細モードとして `detailedRouter = "tiles"` のみを補う。これは SRJ 用コードであり、DSN 全体に slow tier が自動適用されるとは解釈しない。
+- `spec/acceptance/README.md` の名前付き参照プロファイルは default/p1/fanout/strict/novia。DSN 用の詳細完全配線プロファイルは定義されていない。参照用 default の60秒上限などは採用せず、#103 の非モード設定を保持する。
+- `docs/DESIGN.md §9b` と `src/route/passes.ts:333–346` は tiles が line-search の後に corner-stitch channel search を行うことを示す。既に失敗した接続・後続 pass の ripup/contention 条件で詳細探索へ進む。`globalPlan` は前提ではない（同 §10.8、`passes.ts:1429`）。
+
+従って採用条件は **`detailedRouter: "tiles"` だけ**。`globalPlan: "off"`、fanout false、seed 1、コスト、1800000ms 上限、useFileSettings 未指定を保持した。tscircuit / routeSrj / 受け入れコーパス runner は実行していない。`configuration-decision.json` に判断を保存した。
+
+## Main 前の全項目 readback とハーネス
+
+**{cfg['recorded_utc']}** に元 Main DSN を parse し、無改変 `src/pipeline/index.ts` の `resolveSettings` で全実効設定を取得した。`main-preflight/` と `settings-comparison-before-main.json` に保存。これは設定解決だけで、route / routeDsn は呼ばない。#103 の `report.effectiveSettings` と比較して変更は **off → tiles の1項目だけ**であることを assertion で確認した。未指定フィールドは `<unset>` と明記し、内部派生値を明示設定に置き換えない。実行時には driver が設定を再解決し、この事前 readback および結果 report と完全一致することを検査する。
+
+| 設定（全宣言項目） | #103 | #105 | 差分 |
+| --- | --- | --- | --- |
+{settings}
+
+Bun **1.4.4**、TypeScript 5.9.3、@types/bun 1.4.2 は #103 と同一。公式 Bun ZIP の SHA256 は `bf8ccbfb2b0b80159e0f9a6d15c55317add8077534dbc6130a3edb52fccb395c`。`installation.json`・`bun-install.log` に導入を記録した。
+
+ドライバ基本形は #103 と同じ公開 `routeDsn` → SES 保存 → 元 DSN 再読込 → **保存 SES** applySes → checkDrc。追加したのは設定受け渡し・readback 専用モード・実効設定一致チェックである。変更後 `driver.ts` と旧版、`driver-diff.patch` を保存した。ルーター本体を改変していない。headless（DISPLAY/WAYLAND_DISPLAY 除去）、外側上限1920秒。`run-router.py` は既存 stage ディレクトリの再利用を拒否し、Main 前にスモーク合格と事前設定差分のゲートを検査する。
+
+## 入力・固定条件
+
+#87 resume-01 の corrected.dsn を byte 同一コピーした。実行前後の SHA256 は以下と一致し、配置固定、2 signal layers、幅/clearance 200µm を保持。Main parse は49部品・37ネット・197 pads、F.Cu/B.Cu。詳細は各 `parse.json`。
+
+| 入力 | SHA256 |
+| --- | --- |
+| Main | `75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2` |
+| smoke | `7214a0299ce19fae8163fa82a7d844e71c5bbf43b077392cfff7c7b5a9d1f3e9` |
+
+実行 argv・cwd・UTC・全入出力 hash は `E/processes/{{smoke,main}}/record.json` にある。
+
+## Stage 0：スモーク合格
+
+{s['start_utc']}–{s['end_utc']}、{s['elapsed_seconds']:.3f}秒、exit 0。SES 生成成功、全2 paths が0.20mm、未配線0。保存 SES 再適用後の自前 checkDrc は違反0・未接続0。
+
+KiCad **9.0.9** で元基板のコピーに import して保存し、保存基板の snapshot・KiCad DRC・#87 の既存独立銅箔グラフ/非配線同一性検査を実行した。**required unconnected / wrong-net contacts / material violations / unexplained transfer changes はすべて0**。自前 checkDrc と一致した（`smoke-independent.json`）。検査プロセスは全て exit 0。
+
+スモークゲート保存 **{gate['validated_utc']}** → Main 開始 **{m['start_utc']}** の順を検証した。検査ランタイムの初回 Python package 導入が /tmp 容量不足で停止したため、#105 の一時 geometry 環境を workspace に移し再導入してから独立検査した。ルーター再実行はしていない。その他の導入時パス修復は `installation.json`、ライブラリ hash は `kicad-package-hashes.json`、oracle hash は `oracle-hashes.json`。
+
+## Stage 1：唯一の Main と #103 比較
+
+| 実測 | #103 API既定相当 | #105 tiles |
+| --- | --- | --- |
+| 最終未配線 | {b['report']['incompleteAfter']} | {a['main_unrouted_measured']} |
+| passes | {b['report']['passes']} | {a['report']['passes']} |
+| 停止理由 | {b['report']['stoppedBy']} | {a['report']['stoppedBy']} |
+| timedOut / aborted | {b['report']['timedOut']} / {b['report']['aborted']} | {a['report']['timedOut']} / {a['report']['aborted']} |
+| プロセス秒数 | {bm['elapsed_seconds']:.3f} | {m['elapsed_seconds']:.3f} |
+| SES 幅分布（mm） | {fmt(bw['width_histogram_mm'])} | {fmt(w['width_histogram_mm'])} |
+| 0.20mm未満 path | {bw['paths_below_020mm']} | {w['paths_below_020mm']} |
+| via 数 | {bw['vias']} | {w['vias']} |
+| SES path 数 | {bw['paths']} | {w['paths']} |
+
+全設定差分は上表のとおり詳細モードだけ。pass ごとの残接続は以下（最終 SES と混同しない）。
+
+- #103: {seq(be)}
+- #105: {seq(ev)}
+
+Main は **{m['start_utc']}–{m['end_utc']}**、exit **{m['exit_code']}**、外側 timeout **{m['external_timeout']}**。自前結果は `incompleteBefore={a['report']['incompleteBefore']}` → `incompleteAfter={a['main_unrouted_measured']}`。保存 SES の SHA256 は `{w['ses_sha256']}`。幅は `(resolution um 10)` から10000単位/mmとして全 path を静的実測した。層別 {fmt(w['layers'])}、中心線長 {w['centerline_length_mm']:.6f}mm。これは幅の実測であり、実銅箔 clearance の独立合格ではない。
+
+`report.incompleteAfter`・`statsAfter.connections.incomplete`・保存 SES 再適用後の `checkDrc.counts.incompletes` は一致した。自前 checkDrc は **{fmt(a['main_self_drc'])}**、report violationsAdded は {a['report']['violationsAdded']}。個別端点は `check-drc-after.json`、ネット別未配線は `result.json` の perNet、pass と接続の全イベントは stdout と `main-events.json` に保存した。途中 pass から停止後の巻戻し/optimizer を経た最終保存結果への差の原因は、専用 hook で観測していないため特定しない。
+
+API `ok: true` と exit 0 は処理と SES 生成の成功であり、完全配線を示さない。残接続数と停止理由は明記され、未完了を隠していない。
+
+| Main 独立指標 | 値 |
+| --- | --- |
+| required unconnected | null |
+| wrong-net contacts | null |
+| material violations | null |
+| unexplained transfer changes | null |
+
+未配線が残るため指示書に従い Main の KiCad import・独立検査は実施せず、import 可否は未測定。**Main の自己判定と独立検査との一致は未確認**。スモークの一致を転用しない。詳細化後の最終未配線は #103 から {a['main_unrouted_measured']-16:+d} 件であり、この事実をそのまま報告する。単一試行でルーター方式一般や配置の完成不可能性を結論しない。
+
+## 提出・検証
+
+ブランチ **issue-105-fab-router-detailed**、base **{load('baseline-verification.json')['base']}**。main 最新の全 tracked files を byte/hash 照合した。元 `.git` が読取り専用なので管理情報だけ `/tmp/issue-105-fab-router/git` に複製し、現在のディレクトリを work-tree に使用。既存ファイルには変更せず、本書と指定証跡ディレクトリだけを追加。前タスクの未追跡成果物は提出対象に含めない。依存 package・clone・実行バイナリは含めない。
+
+保守的開始 **2026-11-03 23:39:00 UTC**、2時間期限 **2026-11-04 01:39:00 UTC**。条件特定から Draft PR 作成までを含む。実 UTC と user context の日付差は `timebox.json` に記録。検証は `verification.json`、成果物 hash は `manifest.json`、提出時刻は `submission.json`。Draft PR を作成し、**merge はしない**。
+'''
+(R/'docs/issue-105-fab-router-detailed.md').write_text(text)
+(E.parent/'README.md').write_text('# Issue #105 fab_router detailed evidence\n\nSee [analysis](../../../../docs/issue-105-fab-router-detailed.md). All submitted files are additions. Main was run once only. Dependency packages and binaries are excluded.\n')

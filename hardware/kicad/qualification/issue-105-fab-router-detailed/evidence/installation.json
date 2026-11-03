@@ -1,0 +1,22 @@
+{
+  "bun_url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64.zip",
+  "bun_sha256": "bf8ccbfb2b0b80159e0f9a6d15c55317add8077534dbc6130a3edb52fccb395c",
+  "bun_version": "1.4.4",
+  "bun_install_exit": 0,
+  "bun_install_log": "bun-install.log",
+  "setup_corrections": [
+    "Initial bun install path typo exited 127; corrected before any routing",
+    "Initial setup path was dangling apt symlink; target directories created before download",
+    "Git metadata copy ownership preservation unsupported; bytes copied, fetch and full tree verification succeeded; original .git unchanged",
+    "Geometry first install failed ENOSPC on /tmp; moved this task venv to workspace and force-reinstalled same versions before inspection. inspect-ses initial invocation with system Python lacked sexpdata; used venv. No routing rerun."
+  ],
+  "geometry_retry_exit": 0,
+  "geometry_retry_log": "geometry-install-retry.log",
+  "geometry_runtime": ".issue105-runtime/geometry",
+  "geometry_versions": [
+    "numpy==2.5.4",
+    "sexpdata==1.0.2",
+    "shapely==2.2.0"
+  ],
+  "kicad_package_sha256": "b7e6d33867631dc44385067b703b4c39eadede2037a260790b19495fe17e43f0"
+}
