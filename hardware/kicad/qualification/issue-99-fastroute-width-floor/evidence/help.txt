@@ -1,0 +1,64 @@
+fastroute 0.1.14
+usage: fastroute -de <design.dsn> [-do <out.ses>] [options] [--router.<path>=<value> ...]
+
+options:
+  -de FILE                 input Specctra design (.dsn)
+  -do FILE                 output Specctra session (.ses); also rewritten with the best
+                           board so far whenever routing/optimizing improves
+  -mp N                    maximum autorouter passes (router.autorouter.max_passes)
+  --no-neckdown-classes=A,B  keep the full trace width of these net classes at pins
+                           (controlled impedance)
+  --pairs=FILE             differential pairs: routed first, N running along P (see below);
+                           afterwards the shorter net of each pair gets meanders until the
+                           lengths differ by at most --pair-skew (default 0.1 mm; 0 = off)
+  --layer-heights=MM,..    height of each copper layer from the top (stackup), so that via
+                           lengths count in length matching as in KiCad
+  --tune=FILE              length matching after routing (groups of nets, see below)
+  --max-time=SECONDS       stop after this wall-clock time and write the best result
+                           (Ctrl+C / SIGTERM / Ctrl+Break do the same; a second one exits)
+  --initial-session=FILE   start from the wiring of a session (.ses), e.g. a checkpoint of an
+                           earlier run, instead of the wiring in the design
+  --report=FILE            write a JSON summary: statistics, timings, unrouted connections
+                           and clearance violations
+  --diagnose               with --report: route every unrouted connection alone on the
+                           loaded board (congestion vs. blocked by geometry/rules)
+  --live[=PORT]            watch the routing live in the browser (http://127.0.0.1:PORT,
+                           default 7878; opened automatically)
+  --multi-start=N          rerun the autorouter with N-1 shuffled orders in parallel if
+                           connections stay unrouted (default 4; skipped after a first run
+                           longer than 10 minutes)
+  --no-enhancements        Freerouting's behaviour without fastroute's improvements
+  --parity                 byte-identical Freerouting results (deterministic, slower)
+  --optimizer-mode=M       java-compat | parallel
+  --time-limit-mode=M      wall | count | disabled (board time limits)
+  --time-limit-factor=N    count-mode budget factor (default 10)
+  --no-time-limits         deterministic limits, no stage wall-clock limits
+  -v                       debug output
+
+tune file: one group per `group` line, followed by net names (* = any text):
+  group sdram_data tolerance=0.5            # match to the longest net, -0.5 mm allowed
+    /SD_D*
+    /SD_NBL*
+  group sdram_clk tolerance=0.2 target=40   # fixed target length in mm
+
+pairs file: one pair per line, optional copper gap in mm (default: their clearance),
+also per layer, and the allowed length difference (skew=, default --pair-skew). Pairs are
+routed and coupled first, then fixed while the rest is routed:
+  pair /USB_DP /USB_DN gap=0.15 gap@In1.Cu=0.12 skew=0.05
+
+common --router.* settings (numbers, true/false, comma-separated lists):
+  --router.autorouter.max_passes=N          passes (0 = unlimited)
+  --router.autorouter.min_passes=N          the stagnation rules do not stop the autorouter
+                                            before N passes (long runs with --max-time)
+  --router.autorouter.ignore_net_classes=A,B  net classes left unrouted
+  --router.autorouter.max_threads=N         threads of the parallel autorouting pass
+                                            (1 = sequential pass as in Freerouting)
+  --router.optimizer.enabled=true|false     run the optimizer
+  --router.optimizer.max_threads=N          optimizer threads
+  --router.optimizer.optimization_improvement_threshold=P  stop below P % per pass
+  --router.fanout.enabled=true|false        SMD fanout stage
+  --router.scoring.via_costs=N, --router.scoring.plane_via_costs=N
+  --router.min_trace_width_um=W             never neck traces below W um
+  --router.neck_width_um=W                  retry failed connections with W um traces
+  --router.copper_to_edge_clearance_um=C    copper to board edge clearance
+  --router.job_timeout=HH:MM:SS             overall job timeout (default 12:00:00)

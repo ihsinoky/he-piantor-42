@@ -1,0 +1,19 @@
+{
+  "source_pr": 98,
+  "source_commit": "bc0d108f3cdc6d4c7c9f3d11b9ccba86d91208c2",
+  "sources": {
+    "run-router.py": "619844041c55ab07b9fd43194f5622c4b241ca8ee5ad89260049ec832bb079b4",
+    "run-checks.py": "ce1eb6122eece0e63952d99495b6860913a159713840706d4a057aed96b6cce1",
+    "inspect-ses.py": "1bbda18adaadb01b59af4c0d7d75ee0ff1f36e12aec27402e7f99b0a33a588f9",
+    "import-session.py": "cf7682cbc85ae78b393ce75bce0f9fac56cba03a4aec85e195637d4db8533d93",
+    "prepare-smoke-library.py": "c1aba99e983e8d0288cbe90ed00b1fec6b2eb4e0cdcd636d52256f212b58c6a3",
+    "summarize.py": "d82c4ff916915ddc74c1d85869f77ac714dff2290e6f7dddc98e4af67eccd4da"
+  },
+  "adaptations": [
+    "New evidence and temporary runtime paths only",
+    "Router argv adds only --router.min_trace_width_um=200",
+    "Main gate explicitly checks smoke four zero metrics and SES width",
+    "Prepare original Probe library before smoke DRC, avoiding known missing-library warnings",
+    "Gate records validation timestamp"
+  ]
+}
