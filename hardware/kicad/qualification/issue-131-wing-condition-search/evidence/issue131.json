@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/131",
+    "title": "Wing 自動配線の実現条件探索：KRT で層数×線幅の条件を安い順に判定する",
+    "issue_number": 131,
+    "body": "## 目的と方針\nPO 方針：Wing は自動配線の実現が最優先。まず実現できるツール・条件を特定し、基板費用を勘案した判断はその後に行う。\nIssue #129 では固定条件（2層・0.20mm・ビア0.60/0.30・配置固定）で全セル未達だった（KRT-16 未配線2件が最接近）。本 Issue は Main の条件探索（#117／#119／#121）と同じ進め方で、Wing の実現条件を特定する。\n\n## Stage 0：入力改訂\n- #129 で判明した入力側問題への対処：取付 NPTH が自身の pads 禁止 keepout に入る items_not_allowed（全基板各4件）\n- 生成 JSON が定義するのは取付穴 φ2.2mm＋keepout φ5.0mm の形状のみで、禁止対象の種別は JSON に含まれない（PMO 確認済み）。KiCad 側の rule area の禁止対象から pads を外す改訂は入力構築の範囲内で行う。NPTH は銅を持たないため「取付穴周囲に銅を近づけない」意図は維持される\n- JSON の形状・寸法は不変。変更点を記録し、改訂入力で等価性ゲートを再実行して hash を再固定する\n\n## Stage 1：条件探索（KRT、escalation off 固定、16mm 先行、安い順・合格で打ち止め）\n1. 2層・0.127mm\n2. 2層・0.10mm\n3. 4層・0.127mm（層構成は D-019 と同じ F信号／In1 GND／In2信号／B信号）\n4. 4層・0.10mm\n- ビアは 0.60／0.30mm を全セルで維持する。配置は固定（#129 の等価性ゲート通過入力が基礎）\n- 各セル単一 run、設定探索なし。合格した段で探索を止め、未実施セルは未実施として記録する\n- 16mm で合格条件が見つかったら、同条件で 17mm を1セル確認する\n- fab_router は本探索の対象外（#129 で未配線23件と大きく離れたため）。KRT が全セル未達の場合の再検討は別途 PO 判断\n\n## 合格基準（セルごと）\n- 独立検査の4指標すべて 0：required unconnected／wrong-net contacts／material violations／unexplained transfer changes\n- 幅監査：出力プロジェクトの最小幅書き換えがないこと、当該セルのピン留め幅未満のトラックがないこと\n- 未配線が残る場合、4指標は null とし実測未配線件数を報告する\n\n## 制約・成果物\n- タイムボックス：全体で4時間\n- 入力の基礎は #129 の証跡（hardware/kicad/qualification/issue-129-wing-2layer-routing/）と hardware/jitx/wing/generated/**。Wing ソースと docs/decisions.md は編集しない\n- 一時ランタイムは作業ディレクトリ内の .issue131-runtime/ に置く（/tmp は 512MB しかない）。#129 の .issue129-runtime/ の内容は読み取り専用の再利用元として使ってよい\n- 成果物：docs/issue-131-wing-condition-search.md、証跡は hardware/kicad/qualification/issue-131-wing-condition-search/ に追加のみ\n- Draft PR で提出する。merge は PO 判断",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-04T20:43:27Z",
+    "updated_at": "2026-11-04T20:43:27Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/131",
+    "display_title": "Wing 自動配線の実現条件探索：KRT で層数×線幅の条件を安い順に判定する"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/131",
+  "title": "Wing 自動配線の実現条件探索：KRT で層数×線幅の条件を安い順に判定する",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/131",
+  "display_title": "Wing 自動配線の実現条件探索：KRT で層数×線幅の条件を安い順に判定する"
+}

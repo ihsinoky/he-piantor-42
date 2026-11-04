@@ -1,0 +1,26 @@
+{
+  "common.py": {
+    "source": "hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/common.py",
+    "source_sha256": "669e8523b6be4c09dbe69c25203f5ce1f5577446eb39885df30a2ffe0990772c",
+    "new_sha256": "25552843bba141c5c33434bd1618184072b70fd72dd92e1617ec59483653cfa5",
+    "adaptations": "runtime root only"
+  },
+  "check-equivalence.py": {
+    "source": "hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/check-equivalence.py",
+    "source_sha256": "526b626e1d5087a5054de651e3326e9bab9ca8d3adad112bfc4193881f52976d",
+    "new_sha256": "a70425a50398dbaf5d675d7da155d03af3548bfc12d7dea20db7393a5c8f7a8c",
+    "adaptations": "expected GetDoNotAllowPads=False only; all other checks unchanged"
+  },
+  "read-effective.py": {
+    "source": "hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/repair-read-effective.py",
+    "source_sha256": "059b538d950036c97111bce6422666e00d3c799ef2c37df456f91760f3e7a95e",
+    "new_sha256": "fe77f516d71143b02ea184c57b0c3c757fbd37625e7fbafb95f47f2620e57203",
+    "adaptations": "new runtime root; explicit input path and pinned CLI options; stop-before-net-selection mechanism unchanged"
+  },
+  "inspect-cell.py": {
+    "source": "hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/repair-inspect.py",
+    "source_sha256": "3824e3046df66aee59c0c679fe4db48f06c67f47078608bf0025d4f14203c286",
+    "new_sha256": "02d866c70b58d1f1a55acb279e461f363214b6fc528e4fb6a304d36ec9e96f6f",
+    "adaptations": "cell-specific fixed project and width floor; exact conservative broad phase from repair-finish-graph.py"
+  }
+}
