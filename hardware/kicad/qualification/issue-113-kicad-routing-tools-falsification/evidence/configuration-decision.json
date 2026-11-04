@@ -1,0 +1,25 @@
+{
+  "primary_readme": "official/README.md lines 400-410: Route all nets to a specific output file",
+  "command": [
+    "python3",
+    "py_router/route.py",
+    "in.kicad_pcb",
+    "out.kicad_pcb"
+  ],
+  "options": [],
+  "input_geometry_read_from_project": {
+    "track_width_mm": 0.2,
+    "clearance_mm": 0.2,
+    "via_diameter_mm": 0.6,
+    "via_drill_mm": 0.3
+  },
+  "layers": [
+    "F.Cu",
+    "B.Cu"
+  ],
+  "default_escalation": "fab",
+  "default_fab_tier": "auto",
+  "fixed_acceptance": "Original 0.20mm rules, 2 layers, placement frozen; no acceptance of automatic narrowing or output rule relaxation. Built-in checker results never used as independent metrics.",
+  "outer_timeout_seconds": 1800,
+  "warning": "Default automatic dimension descent may violate the fixed condition. It is observed as output failure, never adopted as a relaxed criterion. No override/search to rescue the result."
+}
