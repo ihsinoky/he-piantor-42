@@ -1,0 +1,8 @@
+{
+  "checked_utc": "2026-11-04T20:03:29.691092+00:00",
+  "pass_equivalence": false,
+  "boards": {},
+  "tolerance_mm": 2e-06,
+  "failure": "AssertionError()",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/check-equivalence.py\", line 21, in <module>\n    f=footprints[c['reference']];compare(xy(f.GetPosition()),[100+c['x_mm'],100-c['y_mm']]);close(f.GetOrientationDegrees(),c['rotation_ccw_deg']);assert f.GetLayer()==p.F_Cu;assert f.GetValue()==c['mpn'];assert c['side']=='top';assert f.GetFPIDAsString()=='Wing129:'+c['kind']\n                                                                                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}

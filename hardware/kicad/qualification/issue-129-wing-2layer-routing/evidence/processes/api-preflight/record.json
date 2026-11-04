@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import pcbnew as p;print(p.LSET.__doc__);print([k for k in dir(p.LSET) if 'Add' in k or 'Seq' in k]);b=p.LoadBoard('/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/build-attempt2-inputs/pitch9-16mm/main.kicad_pcb');z=list(b.Zones())[0];print([k for k in dir(z) if any(s in k for s in ['Allow','Rule','Layer'])]); print([k for k in dir(z.Outline().COutline(0)) if 'Point' in k]);print([str(n.GetNetname()) for n in b.GetNetsByNetcode().values()])"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42",
+  "start_utc": "2026-11-04T20:03:13.580741+00:00",
+  "end_utc": "2026-11-04T20:03:14.852458+00:00",
+  "elapsed_seconds": 1.271730381999987,
+  "exit_code": 0,
+  "timed_out": false,
+  "timeout_seconds": 120,
+  "env_overrides": {
+    "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages",
+    "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/kicad",
+    "TMPDIR": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/tmp",
+    "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli",
+    "BUN_INSTALL_CACHE_DIR": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/bun-cache"
+  },
+  "display_unset": true
+}
