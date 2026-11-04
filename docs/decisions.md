@@ -483,3 +483,42 @@ selection remains a later measured-results/G2 decision.
 This records dimensional acceptance only. Design data and generated artifacts,
 including the native 100 mm fab constraint, are unchanged; routing, DRC and
 manufacturing approval are not established by this decision.
+
+
+## D-021 - Rev.M1 Wing two-layer and 0.10 mm design-rule baseline
+
+Status: accepted PO decision (2026-11-05)
+
+The PO decision for [Issue #135](https://github.com/ihsinoky/he-piantor-42/issues/135)
+on **2026-11-05** adopts the following design and manufacturing baseline for the
+**Rev.M1 Wing (representative21, both 16 mm and 17 mm pitches)**: **two copper
+layers**, **1.2 mm** finished PCB thickness, **0.10 mm trace width / 0.10 mm
+clearance**, and **0.60 mm via diameter / 0.30 mm drill**. Automatic routing
+under these conditions is demonstrated with KiCad Routing Tools (KRT,
+escalation off).
+
+This is a **Wing-side decision independent of
+[D-019](#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline)**, which
+sets the Main four-layer baseline. D-019 does not extend to Wings and this
+decision does not alter Main; the two baselines are cross-referenced but decided
+separately.
+
+Reason: [Issue #131](https://github.com/ihsinoky/he-piantor-42/issues/131)
+([results](issue-131-wing-condition-search.md)) completed full automatic routing
+with KRT at both pitches with all four independent metrics zero (required
+unconnected, wrong-net contact, physical violations, unexplained transfer
+changes). [Issue #133](https://github.com/ihsinoky/he-piantor-42/issues/133)
+([results](issue-133-wing-cost-check.md)) confirmed no additional cost: bare
+PCBs for five boards are **USD 9.30 (16 mm)** and **USD 9.90 (17 mm)**, **USD
+19.20** for both pitches. This is bare-board quotation evidence, not a total
+PCBA/order price or a manufacturing release.
+
+Reservations:
+
+- Whether a Keyboard Design surcharge applies stays **undetermined until the
+  manufacturer's file review**.
+- Trace-width manufacturing tolerance is **±20%** (JLCPCB official statement).
+
+The 3 x 3 pitch-evaluation Wings and Rev.A Wings are not covered. Production
+pitch selection remains a later measured-results/G2 decision, and pre-order
+manufacturing review remains required.
