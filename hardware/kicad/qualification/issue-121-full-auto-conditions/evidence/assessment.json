@@ -1,0 +1,668 @@
+{
+  "utc": "2026-11-04T10:59:04.450917+00:00",
+  "completed": true,
+  "confirmed_minimum_in_declared_search_order": "cell1: 4-layer, width/clearance 0.10mm, via 0.60/0.30mm, escalation off",
+  "global_minimum_proven": false,
+  "executed_main_cells": [
+    "cell1"
+  ],
+  "not_executed": [
+    "cell2",
+    "cell3",
+    "cell4"
+  ],
+  "rows": {
+    "smoke-cell1": {
+      "independent": {
+        "utc": "2026-11-04T10:56:38.091488+00:00",
+        "stage": "smoke",
+        "router": "krt",
+        "pass_acceptance": true,
+        "metrics": {
+          "required_unconnected": 0,
+          "wrong_net_contacts": 0,
+          "material_violations": 0,
+          "unexplained_transfer_changes": 0
+        },
+        "measured_unconnected_count": 0,
+        "unconnected_net_endpoint_list": [],
+        "raw_material_DRC_count": 0,
+        "raw_short_DRC_count": 0,
+        "drc_type_counts": {},
+        "width_pass": true,
+        "via_pass": true,
+        "plane_role_pass": true,
+        "original_project_used_for_DRC": true,
+        "zone_refill_before_DRC": true,
+        "output_project_changes": [
+          {
+            "path": "/board/design_settings/rules/min_via_drill",
+            "before": null,
+            "after": 0.3
+          },
+          {
+            "path": "/kicad_routing_tools",
+            "before": null,
+            "after": {
+              "repo_rules": {
+                "min_via_drill": 0.3
+              },
+              "fab_floor_origin": {
+                "min_hole_clearance": 0.2,
+                "min_through_hole_diameter": 0.3,
+                "min_track_width": 0.1,
+                "min_via_annular_width": 0.1,
+                "min_via_diameter": 0.6
+              },
+              "records_rev": 1
+            }
+          }
+        ],
+        "unexplained_change_raw_count": 0,
+        "physical": {
+          "utc": "2026-11-04T10:56:36.662576+00:00",
+          "kicad_version": "9.0.9-9.0.9~ubuntu24.04.1",
+          "refill_performed": true,
+          "zones": [
+            {
+              "net": "N",
+              "layer": "In1.Cu",
+              "filled": true,
+              "filled_area_internal": 91265445613403.5,
+              "same_net_pads": [
+                {
+                  "ref": "U2",
+                  "pad": "1",
+                  "uuid": "f6cd4727-b061-4acf-ad10-ab76ca61c4dd",
+                  "on_plane_layer": true
+                },
+                {
+                  "ref": "U1",
+                  "pad": "1",
+                  "uuid": "72a61ffe-ab7d-4dc6-bc06-f60741151bfb",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U1",
+                  "pad": "1",
+                  "uuid": "2f474b49-a8d8-41de-895e-9309b986e170",
+                  "on_plane_layer": false
+                }
+              ]
+            }
+          ],
+          "track_width_mm_counts": {
+            "0.2": 1,
+            "0.1": 1
+          },
+          "via_diameter_drill_mm_counts": {},
+          "tracks_per_layer": {
+            "F.Cu": 2,
+            "In1.Cu": 0,
+            "In2.Cu": 0,
+            "B.Cu": 0
+          },
+          "In1_signal_tracks": 0
+        }
+      },
+      "process": {
+        "argv": [
+          "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin/python3",
+          "py_router/route.py",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/smoke-cell1/krt/in.kicad_pcb",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/smoke-cell1/krt/out.kicad_pcb",
+          "--escalation",
+          "off",
+          "--track-width",
+          "0.1",
+          "--clearance",
+          "0.1",
+          "--via-size",
+          "0.6",
+          "--via-drill",
+          "0.3",
+          "--layers",
+          "F.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "B.Cu",
+          "--layer-costs",
+          "1.0",
+          "-1",
+          "1.0",
+          "1.0"
+        ],
+        "cwd": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools",
+        "start_utc": "2026-11-04T10:56:27.581055+00:00",
+        "timeout_seconds": 1800,
+        "env_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/lib/python3.12/site-packages",
+          "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/kicad",
+          "KICAD_STOCK_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/share/kicad",
+          "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+          "PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/hatch/.codex/tmp/arg0-linux/codex-arg0QOzmRO:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/opt/hatch/bin:/opt/hatch-image/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/muse/skills/documents/scripts:/opt/muse/skills/generate_podcast/scripts:/opt/muse/skills/style-tryon/scripts",
+          "XDG_CONFIG_HOME": "/tmp/issue-121-main/config",
+          "XDG_CACHE_HOME": "/tmp/issue-121-main/cache",
+          "XDG_DATA_HOME": "/tmp/issue-121-main/data",
+          "XDG_STATE_HOME": "/tmp/issue-121-main/state"
+        },
+        "headless": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "end_utc": "2026-11-04T10:56:35.815063+00:00",
+        "elapsed_seconds": 8.234130684000093
+      },
+      "stop_reason": "CLI normal completion; independent smoke accepted",
+      "router_summary": {
+        "escalations": 0,
+        "failed": 0,
+        "failed_single": [],
+        "main_loop_time_s": 0.01,
+        "min_clearance_used": 0.1,
+        "multipoint_deficit": 0,
+        "open_single": [],
+        "pad_pairs_open": {
+          "count": 0,
+          "nets": []
+        },
+        "regraded_nets": 1,
+        "routed": 1,
+        "scope": "merged",
+        "terminal_restores_broken": [],
+        "vias": 0
+      },
+      "all_project_differences": [
+        {
+          "path": "/board/design_settings/rules/min_via_drill",
+          "before": null,
+          "after": 0.3
+        },
+        {
+          "path": "/kicad_routing_tools",
+          "before": null,
+          "after": {
+            "repo_rules": {
+              "min_via_drill": 0.3
+            },
+            "fab_floor_origin": {
+              "min_hole_clearance": 0.2,
+              "min_through_hole_diameter": 0.3,
+              "min_track_width": 0.1,
+              "min_via_annular_width": 0.1,
+              "min_via_diameter": 0.6
+            },
+            "records_rev": 1
+          }
+        }
+      ]
+    },
+    "main-cell1": {
+      "independent": {
+        "utc": "2026-11-04T10:57:12.692803+00:00",
+        "stage": "main",
+        "router": "krt",
+        "pass_acceptance": true,
+        "metrics": {
+          "required_unconnected": 0,
+          "wrong_net_contacts": 0,
+          "material_violations": 0,
+          "unexplained_transfer_changes": 0
+        },
+        "measured_unconnected_count": 0,
+        "unconnected_net_endpoint_list": [],
+        "raw_material_DRC_count": 0,
+        "raw_short_DRC_count": 0,
+        "drc_type_counts": {
+          "silk_overlap": 12,
+          "silk_over_copper": 5,
+          "text_height": 44
+        },
+        "width_pass": true,
+        "via_pass": true,
+        "plane_role_pass": true,
+        "original_project_used_for_DRC": true,
+        "zone_refill_before_DRC": true,
+        "output_project_changes": [
+          {
+            "path": "/board/design_settings/rules/min_via_drill",
+            "before": null,
+            "after": 0.3
+          },
+          {
+            "path": "/kicad_routing_tools",
+            "before": null,
+            "after": {
+              "repo_rules": {
+                "min_via_drill": 0.3
+              },
+              "fab_floor_origin": {
+                "min_hole_clearance": 0.2,
+                "min_through_hole_diameter": 0.3,
+                "min_track_width": 0.1,
+                "min_via_annular_width": 0.1,
+                "min_via_diameter": 0.6
+              },
+              "records_rev": 1
+            }
+          }
+        ],
+        "unexplained_change_raw_count": 0,
+        "physical": {
+          "utc": "2026-11-04T10:57:10.611319+00:00",
+          "kicad_version": "9.0.9-9.0.9~ubuntu24.04.1",
+          "refill_performed": true,
+          "zones": [
+            {
+              "net": "GND",
+              "layer": "In1.Cu",
+              "filled": true,
+              "filled_area_internal": 2040717111521482.5,
+              "same_net_pads": [
+                {
+                  "ref": "C21",
+                  "pad": "2",
+                  "uuid": "0d8789f1-c367-4645-a1ce-4aa7234dbaaf",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U2",
+                  "pad": "2",
+                  "uuid": "59ff0b27-f2f2-4a4c-b368-5c3199a5478b",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C22",
+                  "pad": "2",
+                  "uuid": "b07b6577-d0ad-4298-8252-abe35fd2bce3",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U4",
+                  "pad": "2",
+                  "uuid": "830a0ad9-d786-4469-ae7d-4d574f80dda9",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C9",
+                  "pad": "2",
+                  "uuid": "bd059dbb-c5d2-4f22-9a9c-0ff670214696",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R13",
+                  "pad": "2",
+                  "uuid": "a464e4f6-1807-4250-969b-420879aecfa8",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C16",
+                  "pad": "2",
+                  "uuid": "83b85dae-0f04-4d4b-bdc3-3d371372be18",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R11",
+                  "pad": "2",
+                  "uuid": "5bac2b4e-6d96-49d8-9be9-c260c768912b",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C12",
+                  "pad": "2",
+                  "uuid": "3fab7136-432e-469f-929a-97107fd945ac",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C7",
+                  "pad": "2",
+                  "uuid": "adab0244-8b45-4eff-8598-82f76f055d64",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C15",
+                  "pad": "2",
+                  "uuid": "fe06556a-abb8-4367-8b65-2df35cd12d95",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C19",
+                  "pad": "2",
+                  "uuid": "2c064edc-75af-4337-9364-ece20977f51b",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C13",
+                  "pad": "2",
+                  "uuid": "58ec1683-75f7-464e-ad89-86dfe537333e",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C10",
+                  "pad": "2",
+                  "uuid": "3e1586a0-059d-4dc6-8200-a7eb83ac17f6",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C8",
+                  "pad": "2",
+                  "uuid": "d78d7dd8-2f2a-4946-898d-5dd195b61f80",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C11",
+                  "pad": "2",
+                  "uuid": "e3e0c447-ddc0-4d04-9690-0620ae4bec0b",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R15",
+                  "pad": "2",
+                  "uuid": "c68c149c-dd26-47e7-a437-464c89dec0b4",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R2",
+                  "pad": "2",
+                  "uuid": "1817ef16-aa55-43f0-a97b-48c22364b1ad",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U5",
+                  "pad": "2",
+                  "uuid": "6e1a2a6c-8519-4d0d-ad7c-59d98431abb7",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C3",
+                  "pad": "2",
+                  "uuid": "2d9c43c5-aab0-4299-adbc-3367ee43f5e8",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C14",
+                  "pad": "2",
+                  "uuid": "dad755cf-4e15-41a5-bfd3-96dbed78c0ef",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R7",
+                  "pad": "2",
+                  "uuid": "08aab83f-a213-48b8-9bc5-9c3a601c91d5",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C2",
+                  "pad": "2",
+                  "uuid": "2416c95d-8438-4147-97eb-199695846381",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J1",
+                  "pad": "1",
+                  "uuid": "61c2adaf-f1c3-40be-8c74-7e8a4a7569cb",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J1",
+                  "pad": "12",
+                  "uuid": "9b65fc68-3431-4c5d-9ce5-274590e69045",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J1",
+                  "pad": "13",
+                  "uuid": "6f295fbf-581f-4aa8-9a9a-90b08fe8f5d9",
+                  "on_plane_layer": true
+                },
+                {
+                  "ref": "J1",
+                  "pad": "13",
+                  "uuid": "3288d310-05d2-4d13-91a2-f399cbe6c832",
+                  "on_plane_layer": true
+                },
+                {
+                  "ref": "J1",
+                  "pad": "13",
+                  "uuid": "ad2fe97a-efcb-4e95-b0d8-d5395255c151",
+                  "on_plane_layer": true
+                },
+                {
+                  "ref": "J1",
+                  "pad": "13",
+                  "uuid": "704ad2e9-932a-4616-a56a-2cf47545dcc1",
+                  "on_plane_layer": true
+                },
+                {
+                  "ref": "R6",
+                  "pad": "2",
+                  "uuid": "b291c440-3559-43f3-b2e6-92f1371f34b4",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C1",
+                  "pad": "2",
+                  "uuid": "a3e2a58b-dc92-4bed-869a-92837a46330e",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "2",
+                  "uuid": "b00efdd7-8da4-4c55-ac63-e5e49bda25d3",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "4",
+                  "uuid": "cd9749ad-f788-407c-92c5-15fd07b4c0f0",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "8",
+                  "uuid": "fc5917f1-dfeb-460d-b298-1ac9c5dc16bd",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "10",
+                  "uuid": "845980fb-b327-4063-b1f0-50117799a7aa",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "12",
+                  "uuid": "2137fa35-8680-4702-b3f3-7921facc8399",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "J2",
+                  "pad": "14",
+                  "uuid": "e0c439ec-ab23-4ca6-af1e-034773aeca66",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "Y1",
+                  "pad": "2",
+                  "uuid": "d158fe05-a0fd-4962-8e1c-55b97fad2a58",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "Y1",
+                  "pad": "4",
+                  "uuid": "f28f256b-763b-47b9-b6f9-e4e4cb29b5e8",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C6",
+                  "pad": "2",
+                  "uuid": "436dbebb-41bf-46c2-895e-5789ffa737a3",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C20",
+                  "pad": "2",
+                  "uuid": "75da6e68-6a0f-4c31-a26b-711fe7ea7a16",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C17",
+                  "pad": "2",
+                  "uuid": "205ed3b7-384f-4802-9c3e-39d365426384",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C4",
+                  "pad": "2",
+                  "uuid": "c395d5ff-2a64-44c0-824c-e7316387107b",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U1",
+                  "pad": "19",
+                  "uuid": "2239254f-fd05-46f8-819a-18319d125499",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U1",
+                  "pad": "57",
+                  "uuid": "c1553166-f498-41db-9c87-3213571c8e35",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C5",
+                  "pad": "2",
+                  "uuid": "8c510d8a-2dd1-49ce-8438-5d549e995711",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "U3",
+                  "pad": "4",
+                  "uuid": "c49c573d-fecb-4876-9cf9-d0df5b00e2f7",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "R1",
+                  "pad": "2",
+                  "uuid": "d7dacd70-5cfa-4cb0-849b-87a6abc9f9c9",
+                  "on_plane_layer": false
+                },
+                {
+                  "ref": "C18",
+                  "pad": "2",
+                  "uuid": "990fa042-63a6-4efa-a7ad-af0a6a34cce6",
+                  "on_plane_layer": false
+                }
+              ]
+            }
+          ],
+          "track_width_mm_counts": {
+            "0.2": 3,
+            "0.1": 537
+          },
+          "via_diameter_drill_mm_counts": {
+            "0.6/0.3": 66
+          },
+          "tracks_per_layer": {
+            "F.Cu": 471,
+            "In1.Cu": 0,
+            "In2.Cu": 33,
+            "B.Cu": 36
+          },
+          "In1_signal_tracks": 0
+        }
+      },
+      "process": {
+        "argv": [
+          "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin/python3",
+          "py_router/route.py",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/main-cell1/krt/in.kicad_pcb",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/main-cell1/krt/out.kicad_pcb",
+          "--escalation",
+          "off",
+          "--track-width",
+          "0.1",
+          "--clearance",
+          "0.1",
+          "--via-size",
+          "0.6",
+          "--via-drill",
+          "0.3",
+          "--layers",
+          "F.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "B.Cu",
+          "--layer-costs",
+          "1.0",
+          "-1",
+          "1.0",
+          "1.0"
+        ],
+        "cwd": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools",
+        "start_utc": "2026-11-04T10:56:42.160352+00:00",
+        "timeout_seconds": 1800,
+        "env_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/lib/python3.12/site-packages",
+          "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/kicad",
+          "KICAD_STOCK_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/share/kicad",
+          "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+          "PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/hatch/.codex/tmp/arg0-linux/codex-arg0QOzmRO:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/opt/hatch/bin:/opt/hatch-image/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/muse/skills/documents/scripts:/opt/muse/skills/generate_podcast/scripts:/opt/muse/skills/style-tryon/scripts",
+          "XDG_CONFIG_HOME": "/tmp/issue-121-main/config",
+          "XDG_CACHE_HOME": "/tmp/issue-121-main/cache",
+          "XDG_DATA_HOME": "/tmp/issue-121-main/data",
+          "XDG_STATE_HOME": "/tmp/issue-121-main/state"
+        },
+        "headless": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "end_utc": "2026-11-04T10:57:09.424415+00:00",
+        "elapsed_seconds": 27.264149706999888
+      },
+      "stop_reason": "CLI normal completion; final written-board regrade 37/37 nets complete",
+      "router_summary": {
+        "escalations": 0,
+        "failed": 0,
+        "failed_single": [],
+        "main_loop_time_s": 1.23,
+        "min_clearance_used": 0.1,
+        "multipoint_deficit": 0,
+        "open_single": [],
+        "pad_pairs_open": {
+          "count": 0,
+          "nets": []
+        },
+        "regraded_nets": 37,
+        "routed": 37,
+        "scope": "merged",
+        "terminal_restores_broken": [],
+        "vias": 67
+      },
+      "all_project_differences": [
+        {
+          "path": "/board/design_settings/rules/min_via_drill",
+          "before": null,
+          "after": 0.3
+        },
+        {
+          "path": "/kicad_routing_tools",
+          "before": null,
+          "after": {
+            "repo_rules": {
+              "min_via_drill": 0.3
+            },
+            "fab_floor_origin": {
+              "min_hole_clearance": 0.2,
+              "min_through_hole_diameter": 0.3,
+              "min_track_width": 0.1,
+              "min_via_annular_width": 0.1,
+              "min_via_diameter": 0.6
+            },
+            "records_rev": 1
+          }
+        }
+      ]
+    }
+  }
+}

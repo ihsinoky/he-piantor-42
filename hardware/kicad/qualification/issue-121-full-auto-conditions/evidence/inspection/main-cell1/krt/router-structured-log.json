@@ -1,0 +1,533 @@
+{
+  "JSON_SUMMARY": [
+    {
+      "routed_single": [
+        "XOUT_XTAL",
+        "ADC_B",
+        "USB_DP_ESD",
+        "ADC_A",
+        "CC2",
+        "USB_DM_ESD",
+        "MUX_OUT_A",
+        "ADC_C",
+        "CC1",
+        "USB_DP_CONN",
+        "RUN",
+        "XIN",
+        "QSPI_SD1",
+        "QSPI_SD3",
+        "QSPI_SCLK",
+        "QSPI_SD0",
+        "XOUT",
+        "MUX_A0",
+        "VBUS",
+        "V1V1",
+        "QSPI_SD2",
+        "USB_DM_CONN",
+        "HALL_PWR_EN",
+        "MUX_OUT_B",
+        "SWCLK",
+        "USB_DM",
+        "MUX_OUT_C",
+        "QSPI_SS_FLASH",
+        "USB_DP",
+        "WING_EN",
+        "MUX_A2",
+        "MUX_A1",
+        "QSPI_SS_MCU",
+        "HALL_5V",
+        "V3V3",
+        "SWDIO"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [
+        {
+          "net_name": "GND",
+          "failed_pads": [
+            {
+              "component_ref": "U1",
+              "pad_number": "?",
+              "x": 99.0,
+              "y": 103.4375
+            }
+          ]
+        }
+      ],
+      "multipoint_nets": 16,
+      "multipoint_pads_connected": 124,
+      "multipoint_pads_total": 125,
+      "multipoint_edges_routed": 105,
+      "multipoint_edges_failed": 3,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 36,
+      "failed": 1,
+      "total_time": 1.18,
+      "total_iterations": 438416,
+      "total_vias": 63,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.2,
+          "annular": 0.1,
+          "board_edge": 0.2
+        },
+        "count": 0,
+        "nets": [],
+        "narrowed": [],
+        "min_delivered": {},
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "kicad_refill",
+        "islands": 1,
+        "refill_status": "ok",
+        "why": "the KiCad refill succeeded",
+        "machine_dependent": false
+      },
+      "rescue": {
+        "attempted": 1,
+        "recovered": [],
+        "improved": [
+          "GND"
+        ],
+        "unchanged": [],
+        "pads_reconnected": 0,
+        "widths": {
+          "GND": {
+            "requested_mm": 0.1,
+            "delivered_mm": 0.1,
+            "rescue_min_mm": 0.1,
+            "rescue_max_mm": 0.1,
+            "rescue_segments_emitted": 31,
+            "rescue_by_width": {
+              "0.1": 31
+            },
+            "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."
+          }
+        },
+        "time": 2.85
+      },
+      "oracle_check": "disabled",
+      "blockers": [
+        {
+          "net": "GND",
+          "stage": "phase3",
+          "blocked_by": [
+            {
+              "net": "QSPI_SS_MCU",
+              "blocked_count": 40,
+              "unique_cells": 40,
+              "track_cells": 40,
+              "via_cells": 0,
+              "near_target_cells": 40,
+              "near_source_cells": 0
+            },
+            {
+              "net": "XOUT",
+              "blocked_count": 11,
+              "unique_cells": 11,
+              "track_cells": 10,
+              "via_cells": 2,
+              "near_target_cells": 11,
+              "near_source_cells": 0
+            },
+            {
+              "net": "QSPI_SD1",
+              "blocked_count": 11,
+              "unique_cells": 11,
+              "track_cells": 11,
+              "via_cells": 0,
+              "near_target_cells": 11,
+              "near_source_cells": 0
+            },
+            {
+              "net": "XIN",
+              "blocked_count": 6,
+              "unique_cells": 6,
+              "track_cells": 6,
+              "via_cells": 0,
+              "near_target_cells": 6,
+              "near_source_cells": 0
+            },
+            {
+              "net": "QSPI_SD2",
+              "blocked_count": 5,
+              "unique_cells": 5,
+              "track_cells": 0,
+              "via_cells": 5,
+              "near_target_cells": 5,
+              "near_source_cells": 0
+            }
+          ]
+        }
+      ],
+      "pad_pairs_connected": 129,
+      "pad_pairs_total": 130,
+      "pad_pairs_open": [
+        {
+          "net": "GND",
+          "pairs_connected": 47,
+          "pairs_total": 48,
+          "outcome": "open",
+          "open_subtype": "partial"
+        }
+      ],
+      "scope": "run",
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli"
+      }
+    },
+    {
+      "routed_single": [
+        "XIN"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_nets": 1,
+      "multipoint_pads_connected": 3,
+      "multipoint_pads_total": 3,
+      "multipoint_edges_routed": 2,
+      "multipoint_edges_failed": 0,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 1,
+      "failed": 0,
+      "total_time": 0.05,
+      "total_iterations": 6329,
+      "total_vias": 4,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.2,
+          "annular": 0.1,
+          "board_edge": 0.2
+        },
+        "count": 0,
+        "nets": [],
+        "narrowed": [],
+        "min_delivered": {},
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "kicad_refill",
+        "islands": 1,
+        "refill_status": "ok",
+        "why": "the KiCad refill succeeded (memo hit)",
+        "machine_dependent": false
+      },
+      "preexisting_rips": {
+        "MUX_A0": "rerouted [was blocking 'MUX_A2']",
+        "MUX_A2": "rerouted [was blocking 'XIN']"
+      },
+      "oracle_check": "skipped (in-memory board)",
+      "pad_pairs_connected": 4,
+      "pad_pairs_total": 4,
+      "scope": "reconciliation-subset",
+      "board_scoped_keys": [
+        "min_clearance_used"
+      ],
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli"
+      }
+    }
+  ],
+  "JSON_ORACLE": [
+    {
+      "available": true,
+      "reason": "ok",
+      "why": "the oracle ran",
+      "rounds": 0,
+      "links_routed": 0,
+      "links_failed": 0,
+      "remaining": 0,
+      "collapsed_duplicate_links": 0,
+      "remaining_links": [],
+      "cross_board": 0,
+      "off_board": 0,
+      "removed_segments": [],
+      "removed_vias": []
+    }
+  ],
+  "VIA_IN_PAD_JSON": [
+    {
+      "count": 25,
+      "sites": [
+        "C5.2",
+        "board F.Paste (graphic)"
+      ],
+      "stamped": 0,
+      "restored": 0,
+      "protected": 0,
+      "unstampable": 25,
+      "site_created": 0,
+      "unprotected": [
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 104.5,
+          "y": 106.1,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 106.0,
+          "y": 96.5,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 103.5,
+          "y": 94.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 103.6,
+          "y": 90.1,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 109.4,
+          "y": 116.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 114.4,
+          "y": 116.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 116.9,
+          "y": 116.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 100.0,
+          "y": 100.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 94.8,
+          "y": 99.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "C5.2",
+          "x": 95.0,
+          "y": 102.5,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 86.2,
+          "y": 102.1,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 84.8,
+          "y": 97.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 83.7,
+          "y": 92.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 88.8,
+          "y": 107.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 100.6,
+          "y": 99.8,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 108.1,
+          "y": 100.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 87.0,
+          "y": 106.8,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 115.0,
+          "y": 104.7,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 111.0,
+          "y": 104.5,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 97.0,
+          "y": 118.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 93.5,
+          "y": 99.2,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 103.4,
+          "y": 97.3,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 99.7,
+          "y": 106.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 81.2,
+          "y": 99.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        },
+        {
+          "site": "board F.Paste (graphic)",
+          "x": 110.2,
+          "y": 116.0,
+          "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"
+        }
+      ],
+      "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"
+    }
+  ],
+  "JSON_REGRADE": [
+    {
+      "board": "file",
+      "graded_nets": 37,
+      "seconds": 0.23,
+      "routed_single": [
+        "XOUT_XTAL",
+        "ADC_B",
+        "USB_DP_ESD",
+        "ADC_A",
+        "CC2",
+        "USB_DM_ESD",
+        "MUX_OUT_A",
+        "ADC_C",
+        "CC1",
+        "USB_DP_CONN",
+        "RUN",
+        "XIN",
+        "QSPI_SD1",
+        "QSPI_SD3",
+        "QSPI_SCLK",
+        "QSPI_SD0",
+        "XOUT",
+        "MUX_A0",
+        "VBUS",
+        "V1V1",
+        "QSPI_SD2",
+        "USB_DM_CONN",
+        "HALL_PWR_EN",
+        "MUX_OUT_B",
+        "SWCLK",
+        "USB_DM",
+        "MUX_OUT_C",
+        "QSPI_SS_FLASH",
+        "USB_DP",
+        "WING_EN",
+        "MUX_A2",
+        "MUX_A1",
+        "QSPI_SS_MCU",
+        "HALL_5V",
+        "V3V3",
+        "SWDIO",
+        "GND"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_pads_total": 125,
+      "multipoint_pads_connected": 125,
+      "successful": 37,
+      "failed": 0,
+      "unowned_broken": [],
+      "recovered": [
+        "GND"
+      ],
+      "pad_pairs": {},
+      "broken_by_run": []
+    }
+  ],
+  "JSON_SUMMARY_MIN": [
+    {
+      "escalations": 0,
+      "failed": 0,
+      "failed_single": [],
+      "main_loop_time_s": 1.23,
+      "min_clearance_used": 0.1,
+      "multipoint_deficit": 0,
+      "open_single": [],
+      "pad_pairs_open": {
+        "count": 0,
+        "nets": []
+      },
+      "regraded_nets": 37,
+      "routed": 37,
+      "scope": "merged",
+      "terminal_restores_broken": [],
+      "vias": 67
+    }
+  ],
+  "PROJECT_WRITES_JSON": [
+    {
+      "project": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/main-cell1/krt/out.kicad_pro",
+      "writes": [
+        "rules.min_via_drill: None -> 0.3 mm",
+        "kicad_routing_tools.fab_floor_origin: recorded"
+      ]
+    }
+  ]
+}
