@@ -452,3 +452,34 @@ and the assembly process for USB J1's PTH retention legs (to be checked in
 [Issue #124](https://github.com/ihsinoky/he-piantor-42/issues/124)). This decision
 selects neither specification nor process; pre-order manufacturing review
 remains required.
+
+## D-020 - Representative 21-key Wing 100 x 100 mm requirement relaxation
+
+Status: accepted PO decision (2026-11-05)
+
+The PO decision in [Issue #127](https://github.com/ihsinoky/he-piantor-42/issues/127)
+on **2026-11-05** relaxes the **100 x 100 mm requirement for the representative
+21-key Wing only**. Preserve the Piantor layout, the product premise based on
+[D-001's geometry foundation](#d-001---one-piece-geometry), and accept these
+measured design outlines:
+
+| Pitch | Accepted representative Wing outline (W x H) |
+| --- | --- |
+| 16.0 mm | 110 x 100 mm |
+| 17.0 mm | 116.5 x 104.75 mm |
+
+Reason: both Piantor-based outlines exceed 100 x 100 mm. Preserving the Piantor
+layout takes priority over fitting that area. These are measurements of the
+generated outline vertices, not physical-board measurements; see the
+[Issue #127 design record](issue-127-wing-design.md).
+The historical 100 x 100 mm target in the [evaluation plan](../hardware/rev-m1/evaluation-plan.md#cost--geometry)
+is **superseded for this representative Wing** by the accepted dimensions above.
+
+This decision does not affect the dimensions of the **3 x 3 pitch-evaluation
+Wings**. The independent **load21** configuration (3 x 3 plus 12 Hall-only
+sites) provides electrical full-load verification coverage. Production pitch
+selection remains a later measured-results/G2 decision.
+
+This records dimensional acceptance only. Design data and generated artifacts,
+including the native 100 mm fab constraint, are unchanged; routing, DRC and
+manufacturing approval are not established by this decision.

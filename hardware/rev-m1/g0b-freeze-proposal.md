@@ -238,6 +238,14 @@ against 100 x 100 mm including connector and cable clearance. Reuse of the
 Main is mandatory across all variants. The parameterized definition and
 variant generation are post-G0B implementation work.
 
+**Later PO decision (2026-11-05):** the representative 21-key Wing's historical
+100 x 100 mm target above is **superseded** by
+[D-020](../../docs/decisions.md#d-020---representative-21-key-wing-100-x-100-mm-requirement-relaxation).
+For Issue #127, preserve the Piantor layout and accept measured design outlines
+of 110 x 100 mm at 16.0 mm pitch and 116.5 x 104.75 mm at 17.0 mm pitch.
+The 3 x 3 pitch-evaluation Wing dimensions are unaffected; the independent
+load21 configuration retains electrical full-load verification coverage.
+
 ## 6. Production-equivalent MUX and bank evidence
 
 | Production behavior | Rev.M1 evidence |

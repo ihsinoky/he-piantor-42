@@ -69,6 +69,15 @@ not a pitch requirement. Magnetic performance and usability take priority.
 Main + Evaluation Wing heterogeneous-panel feasibility is a separate cost
 experiment under the [DFM policy](dfm-policy.md), not a required test geometry.
 
+**Superseded for the representative 21-key Wing only (2026-11-05):**
+[D-020](../../docs/decisions.md#d-020---representative-21-key-wing-100-x-100-mm-requirement-relaxation)
+records the Issue #127 PO decision to relax the historical 100 x 100 mm
+requirement above and preserve the Piantor layout. The accepted measured design
+outlines are **110 x 100 mm at 16.0 mm pitch** and **116.5 x 104.75 mm at
+17.0 mm pitch**. The 3 x 3 pitch-evaluation Wing dimensions are unaffected;
+electrical full-load verification is covered by the independent load21
+configuration (3 x 3 plus 12 Hall-only sites).
+
 ## Recorded evidence and later Human Gate
 
 Produce raw CSV/time-series/travel data, setup photos/diagrams, firmware and

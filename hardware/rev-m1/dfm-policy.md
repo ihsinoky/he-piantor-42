@@ -35,6 +35,13 @@ performance and usability take priority. Future geometry source must be
 project-owned or explicitly approved at a later Human Gate; do not consume
 `hardware/layout/**`.
 
+**Representative Wing exception / superseded target (2026-11-05):**
+[D-020](../../docs/decisions.md#d-020---representative-21-key-wing-100-x-100-mm-requirement-relaxation)
+relaxes the historical 100 x 100 mm target for the Issue #127 representative
+21-key Wing only, preserving Piantor geometry and accepting 110 x 100 mm
+(16.0 mm pitch) / 116.5 x 104.75 mm (17.0 mm pitch). This does not change
+3 x 3 pitch-evaluation Wing dimensions or approve a panel/manufacturing package.
+
 G0B accepted these DFM constraints with architecture/interface and Main reuse.
 The original D-017-era plan named EDA-003B representative stock-tscircuit
 physical/routing proof next, with full Rev.M1 implementation conditional on
