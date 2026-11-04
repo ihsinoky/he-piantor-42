@@ -1,65 +1,103 @@
-# Issue #117 — 4層 Main の事前ゲートと Wing 予備見通し
+# Issue #117 — 4層 Main 本試験と Wing 予備見通し（修正指示01）
 
-**STAGE_0_STOP：指定された smoke のネット不変と GND ゾーンを両立できず、配線前に中断した。** 固定 smoke は非空ネットが `N` の1個だけで `GND` が存在しない。ネットを追加・改名せずに「ネット GND の全面ゾーン」を構築できないため、smoke 配線は両候補0回、Stage 1 の Main 配線も両候補0回である。4層で Main が完成するかは **未判定**。ルーターの失敗や配置不可能性を示す結果ではない。
+**FIXED_CONDITION_FAIL：smoke は両候補とも独立4指標0で合格した。Main は固定条件のまま各1回実行し、再充填後の独立 KiCad DRC で fab_router 26件、KRT 28件の未配線が残った。** 4層・幅/clearance 0.20mm・via 0.60/0.30mmの条件で、今回の両セルはMain完成を示せなかった。配置不可能性や4層一般の不成立を証明する結果ではない。
 
-対象は [Issue #117](https://github.com/ihsinoky/he-piantor-42/issues/117)。以下 `E/` は [証跡ディレクトリ](../hardware/kicad/qualification/issue-117-four-layer-main/evidence/) を指す。指示書全文は `E/instructions.md`、機械可読の結論は `E/assessment.json` と `E/equivalence-gate.json`。この報告は要求変更・製造承認ではなく、`docs/decisions.md` は変更していない。
+対象は [Issue #117](https://github.com/ihsinoky/he-piantor-42/issues/117)、継続提出先は [Draft PR #118](https://github.com/ihsinoky/he-piantor-42/pull/118)、ブランチ `issue-117-four-layer-main`。mergeしない。`docs/decisions.md` は変更していない。
 
-## Stage 0：固定入力と等価性
+以下 `E/` は [証跡](../hardware/kicad/qualification/issue-117-four-layer-main/evidence/)、`A/` はその [`amendment-01/`](../hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/) を指す。**最新結果は `A/assessment.json`・`A/verification.json`**。`E/assessment.json` 等の前回run 2記録は当時の停止履歴として保持している。元指示全文は `E/instructions.md`、優先する修正指示全文は `A/instructions.md`、改稿前の報告全文は `A/report-before-amendment.md`。
 
-#115 の保存入力を byte 同一コピーし、次の SHA256 を照合した。提出ブランチの基点は `e87f8bc5d4855201276ce53d9f54d19bea9536e3`。基点7349ファイルの全 byte 一致を確認し、元の読取り専用 `.git` を変更せず `/tmp/issue-117-main/git` でブランチを作成した。成果物は本書と指定証跡ディレクトリだけの追加である。
+## Stage 0：停止履歴、再利用と等価性
 
-| 固定入力 | SHA256 |
+前回run 2は、固定smokeが非空ネット `N` しか持たず、「ネット不変」と「GNDゾーン」を両立できないため配線前に停止した。その判断・生証跡を維持する。修正指示01に従い、smokeのみIn1プレーンを既存ネット `N` に割り当て、ネット追加・改名は行わない。**このsmoke固有の逸脱はMainへ適用しない。MainはGNDプレーンのままである。** smokeの確認範囲は層役割の受理とheadless出力・KiCad読戻しの経路であり、MainのGND配線能力の証明ではない。
+
+### 固定入力・Main再利用
+
+| 固定2層入力 | SHA256 |
 | --- | --- |
 | Main PCB | `46676e57e9618940a33c5e298244e97aaec61498a87aa7c58a264e444fc71e20` |
 | smoke PCB | `3f70465774f577ffe803f88de017004d164f045e6415ade22766a461a2454bec` |
-| 両入力のプロジェクト | `a5bc2aea160cc9a8b3035f77f0167c26a1de7ffdb749740c94fb7a9e9a3c87d5` |
+| Project | `a5bc2aea160cc9a8b3035f77f0167c26a1de7ffdb749740c94fb7a9e9a3c87d5` |
 
-`E/preflight.json` は #103 の fab_router ソース1534ファイル、#113 の KRT ソース2055ファイル、独立 KiCad 検査 runtime 26ファイルの hash 一致を記録する。fab_router は `69cf598db98c136bff16bbe02bccdded95674b18`、KRT v0.23.8 は `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`。KRT binary の SHA256 は `4411ccf3f074f519d8d69be29ac58b46ca7c4c2fe4f4be889d253d40996c2c0f`。ツールソースの修正、別版導入、配線の条件探索はない。
+Mainの4層入力を作り直していない。前回commit `7917d82` の `E/inputs/main/` 全ファイルをgit blobとbyte比較し、前回manifestのSHA256とも一致した。Main配線直前および最終監査でも再確認した。`A/main-reuse-and-runtime-revalidation.json` に全比較行がある。
 
-### 生成した入力と差分
+| 再利用Main生成物 | SHA256 |
+| --- | --- |
+| 4層native PCB | `33f079d07bfb2dad9a76dce0667a1fd1371c94406df16f36ae17fe559d74af01` |
+| 4層corrected DSN | `661d00c7d99adc270314a1a4940e64838999b948471f4d36a17aa9eac4d5e7f2` |
+| Project（元とbyte同一） | `a5bc2aea160cc9a8b3035f77f0167c26a1de7ffdb749740c94fb7a9e9a3c87d5` |
 
-`E/prepare-four-layer.py` と `E/inputs/{main,smoke}/` に手順・元ファイル・生成物を保存した。層は F.Cu signal / In1.Cu power（GND専用）/ In2.Cu signal / B.Cu signal。板厚は1.2mm。スタックアップの評価用仮定は銅箔各0.035mm ×4、誘電体0.18 / 0.70 / 0.18mm、FR4、比誘電率4.5、損失正接0.02、ソルダーマスク厚を合計から除外する。合計は1.20mm。メーカー確定スタックアップやインピーダンス保証ではない。
+Mainは49 footprints / 199物理ランド / 37非空ネット / 元3トラックを保持する。F.Cu=signal、In1.Cu=power（GND全面ゾーン）、In2.Cu=signal、B.Cu=signal。板厚1.2mm。評価用stackup仮定は銅箔0.035mm×4、誘電体0.18/0.70/0.18mm、FR4、epsilon_r=4.5、loss_tangent=0.02、mask厚は合計から除外。メーカー確定値ではない。Mainのthermal gap/spoke/zone clearance/min thicknessは各0.20mmのまま。
 
-Main は **49 footprints / 199物理ランド / 37非空ネット / 元3トラック**を保持し、In1.Cu に GND の全面ゾーンを追加して KiCad 9.0.9 の `ZONE_FILLER` で充填した。外形のままクリップされる矩形ゾーン、clearance / 最小銅箔幅 / thermal gap / spoke は0.20mm。充填済み銅箔面積は約2064.18mm²（内部単位の生値も保存）。これは入力のゾーン面積であり、配線完了後の GND 接続を示す値ではない。
+前回のnative全AST照合、snapshot、DSNの層役割と全ネット読戻し、内層PTH/NPTH拡張を個別確認したうえでの2層基準への全AST投影一致を再利用した。元の外形・配置・全pad・net/NC・既存配線と層・その他要素は保持される。証跡は `E/native-equivalence.json`、`E/dsn-equivalence.json`、`E/preparation-readback.json`。DSNの既知のSMD例外50µmは既存検証済み復旧器で200µmへ戻したものをそのまま使用する。
 
-初回の native 保存で KiCad が既存 F.Paste 矩形の反転した始終点を正規化したため、厳密な AST 照合が停止した。`E/preparation-attempt-01/` と失敗ログを保持し、準備スクリプトを修正した。修正後は KiCad が生成・充填した **zone ノードだけ**を、元 PCB へ層・stackup を追加したテキストに移植する。これにより既存の描画表現も保持した。これは配線前の入力準備の修正であり、ルーター実行や結果を見た再配線ではない。
+fab_routerは#103と同一commit `69cf598db98c136bff16bbe02bccdded95674b18`、KRT v0.23.8は#113/#115と同一commit `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`。全ソースと独立検査runtimeのhashを再照合し差分0。KRT binary SHA256は `4411ccf3f074f519d8d69be29ac58b46ca7c4c2fe4f4be889d253d40996c2c0f`。ツールソースは編集していない。
 
-最終入力の全トップレベル AST Counter は、layers / setup / zone 以外の追加・削除が両基板とも0。setup は stackup 以外が完全一致。フットプリント内の全パッド、ネット定義、外形、元トラックと元層、UUID、印刷・ペースト・その他の既存要素を保持した。元 `.kicad_pro` は byte 同一である。
+### smoke準備と合格
 
-さらに #115 と同じ独立 `eda-004g/resume-02/read-pcb.py` で KiCad 読戻しを行い、既存 snapshot との差分は Main の layers=2→4 と zones=0→1、smoke の layers=2→4 だけだった。幅 / clearance 0.20mm、via 0.60/0.30mm、板厚1.2mmも読戻し一致。詳細は `E/native-equivalence.json` と `E/preparation-readback.json`。
+固定smokeは4 footprints / 5物理ランド / 非空ネット `N` のみ / 元1トラック。`A/prepare-smoke*.py` は元2層PCBのlayers/setupに4層を加え、KiCadが生成・充填したNゾーンノードだけを移植する。既存要素は変更しない。native AST Counterではlayers/setup/zone以外の追加削除0、setup差はstackupだけ、プロジェクトはbyte一致。DSNは4層役割・N plane・全ネットを確認し、内層/planeを検査用メモリ上だけで除いた全ASTが#115の検証済み2層DSNと順序まで一致した。2層投影をルーターへ渡していない。
 
-### 再生成 DSN の読戻し
+最初のsmokeは両候補各1回実行した。fab_routerはKiCad再充填後の4指標0。KRTは未配線0だが `starved_thermal` 1件（U2.1のIn1ゾーン接続）で不合格だった。`A/inputs/smoke/`・`A/runs/smoke/`・`A/inspection/smoke/` に全結果を保存した。SES転送の元線分UUID再採番は形状/ネット/幅/層を変えない説明可能な差として記録し、#87と同じ中心線被覆検査（2nm）を用いる。初版検査器のUUID判定・import問題も `A/inspection-development-notes.json` と保存版に残した。
 
-4層 native から KiCad の公開 `ExportSpecctraDSN` で `raw.dsn` を新規生成した。既知の KiCad exporter の SMD間例外値 `clearance 50 (type smd_smd)` は、#87/#115 の既存検証済み `restore-clearance.py` を無改変で呼び、**その数値トークンだけ200µmへ復旧**して `corrected.dsn` とした。幅・global/class clearance は200µm、via padstack は600:300µm、4層貫通を明示する。元ルールを緩和する操作ではない。raw・補正後・byte位置・hashを保存した。
+追加したsmokeゾーンのpad接続方式だけをthermalから**solid**へ修正し、再度等価性を通した（`A/equivalence-gate-02.json`）。幅・clearance・via寸法、ルーター設定、元の配置・pad・net・配線は変えていない。固有のゾーン設定はMainに移さず、Main入力のbyte一致を維持する。これはStage 0のsmoke入力修正であり、Stage 1の結果を見た再設定・再実行ではない。smokeには各1回の制限はなく、両候補とも計2回、Mainは各1回のみ。
 
-`E/check-four-layer-dsn.py` は、4層の名前と signal/power の役割、Main の plane GND / In1.Cu、全 native 非空ネットと DSN network 集合を直接照合した。内層の PTH 形状・via 形状・NPTH 障害物は外層と同じ形状・座標の拡張であることを検証した上で、**追加内層・planeだけを検査用メモリ上で除外**し、via の層範囲名と B.Cu index を2層表現へ戻すと、基板ファイル名以外の **全 AST が #115 の検証済み corrected.dsn と順序まで完全一致**した。ルーターへ2層投影を渡してはいない。
+最終smokeは `A/inputs/smoke-02/`、出力は `A/runs/smoke-02/`、独立検査は `A/inspection/smoke-02/`。
 
-この照合は #115 の native/DSN 個別照合済み基準に対する厳密な推移的照合であり、placement の位置・回転・front/back・PN、全パッド座標/形状、ネット、NC、外形、元トラック、ルールの一致を含む。内層形状を無条件に捨てた比較ではない。結果は `E/inputs/*/dsn-projection.json`、`E/dsn-equivalence.json`。
+| 最終smoke検査 | fab_router | KRT v0.23.8 |
+| --- | ---: | ---: |
+| 必須未接続 / 異ネット接触 / 物的違反 / 説明不能な転送変更 | 0 / 0 / 0 / 0 | 0 / 0 / 0 / 0 |
+| 独立KiCad未配線 / DRC違反 | 0 / 0 | 0 / 0 |
+| In1信号トラック | 0 | 0 |
+| headless・出力生成・KiCad読戻し・ゾーン再充填 | 合格 | 合格 |
 
-### smoke を止めた理由と層役割の確認範囲
+fab_routerの実DSN読取りはIn1=`plane`、planeNet=`N`、全netGroupのusable sheets=`[0,2,3]`。KRTの禁止指定は `--layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 -1 1 1`。実出力でもIn1のトラック0、Nゾーンを保持した。直接のプレーン接続pad/viaは `plane-connectivity.json` のKiCad接続APIで別に読戻す。
 
-固定 smoke は **4 footprints / 5物理ランド / 非空ネット `N` だけ / 元1トラック**。`GND` の追加はネット棚卸しを変え、`N` を `GND` に改名すると元トラックとパッドのネットも変わる。ネット0は未割当であり、GND の代用にできない。したがって `E/inputs/smoke/main.kicad_pcb` は4層 stackup を保持する **ゾーン未作成の不適合準備物**として保存し、有効な4層 smoke 入力とは認定していない。空の GND ゾーンや4信号層への読み替えは行っていない。
+KRTは `--escalation off --track-width 0.20 --clearance 0.20 --via-size 0.60 --via-drill 0.30` を明示。既定/明示の全実効設定と差分は `E/configuration/` と `A/configuration/`、明示smokeのGridRouteConfigは前回Mainの明示configと完全一致。差分はescalation、層コスト、寸法の明示値由来フラグ等として保存し、内部tierへ寸法決定を委ねない。fab_routerは#103の公開 `routeDsn` とAPI既定を維持し、全体budgetのみ1800000msを指定。幅/clearance 200µm・via600:300µmはDSNに明示し、パーサと保存出力で確認する。
 
-配線を呼ばない公開パーサ／設定解決だけを実行した。
+**最終smokeゲート確定は `2026-11-04T09:29:19.054667+00:00`**。再開09:22:54 UTCから30分以内。両Mainの開始時刻はこれより後である。
 
-- fab_router `readDsn` は In1.Cu を `plane` と読み、Main の planeNet を `GND` に対応づけた。全 netGroup の信号用 usable sheets は `[0,2,3]`（F/In2/B）。全層幅200µmも読戻した。smoke では GND planeNet 不在がそのまま現れる。`E/read-fab.ts` は配線APIを呼ばない。
-- KRT は #115 の trace 停止方式で `batch_route` の config 構築後、net選択・配線処理の前に停止した。既定と明示指定の両 dump・全差分を `E/configuration/` に保持する。明示指定は `--escalation off --track-width 0.20 --clearance 0.20 --via-size 0.60 --via-drill 0.30 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 -1 1 1`。負値は固定版公式 CLI が規定する、via 通過を残したトラック配置禁止である。4層を bare CLI で信号配線させてはいない。
+## Stage 1：Main固定条件の各1回
 
-KRT の既定解決との実効差分は escalation、In1 の禁止コスト、および寸法をクラス由来から明示値由来にするフラグだけ。実効幅0.20 / clearance0.20 / via0.60/0.30は変わらない。これは **設定読戻しの結果**であり、実配線での層役割遵守・headless出力・SES転送・4指標合格を確認したものではない。
-
-等価性ゲートの判定は **不成立**。条件の明示修正がないまま、スモークや本試験へ進むことはしない。再開には、同じ `N` ネットのプレーンでよいのか、smoke の改名・置換を認めるのか等について、指示元による固定条件の解消が必要である。
-
-## Stage 1：両セル未実行
+以下は元プロジェクトを採点用に使用し、保存出力を独立KiCad 9.0.9で再充填してから得た実測。未完成でもDRC JSON・全未配線ネット/端点・生差分を保存した。ルーター自己申告と独立値を区別する。
 
 | 項目 | セルA fab_router | セルB KRT v0.23.8 |
 | --- | --- | --- |
-| smoke 配線回数 / Main 配線回数 | 0 / 0 | 0 / 0 |
-| 停止理由 | Stage 0 の固定 smoke 条件が不成立 | 同左 |
+| Main配線回数 | 1 | 1 |
+| 独立KiCad未配線数 / ネット数 | 26 / 21 | 28 / 24 |
 | 必須未接続 / 異ネット接触 / 物的違反 / 説明不能な転送変更 | null / null / null / null | null / null / null / null |
-| 未配線数・ネット/端点、幅/via分布、層別本数、プレーン接続、実行時間 | 未測定 | 未測定 |
-| 出力プロジェクト下限書き戻し / 緩和 | 出力なし・対象外 | 出力なし・未検証 |
+| 幅mm : 本数 | {'0.2': 255} | {'0.2': 496} |
+| via外径/drill mm : 個数 | {'0.6/0.3': 106} | {'0.6/0.3': 42} |
+| 層別トラック本数 | {'F.Cu': 199, 'In2.Cu': 41, 'B.Cu': 15} | {'F.Cu': 454, 'In2.Cu': 42} |
+| 経過秒 | 287.649 | 104.724 |
+| 開始UTC | 2026-11-04T09:29:19.127808+00:00 | 2026-11-04T09:29:20.271956+00:00 |
+| 終了UTC | 2026-11-04T09:34:06.776242+00:00 | 2026-11-04T09:31:04.996209+00:00 |
+| 停止理由 | stagnant | Fixed CLI completed its routing, rescue, reconciliation and re-grade; exit 0 with open nets |
+| exit / timeout | 0 / False | 0 / False |
 
-独立4指標は、未実行を0として扱わない。ゾーン再充填後の出力接続検査、出力 DRC 生値、実配線の停止理由は出力が存在せず取得できない。再充填済みの **入力** と出力の独立検査は区別する。インフラ障害による配線中断・再実行も0回。準備物から Main 完成や不完成を推定しない。
+**未配線が残る両セルの4指標は、指定どおり全てnull。** 未配線実数や生DRCの0件を指標0へ代入せず、合格と扱わない。
+
+### fabの実測詳細
+
+未配線ネット別件数は `{'ADC_B': 1, 'GND': 3, 'HALL_5V': 1, 'HALL_PWR_EN': 1, 'MUX_A0': 1, 'MUX_A1': 1, 'MUX_A2': 1, 'QSPI_SCLK': 1, 'QSPI_SD1': 1, 'QSPI_SD2': 1, 'QSPI_SD3': 1, 'SWDIO': 1, 'USB_DM': 1, 'USB_DM_CONN': 2, 'USB_DP': 1, 'V1V1': 1, 'V3V3': 3, 'VBUS': 1, 'WING_EN': 1, 'XIN': 1, 'XOUT_XTAL': 1}`。全端点の部品/パッドまたはtrack、座標、UUIDを `A/inspection/main/fab/unconnected-net-endpoints.json` と `drc.json` に保存した。
+
+DRC種別の生件数は `{'silk_overlap': 12, 'silk_over_copper': 5, 'text_height': 44, 'hole_to_hole': 1, 'track_dangling': 16}`、非印刷の生指摘は17件。非配線要素と元配線の説明不能な生差分は0件。既存F.Pasteの正規化は同一KiCad saverで基準側も保存して照合し、ゾーン再充填のcache差分だけを除外する。実際の元線分は中心線被覆で保持を確認する。
+
+再充填後GND/In1プレーン面積は2014.048951mm²、直接接続は4 pads / 42 tracks-or-vias。これは直接隣接の列挙であり、全GND端点の完成を示さない。各接続のUUID/ネットは `plane-connectivity.json`、GND未配線端点はDRCに残す。In1信号トラックは0本。
+
+raw PCB SHA256は `21624b6cde758b9b6199aa6e748faeb806bf67cb9788214c6a4f1d907fc957c6`、独立再充填後PCB SHA256は `8b5b229722dc6ef242210b5c061983e504d9806735796756cdfc0e3caf6be631`。
+
+公開APIの自己検査countsは `{'violations': 0, 'incompletes': 19}`。fab側の出力project差分はKiCad saverによる `/meta/filename` のout名への変更のみで、ルール下限の変更は0件。独立KiCadの未配線値とは測定主体が異なり、置換しない。SES・読戻し・有効settings・pass/connectionログも全て保存した。
+
+### krtの実測詳細
+
+未配線ネット別件数は `{'ADC_A': 1, 'ADC_B': 1, 'ADC_C': 1, 'GND': 1, 'HALL_PWR_EN': 1, 'MUX_A0': 1, 'MUX_A1': 1, 'MUX_A2': 1, 'QSPI_SCLK': 1, 'QSPI_SD0': 1, 'QSPI_SD1': 1, 'QSPI_SD2': 1, 'QSPI_SD3': 1, 'RUN': 1, 'SWCLK': 1, 'SWDIO': 1, 'USB_DM': 1, 'USB_DP': 1, 'USB_DP_CONN': 1, 'V1V1': 3, 'V3V3': 3, 'WING_EN': 1, 'XIN': 1, 'XOUT': 1}`。全端点の部品/パッドまたはtrack、座標、UUIDを `A/inspection/main/krt/unconnected-net-endpoints.json` と `drc.json` に保存した。
+
+DRC種別の生件数は `{'silk_overlap': 12, 'silk_over_copper': 5, 'text_height': 44, 'via_dangling': 9}`、非印刷の生指摘は9件。非配線要素と元配線の説明不能な生差分は0件。既存F.Pasteの正規化は同一KiCad saverで基準側も保存して照合し、ゾーン再充填のcache差分だけを除外する。実際の元線分は中心線被覆で保持を確認する。
+
+再充填後GND/In1プレーン面積は2044.392986mm²、直接接続は4 pads / 17 tracks-or-vias。これは直接隣接の列挙であり、全GND端点の完成を示さない。各接続のUUID/ネットは `plane-connectivity.json`、GND未配線端点はDRCに残す。In1信号トラックは0本。
+
+raw PCB SHA256は `72c3f81318e7a268324396898209c8544692c8cf8512ab295f7e4ada2fd2f24c`、独立再充填後PCB SHA256は `89d38a80750d29ba41aa64ff123db8a908a79d2ccc2b6eec261677e86547d2b4`。
+
+出力 `.kicad_pro` の全差分は、`board.design_settings.rules.min_via_drill` の未定義→0.3mm追加と、`kicad_routing_tools` の由来メタデータ追加の2箇所。既存min_track_width/min_clearance等とnetclass値の下限緩和は0件。追加書き戻しはあるが、本Issueの禁止する緩和方向の変更ではない。#115の『書き戻しそのもの禁止』という判定と混同しない。全差分は `transfer-diff.json`、raw出力projectを保存した。未配線残存のため本セルは不合格である。
 
 ## Wing：配線なしの予備見通し
 
@@ -101,16 +139,16 @@ KRT の既定解決との実効差分は escalation、In1 の禁止コスト、�
 
 ## D-012 改定の判断材料
 
-**PMO確認済み価格事実（今回の指示書）：** 48×44mm、1.2mm、HASL、数量5枚で **2層 $4.00／4層 $8.00、送料別**。差額は5枚で$4.00。発注数量は5・10・15…の刻みで、6枚は選べない。これは指定Main条件の事実であり、Wing・PCBA・送料や将来の実発注見積もりへ外挿しない。
+**PMO確認済み価格事実：** 48×44mm、1.2mm、HASL、5枚で2層 **$4.00**／4層 **$8.00**、送料別。発注数量は5・10・15…の刻みで6枚は選べない。これは指定Main条件の価格であり、Wing/PCBA/送料や将来見積もりへ外挿しない。
 
-POの「4層を本命とする」方針に対し、Mainの配置・ネット不変の4層入力作成とDSN表現保持は確認できた。両候補の設定読戻しにもプレーン専用化の表現がある。ただし **4層で現行0.20mmのままMain完成、という技術的根拠は今回得ていない**。Stage 0の固定smoke条件を解消してから、許可された各1回のMain試験に進む必要がある。今回の0回を合格や実行済みとして扱わない。
+4層化を本命とするPO方針に対し、固定配置・現行0.20mmの3信号層＋GNDプレーンを両候補が受理し、スモークの一連の出力経路が通ることは実証できた。しかし、今回の各1回では両セルにMain未配線が残り、**現行条件でMain完成という改定根拠は得ていない**。追加条件の探索・Main再実行はしていない。ルーターの候補・既定戦略に依存する結果であり、4層による完成可能性全体や配置不可能性を断定しない。
 
-改定する場合は、D-012およびD-017/DFMの層基準を整合させ、Mainの3信号層＋GND plane、1.2mmの実メーカーstackup、Wingにも4層を原則適用するか2層実証を認めるかをHuman Gateで明確にする必要がある。WingをMainの結果だけで同じ層数に決める根拠はまだない。左右WingはD-015どおり **同一設計定義から生成した別々の製造データセットでよく、リバーシブルPCBAは必須ではない**。
+改定する場合はD-012、D-017、DFMの層基準を整合させ、メーカー確定1.2mm stackup、Mainの3信号層＋GND plane、Wingにも4層を原則適用するか2層実証を認めるかをHuman Gateで明確にする必要がある。Wingの層数をMainだけで決める根拠はない。D-015どおり左右Wingは**同一設計定義から生成した別々の製造データセットで可、リバーシブルPCBAは必須ではない**。
 
-残るリスクはsmokeの評価契約、実配線のプレーン遵守とGND到達、KRT出力プロジェクトの下限書き戻し、現行寸法での局所escape、Wingの未設計geometry/回路とanalog/magnetic実測、USB NPTH等の既存製造事項。価格差だけでそれらの合格を推定しない。採否・要求変更・追加試験はPO判断とし、このPRでは決定ログを更新しない。
+残るリスク・未決定事項は、MainのRP2040周辺等の局所escapeとGND到達、via-in-pad/印刷/既存USB NPTH等の製造事項、メーカーstackup、Wing未設計geometry・回路・最終部品/ピッチ、analog settling/noise・磁気干渉の実測。smokeのsolid/Nプレーンは契約を確認する限定fixtureであり、Mainのthermal/GNDの成立を代替しない。採否・追加投資・要求変更はPOのHuman Gateとする。
 
-## 検証と提出
+## 監査と提出
 
-`E/verification.json` に基点ファイル不変、追加範囲、固定hash、native/DSN読戻し、配線0回、独立指標null、Wing分析のみ、JSON/著作ファイル検査を保存する。各プロセスのargv・headless環境・開始/終了・elapsed・exitは `E/processes/`、成果物hashは `E/manifest.json`。途中の入力生成失敗を含め生ログを保持し、ツールbinaryや依存物を成果物へ含めない。
+再開開始は2026-11-04 **09:22:54 UTC**、smoke期限 **09:52:54 UTC**、全体期限 **11:22:54 UTC**。`A/start.json` に保存し、smokeゲートは期限内に通過した。Main各1回・設定変更/再実行0回・インフラ再起動0回。各プロセスのargv/headless環境/開始終了/elapsed/exitは `E/processes/amend01-*/`、入力hashと順序・基点ファイル不変・変更範囲・最新指標・JSON/Python構文は `A/verification.json`、成果物hashは `A/manifest.json`、提出は `A/submission.json` とする。
 
-開始を保守的に **2026-11-04 09:05 UTC**、Stage 0目安期限10:35 UTC、全体期限12:05 UTCとした。条件不整合は期限前に検出した。smoke条件について確認を提示したが、明示修正の回答がない限り元の固定条件を維持する。Draft PRで提出し、mergeしない。提出時刻は `E/submission.json`。
+ブランチの前回commit `7917d82` に追加commitし、同じDraft PR #118を更新する。作業用gitは `/tmp/issue-117-main/git`、元リポジトリの `.git` は変更していない。変更範囲は本報告と本Issue証跡ディレクトリのみであり、既存要求/決定/他Issue成果物は変更しない。Wing節は前回run 2から全文維持し、今回の配線・再調査は0回である。
