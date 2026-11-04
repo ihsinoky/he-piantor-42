@@ -1,0 +1,21 @@
+{
+  "api": "routeDsn",
+  "adapter": "DSN -> SES only; routeSrj never called",
+  "caller_settings": { "timeBudgetMs": 1800000 },
+  "timeoutSeconds_equivalent": 1800,
+  "external_process_timeout_seconds": 1920,
+  "profile": "Built-in DEFAULT_ROUTE_SETTINGS with layout-resolved angleMode; no acceptance slow-tier profile",
+  "useFileSettings": "unset (false); built-in default",
+  "neckWidthUm": "unset; resolveProfile uses group.trackWidth unchanged",
+  "fanoutEnabled": false,
+  "optimizerEnabled": true,
+  "shoveEnabled": true,
+  "detailedRouter": "off (API default)",
+  "globalPlan": "off (API default)",
+  "seed": 1,
+  "rules": "Unchanged DSN track width and clearance 200 um, two signal layers; no rules override",
+  "effective_settings_evidence": "processes/{smoke,main}/result.json report.effectiveSettings; complete readback",
+  "rerun_policy": "One smoke routing invocation; one Main routing invocation only after independent smoke gate; no parameter search",
+  "driver_exit_code": "0 = successful API/SES generation, not complete routing; inspect incompleteAfter, stoppedBy, timedOut, checkDrc separately",
+  "self_drc_scope": "checkDrc on fresh readDsn + applySes of exact saved output, compared with report statsAfter; independent metrics are separate"
+}
