@@ -1,0 +1,329 @@
+{
+  "utc": "2026-11-04T10:04:36.543155+00:00",
+  "pass_equivalence": true,
+  "inputs": {
+    "main4": {
+      "source": "hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/inputs/main",
+      "original_pcb_sha256": "33f079d07bfb2dad9a76dce0667a1fd1371c94406df16f36ae17fe559d74af01",
+      "original_dsn_sha256": "661d00c7d99adc270314a1a4940e64838999b948471f4d36a17aa9eac4d5e7f2",
+      "relaxed_pcb_sha256": "ff1f6974ee2456a7300959a5ff581df2290c3371c46815398538605edcb8bf01",
+      "relaxed_dsn_sha256": "b3b04edff94b4e2d2a02f0cdd4920cf50957816ce7b8f625258aaebc2476e517",
+      "relaxed_project_sha256": "0744fe4b9aa64e431c1ed8674bfac08d95d309ebb939788cbac78014958261f6",
+      "native_rule_reversal_full_AST_equal": true,
+      "DSN_rule_reversal_full_AST_equal": true,
+      "project_diff": [
+        {
+          "path": "/board/design_settings/rules/min_clearance",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/board/design_settings/rules/min_track_width",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/net_settings/classes",
+          "before": [
+            {
+              "bus_width": 12,
+              "clearance": 0.2,
+              "diff_pair_gap": 0.25,
+              "diff_pair_via_gap": 0.25,
+              "diff_pair_width": 0.2,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.2,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ],
+          "after": [
+            {
+              "bus_width": 12,
+              "clearance": 0.127,
+              "diff_pair_gap": 0.127,
+              "diff_pair_via_gap": 0.127,
+              "diff_pair_width": 0.127,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.127,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ]
+        }
+      ],
+      "native_rule_changes": [
+        "(clearance 0.127)",
+        "(min_thickness 0.127)",
+        "(thermal_gap 0.127)",
+        "(thermal_bridge_width 0.127)"
+      ],
+      "dsn_rule_changes": [
+        "(width 127",
+        "(clearance 127",
+        "(clearance 127",
+        "(width 127",
+        "(clearance 127"
+      ],
+      "existing_copper_widths_unchanged": true,
+      "via_mm": [
+        0.6,
+        0.3
+      ]
+    },
+    "smoke4": {
+      "source": "hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/amendment-01/inputs/smoke-02",
+      "original_pcb_sha256": "0b59cb5085e8740479f7270bbff4ab5b1160ba221b1b56f13ec035bd5a48f652",
+      "original_dsn_sha256": "9a9cd2d239d05fbe845e9c0d4f0099e1b8346136152d3aa78d128902c1c3b72f",
+      "relaxed_pcb_sha256": "3c364f4ab50841ee06aaa265ccffd1dfaf98f31cfa10a3c6b414772c2336b4f9",
+      "relaxed_dsn_sha256": "f486d1deb01fd2ae16beed4f73b047369ac31af66f49f577e054c6daac6f13e4",
+      "relaxed_project_sha256": "0744fe4b9aa64e431c1ed8674bfac08d95d309ebb939788cbac78014958261f6",
+      "native_rule_reversal_full_AST_equal": true,
+      "DSN_rule_reversal_full_AST_equal": true,
+      "project_diff": [
+        {
+          "path": "/board/design_settings/rules/min_clearance",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/board/design_settings/rules/min_track_width",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/net_settings/classes",
+          "before": [
+            {
+              "bus_width": 12,
+              "clearance": 0.2,
+              "diff_pair_gap": 0.25,
+              "diff_pair_via_gap": 0.25,
+              "diff_pair_width": 0.2,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.2,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ],
+          "after": [
+            {
+              "bus_width": 12,
+              "clearance": 0.127,
+              "diff_pair_gap": 0.127,
+              "diff_pair_via_gap": 0.127,
+              "diff_pair_width": 0.127,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.127,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ]
+        }
+      ],
+      "native_rule_changes": [
+        "(clearance 0.127)",
+        "(min_thickness 0.127)",
+        "(thermal_gap 0.127)",
+        "(thermal_bridge_width 0.127)"
+      ],
+      "dsn_rule_changes": [
+        "(width 127",
+        "(clearance 127",
+        "(clearance 127",
+        "(width 127",
+        "(clearance 127"
+      ],
+      "existing_copper_widths_unchanged": true,
+      "via_mm": [
+        0.6,
+        0.3
+      ]
+    },
+    "main2": {
+      "source": "hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inputs/main",
+      "original_pcb_sha256": "46676e57e9618940a33c5e298244e97aaec61498a87aa7c58a264e444fc71e20",
+      "original_dsn_sha256": "75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2",
+      "relaxed_pcb_sha256": "46676e57e9618940a33c5e298244e97aaec61498a87aa7c58a264e444fc71e20",
+      "relaxed_dsn_sha256": "97a65d13f818356d6b2f2e0476b0cc119aeb97a159338df7b5b8343575197f95",
+      "relaxed_project_sha256": "0744fe4b9aa64e431c1ed8674bfac08d95d309ebb939788cbac78014958261f6",
+      "native_rule_reversal_full_AST_equal": true,
+      "DSN_rule_reversal_full_AST_equal": true,
+      "project_diff": [
+        {
+          "path": "/board/design_settings/rules/min_clearance",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/board/design_settings/rules/min_track_width",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/net_settings/classes",
+          "before": [
+            {
+              "bus_width": 12,
+              "clearance": 0.2,
+              "diff_pair_gap": 0.25,
+              "diff_pair_via_gap": 0.25,
+              "diff_pair_width": 0.2,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.2,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ],
+          "after": [
+            {
+              "bus_width": 12,
+              "clearance": 0.127,
+              "diff_pair_gap": 0.127,
+              "diff_pair_via_gap": 0.127,
+              "diff_pair_width": 0.127,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.127,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ]
+        }
+      ],
+      "native_rule_changes": [],
+      "dsn_rule_changes": [
+        "(width 127",
+        "(clearance 127",
+        "(clearance 127",
+        "(width 127",
+        "(clearance 127"
+      ],
+      "existing_copper_widths_unchanged": true,
+      "via_mm": [
+        0.6,
+        0.3
+      ]
+    },
+    "smoke2": {
+      "source": "hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inputs/smoke",
+      "original_pcb_sha256": "3f70465774f577ffe803f88de017004d164f045e6415ade22766a461a2454bec",
+      "original_dsn_sha256": "7214a0299ce19fae8163fa82a7d844e71c5bbf43b077392cfff7c7b5a9d1f3e9",
+      "relaxed_pcb_sha256": "3f70465774f577ffe803f88de017004d164f045e6415ade22766a461a2454bec",
+      "relaxed_dsn_sha256": "0dc4157eace341291ed18f7265205bf0eef3788e5059a5e078b3fc4f877699ef",
+      "relaxed_project_sha256": "0744fe4b9aa64e431c1ed8674bfac08d95d309ebb939788cbac78014958261f6",
+      "native_rule_reversal_full_AST_equal": true,
+      "DSN_rule_reversal_full_AST_equal": true,
+      "project_diff": [
+        {
+          "path": "/board/design_settings/rules/min_clearance",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/board/design_settings/rules/min_track_width",
+          "before": 0.2,
+          "after": 0.127
+        },
+        {
+          "path": "/net_settings/classes",
+          "before": [
+            {
+              "bus_width": 12,
+              "clearance": 0.2,
+              "diff_pair_gap": 0.25,
+              "diff_pair_via_gap": 0.25,
+              "diff_pair_width": 0.2,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.2,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ],
+          "after": [
+            {
+              "bus_width": 12,
+              "clearance": 0.127,
+              "diff_pair_gap": 0.127,
+              "diff_pair_via_gap": 0.127,
+              "diff_pair_width": 0.127,
+              "line_style": 0,
+              "microvia_diameter": 0.3,
+              "microvia_drill": 0.1,
+              "name": "Default",
+              "pcb_color": "rgba(0, 0, 0, 0.000)",
+              "priority": 2147483647,
+              "schematic_color": "rgba(0, 0, 0, 0.000)",
+              "track_width": 0.127,
+              "via_diameter": 0.6,
+              "via_drill": 0.3,
+              "wire_width": 6
+            }
+          ]
+        }
+      ],
+      "native_rule_changes": [],
+      "dsn_rule_changes": [
+        "(width 127",
+        "(clearance 127",
+        "(clearance 127",
+        "(width 127",
+        "(clearance 127"
+      ],
+      "existing_copper_widths_unchanged": true,
+      "via_mm": [
+        0.6,
+        0.3
+      ]
+    }
+  },
+  "scope": "All native and DSN AST nodes restored by reverting only listed rule values; project full recursive diff; geometry, parts, net, original routes, via definitions, layer and plane roles unchanged. DSN explicit rule edit instead of re-export."
+}

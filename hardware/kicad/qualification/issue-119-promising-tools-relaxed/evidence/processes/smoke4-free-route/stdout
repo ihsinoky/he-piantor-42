@@ -1,0 +1,20 @@
+2026-11-04 10:05:38.837 INFO   Freerouting v2.5.0 (build-date: 2026-10-05)
+2026-11-04 10:05:39.934 INFO   Hardware: 4 CPU cores, 52 CPU score, 2048 MB RAM
+2026-11-04 10:05:39.969 WARN   Deprecated settings path '-mp / --router.max_passes'; use '--router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-04 10:05:39.998 WARN   GUI is disabled and you don't have a console available, so the only feedback from Freerouting is in the log.
+2026-11-04 10:05:40.044 INFO   Configured network proxy: hatch-egress-proxy:3128
+2026-11-04 10:05:42.655 WARN   Deprecated settings path 'router.max_passes'; use 'router.autorouter.max_passes' instead. The old path will be removed in a future release.
+2026-11-04 10:05:43.530 INFO   [8B823F\754721] Loading board file 'corrected.dsn'...
+2026-11-04 10:05:43.746 INFO   [8B823F\754721] Job '8B823F\754721' started at 2026-11-04T10:05:43.745679074Z.
+2026-11-04 10:05:43.937 INFO   [8B823F\754721] Pipeline thread limits: autorouter pass is single-threaded, optimizer.max_threads=3.
+2026-11-04 10:05:44.032 INFO   [8B823F\754721] Fanout stage started on board '448e8845ce8d99895fc40f270fd6ff3c' with 2 of 3 SMD pins needing fanout (0 already connected, 1 netless).
+2026-11-04 10:05:44.446 INFO   [8B823F\754721] Fanout pass #1 on board 'bb35faa416d1df19f1bf2fa58d974428' completed in 0.40 seconds with 1 SMD pin fanouted, 0 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-11-04 10:05:44.461 INFO   [8B823F\754721] Fanout pass #2 on board 'bb35faa416d1df19f1bf2fa58d974428' completed in 0.01 seconds with 0 SMD pins fanouted, 0 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-11-04 10:05:44.465 INFO   [8B823F\754721] Fanout stage completed: started with 2 total SMD pins, completed in 0.43 seconds, escaped pins: 2/2 (100.0%), using 0.21 total CPU seconds, 0.01 GB total allocated, and 51.1 MB peak heap usage.
+2026-11-04 10:05:44.526 INFO   [8B823F\754721] Auto-routing stage started on board 'bb35faa416d1df19f1bf2fa58d974428' with baseline score 1000.00 for 0 unrouted items.
+2026-11-04 10:05:44.630 INFO   [8B823F\754721] Auto-routing pass #1 on board 'bb35faa416d1df19f1bf2fa58d974428' was completed in 0.00 seconds with score 1000.00 (0 unrouted and 0 violations).
+2026-11-04 10:05:44.651 INFO   [8B823F\754721] Auto-routing stage completed: started with 1 unrouted nets, completed in 0.71 seconds, final score: 1000.00 (0 unrouted and 0 violations), using 0.00 total CPU seconds, 0.00 GB total allocated, and 0.0 MB peak heap usage.
+2026-11-04 10:05:44.657 INFO   [8B823F\754721] Skipping optimization stage: the board has no vias to eliminate and initial optimizer score (1000.00) is already >= 950.00.
+2026-11-04 10:05:44.662 INFO   [8B823F\754721] Job '8B823F\754721' finished with state: COMPLETED (elapsed: 0.92 seconds, finished at UTC: 2026-11-04T10:05:44.661466686Z).
+2026-11-04 10:05:44.725 INFO   Saving output file '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/free/out.ses' (SES)...
+2026-11-04 10:05:44.728 INFO   Successfully saved output file '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/free/out.ses' (1104 bytes).
