@@ -1,0 +1,248 @@
+{
+  "status": "FIXED_CONDITION_FAIL",
+  "main_invocations": 1,
+  "smoke_invocations": 1,
+  "main_unrouted_measured": 16,
+  "unrouted_evidence": "routeDsn report.incompleteAfter == statsAfter.connections.incomplete == checkDrc after saved SES roundtrip; API self-measurement, not KiCad count",
+  "main_self_drc": {
+    "violations": 0,
+    "incompletes": 16
+  },
+  "self_roundtrip_consistency": {
+    "report_vs_stats_unrouted": true,
+    "report_vs_saved_ses_unrouted": true,
+    "stats_vs_saved_ses_violations": true
+  },
+  "report": {
+    "passes": 15,
+    "attempted": 422,
+    "completed": 183,
+    "incompleteBefore": 127,
+    "incompleteAfter": 16,
+    "added": {
+      "tracks": 274,
+      "barrels": 115
+    },
+    "ripped": 105,
+    "violationsBefore": 0,
+    "violationsAdded": 0,
+    "timedOut": false,
+    "aborted": false,
+    "stoppedBy": "stagnant",
+    "effectiveSettings": {
+      "maxPasses": 100,
+      "maxStagnantPasses": 3,
+      "viaCost": 50,
+      "planeViaCost": 5,
+      "bendCost": 0,
+      "preferredDirectionCost": 1.5,
+      "startRipupCost": 100,
+      "ripupEnabled": true,
+      "fanoutEnabled": false,
+      "routerEnabled": true,
+      "optimizerEnabled": true,
+      "strictDrc": false,
+      "layers": {},
+      "viasAllowed": true,
+      "ignoreNetGroups": [],
+      "seed": 1,
+      "shoveEnabled": true,
+      "orderByDifficulty": true,
+      "detailedRouter": "off",
+      "globalPlan": "off",
+      "timeBudgetMs": 1800000,
+      "angleMode": "45"
+    },
+    "wallClockMs": 298225,
+    "perNet": [
+      {
+        "net": "ADC_A",
+        "incomplete": 0
+      },
+      {
+        "net": "ADC_B",
+        "incomplete": 1
+      },
+      {
+        "net": "ADC_C",
+        "incomplete": 0
+      },
+      {
+        "net": "CC1",
+        "incomplete": 0
+      },
+      {
+        "net": "CC2",
+        "incomplete": 0
+      },
+      {
+        "net": "GND",
+        "incomplete": 2
+      },
+      {
+        "net": "HALL_5V",
+        "incomplete": 0
+      },
+      {
+        "net": "HALL_PWR_EN",
+        "incomplete": 1
+      },
+      {
+        "net": "MUX_A0",
+        "incomplete": 1
+      },
+      {
+        "net": "MUX_A1",
+        "incomplete": 1
+      },
+      {
+        "net": "MUX_A2",
+        "incomplete": 1
+      },
+      {
+        "net": "MUX_OUT_A",
+        "incomplete": 0
+      },
+      {
+        "net": "MUX_OUT_B",
+        "incomplete": 0
+      },
+      {
+        "net": "MUX_OUT_C",
+        "incomplete": 0
+      },
+      {
+        "net": "QSPI_SCLK",
+        "incomplete": 1
+      },
+      {
+        "net": "QSPI_SD0",
+        "incomplete": 1
+      },
+      {
+        "net": "QSPI_SD1",
+        "incomplete": 0
+      },
+      {
+        "net": "QSPI_SD2",
+        "incomplete": 1
+      },
+      {
+        "net": "QSPI_SD3",
+        "incomplete": 0
+      },
+      {
+        "net": "QSPI_SS_FLASH",
+        "incomplete": 0
+      },
+      {
+        "net": "QSPI_SS_MCU",
+        "incomplete": 0
+      },
+      {
+        "net": "RUN",
+        "incomplete": 0
+      },
+      {
+        "net": "SWCLK",
+        "incomplete": 1
+      },
+      {
+        "net": "SWDIO",
+        "incomplete": 1
+      },
+      {
+        "net": "USB_DM",
+        "incomplete": 1
+      },
+      {
+        "net": "USB_DM_CONN",
+        "incomplete": 0
+      },
+      {
+        "net": "USB_DM_ESD",
+        "incomplete": 0
+      },
+      {
+        "net": "USB_DP",
+        "incomplete": 1
+      },
+      {
+        "net": "USB_DP_CONN",
+        "incomplete": 0
+      },
+      {
+        "net": "USB_DP_ESD",
+        "incomplete": 0
+      },
+      {
+        "net": "V1V1",
+        "incomplete": 0
+      },
+      {
+        "net": "V3V3",
+        "incomplete": 1
+      },
+      {
+        "net": "VBUS",
+        "incomplete": 0
+      },
+      {
+        "net": "WING_EN",
+        "incomplete": 0
+      },
+      {
+        "net": "XIN",
+        "incomplete": 1
+      },
+      {
+        "net": "XOUT",
+        "incomplete": 0
+      },
+      {
+        "net": "XOUT_XTAL",
+        "incomplete": 0
+      }
+    ]
+  },
+  "ses_width": {
+    "paths": 276,
+    "minimum_width_mm": 0.2,
+    "below_020mm": 0,
+    "histogram_mm": {
+      "0.2": 276
+    }
+  },
+  "independent_metrics": {
+    "required_unconnected": null,
+    "wrong_net_actual_copper_contacts": null,
+    "targeted_material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "independent_main_inspection_performed": false,
+  "self_vs_independent": {
+    "smoke_agrees": true,
+    "smoke_self_drc": {
+      "violations": 0,
+      "incompletes": 0
+    },
+    "smoke_independent": {
+      "required_unconnected": 0,
+      "wrong_net_actual_copper_contacts": 0,
+      "targeted_material_violations": 0,
+      "unexplained_transfer_changes": 0
+    },
+    "main_agrees": null,
+    "main_note": "Incomplete Main: four independent metrics null. Self DRC is not an independent clearance certification."
+  },
+  "incomplete_reporting": {
+    "api_ok": true,
+    "process_exit": 0,
+    "incompleteAfter": 16,
+    "stoppedBy": "stagnant",
+    "timedOut": false,
+    "aborted": false,
+    "explicitly_reported": true
+  },
+  "assessed_utc": "2026-11-03T23:03:19.394039+00:00"
+}
