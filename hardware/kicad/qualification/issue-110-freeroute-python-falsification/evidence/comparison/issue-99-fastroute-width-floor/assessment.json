@@ -1,0 +1,25 @@
+{
+  "verdict": "FIXED_CONDITION_FAIL",
+  "reason": "Router report retains 37 unrouted connections; final SES has no width-floor violation.",
+  "router_unrouted": 37,
+  "ses_paths": 231,
+  "ses_width_histogram_mm": {
+    "0.2": 231
+  },
+  "ses_paths_below_020mm": 0,
+  "independent_metrics": {
+    "required_unconnected": null,
+    "wrong_net_contacts": null,
+    "material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "main_import_performed": false,
+  "main_independent_inspection_performed": false,
+  "main_import_status": "not measured because unrouted remains",
+  "smoke_pass": true,
+  "router_runs": {
+    "smoke": 1,
+    "main": 1
+  },
+  "interpretation": "Width floor held in final serialized paths, but incomplete connections increased from 1 in #97 to 37 in this observation. Single executions with default concurrency do not establish deterministic causality or general router performance."
+}

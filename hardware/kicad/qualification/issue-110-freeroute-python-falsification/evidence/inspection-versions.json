@@ -1,0 +1,33 @@
+{
+  "kicad-cli": {
+    "argv": [
+      "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "9.0.9\n",
+    "stderr": ""
+  },
+  "pcbnew": {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-c",
+      "import pcbnew;print(pcbnew.GetBuildVersion())"
+    ],
+    "exit_code": 0,
+    "stdout": "9.0.9-9.0.9~ubuntu24.04.1\n",
+    "stderr": ""
+  },
+  "geometry": {
+    "argv": [
+      "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/bin/python",
+      "-B",
+      "-c",
+      "import shapely,sexpdata;print(\"shapely\",shapely.__version__);print(\"sexpdata\",sexpdata.__version__)"
+    ],
+    "exit_code": 0,
+    "stdout": "shapely 2.2.0\nsexpdata 1.0.2\n",
+    "stderr": ""
+  }
+}

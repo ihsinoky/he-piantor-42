@@ -1,0 +1,32 @@
+usage: freeroute [-h] [-de DESIGN] [-do OUTPUT] [-mp MAX_PASSES]
+                 [--engine {exact,grid,room}] [--pack] [--shove] [--diagonal]
+                 [--no-rip-up] [--layers LAYERS]
+                 [dsn]
+
+Native PCB autorouter — route a Specctra DSN and write an SES session file.
+
+positional arguments:
+  dsn                   input Specctra .dsn file
+
+options:
+  -h, --help            show this help message and exit
+  -de DESIGN, --design DESIGN
+                        input .dsn (FreeRouting-compatible alias)
+  -do OUTPUT, -o OUTPUT, --output OUTPUT
+                        output .ses file (default: stdout)
+  -mp MAX_PASSES, --max-passes MAX_PASSES
+                        rip-up-and-retry pass bound (grid and exact engines;
+                        default 10)
+  --engine {exact,grid,room}
+                        routing track: grid (default; multi-layer rip-up maze,
+                        highest coverage), exact (orthogonal, exact-geometry
+                        DRC-verified output), room (continuous expansion
+                        rooms, routes off-grid channels)
+  --pack                coordinated multi-trace channel packing (room engine
+                        only)
+  --shove               shove committed traces aside to recover dropped nets
+                        (exact and room engines)
+  --diagonal            45-degree recovery pass for dropped 2-pin nets (exact
+                        engine only)
+  --no-rip-up           disable rip-up-and-retry (grid and exact engines)
+  --layers LAYERS       comma-separated signal layer indices to route on
