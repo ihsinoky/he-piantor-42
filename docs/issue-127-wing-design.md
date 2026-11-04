@@ -19,6 +19,10 @@ D-017の凍結変更を要さないためStage 2を実施した。
 | `representative21` / `Representative17` | 17 mm | **116.5×104.75 mm（100×100不適合）** | 21 / 3 / 24 / 1 / 15 |
 | `load21` / `Load16`, `Load17` | 16 / 17 mm | **98×98 mm** | 21 / 3 / 24 / 1 / 15 |
 
+表の「100×100不適合」は旧基準に対する幾何的事実として残す。
+2026-11-05のPO決定 [D-020](decisions.md#d-020---representative-21-key-wing-100-x-100-mm-requirement-relaxation)
+により、代表21キーWingについてはその要件を緩和し、上記の両外形を受け入れ済み。
+
 - 設計の正: [`wing/definition.py`](../hardware/jitx/wing/definition.py)。
   `define_wing(pitch, kind)` は有限の16–17 mmを受理し、CLI既定出力は今回対象の両端のみ。
 - native JITX: [`evaluation_wing.py`](../hardware/jitx/he_piantor_42_jitx/evaluation_wing.py)。
@@ -149,11 +153,16 @@ dry buildは回路/配置の変換確認までで、Gerber/CAM/製造出力を�
 1. Stage 1の現行責務維持案をレビュー。Main寄せを優先する場合はD-017再審議を別途行う。
 2. Piantor代表21キーは両ピッチで100×100 mmに不適合。Piantor配置を維持して寸法要件を
    見直すか、配置側の変更を明示的に許可するかをPOが判断する。勝手な圧縮は行わない。
+   **決定済み（2026-11-05）:** [D-020](decisions.md#d-020---representative-21-key-wing-100-x-100-mm-requirement-relaxation)
+   が上記の未決判断をsupersededとする。Piantor配置（D-001の幾何基礎）を製品前提として優先し、
+   代表21キーWingのみ100×100 mm要件を緩和。16 mm＝110×100 mm、17 mm＝116.5×104.75 mmを
+   受け入れる。3×3ピッチ評価Wingの寸法には影響せず、電気的full-load確認は独立したload21構成が担う。
 3. 確定ピッチは後の実測/G2判断。今回16/17両方を提供し、製品ピッチは選定していない。
 4. 後続でNPTH/keepoutをnative PCBに反映し、機構/治具・footprint/手はんだレビュー、
    2層配線/独立DRC、その後にfull-load・ハーネス・磁気/アナログ実測を行う。
 
-Main設計と既存決定文書は変更していない。初回候補では`hardware/layout/**`を消費していなかった。
+Stage 2および2026-11-04のフォローアップではMain設計と既存決定文書は変更していない。
+2026-11-05のフォローアップ2でD-020と関連文書の参照を追加した。初回候補では`hardware/layout/**`を消費していなかった。
 今回の明示的なPiantor基礎データ指定に基づく取り込みの範囲は以下に記録する。
 Draft PRまで。マージ・発注・製造承認は本Issueでは行わない。
 
@@ -203,6 +212,9 @@ D-001の±30°は一体型左右フィールド間の姿勢であり、片側Win
 PO判断は、(a) Piantor配置を維持して100×100要件を見直す、または
 (b)100×100を維持するため配置/セル/機構前提の変更を別途明示承認する、のいずれか。
 製品ピッチの選定も別判断であり、16 mmだけを合格扱いしない。
+上記は2026-11-04時点の未決事項。**2026-11-05にD-020で(a)を決定済み**であり、
+代表Wingの100×100 mm要件はsuperseded、両ピッチの上記外形を受け入れた。
+3×3ピッチ評価Wingの寸法とload21の電気的full-load確認の役割は変わらない。
 `WingFabRules`の100 mm制限は維持しているため代表21キーはその制約にも不適合。
 この差分を製造可能・配線済み・fab検証合格と解釈しない。
 
