@@ -1,0 +1,93 @@
+{
+  "assessment": {
+    "status": "PASS",
+    "width_mm": 0.1,
+    "layers": 2,
+    "cell": "KRT-16-2L-0100",
+    "board": "representative21-16mm",
+    "tool": "KRT",
+    "metrics": {
+      "required_unconnected": 0,
+      "wrong_net_contacts": 0,
+      "material_violations": 0,
+      "unexplained_transfer_changes": 0
+    },
+    "measured_unconnected": 0,
+    "independent_material_drc_count": 0,
+    "drc_type_counts": {},
+    "width_pass": true,
+    "nonroute_snapshot_unchanged": true,
+    "pass_acceptance": true,
+    "original_project_used_for_drc": true,
+    "output_project_audited": true,
+    "utc": "2026-11-04T20:52:56.443971+00:00"
+  },
+  "router_self_report": {
+    "escalations": 0,
+    "failed": 0,
+    "failed_single": [],
+    "main_loop_time_s": 12.58,
+    "min_clearance_used": 0.1,
+    "multipoint_deficit": 0,
+    "open_single": [],
+    "pad_pairs_open": {
+      "count": 0,
+      "nets": []
+    },
+    "regraded_nets": 30,
+    "routed": 30,
+    "scope": "merged",
+    "terminal_restores_broken": [],
+    "vias": 193
+  },
+  "independent_width_audit": {
+    "track_width_histogram_mm": {
+      "0.1": 765
+    },
+    "minimum_track_width_mm": 0.1,
+    "tracks_below_pinned": 0,
+    "output_project_exists": true,
+    "output_project_changes": [
+      {
+        "path": [
+          "kicad_routing_tools"
+        ],
+        "before": null,
+        "after": {
+          "fab_floor_origin": {
+            "min_hole_clearance": 0.2,
+            "min_through_hole_diameter": 0.3,
+            "min_track_width": 0.1,
+            "min_via_annular_width": 0.1,
+            "min_via_diameter": 0.6,
+            "min_via_drill": 0.3
+          },
+          "records_rev": 1
+        }
+      }
+    ],
+    "output_project_min_width": 0.1
+  },
+  "physical_audit": {
+    "via_pass": true,
+    "via_count": 193,
+    "via_diameter_drill_mm_histogram": {
+      "0.6/0.3": 193
+    },
+    "thickness_mm": 1.2,
+    "layers": 2,
+    "tracks_per_layer": {
+      "0": 593,
+      "2": 172
+    },
+    "fixed_input_rules": {
+      "m_MinClearance": 0.1,
+      "m_HoleClearance": 0.2,
+      "m_HoleToHoleMin": 0.2,
+      "m_CopperEdgeClearance": 0.2,
+      "m_TrackMinWidth": 0.1
+    }
+  },
+  "elapsed_seconds": 166.29411004200028,
+  "route_exit_code": 0
+}

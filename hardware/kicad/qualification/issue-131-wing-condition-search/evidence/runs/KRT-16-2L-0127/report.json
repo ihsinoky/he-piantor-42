@@ -1,0 +1,95 @@
+{
+  "assessment": {
+    "status": "FAIL",
+    "width_mm": 0.127,
+    "layers": 2,
+    "cell": "KRT-16-2L-0127",
+    "board": "representative21-16mm",
+    "tool": "KRT",
+    "metrics": {
+      "required_unconnected": null,
+      "wrong_net_contacts": null,
+      "material_violations": null,
+      "unexplained_transfer_changes": null
+    },
+    "measured_unconnected": 1,
+    "independent_material_drc_count": 0,
+    "drc_type_counts": {},
+    "width_pass": true,
+    "nonroute_snapshot_unchanged": true,
+    "pass_acceptance": false,
+    "original_project_used_for_drc": true,
+    "output_project_audited": true,
+    "utc": "2026-11-04T20:48:54.999166+00:00"
+  },
+  "router_self_report": {
+    "escalations": 0,
+    "failed": 1,
+    "failed_single": [],
+    "main_loop_time_s": 13.0,
+    "min_clearance_used": 0.127,
+    "multipoint_deficit": 1,
+    "open_single": [],
+    "pad_pairs_open": {
+      "count": 1,
+      "nets": [
+        "GND"
+      ]
+    },
+    "regraded_nets": 30,
+    "routed": 29,
+    "scope": "merged",
+    "terminal_restores_broken": [],
+    "vias": 195
+  },
+  "independent_width_audit": {
+    "track_width_histogram_mm": {
+      "0.127": 855
+    },
+    "minimum_track_width_mm": 0.127,
+    "tracks_below_pinned": 0,
+    "output_project_exists": true,
+    "output_project_changes": [
+      {
+        "path": [
+          "kicad_routing_tools"
+        ],
+        "before": null,
+        "after": {
+          "fab_floor_origin": {
+            "min_hole_clearance": 0.2,
+            "min_through_hole_diameter": 0.3,
+            "min_track_width": 0.127,
+            "min_via_annular_width": 0.1,
+            "min_via_diameter": 0.6,
+            "min_via_drill": 0.3
+          },
+          "records_rev": 1
+        }
+      }
+    ],
+    "output_project_min_width": 0.127
+  },
+  "physical_audit": {
+    "via_pass": true,
+    "via_count": 195,
+    "via_diameter_drill_mm_histogram": {
+      "0.6/0.3": 195
+    },
+    "thickness_mm": 1.2,
+    "layers": 2,
+    "tracks_per_layer": {
+      "0": 707,
+      "2": 148
+    },
+    "fixed_input_rules": {
+      "m_MinClearance": 0.127,
+      "m_HoleClearance": 0.2,
+      "m_HoleToHoleMin": 0.2,
+      "m_CopperEdgeClearance": 0.2,
+      "m_TrackMinWidth": 0.127
+    }
+  },
+  "elapsed_seconds": 173.19953081399944,
+  "route_exit_code": 0
+}

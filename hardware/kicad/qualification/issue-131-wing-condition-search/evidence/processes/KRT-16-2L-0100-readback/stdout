@@ -1,0 +1,13 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-131-wing-condition-search/evidence/read-effective.py /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/effective.json /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/in.kicad_pcb --escalation off --track-width 0.1 --clearance 0.1 --via-size 0.6 --via-drill 0.3
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue131-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/in.kicad_pcb to expand net patterns...
+Pattern '*' matched 30 nets
+Routing 30 nets: ['GND', 'HALL_5V', 'H_A0_RAW', 'H_A1_RAW', 'H_A2_RAW']...
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/in.kicad_pcb...
+Using 2 routing layers: ['F.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, B.Cu=3.0x
+No BGA components detected - no exclusion zones needed
+EXIT=0
