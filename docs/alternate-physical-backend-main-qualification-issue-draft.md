@@ -1,5 +1,11 @@
 ## Purpose and authority
 
+This draft retains the D-018-era two-layer / 0.20 mm qualification conditions
+as history. The retained draft is not a current execution instruction.
+For the current Rev.M1 Main baseline, see [D-019](decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline):
+four layers, 1.2 mm, 0.10 mm width/clearance and 0.60/0.30 mm vias. Wing
+layers/rules are outside that decision and unevaluated under these conditions.
+
 Determine whether candidate B can faithfully transfer the fixed representative
 Main into KiCad and achieve complete, safe, reproducible physical routing using
 local headless Freerouting. This is an execution Issue **body draft for PO manual
