@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/read-effective.py", line 28, in <module>
+    try:runpy.run_path(str(route),run_name='__main__')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools/py_router/route.py", line 10412, in <module>
+    _preview_out = batch_route(args.input_file,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools/py_router/route.py", line 3231, in batch_route
+    net_ids = resolve_net_ids(pcb_data, net_names)
+              ^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/read-effective.py", line 23, in trace
+    data=dict(checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),stage=stage,policy=policy,stop_before_line=stopline,routing_started=False,cli_namespace=cli,batch_route_bound_parameters=entry,grid_route_config=norm(f.f_locals['config']),fab_tier=norm(fab_tiers.get_default_fab_tier()),escalation_policy=norm(fab_tiers.get_escalation_policy()),routing_defaults={k:norm(v) for k,v in vars(routing_defaults).items() if k.isupper()},environment_knobs={k:norm(v) for k,v in vars(env_knobs).items() if k.isupper() and not k.startswith('_')})
+                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/read-effective.py", line 11, in norm
+    if dataclasses.is_dataclass(x):return norm(dataclasses.asdict(x))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/read-effective.py", line 8, in norm
+    if isinstance(x,dict):return {str(k):norm(v) for k,v in x.items()}
+                                         ^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/read-effective.py", line 13, in norm
+    raise TypeError(type(x))
+TypeError: <class 'frozenset'>

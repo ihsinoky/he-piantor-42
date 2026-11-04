@@ -1,0 +1,76 @@
+{
+  "checked_utc": "2026-11-04T06:05:55.488646+00:00",
+  "only_escalation_diff": true,
+  "differences": {
+    "smoke": [
+      {
+        "path": "/cli_namespace/escalation",
+        "before": "fab",
+        "after": "off"
+      },
+      {
+        "path": "/escalation_policy",
+        "before": [
+          "fab",
+          {
+            "annular": 0.1,
+            "board_edge": 0.2,
+            "clearance": 0.2,
+            "hole_to_hole": 0.2,
+            "track_width": 0.2,
+            "via_diameter": 0.6,
+            "via_drill": 0.3
+          }
+        ],
+        "after": [
+          "off",
+          {
+            "annular": 0.1,
+            "board_edge": 0.2,
+            "clearance": 0.2,
+            "hole_to_hole": 0.2,
+            "track_width": 0.2,
+            "via_diameter": 0.6,
+            "via_drill": 0.3
+          }
+        ]
+      }
+    ],
+    "main": [
+      {
+        "path": "/cli_namespace/escalation",
+        "before": "fab",
+        "after": "off"
+      },
+      {
+        "path": "/escalation_policy",
+        "before": [
+          "fab",
+          {
+            "annular": 0.1,
+            "board_edge": 0.2,
+            "clearance": 0.2,
+            "hole_to_hole": 0.2,
+            "track_width": 0.2,
+            "via_diameter": 0.6,
+            "via_drill": 0.3
+          }
+        ],
+        "after": [
+          "off",
+          {
+            "annular": 0.1,
+            "board_edge": 0.2,
+            "clearance": 0.2,
+            "hole_to_hole": 0.2,
+            "track_width": 0.2,
+            "via_diameter": 0.6,
+            "via_drill": 0.3
+          }
+        ]
+      }
+    ]
+  },
+  "baseline": "Replayed #113 bare CLI resolver against identical frozen inputs with identical version/runtime; aborted before routing. #113 did not save a full configuration dump.",
+  "source_unmodified": true
+}

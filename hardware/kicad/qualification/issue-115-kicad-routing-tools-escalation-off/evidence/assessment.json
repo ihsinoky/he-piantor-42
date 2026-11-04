@@ -1,0 +1,271 @@
+{
+  "verdict": "FIXED_CONDITION_FAIL",
+  "failure_reasons": [
+    "unconnected items remain",
+    "output project minimum rule writeback (including additions)"
+  ],
+  "stages": {
+    "smoke": {
+      "independent": {
+        "required_unconnected": 0,
+        "wrong_net_contacts": 0,
+        "material_violations": 0,
+        "unexplained_transfer_changes": 0
+      },
+      "measured_unconnected_items": 0,
+      "tracks": 2,
+      "width_mm_counts": {
+        "0.2": 2
+      },
+      "minimum_track_width_mm": 0.2,
+      "below_020": 0,
+      "vias": 0,
+      "nonroute_removed": 0,
+      "nonroute_added": 0,
+      "source_routes_removed": 0,
+      "snapshot_nonroute_changes": {},
+      "output_project_changes": [
+        {
+          "path": [
+            "board",
+            "design_settings",
+            "rules",
+            "min_via_drill"
+          ],
+          "kind": "added",
+          "after": 0.3
+        },
+        {
+          "path": [
+            "kicad_routing_tools"
+          ],
+          "kind": "added",
+          "after": {
+            "repo_rules": {
+              "min_via_drill": 0.3
+            },
+            "fab_floor_origin": {
+              "min_hole_clearance": 0.2,
+              "min_through_hole_diameter": 0.3,
+              "min_track_width": 0.2,
+              "min_via_annular_width": 0.1,
+              "min_via_diameter": 0.6
+            },
+            "records_rev": 1
+          }
+        }
+      ],
+      "output_project_floor_writebacks": [
+        {
+          "path": [
+            "board",
+            "design_settings",
+            "rules",
+            "min_via_drill"
+          ],
+          "kind": "added",
+          "after": 0.3
+        }
+      ],
+      "existing_floor_relaxations": [],
+      "output_sha256": "321576d8610a28a739057290908e812930ed2c686eb17afac2ea5d6ae939eb3a",
+      "route_record": {
+        "argv": [
+          "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin/python3",
+          "py_router/route.py",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/smoke/in.kicad_pcb",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/smoke/out.kicad_pcb",
+          "--escalation",
+          "off"
+        ],
+        "cwd": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools",
+        "start_utc": "2026-11-04T06:05:59.764422+00:00",
+        "end_utc": "2026-11-04T06:06:04.561301+00:00",
+        "elapsed_seconds": 4.796911962000195,
+        "exit_code": 0,
+        "timed_out": false,
+        "timeout_seconds": 1800,
+        "env_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/lib/python3.12/site-packages",
+          "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/kicad",
+          "KICAD_STOCK_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/share/kicad",
+          "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+          "PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/hatch/.codex/tmp/arg0-linux/codex-arg0aDm8SI:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/opt/hatch/bin:/opt/hatch-image/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/muse/skills/documents/scripts:/opt/muse/skills/generate_podcast/scripts:/opt/muse/skills/style-tryon/scripts",
+          "XDG_CONFIG_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/config",
+          "XDG_CACHE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/cache",
+          "XDG_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/data",
+          "XDG_STATE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/state"
+        },
+        "display_unset": true
+      }
+    },
+    "main": {
+      "independent": {
+        "required_unconnected": null,
+        "wrong_net_contacts": null,
+        "material_violations": null,
+        "unexplained_transfer_changes": null
+      },
+      "measured_unconnected_items": 28,
+      "tracks": 554,
+      "width_mm_counts": {
+        "0.2": 554
+      },
+      "minimum_track_width_mm": 0.2,
+      "below_020": 0,
+      "vias": 39,
+      "nonroute_removed": 0,
+      "nonroute_added": 0,
+      "source_routes_removed": 0,
+      "snapshot_nonroute_changes": {},
+      "output_project_changes": [
+        {
+          "path": [
+            "board",
+            "design_settings",
+            "rules",
+            "min_via_drill"
+          ],
+          "kind": "added",
+          "after": 0.3
+        },
+        {
+          "path": [
+            "kicad_routing_tools"
+          ],
+          "kind": "added",
+          "after": {
+            "repo_rules": {
+              "min_via_drill": 0.3
+            },
+            "fab_floor_origin": {
+              "min_hole_clearance": 0.2,
+              "min_through_hole_diameter": 0.3,
+              "min_track_width": 0.2,
+              "min_via_annular_width": 0.1,
+              "min_via_diameter": 0.6
+            },
+            "records_rev": 1
+          }
+        }
+      ],
+      "output_project_floor_writebacks": [
+        {
+          "path": [
+            "board",
+            "design_settings",
+            "rules",
+            "min_via_drill"
+          ],
+          "kind": "added",
+          "after": 0.3
+        }
+      ],
+      "existing_floor_relaxations": [],
+      "output_sha256": "13c843919d906e2e2bea2775cd31ec479155b3d6b77e5b9743de6c7b04781926",
+      "route_record": {
+        "argv": [
+          "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin/python3",
+          "py_router/route.py",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/main/in.kicad_pcb",
+          "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/main/out.kicad_pcb",
+          "--escalation",
+          "off"
+        ],
+        "cwd": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/KiCadRoutingTools",
+        "start_utc": "2026-11-04T06:06:18.182996+00:00",
+        "end_utc": "2026-11-04T06:07:21.491950+00:00",
+        "elapsed_seconds": 63.309037265999905,
+        "exit_code": 0,
+        "timed_out": false,
+        "timeout_seconds": 1800,
+        "env_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/lib/python3.12/site-packages",
+          "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/kicad",
+          "KICAD_STOCK_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/share/kicad",
+          "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+          "PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/hatch/.codex/tmp/arg0-linux/codex-arg0aDm8SI:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/opt/hatch/bin:/opt/hatch-image/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/muse/skills/documents/scripts:/opt/muse/skills/generate_podcast/scripts:/opt/muse/skills/style-tryon/scripts",
+          "XDG_CONFIG_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/config",
+          "XDG_CACHE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/cache",
+          "XDG_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/data",
+          "XDG_STATE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/state"
+        },
+        "display_unset": true
+      }
+    }
+  },
+  "main_drc_type_counts": {
+    "silk_overlap": 12,
+    "silk_over_copper": 5,
+    "text_height": 44,
+    "via_dangling": 9
+  },
+  "unconnected_comparison": {
+    "issue115_net_item_counts": {
+      "ADC_A": 1,
+      "ADC_B": 1,
+      "ADC_C": 1,
+      "GND": 1,
+      "HALL_PWR_EN": 1,
+      "MUX_A0": 1,
+      "MUX_A1": 1,
+      "MUX_A2": 1,
+      "QSPI_SCLK": 1,
+      "QSPI_SD0": 1,
+      "QSPI_SD1": 1,
+      "QSPI_SD2": 1,
+      "QSPI_SD3": 1,
+      "RUN": 1,
+      "SWCLK": 1,
+      "SWDIO": 1,
+      "USB_DM": 1,
+      "USB_DP": 1,
+      "USB_DP_CONN": 1,
+      "V1V1": 3,
+      "V3V3": 3,
+      "WING_EN": 1,
+      "XIN": 1,
+      "XOUT": 1
+    },
+    "issue113_net_item_counts": {
+      "QSPI_SD2": 1,
+      "V1V1": 1,
+      "WING_EN": 1,
+      "XIN": 1,
+      "XOUT": 1
+    },
+    "common": [
+      "QSPI_SD2",
+      "V1V1",
+      "WING_EN",
+      "XIN",
+      "XOUT"
+    ],
+    "new": [
+      "ADC_A",
+      "ADC_B",
+      "ADC_C",
+      "GND",
+      "HALL_PWR_EN",
+      "MUX_A0",
+      "MUX_A1",
+      "MUX_A2",
+      "QSPI_SCLK",
+      "QSPI_SD0",
+      "QSPI_SD1",
+      "QSPI_SD3",
+      "RUN",
+      "SWCLK",
+      "SWDIO",
+      "USB_DM",
+      "USB_DP",
+      "USB_DP_CONN",
+      "V3V3"
+    ],
+    "resolved": [],
+    "issue113_net_set_is_subset": true
+  },
+  "note": "Unconnected counts are DRC missing-connection items, not distinct nets; all four Main metrics null whenever any open remains. Any min_* addition is disclosed as writeback; unchanged existing numeric floors do not establish no-writeback."
+}
