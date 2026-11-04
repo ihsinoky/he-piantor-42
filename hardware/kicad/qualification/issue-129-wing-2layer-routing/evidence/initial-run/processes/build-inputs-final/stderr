@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/build-inputs.py", line 11, in <module>
+    a=p.PAD(f);a.SetNumber(row['number']);a.SetAttribute(p.PAD_ATTRIB_SMD);a.SetShape(p.PAD_SHAPE_CIRCLE if row['shape']=='circle' else p.PAD_SHAPE_RECT);a.SetSize(V(row['width_mm'],row['height_mm']));a.SetPosition(V(row['x_mm'],-row['y_mm']));a.SetLayerSet(p.LSET([p.F_Cu,p.F_Paste,p.F_Mask]));f.Add(a)
+                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/python3/dist-packages/pcbnew.py", line 9778, in __init__
+    _pcbnew.LSET_swiginit(self, _pcbnew.new_LSET(*args))
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: in method 'new_LSET', argument 1 of type 'std::vector< PCB_LAYER_ID,std::allocator< PCB_LAYER_ID > > const &'
+Additional information:
+Wrong number or type of arguments for overloaded function 'new_LSET'.
+  Possible C/C++ prototypes are:
+    LSET::LSET()
+    LSET::LSET(BASE_SET const &)
+    LSET::LSET(std::initializer_list< PCB_LAYER_ID >)
+    LSET::LSET(std::vector< PCB_LAYER_ID,std::allocator< PCB_LAYER_ID > > const &)
+    LSET::LSET(LSEQ const &)
+    LSET::LSET(LAYER_RANGE const &)
+

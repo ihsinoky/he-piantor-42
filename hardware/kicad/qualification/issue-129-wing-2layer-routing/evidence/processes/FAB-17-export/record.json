@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import pcbnew as p,sys; b=p.LoadBoard(sys.argv[1]); m=p.GetSettingsManager();m.LoadProject(sys.argv[2]);b.SetProject(m.Prj());assert p.ExportSpecctraDSN(b,sys.argv[3])",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-17/in.kicad_pcb",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-17/in.kicad_pro",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-17/input.dsn"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42",
+  "start_utc": "2026-11-04T20:23:56.081043+00:00",
+  "end_utc": "2026-11-04T20:23:56.598245+00:00",
+  "elapsed_seconds": 0.517222789000698,
+  "exit_code": 0,
+  "timed_out": false,
+  "timeout_seconds": 120,
+  "env_overrides": {
+    "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages",
+    "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/kicad",
+    "TMPDIR": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/tmp",
+    "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli",
+    "BUN_INSTALL_CACHE_DIR": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/bun-cache"
+  },
+  "display_unset": true
+}

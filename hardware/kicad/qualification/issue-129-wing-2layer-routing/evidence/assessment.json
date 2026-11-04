@@ -1,107 +1,133 @@
 {
-  "verdict": "INPUT_CONSTRUCTION_STOPPED",
-  "utc": "2026-11-04T20:05:47.539986+00:00",
-  "gate_pass": false,
-  "gate_attempts": 1,
-  "input_modified_after_gate": false,
-  "gate_retried": false,
-  "routing_started": false,
+  "verdict": "STAGE1_FAILED",
+  "utc": "2026-11-04T20:30:30.733278+00:00",
+  "gate_pass": true,
+  "gate_attempts": 2,
+  "repair_gate_attempts": 1,
+  "initial_gate_preserved": "initial-run/equivalence-gate.json",
+  "gate_code_unchanged": true,
+  "routing_started": true,
+  "all_six_paths_run": true,
   "cells": {
     "KRT-smoke": {
       "board": "pitch9-16mm",
       "tool": "KRT",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/KRT-smoke/effective.json",
+      "measured_unconnected": 0,
+      "router_reported_unconnected": null,
       "metrics": {
-        "required_unconnected": null,
-        "wrong_net_contacts": null,
-        "material_violations": null,
-        "unexplained_transfer_changes": null
+        "required_unconnected": 0,
+        "wrong_net_contacts": 0,
+        "material_violations": 4,
+        "unexplained_transfer_changes": 0
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/KRT-smoke/width-audit.json",
+      "independent_material_drc_count": 4,
+      "width_pass": true,
+      "route_elapsed_seconds": 13.398727992999738,
+      "pass_acceptance": false
     },
     "FAB-smoke": {
       "board": "pitch9-16mm",
-      "tool": "fab_router",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "tool": "FAB",
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/FAB-smoke/effective.json",
+      "measured_unconnected": 10,
+      "router_reported_unconnected": 1,
       "metrics": {
         "required_unconnected": null,
         "wrong_net_contacts": null,
         "material_violations": null,
         "unexplained_transfer_changes": null
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/FAB-smoke/width-audit.json",
+      "independent_material_drc_count": 24,
+      "width_pass": true,
+      "route_elapsed_seconds": 33.11410875299953,
+      "pass_acceptance": false
     },
     "KRT-16": {
       "board": "representative21-16mm",
       "tool": "KRT",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/KRT-16/effective.json",
+      "measured_unconnected": 2,
+      "router_reported_unconnected": null,
       "metrics": {
         "required_unconnected": null,
         "wrong_net_contacts": null,
         "material_violations": null,
         "unexplained_transfer_changes": null
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/KRT-16/width-audit.json",
+      "independent_material_drc_count": 4,
+      "width_pass": true,
+      "route_elapsed_seconds": 120.50010621300044,
+      "pass_acceptance": false
     },
     "KRT-17": {
       "board": "representative21-17mm",
       "tool": "KRT",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/KRT-17/effective.json",
+      "measured_unconnected": 5,
+      "router_reported_unconnected": null,
       "metrics": {
         "required_unconnected": null,
         "wrong_net_contacts": null,
         "material_violations": null,
         "unexplained_transfer_changes": null
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/KRT-17/width-audit.json",
+      "independent_material_drc_count": 6,
+      "width_pass": true,
+      "route_elapsed_seconds": 125.50589568699979,
+      "pass_acceptance": false
     },
     "FAB-16": {
       "board": "representative21-16mm",
-      "tool": "fab_router",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "tool": "FAB",
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/FAB-16/effective.json",
+      "measured_unconnected": 23,
+      "router_reported_unconnected": 19,
       "metrics": {
         "required_unconnected": null,
         "wrong_net_contacts": null,
         "material_violations": null,
         "unexplained_transfer_changes": null
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/FAB-16/width-audit.json",
+      "independent_material_drc_count": 18,
+      "width_pass": true,
+      "route_elapsed_seconds": 394.31355805399926,
+      "pass_acceptance": false
     },
     "FAB-17": {
       "board": "representative21-17mm",
-      "tool": "fab_router",
-      "status": "NOT_RUN_INPUT_GATE",
-      "reason": "Stage 0 independent equivalence gate failed; routing forbidden by instructions.",
-      "runs": 0,
-      "settings_readback": null,
-      "measured_unconnected": null,
+      "tool": "FAB",
+      "status": "FAIL",
+      "runs": 1,
+      "settings_readback": "runs/FAB-17/effective.json",
+      "measured_unconnected": 23,
+      "router_reported_unconnected": 20,
       "metrics": {
         "required_unconnected": null,
         "wrong_net_contacts": null,
         "material_violations": null,
         "unexplained_transfer_changes": null
       },
-      "output_width_audit": null
+      "output_width_audit": "inspection/FAB-17/width-audit.json",
+      "independent_material_drc_count": 13,
+      "width_pass": true,
+      "route_elapsed_seconds": 190.5074535169997,
+      "pass_acceptance": false
     }
   }
 }

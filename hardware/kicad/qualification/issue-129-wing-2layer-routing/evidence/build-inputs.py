@@ -24,13 +24,13 @@ for name in ['pitch9-16mm','representative21-16mm','representative21-17mm']:
  for key in sorted(spec['nets']):
   n=p.NETINFO_ITEM(b,key);b.Add(n);nets[key]=n
  for row in spec['components']:
-  f=p.FootprintLoad(str(lib),row['kind']);f.SetReference(row['reference']);f.SetValue(row['mpn']);f.SetPosition(V(100+row['x_mm'],100-row['y_mm']));f.SetOrientationDegrees(row['rotation_ccw_deg'])
+  f=p.FootprintLoad(str(lib),row['kind']);f.SetFPID(p.LIB_ID('Wing129',row['kind']));f.SetReference(row['reference']);f.SetValue(row['mpn']);f.SetPosition(V(100+row['x_mm'],100-row['y_mm']));f.SetOrientationDegrees(row['rotation_ccw_deg'])
   for a in f.Pads():
    net=row['pins'][a.GetNumber()]
    if net is not None:a.SetNet(nets[net])
   b.Add(f)
  for i,h in enumerate(spec['mounting_holes'],1):
-  f=p.FootprintLoad(str(lib),'mounting');f.SetReference('H'+str(i));f.SetPosition(V(100+h['x_mm'],100-h['y_mm']));b.Add(f)
+  f=p.FootprintLoad(str(lib),'mounting');f.SetFPID(p.LIB_ID('Wing129','mounting'));f.SetReference('H'+str(i));f.SetPosition(V(100+h['x_mm'],100-h['y_mm']));b.Add(f)
   z=p.ZONE(b);z.SetIsRuleArea(True);z.SetLayerSet(p.LSET.AllCuMask());z.SetZoneName('mounting keepout '+str(i));z.SetDoNotAllowTracks(True);z.SetDoNotAllowVias(True);z.SetDoNotAllowPads(True);z.SetDoNotAllowCopperPour(True);z.SetDoNotAllowFootprints(True)
   poly=z.Outline();poly.NewOutline();radius=h['keepout_diameter_mm']/2/math.cos(math.pi/256)
   for j in range(256):
