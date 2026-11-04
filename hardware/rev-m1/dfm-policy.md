@@ -1,12 +1,20 @@
 # Rev.M1 / Rev.A DFM policy
 
 Accepted DFM baseline under [D-017](../../docs/decisions.md#d-017---revm1-mainwing-architecture-and-interface-freeze); no panel, PCB or manufacturing
-dataset is designed here. See [D-015](../../docs/decisions.md) and
+dataset is designed here. Rev.M1 Main layer/rule assumptions are revised by
+[D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline). See [D-015](../../docs/decisions.md) and
 [project gates](../../docs/project-status.md#human-gates).
 
-Prefer JLCPCB Economic PCBA where practical, two copper layers unless separately
-reconsidered, and the existing 1.2 mm thickness baseline. Place SMD components
-on one side by default. Prefer Basic parts, then Promotional Extended parts;
+For **Rev.M1 Main only**, [D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline)
+sets four copper layers (F.Cu signal / In1.Cu GND plane / In2.Cu signal /
+B.Cu signal), 1.2 mm thickness, 0.10 mm trace width / clearance, and
+0.60/0.30 mm via diameter/drill. The two-layer baseline was the D-012-era
+assumption. Wing layer construction and design rules remain unevaluated under
+these conditions and are outside D-019; do not apply the Main change to Wings.
+
+Prefer JLCPCB Economic PCBA where practical and retain the existing 1.2 mm
+thickness baseline. Place SMD components on one side by default. Prefer Basic
+parts, then Promotional Extended parts;
 minimize unnecessary distinct Extended part types. Do not sacrifice electrical
 or mechanical performance merely to reduce an Extended-part count. Actual
 service eligibility, component classification, availability and quotation
@@ -40,3 +48,9 @@ later complete Rev.A package. No order or manufacturing release is authorized
 by G0B. **USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED** remains unchanged;
 no manufacturing exception is granted. Final placement/routing and final
 USB/system power qualification remain open.
+
+Via-in-pad / paste-opening order specifications remain undecided: Issue #121's
+25 observations are manufacturing notes, not DRC violations. USB J1 PTH
+retention-leg assembly process also remains undecided, pending Issue #124.
+See [D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline); no specification or
+process is selected here.

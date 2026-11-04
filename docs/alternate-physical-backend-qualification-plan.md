@@ -1,5 +1,12 @@
 # Bounded alternate physical backend qualification plan
 
+This is the D-018-era planning record. Its two-layer / 0.20 mm conditions
+below are historical qualification constraints. This note does not authorize
+rerunning the historical plan.
+For the current Rev.M1 Main baseline, see [D-019](decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline):
+four layers, 1.2 mm, 0.10 mm width/clearance and 0.60/0.30 mm vias. Wing
+layers/rules are outside that decision and unevaluated under these conditions.
+
 ## Authority and present result
 
 Planning only under [Issue #71](https://github.com/ihsinoky/he-piantor-42/issues/71)

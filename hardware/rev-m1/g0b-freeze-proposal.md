@@ -2,6 +2,12 @@
 
 Status: **ACCEPTED — G0B COMPLETE**
 
+The two-layer assumptions below record the D-012/D-017-era freeze.
+Historical G0B routing-proof conditions below are retained as evidence.
+For the current Rev.M1 Main baseline, see [D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline):
+four layers, 1.2 mm, 0.10 mm width/clearance and 0.60/0.30 mm vias. Wing
+layers/rules are outside that decision and unevaluated under these conditions.
+
 Issue: [#57](https://github.com/ihsinoky/he-piantor-42/issues/57)
 
 Proposal review baseline: `7d7f3cffe4fb98771e3ca47f800a54de22fa8c4f`

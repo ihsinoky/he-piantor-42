@@ -409,3 +409,46 @@ sequence without rewriting D-016/D-017's historical authority.
 
 See the [bounded qualification plan](alternate-physical-backend-qualification-plan.md)
 and [execution Issue body draft](alternate-physical-backend-main-qualification-issue-draft.md).
+
+
+## D-019 - Rev.M1 Main four-layer and 0.10 mm design-rule baseline
+
+Status: accepted
+
+The [Issue #123 PO decision](https://github.com/ihsinoky/he-piantor-42/issues/123)
+on 2026-11-04 revises D-012 for **Rev.M1 Main only**. Use four copper layers:
+**F.Cu signal / In1.Cu GND plane / In2.Cu signal / B.Cu signal**, with
+**1.2 mm** finished PCB thickness. Use **0.10 mm trace width / 0.10 mm
+clearance** and **0.60 mm via diameter / 0.30 mm drill** as the design-rule
+baseline. This replaces the Main layer/rule assumptions retained in
+D-015/D-017/D-018 without rewriting their historical records. D-008's 1.2 mm
+thickness baseline is unchanged.
+
+Reason: [Issue #117](https://github.com/ihsinoky/he-piantor-42/issues/117)
+([results](issue-117-four-layer-main-and-wing-outlook.md)) left 26 unrouted
+with fab_router and 28 with KRT at four layers / 0.20 mm.
+[Issue #119](https://github.com/ihsinoky/he-piantor-42/issues/119)
+([results](issue-119-promising-tools-relaxed-conditions.md)) left one unrouted
+with KRT and 19 with fab_router at four layers / 0.127 mm; Freerouting left
+27 and also violated the width requirement.
+[Issue #121](https://github.com/ihsinoky/he-piantor-42/issues/121)
+([results](issue-121-full-auto-conditions.md)) completed automatic routing
+with KRT at four layers / 0.10 mm and the unchanged 0.60/0.30 mm vias:
+zero unrouted and all four independent metrics zero (required unconnected,
+wrong-net contact, physical violations, unexplained transfer changes).
+The JLCPCB instant quotation checked on 2026-11-04 for **four layers,
+48 x 44 mm, 1.2 mm, five boards** priced the **bare PCBs at USD 8.00**, with
+no fine-trace surcharge for 0.10 mm, as recorded in the PO decision above.
+This is bare-board quotation evidence, not a total PCBA/order price or a
+manufacturing release.
+
+Wing layer construction and design rules have not been evaluated under these
+conditions and are outside this decision. Do not extend the Main baseline
+to Evaluation Wings or Rev.A Wings.
+
+**Undecided order specifications:** via-in-pad / paste-opening disposition
+(the 25 observations in Issue #121 are manufacturing notes, not DRC violations)
+and the assembly process for USB J1's PTH retention legs (to be checked in
+[Issue #124](https://github.com/ihsinoky/he-piantor-42/issues/124)). This decision
+selects neither specification nor process; pre-order manufacturing review
+remains required.

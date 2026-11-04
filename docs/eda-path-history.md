@@ -4,6 +4,12 @@ Read this before proposing an EDA method change or retry. Decisions remain
 historical authority; this index does not replace or rewrite them. Observations,
 PO supplements and executor recommendations have different provenance.
 
+The 0.20 mm retry condition below belongs to the historical EDA-003 evaluation.
+Historical verdicts and their original acceptance conditions are retained.
+For the current Rev.M1 Main baseline, see [D-019](decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline):
+four layers, 1.2 mm, 0.10 mm width/clearance and 0.60/0.30 mm vias. Wing
+layers/rules are outside that decision and unevaluated under these conditions.
+
 | Path / scope | Stop or non-adoption and evidence | Retry condition; reusable work / unproved scope |
 | --- | --- | --- |
 | Initial KiCad files: integrated four-key schematic, attempted PCB | **PO supplement:** repeated direct-authoring file-format hand fixes ([#79](https://github.com/ihsinoky/he-piantor-42/issues/79)). **Observed:** [PR #6](https://github.com/ihsinoky/he-piantor-42/pull/6) symbol/power/reference corrections; [PR #10](https://github.com/ihsinoky/he-piantor-42/pull/10) local static checks only and final CI 587 DRC violations / 40 unconnected items. [Retained metadata/raw](../hardware/kicad/qualification/eda-004e/evidence/), source `f6a1bbac54eb5161fa4ab785c88a3958a320b4f4`. Full writer commands and root causes **unknown**; a generator header does not prove authoring method. D-014 later retires KiCad as fallback/reference. | A concretely different serialization/validation route and current electrical/geometry proof. Reuse original symbols/footprints/requirements as verified reference only; old four-key design is not current Main authority. Local validation absence is not the sole established cause. |
