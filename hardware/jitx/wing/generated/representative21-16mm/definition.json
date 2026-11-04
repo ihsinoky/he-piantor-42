@@ -1,4 +1,172 @@
 {
+  "layout_source": {
+    "source": {
+      "repository": "https://github.com/qmk/qmk_firmware",
+      "revision": "d9f6dd215f2c4d295c6ad85b1f602125c2d81db1",
+      "path": "keyboards/cantor/keyboard.json",
+      "git_blob": "9065e11ae5906756501448a7efe5706f93e53f87",
+      "equivalent_piantor_path": "keyboards/beekeeb/piantor/keyboard.json",
+      "equivalent_piantor_git_blob": "94463f6c6d84091e89e907942b4218c514257b81",
+      "license": "GPL-2.0-only",
+      "license_text": "../../../LICENSES/GPL-2.0-only.txt"
+    },
+    "repository_record": {
+      "path": "hardware/layout/layout_source.json",
+      "commit": "6a835825a686ef8cba63d8e52bbc9f0700e1ecde",
+      "git_blob": "3c62900c0d60a69a761b05930ec06844373c169d"
+    },
+    "source_layout": "LAYOUT_split_3x6_3",
+    "note": "Exact left-side tuples from the existing repository record, imported for Issue #127 follow-up under the explicit PO Piantor instruction. QMK-derived coordinates remain GPL-2.0-only, not CERN-OHL-P-2.0. This is evaluation geometry; production source approval remains open. No runtime dependency on hardware/layout.",
+    "frame": "source key units; +x right; +y down; no monoblock rotation",
+    "keys": [
+      {
+        "id": "L_R0_C0",
+        "side": "L",
+        "x": 0,
+        "y": 0.25
+      },
+      {
+        "id": "L_R0_C1",
+        "side": "L",
+        "x": 1,
+        "y": 0.25
+      },
+      {
+        "id": "L_R0_C2",
+        "side": "L",
+        "x": 2,
+        "y": 0.125
+      },
+      {
+        "id": "L_R0_C3",
+        "side": "L",
+        "x": 3,
+        "y": 0
+      },
+      {
+        "id": "L_R0_C4",
+        "side": "L",
+        "x": 4,
+        "y": 0.125
+      },
+      {
+        "id": "L_R0_C5",
+        "side": "L",
+        "x": 5,
+        "y": 0.25
+      },
+      {
+        "id": "L_R1_C0",
+        "side": "L",
+        "x": 0,
+        "y": 1.25
+      },
+      {
+        "id": "L_R1_C1",
+        "side": "L",
+        "x": 1,
+        "y": 1.25
+      },
+      {
+        "id": "L_R1_C2",
+        "side": "L",
+        "x": 2,
+        "y": 1.125
+      },
+      {
+        "id": "L_R1_C3",
+        "side": "L",
+        "x": 3,
+        "y": 1
+      },
+      {
+        "id": "L_R1_C4",
+        "side": "L",
+        "x": 4,
+        "y": 1.125
+      },
+      {
+        "id": "L_R1_C5",
+        "side": "L",
+        "x": 5,
+        "y": 1.25
+      },
+      {
+        "id": "L_R2_C0",
+        "side": "L",
+        "x": 0,
+        "y": 2.25
+      },
+      {
+        "id": "L_R2_C1",
+        "side": "L",
+        "x": 1,
+        "y": 2.25
+      },
+      {
+        "id": "L_R2_C2",
+        "side": "L",
+        "x": 2,
+        "y": 2.125
+      },
+      {
+        "id": "L_R2_C3",
+        "side": "L",
+        "x": 3,
+        "y": 2
+      },
+      {
+        "id": "L_R2_C4",
+        "side": "L",
+        "x": 4,
+        "y": 2.125
+      },
+      {
+        "id": "L_R2_C5",
+        "side": "L",
+        "x": 5,
+        "y": 2.25
+      },
+      {
+        "id": "L_T0",
+        "side": "L",
+        "x": 3.5,
+        "y": 3.25
+      },
+      {
+        "id": "L_T1",
+        "side": "L",
+        "x": 4.5,
+        "y": 3.5
+      },
+      {
+        "id": "L_T2",
+        "side": "L",
+        "x": 5.5,
+        "y": 3.75
+      }
+    ]
+  },
+  "layout_transform": "x=(source_x-2.75)*pitch; y=(1.875-source_y)*pitch+9; no rotation",
+  "key_cell_bounds_mm": [
+    -52.0,
+    -29.0,
+    52.0,
+    47.0
+  ],
+  "outline_policy": "one-pitch cells; 3 mm border; 18 mm bottom service strip; no compression",
+  "size_requirement": {
+    "limit_mm": [
+      100,
+      100
+    ],
+    "fits": false,
+    "excess_mm": [
+      10.0,
+      0
+    ],
+    "decision": "PO: revise 100x100 requirement or explicitly revise Piantor layout; do not compress"
+  },
   "schema_version": 1,
   "name": "representative21-16mm",
   "kind": "representative21",
@@ -6,48 +174,48 @@
   "frame": "mm; board-center; +Y up; top; CCW",
   "outline_mm": [
     [
-      -49.0,
-      -49.0
+      -55.0,
+      -50.0
     ],
     [
-      49.0,
-      -49.0
+      55.0,
+      -50.0
     ],
     [
-      49.0,
-      49.0
+      55.0,
+      50.0
     ],
     [
-      -49.0,
-      49.0
+      -55.0,
+      50.0
     ]
   ],
-  "width_mm": 98.0,
-  "height_mm": 98.0,
+  "width_mm": 110.0,
+  "height_mm": 100.0,
   "layers": 2,
   "thickness_mm": 1.2,
   "mounting_holes": [
     {
-      "x_mm": -46.0,
-      "y_mm": -46.0,
+      "x_mm": -52.0,
+      "y_mm": -47.0,
       "diameter_mm": 2.2,
       "keepout_diameter_mm": 5.0
     },
     {
-      "x_mm": -46.0,
-      "y_mm": 46.0,
+      "x_mm": -52.0,
+      "y_mm": 47.0,
       "diameter_mm": 2.2,
       "keepout_diameter_mm": 5.0
     },
     {
-      "x_mm": 46.0,
-      "y_mm": -46.0,
+      "x_mm": 52.0,
+      "y_mm": -47.0,
       "diameter_mm": 2.2,
       "keepout_diameter_mm": 5.0
     },
     {
-      "x_mm": 46.0,
-      "y_mm": 46.0,
+      "x_mm": 52.0,
+      "y_mm": 47.0,
       "diameter_mm": 2.2,
       "keepout_diameter_mm": 5.0
     }
@@ -58,10 +226,10 @@
     "conductors": 14
   },
   "connector_cable_access_mm": [
-    -42.0,
-    -43.0,
-    -16.0,
-    -35.0
+    -50.0,
+    -47.0,
+    -24.0,
+    -39.0
   ],
   "sensor_sites": [
     {
@@ -69,168 +237,231 @@
       "mux": "U_MUX_A",
       "address": 0,
       "role": "key",
-      "x_mm": -32.0,
-      "y_mm": 32.0
+      "x_mm": -44.0,
+      "y_mm": 35.0,
+      "source_key_id": "L_R0_C0",
+      "source_x_u": 0,
+      "source_y_u": 0.25
     },
     {
       "reference": "U_HA1",
       "mux": "U_MUX_A",
       "address": 1,
       "role": "key",
-      "x_mm": 16.0,
-      "y_mm": 32.0
+      "x_mm": 4.0,
+      "y_mm": 39.0,
+      "source_key_id": "L_R0_C3",
+      "source_x_u": 3,
+      "source_y_u": 0
     },
     {
       "reference": "U_HA2",
       "mux": "U_MUX_A",
       "address": 2,
       "role": "key",
-      "x_mm": -16.0,
-      "y_mm": 16.0
+      "x_mm": -44.0,
+      "y_mm": 19.0,
+      "source_key_id": "L_R1_C0",
+      "source_x_u": 0,
+      "source_y_u": 1.25
     },
     {
       "reference": "U_HA3",
       "mux": "U_MUX_A",
       "address": 3,
       "role": "key",
-      "x_mm": 32.0,
-      "y_mm": 16.0
+      "x_mm": 4.0,
+      "y_mm": 23.0,
+      "source_key_id": "L_R1_C3",
+      "source_x_u": 3,
+      "source_y_u": 1
     },
     {
       "reference": "U_HA4",
       "mux": "U_MUX_A",
       "address": 4,
       "role": "key",
-      "x_mm": 0.0,
-      "y_mm": 0.0
+      "x_mm": -44.0,
+      "y_mm": 3.0,
+      "source_key_id": "L_R2_C0",
+      "source_x_u": 0,
+      "source_y_u": 2.25
     },
     {
       "reference": "U_HA5",
       "mux": "U_MUX_A",
       "address": 5,
       "role": "key",
-      "x_mm": -32.0,
-      "y_mm": -16.0
+      "x_mm": 4.0,
+      "y_mm": 7.0,
+      "source_key_id": "L_R2_C3",
+      "source_x_u": 3,
+      "source_y_u": 2
     },
     {
       "reference": "U_HA6",
       "mux": "U_MUX_A",
       "address": 6,
       "role": "key",
-      "x_mm": 16.0,
-      "y_mm": -16.0
+      "x_mm": 12.0,
+      "y_mm": -13.0,
+      "source_key_id": "L_T0",
+      "source_x_u": 3.5,
+      "source_y_u": 3.25
     },
     {
       "reference": "U_HB0",
       "mux": "U_MUX_B",
       "address": 0,
       "role": "key",
-      "x_mm": -16.0,
-      "y_mm": 32.0
+      "x_mm": -28.0,
+      "y_mm": 35.0,
+      "source_key_id": "L_R0_C1",
+      "source_x_u": 1,
+      "source_y_u": 0.25
     },
     {
       "reference": "U_HB1",
       "mux": "U_MUX_B",
       "address": 1,
       "role": "key",
-      "x_mm": 32.0,
-      "y_mm": 32.0
+      "x_mm": 20.0,
+      "y_mm": 37.0,
+      "source_key_id": "L_R0_C4",
+      "source_x_u": 4,
+      "source_y_u": 0.125
     },
     {
       "reference": "U_HB2",
       "mux": "U_MUX_B",
       "address": 2,
       "role": "key",
-      "x_mm": 0.0,
-      "y_mm": 16.0
+      "x_mm": -28.0,
+      "y_mm": 19.0,
+      "source_key_id": "L_R1_C1",
+      "source_x_u": 1,
+      "source_y_u": 1.25
     },
     {
       "reference": "U_HB3",
       "mux": "U_MUX_B",
       "address": 3,
       "role": "key",
-      "x_mm": -32.0,
-      "y_mm": 0.0
+      "x_mm": 20.0,
+      "y_mm": 21.0,
+      "source_key_id": "L_R1_C4",
+      "source_x_u": 4,
+      "source_y_u": 1.125
     },
     {
       "reference": "U_HB4",
       "mux": "U_MUX_B",
       "address": 4,
       "role": "key",
-      "x_mm": 16.0,
-      "y_mm": 0.0
+      "x_mm": -28.0,
+      "y_mm": 3.0,
+      "source_key_id": "L_R2_C1",
+      "source_x_u": 1,
+      "source_y_u": 2.25
     },
     {
       "reference": "U_HB5",
       "mux": "U_MUX_B",
       "address": 5,
       "role": "key",
-      "x_mm": -16.0,
-      "y_mm": -16.0
+      "x_mm": 20.0,
+      "y_mm": 5.0,
+      "source_key_id": "L_R2_C4",
+      "source_x_u": 4,
+      "source_y_u": 2.125
     },
     {
       "reference": "U_HB6",
       "mux": "U_MUX_B",
       "address": 6,
       "role": "key",
-      "x_mm": 32.0,
-      "y_mm": -16.0
+      "x_mm": 28.0,
+      "y_mm": -17.0,
+      "source_key_id": "L_T1",
+      "source_x_u": 4.5,
+      "source_y_u": 3.5
     },
     {
       "reference": "U_HC0",
       "mux": "U_MUX_C",
       "address": 0,
       "role": "key",
-      "x_mm": 0.0,
-      "y_mm": 32.0
+      "x_mm": -12.0,
+      "y_mm": 37.0,
+      "source_key_id": "L_R0_C2",
+      "source_x_u": 2,
+      "source_y_u": 0.125
     },
     {
       "reference": "U_HC1",
       "mux": "U_MUX_C",
       "address": 1,
       "role": "key",
-      "x_mm": -32.0,
-      "y_mm": 16.0
+      "x_mm": 36.0,
+      "y_mm": 35.0,
+      "source_key_id": "L_R0_C5",
+      "source_x_u": 5,
+      "source_y_u": 0.25
     },
     {
       "reference": "U_HC2",
       "mux": "U_MUX_C",
       "address": 2,
       "role": "key",
-      "x_mm": 16.0,
-      "y_mm": 16.0
+      "x_mm": -12.0,
+      "y_mm": 21.0,
+      "source_key_id": "L_R1_C2",
+      "source_x_u": 2,
+      "source_y_u": 1.125
     },
     {
       "reference": "U_HC3",
       "mux": "U_MUX_C",
       "address": 3,
       "role": "key",
-      "x_mm": -16.0,
-      "y_mm": 0.0
+      "x_mm": 36.0,
+      "y_mm": 19.0,
+      "source_key_id": "L_R1_C5",
+      "source_x_u": 5,
+      "source_y_u": 1.25
     },
     {
       "reference": "U_HC4",
       "mux": "U_MUX_C",
       "address": 4,
       "role": "key",
-      "x_mm": 32.0,
-      "y_mm": 0.0
+      "x_mm": -12.0,
+      "y_mm": 5.0,
+      "source_key_id": "L_R2_C2",
+      "source_x_u": 2,
+      "source_y_u": 2.125
     },
     {
       "reference": "U_HC5",
       "mux": "U_MUX_C",
       "address": 5,
       "role": "key",
-      "x_mm": 0.0,
-      "y_mm": -16.0
+      "x_mm": 36.0,
+      "y_mm": 3.0,
+      "source_key_id": "L_R2_C5",
+      "source_x_u": 5,
+      "source_y_u": 2.25
     },
     {
       "reference": "U_HC6",
       "mux": "U_MUX_C",
       "address": 6,
       "role": "key",
-      "x_mm": 0,
-      "y_mm": -32.0
+      "x_mm": 44.0,
+      "y_mm": -21.0,
+      "source_key_id": "L_T2",
+      "source_x_u": 5.5,
+      "source_y_u": 3.75
     }
   ],
   "components": [
@@ -238,8 +469,8 @@
       "reference": "U_HA0",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -32.0,
-      "y_mm": 32.0,
+      "x_mm": -44.0,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A0_RAW",
@@ -253,8 +484,8 @@
       "reference": "C_HA0",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -28.5,
-      "y_mm": 32.0,
+      "x_mm": -40.5,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -267,8 +498,8 @@
       "reference": "U_HA1",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 16.0,
-      "y_mm": 32.0,
+      "x_mm": 4.0,
+      "y_mm": 39.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A1_RAW",
@@ -282,8 +513,8 @@
       "reference": "C_HA1",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 19.5,
-      "y_mm": 32.0,
+      "x_mm": 7.5,
+      "y_mm": 39.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -296,8 +527,8 @@
       "reference": "U_HA2",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -16.0,
-      "y_mm": 16.0,
+      "x_mm": -44.0,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A2_RAW",
@@ -311,8 +542,8 @@
       "reference": "C_HA2",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -12.5,
-      "y_mm": 16.0,
+      "x_mm": -40.5,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -325,8 +556,8 @@
       "reference": "U_HA3",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 32.0,
-      "y_mm": 16.0,
+      "x_mm": 4.0,
+      "y_mm": 23.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A3_RAW",
@@ -340,8 +571,8 @@
       "reference": "C_HA3",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 35.5,
-      "y_mm": 16.0,
+      "x_mm": 7.5,
+      "y_mm": 23.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -354,8 +585,8 @@
       "reference": "U_HA4",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 0.0,
-      "y_mm": 0.0,
+      "x_mm": -44.0,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A4_RAW",
@@ -369,8 +600,8 @@
       "reference": "C_HA4",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 3.5,
-      "y_mm": 0.0,
+      "x_mm": -40.5,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -383,8 +614,8 @@
       "reference": "U_HA5",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -32.0,
-      "y_mm": -16.0,
+      "x_mm": 4.0,
+      "y_mm": 7.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A5_RAW",
@@ -398,8 +629,8 @@
       "reference": "C_HA5",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -28.5,
-      "y_mm": -16.0,
+      "x_mm": 7.5,
+      "y_mm": 7.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -412,8 +643,8 @@
       "reference": "U_HA6",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 16.0,
-      "y_mm": -16.0,
+      "x_mm": 12.0,
+      "y_mm": -13.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_A6_RAW",
@@ -427,8 +658,8 @@
       "reference": "C_HA6",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 19.5,
-      "y_mm": -16.0,
+      "x_mm": 15.5,
+      "y_mm": -13.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -441,8 +672,8 @@
       "reference": "U_MUX_A",
       "kind": "mux",
       "mpn": "TMUX1208PWR",
-      "x_mm": 18.0,
-      "y_mm": -35.0,
+      "x_mm": 0.0,
+      "y_mm": -40.0,
       "pins": {
         "1": "MUX_A0",
         "2": "WING_EN",
@@ -469,8 +700,8 @@
       "reference": "C_MUX_A",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 23.0,
-      "y_mm": -34.0,
+      "x_mm": 5.0,
+      "y_mm": -39.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -483,8 +714,8 @@
       "reference": "TP_W_MUXA",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 18.0,
-      "y_mm": -40.0,
+      "x_mm": 0.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "MUX_OUT_A"
       },
@@ -496,8 +727,8 @@
       "reference": "TP_W_GND_A",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 21.0,
-      "y_mm": -40.0,
+      "x_mm": 3.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "GND"
       },
@@ -509,8 +740,8 @@
       "reference": "U_HB0",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -16.0,
-      "y_mm": 32.0,
+      "x_mm": -28.0,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B0_RAW",
@@ -524,8 +755,8 @@
       "reference": "C_HB0",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -12.5,
-      "y_mm": 32.0,
+      "x_mm": -24.5,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -538,8 +769,8 @@
       "reference": "U_HB1",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 32.0,
-      "y_mm": 32.0,
+      "x_mm": 20.0,
+      "y_mm": 37.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B1_RAW",
@@ -553,8 +784,8 @@
       "reference": "C_HB1",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 35.5,
-      "y_mm": 32.0,
+      "x_mm": 23.5,
+      "y_mm": 37.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -567,8 +798,8 @@
       "reference": "U_HB2",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 0.0,
-      "y_mm": 16.0,
+      "x_mm": -28.0,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B2_RAW",
@@ -582,8 +813,8 @@
       "reference": "C_HB2",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 3.5,
-      "y_mm": 16.0,
+      "x_mm": -24.5,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -596,8 +827,8 @@
       "reference": "U_HB3",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -32.0,
-      "y_mm": 0.0,
+      "x_mm": 20.0,
+      "y_mm": 21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B3_RAW",
@@ -611,8 +842,8 @@
       "reference": "C_HB3",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -28.5,
-      "y_mm": 0.0,
+      "x_mm": 23.5,
+      "y_mm": 21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -625,8 +856,8 @@
       "reference": "U_HB4",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 16.0,
-      "y_mm": 0.0,
+      "x_mm": -28.0,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B4_RAW",
@@ -640,8 +871,8 @@
       "reference": "C_HB4",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 19.5,
-      "y_mm": 0.0,
+      "x_mm": -24.5,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -654,8 +885,8 @@
       "reference": "U_HB5",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -16.0,
-      "y_mm": -16.0,
+      "x_mm": 20.0,
+      "y_mm": 5.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B5_RAW",
@@ -669,8 +900,8 @@
       "reference": "C_HB5",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -12.5,
-      "y_mm": -16.0,
+      "x_mm": 23.5,
+      "y_mm": 5.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -683,8 +914,8 @@
       "reference": "U_HB6",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 32.0,
-      "y_mm": -16.0,
+      "x_mm": 28.0,
+      "y_mm": -17.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_B6_RAW",
@@ -698,8 +929,8 @@
       "reference": "C_HB6",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 35.5,
-      "y_mm": -16.0,
+      "x_mm": 31.5,
+      "y_mm": -17.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -712,8 +943,8 @@
       "reference": "U_MUX_B",
       "kind": "mux",
       "mpn": "TMUX1208PWR",
-      "x_mm": 29.0,
-      "y_mm": -35.0,
+      "x_mm": 14.0,
+      "y_mm": -40.0,
       "pins": {
         "1": "MUX_A0",
         "2": "WING_EN",
@@ -740,8 +971,8 @@
       "reference": "C_MUX_B",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 34.0,
-      "y_mm": -34.0,
+      "x_mm": 19.0,
+      "y_mm": -39.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -754,8 +985,8 @@
       "reference": "TP_W_MUXB",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 29.0,
-      "y_mm": -40.0,
+      "x_mm": 14.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "MUX_OUT_B"
       },
@@ -767,8 +998,8 @@
       "reference": "TP_W_GND_B",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 32.0,
-      "y_mm": -40.0,
+      "x_mm": 17.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "GND"
       },
@@ -780,8 +1011,8 @@
       "reference": "U_HC0",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 0.0,
-      "y_mm": 32.0,
+      "x_mm": -12.0,
+      "y_mm": 37.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C0_RAW",
@@ -795,8 +1026,8 @@
       "reference": "C_HC0",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 3.5,
-      "y_mm": 32.0,
+      "x_mm": -8.5,
+      "y_mm": 37.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -809,8 +1040,8 @@
       "reference": "U_HC1",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -32.0,
-      "y_mm": 16.0,
+      "x_mm": 36.0,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C1_RAW",
@@ -824,8 +1055,8 @@
       "reference": "C_HC1",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -28.5,
-      "y_mm": 16.0,
+      "x_mm": 39.5,
+      "y_mm": 35.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -838,8 +1069,8 @@
       "reference": "U_HC2",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 16.0,
-      "y_mm": 16.0,
+      "x_mm": -12.0,
+      "y_mm": 21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C2_RAW",
@@ -853,8 +1084,8 @@
       "reference": "C_HC2",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 19.5,
-      "y_mm": 16.0,
+      "x_mm": -8.5,
+      "y_mm": 21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -867,8 +1098,8 @@
       "reference": "U_HC3",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": -16.0,
-      "y_mm": 0.0,
+      "x_mm": 36.0,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C3_RAW",
@@ -882,8 +1113,8 @@
       "reference": "C_HC3",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": -12.5,
-      "y_mm": 0.0,
+      "x_mm": 39.5,
+      "y_mm": 19.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -896,8 +1127,8 @@
       "reference": "U_HC4",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 32.0,
-      "y_mm": 0.0,
+      "x_mm": -12.0,
+      "y_mm": 5.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C4_RAW",
@@ -911,8 +1142,8 @@
       "reference": "C_HC4",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 35.5,
-      "y_mm": 0.0,
+      "x_mm": -8.5,
+      "y_mm": 5.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -925,8 +1156,8 @@
       "reference": "U_HC5",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 0.0,
-      "y_mm": -16.0,
+      "x_mm": 36.0,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C5_RAW",
@@ -940,8 +1171,8 @@
       "reference": "C_HC5",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 3.5,
-      "y_mm": -16.0,
+      "x_mm": 39.5,
+      "y_mm": 3.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -954,8 +1185,8 @@
       "reference": "U_HC6",
       "kind": "hall",
       "mpn": "DRV5055A3QDBZR",
-      "x_mm": 0,
-      "y_mm": -32.0,
+      "x_mm": 44.0,
+      "y_mm": -21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "H_C6_RAW",
@@ -969,8 +1200,8 @@
       "reference": "C_HC6",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 3.5,
-      "y_mm": -32.0,
+      "x_mm": 47.5,
+      "y_mm": -21.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -983,8 +1214,8 @@
       "reference": "U_MUX_C",
       "kind": "mux",
       "mpn": "TMUX1208PWR",
-      "x_mm": 40.0,
-      "y_mm": -35.0,
+      "x_mm": 28.0,
+      "y_mm": -40.0,
       "pins": {
         "1": "MUX_A0",
         "2": "WING_EN",
@@ -1011,8 +1242,8 @@
       "reference": "C_MUX_C",
       "kind": "capacitor",
       "mpn": "GRM188R71C104KA01D",
-      "x_mm": 45.0,
-      "y_mm": -34.0,
+      "x_mm": 33.0,
+      "y_mm": -39.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND"
@@ -1025,8 +1256,8 @@
       "reference": "TP_W_MUXC",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 40.0,
-      "y_mm": -40.0,
+      "x_mm": 28.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "MUX_OUT_C"
       },
@@ -1038,8 +1269,8 @@
       "reference": "TP_W_GND_C",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": 43.0,
-      "y_mm": -40.0,
+      "x_mm": 31.0,
+      "y_mm": -45.0,
       "pins": {
         "1": "GND"
       },
@@ -1051,8 +1282,8 @@
       "reference": "J_WING",
       "kind": "connector",
       "mpn": "BM14B-GHS-TBT(LF)(SN)",
-      "x_mm": -29.0,
-      "y_mm": -36.0,
+      "x_mm": -37.0,
+      "y_mm": -40.0,
       "pins": {
         "1": "HALL_5V",
         "2": "GND",
@@ -1078,8 +1309,8 @@
       "reference": "TP_H_CTR_RAW",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": -19.5,
-      "y_mm": 16.0,
+      "x_mm": -47.5,
+      "y_mm": 19.0,
       "pins": {
         "1": "H_A2_RAW"
       },
@@ -1091,8 +1322,8 @@
       "reference": "TP_H_N_RAW",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": -3.5,
-      "y_mm": 16.0,
+      "x_mm": -31.5,
+      "y_mm": 19.0,
       "pins": {
         "1": "H_B2_RAW"
       },
@@ -1104,8 +1335,8 @@
       "reference": "TP_H_DIAG_RAW",
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
-      "x_mm": -3.5,
-      "y_mm": 32.0,
+      "x_mm": -15.5,
+      "y_mm": 37.0,
       "pins": {
         "1": "H_C0_RAW"
       },
@@ -1118,7 +1349,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": -10,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "HALL_5V"
       },
@@ -1131,7 +1362,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": -6,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "GND"
       },
@@ -1144,7 +1375,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": -2,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "MUX_A0"
       },
@@ -1157,7 +1388,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": 2,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "MUX_A1"
       },
@@ -1170,7 +1401,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": 6,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "MUX_A2"
       },
@@ -1183,7 +1414,7 @@
       "kind": "testpoint",
       "mpn": "PCB_PAD_1.2MM",
       "x_mm": 10,
-      "y_mm": 45.0,
+      "y_mm": 47.0,
       "pins": {
         "1": "WING_EN"
       },

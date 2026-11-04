@@ -15,7 +15,8 @@ D-017の凍結変更を要さないためStage 2を実施した。
 | 定義 / JITXクラス | ピッチ | 外形 | Hall / MUX / 100 nF / GH14 / TP |
 | --- | --- | --- | --- |
 | `pitch9` / `Pitch16`, `Pitch17` | 16 / 17 mm | **64×80 mm** | 9 / 3 / 12 / 1 / 15 |
-| `representative21` / `Representative16`, `Representative17` | 16 / 17 mm、可変定義あり | **98×98 mm** | 21 / 3 / 24 / 1 / 15 |
+| `representative21` / `Representative16` | 16 mm | **110×100 mm（100×100不適合）** | 21 / 3 / 24 / 1 / 15 |
+| `representative21` / `Representative17` | 17 mm | **116.5×104.75 mm（100×100不適合）** | 21 / 3 / 24 / 1 / 15 |
 | `load21` / `Load16`, `Load17` | 16 / 17 mm | **98×98 mm** | 21 / 3 / 24 / 1 / 15 |
 
 - 設計の正: [`wing/definition.py`](../hardware/jitx/wing/definition.py)。
@@ -57,29 +58,18 @@ GHの原点は信号ランド列の中心。pin1は+X端、14信号ランドは
 ピン1表示とケーブル回路番号の対応は下流基板化で必須。
 ヘッダ本体20.75×4.25 mm、配置検証用ランド包絡は20.95 mm幅。
 ケーブル/ラッチ用に原点からX±13、Y−7〜+1 mmの平面投影を予約する。
-全6基板でこの予約領域が100 mm以内に入る。これはtop-entryの上方引出しを
+全6構成でこの予約領域が各基板の外形内に入る。代表21キー基板自体は100 mmを超える。これはtop-entryの上方引出しを
 仮定した予約であり、曲げ半径・高さ・ラッチ操作・実ハーネスの機構保証ではない。
 [JST資料](https://www.jst-mfg.com/product/pdf/eng/eGH.pdf)と承認済みnativeモデルを根拠にした。
 
 ## 代表21キー候補とfull-loadの区別
 
-既存[G0B §5](../hardware/rev-m1/g0b-freeze-proposal.md)に最終21キーの座標はない。
-[Issue #117の見通し](issue-117-four-layer-main-and-wing-outlook.md)の6列×3行＋thumb3は
-未採用の推定モデルで、17 mmでは1ピッチセル幅だけで102 mmとなる。
-その配置の採用を仮定せず、指示書で許可された**新しい候補**を提示する。
-
-代表候補は5列×4行20キー＋中央下のthumb1キー、stagger/回転なし。
-X=`−2p,−p,0,p,2p`、Y=`2p,p,0,−p`、thumb=`(0,−2p)`。
-ピッチセル外接は80×80 / 85×85 mmで、98×98 mm内に余白を持つ。
-GHは`(−29,−36)`、MUXは`(18,−35),(29,−35),(40,−35)`で、
-thumbの左右に空けた領域を使う。4穴とコネクタ予約領域を含む。
-実キーキャップ外形・操作性・磁石軸/センサ感磁点・治具干渉は未検証。
-**PiANTORの最終18＋3親指配列や左右の完成Wingとしての採用を意味しない。**
-100×100条件を満たす電気/寸法評価候補の採否はPOに求める。
-
-代表候補のrow-major順（thumbは最後）にA/B/Cへラウンドロビンで配り、
-各MUXに7入力を割り当てる。全21点にスイッチを置く候補なので、
-G0Bの磁気3×3比較に勝手に代用しない。
+**2026-11-04 フォローアップで旧5×4＋thumb1（98×98 mm）を superseded とし、
+Piantor の片側3行×6列＋親指3キーに置き換えた。旧候補の生成物は現行ファイルで置換した。**
+現行の座標出所・寸法実測・不適合は末尾のフォローアップ節を参照。
+代表配置のソース順（3行row-major、最後にthumb3）をA/B/Cへラウンドロビンで配り、
+各MUXに7入力を割り当てる。21 rawのネット・BOM・凍結GH14接続は変更しない。
+G0Bの磁気3×3比較への代用はしない。
 
 別の`load21`は`pitch9`と**同一の3×3座標/列MUX割当**に、各列Xで
 Y=`−15,−20,−25,−30` mmのHall-only負荷4個を加える（計12）。
@@ -138,7 +128,7 @@ uv run jitx design build he_piantor_42_jitx.evaluation_wing.Pitch16 \
   he_piantor_42_jitx.evaluation_wing.Load17 --dry --no-dependency-check
 ```
 
-結果: 6バリアントのdry build成功、3テストメソッド（6構成を反復）成功。
+初回候補の検証結果（今回の差分の検証は末尾）: 6バリアントのdry build成功、3テストメソッド（6構成を反復）成功。
 実際のJITX部品/ポートで凍結ピン割当、給電、MUX→Hall、未使用入力NCを確認。
 実ランド形状を座標変換して、他部品のパッド重複0、銅箔の外形から0.5 mm内側への
 包含、全取付穴φ5予約との非干渉を確認した。JSON/CSV/SVGの再生成一致も確認。
@@ -157,11 +147,100 @@ dry buildは回路/配置の変換確認までで、Gerber/CAM/製造出力を�
 ## PO判断と次の作業
 
 1. Stage 1の現行責務維持案をレビュー。Main寄せを優先する場合はD-017再審議を別途行う。
-2. 代表21キーの5×4＋1を**評価候補**として使うか判断。最終18＋3配列が必要なら
-   100 mm条件と両立する別のstagger/thumb配置を指定してから設計を更新する。
+2. Piantor代表21キーは両ピッチで100×100 mmに不適合。Piantor配置を維持して寸法要件を
+   見直すか、配置側の変更を明示的に許可するかをPOが判断する。勝手な圧縮は行わない。
 3. 確定ピッチは後の実測/G2判断。今回16/17両方を提供し、製品ピッチは選定していない。
 4. 後続でNPTH/keepoutをnative PCBに反映し、機構/治具・footprint/手はんだレビュー、
    2層配線/独立DRC、その後にfull-load・ハーネス・磁気/アナログ実測を行う。
 
-Main設計と既存決定文書は変更していない。`hardware/layout/**`は消費していない。
+Main設計と既存決定文書は変更していない。初回候補では`hardware/layout/**`を消費していなかった。
+今回の明示的なPiantor基礎データ指定に基づく取り込みの範囲は以下に記録する。
 Draft PRまで。マージ・発注・製造承認は本Issueでは行わない。
+
+
+## フォローアップ — Piantor 配置への置換（2026-11-04）
+
+### 座標の出所と変換
+
+基礎は既存の[幾何記録](layout-geometry.md)、[D-001](decisions.md#d-001---one-piece-geometry)、
+および `hardware/layout/layout_source.json` に記録された具体的なキー中心座標。
+取り込み元はコミット `6a835825a686ef8cba63d8e52bbc9f0700e1ecde`、
+ファイルblob `3c62900c0d60a69a761b05930ec06844373c169d`。
+左側21点を一切補間せず [`piantor_left21.json`](../hardware/jitx/wing/piantor_left21.json) に転記した。
+上流はQMK `d9f6dd215f2c4d295c6ad85b1f602125c2d81db1` の
+`keyboards/cantor/keyboard.json`、`LAYOUT_split_3x6_3`。
+元記録はPiantor相当パス `keyboards/beekeeb/piantor/keyboard.json` とblobも保持している。
+今回はrepo内の記録を使用し、上流の最新版やPCBとの再照合は行っていない。
+QMK由来の21座標はGPL-2.0-onlyのまま出所とライセンスを同梱し、project-ownedとして再許諾しない。
+
+D-015および初回指示には `hardware/layout/**` 消費禁止があるが、今回のPO指示は
+repo既存のPiantorキー中心を正とすることを明示しているため、**この評価用代表Wingに限り**
+既存座標を出所付きで取り込んだ。決定文書は変更せず、製品採用のsource approvalは未解決のまま。
+生成処理はWing内のスナップショットのみを読み、`hardware/layout/**`への実行時依存はない。
+
+ソースの列スタッガは各行 `(0.25,0.25,0.125,0,0.125,0.25)` uに行番号を加算。
+親指3点は `(3.5,3.25), (4.5,3.5), (5.5,3.75)` u。
+ピッチをpとして `X=(source_x−2.75)p`, `Y=(1.875−source_y)p+9` mm。
+これは単位変換・Y軸の反転・平行移動のみで、列間隔も親指クラスタも圧縮していない。
+D-001の±30°は一体型左右フィールド間の姿勢であり、片側Wingでは適用しない。
+既存幾何記録も列スタッガと一体型回転・gapを独立パラメータとしている。
+全センサの `source_key_id`, `source_x_u`, `source_y_u` をdefinitionへ記録した。
+
+### 外形の実測と100×100 mm要件
+
+生成した `definition.json` の外形4頂点の `max−min` を測定した設計値（実物測定ではない）。
+採用外形は1ピッチセルの外接に各辺3 mm、下辺側に電装用18 mmを加えた矩形。
+セルは既存と同じ設計仮定で、実スイッチ/キーキャップCADの保証寸法ではない。
+この外形選択は評価入力であり、最小可能外形や製造承認を主張しない。
+
+| ピッチ | キー中心の外接 | 1ピッチセル外接 | 生成外形の実測 W×H | 100×100適合 | W/H超過 |
+| --- | --- | --- | --- | --- | --- |
+| 16.0 mm | 88×60 mm | 104×76 mm | **110×100 mm** | **満たさない** | **10 / 0 mm** |
+| 17.0 mm | 93.5×63.75 mm | 110.5×80.75 mm | **116.5×104.75 mm** | **満たさない** | **16.5 / 4.75 mm** |
+
+100 mmに収めるための圧縮・スタッガ変更・親指位置変更はしていない。
+1ピッチセルを保持する前提では電装帯や基板余白を削るだけでも幅が超過する。
+PO判断は、(a) Piantor配置を維持して100×100要件を見直す、または
+(b)100×100を維持するため配置/セル/機構前提の変更を別途明示承認する、のいずれか。
+製品ピッチの選定も別判断であり、16 mmだけを合格扱いしない。
+`WingFabRules`の100 mm制限は維持しているため代表21キーはその制約にも不適合。
+この差分を製造可能・配線済み・fab検証合格と解釈しない。
+
+MUXは下端から10 mmのサービス帯にX=`0,14,28` mmで配置、GHは左端から18 mm・下端から10 mm。
+制御TPは上端から3 mm。取付穴は既存と同じ端から3 mm/φ2.2/φ5予約で外形に追従する。
+下流ではNPTH/keepout反映と機構・手はんだ・2層配線評価が必要。
+`load21`は代表形状から独立した3×3＋12 Hall-onlyの電気負荷用なので、定義と生成物を維持した。
+`pitch9`の定義/全生成物、Stage 1文書、Main設計、既存決定文書は変更していない。
+
+### 今回の検証
+
+固定lockのJITX 4.4.3 / jitxlib-standard 4.4.0で4テストメソッド成功（17.4秒）。
+6構成のnative接続・NC・部品数に加え、Piantor全21点の全ペアで相対X/Yを確認。
+両ピッチで実ランドの部品間重複0、外形から0.5 mm内側への包含、取付穴φ5予約との非干渉、
+ケーブルアクセス領域の包含を確認した。代表21キーの寸法不適合はテストでも明示的に確認し、
+従来の「全構成100 mm以内」という判定を残していない。
+
+`Representative16` / `Representative17`のnative JITX dry build成功。
+dry buildは100 mm fab制約を満たす証拠ではない。runtime build、配線、DRC、製造出力は未検証。
+`python3 -m wing.export --check`で全6構成の再生成一致、Ruff check/formatと
+`git diff --check`成功。代表両ピッチのplacement/nets/bom/definition/svgは再生成済みで、
+電気接続・MPN・リファレンスを保持したためnets.csvとbom.csvは既存とバイト一致する。
+
+取り込んだ21点は元コミットの左側キー配列と完全一致することを別途照合した。
+`git diff --exit-code`で `pitch9` / `load21` の全生成物、Stage 1文書、
+Main設計、`hardware/rev-m1`、`hardware/layout`、既存決定文書の差分なしを確認。
+外形表は生成JSONの頂点から直接計算し、宣言済みwidth/height値のみを転載したものではない。
+再測定例（`hardware/jitx`で実行）:
+
+```sh
+python3 - <<'PYMEASURE'
+import json
+from pathlib import Path
+for pitch in (16, 17):
+    d = json.loads(Path(f"wing/generated/representative21-{pitch}mm/definition.json").read_text())
+    xs, ys = zip(*d["outline_mm"])
+    w, h = max(xs)-min(xs), max(ys)-min(ys)
+    print(pitch, w, h, "fits:", w <= 100 and h <= 100,
+          "excess:", max(0, w-100), max(0, h-100))
+PYMEASURE
+```

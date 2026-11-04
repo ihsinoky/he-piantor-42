@@ -14,8 +14,12 @@ NCs and each sensor's MUX/address/role. `nets.csv` includes mechanical `MP` NCs.
 `placement.svg` is a review drawing with assumed pitch cells, not switch CAD.
 
 `pitch9` is the isolated 3x3 pitch experiment. `load21` keeps the same 3x3 field
-and adds 12 Hall-only electrical loads. `representative21` is a new 5x4+1 compact
-21-switch geometry proposal. These roles must not be silently interchanged.
+and adds 12 Hall-only electrical loads. `representative21` uses the attributed Piantor left-half 3x6+3 snapshot in
+`piantor_left21.json`, preserving column stagger and the three thumb centers.
+The former 5x4+1 candidate is superseded. The current 16/17 mm boards measure
+110x100 / 116.5x104.75 mm; both fail the 100x100 requirement and need a PO decision.
+The native 100 mm fabrication constraints remain in place; these oversized inputs
+are for review, pending that decision. These roles must not be silently interchanged.
 
 Native classes live in `he_piantor_42_jitx.evaluation_wing`: `Pitch16`, `Pitch17`,
 `Representative16`, `Representative17`, `Load16`, `Load17`. For another validated

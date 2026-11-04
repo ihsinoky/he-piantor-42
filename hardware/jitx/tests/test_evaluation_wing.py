@@ -1,5 +1,6 @@
 """Frozen interface, native connectivity, geometry, and reproducible Wing inputs."""
 
+import json
 import math
 from collections import Counter
 from pathlib import Path
@@ -85,8 +86,12 @@ class EvaluationWingTest(TestCase):
                         spec["width_mm"] / 2,
                         spec["height_mm"] / 2,
                     )
-                    self.assertLessEqual(spec["width_mm"], 100)
-                    self.assertLessEqual(spec["height_mm"], 100)
+                    if kind == "representative21":
+                        self.assertFalse(spec["size_requirement"]["fits"])
+                        self.assertGreater(spec["width_mm"], 100)
+                    else:
+                        self.assertLessEqual(spec["width_mm"], 100)
+                        self.assertLessEqual(spec["height_mm"], 100)
                     self.assertTrue(board.covers(box(*spec["connector_cable_access_mm"])))
                     pads = []
                     for component_trace, part in visit(c, Component):
@@ -114,12 +119,43 @@ class EvaluationWingTest(TestCase):
                                     f"{kind}/{pitch}: {left} overlaps {right}",
                                 )
 
+    def test_piantor_source_and_relative_geometry(self):
+        source = json.loads((ROOT / "wing/piantor_left21.json").read_text())
+        keys = source["keys"]
+        self.assertEqual(len(keys), 21)
+        self.assertEqual(sum("_R" in k["id"] for k in keys), 18)
+        self.assertEqual(sum("_T" in k["id"] for k in keys), 3)
+        for pitch in (16.0, 17.0):
+            spec = define_wing(pitch, "representative21")
+            sites = {s["source_key_id"]: s for s in spec["sensor_sites"]}
+            # Every pair must preserve the source relative shape, including thumbs.
+            for left in keys:
+                for right in keys:
+                    self.assertAlmostEqual(
+                        sites[left["id"]]["x_mm"] - sites[right["id"]]["x_mm"],
+                        (left["x"] - right["x"]) * pitch,
+                    )
+                    self.assertAlmostEqual(
+                        sites[left["id"]]["y_mm"] - sites[right["id"]]["y_mm"],
+                        -(left["y"] - right["y"]) * pitch,
+                    )
+            xs, ys = zip(*spec["outline_mm"], strict=True)
+            self.assertEqual(max(xs) - min(xs), spec["width_mm"])
+            self.assertEqual(max(ys) - min(ys), spec["height_mm"])
+            board = box(min(xs), min(ys), max(xs), max(ys))
+            for site in sites.values():
+                x, y = site["x_mm"], site["y_mm"]
+                self.assertTrue(
+                    board.covers(box(x - pitch / 2, y - pitch / 2, x + pitch / 2, y + pitch / 2))
+                )
+
     def test_coverage_geometry_and_export_reproducibility(self):
         for kind in ("pitch9", "representative21", "load21"):
             a, b = [define_wing(p, kind) for p in (16.0, 17.0)]
             self.assertEqual(a["nets"], b["nets"])
             self.assertEqual(a["intentional_nc"], b["intentional_nc"])
-            self.assertEqual(a["outline_mm"], b["outline_mm"])
+            if kind != "representative21":
+                self.assertEqual(a["outline_mm"], b["outline_mm"])
             self.assertEqual(
                 Counter(s["mux"] for s in a["sensor_sites"]),
                 {f"U_MUX_{g}": 3 if kind == "pitch9" else 7 for g in "ABC"},

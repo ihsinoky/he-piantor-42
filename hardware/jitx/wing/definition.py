@@ -1,11 +1,13 @@
 """Backend-independent source for Wing placement/net exports and JITX assembly.
 
-mm, board center origin, +Y up, top-side, CCW degrees. No legacy layout input.
-Representative geometry is a new evaluation proposal, not production ergonomics.
+mm, board center origin, +Y up, top-side, CCW degrees.
+Representative geometry uses the attributed Piantor evaluation snapshot.
 """
 
+import json
 import math
 from dataclasses import asdict, dataclass
+from pathlib import Path
 
 INTERFACE = (
     "HALL_5V",
@@ -72,14 +74,20 @@ def define_wing(pitch: float, kind: str = "pitch9") -> dict:
     sensors = []
     groups: dict[str, list[tuple[float, float, str]]] = {g: [] for g in "ABC"}
     if kind == "representative21":
-        # New compact evaluation proposal: 5 columns x 4 rows plus center thumb.
-        sites = [(c * pitch, (2 - r) * pitch, "key") for r in range(4) for c in range(-2, 3)]
-        sites.append((0, -2 * pitch, "key"))
-        for i, site in enumerate(sites):
-            groups["ABC"[i % 3]].append(site)
-        width, height = 98.0, 98.0
-        mux_sites = [(18.0, -35.0), (29.0, -35.0), (40.0, -35.0)]
-        connector = (-29.0, -36.0)
+        # Exact repository Piantor tuples; only pitch, Y reflection and translation.
+        layout = json.loads(Path(__file__).with_name("piantor_left21.json").read_text())
+        keys = layout["keys"]
+        min_x, max_x = min(k["x"] for k in keys), max(k["x"] for k in keys)
+        min_y, max_y = min(k["y"] for k in keys), max(k["y"] for k in keys)
+        # One-pitch key cells, 3 mm border and 18 mm service strip below the cells.
+        width = (max_x - min_x + 1) * pitch + 6
+        height = (max_y - min_y + 1) * pitch + 6 + 18
+        for i, key in enumerate(keys):
+            x = (key["x"] - (min_x + max_x) / 2) * pitch
+            y = ((min_y + max_y) / 2 - key["y"]) * pitch + 9
+            groups["ABC"[i % 3]].append((x, y, "key"))
+        mux_sites = [(x, -height / 2 + 10) for x in (0.0, 14.0, 28.0)]
+        connector = (-width / 2 + 18, -height / 2 + 10)
     else:
         # Column A/B/C, row/address 0/1/2, identical pitch-only and load coverage.
         for c, group in enumerate("ABC"):
@@ -157,6 +165,8 @@ def define_wing(pitch: float, kind: str = "pitch9") -> dict:
         probe(f"TP_H_{suffix}_RAW", f"H_{channel}_RAW", sensor["x_mm"] - 3.5, sensor["y_mm"])
     # Rail/control access row; no extra connector signals or remote pull-downs.
     ty = 37.0 if kind == "pitch9" else 45.0
+    if kind == "representative21":
+        ty = height / 2 - 3
     for i, net in enumerate(("HALL_5V", "GND", "MUX_A0", "MUX_A1", "MUX_A2", "WING_EN")):
         label = {"HALL_5V": "H5V", "GND": "GND", "WING_EN": "EN"}.get(net, net[-2:])
         probe(f"TP_W_{label}", net, -10 + 4 * i, ty)
@@ -170,7 +180,25 @@ def define_wing(pitch: float, kind: str = "pitch9") -> dict:
                 ncs.append(endpoint)
             else:
                 nets.setdefault(net, []).append(endpoint)
+    geometry = {}
+    if kind == "representative21":
+        for i, key in enumerate(keys):
+            sensor = next(s for s in sensors if s["reference"] == f"U_H{'ABC'[i % 3]}{i // 3}")
+            sensor.update(source_key_id=key["id"], source_x_u=key["x"], source_y_u=key["y"])
+        geometry = {
+            "layout_source": layout,
+            "layout_transform": "x=(source_x-2.75)*pitch; y=(1.875-source_y)*pitch+9; no rotation",
+            "key_cell_bounds_mm": [-width / 2 + 3, -height / 2 + 21, width / 2 - 3, height / 2 - 3],
+            "outline_policy": "one-pitch cells; 3 mm border; 18 mm bottom service strip; no compression",
+            "size_requirement": {
+                "limit_mm": [100, 100],
+                "fits": width <= 100 and height <= 100,
+                "excess_mm": [max(0, width - 100), max(0, height - 100)],
+                "decision": "PO: revise 100x100 requirement or explicitly revise Piantor layout; do not compress",
+            },
+        }
     return {
+        **geometry,
         "schema_version": 1,
         "name": f"{kind}-{pitch:g}mm",
         "kind": kind,
