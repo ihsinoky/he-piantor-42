@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-109-autoroute-falsification/evidence/run-checks.py", line 25, in <module>
+    run(stage+'-independent',[ROOT/'.issue105-runtime/geometry/bin/python','-B',check,*args])
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-109-autoroute-falsification/evidence/run-checks.py", line 16, in run
+    assert r.returncode==0,(name,(work/'stderr').read_text())
+           ^^^^^^^^^^^^^^^
+AssertionError: ('smoke-independent', 'Traceback (most recent call last):\n  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-87-native-main-routing/resume-01/check-import.py", line 27, in <module>\n    assert source.difference(actual).length<=m.C[\'tolerance_mm\'],(\'original local copper changed\',oldtrack)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (\'original local copper changed\', {\'kind\': \'track\', \'start\': [10.0, 10.0], \'end\': [10.0, 12.0], \'width\': 0.2, \'net\': \'N\', \'layer\': 0, \'uuid\': \'6f378793-56c6-4d3a-b3b4-e29acf194c31\'})\n')
