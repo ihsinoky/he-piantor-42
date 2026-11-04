@@ -1,0 +1,97 @@
+{
+  "utc": "2026-11-04T09:19:21.054687+00:00",
+  "pass_audit": true,
+  "qualification_pass": false,
+  "base": "e87f8bc5d4855201276ce53d9f54d19bea9536e3",
+  "base_files_checked": 7349,
+  "base_mismatches": [],
+  "allowed_new_paths": [
+    "docs/issue-117-four-layer-main-and-wing-outlook.md",
+    "hardware/kicad/qualification/issue-117-four-layer-main/"
+  ],
+  "native_and_DSN_readbacks_verified": true,
+  "stage0_gate_closed": true,
+  "router_execution_count": 0,
+  "independent_metrics_all_null": true,
+  "wing_analysis_only": true,
+  "wing_allowlist_hashes_unchanged": true,
+  "json_files_valid": 49,
+  "python_AST_and_authored_whitespace_pass": true,
+  "authored_files": [
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/common.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/preflight.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/prepare-four-layer.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/check-four-layer-dsn.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/read-fab.ts",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/read-effective.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/wing-outlook.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/finish-preparation.py",
+    "hardware/kicad/qualification/issue-117-four-layer-main/evidence/verify.py",
+    "docs/issue-117-four-layer-main-and-wing-outlook.md",
+    "hardware/kicad/qualification/issue-117-four-layer-main/README.md"
+  ],
+  "processes": [
+    {
+      "name": "api-probe",
+      "exit_code": 0,
+      "elapsed_seconds": 1.1870768199987651
+    },
+    {
+      "name": "dsn-equivalence",
+      "exit_code": 0,
+      "elapsed_seconds": 0.26536478900015936
+    },
+    {
+      "name": "main-fab-parse-only",
+      "exit_code": 0,
+      "elapsed_seconds": 0.3814262480009347
+    },
+    {
+      "name": "main-krt-config-default",
+      "exit_code": 0,
+      "elapsed_seconds": 5.207044251999832
+    },
+    {
+      "name": "main-krt-config-explicit",
+      "exit_code": 0,
+      "elapsed_seconds": 4.041627276001236
+    },
+    {
+      "name": "main-native-readback",
+      "exit_code": 0,
+      "elapsed_seconds": 1.428301840000131
+    },
+    {
+      "name": "prepare-four-layer",
+      "exit_code": 1,
+      "elapsed_seconds": 2.022398939001505
+    },
+    {
+      "name": "prepare-four-layer-02",
+      "exit_code": 0,
+      "elapsed_seconds": 2.80338244000086
+    },
+    {
+      "name": "smoke-fab-parse-only",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06545316399933654
+    },
+    {
+      "name": "smoke-krt-config-default",
+      "exit_code": 0,
+      "elapsed_seconds": 3.453523980000682
+    },
+    {
+      "name": "smoke-krt-config-explicit",
+      "exit_code": 0,
+      "elapsed_seconds": 3.389228476000426
+    },
+    {
+      "name": "smoke-native-readback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6698115450017212
+    }
+  ],
+  "known_preparation_failure": "Initial KiCad save normalized paste rectangle endpoints. Exact identity gate rejected it; final preparation transplants only the filled zone into the text-local layer/stackup addition.",
+  "tools_not_bundled": true
+}

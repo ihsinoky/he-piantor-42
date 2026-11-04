@@ -1,0 +1,87 @@
+{
+  "utc": "2026-11-04T09:11:12.947750+00:00",
+  "pass_": true,
+  "baseline": "hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inputs/smoke/corrected.dsn",
+  "baseline_sha256": "7214a0299ce19fae8163fa82a7d844e71c5bbf43b077392cfff7c7b5a9d1f3e9",
+  "new_sha256": "5f2940c92163da4c7a30fe48c0068c19c76341432ff0f394509269973706265e",
+  "roles": [
+    {
+      "name": "F.Cu",
+      "type": "signal"
+    },
+    {
+      "name": "In1.Cu",
+      "type": "power"
+    },
+    {
+      "name": "In2.Cu",
+      "type": "signal"
+    },
+    {
+      "name": "B.Cu",
+      "type": "signal"
+    }
+  ],
+  "planes": [],
+  "inner_PTH_and_NPTH_extensions": [
+    [
+      "shape",
+      [
+        "circle",
+        "In1.Cu",
+        1000
+      ]
+    ],
+    [
+      "shape",
+      [
+        "circle",
+        "In2.Cu",
+        1000
+      ]
+    ],
+    [
+      "shape",
+      [
+        "circle",
+        "In1.Cu",
+        600
+      ]
+    ],
+    [
+      "shape",
+      [
+        "circle",
+        "In2.Cu",
+        600
+      ]
+    ],
+    [
+      "keepout",
+      "",
+      [
+        "circle",
+        "In1.Cu",
+        1050,
+        16000,
+        -16000
+      ]
+    ],
+    [
+      "keepout",
+      "",
+      [
+        "circle",
+        "In2.Cu",
+        1050,
+        16000,
+        -16000
+      ]
+    ]
+  ],
+  "full_native_net_inventory": [
+    "N"
+  ],
+  "exact_projected_AST_equals_previously_verified_DSN": true,
+  "scope": "Readback equality only; no router execution, no smoke acceptance"
+}
