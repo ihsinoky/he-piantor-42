@@ -1,0 +1,43 @@
+{
+  "command": [
+    "cargo",
+    "install",
+    "--locked",
+    "--path",
+    "crates/topola-cli"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source",
+  "versions": {
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
+    "topola": "topola-cli 0.1.0"
+  },
+  "build_exit": 0,
+  "build_log": "build-final.log",
+  "original_source_modified": false,
+  "upstream_Cargo_lock_present": false,
+  "lock_warning": "No Cargo.lock published; --locked retained exactly; Cargo resolved current dependencies.",
+  "git_dependency": {
+    "url": "https://codeberg.org/topola/petgraph.git",
+    "commit": "1bae625ec5f0373ebe859e027af56dcb11a3ac85",
+    "method": "Official archive/API; exact Git commit reconstructed then seeded Cargo git cache; GIT_CONFIG url rewrite to local identical repository",
+    "reconstruction": "reconstruct-petgraph.py"
+  },
+  "environment": {
+    "CARGO_HOME": "/tmp/issue-107-topola/cargo",
+    "RUSTUP_HOME": "/tmp/issue-107-topola/rustup",
+    "CARGO_TARGET_DIR": "/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/target",
+    "CARGO_NET_GIT_FETCH_WITH_CLI": "true",
+    "GIT_CONFIG_COUNT": "1",
+    "GIT_CONFIG_KEY_0": "url.file:///home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/petgraph-archive/.insteadOf",
+    "GIT_CONFIG_VALUE_0": "https://codeberg.org/topola/petgraph.git"
+  },
+  "binary_sha256": "dc2cee1668023a88d2f14335940115660684a4a9fbdbf6d64b6fb8a61057a2c0",
+  "binary_in_artifacts": false,
+  "setup_retries": [
+    "Rust /tmp download extraction EOF; retried in workspace storage",
+    "Codeberg Git POST stalled; used official commit archives",
+    "First dependency cache fetch rejected shallow roots; seeded exact commit and shallow metadata, then succeeded"
+  ],
+  "recorded_utc": "2026-11-04T01:12:32.140843+00:00"
+}

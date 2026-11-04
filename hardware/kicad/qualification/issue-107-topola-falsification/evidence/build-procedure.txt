@@ -1,0 +1,21 @@
+Source: https://codeberg.org/topola/topola/archive/666e06cfd7ba1f1e5daf700288acb9e0a4f84ceb.tar.gz
+Extract unmodified archive to .issue107-runtime/archive-source.
+Dependency: https://codeberg.org/topola/petgraph/archive/1bae625ec5f0373ebe859e027af56dcb11a3ac85.tar.gz
+Extract dependency into .issue107-runtime/petgraph-archive, run reconstruct-petgraph.py on that directory.
+The reconstruction script asserts exact original commit SHA.
+Seed cargo/git/db/petgraph-86a8fed1ddefd1f0/objects from petgraph-archive/.git/objects,
+copy its shallow file, and set refs/remotes/origin/HEAD to the verified commit.
+Use the exact environment and cwd recorded in installation.json:
+CARGO_HOME=/tmp/issue-107-topola/cargo
+RUSTUP_HOME=/tmp/issue-107-topola/rustup
+CARGO_TARGET_DIR=<workspace>/.issue107-runtime/target
+CARGO_NET_GIT_FETCH_WITH_CLI=true
+GIT_CONFIG_COUNT=1
+GIT_CONFIG_KEY_0=url.file://<workspace>/.issue107-runtime/petgraph-archive/.insteadOf
+GIT_CONFIG_VALUE_0=https://codeberg.org/topola/petgraph.git
+PATH=/tmp/issue-107-topola/cargo/bin:<existing PATH>
+cd <workspace>/.issue107-runtime/archive-source
+cargo install --locked --path crates/topola-cli
+
+Source has no Cargo.lock; Cargo warns and resolves dependencies. Do not claim a locked dependency graph.
+Final compile log: build-final.log. No patches, command files or routing option changes.

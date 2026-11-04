@@ -1,0 +1,22 @@
+    Blocking waiting for file lock on package cache
+warning: no Cargo.lock file published in topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)
+  Installing topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)
+    Updating crates.io index
+    Updating git repository `https://codeberg.org/topola/petgraph.git`
+warning: rejected refs/remotes/origin/HEAD because shallow roots are not allowed to be updated
+warning: rejected refs/remotes/origin/HEAD because shallow roots are not allowed to be updated
+error: failed to compile `topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)`, intermediate artifacts can be found at `/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/target`.
+To reuse those artifacts with a future compilation, set the environment variable `CARGO_BUILD_BUILD_DIR` to that path.
+
+Caused by:
+  failed to get `petgraph` as a dependency of package `topola v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source)`
+      ... which satisfies path dependency `topola` of package `topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)`
+
+Caused by:
+  failed to load source for dependency `petgraph`
+
+Caused by:
+  unable to update https://codeberg.org/topola/petgraph.git
+
+Caused by:
+  reference 'refs/remotes/origin/HEAD' not found; class=Reference (4); code=NotFound (-3)

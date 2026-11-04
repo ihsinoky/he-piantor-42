@@ -1,0 +1,30 @@
+warning: no Cargo.lock file published in topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)
+  Installing topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)
+    Updating crates.io index
+    Updating git repository `https://codeberg.org/topola/petgraph.git`
+warning: spurious network error (3 tries remaining): [28] Timeout was reached (Operation too slow. Less than 10 bytes/sec transferred the last 30 seconds); class=Net (12)
+warning: spurious network error (2 tries remaining): [28] Timeout was reached (Operation too slow. Less than 10 bytes/sec transferred the last 30 seconds); class=Net (12)
+warning: spurious network error (1 try remaining): [28] Timeout was reached (Operation too slow. Less than 10 bytes/sec transferred the last 30 seconds); class=Net (12)
+error: failed to compile `topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)`, intermediate artifacts can be found at `/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/.issue107-runtime/target`.
+To reuse those artifacts with a future compilation, set the environment variable `CARGO_BUILD_BUILD_DIR` to that path.
+
+Caused by:
+  failed to get `petgraph` as a dependency of package `topola v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source)`
+      ... which satisfies path dependency `topola` of package `topola-cli v0.1.0 (/home/hatch/workspace/projects/he-piantor-42/.issue107-runtime/archive-source/crates/topola-cli)`
+
+Caused by:
+  failed to load source for dependency `petgraph`
+
+Caused by:
+  unable to update https://codeberg.org/topola/petgraph.git
+
+Caused by:
+  failed to clone into: /tmp/issue-107-topola/cargo/git/db/petgraph-86a8fed1ddefd1f0
+
+Caused by:
+  network failure seems to have happened
+  if a proxy or similar is necessary `net.git-fetch-with-cli` may help here
+  https://doc.rust-lang.org/cargo/reference/config.html#netgit-fetch-with-cli
+
+Caused by:
+  [28] Timeout was reached (Operation too slow. Less than 10 bytes/sec transferred the last 30 seconds); class=Net (12)

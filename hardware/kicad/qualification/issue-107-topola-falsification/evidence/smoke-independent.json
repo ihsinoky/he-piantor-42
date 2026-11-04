@@ -1,0 +1,46 @@
+{
+  "status": "STAGE_0_FAIL_UNCONNECTED",
+  "unrouted_count": 1,
+  "unrouted_count_method": "Number of unconnected_items in KiCad 9.0.9 DRC JSON after importing the saved SES into a copy of the original board. Not Topola self-report, endpoint deficit or disconnected-net count.",
+  "four_metrics": {
+    "required_unconnected": null,
+    "wrong_net_actual_copper_contacts": null,
+    "targeted_material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "null_reason": "Unrouted remains; all four acceptance metrics null per Issue #107 instructions.",
+  "diagnostic_only": {
+    "kicad_unconnected_items": 1,
+    "kicad_violations": 0,
+    "graph": {
+      "shorts": [],
+      "groups": {
+        "0": [
+          "U2.1"
+        ],
+        "2": [
+          "U1.1",
+          "U1.1",
+          "copper-0"
+        ],
+        "3": [
+          "U3.1"
+        ]
+      },
+      "disconnected": {
+        "N": 2
+      }
+    },
+    "nonroute_semantics_identical": true,
+    "snapshot_nonroute_identical": true,
+    "original_tracks": 1,
+    "returned_tracks": 1,
+    "returned_copper_equals_original": true
+  },
+  "independent_acceptance_oracle": {
+    "script": "issue-87-native-main-routing/resume-01/check-import.py",
+    "exit_code": 1,
+    "failure": "AssertionError: KiCad unconnected remains"
+  },
+  "measured_utc": "2026-11-04T01:13:19.146682+00:00"
+}

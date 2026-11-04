@@ -1,0 +1,38 @@
+{
+  "baselines": [
+    {
+      "router": "Freerouting v2.5.0 Run 2",
+      "issue": 95,
+      "stage": "Main",
+      "unrouted": 38,
+      "seconds": 159.863043
+    },
+    {
+      "router": "fastroute",
+      "issue": 99,
+      "stage": "Main",
+      "unrouted": 37,
+      "seconds": 28.184144
+    },
+    {
+      "router": "fab_router",
+      "issue": 103,
+      "stage": "Main",
+      "unrouted": 16,
+      "seconds": 298.698
+    }
+  ],
+  "topola": {
+    "smoke_unrouted": 1,
+    "smoke_seconds": 0.042431747,
+    "main_unrouted": null,
+    "main_seconds": null
+  },
+  "sources": {
+    "hardware/kicad/qualification/issue-95-freerouting-v250-run2/evidence/summary.json": "6e39c90febca19fd211fb864afaeb0a3caf7fb2840c8a035ef71481dd646e5de",
+    "hardware/kicad/qualification/issue-99-fastroute-width-floor/evidence/summary.json": "60f76b73a6e90c6c90995bd8c35cf2ab31dcff30e57514de8b1e0988bf6b6e6f",
+    "hardware/kicad/qualification/issue-103-fab-router-falsification/evidence/assessment.json": "45869a1e0ebf345c694e2a814715fc67d7a87decf2c2d489d522fc60fb2fc111",
+    "hardware/kicad/qualification/issue-103-fab-router-falsification/evidence/processes/main/record.json": "4848f4395dfa6b395b9fd67e1bac827521374676a2bb0dc1ad2db6f7af077c00"
+  },
+  "scope": "Different stage sizes and count sources; Topola smoke must not be ranked against Main"
+}
