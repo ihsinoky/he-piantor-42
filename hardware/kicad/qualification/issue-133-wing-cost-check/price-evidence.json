@@ -1,0 +1,132 @@
+{
+  "currency": "USD",
+  "method": "Anonymous calculation-only POST to cart.jlcpcb.com calculationGoodsCostsNew via curl (no login/upload/cart/order). Request from the site's own frontend serializer with default service options. See run-calculation-quotes.py.",
+  "quote_conditions": {
+    "material": "FR4 Standard TG135-140",
+    "layers": 2,
+    "thickness_mm": 1.2,
+    "outer_copper_oz": 1,
+    "soldermask": "Green",
+    "silkscreen": "White",
+    "surface_finish": "HASL(with lead)",
+    "min_via": "default 0.3mm hole/(0.4/0.45mm) via dia option",
+    "quantity_per_design": 5,
+    "different_designs": 1,
+    "delivery": "2 days (default, $0 surcharge)",
+    "pcba": false,
+    "stencil": false,
+    "note": "Finish/colour match what #124 would use by default is NOT verifiable: #124's $8 PCB amount was PMO-supplied with no recorded finish/colour/copper."
+  },
+  "boards": [
+    {
+      "board": "representative21-16mm",
+      "length_mm": 110,
+      "width_mm": 100,
+      "quantity": 5,
+      "quote_0_10mm": {
+        "record_id": "16mm-wing-0.10mm-design",
+        "retrieved_utc": "2026-11-04T23:13:11.317005+00:00",
+        "response_date": "Wed, 04 Nov 2026 23:13:13 GMT",
+        "http_status": 200,
+        "response_sha256": "0eafb7f02186b59f4b8a16bdc6d923c8bd664b1c3a70eb8e38dda11ccf3c7763",
+        "engineering_fee_usd": 4.0,
+        "board_fee_usd": 5.3,
+        "pcb_total_usd": 9.3,
+        "other_fees_usd": 0.0,
+        "pcb_weight_kg": 0.14
+      },
+      "quote_0_20mm": {
+        "record_id": "16mm-comparison-0.20mm-design",
+        "retrieved_utc": "2026-11-04T23:13:12.832467+00:00",
+        "response_date": "Wed, 04 Nov 2026 23:13:15 GMT",
+        "http_status": 200,
+        "response_sha256": "0c7979ad2a67ea8c42daa355766ae88bb9e94e8358ae3519fb9c20a749f7be08",
+        "engineering_fee_usd": 4.0,
+        "board_fee_usd": 5.3,
+        "pcb_total_usd": 9.3,
+        "other_fees_usd": 0.0,
+        "pcb_weight_kg": 0.14
+      },
+      "repeat_quote": {
+        "record_id": "16mm-repeat-wing-0.10mm-design",
+        "retrieved_utc": "2026-11-04T23:13:16.447770+00:00",
+        "response_date": "Wed, 04 Nov 2026 23:13:18 GMT",
+        "http_status": 200,
+        "response_sha256": "a93701fcb41e0ea5b536c99b95b5e94576ceb26b6d6361249d93ff73db6c3dec",
+        "engineering_fee_usd": 4.0,
+        "board_fee_usd": 5.3,
+        "pcb_total_usd": 9.3,
+        "other_fees_usd": 0.0,
+        "pcb_weight_kg": 0.14
+      },
+      "trace_width_delta_usd": 0.0,
+      "note": "Calculator has no trace-width input; the 0.10 and 0.20 requests are byte-identical (same request_sha256), so equality is structural, not a measured response to a different width. Supported by published capability + surcharge rules in the report."
+    },
+    {
+      "board": "representative21-17mm",
+      "length_mm": 116.5,
+      "width_mm": 104.75,
+      "quantity": 5,
+      "quote_0_10mm": {
+        "record_id": "17mm-wing-0.10mm-design",
+        "retrieved_utc": "2026-11-04T23:13:14.331631+00:00",
+        "response_date": "Wed, 04 Nov 2026 23:13:16 GMT",
+        "http_status": 200,
+        "response_sha256": "dc3d68331489d87e9ba89ca74b14f8977064c46ccd3d935efaf4349a5ec79655",
+        "engineering_fee_usd": 4.0,
+        "board_fee_usd": 5.9,
+        "pcb_total_usd": 9.9,
+        "other_fees_usd": 0.0,
+        "pcb_weight_kg": 0.16
+      },
+      "quote_0_20mm": {
+        "record_id": "17mm-comparison-0.20mm-design",
+        "retrieved_utc": "2026-11-04T23:13:15.333120+00:00",
+        "response_date": "Wed, 04 Nov 2026 23:13:17 GMT",
+        "http_status": 200,
+        "response_sha256": "1443d1ae203999185873328d53f3ba4b79a65fef51d1878d493c97f48a1f407a",
+        "engineering_fee_usd": 4.0,
+        "board_fee_usd": 5.9,
+        "pcb_total_usd": 9.9,
+        "other_fees_usd": 0.0,
+        "pcb_weight_kg": 0.16
+      },
+      "repeat_quote": null,
+      "trace_width_delta_usd": 0.0,
+      "note": "Calculator has no trace-width input; the 0.10 and 0.20 requests are byte-identical (same request_sha256), so equality is structural, not a measured response to a different width. Supported by published capability + surcharge rules in the report."
+    }
+  ],
+  "combined": {
+    "boards": 10,
+    "pcb_subtotal_usd": 19.2,
+    "engineering_fee_included_usd": 8.0,
+    "shipping_usd": null,
+    "shipping_status": "not obtained: needs destination/carrier selection; calculator response has orderShippingVoList=null. Reference only: pcbWeight 0.14kg(16mm)/0.16kg(17mm) per 5pcs, excluding packaging.",
+    "tax_usd": null
+  },
+  "keyboard_fee_risk": {
+    "published_rule": "$16.41 + $49.25/m2 (extra-charges page item 16)",
+    "not_included_in_calculator": true,
+    "if_applied_per_board_area_reading_usd": {
+      "m16": 16.95,
+      "m17": 17.01
+    },
+    "status": "unverified; applies at file review to keyboard designs with dense milled slots/cutouts. #131 geometry evidence: external rectangle only, 4 NPTH, no internal Edge.Cuts. Interpretation of the m2 basis unverified."
+  },
+  "baseline_124": {
+    "pcb_lot_usd": 8,
+    "layers": 4,
+    "dimensions_mm": [
+      48,
+      44
+    ],
+    "quantity": 5,
+    "source": "docs/issue-124-main-bom-pcba-estimate.md (PMO supplied)",
+    "comparable": false
+  },
+  "conclusion": {
+    "additional_cost_for_0_10mm_usd_per_lot": 0.0,
+    "additional_cost_two_lots_usd": 0.0,
+    "basis": "Calculator price identical for the 0.10 and 0.20mm cases and published 1/2-layer 1oz minimum is 0.10/0.10mm; trace-surcharge rule applies only to multilayer 3.0-3.5mil."
+  }
+}
