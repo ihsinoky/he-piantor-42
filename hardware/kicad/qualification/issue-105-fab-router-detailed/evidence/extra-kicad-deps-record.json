@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "apt-get",
+    "-o",
+    "APT::Sandbox::User=root",
+    "-o",
+    "Dir::State::lists=/tmp/issue-105-fab-router/apt/lists",
+    "-o",
+    "Dir::Cache=/tmp/issue-105-fab-router/apt/cache",
+    "-o",
+    "Dir::Etc::sourcelist=/tmp/issue-105-fab-router/apt/sources.list",
+    "-o",
+    "Dir::Etc::sourceparts=-",
+    "--download-only",
+    "--no-install-recommends",
+    "-y",
+    "install",
+    "libprotobuf32t64",
+    "libgit2-1.7",
+    "libnng1"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 3.8135594989998935
+}

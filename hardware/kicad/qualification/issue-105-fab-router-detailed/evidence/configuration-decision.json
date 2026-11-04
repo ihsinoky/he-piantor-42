@@ -1,0 +1,19 @@
+{
+  "selected": {
+    "detailedRouter": "tiles"
+  },
+  "kept": {
+    "globalPlan": "off",
+    "fanoutEnabled": false,
+    "timeBudgetMs": 1800000,
+    "seed": 1,
+    "useFileSettings": "unset"
+  },
+  "basis": [
+    "README: detailed router supported, global planning explicitly off-by-default",
+    "spec/api/settings.md: detailedRouter off (fast) / tiles (slow)",
+    "tools/acceptance/run-case.ts:269-276: slow/SRJ detailed profile enables only tiles; no DSN named completion profile",
+    "spec/acceptance/README.md: reference default/fanout/p1/strict/novia profiles do not supply a detailed completion profile"
+  ],
+  "scope": "Adopt documented tiles detailed mode only; do not invoke SRJ adapter or acceptance suite; preserve all non-mode settings."
+}

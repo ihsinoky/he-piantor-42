@@ -1,0 +1,38 @@
+--- issue103/driver.ts
++++ issue105/driver.ts
+@@ -3,17 +3,23 @@
+ import { readFileSync, writeFileSync } from "node:fs";
+ import { resolve, join } from "node:path";
+ import { pathToFileURL } from "node:url";
+-const [source, input, output] = process.argv.slice(2);
++const [source, input, output, mode] = process.argv.slice(2);
+ if (!source || !input || !output) throw new Error("usage: bun driver.ts SOURCE INPUT_DSN OUTPUT_DIR");
+ const api = await import(pathToFileURL(join(resolve(source), "src/api.ts")).href);
+ const save = (name: string, value: unknown) => writeFileSync(join(output, name), JSON.stringify(value, null, 2) + "\n");
+-// Only override the whole-route time budget. All algorithm controls retain API defaults.
+-const settings = { timeBudgetMs: 1800000 };
+-save("requested-settings.json", { settings, timeoutSecondsEquivalent: 1800, otherSettings: "API defaults; useFileSettings unset/false" });
++// #105: documented tiles detailed mode; all other settings match #103.
++const settings = { timeBudgetMs: 1800000, detailedRouter: "tiles" };
++save("requested-settings.json", { settings, timeoutSecondsEquivalent: 1800, otherSettings: "#103 unchanged except detailedRouter; useFileSettings unset/false" });
+ const text = readFileSync(input, "utf8");
+ const before = api.readDsn(text);
+ save("parse.json", before.ok ? { ok: true, diagnostics: before.diagnostics, summary: api.parseSummary(before), frame: before.layout.frame, stack: before.layout.stack, netGroups: before.layout.netGroups, settingsFromFile: before.layout.settingsFromFile } : before);
+ if (!before.ok) process.exit(2);
++const pipeline = await import(pathToFileURL(join(resolve(source), "src/pipeline/index.ts")).href);
++const effective = pipeline.resolveSettings(settings, before.layout.settingsFromFile, before.layout.angleMode);
++save("effective-settings-before.json", { readbackUtc: new Date().toISOString(), effectiveSettings: effective, mechanism: "unmodified resolveSettings; no routing call" });
++if (mode === "readback-only") process.exit(0);
++const preflight = JSON.parse(readFileSync(join(output, "../../main-preflight/effective-settings-before.json"), "utf8"));
++if (JSON.stringify(preflight.effectiveSettings) !== JSON.stringify(effective)) throw new Error("preflight mismatch");
+ save("check-drc-before.json", api.checkDrc(before.layout));
+ const hooks = {
+   onPass: (e: unknown) => console.log(JSON.stringify({ event: "pass", ...e as object })),
+@@ -22,6 +28,7 @@
+ };
+ const result = api.routeDsn(text, settings, hooks);
+ if (!result.ok) { save("result.json", result); process.exit(2); }
++if (JSON.stringify(result.report.effectiveSettings) !== JSON.stringify(effective)) throw new Error("report readback mismatch");
+ writeFileSync(join(output, "out.ses"), result.ses);
+ const { ses, ...report } = result;
+ save("result.json", report);

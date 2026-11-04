@@ -1,0 +1,50 @@
+(session "/tmp/issue87/smoke/input.ses"
+  (base_design "/tmp/issue87/smoke/input.dsn")
+  (placement
+    (resolution um 10)
+    (component Probe:U2
+      (place U2 0 0 front 0)
+    )
+    (component Probe:U1
+      (place U1 0 0 front 0)
+    )
+    (component Probe:U3
+      (place U3 0 0 front 0)
+    )
+    (component Probe:H1
+      (place H1 0 0 front 0)
+    )
+  )
+  (was_is)
+  (routes
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "9.0.9-9.0.9~ubuntu24.04.1")
+    )
+    (library_out
+      (padstack "Via[0-1]_600:300_um"
+        (shape (circle F.Cu 6000 0 0))
+        (shape (circle B.Cu 6000 0 0))
+        (attach off)
+      )
+    )
+    (network_out
+      (net N
+        (wire
+          (path F.Cu 2000
+            100000 -100000
+            100000 -120000
+          )
+          (type protect)
+        )
+        (wire
+          (path F.Cu 2000
+            160000 -100000
+            100000 -100000
+          )
+        )
+      )
+    )
+  )
+)
