@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import pcbnew as p,sys\nfrom pathlib import Path\nw=Path(sys.argv[2]);b=p.LoadBoard(sys.argv[1]);lib=w/'Probe.pretty';lib.mkdir();io=p.PCB_IO_KICAD_SEXPR()\nfor f in b.GetFootprints():io.FootprintSave(str(lib),f)\n(w/'fp-lib-table').write_text(f'(fp_lib_table (version 7) (lib (name \"Probe\")(type \"KiCad\")(uri \"{lib}\")(options \"\")(descr \"Original fixture\")))\\n')\n",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inputs/smoke/main.kicad_pcb",
+    "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inspection/smoke"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42",
+  "start_utc": "2026-11-04T05:21:07.470993+00:00",
+  "end_utc": "2026-11-04T05:21:08.095426+00:00",
+  "elapsed_seconds": 0.6244375359992773,
+  "exit_code": 0,
+  "timed_out": false,
+  "timeout_seconds": 120,
+  "env_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/python3/dist-packages:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/geometry/lib/python3.12/site-packages",
+    "LD_LIBRARY_PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/lib/kicad",
+    "KICAD_STOCK_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/share/kicad",
+    "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli",
+    "PATH": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/venv/bin:/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/hatch/.codex/tmp/arg0-linux/codex-arg0soPDr8:/home/hatch/workspace/tools/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/opt/hatch/bin:/opt/hatch-image/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/muse/skills/documents/scripts:/opt/muse/skills/generate_podcast/scripts:/opt/muse/skills/style-tryon/scripts",
+    "XDG_CONFIG_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/config",
+    "XDG_CACHE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/cache",
+    "XDG_DATA_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/data",
+    "XDG_STATE_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue113-runtime/state"
+  },
+  "display_unset": true
+}
