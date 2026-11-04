@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/build-inputs.py", line 25, in <module>
+    f=p.FootprintLoad(str(lib),row['kind']);f.SetReference(row['reference']);f.SetValue(row['mpn']);f.SetPosition(V(100+row['x_mm'],100-row['y_mm']));f.SetOrientationDegrees(row['rotation_ccw_deg']);f.SetProperty('MPN',row['mpn']);f.SetProperty('IntentionalNC',','.join(k for k,v in row['pins'].items() if v is None))
+                                                                                                                                                                                                       ^^^^^^^^^^^^^
+AttributeError: 'FOOTPRINT' object has no attribute 'SetProperty'
