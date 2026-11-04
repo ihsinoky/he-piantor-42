@@ -1,0 +1,75 @@
+{
+  "version": "1",
+  "pip_version": "24.0",
+  "install": [
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/9e/09/350a04986472d750b0c12d04c844bb0f7d18c0a58494b1ddefb851104a43/freeroute-2026.7.14-py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=a1b8b369a3e5df558dea15568876621f705e0c9510979caa92b3ff2c43ee4a93",
+          "hashes": {
+            "sha256": "a1b8b369a3e5df558dea15568876621f705e0c9510979caa92b3ff2c43ee4a93"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "freeroute",
+        "version": "2026.7.14",
+        "summary": "Native Python PCB autorouter — a Java-free port of the FreeRouting engine (Specctra DSN in, SES out)",
+        "description": "# freeroute\n\nA native Python PCB autorouter — a Java-free reimplementation of the\n[FreeRouting](https://github.com/freerouting/freerouting) engine. Specctra DSN\nin, Specctra SES out, no JVM anywhere in the pipeline.\n\n## Why\n\nToolchains that autoroute (`kicad-mcp` among them) do it by shelling out to\n`freerouting.jar`, which drags a JVM into every install and container image.\n`freeroute` reimplements the routing engine in pure Python — no dependencies at\nall, standard library only — so the JAR step becomes a `pip install`.\n\n## The contract\n\nThe entire integration surface is two Specctra files:\n\n```\nboard.dsn  ──▶  freeroute  ──▶  board.ses\n(unrouted)                       (routed session: traces + vias)\n```\n\n`kicad-cli` already exports `.dsn` and imports `.ses`, so `freeroute` drops in\nwherever `java -jar freerouting.jar` was invoked — nothing else in the pipeline\nchanges. The `-de` / `-do` / `-mp` flags are the JAR's, on purpose.\n\n## Install\n\n```bash\nuv tool install freeroute      # or: pipx install freeroute\n```\n\n## Usage\n\n```bash\nfreeroute board.dsn -o board.ses          # grid engine, the default\nfreeroute -de board.dsn -do board.ses     # the FreeRouting JAR spelling\n\nfreeroute board.dsn --engine room --pack --shove -do board.ses\nfreeroute board.dsn --engine exact --diagonal --shove -do board.ses\n```\n\nWith no `-do` / `-o`, the SES goes to stdout.\n\n### Engines\n\nThree routing tracks, selected with `--engine`:\n\n- **`grid`** (default) — multi-layer maze router over a uniform occupancy grid,\n  with rip-up-and-retry and via search. Highest raw connectivity of the three;\n  its geometry is grid-quantised, so it is the least precise about clearance.\n- **`exact`** — orthogonal router whose output is verified against exact integer\n  geometry (tile/octagon clearance, not bounding boxes). Cleaner, DRC-clean\n  output where it succeeds; it will drop a net rather than emit a violation.\n- **`room`** — continuous expansion-room router: an exact decomposition of free\n  space, so it routes off-grid channels that the grid quantisation cannot see.\n\n### Flags\n\n| flag | effect |\n|---|---|\n| `--engine {grid,exact,room}` | routing track (default: `grid`) |\n| `-de`, `--design` | input `.dsn` (FreeRouting-compatible alias) |\n| `-do`, `--output` | output `.ses` (default: stdout) |\n| `-mp`, `--max-passes` | rip-up-and-retry pass bound (default 10) |\n| `--no-rip-up` | single greedy pass, no rip-up |\n| `--layers` | comma-separated signal layer indices to route on |\n| `--pack` | coordinated multi-trace channel packing |\n| `--shove` | move committed traces aside to recover dropped nets |\n| `--diagonal` | 45° recovery pass for dropped 2-pin nets |\n\nNot every engine implements every pass. This is the supported matrix, and an\nunsupported combination is a hard error (exit 2) rather than a silent no-op:\n\n| | `--pack` | `--shove` | `--diagonal` | `--no-rip-up` | `-mp` |\n|---|---|---|---|---|---|\n| **grid** | — | — | — | yes | yes |\n| **exact** | — | yes | yes | yes | yes |\n| **room** | yes | yes | — | — | — |\n\n`--layers` works on all three.\n\nWhat the opt-in passes buy you:\n\n- **`--pack`** (room) — when several 2-pin nets have to cross the same obstacle\n  gap, they are assigned consistent parallel lanes and routed together, so a\n  channel physically wide enough for all of them stops dropping nets to greedy\n  per-net gate collisions.\n- **`--shove`** (exact, room) — a net that would be dropped nudges the blocking\n  committed traces aside and re-routes, rolling every moved trace back if the\n  retry fails. On the room engine it also turns on occupancy-aware gate\n  placement. It recovers *ordering* drops; it cannot manufacture space that is\n  not there.\n- **`--diagonal`** (exact) — a still-dropped 2-pin net is retried as a 45° trace\n  whose diagonal copper is covered by an exact integer octagon, so it fits\n  corridors the orthogonal L cannot, at the ideal hypotenuse length.\n\n## Library use\n\n```python\nfrom freeroute.route import route\n\nses_text = route(dsn_text, engine=\"room\", shove=True, pack=True)\n```\n\n## Status and honest scope\n\nAlpha, version 0.1.0. It parses real `kicad-cli` DSN output, routes, and writes\nSES that KiCad imports. What is actually implemented:\n\n- Specctra DSN parser (structure, library, placement, network, rules, keepouts)\n  and SES writer.\n- Multi-layer routing with via search and rip-up-and-retry.\n- Exact integer geometry (tiles, octagons) with a spatial index, so the `exact`\n  and `room` engines verify their own output is clearance-clean.\n- Continuous expansion-room free-space decomposition.\n- Channel packing, shove, and 45° routing as described above.\n\nWhat it is **not**, stated plainly:\n\n- **Not at FreeRouting/JAR density parity on dense commercial boards.** The JAR\n  remains the better router when the board is hard. `freeroute` is honest about\n  drops: it leaves a net unrouted rather than emit a DRC violation, so on a\n  crowded board expect fewer completed nets than the JAR would manage.\n- **`--diagonal` is a shortening/recovery pass, not diagonal-native search.**\n  The maze search is orthogonal; 45° geometry is applied to nets the orthogonal\n  pass dropped or to shorten a staircase. A true 45°-native expansion-room maze\n  is not implemented.\n- No fanout pass, no post-route optimiser, no interactive/incremental routing,\n  no net classes with per-class widths beyond the default rules, no plane/pour\n  handling.\n\nIf you need maximum completion on a dense board today, use the JAR. If you need\nrouting without a JVM — CI, containers, an MCP server, a library call — this is\nthat.\n\n## Development\n\n```bash\nuv sync\nuv run pytest -m \"not oracle\"     # the suite; oracle tests need Java + the JAR\nuv run ruff check src/ tests/\n```\n\nThe `oracle`-marked tests run the real `freerouting.jar` as a differential\nreference and skip cleanly when Java or the JAR is absent. The JAR is never\nvendored, and neither is the upstream Java source — see\n[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the port map and\n[`docs/PORTING_PLAN.md`](docs/PORTING_PLAN.md) for the roadmap.\n\n## License\n\nGPL-3.0-or-later, matching the FreeRouting source it is ported from. No upstream\nJava code is distributed with this package; the reference clone used during\nporting is git-ignored and excluded from the sdist.\n",
+        "description_content_type": "text/markdown",
+        "keywords": [
+          "autorouter",
+          "dsn",
+          "eda",
+          "freerouting",
+          "kicad",
+          "pcb",
+          "routing",
+          "ses",
+          "specctra"
+        ],
+        "author_email": "Ryan Malloy <ryan@supported.systems>",
+        "classifier": [
+          "Development Status :: 3 - Alpha",
+          "Environment :: Console",
+          "Intended Audience :: Developers",
+          "Intended Audience :: Manufacturing",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+          "Typing :: Typed"
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://git.supported.systems/warehack.ing/freeroute",
+          "Repository, https://git.supported.systems/warehack.ing/freeroute",
+          "Issues, https://git.supported.systems/warehack.ing/freeroute/issues",
+          "Upstream, https://github.com/freerouting/freerouting"
+        ]
+      }
+    }
+  ],
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.12.3",
+    "os_name": "posix",
+    "platform_machine": "x86_64",
+    "platform_release": "7.0.0-39-generic",
+    "platform_system": "Linux",
+    "platform_version": "#1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026",
+    "python_full_version": "3.12.3",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.12",
+    "sys_platform": "linux"
+  }
+}

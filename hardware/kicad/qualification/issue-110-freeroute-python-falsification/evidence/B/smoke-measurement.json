@@ -1,0 +1,96 @@
+{
+  "status": "FIXED_CONDITION_FAIL",
+  "router_exit_code": 0,
+  "unrouted_count": 3,
+  "unrouted_count_method": "len(unconnected_items) from KiCad DRC JSON after importing saved SES into original board copy; not router failed-net count or endpoint deficit.",
+  "four_metrics": {
+    "required_unconnected": null,
+    "wrong_net_actual_copper_contacts": null,
+    "targeted_material_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "diagnostic_only": {
+    "kicad_unconnected_items": 3,
+    "kicad_violations": 4,
+    "kicad_violation_types": {
+      "track_width": 2,
+      "track_dangling": 2
+    },
+    "nonprinting_violations": 4,
+    "graph": {
+      "shorts": [],
+      "groups": {
+        "0": [
+          "U2.1"
+        ],
+        "1": [
+          "U1.1"
+        ],
+        "2": [
+          "U1.1"
+        ],
+        "3": [
+          "U3.1"
+        ],
+        "4": [
+          "copper-0",
+          "copper-1"
+        ]
+      },
+      "disconnected": {
+        "N": 3
+      }
+    },
+    "wrong_net_contact_pairs": 0,
+    "nonroute_semantics_identical": true,
+    "snapshot_nonroute_identical": true,
+    "original_tracks": 1,
+    "returned_tracks": 2,
+    "source_local_copper": [
+      {
+        "source": {
+          "kind": "track",
+          "start": [
+            10.0,
+            10.0
+          ],
+          "end": [
+            10.0,
+            12.0
+          ],
+          "width": 0.2,
+          "net": "N",
+          "layer": 0,
+          "uuid": "6f378793-56c6-4d3a-b3b4-e29acf194c31"
+        },
+        "missing_centerline_length_mm": 2.0,
+        "preserved": false
+      }
+    ],
+    "source_local_copper_preserved": false,
+    "before_graph": {
+      "shorts": [],
+      "groups": {
+        "0": [
+          "U2.1"
+        ],
+        "2": [
+          "U1.1",
+          "U1.1",
+          "copper-0"
+        ],
+        "3": [
+          "U3.1"
+        ]
+      },
+      "disconnected": {
+        "N": 2
+      }
+    }
+  },
+  "oracle_exit_code": 1,
+  "oracle_stderr": "Traceback (most recent call last):\n  File \"/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-87-native-main-routing/resume-01/check-import.py\", line 27, in <module>\n    assert source.difference(actual).length<=m.C['tolerance_mm'],('original local copper changed',oldtrack)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('original local copper changed', {'kind': 'track', 'start': [10.0, 10.0], 'end': [10.0, 12.0], 'width': 0.2, 'net': 'N', 'layer': 0, 'uuid': '6f378793-56c6-4d3a-b3b4-e29acf194c31'})\n",
+  "elapsed_seconds": 0.11464508799963369,
+  "null_reason": "Stage failed; raw diagnostics are not acceptance metrics. Unconnected or failed checks require all four metrics null.",
+  "measured_utc": "2026-11-04T03:29:47.665335+00:00"
+}
