@@ -1,0 +1,53 @@
+(session "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke-02/raw.ses"
+  (base_design "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke-02/raw.dsn")
+  (placement
+    (resolution um 10)
+    (component Probe:U2
+      (place U2 0 0 front 0)
+    )
+    (component Probe:U1
+      (place U1 0 0 front 0)
+    )
+    (component Probe:U3
+      (place U3 0 0 front 0)
+    )
+    (component Probe:H1
+      (place H1 0 0 front 0)
+    )
+  )
+  (was_is)
+  (routes
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "9.0.9-9.0.9~ubuntu24.04.1")
+    )
+    (library_out
+      (padstack "Via[0-3]_600:300_um"
+        (shape (circle F.Cu 6000 0 0))
+        (shape (circle In1.Cu 6000 0 0))
+        (shape (circle In2.Cu 6000 0 0))
+        (shape (circle B.Cu 6000 0 0))
+        (attach off)
+      )
+    )
+    (network_out
+      (net N
+        (wire
+          (path F.Cu 2000
+            100000 -100000
+            100000 -120000
+          )
+          (type protect)
+        )
+        (wire
+          (path F.Cu 2000
+            100000 -100000
+            105657 -94343
+          )
+        )
+        (via "Via[0-3]_600:300_um" 105657 -94343)
+      )
+    )
+  )
+)

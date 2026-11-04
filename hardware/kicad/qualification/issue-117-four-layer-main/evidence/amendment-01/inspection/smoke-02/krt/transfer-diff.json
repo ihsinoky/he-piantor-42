@@ -1,0 +1,39 @@
+{
+  "nonroute_removed": [],
+  "nonroute_added": [],
+  "original_routes_missing": [],
+  "source_track_coverage": [
+    {
+      "source": "(segment (start 10 10) (end 10 12) (width 0.2) (layer \"F.Cu\") (net 1) (uuid \"6f378793-56c6-4d3a-b3b4-e29acf194c31\"))",
+      "uncovered_length_mm": 0.0
+    }
+  ],
+  "UUID_sensitive_route_differences": [],
+  "output_project_changes": [
+    {
+      "path": "/board/design_settings/rules/min_via_drill",
+      "before": null,
+      "after": 0.3
+    },
+    {
+      "path": "/kicad_routing_tools",
+      "before": null,
+      "after": {
+        "repo_rules": {
+          "min_via_drill": 0.3
+        },
+        "fab_floor_origin": {
+          "min_hole_clearance": 0.2,
+          "min_through_hole_diameter": 0.3,
+          "min_track_width": 0.2,
+          "min_via_annular_width": 0.1,
+          "min_via_diameter": 0.6
+        },
+        "records_rev": 1
+      }
+    }
+  ],
+  "explained": "Both inputs canonicalized with the same KiCad saver; only zone fill-cache nodes excluded after required refill. Original segment centerline coverage checked at 2nm; SES UUID reassignment and collinear splits explained separately.",
+  "raw_output_sha256": "75a3a28bcc8037f44d995c6403fc76c52c6165673bdecc1d147cc844f61a5cd1",
+  "refilled_output_sha256": "8b7a6d72148f4e1bbce77cc7bce12c72ac45935216bdc6953aa635dcdab92974"
+}

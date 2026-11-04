@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/117",
+    "title": "4層化の検証：Rev.M1 Main（3信号層＋GNDプレーン）で現行ルール0.20mmのまま完成するか＋Wing予備見通し（D-012改定の判断材料）",
+    "issue_number": 117,
+    "body": "## 目的\nD-012（2層基準）の改定判断材料を作る。PO方針：4層化を本命として進める（2026-11-04）。価格前提は数量5枚基準（2層 $4.00／4層 $8.00、JLCPCB実見積もり済み）。50枚前提の議論はしない。\n\n## 前提（確定済み）\n- 対象 Main は従来どおり #87 証跡の corrected.dsn と等価な native 基板（hash固定済み）。配置・部品・ネットは不変\n- 4層構成は「3信号層＋GNDプレーン」（F.Cu信号／In1 GNDプレーン／In2信号／B.Cu信号）、板厚1.2mm維持\n- ルールは現行のまま：幅／クリアランス 0.20mm、ビア 0.60/0.30mm を明示固定（KRT の内部ティア任せにしない、escalation off）\n- Wing については予備見通し（リポジトリ内の設計定義・評価計画の調査に基づく分析）を判断材料に含める。Wing の配線テスト自体は本Issueの対象外\n\n## 実施内容\n- Stage 0：4層入力の準備（スタックアップ定義・GNDゾーン・DSN再生成）と等価性ゲート（配置・ネット・パッドが2層入力と一致し、差分は層構成とGNDプレーンのみ）、両候補の層役割の受理確認、スモーク\n- Stage 1：Main 本試験2セル（fab_router、KiCad Routing Tools）。独立4指標で判定\n- Wing予備見通し：2層／4層それぞれでの配線見通しを、既存資料と定量的な根拠で整理\n\n## 成果物\n- docs/issue-117-*.md（D-012改定の判断材料としての総括を含む）\n- hardware/kicad/qualification/issue-117-*/ 証跡一式\n- Draft PR で提出。merge は PO 判断\n\n詳細は PMO 指示書（別途提示）に従うこと。制限時間3時間（Stage 0 が前半で完了しない場合は中断して報告）。",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-04T09:03:39Z",
+    "updated_at": "2026-11-04T09:03:39Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/117",
+    "display_title": "4層化の検証：Rev.M1 Main（3信号層＋GNDプレーン）で現行ルール0.20mmのまま完成するか＋Wing予備見通し（D-012改定の判断材料）"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/117",
+  "title": "4層化の検証：Rev.M1 Main（3信号層＋GNDプレーン）で現行ルール0.20mmのまま完成するか＋Wing予備見通し（D-012改定の判断材料）",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/117",
+  "display_title": "4層化の検証：Rev.M1 Main（3信号層＋GNDプレーン）で現行ルール0.20mmのまま完成するか＋Wing予備見通し（D-012改定の判断材料）"
+}

@@ -1,0 +1,138 @@
+{
+  "utc": "2026-11-04T09:13:36.078817+00:00",
+  "analysis_only": true,
+  "routing_runs": 0,
+  "consumed_layout_paths": [],
+  "source_hashes": {
+    "hardware/rev-m1/architecture.md": "f33c80f1cdeadcbd93e88160cf0ec962e4f9156e2e792176eb7b6e96833e7fcd",
+    "hardware/rev-m1/main-wing-interface.md": "30f1e61f164d3834d0ae1a079c78acd94129de823b06dd77b9889435598c3120",
+    "hardware/rev-m1/evaluation-plan.md": "56804a387c03a534451977c5901d5702f004c5764b4ebe39f83f2b919e697e9e",
+    "hardware/rev-m1/dfm-policy.md": "f7a4fa8b60f64cea620425bc0e5a2a10306906a74d4ec4a9fbff96fc7b9a215d",
+    "hardware/rev-m1/g0b-freeze-proposal.md": "a0b15596ad90d8e6a46a97ca5c5e5e439e995bffc029f6760cdad0e81b2d6965",
+    "docs/decisions.md": "7d1d5dc2d59146ee35f96b5d06285f23838e68e9465a73f2d915563f74b6bda8",
+    "docs/hall-acquisition.md": "a46fda2c1f33838c92c5f95d300e5b0531274467bf1bcc7168fcc1bcbe6710d7"
+  },
+  "source_priority": "D-017 / accepted G0B supersede old TBD wording in hall-acquisition",
+  "dimensions": [
+    {
+      "pitch_mm": 17.0,
+      "hypothetical_6_columns_4_rows": {
+        "occupied_keys": 21,
+        "centre_span_mm": [
+          85.0,
+          51.0
+        ],
+        "pitch_cell_envelope_mm": [
+          102.0,
+          68.0
+        ],
+        "with_2mm_each_edge_mm": [
+          106.0,
+          72.0
+        ],
+        "remaining_width_for_outer_key_envelope_and_total_margins_mm": 15.0,
+        "area_without_border_mm2": 6936.0
+      },
+      "hypothetical_7_columns_3_rows": {
+        "pitch_cell_envelope_mm": [
+          119.0,
+          51.0
+        ]
+      },
+      "evaluation_3_by_3_matrix_pitch_cell_envelope_mm": [
+        51.0,
+        51.0
+      ],
+      "hypothetical_copper_pad_density_per_mm2": 0.02494232987312572
+    },
+    {
+      "pitch_mm": 16.5,
+      "hypothetical_6_columns_4_rows": {
+        "occupied_keys": 21,
+        "centre_span_mm": [
+          82.5,
+          49.5
+        ],
+        "pitch_cell_envelope_mm": [
+          99.0,
+          66.0
+        ],
+        "with_2mm_each_edge_mm": [
+          103.0,
+          70.0
+        ],
+        "remaining_width_for_outer_key_envelope_and_total_margins_mm": 17.5,
+        "area_without_border_mm2": 6534.0
+      },
+      "hypothetical_7_columns_3_rows": {
+        "pitch_cell_envelope_mm": [
+          115.5,
+          49.5
+        ]
+      },
+      "evaluation_3_by_3_matrix_pitch_cell_envelope_mm": [
+        49.5,
+        49.5
+      ],
+      "hypothetical_copper_pad_density_per_mm2": 0.02647689011325375
+    },
+    {
+      "pitch_mm": 16.0,
+      "hypothetical_6_columns_4_rows": {
+        "occupied_keys": 21,
+        "centre_span_mm": [
+          80.0,
+          48.0
+        ],
+        "pitch_cell_envelope_mm": [
+          96.0,
+          64.0
+        ],
+        "with_2mm_each_edge_mm": [
+          100.0,
+          68.0
+        ],
+        "remaining_width_for_outer_key_envelope_and_total_margins_mm": 20.0,
+        "area_without_border_mm2": 6144.0
+      },
+      "hypothetical_7_columns_3_rows": {
+        "pitch_cell_envelope_mm": [
+          112.0,
+          48.0
+        ]
+      },
+      "evaluation_3_by_3_matrix_pitch_cell_envelope_mm": [
+        48.0,
+        48.0
+      ],
+      "hypothetical_copper_pad_density_per_mm2": 0.028157552083333332
+    }
+  ],
+  "assumptions": [
+    "No accepted 21-key XY coordinates or outline exists in these design definitions.",
+    "6 columns x 3 rows + 3 thumbs within a fourth row; no stagger/rotation/cable keepout. This is an estimate, not a chosen design.",
+    "Pitch-cell envelope uses one pitch as outer key allowance; actual switch and keycap dimensions must replace it.",
+    "Optional density comparison assumes 21 three-pin Hall devices, three 16-pad TMUX packages, a 14-contact connector, and 24 two-pad decouplers. Mechanical tabs/testpoints/unused areas excluded."
+  ],
+  "net_estimate": {
+    "hall_outputs": 21,
+    "mux_outputs": 3,
+    "address": 3,
+    "enable": 1,
+    "power_and_ground": 2,
+    "total": 30,
+    "unused_mux_inputs": 3,
+    "interface_unique_nets": 9,
+    "interface_ground_contacts": 6,
+    "interface_contacts": 14
+  },
+  "density_model": {
+    "core_electrical_pads": 125,
+    "decoupling_pads": 48,
+    "total_assumed": 173,
+    "main_measured_pads": 199,
+    "main_measured_area_mm2": 2112,
+    "main_pad_density_per_mm2": 0.09422348484848485
+  },
+  "confidence": "Preliminary analytical outlook; no Wing native board, routing result or physical feasibility claimed."
+}

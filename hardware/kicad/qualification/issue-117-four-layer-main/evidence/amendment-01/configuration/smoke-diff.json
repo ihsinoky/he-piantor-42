@@ -1,0 +1,85 @@
+{
+  "utc": "2026-11-04T09:25:03.148514+00:00",
+  "differences": [
+    {
+      "path": "/batch_route_bound_parameters/layer_costs",
+      "before": [],
+      "after": [
+        1.0,
+        -1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "path": "/batch_route_bound_parameters/track_width_from_class",
+      "before": true,
+      "after": false
+    },
+    {
+      "path": "/batch_route_bound_parameters/via_from_class",
+      "before": true,
+      "after": false
+    },
+    {
+      "path": "/cli_namespace/escalation",
+      "before": "fab",
+      "after": "off"
+    },
+    {
+      "path": "/cli_namespace/layer_costs",
+      "before": [],
+      "after": [
+        1.0,
+        -1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "path": "/escalation_policy",
+      "before": [
+        "fab",
+        {
+          "annular": 0.1,
+          "board_edge": 0.2,
+          "clearance": 0.2,
+          "hole_to_hole": 0.2,
+          "track_width": 0.2,
+          "via_diameter": 0.6,
+          "via_drill": 0.3
+        }
+      ],
+      "after": [
+        "off",
+        {
+          "annular": 0.1,
+          "board_edge": 0.2,
+          "clearance": 0.2,
+          "hole_to_hole": 0.2,
+          "track_width": 0.2,
+          "via_diameter": 0.6,
+          "via_drill": 0.3
+        }
+      ]
+    },
+    {
+      "path": "/grid_route_config/layer_costs",
+      "before": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "after": [
+        1.0,
+        -1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "main_original_config_unchanged": true,
+  "smoke_config_equals_main_config": true,
+  "exact_cli_reused_for_execution": true
+}

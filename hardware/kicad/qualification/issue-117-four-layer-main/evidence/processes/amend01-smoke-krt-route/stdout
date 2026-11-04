@@ -1,0 +1,67 @@
+CMD: python3 py_router/route.py /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/in.kicad_pcb /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pcb --escalation off --track-width 0.20 --clearance 0.20 --via-size 0.60 --via-drill 0.30 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1.0 -1 1.0 1.0
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.2: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/in.kicad_pcb to expand net patterns...
+Pattern '*' matched 1 nets
+Routing 1 nets: ['N']
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/in.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=-1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 1 nets with 0 crossing conflicts detected
+MPS Round 1: 1 units: N
+
+Routing 1 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 0.03s
+Found 1 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.00s (1 nets)
+Plane fragility: exact-fill geometry (1 filled island(s) from KiCad refill)
+Plane fragility field: 6361 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/1] Routing N (id=1)
+  POUR-LAUNCH pair anchors: +12 source, +12 target fill cells
+  SUCCESS: 1 segments, 0 vias, 73 iterations, length=8.00mm (stubs=2.00mm) (0.01s)
+
+Sync pcb_data: 2 -> 1 (kept stubs) -> 2 (after adding 1)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  1/1 routed
+  Total vias:    0
+  Total time:    0.01s
+  Iterations:    73
+JSON_SUMMARY: {"routed_single": ["N"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_nets": 0, "multipoint_pads_connected": 0, "multipoint_pads_total": 0, "multipoint_edges_routed": 0, "multipoint_edges_failed": 0, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 1, "failed": 0, "total_time": 0.01, "total_iterations": 73, "total_vias": 0, "cleanup_disconnected": [], "min_clearance_used": 0.2, "design_rules": {"escalation_policy": "off", "fab_tier": "auto", "board_floors": {"clearance": 0.2, "track_width": 0.2, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 0, "nets": [], "narrowed": [], "min_delivered": {}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "advanced", "unsupported_rules": []}, "plane_fragility": {"source": "kicad_refill", "islands": 1, "refill_status": "ok", "why": "the KiCad refill succeeded", "machine_dependent": false}, "oracle_check": "disabled", "pad_pairs_connected": 2, "pad_pairs_total": 2, "scope": "run", "env_knobs": {"KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue105-runtime/kicad/usr/bin/kicad-cli"}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pcb...
+Successfully wrote /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pcb
+
+Plane finalize (#562): all zone nets complete (fill-aware) -- skipping engine/cleanup legs, oracle verifies
+  KiCad-oracle recheck: deterministic exact-fill link source (pcbnew refill)
+  KiCad-oracle recheck: KiCad reports all processed nets complete
+  [finalize timing] oracle leg: 1.3s
+JSON_ORACLE: {"available": true, "reason": "ok", "why": "the oracle ran", "rounds": 0, "links_routed": 0, "links_failed": 0, "remaining": 0, "collapsed_duplicate_links": 0, "remaining_links": [], "cross_board": 0, "off_board": 0, "removed_segments": [], "removed_vias": []}
+VIA_IN_PAD_JSON: {"count": 0, "sites": [], "stamped": 0, "restored": 0, "protected": 0, "unstampable": 0, "site_created": 0, "unprotected": [], "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"}
+JSON_REGRADE: {"board": "file", "graded_nets": 1, "seconds": 0.01, "routed_single": ["N"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 3, "multipoint_pads_connected": 3, "successful": 1, "failed": 0, "unowned_broken": [], "recovered": [], "pad_pairs": {}, "broken_by_run": []}
+
+============================================================
+Run complete -- whole run, re-graded on the written board (1 net(s), 0.0s)
+============================================================
+  Single-ended:  1/1 routed
+  Multi-point:   3/3 pads connected
+JSON_IMPROVEMENT_GATE: {"lost": [], "gained": ["N"], "lost_zone": [], "gained_zone": ["N"], "worsened": [], "disconnected_pads_before": 2, "disconnected_pads_after": 0, "nets_compared": 1, "verdict": "accept"}
+JSON_SUMMARY_MIN: {"escalations": 0, "failed": 0, "failed_single": [], "main_loop_time_s": 0.01, "min_clearance_used": 0.2, "multipoint_deficit": 0, "open_single": [], "pad_pairs_open": {"count": 0, "nets": []}, "regraded_nets": 1, "routed": 1, "scope": "merged", "terminal_restores_broken": [], "vias": 0}
+  DRC settings: wrote 2 value(s) to /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pro to match the routed floors (close+reopen in KiCad if it is open). WRITES, not changes: a key the project never declared counts here, and one logical value is written once per net class:
+      rules.min_via_drill: None -> 0.3 mm
+      kicad_routing_tools.fab_floor_origin: recorded
+PROJECT_WRITES_JSON: {"project": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pro", "writes": ["rules.min_via_drill: None -> 0.3 mm", "kicad_routing_tools.fab_floor_origin: recorded"]}
+EXIT=0
