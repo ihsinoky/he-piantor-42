@@ -1,0 +1,12 @@
+{
+  "utc": "2026-11-05T07:20:41.791517+00:00",
+  "parsed_inspection": "inspect-gerbers-resumed.py using existing viewer-venv, exit 0; no CAD export. After successful run, rendering section was separated into render-review.py and diagnostic preview files moved to runtime.",
+  "review_render": "render-review.py using existing viewer-venv, exit 0",
+  "native_audit": "verify-resumption.py using env.sh CAD runtime, exit 0",
+  "inherited_defect": "Old inspector exact drill equality disagreed with legitimate Excellon rounding; new inspector uses bounded unique hole matches.",
+  "resume_diagnostic_corrections": [
+    "First resumed viewer refused to reuse inherited empty preview directory; separate output used.",
+    "First full baseline audit treated symlink objects as file hashes; corrected to compare link target strings per baseline schema. Final audit reports zero changes."
+  ],
+  "rendering_warnings": "Parsed-inspection stderr includes missing top/bottom paste warnings from intermediate pretty viewer only: paste intentionally excluded from order. Final filter-free review rendering stderr is empty. G90 warnings retained in manufacturing-checks.json."
+}
