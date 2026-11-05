@@ -124,4 +124,4 @@ GND49パッドの接続とplaneの4穴抜きは成立したが、帰路インピ
 
 E/verification.jsonで最終独立指標、厳密φ5予約、全体配線後の4nm補正限定、#121と同一の印刷61指摘、KRTソースと既存ファイルの保全を確認した。保全対象 **10,271ファイル**はD-023の許可追記を除いて変更0。失敗・中断した検査も削除せずprocessesに残した。再現方法と成果物の区別は[E/README.md](../hardware/kicad/qualification/issue-155-main-mounting-stage2/README.md)に記載する。
 
-この報告・D-023追記・今回の証跡だけを選択して作業ブランチへコミットし、Draft PRとして公開する。公開結果はE/publication.jsonに追記する。発注・課金・mergeは行わない。
+この報告・D-023追記・今回の証跡だけを選択して作業ブランチへコミットした（実装コミット `eb20fbebde85cad573e6e71b0e7e725706e9fa73`）。pushはHTTPS認証情報がなく `could not read Username for 'https://github.com': terminal prompts disabled` で失敗した。ユーザー指定の「pushできない場合はコミット済みで報告」に従って公開を停止し、**remoteブランチとDraft PRは未作成**。失敗記録はE/processes/publication-push、公開状態はE/publication.json、準備済みPR本文はE/draft-pr-body.mdに保存した。公開失敗の記録も同じブランチへ追加コミットする。発注・課金・mergeは行っていない。
