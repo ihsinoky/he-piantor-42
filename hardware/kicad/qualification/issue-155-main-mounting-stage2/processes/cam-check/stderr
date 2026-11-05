@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue147-runtime/viewer-venv/lib/python3.12/site-packages/gerbonara/excellon.py", line 604, in do_parse
+    raise ValueError('Unknown excellon statement:', line)
+ValueError: ('Unknown excellon statement:', 'X80.68Y-79.65G85X80.68Y-80.25')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-155-main-mounting-stage2/check-cam.py", line 17, in <module>
+    pth=ExcellonFile.open(fab/'main-stage2-PTH.drl',plated=True);npth=ExcellonFile.open(fab/'main-stage2-NPTH.drl',plated=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue147-runtime/viewer-venv/lib/python3.12/site-packages/gerbonara/excellon.py", line 346, in open
+    return kls.from_string(filename.read_text(), settings=settings,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue147-runtime/viewer-venv/lib/python3.12/site-packages/gerbonara/excellon.py", line 358, in from_string
+    parser.do_parse(data, filename=filename)
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue147-runtime/viewer-venv/lib/python3.12/site-packages/gerbonara/excellon.py", line 606, in do_parse
+    raise SyntaxError(f'{filename}:{lineno} "{line}": {e}') from e
+SyntaxError: /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-155-main-mounting-stage2/manufacturing/gerber/main-stage2-PTH.drl:84 "X80.68Y-79.65G85X80.68Y-80.25": ('Unknown excellon statement:', 'X80.68Y-79.65G85X80.68Y-80.25')

@@ -586,3 +586,43 @@ Items to confirm at order time:
 D-019's other content is unchanged. This records the decision only; it is not
 a manufacturing release or an order, and design data, board data and other
 documents are unchanged.
+
+## D-023 - Rev.M1 Main mounting revision: plan A, retained 48 x 44 mm outline
+
+Status: accepted PO decision (2026-11-06)
+
+Per [Issue #155](https://github.com/ihsinoky/he-piantor-42/issues/155), adopt
+**plan A** from [Issue #153 Stage 1](issue-153-main-mounting-stage1.md#2-第一案a48×44mm4穴部品ビア固定)
+for reuse of Main in ver.A: retain the **48 x 44 mm** outline
+(KiCad absolute X76–124 / Y78–122) and add four **non-plated Ø2.2 mm**
+mounting holes in a non-rectangular pattern:
+
+| Hole | KiCad absolute X, Y (mm; top view, X right, Y down) |
+| --- | --- |
+| H1 | 79, 92 |
+| H2 | 121, 81 |
+| H3 | 79, 119 |
+| H4 | 102, 111.5 |
+
+Reserve **Ø5.0 mm on every copper layer**, prohibiting tracks, vias and copper
+pour. NPTH holes carry no net; use the Wing rule-area treatment from #131 so
+the mechanical NPTH itself is not reported as a prohibited copper pad. Check
+existing copper pads independently. Preserve all existing components, nets,
+J1/J2 positions and the electrical interface. Use the #121 qualified PCB and
+its corresponding input project as the revision baseline.
+
+The basis is #153 §2 and §5 and its
+[plans.json](../hardware/kicad/qualification/issue-153-main-mounting-stage1/plans.json):
+no component, pad or existing via intersects the nominal reservations; three
+segments (VBUS, WING_EN, GND) require rerouting and the GND plane requires
+refilling. Try local rerouting first, then at most the explicitly scoped full
+reroute within Issue #155's timebox. Retain **D-019** routing/stackup conditions
+and **D-022** POFV and J1 Economic PCBA specifications; reclassify via treatment
+after routing rather than carrying forward the old counts as new measurements.
+
+Candidate fastening uses M2 through screws and insulating spacers, with head,
+washer and contacting boss projected diameter **at most Ø4.5 mm**, no countersink.
+Actual tolerances, tightening, non-rectangular support under J1/J2 insertion
+loads, tool access and underside solder/boss clearance remain mechanical
+validation items. This adopts the layout; qualification and manufacturing
+review remain required. It does not authorize ordering, billing or merge.
