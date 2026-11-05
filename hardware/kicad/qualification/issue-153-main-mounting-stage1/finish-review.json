@@ -1,0 +1,45 @@
+{
+  "status": "pass",
+  "utc": "2026-11-05T12:22:18.822758+00:00",
+  "instructions": "finish-instructions.md",
+  "issue153_refetched_body_unchanged": true,
+  "measured_geometry_unchanged_except_explicit_outline_local_coordinates": true,
+  "conclusions": {
+    "A": "48 x 44 mm; NPTH 2.2 mm x 4 nonrectangular; 3 track hits, 0 pad/via hits; all 4 holes intersect saved GND fill",
+    "B": "60 x 44 mm; four corners; no hits on existing pads/tracks/vias or saved GND fill",
+    "extension_required": false,
+    "adoption_decision": "PO gate; no selection or Stage 2 execution"
+  },
+  "corrections": [
+    "Use each evaluated outline top-left for local coordinates consistently in report/JSON/CSV",
+    "Explain existing-fill status separately in A/B SVG legends",
+    "Limit survey-map plane statement to the 15 individually checked in-outline candidates",
+    "Remove report link to uncommitted #150 artifact; preserve hash and support excerpt",
+    "Allow derived assets to reproduce from committed inputs and saved #150 provenance when optional context is absent",
+    "Use one-hour finish-task timebox rather than the interrupted original two-hour window",
+    "Clarify recommendation vs PO adoption gate"
+  ],
+  "visual_review": {
+    "renderer": "librsvg-2 / cairo; review PNGs retained only in .issue153-runtime/",
+    "files": [
+      "retained-outline.svg",
+      "extended-outline.svg",
+      "survey-map.svg"
+    ],
+    "result": "Hole locations, outline dimensions, highlighted tracks, labels and legends inspected; no clipping"
+  },
+  "report_local_links_resolve_in_submission": true,
+  "clean_checkout_evidence": "clean-checkout-verification.json",
+  "existing_files_preserved": {
+    "status": "pass",
+    "checked_files": 10250,
+    "missing": [],
+    "changed": [],
+    "scope": "All tracked files and pre-existing untracked #147/#149/#150 report/evidence files; existing runtime contents excluded."
+  },
+  "pcb_edits": 0,
+  "routing_runs": 0,
+  "orders": 0,
+  "charges": 0,
+  "merge_performed": false
+}
