@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/157",
+    "title": "Main 2 Wing 接続化 Stage 1：実現性とインタフェース定義案",
+    "issue_number": 157,
+    "body": "## 前提（PO 指示 2026-11-06）\n- ver.M1 の Main 基板を、Wing を2つ（左右）接続できるように変更する。ver.A 製品（42キー）の構成に必要\n- 現行 Main（D-023 で取付穴追加済み、48×44mm）は GH コネクタ（J_WING）1系統のみで、WING_EN も1系統\n- D-017 で Main↔Wing インタフェースは凍結されている。第2系統の追加はインタフェースの拡張にあたるため、本 Stage で定義案を作り、決定記録の追記案まで用意する\n\n## 本 Stage の作業（実現性と定義案まで）\n1. 現行 Main の実データ（#155 改版後の合格基板）と回路から、第2 Wing 系統に必要な信号を洗い出す：コネクタ、電源（HALL_5V の供給能力と2 Wing 合計の負荷）、GND、マルチプレクサ制御・読み取り信号、WING_EN の扱い（系統別か共通か）\n2. 第2コネクタの配置実現性：48×44mm のまま置けるか（取付穴4個とその予約領域を維持したまま）、置けない場合は外形拡張案と筐体・既存条件への影響\n3. インタフェース定義案：第2系統のピン配列（第1系統との対称性、左右の誤挿入防止）、ハーネス（G0B）の扱い、ファームウェア側の走査への要求（インタフェース契約として明記）\n4. 電源インテグリティ：第2 Wing を接続したときの HALL_5V 電圧降下の再評価（#141 のモデルを2系統に拡張）。TPS22919 の電流容量との照合\n5. D-019／D-022 への影響：部品点数・PCBA 費用への影響見込み、再配線・再資格確認の手順見通し\n6. D-017 拡張の決定記録（追記）案文\n\n## 制約\n- 本 Stage は調査と定義案まで。基板データの変更・再配線は Stage 2（PO が定義案を確認した後）\n- 既存ファイルの変更はせず追加のみ。成果物は報告書と証跡、Draft PR、merge は PO 判断\n- タイムボックス：2時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T20:47:00Z",
+    "updated_at": "2026-11-05T20:47:00Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/157",
+    "display_title": "Main 2 Wing 接続化 Stage 1：実現性とインタフェース定義案"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/157",
+  "title": "Main 2 Wing 接続化 Stage 1：実現性とインタフェース定義案",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/157",
+  "display_title": "Main 2 Wing 接続化 Stage 1：実現性とインタフェース定義案"
+}

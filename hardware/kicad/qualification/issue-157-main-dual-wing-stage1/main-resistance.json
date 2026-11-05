@@ -1,0 +1,939 @@
+{
+  "method": "Verbatim #141 model() reused with Main #155 native snapshot; 1A test load",
+  "model_sha256": "574fe5f2d505897c1f5f2866495599795ba3b1e17c1886dc956e9f727ffa5aa3",
+  "snapshot_sha256": "8939aa540aba324f3b36c9ec265f2d0ff8bf0d3df72d6e1971e1751bd8068453",
+  "limitations": [
+    "Positive rail only; GND plane not extracted",
+    "VBUS calculation excludes Main MCU/LDO load; USB upstream excluded",
+    "Existing single-Wing route only; cannot predict new branch or shared-section split",
+    "35um foil,20um barrel,pad spreading and manufactured junction continuity inherited from #141"
+  ],
+  "results": [
+    {
+      "net": "VBUS",
+      "source": [
+        "J1",
+        [
+          "2",
+          "11"
+        ]
+      ],
+      "load": [
+        "U5",
+        "1"
+      ],
+      "temperature_C": 20,
+      "width_factor": 1,
+      "resistance_ohm": 0.14459794453109517,
+      "track_count": 31,
+      "via_count": 2,
+      "kcl_residual_A": 9.094947017729282e-13
+    },
+    {
+      "net": "VBUS",
+      "source": [
+        "J1",
+        [
+          "2",
+          "11"
+        ]
+      ],
+      "load": [
+        "U5",
+        "1"
+      ],
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.18003968551669977,
+      "track_count": 31,
+      "via_count": 2,
+      "kcl_residual_A": 1.8189894035458565e-12
+    },
+    {
+      "net": "VBUS",
+      "source": [
+        "J1",
+        [
+          "2",
+          "11"
+        ]
+      ],
+      "load": [
+        "U5",
+        "1"
+      ],
+      "temperature_C": 125,
+      "width_factor": 1,
+      "resistance_ohm": 0.20426628634171992,
+      "track_count": 31,
+      "via_count": 2,
+      "kcl_residual_A": 1.8189894035458565e-12
+    },
+    {
+      "net": "VBUS",
+      "source": [
+        "J1",
+        [
+          "2",
+          "11"
+        ]
+      ],
+      "load": [
+        "U5",
+        "1"
+      ],
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.25433306174475245,
+      "track_count": 31,
+      "via_count": 2,
+      "kcl_residual_A": 1.8189894035458565e-12
+    },
+    {
+      "net": "HALL_5V",
+      "source": [
+        "U5",
+        [
+          "6"
+        ]
+      ],
+      "load": [
+        "J2",
+        "1"
+      ],
+      "temperature_C": 20,
+      "width_factor": 1,
+      "resistance_ohm": 0.22945187996581345,
+      "track_count": 9,
+      "via_count": 2,
+      "kcl_residual_A": 5.684341886080802e-14
+    },
+    {
+      "net": "HALL_5V",
+      "source": [
+        "U5",
+        [
+          "6"
+        ]
+      ],
+      "load": [
+        "J2",
+        "1"
+      ],
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.2861893069731735,
+      "track_count": 9,
+      "via_count": 2,
+      "kcl_residual_A": 4.547473508864641e-13
+    },
+    {
+      "net": "HALL_5V",
+      "source": [
+        "U5",
+        [
+          "6"
+        ]
+      ],
+      "load": [
+        "J2",
+        "1"
+      ],
+      "temperature_C": 125,
+      "width_factor": 1,
+      "resistance_ohm": 0.32413519823368436,
+      "track_count": 9,
+      "via_count": 2,
+      "kcl_residual_A": 2.2737367544323206e-13
+    },
+    {
+      "net": "HALL_5V",
+      "source": [
+        "U5",
+        [
+          "6"
+        ]
+      ],
+      "load": [
+        "J2",
+        "1"
+      ],
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.40428532449564153,
+      "track_count": 9,
+      "via_count": 2,
+      "kcl_residual_A": 4.547473508864641e-13
+    }
+  ],
+  "spine_sensitivity": [
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.024094305956638137,
+      "existing_vbus_drop_V": 0.030367910838231392,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.632008208648512,
+      "old_J2_local_at_USB_J1_4V75_V": 4.60164029781028,
+      "old_J2_local_at_USB_J1_5V_V": 4.85164029781028
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.04818861191327627,
+      "existing_vbus_drop_V": 0.030367910838231392,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.607913902691874,
+      "old_J2_local_at_USB_J1_4V75_V": 4.5775459918536425,
+      "old_J2_local_at_USB_J1_5V_V": 4.8275459918536425
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.02914038875565831,
+      "existing_vbus_drop_V": 0.036727877910898175,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.607297127539313,
+      "old_J2_local_at_USB_J1_4V75_V": 4.570569249628415,
+      "old_J2_local_at_USB_J1_5V_V": 4.820569249628415
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.05828077751131662,
+      "existing_vbus_drop_V": 0.036727877910898175,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.5781567387836555,
+      "old_J2_local_at_USB_J1_4V75_V": 4.541428860872757,
+      "old_J2_local_at_USB_J1_5V_V": 4.791428860872757
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.030052195365569703,
+      "existing_vbus_drop_V": 0.03781125060141233,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.614657648701671,
+      "old_J2_local_at_USB_J1_4V75_V": 4.576846398100259,
+      "old_J2_local_at_USB_J1_5V_V": 4.826846398100259
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.06010439073113941,
+      "existing_vbus_drop_V": 0.03781125060141233,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.584605453336101,
+      "old_J2_local_at_USB_J1_4V75_V": 4.546794202734689,
+      "old_J2_local_at_USB_J1_5V_V": 4.796794202734689
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.03634604198559304,
+      "existing_vbus_drop_V": 0.045730080121241745,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.586312830963633,
+      "old_J2_local_at_USB_J1_4V75_V": 4.5405827508423915,
+      "old_J2_local_at_USB_J1_5V_V": 4.7905827508423915
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.07269208397118608,
+      "existing_vbus_drop_V": 0.045730080121241745,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.54996678897804,
+      "old_J2_local_at_USB_J1_4V75_V": 4.504236708856798,
+      "old_J2_local_at_USB_J1_5V_V": 4.754236708856798
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.034036821309642556,
+      "existing_vbus_drop_V": 0.04289922924559992,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.58037215372753,
+      "old_J2_local_at_USB_J1_4V75_V": 4.53747292448193,
+      "old_J2_local_at_USB_J1_5V_V": 4.78747292448193
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.06807364261928511,
+      "existing_vbus_drop_V": 0.04289922924559992,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.546335332417888,
+      "old_J2_local_at_USB_J1_4V75_V": 4.503436103172288,
+      "old_J2_local_at_USB_J1_5V_V": 4.753436103172288
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.04116517017567792,
+      "existing_vbus_drop_V": 0.05188363673079686,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.544846907270928,
+      "old_J2_local_at_USB_J1_4V75_V": 4.492963270540131,
+      "old_J2_local_at_USB_J1_5V_V": 4.742963270540131
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.08233034035135584,
+      "existing_vbus_drop_V": 0.05188363673079686,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.503681737095251,
+      "old_J2_local_at_USB_J1_4V75_V": 4.451798100364454,
+      "old_J2_local_at_USB_J1_5V_V": 4.701798100364454
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.04245323378317078,
+      "existing_vbus_drop_V": 0.05341406316199828,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.5558618907649535,
+      "old_J2_local_at_USB_J1_4V75_V": 4.502447827602955,
+      "old_J2_local_at_USB_J1_5V_V": 4.752447827602955
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.08490646756634156,
+      "existing_vbus_drop_V": 0.05341406316199828,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.513408656981783,
+      "old_J2_local_at_USB_J1_4V75_V": 4.4599945938197845,
+      "old_J2_local_at_USB_J1_5V_V": 4.7099945938197845
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.05134423621094648,
+      "existing_vbus_drop_V": 0.06460059768316713,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.51520344742119,
+      "old_J2_local_at_USB_J1_4V75_V": 4.450602849738023,
+      "old_J2_local_at_USB_J1_5V_V": 4.700602849738023
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.10268847242189295,
+      "existing_vbus_drop_V": 0.06460059768316713,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.463859211210243,
+      "old_J2_local_at_USB_J1_4V75_V": 4.399258613527076,
+      "old_J2_local_at_USB_J1_5V_V": 4.649258613527076
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.05300524283233064,
+      "existing_vbus_drop_V": 0.06680659286006739,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.490426255362546,
+      "old_J2_local_at_USB_J1_4V75_V": 4.423619662502478,
+      "old_J2_local_at_USB_J1_5V_V": 4.673619662502478
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.10601048566466129,
+      "existing_vbus_drop_V": 0.06680659286006739,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.437421012530216,
+      "old_J2_local_at_USB_J1_4V75_V": 4.370614419670148,
+      "old_J2_local_at_USB_J1_5V_V": 4.620614419670148
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.06378762263049614,
+      "existing_vbus_drop_V": 0.08039645715928892,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.437623503205247,
+      "old_J2_local_at_USB_J1_4V75_V": 4.357227046045958,
+      "old_J2_local_at_USB_J1_5V_V": 4.607227046045958
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.1275752452609923,
+      "existing_vbus_drop_V": 0.08039645715928892,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.373835880574751,
+      "old_J2_local_at_USB_J1_4V75_V": 4.293439423415462,
+      "old_J2_local_at_USB_J1_5V_V": 4.543439423415462
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.06611204804418958,
+      "existing_vbus_drop_V": 0.08318125135162069,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.452255974122203,
+      "old_J2_local_at_USB_J1_4V75_V": 4.369074722770582,
+      "old_J2_local_at_USB_J1_5V_V": 4.619074722770582
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.13222409608837915,
+      "existing_vbus_drop_V": 0.08318125135162069,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.386143926078014,
+      "old_J2_local_at_USB_J1_4V75_V": 4.302962674726393,
+      "old_J2_local_at_USB_J1_5V_V": 4.552962674726393
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.07956062733854224,
+      "existing_vbus_drop_V": 0.10010206514728508,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.391688584971577,
+      "old_J2_local_at_USB_J1_4V75_V": 4.291586519824292,
+      "old_J2_local_at_USB_J1_5V_V": 4.541586519824292
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.1591212546770845,
+      "existing_vbus_drop_V": 0.10010206514728508,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.3121279576330345,
+      "old_J2_local_at_USB_J1_4V75_V": 4.212025892485749,
+      "old_J2_local_at_USB_J1_5V_V": 4.462025892485749
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.07487785628708679,
+      "existing_vbus_drop_V": 0.09437433340371336,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.376830589520171,
+      "old_J2_local_at_USB_J1_4V75_V": 4.282456256116458,
+      "old_J2_local_at_USB_J1_5V_V": 4.532456256116458
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.14975571257417358,
+      "existing_vbus_drop_V": 0.09437433340371336,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.301952733233084,
+      "old_J2_local_at_USB_J1_4V75_V": 4.20757839982937,
+      "old_J2_local_at_USB_J1_5V_V": 4.45757839982937
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.09010958510896426,
+      "existing_vbus_drop_V": 0.11357205520599628,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.300920092787256,
+      "old_J2_local_at_USB_J1_4V75_V": 4.187348037581259,
+      "old_J2_local_at_USB_J1_5V_V": 4.437348037581259
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.18021917021792852,
+      "existing_vbus_drop_V": 0.11357205520599628,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.210810507678291,
+      "old_J2_local_at_USB_J1_4V75_V": 4.097238452472294,
+      "old_J2_local_at_USB_J1_5V_V": 4.347238452472294
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.09339318466962163,
+      "existing_vbus_drop_V": 0.11750599472167593,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.322909353927772,
+      "old_J2_local_at_USB_J1_4V75_V": 4.2054033592060955,
+      "old_J2_local_at_USB_J1_5V_V": 4.4554033592060955
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.18678636933924325,
+      "existing_vbus_drop_V": 0.11750599472167593,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.22951616925815,
+      "old_J2_local_at_USB_J1_4V75_V": 4.112010174536474,
+      "old_J2_local_at_USB_J1_5V_V": 4.362010174536474
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.11239132020978836,
+      "existing_vbus_drop_V": 0.14140918233008237,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.236030145228329,
+      "old_J2_local_at_USB_J1_4V75_V": 4.094620962898247,
+      "old_J2_local_at_USB_J1_5V_V": 4.344620962898247
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.2247826404195767,
+      "existing_vbus_drop_V": 0.14140918233008237,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.123638825018541,
+      "old_J2_local_at_USB_J1_4V75_V": 3.9822296426884587,
+      "old_J2_local_at_USB_J1_5V_V": 4.232229642688459
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.02409430595663814,
+      "existing_vbus_drop_V": 0.030367910838231395,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.609628350969702,
+      "old_J2_local_at_USB_J1_4V75_V": 4.5792604401314705,
+      "old_J2_local_at_USB_J1_5V_V": 4.8292604401314705
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.04818861191327628,
+      "existing_vbus_drop_V": 0.030367910838231395,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.585534045013064,
+      "old_J2_local_at_USB_J1_4V75_V": 4.555166134174833,
+      "old_J2_local_at_USB_J1_5V_V": 4.805166134174833
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.02914038875565831,
+      "existing_vbus_drop_V": 0.036727877910898175,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.580230244839704,
+      "old_J2_local_at_USB_J1_4V75_V": 4.543502366928806,
+      "old_J2_local_at_USB_J1_5V_V": 4.793502366928806
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.05828077751131662,
+      "existing_vbus_drop_V": 0.036727877910898175,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.5510898560840465,
+      "old_J2_local_at_USB_J1_4V75_V": 4.514361978173148,
+      "old_J2_local_at_USB_J1_5V_V": 4.764361978173148
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.030052195365569707,
+      "existing_vbus_drop_V": 0.03781125060141233,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.587111381828452,
+      "old_J2_local_at_USB_J1_4V75_V": 4.54930013122704,
+      "old_J2_local_at_USB_J1_5V_V": 4.79930013122704
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.060104390731139413,
+      "existing_vbus_drop_V": 0.03781125060141233,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.557059186462881,
+      "old_J2_local_at_USB_J1_4V75_V": 4.519247935861469,
+      "old_J2_local_at_USB_J1_5V_V": 4.769247935861469
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.03634604198559304,
+      "existing_vbus_drop_V": 0.045730080121241745,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.552997535354066,
+      "old_J2_local_at_USB_J1_4V75_V": 4.5072674552328245,
+      "old_J2_local_at_USB_J1_5V_V": 4.7572674552328245
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.07269208397118608,
+      "existing_vbus_drop_V": 0.045730080121241745,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.516651493368473,
+      "old_J2_local_at_USB_J1_4V75_V": 4.470921413247231,
+      "old_J2_local_at_USB_J1_5V_V": 4.720921413247231
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.034036821309642556,
+      "existing_vbus_drop_V": 0.042899229245599926,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.548757215600154,
+      "old_J2_local_at_USB_J1_4V75_V": 4.505857986354554,
+      "old_J2_local_at_USB_J1_5V_V": 4.755857986354554
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.06807364261928511,
+      "existing_vbus_drop_V": 0.042899229245599926,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.514720394290512,
+      "old_J2_local_at_USB_J1_4V75_V": 4.471821165044912,
+      "old_J2_local_at_USB_J1_5V_V": 4.721821165044912
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.04116517017567792,
+      "existing_vbus_drop_V": 0.05188363673079686,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.506610836508989,
+      "old_J2_local_at_USB_J1_4V75_V": 4.454727199778192,
+      "old_J2_local_at_USB_J1_5V_V": 4.704727199778192
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.08233034035135584,
+      "existing_vbus_drop_V": 0.05188363673079686,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.465445666333312,
+      "old_J2_local_at_USB_J1_4V75_V": 4.413562029602515,
+      "old_J2_local_at_USB_J1_5V_V": 4.663562029602515
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.042453233783170785,
+      "existing_vbus_drop_V": 0.05341406316199829,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.516948622087196,
+      "old_J2_local_at_USB_J1_4V75_V": 4.463534558925198,
+      "old_J2_local_at_USB_J1_5V_V": 4.713534558925198
+    },
+    {
+      "load_case": "component-5mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.08490646756634157,
+      "existing_vbus_drop_V": 0.05341406316199829,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.4744953883040255,
+      "old_J2_local_at_USB_J1_4V75_V": 4.421081325142027,
+      "old_J2_local_at_USB_J1_5V_V": 4.671081325142027
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.05134423621094648,
+      "existing_vbus_drop_V": 0.06460059768316713,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.468140553015186,
+      "old_J2_local_at_USB_J1_4V75_V": 4.403539955332018,
+      "old_J2_local_at_USB_J1_5V_V": 4.653539955332018
+    },
+    {
+      "load_case": "planning-127mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.10268847242189295,
+      "existing_vbus_drop_V": 0.06460059768316713,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.416796316804239,
+      "old_J2_local_at_USB_J1_4V75_V": 4.352195719121071,
+      "old_J2_local_at_USB_J1_5V_V": 4.602195719121071
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.05300524283233064,
+      "existing_vbus_drop_V": 0.06680659286006739,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.441190765557162,
+      "old_J2_local_at_USB_J1_4V75_V": 4.374384172697095,
+      "old_J2_local_at_USB_J1_5V_V": 4.624384172697095
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.10601048566466129,
+      "existing_vbus_drop_V": 0.06680659286006739,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.388185522724832,
+      "old_J2_local_at_USB_J1_4V75_V": 4.321378929864765,
+      "old_J2_local_at_USB_J1_5V_V": 4.571378929864765
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.06378762263049614,
+      "existing_vbus_drop_V": 0.08039645715928892,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.378372480553241,
+      "old_J2_local_at_USB_J1_4V75_V": 4.297976023393953,
+      "old_J2_local_at_USB_J1_5V_V": 4.547976023393953
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.1275752452609923,
+      "existing_vbus_drop_V": 0.08039645715928892,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.314584857922745,
+      "old_J2_local_at_USB_J1_4V75_V": 4.234188400763457,
+      "old_J2_local_at_USB_J1_5V_V": 4.484188400763457
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.06611204804418958,
+      "existing_vbus_drop_V": 0.08318125135162069,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.3916544332097365,
+      "old_J2_local_at_USB_J1_4V75_V": 4.3084731818581155,
+      "old_J2_local_at_USB_J1_5V_V": 4.5584731818581155
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.13222409608837915,
+      "existing_vbus_drop_V": 0.08318125135162069,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.325542385165547,
+      "old_J2_local_at_USB_J1_4V75_V": 4.242361133813926,
+      "old_J2_local_at_USB_J1_5V_V": 4.492361133813926
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.07956062733854224,
+      "existing_vbus_drop_V": 0.10010206514728508,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.31875941766677,
+      "old_J2_local_at_USB_J1_4V75_V": 4.218657352519484,
+      "old_J2_local_at_USB_J1_5V_V": 4.468657352519484
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 20,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.1591212546770845,
+      "existing_vbus_drop_V": 0.10010206514728508,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.239198790328227,
+      "old_J2_local_at_USB_J1_4V75_V": 4.139096725180941,
+      "old_J2_local_at_USB_J1_5V_V": 4.389096725180941
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.07487785628708679,
+      "existing_vbus_drop_V": 0.09437433340371336,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.307278004058002,
+      "old_J2_local_at_USB_J1_4V75_V": 4.212903670654288,
+      "old_J2_local_at_USB_J1_5V_V": 4.462903670654288
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.14975571257417358,
+      "existing_vbus_drop_V": 0.09437433340371336,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.232400147770915,
+      "old_J2_local_at_USB_J1_4V75_V": 4.138025814367201,
+      "old_J2_local_at_USB_J1_5V_V": 4.388025814367201
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.09010958510896426,
+      "existing_vbus_drop_V": 0.11357205520599628,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.217219050449419,
+      "old_J2_local_at_USB_J1_4V75_V": 4.103646995243422,
+      "old_J2_local_at_USB_J1_5V_V": 4.353646995243422
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 1.0,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.18021917021792852,
+      "existing_vbus_drop_V": 0.11357205520599628,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.127109465340454,
+      "old_J2_local_at_USB_J1_4V75_V": 4.013537410134457,
+      "old_J2_local_at_USB_J1_5V_V": 4.263537410134457
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.09339318466962163,
+      "existing_vbus_drop_V": 0.11750599472167593,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.237300510645151,
+      "old_J2_local_at_USB_J1_4V75_V": 4.119794515923475,
+      "old_J2_local_at_USB_J1_5V_V": 4.369794515923475
+    },
+    {
+      "load_case": "envelope-11mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.18678636933924325,
+      "existing_vbus_drop_V": 0.11750599472167593,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.14390732597553,
+      "old_J2_local_at_USB_J1_4V75_V": 4.026401331253854,
+      "old_J2_local_at_USB_J1_5V_V": 4.276401331253854
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "star-at-U5-OUT",
+      "existing_hall_drop_V": 0.11239132020978836,
+      "existing_vbus_drop_V": 0.14140918233008237,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.133006664958295,
+      "old_J2_local_at_USB_J1_4V75_V": 3.991597482628212,
+      "old_J2_local_at_USB_J1_5V_V": 4.241597482628213
+    },
+    {
+      "load_case": "envelope-allowance-278mA",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "topology": "splitter-at-J2",
+      "existing_hall_drop_V": 0.2247826404195767,
+      "existing_vbus_drop_V": 0.14140918233008237,
+      "old_J2_local_at_U5_VIN_4V75_V": 4.0206153447485065,
+      "old_J2_local_at_USB_J1_4V75_V": 3.879206162418424,
+      "old_J2_local_at_USB_J1_5V_V": 4.129206162418424
+    }
+  ]
+}
