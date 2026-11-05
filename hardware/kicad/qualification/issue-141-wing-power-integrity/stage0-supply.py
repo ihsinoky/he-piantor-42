@@ -1,0 +1,15 @@
+"""Record repository evidence separately from electrical sensitivity assumptions."""
+from common import *
+paths=['docs/decisions.md','docs/specification.md','docs/hall-acquisition.md','hardware/rev-m1/main-wing-interface.md','hardware/rev-m1/g0b-freeze-proposal.md','hardware/jitx/he_piantor_42_jitx/m1.py','hardware/jitx/he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py','hardware/jitx/he_piantor_42_jitx/components/power/diodes_ap2112k_3_3trg1.py','hardware/tscircuit/src/qualification/revm1-routing-proof.tsx']
+(E/'supply-sources').mkdir(exist_ok=False)
+rows=[]
+for i,path in enumerate(paths):
+ p=R/path;copy=E/'supply-sources'/f'{i:02d}-{p.name}.txt';copy.write_bytes(p.read_bytes())
+ rows.append(dict(path=path,sha256=digest(p),copy=str(copy.relative_to(E))))
+rho=1.7241e-8;area=.0804;wire=rho*.1/(area*1e-6)
+save(E/'stage0-supply.json',dict(utc=now(),sources=rows,
+ facts=[dict(fact='HALL_5V is USB VBUS switched by U_LOAD TPS22919DCKR, not regulated 5V and not AP2112 3.3V',sources=[paths[2],paths[5],paths[8]]),dict(fact='TPS22919 component model rates the load switch 1.5 A; this is NOT guaranteed available USB/harness current',sources=[paths[6]]),dict(fact='J_WING pin 1 carries HALL_5V; six return contacts 2/4/8/10/12/14 are common GND; control is 3.3V, no Wing 3.3V supply',sources=[paths[3],paths[4],paths[8]]),dict(fact='Accepted evaluation harness target: 100mm contact-to-contact, 28AWG stranded copper, 14 individually crimped 1:1 conductors; GH BM14B-GHS-TBT / GHR-14V-S / SSHL-002T-P0.2',sources=[paths[4]]),dict(fact='Repository G0B quotes GH 1A/contact, initial contact resistance <=30mOhm, after-test <=50mOhm',sources=[paths[4]])],
+ unresolved=['No repository guarantee of minimum/maximum voltage at Wing J_WING under load; upstream USB, Main copper and load-switch drops unqualified','No assembled harness resistance, contact/crimp measurement or delivered wire tolerance; final Rev.A mechanics/length open','1.5A switch rating is not a USB current entitlement; full-board current/startup gate remains open','DRV5055 RevC table max 5mA versus Fig5-13 inconsistency inherited from #138; 11mA includes output-load engineering envelope, not guaranteed datasheet max'],
+ assumptions=dict(wing_connector_sensitivity_V=[5.0,4.75],connector_voltage_is_after_harness=True,source_and_return_connector_nodes_ideal=True,sensor_current_A=[.005,.011],mux_current_A=2.7e-6,temperatures_C=[20,125],copper_thickness_mm=.035,copper_rho20_ohm_m=rho,copper_alpha_per_K=.00393,via_barrel_um=20),
+ harness_illustration=dict(not_measurement_or_guarantee=True,area28AWG_mm2_assumed=area,wire_resistance_one_way_20C_ohm=wire,two_mated_contacts_per_conductor=True,loop_initial_six_equal_returns_ohm=(wire+2*.03)*(1+1/6),loop_after_test_six_equal_returns_ohm=(wire+2*.05)*(1+1/6),loop_after_test_single_return_ohm=2*(wire+2*.05),formula='R_wire=rho*0.100m/0.0804mm2; R_loop=(R_wire+2*R_contact)*(1+1/N_returns). Equal sharing is an assumption. Excludes Main, switch, crimps and resistance tolerance.',do_not_subtract_again_from_4V75_at_wing=True)))
+print('Stage 0 supply evidence saved')

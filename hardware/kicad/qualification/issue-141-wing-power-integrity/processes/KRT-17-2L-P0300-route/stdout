@@ -1,0 +1,677 @@
+CMD: python3 py_router/route.py /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/in.kicad_pcb /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pcb --track-width 0.1 --power-nets HALL_5V GND --power-nets-widths 0.3 0.3 --escalation off --clearance 0.1 --via-size 0.6 --via-drill 0.3
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue141-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/in.kicad_pcb to expand net patterns...
+Pattern '*' matched 30 nets
+Routing 30 nets: ['GND', 'HALL_5V', 'H_A0_RAW', 'H_A1_RAW', 'H_A2_RAW']...
+Netclass clearances for 2 net(s), honored in full (no --clearance-ceiling) (mm: [0.1]); cross-class max(A,B) respected.
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/in.kicad_pcb...
+Using 2 routing layers: ['F.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, B.Cu=3.0x
+No BGA components detected - no exclusion zones needed
+
+Power net width assignments (2 nets):
+  0.3mm: GND, HALL_5V
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 30 nets with 185 crossing conflicts detected
+MPS Round 1: 14 units: MUX_OUT_A, H_C6_RAW, H_A6_RAW, H_A2_RAW, H_C5_RAW, H_B5_RAW, H_A5_RAW, H_C3_RAW, H_B3_RAW, H_A3_RAW, H_C1_RAW, H_B1_RAW, H_A1_RAW, H_A0_RAW
+MPS Round 2: 6 units: MUX_OUT_B, H_B2_RAW, H_C0_RAW, H_A4_RAW, H_C2_RAW, H_B0_RAW
+MPS Round 3: 3 units: H_B6_RAW, MUX_OUT_C, H_B4_RAW
+MPS Round 4: 1 units: HALL_5V
+MPS Round 5: 1 units: GND
+MPS Round 6: 1 units: WING_EN
+MPS Round 7: 1 units: MUX_A0
+MPS Round 8: 1 units: MUX_A2
+MPS Round 9: 1 units: MUX_A1
+MPS Round 10: 1 units: H_C4_RAW
+
+Routing 30 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 0.10s
+Found 30 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.03s (30 nets)
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/30] Routing MUX_OUT_A (id=27)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 1, length=41.47mm)
+  Phase 1 routed in 426 iterations, 12 segments
+  SUCCESS: 12 segments, 0 vias, 426 iterations, length=40.80mm (stubs=0.00mm) (0.81s)
+
+[2/30] Routing H_C6_RAW (id=23)
+  SUCCESS: 8 segments, 0 vias, 366 iterations, length=27.44mm (stubs=0.00mm) (0.00s)
+
+[3/30] Routing H_A6_RAW (id=9)
+  SUCCESS: 8 segments, 0 vias, 308 iterations, length=33.30mm (stubs=0.00mm) (0.00s)
+
+[4/30] Routing H_A2_RAW (id=5)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=106.86mm)
+  Phase 1 routed in 808 iterations, 10 segments
+  SUCCESS: 10 segments, 0 vias, 808 iterations, length=82.54mm (stubs=0.00mm) (0.01s)
+
+[5/30] Routing H_C5_RAW (id=22)
+  SUCCESS: 16 segments, 0 vias, 17168 iterations, length=56.65mm (stubs=0.00mm) (0.01s)
+
+[6/30] Routing H_B5_RAW (id=15)
+  SUCCESS: 10 segments, 0 vias, 493 iterations, length=49.42mm (stubs=0.00mm) (0.00s)
+
+[7/30] Routing H_A5_RAW (id=8)
+  SUCCESS: 8 segments, 0 vias, 655 iterations, length=50.56mm (stubs=0.00mm) (0.00s)
+
+[8/30] Routing H_C3_RAW (id=20)
+  SUCCESS: 20 segments, 0 vias, 808 iterations, length=69.65mm (stubs=0.00mm) (0.00s)
+
+[9/30] Routing H_B3_RAW (id=13)
+  SUCCESS: 22 segments, 0 vias, 782 iterations, length=70.17mm (stubs=0.00mm) (0.00s)
+
+[10/30] Routing H_A3_RAW (id=6)
+  SUCCESS: 12 segments, 0 vias, 683 iterations, length=70.71mm (stubs=0.00mm) (0.00s)
+
+[11/30] Routing H_C1_RAW (id=18)
+  SUCCESS: 40 segments, 0 vias, 1049 iterations, length=86.90mm (stubs=0.00mm) (0.00s)
+
+[12/30] Routing H_B1_RAW (id=11)
+  SUCCESS: 30 segments, 0 vias, 950 iterations, length=86.87mm (stubs=0.00mm) (0.00s)
+
+[13/30] Routing H_A1_RAW (id=4)
+  SUCCESS: 34 segments, 2 vias, 209091 iterations, length=87.54mm (stubs=0.00mm) (0.08s)
+
+[14/30] Routing H_A0_RAW (id=3)
+  SUCCESS: 24 segments, 2 vias, 6554 iterations, length=98.52mm (stubs=0.00mm) (0.01s)
+
+[15/30] Routing MUX_OUT_B (id=28)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 1, length=57.97mm)
+  Phase 1 routed in 1546 iterations, 19 segments
+  SUCCESS: 19 segments, 0 vias, 1546 iterations, length=59.65mm (stubs=0.00mm) (0.01s)
+
+[16/30] Routing H_B2_RAW (id=12)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=103.86mm)
+  Phase 1 routed in 195419 iterations, 12 segments
+  SUCCESS: 12 segments, 4 vias, 195419 iterations, length=82.40mm (stubs=0.00mm) (0.09s)
+
+[17/30] Routing H_C0_RAW (id=17)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=118.68mm)
+  Phase 1 routed in 399944 iterations, 20 segments
+  SUCCESS: 20 segments, 6 vias, 399944 iterations, length=107.21mm (stubs=0.00mm) (0.23s)
+
+[18/30] Routing H_A4_RAW (id=7)
+  SUCCESS: 9 segments, 2 vias, 67500 iterations, length=69.72mm (stubs=0.00mm) (0.12s)
+
+[19/30] Routing H_C2_RAW (id=19)
+  SUCCESS: 21 segments, 6 vias, 324892 iterations, length=88.93mm (stubs=0.00mm) (0.23s)
+
+[20/30] Routing H_B0_RAW (id=10)
+  SUCCESS: 24 segments, 4 vias, 168315 iterations, length=103.15mm (stubs=0.00mm) (0.06s)
+
+[21/30] Routing H_B6_RAW (id=16)
+  SUCCESS: 12 segments, 2 vias, 38996 iterations, length=30.49mm (stubs=0.00mm) (0.02s)
+
+[22/30] Routing MUX_OUT_C (id=29)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 1, length=74.47mm)
+  Phase 1 routed in 852 iterations, 17 segments
+  SUCCESS: 17 segments, 0 vias, 852 iterations, length=76.31mm (stubs=0.00mm) (0.01s)
+
+[23/30] Routing H_B4_RAW (id=14)
+  SUCCESS: 12 segments, 4 vias, 168112 iterations, length=66.48mm (stubs=0.00mm) (0.08s)
+
+[24/30] Routing HALL_5V (id=2)
+  Detected multi-point net with 50 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 20 and 6, length=35.38mm)
+  Phase 1 routed in 34975 iterations, 15 segments
+  SUCCESS: 15 segments, 4 vias, 34975 iterations, length=40.30mm (stubs=0.00mm) (0.11s)
+
+[25/30] Routing GND (id=1)
+  Detected multi-point net with 58 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 11 and 25, length=37.28mm)
+  Phase 1 routed in 101132 iterations, 10 segments
+  SUCCESS: 10 segments, 2 vias, 101132 iterations, length=38.01mm (stubs=0.00mm) (0.27s)
+
+[26/30] Routing WING_EN (id=30)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 3 and 2, length=91.19mm)
+  Phase 1 routed in 54783 iterations, 18 segments
+  SUCCESS: 18 segments, 2 vias, 54783 iterations, length=93.49mm (stubs=0.00mm) (0.04s)
+
+[27/30] Routing MUX_A0 (id=24)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=90.41mm)
+  Phase 1 routed in 739519 iterations, 38 segments
+  SUCCESS: 38 segments, 6 vias, 739519 iterations, length=109.44mm (stubs=0.00mm) (0.29s)
+
+[28/30] Routing MUX_A2 (id=26)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=93.19mm)
+  Phase 1 routed in 172612 iterations, 26 segments
+  SUCCESS: 26 segments, 2 vias, 172612 iterations, length=92.67mm (stubs=0.00mm) (0.07s)
+
+[29/30] Routing MUX_A1 (id=25)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 2 and 1, length=90.41mm)
+  Phase 1 routed in 273044 iterations, 60 segments
+  SUCCESS: 60 segments, 6 vias, 273044 iterations, length=118.88mm (stubs=0.00mm) (0.11s)
+
+[30/30] Routing H_C4_RAW (id=21)
+  SUCCESS: 13 segments, 6 vias, 706420 iterations, length=68.20mm (stubs=0.00mm) (0.36s)
+
+Sync pcb_data: 580 -> 0 (kept stubs) -> 580 (after adding 580)
+
+============================================================
+Multi-point Phase 3: Routing 122 tap connections
+============================================================
+Phase 3 order (boxed-in risk first): HALL_5V, GND, WING_EN, MUX_A2, MUX_A0, MUX_A1, MUX_OUT_A, H_A2_RAW, MUX_OUT_B, H_B2_RAW, H_C0_RAW, MUX_OUT_C
+
+HALL_5V (net 2):
+  Multi-point net Phase 3: routing 48 remaining MST edges (longest first)
+    [1/122] Routing MST edge: pad 20 -> pad 24 (length=3.59mm) target=(105.00, 140.53)
+      Routed in 16 iterations (0.00s)
+    [2/122] Routing MST edge: pad 24 -> pad 30 (length=13.45mm) target=(116.93, 142.05)
+      Neck-down refused (--escalation off): the edge spans 11.96mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (26 < 5000), forward=5000
+        backward cell (1169, 1420, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: H_B4_RAW(4 track, 1 pad), GND(1 pad)  [x2]
+      backward stuck (28 < 5000), forward=5000
+        backward cell (1167, 1420, layer=0): ok, 8/8 neighbors blocked (margin=3)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x7]
+      No route found after 5000 iterations (forward), trying backward...  [x3]
+      No route found after 10000 iterations (forward), trying backward...  [x3]
+      Failed to route MST edge after 102555 iterations (1.00s)
+    Fallback: attempting orphaned pad 30 directly from connected copper
+    [3/122] (1 failed) Routing MST edge: pad 24 -> pad 30 (length=13.45mm) target=(116.93, 142.05)
+      Routed in 72782 iterations (0.25s)
+    [4/122] (1 failed) Routing MST edge: pad 30 -> pad 31 (length=3.59mm) target=(119.00, 140.53)
+      Routed in 259 iterations (0.00s)
+    [5/122] (1 failed) Routing MST edge: pad 31 -> pad 39 (length=13.45mm) target=(130.93, 142.05)
+      Neck-down refused (--escalation off): the edge spans 11.99mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (26 < 5000), forward=5000
+        backward cell (1309, 1420, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: H_C4_RAW(1 track, 1 pad), GND(1 pad)  [x2]
+      backward stuck (28 < 5000), forward=5000
+        backward cell (1307, 1420, layer=0): ok, 8/8 neighbors blocked (margin=3)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x7]
+      No route found after 5000 iterations (forward), trying backward...  [x3]
+      No route found after 10000 iterations (forward), trying backward...  [x3]
+      Failed to route MST edge after 154742 iterations (0.54s)
+    Fallback: attempting orphaned pad 39 directly from connected copper
+    [6/122] (2 failed) Routing MST edge: pad 31 -> pad 39 (length=13.45mm) target=(130.93, 142.05)
+      Routed in 93835 iterations (0.30s)
+    [7/122] (2 failed) Routing MST edge: pad 39 -> pad 40 (length=3.59mm) target=(133.00, 140.53)
+      Routed in 259 iterations (0.00s)
+    [8/122] (2 failed) Routing MST edge: pad 40 -> pad 41 (length=23.00mm) target=(133.25, 117.78)
+      Routed in 19956 iterations (0.06s)
+    [9/122] (2 failed) Routing MST edge: pad 41 -> pad 48 (length=16.63mm) target=(145.73, 121.92)
+      Routed in 58528 iterations (0.17s)
+    [10/122] (2 failed) Routing MST edge: pad 41 -> pad 38 (length=4.62mm) target=(128.73, 117.67)
+      Routed in 43 iterations (0.00s)
+    [11/122] (2 failed) Routing MST edge: pad 38 -> pad 29 (length=16.63mm) target=(116.25, 113.53)
+      Routed in 85968 iterations (0.27s)
+    [12/122] (2 failed) Routing MST edge: pad 29 -> pad 34 (length=23.22mm) target=(120.23, 94.30)
+      Routed in 86460 iterations (0.25s)
+    [13/122] (2 failed) Routing MST edge: pad 34 -> pad 27 (length=14.50mm) target=(107.75, 92.28)
+      Routed in 61911 iterations (0.17s)
+    [14/122] (2 failed) Routing MST edge: pad 48 -> pad 49 (length=4.62mm) target=(150.25, 122.03)
+      Routed in 46 iterations (0.00s)
+    [15/122] (2 failed) Routing MST edge: pad 27 -> pad 23 (length=4.62mm) target=(103.23, 92.17)
+      Routed in 42547 iterations (0.21s)
+    [16/122] (2 failed) Routing MST edge: pad 23 -> pad 19 (length=14.72mm) target=(90.75, 94.41)
+      Routed in 47857 iterations (0.17s)
+    [17/122] (2 failed) Routing MST edge: pad 19 -> pad 15 (length=4.62mm) target=(86.23, 94.30)
+      Routed in 47 iterations (0.00s)
+    [18/122] (2 failed) Routing MST edge: pad 15 -> pad 12 (length=14.72mm) target=(73.75, 96.53)
+      Routed in 52572 iterations (0.16s)
+    [19/122] (2 failed) Routing MST edge: pad 12 -> pad 9 (length=4.62mm) target=(69.23, 96.42)
+      Routed in 47 iterations (0.00s)
+    [20/122] (2 failed) Routing MST edge: pad 9 -> pad 5 (length=12.59mm) target=(56.75, 96.53)
+      Routed in 47829 iterations (0.14s)
+    [21/122] (2 failed) Routing MST edge: pad 5 -> pad 2 (length=4.62mm) target=(52.23, 96.42)
+      Routed in 36019 iterations (0.10s)
+    [22/122] (2 failed) Routing MST edge: pad 2 -> pad 1 (length=17.00mm) target=(52.23, 79.42)
+      Routed in 82669 iterations (0.21s)
+    [23/122] (2 failed) Routing MST edge: pad 1 -> pad 4 (length=4.62mm) target=(56.75, 79.53)
+      Routed in 47 iterations (0.00s)
+    [24/122] (2 failed) Routing MST edge: pad 4 -> pad 3 (length=17.00mm) target=(56.75, 62.53)
+      Routed in 239 iterations (0.00s)
+    [25/122] (2 failed) Routing MST edge: pad 3 -> pad 7 (length=12.59mm) target=(69.23, 62.42)
+      Routed in 116 iterations (0.00s)
+    [26/122] (2 failed) Routing MST edge: pad 4 -> pad 8 (length=12.59mm) target=(69.23, 79.42)
+      Routed in 125 iterations (0.00s)
+    [27/122] (2 failed) Routing MST edge: pad 3 -> pad 0 (length=4.62mm) target=(52.23, 62.42)
+      Routed in 47 iterations (0.00s)
+    [28/122] (2 failed) Routing MST edge: pad 7 -> pad 10 (length=4.62mm) target=(73.75, 62.53)
+      Routed in 47 iterations (0.00s)
+    [29/122] (2 failed) Routing MST edge: pad 10 -> pad 13 (length=14.72mm) target=(86.23, 60.30)
+      Routed in 125 iterations (0.00s)
+    [30/122] (2 failed) Routing MST edge: pad 13 -> pad 17 (length=4.62mm) target=(90.75, 60.41)
+      Routed in 48 iterations (0.00s)
+    [31/122] (2 failed) Routing MST edge: pad 17 -> pad 21 (length=14.72mm) target=(103.23, 58.17)
+      Routed in 25733 iterations (0.08s)
+    [32/122] (2 failed) Routing MST edge: pad 17 -> pad 16 (length=10.53mm) target=(90.00, 50.62)
+      Routed in 33 iterations (0.01s)
+    [33/122] (2 failed) Routing MST edge: pad 21 -> pad 25 (length=4.62mm) target=(107.75, 58.28)
+      Routed in 18662 iterations (0.06s)
+    [34/122] (2 failed) Routing MST edge: pad 25 -> pad 32 (length=14.50mm) target=(120.23, 60.30)
+      Routed in 18095 iterations (0.06s)
+    [35/122] (2 failed) Routing MST edge: pad 32 -> pad 35 (length=4.62mm) target=(124.75, 60.41)
+      Routed in 47 iterations (0.00s)
+    [36/122] (2 failed) Routing MST edge: pad 35 -> pad 42 (length=14.50mm) target=(137.23, 62.42)
+      Routed in 125 iterations (0.00s)
+    [37/122] (2 failed) Routing MST edge: pad 42 -> pad 45 (length=4.62mm) target=(141.75, 62.53)
+      Routed in 47 iterations (0.00s)
+    [38/122] (2 failed) Routing MST edge: pad 8 -> pad 11 (length=4.62mm) target=(73.75, 79.53)
+      Routed in 47 iterations (0.00s)
+    [39/122] (2 failed) Routing MST edge: pad 11 -> pad 14 (length=14.72mm) target=(86.23, 77.30)
+      Routed in 58855 iterations (0.18s)
+    [40/122] (2 failed) Routing MST edge: pad 14 -> pad 18 (length=4.62mm) target=(90.75, 77.41)
+      Routed in 28198 iterations (0.13s)
+    [41/122] (2 failed) Routing MST edge: pad 18 -> pad 22 (length=14.72mm) target=(103.23, 75.17)
+      Routed in 108029 iterations (0.34s)
+    [42/122] (2 failed) Routing MST edge: pad 22 -> pad 26 (length=4.62mm) target=(107.75, 75.28)
+      Routed in 19306 iterations (0.08s)
+    [43/122] (2 failed) Routing MST edge: pad 26 -> pad 33 (length=14.50mm) target=(120.23, 77.30)
+      Routed in 34843 iterations (0.10s)
+    [44/122] (2 failed) Routing MST edge: pad 29 -> pad 28 (length=4.62mm) target=(111.73, 113.42)
+      Routed in 36092 iterations (0.11s)
+    [45/122] (2 failed) Routing MST edge: pad 33 -> pad 36 (length=4.62mm) target=(124.75, 77.41)
+      Routed in 47 iterations (0.00s)
+    [46/122] (2 failed) Routing MST edge: pad 36 -> pad 43 (length=14.50mm) target=(137.23, 79.42)
+      Routed in 16806 iterations (0.06s)
+    [47/122] (2 failed) Routing MST edge: pad 43 -> pad 46 (length=4.62mm) target=(141.75, 79.53)
+      Routed in 47 iterations (0.00s)
+    [48/122] (2 failed) Routing MST edge: pad 34 -> pad 37 (length=4.62mm) target=(124.75, 94.41)
+      Routed in 40543 iterations (0.14s)
+    [49/122] (2 failed) Routing MST edge: pad 37 -> pad 44 (length=14.50mm) target=(137.23, 96.42)
+      Routed in 3095 iterations (0.01s)
+    [50/122] (2 failed) Routing MST edge: pad 44 -> pad 47 (length=4.62mm) target=(141.75, 96.53)
+      Routed in 47 iterations (0.00s)
+  Phase 3 routing complete: 48 edges, 278 total segments, 41 total vias
+  Added 263 tap segments, 37 tap vias
+  Net total time: 6.84s, 1491413 iterations
+
+GND (net 1):
+  Multi-point net Phase 3: routing 56 remaining MST edges (longest first)
+    [51/122] (2 failed) Routing MST edge: pad 25 -> pad 26 (length=6.04mm) target=(103.00, 147.38)
+      Routed in 27302 iterations (0.09s)
+    [52/122] (2 failed) Routing MST edge: pad 25 -> pad 27 (length=2.89mm) target=(105.00, 142.22)
+      Routed in 2945 iterations (0.01s)
+    [53/122] (2 failed) Routing MST edge: pad 27 -> pad 36 (length=12.75mm) target=(116.93, 141.40)
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1169, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)  [x3]
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)  [x3]
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1164, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), H_C2_RAW(2 track), MUX_A2(1 pad)
+      backward stuck (160 < 5000), forward=5000
+        backward cell (1169, 1414, layer=0): ok, 3/8 neighbors blocked
+      backward stuck (3 < 5000), forward=5000  [x2]
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x4]
+      No route found after 5000 iterations (forward), trying backward...  [x2]
+      No route found after 10000 iterations (forward), trying backward...  [x2]
+      Failed to route MST edge after 15170 iterations (0.30s)
+    [54/122] (3 failed) Routing MST edge: pad 11 -> pad 10 (length=2.50mm) target=(64.12, 142.38)
+      Routed in 249 iterations (0.00s)
+    [55/122] (3 failed) Routing MST edge: pad 10 -> pad 9 (length=5.00mm) target=(59.12, 142.38)
+      Routed in 194 iterations (0.00s)
+    [56/122] (3 failed) Routing MST edge: pad 9 -> pad 5 (length=2.50mm) target=(56.62, 142.38)
+      Routed in 237 iterations (0.00s)
+    [57/122] (3 failed) Routing MST edge: pad 5 -> pad 1 (length=2.50mm) target=(54.12, 142.38)
+      Routed in 200 iterations (0.00s)
+    [58/122] (3 failed) Routing MST edge: pad 1 -> pad 0 (length=2.50mm) target=(51.62, 142.38)
+      Routed in 200 iterations (0.00s)
+    Fallback: attempting orphaned pad 36 directly from connected copper
+    [59/122] (3 failed) Routing MST edge: pad 27 -> pad 36 (length=12.75mm) target=(116.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 11.93mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1169, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1164, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), H_C2_RAW(2 track), MUX_A2(1 pad)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 123303 iterations (0.09s)
+    Fallback: attempting orphaned pad 37 directly from connected copper
+    [59/122] (3 failed) Routing MST edge: pad 26 -> pad 37 (length=14.00mm) target=(117.00, 147.38)
+      Routed in 171 iterations (0.00s)
+    [60/122] (3 failed) Routing MST edge: pad 37 -> pad 36 (length=6.04mm) target=(116.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 5.00mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1169, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1164, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), H_C2_RAW(2 track), MUX_A2(1 pad)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 145472 iterations (0.10s)
+    Fallback: attempting orphaned pad 38 directly from connected copper
+    [61/122] (4 failed) Routing MST edge: pad 37 -> pad 38 (length=7.16mm) target=(119.00, 142.22)
+      Routed in 27717 iterations (0.09s)
+    [62/122] (4 failed) Routing MST edge: pad 38 -> pad 46 (length=12.75mm) target=(130.93, 141.40)
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1309, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)  [x3]
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)  [x3]
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1304, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), MUX_A2(1 pad), H_C6_RAW(1 track)
+      backward stuck (158 < 5000), forward=5000
+        backward cell (1309, 1414, layer=0): ok, 3/8 neighbors blocked
+      backward stuck (3 < 5000), forward=5000  [x2]
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x4]
+      No route found after 5000 iterations (forward), trying backward...  [x2]
+      No route found after 10000 iterations (forward), trying backward...  [x2]
+      Failed to route MST edge after 15168 iterations (0.30s)
+    [63/122] (5 failed) Routing MST edge: pad 38 -> pad 36 (length=2.89mm) target=(116.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 2.19mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1169, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1164, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), H_C2_RAW(2 track), MUX_A2(1 pad)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 61439 iterations (0.06s)
+    Fallback: attempting orphaned pad 46 directly from connected copper
+    [64/122] (6 failed) Routing MST edge: pad 38 -> pad 46 (length=12.75mm) target=(130.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 11.93mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1309, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1304, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), MUX_A2(1 pad), H_C6_RAW(1 track)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 115189 iterations (0.08s)
+    Fallback: attempting orphaned pad 47 directly from connected copper
+    [64/122] (6 failed) Routing MST edge: pad 37 -> pad 47 (length=14.00mm) target=(131.00, 147.38)
+      Routed in 30113 iterations (0.09s)
+    [65/122] (6 failed) Routing MST edge: pad 47 -> pad 46 (length=6.04mm) target=(130.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 6.00mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1309, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1304, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), MUX_A2(1 pad), H_C6_RAW(1 track)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 75381 iterations (0.06s)
+    Fallback: attempting orphaned pad 48 directly from connected copper
+    [66/122] (7 failed) Routing MST edge: pad 47 -> pad 48 (length=7.16mm) target=(133.00, 142.22)
+      Routed in 53 iterations (0.00s)
+    [67/122] (7 failed) Routing MST edge: pad 48 -> pad 46 (length=2.89mm) target=(130.93, 141.40)
+      Neck-down refused (--escalation off): the edge spans 2.25mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+      backward stuck (1 < 5000), forward=5000
+        backward cell (1309, 1414, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(2 track, 1 pad), MUX_A2(1 pad)
+      backward stuck (9 < 5000), forward=5000
+        backward cell (1304, 1413, layer=0): ok, 8/8 neighbors blocked (margin=3)
+          Blocking obstacles: HALL_5V(1 track, 1 pad), MUX_A2(1 pad), H_C6_RAW(1 track)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+      Failed to route MST edge after 77777 iterations (0.07s)
+    Fallback: attempting orphaned pad 49 directly from connected copper
+    [68/122] (8 failed) Routing MST edge: pad 48 -> pad 49 (length=23.00mm) target=(133.25, 119.47)
+      Routed in 75952 iterations (0.21s)
+    [69/122] (8 failed) Routing MST edge: pad 49 -> pad 56 (length=17.92mm) target=(147.77, 122.88)
+      Routed in 8194 iterations (0.02s)
+    [70/122] (8 failed) Routing MST edge: pad 49 -> pad 45 (length=3.33mm) target=(130.77, 118.62)
+      Routed in 130 iterations (0.00s)
+    [71/122] (8 failed) Routing MST edge: pad 45 -> pad 46 (length=22.94mm) target=(130.93, 141.40)
+      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
+      Routed in 16872 iterations (0.04s)
+    [72/122] (8 failed) Routing MST edge: pad 45 -> pad 35 (length=17.92mm) target=(116.25, 115.22)
+      Routed in 90306 iterations (0.25s)
+    [73/122] (8 failed) Routing MST edge: pad 35 -> pad 41 (length=25.98mm) target=(122.27, 95.25)
+      Routed in 82865 iterations (0.23s)
+    [74/122] (8 failed) Routing MST edge: pad 41 -> pad 33 (length=15.80mm) target=(107.75, 93.97)
+      Routed in 97577 iterations (0.30s)
+    [75/122] (8 failed) Routing MST edge: pad 33 -> pad 30 (length=3.33mm) target=(105.27, 93.12)
+      Routed in 24369 iterations (0.08s)
+    [76/122] (8 failed) Routing MST edge: pad 30 -> pad 29 (length=17.00mm) target=(105.27, 76.12)
+      Routed in 171 iterations (0.00s)
+    [77/122] (8 failed) Routing MST edge: pad 29 -> pad 28 (length=17.00mm) target=(105.27, 59.12)
+      Routed in 171 iterations (0.00s)
+    [78/122] (8 failed) Routing MST edge: pad 28 -> pad 21 (length=17.48mm) target=(90.75, 62.09)
+      Routed in 24008 iterations (0.07s)
+    [79/122] (8 failed) Routing MST edge: pad 21 -> pad 24 (length=14.72mm) target=(94.00, 50.62)
+      Routed in 57056 iterations (0.17s)
+    [80/122] (8 failed) Routing MST edge: pad 29 -> pad 32 (length=3.33mm) target=(107.75, 76.97)
+      Routed in 23971 iterations (0.08s)
+    [81/122] (8 failed) Routing MST edge: pad 32 -> pad 40 (length=15.80mm) target=(122.27, 78.25)
+      Routed in 120210 iterations (0.40s)
+    [82/122] (8 failed) Routing MST edge: pad 35 -> pad 34 (length=3.33mm) target=(113.77, 114.38)
+      Routed in 25 iterations (0.00s)
+    [83/122] (8 failed) Routing MST edge: pad 40 -> pad 43 (length=3.33mm) target=(124.75, 79.09)
+      Routed in 26 iterations (0.00s)
+    [84/122] (8 failed) Routing MST edge: pad 43 -> pad 51 (length=15.80mm) target=(139.27, 80.38)
+      Routed in 60987 iterations (0.17s)
+    [85/122] (8 failed) Routing MST edge: pad 41 -> pad 44 (length=3.33mm) target=(124.75, 96.09)
+      Routed in 5787 iterations (0.02s)
+    [86/122] (8 failed) Routing MST edge: pad 44 -> pad 52 (length=15.80mm) target=(139.27, 97.38)
+      Routed in 419 iterations (0.00s)
+    [87/122] (8 failed) Routing MST edge: pad 21 -> pad 18 (length=3.33mm) target=(88.27, 61.25)
+      Routed in 26 iterations (0.00s)
+    [88/122] (8 failed) Routing MST edge: pad 18 -> pad 15 (length=17.48mm) target=(73.75, 64.22)
+      Routed in 88943 iterations (0.28s)
+    [89/122] (8 failed) Routing MST edge: pad 18 -> pad 19 (length=17.00mm) target=(88.27, 78.25)
+      Routed in 104315 iterations (0.29s)
+    [90/122] (8 failed) Routing MST edge: pad 19 -> pad 20 (length=17.00mm) target=(88.27, 95.25)
+      Routed in 142206 iterations (0.41s)
+    [91/122] (8 failed) Routing MST edge: pad 15 -> pad 12 (length=3.33mm) target=(71.27, 63.38)
+      Routed in 26 iterations (0.00s)
+    [92/122] (8 failed) Routing MST edge: pad 12 -> pad 6 (length=15.36mm) target=(56.75, 64.22)
+      Routed in 39507 iterations (0.11s)
+    [93/122] (8 failed) Routing MST edge: pad 19 -> pad 22 (length=3.33mm) target=(90.75, 79.09)
+      Routed in 26 iterations (0.00s)
+    [94/122] (8 failed) Routing MST edge: pad 20 -> pad 23 (length=3.33mm) target=(90.75, 96.09)
+      Routed in 26 iterations (0.00s)
+    [95/122] (8 failed) Routing MST edge: pad 6 -> pad 2 (length=3.33mm) target=(54.27, 63.38)
+      Routed in 26 iterations (0.00s)
+    [96/122] (8 failed) Routing MST edge: pad 2 -> pad 3 (length=17.00mm) target=(54.27, 80.38)
+      Routed in 87318 iterations (0.24s)
+    [97/122] (8 failed) Routing MST edge: pad 3 -> pad 4 (length=17.00mm) target=(54.27, 97.38)
+      Routed in 73795 iterations (0.23s)
+    [98/122] (8 failed) Routing MST edge: pad 3 -> pad 7 (length=3.33mm) target=(56.75, 81.22)
+      Routed in 26 iterations (0.00s)
+    [99/122] (8 failed) Routing MST edge: pad 7 -> pad 13 (length=15.36mm) target=(71.27, 80.38)
+      Routed in 183 iterations (0.00s)
+    [100/122] (8 failed) Routing MST edge: pad 13 -> pad 16 (length=3.33mm) target=(73.75, 81.22)
+      Routed in 26 iterations (0.00s)
+    [101/122] (8 failed) Routing MST edge: pad 4 -> pad 8 (length=3.33mm) target=(56.75, 98.22)
+      Routed in 26 iterations (0.00s)
+    [102/122] (8 failed) Routing MST edge: pad 8 -> pad 14 (length=15.36mm) target=(71.27, 97.38)
+      Routed in 145002 iterations (0.37s)
+    [103/122] (8 failed) Routing MST edge: pad 14 -> pad 17 (length=3.33mm) target=(73.75, 98.22)
+      Routed in 26 iterations (0.00s)
+    [104/122] (8 failed) Routing MST edge: pad 28 -> pad 31 (length=3.33mm) target=(107.75, 59.97)
+      Routed in 31132 iterations (0.11s)
+    [105/122] (8 failed) Routing MST edge: pad 31 -> pad 39 (length=15.80mm) target=(122.27, 61.25)
+      Routed in 93405 iterations (0.29s)
+    [106/122] (8 failed) Routing MST edge: pad 39 -> pad 42 (length=3.33mm) target=(124.75, 62.09)
+      Routed in 26 iterations (0.00s)
+    [107/122] (8 failed) Routing MST edge: pad 42 -> pad 50 (length=15.80mm) target=(139.27, 63.38)
+      Routed in 31510 iterations (0.10s)
+    [108/122] (8 failed) Routing MST edge: pad 50 -> pad 53 (length=3.33mm) target=(141.75, 64.22)
+      Routed in 26 iterations (0.00s)
+    [109/122] (8 failed) Routing MST edge: pad 51 -> pad 54 (length=3.33mm) target=(141.75, 81.22)
+      Routed in 26 iterations (0.00s)
+    [110/122] (8 failed) Routing MST edge: pad 52 -> pad 55 (length=3.33mm) target=(141.75, 98.22)
+      Routed in 26 iterations (0.00s)
+    [111/122] (8 failed) Routing MST edge: pad 56 -> pad 57 (length=3.33mm) target=(150.25, 123.72)
+      Routed in 25 iterations (0.00s)
+  Warning: 1 pad(s) not connected (6 MST edge(s) failed)
+  Phase 3 routing complete: 55 edges, 330 total segments, 53 total vias
+  NOT CONNECTED (so far): GND - U_MUX_B pad 14 at (116.93, 141.40) - may still be recovered; final verdict in the end-of-run summary
+  Added 320 tap segments, 51 tap vias
+  Net total time: 7.00s, 2346187 iterations
+
+WING_EN (net 30):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [112/122] (8 failed) Routing MST edge: pad 3 -> pad 1 (length=14.00mm) target=(97.07, 140.75)
+      Routed in 109610 iterations (0.05s)
+    [113/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=38.32mm) target=(60.38, 142.38)
+      Routed in 44955 iterations (0.02s)
+    [114/122] (8 failed) Routing MST edge: pad 3 -> pad 4 (length=14.00mm) target=(125.07, 140.75)
+      Routed in 66633 iterations (0.04s)
+  Phase 3 routing complete: 3 edges, 46 total segments, 12 total vias
+  Added 28 tap segments, 10 tap vias
+  Net total time: 0.33s, 275981 iterations
+
+MUX_A2 (net 26):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [115/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=42.93mm) target=(61.62, 142.38)
+      Routed in 176185 iterations (0.08s)
+    [116/122] (8 failed) Routing MST edge: pad 1 -> pad 3 (length=14.00mm) target=(116.93, 140.75)
+      Routed in 80761 iterations (0.03s)
+    [117/122] (8 failed) Routing MST edge: pad 3 -> pad 4 (length=14.00mm) target=(130.93, 140.75)
+      Routed in 101692 iterations (0.04s)
+  Phase 3 routing complete: 3 edges, 69 total segments, 11 total vias
+  Added 43 tap segments, 9 tap vias
+  Net total time: 0.22s, 531250 iterations
+
+MUX_A0 (net 24):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [118/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=33.97mm) target=(65.38, 142.38)
+      Routed in 116829 iterations (0.05s)
+    [119/122] (8 failed) Routing MST edge: pad 1 -> pad 3 (length=14.00mm) target=(111.07, 140.10)
+      Routed in 82279 iterations (0.04s)
+    [120/122] (8 failed) Routing MST edge: pad 3 -> pad 4 (length=14.00mm) target=(125.07, 140.10)
+      Routed in 45799 iterations (0.02s)
+  Phase 3 routing complete: 3 edges, 63 total segments, 13 total vias
+  Added 25 tap segments, 7 tap vias
+  Net total time: 0.17s, 984426 iterations
+
+MUX_A1 (net 25):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [121/122] (8 failed) Routing MST edge: pad 2 -> pad 0 (length=42.33mm) target=(62.88, 142.38)
+      Routed in 254701 iterations (0.10s)
+    [122/122] (8 failed) Routing MST edge: pad 2 -> pad 3 (length=14.00mm) target=(116.93, 140.10)
+      Routed in 125080 iterations (0.05s)
+    [123/122] (8 failed) Routing MST edge: pad 3 -> pad 4 (length=14.00mm) target=(130.93, 140.10)
+      Routed in 97152 iterations (0.04s)
+  Phase 3 routing complete: 3 edges, 108 total segments, 18 total vias
+  Added 48 tap segments, 12 tap vias
+  Net total time: 0.32s, 749977 iterations
+
+MUX_OUT_A (net 27):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [124/122] (8 failed) Routing MST edge: pad 1 -> pad 2 (length=5.66mm) target=(100.00, 147.38)
+      Routed in 18274 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 18 total segments, 2 total vias
+  Added 6 tap segments, 2 tap vias
+  Net total time: 0.03s, 18700 iterations
+
+H_A2_RAW (net 5):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [125/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=3.43mm) target=(49.75, 80.38)
+      Routed in 22448 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 17 total segments, 2 total vias
+  Added 7 tap segments, 2 tap vias
+  Net total time: 0.05s, 23256 iterations
+
+MUX_OUT_B (net 28):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [126/122] (8 failed) Routing MST edge: pad 1 -> pad 2 (length=5.66mm) target=(114.00, 147.38)
+      Routed in 7404 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 26 total segments, 2 total vias
+  Added 7 tap segments, 2 tap vias
+  Net total time: 0.03s, 8950 iterations
+
+H_B2_RAW (net 12):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [127/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=3.43mm) target=(66.75, 80.38)
+      Routed in 24303 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 20 total segments, 4 total vias
+  Added 8 tap segments, 0 tap vias
+  Net total time: 0.10s, 219722 iterations
+
+H_C0_RAW (net 17):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [128/122] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=3.43mm) target=(83.75, 61.25)
+      Routed in 27769 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 29 total segments, 8 total vias
+  Added 9 tap segments, 2 tap vias
+  Net total time: 0.06s, 427713 iterations
+
+MUX_OUT_C (net 29):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [129/122] (8 failed) Routing MST edge: pad 1 -> pad 2 (length=5.66mm) target=(128.00, 147.38)
+      Routed in 30 iterations (0.00s)
+  Phase 3 routing complete: 1 edges, 20 total segments, 0 total vias
+  Added 3 tap segments, 0 tap vias
+  Net total time: 0.06s, 882 iterations
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing GND (partial, 2 disconnected parts)
+    bare-ball escape: U_MUX_B.14 dogbone (0 seg(s), 1 via(s)) (#666)
+backward stuck (4635 < 5000), forward=5000
+  backward cell (4677, 5656, layer=0): ok, 3/8 neighbors blocked (margin=7)
+    Blocking obstacles: HALL_5V(1 track)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+backward stuck (3984 < 5000), forward=5000
+  backward cell (4627, 5655, layer=1): ok, 8/8 neighbors blocked (margin=7)
+    Blocking obstacles: H_C2_RAW(1 track), H_B4_RAW(1 track)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+forward stuck (3965 < 5000), backward=5000
+  forward cell (4677, 5656, layer=0): ok, 3/8 neighbors blocked (margin=7)
+    Blocking obstacles: HALL_5V(1 track)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Neck-down refused (--escalation off): the edge spans 2.17mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
+No route found after 873959 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+Route found in 316355 iterations, path length: 319
+    rescued a gap: grid 0.025, clearance 0.1, track 0.3 (8 segs, 3 vias, 316355 iters)
+    fully reconnected (2 -> 1 parts, 3.2s)
+Rescue pass: 1 recovered, 0 improved, 0 unchanged (3.2s)
+Closed 13 stub gap(s) to same-net copper
+Cycle prune: removed 53 redundant loop segment(s) across 12 net(s)
+Octolinear smoothing: collapsed 109 staircase span(s) on 25 net(s), -25.82 mm of copper (#536)
+Merged 17 collinear joint(s) on 12 net(s): -17 redundant segment(s) (#811)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  30/30 routed
+  Multi-point:   146/146 pads connected (12 nets)
+  Total vias:    198
+  Total time:    3.05s
+  Iterations:    3,688,202
+  History congestion (#590): 0 contest + 0 rip + 6 blocked-frontier event(s) over 92 cell(s), peak 0.05mm-equiv (inc 0.1mm, cap 0.5, escalate 0.0, rip weight 1.0, frontier weight 0.25), 0.00s of field upkeep
+
+Power trace ampacity (bottleneck segment, IPC-2152):
+  GND: 1.00A max (0.300mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 1.00A)
+  HALL_5V: 1.00A max (0.300mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 1.00A)
+JSON_SUMMARY: {"routed_single": ["MUX_OUT_A", "H_C6_RAW", "H_A6_RAW", "H_A2_RAW", "H_C5_RAW", "H_B5_RAW", "H_A5_RAW", "H_C3_RAW", "H_B3_RAW", "H_A3_RAW", "H_C1_RAW", "H_B1_RAW", "H_A1_RAW", "H_A0_RAW", "MUX_OUT_B", "H_B2_RAW", "H_C0_RAW", "H_A4_RAW", "H_C2_RAW", "H_B0_RAW", "H_B6_RAW", "MUX_OUT_C", "H_B4_RAW", "HALL_5V", "GND", "WING_EN", "MUX_A0", "MUX_A2", "MUX_A1", "H_C4_RAW"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_nets": 12, "multipoint_pads_connected": 146, "multipoint_pads_total": 146, "multipoint_edges_routed": 133, "multipoint_edges_failed": 8, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 30, "failed": 0, "total_time": 3.05, "total_iterations": 3688202, "total_vias": 198, "cleanup_disconnected": [], "min_clearance_used": 0.1, "design_rules": {"escalation_policy": "off", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 2, "nets": [1], "narrowed": [{"net": 1, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}, {"net": 1, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}], "min_delivered": {"track_width": 0.1}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "advanced", "unsupported_rules": []}, "plane_fragility": {"source": "none", "islands": 0, "refill_status": null, "why": "the board has no zones", "machine_dependent": false}, "rescue": {"attempted": 1, "recovered": ["GND"], "improved": [], "unchanged": [], "pads_reconnected": 1, "widths": {"GND": {"requested_mm": 0.3, "delivered_mm": 0.3, "rescue_min_mm": 0.3, "rescue_max_mm": 0.3, "rescue_segments_emitted": 8, "rescue_by_width": {"0.3": 8}, "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."}}, "time": 3.2}, "oracle_check": "disabled", "pad_pairs_connected": 152, "pad_pairs_total": 152, "power_trace_ampacity": [{"net": "GND", "bottleneck_width_mm": 0.3, "bottleneck_layer": "F.Cu", "copper_oz": 1.0, "max_current_a": 1.0, "max_current_ipc2152_a": 1.0, "temp_rise_c": 10.0, "trace_length_mm": 574.0}, {"net": "HALL_5V", "bottleneck_width_mm": 0.3, "bottleneck_layer": "F.Cu", "copper_oz": 1.0, "max_current_a": 1.0, "max_current_ipc2152_a": 1.0, "temp_rise_c": 10.0, "trace_length_mm": 531.1}], "scope": "run", "env_knobs": {"KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue141-runtime/kicad/usr/bin/kicad-cli"}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pcb...
+Successfully wrote /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pcb
+  Strict collapse (#1063, end of run): removed 296 redundant segment(s) on 30 net(s)
+
+  FAB NOTE (route): 46 via(s) in a pad or paste opening [C_HA0.2 F.Paste (pad), C_HB5.1 F.Paste (pad), C_HB5.2 F.Paste (pad), C_HB6.2 F.Paste (pad), C_MUX_A.1 F.Paste (pad), C_MUX_A.2 F.Paste (pad), C_MUX_B.1 F.Paste (pad), C_MUX_B.2 F.Paste (pad), +38 more] -- 0 stamped (capping yes) (filling yes), 0 already filled+capped, 46 NOT stampable (the file format cannot declare it per via: put it on the fab drawing), 46 shipped WITHOUT Type VII. via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel.
+VIA_IN_PAD_JSON: {"count": 46, "sites": ["C_HA0.2 F.Paste (pad)", "C_HB5.1 F.Paste (pad)", "C_HB5.2 F.Paste (pad)", "C_HB6.2 F.Paste (pad)", "C_MUX_A.1 F.Paste (pad)", "C_MUX_A.2 F.Paste (pad)", "C_MUX_B.1 F.Paste (pad)", "C_MUX_B.2 F.Paste (pad)", "J_WING.3 F.Paste (pad)", "J_WING.5 F.Paste (pad)", "J_WING.6 F.Paste (pad)", "TP_H_CTR_RAW.1 F.Paste (pad)", "TP_H_DIAG_RAW.1 F.Paste (pad)", "TP_W_MUXA.1 F.Paste (pad)", "TP_W_MUXB.1 F.Paste (pad)", "U_HA2.1 F.Paste (pad)", "U_HA2.2 F.Paste (pad)", "U_HA2.3 F.Paste (pad)", "U_HA3.1 F.Paste (pad)", "U_HA4.1 F.Paste (pad)", "U_HA4.3 F.Paste (pad)", "U_HA5.1 F.Paste (pad)", "U_HA5.3 F.Paste (pad)", "U_HA6.1 F.Paste (pad)", "U_HB1.3 F.Paste (pad)", "U_HB5.1 F.Paste (pad)", "U_HC1.3 F.Paste (pad)", "U_HC3.3 F.Paste (pad)", "U_HC4.3 F.Paste (pad)", "U_HC6.1 F.Paste (pad)", "U_MUX_A.12 F.Paste (pad)", "U_MUX_A.14 F.Paste (pad)", "U_MUX_A.2 F.Paste (pad)", "U_MUX_A.4 F.Paste (pad)", "U_MUX_A.8 F.Paste (pad)", "U_MUX_B.12 F.Paste (pad)", "U_MUX_B.13 F.Paste (pad)", "U_MUX_B.14 F.Paste (pad)", "U_MUX_B.16 F.Paste (pad)", "U_MUX_C.1 F.Paste (pad)", "U_MUX_C.12 F.Paste (pad)", "U_MUX_C.13 F.Paste (pad)", "U_MUX_C.14 F.Paste (pad)", "U_MUX_C.16 F.Paste (pad)", "U_MUX_C.2 F.Paste (pad)", "U_MUX_C.4 F.Paste (pad)"], "stamped": 0, "restored": 0, "protected": 0, "unstampable": 46, "site_created": 0, "unprotected": [{"site": "U_MUX_A.4 F.Paste (pad)", "x": 96.6, "y": 142.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_A.12 F.Paste (pad)", "x": 102.5, "y": 142.7, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_B.12 F.Paste (pad)", "x": 116.5, "y": 142.7, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.12 F.Paste (pad)", "x": 130.5, "y": 142.7, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_MUX_A.1 F.Paste (pad)", "x": 105.0, "y": 140.5311, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_B.13 F.Paste (pad)", "x": 116.9321, "y": 142.05, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_MUX_B.1 F.Paste (pad)", "x": 119.0, "y": 140.5311, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.13 F.Paste (pad)", "x": 130.9321, "y": 142.05, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HC6.1 F.Paste (pad)", "x": 145.2, "y": 121.9, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HB5.1 F.Paste (pad)", "x": 119.9, "y": 94.5, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA5.1 F.Paste (pad)", "x": 103.6, "y": 92.2, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA4.1 F.Paste (pad)", "x": 52.6, "y": 96.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA2.1 F.Paste (pad)", "x": 52.0, "y": 79.7, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA3.1 F.Paste (pad)", "x": 102.9, "y": 75.2, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA6.1 F.Paste (pad)", "x": 112.1, "y": 113.3, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_HB5.1 F.Paste (pad)", "x": 124.6, "y": 94.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_A.14 F.Paste (pad)", "x": 102.9, "y": 141.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_MUX_A.2 F.Paste (pad)", "x": 104.8, "y": 142.2, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_MUX_B.2 F.Paste (pad)", "x": 118.9, "y": 142.3, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_HB6.2 F.Paste (pad)", "x": 133.2, "y": 120.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.14 F.Paste (pad)", "x": 130.6, "y": 141.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA5.3 F.Paste (pad)", "x": 105.6, "y": 93.1, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HC3.3 F.Paste (pad)", "x": 138.7, "y": 80.5, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_HB5.2 F.Paste (pad)", "x": 124.7, "y": 96.5, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HC4.3 F.Paste (pad)", "x": 88.3, "y": 94.9, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "C_HA0.2 F.Paste (pad)", "x": 57.0, "y": 64.1, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA2.3 F.Paste (pad)", "x": 54.3, "y": 80.1, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA4.3 F.Paste (pad)", "x": 54.4, "y": 97.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HB1.3 F.Paste (pad)", "x": 121.4, "y": 61.2, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HC1.3 F.Paste (pad)", "x": 138.5, "y": 63.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_B.14 F.Paste (pad)", "x": 116.6, "y": 141.4, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_A.2 F.Paste (pad)", "x": 97.5, "y": 140.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.2 F.Paste (pad)", "x": 124.6, "y": 140.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "J_WING.6 F.Paste (pad)", "x": 62.1, "y": 141.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "J_WING.3 F.Paste (pad)", "x": 65.8, "y": 141.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.1 F.Paste (pad)", "x": 124.8, "y": 139.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "J_WING.5 F.Paste (pad)", "x": 63.0, "y": 141.8, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_B.16 F.Paste (pad)", "x": 116.3, "y": 140.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.16 F.Paste (pad)", "x": 130.5, "y": 140.1, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_A.8 F.Paste (pad)", "x": 97.6, "y": 144.7, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "TP_W_MUXA.1 F.Paste (pad)", "x": 99.9, "y": 147.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_HA2.2 F.Paste (pad)", "x": 51.9, "y": 81.2, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "TP_H_CTR_RAW.1 F.Paste (pad)", "x": 50.6, "y": 80.5, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "TP_W_MUXB.1 F.Paste (pad)", "x": 113.2, "y": 147.6, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "U_MUX_C.4 F.Paste (pad)", "x": 124.6, "y": 142.0, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}, {"site": "TP_H_DIAG_RAW.1 F.Paste (pad)", "x": 83.7, "y": 61.9, "why": "file format 20241229 predates per-via capping/filling (KiCad 10)"}], "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"}
+JSON_SHIPPED_RULES: {"min_clearance_used": 0.1, "design_rules": {"escalation_policy": "off", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 0, "nets": [], "narrowed": [], "min_delivered": {}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "advanced"}}
+JSON_REGRADE: {"board": "file", "graded_nets": 30, "seconds": 0.32, "routed_single": ["MUX_OUT_A", "H_C6_RAW", "H_A6_RAW", "H_A2_RAW", "H_C5_RAW", "H_B5_RAW", "H_A5_RAW", "H_C3_RAW", "H_B3_RAW", "H_A3_RAW", "H_C1_RAW", "H_B1_RAW", "H_A1_RAW", "H_A0_RAW", "MUX_OUT_B", "H_B2_RAW", "H_C0_RAW", "H_A4_RAW", "H_C2_RAW", "H_B0_RAW", "H_B6_RAW", "MUX_OUT_C", "H_B4_RAW", "HALL_5V", "GND", "WING_EN", "MUX_A0", "MUX_A2", "MUX_A1", "H_C4_RAW"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 146, "multipoint_pads_connected": 146, "successful": 30, "failed": 0, "unowned_broken": [], "recovered": [], "pad_pairs": {}, "broken_by_run": []}
+
+============================================================
+Run complete -- whole run, re-graded on the written board (30 net(s), 0.3s)
+============================================================
+  Single-ended:  30/30 routed
+  Multi-point:   146/146 pads connected
+JSON_SUMMARY_MIN: {"escalations": 0, "failed": 0, "failed_single": [], "main_loop_time_s": 3.05, "min_clearance_used": 0.1, "multipoint_deficit": 0, "open_single": [], "pad_pairs_open": {"count": 0, "nets": []}, "regraded_nets": 30, "routed": 30, "scope": "merged", "terminal_restores_broken": [], "vias": 198}
+  Copper-to-hole floor this step's copper holds: 0.2 mm -- it held 0.2 mm and its own copper clears every foreign hole by it (#1369)
+  DRC settings: wrote 1 value(s) to /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pro to match the routed floors (close+reopen in KiCad if it is open). WRITES, not changes: a key the project never declared counts here, and one logical value is written once per net class:
+      kicad_routing_tools.fab_floor_origin: recorded
+PROJECT_WRITES_JSON: {"project": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pro", "writes": ["kicad_routing_tools.fab_floor_origin: recorded"]}
+  Power-net widths (measured by board_score): 2 recorded in out.kicad_pro (+2 this step)
+EXIT=0

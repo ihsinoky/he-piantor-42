@@ -1,0 +1,91 @@
+"""Generate the comparison report from saved independent and DC measurements."""
+from common import *
+import csv
+rows=list(csv.DictReader((E/'dc-comparison.csv').open()));dc=json.loads((E/'dc-drop-estimate.json').read_text())
+report=R/'docs/issue-141-wing-power-integrity.md'
+text='''# Issue #141 — Wing 電源インテグリティのフォローアップ
+
+**電源／GNDを0.30mm、信号を0.10mmに分けた2層配線は16mm・17mmとも各1回で合格した。独立4指標すべて0、クラス別幅監査通過。電圧降下は改善するが、Wing入力4.75V・保守包絡11mA/個・125°C・最悪幅では17mmが4.5Vを下回る。供給系の最低保証電圧も未確定であり、電源インテグリティの無条件合格や製造承認とはしない。**
+
+[Issue #141](https://github.com/ihsinoky/he-piantor-42/issues/141) に対する評価材料。D-021、既存設計・基板・#131/#138証跡を変更していない。基準改定の判断はPOに残す。
+
+以下の `E/` は [`hardware/kicad/qualification/issue-141-wing-power-integrity/`](../hardware/kicad/qualification/issue-141-wing-power-integrity/)。指示書全文は `E/instructions.md`、Issue取得本文は `E/issue141.json`。全証跡hashは `E/manifest.json`。
+
+## Stage 0：供給条件の事実と仮定
+
+| 項目 | リポジトリで確定できたこと | 未確定・計算上の仮定 |
+| --- | --- | --- |
+| 供給元 | USB VBUS → U_LOAD TPS22919DCKR → HALL_5V。5V系のスイッチ出力。AP2112K-3.3の3.3V系とは別 | 安定化5.000Vを生成するレギュレータではない。USB・Main銅箔・スイッチの降下を含む供給保証は未評価 |
+| 電流 | JITXのTPS22919モデルに1.5A定格。G0BはGH接点1A、Wing設計見積127mAを記録 | 1.5Aはスイッチ部品定格であり、USBからの利用可能電流やWing供給保証ではない。全システムの電源予算・起動条件は未確定 |
+| J_WING | pin1 HALL_5V、GNDは2/4/8/10/12/14の6接点。3.3Vは制御信号でありWing給電端子はない | J_WINGでの最低／最高許容電圧を保証する数値仕様は見つからない。主計算はWing端で5.00V／4.75Vを与える感度解析 |
+| ケーブル | G0Bは100mm nominal contact-to-contact、28AWG stranded copper、14本個別圧着・1:1。GHの両端ヘッダ／ハウジング／接点を指定 | 完成品の長さ・抵抗・圧着品質は実測が必要。Rev.A最終長さは未決。等分帰路電流を保証しない |
+| 接点抵抗 | G0B §2.1の保存済みメーカー資料引用は初期≤30mΩ、環境試験後≤50mΩ | その値は完成ハーネス抵抗ではない。両端接点・線材・圧着を含む総抵抗測定はない |
+
+根拠は [D-009/D-017](decisions.md)、[Hall acquisition §3/§9](hall-acquisition.md)、[Main/Wing interface](../hardware/rev-m1/main-wing-interface.md)、[G0B §2–4](../hardware/rev-m1/g0b-freeze-proposal.md)、[JITX M1定義](../hardware/jitx/he_piantor_42_jitx/m1.py)、[TPS22919モデル](../hardware/jitx/he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py)、[分離Mainの配線定義](../hardware/tscircuit/src/qualification/revm1-routing-proof.tsx)。JITX M1は歴史的4キー一体fixtureであり、J_WINGの接続は分離Main定義でも確認した。根拠全文コピーとhashを `E/supply-sources/`、事実／未確定／仮定を `E/stage0-supply.json` に保存した。現行メーカー仕様を新規照会したとの主張はしない。#138本文の「7個のGND端子」は、同保存inventoryと現行インターフェースの6接点に一致しないため、今回の記録は実パッド番号を採用した（#138自体は不変）。
+
+抵抗の規模を見るため、28AWG断面積を0.0804mm²、銅ρ20を1.7241×10⁻⁸Ωmと仮定すると、100mmの線材は片道0.02144Ω。各導体の両端に2接点として、初期30mΩ/接点＋6本等分帰路なら往復約0.0950Ω、試験後50mΩ/接点なら約0.1417Ω。帰路1本に全電流を負わせる感度例は約0.2429Ω。これは測定値・保証上限ではなく、圧着・線材公差・Main・スイッチを含まない参考計算。全負荷105.0081mA／231.0081mAで0.1417Ωは約14.9／32.7mVの追加降下に相当する。
+
+**4.75VはWing側コネクタ到達後の仮定**なので、主表でケーブル降下を二重に引かない。Main側電圧から評価する場合は、その手前でケーブル・Main・スイッチ降下と共通GNDオフセットを別途評価する必要がある。
+
+DRV5055の電流は#138の留保をそのまま引き継ぐ。RevCの表max 5mA/個とFig5-13に不整合があり、全21個同時に5mAまたは11mA（10mAの工学的包絡＋出力負荷1mA）を流す。11mAを保証最大値とは呼ばない。MUXは3個×2.7µA。温度125°Cは抵抗率感度であり、125°C周囲温度での実機動作承認ではない。
+
+## Stage 1：固定クラスでの再配線
+
+#131 Stage 0のkeepout pads修正済み・等価性ゲート通過入力から派生。入力PCBは元とbyte一致で、配置・ネット・外形・1.2mm厚・keepoutは不変。変更は派生プロジェクトのglobal min幅／クリアランス0.10mm、Default信号幅0.10mm、PowerクラスHALL_5V/GND幅0.30mmとその割当のみ。全クラスのclearance0.10mm、via0.60/0.30mm。ライブラリは同一byteのコピーへ参照先だけ移した。`E/cell-inputs/<cell>/derivation.json` と `hashes.json` に記録。
+
+KRT v0.23.8、commit `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`。#131固定hashの2055ソースすべて一致、grid_router SHA256 `4411ccf3f074f519d8d69be29ac58b46ca7c4c2fe4f4be889d253d40996c2c0f`。KRT本体は未変更。
+
+事前readbackで、CLI幅を省略すると公式resolverが信号を0.127mmへclampすることを検出し、配線開始前に拒否した（`E/preflight/`）。実runはプロジェクトと同じ幅を公式CLIで固定した：`--track-width 0.1 --power-nets HALL_5V GND --power-nets-widths 0.3 0.3 --escalation off --clearance 0.1 --via-size 0.6 --via-drill 0.3`。readbackはnet選択前に停止する読取りのみ。各実runは単一、途中調整・再試行・手配線なし。16mm独立合格後に17mmを開始し、0.20mmは未実施。
+
+4指標の順は required unconnected / wrong-net contacts / material violations / unexplained transfer changes。
+
+| セル | 独立未配線 | 独立4指標 | 信号幅／本数 | 電源幅／本数 | via数 | 判定 |
+| --- | ---: | --- | --- | --- | ---: | --- |
+'''
+for pitch in [16,17]:
+ cell=f'KRT-{pitch}-2L-P0300';w=E/'inspection'/cell;a=json.loads((w/'assessment.json').read_text());width=json.loads((w/'width-audit.json').read_text());cs=width['classes']
+ text+=f"| {cell} | {a['measured_unconnected']} | {' / '.join(str(v) for v in a['metrics'].values())} | {cs['Signal']['minimum_mm']:.2f}mm / {cs['Signal']['segments']} | {cs['Power']['minimum_mm']:.2f}mm / {cs['Power']['segments']} | {width['via_count']} | 合格 |\n"
+text+='''
+各クラスの指定幅未満0、全via0.60/0.30mm。独立検査は#131の固定入力プロジェクトを使うDRC、#87由来の実銅箔graph、非配線AST/snapshot比較を踏襲。銅箔graphの形状・接触述語・保守的境界箱除外を変更していない。配置・ネット・外形等の転送差分0、物的DRC0、printing違反も0。
+
+出力プロジェクトの**設定は全キーで入力と一致**する。ただしbyte同一ではなく、KRTが `kicad_routing_tools` に `fab_floor_origin`・`records_rev`・実測 `power_widths` を追加した。幅／clearance／netclass等の書き換えはない。#131と同じ由来記録に加わる実測幅記録を初回の厳密比較器が未知項目として拒否したため、16mmは初回結果を `first-strict-*.json` に保持し、`project-record-audit.json` で全設定一致と記録値が指定0.30mmに一致することを別途確認した。配線・DRC・銅箔graphの再実行や4指標の変更はない。最終監査器はこの記録追加を明示的に扱う。
+
+セルごとの `runs/<cell>/` にlaunch・実効readback・record対応出力・report、`inspection/<cell>/` にDRC／copper-graph／transfer-diff／width-audit／physical-audit。起動引数・時刻・終了値・timeoutは `E/processes/`。
+
+## Stage 2：拡幅前後のDC比較
+
+#138の `estimate-dc-drop.py` の `model` を含む計算部分を `E/dc-model.py` に全文byte一致で複製した。実配線の中心線・パッド・via位置から抵抗網を構成し、全21センサ＋3MUXを同時印加する。35µm銅、20µm via barrel、温度係数0.00393/K、パッド拡がり近似、理想コネクタGND群、製造後の接触トポロジ保持という仮定を継承。公称／−20%幅は電源クラスでそれぞれ0.30／0.24mm、比較前は0.10／0.08mm。信号線を抵抗網に含めない。
+
+両ピッチ×前後×5/11mA×20/125°C×公称/最悪幅の32ケースを計算した。#138に保存された10ケース（5条件×2ピッチ）は再計算との差が1×10⁻⁸V未満。#138に保存のない3条件/ピッチは、同じ拡幅前実配線で追加計算した値として区別する。全解でKCL残差<1×10⁻⁷A。`E/dc-drop-estimate.json` に全パッド電圧・全センサ別結果・再現比較、`E/dc-comparison.csv` に比較表を保存した。拡幅前inventory・旧計算結果・旧計算スクリプトは `E/baseline138/` にbyte一致コピーし、未追跡の#138成果物が手元にない環境でも比較を再計算できるようにした。
+
+下表の「前／後ΔV」はセンサごとのHALL側降下＋GND上昇の最大値。「GND」はその最大往復降下センサでの上昇。最遠は幾何距離でなく電気的に局所電源が最低となるセンサを指し、前後で部品が変わり得る。全センサ中のGND上昇最大値はCSV/JSONにも別途保存。
+
+| ピッチ | mA/個 | °C | 幅条件 | 前ΔV | 後ΔV | 改善% | 後GND V | 後局所@4.75V | 4.5V余裕 | 後局所@5V |
+| --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+'''
+for row in rows:
+ nums=[float(row[k]) for k in ['before_loop_V','after_loop_V','drop_reduction_pct','after_ground_at_worst_V','after_local_4V75_V','after_margin_4V75_V','after_local_5V_V']]
+ text+=f"| {row['pitch_mm']}mm | {float(row['sensor_mA']):g} | {row['temperature_C']} | {'公称' if float(row['width_factor'])==1 else '−20%'} | "+' | '.join(f'{v:.4f}' if i!=2 else f'{v:.1f}' for i,v in enumerate(nums))+' |\n'
+text+='\n'
+for pitch in [16,17]:
+ for current in [.005,.011]:
+  r=next(r for r in dc['results'] if r['variant']=='after' and r['pitch_mm']==pitch and r['sensor_current_A']==current and r['temperature_C']==125 and r['width_factor']==.8)
+  w=r['worst_sensor']
+  text+=f"- {pitch}mm・{current*1000:g}mA/個・125°C・−20%幅：最低局所 {w['local_supply_at_4V75_V']:.4f}V、余裕 {w['margin_at_4V75_V']:+.4f}V、最悪センサ `{w['ref']}`、そこでのGND上昇 {w['ground_rise_V']:.4f}V。4.5V維持に必要なWing入力はモデル上 {r['required_wing_input_for_4V5_V']:.4f}V以上。\n"
+text+='''
+5mAの表maxでは両ピッチの全計算ケースで4.75V仮定に対する余裕が正に戻る。11mAの保守包絡では17mm・125°C・最悪幅に負の余裕が残る。5V入力仮定では今回の全ケースが4.5V以上だが、供給最低値が保証されていないため、実機全条件での成立は証明しない。0.30mm化で抵抗の問題は大きく緩和したものの、D-021改定と電源供給条件の採用、データシート電流不整合・実機電流・ハーネス抵抗・起動過渡・GND/ADC精度の確認はPO判断と後続検証に残る。
+
+このモデルは補助的な中心線抵抗近似であり、製造公差に対する保証最大値や電磁界解析ではない。Mainやハーネスの損失・接触集中・過渡・アナログ精度を含まない。0.30mmの電流容量／温度上昇や実機125°C動作を新たに認定していない。
+
+## 検証・提出
+
+作業ブランチ `issue-141-wing-power-integrity`。通常の `.git` は読取り専用のため、管理情報を `.issue141-runtime/git` に複製し、同じ作業ツリーで専用ブランチ・コミットを作成した。KRTは新runtimeに複製し、既存KiCad/geometry/venvを読取り専用で再利用。書込み可能キャッシュ・一時ファイルは `.issue141-runtime/` に限定した。
+
+開始を保守的に2026-11-05 02:42:00 UTC、期限を05:42:00 UTCとした。`E/verification.json` に検証時刻・経過時間・入力hash・単一run/順序・実効設定・32 DCケース・構文検査を記録する。開始時の全既存ファイル（通常.git・#137/#138の未追跡成果物・既存runtimeを含む）は `protected-start-hashes.json.gz` のSHA256で監査し、変更0を確認する。今回の差分は指定報告書と証跡の追加だけ。既存高レベルstatus／Dashboardは「既存変更禁止」の指示に従い更新しない。
+
+既存CIのpath条件上、この追加だけではlayout／product KiCad／firmware／tscircuitの重いジョブは対象外。今回のセルには上記の独立DRC・実銅箔graph・幅監査・DC再現を実行した。GitHub CIの実行結果はローカル合格と混同しない。著作Python/JSON/報告書の末尾空白は0。KRT生出力PCBの空白行はbyte保存を優先し整形せず、`E/whitespace-audit.json` に分けて記録する。
+
+公開試行とPMO向け引継ぎは `E/publication.json` を参照。Draft PR作成を試み、push不可の場合も指定ブランチをコミット済みで残す。mergeは実行しない。
+'''
+report.write_text(text)
+print(report)
