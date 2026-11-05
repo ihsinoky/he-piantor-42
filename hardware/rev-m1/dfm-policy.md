@@ -10,9 +10,11 @@ sets four copper layers (F.Cu signal / In1.Cu GND plane / In2.Cu signal /
 B.Cu signal), 1.2 mm thickness, 0.10 mm trace width / clearance, and
 0.60/0.30 mm via diameter/drill. The two-layer baseline was the D-012-era
 assumption. D-019 does not apply to Wings; do not apply the Main change to
-Wings. The representative21 Wing baseline (two layers, 1.2 mm, 0.10 mm
-trace/clearance, 0.60/0.30 mm vias) is decided independently in
-[D-021](../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline).
+Wings. The representative21 Wing baseline (two layers, 1.2 mm, trace width
+signal 0.10 mm / power (HALL_5V, GND) 0.30 mm, 0.10 mm clearance, 0.60/0.30 mm
+vias) is decided independently in
+[D-021](../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline),
+as amended on 2026-11-05 (Issue #143; originally uniform 0.10 mm).
 
 Prefer JLCPCB Economic PCBA where practical and retain the existing 1.2 mm
 thickness baseline. Place SMD components on one side by default. Prefer Basic
