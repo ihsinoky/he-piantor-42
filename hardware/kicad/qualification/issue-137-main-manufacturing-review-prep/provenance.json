@@ -1,0 +1,47 @@
+{
+  "base_commit": "8a4c3d321fca4880e62289c10d81af845f162bc5",
+  "remote_main_observed": "8a4c3d321fca4880e62289c10d81af845f162bc5",
+  "remote_main_check": "git ls-remote origin refs/heads/main; exit 0",
+  "working_directory": "/home/hatch/workspace/projects/he-piantor-42",
+  "branch": "issue-137-main-manufacturing-review-prep",
+  "git_dir": ".issue137-runtime/git",
+  "original_git_read_only": true,
+  "initial_untracked": [
+    ".issue129-runtime/",
+    ".issue133-runtime/",
+    ".issue135-runtime/"
+  ],
+  "instruction_source": "/home/hatch/workspace/goals/he-piantor-42-keyboard-pmo/instructions/issue-137-main-manufacturing-review-prep.md",
+  "instruction_sha256": "4c51c37ed1e099893ecf6f58434fb583658ba463253a149e4955798ac0bd6be9",
+  "timebox": {
+    "hours": 2,
+    "conservative_anchor_utc": "2026-11-05T02:03:35Z",
+    "anchor_reason": "Issue creation precedes task execution; conservative earlier bound, not a claimed exact start.",
+    "deadline_utc": "2026-11-05T04:03:35Z"
+  },
+  "inputs": {
+    "docs/issue-121-full-auto-conditions.md": "a1e63c26973421e6403fdc10b3e1a74493291f4192aa10723e1690d1e1e776bd",
+    "docs/issue-124-main-bom-pcba-estimate.md": "656f1d4525549168c2840c24f387a3238fdee113b4b12ac9cf17eb2c21ae7e09",
+    "docs/decisions.md": "eafd58af50731de09aca86d63f225123e0e09dffd620720b61c3714ac4ef6051",
+    "hardware/kicad/qualification/issue-124-main-bom-pcba/main-bom.csv": "ea8ec2b1b257ea0498dc3766da91f11500281472b5197eb227861fb9b8bb4824",
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/main.kicad_pcb": "6163ae555a6edf192e52a6dad50721184f3ef9b00f50d468516bf97c545ed2dd",
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/router-structured-log.json": "61c3850fc7f4cf5cd66e8b130cdb9a565d013e78f7f5c8f8931ad0e33e85b69f"
+  },
+  "geometry_environment": {
+    "python": "/usr/bin/python3",
+    "pcbnew_version": "9.0.9-9.0.9~ubuntu24.04.1",
+    "PYTHONPATH": "$PWD/.issue129-runtime/kicad/usr/lib/python3/dist-packages",
+    "LD_LIBRARY_PATH": "$PWD/.issue129-runtime/kicad/usr/lib/x86_64-linux-gnu:$PWD/.issue129-runtime/kicad/usr/lib/kicad",
+    "XDG_CONFIG_HOME": "$PWD/.issue137-runtime/config",
+    "TMPDIR": "$PWD/.issue137-runtime/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "reuse": "Existing KiCad binary/bindings read only; own temp/config/output in .issue137-runtime or new evidence. No new dependencies installed."
+  },
+  "read_only_design_commands": [
+    "analyze-board.py > board-analysis.json",
+    "crosscheck-geometry.py > geometry-crosscheck.json",
+    "build-review-assets.py",
+    "verify.py"
+  ],
+  "created_utc": "2026-11-05T02:16:27.582280+00:00"
+}
