@@ -1,0 +1,24 @@
+{
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/155",
+  "title": "Main 機構改版 Stage 2：案A の実装・再配線・再資格確認",
+  "issue_number": 155,
+  "body": "## 前提（決定済み）\n- PO は Issue #153 の第一案Aを採用した（2026-11-06）：Main 外形 48×44mm を維持し、NPTH φ2.2mm の取付穴×4 を非矩形配置で追加する。穴座標・仕様は #153 報告書（docs/issue-153-main-mounting-stage1.md）のとおり：H1 (79,92)／H2 (121,81)／H3 (79,119)／H4 (102,111.5)、全銅層に φ5.0mm の予約領域\n- Main は ver.A に流用する前提で改版する。未発注のため発注前に完了させる\n- D-019（4層・1.2mm・幅／間隙 0.10mm・via 0.60/0.30・KRT escalation off）と D-022（POFV 指定、J1 の Economic PCBA 一括実装）は改版後も維持する\n\n## 作業\n1. 決定記録：案Aの採用を D-023 として docs/decisions.md に追記する（#153 の座標・仕様・根拠を参照する形）\n2. 改版入力の構築：#121 合格出力と対応する入力側 project を起点に hash を保存し、取付穴4個・全銅層の銅箔／via／pour 禁止領域・必要なシルク逃げだけを追加する。部品・ネット・J1/J2 の位置は不変。NPTH 自体を keepout 内の禁止パッドとして誤判定させない（Wing での rule-area の扱いを踏襲）\n3. 再配線：D-019 条件で KRT を実行する。まず直接干渉する3セグメント（VBUS／WING_EN／GND）の局所退避を試み、成立しない場合は未配線入力を作る範囲を明示してから全体再配線する\n4. 独立資格確認：GND 再充填→KiCad DRC→独立4指標（必須未接続／異ネット接触／物的違反／説明不能な転送変更）すべて0。全37ネットの連結確認、穴径・非めっき・位置の読戻し、板端・ドリル間の確認\n5. 製造データと発注前確認の更新：改版基板の Gerber／ドリルを生成し、POFV 対象ビアの再分類（座標・パッド重なり）、J1 工程・BOM/CPL 原点の再確認を行う。D-022 の結論が変わる場合は明示する\n6. 機械面の確認：非矩形4支点での J1/J2 挿抜荷重と基板たわみ、ねじ締結・工具アクセス、下面はんだとボスの干渉を、可能な範囲で確認し、残課題を明示する\n\n## 制約\n- 条件緩和（幅・間隙・層数・escalation の変更）や無制限の再試行は行わない。局所・全体の再配線がいずれも時間枠内に成立しない場合は、その状態を報告して止める\n- 発注・課金は行わない。成果物は Draft PR、merge は PO 判断\n- タイムボックス：4時間",
+  "state": "open",
+  "user": {
+    "login": "ihsinoky",
+    "name": "ihsinoky",
+    "email": null,
+    "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+    "id": 42207341
+  },
+  "assignees": null,
+  "labels": null,
+  "milestone": null,
+  "state_reason": null,
+  "comments": 0,
+  "created_at": "2026-11-05T19:52:02Z",
+  "updated_at": "2026-11-05T19:52:02Z",
+  "closed_at": null,
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/155",
+  "display_title": "Main 機構改版 Stage 2：案A の実装・再配線・再資格確認"
+}

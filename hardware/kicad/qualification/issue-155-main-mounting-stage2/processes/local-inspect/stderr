@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/__init__.py", line 109, in <module>
+    from numpy.__config__ import show_config
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/__config__.py", line 4, in <module>
+    from numpy._core._multiarray_umath import (
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/_core/__init__.py", line 24, in <module>
+    from . import multiarray
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/_core/multiarray.py", line 11, in <module>
+    from . import _multiarray_umath, overrides
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/_core/overrides.py", line 4, in <module>
+    import inspect
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-155-main-mounting-stage2/inspect.py", line 4, in <module>
+    from shapely.geometry import LineString
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/shapely/geometry/__init__.py", line 3, in <module>
+    from shapely.geometry.base import CAP_STYLE, JOIN_STYLE
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/shapely/geometry/base.py", line 15, in <module>
+    from shapely._geometry_helpers import _geom_factory
+  File "shapely/_geometry_helpers.pyx", line 1, in init shapely._geometry_helpers
+AttributeError: partially initialized module 'numpy' has no attribute 'dtype' (most likely due to a circular import). Did you mean: 'dtypes'?
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-155-main-mounting-stage2/inspect.py", line 4, in <module>
+    from shapely.geometry import LineString
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/shapely/__init__.py", line 20, in <module>
+    from shapely.lib import GEOSException
+ImportError: numpy._core.multiarray failed to import
