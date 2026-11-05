@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/141",
+    "title": "Wing 電源インテグリティのフォローアップ：供給条件の確定と電源／GND 拡幅セルの再配線評価",
+    "issue_number": 141,
+    "body": "## 目的\nIssue #138 の点検で、Wing の全ネットが一律 0.10mm で配線されており、HALL_5V／GND の電圧降下が条件によっては DRV5055 の推奨下限（5V 系で 4.5V）を割りうることが分かった。本 Issue は (1) 供給側の事実を確定し、(2) 電源／GND のみを幅広にした再配線セルを実証し、(3) 電圧降下を再評価して、D-021 改定の要否を PO が判断できる材料を揃える。基準の改定決定は PO が行う。\n\n## Stage 0：供給条件の確定\n- リポジトリ内の設計データ（Main の設計定義・回路資料）から、HALL_5V の供給元（レギュレータ／電源ツリー）、J_WING での想定電圧、ケーブル・コネクタの想定を確認し、確定できた事実と残る仮定を切り分けて記録する\n- DRV5055 の供給電流は #138 の留保（データシート RevC の表 max 5mA と Fig 5-13 の不整合）を引き継ぎ、表 max と保守包絡の両ケースで評価する\n\n## Stage 1：拡幅セルの再配線（KRT、escalation off、2層）\n- 基礎入力は #131 の Stage 0 改訂入力（keepout 修正済み）。ネットクラスを分ける：HALL_5V と GND は幅広クラス、他の信号は 0.10mm のまま。クリアランスは 0.10mm、ビア 0.60／0.30mm、配置固定\n- 幅の候補は 0.30mm を先に試し、完走しなければ 0.20mm を試す（各セル単一 run）\n- まず representative21-16mm で行い、合格したら同条件で 17mm を確認する\n- 合格基準は従来どおり：独立4指標すべて 0、幅監査（信号 0.10mm 未満なし、電源／GND は指定幅未満なし）\n\n## Stage 2：電圧降下の再評価\n- #138 と同じ DC モデル手法で、再配線後の基板について最遠センサの局所電源電圧と GND 持ち上がりを再計算する（同じ負荷ケース：表 max／保守包絡、20°C／高温側、最悪幅）\n- 供給条件（Stage 0 の確定値）と組み合わせ、推奨下限 4.5V に対してどこまで余裕が戻るかを示す\n\n## 制約・成果物\n- タイムボックス：3時間\n- 成果物：報告書 docs/issue-141-wing-power-integrity.md と証跡（hardware/kicad/qualification/issue-141-wing-power-integrity/）、追加のみ・Draft PR、merge は PO 判断\n- D-021 や既存の設計・基板データは変更しない。本 Issue は評価と材料作成まで",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T02:41:42Z",
+    "updated_at": "2026-11-05T02:41:42Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/141",
+    "display_title": "Wing 電源インテグリティのフォローアップ：供給条件の確定と電源／GND 拡幅セルの再配線評価"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/141",
+  "title": "Wing 電源インテグリティのフォローアップ：供給条件の確定と電源／GND 拡幅セルの再配線評価",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/141",
+  "display_title": "Wing 電源インテグリティのフォローアップ：供給条件の確定と電源／GND 拡幅セルの再配線評価"
+}

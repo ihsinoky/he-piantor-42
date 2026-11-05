@@ -1,0 +1,124 @@
+{
+  "utc": "2026-11-05T02:46:22.714018+00:00",
+  "sources": [
+    {
+      "path": "docs/decisions.md",
+      "sha256": "eafd58af50731de09aca86d63f225123e0e09dffd620720b61c3714ac4ef6051",
+      "copy": "supply-sources/00-decisions.md.txt"
+    },
+    {
+      "path": "docs/specification.md",
+      "sha256": "45f6b43c6748bbd878cbbea477e2cfcbbfa07c2848d0d301068928890332e644",
+      "copy": "supply-sources/01-specification.md.txt"
+    },
+    {
+      "path": "docs/hall-acquisition.md",
+      "sha256": "a46fda2c1f33838c92c5f95d300e5b0531274467bf1bcc7168fcc1bcbe6710d7",
+      "copy": "supply-sources/02-hall-acquisition.md.txt"
+    },
+    {
+      "path": "hardware/rev-m1/main-wing-interface.md",
+      "sha256": "30f1e61f164d3834d0ae1a079c78acd94129de823b06dd77b9889435598c3120",
+      "copy": "supply-sources/03-main-wing-interface.md.txt"
+    },
+    {
+      "path": "hardware/rev-m1/g0b-freeze-proposal.md",
+      "sha256": "fc49775bb68b8513b66128089a55445c9c5fc73e442654057ac419531664da67",
+      "copy": "supply-sources/04-g0b-freeze-proposal.md.txt"
+    },
+    {
+      "path": "hardware/jitx/he_piantor_42_jitx/m1.py",
+      "sha256": "4a1f13c169da45681e375a42e5b2b6475cec9a09899b06fcee346cddad6fbfc2",
+      "copy": "supply-sources/05-m1.py.txt"
+    },
+    {
+      "path": "hardware/jitx/he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py",
+      "sha256": "8cd4ae0920a257278aba61f341b9e979f1cf3d9d182d79d6a7f51ee44ee39703",
+      "copy": "supply-sources/06-texas_instruments_tps22919dckr.py.txt"
+    },
+    {
+      "path": "hardware/jitx/he_piantor_42_jitx/components/power/diodes_ap2112k_3_3trg1.py",
+      "sha256": "2ab32372b566db3f1caae7f0e8495a504057d652e19d0919d9be9e96c4e0062a",
+      "copy": "supply-sources/07-diodes_ap2112k_3_3trg1.py.txt"
+    },
+    {
+      "path": "hardware/tscircuit/src/qualification/revm1-routing-proof.tsx",
+      "sha256": "0caa8e53eed298c3cf65715a15a1d671d91de715d4eb8f790eeb13e17a777008",
+      "copy": "supply-sources/08-revm1-routing-proof.tsx.txt"
+    }
+  ],
+  "facts": [
+    {
+      "fact": "HALL_5V is USB VBUS switched by U_LOAD TPS22919DCKR, not regulated 5V and not AP2112 3.3V",
+      "sources": [
+        "docs/hall-acquisition.md",
+        "hardware/jitx/he_piantor_42_jitx/m1.py",
+        "hardware/tscircuit/src/qualification/revm1-routing-proof.tsx"
+      ]
+    },
+    {
+      "fact": "TPS22919 component model rates the load switch 1.5 A; this is NOT guaranteed available USB/harness current",
+      "sources": [
+        "hardware/jitx/he_piantor_42_jitx/components/power/texas_instruments_tps22919dckr.py"
+      ]
+    },
+    {
+      "fact": "J_WING pin 1 carries HALL_5V; six return contacts 2/4/8/10/12/14 are common GND; control is 3.3V, no Wing 3.3V supply",
+      "sources": [
+        "hardware/rev-m1/main-wing-interface.md",
+        "hardware/rev-m1/g0b-freeze-proposal.md",
+        "hardware/tscircuit/src/qualification/revm1-routing-proof.tsx"
+      ]
+    },
+    {
+      "fact": "Accepted evaluation harness target: 100mm contact-to-contact, 28AWG stranded copper, 14 individually crimped 1:1 conductors; GH BM14B-GHS-TBT / GHR-14V-S / SSHL-002T-P0.2",
+      "sources": [
+        "hardware/rev-m1/g0b-freeze-proposal.md"
+      ]
+    },
+    {
+      "fact": "Repository G0B quotes GH 1A/contact, initial contact resistance <=30mOhm, after-test <=50mOhm",
+      "sources": [
+        "hardware/rev-m1/g0b-freeze-proposal.md"
+      ]
+    }
+  ],
+  "unresolved": [
+    "No repository guarantee of minimum/maximum voltage at Wing J_WING under load; upstream USB, Main copper and load-switch drops unqualified",
+    "No assembled harness resistance, contact/crimp measurement or delivered wire tolerance; final Rev.A mechanics/length open",
+    "1.5A switch rating is not a USB current entitlement; full-board current/startup gate remains open",
+    "DRV5055 RevC table max 5mA versus Fig5-13 inconsistency inherited from #138; 11mA includes output-load engineering envelope, not guaranteed datasheet max"
+  ],
+  "assumptions": {
+    "wing_connector_sensitivity_V": [
+      5.0,
+      4.75
+    ],
+    "connector_voltage_is_after_harness": true,
+    "source_and_return_connector_nodes_ideal": true,
+    "sensor_current_A": [
+      0.005,
+      0.011
+    ],
+    "mux_current_A": 2.7e-06,
+    "temperatures_C": [
+      20,
+      125
+    ],
+    "copper_thickness_mm": 0.035,
+    "copper_rho20_ohm_m": 1.7241e-08,
+    "copper_alpha_per_K": 0.00393,
+    "via_barrel_um": 20
+  },
+  "harness_illustration": {
+    "not_measurement_or_guarantee": true,
+    "area28AWG_mm2_assumed": 0.0804,
+    "wire_resistance_one_way_20C_ohm": 0.02144402985074627,
+    "two_mated_contacts_per_conductor": true,
+    "loop_initial_six_equal_returns_ohm": 0.09501803482587065,
+    "loop_after_test_six_equal_returns_ohm": 0.14168470149253734,
+    "loop_after_test_single_return_ohm": 0.24288805970149255,
+    "formula": "R_wire=rho*0.100m/0.0804mm2; R_loop=(R_wire+2*R_contact)*(1+1/N_returns). Equal sharing is an assumption. Excludes Main, switch, crimps and resistance tolerance.",
+    "do_not_subtract_again_from_4V75_at_wing": true
+  }
+}
