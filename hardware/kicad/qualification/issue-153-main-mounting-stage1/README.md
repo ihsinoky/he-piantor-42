@@ -18,7 +18,7 @@
 | build-assets.py | CSV・図・入力記録の再生成。書込み先はこの新規証跡フォルダのみ |
 | verify.py / verification.json | 寸法とnative結果・派生7ファイルのbyte再現、SVG穴・強調配線・本文寸法表の照合、元#121合格指標、入力保全の確認 |
 | finish-review.json / clean-checkout-verification.json | 仕上げ時の修正・図の目視確認、他Issue成果物のない入力環境での再現結果 |
-| publication.json | commit後のpush／Draft PR試行結果。mergeなし |
+| publication.json | push成功と[Draft PR #154](https://github.com/ihsinoky/he-piantor-42/pull/154)の作成・確認記録。mergeなし |
 
 ## 再現
 

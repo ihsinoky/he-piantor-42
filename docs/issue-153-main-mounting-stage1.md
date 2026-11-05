@@ -128,4 +128,4 @@ POへの第一提案は**A（48×44維持・非矩形4穴・直接3本の配線�
 
 仕上げ検証では19候補のKiCad実効形状照合、寸法JSONと派生7ファイルのbyte再現、Aの本文寸法表8行、A／BのSVG穴位置・径・ラベル・強調配線を確認した。3図を描画して目視確認し、#147／#149／#150成果物のない入力環境でも再現した。[E/finish-review.json](../hardware/kicad/qualification/issue-153-main-mounting-stage1/finish-review.json)に修正内容と確認範囲を保存する。
 
-公開操作は[publication.json](../hardware/kicad/qualification/issue-153-main-mounting-stage1/publication.json)に記録する。今回の追加だけを選択してコミットし、pushとDraft PR作成を試みる。既存の他Issue成果物・runtimeはコミット対象外とし、mergeは行わない。
+今回の報告書・証跡22ファイルだけを選択して`issue-153-main-mounting-stage1`へコミット・pushし、[Draft PR #154](https://github.com/ihsinoky/he-piantor-42/pull/154)を作成した。公開操作と確認時の状態は[publication.json](../hardware/kicad/qualification/issue-153-main-mounting-stage1/publication.json)に記録する。既存の他Issue成果物・runtimeはコミット対象外であり、mergeは行っていない。
