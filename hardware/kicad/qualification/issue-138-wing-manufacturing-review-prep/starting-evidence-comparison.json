@@ -1,0 +1,47 @@
+{
+  "starting_evidence": [
+    {
+      "path": "docs/issue-133-wing-cost-check.md",
+      "sha256": "58d03efc3789d4cee79645caca391d5e9650c0cb35a4a4ac22414331d2a28752"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-133-wing-cost-check/geometry-evidence.json",
+      "sha256": "d7f2f8efff2e9749efdf818ee4955fdba546d34e670a48c28dafaa6a8e6d84c8"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-133-wing-cost-check/capability-capture/capability-retrieval-records.json",
+      "sha256": "355c686d5b34bf2637708d4056a0aff660adaf95b0abf644fadd312cb1df51ca"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-133-wing-cost-check/capability-capture/extra-charges.text.txt",
+      "sha256": "6e9a52ef66b99d3c97226c1f780af902bacf3b989e5444f5ad89b936162a029b"
+    },
+    {
+      "path": "docs/decisions.md",
+      "sha256": "eafd58af50731de09aca86d63f225123e0e09dffd620720b61c3714ac4ef6051"
+    }
+  ],
+  "comparison": [
+    {
+      "cell": "KRT-16-2L-0100",
+      "previous_input": "hardware/kicad/qualification/issue-131-wing-condition-search/evidence/cell-inputs/KRT-16-2L-0100/main.kicad_pcb",
+      "previous_input_sha256": "d23e9e35dbf89304aa521955687f35404ddcc5d97ee01bf579b9eaa82353dad1",
+      "routed_output": "hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/out.kicad_pcb",
+      "routed_output_sha256": "0c1a95ef893ead7c8ad8d28a7e807ff085a2d08e2e736197ebace7fd545192d5",
+      "external_edges_equal": true,
+      "npth_count_equal": true,
+      "slots_and_internal_edges_zero": true
+    },
+    {
+      "cell": "KRT-17-2L-0100",
+      "previous_input": "hardware/kicad/qualification/issue-131-wing-condition-search/evidence/cell-inputs/KRT-17-2L-0100/main.kicad_pcb",
+      "previous_input_sha256": "0d98eec014a23f6e06b34bb3641532dcc6c6d65ea9ac936d905264cd985c69cc",
+      "routed_output": "hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-17-2L-0100/out.kicad_pcb",
+      "routed_output_sha256": "06d550ff5047a81449dca50dd013c199d2ae5ce1a61fe7ea279a24708da8513c",
+      "external_edges_equal": true,
+      "npth_count_equal": true,
+      "slots_and_internal_edges_zero": true
+    }
+  ],
+  "interpretation": "Self-check: geometry lacks densely packed milled slots/cutouts. Manufacturer fee classification is not determined by this script."
+}
