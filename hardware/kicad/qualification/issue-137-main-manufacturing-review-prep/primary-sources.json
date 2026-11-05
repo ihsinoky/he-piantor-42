@@ -1,0 +1,243 @@
+{
+  "acquisition": "2026-11-05 unauthenticated public HTTPS GET via curl --http1.1; web search used for discovery and corroboration. No login, upload, quote submission, contact, order or payment.",
+  "raw_response_location": ".issue137-runtime/sources/<id>.html (untracked runtime); hashes and compact review excerpts retained here instead of redistributing full articles.",
+  "records": [
+    {
+      "id": "pcb-capabilities",
+      "url": "https://jlcpcb.com/capabilities/pcb-capabilities/",
+      "started_utc": "2026-11-05T02:07:35.068796+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/capabilities/pcb-capabilities/",
+      "sha256": "ec1c5066ccc0489ad3356e9102ae3e1de7d6e8cbf3c01b52037968f8843e9de2",
+      "bytes": 139848,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:37.479525+00:00",
+      "review": {
+        "section": "Soldermask > JLCPCB Via-in-Pad Process / Plugged vias; extracted text lines 335–347",
+        "quote": "Compatible with via diameters from 0.15 to 0.55 mm.",
+        "facts": [
+          "Epoxy Filled & Capped と Copper paste Filled&Capped を掲載。充填後にめっきする。6層以上は既定工程。",
+          "インク充填の条件は両面開口なし・他のマスク開口から0.35mm以上・径0.5mm以下。",
+          "diameters の0.15–0.55mmという表記は外径か穴径か当該行で明示されない。0.60/0.30mmへの適用はメーカー確認未取得。"
+        ]
+      }
+    },
+    {
+      "id": "via-covering",
+      "url": "https://jlcpcb.com/help/article/pcb-via-covering",
+      "started_utc": "2026-11-05T02:07:35.069344+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/help/article/pcb-via-covering",
+      "sha256": "4d6e233021100915270137ebf68b247492a7cd875415011d5a0cc07362e02edb",
+      "bytes": 133779,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:37.455164+00:00",
+      "review": {
+        "section": "4. Epoxy-Filled & Capped Vias; 5. Copper-Paste-Filled & Capped Vias; Important Notes; lines 203–212",
+        "quote": "Alternatively, you can specify to fill all vias of a particular diameter.",
+        "facts": [
+          "非導電エポキシまたは導電性銅ペーストを充填し、銅めっきで蓋を作る。tented / soldermask ink plugged とは別工程。",
+          "インクではパッド内・マスク開口付近を充填できない。エポキシ/銅は対象にできる。",
+          "穴径0.5mm超は推奨せず。対象viaの画像または注記、または特定径の全viaを指定可能。Confirm production filesを推奨。",
+          "記述中に全PTHを充填するようにも読める表現があるが、同記事は部品用PTHとviaを区別する。J1等の部品穴は対象外と明記する必要がある。"
+        ]
+      }
+    },
+    {
+      "id": "extra-charges",
+      "url": "https://jlcpcb.com/help/article/in-what-cases-will-there-be-charged-extra",
+      "started_utc": "2026-11-05T02:07:35.070301+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/help/article/in-what-cases-will-there-be-charged-extra",
+      "sha256": "47f911adedd740f7b4d0251311e1b52bf9ee5419515c65d54d34758f4d799ea0",
+      "bytes": 162589,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:37.354821+00:00",
+      "review": {
+        "section": "Extra costs introduction; 4. Small Size Holes; 8. Orders with Special Process; lines 132–139,154–156,173–174",
+        "quote": "extra costs required during the file review process",
+        "facts": [
+          "オンライン計算の正しい選択が原則。特殊工程や選択の不一致はファイル審査時に追徴され得る。",
+          "POFV専用の固定追加額、個数単価、面積単価は当該追加料金ページから未取得。",
+          "via-in-padなら必ず差し戻す、または自動充填するという個別ルールは未取得。"
+        ]
+      }
+    },
+    {
+      "id": "pofv-process",
+      "url": "https://jlcpcb.com/news/free-via-in-pad-6-20-layer-pcbs-pofv",
+      "started_utc": "2026-11-05T02:07:35.071609+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/news/free-via-in-pad-6-20-layer-pcbs-pofv",
+      "sha256": "6f720e18d2e759cc4f6c9e5eda2effd704ff48653124d0a4a56311e8296f301b",
+      "bytes": 115029,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:37.481230+00:00",
+      "review": {
+        "section": "Introduction; 2. How They’re Made; 3. POFV Design Requirements; lines 82,93–111",
+        "quote": "POFV for 4-layer PCBs still requires charges.",
+        "facts": [
+          "2022-11-02公式告知：6–20層は無料、4層は有料。現Mainは4層なので無料条件を流用できない。",
+          "ドリル・穴壁めっきに加え、エポキシ充填、加熱乾燥、平坦化、追加めっき。",
+          "当時の設計条件は穴0.2–0.5mm、annular ring最小0.05mm/推奨0.075mm。現viaは穴0.30、ring0.15。現在の能力表の径表現と併せて確認する。",
+          "当該資料は4層POFVの具体追加額を示さない。"
+        ]
+      }
+    },
+    {
+      "id": "pcba-capabilities",
+      "url": "https://jlcpcb.com/capabilities/pcb-assembly-capabilities",
+      "started_utc": "2026-11-05T02:07:37.354932+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/capabilities/pcb-assembly-capabilities",
+      "sha256": "c98debccf5bf987ac2c37c9f58bffcdfc9b20ab47c16a2180262b4d2fb005ac4",
+      "bytes": 112561,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:38.513469+00:00",
+      "review": {
+        "section": "Assembly Types / Layer / Thickness / Dimension / Reflow temperature / SPI; FAQs mixed assembly & unused through-holes; lines 82–137,249–255",
+        "quote": "This service is available under both the Economic and Standard PCBA.",
+        "facts": [
+          "両サービスで同一注文のSMT/THT混載に対応。通常SMDはリフロー、THTはウェーブ。個別J1の工程は未取得。",
+          "Economicは片面配置・2/4/6層・0.8–1.6mm・2–50枚・最小10×10mm。Standardは両面可・1–32層・最小70×70mm。",
+          "Economicは標準stackupのみ。Standardはrails/fiducials必要、SPIあり。EconomicにSPIなし。",
+          "未使用部品穴の保護は一般説明であり、搭載済みJ1の脚だけを残せる保証ではない。"
+        ]
+      }
+    },
+    {
+      "id": "pcba-price",
+      "url": "https://jlcpcb.com/help/article/pcb-assembly-price",
+      "started_utc": "2026-11-05T02:07:37.455249+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/help/article/pcb-assembly-price",
+      "sha256": "511d8ad2e78ad62299a65d5e71bb4a12361f96dd676de8f89870135b003f23cd",
+      "bytes": 123989,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:38.575460+00:00",
+      "review": {
+        "section": "Fee table; Fee Details and Explanations; lines 130–239; page update 2026-10-22",
+        "quote": "The fee is calculated based on the number of solder joints requiring manual soldering.",
+        "facts": [
+          "USD表。少量manualは両サービス0.0164/joint、hand-solder laborは両サービス3.58/order。pre-reflowは0.016/joint。",
+          "片面setup Economic8.18/Standard25.56、stencil1.53/8.21、feeder Economic Extended3.07/type / Standard Basic・Extended1.53/type。",
+          "Standard追加項目：handlingはEconomicとの差が14.93未満のとき不足額。単板assembly surcharge0.48はbulkの最低SMT費を補う規定であり5枚に自動加算しない。",
+          "Standard rigid fixtureは8.21/fixture、1–29枚は2fixtures=16.42の表がある。適用、パネル/rails、storage等の実額は未取得。"
+        ],
+        "rates_usd": {
+          "manual_joint_1_to_10000": 0.0164,
+          "hand_solder_labor_per_order": 3.58,
+          "pre_reflow_joint": 0.016,
+          "smt_joint_small_order": 0.0016,
+          "economic_setup": 8.18,
+          "standard_single_setup": 25.56,
+          "economic_stencil": 1.53,
+          "standard_single_stencil": 8.21,
+          "economic_extended_feeder_per_type": 3.07,
+          "standard_feeder_per_type": 1.53
+        }
+      }
+    },
+    {
+      "id": "pcba-terms",
+      "url": "https://jlcpcb.com/help/article/terms-and-conditions-of-jlcpcb-assembly-service",
+      "started_utc": "2026-11-05T02:07:37.479803+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/help/article/terms-and-conditions-of-jlcpcb-assembly-service",
+      "sha256": "4e9cc71a0baf0df562867a83f1a3b14f6c2a071cf2fbd986ce06f23cf1dad523",
+      "bytes": 127566,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:38.683411+00:00",
+      "review": {
+        "section": "2. Notes on DFM (6); 5. Disclaimer (6); lines located by section headings",
+        "quote": "JLC will not take the consequential responsibility due to this.",
+        "facts": [
+          "via-in-padのはんだ吸い込みにより部品の傾き・tombstoning等が起き得る旨と免責を掲載。",
+          "PTHは3D製造ファイル、SMDは2Dファイルの配置確認を求める。",
+          "無指定なら必ず製造者が埋める/拒否する、という保証は記載されていない。"
+        ]
+      }
+    },
+    {
+      "id": "j1-part",
+      "url": "https://jlcpcb.com/partdetail/C165948",
+      "started_utc": "2026-11-05T02:07:37.481283+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/partdetail/C165948",
+      "sha256": "52562b4b4df8c5f3c9a9260a7a520bcf17ff09a41216da7ce61452652d7a0d22",
+      "bytes": 425248,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:38.926723+00:00",
+      "review": {
+        "section": "Product attributes / Assembly Type / PCBA Type; lines 77–98",
+        "quote": "SMT Assembly",
+        "facts": [
+          "C165948 / TYPE-C-31-M-12 / Korean Hroparts Elec。Package=SMD、Assembly Type=SMT Assembly、PCBA Type=Economic and Standard。",
+          "部品単位の両サービス対応は確認できた。4本のPTH脚の接合工程・料金・脚だけの未はんだ納品可否は掲載から未取得。"
+        ]
+      }
+    },
+    {
+      "id": "resin-price-notice",
+      "url": "https://jlcpcb.com/news/pcb-lead-time-and-price-adjustment-august2026",
+      "started_utc": "2026-11-05T02:07:38.513570+00:00",
+      "method": "unauthenticated GET",
+      "curl_exit": 0,
+      "transport": "curl --http1.1",
+      "stderr": "",
+      "http_status": 200,
+      "final_url": "https://jlcpcb.com/news/pcb-lead-time-and-price-adjustment-august2026",
+      "sha256": "2bd7f0c350031b91b7d3f71234aed091acd4573aed4ef1f5a5c694ae3571883c",
+      "bytes": 86697,
+      "status": "取得済み（本文の該当箇所を確認）",
+      "finished_utc": "2026-11-05T02:07:39.441680+00:00",
+      "review": {
+        "section": "Temporary Adjustments for Resin Plugging Process & 6+ Layer PCB Orders; 2026-08-06; lines 79–84",
+        "quote": "4-Layer PCBs with Resin Filled Vias : Prices will experience a slight increase.",
+        "facts": [
+          "4層樹脂充填viaの値上げを公式告知。具体金額は示さない。約15日の生産ライン調整の歴史的告知であり、現在の納期や増額を確定する根拠にはしない。"
+        ]
+      }
+    }
+  ],
+  "unobtained": [
+    "4-layer 48×44mm 1.2mm 5枚でのfilled/capped増額・算定単位・minimum fee・納期",
+    "0.60/0.30mmに対する現行能力表diameters表記の正式解釈",
+    "無指定via-in-padの当該設計に対するDFM結果・必ず差し戻すかどうか",
+    "C165948の4PTH脚の個別工程・実接合課金数・脚だけの後工程対応",
+    "filled/cappedとEconomic PCBAの同時適格性・Standard移行の要否",
+    "Gerber/BOM/CPLに基づく発注総額"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/137",
+    "title": "Main 製造前レビュー準備：via-in-pad 25箇所と USB J1 の PTH 固定脚の扱いを調査する",
+    "issue_number": 137,
+    "body": "## 目的\nD-019 で未決定として残した Main の発注仕様2件について、一次情報に基づく判断材料（選択肢・費用影響・推奨案）を用意する。仕様の決定自体は PO が行う。本 Issue は調査と材料作成まで。\n\n## 対象1：via-in-pad / paste opening（25箇所）\n- Issue #121 の証跡にある KRT の via-in-pad／paste opening 自己検出25箇所（製造注記であり DRC 違反ではない）の内訳を整理する：実際にパッド上にビアが乗っている箇所と、ペースト開口との重なり等の箇所を分類し、座標と対象部品を一覧化する\n- JLCPCB の一次情報（公式の製造能力・追加料金・発注仕様のページ）で、filled／capped via の工程選択肢と費用影響を確認する\n- 選択肢を整理する：(a) 現状のまま発注（製造側 DFM 審査での扱い見込みを含む）、(b) filled／capped を指定して発注、(c) 設計側で回避（配線済み基板への影響＝再配線評価が要ることも明記）。それぞれの費用・リスク・手間を示し、推奨案を付ける\n\n## 対象2：USB J1 の PTH 固定脚の実装工程\n- J1（USB コネクタ）は SMD 信号パッドに加えて PTH 固定脚×4と NPTH×2 を持つ（#124 で確認済み）。#124 の見積もりは片面 SMD 実装前提だった\n- JLCPCB PCBA の一次情報で、スルーホール部品を含む実装の扱い（同一発注で実装可能か、工程・追加料金、部品形状の制約）を確認する\n- 選択肢を整理する：(a) PCBA で一括実装、(b) 脚のみ後工程（手はんだ等）で処理、(c) その他。それぞれの費用・現実性と推奨案を示す\n\n## 制約・成果物\n- タイムボックス：2時間\n- 発注・課金は行わない。ログインが必要な精密見積もりは行わない\n- 成果物：docs/issue-137-main-manufacturing-review-prep.md と証跡（hardware/kicad/qualification/issue-137-main-manufacturing-review-prep/）、追加のみ・Draft PR、merge は PO 判断",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T02:03:35Z",
+    "updated_at": "2026-11-05T02:03:35Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/137",
+    "display_title": "Main 製造前レビュー準備：via-in-pad 25箇所と USB J1 の PTH 固定脚の扱いを調査する"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/137",
+  "title": "Main 製造前レビュー準備：via-in-pad 25箇所と USB J1 の PTH 固定脚の扱いを調査する",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/137",
+  "display_title": "Main 製造前レビュー準備：via-in-pad 25箇所と USB J1 の PTH 固定脚の扱いを調査する"
+}
