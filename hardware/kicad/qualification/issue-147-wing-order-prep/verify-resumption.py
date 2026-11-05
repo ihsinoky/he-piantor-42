@@ -4,6 +4,7 @@ from collections import Counter
 import gzip
 import json
 import os
+import sys
 import pcbnew
 from common import R, E, T, SOURCE, now, digest, save
 
@@ -87,9 +88,12 @@ for pitch in (16,17):
                         issue141_acceptance_metrics=assessment['metrics'],inherited_drc_zero=True,
                         export_process_records=processes,tracks=len(source_tracks),vias=len(source_vias),
                         inherited_export_reused=True,cad_regenerated_in_resumed_run=False))
-save(E/'resumption-verification.json',dict(utc=now(),resume_start_utc=start['utc'],
+verification=dict(utc=now(),resume_start_utc=start['utc'],
      inherited_files_audited=len(start['inherited_file_hashes']),inherited_file_changes=inherited_changes,
      original_run_protected_files_audited=len(protected),original_worktree_changes=worktree_changes,
      original_git_metadata_changes=git_metadata_changes,source_checks=results,
-     original_git_metadata_note='Original .git is read-only and has not been written by this resumed run. Host refresh differences, if any, are metadata only.'))
+     original_git_metadata_note='Original .git is read-only and has not been written by this resumed run. Host refresh differences, if any, are metadata only.')
+if '--write' in sys.argv:
+    assert not (E/'resumption-verification.json').exists()
+    save(E/'resumption-verification.json',verification)
 print(json.dumps(dict(protected=len(protected),git_metadata_changes=git_metadata_changes,sources=results),indent=2))

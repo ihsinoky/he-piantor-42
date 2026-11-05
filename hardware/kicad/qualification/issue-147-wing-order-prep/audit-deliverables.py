@@ -47,12 +47,13 @@ for check in checks:
     review=next(v for v in visual['reviews'] if v['pitch_mm']==pitch)
     assert review['no_unexplained_anomalies']
     for item in review['files']:assert digest(E/item['path'])==item['sha256']
-status=subprocess.check_output(G+['diff','--cached','--name-status'],text=True)
+base=json.loads((E/'start.json').read_text())['base']
+status=subprocess.check_output(G+['diff','--cached','--name-status',base],text=True)
 entries=[line.split('\t',1) for line in status.splitlines()]
 assert entries and all(s=='A' for s,p in entries),entries
 assert all(p=='docs/issue-147-wing-order-prep.md' or p.startswith('hardware/kicad/qualification/issue-147-wing-order-prep/') for s,p in entries)
 assert not subprocess.check_output(G+['diff','--name-only'],text=True).strip()
-whitespace=subprocess.run(G+['diff','--cached','--check'],text=True,capture_output=True)
+whitespace=subprocess.run(G+['diff','--cached','--check',base],text=True,capture_output=True)
 allowed='hardware/kicad/qualification/issue-147-wing-order-prep/common.py:61: new blank line at EOF.'
 assert whitespace.stdout.strip() in ('',allowed),whitespace.stdout
 end=datetime.datetime.now(datetime.timezone.utc)
