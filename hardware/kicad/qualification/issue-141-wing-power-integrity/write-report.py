@@ -46,7 +46,7 @@ for pitch in [16,17]:
  cell=f'KRT-{pitch}-2L-P0300';w=E/'inspection'/cell;a=json.loads((w/'assessment.json').read_text());width=json.loads((w/'width-audit.json').read_text());cs=width['classes']
  text+=f"| {cell} | {a['measured_unconnected']} | {' / '.join(str(v) for v in a['metrics'].values())} | {cs['Signal']['minimum_mm']:.2f}mm / {cs['Signal']['segments']} | {cs['Power']['minimum_mm']:.2f}mm / {cs['Power']['segments']} | {width['via_count']} | 合格 |\n"
 text+='''
-各クラスの指定幅未満0、全via0.60/0.30mm。独立検査は#131の固定入力プロジェクトを使うDRC、#87由来の実銅箔graph、非配線AST/snapshot比較を踏襲。銅箔graphの形状・接触述語・保守的境界箱除外を変更していない。配置・ネット・外形等の転送差分0、物的DRC0、printing違反も0。
+各クラスの指定幅未満0、全via0.60/0.30mm。独立検査は#131と同様、今回のセルごとの固定入力プロジェクトを使うDRC、#87由来の実銅箔graph、非配線AST/snapshot比較を踏襲。銅箔graphの形状・接触述語・保守的境界箱除外を変更していない。配置・ネット・外形等の転送差分0、物的DRC0、printing違反も0。
 
 出力プロジェクトの**設定は全キーで入力と一致**する。ただしbyte同一ではなく、KRTが `kicad_routing_tools` に `fab_floor_origin`・`records_rev`・実測 `power_widths` を追加した。幅／clearance／netclass等の書き換えはない。#131と同じ由来記録に加わる実測幅記録を初回の厳密比較器が未知項目として拒否したため、16mmは初回結果を `first-strict-*.json` に保持し、`project-record-audit.json` で全設定一致と記録値が指定0.30mmに一致することを別途確認した。配線・DRC・銅箔graphの再実行や4指標の変更はない。最終監査器はこの記録追加を明示的に扱う。
 
@@ -85,7 +85,7 @@ text+='''
 
 既存CIのpath条件上、この追加だけではlayout／product KiCad／firmware／tscircuitの重いジョブは対象外。今回のセルには上記の独立DRC・実銅箔graph・幅監査・DC再現を実行した。GitHub CIの実行結果はローカル合格と混同しない。著作Python/JSON/報告書の末尾空白は0。KRT生出力PCBの空白行はbyte保存を優先し整形せず、`E/whitespace-audit.json` に分けて記録する。
 
-公開試行とPMO向け引継ぎは `E/publication.json` を参照。Draft PR作成を試み、push不可の場合も指定ブランチをコミット済みで残す。mergeは実行しない。
+公開試行とPMO向け引継ぎは `E/publication.json`、PR本文は `E/pr-draft.md` を参照。pushはGitHub認証情報がなくexit128、Draft PR作成APIは承認が必要な操作として環境の `approval policy=never` により拒否された。リモートPR／CIは未作成・未実行。指定ブランチを `.issue141-runtime/git` にコミット済みで残す。ホスト側で `git fetch ./.issue141-runtime/git issue-141-wing-power-integrity`、続けて `git push origin FETCH_HEAD:issue-141-wing-power-integrity` で引き継げる。mergeは実行していない。
 '''
 report.write_text(text)
 print(report)
