@@ -177,4 +177,4 @@ python3 hardware/kicad/qualification/issue-138-wing-manufacturing-review-prep/fe
 
 ランタイムのパスはこの作業環境向け。別環境では同等のKiCad pcbnew、sexpdata、numpy、shapelyを用意する。公式ページの再取得は時点によって変わるため、保存した取得記録と混同しない。
 
-`E/verification.json` は、既存追跡ファイルと#137報告・証跡を含む開始時hashの一致、配線のnative reader／S式／#131保存snapshotの一致、60ネットの集計、ソースhash、モデルの解析解テストとKCLを監査する。既存ファイルの変更はなく追加のみ。指示されたDraft PRの作成を試みるが、push不可の場合はコミット済みの `.issue138-runtime/git` を引渡す。公開試行結果は `E/publication.json` に記録する。mergeは行わない。
+`E/verification.json` は、既存追跡ファイルと#137報告・証跡を含む開始時hashの一致、配線のnative reader／S式／#131保存snapshotの一致、60ネットの集計、ソースhash、モデルの解析解テストとKCLを監査する。既存ファイルの変更はなく追加のみ。指定ブランチのpushに成功し、[Draft PR #140](https://github.com/ihsinoky/he-piantor-42/pull/140) を作成した。GitHub接続ツールは承認設定のため作成できず、GitHub CLIで作成し、open／draft／未mergeを接続ツールで確認した。公開記録は `E/publication.json`。mergeは行っていない。
