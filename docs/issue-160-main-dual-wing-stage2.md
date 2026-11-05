@@ -61,3 +61,5 @@ D-024はD-017の2 Wing拡張と、承認済み案A／案C提案時停止方針�
 ## 5. 再現と公開
 
 E/README.mdの手順で機構感度と入力保全を再確認できる。E/verification.jsonは保全・追記限定・計算整合の検証であり、新改版の4指標資格証ではない。失敗した初回の解析は座標APIのlist/tuple比較の誤りを修正して再実行したもの。配線再試行ではない。公開結果はE/publication.json、Draft PR本文はE/draft-pr-body.mdに記録する。
+
+内容コミットは `ed75871`。pushに成功し、**[Draft PR #162](https://github.com/ihsinoky/he-piantor-42/pull/162)** を作成した。接続ツールでのPR作成は実行環境の承認ポリシーで拒否され、同じ依頼範囲のGitHub CLI `gh pr create --draft --body-file` で成功した。拒否・push・CLIの結果をE/processesに保存する。今回の公開記録も同じブランチへ追加コミットする。Issueは閉じず、案Cの採用もmergeも行っていない。
