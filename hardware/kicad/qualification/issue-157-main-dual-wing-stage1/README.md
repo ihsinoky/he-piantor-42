@@ -45,3 +45,7 @@ only to obtain ohms; it is not a load-current requirement.
 
 The timebox uses host UTC (start 2026-11-05 20:47:22, deadline 22:47:22).
 The PO task date is 2026-11-06. No order, charge or merge is performed.
+
+Publication `stdout`/`stderr` are raw command output, including GitHub's remote
+trailing spaces. Whitespace lint checks authored content and JSON; it excludes
+only those raw stdout/stderr records rather than altering the evidence.
