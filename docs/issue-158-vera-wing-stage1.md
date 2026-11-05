@@ -177,3 +177,5 @@ D-021はM1限定の既存決定なので、本Issueはver.Aへの採用案を提
 E/analyze.pyは既存PCB・definitionを読取るだけで、外形・4取付穴・21上面Hall・GH全14pinと左右中心の鏡映規則を照合し、穴仮説の余裕と既存segment/via干渉を再現する。これはDRC、ルータ、3D CAD、磁気解析、実機測定の代用ではなく、それらは実行していない。
 
 入力・結果・保全hash・再現手順は [E/README.md](../hardware/kicad/qualification/issue-158-vera-wing-stage1/README.md)。既存ファイルの保全、今回の追加限定、リンク、解析JSONのbyte再現を検査する。報告書と証跡だけをコミットし、pushとDraft PR作成を試みる。最終結果はE/publication.jsonに残す。既存decisions・回路・CAD・M1評価データは更新しない。
+
+作業ブランチの内容コミット `ffffbbeb19ba220cd018fb6a3e5e8997aaf47a0d` をpushし、**[Draft PR #161](https://github.com/ihsinoky/he-piantor-42/pull/161)** を作成した。接続ツールは承認ポリシーにより実行不可だったため、GitHub CLIで同じ依頼範囲のDraft作成を行い、OPEN／isDraft=trueを確認した。公開記録は追加コミットする。
