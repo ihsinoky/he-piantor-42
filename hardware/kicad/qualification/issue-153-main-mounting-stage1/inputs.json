@@ -1,0 +1,59 @@
+{
+  "base_main_commit": "f2a6c1388969f42b5a68f8a062fcbcf515b577f2",
+  "remote_main_verified": "git ls-remote origin refs/heads/main: same SHA on 2026-11-05",
+  "files": {
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/main.kicad_pcb": "6163ae555a6edf192e52a6dad50721184f3ef9b00f50d468516bf97c545ed2dd",
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/main-cell1/main.kicad_pro": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/independent.json": "b38775e8c5ff93d5ea9834ab6db9c8aaa29e85fb7251ccc9a819218e0c648b0b",
+    "hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/router-structured-log.json": "61c3850fc7f4cf5cd66e8b130cdb9a565d013e78f7f5c8f8931ad0e33e85b69f",
+    "hardware/kicad/qualification/issue-137-main-manufacturing-review-prep/board-analysis.json": "5d6cddd8499c413b73216f8a9e3a7c7940459bbc8f0e5c304d56d2f4499fc22b",
+    "docs/issue-121-full-auto-conditions.md": "a1e63c26973421e6403fdc10b3e1a74493291f4192aa10723e1690d1e1e776bd",
+    "docs/issue-137-main-manufacturing-review-prep.md": "7b310e537a9df0ac50fce777f012699f9685720983e1b8d407aff62df27deb7a",
+    "docs/decisions.md": "39f947ef8afb298c03f00ab20557f1d29afe2c86cfd286f3b7d8d92bd6fd774c",
+    "hardware/rev-m1/main-wing-interface.md": "30f1e61f164d3834d0ae1a079c78acd94129de823b06dd77b9889435598c3120",
+    "hardware/rev-m1/g0b-freeze-proposal.md": "fc49775bb68b8513b66128089a55445c9c5fc73e442654057ac419531664da67",
+    "hardware/jitx/wing/generated/representative21-16mm/definition.json": "2db56af5140c9079d6e31823d3e1ba71260960d5e9003596daa796e5ef2f5b78",
+    "hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-16-2L-P0300/out.kicad_pcb": "3f29d24274c6e1834cf344c1c9c3bb234cd1aefa1e85d6eb3e8470eb5f2383f4",
+    "docs/issue-150-case-stage1.md": "c8972b5018e29ba35b9eec7db34fcaa8c74317676de9e1edd889bfe60403856c",
+    "hardware/case/issue-150-stage1/measurements.json": "0cf2cea4db3bbfc1654b8fa0b6ce0991b267c7919ba010de0edfbc53e79433b8"
+  },
+  "issue150": {
+    "status": "Untracked pre-existing report at task start; preserved and hash-pinned as context. Main dimensions independently reread from committed #121 PCB.",
+    "main_support_excerpt": "**Main 保持**：新しい穴は開けず、下面・端部の実装を逃がした絶縁トレイと着脱クリップ／上からの枠押えを提案。USB挿抜荷重をトレイに逃がす。J1の固定脚・NPTHをケース固定に流用しない。基板端も配線があるため、支持面を製造外形と下面在庫で確認し、導電ねじや金属ばねで挟まない。クリップ実位置は Stage 2 の干渉確認で確定する。"
+  },
+  "wing_precedent": {
+    "path": "hardware/jitx/wing/generated/representative21-16mm/definition.json",
+    "holes": [
+      {
+        "x_mm": -52.0,
+        "y_mm": -47.0,
+        "diameter_mm": 2.2,
+        "keepout_diameter_mm": 5.0
+      },
+      {
+        "x_mm": -52.0,
+        "y_mm": 47.0,
+        "diameter_mm": 2.2,
+        "keepout_diameter_mm": 5.0
+      },
+      {
+        "x_mm": 52.0,
+        "y_mm": -47.0,
+        "diameter_mm": 2.2,
+        "keepout_diameter_mm": 5.0
+      },
+      {
+        "x_mm": 52.0,
+        "y_mm": 47.0,
+        "diameter_mm": 2.2,
+        "keepout_diameter_mm": 5.0
+      }
+    ]
+  },
+  "decisions": {
+    "D017": "GH14 exact pinout; 100mm/14 conductors/1:1; common GND returns and external WING_EN pulldown; final placement remains open in D-017.",
+    "D019": "4 layers F signal/In1 GND/In2 signal/B signal;1.2mm;0.10/0.10mm;vias0.60/0.30mm;KRT",
+    "D022": "POFV for pad vias; same Economic order for J1 SMD plus 4 PTH legs; J1 PTH and NPTH excluded from fill"
+  },
+  "issue153_scope": "Analysis and proposals only; new files only; no PCB edits, routing, ordering, billing, or merge."
+}
