@@ -552,3 +552,37 @@ Reservations carried over unchanged:
 
 This records the decision only; design data, board data and other documents are
 unchanged.
+
+## D-022 - Rev.M1 Main order specifications: POFV vias and J1 Economic PCBA
+
+Status: accepted PO decision (2026-11-05)
+
+Per the PO decision of 2026-11-05 ([Issue #145](https://github.com/ihsinoky/he-piantor-42/issues/145)),
+this decision **finalizes the two order specifications that
+[D-019](#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline) left
+undecided**. The basis is the investigation in
+[Issue #137](https://github.com/ihsinoky/he-piantor-42/issues/137)
+(PR #139, merged; [report](issue-137-main-manufacturing-review-prep.md)).
+
+1. **Via treatment:** explicitly specify **epoxy-filled and copper-capped vias
+   (POFV)** at order time for vias in pads (25 locations, centered on the 23
+   where the hole falls on a mounted-component pad). The routing demonstrated in
+   [Issue #121](https://github.com/ihsinoky/he-piantor-42/issues/121) is kept;
+   **no design-side via avoidance is made**.
+2. **USB J1 assembly:** mount the SMD terminals and the four PTH retention legs
+   **together in the same Economic PCBA order**. The hand-soldering process fee
+   (USD 0.0164 per joint + USD 3.58 per order, **USD 3.9080 for five boards**)
+   is already included in the [Issue #124](https://github.com/ihsinoky/he-piantor-42/issues/124)
+   estimate. **No move to Standard PCBA.**
+
+Items to confirm at order time:
+
+- The POFV surcharge for four layers / five boards.
+- How the manufacturer's supported via size is stated (outer diameter or hole
+  diameter) and whether our 0.60 mm / 0.30 mm vias qualify.
+- The final scope of vias subject to filling.
+- J1's PTH legs and NPTH holes are **excluded** from filling.
+
+D-019's other content is unchanged. This records the decision only; it is not
+a manufacturing release or an order, and design data, board data and other
+documents are unchanged.

@@ -60,8 +60,10 @@ by G0B. **USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED** remains unchange
 no manufacturing exception is granted. Final placement/routing and final
 USB/system power qualification remain open.
 
-Via-in-pad / paste-opening order specifications remain undecided: Issue #121's
-25 observations are manufacturing notes, not DRC violations. USB J1 PTH
-retention-leg assembly process also remains undecided, pending Issue #124.
-See [D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline); no specification or
-process is selected here.
+Via-in-pad and USB J1 order specifications are decided in
+[D-022](../../docs/decisions.md#d-022---revm1-main-order-specifications-pofv-vias-and-j1-economic-pcba)
+(PO decision 2026-11-05, resolving the two items D-019 left open): vias in
+pads are specified as epoxy-filled and copper-capped (POFV) at order time, and
+J1's SMD terminals and PTH retention legs are mounted together in Economic
+PCBA. POFV surcharge, supported via size and fill scope remain order-time
+confirmations; pre-order review is still required.
