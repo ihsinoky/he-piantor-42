@@ -30,8 +30,10 @@ The native JITX board is a rectangle. Before routing, consumers must implement
 JSON mounting NPTH and keepouts in their target PCB, review the fixture/switch
 mechanics, and preserve the exact pin map including six separate GND conductors.
 Two-layer rules are provisional scaffolding, not an approved fabrication policy.
-For the representative21 Wing, the two-layer / 0.10 mm baseline is now adopted by
-[D-021](../../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline);
+For the representative21 Wing, the two-layer baseline (trace width signal 0.10 mm / power HALL_5V and GND
+0.30 mm, 0.10 mm clearance) is now adopted by
+[D-021](../../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline)
+as amended on 2026-11-05 (Issue #143);
 this generated data is unchanged and the README remains no manufacturing release.
 No routing, manufacturing package, final ergonomic layout or measured acceptance
 is included.

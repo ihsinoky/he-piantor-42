@@ -487,7 +487,8 @@ manufacturing approval are not established by this decision.
 
 ## D-021 - Rev.M1 Wing two-layer and 0.10 mm design-rule baseline
 
-Status: accepted PO decision (2026-11-05)
+Status: accepted PO decision (2026-11-05); amended 2026-11-05 (see
+[Amendment](#d-021-amendment-2026-11-05-trace-width-classes))
 
 The PO decision for [Issue #135](https://github.com/ihsinoky/he-piantor-42/issues/135)
 on **2026-11-05** adopts the following design and manufacturing baseline for the
@@ -522,3 +523,66 @@ Reservations:
 The 3 x 3 pitch-evaluation Wings and Rev.A Wings are not covered. Production
 pitch selection remains a later measured-results/G2 decision, and pre-order
 manufacturing review remains required.
+
+### D-021 Amendment (2026-11-05): trace-width classes
+
+Status: accepted PO decision (2026-11-05), amends the original conditions above
+([Issue #143](https://github.com/ihsinoky/he-piantor-42/issues/143)). The
+original text above (uniform 0.10 mm trace width; PR #132 / #136) is retained
+as history and is superseded only for trace width.
+
+Changed: the trace-width condition changes from "uniform 0.10 mm" to a class
+split: **signal 0.10 mm / power (HALL_5V and GND) 0.30 mm**.
+
+Unchanged: two copper layers, **1.2 mm** PCB thickness, **0.60 mm via diameter
+/ 0.30 mm drill**, **0.10 mm clearance**, and automatic routing demonstrated
+with KRT (escalation off).
+
+Reason: the demonstration in
+[Issue #141](https://github.com/ihsinoky/he-piantor-42/issues/141) (PR #142)
+showed all four independent metrics zero at both pitches, and the voltage drop
+at the datasheet-table maximum load had positive margin in every case against
+the recommended lower limit of 4.5 V.
+
+Reservations carried over unchanged:
+
+- Whether a Keyboard Design surcharge applies stays **undetermined until the
+  manufacturer's file review**.
+- Trace-width manufacturing tolerance is **±20%**.
+
+This records the decision only; design data, board data and other documents are
+unchanged.
+
+## D-022 - Rev.M1 Main order specifications: POFV vias and J1 Economic PCBA
+
+Status: accepted PO decision (2026-11-05)
+
+Per the PO decision of 2026-11-05 ([Issue #145](https://github.com/ihsinoky/he-piantor-42/issues/145)),
+this decision **finalizes the two order specifications that
+[D-019](#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline) left
+undecided**. The basis is the investigation in
+[Issue #137](https://github.com/ihsinoky/he-piantor-42/issues/137)
+(PR #139, merged; [report](issue-137-main-manufacturing-review-prep.md)).
+
+1. **Via treatment:** explicitly specify **epoxy-filled and copper-capped vias
+   (POFV)** at order time for vias in pads (25 locations, centered on the 23
+   where the hole falls on a mounted-component pad). The routing demonstrated in
+   [Issue #121](https://github.com/ihsinoky/he-piantor-42/issues/121) is kept;
+   **no design-side via avoidance is made**.
+2. **USB J1 assembly:** mount the SMD terminals and the four PTH retention legs
+   **together in the same Economic PCBA order**. The hand-soldering process fee
+   (USD 0.0164 per joint + USD 3.58 per order, **USD 3.9080 for five boards**)
+   is already included in the [Issue #124](https://github.com/ihsinoky/he-piantor-42/issues/124)
+   estimate. **No move to Standard PCBA.**
+
+Items to confirm at order time:
+
+- The POFV surcharge for four layers / five boards.
+- How the manufacturer's supported via size is stated (outer diameter or hole
+  diameter) and whether our 0.60 mm / 0.30 mm vias qualify.
+- The final scope of vias subject to filling.
+- J1's PTH legs and NPTH holes are **excluded** from filling.
+
+D-019's other content is unchanged. This records the decision only; it is not
+a manufacturing release or an order, and design data, board data and other
+documents are unchanged.

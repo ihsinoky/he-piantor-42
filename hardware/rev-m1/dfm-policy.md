@@ -10,9 +10,11 @@ sets four copper layers (F.Cu signal / In1.Cu GND plane / In2.Cu signal /
 B.Cu signal), 1.2 mm thickness, 0.10 mm trace width / clearance, and
 0.60/0.30 mm via diameter/drill. The two-layer baseline was the D-012-era
 assumption. D-019 does not apply to Wings; do not apply the Main change to
-Wings. The representative21 Wing baseline (two layers, 1.2 mm, 0.10 mm
-trace/clearance, 0.60/0.30 mm vias) is decided independently in
-[D-021](../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline).
+Wings. The representative21 Wing baseline (two layers, 1.2 mm, trace width
+signal 0.10 mm / power (HALL_5V, GND) 0.30 mm, 0.10 mm clearance, 0.60/0.30 mm
+vias) is decided independently in
+[D-021](../../docs/decisions.md#d-021---revm1-wing-two-layer-and-010-mm-design-rule-baseline),
+as amended on 2026-11-05 (Issue #143; originally uniform 0.10 mm).
 
 Prefer JLCPCB Economic PCBA where practical and retain the existing 1.2 mm
 thickness baseline. Place SMD components on one side by default. Prefer Basic
@@ -58,8 +60,10 @@ by G0B. **USB NPTH — OPEN — PRE-ORDER DFM REVIEW REQUIRED** remains unchange
 no manufacturing exception is granted. Final placement/routing and final
 USB/system power qualification remain open.
 
-Via-in-pad / paste-opening order specifications remain undecided: Issue #121's
-25 observations are manufacturing notes, not DRC violations. USB J1 PTH
-retention-leg assembly process also remains undecided, pending Issue #124.
-See [D-019](../../docs/decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline); no specification or
-process is selected here.
+Via-in-pad and USB J1 order specifications are decided in
+[D-022](../../docs/decisions.md#d-022---revm1-main-order-specifications-pofv-vias-and-j1-economic-pcba)
+(PO decision 2026-11-05, resolving the two items D-019 left open): vias in
+pads are specified as epoxy-filled and copper-capped (POFV) at order time, and
+J1's SMD terminals and PTH retention legs are mounted together in Economic
+PCBA. POFV surcharge, supported via size and fill scope remain order-time
+confirmations; pre-order review is still required.
