@@ -1,6 +1,37 @@
 {
-  "status": "prepared; commit/push/Draft PR attempt pending",
+  "status": "push successful; Draft PR created and verified",
+  "recorded_utc": "2026-11-05T02:19:08.302399+00:00",
   "branch": "issue-137-main-manufacturing-review-prep",
   "base_commit": "8a4c3d321fca4880e62289c10d81af845f162bc5",
-  "merge_performed": false
+  "review_content_commit": "4445128945a34ff83eb523dddfbae353385875d8",
+  "pr": {
+    "baseRefName": "main",
+    "headRefName": "issue-137-main-manufacturing-review-prep",
+    "headRefOid": "4445128945a34ff83eb523dddfbae353385875d8",
+    "isDraft": true,
+    "mergedAt": null,
+    "number": 139,
+    "state": "OPEN",
+    "url": "https://github.com/ihsinoky/he-piantor-42/pull/139"
+  },
+  "push": {
+    "exit_code": 0,
+    "stdout": "branch 'issue-137-main-manufacturing-review-prep' set up to track 'origin/issue-137-main-manufacturing-review-prep'.\n",
+    "stderr": "remote: \nremote: Create a pull request for 'issue-137-main-manufacturing-review-prep' on GitHub by visiting:        \nremote:      https://github.com/ihsinoky/he-piantor-42/pull/new/issue-137-main-manufacturing-review-prep        \nremote: \nTo https://github.com/ihsinoky/he-piantor-42.git\n * [new branch]      issue-137-main-manufacturing-review-prep -> issue-137-main-manufacturing-review-prep\n"
+  },
+  "draft_pr_attempts": [
+    {
+      "method": "GitHub connector create_pull_request draft=true",
+      "result": "MCP tool call requires approval, but approval policy is never; no PR created by this attempt"
+    },
+    {
+      "method": "gh pr create --draft --base main --head issue-137-main-manufacturing-review-prep --body-file .issue137-runtime/pr-body.md",
+      "exit_code": 0,
+      "url": "https://github.com/ihsinoky/he-piantor-42/pull/139"
+    }
+  ],
+  "final_record_commit": "Resolve branch HEAD after the submission-record follow-up commit; self-hash intentionally not embedded.",
+  "merge_performed": false,
+  "order_or_payment": false,
+  "manufacturing_spec_decision": false
 }
