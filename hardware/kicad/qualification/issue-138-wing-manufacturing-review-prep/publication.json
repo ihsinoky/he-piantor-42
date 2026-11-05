@@ -1,0 +1,62 @@
+{
+  "branch": "issue-138-wing-manufacturing-review-prep",
+  "git_dir": ".issue138-runtime/git",
+  "work_tree": ".",
+  "base_main": "8a4c3d321fca4880e62289c10d81af845f162bc5",
+  "status": "Pushed; Draft PR created and verified open/draft/unmerged",
+  "merge_performed": false,
+  "utc": "2026-11-05T02:39:24.072831+00:00",
+  "submitted_content_commit": "d5fde7acbe2ba1a9701cc708df1c095dfcceaefd",
+  "push_attempt": {
+    "utc": "2026-11-05T02:37:59.991962+00:00",
+    "argv": [
+      "git",
+      "--git-dir=.issue138-runtime/git",
+      "--work-tree=.",
+      "-c",
+      "credential.helper=",
+      "-c",
+      "credential.helper=!gh auth git-credential",
+      "push",
+      "origin",
+      "HEAD:refs/heads/issue-138-wing-manufacturing-review-prep"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "remote: \nremote: Create a pull request for 'issue-138-wing-manufacturing-review-prep' on GitHub by visiting:        \nremote:      https://github.com/ihsinoky/he-piantor-42/pull/new/issue-138-wing-manufacturing-review-prep        \nremote: \nTo https://github.com/ihsinoky/he-piantor-42.git\n * [new branch]      HEAD -> issue-138-wing-manufacturing-review-prep\n"
+  },
+  "connector_pr_attempt": {
+    "is_error": true,
+    "message": "MCP tool call requires approval, but approval policy is never"
+  },
+  "cli_pr_attempt": {
+    "utc": "2026-11-05T02:38:40.475656+00:00",
+    "argv": [
+      "gh",
+      "pr",
+      "create",
+      "--repo",
+      "ihsinoky/he-piantor-42",
+      "--base",
+      "main",
+      "--head",
+      "issue-138-wing-manufacturing-review-prep",
+      "--title",
+      "Wing 発注前製造レビュー準備：形状加算と線幅公差の影響 (#138)",
+      "--body-file",
+      ".issue138-runtime/pr-body.md",
+      "--draft"
+    ],
+    "exit_code": 0,
+    "stdout": "https://github.com/ihsinoky/he-piantor-42/pull/140\n",
+    "stderr": ""
+  },
+  "pull_request": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/pull/140",
+    "number": 140,
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "note": "This publication record is committed in a follow-up commit on the same branch; no merge or ready-for-review transition."
+}

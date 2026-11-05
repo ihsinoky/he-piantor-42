@@ -1,0 +1,97 @@
+[
+  {
+    "cell": "KRT-16-2L-0100",
+    "sha256": "0c1a95ef893ead7c8ad8d28a7e807ff085a2d08e2e736197ebace7fd545192d5",
+    "track_count": 765,
+    "via_count": 193,
+    "dimensions_mm": [
+      110.0,
+      100.0
+    ],
+    "internal_edge_cuts": 0,
+    "milled_slots": 0
+  },
+  {
+    "cell": "KRT-17-2L-0100",
+    "sha256": "06d550ff5047a81449dca50dd013c199d2ae5ce1a61fe7ea279a24708da8513c",
+    "track_count": 727,
+    "via_count": 194,
+    "dimensions_mm": [
+      116.5,
+      104.75
+    ],
+    "internal_edge_cuts": 0,
+    "milled_slots": 0
+  }
+]
+{
+  "capacity_A": 0.38319684172132,
+  "scenarios": [
+    {
+      "label": "3.3V-datasheet-table",
+      "per_sensor_ma": 4,
+      "per_mux_ua": 1.5,
+      "sensors_A": 0.084,
+      "muxes_A": 4.5e-06,
+      "supply_A": 0.08400450000000001,
+      "return_A": 0.08400450000000001,
+      "capacity_A": 0.38319684172132,
+      "capacity_to_current_ratio": 4.561622790699546,
+      "predicted_rise_K": 0.317688454801993,
+      "below_10K_screen": true,
+      "note": "DRV5055 RevC table at 3.3V; board net is HALL_5V, comparison only"
+    },
+    {
+      "label": "5V-datasheet-table",
+      "per_sensor_ma": 5,
+      "per_mux_ua": 2.7,
+      "sensors_A": 0.105,
+      "muxes_A": 8.1e-06,
+      "supply_A": 0.1050081,
+      "return_A": 0.1050081,
+      "capacity_A": 0.38319684172132,
+      "capacity_to_current_ratio": 3.649212220022265,
+      "predicted_rise_K": 0.5275634821464525,
+      "below_10K_screen": true,
+      "note": "DRV5055 RevC table at 5.0V, B=0mT; TMUX1208 RevC 5V table maximum"
+    },
+    {
+      "label": "conservative-10mA-envelope",
+      "per_sensor_ma": 10,
+      "per_mux_ua": 2.7,
+      "sensors_A": 0.21,
+      "muxes_A": 8.1e-06,
+      "supply_A": 0.2100081,
+      "return_A": 0.2100081,
+      "capacity_A": 0.38319684172132,
+      "capacity_to_current_ratio": 1.8246764849609134,
+      "predicted_rise_K": 2.5491520346455014,
+      "below_10K_screen": true,
+      "note": "Engineering envelope, NOT a RevC maximum specification; exceeds Fig5-13 typical curves"
+    },
+    {
+      "label": "envelope-plus-output-loads",
+      "per_sensor_ma": 11,
+      "per_mux_ua": 2.7,
+      "sensors_A": 0.231,
+      "muxes_A": 8.1e-06,
+      "supply_A": 0.23100810000000002,
+      "return_A": 0.23100810000000002,
+      "capacity_A": 0.38319684172132,
+      "capacity_to_current_ratio": 1.6588026208661946,
+      "predicted_rise_K": 3.1656767140088626,
+      "below_10K_screen": true,
+      "note": "10mA per sensor plus 1mA output source per sensor; all 21 simultaneously is conservative"
+    }
+  ]
+}
+KRT-16-2L-0100 datasheet-5mA-worst-width-20C 0.2342502833691989 4.5157497166308005
+KRT-16-2L-0100 datasheet-5mA-worst-width-125C 0.3309135841278924 4.419086415872108
+KRT-16-2L-0100 envelope-11mA-nominal-width-20C 0.41399073780317497 4.336009262196825
+KRT-16-2L-0100 envelope-11mA-worst-width-20C 0.5153444139596797 4.23465558604032
+KRT-16-2L-0100 envelope-11mA-worst-width-125C 0.7280011133022195 4.02199888669778
+KRT-17-2L-0100 datasheet-5mA-worst-width-20C 0.23984004903445133 4.510159950965549
+KRT-17-2L-0100 datasheet-5mA-worst-width-125C 0.33881002266066707 4.411189977339332
+KRT-17-2L-0100 envelope-11mA-nominal-width-20C 0.4235204628909117 4.326479537109088
+KRT-17-2L-0100 envelope-11mA-worst-width-20C 0.5276413148698422 4.222358685130158
+KRT-17-2L-0100 envelope-11mA-worst-width-125C 0.7453724537136122 4.004627546286388

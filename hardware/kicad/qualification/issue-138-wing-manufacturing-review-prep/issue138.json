@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/138",
+    "title": "Wing 発注前製造レビュー準備：Keyboard Design 加算の該当性と 0.10mm 公差の影響を点検する",
+    "issue_number": 138,
+    "body": "## 目的\nD-021（Wing 基準）の留保事項について、発注前に潰せる点検を済ませ、残リスクを一覧化する。発注判断は PO が行う。本 Issue は点検と材料作成まで。\n\n## 点検1：Keyboard Design 加算の該当性\n- Issue #133 で未確定とした「Keyboard Design」加算（密集した切削スロット・切り欠きへの $16.41＋$49.25/m²）について、JLCPCB 公式の追加料金ページの記載と、representative21 両ピッチの基板形状データ（外形・内部切り欠き・NPTH・スロットの有無）を突き合わせ、該当／非該当の自己点検結果を根拠つきで示す\n- 審査で問われうる残りの不確定要素があれば、それも明記する\n\n## 点検2：線幅公差 ±20% の影響\n- JLCPCB 公式記載の線幅公差 ±20% により、0.10mm の配線が最悪 0.08mm まで細る前提で、Issue #131 の配線済み基板の実データ（ネット別の配線幅・役割）から影響を評価する\n- 特に電源・GND 系（ホールセンサ21個分の供給とリターン）と信号系で許容できるかを、電流の見積もりと併せて示す\n\n## 成果物\n- 発注前チェックリスト（点検結果＋残リスク＋発注時に確認すべき事項の一覧）を報告書にまとめる\n- 成果物：docs/issue-138-wing-manufacturing-review-prep.md と証跡、追加のみ・Draft PR、merge は PO 判断\n- タイムボックス：1.5時間。発注・課金は行わない",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T02:03:37Z",
+    "updated_at": "2026-11-05T02:03:37Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/138",
+    "display_title": "Wing 発注前製造レビュー準備：Keyboard Design 加算の該当性と 0.10mm 公差の影響を点検する"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/138",
+  "title": "Wing 発注前製造レビュー準備：Keyboard Design 加算の該当性と 0.10mm 公差の影響を点検する",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/138",
+  "display_title": "Wing 発注前製造レビュー準備：Keyboard Design 加算の該当性と 0.10mm 公差の影響を点検する"
+}
