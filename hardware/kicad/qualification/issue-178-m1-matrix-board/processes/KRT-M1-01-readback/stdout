@@ -1,0 +1,17 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/read-effective.py /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/effective.json /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/in.kicad_pcb --track-width 0.1 --power-nets HALL_5V GND --power-nets-widths 0.3 0.3 --escalation off --clearance 0.1 --via-size 0.6 --via-drill 0.3
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/in.kicad_pcb to expand net patterns...
+Pattern '*' matched 27 nets
+Routing 27 nets: ['GND', 'HALL_5V', 'H_A0_RAW', 'H_A1_RAW', 'H_A2_RAW']...
+Netclass clearances for 2 net(s), honored in full (no --clearance-ceiling) (mm: [0.1]); cross-class max(A,B) respected.
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/in.kicad_pcb...
+Using 2 routing layers: ['F.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, B.Cu=3.0x
+No BGA components detected - no exclusion zones needed
+
+Power net width assignments (2 nets):
+  0.3mm: GND, HALL_5V
+EXIT=0

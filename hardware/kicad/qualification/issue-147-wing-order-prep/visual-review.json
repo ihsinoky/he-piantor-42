@@ -1,0 +1,72 @@
+{
+  "utc": "2026-11-05T07:20:41.769120+00:00",
+  "reviews": [
+    {
+      "pitch_mm": 16,
+      "reviewed_utc": "2026-11-05T07:20:41.735313+00:00",
+      "reviewer": "Codex image inspection",
+      "files": [
+        {
+          "path": "16mm/preview-review/all-layers.png",
+          "sha256": "f981435165bb977477e4e49640d67bb1f6b2e66d8d172870521797b1c556f1c3"
+        },
+        {
+          "path": "16mm/preview-review/top-copper-holes.png",
+          "sha256": "4f1e0db6c3a91e52de40f092a4ac5aedb345f118aa04e922761b6600d83d116d"
+        },
+        {
+          "path": "16mm/preview-review/bottom-copper-holes.png",
+          "sha256": "2fcb43433fd5fb703d605e9223bad45f1636379af5593db655e11d78a7f762d7"
+        }
+      ],
+      "individual_layers": 9,
+      "method": "Gerbonara parses exported manufacturing files; filter-free SVG, explicit white PNG background. Layer contact sheet plus full-size top/bottom copper+outline+hole views inspected.",
+      "orientation": "Both copper composites in front-view coordinates. Bottom view is not a mirror fabrication variant.",
+      "observations": [
+        "One closed rectangular contour, four circular corner NPTH holes.",
+        "Front copper includes sensor pad groups, lower connector and three MUX pad groups. Back copper links and via holes align.",
+        "No unintended solid areas, contours, external copper or gross layer displacement observed.",
+        "Front mask openings follow pads; back mask has no openings, consistent with no bottom pads and tented vias.",
+        "Both silk layers blank as in source; front clear subtraction primitives do not print legend."
+      ],
+      "no_unexplained_anomalies": true,
+      "known_input_deficiency": "No visible silkscreen legend on either side.",
+      "disposition": "PO/design owner must accept unmarked boards or arrange a separate requalified legend revision.",
+      "limits": "Visual screen is not minimum-clearance measurement or manufacturer CAM/DFM approval. Use parsed geometry and source DRC alongside it."
+    },
+    {
+      "pitch_mm": 17,
+      "reviewed_utc": "2026-11-05T07:20:41.759032+00:00",
+      "reviewer": "Codex image inspection",
+      "files": [
+        {
+          "path": "17mm/preview-review/all-layers.png",
+          "sha256": "fcd2348e838f6ff023cd9ff2d29efef67605cadc051cc0702ef81886b22cd8be"
+        },
+        {
+          "path": "17mm/preview-review/top-copper-holes.png",
+          "sha256": "468da986a2f4c34c59b1c940013793d9cdd0bfbd461f8de6044297c07e8c688b"
+        },
+        {
+          "path": "17mm/preview-review/bottom-copper-holes.png",
+          "sha256": "a596a83a6b65ae3844d0d3f4ea7fc4f1b17db0f4e1097da5cc83b33f57457b97"
+        }
+      ],
+      "individual_layers": 9,
+      "method": "Gerbonara parses exported manufacturing files; filter-free SVG, explicit white PNG background. Layer contact sheet plus full-size top/bottom copper+outline+hole views inspected.",
+      "orientation": "Both copper composites in front-view coordinates. Bottom view is not a mirror fabrication variant.",
+      "observations": [
+        "One closed rectangular contour, four circular corner NPTH holes.",
+        "Front copper includes sensor pad groups, lower connector and three MUX pad groups. Back copper links and via holes align.",
+        "No unintended solid areas, contours, external copper or gross layer displacement observed.",
+        "Front mask openings follow pads; back mask has no openings, consistent with no bottom pads and tented vias.",
+        "Both silk layers blank as in source; front clear subtraction primitives do not print legend."
+      ],
+      "no_unexplained_anomalies": true,
+      "known_input_deficiency": "No visible silkscreen legend on either side.",
+      "disposition": "PO/design owner must accept unmarked boards or arrange a separate requalified legend revision.",
+      "limits": "Visual screen is not minimum-clearance measurement or manufacturer CAM/DFM approval. Use parsed geometry and source DRC alongside it."
+    }
+  ],
+  "render_disposition": "Intermediate Cairo pretty-SVG filters / transparent background gave misleading black views; diagnostic renders moved into issue runtime. Authoritative reviewed images are preview-review only. No fabrication file changed."
+}
