@@ -4,6 +4,27 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+## Board naming convention (PO decision, 2026-11-06)
+
+Milestone names and board revision names are kept separate. `M0` / `M1` / `M2`
+name phases (milestones) only and are never used as board names. Each board
+carries its own revision number; there is no cross-board generation label.
+The former `Rev.M1` label is retired. Historical documents and decision
+records that use `Rev.M1` / `Rev.A` are not rewritten; read them through this
+table.
+
+| Board | Revision | Meaning | Former names |
+| --- | --- | --- | --- |
+| Main board | Rev.1 | Single-Wing version. Not an order target. | Rev.M1 Main (single-Wing) |
+| Main board | Rev.2 | Dual-Wing version (Issue #175 final board). Current Main; reused for the product. | Rev.M1 Main (dual-Wing) |
+| Matrix board | Rev.1 | Evaluation board: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | Evaluation Wing, pitch9 (design data only, no revision) |
+| Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
+
+Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
+42-key product phase. Ordering the Wing Rev.1 bare boards together with the
+M1-phase boards is a PO-approved front-loading, ahead of the G2 pitch
+decision.
+
 ## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
 **Location:** Before real Rev.M1/Main product design. Same Draft
