@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-mainrev3/hardware/kicad/qualification/issue-185-main-rev3/extract-ground.py", line 121, in <module>
+    K,terms,stats=assemble(area,factor)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-mainrev3/hardware/kicad/qualification/issue-185-main-rev3/extract-ground.py", line 69, in assemble
+    v,tr=mesh(poly,area,seeds);idx=tr+N;pts=v[tr];area2=np.abs((pts[:,1,0]-pts[:,0,0])*(pts[:,2,1]-pts[:,0,1])-(pts[:,1,1]-pts[:,0,1])*(pts[:,2,0]-pts[:,0,0]));assert np.min(area2)>0
+                                                                                                                                                                       ^^^^^^^^^^^^^^^
+AssertionError

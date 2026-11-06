@@ -1,0 +1,31 @@
+{
+  "utc": "2026-11-06T13:24:32.464494+00:00",
+  "PCB_qualified": true,
+  "current_guarantee_established": false,
+  "feedback_nominal_V": 5.192,
+  "feedback_corner_V": [
+    5.1042403814125565,
+    5.280589716756147
+  ],
+  "feedback_assumptions": "FB ±1% forced PWM; R initial ±0.1% and ±25ppm/K over 100K; FB leakage100nA; no long-term drift claim",
+  "USB_connector_V": [
+    4.5,
+    5.25
+  ],
+  "USB_configured_allowance_A": 0.5,
+  "design_Wing_A": 0.127,
+  "Main_other_allocated_A": 0.11,
+  "efficiency_lower_bound_guaranteed": false,
+  "simulated_cases": 135,
+  "current_equation": "converter_V + input_loop_ohm * total_USB_A = connector_V; converter_A * converter_V * efficiency = 2*Wing_A*rail_V",
+  "farthest_formula": "Target rail minimum5.096 minus50mV dynamic allowance minus Main common loop @2*I, assumed0.25ohm U5 Ron @2*I, branch loop @I, and inherited harness/17mm-Wing drops scaled from127mA",
+  "farthest_is_conditional": true,
+  "not_established": [
+    "Converter efficiency minimum across input/load/PVT",
+    "Main 110mA actual maximum in all relevant USB/firmware states",
+    "Dynamic ±50mV, cold start, overshoot, reverse feeding, EMI/ADC settling",
+    "USB configured/reset/suspend permission firmware and verification",
+    "Finished copper/plating/stackup minima and actual return-contact current split",
+    "Manufacturing acceptance; prototype electrical validation"
+  ]
+}

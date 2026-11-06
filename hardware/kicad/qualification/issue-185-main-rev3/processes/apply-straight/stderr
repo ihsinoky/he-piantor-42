@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-mainrev3/hardware/kicad/qualification/issue-185-main-rev3/apply-straight.py", line 18, in <module>
+    seen.add(key);t=p.PCB_TRACK(b);t.SetStart(p.VECTOR2I(round(a['position_mm'][0]*1e6),round(a['position_mm'][1]*1e6)));t.SetEnd(v.GetPosition());t.SetWidth(p.FromMM(a['width_mm']));t.SetLayer(b.GetLayerID(a['layer']));t.SetNetCode(v.GetNetCode());t.m_Uuid=p.KIID(str(uuid.uuid5(uuid.NAMESPACE_URL,r['via_uuid']+str(key))));b.Add(t)
+                                                                                                                                                                                                                                                         ^^^^^^^^
+AttributeError: property 'm_Uuid' of 'PCB_TRACK' object has no setter
