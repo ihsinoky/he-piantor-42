@@ -1,0 +1,77 @@
+{
+  "utc": "2026-11-05T07:20:41.769592+00:00",
+  "basis": "docs/issue-138-wing-manufacturing-review-prep.md section 5, open rows continued using #141 outputs",
+  "items": [
+    {
+      "id": "final-manufacturing-data",
+      "status": "data-complete-po-silk-disposition-open",
+      "disposition": "Source #141 fixed by SHA256, geometry and 0.10 mm DRC checked, per-file parsed comparison, two ZIPs and offline visual review complete."
+    },
+    {
+      "id": "copper-and-manufacturing-quality",
+      "status": "data-annotation-complete-manufacturer-and-receipt-open",
+      "disposition": "Order 2 layers / 1.2 mm / outer 1oz / via 0.60/0.30 mm; finished copper, line tolerances, plating, stackup and receipt checks remain."
+    },
+    {
+      "id": "keyboard-design-fee",
+      "status": "manufacturer-review-open",
+      "disposition": "Carry forward #138 self-assessment non-applicable; rectangle, no internal cutouts or slots, four NPTH. Actual category, surcharge, units and area are manufacturer decisions."
+    },
+    {
+      "id": "drv5055-current-guarantee",
+      "status": "open-external-spec-and-measurement",
+      "disposition": "RevC table/Fig5-13 inconsistency, exact procured revision, temperature, magnetic field and current must be checked. Envelope is not guaranteed maximum."
+    },
+    {
+      "id": "hall-supply-drop-ground-reference",
+      "status": "open-system-spec-and-measurement",
+      "disposition": "Use #141 widened power output; minimum supply, Main/cable/contact losses, GND/ADC accuracy and load remain. 17mm conservative 125C/11mA/worst-width case at input4.75V gives4.4813V."
+    },
+    {
+      "id": "tmux1208-control",
+      "status": "open-electrical-validation",
+      "disposition": "3.3 V control and switching current, ranges, ADC load and settling require validation."
+    },
+    {
+      "id": "startup-fault-environment-hardware",
+      "status": "open-hardware-validation",
+      "disposition": "Inrush, short protection, enclosure temperature, endurance, far-end supply and key acquisition accuracy remain."
+    },
+    {
+      "id": "cost-and-approval",
+      "status": "po-order-gate-open",
+      "disposition": "Each pitch five bare boards; final board price, surcharges, shipping, tax and approval remain PO decisions. Prior $19.20 reference is not final."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "SILK-ABSENT",
+      "origin": "input-board",
+      "status": "po-design-disposition-open",
+      "disposition": "Accept no-legend assembly using placement/polarity information, or add legend in separate design change and requalify. No design edits in this issue."
+    }
+  ],
+  "order_conditions": {
+    "quantity_each": 5,
+    "pitches_mm": [
+      16,
+      17
+    ],
+    "copper_layers": 2,
+    "thickness_mm": 1.2,
+    "outer_copper_oz": 1,
+    "signal_width_mm": 0.1,
+    "power_width_mm": 0.3,
+    "min_clearance_mm": 0.1,
+    "via_diameter_mm": 0.6,
+    "via_drill_mm": 0.3,
+    "npth_diameter_mm": 2.2,
+    "npth_count_each": 4,
+    "pcba": false,
+    "stencil": false
+  },
+  "manufacturer_upload": false,
+  "manufacturer_contact": false,
+  "order": false,
+  "payment": false
+}

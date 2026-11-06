@@ -1,0 +1,67 @@
+{
+  "status": "pass",
+  "checked_utc": "2026-11-06T00:49:41.004726+00:00",
+  "scope": "Artifact/preservation/model checks only; mechanical gate remains unestablished",
+  "engineering_outcome": "STOP_MECHANICAL_GATE_UNESTABLISHED",
+  "protected_files": 10754,
+  "existing_changed_files": [],
+  "PR162_imported_files": 27,
+  "D024_byte_preserved": true,
+  "D025_only_append": true,
+  "original_input_hashes_match": true,
+  "ideal_main_model_crosschecked_cases": 32,
+  "local_links_checked": 3,
+  "runs": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "hardware/kicad/qualification/issue-163-main-dual-wing-plan-c/analyze.py"
+      ],
+      "start_utc": "2026-11-06T00:49:33.007865+00:00",
+      "end_utc": "2026-11-06T00:49:33.201782+00:00",
+      "exit_code": 0,
+      "timeout_seconds": 120,
+      "runtime": ".issue163-runtime",
+      "scope": "Read-only original-board check; no new-board qualification"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "hardware/kicad/qualification/issue-163-main-dual-wing-plan-c/draw.py"
+      ],
+      "start_utc": "2026-11-06T00:49:33.202011+00:00",
+      "end_utc": "2026-11-06T00:49:33.251902+00:00",
+      "exit_code": 0,
+      "timeout_seconds": 120,
+      "runtime": ".issue163-runtime",
+      "scope": "Read-only original-board check; no new-board qualification"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "hardware/kicad/qualification/issue-160-main-dual-wing-stage2/native-readback.py"
+      ],
+      "start_utc": "2026-11-06T00:49:33.252072+00:00",
+      "end_utc": "2026-11-06T00:49:34.418977+00:00",
+      "exit_code": 0,
+      "timeout_seconds": 120,
+      "runtime": ".issue163-runtime",
+      "scope": "Read-only original-board check; no new-board qualification"
+    }
+  ],
+  "execution": {
+    "pcb_writes": 0,
+    "schematic_writes": 0,
+    "router_attempts": 0,
+    "refill_runs": 0,
+    "independent_new_board_qualifications": 0,
+    "manufacturing_exports": 0
+  },
+  "new_board_independent_metrics": {
+    "required_unconnected": null,
+    "wrong_net_contact": null,
+    "physical_violations": null,
+    "unexplained_transfer_changes": null
+  },
+  "order_charge_merge_performed": false
+}

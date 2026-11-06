@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/prepare.py", line 52, in <module>
+    for num,y,n in [(1,-.75,'GND'),(2,-.25,'RAIL_PG'),(3,.25,'VAUX'),(4,.75,'GND')]:land(num,-1.15,y,.6,.25,n)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/prepare.py", line 51, in land
+    a=p.PAD(f);a.SetNumber(str(num));a.SetAttribute(p.PAD_ATTRIB_SMD);a.SetShape(p.PAD_SHAPE_RECT);a.SetSize(V(sx,sy));a.SetPosition(V(x,y));a.SetLayerSet(p.LSET(p.F_Cu,p.F_Mask,p.F_Paste));a.SetNet(net(n));f.Add(a)
+                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/python3/dist-packages/pcbnew.py", line 9778, in __init__
+    _pcbnew.LSET_swiginit(self, _pcbnew.new_LSET(*args))
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: new_LSET expected at most 1 arguments, got 3
+Additional information:
+Wrong number or type of arguments for overloaded function 'new_LSET'.
+  Possible C/C++ prototypes are:
+    LSET::LSET()
+    LSET::LSET(BASE_SET const &)
+    LSET::LSET(std::initializer_list< PCB_LAYER_ID >)
+    LSET::LSET(std::vector< PCB_LAYER_ID,std::allocator< PCB_LAYER_ID > > const &)
+    LSET::LSET(LSEQ const &)
+    LSET::LSET(LAYER_RANGE const &)
+

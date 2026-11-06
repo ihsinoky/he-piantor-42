@@ -1,0 +1,18 @@
+{
+  "utc": "2026-11-05T07:52:18.816839+00:00",
+  "successful_steps": {
+    "qualify-2": "Native identity and all eight CAD subprocesses; see processes/ for argv/time/exit codes",
+    "manufacturing-2": "Native-to-CAM and #147 CAM comparison, ZIP CRC/member verification",
+    "render": "Actual Gerber/Excellon SVG/PNG rendering for both pitches",
+    "silk-verification": "Native refs, key dimensions/perimeter, pin1 proximity, mounting-hole/keepout and DRC settings",
+    "native-final": "Final verify-silkscreen.py --verify-only after script/input-path cleanup; exit 0",
+    "cam-final": "Final inspect-manufacturing.py --verify-only against frozen inputs; exit 0"
+  },
+  "logs": "verification-logs/",
+  "all_exit_codes": 0,
+  "notes": [
+    "Only successful final verification logs are copied here; preliminary diagnostic failures remain in isolated runtime.",
+    "Initial source script failed before any PCB write and is preserved unchanged.",
+    "No CAD design/export changes after successful qualify-2."
+  ]
+}

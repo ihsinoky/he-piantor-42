@@ -1,0 +1,274 @@
+{
+  "outcome": "STOP_MECHANICAL_GATE_UNESTABLISHED",
+  "adopted_geometry": {
+    "outline_mm": [
+      76,
+      70,
+      124,
+      122
+    ],
+    "size_mm": [
+      48,
+      52
+    ],
+    "J3_origin_mm": [
+      105.0,
+      73.0
+    ],
+    "J3_rotation_deg": 0,
+    "holes_mm": {
+      "H1": [
+        79.0,
+        92.0
+      ],
+      "H2": [
+        121.0,
+        81.0
+      ],
+      "H3": [
+        79.0,
+        119.0
+      ],
+      "H4": [
+        102.0,
+        111.5
+      ]
+    }
+  },
+  "selected_trial_hardware": {
+    "screw": {
+      "part": "NBK SNZS-M2-6",
+      "thread": "M2x0.4",
+      "length_mm": 6,
+      "head": "precision pan, cross recess No.0",
+      "head_diameter_mm": 3,
+      "head_height_mm": 0.6,
+      "screw_only_max_torque_Nm": 0.22
+    },
+    "screw_driver": {
+      "part": "HOZAN D-540-100",
+      "tip": "No.0",
+      "shaft_diameter_mm": 4,
+      "shaft_length_mm": 100,
+      "handle_diameter_mm": 19.8
+    },
+    "latch_probe": {
+      "part": "HOZAN P-512-S with P-512S-1",
+      "material": "PEEK",
+      "tip_size_mm": [
+        0.4,
+        3.5
+      ],
+      "tip_length_mm": 30,
+      "tool_length_mm": 140.5,
+      "GH_approved": false
+    },
+    "insulators": {
+      "status": "Proposed custom dimensions; no manufactured part or strength proof",
+      "top_washer_OD_ID_thickness_mm": [
+        4.0,
+        2.2,
+        0.3
+      ],
+      "underside_threaded_POM_boss_OD_height_mm": [
+        4.0,
+        6.0
+      ],
+      "female_thread": "M2, proposed usable depth5.0mm",
+      "nominal_thread_engagement_mm": 4.5,
+      "nominal_blind_bottom_clearance_mm": 0.5,
+      "nominal_head_top_z_mm": 0.8999999999999999,
+      "nominal_boss_bottom_z_mm": -7.2,
+      "combined_radial_error_scenarios_mm": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "radial_copper_reservation_margin_mm": [
+        0.4,
+        0.3,
+        0.2
+      ],
+      "assembly_torque_Nm": null
+    }
+  },
+  "projections": {
+    "header_body_mm": [
+      94.625,
+      73.2,
+      115.375,
+      77.45
+    ],
+    "assumed_housing_mm": [
+      95.625,
+      73.25,
+      114.375,
+      77.4
+    ],
+    "retained_stage1_service_rectangle_mm": [
+      92.0,
+      71.5,
+      118.0,
+      79.0
+    ],
+    "H2_to_service_driver_d4_gap_mm": 1.6055512754639891,
+    "H2_to_header_washer_d4_gap_mm": 4.65155057110746,
+    "side_grip_scenarios": [
+      {
+        "grip_diameter_mm": 6.0,
+        "right_grip_to_screw_head_d3_mm": 2.233962429357619,
+        "right_grip_to_washer_d4_mm": 1.7339624293576188,
+        "meaning": "Planar projection only. No hand size or compliant-grip qualification"
+      },
+      {
+        "grip_diameter_mm": 8.0,
+        "right_grip_to_screw_head_d3_mm": 0.7526994170518035,
+        "right_grip_to_washer_d4_mm": 0.25269941705180354,
+        "meaning": "Planar projection only. No hand size or compliant-grip qualification"
+      },
+      {
+        "grip_diameter_mm": 10.0,
+        "right_grip_to_screw_head_d3_mm": -0.5969287654645425,
+        "right_grip_to_washer_d4_mm": -1.0969287654645425,
+        "meaning": "Planar projection only. No hand size or compliant-grip qualification"
+      }
+    ]
+  },
+  "proposed_operation": [
+    "Remove USB/power and lid; release cable strain relief before handling.",
+    "Fit insulating bosses/washers and screws with GH harnesses removed; driver approaches along +Z. Screw-only torque maximum is not an assembly torque.",
+    "For insertion align housing and hold wires across the full pitch; apply axial force with PCB supported locally. Do not use the latch probe as a lever.",
+    "For extraction use P-512-S only to depress the lock while holding all14 wires together, keeping them at their natural pitch; fully unlock then pull axially.",
+    "Target zero tilt; manufacturer section3.3 permits at most20deg. Latch travel and complete release must be verified with actual housing/tool.",
+    "Local underside support alone reacts insertion, not extraction. An edge-retaining fixture must also react upward load; its geometry/contact sites are not yet verified."
+  ],
+  "cable_scenarios": [
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 3.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 10.680000000000001,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 3.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 10.8,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 5.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 12.680000000000001,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 5.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 12.8,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 8.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 15.680000000000001,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 0.0,
+      "bend_radius_mm": 8.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 15.8,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 3.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 12.680000000000001,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 3.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 12.8,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 5.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 14.680000000000001,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 5.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 14.8,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 8.0,
+      "wire_OD_mm": 0.76,
+      "required_z_mm": 17.68,
+      "assembly_height_reference_mm": 7.3
+    },
+    {
+      "straight_rise_mm": 2.0,
+      "bend_radius_mm": 8.0,
+      "wire_OD_mm": 1.0,
+      "required_z_mm": 17.8,
+      "assembly_height_reference_mm": 7.3
+    }
+  ],
+  "cable_trial_selection": {
+    "straight_rise_mm": 2.0,
+    "radius_mm": 5.0,
+    "OD_mm": 1.0,
+    "resulting_z_mm": 14.8,
+    "hypothetical_extraction_stroke_mm": 6.0,
+    "resulting_moving_wire_z_mm": 20.8,
+    "source": "Engineering scenarios; NOT a wire bend specification or verified extraction stroke"
+  },
+  "overhang": {
+    "load_datum_assumed_mm": [
+      105.0,
+      75.325
+    ],
+    "origin_outside_support_polygon_mm": 11.792728056444895,
+    "body_center_outside_support_polygon_mm": 9.543587637085823,
+    "furthest_body_corner_outside_support_polygon_mm": 14.227857302084807,
+    "deepest_rear_support_lever_mm": 26.11905003126662,
+    "insertion_minimum_total_rear_uplift_per_unit_load": 0.36538800705467367,
+    "static_meaning": "Point-support equilibrium: a down load outside H1-H2 needs tensile screw reactions. Ignoring finite boss radii and clamp moments.",
+    "beam_model": "Illustrative clamped strip: I=b*t^3/12; delta=F*L^3/(3*E*I); sigma=6*F*L/(b*t^2). No plate/torsion/joint model.",
+    "beam_rows": 72,
+    "force_values_are_measured_or_rated": false,
+    "actual_laminate_or_stiffness_known": false,
+    "beam_is_upper_or_lower_bound": false,
+    "actual_force_N": null,
+    "verified_board_deflection_mm": null,
+    "accepted_solder_strain_limit": null
+  },
+  "unresolved": [
+    "No actual GHR-14V-S latch datum/travel and probe swept solid; the0.4x3.5 tip alone cannot verify lock release or tool-body clearance.",
+    "Actual 14-way insertion and unlocked extraction force, local restraint, screw preload/POM thread strength and laminate stiffness are not established.",
+    "No qualified wire bend radius, strain-relief position, actual extraction stroke or case/cover model.",
+    "Consequently this is mechanical concretization and sensitivity evaluation, NOT a successful3D service/strain qualification."
+  ],
+  "execution": {
+    "pcb_writes": 0,
+    "schematic_writes": 0,
+    "router_attempts": 0,
+    "refill_runs": 0,
+    "independent_new_board_qualifications": 0,
+    "manufacturing_exports": 0
+  }
+}
