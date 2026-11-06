@@ -1,0 +1,13 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/read-effective.py /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/seed-b/effective.json /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb --escalation off --track-width 0.1 --clearance 0.1 --via-size 0.6 --via-drill 0.3 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1.0 -1 1.0 1.0 --keep-input-copper --ordering inside_out --direction backward
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb to expand net patterns...
+Pattern '*' matched 44 nets
+Routing 44 nets: ['ADC_A', 'ADC_B', 'ADC_C', 'CC1', 'CC2']...
+Loading /home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=-1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+EXIT=0

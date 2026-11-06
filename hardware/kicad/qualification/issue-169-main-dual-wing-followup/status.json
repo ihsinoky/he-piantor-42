@@ -1,0 +1,65 @@
+{
+  "utc": "2026-11-06T08:23:48.668395+00:00",
+  "issue_complete": false,
+  "manufacturing_GO": false,
+  "stop_reason": "Two whole-board attempts exhausted; final selected-component seed-b fails. No third route, local repair or rip-up.",
+  "route_attempts": {
+    "global_count": 2,
+    "local_count": 0,
+    "remaining": 0
+  },
+  "attempts": [
+    {
+      "label": "seed-a",
+      "qualified": true,
+      "nets_checked": 44,
+      "measured_four_metrics": {
+        "required_unconnected": 0,
+        "wrong_net_contacts": 0,
+        "material_violations": 0,
+        "unexplained_transfer_changes": 0
+      },
+      "conditional_qualification_metrics": {
+        "required_unconnected": 0,
+        "wrong_net_contacts": 0,
+        "material_violations": 0,
+        "unexplained_transfer_changes": 0
+      },
+      "source_project_used": true
+    },
+    {
+      "label": "seed-b",
+      "qualified": false,
+      "nets_checked": 44,
+      "measured_four_metrics": {
+        "required_unconnected": 2,
+        "wrong_net_contacts": 2,
+        "material_violations": 4,
+        "unexplained_transfer_changes": 7
+      },
+      "conditional_qualification_metrics": {
+        "required_unconnected": null,
+        "wrong_net_contacts": null,
+        "material_violations": null,
+        "unexplained_transfer_changes": null
+      },
+      "source_project_used": true
+    }
+  ],
+  "seed_a_paste_corrected_qualification": {
+    "required_unconnected": 0,
+    "wrong_net_contacts": 0,
+    "material_violations": 0,
+    "unexplained_transfer_changes": 0
+  },
+  "final_selected_component_candidate": "inspection/seed-b/main.kicad_pcb",
+  "best_qualified_routing_only_candidate": "inspection/final/main.kicad_pcb",
+  "final_manufacturing_generated": false,
+  "seed_a_review_CAM_generated": true,
+  "pcba_final_quote_confirmed": false,
+  "D019_relaxed": false,
+  "new_decision_records": 0,
+  "execution_error": "Shell command sequence did not stop after failed seed-b preflight assertion; route.py at the time had no independent preflight guard. Preserved source/input/logs, fixed future guard and tested exhausted-budget refusal. The second attempt is counted in full.",
+  "PO_assessment": "No evidence that D-019 relaxation is necessary: seed-a routed with four zeros. Need a new finite authorized work scope to validate large-cap placement and XIN/retention under same conditions, plus explicit disposition of remaining supply/manufacturing/quote gates; do not weaken requirements automatically.",
+  "forbidden_actions_performed": []
+}

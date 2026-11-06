@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/169",
+    "title": "Main 2 Wing 化 Stage 2 フォローアップ：配置・seed 見直しと再配線",
+    "issue_number": 169,
+    "body": "## 前提\n- Issue #167 で案C＋5.2V レールの回路・基板候補は作成されたが、配線が試行枠（全体1回＋局所1回）内に合格しなかった：未接続 3（V1V1／V3V3 の電源ネット分断）、局所修正が保持対象の QSPI 配線を壊した（転送差分 24、dangling via 2）\n- 候補の内容は #167 報告書（docs/issue-167-main-dual-wing-stage2.md）と Draft PR #168 のブランチに保存されている。D-027 までの決定記録も同ブランチにある\n- 電源抵抗の課題：レール共通部の正側が 60.674mΩ で、50mΩ 目標を超えている（#167 §7）\n\n## 作業\n1. 配置と seed の見直し：U1（RP2040）周りの電源ネット（V1V1／V3V3）の混雑を、追加部品（変換回路・J3）の配置と電源 seed の引き方で解く。レール共通部の正側抵抗を 50mΩ 目標内へ入れる。既存部品の座標は原則維持し、動かす必要がある場合は対象と理由を明示する\n2. 部品の確定：コンデンサ（実効容量・DC バイアス・ESR を満たす具体的な型番）と帰還用の精密抵抗の型番を確定し、BOM に反映する\n3. 再配線：D-019 条件を維持し、全体配線を最大2回（seed を変える）まで認める。局所 rip-up で保持ネットを変更する進め方は採らない。やむを得ず局所修正を行う場合は、影響ネット全体を再検証対象に含める\n4. 独立資格確認（4指標すべて0、全44ネット）、実抵抗の再抽出（GND 側を含む）、製造データ再生成、POFV 再分類、PCBA 見積の確定\n\n## 制約\n- D-019 の条件緩和（層数・幅・間隙・escalation）は行わない。今回の枠でも成立しない場合は、条件変更の要否として PO へ上げる形で報告して止める\n- 発注・課金は行わない。成果物は Draft PR、merge は PO 判断\n- タイムボックス：4時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-06T07:54:55Z",
+    "updated_at": "2026-11-06T07:54:55Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/169",
+    "display_title": "Main 2 Wing 化 Stage 2 フォローアップ：配置・seed 見直しと再配線"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/169",
+  "title": "Main 2 Wing 化 Stage 2 フォローアップ：配置・seed 見直しと再配線",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/169",
+  "display_title": "Main 2 Wing 化 Stage 2 フォローアップ：配置・seed 見直しと再配線"
+}
