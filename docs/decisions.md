@@ -626,3 +626,73 @@ Actual tolerances, tightening, non-rectangular support under J1/J2 insertion
 loads, tool access and underside solder/boss clearance remain mechanical
 validation items. This adopts the layout; qualification and manufacturing
 review remain required. It does not authorize ordering, billing or merge.
+
+## D-024 - Rev.M1 Main two-Wing interface and plan A / plan C fallback
+
+Status: accepted PO scope decision (2026-11-06); implementation remains subject
+to the mechanical gate and independent qualification
+
+[Issue #160](https://github.com/ihsinoky/he-piantor-42/issues/160) adopts the
+interface proposed in [Issue #157 §2–4](issue-157-main-dual-wing-stage1.md)
+as a two-Wing extension of D-017. J2 is L/Bank0; added J3 (`J_WING_R`) is
+R/Bank1. Both use BM14B-GHS-TBT(LF)(SN), GHR-14V-S and SSHL-002T-P0.2.
+Preserve the existing G0B pin allocation: pin1 HALL_5V; pins2/4/8/10/12/14
+common GND; pins3/5/6 MUX_A0/A1/A2; pins9/11/13 MUX_OUT_A/B/C; pin7 is
+the respective independent enable. Reinforcement lands remain mechanical NC.
+No GND contact becomes an ID or other signal.
+
+Share address and the three raw MUX buses, retaining the existing three
+divider/filter/ADC paths. Feed both Wings from common HALL_5V with two branches
+near U5 output, not a thin J2 daisy chain or external Y cable. U5 and
+HALL_PWR_EN (U1.9/GPIO7, R7 100kΩ) remain the common default-off power control.
+Existing J2 WING_EN is logical MUX_EN0 (U1.7/GPIO5, R6 100kΩ).
+J3 pin7 uses new MUX_EN1 at U1.8/GPIO6 with a new explicit 100kΩ external
+pull-down; remove that pin's source NC declaration when implementing it.
+Check leakage/noise and transitions before accepting the pull-down value.
+
+Firmware must disable both banks before address/bank changes, wait for actual
+output disable and address settling, then enable only one bank and wait for
+ADC settling. Simultaneous enables are prohibited. Reset, unstable power,
+suspend and faults require both banks off. Verify 2 banks × 7 addresses ×
+3 ADC channels, single-Wing operation and L/R calibration mapping. Enable
+selection does not turn off Hall power or halve the supply load.
+
+Use one nominal 100mm, 14-individual-wire, fully 1:1 representative G0B harness
+per port, with all six returns. Same-type connectors do not mechanically
+exclude L/R interchange: label both ends, constrain the case paths and verify
+all 28 circuits and left/right key identity during assembly. Longer/asymmetric
+product harnesses need renewed power and settling evaluation. Hot-plug is
+not qualified; initial evaluation uses power-off mating/unmating.
+
+The adopted first placement is **plan A: J3=(105,81), 0°, 48×44mm**.
+Retain D-023's four NPTHs, coordinates and all-copper-layer Ø5 reservations,
+J1/J2 positions and existing components. The exception to D-023's electrical
+preservation is limited to this approved second port, enable/pull-down and
+necessary power/signal routing. Verify actual housing, cable bends, latch,
+finger/tool access and fastening tolerances. If plan A cannot be established
+or presents too many disadvantages, **record the evidence, propose plan C
+and stop**; do not force the layout or shrink an unverified service envelope
+to declare success. Plan C is J3=(105,73), 0°, X76–124/Y70–122 (48×52mm),
+retaining the four holes. It is a fallback proposal requiring PO approval
+before changing the outline, not an automatically adopted board revision.
+
+Plan for 127mA per Wing / 254mA total and also evaluate the #141
+11mA-per-sensor sensitivity envelope. Reduce Main power-path resistance;
+simple branching of the current thin path is insufficient. Use actual routed
+common and branch supply/return resistance, harnesses and Wing networks to
+show the farthest sensor remains at least 4.5V over the declared conditions;
+do not substitute TPS22919's current rating for USB or local-voltage evidence.
+Identify any unachievable envelope instead of relaxing it. Check startup,
+ground sharing, address loading, bus contention, ADC noise and settling.
+
+D-019 remains four layers / 1.2mm, signal width and clearance 0.10mm,
+via 0.60/0.30mm, In1.Cu GND plane. Deliberately wider power paths implement
+the low-resistance requirement; do not reduce any minimum, change layer
+assignment or enable escalation. Freeze routing scope and attempt/time
+limits before routing; no unbounded retry. Requalify all nets against the
+input project with all four independent metrics zero. Regenerate and
+reconcile manufacturing data, reclassify actual revised vias under D-022's
+epoxy-fill/copper-cap POFV policy, retain J1's same Economic PCBA process,
+and update BOM/CPL and quotation evidence only after the applicable gates.
+Neither this decision nor prior-board qualification qualifies a new revision
+or authorizes manufacturing release, ordering, billing or merge.
