@@ -144,13 +144,14 @@ cur={c['ref']:c for c in main['components']}; prev={c['ref']:c for c in oldmain[
 comp_diff=dict(added=sorted(set(cur)-set(prev)),removed=sorted(set(prev)-set(cur)),moved=sorted(r for r in cur if r in prev and cur[r]['at']!=prev[r]['at']),value_changed=sorted(r for r in cur if r in prev and cur[r]['value']!=prev[r]['value']),n_stage150=len(prev),n_rev3=len(cur))
 holes_stage=[h for h in oldmain['holes']]
 mech=dict(service_rectangle_xy_mm=service,ghr_projection_xy_mm=ghr,pads_within_0_5mm_of_service_rect=near_service,pads_overlapping_service_rect=service_overlap,hole_to_pad=hole_pad_clear,support_hull=support,footprint_layers=layers_of_parts,north_region_vias_x90_120_y_lt_85=north_vias,component_diff=comp_diff,stage150_holes=holes_stage)
-wings={}; rows=[]
+wings={}; rows=[]; wing_boards={}
 frozen=json.loads(read('hardware/case/issue-150-stage1/inputs/issue149-interface.json'))
 for pitch in (16,17):
     base=f'hardware/kicad/qualification/issue-149-wing-silkscreen/{pitch}mm/'
     inv,wb=board(base+f'wing-{pitch}mm-silk149.kicad_pcb')
     stage=old['wings'][str(pitch)]['native']
     for k in ('bounds_xy_mm','thickness_mm','holes','components'): assert inv[k]==stage[k]==frozen[str(pitch)]['geometry'][k],k
+    wing_boards[pitch]=(inv,wb)
     byref={c['ref']:c for c in inv['components']}
     keys=list(csv.DictReader(io.StringIO(read(f'hardware/case/issue-150-stage1/keys-{pitch}mm.csv').decode())))
     assert len(keys)==21
@@ -170,10 +171,16 @@ for pitch in (16,17):
 bom=list(csv.DictReader(io.StringIO(read(mainbase+'main-bom.csv').decode())))
 for p in ('docs/decisions.md','docs/issue-150-case-stage1.md','docs/issue-160-main-dual-wing-stage2.md','docs/issue-163-main-dual-wing-plan-c.md','docs/issue-175-main-dual-wing-final2.md','docs/issue-185-main-rev3.md','docs/project-status.md','docs/issue-158-vera-wing-stage1.md',mainbase+'README.md','hardware/kicad/qualification/issue-149-wing-silkscreen/publication.json'):
     read(p)
-out=dict(units='mm',frame='KiCad top view X right Y down; separate PCB frames are not an assembly',main=main,stage150_main=oldmain,connectors=connectors,mounting=mount,reservations=reservations,main_manufacturing=maincam,j3_support=dict(body_projection_xy_mm=j3fab,pad_corner_outside_range_mm=[min(outside((x,y)) for x in (connectors['J3']['pad_bounds_xy'][0],connectors['J3']['pad_bounds_xy'][2]) for y in (connectors['J3']['pad_bounds_xy'][1],connectors['J3']['pad_bounds_xy'][3])),max(outside((x,y)) for x in (connectors['J3']['pad_bounds_xy'][0],connectors['J3']['pad_bounds_xy'][2]) for y in (connectors['J3']['pad_bounds_xy'][1],connectors['J3']['pad_bounds_xy'][3]))],north_edge=['H1','H2'],origin_outside_mm=outside(connectors['J3']['at'][:2]),body_center_outside_mm=outside(((j3fab[0]+j3fab[2])/2,(j3fab[1]+j3fab[3])/2)),body_corner_outside_range_mm=[min(map(outside,corners)),max(map(outside,corners))],service_rectangle_xy_mm=[92,71.5,118,79],service_to_H2_reservation_mm=math.hypot(121-118,81-79)-2.5,service_to_H2_boss4_5_mm=math.hypot(3,2)-2.25,service_to_north_edge_mm=1.5),wings=wings,bom_fields=list(bom[0]),height_verdict='判定不能（不足入力：全実装部品の保証最大高さ・実装浮き・下面はんだ・嵌合体とケーブルのZ包絡）',harness=dict(nominal_length=100,stage150_route_target=70,stage150_slack_total=30,conductor_count=14,flat_wire_width_max=14*1.0,proposed_channel_width=18,planar_center_distance_upper_bound_mm={f'R{R}':{'route_70':70-math.pi*R+2*R,'route_100_if_no_slack':100-math.pi*R+2*R} for R in (3,5,8)},j2_j3_pad_row_separation_mm=116-73,actual_route_verdict='判定不能（不足入力：各板の組立位置・角度・Z、ハーネス有効長基準、実線材曲げ条件と固定点）'),mechanics=mech,input_sha256=inputs)
+import importlib.util
+spec=importlib.util.spec_from_file_location('interference',Path(__file__).resolve().parent/'interference.py'); itf=importlib.util.module_from_spec(spec); spec.loader.exec_module(itf)
+interference,zone_maps=itf.run(dict(children=children,child=child,all_pads=all_pads,main_b=b,main=main,connectors=connectors,wings=wing_boards,rows=rows,mech=mech,
+    wing_j={p:next(c['at'][:2] for c in wing_boards[p][0]['components'] if c['ref']=='J_WING') for p in wing_boards}))
+out=dict(units='mm',frame='KiCad top view X right Y down; separate PCB frames are not an assembly',main=main,stage150_main=oldmain,connectors=connectors,mounting=mount,reservations=reservations,main_manufacturing=maincam,j3_support=dict(body_projection_xy_mm=j3fab,pad_corner_outside_range_mm=[min(outside((x,y)) for x in (connectors['J3']['pad_bounds_xy'][0],connectors['J3']['pad_bounds_xy'][2]) for y in (connectors['J3']['pad_bounds_xy'][1],connectors['J3']['pad_bounds_xy'][3])),max(outside((x,y)) for x in (connectors['J3']['pad_bounds_xy'][0],connectors['J3']['pad_bounds_xy'][2]) for y in (connectors['J3']['pad_bounds_xy'][1],connectors['J3']['pad_bounds_xy'][3]))],north_edge=['H1','H2'],origin_outside_mm=outside(connectors['J3']['at'][:2]),body_center_outside_mm=outside(((j3fab[0]+j3fab[2])/2,(j3fab[1]+j3fab[3])/2)),body_corner_outside_range_mm=[min(map(outside,corners)),max(map(outside,corners))],service_rectangle_xy_mm=[92,71.5,118,79],service_to_H2_reservation_mm=math.hypot(121-118,81-79)-2.5,service_to_H2_boss4_5_mm=math.hypot(3,2)-2.25,service_to_north_edge_mm=1.5),wings=wings,bom_fields=list(bom[0]),height_verdict='判定不能（不足入力：全実装部品の保証最大高さ・実装浮き・下面はんだ・嵌合体とケーブルのZ包絡）',harness=dict(nominal_length=100,stage150_route_target=70,stage150_slack_total=30,conductor_count=14,flat_wire_width_max=14*1.0,proposed_channel_width=18,planar_center_distance_upper_bound_mm={f'R{R}':{'route_70':70-math.pi*R+2*R,'route_100_if_no_slack':100-math.pi*R+2*R} for R in (3,5,8)},j2_j3_pad_row_separation_mm=116-73,actual_route_verdict='判定不能（不足入力：各板の組立位置・角度・Z、ハーネス有効長基準、実線材曲げ条件と固定点）'),mechanics=mech,interference=interference,input_sha256=inputs)
 print(json.dumps(out,ensure_ascii=False,indent=2))
 # CSV is derived from the same successful comparisons; emitted only on request.
 import sys
+if '--zonemap' in sys.argv:
+    Path(sys.argv[sys.argv.index('--zonemap')+1]).write_text('\n'.join(l for f in 'FB' for l in zone_maps[f]+[''])+'\n')
 if '--csv' in sys.argv:
     sys.stdout.seek if False else None
     # JSON remains stdout; CSV path must be explicitly supplied by caller.

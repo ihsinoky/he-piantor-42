@@ -5,7 +5,7 @@
 ## 再現
 
 ```
-python3 hardware/case/issue-188-crosscheck/extract.py --csv hardware/case/issue-188-crosscheck/wing-keys-check.csv > hardware/case/issue-188-crosscheck/extracted.json
+python3 hardware/case/issue-188-crosscheck/extract.py --csv hardware/case/issue-188-crosscheck/wing-keys-check.csv --zonemap hardware/case/issue-188-crosscheck/j3-zone-map.txt > hardware/case/issue-188-crosscheck/extracted.json
 ```
 
 標準ライブラリのみ（Python 3.12 で確認）。作業ツリーのどこから実行してもよい。同じ入力なら `extracted.json` はbyte一致する。
@@ -14,6 +14,8 @@ python3 hardware/case/issue-188-crosscheck/extract.py --csv hardware/case/issue-
 | --- | --- |
 | `extract.py` | 抽出・照合スクリプト。#150 の `measure.py` のS式パーサ関数だけを再利用し、トップレベル処理は実行しない |
 | `extracted.json` | 全結果。`input_sha256` に使った入力ファイルのSHA256を記録 |
+| `interference.py` | 干渉チェック（ボス包絡、J3 自由領域、GH ハウジング、J1 プラグ、Wing 板）。`extract.py` が読み込み、結果は `extracted.json` の `interference` |
+| `j3-zone-map.txt` | J3 周辺 1mm セルの自由領域図（上面／下面） |
 | `wing-keys-check.csv` | Wing 16/17mm 各21キーの Rev.1 基板座標と #150 `keys-*.csv` の差（全て0） |
 
 ## `extract.py` が失敗（assert）で止まる条件
@@ -29,3 +31,9 @@ python3 hardware/case/issue-188-crosscheck/extract.py --csv hardware/case/issue-
 - J3 本体投影 X94.625–115.375／Y73.2–77.45、GHR-14V-S 投影（18.75×4.15）：docs/issue-163・160 の公表値／設計値を転記。実ラッチdatumは不明（実測待ち）
 - 部品最大高さ・ハーネス実経路：入力が無いため計算していない（判定不能）
 - `harness.planar_center_distance_upper_bound_mm`：2つの90°曲げ（曲げ中心線半径R）と水平直線だけで同一平面の2コネクタを結ぶ最短経路の逆算。実ハーネスの上限ではなく、これより長い中心間距離は確実に届かないという**楽観側の上界**
+
+## 干渉チェックのモデルと仮定
+
+- 銅＝パッド・トラック・via・スルーホール・NPTH。部品包絡＝パッド外接矩形（Fab／3D 本体は基板データに無い）。J2／J3／J_WING は BM14B 本体、J1 は HRO 本体を加える
+- グリッド占有は保守側（解像度の半対角分を上乗せ）。余白 0.3mm は感度確認用の仮定
+- 公表値・設計値・仮定・判定不能の区別は報告書「干渉チェック」節の末尾を参照
