@@ -626,3 +626,42 @@ Actual tolerances, tightening, non-rectangular support under J1/J2 insertion
 loads, tool access and underside solder/boss clearance remain mechanical
 validation items. This adopts the layout; qualification and manufacturing
 review remain required. It does not authorize ordering, billing or merge.
+
+## D-028 - M1 / ver.A version definition and dual-pitch matrix evaluation board
+
+Status: accepted PO scope decision (2026-11-06), per
+[Issue #178](https://github.com/ihsinoky/he-piantor-42/issues/178)
+(corrected body: 16 mm and 17 mm; the old issue title is not the specification)
+
+**M1 = Main board with two Wing ports + the matrix evaluation board.**
+**ver.A = the left/right 21-key Wing boards.** The matrix board measures
+Hall-effect interaction while multiple keys are pressed and compares key pitch;
+it does not select a production pitch or qualify magnetic behaviour by geometry
+alone. The 16.5 mm variant is outside this scope.
+
+Replace the two separate pitch9 evaluation candidates for this M1 evaluation
+with **one board carrying a 16 mm 3 x 3 field (9 keys) and a 17 mm 3 x 3 field
+(9 keys), 18 keys total**. Keep three TMUX1208 banks. Bank A/B/C serves the
+same column A/B/C in both fields: addresses 0/1/2 are the three rows of the
+16 mm field, addresses 3/4/5 the three rows of the 17 mm field. S7/S8
+(addresses 6/7) and the physical NC pin remain unconnected. Keep the D-017
+GH14 interface, including all six GND contacts, common address/enable and
+three analog outputs; do not add or repurpose interface pins.
+
+Target at least **34 mm between the nearest key centres of different fields**;
+report the achieved distance and native-board basis. Preserve each field's
+unmodified 16/17 mm pitch. Mounting fixtures, magnet height and actual magnetic
+isolation remain physical evaluation items.
+
+For this matrix board, explicitly apply the D-021 amended routing conditions:
+**2 copper layers / 1.2 mm, signal 0.10 mm, HALL_5V and GND 0.30 mm,
+clearance 0.10 mm, via 0.60/0.30 mm, KRT escalation off**. This extends those
+conditions to this evaluation board despite D-021's historical exclusion of
+separate pitch9 boards; it does not alter the representative21 baseline.
+Require independent all-net qualification with all four metrics zero and
+Gerber plus JLCPCB-format PCBA BOM/CPL from the qualified revision.
+
+The implementation and evidence are in
+[Issue #178 report](issue-178-m1-matrix-board.md). Passing routing/DRC does not
+establish magnetic interaction, harness/ADC settling, manufacturer PCBA
+acceptance or manufacturing release. No order, charge or merge is authorized.

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/verify-derivation.py", line 23, in <module>
+    refs=[str(val(n,'at')) for n in silk];assert len(silk)==json.loads((E/'final-design-derivation.json').read_text())['added_silk_primitives']
+              ^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-178-m1-matrix-board/verify-derivation.py", line 7, in val
+    def val(n,k):return children(n,k)[0][1:]
+                        ~~~~~~~~~~~~~^^^
+IndexError: list index out of range

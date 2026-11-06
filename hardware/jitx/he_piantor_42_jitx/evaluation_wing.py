@@ -12,6 +12,7 @@ from jitx.shapes.composites import rectangle
 from jitxlib.landpatterns.twopin.smt import SMT
 
 from wing.definition import HALL_PINS, MUX_PINS, define_wing
+from wing.matrix import define_m1_matrix
 
 from .components.connectors.jst_bm14b_ghs_tbt import BM14B_GHS_TBT
 from .components.generic_electrical import Capacitor, TestPoint
@@ -26,8 +27,8 @@ class WingBypass(Capacitor):
     landpattern = SMT("0603")
 
 
-def make_wing_circuit(pitch: float, kind: str = "pitch9") -> type[Circuit]:
-    spec = define_wing(pitch, kind)
+def make_wing_circuit(pitch: float, kind: str = "pitch9", spec=None) -> type[Circuit]:
+    spec = define_wing(pitch, kind) if spec is None else spec
     declarations = {}
     for row in spec["components"]:
         declarations[row["reference"]] = {
@@ -112,3 +113,37 @@ Representative16 = make_wing_design("Representative16", 16.0, "representative21"
 Representative17 = make_wing_design("Representative17", 17.0, "representative21")
 Load16 = make_wing_design("Load16", 16.0, "load21")
 Load17 = make_wing_design("Load17", 17.0, "load21")
+
+
+# M1 evaluation board has two independent 3x3 pitch fields on one substrate.
+
+
+class M1MatrixFabRules(WingFabRules):
+    max_board_width = 128.0
+    max_board_height = 80.0
+    min_copper_width = 0.10
+    min_copper_copper_space = 0.10
+    min_copper_hole_space = 0.20
+    min_copper_edge_space = 0.20
+
+
+class M1MatrixSubstrate(QualificationSubstrate):
+    constraints = M1MatrixFabRules()
+
+    class ThroughVia(QualificationSubstrate.ThroughVia):
+        diameter = 0.60
+        hole_diameter = 0.30
+
+
+class M1MatrixBoard(Board):
+    shape = rectangle(128.0, 80.0)
+    signal_area = rectangle(127.0, 79.0)
+
+
+M1MatrixCircuit = make_wing_circuit(16, "matrix18", define_m1_matrix())
+
+
+class M1Matrix18(Design):
+    board = M1MatrixBoard()
+    substrate = M1MatrixSubstrate()
+    circuit = M1MatrixCircuit()
