@@ -886,3 +886,36 @@ manufacturing evidence. Manufacturer DFM and assembly orientation review remain
 later release tasks. This decision authorizes no order, charge or merge.
 =======
 >>>>>>> origin/main
+
+## D-030 - Main Rev.3 via relocation to remove the POFV design requirement
+
+Status: Issue #185 implementation proposal; pending PO review / merge (2026-11-06)
+
+Per [Issue #185](https://github.com/ihsinoky/he-piantor-42/issues/185), Main Rev.3
+relocates the 35 vias that failed the [Issue #183 audit](https://github.com/ihsinoky/he-piantor-42/pull/184)
+from the qualified Main Rev.2 board in PR #176. All 66 footprint positions and
+orientations, existing 693 track segments and all 113 via identities are retained.
+The 33 straight-connection candidates are implemented first, followed by the two
+local connection cases at C5.2/GND and C4.1/V3V3. No whole-board routing is used.
+
+The [Issue #185 report](issue-185-main-rev3.md) records all four independent metrics
+at zero across all 44 nets after GND zone refill. All 113 vias have annulus-to-pad
+copper clearance at least 0.10 mm, including same-net and bare test pads. Via
+copper and drills overlap neither paste layer. The extracted 125°C / track-width
+−20% model gives common loop **41.135 mΩ**, J2 branch **24.834 mΩ**, and J3 branch
+**26.095 mΩ**, preserving the 50 mΩ common/branch targets. These are model values,
+not finished-board resistance or operating-performance guarantees.
+
+For this qualified Rev.3 package, propose removing D-022's **epoxy-filled and
+copper-capped POFV** order requirement: there are no remaining via-in-pad sites.
+Keep the exported solder-mask settings and request ordinary tented vias, subject
+to manufacturer DFM acceptance. This applies only to the new Rev.3 package;
+D-022 continues to describe the previous boards. Keep D-022's J1 SMD contacts and
+four PTH shell legs in the same Economic PCBA process. D-019 remains four layers,
+1.2 mm, minimum track/clearance 0.10 mm and via 0.60/0.30 mm, with In1.Cu GND.
+
+Regenerated Gerber/drill/paste/BOM/CPL and CAM checks accompany the proposal.
+This change does not adopt quotation-only substitute parts, guarantee a cost
+reduction or constitute manufacturing release. Vendor acceptance, revised
+quotation, material minima, procurement and physical validation remain separate.
+No order, charge or merge is authorized or performed.
