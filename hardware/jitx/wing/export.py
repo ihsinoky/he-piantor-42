@@ -8,6 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from wing.definition import define_wing
+from wing.matrix import define_m1_matrix
 
 
 def csv_text(fields, rows):
@@ -28,7 +29,7 @@ def render_svg(spec):
     ]
     for sensor in spec["sensor_sites"]:
         if sensor["role"] == "key":
-            x, y, p = sensor["x_mm"], sensor["y_mm"], spec["pitch_mm"]
+            x, y, p = sensor["x_mm"], sensor["y_mm"], sensor.get("block_pitch_mm", spec["pitch_mm"])
             lines.append(
                 f'<rect class="cell" x="{x - p / 2}" y="{-y - p / 2}" width="{p}" height="{p}"/>'
             )
@@ -139,6 +140,16 @@ def export_all(output, check=False):
                 else:
                     directory.mkdir(parents=True, exist_ok=True)
                     target.write_text(content)
+
+    spec = define_m1_matrix()
+    for name, content in artifacts(spec).items():
+        target = output / spec["name"] / name
+        if check:
+            if not target.is_file() or target.read_text() != content:
+                raise ValueError(f"Missing or stale artifact: {target}")
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content)
 
 
 if __name__ == "__main__":
