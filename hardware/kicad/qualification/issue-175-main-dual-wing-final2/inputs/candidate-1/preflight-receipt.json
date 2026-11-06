@@ -1,0 +1,117 @@
+{
+  "candidate": "candidate-1",
+  "utc": "2026-11-06T08:48:43.957330+00:00",
+  "board_sha256": "3c0e1af7137cf5af39afe2f61a5ee03bc49c27ca4d02a47bc0c81a8a679a71f9",
+  "project_sha256": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+  "drc_sha256": "3b573911977082b3e26822c86d25a8ca98151720d65a6496f6446469358e29f2",
+  "pass_preflight": false,
+  "blocking_violations": [
+    {
+      "description": "Front solder mask aperture bridges items with different nets",
+      "items": [
+        {
+          "description": "Track [SW2] on F.Cu, length 4.3500 mm",
+          "pos": {
+            "x": 86.7,
+            "y": 76.4
+          },
+          "uuid": "3970638a-13eb-4a9f-9362-caff965312f6"
+        },
+        {
+          "description": "Pad 1 [V5V2] of C26 on F.Cu",
+          "pos": {
+            "x": 90.899999,
+            "y": 77.8
+          },
+          "uuid": "98f7adec-3b8e-4a84-bb13-4223b1814fd9"
+        }
+      ],
+      "severity": "error",
+      "type": "solder_mask_bridge"
+    },
+    {
+      "description": "Front solder mask aperture bridges items with different nets",
+      "items": [
+        {
+          "description": "Track [SW2] on F.Cu, length 2.4000 mm",
+          "pos": {
+            "x": 91.05,
+            "y": 76.4
+          },
+          "uuid": "c5e54377-8758-4b8c-9609-4dff21ee56f9"
+        },
+        {
+          "description": "Pad 1 [V5V2] of C26 on F.Cu",
+          "pos": {
+            "x": 90.899999,
+            "y": 77.8
+          },
+          "uuid": "98f7adec-3b8e-4a84-bb13-4223b1814fd9"
+        }
+      ],
+      "severity": "error",
+      "type": "solder_mask_bridge"
+    },
+    {
+      "description": "Items shorting two nets (nets SW2 and V5V2)",
+      "items": [
+        {
+          "description": "Track [SW2] on F.Cu, length 4.3500 mm",
+          "pos": {
+            "x": 86.7,
+            "y": 76.4
+          },
+          "uuid": "3970638a-13eb-4a9f-9362-caff965312f6"
+        },
+        {
+          "description": "Pad 1 [V5V2] of C26 on F.Cu",
+          "pos": {
+            "x": 90.899999,
+            "y": 77.8
+          },
+          "uuid": "98f7adec-3b8e-4a84-bb13-4223b1814fd9"
+        }
+      ],
+      "severity": "error",
+      "type": "shorting_items"
+    },
+    {
+      "description": "Items shorting two nets (nets V5V2 and SW2)",
+      "items": [
+        {
+          "description": "Pad 1 [V5V2] of C26 on F.Cu",
+          "pos": {
+            "x": 90.899999,
+            "y": 77.8
+          },
+          "uuid": "98f7adec-3b8e-4a84-bb13-4223b1814fd9"
+        },
+        {
+          "description": "Track [SW2] on F.Cu, length 2.4000 mm",
+          "pos": {
+            "x": 91.05,
+            "y": 76.4
+          },
+          "uuid": "c5e54377-8758-4b8c-9609-4dff21ee56f9"
+        }
+      ],
+      "severity": "error",
+      "type": "shorting_items"
+    }
+  ],
+  "type_counts": {
+    "solder_mask_bridge": 2,
+    "shorting_items": 2,
+    "silk_overlap": 12,
+    "silk_over_copper": 5,
+    "text_height": 44,
+    "via_dangling": 15
+  },
+  "expected_unrouted_connections": 130,
+  "ignored_print_and_pre_route_via_warnings": [
+    "silk_over_copper",
+    "silk_overlap",
+    "text_height",
+    "via_dangling"
+  ]
+}
