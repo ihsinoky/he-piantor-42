@@ -26,6 +26,28 @@ Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
 M1-phase boards is a PO-approved front-loading, ahead of the G2 pitch
 decision.
 
+### Revision history (background, one line per revision)
+
+Kept here because the reasons behind a revision cannot be recovered from
+comparing artifacts. Detailed changes live in the decision records and the
+issue reports, not here.
+
+- Main Rev.1 - Built as the single-Wing evaluation Main; superseded before
+  ordering when dual-Wing connection became a requirement.
+- Main Rev.2 - The dual-Wing revision; its placement passed under the PO
+  policy of proceeding with design while deferring physical GH checks to
+  real hardware, and it gained a regulated 5.2 V rail after analysis showed
+  raw VBUS could not hold the far-end sensor voltage.
+- Matrix Rev.1 - Designed as two separate per-pitch boards for pitch
+  comparison; replaced before fabrication when the verification approach
+  changed to one combined board.
+- Matrix Rev.2 - Rebuilt as one combined board after simultaneous-press
+  Hall-interaction measurement was added to its purpose, so both pitches
+  are measured under identical conditions.
+- Wing Rev.1 - The representative 21-key Wing taken to manufacturing data
+  (SILK-149A) with silkscreen prepared for hand soldering; both pitches
+  prepared because the production pitch is decided from measurements.
+
 ## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
 **Location:** Before real Rev.M1/Main product design. Same Draft
