@@ -627,19 +627,21 @@ loads, tool access and underside solder/boss clearance remain mechanical
 validation items. This adopts the layout; qualification and manufacturing
 review remain required. It does not authorize ordering, billing or merge.
 
-## D-028 - M1 / ver.A version definition and dual-pitch matrix evaluation board
+## D-028 - Dual-pitch Matrix Rev.2 evaluation board (naming per Issue #179 convention)
 
 Status: accepted PO scope decision (2026-11-06), per
 [Issue #178](https://github.com/ihsinoky/he-piantor-42/issues/178)
 (corrected body: 16 mm and 17 mm; the old issue title is not the specification)
 
-**M1 = Main board with two Wing ports + the matrix evaluation board.**
-**ver.A = the left/right 21-key Wing boards.** The matrix board measures
+Board names follow the naming convention of Issue #179 (phases and board
+revisions are separate; M1 names the evaluation phase only). The boards in
+scope are **Main Rev.2 (two Wing ports), Matrix Rev.2 (this evaluation
+board), and Wing Rev.1 (the left/right 21-key boards)**. The matrix board measures
 Hall-effect interaction while multiple keys are pressed and compares key pitch;
 it does not select a production pitch or qualify magnetic behaviour by geometry
 alone. The 16.5 mm variant is outside this scope.
 
-Replace the two separate pitch9 evaluation candidates for this M1 evaluation
+Replace the two separate pitch9 evaluation candidates (Matrix Rev.1) for this evaluation
 with **one board carrying a 16 mm 3 x 3 field (9 keys) and a 17 mm 3 x 3 field
 (9 keys), 18 keys total**. Keep three TMUX1208 banks. Bank A/B/C serves the
 same column A/B/C in both fields: addresses 0/1/2 are the three rows of the
