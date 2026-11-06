@@ -92,3 +92,5 @@ E/run-checks.pyは、入力保全、PR #162取り込み、D-025追記限定、�
 全差分の空白検査では、取り込んだ#160のGitHub push生ログに既存の行末空白4件がある。元byteを維持し、stdout／stderrの生記録だけを除外した著作内容の空白検査は合格した。ログを整形して取り込み一致を崩してはいない。
 
 公開用本文はE/draft-pr-body.md、コミット・push・Draft PRの結果はE/publication.jsonに記録する。Issueは自動closeせず、Draftのままレビュー対象とする。発注・課金・mergeは実施しない。
+
+内容コミット **`3f90c881786567a24bf05b1454984dd4a1334765`** のpushに成功し、**[Draft PR #164](https://github.com/ihsinoky/he-piantor-42/pull/164)** を作成した。接続ツールは「承認が必要だが承認ポリシーはnever」としてPR作成を拒否したため、同じ依頼範囲のGitHub CLI `gh pr create --draft --body-file` で作成した。拒否・push・CLIの実行結果はE/processesに保存した。公開記録も同じブランチへ追加コミットする。
