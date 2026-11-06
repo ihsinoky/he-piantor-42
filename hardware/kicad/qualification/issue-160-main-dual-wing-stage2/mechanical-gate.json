@@ -1,0 +1,304 @@
+{
+  "status": "STOP_PROPOSE_C",
+  "decision_kind": "Engineering judgment of multiple unresolved service constraints; not proof that every A assembly method is impossible",
+  "inputs": {
+    "hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/final/main.kicad_pcb": "fdc1a7748f94714e395eb50f3e08c43afa24192ee76eb3d1804a8cba28690222",
+    "hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/final/main.kicad_pro": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+    "hardware/kicad/qualification/issue-153-main-mounting-stage1/measure.py": "880364ae12aaacdad8607001764231891f9360bef2d42bd1e6811b7d077812cc",
+    "hardware/tscircuit/src/qualification/JstGh14.tsx": "ad23f75d53a917f8f43485b7fe887ff096ab0bdda244e3dc6e44fd73d93c787c"
+  },
+  "actual_R2_pad_hull_mm": [
+    90.525,
+    82.77499999999999,
+    91.475,
+    85.22500000000001
+  ],
+  "holes_mm": {
+    "H1": [
+      79.0,
+      92.0
+    ],
+    "H2": [
+      121.0,
+      81.0
+    ],
+    "H3": [
+      79.0,
+      119.0
+    ],
+    "H4": [
+      102.0,
+      111.5
+    ]
+  },
+  "manufacturer_catalogue": {
+    "url": "https://jst.es/wp-content/uploads/2025/06/gh-connector.pdf",
+    "housing_GHR14_width_mm": 18.75,
+    "housing_depth_mm": 4.15,
+    "housing_height_mm": 5.7,
+    "top_entry_assembly_height_reference_mm": 7.3,
+    "wire_insulation_OD_range_mm": [
+      0.76,
+      1.0
+    ],
+    "pages_1_based": [
+      1,
+      2,
+      3
+    ]
+  },
+  "assumptions": {
+    "housing_center": "header body midpoint; full seating/latch datum and tolerances not supplied",
+    "finger_diameters_mm": [
+      6,
+      8,
+      10
+    ],
+    "driver_diameter_mm": 6,
+    "screw_head_diameter_max_mm": 4.5,
+    "relative_tolerance_sweep_mm": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "bend_centerline_radii_mm": [
+      3,
+      5,
+      8
+    ],
+    "notes": "Sweeps are engineering scenarios, not manufacturer minimums or newly approved requirements. Original service envelope is never reduced."
+  },
+  "candidates": [
+    {
+      "name": "A",
+      "origin_mm": [
+        105,
+        81
+      ],
+      "rotation_deg": 0,
+      "outline_mm": [
+        76,
+        78,
+        124,
+        122
+      ],
+      "header_body_mm": [
+        94.625,
+        81.2,
+        115.375,
+        85.45
+      ],
+      "housing_projection_assumed_mm": [
+        95.625,
+        81.25,
+        114.375,
+        85.4
+      ],
+      "service_rectangle_from_stage1_mm": [
+        92,
+        79.5,
+        118,
+        87
+      ],
+      "service_to_R2_pad_plus_0p5_mm": 0.025000000000005684,
+      "service_to_H2_d5_reservation_mm": 0.4999959999999999,
+      "service_to_H2_driver_d6_mm": 0.0,
+      "R2_service_gap_after_relative_tolerance_mm": [
+        {
+          "relative_allowance_mm": 0.05,
+          "signed_remaining_mm": -0.02499999999999432
+        },
+        {
+          "relative_allowance_mm": 0.1,
+          "signed_remaining_mm": -0.07499999999999432
+        },
+        {
+          "relative_allowance_mm": 0.2,
+          "signed_remaining_mm": -0.17499999999999433
+        }
+      ],
+      "side_grasp_projection_sweep": [
+        {
+          "diameter_mm": 6,
+          "left_center": [
+            92.625,
+            83.325
+          ],
+          "right_center": [
+            117.375,
+            83.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": -1.8499999999999943,
+          "right_to_H2_head_d4p5_mm": -0.943464269276288,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        },
+        {
+          "diameter_mm": 8,
+          "left_center": [
+            91.625,
+            83.325
+          ],
+          "right_center": [
+            118.375,
+            83.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": -3.8499999999999943,
+          "right_to_H2_head_d4p5_mm": -2.74339908173171,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        },
+        {
+          "diameter_mm": 10,
+          "left_center": [
+            90.625,
+            83.325
+          ],
+          "right_center": [
+            119.375,
+            83.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": -5.0,
+          "right_to_H2_head_d4p5_mm": -4.413408735823927,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        }
+      ]
+    },
+    {
+      "name": "C",
+      "origin_mm": [
+        105,
+        73
+      ],
+      "rotation_deg": 0,
+      "outline_mm": [
+        76,
+        70,
+        124,
+        122
+      ],
+      "header_body_mm": [
+        94.625,
+        73.2,
+        115.375,
+        77.45
+      ],
+      "housing_projection_assumed_mm": [
+        95.625,
+        73.25,
+        114.375,
+        77.4
+      ],
+      "service_rectangle_from_stage1_mm": [
+        92,
+        71.5,
+        118,
+        79
+      ],
+      "service_to_R2_pad_plus_0p5_mm": 3.275095418457292,
+      "service_to_H2_d5_reservation_mm": 1.105547275463989,
+      "service_to_H2_driver_d6_mm": 0.6055512754639891,
+      "R2_service_gap_after_relative_tolerance_mm": [
+        {
+          "relative_allowance_mm": 0.05,
+          "signed_remaining_mm": 3.225095418457292
+        },
+        {
+          "relative_allowance_mm": 0.1,
+          "signed_remaining_mm": 3.1750954184572917
+        },
+        {
+          "relative_allowance_mm": 0.2,
+          "signed_remaining_mm": 3.0750954184572916
+        }
+      ],
+      "side_grasp_projection_sweep": [
+        {
+          "diameter_mm": 6,
+          "left_center": [
+            92.625,
+            75.325
+          ],
+          "right_center": [
+            117.375,
+            75.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": 4.53823586789375,
+          "right_to_H2_head_d4p5_mm": 1.4839624293576188,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        },
+        {
+          "diameter_mm": 8,
+          "left_center": [
+            91.625,
+            75.325
+          ],
+          "right_center": [
+            118.375,
+            75.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": 3.451509914104646,
+          "right_to_H2_head_d4p5_mm": 0.002699417051803543,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        },
+        {
+          "diameter_mm": 10,
+          "left_center": [
+            90.625,
+            75.325
+          ],
+          "right_center": [
+            119.375,
+            75.325
+          ],
+          "left_to_R2_actual_pad_hull_mm": 2.4499999999999886,
+          "right_to_H2_head_d4p5_mm": -1.3469287654645425,
+          "meaning": "Negative is a planar screening conflict, not proof of 3D collision or impossibility"
+        }
+      ]
+    }
+  ],
+  "cable_bend_height_screen": [
+    {
+      "radius_mm": 3,
+      "wire_OD_mm": 0.76,
+      "minimum_z_above_PCB_screen_mm": 10.680000000000001
+    },
+    {
+      "radius_mm": 3,
+      "wire_OD_mm": 1.0,
+      "minimum_z_above_PCB_screen_mm": 10.8
+    },
+    {
+      "radius_mm": 5,
+      "wire_OD_mm": 0.76,
+      "minimum_z_above_PCB_screen_mm": 12.680000000000001
+    },
+    {
+      "radius_mm": 5,
+      "wire_OD_mm": 1.0,
+      "minimum_z_above_PCB_screen_mm": 12.8
+    },
+    {
+      "radius_mm": 8,
+      "wire_OD_mm": 0.76,
+      "minimum_z_above_PCB_screen_mm": 15.680000000000001
+    },
+    {
+      "radius_mm": 8,
+      "wire_OD_mm": 1.0,
+      "minimum_z_above_PCB_screen_mm": 15.8
+    }
+  ],
+  "unresolved": [
+    "3D latch actuation and straight withdrawal with actual harness/tool",
+    "Selected wire bend radius, strain relief and case/cover height",
+    "Actual component/assembly/fastener/tool tolerances",
+    "Support against insertion/withdrawal forces; no actual force or deflection test"
+  ],
+  "execution": {
+    "pcb_writes": 0,
+    "router_runs": 0,
+    "refill_runs": 0,
+    "qualification_runs": 0,
+    "manufacturing_exports": 0
+  }
+}

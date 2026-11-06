@@ -1,0 +1,43 @@
+[
+  {
+    "title": "USB 2.0 base specification",
+    "url": "https://www.usb.org/document-library/usb-20-specification",
+    "pdf_sha256": "d39698a33486c399124af92bd02e4f978fd9a836b5cf4e52e6e4633eb1d89f61",
+    "runtime_pdf": ".issue167-runtime/sources/usb_20.pdf",
+    "reviewed_utc": "2026-11-06T05:32:55.718777+00:00",
+    "notes": [
+      "USB-IF package https://usb.org/sites/default/files/usb_20_20250603.zip; Revision 2.0, April 27 2000",
+      "7.2.1.4 p174: source 4.75 V at upstream cable plug; staged high-power enable",
+      "7.2.2 p175: upstream voltage and cable voltage drops",
+      "9.1.2 p245: before/after configuration current",
+      "9.6.3 p266: bMaxPower in 2 mA units",
+      "Legacy USB 2.0 path is a supported supply counterexample, not a claim that every Type-C mode uses these limits"
+    ]
+  },
+  {
+    "title": "USB-IF drop/droop requirements",
+    "url": "https://www.usb.org/sites/default/files/USB20_32_BC12_Drop_Droop_1_4_1.pdf",
+    "pdf_sha256": "cf7e58f3f45d44e35de6e44452f3bceb6f8c51e0de4345a2dc044bda2854b14e",
+    "runtime_pdf": ".issue167-runtime/sources/usb-drop-droop.pdf",
+    "reviewed_utc": "2026-11-06T05:32:55.731589+00:00",
+    "notes": [
+      "Version 1.4.1, 19 June 2018, p6 Table 2",
+      "Non-Type-C PC USB 2.0 downstream host port: 4.75 V at 500 mA",
+      "Use as upstream A-to-C supply case; not the Type-C specification"
+    ]
+  },
+  {
+    "title": "TI TPS63070",
+    "url": "https://www.ti.com/lit/ds/symlink/tps63070.pdf",
+    "pdf_sha256": "a88ef66f3493156ff6e7da0849de0e0e1068647f2553d08c1844d4a90c5c65ef",
+    "runtime_pdf": ".issue165-runtime/datasheets/tps63070.pdf",
+    "reviewed_utc": "2026-11-06T05:32:55.738453+00:00",
+    "notes": [
+      "SLVSC58B March 2019, read-only reuse with web verification",
+      "6 Pin Functions: PS/SYNC pin1 LOW gives forced PWM",
+      "7.5 PWM reference accuracy +/-1%; not a system tolerance guarantee",
+      "9.2 Table2 and 9.2.2: example 1.5uH and capacitor derating; not final BOM or verified layout",
+      "2 V operating range does not establish the Issue-required 4.75 V input"
+    ]
+  }
+]
