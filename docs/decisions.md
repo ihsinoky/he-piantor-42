@@ -856,3 +856,33 @@ The implementation and evidence are in
 [Issue #178 report](issue-178-m1-matrix-board.md). Passing routing/DRC does not
 establish magnetic interaction, harness/ADC settling, manufacturer PCBA
 acceptance or manufacturing release. No order, charge or merge is authorized.
+<<<<<<< HEAD
+
+## D-029 - Matrix Rev.3: keep every via clear of component pads; no POFV
+
+Status: accepted PO design policy (2026-11-06), per
+[Issue #182](https://github.com/ihsinoky/he-piantor-42/issues/182).
+
+For the matrix board, **do not overlap any component copper pad with a via**,
+including bare testpads, NC lands and connector reinforcement pads. Require
+**at least 0.10 mm from every via's outer copper annulus to every pad's copper**,
+irrespective of net. Independently audit every via and retain its minimum gap.
+
+**Matrix Rev.3 does not require epoxy filling or copper capping (POFV)** because
+its qualified routing meets that condition. This supersedes the Matrix Rev.2
+fabrication note requiring all 146 vias to be filled/capped, only for the Rev.3
+data package. It does not change Main's D-022 via treatment or retroactively
+qualify Rev.2 artwork. Ordinary plated through vias and inherited mask tenting
+are retained; do not use the Rev.2 artwork with the Rev.3 process note.
+
+Keep Rev.2's component placement, board outline, GH14 interface and electrical
+configuration. Retain D-021 unchanged: **2 copper layers / 1.2 mm; signal
+0.10 mm; HALL_5V/GND 0.30 mm; clearance 0.10 mm; via 0.60/0.30 mm; KRT
+escalation off**. Require all four independent all-net qualification metrics
+zero, plus the all-via pad audit, before regenerating manufacturing data.
+
+The [Rev.3 report](issue-182-matrix-rev3.md) records the qualified result and
+manufacturing evidence. Manufacturer DFM and assembly orientation review remain
+later release tasks. This decision authorizes no order, charge or merge.
+=======
+>>>>>>> origin/main
