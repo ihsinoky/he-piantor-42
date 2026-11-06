@@ -183,3 +183,5 @@ E/[copper-study.py](../hardware/kicad/qualification/issue-165-dual-wing-power-st
 E/[README.md](../hardware/kicad/qualification/issue-165-dual-wing-power-study/README.md)に実行方法、入力・メーカー一次資料のhash、出力の対応を記載する。主表はE/primary.csvとE/primary-fixed-pad-via.csv、全感度はE/sensitivity.csv、固定トポロジの極限はE/copper-study.json、変換電流/熱と走査の仮定はそれぞれconverter-power.csv/duty-timing.csvに保存した。
 
 検証は入力再現、全ケースの式整合、一次資料条件との突合、既存ファイルhash保全、main起点との差分が追加のみであること、ローカルリンク、空白を対象とする。結果はE/verification.json。**計算・保全検査のpassは新回路の設計保証や実基板資格確認のpassではない。** Draft PR本文はE/draft-pr-body.md、コミット/push/PR作成の結果はE/publication.jsonに保存する。Issueの自動close、merge、発注・課金は行わない。
+
+内容コミット `24578d00b8ea26c2d6d85c5b92627a42dcbb0a85` のpushに成功し、**[Draft PR #166](https://github.com/ihsinoky/he-piantor-42/pull/166)** を作成した。接続ツールは承認ポリシーneverでPR作成を拒否したため、認証済みGitHub CLIの `gh pr create --draft --body-file` で作成した。公開結果・生ログはE/publication.jsonとE/processesに記録し、この記録も同じブランチへ追加コミットする。
