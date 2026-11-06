@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/147",
+    "title": "Wing 素基板の発注準備：拡幅配線（D-021 改定条件）から両ピッチの製造データを生成し発注前チェックを完遂する",
+    "issue_number": 147,
+    "body": "## 前提\n- Wing は PCBA しない（2026-11-04 PO 決定）。素基板を 16mm／17mm 両ピッチとも発注し、手はんだで組み立てて実測してから量産ピッチを確定する計画\n- 発注対象の配線は D-021 改定条件（信号 0.10mm／電源 HALL_5V・GND 0.30mm）で合格した Issue #141 の出力基板。旧来の一律 0.10mm（#131）出力は使わない\n\n## 作業内容\n1. #141 の合格出力（両ピッチ）から製造データ（Gerber 一式＋Excellon ドリル）を生成する。生成前に、出力基板が製造データ生成に必要な要素（外形、NPTH、シルク、マスク等）を備えているかを確認し、不足があれば報告する（勝手に設計変更しない）\n2. Issue #138 の発注前チェックリストの「未」項目のうち、データ側で完結するものを確認する：最終データと合格基板の一致、Edge.Cuts／NPTH φ2.2×4／ドリル分類／単一外形／最小間隔、Gerber プレビューでの目視確認、銅厚・スタックアップ条件（2層・1.2mm・外層1oz）の注記\n3. 発注直前の状態まで整え、PO が発注に進むために残る事項（メーカー審査で確定する Keyboard Design 加算の有無、送料・税を含む最終金額、注文画面での指定事項）を一覧にする\n\n## 制約\n- 発注・課金・ファイルのメーカーサイトへのアップロードは行わない（PO ゲート）\n- 既存ファイルの変更はせず追加のみ。成果物は報告書と製造データ一式、Draft PR、merge は PO 判断\n- タイムボックス：2時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T03:54:18Z",
+    "updated_at": "2026-11-05T03:54:18Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/147",
+    "display_title": "Wing 素基板の発注準備：拡幅配線（D-021 改定条件）から両ピッチの製造データを生成し発注前チェックを完遂する"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/147",
+  "title": "Wing 素基板の発注準備：拡幅配線（D-021 改定条件）から両ピッチの製造データを生成し発注前チェックを完遂する",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/147",
+  "display_title": "Wing 素基板の発注準備：拡幅配線（D-021 改定条件）から両ピッチの製造データを生成し発注前チェックを完遂する"
+}

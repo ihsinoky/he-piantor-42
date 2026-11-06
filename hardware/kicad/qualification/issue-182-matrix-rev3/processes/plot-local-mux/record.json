@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import json,matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Rectangle,Circle\nfrom pathlib import Path\ns=json.loads(Path('hardware/kicad/qualification/issue-182-matrix-rev3/inspection/GLOBAL-02/snapshot.json').read_text())\nfig,axs=plt.subplots(1,2,figsize=(16,9))\ncolors={'WING_EN':'lime','GND':'orange','HALL_5V':'red','MUX_A0':'cyan','MUX_A1':'violet','MUX_A2':'pink'}\nfor l,ax in zip([0,2],axs):\n ax.set_facecolor('#141b22')\n for t in s['tracks']:\n  c=colors.get(t['net'],'#7b8997')\n  if t['kind']=='track' and t['layer']==l:\n   a,z=t['start'],t['end'];ax.plot([a[0],z[0]],[a[1],z[1]],color=c,linewidth=t['width']*25,solid_capstyle='round')\n  if t['kind']=='via':\n   x,y=t['position'];ax.add_patch(Circle((x,y),t['size']/2,facecolor=c,edgecolor='white'));ax.add_patch(Circle((x,y),t['drill']/2,facecolor='black'))\n for q in s['pads']:\n  if l not in q['layers']:continue\n  x,y=q['position'];w,h=q['size'];c=colors.get(q['net'],'#7b8997');ax.add_patch(Rectangle((x-w/2,y-h/2),w,h,facecolor=c,alpha=.8))\n  if 75<x<88 and 116<y<125:ax.text(x,y,q['ref']+'.'+q['number'],fontsize=6)\n ax.set_xlim(75.5,88.5);ax.set_ylim(125,116);ax.set_aspect('equal');ax.set_title(str(l));ax.grid(alpha=.15)\nfig.savefig('hardware/kicad/qualification/issue-182-matrix-rev3/inspection/mux-a-global2.png',dpi=130)\n"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42",
+  "start_utc": "2026-11-06T12:58:08.409936+00:00",
+  "end_utc": "2026-11-06T12:58:09.189696+00:00",
+  "elapsed_seconds": 0.7797639420000451,
+  "exit_code": 1,
+  "timeout_seconds": 300
+}

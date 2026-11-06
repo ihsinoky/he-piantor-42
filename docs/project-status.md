@@ -4,6 +4,11 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+Cross-cutting lessons distilled from the decision record (D-001–D-027) and the
+PMO run record (Issues #87–#169) are collected in
+[lessons-learned-device-development.md](lessons-learned-device-development.md).
+Read it when starting a new device development or revisiting a settled method.
+
 ## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
 **Location:** Before real Rev.M1/Main product design. Same Draft
