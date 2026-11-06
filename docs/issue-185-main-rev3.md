@@ -88,3 +88,13 @@ E/verify.pyは、4指標、via全件、paste、配置、抵抗、CAM、source ha
 内容コミット **`8feea4c992a3995cbe5c0718fe0e8c87282efc2a`** を指定ブランチへpush済み。Draft PR作成を実行したが、ツール承認制御が **`MCP tool call requires approval, but approval policy is never`** と拒否したため、**Draft PRは未作成**。別経路で拒否を回避していない。提出本文はE/draft-pr-body.md、対象baseは `issue-175-main-dual-wing-final2`、headは `issue-185-main-rev3-nopofv`。ホスト側でこの本文とbase/headを使ってDraft作成することが残る。Git管理情報は `.issue185-runtime/git` にあり、通常worktreeの読取り専用 `.git` は起点を指したままである。
 
 監査CSVのCRLFを保持し、`git -c core.whitespace=cr-at-eol diff --check` を通過した。生成されたPython bytecodeとKiCad session/project補助ファイルは `.issue185-runtime/generated-settings/` へ移し、提出成果物には含めていない。
+
+## 訂正（2026-11-07）：C25 の部品を Basic 品へ統一
+
+PO 判断により、C25 の選定部品を変更する。基板データ・電気特性・配置は変更しない（値・誘電体・フットプリントは同一で、選定品番のみの変更）。
+
+- 変更前：Murata GRM155R71E104KE14D（100nF 25V X7R 0402、LCSC C77014、JLCPCB Extended）
+- 変更後：Samsung CL05B104KO5NNNC（100nF 16V X7R 0402、LCSC C1525、JLCPCB Basic）— C3〜C11・C15 で既に採用している同一部品への統一
+- 根拠：C25 は TPS63070 の VAUX ピン用 100nF（データシート SLVSC58A：VAUX の絶対最大定格は 7V、接続容量 100nF を指定）。VAUX は内部レギュレータの出力で、ピンの電圧は絶対最大の 7V を超えることがないため、16V 定格でもピンの受けうる最大に対して2倍超の余裕がある
+- 効果（2026-11-07 に再見積で検証）：Main Rev.3 PCBA 5枚実装の確定見積が $125.55 → **$122.29**（Extended 費 $46.35 → $43.26、部品・実装の差 −$0.17）。条件は基準見積と同一（Economic PCBA、鉛入り HASL、全58箇所選択、PR #177 の代替品を照合時に適用）
+- 同時に検討した R3／R4（27Ω 0603）は、JLCPCB の Basic ライブラリに 27Ω・0603 が存在しないことを確認したため変更しない

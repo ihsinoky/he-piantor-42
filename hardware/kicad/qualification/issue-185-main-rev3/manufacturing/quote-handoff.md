@@ -27,3 +27,9 @@ with this package. This is not manufacturing GO.
 
 No manufacturer upload, communication, cart addition, order or payment occurred
 in Issue #185. PO review / merge and manufacturer review remain outstanding.
+- Amendment 2026-11-07 (PO decision): C25 changed from GRM155R71E104KE14D
+  (C77014) to CL05B104KO5NNNC (C1525). A requote of this package with the
+  amendment (PR #177 substitutes applied at parts matching) verified $122.29
+  for five assembled boards, Economic PCBA, leaded HASL — $3.26 below the
+  $125.55 pre-amendment quote. See the amendment note in
+  docs/issue-185-main-rev3.md.
