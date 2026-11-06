@@ -1,0 +1,24 @@
+{
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/190",
+  "title": "Wing 配列が Piantor になっていない：Cantor 原典からの座標再導出（Stage 1）",
+  "issue_number": 190,
+  "body": "## 問題\nWing Rev.1 のキー配列が Piantor になっていない（PO 指摘、2026-11-07、PMO が定量検証済み）。\n\n原典である Cantor（diepala/cantor の Cantor_Classic）と Piantor（beekeeb/piantor 左手版）の実基板からスイッチ座標を抽出したところ、両者は21キー全て完全一致した。列ごとの縦オフセット（最上列基準、ピッチ比 u）は：\n\n| 列 | Cantor／Piantor | 現行 Wing（17mm） |\n|---|---|---|\n| C0（小指・外） | +0.94u | +0.25u |\n| C1（小指・内） | +0.94u | +0.25u |\n| C2 | +0.28u | +0.125u |\n| C3 | 0 | 0 |\n| C4 | +0.28u | +0.125u |\n| C5（最内） | +0.39u | +0.25u |\n\n現行 Wing は左右対称の緩い弧で、Cantor 系の「小指側2列が強く下がる」非対称スタッガー（17mm 換算で 16.1mm のところ 4.25mm しか下がっていない）を再現していない。親指クラスタの配置も原典とは異なる。原典のキー間隔は 18mm（横）×17mm（縦）。\n\n## 影響\n- Wing のみ。Main Rev.3 と Matrix（3×3 グリッド測定板）は無関係で、第1便の発注判断に影響しない\n- Wing は未発注（第2便に後ろ倒し済み）なのでスクラップは出ない\n- #150 のキー計測と #188 の項目4は、同じ誤った座標を源泉とする自己整合の確認だったことが判明した\n\n## Stage 1（本 Issue）の範囲\n1. 原典座標の確定：Cantor 実座標21キーを正とし、u 座標系（横 18mm／縦 17mm を 1u とする）を定義する。抽出済み座標は PMO の検証データとして指示書に添付する\n2. 16mm／17mm 両ピッチへの再導出：u 比を保持して新キー座標表を作成し、現行 Wing 座標との差分表を出す\n3. Wing 定義データ（JITX の representative21 定義・placements）の更新案と、外形への影響評価（小指列が 1u 下がることでキー領域が南へ広がる。現行外形 110×100／116.5×104.75 に収まるか、再アンカーが要るか）\n4. #150 のキー計測データ（keys-*.csv）の更新案\n\n## Stage 2（別 Issue、本 Issue の PO 採用後）\n新座標での再レイアウト、D-021 配線再検証、製造データ再生成。これは Wing Rev.2 として起こす（Rev.1 は未製造のまま supersede する）。\n\n## 範囲外\n基板の再レイアウト・配線そのもの（Stage 2）、発注、筐体 CAD。\n\n## 完了条件\n両ピッチの新座標表と差分表が確定し、外形への影響が評価され、PO が Stage 2 の前提として採用できる形になっていること。\n",
+  "state": "open",
+  "user": {
+    "login": "ihsinoky",
+    "name": "ihsinoky",
+    "email": null,
+    "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+    "id": 42207341
+  },
+  "assignees": null,
+  "labels": null,
+  "milestone": null,
+  "state_reason": null,
+  "comments": 0,
+  "created_at": "2026-11-06T21:02:01Z",
+  "updated_at": "2026-11-06T21:02:01Z",
+  "closed_at": null,
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/190",
+  "display_title": "Wing 配列が Piantor になっていない：Cantor 原典からの座標再導出（Stage 1）"
+}
