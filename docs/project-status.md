@@ -17,7 +17,8 @@ table.
 | --- | --- | --- | --- |
 | Main board | Rev.1 | Single-Wing version. Not an order target. | Rev.M1 Main (single-Wing) |
 | Main board | Rev.2 | Dual-Wing version (Issue #175 final board). Current Main; reused for the product. | Rev.M1 Main (dual-Wing) |
-| Matrix board | Rev.1 | Evaluation board: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | Evaluation Wing, pitch9 (design data only, no revision) |
+| Matrix board | Rev.1 | Separate 3x3 boards per pitch (16 mm and 17 mm), 9 keys each. Designed in Issue #127, routing-evaluated in Issue #129; never fabricated. | Evaluation Wing, pitch9 |
+| Matrix board | Rev.2 | One board carrying both pitches: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
 
 Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
