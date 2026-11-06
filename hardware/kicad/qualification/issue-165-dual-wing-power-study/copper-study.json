@@ -1,0 +1,1198 @@
+{
+  "status": "RESISTANCE_TARGETS_AND_MATHEMATICAL_LIMIT_ONLY",
+  "source": "hardware/kicad/qualification/issue-141-wing-power-integrity/dc-model.py",
+  "source_sha256": "574fe5f2d505897c1f5f2866495599795ba3b1e17c1886dc956e9f727ffa5aa3",
+  "original_function_modified": false,
+  "reproduction": [
+    {
+      "pitch_mm": 16,
+      "absolute_error_V": 0.0
+    },
+    {
+      "pitch_mm": 17,
+      "absolute_error_V": 0.0
+    }
+  ],
+  "results": [
+    {
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 1.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HA0",
+        "loop_drop_V": 0.10064725038530734
+      },
+      "wing_drop_ratio": 1.0,
+      "max_kcl_residual_A": 1.7062617985175166e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.7062617985175166e-10,
+          "variable_resistors": 258,
+          "fixed_resistors": 201,
+          "nodes_after_contraction": 381
+        },
+        "GND": {
+          "residual_A": 1.1641532182693481e-10,
+          "variable_resistors": 320,
+          "fixed_resistors": 166,
+          "nodes_after_contraction": 357
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.08679927844712057
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.07148779452825273
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.08676023011436705
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.05857722216626522
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.06878058983373095
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.08621851179973286
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.08460169196263843
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.0990036952537276
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.09635405840658802
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.09302999936920503
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.09021393579624903
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.09416007488810248
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.08877982350772934
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.10064725038530734
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.06289510330145916
+        },
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.09386563986857692
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.08711354836857736
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.057265485394223575
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.08281697552995523
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.08971060792987871
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.0879729504920106
+        }
+      ]
+    },
+    {
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 2.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HA0",
+        "loop_drop_V": 0.051974096547084916
+      },
+      "wing_drop_ratio": 0.5163985737127716,
+      "max_kcl_residual_A": 1.3697445392610273e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.3697445392610273e-10,
+          "variable_resistors": 258,
+          "fixed_resistors": 201,
+          "nodes_after_contraction": 381
+        },
+        "GND": {
+          "residual_A": 1.1641532182693481e-10,
+          "variable_resistors": 320,
+          "fixed_resistors": 166,
+          "nodes_after_contraction": 357
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.044888387468791494
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.036867925547502484
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.04486868011743079
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.03035349767873666
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.03545734126238887
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.0445970080316225
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.04345165138654141
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.05114873917202274
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.04982320091516026
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.04821283822449564
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.04642019396372029
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.048452279987040575
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.04593198806858024
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.051974096547084916
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.03252743576735858
+        },
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.04841777071799624
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.04475845508269414
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.02969845339382457
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.04264721419734796
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.04643981428803212
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.04552301103115133
+        }
+      ]
+    },
+    {
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 4.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HA0",
+        "loop_drop_V": 0.02761169479251675
+      },
+      "wing_drop_ratio": 0.27434127297875543,
+      "max_kcl_residual_A": 1.3697445392610273e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.3697445392610273e-10,
+          "variable_resistors": 258,
+          "fixed_resistors": 201,
+          "nodes_after_contraction": 381
+        },
+        "GND": {
+          "residual_A": 9.58561897277669e-11,
+          "variable_resistors": 320,
+          "fixed_resistors": 166,
+          "nodes_after_contraction": 357
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.023915657009146617
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.019549965126518087
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.023906492531752668
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.016234863812915855
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.018787559490991087
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.023769501051413584
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.0228581763029921
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.027197181208675043
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.026534096513860808
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.025783412224018767
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.024505116370248686
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.025576744525651108
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.024489598303490165
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.02761169479251675
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.017335335958286457
+        },
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.02566912272732551
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.023561508071657133
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.01590799066189876
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.02254493880974551
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.024787574571664497
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.02428025822783099
+        }
+      ]
+    },
+    {
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 10.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HA0",
+        "loop_drop_V": 0.012971952022806012
+      },
+      "wing_drop_ratio": 0.1288853095652942,
+      "max_kcl_residual_A": 1.3697445392610273e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.3697445392610273e-10,
+          "variable_resistors": 258,
+          "fixed_resistors": 201,
+          "nodes_after_contraction": 381
+        },
+        "GND": {
+          "residual_A": 1.1641532182693481e-10,
+          "variable_resistors": 320,
+          "fixed_resistors": 166,
+          "nodes_after_contraction": 357
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.011315766958592164
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.009150840605620306
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.011313594325018111
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.007756075885039517
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.00877726899350261
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.011257126727582797
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.010485815409820985
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.012805282575352205
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.012539962470416974
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.012307331213532493
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.011340203913292239
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.011832950735605165
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.011607243279203627
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.012971952022806012
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.008211577320157731
+        },
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.011998453718794107
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.010826579482824379
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.007626020090285915
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.010468203178930456
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.01178074762513531
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.011518127978232139
+        }
+      ]
+    },
+    {
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": null,
+      "interpretation": "zero variable-resistance limit; fixed pad/via retained",
+      "worst_sensor": {
+        "ref": "U_HA1",
+        "loop_drop_V": 0.003297889100301933
+      },
+      "wing_drop_ratio": 0.032766807713838594,
+      "max_kcl_residual_A": 3.365129355725749e-13,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 2.2737367544323206e-13,
+          "variable_resistors": 258,
+          "fixed_resistors": 201,
+          "nodes_after_contraction": 148
+        },
+        "GND": {
+          "residual_A": 3.365129355725749e-13,
+          "variable_resistors": 320,
+          "fixed_resistors": 166,
+          "nodes_after_contraction": 113
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.0028917891370272247
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.002201515515322865
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.002894833037588925
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.002087481971446194
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.002087114228058698
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.0028917853133759676
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.002214535464783047
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.003183191459174605
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.0031832742585535287
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.003297889100301933
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.0025410846934292913
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.0026457886268049582
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.0029946265011086695
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.0031835610239845835
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.002112390831585177
+        },
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.0028567504553278725
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.002313415185502512
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.002088591425656695
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.002394817158657615
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.003086475833396392
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.0029859670523566875
+        }
+      ]
+    },
+    {
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 1.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HC1",
+        "loop_drop_V": 0.14771014479131223
+      },
+      "wing_drop_ratio": 1.0,
+      "max_kcl_residual_A": 1.1641532182693481e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.1641532182693481e-10,
+          "variable_resistors": 272,
+          "fixed_resistors": 157,
+          "nodes_after_contraction": 326
+        },
+        "GND": {
+          "residual_A": 3.637978807091713e-12,
+          "variable_resistors": 246,
+          "fixed_resistors": 209,
+          "nodes_after_contraction": 397
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.146154973731634
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.13645274372644348
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.07556762145775676
+        },
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.14771014479131223
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.14152444217383803
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.1388883514198459
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.10601374325920254
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.1464582702102759
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.14291028073234247
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.13407497287074893
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.06392112946351845
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.09537818746639783
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.14003007686411462
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.1320877132253539
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.13468013945224622
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.1343082296337204
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.14380958900926447
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.08048469366117002
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.1433242154070208
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.1436012461097519
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.12320647096874586
+        }
+      ]
+    },
+    {
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 2.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HC1",
+        "loop_drop_V": 0.07695400115735135
+      },
+      "wing_drop_ratio": 0.5209797963848283,
+      "max_kcl_residual_A": 2.1227151155470172e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 2.1227151155470172e-10,
+          "variable_resistors": 272,
+          "fixed_resistors": 157,
+          "nodes_after_contraction": 326
+        },
+        "GND": {
+          "residual_A": 3.637978807091713e-12,
+          "variable_resistors": 246,
+          "fixed_resistors": 209,
+          "nodes_after_contraction": 397
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.07629345747159172
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.07140405711119542
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.0391260918778291
+        },
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.07695400115735135
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.07402259625229196
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.07249175945676879
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.0554068934918561
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.07631987135959158
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.07469451606394979
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.06960259245735352
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.03330902559946322
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.04944437046614397
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.07327025350370756
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.06899224540644903
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.07006799343066644
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.0697123682064392
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.07501915786084373
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.04178016461194323
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.07486277376440803
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.07483139894831248
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.06435331015155281
+        }
+      ]
+    },
+    {
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 4.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HC1",
+        "loop_drop_V": 0.04152341422188151
+      },
+      "wing_drop_ratio": 0.28111416640032816,
+      "max_kcl_residual_A": 2.5338977575303754e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 2.5338977575303754e-10,
+          "variable_resistors": 272,
+          "fixed_resistors": 157,
+          "nodes_after_contraction": 326
+        },
+        "GND": {
+          "residual_A": 9.094947017729282e-13,
+          "variable_resistors": 246,
+          "fixed_resistors": 209,
+          "nodes_after_contraction": 397
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.04131176673797176
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.038832017772802915
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.020896624840980087
+        },
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.04152341422188151
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.04022056113390759
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.039242942405377394
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.030067225800261166
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.041198542027193544
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.04053609736972104
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.037327624726342414
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.017994766197798433
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.026457537127073424
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.03983973529662705
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.037402878876318546
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.03771688772511432
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.03737560429285116
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.04057302062100537
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.022418611404968137
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.0405824004344195
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.04039584055851415
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.03488935026510466
+        }
+      ]
+    },
+    {
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": 10.0,
+      "interpretation": "conductance target, same contacts/topology; not physical widened traces",
+      "worst_sensor": {
+        "ref": "U_HC2",
+        "loop_drop_V": 0.020290604208561304
+      },
+      "wing_drop_ratio": 0.13736770915246388,
+      "max_kcl_residual_A": 2.134283860755204e-10,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 2.134283860755204e-10,
+          "variable_resistors": 272,
+          "fixed_resistors": 157,
+          "nodes_after_contraction": 326
+        },
+        "GND": {
+          "residual_A": 9.094947017729282e-13,
+          "variable_resistors": 246,
+          "fixed_resistors": 209,
+          "nodes_after_contraction": 397
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.020290604208561304
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.019258681271392512
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.009954444557122454
+        },
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.02023167702738235
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.019907088352488205
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.01926175470327619
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.014840532079424294
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.020092707315395145
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.020009144004366684
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.01793881898308941
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.008801932147712443
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.012653400225532475
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.01974957802932059
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.018422993910920605
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.018277775870250215
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.017949691824392214
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.019873131047929076
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.010796825055410556
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.019982803499069907
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.019702500732258554
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.01718735116819903
+        }
+      ]
+    },
+    {
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "planning_current_A": 0.127,
+      "conductance_multiplier": null,
+      "interpretation": "zero variable-resistance limit; fixed pad/via retained",
+      "worst_sensor": {
+        "ref": "U_HB2",
+        "loop_drop_V": 0.006342622101646737
+      },
+      "wing_drop_ratio": 0.04293965123795469,
+      "max_kcl_residual_A": 1.4713395432575105e-12,
+      "networks": {
+        "HALL_5V": {
+          "residual_A": 1.4713395432575105e-12,
+          "variable_resistors": 272,
+          "fixed_resistors": 157,
+          "nodes_after_contraction": 119
+        },
+        "GND": {
+          "residual_A": 5.684341886080802e-14,
+          "variable_resistors": 246,
+          "fixed_resistors": 209,
+          "nodes_after_contraction": 159
+        }
+      },
+      "sensors": [
+        {
+          "ref": "U_HC2",
+          "loop_drop_V": 0.006254404145605971
+        },
+        {
+          "ref": "U_HA4",
+          "loop_drop_V": 0.006189029860795334
+        },
+        {
+          "ref": "U_HB6",
+          "loop_drop_V": 0.002657052504870003
+        },
+        {
+          "ref": "U_HC1",
+          "loop_drop_V": 0.006013993831014812
+        },
+        {
+          "ref": "U_HB2",
+          "loop_drop_V": 0.006342622101646737
+        },
+        {
+          "ref": "U_HA3",
+          "loop_drop_V": 0.005919034750263974
+        },
+        {
+          "ref": "U_HA5",
+          "loop_drop_V": 0.004673576146342264
+        },
+        {
+          "ref": "U_HB1",
+          "loop_drop_V": 0.005999365734289485
+        },
+        {
+          "ref": "U_HA0",
+          "loop_drop_V": 0.006302588396858979
+        },
+        {
+          "ref": "U_HC3",
+          "loop_drop_V": 0.00499692228365822
+        },
+        {
+          "ref": "U_HC6",
+          "loop_drop_V": 0.0026708869791818575
+        },
+        {
+          "ref": "U_HB5",
+          "loop_drop_V": 0.0034425679219240134
+        },
+        {
+          "ref": "U_HA2",
+          "loop_drop_V": 0.006334345822665464
+        },
+        {
+          "ref": "U_HB4",
+          "loop_drop_V": 0.005751569130271777
+        },
+        {
+          "ref": "U_HB3",
+          "loop_drop_V": 0.005298792345378495
+        },
+        {
+          "ref": "U_HC5",
+          "loop_drop_V": 0.004983040444826611
+        },
+        {
+          "ref": "U_HC0",
+          "loop_drop_V": 0.006051035134415391
+        },
+        {
+          "ref": "U_HA6",
+          "loop_drop_V": 0.0030461306610876874
+        },
+        {
+          "ref": "U_HB0",
+          "loop_drop_V": 0.006228157398680911
+        },
+        {
+          "ref": "U_HA1",
+          "loop_drop_V": 0.005884920874165297
+        },
+        {
+          "ref": "U_HC4",
+          "loop_drop_V": 0.005369687469410273
+        }
+      ]
+    }
+  ],
+  "ideal_strips": [
+    {
+      "length_mm": 50,
+      "nominal_width_mm": 1,
+      "parallel_layers": 1,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.04349196187499999
+    },
+    {
+      "length_mm": 50,
+      "nominal_width_mm": 3,
+      "parallel_layers": 1,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.014497320624999999
+    },
+    {
+      "length_mm": 50,
+      "nominal_width_mm": 3,
+      "parallel_layers": 2,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.0072486603124999995
+    },
+    {
+      "length_mm": 100,
+      "nominal_width_mm": 1,
+      "parallel_layers": 1,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "resistance_ohm": 0.08698392374999998
+    }
+  ],
+  "limitations": [
+    "No layout changes, new copper geometry or parasitic/clearance proof.",
+    "Pad spreading and half-via barrels fixed; contacts, cable and switches outside graph.",
+    "Zero-variable-resistance limit only applies to this inherited topology/approximation.",
+    "Uniform factor0.5 in compare.py is more optimistic than doubling track conductance."
+  ]
+}

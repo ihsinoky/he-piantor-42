@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-X",
+    "faulthandler",
+    "-c",
+    "import pcbnew as p\nimport shapely,numpy\nb=p.LoadBoard(\"hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-02/out.kicad_pcb\")\nprint(type(b),len(b.GetFootprints()),flush=True)\nprint([(type(f).__name__,f.GetReference()) for f in b.GetFootprints()],flush=True)\nfor t in list(b.GetTracks()):\n if isinstance(t,p.PCB_VIA) and t.m_Uuid.AsString()==\"64129d2f-40a4-4053-8481-dae9fd46ee28\":\n  print(\"remove\",type(t),flush=True);b.Remove(t)\nprint([(type(f).__name__,f.GetReference()) for f in b.GetFootprints()],flush=True)\n"
+  ],
+  "cwd": "/home/hatch/workspace/projects/he-piantor-42",
+  "start_utc": "2026-11-06T12:56:22.701691+00:00",
+  "end_utc": "2026-11-06T12:56:23.839796+00:00",
+  "elapsed_seconds": 1.1380914419999613,
+  "exit_code": 1,
+  "timeout_seconds": 300
+}

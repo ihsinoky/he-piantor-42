@@ -4,6 +4,10 @@ Read this before proposing an EDA method change or retry. Decisions remain
 historical authority; this index does not replace or rewrite them. Observations,
 PO supplements and executor recommendations have different provenance.
 
+For the cross-cutting lessons behind these paths (tool evaluation, pass
+criteria, and working rules), see
+[lessons-learned-device-development.md](lessons-learned-device-development.md).
+
 The 0.20 mm retry condition below belongs to the historical EDA-003 evaluation.
 Historical verdicts and their original acceptance conditions are retained.
 For the current Rev.M1 Main baseline, see [D-019](decisions.md#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline):

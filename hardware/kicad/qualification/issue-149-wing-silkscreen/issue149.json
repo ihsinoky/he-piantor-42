@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/149",
+    "title": "Wing シルク追加の改版：部品配置・キー位置を含むシルクを入れて製造データを再検証する",
+    "issue_number": 149,
+    "body": "## 目的\nPO 判断（2026-11-05）：Wing 基板にシルクは必要。Issue #147 で判明した「シルクなし」の状態を改版で解消し、製造データを作り直す。\n\n## 追加するシルクの内容\n- 全搭載部品の Reference 表示（センサ DRV5055×21、TMUX1208×3、J_WING、受動部品）\n- **キー位置の表示**：21キーの各位置（センサ位置）に、キースイッチの場所が分かる枠（そのピッチ 16mm／17mm の正方形）または同等の明示的なマーク\n- pin1／極性マーク（DRV5055、TMUX1208、J_WING の pin1 と向き）\n- 取付穴（NPTH φ2.2mm×4）の位置表示\n- 基板名・ピッチ（16mm／17mm）・リビジョンの文字\n\n## 方法と合格条件\n- 対象は #141 の合格出力基板（拡幅条件）。**銅箔・配線・穴は一切変更しない**。追加はシルク層の図形・文字のみ\n- 変更前後で銅箔が同一であることを解析的に検証する（配線・ビア・パッドの照合）\n- DRC を再実行し違反0を確認する（シルク関連のチェックを含む）。シルクはパッドにかからない配置を原則とする\n- 製造データ（Gerber 一式＋Excellon）を両ピッチで再生成し、Gerber ビューアでシルクが実際に描画されることを確認する\n- #147 の製造 ZIP は本改版のデータに置き換わる。その旨を報告書に明記する\n- 併せて、筐体設計へのインタフェースとして取付穴4点の座標表（基板座標系での位置・径・キープアウト径）を報告書に残す\n\n## 制約\n- 発注・課金・メーカーサイトへのアップロードは行わない\n- 既存ファイルの変更はせず追加のみ（改版後の基板データと製造データは新しい資格フォルダに置く）。成果物は報告書と Draft PR、merge は PO 判断\n- タイムボックス：2時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T07:30:38Z",
+    "updated_at": "2026-11-05T07:30:38Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/149",
+    "display_title": "Wing シルク追加の改版：部品配置・キー位置を含むシルクを入れて製造データを再検証する"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/149",
+  "title": "Wing シルク追加の改版：部品配置・キー位置を含むシルクを入れて製造データを再検証する",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/149",
+  "display_title": "Wing シルク追加の改版：部品配置・キー位置を含むシルクを入れて製造データを再検証する"
+}
