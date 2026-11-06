@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/extract-ground.py", line 111, in <module>
+    K,terms,stats=assemble(area,factor)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/extract-ground.py", line 76, in assemble
+    ids=contact(l,barrel['outer']);hub=N;N+=1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/extract-ground.py", line 71, in contact
+    v,ids=vertices[l];xmin,ymin,xmax,ymax=shape.bounds;mask=(v[:,0]>=xmin-.003)&(v[:,0]<=xmax+.003)&(v[:,1]>=ymin-.003)&(v[:,1]<=ymax+.003);cand=np.flatnonzero(mask);hit=cand[contains_xy(shape.buffer(.003),v[cand,0],v[cand,1])];assert len(hit)>0,('No mesh contact',b.GetLayerName(l),shape.bounds)
+                                                                                                                                                                                                                                           ^^^^^^^^^^
+AssertionError: ('No mesh contact', 'In1.Cu', (109.075, 117.2, 109.675, 117.8))

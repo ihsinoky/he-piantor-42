@@ -626,3 +626,296 @@ Actual tolerances, tightening, non-rectangular support under J1/J2 insertion
 loads, tool access and underside solder/boss clearance remain mechanical
 validation items. This adopts the layout; qualification and manufacturing
 review remain required. It does not authorize ordering, billing or merge.
+
+## D-024 - Rev.M1 Main two-Wing interface and plan A / plan C fallback
+
+Status: accepted PO scope decision (2026-11-06); implementation remains subject
+to the mechanical gate and independent qualification
+
+[Issue #160](https://github.com/ihsinoky/he-piantor-42/issues/160) adopts the
+interface proposed in [Issue #157 §2–4](issue-157-main-dual-wing-stage1.md)
+as a two-Wing extension of D-017. J2 is L/Bank0; added J3 (`J_WING_R`) is
+R/Bank1. Both use BM14B-GHS-TBT(LF)(SN), GHR-14V-S and SSHL-002T-P0.2.
+Preserve the existing G0B pin allocation: pin1 HALL_5V; pins2/4/8/10/12/14
+common GND; pins3/5/6 MUX_A0/A1/A2; pins9/11/13 MUX_OUT_A/B/C; pin7 is
+the respective independent enable. Reinforcement lands remain mechanical NC.
+No GND contact becomes an ID or other signal.
+
+Share address and the three raw MUX buses, retaining the existing three
+divider/filter/ADC paths. Feed both Wings from common HALL_5V with two branches
+near U5 output, not a thin J2 daisy chain or external Y cable. U5 and
+HALL_PWR_EN (U1.9/GPIO7, R7 100kΩ) remain the common default-off power control.
+Existing J2 WING_EN is logical MUX_EN0 (U1.7/GPIO5, R6 100kΩ).
+J3 pin7 uses new MUX_EN1 at U1.8/GPIO6 with a new explicit 100kΩ external
+pull-down; remove that pin's source NC declaration when implementing it.
+Check leakage/noise and transitions before accepting the pull-down value.
+
+Firmware must disable both banks before address/bank changes, wait for actual
+output disable and address settling, then enable only one bank and wait for
+ADC settling. Simultaneous enables are prohibited. Reset, unstable power,
+suspend and faults require both banks off. Verify 2 banks × 7 addresses ×
+3 ADC channels, single-Wing operation and L/R calibration mapping. Enable
+selection does not turn off Hall power or halve the supply load.
+
+Use one nominal 100mm, 14-individual-wire, fully 1:1 representative G0B harness
+per port, with all six returns. Same-type connectors do not mechanically
+exclude L/R interchange: label both ends, constrain the case paths and verify
+all 28 circuits and left/right key identity during assembly. Longer/asymmetric
+product harnesses need renewed power and settling evaluation. Hot-plug is
+not qualified; initial evaluation uses power-off mating/unmating.
+
+The adopted first placement is **plan A: J3=(105,81), 0°, 48×44mm**.
+Retain D-023's four NPTHs, coordinates and all-copper-layer Ø5 reservations,
+J1/J2 positions and existing components. The exception to D-023's electrical
+preservation is limited to this approved second port, enable/pull-down and
+necessary power/signal routing. Verify actual housing, cable bends, latch,
+finger/tool access and fastening tolerances. If plan A cannot be established
+or presents too many disadvantages, **record the evidence, propose plan C
+and stop**; do not force the layout or shrink an unverified service envelope
+to declare success. Plan C is J3=(105,73), 0°, X76–124/Y70–122 (48×52mm),
+retaining the four holes. It is a fallback proposal requiring PO approval
+before changing the outline, not an automatically adopted board revision.
+
+Plan for 127mA per Wing / 254mA total and also evaluate the #141
+11mA-per-sensor sensitivity envelope. Reduce Main power-path resistance;
+simple branching of the current thin path is insufficient. Use actual routed
+common and branch supply/return resistance, harnesses and Wing networks to
+show the farthest sensor remains at least 4.5V over the declared conditions;
+do not substitute TPS22919's current rating for USB or local-voltage evidence.
+Identify any unachievable envelope instead of relaxing it. Check startup,
+ground sharing, address loading, bus contention, ADC noise and settling.
+
+D-019 remains four layers / 1.2mm, signal width and clearance 0.10mm,
+via 0.60/0.30mm, In1.Cu GND plane. Deliberately wider power paths implement
+the low-resistance requirement; do not reduce any minimum, change layer
+assignment or enable escalation. Freeze routing scope and attempt/time
+limits before routing; no unbounded retry. Requalify all nets against the
+input project with all four independent metrics zero. Regenerate and
+reconcile manufacturing data, reclassify actual revised vias under D-022's
+epoxy-fill/copper-cap POFV policy, retain J1's same Economic PCBA process,
+and update BOM/CPL and quotation evidence only after the applicable gates.
+Neither this decision nor prior-board qualification qualifies a new revision
+or authorizes manufacturing release, ordering, billing or merge.
+
+## D-025 - Rev.M1 Main two-Wing plan C outline and J3 placement
+
+Status: accepted PO decision (2026-11-06)
+
+Per [Issue #163](https://github.com/ihsinoky/he-piantor-42/issues/163), adopt
+**plan C** following the [Issue #160 mechanical gate](issue-160-main-dual-wing-stage2.md):
+extend Main north by **8 mm** to **48 x 52 mm**, KiCad absolute
+**X76–124 / Y70–122**, and place **J3 = (105,73), 0 degrees**.
+This supersedes D-024's initial plan A placement and the requirement to obtain
+PO approval before adopting that specific plan C outline.
+
+Retain D-023's four mounting holes, their coordinates and all-layer diameter
+5 mm copper reservations. Preserve J1/J2 and existing component coordinates.
+D-024's electrical interface remains adopted: common Hall power, address and
+three ADC paths, independent enables with MUX_EN1 at U1.8/GPIO6 and a new
+100 kohm pull-down, and two power branches near U5 output. D-019 routing and
+D-022 POFV / J1 Economic PCBA conditions remain in force.
+
+Outline adoption does not establish mechanical or electrical qualification.
+Issue #163 must concretize screw/tool handling, latch release, cable height
+and the insertion/extraction load on the north overhang, reduce and evaluate
+the routed power resistance, and independently requalify every net before
+manufacturing outputs or quotation can be accepted for the revised board.
+If the conditions cannot be established, record the state and stop without
+relaxing conditions or unbounded retries. This decision authorizes no order,
+charge, manufacturing release or merge.
+
+## D-026 - Main two-Wing implementation: design-first mechanics and regulated 5.2 V
+
+Status: accepted PO scope decision (2026-11-06); electrical implementation and
+qualification are not established by this decision
+
+Per [Issue #167](https://github.com/ihsinoky/he-piantor-42/issues/167), retain
+D-025 plan C: X76–124 / Y70–122 (48 x 52 mm), J3=(105,73), 0 degrees,
+four fixed mounting holes with their all-layer diameter 5 mm reservations,
+and all existing component coordinates. Adopt mechanical policy **(b), design
+first**. The ver.A enclosure must provide support near J3; measure GH latch
+operation and insertion/extraction forces early on M1 hardware. These physical
+checks remain downstream verification items and are **not gates for Issue
+#167**. This supersedes the physical-mechanics gates in D-024/D-025 for this
+work, without declaring those checks passed.
+
+Adopt [Issue #165's recommendation](https://github.com/ihsinoky/he-piantor-42/pull/166):
+a regulated **5.2 V rail**, using a TPS63070-class buck-boost in **forced PWM**,
+followed by the common default-off U5 and two low-resistance power branches
+near its output. D-009's direct switched-VBUS supply is superseded for this
+revision. Retain D-024's interface, common address/raw ADC buses and independent
+enables: GPIO5/WING_EN is logical MUX_EN0; GPIO6/U1.8 is MUX_EN1 with an
+explicit 100 kohm pull-down and its previous NC declaration removed when
+implemented. HALL_PWR_EN/GPIO7 and its external pull-down retain common
+default-off control. Disabling a MUX bank does not reduce the Hall supply load.
+Lower Wing conductor resistance remains a ver.A Wing design requirement;
+this Issue implements the Main side only.
+
+The adopted design load is **127 mA per Wing**, continuously supplied on both
+ports. The farthest sensor target is **4.60 V**, retaining 100 mV above the
+4.5 V lower limit for unmodelled effects. Target extracted Main common and
+per-branch loop resistances of **at most 50 milliohm each**. Retain the #165
+5.2 V rail tolerance target of +/-2% and downward ripple/transient budget of
+50 mV; verify high-side and startup limits as well. Include the inherited
+100 mm harness/contact, width-minus-20% and 125 degrees C resistance
+sensitivities without presenting them as a whole-product ambient guarantee.
+The **11 mA per sensor envelope is recorded as stress only**, outside the
+adopted guarantee; it must not replace or reduce the 127 mA design load.
+
+Demonstrate **4.75 V at the converter input**, accounting for upstream USB
+losses and other Main loads, and reconcile total current with USB permission
+before claiming the supply qualified. The value is a requirement to establish,
+not an assumed USB source guarantee. Final component selection, actual routed
+resistances, startup, suspend, reverse feeding, noise and ADC settling require
+their own evidence. D-019 and D-022 remain unchanged: no width/clearance/layer
+or escalation relaxation, bounded routing, independent all-net qualification
+with all four metrics zero, regenerated manufacturing data, actual-via POFV
+classification and J1's same Economic PCBA process. If electrical conditions
+cannot be established, record the state and stop. No order, charge,
+manufacturing release or merge is authorized.
+
+## D-027 - Main USB input requirement at the board connector
+
+Status: accepted PO requirement redefinition (2026-11-06)
+
+Per the [Issue #167 resume instruction](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/instructions-167-resume.md),
+replace D-026's requirement to demonstrate 4.75 V **at the converter input**.
+The previous run established that a USB source at its permitted 4.75 V lower
+limit cannot deliver 4.75 V after any positive cable/contact/board resistance
+under load. This was a requirement-location problem, not evidence that a
+buck-boost cannot regulate below 4.75 V. Preserve that run and its input-budget
+evidence; its stop is superseded only by this explicit PO decision.
+
+Define input at the **Main USB connector**, referenced to local connector GND.
+For configured high-power USB 2.0 operation, use **4.50–5.25 V**: USB 2.0
+Revision 2.0 sections 7.2.1.4 and 7.2.2 specify the 4.75 V upstream lower
+limit and maximum detachable-cable drops of 125 mV on VBUS and 125 mV on GND;
+4.75 - 0.125 - 0.125 = 4.50 V at the device. The 4.40 V enumeration condition
+and Figure 7-47's low-power path must not be confused with a grant to draw
+500 mA from a bus-powered low-power hub. Subtract the implemented Main input
+path drop separately when checking converter operating range and current.
+A USB-C connector and CC pull-downs do not themselves grant extra current.
+
+Across this input range, retain the **5.2 V rail +/-2%** accuracy requirement
+and **50 mV per-side ripple/transient budget**. At **127 mA per Wing**, show
+converter input current plus all other Main loads within the **configured
+USB allowance of 500 mA**, with explicit maximum-load estimation assumptions
+and evidence. Configuration permission is required before enabling the
+converter, U5 or either MUX; reset, unconfigured and suspend states must keep
+them off. Distinguish guaranteed component limits, engineering allocations,
+and unmeasured prototype behaviour. A typical efficiency curve alone is not
+a guaranteed worst-case current bound.
+
+The output guarantee is unchanged: farthest sensor **4.60 V design target**
+at the design load, inherited harness/contact/copper-temperature sensitivities,
+and Main common/branch loop resistance targets of at most 50 milliohm each.
+The 11 mA-per-sensor envelope remains stress-only. D-025/D-026 geometry,
+mechanics policy (b), forced PWM, common default-off U5 and two low-resistance
+branches remain adopted. D-019's routing conditions and bounded attempts,
+all-net independent four-zero qualification, regenerated manufacturing data,
+D-022 POFV classification and same Economic PCBA process for J1 remain
+mandatory. No relaxation of output targets, unbounded retry, order, charge,
+manufacturing release or merge is authorized.
+## D-028 - Dual-pitch Matrix Rev.2 evaluation board (naming per Issue #179 convention)
+
+Status: accepted PO scope decision (2026-11-06), per
+[Issue #178](https://github.com/ihsinoky/he-piantor-42/issues/178)
+(corrected body: 16 mm and 17 mm; the old issue title is not the specification)
+
+Board names follow the naming convention of Issue #179 (phases and board
+revisions are separate; M1 names the evaluation phase only). The boards in
+scope are **Main Rev.2 (two Wing ports), Matrix Rev.2 (this evaluation
+board), and Wing Rev.1 (the left/right 21-key boards)**. The matrix board measures
+Hall-effect interaction while multiple keys are pressed and compares key pitch;
+it does not select a production pitch or qualify magnetic behaviour by geometry
+alone. The 16.5 mm variant is outside this scope.
+
+Replace the two separate pitch9 evaluation candidates (Matrix Rev.1) for this evaluation
+with **one board carrying a 16 mm 3 x 3 field (9 keys) and a 17 mm 3 x 3 field
+(9 keys), 18 keys total**. Keep three TMUX1208 banks. Bank A/B/C serves the
+same column A/B/C in both fields: addresses 0/1/2 are the three rows of the
+16 mm field, addresses 3/4/5 the three rows of the 17 mm field. S7/S8
+(addresses 6/7) and the physical NC pin remain unconnected. Keep the D-017
+GH14 interface, including all six GND contacts, common address/enable and
+three analog outputs; do not add or repurpose interface pins.
+
+Target at least **34 mm between the nearest key centres of different fields**;
+report the achieved distance and native-board basis. Preserve each field's
+unmodified 16/17 mm pitch. Mounting fixtures, magnet height and actual magnetic
+isolation remain physical evaluation items.
+
+For this matrix board, explicitly apply the D-021 amended routing conditions:
+**2 copper layers / 1.2 mm, signal 0.10 mm, HALL_5V and GND 0.30 mm,
+clearance 0.10 mm, via 0.60/0.30 mm, KRT escalation off**. This extends those
+conditions to this evaluation board despite D-021's historical exclusion of
+separate pitch9 boards; it does not alter the representative21 baseline.
+Require independent all-net qualification with all four metrics zero and
+Gerber plus JLCPCB-format PCBA BOM/CPL from the qualified revision.
+
+The implementation and evidence are in
+[Issue #178 report](issue-178-m1-matrix-board.md). Passing routing/DRC does not
+establish magnetic interaction, harness/ADC settling, manufacturer PCBA
+acceptance or manufacturing release. No order, charge or merge is authorized.
+<<<<<<< HEAD
+
+## D-029 - Matrix Rev.3: keep every via clear of component pads; no POFV
+
+Status: accepted PO design policy (2026-11-06), per
+[Issue #182](https://github.com/ihsinoky/he-piantor-42/issues/182).
+
+For the matrix board, **do not overlap any component copper pad with a via**,
+including bare testpads, NC lands and connector reinforcement pads. Require
+**at least 0.10 mm from every via's outer copper annulus to every pad's copper**,
+irrespective of net. Independently audit every via and retain its minimum gap.
+
+**Matrix Rev.3 does not require epoxy filling or copper capping (POFV)** because
+its qualified routing meets that condition. This supersedes the Matrix Rev.2
+fabrication note requiring all 146 vias to be filled/capped, only for the Rev.3
+data package. It does not change Main's D-022 via treatment or retroactively
+qualify Rev.2 artwork. Ordinary plated through vias and inherited mask tenting
+are retained; do not use the Rev.2 artwork with the Rev.3 process note.
+
+Keep Rev.2's component placement, board outline, GH14 interface and electrical
+configuration. Retain D-021 unchanged: **2 copper layers / 1.2 mm; signal
+0.10 mm; HALL_5V/GND 0.30 mm; clearance 0.10 mm; via 0.60/0.30 mm; KRT
+escalation off**. Require all four independent all-net qualification metrics
+zero, plus the all-via pad audit, before regenerating manufacturing data.
+
+The [Rev.3 report](issue-182-matrix-rev3.md) records the qualified result and
+manufacturing evidence. Manufacturer DFM and assembly orientation review remain
+later release tasks. This decision authorizes no order, charge or merge.
+=======
+>>>>>>> origin/main
+
+## D-030 - Main Rev.3 via relocation to remove the POFV design requirement
+
+Status: Issue #185 implementation proposal; pending PO review / merge (2026-11-06)
+
+Per [Issue #185](https://github.com/ihsinoky/he-piantor-42/issues/185), Main Rev.3
+relocates the 35 vias that failed the [Issue #183 audit](https://github.com/ihsinoky/he-piantor-42/pull/184)
+from the qualified Main Rev.2 board in PR #176. All 66 footprint positions and
+orientations, existing 693 track segments and all 113 via identities are retained.
+The 33 straight-connection candidates are implemented first, followed by the two
+local connection cases at C5.2/GND and C4.1/V3V3. No whole-board routing is used.
+
+The [Issue #185 report](issue-185-main-rev3.md) records all four independent metrics
+at zero across all 44 nets after GND zone refill. All 113 vias have annulus-to-pad
+copper clearance at least 0.10 mm, including same-net and bare test pads. Via
+copper and drills overlap neither paste layer. The extracted 125°C / track-width
+−20% model gives common loop **41.135 mΩ**, J2 branch **24.834 mΩ**, and J3 branch
+**26.095 mΩ**, preserving the 50 mΩ common/branch targets. These are model values,
+not finished-board resistance or operating-performance guarantees.
+
+For this qualified Rev.3 package, propose removing D-022's **epoxy-filled and
+copper-capped POFV** order requirement: there are no remaining via-in-pad sites.
+Keep the exported solder-mask settings and request ordinary tented vias, subject
+to manufacturer DFM acceptance. This applies only to the new Rev.3 package;
+D-022 continues to describe the previous boards. Keep D-022's J1 SMD contacts and
+four PTH shell legs in the same Economic PCBA process. D-019 remains four layers,
+1.2 mm, minimum track/clearance 0.10 mm and via 0.60/0.30 mm, with In1.Cu GND.
+
+Regenerated Gerber/drill/paste/BOM/CPL and CAM checks accompany the proposal.
+This change does not adopt quotation-only substitute parts, guarantee a cost
+reduction or constitute manufacturing release. Vendor acceptance, revised
+quotation, material minima, procurement and physical validation remain separate.
+No order, charge or merge is authorized or performed.

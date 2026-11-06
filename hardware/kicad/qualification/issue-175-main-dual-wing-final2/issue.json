@@ -1,0 +1,42 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "issue": {
+        "url": "https://github.com/ihsinoky/he-piantor-42/issues/175",
+        "title": "Main 2 Wing 化 Stage 2 限定継続2：C26 配置の反復調整と最終配線1回",
+        "issue_number": 175,
+        "body": "## 前提\n- Issue #173 で C26 の移動により SW2 との接触は解消したが（銅箔間 1.275mm）、移動先で J3 の未接続ランドと 0.4mm² 重なった。準備 DRC が検出し、指示どおり配線に入らず停止した。全体配線の試行は消費されていない（0回）\n- #173 の停止は「preflight で検出した衝突のまま配線しない」という指示の適用であり、配置調整の反復まで禁じる意図ではなかったことを PMO として明確化する\n- 合格済みの seed-a は #173 のブランチに整理済み（フォールバックとして維持する）\n\n## 作業\n1. 配置調整の反復：追加部品（C26 を中心に C23〜C28／L1／U6）の範囲で、C26 の配置候補を最大3つまで試す。各候補で準備 DRC（preflight）を実行し、衝突・短絡・ランド重なりがない候補だけを次に進める。移動方向の変更、C27／C28 との連動移動も可。#155 由来の既存部品は動かさない\n2. preflight を通過した候補に対して全体配線1回（D-019 条件を維持、局所 rip-up なし）\n3. 合格した場合のみ：独立資格確認（4指標すべて0、全44ネット）、実抵抗の再抽出、製造データ再生成、POFV 再分類、PCBA 見積確定まで完遂する\n\n## 制約\n- 配置候補3つと全体配線1回の枠で成立しない場合は止める。その場合は seed-a を成果物のまま維持し、配置が成立しない幾何学的な理由を報告書に明記する\n- D-019 の条件緩和は行わない。発注・課金は行わない。Draft PR、merge は PO 判断\n- タイムボックス：3時間",
+        "state": "open",
+        "user": {
+          "login": "ihsinoky",
+          "name": "ihsinoky",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+          "id": 42207341
+        },
+        "assignees": null,
+        "labels": null,
+        "milestone": null,
+        "state_reason": null,
+        "comments": 0,
+        "created_at": "2026-11-06T08:45:35Z",
+        "updated_at": "2026-11-06T08:45:35Z",
+        "closed_at": null,
+        "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/175",
+        "display_title": "Main 2 Wing 化 Stage 2 限定継続2：C26 配置の反復調整と最終配線1回"
+      },
+      "url": "https://github.com/ihsinoky/he-piantor-42/issues/175",
+      "title": "Main 2 Wing 化 Stage 2 限定継続2：C26 配置の反復調整と最終配線1回",
+      "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/175",
+      "display_title": "Main 2 Wing 化 Stage 2 限定継続2：C26 配置の反復調整と最終配線1回"
+    },
+    "isError": false
+  }
+}

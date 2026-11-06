@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/163",
+    "title": "Main 2 Wing 接続化 Stage 2（案C）：実装・再配線・再資格確認",
+    "issue_number": 163,
+    "body": "## 前提（決定済み）\n- PO は案Cへの切替を承認した（2026-11-06）。Issue #160 の機構ゲートで案Aは「不都合が多い」側と判定され、切替提案として停止した経緯がある\n- 案Cの内容：外形を北へ 8mm 拡張して 48×52mm（X76–124／Y70–122）とし、第2 GH14（J3）を (105,73)・0° に置く。D-023 の取付穴4個と J1/J2・既存部品の座標は固定する\n- 電気方式は D-024（PR #162 のブランチに記録済み）：共通電源・共通アドレス・共通3 ADC経路・独立 EN×2（MUX_EN1＝GPIO6／U1.8＋新規 100kΩ プルダウン）、U5 出力近傍からの電源2分岐\n\n## 作業\n1. 決定記録の取り込みと追記：PR #162 ブランチにある D-024 の本文と Issue #160 の報告書・証跡を本ブランチにも取り込み、そのうえで案C切替の採用を D-025 として docs/decisions.md に追記する\n2. 機構の具体化：ねじ（M2、頭形状）と着脱工具・操作方法を具体的に選定し、案C配置での操作領域、ラッチ解除、ケーブル高さ方向の所要量を立体的に確認する。J3 が既存4点支持から北へ張り出すことによる挿抜荷重と基板たわみの評価も行う\n3. 回路・基板の実装：#155 の改版基板を起点に、外形拡張、J3 の追加、MUX_EN1 の新設、電源2分岐を行う\n4. 電源経路の低抵抗化と、2系統接続時の電圧降下モデルの再評価（配線後の実抵抗で、最遠センサーが 4.5V を割らないことを示す）\n5. D-019 条件での再配線と独立資格確認（4指標すべて0、全ネット確認）。製造データの再生成、POFV 対象ビアの再分類、PCBA 見積の更新（外形変更と追加部品を反映）\n\n## 制約\n- 条件緩和（幅・間隙・層数・escalation の変更）と無制限の再試行は行わない。成立しない場合は状態を報告して止める\n- 発注・課金は行わない。成果物は Draft PR、merge は PO 判断\n- タイムボックス：4時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-06T00:38:36Z",
+    "updated_at": "2026-11-06T00:38:36Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/163",
+    "display_title": "Main 2 Wing 接続化 Stage 2（案C）：実装・再配線・再資格確認"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/163",
+  "title": "Main 2 Wing 接続化 Stage 2（案C）：実装・再配線・再資格確認",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/163",
+  "display_title": "Main 2 Wing 接続化 Stage 2（案C）：実装・再配線・再資格確認"
+}

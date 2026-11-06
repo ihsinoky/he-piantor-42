@@ -1,0 +1,143 @@
+{
+  "utc": "2026-11-06T07:43:38.628766+00:00",
+  "issue": 167,
+  "branch": "issue-167-main-dual-wing-stage2",
+  "PR": 168,
+  "issue_complete": false,
+  "manufacturing_GO": false,
+  "stop_reason": "Both bounded routing attempts exhausted; independent all-net four-zero qualification failed. No further routing.",
+  "resume_requirement_redefinition_record": "docs/decisions.md D-027",
+  "former_4V75_requirement_stop_superseded": true,
+  "attempts": [
+    {
+      "label": "global",
+      "PCB_sha256": "a6698ac1cd08d5e3189cdbc303e798616b85188ee8723178b287e2912b660521",
+      "qualified": false,
+      "measured_four_metrics": {
+        "required_unconnected": 3,
+        "wrong_net_contacts": 0,
+        "material_violations": 0,
+        "unexplained_transfer_changes": 1
+      },
+      "legacy_assessment_metric_precondition": "assessment.json leaves accepted metrics null when KiCad has opens; this summary exposes direct independent measurements, not an acceptance waiver",
+      "nets_checked": 44,
+      "disconnected": {
+        "V3V3": 3,
+        "V1V1": 2
+      },
+      "KiCad_unconnected_count": 3,
+      "material_violations": [],
+      "transfer_counts": {
+        "nonroute_removed": 0,
+        "nonroute_added": 0,
+        "missing_retained_tracks": 0,
+        "missing_retained_vias": 1
+      },
+      "width_pass": true,
+      "via_pass": true,
+      "plane_pass": true
+    },
+    {
+      "label": "local",
+      "PCB_sha256": "ecdf5028274f739e66f95b0c8fc5e8349d3e852ace335ed91b8133a55057b575",
+      "qualified": false,
+      "measured_four_metrics": {
+        "required_unconnected": 3,
+        "wrong_net_contacts": 0,
+        "material_violations": 2,
+        "unexplained_transfer_changes": 24
+      },
+      "legacy_assessment_metric_precondition": "assessment.json leaves accepted metrics null when KiCad has opens; this summary exposes direct independent measurements, not an acceptance waiver",
+      "nets_checked": 44,
+      "disconnected": {
+        "V3V3": 2,
+        "V1V1": 3
+      },
+      "KiCad_unconnected_count": 3,
+      "material_violations": [
+        {
+          "description": "Via is not connected or connected on only one layer",
+          "items": [
+            {
+              "description": "Via [V3V3] on F.Cu - B.Cu",
+              "pos": {
+                "x": 106.4,
+                "y": 92.3
+              },
+              "uuid": "3a83359c-37b1-46e5-95c7-46fb4e519c12"
+            }
+          ],
+          "severity": "warning",
+          "type": "via_dangling"
+        },
+        {
+          "description": "Via is not connected or connected on only one layer",
+          "items": [
+            {
+              "description": "Via [V5V2] on F.Cu - B.Cu",
+              "pos": {
+                "x": 90.0,
+                "y": 78.5
+              },
+              "uuid": "bc4c4253-d457-42a4-8ed7-441751e6b21d"
+            }
+          ],
+          "severity": "warning",
+          "type": "via_dangling"
+        }
+      ],
+      "transfer_counts": {
+        "nonroute_removed": 0,
+        "nonroute_added": 0,
+        "missing_retained_tracks": 20,
+        "missing_retained_vias": 4
+      },
+      "width_pass": true,
+      "via_pass": true,
+      "plane_pass": true
+    }
+  ],
+  "route_attempts": {
+    "global_count": 1,
+    "local_count": 1,
+    "remaining": 0
+  },
+  "new_candidate": {
+    "footprints": 66,
+    "logical_components": 62,
+    "logical_pins": 245,
+    "nets": 44,
+    "outline_mm": [
+      48,
+      52
+    ],
+    "J3_position_angle": [
+      105,
+      73,
+      0
+    ],
+    "existing_53_positions_preserved": true,
+    "schematic_export_matches_explicit_circuit_and_PCB": true
+  },
+  "power_qualified": false,
+  "Main_common_positive_model_ohm": 0.060673675111665,
+  "pofv_diagnostic": {
+    "candidate_qualified": false,
+    "total_vias": 108,
+    "candidate_count": 26,
+    "counts": {
+      "mounted-center-in-pad": 21,
+      "mounted-annulus-only": 2,
+      "mounted-drill-edge-overlap": 2,
+      "bare-testpad": 1
+    }
+  },
+  "manufacturing_exports_regenerated": false,
+  "final_BOM_CPL_generated": false,
+  "PCBA_quote_updated": false,
+  "quote_blocker": "Unqualified board, unclosed power guarantee and non-final passive MPNs. D-024 permits final BOM/CPL/quotation only after applicable gates; no new price or manufacturer acceptance claimed.",
+  "forbidden_actions_performed": [],
+  "merge_performed": false,
+  "order_performed": false,
+  "billing_performed": false
+}

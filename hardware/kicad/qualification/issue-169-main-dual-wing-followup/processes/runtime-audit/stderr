@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/audit-runtime.py", line 8, in <module>
+    save(E/'runtime-check.json',dict(utc=now(),source_files=len(hashes),mismatches=bad,source_manifest_sha256=digest(src),grid_router_sha256=digest(K/'grid_router'),kicad_cli_sha256=digest(B/'kicad/usr/bin/kicad-cli'),no_prior_tracked_files_modified=True,prior_branch_head=base,decisions_unchanged=True,work_repo=str(R),git_metadata=str(T/'git')))
+                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/common.py", line 7, in digest
+    def digest(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+                                        ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/hatch/workspace/projects/he-piantor-42/.issue155-runtime/KiCadRoutingTools/grid_router'

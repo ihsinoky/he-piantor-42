@@ -1,0 +1,5260 @@
+{
+  "batch_route_bound_parameters": {
+    "add_teardrops": false,
+    "bga_exclusion_zones": null,
+    "bga_proximity_cost": 0.2,
+    "bga_proximity_radius": 7.0,
+    "board_edge_clearance": 0.2,
+    "bus_attraction_bonus": 5000,
+    "bus_attraction_radius": 5.0,
+    "bus_detection_radius": 5.0,
+    "bus_enabled": false,
+    "bus_min_nets": 2,
+    "can_swap_to_top_layer": false,
+    "cancel_check": null,
+    "clearance": 0.1,
+    "clearance_ceiling": null,
+    "collect_stats": false,
+    "coplanar_gap": 0.0,
+    "coplanar_nets": null,
+    "crossing_layer_check": true,
+    "crossing_penalty": 1000.0,
+    "debug_lines": false,
+    "debug_memory": false,
+    "direction_order": "backward",
+    "direction_preference_cost": 250,
+    "disable_bga_zones": null,
+    "enable_layer_switch": true,
+    "external_ripped_ghosts": null,
+    "final_reconcile": true,
+    "fix_drc_settings": true,
+    "force_reroute": false,
+    "grid_step": 0.1,
+    "guide_corridor_enabled": false,
+    "guide_corridor_layer": "User.1",
+    "guide_corridor_spacing": 0.0,
+    "heuristic_weight": 2.3,
+    "hole_to_hole_clearance": 0.2,
+    "impedance": null,
+    "input_file": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb",
+    "json_out": null,
+    "keep_away": null,
+    "keep_away_cost": 0.5,
+    "keep_away_free": 1.5,
+    "keep_input_copper": true,
+    "keepout_enabled": false,
+    "keepout_layer": "User.2",
+    "layer_clearances": null,
+    "layer_costs": [
+      1.0,
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "layers": [
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu",
+      "B.Cu"
+    ],
+    "length_match_groups": null,
+    "length_match_tolerance": 0.1,
+    "max_iterations": 200000,
+    "max_probe_iterations": 5000,
+    "max_rip_up_count": 3,
+    "meander_amplitude": 1.0,
+    "meander_spacing": 2.0,
+    "minimal_obstacle_cache": false,
+    "mps_layer_swap": false,
+    "mps_reverse_rounds": false,
+    "mps_segment_intersection": false,
+    "mps_unroll": true,
+    "neckdown_length": 2.5,
+    "neckdown_taper_length": 0.5,
+    "net_clearances": {},
+    "net_keepouts": null,
+    "net_name_patterns": [
+      "*"
+    ],
+    "net_names": [
+      "ADC_A",
+      "ADC_B",
+      "ADC_C",
+      "CC1",
+      "CC2",
+      "FB_5V2",
+      "GND",
+      "HALL_5V",
+      "HALL_PWR_EN",
+      "MUX_A0",
+      "MUX_A1",
+      "MUX_A2",
+      "MUX_EN1",
+      "MUX_OUT_A",
+      "MUX_OUT_B",
+      "MUX_OUT_C",
+      "QSPI_SCLK",
+      "QSPI_SD0",
+      "QSPI_SD1",
+      "QSPI_SD2",
+      "QSPI_SD3",
+      "QSPI_SS_FLASH",
+      "QSPI_SS_MCU",
+      "RAIL_PG",
+      "RUN",
+      "SW1",
+      "SW2",
+      "SWCLK",
+      "SWDIO",
+      "USB_DM",
+      "USB_DM_CONN",
+      "USB_DM_ESD",
+      "USB_DP",
+      "USB_DP_CONN",
+      "USB_DP_ESD",
+      "V1V1",
+      "V3V3",
+      "V5V2",
+      "VAUX",
+      "VBUS",
+      "WING_EN",
+      "XIN",
+      "XOUT",
+      "XOUT_XTAL"
+    ],
+    "oracle_links": null,
+    "ordering_strategy": "inside_out",
+    "output_file": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/readback-never-written.kicad_pcb",
+    "pcb_data": null,
+    "pour_barriers": null,
+    "power_nets": [],
+    "power_nets_widths": [],
+    "power_tap_neckdown": true,
+    "progress_callback": null,
+    "proximity_heuristic_factor": 0.02,
+    "quick": 0,
+    "return_results": false,
+    "rip_existing_nets": null,
+    "rip_preexisting": null,
+    "ripped_route_avoidance_cost": 0.1,
+    "ripped_route_avoidance_radius": 1.0,
+    "ripup_abandon_metric": "stranded",
+    "ripup_blocker_select": "count",
+    "routing_clearance_margin": 1.0,
+    "same_net_pad_clearance": null,
+    "schematic_dir": null,
+    "scoped_clearance_rules": null,
+    "skip_routing": false,
+    "smoothing": true,
+    "stage_board_fn": null,
+    "stub_proximity_cost": 0.2,
+    "stub_proximity_radius": 2.0,
+    "swappable_net_patterns": null,
+    "time_match_tolerance": 1.0,
+    "time_matching": false,
+    "track_clearances": null,
+    "track_proximity_cost": 0.0,
+    "track_proximity_distance": 2.0,
+    "track_width": 0.1,
+    "track_width_from_class": false,
+    "turn_cost": 1000,
+    "verbose": false,
+    "vertical_attraction_cost": 0.0,
+    "vertical_attraction_radius": 1.0,
+    "via_cost": 75,
+    "via_drill": 0.3,
+    "via_from_class": false,
+    "via_proximity_cost": 10,
+    "via_size": 0.6
+  },
+  "checked_utc": "2026-11-06T08:13:51.310242+00:00",
+  "cli_namespace": {
+    "_clamp_netclasses": false,
+    "_clearance_ceiling": null,
+    "add_teardrops": false,
+    "bga_proximity_cost": 0.2,
+    "bga_proximity_radius": 7.0,
+    "board_edge_clearance": 0.2,
+    "bus": false,
+    "bus_attraction_bonus": 5000,
+    "bus_attraction_radius": 5.0,
+    "bus_detection_radius": 5.0,
+    "bus_min_nets": 2,
+    "can_swap_to_top_layer": false,
+    "capabilities": false,
+    "clearance": 0.1,
+    "clearance_ceiling": null,
+    "component": null,
+    "coplanar_gap": 0.0,
+    "coplanar_nets": null,
+    "crossing_penalty": 1000.0,
+    "debug_lines": false,
+    "debug_memory": false,
+    "direction": "backward",
+    "direction_preference_cost": 250,
+    "enable_used_layers": false,
+    "escalation": "off",
+    "fab_overrides": null,
+    "fab_tier": "auto",
+    "force_reroute": false,
+    "grid_step": 0.1,
+    "group": null,
+    "group_by": "auto",
+    "group_scope": null,
+    "guide_corridor": false,
+    "guide_corridor_layer": "User.1",
+    "guide_corridor_spacing": 0.0,
+    "heuristic_weight": 2.3,
+    "hole_to_hole_clearance": 0.2,
+    "impedance": null,
+    "input_file": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb",
+    "json_out": null,
+    "keep_away": null,
+    "keep_away_cost": 0.5,
+    "keep_away_free": 1.5,
+    "keep_input_copper": true,
+    "keep_thermal": false,
+    "keepout": false,
+    "keepout_layer": "User.2",
+    "layer_costs": [
+      1.0,
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "layers": [
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu",
+      "B.Cu"
+    ],
+    "length_match_groups": null,
+    "length_match_tolerance": 0.1,
+    "list_groups": false,
+    "max_iterations": 200000,
+    "max_probe_iterations": 5000,
+    "max_ripup": 3,
+    "meander_amplitude": 1.0,
+    "meander_spacing": 2.0,
+    "mps_layer_swap": false,
+    "mps_reverse_rounds": false,
+    "mps_segment_intersection": false,
+    "neckdown_length": 2.5,
+    "neckdown_taper_length": 0.5,
+    "net_clearances": null,
+    "net_patterns": [],
+    "nets": null,
+    "no_bga_zones": null,
+    "no_crossing_layer_check": false,
+    "no_fix_drc_settings": false,
+    "no_power_tap_neckdown": false,
+    "no_stub_layer_swap": false,
+    "ordering": "inside_out",
+    "output": null,
+    "output_file": "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/readback-never-written.kicad_pcb",
+    "overwrite": false,
+    "power_nets": [],
+    "power_nets_widths": [],
+    "preview": false,
+    "preview_png": null,
+    "proximity_heuristic_factor": 0.02,
+    "quick": 0,
+    "relax_drc_severities": false,
+    "rip_existing_nets": null,
+    "ripped_route_avoidance_cost": 0.1,
+    "ripped_route_avoidance_radius": 1.0,
+    "ripup_abandon_metric": "stranded",
+    "ripup_blocker_select": "count",
+    "routing_clearance_margin": 1.0,
+    "same_net_pad_clearance": null,
+    "schematic_dir": null,
+    "skip_routing": false,
+    "smoothing": true,
+    "stats": false,
+    "strict_sizes": false,
+    "stub_proximity_cost": 0.2,
+    "stub_proximity_radius": 2.0,
+    "swappable_nets": null,
+    "time_match_tolerance": 1.0,
+    "time_matching": false,
+    "track_proximity_cost": 0.0,
+    "track_proximity_distance": 2.0,
+    "track_width": 0.1,
+    "turn_cost": 1000,
+    "undo": false,
+    "verbose": false,
+    "vertical_attraction_cost": 0.0,
+    "vertical_attraction_radius": 1.0,
+    "via_cost": 75,
+    "via_drill": 0.3,
+    "via_proximity_cost": 10,
+    "via_size": 0.6,
+    "write_fill": false
+  },
+  "environment_knobs": {
+    "ALLOW_STAGGERED_BGA": false,
+    "BARE_PAD_ESCAPE": true,
+    "BOARD_LEDGER": false,
+    "BUS_CORRIDOR_PROBE_VIA_MULT": 20.0,
+    "BUS_MAX_CORRIDOR_LAYER_CHANGES": 1,
+    "BUS_MULTIPOINT_SPAN": true,
+    "BUS_XLAYER_PCT": 35,
+    "CLEARANCE_LEGACY_CEILING": false,
+    "COLLINEAR_VIAS": false,
+    "CONGESTION2": {
+      "bin": 1.0,
+      "cost": 0.0,
+      "exempt_r": 1.0,
+      "ramp_top": 2.0,
+      "thresh": 0.5
+    },
+    "CONGESTION_BIN": 1.0,
+    "CONGESTION_COST": 0.0,
+    "CONGESTION_THRESHOLD": 0.3,
+    "DIRECT_FIRST": true,
+    "DUMP_BATCH_KWARGS": "",
+    "DUMP_BATCH_KWARGS_CONTINUE": false,
+    "DYNAMIC_ITERATIONS": true,
+    "DYNAMIC_ITERATIONS_CLAMP": 10000000,
+    "DYNAMIC_ITERATIONS_GRACE": 0,
+    "DYNAMIC_ITERATIONS_QUANTUM_CELLS": 2.0,
+    "DYNAMIC_ITERATIONS_QUANTUM_PCT": 2.0,
+    "ESCAPE_STUB_RADIUS": 1.0,
+    "FANOUT_DIRECT": false,
+    "FANOUT_LANE_WALK": true,
+    "FANOUT_LANE_WALK_MAX": 3,
+    "FANOUT_PAIR_DIVE": true,
+    "FANOUT_PLANE_DROP": "",
+    "FANOUT_POUR_DIRECT": true,
+    "FANOUT_POUR_TRACK": true,
+    "FANOUT_POUR_TRACK_R": 2.0,
+    "FANOUT_RIP_RESCUE": true,
+    "FANOUT_SKIP_UNDER": false,
+    "FANOUT_SURFACE_RESCUE": true,
+    "FANOUT_TOWARD_TARGETS": false,
+    "FINE_PITCH_PSEUDO_STUBS": true,
+    "GATE_DEBUG": false,
+    "GLOBAL_PLAN": {
+      "attract": false,
+      "attract_home": false,
+      "attract_potential": 0,
+      "c2": false,
+      "cost": 0.0,
+      "debug": false,
+      "dump": "",
+      "dump_exit": false,
+      "enable": false,
+      "escape": false,
+      "escape_radius": 1.5,
+      "hweight": 2.3,
+      "iters": 5000,
+      "layer": "",
+      "layer_discount": 0.7,
+      "layer_mode": "clique",
+      "layer_tax": 1.0,
+      "order": "share",
+      "order_file": "",
+      "power_first": false,
+      "power_layer_costs": "",
+      "probe_via_cost": 0,
+      "radius": 1.0,
+      "river": false,
+      "river_debug": false,
+      "seq": false,
+      "seq_cost": 0.15,
+      "seq_radius": 1.0,
+      "swaps": false,
+      "zone_scale": 1.0
+    },
+    "HISTORY": {
+      "blocked_weight": 0.25,
+      "cap": 0.5,
+      "cost": 0.1,
+      "escalate": 0.0,
+      "max_cells": 500000,
+      "radius": 0.25,
+      "rip_weight": 1.0
+    },
+    "HYBRID_COUPLE": true,
+    "HYBRID_COUPLE_RADIUS": 1.0,
+    "HYBRID_LEG_DEBUG": "",
+    "IMPEDANCE_NECKDOWN": true,
+    "IMPROVEMENT_GATE": true,
+    "INRUN_FLOOR_SYNC": true,
+    "LEDGER_TRACE": "",
+    "MEM_PROBE": false,
+    "MERGE_COLLINEAR": true,
+    "MULTIPOINT_DENSE_FIRST": false,
+    "NET_RESCUE": true,
+    "NO_SOFT_JOINT_BRIDGE": false,
+    "NO_SWEEP_PLATED": false,
+    "OBSTACLE_AUDIT": false,
+    "ORACLE_SUMMARY": false,
+    "ORACLE_UNION": true,
+    "PACKAGE_PROXIMITY": false,
+    "PACK_INLINE": false,
+    "PLANE_MAP_PARITY": false,
+    "PLANE_PARTIAL_RESTORE": false,
+    "POCKET_RIP": false,
+    "POUR_GUARD": true,
+    "POUR_LAUNCH_FRAG": 1.0,
+    "POUR_PROMISE_WELD": false,
+    "PROXIMITY_SOFTCAP_ALPHA": 0.3,
+    "PROXIMITY_SUM": false,
+    "PROXIMITY_SUM_MODE": "",
+    "PSEUDO_STUB_RETIRE": true,
+    "QFN_ONPAD_REACH": "full",
+    "QFN_UNDERPAD_ERASED_GATE": "all",
+    "QFN_UNDERPAD_NO_ALT_STAGGER": false,
+    "RASTER_CACHE_MB": 256.0,
+    "RASTER_ORACLE": false,
+    "RENDER_THEME": "light",
+    "RESCUE_CAP_MOVE": true,
+    "RESCUE_DEBUG_VIA": "",
+    "SEAM_SE_MAX": 16,
+    "SEAM_SE_RATIO": 1.3,
+    "SETTLE_DEBUG": false,
+    "SMOOTH_ROUTE": "",
+    "STOP_AFTER": "",
+    "STOP_CLEANUP": false,
+    "STOP_FILE": "",
+    "STUB_DEBRIS_TRIM": true,
+    "STUB_LAYER_AWARE": false,
+    "STUB_LAYER_M": 0.0,
+    "TAP_CROSS_SCAN": false,
+    "TAP_RELOCATION": false,
+    "TAP_RELOCATION_MAX": 2,
+    "TERMINAL_ESCALATION": true,
+    "TRACK_PROX_PREEXISTING": false,
+    "UNBLOCK_DEBUG": false,
+    "UNDERPAD_OUTER_RINGS": "",
+    "VIA_RUNG_2": true,
+    "VICTIM_RESTORE": true
+  },
+  "escalation_policy": [
+    "off",
+    {
+      "annular": 0.1,
+      "board_edge": 0.2,
+      "clearance": 0.1,
+      "hole_to_hole": 0.2,
+      "track_width": 0.1,
+      "via_diameter": 0.6,
+      "via_drill": 0.3
+    }
+  ],
+  "fab_tier": [
+    "auto",
+    {}
+  ],
+  "grid_route_config": {
+    "ac_couple_match": false,
+    "add_teardrops": false,
+    "bga_exclusion_zones": [],
+    "bga_proximity_cost": 0.2,
+    "bga_proximity_radius": 7.0,
+    "board_copper_layers": [],
+    "board_edge_clearance": 0.2,
+    "bus_attraction_bonus": 5000,
+    "bus_attraction_radius": 5.0,
+    "bus_detection_radius": 5.0,
+    "bus_enabled": false,
+    "bus_min_nets": 2,
+    "clearance": 0.1,
+    "collect_stats": false,
+    "coplanar_gap": 0.0,
+    "coplanar_layer_widths": {},
+    "coplanar_net_ids": [],
+    "corridor_waypoints": [],
+    "coupled_pair_clearances": {},
+    "crossing_layer_check": true,
+    "debug_lines": false,
+    "debug_memory": false,
+    "diff_chamfer_extra": 1.5,
+    "diff_pair_centerline_setback": null,
+    "diff_pair_gap": 0.101,
+    "diff_pair_hybrid_escape": true,
+    "diff_pair_intra_match": false,
+    "diff_pair_setback_floor": null,
+    "diff_pair_setback_no_ladder": false,
+    "diff_pair_uncouple_factor": 6.0,
+    "direction_order": "backward",
+    "direction_preference_cost": 250,
+    "gnd_via_enabled": true,
+    "grid_step": 0.1,
+    "guide_corridor_enabled": false,
+    "guide_corridor_layer": "User.1",
+    "guide_corridor_spacing": 0.0,
+    "heuristic_weight": 2.3,
+    "hole_clearance": 0.0,
+    "hole_to_hole_clearance": 0.2,
+    "impedance_target": null,
+    "intra_pair_tolerances": null,
+    "keep_away": [],
+    "keep_away_cost": 0.5,
+    "keep_away_free": 1.5,
+    "keepout_enabled": false,
+    "keepout_layer": "User.2",
+    "layer_clearances": {},
+    "layer_costs": [
+      1.0,
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "layer_widths": {},
+    "layers": [
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu",
+      "B.Cu"
+    ],
+    "length_match_groups": null,
+    "length_match_tolerance": 0.1,
+    "max_iterations": 200000,
+    "max_probe_iterations": 5000,
+    "max_rip_up_count": 3,
+    "max_setback_angle": 45.0,
+    "max_turn_angle": 180.0,
+    "meander_amplitude": 1.0,
+    "meander_spacing": 2.0,
+    "min_turning_radius": 0.2,
+    "neckdown_length": 2.5,
+    "neckdown_taper_length": 0.5,
+    "net_clearance_floor": null,
+    "net_clearances": {},
+    "net_layer_widths": {},
+    "net_track_widths": {},
+    "net_via_sizes": {},
+    "netclass_width_floors": {},
+    "package_proximity_zones": null,
+    "plan_probe": false,
+    "pour_barriers": [],
+    "power_net_widths": {},
+    "power_tap_neckdown": true,
+    "proximity_heuristic_factor": 0.02,
+    "quick": 0,
+    "reserve_layer_widths": false,
+    "ripped_route_avoidance_cost": 0.1,
+    "ripped_route_avoidance_radius": 1.0,
+    "ripup_abandon_metric": "stranded",
+    "ripup_blocker_select": "count",
+    "routing_clearance_margin": 1.0,
+    "rules": null,
+    "run_via": null,
+    "same_net_pad_clearance": -1.0,
+    "scoped_clearance": null,
+    "skew_graded_net_ids": [],
+    "stub_layer_swap": true,
+    "stub_proximity_cost": 0.2,
+    "stub_proximity_radius": 2.0,
+    "target_swap_crossing_penalty": 1000.0,
+    "time_match_tolerance": 1.0,
+    "time_matching": false,
+    "track_clearances": {},
+    "track_partner_clearances": {},
+    "track_proximity_cost": 0.0,
+    "track_proximity_distance": 2.0,
+    "track_width": 0.1,
+    "turn_cost": 1000,
+    "verbose": false,
+    "vertical_attraction_cost": 0.0,
+    "vertical_attraction_radius": 1.0,
+    "via_cost": 75,
+    "via_drill": 0.3,
+    "via_proximity_cost": 10,
+    "via_rung": 0,
+    "via_size": 0.6
+  },
+  "native_keepouts": [
+    {
+      "copper_pour_allowed": false,
+      "footprints_allowed": false,
+      "holes": [],
+      "in_footprint": false,
+      "layers": [
+        "B.Cu",
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu"
+      ],
+      "name": "Main155 mounting keepout 1",
+      "owner": "",
+      "pads_allowed": true,
+      "polygon": [
+        [
+          81.500192,
+          92.0
+        ],
+        [
+          81.499439,
+          92.061357
+        ],
+        [
+          81.49718,
+          92.122678
+        ],
+        [
+          81.493417,
+          92.183925
+        ],
+        [
+          81.488153,
+          92.245061
+        ],
+        [
+          81.481389,
+          92.306049
+        ],
+        [
+          81.473131,
+          92.366854
+        ],
+        [
+          81.463383,
+          92.427437
+        ],
+        [
+          81.452151,
+          92.487763
+        ],
+        [
+          81.439443,
+          92.547795
+        ],
+        [
+          81.425264,
+          92.607497
+        ],
+        [
+          81.409625,
+          92.666833
+        ],
+        [
+          81.392534,
+          92.725767
+        ],
+        [
+          81.374003,
+          92.784264
+        ],
+        [
+          81.354041,
+          92.842289
+        ],
+        [
+          81.332661,
+          92.899806
+        ],
+        [
+          81.309876,
+          92.956782
+        ],
+        [
+          81.2857,
+          93.013181
+        ],
+        [
+          81.260147,
+          93.06897
+        ],
+        [
+          81.233232,
+          93.124114
+        ],
+        [
+          81.204973,
+          93.178582
+        ],
+        [
+          81.175384,
+          93.23234
+        ],
+        [
+          81.144486,
+          93.285355
+        ],
+        [
+          81.112295,
+          93.337596
+        ],
+        [
+          81.078833,
+          93.389032
+        ],
+        [
+          81.044118,
+          93.43963
+        ],
+        [
+          81.008173,
+          93.489362
+        ],
+        [
+          80.971017,
+          93.538196
+        ],
+        [
+          80.932674,
+          93.586105
+        ],
+        [
+          80.893167,
+          93.633058
+        ],
+        [
+          80.85252,
+          93.679026
+        ],
+        [
+          80.810757,
+          93.723984
+        ],
+        [
+          80.767903,
+          93.767903
+        ],
+        [
+          80.723984,
+          93.810757
+        ],
+        [
+          80.679026,
+          93.85252
+        ],
+        [
+          80.633058,
+          93.893167
+        ],
+        [
+          80.586105,
+          93.932674
+        ],
+        [
+          80.538196,
+          93.971017
+        ],
+        [
+          80.489362,
+          94.008173
+        ],
+        [
+          80.43963,
+          94.044118
+        ],
+        [
+          80.389032,
+          94.078833
+        ],
+        [
+          80.337596,
+          94.112295
+        ],
+        [
+          80.285355,
+          94.144486
+        ],
+        [
+          80.23234,
+          94.175384
+        ],
+        [
+          80.178582,
+          94.204973
+        ],
+        [
+          80.124114,
+          94.233232
+        ],
+        [
+          80.06897,
+          94.260147
+        ],
+        [
+          80.013181,
+          94.2857
+        ],
+        [
+          79.956782,
+          94.309876
+        ],
+        [
+          79.899806,
+          94.332661
+        ],
+        [
+          79.842289,
+          94.354041
+        ],
+        [
+          79.784264,
+          94.374003
+        ],
+        [
+          79.725767,
+          94.392534
+        ],
+        [
+          79.666833,
+          94.409625
+        ],
+        [
+          79.607497,
+          94.425264
+        ],
+        [
+          79.547795,
+          94.439443
+        ],
+        [
+          79.487763,
+          94.452151
+        ],
+        [
+          79.427437,
+          94.463383
+        ],
+        [
+          79.366854,
+          94.473131
+        ],
+        [
+          79.306049,
+          94.481389
+        ],
+        [
+          79.245061,
+          94.488153
+        ],
+        [
+          79.183925,
+          94.493417
+        ],
+        [
+          79.122678,
+          94.49718
+        ],
+        [
+          79.061357,
+          94.499439
+        ],
+        [
+          79.0,
+          94.500192
+        ],
+        [
+          78.938642,
+          94.499439
+        ],
+        [
+          78.877321,
+          94.49718
+        ],
+        [
+          78.816074,
+          94.493417
+        ],
+        [
+          78.754938,
+          94.488153
+        ],
+        [
+          78.69395,
+          94.481389
+        ],
+        [
+          78.633145,
+          94.473131
+        ],
+        [
+          78.572562,
+          94.463383
+        ],
+        [
+          78.512236,
+          94.452151
+        ],
+        [
+          78.452204,
+          94.439443
+        ],
+        [
+          78.392502,
+          94.425264
+        ],
+        [
+          78.333166,
+          94.409625
+        ],
+        [
+          78.274232,
+          94.392534
+        ],
+        [
+          78.215735,
+          94.374003
+        ],
+        [
+          78.15771,
+          94.354041
+        ],
+        [
+          78.100193,
+          94.332661
+        ],
+        [
+          78.043217,
+          94.309876
+        ],
+        [
+          77.986818,
+          94.2857
+        ],
+        [
+          77.931029,
+          94.260147
+        ],
+        [
+          77.875885,
+          94.233232
+        ],
+        [
+          77.821417,
+          94.204973
+        ],
+        [
+          77.767659,
+          94.175384
+        ],
+        [
+          77.714644,
+          94.144486
+        ],
+        [
+          77.662403,
+          94.112295
+        ],
+        [
+          77.610967,
+          94.078833
+        ],
+        [
+          77.560369,
+          94.044118
+        ],
+        [
+          77.510637,
+          94.008173
+        ],
+        [
+          77.461803,
+          93.971017
+        ],
+        [
+          77.413894,
+          93.932674
+        ],
+        [
+          77.366941,
+          93.893167
+        ],
+        [
+          77.320973,
+          93.85252
+        ],
+        [
+          77.276015,
+          93.810757
+        ],
+        [
+          77.232096,
+          93.767903
+        ],
+        [
+          77.189242,
+          93.723984
+        ],
+        [
+          77.147479,
+          93.679026
+        ],
+        [
+          77.106832,
+          93.633058
+        ],
+        [
+          77.067325,
+          93.586105
+        ],
+        [
+          77.028982,
+          93.538196
+        ],
+        [
+          76.991826,
+          93.489362
+        ],
+        [
+          76.955881,
+          93.43963
+        ],
+        [
+          76.921166,
+          93.389032
+        ],
+        [
+          76.887704,
+          93.337596
+        ],
+        [
+          76.855513,
+          93.285355
+        ],
+        [
+          76.824615,
+          93.23234
+        ],
+        [
+          76.795026,
+          93.178582
+        ],
+        [
+          76.766767,
+          93.124114
+        ],
+        [
+          76.739852,
+          93.06897
+        ],
+        [
+          76.714299,
+          93.013181
+        ],
+        [
+          76.690123,
+          92.956782
+        ],
+        [
+          76.667338,
+          92.899806
+        ],
+        [
+          76.645958,
+          92.842289
+        ],
+        [
+          76.625996,
+          92.784264
+        ],
+        [
+          76.607465,
+          92.725767
+        ],
+        [
+          76.590374,
+          92.666833
+        ],
+        [
+          76.574735,
+          92.607497
+        ],
+        [
+          76.560556,
+          92.547795
+        ],
+        [
+          76.547848,
+          92.487763
+        ],
+        [
+          76.536616,
+          92.427437
+        ],
+        [
+          76.526868,
+          92.366854
+        ],
+        [
+          76.51861,
+          92.306049
+        ],
+        [
+          76.511846,
+          92.245061
+        ],
+        [
+          76.506582,
+          92.183925
+        ],
+        [
+          76.502819,
+          92.122678
+        ],
+        [
+          76.50056,
+          92.061357
+        ],
+        [
+          76.499807,
+          92.0
+        ],
+        [
+          76.50056,
+          91.938642
+        ],
+        [
+          76.502819,
+          91.877321
+        ],
+        [
+          76.506582,
+          91.816074
+        ],
+        [
+          76.511846,
+          91.754938
+        ],
+        [
+          76.51861,
+          91.69395
+        ],
+        [
+          76.526868,
+          91.633145
+        ],
+        [
+          76.536616,
+          91.572562
+        ],
+        [
+          76.547848,
+          91.512236
+        ],
+        [
+          76.560556,
+          91.452204
+        ],
+        [
+          76.574735,
+          91.392502
+        ],
+        [
+          76.590374,
+          91.333166
+        ],
+        [
+          76.607465,
+          91.274232
+        ],
+        [
+          76.625996,
+          91.215735
+        ],
+        [
+          76.645958,
+          91.15771
+        ],
+        [
+          76.667338,
+          91.100193
+        ],
+        [
+          76.690123,
+          91.043217
+        ],
+        [
+          76.714299,
+          90.986818
+        ],
+        [
+          76.739852,
+          90.931029
+        ],
+        [
+          76.766767,
+          90.875885
+        ],
+        [
+          76.795026,
+          90.821417
+        ],
+        [
+          76.824615,
+          90.767659
+        ],
+        [
+          76.855513,
+          90.714644
+        ],
+        [
+          76.887704,
+          90.662403
+        ],
+        [
+          76.921166,
+          90.610967
+        ],
+        [
+          76.955881,
+          90.560369
+        ],
+        [
+          76.991826,
+          90.510637
+        ],
+        [
+          77.028982,
+          90.461803
+        ],
+        [
+          77.067325,
+          90.413894
+        ],
+        [
+          77.106832,
+          90.366941
+        ],
+        [
+          77.147479,
+          90.320973
+        ],
+        [
+          77.189242,
+          90.276015
+        ],
+        [
+          77.232096,
+          90.232096
+        ],
+        [
+          77.276015,
+          90.189242
+        ],
+        [
+          77.320973,
+          90.147479
+        ],
+        [
+          77.366941,
+          90.106832
+        ],
+        [
+          77.413894,
+          90.067325
+        ],
+        [
+          77.461803,
+          90.028982
+        ],
+        [
+          77.510637,
+          89.991826
+        ],
+        [
+          77.560369,
+          89.955881
+        ],
+        [
+          77.610967,
+          89.921166
+        ],
+        [
+          77.662403,
+          89.887704
+        ],
+        [
+          77.714644,
+          89.855513
+        ],
+        [
+          77.767659,
+          89.824615
+        ],
+        [
+          77.821417,
+          89.795026
+        ],
+        [
+          77.875885,
+          89.766767
+        ],
+        [
+          77.931029,
+          89.739852
+        ],
+        [
+          77.986818,
+          89.714299
+        ],
+        [
+          78.043217,
+          89.690123
+        ],
+        [
+          78.100193,
+          89.667338
+        ],
+        [
+          78.15771,
+          89.645958
+        ],
+        [
+          78.215735,
+          89.625996
+        ],
+        [
+          78.274232,
+          89.607465
+        ],
+        [
+          78.333166,
+          89.590374
+        ],
+        [
+          78.392502,
+          89.574735
+        ],
+        [
+          78.452204,
+          89.560556
+        ],
+        [
+          78.512236,
+          89.547848
+        ],
+        [
+          78.572562,
+          89.536616
+        ],
+        [
+          78.633145,
+          89.526868
+        ],
+        [
+          78.69395,
+          89.51861
+        ],
+        [
+          78.754938,
+          89.511846
+        ],
+        [
+          78.816074,
+          89.506582
+        ],
+        [
+          78.877321,
+          89.502819
+        ],
+        [
+          78.938642,
+          89.50056
+        ],
+        [
+          79.0,
+          89.499807
+        ],
+        [
+          79.061357,
+          89.50056
+        ],
+        [
+          79.122678,
+          89.502819
+        ],
+        [
+          79.183925,
+          89.506582
+        ],
+        [
+          79.245061,
+          89.511846
+        ],
+        [
+          79.306049,
+          89.51861
+        ],
+        [
+          79.366854,
+          89.526868
+        ],
+        [
+          79.427437,
+          89.536616
+        ],
+        [
+          79.487763,
+          89.547848
+        ],
+        [
+          79.547795,
+          89.560556
+        ],
+        [
+          79.607497,
+          89.574735
+        ],
+        [
+          79.666833,
+          89.590374
+        ],
+        [
+          79.725767,
+          89.607465
+        ],
+        [
+          79.784264,
+          89.625996
+        ],
+        [
+          79.842289,
+          89.645958
+        ],
+        [
+          79.899806,
+          89.667338
+        ],
+        [
+          79.956782,
+          89.690123
+        ],
+        [
+          80.013181,
+          89.714299
+        ],
+        [
+          80.06897,
+          89.739852
+        ],
+        [
+          80.124114,
+          89.766767
+        ],
+        [
+          80.178582,
+          89.795026
+        ],
+        [
+          80.23234,
+          89.824615
+        ],
+        [
+          80.285355,
+          89.855513
+        ],
+        [
+          80.337596,
+          89.887704
+        ],
+        [
+          80.389032,
+          89.921166
+        ],
+        [
+          80.43963,
+          89.955881
+        ],
+        [
+          80.489362,
+          89.991826
+        ],
+        [
+          80.538196,
+          90.028982
+        ],
+        [
+          80.586105,
+          90.067325
+        ],
+        [
+          80.633058,
+          90.106832
+        ],
+        [
+          80.679026,
+          90.147479
+        ],
+        [
+          80.723984,
+          90.189242
+        ],
+        [
+          80.767903,
+          90.232096
+        ],
+        [
+          80.810757,
+          90.276015
+        ],
+        [
+          80.85252,
+          90.320973
+        ],
+        [
+          80.893167,
+          90.366941
+        ],
+        [
+          80.932674,
+          90.413894
+        ],
+        [
+          80.971017,
+          90.461803
+        ],
+        [
+          81.008173,
+          90.510637
+        ],
+        [
+          81.044118,
+          90.560369
+        ],
+        [
+          81.078833,
+          90.610967
+        ],
+        [
+          81.112295,
+          90.662403
+        ],
+        [
+          81.144486,
+          90.714644
+        ],
+        [
+          81.175384,
+          90.767659
+        ],
+        [
+          81.204973,
+          90.821417
+        ],
+        [
+          81.233232,
+          90.875885
+        ],
+        [
+          81.260147,
+          90.931029
+        ],
+        [
+          81.2857,
+          90.986818
+        ],
+        [
+          81.309876,
+          91.043217
+        ],
+        [
+          81.332661,
+          91.100193
+        ],
+        [
+          81.354041,
+          91.15771
+        ],
+        [
+          81.374003,
+          91.215735
+        ],
+        [
+          81.392534,
+          91.274232
+        ],
+        [
+          81.409625,
+          91.333166
+        ],
+        [
+          81.425264,
+          91.392502
+        ],
+        [
+          81.439443,
+          91.452204
+        ],
+        [
+          81.452151,
+          91.512236
+        ],
+        [
+          81.463383,
+          91.572562
+        ],
+        [
+          81.473131,
+          91.633145
+        ],
+        [
+          81.481389,
+          91.69395
+        ],
+        [
+          81.488153,
+          91.754938
+        ],
+        [
+          81.493417,
+          91.816074
+        ],
+        [
+          81.49718,
+          91.877321
+        ],
+        [
+          81.499439,
+          91.938642
+        ]
+      ],
+      "tracks_allowed": false,
+      "vias_allowed": false
+    },
+    {
+      "copper_pour_allowed": false,
+      "footprints_allowed": false,
+      "holes": [],
+      "in_footprint": false,
+      "layers": [
+        "B.Cu",
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu"
+      ],
+      "name": "Main155 mounting keepout 3",
+      "owner": "",
+      "pads_allowed": true,
+      "polygon": [
+        [
+          81.500192,
+          119.0
+        ],
+        [
+          81.499439,
+          119.061357
+        ],
+        [
+          81.49718,
+          119.122678
+        ],
+        [
+          81.493417,
+          119.183925
+        ],
+        [
+          81.488153,
+          119.245061
+        ],
+        [
+          81.481389,
+          119.306049
+        ],
+        [
+          81.473131,
+          119.366854
+        ],
+        [
+          81.463383,
+          119.427437
+        ],
+        [
+          81.452151,
+          119.487763
+        ],
+        [
+          81.439443,
+          119.547795
+        ],
+        [
+          81.425264,
+          119.607497
+        ],
+        [
+          81.409625,
+          119.666833
+        ],
+        [
+          81.392534,
+          119.725767
+        ],
+        [
+          81.374003,
+          119.784264
+        ],
+        [
+          81.354041,
+          119.842289
+        ],
+        [
+          81.332661,
+          119.899806
+        ],
+        [
+          81.309876,
+          119.956782
+        ],
+        [
+          81.2857,
+          120.013181
+        ],
+        [
+          81.260147,
+          120.06897
+        ],
+        [
+          81.233232,
+          120.124114
+        ],
+        [
+          81.204973,
+          120.178582
+        ],
+        [
+          81.175384,
+          120.23234
+        ],
+        [
+          81.144486,
+          120.285355
+        ],
+        [
+          81.112295,
+          120.337596
+        ],
+        [
+          81.078833,
+          120.389032
+        ],
+        [
+          81.044118,
+          120.43963
+        ],
+        [
+          81.008173,
+          120.489362
+        ],
+        [
+          80.971017,
+          120.538196
+        ],
+        [
+          80.932674,
+          120.586105
+        ],
+        [
+          80.893167,
+          120.633058
+        ],
+        [
+          80.85252,
+          120.679026
+        ],
+        [
+          80.810757,
+          120.723984
+        ],
+        [
+          80.767903,
+          120.767903
+        ],
+        [
+          80.723984,
+          120.810757
+        ],
+        [
+          80.679026,
+          120.85252
+        ],
+        [
+          80.633058,
+          120.893167
+        ],
+        [
+          80.586105,
+          120.932674
+        ],
+        [
+          80.538196,
+          120.971017
+        ],
+        [
+          80.489362,
+          121.008173
+        ],
+        [
+          80.43963,
+          121.044118
+        ],
+        [
+          80.389032,
+          121.078833
+        ],
+        [
+          80.337596,
+          121.112295
+        ],
+        [
+          80.285355,
+          121.144486
+        ],
+        [
+          80.23234,
+          121.175384
+        ],
+        [
+          80.178582,
+          121.204973
+        ],
+        [
+          80.124114,
+          121.233232
+        ],
+        [
+          80.06897,
+          121.260147
+        ],
+        [
+          80.013181,
+          121.2857
+        ],
+        [
+          79.956782,
+          121.309876
+        ],
+        [
+          79.899806,
+          121.332661
+        ],
+        [
+          79.842289,
+          121.354041
+        ],
+        [
+          79.784264,
+          121.374003
+        ],
+        [
+          79.725767,
+          121.392534
+        ],
+        [
+          79.666833,
+          121.409625
+        ],
+        [
+          79.607497,
+          121.425264
+        ],
+        [
+          79.547795,
+          121.439443
+        ],
+        [
+          79.487763,
+          121.452151
+        ],
+        [
+          79.427437,
+          121.463383
+        ],
+        [
+          79.366854,
+          121.473131
+        ],
+        [
+          79.306049,
+          121.481389
+        ],
+        [
+          79.245061,
+          121.488153
+        ],
+        [
+          79.183925,
+          121.493417
+        ],
+        [
+          79.122678,
+          121.49718
+        ],
+        [
+          79.061357,
+          121.499439
+        ],
+        [
+          79.0,
+          121.500192
+        ],
+        [
+          78.938642,
+          121.499439
+        ],
+        [
+          78.877321,
+          121.49718
+        ],
+        [
+          78.816074,
+          121.493417
+        ],
+        [
+          78.754938,
+          121.488153
+        ],
+        [
+          78.69395,
+          121.481389
+        ],
+        [
+          78.633145,
+          121.473131
+        ],
+        [
+          78.572562,
+          121.463383
+        ],
+        [
+          78.512236,
+          121.452151
+        ],
+        [
+          78.452204,
+          121.439443
+        ],
+        [
+          78.392502,
+          121.425264
+        ],
+        [
+          78.333166,
+          121.409625
+        ],
+        [
+          78.274232,
+          121.392534
+        ],
+        [
+          78.215735,
+          121.374003
+        ],
+        [
+          78.15771,
+          121.354041
+        ],
+        [
+          78.100193,
+          121.332661
+        ],
+        [
+          78.043217,
+          121.309876
+        ],
+        [
+          77.986818,
+          121.2857
+        ],
+        [
+          77.931029,
+          121.260147
+        ],
+        [
+          77.875885,
+          121.233232
+        ],
+        [
+          77.821417,
+          121.204973
+        ],
+        [
+          77.767659,
+          121.175384
+        ],
+        [
+          77.714644,
+          121.144486
+        ],
+        [
+          77.662403,
+          121.112295
+        ],
+        [
+          77.610967,
+          121.078833
+        ],
+        [
+          77.560369,
+          121.044118
+        ],
+        [
+          77.510637,
+          121.008173
+        ],
+        [
+          77.461803,
+          120.971017
+        ],
+        [
+          77.413894,
+          120.932674
+        ],
+        [
+          77.366941,
+          120.893167
+        ],
+        [
+          77.320973,
+          120.85252
+        ],
+        [
+          77.276015,
+          120.810757
+        ],
+        [
+          77.232096,
+          120.767903
+        ],
+        [
+          77.189242,
+          120.723984
+        ],
+        [
+          77.147479,
+          120.679026
+        ],
+        [
+          77.106832,
+          120.633058
+        ],
+        [
+          77.067325,
+          120.586105
+        ],
+        [
+          77.028982,
+          120.538196
+        ],
+        [
+          76.991826,
+          120.489362
+        ],
+        [
+          76.955881,
+          120.43963
+        ],
+        [
+          76.921166,
+          120.389032
+        ],
+        [
+          76.887704,
+          120.337596
+        ],
+        [
+          76.855513,
+          120.285355
+        ],
+        [
+          76.824615,
+          120.23234
+        ],
+        [
+          76.795026,
+          120.178582
+        ],
+        [
+          76.766767,
+          120.124114
+        ],
+        [
+          76.739852,
+          120.06897
+        ],
+        [
+          76.714299,
+          120.013181
+        ],
+        [
+          76.690123,
+          119.956782
+        ],
+        [
+          76.667338,
+          119.899806
+        ],
+        [
+          76.645958,
+          119.842289
+        ],
+        [
+          76.625996,
+          119.784264
+        ],
+        [
+          76.607465,
+          119.725767
+        ],
+        [
+          76.590374,
+          119.666833
+        ],
+        [
+          76.574735,
+          119.607497
+        ],
+        [
+          76.560556,
+          119.547795
+        ],
+        [
+          76.547848,
+          119.487763
+        ],
+        [
+          76.536616,
+          119.427437
+        ],
+        [
+          76.526868,
+          119.366854
+        ],
+        [
+          76.51861,
+          119.306049
+        ],
+        [
+          76.511846,
+          119.245061
+        ],
+        [
+          76.506582,
+          119.183925
+        ],
+        [
+          76.502819,
+          119.122678
+        ],
+        [
+          76.50056,
+          119.061357
+        ],
+        [
+          76.499807,
+          119.0
+        ],
+        [
+          76.50056,
+          118.938642
+        ],
+        [
+          76.502819,
+          118.877321
+        ],
+        [
+          76.506582,
+          118.816074
+        ],
+        [
+          76.511846,
+          118.754938
+        ],
+        [
+          76.51861,
+          118.69395
+        ],
+        [
+          76.526868,
+          118.633145
+        ],
+        [
+          76.536616,
+          118.572562
+        ],
+        [
+          76.547848,
+          118.512236
+        ],
+        [
+          76.560556,
+          118.452204
+        ],
+        [
+          76.574735,
+          118.392502
+        ],
+        [
+          76.590374,
+          118.333166
+        ],
+        [
+          76.607465,
+          118.274232
+        ],
+        [
+          76.625996,
+          118.215735
+        ],
+        [
+          76.645958,
+          118.15771
+        ],
+        [
+          76.667338,
+          118.100193
+        ],
+        [
+          76.690123,
+          118.043217
+        ],
+        [
+          76.714299,
+          117.986818
+        ],
+        [
+          76.739852,
+          117.931029
+        ],
+        [
+          76.766767,
+          117.875885
+        ],
+        [
+          76.795026,
+          117.821417
+        ],
+        [
+          76.824615,
+          117.767659
+        ],
+        [
+          76.855513,
+          117.714644
+        ],
+        [
+          76.887704,
+          117.662403
+        ],
+        [
+          76.921166,
+          117.610967
+        ],
+        [
+          76.955881,
+          117.560369
+        ],
+        [
+          76.991826,
+          117.510637
+        ],
+        [
+          77.028982,
+          117.461803
+        ],
+        [
+          77.067325,
+          117.413894
+        ],
+        [
+          77.106832,
+          117.366941
+        ],
+        [
+          77.147479,
+          117.320973
+        ],
+        [
+          77.189242,
+          117.276015
+        ],
+        [
+          77.232096,
+          117.232096
+        ],
+        [
+          77.276015,
+          117.189242
+        ],
+        [
+          77.320973,
+          117.147479
+        ],
+        [
+          77.366941,
+          117.106832
+        ],
+        [
+          77.413894,
+          117.067325
+        ],
+        [
+          77.461803,
+          117.028982
+        ],
+        [
+          77.510637,
+          116.991826
+        ],
+        [
+          77.560369,
+          116.955881
+        ],
+        [
+          77.610967,
+          116.921166
+        ],
+        [
+          77.662403,
+          116.887704
+        ],
+        [
+          77.714644,
+          116.855513
+        ],
+        [
+          77.767659,
+          116.824615
+        ],
+        [
+          77.821417,
+          116.795026
+        ],
+        [
+          77.875885,
+          116.766767
+        ],
+        [
+          77.931029,
+          116.739852
+        ],
+        [
+          77.986818,
+          116.714299
+        ],
+        [
+          78.043217,
+          116.690123
+        ],
+        [
+          78.100193,
+          116.667338
+        ],
+        [
+          78.15771,
+          116.645958
+        ],
+        [
+          78.215735,
+          116.625996
+        ],
+        [
+          78.274232,
+          116.607465
+        ],
+        [
+          78.333166,
+          116.590374
+        ],
+        [
+          78.392502,
+          116.574735
+        ],
+        [
+          78.452204,
+          116.560556
+        ],
+        [
+          78.512236,
+          116.547848
+        ],
+        [
+          78.572562,
+          116.536616
+        ],
+        [
+          78.633145,
+          116.526868
+        ],
+        [
+          78.69395,
+          116.51861
+        ],
+        [
+          78.754938,
+          116.511846
+        ],
+        [
+          78.816074,
+          116.506582
+        ],
+        [
+          78.877321,
+          116.502819
+        ],
+        [
+          78.938642,
+          116.50056
+        ],
+        [
+          79.0,
+          116.499807
+        ],
+        [
+          79.061357,
+          116.50056
+        ],
+        [
+          79.122678,
+          116.502819
+        ],
+        [
+          79.183925,
+          116.506582
+        ],
+        [
+          79.245061,
+          116.511846
+        ],
+        [
+          79.306049,
+          116.51861
+        ],
+        [
+          79.366854,
+          116.526868
+        ],
+        [
+          79.427437,
+          116.536616
+        ],
+        [
+          79.487763,
+          116.547848
+        ],
+        [
+          79.547795,
+          116.560556
+        ],
+        [
+          79.607497,
+          116.574735
+        ],
+        [
+          79.666833,
+          116.590374
+        ],
+        [
+          79.725767,
+          116.607465
+        ],
+        [
+          79.784264,
+          116.625996
+        ],
+        [
+          79.842289,
+          116.645958
+        ],
+        [
+          79.899806,
+          116.667338
+        ],
+        [
+          79.956782,
+          116.690123
+        ],
+        [
+          80.013181,
+          116.714299
+        ],
+        [
+          80.06897,
+          116.739852
+        ],
+        [
+          80.124114,
+          116.766767
+        ],
+        [
+          80.178582,
+          116.795026
+        ],
+        [
+          80.23234,
+          116.824615
+        ],
+        [
+          80.285355,
+          116.855513
+        ],
+        [
+          80.337596,
+          116.887704
+        ],
+        [
+          80.389032,
+          116.921166
+        ],
+        [
+          80.43963,
+          116.955881
+        ],
+        [
+          80.489362,
+          116.991826
+        ],
+        [
+          80.538196,
+          117.028982
+        ],
+        [
+          80.586105,
+          117.067325
+        ],
+        [
+          80.633058,
+          117.106832
+        ],
+        [
+          80.679026,
+          117.147479
+        ],
+        [
+          80.723984,
+          117.189242
+        ],
+        [
+          80.767903,
+          117.232096
+        ],
+        [
+          80.810757,
+          117.276015
+        ],
+        [
+          80.85252,
+          117.320973
+        ],
+        [
+          80.893167,
+          117.366941
+        ],
+        [
+          80.932674,
+          117.413894
+        ],
+        [
+          80.971017,
+          117.461803
+        ],
+        [
+          81.008173,
+          117.510637
+        ],
+        [
+          81.044118,
+          117.560369
+        ],
+        [
+          81.078833,
+          117.610967
+        ],
+        [
+          81.112295,
+          117.662403
+        ],
+        [
+          81.144486,
+          117.714644
+        ],
+        [
+          81.175384,
+          117.767659
+        ],
+        [
+          81.204973,
+          117.821417
+        ],
+        [
+          81.233232,
+          117.875885
+        ],
+        [
+          81.260147,
+          117.931029
+        ],
+        [
+          81.2857,
+          117.986818
+        ],
+        [
+          81.309876,
+          118.043217
+        ],
+        [
+          81.332661,
+          118.100193
+        ],
+        [
+          81.354041,
+          118.15771
+        ],
+        [
+          81.374003,
+          118.215735
+        ],
+        [
+          81.392534,
+          118.274232
+        ],
+        [
+          81.409625,
+          118.333166
+        ],
+        [
+          81.425264,
+          118.392502
+        ],
+        [
+          81.439443,
+          118.452204
+        ],
+        [
+          81.452151,
+          118.512236
+        ],
+        [
+          81.463383,
+          118.572562
+        ],
+        [
+          81.473131,
+          118.633145
+        ],
+        [
+          81.481389,
+          118.69395
+        ],
+        [
+          81.488153,
+          118.754938
+        ],
+        [
+          81.493417,
+          118.816074
+        ],
+        [
+          81.49718,
+          118.877321
+        ],
+        [
+          81.499439,
+          118.938642
+        ]
+      ],
+      "tracks_allowed": false,
+      "vias_allowed": false
+    },
+    {
+      "copper_pour_allowed": false,
+      "footprints_allowed": false,
+      "holes": [],
+      "in_footprint": false,
+      "layers": [
+        "B.Cu",
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu"
+      ],
+      "name": "Main155 mounting keepout 2",
+      "owner": "",
+      "pads_allowed": true,
+      "polygon": [
+        [
+          123.500192,
+          81.0
+        ],
+        [
+          123.499439,
+          81.061357
+        ],
+        [
+          123.49718,
+          81.122678
+        ],
+        [
+          123.493417,
+          81.183925
+        ],
+        [
+          123.488153,
+          81.245061
+        ],
+        [
+          123.481389,
+          81.306049
+        ],
+        [
+          123.473131,
+          81.366854
+        ],
+        [
+          123.463383,
+          81.427437
+        ],
+        [
+          123.452151,
+          81.487763
+        ],
+        [
+          123.439443,
+          81.547795
+        ],
+        [
+          123.425264,
+          81.607497
+        ],
+        [
+          123.409625,
+          81.666833
+        ],
+        [
+          123.392534,
+          81.725767
+        ],
+        [
+          123.374003,
+          81.784264
+        ],
+        [
+          123.354041,
+          81.842289
+        ],
+        [
+          123.332661,
+          81.899806
+        ],
+        [
+          123.309876,
+          81.956782
+        ],
+        [
+          123.2857,
+          82.013181
+        ],
+        [
+          123.260147,
+          82.06897
+        ],
+        [
+          123.233232,
+          82.124114
+        ],
+        [
+          123.204973,
+          82.178582
+        ],
+        [
+          123.175384,
+          82.23234
+        ],
+        [
+          123.144486,
+          82.285355
+        ],
+        [
+          123.112295,
+          82.337596
+        ],
+        [
+          123.078833,
+          82.389032
+        ],
+        [
+          123.044118,
+          82.43963
+        ],
+        [
+          123.008173,
+          82.489362
+        ],
+        [
+          122.971017,
+          82.538196
+        ],
+        [
+          122.932674,
+          82.586105
+        ],
+        [
+          122.893167,
+          82.633058
+        ],
+        [
+          122.85252,
+          82.679026
+        ],
+        [
+          122.810757,
+          82.723984
+        ],
+        [
+          122.767903,
+          82.767903
+        ],
+        [
+          122.723984,
+          82.810757
+        ],
+        [
+          122.679026,
+          82.85252
+        ],
+        [
+          122.633058,
+          82.893167
+        ],
+        [
+          122.586105,
+          82.932674
+        ],
+        [
+          122.538196,
+          82.971017
+        ],
+        [
+          122.489362,
+          83.008173
+        ],
+        [
+          122.43963,
+          83.044118
+        ],
+        [
+          122.389032,
+          83.078833
+        ],
+        [
+          122.337596,
+          83.112295
+        ],
+        [
+          122.285355,
+          83.144486
+        ],
+        [
+          122.23234,
+          83.175384
+        ],
+        [
+          122.178582,
+          83.204973
+        ],
+        [
+          122.124114,
+          83.233232
+        ],
+        [
+          122.06897,
+          83.260147
+        ],
+        [
+          122.013181,
+          83.2857
+        ],
+        [
+          121.956782,
+          83.309876
+        ],
+        [
+          121.899806,
+          83.332661
+        ],
+        [
+          121.842289,
+          83.354041
+        ],
+        [
+          121.784264,
+          83.374003
+        ],
+        [
+          121.725767,
+          83.392534
+        ],
+        [
+          121.666833,
+          83.409625
+        ],
+        [
+          121.607497,
+          83.425264
+        ],
+        [
+          121.547795,
+          83.439443
+        ],
+        [
+          121.487763,
+          83.452151
+        ],
+        [
+          121.427437,
+          83.463383
+        ],
+        [
+          121.366854,
+          83.473131
+        ],
+        [
+          121.306049,
+          83.481389
+        ],
+        [
+          121.245061,
+          83.488153
+        ],
+        [
+          121.183925,
+          83.493417
+        ],
+        [
+          121.122678,
+          83.49718
+        ],
+        [
+          121.061357,
+          83.499439
+        ],
+        [
+          121.0,
+          83.500192
+        ],
+        [
+          120.938642,
+          83.499439
+        ],
+        [
+          120.877321,
+          83.49718
+        ],
+        [
+          120.816074,
+          83.493417
+        ],
+        [
+          120.754938,
+          83.488153
+        ],
+        [
+          120.69395,
+          83.481389
+        ],
+        [
+          120.633145,
+          83.473131
+        ],
+        [
+          120.572562,
+          83.463383
+        ],
+        [
+          120.512236,
+          83.452151
+        ],
+        [
+          120.452204,
+          83.439443
+        ],
+        [
+          120.392502,
+          83.425264
+        ],
+        [
+          120.333166,
+          83.409625
+        ],
+        [
+          120.274232,
+          83.392534
+        ],
+        [
+          120.215735,
+          83.374003
+        ],
+        [
+          120.15771,
+          83.354041
+        ],
+        [
+          120.100193,
+          83.332661
+        ],
+        [
+          120.043217,
+          83.309876
+        ],
+        [
+          119.986818,
+          83.2857
+        ],
+        [
+          119.931029,
+          83.260147
+        ],
+        [
+          119.875885,
+          83.233232
+        ],
+        [
+          119.821417,
+          83.204973
+        ],
+        [
+          119.767659,
+          83.175384
+        ],
+        [
+          119.714644,
+          83.144486
+        ],
+        [
+          119.662403,
+          83.112295
+        ],
+        [
+          119.610967,
+          83.078833
+        ],
+        [
+          119.560369,
+          83.044118
+        ],
+        [
+          119.510637,
+          83.008173
+        ],
+        [
+          119.461803,
+          82.971017
+        ],
+        [
+          119.413894,
+          82.932674
+        ],
+        [
+          119.366941,
+          82.893167
+        ],
+        [
+          119.320973,
+          82.85252
+        ],
+        [
+          119.276015,
+          82.810757
+        ],
+        [
+          119.232096,
+          82.767903
+        ],
+        [
+          119.189242,
+          82.723984
+        ],
+        [
+          119.147479,
+          82.679026
+        ],
+        [
+          119.106832,
+          82.633058
+        ],
+        [
+          119.067325,
+          82.586105
+        ],
+        [
+          119.028982,
+          82.538196
+        ],
+        [
+          118.991826,
+          82.489362
+        ],
+        [
+          118.955881,
+          82.43963
+        ],
+        [
+          118.921166,
+          82.389032
+        ],
+        [
+          118.887704,
+          82.337596
+        ],
+        [
+          118.855513,
+          82.285355
+        ],
+        [
+          118.824615,
+          82.23234
+        ],
+        [
+          118.795026,
+          82.178582
+        ],
+        [
+          118.766767,
+          82.124114
+        ],
+        [
+          118.739852,
+          82.06897
+        ],
+        [
+          118.714299,
+          82.013181
+        ],
+        [
+          118.690123,
+          81.956782
+        ],
+        [
+          118.667338,
+          81.899806
+        ],
+        [
+          118.645958,
+          81.842289
+        ],
+        [
+          118.625996,
+          81.784264
+        ],
+        [
+          118.607465,
+          81.725767
+        ],
+        [
+          118.590374,
+          81.666833
+        ],
+        [
+          118.574735,
+          81.607497
+        ],
+        [
+          118.560556,
+          81.547795
+        ],
+        [
+          118.547848,
+          81.487763
+        ],
+        [
+          118.536616,
+          81.427437
+        ],
+        [
+          118.526868,
+          81.366854
+        ],
+        [
+          118.51861,
+          81.306049
+        ],
+        [
+          118.511846,
+          81.245061
+        ],
+        [
+          118.506582,
+          81.183925
+        ],
+        [
+          118.502819,
+          81.122678
+        ],
+        [
+          118.50056,
+          81.061357
+        ],
+        [
+          118.499807,
+          81.0
+        ],
+        [
+          118.50056,
+          80.938642
+        ],
+        [
+          118.502819,
+          80.877321
+        ],
+        [
+          118.506582,
+          80.816074
+        ],
+        [
+          118.511846,
+          80.754938
+        ],
+        [
+          118.51861,
+          80.69395
+        ],
+        [
+          118.526868,
+          80.633145
+        ],
+        [
+          118.536616,
+          80.572562
+        ],
+        [
+          118.547848,
+          80.512236
+        ],
+        [
+          118.560556,
+          80.452204
+        ],
+        [
+          118.574735,
+          80.392502
+        ],
+        [
+          118.590374,
+          80.333166
+        ],
+        [
+          118.607465,
+          80.274232
+        ],
+        [
+          118.625996,
+          80.215735
+        ],
+        [
+          118.645958,
+          80.15771
+        ],
+        [
+          118.667338,
+          80.100193
+        ],
+        [
+          118.690123,
+          80.043217
+        ],
+        [
+          118.714299,
+          79.986818
+        ],
+        [
+          118.739852,
+          79.931029
+        ],
+        [
+          118.766767,
+          79.875885
+        ],
+        [
+          118.795026,
+          79.821417
+        ],
+        [
+          118.824615,
+          79.767659
+        ],
+        [
+          118.855513,
+          79.714644
+        ],
+        [
+          118.887704,
+          79.662403
+        ],
+        [
+          118.921166,
+          79.610967
+        ],
+        [
+          118.955881,
+          79.560369
+        ],
+        [
+          118.991826,
+          79.510637
+        ],
+        [
+          119.028982,
+          79.461803
+        ],
+        [
+          119.067325,
+          79.413894
+        ],
+        [
+          119.106832,
+          79.366941
+        ],
+        [
+          119.147479,
+          79.320973
+        ],
+        [
+          119.189242,
+          79.276015
+        ],
+        [
+          119.232096,
+          79.232096
+        ],
+        [
+          119.276015,
+          79.189242
+        ],
+        [
+          119.320973,
+          79.147479
+        ],
+        [
+          119.366941,
+          79.106832
+        ],
+        [
+          119.413894,
+          79.067325
+        ],
+        [
+          119.461803,
+          79.028982
+        ],
+        [
+          119.510637,
+          78.991826
+        ],
+        [
+          119.560369,
+          78.955881
+        ],
+        [
+          119.610967,
+          78.921166
+        ],
+        [
+          119.662403,
+          78.887704
+        ],
+        [
+          119.714644,
+          78.855513
+        ],
+        [
+          119.767659,
+          78.824615
+        ],
+        [
+          119.821417,
+          78.795026
+        ],
+        [
+          119.875885,
+          78.766767
+        ],
+        [
+          119.931029,
+          78.739852
+        ],
+        [
+          119.986818,
+          78.714299
+        ],
+        [
+          120.043217,
+          78.690123
+        ],
+        [
+          120.100193,
+          78.667338
+        ],
+        [
+          120.15771,
+          78.645958
+        ],
+        [
+          120.215735,
+          78.625996
+        ],
+        [
+          120.274232,
+          78.607465
+        ],
+        [
+          120.333166,
+          78.590374
+        ],
+        [
+          120.392502,
+          78.574735
+        ],
+        [
+          120.452204,
+          78.560556
+        ],
+        [
+          120.512236,
+          78.547848
+        ],
+        [
+          120.572562,
+          78.536616
+        ],
+        [
+          120.633145,
+          78.526868
+        ],
+        [
+          120.69395,
+          78.51861
+        ],
+        [
+          120.754938,
+          78.511846
+        ],
+        [
+          120.816074,
+          78.506582
+        ],
+        [
+          120.877321,
+          78.502819
+        ],
+        [
+          120.938642,
+          78.50056
+        ],
+        [
+          121.0,
+          78.499807
+        ],
+        [
+          121.061357,
+          78.50056
+        ],
+        [
+          121.122678,
+          78.502819
+        ],
+        [
+          121.183925,
+          78.506582
+        ],
+        [
+          121.245061,
+          78.511846
+        ],
+        [
+          121.306049,
+          78.51861
+        ],
+        [
+          121.366854,
+          78.526868
+        ],
+        [
+          121.427437,
+          78.536616
+        ],
+        [
+          121.487763,
+          78.547848
+        ],
+        [
+          121.547795,
+          78.560556
+        ],
+        [
+          121.607497,
+          78.574735
+        ],
+        [
+          121.666833,
+          78.590374
+        ],
+        [
+          121.725767,
+          78.607465
+        ],
+        [
+          121.784264,
+          78.625996
+        ],
+        [
+          121.842289,
+          78.645958
+        ],
+        [
+          121.899806,
+          78.667338
+        ],
+        [
+          121.956782,
+          78.690123
+        ],
+        [
+          122.013181,
+          78.714299
+        ],
+        [
+          122.06897,
+          78.739852
+        ],
+        [
+          122.124114,
+          78.766767
+        ],
+        [
+          122.178582,
+          78.795026
+        ],
+        [
+          122.23234,
+          78.824615
+        ],
+        [
+          122.285355,
+          78.855513
+        ],
+        [
+          122.337596,
+          78.887704
+        ],
+        [
+          122.389032,
+          78.921166
+        ],
+        [
+          122.43963,
+          78.955881
+        ],
+        [
+          122.489362,
+          78.991826
+        ],
+        [
+          122.538196,
+          79.028982
+        ],
+        [
+          122.586105,
+          79.067325
+        ],
+        [
+          122.633058,
+          79.106832
+        ],
+        [
+          122.679026,
+          79.147479
+        ],
+        [
+          122.723984,
+          79.189242
+        ],
+        [
+          122.767903,
+          79.232096
+        ],
+        [
+          122.810757,
+          79.276015
+        ],
+        [
+          122.85252,
+          79.320973
+        ],
+        [
+          122.893167,
+          79.366941
+        ],
+        [
+          122.932674,
+          79.413894
+        ],
+        [
+          122.971017,
+          79.461803
+        ],
+        [
+          123.008173,
+          79.510637
+        ],
+        [
+          123.044118,
+          79.560369
+        ],
+        [
+          123.078833,
+          79.610967
+        ],
+        [
+          123.112295,
+          79.662403
+        ],
+        [
+          123.144486,
+          79.714644
+        ],
+        [
+          123.175384,
+          79.767659
+        ],
+        [
+          123.204973,
+          79.821417
+        ],
+        [
+          123.233232,
+          79.875885
+        ],
+        [
+          123.260147,
+          79.931029
+        ],
+        [
+          123.2857,
+          79.986818
+        ],
+        [
+          123.309876,
+          80.043217
+        ],
+        [
+          123.332661,
+          80.100193
+        ],
+        [
+          123.354041,
+          80.15771
+        ],
+        [
+          123.374003,
+          80.215735
+        ],
+        [
+          123.392534,
+          80.274232
+        ],
+        [
+          123.409625,
+          80.333166
+        ],
+        [
+          123.425264,
+          80.392502
+        ],
+        [
+          123.439443,
+          80.452204
+        ],
+        [
+          123.452151,
+          80.512236
+        ],
+        [
+          123.463383,
+          80.572562
+        ],
+        [
+          123.473131,
+          80.633145
+        ],
+        [
+          123.481389,
+          80.69395
+        ],
+        [
+          123.488153,
+          80.754938
+        ],
+        [
+          123.493417,
+          80.816074
+        ],
+        [
+          123.49718,
+          80.877321
+        ],
+        [
+          123.499439,
+          80.938642
+        ]
+      ],
+      "tracks_allowed": false,
+      "vias_allowed": false
+    },
+    {
+      "copper_pour_allowed": false,
+      "footprints_allowed": false,
+      "holes": [],
+      "in_footprint": false,
+      "layers": [
+        "B.Cu",
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu"
+      ],
+      "name": "Main155 mounting keepout 4",
+      "owner": "",
+      "pads_allowed": true,
+      "polygon": [
+        [
+          104.500192,
+          111.5
+        ],
+        [
+          104.499439,
+          111.561357
+        ],
+        [
+          104.49718,
+          111.622678
+        ],
+        [
+          104.493417,
+          111.683925
+        ],
+        [
+          104.488153,
+          111.745061
+        ],
+        [
+          104.481389,
+          111.806049
+        ],
+        [
+          104.473131,
+          111.866854
+        ],
+        [
+          104.463383,
+          111.927437
+        ],
+        [
+          104.452151,
+          111.987763
+        ],
+        [
+          104.439443,
+          112.047795
+        ],
+        [
+          104.425264,
+          112.107497
+        ],
+        [
+          104.409625,
+          112.166833
+        ],
+        [
+          104.392534,
+          112.225767
+        ],
+        [
+          104.374003,
+          112.284264
+        ],
+        [
+          104.354041,
+          112.342289
+        ],
+        [
+          104.332661,
+          112.399806
+        ],
+        [
+          104.309876,
+          112.456782
+        ],
+        [
+          104.2857,
+          112.513181
+        ],
+        [
+          104.260147,
+          112.56897
+        ],
+        [
+          104.233232,
+          112.624114
+        ],
+        [
+          104.204973,
+          112.678582
+        ],
+        [
+          104.175384,
+          112.73234
+        ],
+        [
+          104.144486,
+          112.785355
+        ],
+        [
+          104.112295,
+          112.837596
+        ],
+        [
+          104.078833,
+          112.889032
+        ],
+        [
+          104.044118,
+          112.93963
+        ],
+        [
+          104.008173,
+          112.989362
+        ],
+        [
+          103.971017,
+          113.038196
+        ],
+        [
+          103.932674,
+          113.086105
+        ],
+        [
+          103.893167,
+          113.133058
+        ],
+        [
+          103.85252,
+          113.179026
+        ],
+        [
+          103.810757,
+          113.223984
+        ],
+        [
+          103.767903,
+          113.267903
+        ],
+        [
+          103.723984,
+          113.310757
+        ],
+        [
+          103.679026,
+          113.35252
+        ],
+        [
+          103.633058,
+          113.393167
+        ],
+        [
+          103.586105,
+          113.432674
+        ],
+        [
+          103.538196,
+          113.471017
+        ],
+        [
+          103.489362,
+          113.508173
+        ],
+        [
+          103.43963,
+          113.544118
+        ],
+        [
+          103.389032,
+          113.578833
+        ],
+        [
+          103.337596,
+          113.612295
+        ],
+        [
+          103.285355,
+          113.644486
+        ],
+        [
+          103.23234,
+          113.675384
+        ],
+        [
+          103.178582,
+          113.704973
+        ],
+        [
+          103.124114,
+          113.733232
+        ],
+        [
+          103.06897,
+          113.760147
+        ],
+        [
+          103.013181,
+          113.7857
+        ],
+        [
+          102.956782,
+          113.809876
+        ],
+        [
+          102.899806,
+          113.832661
+        ],
+        [
+          102.842289,
+          113.854041
+        ],
+        [
+          102.784264,
+          113.874003
+        ],
+        [
+          102.725767,
+          113.892534
+        ],
+        [
+          102.666833,
+          113.909625
+        ],
+        [
+          102.607497,
+          113.925264
+        ],
+        [
+          102.547795,
+          113.939443
+        ],
+        [
+          102.487763,
+          113.952151
+        ],
+        [
+          102.427437,
+          113.963383
+        ],
+        [
+          102.366854,
+          113.973131
+        ],
+        [
+          102.306049,
+          113.981389
+        ],
+        [
+          102.245061,
+          113.988153
+        ],
+        [
+          102.183925,
+          113.993417
+        ],
+        [
+          102.122678,
+          113.99718
+        ],
+        [
+          102.061357,
+          113.999439
+        ],
+        [
+          102.0,
+          114.000192
+        ],
+        [
+          101.938642,
+          113.999439
+        ],
+        [
+          101.877321,
+          113.99718
+        ],
+        [
+          101.816074,
+          113.993417
+        ],
+        [
+          101.754938,
+          113.988153
+        ],
+        [
+          101.69395,
+          113.981389
+        ],
+        [
+          101.633145,
+          113.973131
+        ],
+        [
+          101.572562,
+          113.963383
+        ],
+        [
+          101.512236,
+          113.952151
+        ],
+        [
+          101.452204,
+          113.939443
+        ],
+        [
+          101.392502,
+          113.925264
+        ],
+        [
+          101.333166,
+          113.909625
+        ],
+        [
+          101.274232,
+          113.892534
+        ],
+        [
+          101.215735,
+          113.874003
+        ],
+        [
+          101.15771,
+          113.854041
+        ],
+        [
+          101.100193,
+          113.832661
+        ],
+        [
+          101.043217,
+          113.809876
+        ],
+        [
+          100.986818,
+          113.7857
+        ],
+        [
+          100.931029,
+          113.760147
+        ],
+        [
+          100.875885,
+          113.733232
+        ],
+        [
+          100.821417,
+          113.704973
+        ],
+        [
+          100.767659,
+          113.675384
+        ],
+        [
+          100.714644,
+          113.644486
+        ],
+        [
+          100.662403,
+          113.612295
+        ],
+        [
+          100.610967,
+          113.578833
+        ],
+        [
+          100.560369,
+          113.544118
+        ],
+        [
+          100.510637,
+          113.508173
+        ],
+        [
+          100.461803,
+          113.471017
+        ],
+        [
+          100.413894,
+          113.432674
+        ],
+        [
+          100.366941,
+          113.393167
+        ],
+        [
+          100.320973,
+          113.35252
+        ],
+        [
+          100.276015,
+          113.310757
+        ],
+        [
+          100.232096,
+          113.267903
+        ],
+        [
+          100.189242,
+          113.223984
+        ],
+        [
+          100.147479,
+          113.179026
+        ],
+        [
+          100.106832,
+          113.133058
+        ],
+        [
+          100.067325,
+          113.086105
+        ],
+        [
+          100.028982,
+          113.038196
+        ],
+        [
+          99.991826,
+          112.989362
+        ],
+        [
+          99.955881,
+          112.93963
+        ],
+        [
+          99.921166,
+          112.889032
+        ],
+        [
+          99.887704,
+          112.837596
+        ],
+        [
+          99.855513,
+          112.785355
+        ],
+        [
+          99.824615,
+          112.73234
+        ],
+        [
+          99.795026,
+          112.678582
+        ],
+        [
+          99.766767,
+          112.624114
+        ],
+        [
+          99.739852,
+          112.56897
+        ],
+        [
+          99.714299,
+          112.513181
+        ],
+        [
+          99.690123,
+          112.456782
+        ],
+        [
+          99.667338,
+          112.399806
+        ],
+        [
+          99.645958,
+          112.342289
+        ],
+        [
+          99.625996,
+          112.284264
+        ],
+        [
+          99.607465,
+          112.225767
+        ],
+        [
+          99.590374,
+          112.166833
+        ],
+        [
+          99.574735,
+          112.107497
+        ],
+        [
+          99.560556,
+          112.047795
+        ],
+        [
+          99.547848,
+          111.987763
+        ],
+        [
+          99.536616,
+          111.927437
+        ],
+        [
+          99.526868,
+          111.866854
+        ],
+        [
+          99.51861,
+          111.806049
+        ],
+        [
+          99.511846,
+          111.745061
+        ],
+        [
+          99.506582,
+          111.683925
+        ],
+        [
+          99.502819,
+          111.622678
+        ],
+        [
+          99.50056,
+          111.561357
+        ],
+        [
+          99.499807,
+          111.5
+        ],
+        [
+          99.50056,
+          111.438642
+        ],
+        [
+          99.502819,
+          111.377321
+        ],
+        [
+          99.506582,
+          111.316074
+        ],
+        [
+          99.511846,
+          111.254938
+        ],
+        [
+          99.51861,
+          111.19395
+        ],
+        [
+          99.526868,
+          111.133145
+        ],
+        [
+          99.536616,
+          111.072562
+        ],
+        [
+          99.547848,
+          111.012236
+        ],
+        [
+          99.560556,
+          110.952204
+        ],
+        [
+          99.574735,
+          110.892502
+        ],
+        [
+          99.590374,
+          110.833166
+        ],
+        [
+          99.607465,
+          110.774232
+        ],
+        [
+          99.625996,
+          110.715735
+        ],
+        [
+          99.645958,
+          110.65771
+        ],
+        [
+          99.667338,
+          110.600193
+        ],
+        [
+          99.690123,
+          110.543217
+        ],
+        [
+          99.714299,
+          110.486818
+        ],
+        [
+          99.739852,
+          110.431029
+        ],
+        [
+          99.766767,
+          110.375885
+        ],
+        [
+          99.795026,
+          110.321417
+        ],
+        [
+          99.824615,
+          110.267659
+        ],
+        [
+          99.855513,
+          110.214644
+        ],
+        [
+          99.887704,
+          110.162403
+        ],
+        [
+          99.921166,
+          110.110967
+        ],
+        [
+          99.955881,
+          110.060369
+        ],
+        [
+          99.991826,
+          110.010637
+        ],
+        [
+          100.028982,
+          109.961803
+        ],
+        [
+          100.067325,
+          109.913894
+        ],
+        [
+          100.106832,
+          109.866941
+        ],
+        [
+          100.147479,
+          109.820973
+        ],
+        [
+          100.189242,
+          109.776015
+        ],
+        [
+          100.232096,
+          109.732096
+        ],
+        [
+          100.276015,
+          109.689242
+        ],
+        [
+          100.320973,
+          109.647479
+        ],
+        [
+          100.366941,
+          109.606832
+        ],
+        [
+          100.413894,
+          109.567325
+        ],
+        [
+          100.461803,
+          109.528982
+        ],
+        [
+          100.510637,
+          109.491826
+        ],
+        [
+          100.560369,
+          109.455881
+        ],
+        [
+          100.610967,
+          109.421166
+        ],
+        [
+          100.662403,
+          109.387704
+        ],
+        [
+          100.714644,
+          109.355513
+        ],
+        [
+          100.767659,
+          109.324615
+        ],
+        [
+          100.821417,
+          109.295026
+        ],
+        [
+          100.875885,
+          109.266767
+        ],
+        [
+          100.931029,
+          109.239852
+        ],
+        [
+          100.986818,
+          109.214299
+        ],
+        [
+          101.043217,
+          109.190123
+        ],
+        [
+          101.100193,
+          109.167338
+        ],
+        [
+          101.15771,
+          109.145958
+        ],
+        [
+          101.215735,
+          109.125996
+        ],
+        [
+          101.274232,
+          109.107465
+        ],
+        [
+          101.333166,
+          109.090374
+        ],
+        [
+          101.392502,
+          109.074735
+        ],
+        [
+          101.452204,
+          109.060556
+        ],
+        [
+          101.512236,
+          109.047848
+        ],
+        [
+          101.572562,
+          109.036616
+        ],
+        [
+          101.633145,
+          109.026868
+        ],
+        [
+          101.69395,
+          109.01861
+        ],
+        [
+          101.754938,
+          109.011846
+        ],
+        [
+          101.816074,
+          109.006582
+        ],
+        [
+          101.877321,
+          109.002819
+        ],
+        [
+          101.938642,
+          109.00056
+        ],
+        [
+          102.0,
+          108.999807
+        ],
+        [
+          102.061357,
+          109.00056
+        ],
+        [
+          102.122678,
+          109.002819
+        ],
+        [
+          102.183925,
+          109.006582
+        ],
+        [
+          102.245061,
+          109.011846
+        ],
+        [
+          102.306049,
+          109.01861
+        ],
+        [
+          102.366854,
+          109.026868
+        ],
+        [
+          102.427437,
+          109.036616
+        ],
+        [
+          102.487763,
+          109.047848
+        ],
+        [
+          102.547795,
+          109.060556
+        ],
+        [
+          102.607497,
+          109.074735
+        ],
+        [
+          102.666833,
+          109.090374
+        ],
+        [
+          102.725767,
+          109.107465
+        ],
+        [
+          102.784264,
+          109.125996
+        ],
+        [
+          102.842289,
+          109.145958
+        ],
+        [
+          102.899806,
+          109.167338
+        ],
+        [
+          102.956782,
+          109.190123
+        ],
+        [
+          103.013181,
+          109.214299
+        ],
+        [
+          103.06897,
+          109.239852
+        ],
+        [
+          103.124114,
+          109.266767
+        ],
+        [
+          103.178582,
+          109.295026
+        ],
+        [
+          103.23234,
+          109.324615
+        ],
+        [
+          103.285355,
+          109.355513
+        ],
+        [
+          103.337596,
+          109.387704
+        ],
+        [
+          103.389032,
+          109.421166
+        ],
+        [
+          103.43963,
+          109.455881
+        ],
+        [
+          103.489362,
+          109.491826
+        ],
+        [
+          103.538196,
+          109.528982
+        ],
+        [
+          103.586105,
+          109.567325
+        ],
+        [
+          103.633058,
+          109.606832
+        ],
+        [
+          103.679026,
+          109.647479
+        ],
+        [
+          103.723984,
+          109.689242
+        ],
+        [
+          103.767903,
+          109.732096
+        ],
+        [
+          103.810757,
+          109.776015
+        ],
+        [
+          103.85252,
+          109.820973
+        ],
+        [
+          103.893167,
+          109.866941
+        ],
+        [
+          103.932674,
+          109.913894
+        ],
+        [
+          103.971017,
+          109.961803
+        ],
+        [
+          104.008173,
+          110.010637
+        ],
+        [
+          104.044118,
+          110.060369
+        ],
+        [
+          104.078833,
+          110.110967
+        ],
+        [
+          104.112295,
+          110.162403
+        ],
+        [
+          104.144486,
+          110.214644
+        ],
+        [
+          104.175384,
+          110.267659
+        ],
+        [
+          104.204973,
+          110.321417
+        ],
+        [
+          104.233232,
+          110.375885
+        ],
+        [
+          104.260147,
+          110.431029
+        ],
+        [
+          104.2857,
+          110.486818
+        ],
+        [
+          104.309876,
+          110.543217
+        ],
+        [
+          104.332661,
+          110.600193
+        ],
+        [
+          104.354041,
+          110.65771
+        ],
+        [
+          104.374003,
+          110.715735
+        ],
+        [
+          104.392534,
+          110.774232
+        ],
+        [
+          104.409625,
+          110.833166
+        ],
+        [
+          104.425264,
+          110.892502
+        ],
+        [
+          104.439443,
+          110.952204
+        ],
+        [
+          104.452151,
+          111.012236
+        ],
+        [
+          104.463383,
+          111.072562
+        ],
+        [
+          104.473131,
+          111.133145
+        ],
+        [
+          104.481389,
+          111.19395
+        ],
+        [
+          104.488153,
+          111.254938
+        ],
+        [
+          104.493417,
+          111.316074
+        ],
+        [
+          104.49718,
+          111.377321
+        ],
+        [
+          104.499439,
+          111.438642
+        ]
+      ],
+      "tracks_allowed": false,
+      "vias_allowed": false
+    }
+  ],
+  "policy": "off",
+  "routing_defaults": {
+    "BGA_CLEARANCE": 0.25,
+    "BGA_DIFF_PAIR_GAP": 0.1,
+    "BGA_EXIT_MARGIN": 0.5,
+    "BGA_PROXIMITY_COST": 0.2,
+    "BGA_PROXIMITY_RADIUS": 7.0,
+    "BGA_TRACK_WIDTH": 0.3,
+    "BGA_VIA_DRILL": 0.3,
+    "BGA_VIA_SIZE": 0.5,
+    "BOARD_EDGE_CLEARANCE": 0.0,
+    "BUS_ATTRACTION_BONUS": 5000,
+    "BUS_ATTRACTION_RADIUS": 5.0,
+    "BUS_DETECTION_RADIUS": 5.0,
+    "BUS_MIN_NETS": 2,
+    "CLEARANCE": 0.25,
+    "COPLANAR_GAP": 0.0,
+    "CROSSING_PENALTY": 1000.0,
+    "DEFAULT_LAYERS": [
+      "F.Cu",
+      "B.Cu"
+    ],
+    "DEFAULT_ORDERING_STRATEGY": "mps",
+    "DIAGONAL_MARGIN": 0.25,
+    "DIFF_PAIR_CENTERLINE_SETBACK": 0.0,
+    "DIFF_PAIR_CHAMFER_EXTRA": 1.5,
+    "DIFF_PAIR_GAP": 0.101,
+    "DIFF_PAIR_MAX_SETBACK_ANGLE": 45.0,
+    "DIFF_PAIR_MAX_TURN_ANGLE": 180.0,
+    "DIFF_PAIR_MIN_TURNING_RADIUS": 0.2,
+    "DIFF_PAIR_WIDTH": 0.3,
+    "DIRECTION_PREFERENCE_COST": 250,
+    "ESCALATION": "fab",
+    "FAB_TIER": "auto",
+    "FINE_PITCH_MIN_PAD_DIM": 0.35,
+    "FINE_PITCH_NEIGHBOR_DIST": 0.65,
+    "FINE_TAP_CLEARANCE_STEPS": 4,
+    "FINE_TAP_GRID_STEP": 0.05,
+    "FINE_TAP_SEARCH_RADIUS": 3.0,
+    "GND_VIA_DISTANCE": 2.0,
+    "GND_VIA_NET": "",
+    "GRID_STEP": 0.1,
+    "GUIDE_CORRIDOR_ENABLED": false,
+    "GUIDE_CORRIDOR_LAYER": "User.1",
+    "GUIDE_CORRIDOR_SPACING": 0.0,
+    "HEURISTIC_WEIGHT": 2.3,
+    "HOLE_TO_HOLE_CLEARANCE": 0.2,
+    "IMPEDANCE_DEFAULT": 50,
+    "KEEPOUT_ENABLED": false,
+    "KEEPOUT_LAYER": "User.2",
+    "KEEP_AWAY_COST": 0.5,
+    "KEEP_AWAY_FREE": 1.5,
+    "LENGTH_MATCH_TOLERANCE": 0.1,
+    "MAX_ITERATIONS": 200000,
+    "MAX_PROBE_ITERATIONS": 5000,
+    "MAX_RIPUP": 3,
+    "MEANDER_AMPLITUDE": 1.0,
+    "MEANDER_SPACING": 2.0,
+    "NECKDOWN_LENGTH": 2.5,
+    "NECKDOWN_TAPER_LENGTH": 0.5,
+    "NPTH_TO_TRACK_CLEARANCE": 0.2,
+    "PAD_ENTRY_NECK_MM": 2.0,
+    "PARAM_RANGES": {
+      "bga_proximity_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "bga_proximity_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 20.0,
+        "min": 0.0
+      },
+      "board_edge_clearance": {
+        "digits": 3,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "bus_attraction_bonus": {
+        "max": 10000,
+        "min": 0
+      },
+      "bus_attraction_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.5
+      },
+      "bus_detection_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 100.0,
+        "min": 0.5
+      },
+      "bus_min_nets": {
+        "max": 20,
+        "min": 2
+      },
+      "clearance": {
+        "digits": 4,
+        "inc": 0.05,
+        "max": 5.0,
+        "min": 0.05
+      },
+      "coplanar_gap": {
+        "digits": 3,
+        "inc": 0.05,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "crossing_penalty": {
+        "digits": 0,
+        "inc": 100.0,
+        "max": 10000.0,
+        "min": 0.0
+      },
+      "diff_pair_centerline_setback": {
+        "digits": 3,
+        "inc": 0.1,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "diff_pair_chamfer_extra": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 3.0,
+        "min": 1.0
+      },
+      "diff_pair_gap": {
+        "digits": 2,
+        "inc": 0.01,
+        "max": 5.0,
+        "min": 0.05
+      },
+      "diff_pair_max_setback_angle": {
+        "digits": 0,
+        "inc": 5.0,
+        "max": 90.0,
+        "min": 10.0
+      },
+      "diff_pair_max_turn_angle": {
+        "digits": 0,
+        "inc": 15.0,
+        "max": 360.0,
+        "min": 45.0
+      },
+      "diff_pair_min_turning_radius": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 2.0,
+        "min": 0.05
+      },
+      "diff_pair_width": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 5.0,
+        "min": 0.05
+      },
+      "direction_preference_cost": {
+        "max": 10000,
+        "min": 0
+      },
+      "exit_margin": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.1
+      },
+      "gnd_via_distance": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.5
+      },
+      "grid_step": {
+        "digits": 4,
+        "inc": 0.01,
+        "max": 1.0,
+        "min": 0.01
+      },
+      "heuristic_weight": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 10.0,
+        "min": 1.0
+      },
+      "hole_to_hole_clearance": {
+        "digits": 3,
+        "inc": 0.05,
+        "max": 1.0,
+        "min": 0.0
+      },
+      "impedance": {
+        "digits": 0,
+        "inc": 1,
+        "max": 200,
+        "min": 10
+      },
+      "keep_away_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "keep_away_free": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "length_match_tolerance": {
+        "digits": 2,
+        "inc": 0.01,
+        "max": 5.0,
+        "min": 0.01
+      },
+      "max_iterations": {
+        "max": 100000000,
+        "min": 1000
+      },
+      "max_probe_iterations": {
+        "max": 100000,
+        "min": 100
+      },
+      "max_ripup": {
+        "max": 50,
+        "min": 0
+      },
+      "meander_amplitude": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 10.0,
+        "min": 0.1
+      },
+      "meander_spacing": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 1.0
+      },
+      "neckdown_length": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 50.0,
+        "min": 0.0
+      },
+      "neckdown_taper_length": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "plane_edge_clearance": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "plane_max_rip_nets": {
+        "max": 10,
+        "min": 1
+      },
+      "plane_max_search_radius": {
+        "digits": 1,
+        "inc": 1.0,
+        "max": 50.0,
+        "min": 1.0
+      },
+      "plane_max_via_reuse_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "plane_min_thickness": {
+        "digits": 4,
+        "inc": 0.05,
+        "max": 2.0,
+        "min": 0.01
+      },
+      "plane_zone_clearance": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 2.0,
+        "min": 0.05
+      },
+      "proximity_heuristic_factor": {
+        "digits": 2,
+        "inc": 0.01,
+        "max": 0.2,
+        "min": 0.0
+      },
+      "qfn_extension": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 10.0,
+        "min": 0.05
+      },
+      "repair_analysis_grid_step": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 2.0,
+        "min": 0.1
+      },
+      "repair_max_track_width": {
+        "digits": 3,
+        "inc": 0.1,
+        "max": 10.0,
+        "min": 0.1
+      },
+      "repair_min_track_width": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 5.0,
+        "min": 0.05
+      },
+      "ripped_route_avoidance_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "ripped_route_avoidance_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "routing_clearance_margin": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 2.0,
+        "min": 0.5
+      },
+      "same_net_pad_clearance": {
+        "digits": 2,
+        "inc": 0.05,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "stitch_fence_pitch": {
+        "digits": 1,
+        "inc": 1.0,
+        "max": 100.0,
+        "min": 0.0
+      },
+      "stitch_inset": {
+        "digits": 2,
+        "inc": 0.1,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "stitch_max_freq": {
+        "digits": 0,
+        "inc": 50.0,
+        "max": 20000.0,
+        "min": 0.0
+      },
+      "stitch_pitch": {
+        "digits": 1,
+        "inc": 1.0,
+        "max": 100.0,
+        "min": 1.0
+      },
+      "stub_proximity_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "stub_proximity_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "time_match_tolerance": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 50.0,
+        "min": 0.1
+      },
+      "track_proximity_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "track_proximity_distance": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "track_width": {
+        "digits": 4,
+        "inc": 0.05,
+        "max": 25.0,
+        "min": 0.05
+      },
+      "turn_cost": {
+        "max": 10000,
+        "min": 0
+      },
+      "vertical_attraction_cost": {
+        "digits": 1,
+        "inc": 0.1,
+        "max": 5.0,
+        "min": 0.0
+      },
+      "vertical_attraction_radius": {
+        "digits": 1,
+        "inc": 0.5,
+        "max": 10.0,
+        "min": 0.0
+      },
+      "via_cost": {
+        "max": 1000,
+        "min": 1
+      },
+      "via_drill": {
+        "digits": 4,
+        "inc": 0.05,
+        "max": 1.5,
+        "min": 0.1
+      },
+      "via_proximity_cost": {
+        "digits": 1,
+        "inc": 1.0,
+        "max": 100.0,
+        "min": 0.0
+      },
+      "via_size": {
+        "digits": 4,
+        "inc": 0.05,
+        "max": 2.0,
+        "min": 0.2
+      },
+      "voronoi_seed_interval": {
+        "digits": 3,
+        "inc": 0.5,
+        "max": 50.0,
+        "min": 0.05
+      }
+    },
+    "PLANE_EDGE_CLEARANCE": 0.5,
+    "PLANE_MAX_RIP_NETS": 3,
+    "PLANE_MAX_SEARCH_RADIUS": 10.0,
+    "PLANE_MIN_THICKNESS": 0.1,
+    "PLANE_PAD_STRAP_RADIUS": 1.5,
+    "PLANE_TRACK_VIA_CLEARANCE": 0.8,
+    "PLANE_ZONE_CLEARANCE": 0.2,
+    "PROXIMITY_HEURISTIC_FACTOR": 0.02,
+    "QFN_CLEARANCE": 0.1,
+    "QFN_ESCALATION_STEP": 0.005,
+    "QFN_EXTENSION": 0.05,
+    "QFN_TRACK_WIDTH": 0.1,
+    "REPAIR_ANALYSIS_GRID_STEP": 0.5,
+    "REPAIR_MAX_TRACK_WIDTH": 2.0,
+    "REPAIR_MIN_TRACK_WIDTH": 0.2,
+    "RESCUE_CLEARANCE_STEPS": 4,
+    "RESCUE_GRID_STEP": 0.025,
+    "RESCUE_MAX_EDGES_PER_NET": 8,
+    "RESCUE_MAX_ITERATIONS": 1000000,
+    "RESCUE_MAX_MARGIN_CELLS": 30,
+    "RESCUE_MAX_WINDOW_CELLS": 4000000,
+    "RESCUE_MIN_WINDOW_HALF": 6.0,
+    "RESCUE_WINDOW_MARGIN": 4.0,
+    "RIPPED_ROUTE_AVOIDANCE_COST": 0.1,
+    "RIPPED_ROUTE_AVOIDANCE_RADIUS": 1.0,
+    "RIPUP_ABANDON_METRIC": "stranded",
+    "RIPUP_ABANDON_METRIC_CHOICES": [
+      "stranded",
+      "total-pads",
+      "complete-nets",
+      "congestion",
+      "history",
+      "weighted",
+      "probe",
+      "weighted-probe"
+    ],
+    "RIPUP_BLOCKER_SELECT": "count",
+    "RIPUP_BLOCKER_SELECT_CHOICES": [
+      "count",
+      "near-target",
+      "bidir",
+      "mincut",
+      "cost"
+    ],
+    "ROUTING_CLEARANCE_MARGIN": 1.0,
+    "SAME_NET_PAD_CLEARANCE": -1.0,
+    "STITCH_PITCH": 20.0,
+    "STUB_PROXIMITY_COST": 0.2,
+    "STUB_PROXIMITY_RADIUS": 2.0,
+    "THERMAL_PAD_MIN_MM": 2.0,
+    "THERMAL_VIAS": true,
+    "TIME_MATCHING": false,
+    "TIME_MATCH_TOLERANCE": 1.0,
+    "TRACK_PROXIMITY_COST": 0.0,
+    "TRACK_PROXIMITY_DISTANCE": 2.0,
+    "TRACK_WIDTH": 0.3,
+    "TURN_COST": 1000,
+    "UNBLOCK_REFIT_MARGIN_MM": 0.05,
+    "VERTICAL_ATTRACTION_COST": 0.0,
+    "VERTICAL_ATTRACTION_RADIUS": 1.0,
+    "VIA_COST": 75,
+    "VIA_DRILL": 0.3,
+    "VIA_PROXIMITY_COST": 10,
+    "VIA_SIZE": 0.5,
+    "VORONOI_SEED_INTERVAL": 2.0
+  },
+  "routing_started": false,
+  "stage": "seed-b",
+  "stop_before_line": 3231
+}

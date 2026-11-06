@@ -1,0 +1,48 @@
+{
+  "utc": "2026-11-06T08:18:02.133443+00:00",
+  "seed_a": {
+    "input_caps": "GRM21BC81C226ME44L x2",
+    "output_caps": "GRM21BC81C226ME44L x3",
+    "screening_only": true,
+    "reason": "0805 output at ~5.35V loses >50% at 25C in typical DC-bias curve; tolerance, temperature and ageing further reduce margin. Do not claim final output capacitance guarantee."
+  },
+  "seed_b": {
+    "input_caps": "GRM21BC81C226ME44L x2",
+    "output_caps": "C3225X7R1C226K250AC x3",
+    "VAUX": "GRM155R71E104KE14D",
+    "R17": "TNPW060354K9BEEA",
+    "R18": "TNPW060310K0BEEA",
+    "nominal_output_V": 5.192,
+    "capacitor_case": "1210 outputs; 0805 inputs; 0402 VAUX",
+    "output_typical_bias_retention_screen": 0.85,
+    "output_tolerance_factor": 0.9,
+    "output_temperature_factor": 0.85,
+    "output_ageing_AC_reserve_factor": 0.9,
+    "output_screening_effective_uF": 38.62485,
+    "input_screening_effective_uF": 9.884160000000001,
+    "output_reference_effective_min_uF": 15,
+    "input_reference_min_uF": 4.7,
+    "ESR_typical_readout_ohm_per_part_at_2_4MHz": [
+      0.002,
+      0.01
+    ],
+    "effective_L_uH": [
+      1.05,
+      1.8
+    ]
+  },
+  "limitations": [
+    "Typical DC bias/ESR curves are not guaranteed minima/maxima across lots and PVT",
+    "Input X6S is limited to 105C; 125C copper sensitivity is not a whole-product ambient rating",
+    "Output effective capacitance screening retains >33uF and recommended 47uF-class -50% effective margin; raw curve readout deliberately rounded down to 85% retention at 5.354V",
+    "\u00b150mV ripple/transient, cold start, overshoot, reverse feeding, USB permission, EMI/ADC settling require hardware/simulation evidence and are not established by component selection",
+    "Seed-b layout failed independent qualification; selected parts are recorded, not a released BOM"
+  ],
+  "primary_documents": [
+    "sources/tps63070.pdf",
+    "sources/bulk-reference.pdf",
+    "sources/bulk-characteristics-murata-mirror.pdf",
+    "sources/output-tdk-characteristics.pdf",
+    "sources/tnpw.pdf"
+  ]
+}

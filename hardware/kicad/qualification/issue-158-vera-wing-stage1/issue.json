@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/158",
+    "title": "ver.A Wing 標準実装化 Stage 1：設計計画（位置決め穴・裏面センサー・左右展開）",
+    "issue_number": 158,
+    "body": "## 前提（PO 指示 2026-11-06）\n- ver.A の Wing を標準実装化する：Gateron Magnetic Jade Pro HE のメーカー基準設計どおり、各キーに位置決め穴（φ1.70mm×2）を設け、Hall センサーを基板裏面に配置し、標準の座りで使える製品基板にする（Issue #150 の調査結果）\n- 現行の M1 評価用 Wing（代表21、左半分のみ、センサー表面実装）とは別の製品基板として設計する。M1 評価の進め方（両ピッチ発注→実測で決定）は変えない\n\n## 本 Stage の作業（設計計画まで）\n1. 標準実装の要件整理：位置決め穴の配置規則（キー中心に対する寸法関係）、裏面センサーの配置と検出距離チェーン（#150 の寸法調査を土台にする）、スイッチ脚・センサー・位置決め穴の干渉条件\n2. 左右展開：左 Wing（21キー）と右 Wing（ミラー）の構成。Main とのインタフェース（GH 14ピン、D-017）は現行互換を維持できるか\n3. 取付穴（φ2.2mm×4）と外形の維持可否。位置決め穴42個の追加が外形・キー配置に与える影響\n4. 製造形態：左右を1枚の基板に収める一体パネル（分離は自宅側で実施、PO 確認済み）を前提に、接合部の形（手元で分離でき、配線を傷めない形）の案\n5. ピッチの扱い：製品ピッチは M1 実測後に決まる前提で、設計をピッチ確定前から進められる部分と、確定が要る部分を切り分ける\n6. D-021 条件（2層・0.10mm、電源／GND 0.30mm）での配線実現性の見通しと、裏面部品が配線・製造に与える影響（両面実装になることの扱いを含む）\n\n## 制約\n- 本 Stage は設計計画まで。基板データの作成・配線は Stage 2 以降\n- 既存ファイルの変更はせず追加のみ。成果物は報告書と証跡、Draft PR、merge は PO 判断\n- タイムボックス：2時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-05T20:47:01Z",
+    "updated_at": "2026-11-05T20:47:01Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/158",
+    "display_title": "ver.A Wing 標準実装化 Stage 1：設計計画（位置決め穴・裏面センサー・左右展開）"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/158",
+  "title": "ver.A Wing 標準実装化 Stage 1：設計計画（位置決め穴・裏面センサー・左右展開）",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/158",
+  "display_title": "ver.A Wing 標準実装化 Stage 1：設計計画（位置決め穴・裏面センサー・左右展開）"
+}

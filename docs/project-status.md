@@ -4,6 +4,11 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+Cross-cutting lessons distilled from the decision record (D-001–D-027) and the
+PMO run record (Issues #87–#169) are collected in
+[lessons-learned-device-development.md](lessons-learned-device-development.md).
+Read it when starting a new device development or revisiting a settled method.
+
 ## Board naming convention (PO decision, 2026-11-06)
 
 Milestone names and board revision names are kept separate. `M0` / `M1` / `M2`

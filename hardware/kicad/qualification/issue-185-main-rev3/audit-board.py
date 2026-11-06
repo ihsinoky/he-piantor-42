@@ -1,0 +1,6 @@
+"""Reuse #183 measurement code unchanged against each new snapshot."""
+from common import *
+import importlib.util,gzip
+label=sys.argv[1];w=E/label;src=w/'main.kicad_pcb';out=w/'audit';out.mkdir(exist_ok=True)
+spec=importlib.util.spec_from_file_location('audit183',E/'source183/audit.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.E=out
+(out/'snapshot.kicad_pcb.gz').write_bytes(gzip.compress(src.read_bytes(),mtime=0));runtime=T/('audit-'+label);runtime.mkdir(exist_ok=True);m.audit(dict(board='via-pad',snapshot='snapshot.kicad_pcb.gz',sha256=digest(src)),runtime)

@@ -1,0 +1,156 @@
+{
+  "utc": "2026-11-06T07:41:27.400918+00:00",
+  "qualified": false,
+  "USB": {
+    "host_min_V": 4.75,
+    "cable_vbus_max_drop_V": 0.125,
+    "cable_gnd_max_drop_V": 0.125,
+    "connector_min_V": 4.5,
+    "connector_max_V": 5.25,
+    "configured_permission_A": 0.5
+  },
+  "DC_feedback_tolerance": {
+    "nominal_V": 5.2,
+    "resistor_initial_fraction": 0.001,
+    "resistor_drift_ppm_per_K": 25,
+    "max_delta_K": 100,
+    "FB_accuracy_fraction": 0.01,
+    "FB_leakage_max_A": 1e-07,
+    "calculated_min_V": 5.112095099775785,
+    "calculated_max_V": 5.28873651041144,
+    "DC_target_min_V": 5.096,
+    "DC_target_max_V": 5.304,
+    "arithmetic_within_target": true,
+    "limitations": "Precision resistor MPN/thermal matching, feedback routing pickup and system DC behaviour not qualified"
+  },
+  "ripple_transient": {
+    "per_side_budget_V": 0.05,
+    "verified": false,
+    "reason": "No validated capacitor effective C / ESR / loop transient / prototype waveform. Allocation is not a proof."
+  },
+  "other_Main_maximum_estimate": [
+    {
+      "load": "RP2040 incl. internal linear VREG, USB/ADC and external logic switching",
+      "estimate_max_A": 0.08,
+      "basis": "RP2040 datasheet Table637 maximum-average Popcorn DVDD16.6mA+IOVDD35.5mA+USB2mA=54.1mA; reserve25.9mA. Workload-specific engineering allocation; not a silicon max or verified133MHz ceiling."
+    },
+    {
+      "load": "W25Q16JV flash",
+      "estimate_max_A": 0.025,
+      "basis": "Manufacturer current limit envelope used for read/program/erase planning; system PVT/active-I/O supply validation remains open."
+    },
+    {
+      "load": "LDO quiescent, USB/CC/ESD/pullups/pulldowns and other auxiliary loads",
+      "estimate_max_A": 0.005,
+      "basis": "5mA engineering reserve. AP2112 Iq80uA, ESD/pullups/control not individually qualified at every state."
+    }
+  ],
+  "other_Main_allocated_A": 0.11,
+  "current_sensitivity_rows": 405,
+  "efficiency_min_guaranteed": false,
+  "current_guarantee_established": false,
+  "input_voltage_range_arithmetic_established": true,
+  "positive_extracted_corner_ohm": {
+    "VBUS_to_U6": 0.12148598232452204,
+    "V5V2_to_U5": 0.054012743317458464,
+    "HALL_common": 0.006660931794206537,
+    "branches": {
+      "J2": 0.023847809954707325,
+      "J3": 0.025282346498601505
+    }
+  },
+  "Main_common_loop_target_ohm": 0.05,
+  "Main_common_positive_alone_ohm": 0.060673675111665,
+  "Main_common_target_not_met_in_model": true,
+  "conditional_downstream": [
+    {
+      "Wing_A": 0.127,
+      "positive_Main_drop_V": 0.0186219714836853,
+      "additional_GND_drop_assumption_V": 0,
+      "conditional_farthest_V": 4.796862883516315,
+      "target_V": 4.6,
+      "scope": "design",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.127,
+      "positive_Main_drop_V": 0.0186219714836853,
+      "additional_GND_drop_assumption_V": 0.025,
+      "conditional_farthest_V": 4.771862883516315,
+      "target_V": 4.6,
+      "scope": "design",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.127,
+      "positive_Main_drop_V": 0.0186219714836853,
+      "additional_GND_drop_assumption_V": 0.05,
+      "conditional_farthest_V": 4.746862883516315,
+      "target_V": 4.6,
+      "scope": "design",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.2310081,
+      "positive_Main_drop_V": 0.03387264764330963,
+      "additional_GND_drop_assumption_V": 0,
+      "conditional_farthest_V": 4.592829197493112,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.2310081,
+      "positive_Main_drop_V": 0.03387264764330963,
+      "additional_GND_drop_assumption_V": 0.025,
+      "conditional_farthest_V": 4.567829197493111,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.2310081,
+      "positive_Main_drop_V": 0.03387264764330963,
+      "additional_GND_drop_assumption_V": 0.05,
+      "conditional_farthest_V": 4.542829197493112,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.278,
+      "positive_Main_drop_V": 0.04076305568869697,
+      "additional_GND_drop_assumption_V": 0,
+      "conditional_farthest_V": 4.500644737145948,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.278,
+      "positive_Main_drop_V": 0.04076305568869697,
+      "additional_GND_drop_assumption_V": 0.025,
+      "conditional_farthest_V": 4.475644737145948,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    },
+    {
+      "Wing_A": 0.278,
+      "positive_Main_drop_V": 0.04076305568869697,
+      "additional_GND_drop_assumption_V": 0.05,
+      "conditional_farthest_V": 4.450644737145948,
+      "target_V": 4.6,
+      "scope": "stress-only",
+      "qualified": false
+    }
+  ],
+  "not_established": [
+    "Actual GND loop resistance",
+    "80% efficiency lower bound across PVT and forced-PWM operation",
+    "RP2040 workload maximum and USB configuration/suspend firmware",
+    "50mV dynamic rail budget and selected capacitors",
+    "Normal operation with broken V1V1/V3V3 nets",
+    "Farthest-sensor design guarantee"
+  ]
+}
