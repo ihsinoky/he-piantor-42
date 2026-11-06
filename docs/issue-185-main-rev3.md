@@ -84,3 +84,7 @@ CAM contact sheetを目視し、4銅層、4取付穴予約、北側C26–C28のp
 ## 提出と検証
 
 E/verify.pyは、4指標、via全件、paste、配置、抵抗、CAM、source hash、変更範囲、文書リンク、manifestを確認する。実行ログと結果はE/verification.json。公開結果はE/publication.jsonに保存する。**Draft PRのみ提出し、発注・課金・mergeは行わない。**
+
+内容コミット **`8feea4c992a3995cbe5c0718fe0e8c87282efc2a`** を指定ブランチへpush済み。Draft PR作成を実行したが、ツール承認制御が **`MCP tool call requires approval, but approval policy is never`** と拒否したため、**Draft PRは未作成**。別経路で拒否を回避していない。提出本文はE/draft-pr-body.md、対象baseは `issue-175-main-dual-wing-final2`、headは `issue-185-main-rev3-nopofv`。ホスト側でこの本文とbase/headを使ってDraft作成することが残る。Git管理情報は `.issue185-runtime/git` にあり、通常worktreeの読取り専用 `.git` は起点を指したままである。
+
+監査CSVのCRLFを保持し、`git -c core.whitespace=cr-at-eol diff --check` を通過した。生成されたPython bytecodeとKiCad session/project補助ファイルは `.issue185-runtime/generated-settings/` へ移し、提出成果物には含めていない。
