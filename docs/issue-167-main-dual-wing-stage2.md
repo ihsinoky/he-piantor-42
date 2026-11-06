@@ -1,107 +1,136 @@
-# Issue #167 — Main 2 Wing Stage 2：D-026採用とUSB入力予算による停止
+# Issue #167 — Main 2 Wing Stage 2 再開：D-027、実装候補と資格確認の停止
 
-**D-024／D-025と#160／#163の報告・証跡を取り込み、D-026を追記した。機構実物確認はゲートから外した。一方、指定された「USB上流損失・Main他負荷込みで変換器入力4.75V」を既存USB給電で保証できないため、電気条件の停止規則を適用した。Issue全体は未完了である。** PCB／回路は未変更、配線試行0回、独立4指標はすべて未評価（null）。製造データ、改版後POFV、PCBA見積は未生成／未更新であり、製造GOではない。
+**PO承認の入力再定義をD-027へ記録し、案Cの回路・基板候補を作成した。独立検査は全44ネットで実施したが、全体配線1回＋局所修正1回の上限内に合格せず停止した。Issueは未完了、製造GOではない。** 最終試行の実測4指標は **未接続3／異ネット接触0／物的違反2／説明不能な転送変更24**。4指標0の資格は取得していない。入力再定義そのものを停止理由にしていない。
 
-以下Eは[新規証跡フォルダ](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/)を指す。発注・課金・mergeは行っていない。
+発注・課金・mergeは行っていない。既存の [Draft PR #168](https://github.com/ihsinoky/he-piantor-42/pull/168) を同じ `issue-167-main-dual-wing-stage2` で更新する。本報告のEは [再開証跡フォルダ](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/) を指す。
 
-## 1. 指示・入力・決定の取り込み
+## 1. 再開範囲と保全
 
-指定手順書と[Issue #167](https://github.com/ihsinoky/he-piantor-42/issues/167)を全文確認した。fetchした最新mainは `67111c79ac2a583057cd0c81b1292cd070bf9340`。通常の `.git` は読取り専用で古いmainを指すため、Git管理領域を `.issue167-runtime/git` に複製し、同じ作業ディレクトリで最新main起点の **`issue-167-main-dual-wing-stage2`** を作成した。作業前の未追跡ファイルとdecisions.md追記は保全した。通常checkoutは既存ファイルとの衝突で中止したため、複製したGit管理領域だけでbranch／HEAD／indexを設定し、作業ファイルを上書きしていない。
+`.issue167-runtime/instructions-167-resume.md` と `instructions-167.md` を全文読み、Issue #167およびDraft PR #168を取得した。再開headは `0a1f355510e3f2fcadfdc68e7ae97ea90122eb6b`。通常の `.git` は古いmainを指し読取り専用なので、前回と同じ `.issue167-runtime/git` を継続使用した。新しいブランチへの付替え、mainのcheckout、mergeはしていない。
 
-```sh
-git --git-dir=.issue167-runtime/git --work-tree=. status
-```
+D-024／D-025／D-026、#160／#163の取り込み、旧入力予算は引き継ぐ。[前回報告全文](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/previous-run-report.md) と旧status／publication／manifestをEへ保存した。前回の入力4.75V不成立という証明は過去要件に対する証跡として残す。旧検証passを今回の合格へ流用しない。
 
-[PR #164](https://github.com/ihsinoky/he-piantor-42/pull/164)のhead `be000d4d7e2641fbd7269816a580bda463db1913` とmainとの差分70ファイルを元byteで照合した。開始時点で作業ツリーにあったD-024／D-025本文、#160／#163の報告・証跡がすべて一致しており、そのまま選択して取り込む。E/import-proof.jsonに全件hashを保存した。D-023は最新mainに含まれる。decisions.mdはPR #164全文をprefixとして保持し、後ろにD-026だけを追加した。
+開始時計は **2026-11-06 07:22:18 UTC**、4時間の期限は **11:22:18 UTC**（E/start.json）。停止は時間切れではなく、事前に固定した配線試行上限への到達による。残時間を追加試行へ転用しない。一時Git、XDG、ツール用tmpは `.issue167-runtime/`、既存のKiCad／KRT依存環境は読取り使用した。
 
-[D-026](decisions.md#d-026---main-two-wing-implementation-design-first-mechanics-and-regulated-52-v)は、案C（48×52mm、J3=(105,73)・0°、既存4穴・部品座標固定）、機構(b)、5.2V強制PWM buck-boost＋共通default-off U5＋低抵抗2枝、127mA/Wing・最遠点4.60V・共通／枝各50mΩ目標を採用する。J3近傍支持はver.A筐体要件、GHラッチ・挿抜力実測はM1の後段確認とし、今回のゲートにはしない。11mA包絡はストレスのみ、Wing導体改善はWing側の要件として残す。
+## 2. D-027とUSBコネクタ位置の入力
 
-#155起点は `hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/final/main.kicad_pcb`、SHA256 **`fdc1a7748f94714e395eb50f3e08c43afa24192ee76eb3d1804a8cba28690222`**。KiCad 9.0.9で読取り、53フットプリント／203パッド、4層／1.2mm、J1/J2・4穴固定、J3未追加、U1.8無ネット、U5・R6/R7とCC抵抗を確認した。E/native-readback.jsonは起点同定であり、新板の資格証ではない。
+[D-027](decisions.md#d-027---main-usb-input-requirement-at-the-board-connector) を追記した。既存決定本文は変更していない。
 
-タイムボックスは最初の時計読取り **2026-11-06 05:28:14 UTC** から4時間、期限 **09:28:14 UTC**。時間切れでなく、下記電気条件の不成立による停止である。一時ファイル・PDF・Git管理領域・XDGは今回の `.issue167-runtime/` 内。既存KiCad依存環境は読取り利用し、/tmpに展開していない。
-
-## 2. 変換器入力4.75Vの予算
-
-入力要件を満たせるかをPCB実装前に評価した。[USB-IFのUSB 2.0仕様](https://www.usb.org/document-library/usb-20-specification) §7.2.1.4、§7.2.2は上流給電点とケーブル損失を区別する。[USB-IF Drop/Droop v1.4.1 p6 Table 2](https://www.usb.org/sites/default/files/USB20_32_BC12_Drop_Droop_1_4_1.pdf)でも、非Type-CのPC USB 2.0ホストポートは500mA時に4.75Vが下限である。既存MainのUSB-Cコネクタは、A-to-C経由も含めた上流電源を自動的に高精度5.0V源へ変換しない。実板R1/R2は5.1kΩのCCプルダウンであり、追加の昇圧入力源や電源契約の証拠ではない。Type-Cの全給電モードがこの表と同一という主張ではない。
-
-Issue #165の4.75Vは**変換器入力位置での比較境界**であって、ホスト／Mainコネクタで保証された値ではない。今回の依頼でもこの入力をUSB上流・Main他負荷込みで示すことを求められている。指定電源・ケーブルの有無を作業中に確認依頼したが、評価時点で提示はなく、案内した既存USB 2.0給電を前提とした。5.0V固定源や極短ケーブルを暗黙に追加採用していない。
-
-次の式で上流を評価した。`eta`は効率、`Iother`は変換器以外のMain負荷、`Rloop`は上流ケーブル・接点・Main共通往復抵抗の合計である。
+[USB 2.0仕様](https://www.usb.org/document-library/usb-20-specification) §7.2.1.4／§7.2.2は、構成後の高電力機能について給電点の下限とケーブル降下を区別する。USBコネクタでローカルGNDを基準にする入力範囲を、次のとおり **4.50–5.25V** と定める。
 
 ```text
-Pconverter_in = 2 × Iwing × Vrail / eta
-Vin = Vsource − Rloop × (Pconverter_in / Vin + Iother)
-Vsource_required = 4.75 + Rloop × (Pconverter_in / 4.75 + Iother)
+給電点下限 4.75V − VBUSケーブル降下125mV − GNDケーブル降下125mV
+= デバイス側コネクタでの実効下限4.50V
 ```
 
-**Vsource=4.75V、負荷>0、Rloop>0なら、Vin<4.75Vとなる。** 効率100%・Main他負荷0という楽観条件でも変わらない。Main抵抗を小さくしても、正の上流抵抗をゼロにはできない。したがってUSBの既存範囲全体に対して入力4.75Vを保証する根拠は成立しない。これはTPS63070が4.75V未満で動作できないという意味ではなく、今回の入力保証要件との不一致である。
+これはコネクタから変換器までの基板損失を含まない。そこは実配線から別に引く。列挙用の低電力条件、§7.2.2 Figure 7-47のバス給電hub経由の低電圧経路と、500mAが許可された構成後の給電を混同しない。USB-C形状や5.1kΩのCC抵抗だけから500mA超の許可は導かない。
 
-| 感度例（実測値・最終部品保証値ではない） | 値 |
-| --- | ---: |
-| 負荷／出力／効率 | 127mA×2、5.2V、80% |
-| 上流源／上流往復R／Main往復R | 4.75V／0.10Ω／0.05Ω |
-| Main他負荷 | 100mA |
-| 自己整合計算した変換器入力 | **4.682107V** |
-| 同条件のUSB合計電流 | **452.619mA** |
-| 変換器入力4.75Vに必要な上流源 | **4.817137V以上** |
+構成許可前・未列挙・reset・suspendでは変換器、U5、両MUXをoffとする必要がある。今回の回路候補ではU6.ENとU5.ONを既存 `HALL_PWR_EN`／R7のdefault-offへ接続した。既存sensor-test firmwareはこの許可管理を実装済みとはいえず、変更していない。USB descriptorと構成／suspend処理の実装・実証は未完了である。
 
-この例は電流が500mA未満でも入力電圧要求に失敗することを示す。抵抗・効率・他負荷を特定値へ決め打ちして不合格にしたものではなく、上の不等式は任意の正のRに成立する。E/upstream-sensitivity.csvは3負荷×2出力×5効率×3上流電圧×4上流R×3Main R×4他負荷の**4,320ケース**。定電力負荷の二次式を解き、KVL・電力・必要源電圧を別の式で相互照合した。
+## 3. 回路・基板候補
 
-#157の旧板VBUS正側抵抗0.254333Ω（125°C、幅−20%）も参考列へ残すが、GNDやMain他負荷を含まず、改版後の実抵抗ではない。停止判断を旧配線抵抗へ依存させていない。
+起点は#155の `inspection/final/main.kicad_pcb`、SHA256 **`fdc1a7748f94714e395eb50f3e08c43afa24192ee76eb3d1804a8cba28690222`**。
 
-## 3. USB許可電流との照合と下流の条件付き計算
-
-E/current-budget.csvに、5.2V公称と高側5.304V、100/95/90/85/80%効率感度を保存した。#165の既存12行も独立式で差1e-12A未満まで再現した。80–95%は保証された効率範囲ではなく比較条件である。
-
-| 変換器入力4.75Vを別途満たした場合 | 変換器入力電流（80%） | 500mAからMain他負荷へ残る枠 |
-| --- | ---: | ---: |
-| 設計127mA/Wing、5.2V | 347.579mA | 152.421mA |
-| 設計127mA/Wing、5.304V | 354.531mA | 145.469mA |
-| 11mA/個の生包絡231.0081mA/Wing、5.2V | 632.233mA | −132.233mA |
-| 包絡＋計画余裕278mA/Wing、5.2V | 760.842mA | −260.842mA |
-
-設計ケースには500mA枠内へ納める余地があるが、MainのRP2040／flash／LDO等の最大電流、実効率下限、USB descriptorのbMaxPowerと実際の構成許可を確定した結果ではない。100mAの列挙前枠ではHall常時給電を有効にできない。USB 2.0 §9.1.2／§9.6.3に従い、構成許可前、未列挙、suspendではU5と両MUXをoffにする必要がある。既存sensor-test/main.cはUSB初期化待ち後、接続の有無によらずHallをonにする試験用コードであり、製品の電流許可を確認した実装ではない。今回は変更していない。USB-C形状、TPS22919の1.5A定格、GPIO EN交互駆動から500mA超の許可や消費半減を推論していない。
-
-下流の方式自体については、#141の実Wing抵抗網の保存解を引き継ぎ、Main共通／枝を**目標値**各50mΩと仮置きした条件付き評価も残した。5.2V×0.98−0.05V=5.046Vをレール下限とし、100mmハーネス、各接点50mΩ、6帰線等分、17mm Wing、125°C、幅−20%、U5 Ron感度0.25Ωでは以下となる。
-
-| 負荷 | 条件付き最遠点 | 扱い |
-| --- | ---: | --- |
-| 127mA/Wing | **4.796435V** | 4.60V目標へ196.435mV余裕。実配線の保証値ではない |
-| 11mA/個の生包絡 | **4.592042V** | ストレス記録のみ |
-| 278mA/Wing | **4.499698V** | ストレス記録のみ。4.5Vへも届かない |
-
-全48行はE/conditional-downstream.csv。これらは上流入力要件が成立し、5.2Vレールの精度・過渡予算を確保した場合の計算であり、今回の電源合格を意味しない。Mainの実抵抗抽出・実測で置き換える前の目標感度に限定する。Ronは従来の保守感度を維持し、125°Cを製品全体の周囲温度保証へ読み替えない。
-
-## 4. 停止範囲と再開時に必要な条件
-
-入力4.75Vを下げたり、USB上流を都合よく5.0V固定にして合格としたりせず、指定の停止規則を適用した。**機構の実物・工具・GH確認を停止理由にしていない。** TPS63070級方式の採用は維持するが、最終部品選定・実装済みとの主張はしない。[TIデータシート](https://www.ti.com/lit/ds/symlink/tps63070.pdf)のPS/SYNCは**lowで強制PWM**であり、再開時の回路ではこの極性を守る。2Vからの動作能力だけで今回の4.75V入力要求を満たしたことにはしない。
-
-| 要求作業 | 今回の状態 |
+| 項目 | 作成した候補／確認 |
 | --- | --- |
-| PR #164のD-024/D-025、#160/#163取込み、D-026 | 完了。元byte照合、追記限定 |
-| #155起点hash・KiCad読取り | 完了。元板未変更 |
-| 外形48×52mm、J3、MUX_EN1＋100kΩ | **未実装**。未配線の仮板を最終板として置いていない |
-| 変換IC最終選定・L/C・強制PWM・U5・2枝 | **未実装**。採用方式はD-026に記録、最終BOMなし |
-| 入力4.75V保証 | **不成立**。上流仕様の追加根拠なし |
-| システム電流／USB許可 | 算術枠と不足条件を提示。最大値／構成許可の資格は未取得 |
-| Main実抵抗、配線後最遠点 | **未抽出**。条件付き目標計算と区別 |
-| D-019再配線 | **0試行**。幅・間隙・層数・escalation変更なし |
-| 必須未接続／異ネット接触／物的違反／説明不能な転送変更 | **null／null／null／null**。新板の全ネット検査は未実施 |
-| 製造データ再生成／POFV再分類 | **未実施**。旧板CAM・via件数は引き継がない |
-| PCBA見積更新 | **未実施**。最終BOM/CPL・via処置・工程のない新板見積を捏造しない |
+| 外形 | X76–124／Y70–122、48×52mm |
+| 既存配置 | 全53 footprintの座標・角度を保全。J1/J2、4穴、全層Ø5mm予約を保持 |
+| J3 | (105,73)、0°、GH14同一ピン契約。補強ランドは機械NC |
+| MUX_EN1 | U1.8／GPIO6 → J3.7、R16=100kΩ外部プルダウン。旧NCを回路源から除去 |
+| 変換器 | U6=可変版TPS63070RNMR、PS/SYNC=GNDで強制PWM、VSEL／未使用FB2=GND |
+| 帰還 | R17=55kΩ／R18=10kΩ、初期0.1%・25ppm/Kを要求。公称0.8×(1+55/10)=5.2V |
+| L/C | L1=1.5µH XFL4020-152MEC候補、入力22µF×2、出力22µF×3、VAUX 100nF |
+| default-off | U6.ENと既存U5.ONは共通HALL_PWR_EN。U5入力をVBUSからV5V2へ変更 |
+| 2分岐 | U5出力近傍から両GHへ分岐。意図した太い電源経路をseed化し、信号はD-019のまま |
+| 成果物 | 66 footprints、うち電気部品62／機械穴4。論理245 pins／44 nets |
 
-再開には、上流電源の最低電圧、USBケーブル・接点の最大往復抵抗、Main最大負荷、使用可能なUSB電流と起動許可を具体化し、上記式で変換器入力4.75Vを満たす根拠が必要となる。既存USB全体の対応範囲を変える、入力要求を変える、別の前段を加える場合は仕様／回路変更として明示的に判断する事項であり、今回黙って採用していない。単に配線回数を増やしても上流下限の問題は解消しない。配線を再開する時点で、その範囲・最大試行数・時間を固定する。今回は配線計画の凍結や試行をしたことにはしない。
+[TIデータシート](https://www.ti.com/lit/ds/symlink/tps63070.pdf) の可変版ピン割当とRNM0015Aランド例からU6候補を作成した。[Coilcraft XFL4020-152](https://www.coilcraft.com/en-us/products/power/high-voltage-inductors/xfl/xfl4020/xfl4020-152/) は1.5µH±20%、25°C DCR最大15.8mΩ。量産向けランド／mask／paste照合は完了していない。C23/C24/C26–C28は **22µF・16V・X7R・0805の要求値を置いた段階**で、実効容量・DCバイアス・ESRを満たす具体的MPNは未確定。これを最終BOMとは呼ばない。精密抵抗のMPNも未確定である。複製元由来のSourceID属性が新部品に残り、後段の製造追跡用には整理が必要となる。
 
-D-019の4層／1.2mm、信号幅・間隙0.10mm、via0.60/0.30mm、In1.Cu GND専用、escalation offと、D-022のPOFV・J1同一Economic PCBA方針は維持する。下流のノイズ、ADC settling、起動・逆給電・上限電圧の実証も未実施のままである。
+E/circuit-source.pyは既存の凍結済み回路契約に変更・追加を明示し、PCBからネットを逆生成せずにnative schematicを作成する。KiCad CLIでその [回路図](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/schematic/main.kicad_sch) をnetlistへexportし、独立に全245論理pinsをPCB padと照合した。E/circuit-check-global.json／local.jsonの差は0。これは**論理接続指定の一致**であり、物理的な導通合格ではない。
 
-## 5. 検証・成果物・公開
+## 4. D-019再配線と独立資格確認
 
-E/verify.pyは、開始時10,840ファイルの保全（許可されたD-026追記のみ例外）、PR #164の70ファイル照合、D-026追記限定、入力hash、計算式の整合と過去12行の再現、状態のnull、著作文書のローカルリンクを検査する。E/verification.jsonのpassはこれらの記録の整合であり、新板資格やUSB電源のpassではない。
+4層／1.2mm、信号幅・間隙0.10mm、via0.60/0.30mm、In1.CuはGND専用、escalation offを保持した。E/routing-scope.jsonで**全体1回1800秒＋原因を限定した局所1回900秒**に固定した。初期配置・seed銅箔の手動修正は3回を上限とし、修正後にも残ったJ1近傍の0.086mm間隙違反は、該当するV5V2の2 segmentsだけを全体配線の対象へ渡した（E/global-seed-ripup.json）。0.086mmを許容条件へ変更していない。API互換修正でnative保存に至らなかった起動は配線試行に数えず、ログはすべて保存した。
 
-取り込み全体の空白検査には、#160／#163のGitHub push生ログに由来する行末空白8件が残る。元byte照合を守って保存し、今回の著作ファイルとD-026の空白検査は合格した。E/processes/staged-whitespace.jsonに対象を記録する。
+KRTのresolverを配線直前に読取り、幅・間隙・via・層コスト `[1,-1,1,1]` とoffを確認した。#131に保存されたKRT全2055 source hashesと実使用runtimeを照合し、変更0件。ルータのexit code 0だけでは合格としない。
 
-メーカーPDFとUSB仕様書はランタイムに保存し、URL・版・対象節・hashをE/sources.jsonに記録した。#165は未mergeのため、検討に用いた報告書と電流表をE/inputsへbyte保存する。そのMarkdown内の相対リンクは元位置を前提とする歴史入力であり、書き換えない。必要な主計算入力はmainに含まれる#141／#155／#157を参照する。
+| 独立実測項目 | 全体1回目 | 局所最終1回 |
+| --- | ---: | ---: |
+| 必須未接続 | **3** | **3** |
+| 異ネット接触 | 0 | 0 |
+| 物的違反 | 0 | **2** |
+| 説明不能な転送変更 | **1** | **24** |
+| 全ネット確認 | 44 | 44 |
+| 資格判定 | **不合格** | **不合格** |
 
-公開用本文はE/draft-pr-body.md、実際のcommit・push・Draft PR結果はE/publication.json。停止状態をレビューするDraftとし、Issueの自動close・merge・発注・課金を行わない。
+独立手順は、入力側projectを使用したKiCad再fill／DRC、native読取りsnapshot、実銅箔の44-net union-find、nonroute AST差分、保持すべき各segmentの中心線coverage／via一致からなる。GNDは実fillのouter／hole polygonsを含め、同名ネットという理由で導通を合成しない。
 
-内容コミット `fa20adde1f5c16de04be514f9400970bf48507c1` のpushは成功した。Draft PR作成も試みたが、接続ツールが「承認が必要だが承認ポリシーはnever」として拒否したため、**PRは未作成**。別経路で承認制約を回避せず、拒否結果をE/processes/draft-pr-result.jsonへ保存した。公開記録を追加コミットして同じブランチへpushする。
+全体結果はV1V1が2成分、V3V3が3成分。V5V2の保持via1件も欠落した。局所修正では、未接続2電源ネットとルータ診断が挙げた `XOUT`／`QSPI_SD0` の4ネットだけをripping対象とし、欠落viaとC26への局所接続を入力へ戻した。最終結果でも **V1V1が3成分、V3V3が2成分** で、合計未接続3件。さらに `QSPI_SCLK`／`QSPI_SD2` の保持対象20 segments＋4 viasが欠落した。nonroute AST追加／削除は0である。dangling viaはV3V3 (106.4,92.3) とV5V2 (90,78.5) の2件。幅・via・In1 GND条件の検査は両回とも合格した。
+
+E/inspection/*/assessment.jsonは従来の判定法を保持し、KiCadに未接続がある場合の「資格指標」をnullにする。上表はE/status.jsonにまとめた**直接観測値**であり、nullを0へ置換していない。raw DRC、connectivity、transfer-diffをすべて残した。印刷上の既存61件（text-height44／silk-overlap12／silk-over-copper5）は物的指標と分離し、その記録を消していない。
+
+**試行上限に達したため、追加の手配線・別順序試行・新ツール試行はしない。** 全体・局所の両候補を証跡として保持し、「最終合格板」というパスへ移していない。
+
+## 5. 電源の再評価：計算と未保証の境界
+
+### 5.1 5.2V精度と動特性
+
+強制PWMのFB精度±1%、帰還抵抗の初期±0.1%と25ppm/K×100K、FB leakage最大100nAを独立に端点計算すると **5.112095–5.288737V**。要求DC範囲5.096–5.304V内に入る計算である。入力4.50–5.25Vから基板損失を差し引いても、ICの入力動作範囲に対して余裕はある。
+
+しかし部品MPN・実効容量・ループ応答・起動波形を確定しておらず、**片側50mVのリップル／過渡予算は未検証**。計算上の帰還精度だけでレール全体が入力範囲全域で保証されたとはしない。上限5.354Vを守る起動overshoot、逆給電、ノイズ／ADC settlingも未実証である。
+
+### 5.2 他負荷の最大値見積りと500mA
+
+E/power-budget.jsonとE/connector-current-sensitivity.csvに保存した。Main他負荷の**設計上の最大割当見積りは110mA**。
+
+| 他負荷 | 最大割当見積り | 根拠と限界 |
+| --- | ---: | --- |
+| RP2040（内部linear VREG、USB／ADC／ロジックを含む） | 80mA | [公式datasheet](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf) Table637のPopcorn最大平均DVDD16.6＋IOVDD35.5、USB用2mAを併記し、さらに25.9mAを予約。48MHzの測定例から133MHz全workloadの保証maxは導けず、割当上限は未実証 |
+| W25Q16JV flash | 25mA | read／program／eraseの計画包絡。実動作・PVT・I/O駆動を含むシステム確認は未完了 |
+| LDO Iq、CC／USB／ESD、pullup/down等 | 5mA | Iq80µA級に対する余裕を含む工学的予約。個別最大の完全積上げ・全state検証は未完了 |
+
+125°C抵抗率／幅−20%の正側VBUS実配線モデルは **121.486mΩ**。GNDを追加50mΩと仮定し、他負荷も同一抵抗へ流す保守的な集中モデルで定電力の二次式を解く。入力コネクタ4.50V、127mA/Wing、レール高側5.354Vでは次のとおり。
+
+| 効率の仮定 | 変換器入力 | 変換器入力電流 | Main他負荷込み | 500mAとの差 |
+| --- | ---: | ---: | ---: | ---: |
+| 80% | 4.415111V | 385.017mA | 495.017mA | 4.983mA |
+| 90% | 4.422546V | 341.662mA | 451.662mA | 48.338mA |
+
+**80%は保証下限ではない。** 他負荷110mAも未実証の割当で、GND抵抗も仮定である。したがって「設計負荷でUSB500mA内に入る保証を取得した」とはしない。設計／ストレス、入力3点、効率5点、GND感度3点、レール3点の405ケースを、KVLと電力式で相互検算した。11mA包絡はストレスのみとし、500mAを超えるケースを合格へ読み替えない。
+
+### 5.3 実抵抗と最遠点
+
+E/extract-power.pyは#141中心線抵抗モデルを、**各segmentの実線幅**に対応するよう局所的に拡張した。変更した関数本文、入力hash、KCL残差をE/power-extraction-local.jsonへ保存する。35µm箔／20µm barrel、パッド拡がり等の近似モデルであり、製造最小値・実測上限ではない。GND planeの抵抗は抽出していない。
+
+| 正側のみ、125°C／幅−20% | 抽出モデル値 |
+| --- | ---: |
+| J1 VBUS → U6 VIN | 121.486mΩ |
+| U6 V5V2 → U5 IN | 54.013mΩ |
+| U5 OUT → 2枝の共通部 | 6.661mΩ |
+| J2枝（共通部を除く） | 23.848mΩ |
+| J3枝（共通部を除く） | 25.282mΩ |
+
+レールからの共通正側だけで **60.674mΩ** となり、共通往復50mΩ目標をモデル上超える。太い幹線だけでなく、小ピンのescapeと接続部を含めた改善が必要である。
+
+既存17mm Wingの147.710145mV、代表100mmハーネス／接点19.305mV（ともに127mA時）、U5 Ron感度0.25Ωを保持した条件付き計算では、Main追加GND降下0／25／50mVに対し、127mA最遠点は **4.796863／4.771863／4.746863V**。これは5.2V下限・動特性を別途満たした場合の感度であり、4.60Vの設計保証ではない。11mA包絡の結果もE/power-budget.jsonに分離した。GND抽出・実効率下限・最大負荷・動特性・正常な電源ネットの成立を省略していない。
+
+## 6. POFVと製造・見積の扱い
+
+未資格の局所候補を**診断目的で**全via再走査した。E/pofv-reclassification.json／pofv-sites.csvは実候補のhashを持ち、総108 vias／候補26件（mounted-center21、mounted-drill-edge2、mounted-annulus-only2、bare-testpad1）。D-022のepoxy-fill／copper-cap方針と、J1の12 SMD contacts＋4 PTH shell legsを同一Economic PCBAで実装する要求を保持する。製造業者の受入れや追加料金合意は取得していない。
+
+**製造データの再生成と確定BOM／CPL・PCBA見積はゲート未通過のため保留。** 旧#155 CAM／見積を48×52mmの新板へ転用していない。D-024の「適用ゲート後に製造データ・BOM／CPL／見積を更新」に従う。E/pcba-update-status.jsonには外形・4層／1.2mm・追加13 refs・予定58実装部品（旧45）・新POFV件数と、見積不能の条件を明記した。金額を推測して確定見積とせず、発注／カート／課金操作はしていない。
+
+## 7. 検証・公開・再開に必要な判断
+
+E/verification.jsonは、記録の算術・保全・試行数・source hashes・native論理一致・不合格の正確な表示を検査した結果である。**証跡整合passとPCB資格failを分ける。** 実行方法と成果物の地図はE/README.md、現在状態はE/status.json、公開本文はE/draft-pr-body.md、commit／push／PR更新結果はE/publication.jsonを参照する。
+
+再開には、今回の失敗を踏まえた**新たな有限の配線範囲・試行枠**の判断が必要となる。候補の次の問題を同時に解消する必要がある。
+
+- V1V1／V3V3の実未接続と、局所処理がQSPI_SCLK／QSPI_SD2を変更した転送問題。旧板資格やルータexit codeで代替しない。
+- レール共通部の正側60.674mΩ、未抽出のGND、変換器入力線の損失。50mΩ目標を変更しない。
+- C／精密Rの具体的選定・ランド／mask／paste確認、効率・Main最大負荷・50mV動特性・USB許可制御の根拠。
+- その後の全44ネット独立4指標0、製造CAM、確定BOM／CPL、POFV／Economic工程、現行PCBA見積。
+
+機構(b)を維持し、J3近傍の筐体支持とGH実物操作／挿抜力はM1の後段検証として残す。機構実物未確認を今回の停止理由にはしていない。mergeは行わない。
+
+生のプロセス出力とKRT生PCBにはツール由来の空白警告が残る。hash付き生データを保持し、正規化済み検査板・著作コード・報告書と分離した。E/staged-whitespace.jsonに対象を記録する。

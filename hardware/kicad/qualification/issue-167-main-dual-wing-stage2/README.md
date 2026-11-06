@@ -1,3 +1,9 @@
+# Current resume status: NOT QUALIFIED
+
+PO-approved input redefinition is recorded in D-027. The resumed implementation exhausted one global and one local routing attempt. Measured four metrics: **3 / 0 / 2 / 24** on all 44 nets. See [resume evidence](resume/README.md) and the [current report](../../../../docs/issue-167-main-dual-wing-stage2.md). No manufacturing release, order, charge or merge.
+
+The material below records the previous run; its input-requirement stop has been superseded by D-027.
+
 # Issue #167 evidence
 
 [Report](../../../../docs/issue-167-main-dual-wing-stage2.md).
