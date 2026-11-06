@@ -1,0 +1,49 @@
+{
+  "utc": "2026-11-06T08:54:02.184439+00:00",
+  "final_quote_confirmed": false,
+  "final_quote_total": null,
+  "currency": null,
+  "order": false,
+  "billing": false,
+  "final_PCB_qualified": true,
+  "manufacturing_data_generated": true,
+  "reason": "No authenticated JLCPCB quote session or documented quote API credentials are available through the connected tools. Public quote page can be read but not used to upload/process BOM/CPL. No quote identifier or vendor acceptance was received.",
+  "quote_target": {
+    "quantity": 5,
+    "outline_mm": [
+      48,
+      52
+    ],
+    "layers": 4,
+    "thickness_mm": 1.2,
+    "signal_mm": 0.1,
+    "via_mm": [
+      0.6,
+      0.3
+    ],
+    "assembly": "Economic",
+    "assembled_parts_per_board": 58,
+    "J1": "12 SMD contacts + 4 PTH shell legs in the same Economic PCBA",
+    "POFV": "epoxy-filled and copper-capped; vendor to confirm scope from all113 vias /32 candidates",
+    "POFV_exclusions": "J1 PTH shell legs and all NPTH holes"
+  },
+  "sources": [
+    {
+      "url": "https://jlcpcb.com/help/article/how-do-i-place-a-pcba-order",
+      "observed": "Official workflow requires Gerber, BOM/CPL processing, matched parts and placement review before Quote & Order."
+    },
+    {
+      "url": "https://cart.jlcpcb.com/quote/?fromDemo=yes",
+      "observed": "Read-only form; no populated design quote or price received."
+    }
+  ],
+  "unconfirmed": [
+    "R17 exact sourcing and output TDK capacitor procurement (no LCSC code assigned)",
+    "Economic eligibility, J1 PTH process and 4-layer 1.2mm POFV 0.60/0.30mm acceptance/surcharge",
+    "Finished copper/plating/stackup minima",
+    "Attrition/MOQ/stock, stencil, assembly, freight, tax and quote validity"
+  ],
+  "old_quote_transferred": false,
+  "no_design_substitution": true,
+  "missing_access_question_sent": true
+}
