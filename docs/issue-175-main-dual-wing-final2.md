@@ -83,3 +83,12 @@ R17とTDK出力Cの調達／在庫／MOQ、POFV仕様と範囲・4層加算、J1
 内容コミット **`b454706a30c33afea9625d39d4a497023659d9dc`** を作成。pushはGitHub認証情報を取得できず `could not read Username ... terminal prompts disabled`（exit128）で失敗した。Draft PR作成は実際に呼び出したが、ツールの承認制御が **`MCP tool call requires approval, but approval policy is never`** と拒否した。Draft PR未作成、コミット済みローカル状態として引継ぎ。拒否を別経路で回避していない。公開結果は後続コミットに含める。
 
 `git diff --check` は実ルータの生出力 `runs/final/out.kicad_pcb` の末尾空白を検出した。生証跡のhashを維持するためそのまま保存し、staged-whitespace.txt/jsonに記録した。手書きの報告書・スクリプトの空白検査は通過した。
+
+## 訂正（2026-11-06、PO 判断）：BOM の代替品反映
+
+見積取得時に JLCPCB 在庫がなかった2品目について、PO 判断で代替品を BOM に反映した。本文書の他の記述（元の選定経緯）は履歴として変更していない。
+
+- C26／C27／C28：TDK C3225X7R1C226K250AC（±10%、TDK の製品ページで NRND 表示）→ **TDK C3225X7R1C226MT000N**（LCSC C342699）。同一 C3225 シリーズ・X7R・1210・16V・22µF の ±20% グレード。#169 のスクリーニング係数をそのまま適用すると、3個の実効容量は約 34µF（K 品 約38.6µF）。却下した 0805 案（約19µF）を大きく上回るため、設計意図（DC バイアスでの容量保持）は維持されると判断した
+- R17：Vishay TNPW060354K9BEEA → **Yageo RT0603BRD0754K9L**（LCSC C728593）。54.9kΩ・0603・±0.1%・±25ppm/K・薄膜で、要求仕様と完全一致する
+
+この BOM での確定見積は $144.85（全58行配置、送料・税金は未算出）。詳細は PR #176 の PMO コメントを参照。
