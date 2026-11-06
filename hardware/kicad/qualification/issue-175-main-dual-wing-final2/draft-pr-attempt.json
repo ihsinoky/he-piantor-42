@@ -1,0 +1,19 @@
+{
+  "args": {
+    "repository_full_name": "ihsinoky/he-piantor-42",
+    "title": "Main 2 Wing Stage 2: C26配置・配線資格合格、PCBA見積待ち (#175)",
+    "base": "issue-173-main-dual-wing-final",
+    "head": "issue-175-main-dual-wing-final2",
+    "draft": true,
+    "body": "C26の1210配置を2候補で確認し、候補2 (92.2,78.2)mm がpreflightを通過。D-019条件で全体配線を1回だけ実行し、独立確認で全44ネット・4指標すべて0。既存53部品と種配線を保持、局所rip-upなし。\n\n抵抗再抽出（共通往復41.231mΩ）、製造データ再生成・CAM照合、113 vias中32のPOFV再分類を完了。seed-aは変更なし。\n\nPCBA確定見積と業者受入れは未取得で金額null。製造GOではありません。発注・課金・mergeなし。Issue自動closeは意図しません。\n\n詳細: docs/issue-175-main-dual-wing-final2.md。検証: KiCad DRC、独立44ネット/245論理pin、保持配線差分0、CAM一致、FEM数値検証、fallback117ファイル照合。"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "MCP tool call requires approval, but approval policy is never"
+      }
+    ],
+    "isError": true
+  }
+}

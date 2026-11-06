@@ -79,3 +79,7 @@ R17とTDK出力Cの調達／在庫／MOQ、POFV仕様と範囲・4層加算、J1
 初回準備スクリプトは重なり状態のF.Pasteを幾何選択したためassert停止し、基板を生成しなかった。#173の2開口UUID指定に修正して同じ候補1を生成した。初回DRC起動のboard-load失敗も保存。runtime auditは継承した旧base参照のassertを修正した（KRT2055 hashの一致確認自体は両回とも通過）。CAM検証初回はsystem PythonにGerbonaraがなくimport失敗し、既設viewer runtimeで実行した。これらの失敗をprocess証跡に保持し、配置候補追加・再配線に数えていない。正常な配置候補は2つ、実ルータは1回だけである。
 
 報告書と新規Eのみコミットし、指定ブランチへのpushとDraft PR作成を試みる。結果はE/publication.jsonに記録する。Issue自動closeとmergeは行わない。ホスト引継ぎのGitは **`.issue175-runtime/git`**。
+
+内容コミット **`b454706a30c33afea9625d39d4a497023659d9dc`** を作成。pushはGitHub認証情報を取得できず `could not read Username ... terminal prompts disabled`（exit128）で失敗した。Draft PR作成は実際に呼び出したが、ツールの承認制御が **`MCP tool call requires approval, but approval policy is never`** と拒否した。Draft PR未作成、コミット済みローカル状態として引継ぎ。拒否を別経路で回避していない。公開結果は後続コミットに含める。
+
+`git diff --check` は実ルータの生出力 `runs/final/out.kicad_pcb` の末尾空白を検出した。生証跡のhashを維持するためそのまま保存し、staged-whitespace.txt/jsonに記録した。手書きの報告書・スクリプトの空白検査は通過した。
