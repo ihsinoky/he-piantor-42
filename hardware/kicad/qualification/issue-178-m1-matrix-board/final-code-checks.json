@@ -1,0 +1,67 @@
+{
+  "utc": "2026-11-06T12:11:14.851646+00:00",
+  "checks": {
+    "final-jitx-tests": {
+      "exit_code": 0,
+      "argv": [
+        "/home/hatch/workspace/projects/he-piantor-42/.issue178-runtime/jitx-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*wing.py",
+        "-v"
+      ],
+      "reused_prior_success": true
+    },
+    "final-matrix-tests": {
+      "exit_code": 0,
+      "argv": [
+        "/home/hatch/workspace/projects/he-piantor-42/.issue178-runtime/jitx-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m1_matrix.py",
+        "-v"
+      ],
+      "reused_prior_success": true
+    },
+    "final-export-check": {
+      "exit_code": 0,
+      "argv": [
+        "/home/hatch/workspace/projects/he-piantor-42/.issue178-runtime/jitx-venv/bin/python",
+        "-m",
+        "wing.export",
+        "--check"
+      ],
+      "reused_prior_success": true
+    },
+    "final-ruff": {
+      "exit_code": 0,
+      "argv": [
+        "/home/hatch/workspace/projects/he-piantor-42/.issue178-runtime/jitx-venv/bin/ruff",
+        "check",
+        "wing",
+        "he_piantor_42_jitx/evaluation_wing.py",
+        "tests/test_m1_matrix.py"
+      ]
+    },
+    "final-format": {
+      "exit_code": 0,
+      "argv": [
+        "/home/hatch/workspace/projects/he-piantor-42/.issue178-runtime/jitx-venv/bin/ruff",
+        "format",
+        "--check",
+        "wing/matrix.py",
+        "wing/export.py",
+        "he_piantor_42_jitx/evaluation_wing.py",
+        "tests/test_m1_matrix.py"
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-06T22:03:21+0900",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 2.7000 mm",
+                    "pos": {
+                        "x": 98.7,
+                        "y": 134.6
+                    },
+                    "uuid": "ae877dbc-af77-464a-8a6f-64f7b7f85a99"
+                },
+                {
+                    "description": "Pad 10 [GND] of J_WING on F.Cu",
+                    "pos": {
+                        "x": 96.875,
+                        "y": 133.0
+                    },
+                    "uuid": "0bc39a10-fb80-4003-addc-f52edb90b59e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [MUX_A0] of U_MUX_A on F.Cu",
+                    "pos": {
+                        "x": 79.067925,
+                        "y": 119.725
+                    },
+                    "uuid": "6fdd8906-d814-4634-9c56-09cc0fd80f77"
+                },
+                {
+                    "description": "Track [MUX_A0] on F.Cu, length 1.3435 mm",
+                    "pos": {
+                        "x": 97.05,
+                        "y": 119.7
+                    },
+                    "uuid": "3bb5fd10-c867-4933-ac3d-715c70e8cfa0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3536 mm",
+                    "pos": {
+                        "x": 133.65,
+                        "y": 107.25
+                    },
+                    "uuid": "98b2d7a3-c27b-4b0c-8e91-f9a37ce633cc"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 69.5,
+                        "y": 107.65
+                    },
+                    "uuid": "388d9e70-425e-4a86-ad77-3227049234c0"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 83.0,
+                        "y": 106.7
+                    },
+                    "uuid": "ec5c8d37-f5d5-407c-a611-a6ddb69b0565"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [MUX_A2] on B.Cu, length 0.9375 mm",
+                    "pos": {
+                        "x": 101.720313,
+                        "y": 132.317187
+                    },
+                    "uuid": "14f744ee-5452-4179-970c-39cc45b890ed"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        }
+    ]
+}

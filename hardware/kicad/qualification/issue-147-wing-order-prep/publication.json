@@ -1,0 +1,38 @@
+{
+  "utc": "2026-11-05T07:24:07.628733+00:00",
+  "branch": "issue-147-wing-order-prep",
+  "git_dir": ".issue147-runtime/git",
+  "base": "f2a6c1388969f42b5a68f8a062fcbcf515b577f2",
+  "manufacturing_commit": "5c2a0e254a19968d1480d9765122184b341a6576",
+  "push": {
+    "exit_code": 0,
+    "remote": "origin",
+    "head": "issue-147-wing-order-prep",
+    "force": false
+  },
+  "draft_pr": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/pull/148",
+    "number": 148,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "creation": "GitHub CLI gh pr create --draft --body-file pr-draft.md; exit 0",
+    "verification": "GitHub connector get_pr_info returned open / draft=true / merged=false at first commit."
+  },
+  "connector_create_attempt": {
+    "is_error": true,
+    "reason": "MCP tool call requires approval, but approval policy is never",
+    "disposition": "Used authorized gh CLI fallback with the same saved title/body and draft flag; succeeded."
+  },
+  "followup_commit": "This publication record and read-only post-commit audit support are committed after PR creation. The first manufacturing commit and all inherited 70 files remain intact.",
+  "manifest": "manifest.json hashes manufacturing/report evidence and excludes this later publication record to avoid circularity.",
+  "ci": "No remote CI result claimed in this record.",
+  "prohibited_actions": {
+    "manufacturer_upload": false,
+    "manufacturer_contact": false,
+    "order": false,
+    "payment": false,
+    "merge": false
+  },
+  "handoff": "Review report and unresolved silk / manufacturer / price gates; PO makes order decision."
+}

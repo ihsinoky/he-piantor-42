@@ -12,3 +12,6 @@ PCB qualification and CAM comparison pass. This is a quotation/review package; m
 - Record quote ID/date/expiry, currency, PCB/POFV/stencil/components/assembly/J1 costs, attrition/MOQ, shipping/tax, total and acceptance notes against these exact source hashes. Do not reuse the prior smaller board/seed-a estimate.
 
 Current total, quote ID and expiry: **null / unconfirmed**. No upload, cart, order, charge or support message was made. Access to the vendor quote workflow is required to complete this step.
+
+---
+Amendment (2026-11-06, PO decision): BOM.csv and main-bom.csv now carry the substitutes selected in the completed JLCPCB quote — C26/C27/C28 = TDK C3225X7R1C226MT000N (LCSC C342699, +/-20% grade of the same series; the K grade had no stock and is NRND) and R17 = Yageo RT0603BRD0754K9L (LCSC C728593, exact spec match). Completed quote total with all 58 lines placed: USD 144.85, excluding shipping and tax (not shown at the quote stage). See the amendment section of docs/issue-175-main-dual-wing-final2.md.

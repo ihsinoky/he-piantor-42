@@ -1,0 +1,124 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-06T21:59:03+0900",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 94.9,
+                        "y": 134.0
+                    },
+                    "uuid": "f9986e95-2138-4354-aab9-225cbc107dee"
+                },
+                {
+                    "description": "Pad 10 [GND] of J_WING on F.Cu",
+                    "pos": {
+                        "x": 96.875,
+                        "y": 133.0
+                    },
+                    "uuid": "0bc39a10-fb80-4003-addc-f52edb90b59e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 16 [MUX_A1] of U_MUX_C on F.Cu",
+                    "pos": {
+                        "x": 120.932075,
+                        "y": 119.725
+                    },
+                    "uuid": "35d2a4b4-31be-48f4-b77a-260cb1a2c91a"
+                },
+                {
+                    "description": "Track [MUX_A1] on B.Cu, length 2.0250 mm",
+                    "pos": {
+                        "x": 106.475,
+                        "y": 121.225
+                    },
+                    "uuid": "0d6f434e-fbbb-4772-b4e7-7e88d3f2beb4"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 15 [MUX_A2] of U_MUX_B on F.Cu",
+                    "pos": {
+                        "x": 102.932075,
+                        "y": 120.375
+                    },
+                    "uuid": "1ae280e3-1bd9-4073-80ee-f1d9729eafe5"
+                },
+                {
+                    "description": "Pad 15 [MUX_A2] of U_MUX_C on F.Cu",
+                    "pos": {
+                        "x": 120.932075,
+                        "y": 120.375
+                    },
+                    "uuid": "af34196b-94be-4ed4-88e7-34e375aac9f2"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [WING_EN] on B.Cu, length 1.1500 mm",
+                    "pos": {
+                        "x": 80.225,
+                        "y": 120.375
+                    },
+                    "uuid": "efba21a4-bac2-4354-9d09-0f596ce8c965"
+                },
+                {
+                    "description": "Pad 2 [WING_EN] of U_MUX_A on F.Cu",
+                    "pos": {
+                        "x": 79.067925,
+                        "y": 120.375
+                    },
+                    "uuid": "fc188121-e9e6-4c67-ad3d-59c00e0e0c9f"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [WING_EN] on B.Cu, length 1.1500 mm",
+                    "pos": {
+                        "x": 80.225,
+                        "y": 120.375
+                    },
+                    "uuid": "efba21a4-bac2-4354-9d09-0f596ce8c965"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        }
+    ]
+}

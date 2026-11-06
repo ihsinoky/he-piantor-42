@@ -1,0 +1,131 @@
+{
+  "status": "ARCHITECTURE_SENSITIVITY_ONLY_NOT_DESIGN_QUALIFICATION",
+  "equation": "Vlocal=Vrail-I*(Nactive*Ncommon_switch+Nbranch_switch)*Ron-I*(Nactive*Rc+Rb)-I*Rh-I*Rw*k",
+  "reference_boundary": "U5 VIN to Main GND; same boundary becomes regulator input in replacement architectures",
+  "input_wing_sha256": "5436e1afb144bf4d009f4566c6685b459a4f1da79abfaf4676984a8fd4630580",
+  "rows": 14976,
+  "reproduced_157_rows": 768,
+  "max_reproduction_error_V": 8.881784197001252e-16,
+  "baseline": {
+    "architecture": "baseline",
+    "load_case": "planning127mA",
+    "pitch_mm": 17,
+    "temperature_C": 125,
+    "width_factor": 0.8,
+    "contact_each_ohm": 0.05,
+    "return_conductors": 6,
+    "input_V": 4.75,
+    "source_floor_V": 4.75,
+    "active_wings": 2,
+    "branch_current_A": 0.127,
+    "main_common_ohm": 0.0,
+    "main_branch_ohm": 0.0,
+    "switch_bracket_ohm": 0.25,
+    "wing_resistance_factor": 1.0,
+    "switch_drop_V": 0.0635,
+    "main_drop_V": 0.0,
+    "harness_drop_V": 0.01930506598255597,
+    "wing_drop_V": 0.14771014479131223,
+    "sensor_voltage_V": 4.519484789226132,
+    "operating_minimum_V": 4.5,
+    "dc_margin_V": 0.019484789226131838,
+    "main_voltage_budget_V": 0.019484789226131838,
+    "equivalent_common_resistance_budget_ohm": 0.07671176860681826
+  },
+  "envelope_20C_nominal": {
+    "architecture": "baseline",
+    "load_case": "envelope11mA",
+    "pitch_mm": 17,
+    "temperature_C": 20,
+    "width_factor": 1.0,
+    "contact_each_ohm": 0.05,
+    "return_conductors": 6,
+    "input_V": 4.75,
+    "source_floor_V": 4.75,
+    "active_wings": 2,
+    "branch_current_A": 0.23100810000000005,
+    "main_common_ohm": 0.0,
+    "main_branch_ohm": 0.0,
+    "switch_bracket_ohm": 0.15,
+    "wing_resistance_factor": 1.0,
+    "switch_drop_V": 0.06930243000000001,
+    "main_drop_V": 0.0,
+    "harness_drop_V": 0.03273031369085822,
+    "wing_drop_V": 0.15377124791964822,
+    "sensor_voltage_V": 4.494196008389494,
+    "operating_minimum_V": 4.5,
+    "dc_margin_V": -0.005803991610505932,
+    "main_voltage_budget_V": -0.005803991610505932,
+    "equivalent_common_resistance_budget_ohm": -0.012562311907041206
+  },
+  "thresholds": [
+    {
+      "active_wings": 2,
+      "switch_series_multiplier": 2,
+      "main_common_ohm": 0.0,
+      "max_current_for_4V5_A": 0.13773494553097518,
+      "max_current_with_50mV_reserve_A": 0.11018795642478016
+    },
+    {
+      "active_wings": 2,
+      "switch_series_multiplier": 2,
+      "main_common_ohm": 0.25,
+      "max_current_for_4V5_A": 0.10798761028870521,
+      "max_current_with_50mV_reserve_A": 0.08639008823096417
+    },
+    {
+      "active_wings": 1,
+      "switch_series_multiplier": 1,
+      "main_common_ohm": 0.0,
+      "max_current_for_4V5_A": 0.1597362027106516,
+      "max_current_with_50mV_reserve_A": 0.1277889621685213
+    },
+    {
+      "active_wings": 1,
+      "switch_series_multiplier": 1,
+      "main_common_ohm": 0.25,
+      "max_current_for_4V5_A": 0.13773494553097518,
+      "max_current_with_50mV_reserve_A": 0.11018795642478016
+    },
+    {
+      "active_wings": 1,
+      "switch_series_multiplier": 2,
+      "main_common_ohm": 0.0,
+      "max_current_for_4V5_A": 0.13773494553097518,
+      "max_current_with_50mV_reserve_A": 0.11018795642478016
+    },
+    {
+      "active_wings": 1,
+      "switch_series_multiplier": 2,
+      "main_common_ohm": 0.25,
+      "max_current_for_4V5_A": 0.121060661863291,
+      "max_current_with_50mV_reserve_A": 0.0968485294906328
+    }
+  ],
+  "rail5V2": {
+    "nominal_V": 5.2,
+    "dc_tolerance": 0.02,
+    "one_sided_ripple_transient_V": 0.05,
+    "minimum_V": 5.046,
+    "maximum_V": 5.354
+  },
+  "rail3V3": {
+    "nominal_V": 3.3,
+    "dc_tolerance": 0.02,
+    "one_sided_ripple_transient_V": 0.03,
+    "minimum_V": 3.204,
+    "maximum_V": 3.3959999999999995
+  },
+  "limitations": [
+    "Regulation tolerance, ripple, target current and copper multiplier are requirements to prove, not measured results.",
+    "Off Wing voltage is zero; duty values apply only to settled on-window.",
+    "Current targets apply only to separate planning rows; envelopes are unchanged.",
+    "3.3V Ron bracket inherited for comparison, not a guaranteed spec across 3.0-3.63V.",
+    "Main resistance scenarios are downstream lumped supply/return; upstream source losses excluded.",
+    "All 21 Hall and three MUX loads are retained. Replacement load shape is linearized.",
+    "Uniform half-copper factor is an optimistic sensitivity pending fixed-topology resistor study.",
+    "Copper zero is an unattainable mathematical ceiling on voltage, not a manufactured design.",
+    "Constant-current DC, no transient simulation or field solver; unequal returns have only one-return stress bracket.",
+    "4.75V is a specified study boundary, not a USB-to-product minimum guarantee."
+  ]
+}
