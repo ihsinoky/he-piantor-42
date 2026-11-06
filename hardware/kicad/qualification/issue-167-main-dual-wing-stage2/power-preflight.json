@@ -1,0 +1,36 @@
+{
+  "status": "STOP: converter input 4.75 V cannot be guaranteed from unspecified USB upstream",
+  "equations": {
+    "Pin": "2*Iwing*Vrail/eta",
+    "KVL": "Vin=Vsource-(Rupstream+Rpcb)*(Pin/Vin+Iother)",
+    "required_source": "4.75+(Rupstream+Rpcb)*(Pin/4.75+Iother)"
+  },
+  "counterexample": {
+    "branch_A": 0.127,
+    "rail_V": 5.2,
+    "efficiency": 0.8,
+    "source_V": 4.75,
+    "upstream_loop_ohm": 0.1,
+    "pcb_loop_ohm": 0.05,
+    "other_Main_A": 0.1,
+    "converter_input_V": 4.682107148092307,
+    "USB_current_A": 0.45261901271795724,
+    "required_source_for_converter_4V75_V": 4.817136842105263,
+    "input_4V75_met": false,
+    "note": "all R/Main/eta values are sensitivities; old PCB R is positive path only"
+  },
+  "mathematical_obstruction": "At source=4.75 V, Pin>0 and Rloop>0 imply Vin<4.75 V, even with eta=1 and Iother=0. Reducing positive resistance cannot make it zero.",
+  "source_status": "No specified higher minimum source or bounded cable was provided at assessment; USB-C connector alone is not a higher supply contract.",
+  "sweep_rows": 4320,
+  "current_rows": 30,
+  "downstream_rows": 48,
+  "previous_converter_rows_reproduced": 12,
+  "old_partial_VBUS_R_ohm": 0.25433306174475245,
+  "limitations": [
+    "No revised PCB or actual routed Main resistance",
+    "Efficiency and other Main currents are sensitivities, not guaranteed operating bounds",
+    "Actual USB descriptors, granted current and Main maximum current are not qualified",
+    "Downstream rail-floor calculations require the input condition to be met",
+    "No whole-product thermal/noise/startup or ADC qualification"
+  ]
+}

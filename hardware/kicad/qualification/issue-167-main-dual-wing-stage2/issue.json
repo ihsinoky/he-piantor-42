@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/167",
+    "title": "Main 2 Wing 化 Stage 2（再構成）：案C＋5.2V安定化レールの実装・再配線・再資格確認",
+    "issue_number": 167,
+    "body": "## 前提（決定済み）\n- 配置は案C（D-025）：外形 48×52mm（北へ 8mm 拡張）、J3 を (105,73)・0°、取付穴4個と既存部品座標は固定\n- 機構は (b) 方針（PO 決定 2026-11-06）：設計を先行し、実物確認は後段で行う。ヘッジとして、(1) ver.A 筐体の要件に「J3 近傍で基板を支持する構造」を入れる、(2) GH のラッチ操作・挿抜力は M1 実機で早期に実測する、を記録する（本 Issue では設計側の前提として扱い、ゲートにはしない）\n- 電源は Issue #165 の推奨方式を採用（PO 決定 2026-11-06）：Main に 5.2V 安定化レール（TPS63070 級の強制 PWM buck-boost）を新設し、共通の default-off スイッチと低抵抗2分岐を維持する。Wing 導体の低抵抗化は ver.A Wing 設計側の要件として記録し、本 Issue の実装範囲は Main 側とする\n- 保証範囲は #165 §6 の推奨どおり：設計負荷 127mA/Wing、最遠点 4.60V を設計目標（下限 4.5V＋未モデル化予算 100mV）、Main の共通／枝抵抗は各 50mΩ 以下を目標。11mA 包絡はストレス条件として結果を記録する（保証には含めない）\n\n## 作業\n1. 決定記録：PR #164 ブランチにある D-024／D-025 の本文と #160／#163 の報告書・証跡を本ブランチに取り込み、本 Issue の決定（機構 (b) 方針、5.2V レール方式、保証範囲）を D-026 として docs/decisions.md に追記する\n2. 回路実装：#155 の改版基板を起点に、外形拡張、J3 と MUX_EN1 の追加、5.2V レールの新設（変換 IC の最終選定、インダクタ・入出力コンデンサ、強制 PWM 設定）、U5 による default-off の維持、電源2分岐を行う\n3. 電源の検証：変換器入力の電圧予算（USB 上流損失と Main 他負荷を含めて入力 4.75V を示す）、2系統のシステム電流と USB 許可電流の照合、配線後の実抵抗抽出による最遠点電圧の再評価（設計目標 4.60V、ストレス条件の結果も記録）\n4. D-019 条件での再配線と独立資格確認（4指標すべて0、全ネット確認、電源ネットの抵抗目標の確認を含む）\n5. 製造データの再生成、POFV 対象ビアの再分類、PCBA 見積の更新（変換回路と追加部品を反映）\n\n## 制約\n- 条件緩和（幅・間隙・層数・escalation の変更）と無制限の再試行は行わない。成立しない場合は状態を報告して止める\n- 発注・課金は行わない。成果物は Draft PR、merge は PO 判断\n- タイムボックス：4時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-06T05:27:31Z",
+    "updated_at": "2026-11-06T05:27:31Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/167",
+    "display_title": "Main 2 Wing 化 Stage 2（再構成）：案C＋5.2V安定化レールの実装・再配線・再資格確認"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/167",
+  "title": "Main 2 Wing 化 Stage 2（再構成）：案C＋5.2V安定化レールの実装・再配線・再資格確認",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/167",
+  "display_title": "Main 2 Wing 化 Stage 2（再構成）：案C＋5.2V安定化レールの実装・再配線・再資格確認"
+}

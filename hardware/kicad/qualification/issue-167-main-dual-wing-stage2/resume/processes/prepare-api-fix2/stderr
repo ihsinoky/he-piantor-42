@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/prepare.py", line 28, in <module>
+    nets={n.GetNetname():n for n in b.GetNetsByNetcode().values()}
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/python3/dist-packages/pcbnew.py", line 20439, in GetNetsByNetcode
+    return self.GetNetInfo().NetsByNetcode()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SwigPyObject' object has no attribute 'NetsByNetcode'

@@ -723,3 +723,96 @@ manufacturing outputs or quotation can be accepted for the revised board.
 If the conditions cannot be established, record the state and stop without
 relaxing conditions or unbounded retries. This decision authorizes no order,
 charge, manufacturing release or merge.
+
+## D-026 - Main two-Wing implementation: design-first mechanics and regulated 5.2 V
+
+Status: accepted PO scope decision (2026-11-06); electrical implementation and
+qualification are not established by this decision
+
+Per [Issue #167](https://github.com/ihsinoky/he-piantor-42/issues/167), retain
+D-025 plan C: X76–124 / Y70–122 (48 x 52 mm), J3=(105,73), 0 degrees,
+four fixed mounting holes with their all-layer diameter 5 mm reservations,
+and all existing component coordinates. Adopt mechanical policy **(b), design
+first**. The ver.A enclosure must provide support near J3; measure GH latch
+operation and insertion/extraction forces early on M1 hardware. These physical
+checks remain downstream verification items and are **not gates for Issue
+#167**. This supersedes the physical-mechanics gates in D-024/D-025 for this
+work, without declaring those checks passed.
+
+Adopt [Issue #165's recommendation](https://github.com/ihsinoky/he-piantor-42/pull/166):
+a regulated **5.2 V rail**, using a TPS63070-class buck-boost in **forced PWM**,
+followed by the common default-off U5 and two low-resistance power branches
+near its output. D-009's direct switched-VBUS supply is superseded for this
+revision. Retain D-024's interface, common address/raw ADC buses and independent
+enables: GPIO5/WING_EN is logical MUX_EN0; GPIO6/U1.8 is MUX_EN1 with an
+explicit 100 kohm pull-down and its previous NC declaration removed when
+implemented. HALL_PWR_EN/GPIO7 and its external pull-down retain common
+default-off control. Disabling a MUX bank does not reduce the Hall supply load.
+Lower Wing conductor resistance remains a ver.A Wing design requirement;
+this Issue implements the Main side only.
+
+The adopted design load is **127 mA per Wing**, continuously supplied on both
+ports. The farthest sensor target is **4.60 V**, retaining 100 mV above the
+4.5 V lower limit for unmodelled effects. Target extracted Main common and
+per-branch loop resistances of **at most 50 milliohm each**. Retain the #165
+5.2 V rail tolerance target of +/-2% and downward ripple/transient budget of
+50 mV; verify high-side and startup limits as well. Include the inherited
+100 mm harness/contact, width-minus-20% and 125 degrees C resistance
+sensitivities without presenting them as a whole-product ambient guarantee.
+The **11 mA per sensor envelope is recorded as stress only**, outside the
+adopted guarantee; it must not replace or reduce the 127 mA design load.
+
+Demonstrate **4.75 V at the converter input**, accounting for upstream USB
+losses and other Main loads, and reconcile total current with USB permission
+before claiming the supply qualified. The value is a requirement to establish,
+not an assumed USB source guarantee. Final component selection, actual routed
+resistances, startup, suspend, reverse feeding, noise and ADC settling require
+their own evidence. D-019 and D-022 remain unchanged: no width/clearance/layer
+or escalation relaxation, bounded routing, independent all-net qualification
+with all four metrics zero, regenerated manufacturing data, actual-via POFV
+classification and J1's same Economic PCBA process. If electrical conditions
+cannot be established, record the state and stop. No order, charge,
+manufacturing release or merge is authorized.
+
+## D-027 - Main USB input requirement at the board connector
+
+Status: accepted PO requirement redefinition (2026-11-06)
+
+Per the [Issue #167 resume instruction](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/instructions-167-resume.md),
+replace D-026's requirement to demonstrate 4.75 V **at the converter input**.
+The previous run established that a USB source at its permitted 4.75 V lower
+limit cannot deliver 4.75 V after any positive cable/contact/board resistance
+under load. This was a requirement-location problem, not evidence that a
+buck-boost cannot regulate below 4.75 V. Preserve that run and its input-budget
+evidence; its stop is superseded only by this explicit PO decision.
+
+Define input at the **Main USB connector**, referenced to local connector GND.
+For configured high-power USB 2.0 operation, use **4.50–5.25 V**: USB 2.0
+Revision 2.0 sections 7.2.1.4 and 7.2.2 specify the 4.75 V upstream lower
+limit and maximum detachable-cable drops of 125 mV on VBUS and 125 mV on GND;
+4.75 - 0.125 - 0.125 = 4.50 V at the device. The 4.40 V enumeration condition
+and Figure 7-47's low-power path must not be confused with a grant to draw
+500 mA from a bus-powered low-power hub. Subtract the implemented Main input
+path drop separately when checking converter operating range and current.
+A USB-C connector and CC pull-downs do not themselves grant extra current.
+
+Across this input range, retain the **5.2 V rail +/-2%** accuracy requirement
+and **50 mV per-side ripple/transient budget**. At **127 mA per Wing**, show
+converter input current plus all other Main loads within the **configured
+USB allowance of 500 mA**, with explicit maximum-load estimation assumptions
+and evidence. Configuration permission is required before enabling the
+converter, U5 or either MUX; reset, unconfigured and suspend states must keep
+them off. Distinguish guaranteed component limits, engineering allocations,
+and unmeasured prototype behaviour. A typical efficiency curve alone is not
+a guaranteed worst-case current bound.
+
+The output guarantee is unchanged: farthest sensor **4.60 V design target**
+at the design load, inherited harness/contact/copper-temperature sensitivities,
+and Main common/branch loop resistance targets of at most 50 milliohm each.
+The 11 mA-per-sensor envelope remains stress-only. D-025/D-026 geometry,
+mechanics policy (b), forced PWM, common default-off U5 and two low-resistance
+branches remain adopted. D-019's routing conditions and bounded attempts,
+all-net independent four-zero qualification, regenerated manufacturing data,
+D-022 POFV classification and same Economic PCBA process for J1 remain
+mandatory. No relaxation of output targets, unbounded retry, order, charge,
+manufacturing release or merge is authorized.
