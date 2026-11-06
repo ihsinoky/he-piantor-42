@@ -1,0 +1,72 @@
+{
+  "utc": "2026-11-06T08:39:22.097256+00:00",
+  "board_sha256": "3493dc4a50affdae281bf33444cb07153a4b8652af536293add454bdef0ba7ef",
+  "project_sha256": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+  "drc_sha256": "67105ff264228f04e513b41c8da45d69cf89da4523e0ad8763856d4cf0453241",
+  "pass_preflight": false,
+  "blocking_violations": [
+    {
+      "description": "Front solder mask aperture bridges items with different nets",
+      "items": [
+        {
+          "description": "Pad 2 [GND] of C26 on F.Cu",
+          "pos": {
+            "x": 95.9,
+            "y": 77.2
+          },
+          "uuid": "ec3a70e0-9e60-4fac-8e21-572d7aade734"
+        },
+        {
+          "description": "Pad 15 [<no net>] of J3 on F.Cu",
+          "pos": {
+            "x": 95.025,
+            "y": 76.35
+          },
+          "uuid": "023154d6-c95c-4d14-919b-995266966f9f"
+        }
+      ],
+      "severity": "error",
+      "type": "solder_mask_bridge"
+    },
+    {
+      "description": "Clearance violation ( clearance 0.1000 mm; actual 0.0000 mm)",
+      "items": [
+        {
+          "description": "Pad 2 [GND] of C26 on F.Cu",
+          "pos": {
+            "x": 95.9,
+            "y": 77.2
+          },
+          "uuid": "ec3a70e0-9e60-4fac-8e21-572d7aade734"
+        },
+        {
+          "description": "Pad 15 [<no net>] of J3 on F.Cu",
+          "pos": {
+            "x": 95.025,
+            "y": 76.35
+          },
+          "uuid": "023154d6-c95c-4d14-919b-995266966f9f"
+        }
+      ],
+      "severity": "error",
+      "type": "clearance"
+    }
+  ],
+  "type_counts": {
+    "solder_mask_bridge": 1,
+    "clearance": 1,
+    "silk_overlap": 12,
+    "silk_over_copper": 5,
+    "text_height": 44,
+    "via_dangling": 15
+  },
+  "expected_unrouted_connections": 130,
+  "ignored_print_and_pre_route_via_warnings": [
+    "silk_over_copper",
+    "silk_overlap",
+    "text_height",
+    "via_dangling"
+  ],
+  "routing_allowed": false,
+  "terminal_on_failure": true
+}

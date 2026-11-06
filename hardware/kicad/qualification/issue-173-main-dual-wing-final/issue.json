@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/173",
+    "title": "Main 2 Wing 化 Stage 2 限定継続：C26 衝突の解消と最終配線1回",
+    "issue_number": 173,
+    "body": "## 前提\n- Issue #169 で、配置・seed 見直し後の seed-a が全44ネット・4指標すべて0を達成し、D-019 条件での配線可能性が実証された（レール共通部正側 33.295mΩ）\n- 出力コンデンサを実効容量の余裕が大きい 1210 品（TDK C3225X7R1C226K250AC）へ更新した seed-b は、C26 と SW2 の接触（異ネット接触 2）と XIN の分断（未接続 2）で不合格。加えて、準備 DRC が衝突を検出していたのに実行が進む不備があった（#169 で記録・ガード修正済み）\n- #169 の報告書と証跡、seed-a／seed-b の両候補は Draft PR #172 のブランチに保存されている\n\n## 作業（この範囲に限る）\n1. 衝突の解消：追加部品（変換回路まわり：C26 を中心に C23〜C28／L1／U6）の範囲で配置を調整し、C26 と SW2 の接触を解く。#155 由来の既存部品は動かさない\n2. preflight の必須化：配線の前に準備 DRC を実行し、衝突・短絡があれば配線に入らず止める（#169 で修正したガードを使う）\n3. 全体配線1回のみ（D-019 条件を維持）。局所 rip-up は行わない\n4. 合格した場合のみ：独立資格確認（4指標すべて0、全44ネット）、実抵抗の再抽出、製造データ生成、POFV 再分類、PCBA 見積の確定まで完遂する\n\n## 制約\n- この1回で成立しない場合は止める。その場合は seed-a（合格済み）を成果物として整理し、出力容量の余裕の弱さを既知の制限として明記した報告書を出す（PO がどちらの基板で進めるかを判断する）\n- D-019 の条件緩和は行わない。発注・課金は行わない。Draft PR、merge は PO 判断\n- タイムボックス：3時間",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-06T08:35:57Z",
+    "updated_at": "2026-11-06T08:35:57Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/173",
+    "display_title": "Main 2 Wing 化 Stage 2 限定継続：C26 衝突の解消と最終配線1回"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/173",
+  "title": "Main 2 Wing 化 Stage 2 限定継続：C26 衝突の解消と最終配線1回",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/173",
+  "display_title": "Main 2 Wing 化 Stage 2 限定継続：C26 衝突の解消と最終配線1回"
+}
