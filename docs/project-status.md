@@ -19,6 +19,8 @@ table.
 | Main board | Rev.2 | Dual-Wing version (Issue #175 final board). Current Main; reused for the product. | Rev.M1 Main (dual-Wing) |
 | Matrix board | Rev.1 | Separate 3x3 boards per pitch (16 mm and 17 mm), 9 keys each. Designed in Issue #127, routing-evaluated in Issue #129; never fabricated. | Evaluation Wing, pitch9 |
 | Matrix board | Rev.2 | One board carrying both pitches: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | - |
+| Matrix board | Rev.3 | Rev.2 with every via moved clear of component pads; no POFV required (Issue #182). | - |
+| Main board | Rev.3 | Rev.2 with 35 vias relocated clear of pads; no POFV required for this package (Issue #185). | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
 
 Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
@@ -47,6 +49,14 @@ issue reports, not here.
 - Wing Rev.1 - The representative 21-key Wing taken to manufacturing data
   (SILK-149A) with silkscreen prepared for hand soldering; both pitches
   prepared because the production pitch is decided from measurements.
+- Matrix Rev.3 - Rework of Rev.2 that moved every via clear of component
+  pads so the POFV (epoxy fill and cap) requirement could be withdrawn;
+  layout, outline and circuits unchanged. Cut the PCBA quote by $57.33.
+- Main Rev.3 - Rework of Rev.2 that relocated 35 vias (plus local stubs)
+  without touching placement or the existing routing skeleton, so the
+  POFV specification from D-022 could be dropped for this package; the
+  minimum via-to-pad gap is exactly 0.100 mm nominal. Cut the PCBA quote
+  by $19.29.
 
 ## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
