@@ -59,3 +59,5 @@ USB許可firmware、効率・Main他負荷、動特性・逆給電・ADC settlin
 ## 検証と公開
 
 E/verification.jsonはpreflight停止・配線0回・元データ保持・seed-aパッケージ整合の検証結果。1210候補の配線資格合格ではない。E/status.jsonに停止状態、E/manifest.jsonに成果物ハッシュを保存する。報告書と証跡のみコミットし、指定ブランチへpush後、#169ブランチをbaseにDraft PR作成を試みる。結果はE/publication.jsonに記録する。Issueの自動close、mergeは行わない。
+
+内容コミット **`0bd6d65f7a72bfa142eebf49b7416db4045c13af`** を作成済み。pushは実行したが、GitHub認証情報を取得できず `could not read Username ... terminal prompts disabled`（exit128）で失敗した。Draft PR作成も実際に試みたが、接続ツールが **`MCP tool call requires approval, but approval policy is never`** として拒否した。別経路で拒否を回避していない。**Draft PRは未作成、変更はコミット済みローカル状態**。公開結果の記録は後続のローカルコミットに含める。ホストからの引継ぎには `.issue173-runtime/git` の `issue-173-main-dual-wing-final` を使用する。
