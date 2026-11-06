@@ -919,3 +919,29 @@ This change does not adopt quotation-only substitute parts, guarantee a cost
 reduction or constitute manufacturing release. Vendor acceptance, revised
 quotation, material minima, procurement and physical validation remain separate.
 No order, charge or merge is authorized or performed.
+
+## D-031 - Knowledge recording: ADR, Finding Records, and promotion
+
+Status: accepted PO decision (2026-11-07); piloted in this project
+
+Knowledge in this project is kept in three layers:
+
+- **Judgments** continue as ADR in this file (D-xxx). Only significant
+  decisions record options, rejection reasons and verification method in
+  full. Finalized records are not edited; a change supersedes the old
+  record.
+- **Empirical findings** are recorded in
+  [findings.md](findings.md) — a single ledger at first, split into
+  `docs/findings/NNNN-*.md` when it grows. Every entry requires: a
+  conclusion with confidence and trial count; the conditions tried (exact
+  tool versions, target commit, parameter ranges); failed attempts (one
+  line each); a validity scope (untested ranges, assumptions, invalidation
+  conditions, re-verification triggers); evidence links (raw logs live in
+  Issues/PRs and are not duplicated); and a `Promoted to` field.
+- **Lessons** are not kept as a separate register. When rework occurs, the
+  process that would have prevented it is written as a process definition
+  (for steps needing judgment) or a skill (for steps an agent executes);
+  the Finding keeps only its `Promoted to` reference.
+
+Not maintained: a lessons register, AAR, postmortem documents, design
+doc/RFC, runbook, and tech radar (the last is trigger-based only).
