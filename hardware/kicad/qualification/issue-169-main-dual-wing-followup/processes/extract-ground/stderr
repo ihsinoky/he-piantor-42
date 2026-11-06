@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/extract-ground.py", line 111, in <module>
+    K,terms,stats=assemble(area,factor)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/extract-ground.py", line 61, in assemble
+    v,tr=mesh(poly,area);idx=tr+N;pts=v[tr];area2=np.abs(np.cross(pts[:,1]-pts[:,0],pts[:,2]-pts[:,0]));assert np.min(area2)>0
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/geometry/lib/python3.12/site-packages/numpy/_core/numeric.py", line 1680, in cross
+    raise ValueError(
+ValueError: Both input arrays must be (arrays of) 3-dimensional vectors, but they are 2 and 2 dimensional instead.

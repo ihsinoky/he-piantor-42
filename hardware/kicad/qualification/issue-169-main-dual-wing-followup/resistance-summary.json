@@ -1,0 +1,58 @@
+{
+  "utc": "2026-11-06T08:23:48.663843+00:00",
+  "model_only": true,
+  "rows": [
+    {
+      "label": "seed-a",
+      "board_sha256": "2689cf802cf7948917166e8ef5b469d33544cc5cbab235bc1580c44bf14cf4d1",
+      "qualified": true,
+      "corner": "125C, actual positive widths -20%; actual GND tracks -20%, native filled plane/spokes; assumed 35um sheet / 20um barrel",
+      "input_positive_ohm": 0.12197917471316812,
+      "input_GND_ohm": 0.011409462128939346,
+      "rail_common_positive_ohm": 0.03329474020330314,
+      "rail_common_GND_ohm": 0.009916421381414894,
+      "rail_common_loop_ohm": 0.043211161584718036,
+      "branch_positive_ohm": {
+        "J2": 0.023847809954707193,
+        "J3": 0.0256305676991879
+      },
+      "branch_GND_ohm": {
+        "J2": 0.0009849027815399293,
+        "J3": 0.00046414477723537295
+      },
+      "branch_loop_ohm": {
+        "J2": 0.024832712736247122,
+        "J3": 0.02609471247642327
+      },
+      "all_loop_targets_met_in_model": true,
+      "operating_board_guarantee": false,
+      "limitations": "Seed-b shorts and XIN opens prevent operation. Modelled network resistance excludes cross-net shorts, so it is diagnostic only; no real-board voltage guarantee. Native GND plane/spoke etch tolerances and guaranteed material minima not established."
+    },
+    {
+      "label": "seed-b",
+      "board_sha256": "7184d6a86bfb358b8aff41e5a10f8e503b2848890a377f6c91d279ee6c226574",
+      "qualified": false,
+      "corner": "125C, actual positive widths -20%; actual GND tracks -20%, native filled plane/spokes; assumed 35um sheet / 20um barrel",
+      "input_positive_ohm": 0.10962515307169667,
+      "input_GND_ohm": 0.010301633280984502,
+      "rail_common_positive_ohm": 0.032122650214081824,
+      "rail_common_GND_ohm": 0.00878157062770124,
+      "rail_common_loop_ohm": 0.040904220841783065,
+      "branch_positive_ohm": {
+        "J2": 0.023202090819812896,
+        "J3": 0.02316904037622181
+      },
+      "branch_GND_ohm": {
+        "J2": 0.001000586516144224,
+        "J3": 0.00045442085136022416
+      },
+      "branch_loop_ohm": {
+        "J2": 0.024202677335957122,
+        "J3": 0.023623461227582035
+      },
+      "all_loop_targets_met_in_model": true,
+      "operating_board_guarantee": false,
+      "limitations": "Seed-b shorts and XIN opens prevent operation. Modelled network resistance excludes cross-net shorts, so it is diagnostic only; no real-board voltage guarantee. Native GND plane/spoke etch tolerances and guaranteed material minima not established."
+    }
+  ]
+}

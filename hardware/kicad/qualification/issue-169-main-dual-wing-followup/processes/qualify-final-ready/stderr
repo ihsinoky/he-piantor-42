@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspect-board.py", line 7, in <module>
+    if not (w/'main.kicad_pcb').exists():assert run(label+'-refill',['/usr/bin/python3',E/'refill.py',label])==0
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/common.py", line 17, in run
+    w=E/'processes'/name;w.mkdir(parents=True,exist_ok=False);start=now();t=time.monotonic()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/hatch/workspace/projects/he-piantor-42/hardware/kicad/qualification/issue-169-main-dual-wing-followup/processes/final-refill'
