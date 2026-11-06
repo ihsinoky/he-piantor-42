@@ -696,3 +696,30 @@ epoxy-fill/copper-cap POFV policy, retain J1's same Economic PCBA process,
 and update BOM/CPL and quotation evidence only after the applicable gates.
 Neither this decision nor prior-board qualification qualifies a new revision
 or authorizes manufacturing release, ordering, billing or merge.
+
+## D-025 - Rev.M1 Main two-Wing plan C outline and J3 placement
+
+Status: accepted PO decision (2026-11-06)
+
+Per [Issue #163](https://github.com/ihsinoky/he-piantor-42/issues/163), adopt
+**plan C** following the [Issue #160 mechanical gate](issue-160-main-dual-wing-stage2.md):
+extend Main north by **8 mm** to **48 x 52 mm**, KiCad absolute
+**X76–124 / Y70–122**, and place **J3 = (105,73), 0 degrees**.
+This supersedes D-024's initial plan A placement and the requirement to obtain
+PO approval before adopting that specific plan C outline.
+
+Retain D-023's four mounting holes, their coordinates and all-layer diameter
+5 mm copper reservations. Preserve J1/J2 and existing component coordinates.
+D-024's electrical interface remains adopted: common Hall power, address and
+three ADC paths, independent enables with MUX_EN1 at U1.8/GPIO6 and a new
+100 kohm pull-down, and two power branches near U5 output. D-019 routing and
+D-022 POFV / J1 Economic PCBA conditions remain in force.
+
+Outline adoption does not establish mechanical or electrical qualification.
+Issue #163 must concretize screw/tool handling, latch release, cable height
+and the insertion/extraction load on the north overhang, reduce and evaluate
+the routed power resistance, and independently requalify every net before
+manufacturing outputs or quotation can be accepted for the revised board.
+If the conditions cannot be established, record the state and stop without
+relaxing conditions or unbounded retries. This decision authorizes no order,
+charge, manufacturing release or merge.
