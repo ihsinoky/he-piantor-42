@@ -1,0 +1,47 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/pull/168",
+    "number": 168,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": true,
+    "body": "D-024／D-025 と #160／#163 の成果物を取り込み、D-026（機構 (b) 方針、5.2V レール方式、保証範囲の採用）を追記した。\n\nただし電気条件の停止規則を適用し、Issue 全体は未完了。理由：Issue 本文が求めた「USB 上流損失・Main 他負荷込みで変換器入力 4.75V の保証」は、上流源の下限自体が 4.75V になりうる USB 給電では、負荷電流と正のケーブル・接点抵抗がある限り数学的に保証できない。#165 の 4.75V は変換器入力位置での比較境界であり、ホスト側で保証された値ではなかった。条件を黙って下げる、上流を 5.0V 固定と仮定する、といった合格化はしていない。\n\n下流側の条件付き計算では、設計負荷 127mA/Wing で最遠点 4.796V（設計目標 4.60V に対して余裕あり）。機構の実物確認は停止理由にしていない。\n\n報告書: `docs/issue-167-main-dual-wing-stage2.md`\n\n再開には入力要件の再定義（基板コネクタ位置での入力範囲として定める等）が PO 判断として必要。",
+    "title": "Main 2 Wing Stage 2：D-026 採用記録と USB 入力予算による停止 (#167)",
+    "base": "main",
+    "base_sha": "67111c79ac2a583057cd0c81b1292cd070bf9340",
+    "head": "issue-167-main-dual-wing-stage2",
+    "head_sha": "e82ca18d0722d616275b82fb7f2a726c30b6eb5a",
+    "head_repo_id": 1387445866,
+    "head_repo_full_name": "ihsinoky/he-piantor-42",
+    "merge_commit_sha": "43eeb7a0f09c043518b9883968801e4c4fbdc543",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-11-06T05:39:16Z",
+    "updated_at": "2026-11-06T07:51:18Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 3,
+    "changed_files": 459,
+    "additions": 248833,
+    "deletions": 0,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/pull/168",
+    "display_title": "Main 2 Wing Stage 2：D-026 採用記録と USB 入力予算による停止 (#167)"
+  },
+  "isError": false
+}
