@@ -103,3 +103,5 @@ E/verify.pyは、開始時10,840ファイルの保全（許可されたD-026追�
 メーカーPDFとUSB仕様書はランタイムに保存し、URL・版・対象節・hashをE/sources.jsonに記録した。#165は未mergeのため、検討に用いた報告書と電流表をE/inputsへbyte保存する。そのMarkdown内の相対リンクは元位置を前提とする歴史入力であり、書き換えない。必要な主計算入力はmainに含まれる#141／#155／#157を参照する。
 
 公開用本文はE/draft-pr-body.md、実際のcommit・push・Draft PR結果はE/publication.json。停止状態をレビューするDraftとし、Issueの自動close・merge・発注・課金を行わない。
+
+内容コミット `fa20adde1f5c16de04be514f9400970bf48507c1` のpushは成功した。Draft PR作成も試みたが、接続ツールが「承認が必要だが承認ポリシーはnever」として拒否したため、**PRは未作成**。別経路で承認制約を回避せず、拒否結果をE/processes/draft-pr-result.jsonへ保存した。公開記録を追加コミットして同じブランチへpushする。
