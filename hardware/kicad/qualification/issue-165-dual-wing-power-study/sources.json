@@ -1,0 +1,180 @@
+[
+  {
+    "part": "drv5055",
+    "url": "https://www.ti.com/lit/ds/symlink/drv5055.pdf",
+    "pdf_sha256": "d04305a4ae7a603f95286c957160945ad5c7156b3d4e2137d47d74f614dd3194",
+    "runtime_path": ".issue165-runtime/datasheets/drv5055.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.955809+00:00",
+    "bytes": 1372343,
+    "revision": "SBAS640C, June 2026",
+    "sections_checked": [
+      "5.3",
+      "5.5",
+      "5.6",
+      "6.3.5",
+      "6.3.7",
+      "4"
+    ],
+    "supply_ranges_V": [
+      [
+        3,
+        3.63
+      ],
+      [
+        4.5,
+        5.5
+      ]
+    ],
+    "supply_current_at_B0_typ_max_mA": {
+      "5V": [
+        3,
+        5
+      ],
+      "3V3": [
+        2,
+        4
+      ]
+    },
+    "A3_sensitivity_5V_3V3_mV_mT": [
+      25,
+      15
+    ],
+    "numeric_tON_bound_in_5_5": false,
+    "DBZ_VCC_OUT_GND_pins": [
+      1,
+      2,
+      3
+    ],
+    "note": "Fig5-13 has >5mA trace; retain 11mA engineering sensitivity, do not claim it is max specification."
+  },
+  {
+    "part": "tps61023",
+    "url": "https://www.ti.com/lit/ds/symlink/tps61023.pdf",
+    "pdf_sha256": "edc49c88dfee7df4dc3d4eda612b691820bfb163ae9879d8664553a2288a6feb",
+    "runtime_path": ".issue165-runtime/datasheets/tps61023.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.811868+00:00",
+    "bytes": 2392725,
+    "revision": "SLVSF14B, August 2020",
+    "sections_checked": [
+      "Features",
+      "Recommended operating conditions",
+      "Electrical characteristics",
+      "8.2.2.1"
+    ],
+    "input_range_V": [
+      0.5,
+      5.5
+    ],
+    "output_max_V": 5.5,
+    "reference_accuracy_pct": 2.5,
+    "mode": "Automatic PFM and pass-through; not a forced-PWM buck-boost",
+    "note": "2.7% total DC rail tolerance is an engineering target with precision divider, not guaranteed by reference accuracy alone."
+  },
+  {
+    "part": "tps63070",
+    "url": "https://www.ti.com/lit/ds/symlink/tps63070.pdf",
+    "pdf_sha256": "a88ef66f3493156ff6e7da0849de0e0e1068647f2553d08c1844d4a90c5c65ef",
+    "runtime_path": ".issue165-runtime/datasheets/tps63070.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.719788+00:00",
+    "bytes": 1680561,
+    "revision": "SLVSC58B, March 2019",
+    "sections_checked": [
+      "7.3",
+      "7.5",
+      "8.4.5",
+      "9.2"
+    ],
+    "input_range_V": [
+      2,
+      16
+    ],
+    "adjustable_output_range_V": [
+      2.5,
+      9
+    ],
+    "PWM_feedback_accuracy_pct": [
+      -1,
+      1
+    ],
+    "PFM_feedback_accuracy_pct": [
+      -1,
+      3
+    ],
+    "forced_PWM_frequency_MHz": 2.4,
+    "note": "Select adjustable TPS63070, not fixed TPS630701; +/-2% total rail tolerance remains a design target."
+  },
+  {
+    "part": "tps22919",
+    "url": "https://www.ti.com/lit/ds/symlink/tps22919.pdf",
+    "pdf_sha256": "743c59b01fb0891d2d0f1faba779161cd2d2b6c18edf68e6d5b3279016240c84",
+    "runtime_path": ".issue165-runtime/datasheets/tps22919.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.828283+00:00",
+    "bytes": 1454791,
+    "revision": "SLVSEN5B, May 2019",
+    "sections_checked": [
+      "6.3",
+      "6.5",
+      "6.6"
+    ],
+    "input_range_V": [
+      1.6,
+      5.5
+    ],
+    "continuous_A": 1.5,
+    "turn_on_5V_typ_us": 1950,
+    "turn_on_max_bound": null,
+    "comparison_Ron_20C_125C_ohm": [
+      0.15,
+      0.25
+    ],
+    "note": "Ron brackets inherited from #157 3.6V max table points; not interpolation at 4.75V, 5.2V, or all 3.3V conditions."
+  },
+  {
+    "part": "tmux1208",
+    "url": "https://www.ti.com/lit/ds/symlink/tmux1208.pdf",
+    "pdf_sha256": "a717afc1524fe899a4693494e13a0944f2b742a7160b96bdfb2be6cb5b9ff170",
+    "runtime_path": ".issue165-runtime/datasheets/tmux1208.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.980865+00:00",
+    "bytes": 1525126,
+    "revision": "SCDS389C, December 2018",
+    "sections_checked": [
+      "7.1",
+      "7.3",
+      "7.5",
+      "7.6"
+    ],
+    "supply_range_V": [
+      1.08,
+      5.5
+    ],
+    "note": "At VDD=0, S/D absolute max is 0.5V; an active peer raw bus near 2.5V requires branch analog isolation or another valid power architecture. Logic absolute max is separately specified. Inherited 3x2.7uA planning current requires actual control-level verification.",
+    "unpowered_analog_absolute_max_V": 0.5
+  },
+  {
+    "part": "drv5053",
+    "url": "https://www.ti.com/lit/ds/symlink/drv5053.pdf",
+    "pdf_sha256": "80aebab55793b9b7274af95c6c2ef0c82cc69fa81e0d9567c446a067c3cb226c",
+    "runtime_path": ".issue165-runtime/datasheets/drv5053.pdf",
+    "retrieved_utc": "2026-11-06T03:34:52.796117+00:00",
+    "bytes": 1241199,
+    "revision": "SLIS153D, February 2023",
+    "sections_checked": [
+      "5",
+      "6.3",
+      "6.5",
+      "7.3"
+    ],
+    "supply_range_V": [
+      2.5,
+      38
+    ],
+    "current_max_at_125C_mA": 3.6,
+    "power_on_max_us": 50,
+    "DBZ_VCC_OUT_GND_pins": [
+      1,
+      2,
+      3
+    ],
+    "note": "Pin assignment matches DRV5055 DBZ; different transfer curve/offset/drive/magnetic performance prevents assuming a qualified drop-in."
+  }
+]

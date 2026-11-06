@@ -1,0 +1,11 @@
+{
+  "initial_exit_code": 5,
+  "initial_findings": {
+    "lib_footprint_issues": 68,
+    "unconnected": 0,
+    "physical": 0
+  },
+  "cause": "Runtime copy had no fp-lib-table, so all 68 embedded footprints lacked library lookup.",
+  "correction": "Copy Issue 141 inspection fp-lib-table unchanged into runtime. No board/project/library edits.",
+  "retained_initial_report": "16mm/drc-before-library-config.json"
+}
