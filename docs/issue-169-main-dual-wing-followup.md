@@ -121,3 +121,5 @@ D-022のepoxy fill／copper capと、J1の12 SMD contacts＋4 PTH shell legsを*
 再開時には、現在の選定品・配置で全44-net／4指標0を成立させ、容量／動特性・USB許可・電流上限・製造材料条件の未保証部分を処理し、その候補のCAM／BOM/CPL／POFV／同一Economic PCBA工程を照合して現行のアカウント見積を確定する必要がある。機構方針(b)は維持し、実GH挿抜／筐体支持は後段のM1検証である。
 
 E/verification.jsonは証跡整合の検査であり、seed-bの合格を意味しない。E/README.mdに成果物と実行方法、E/status.jsonに停止状態、E/publication.jsonにcommit／push／Draft PR試行結果を保存する。通常 `.git` を使わず今回のGitメタデータで**コミット後にpushしDraft PR作成を試みる**。Draft PRのbaseは#167ブランチとし、#169だけの差分をレビュー可能にする。mergeは行わない。
+
+内容コミット **`a5a5aa6cc54c8fa9b1c4e7d3bb1945493389682e`** は新ブランチへpush済み。Draft PR作成は実際に試みたが、接続ツールが **`MCP tool call requires approval, but approval policy is never`** として拒否した。別経路でこの拒否を回避していない。作成用タイトル・本文と拒否生結果はEに保存し、[比較リンク](https://github.com/ihsinoky/he-piantor-42/compare/issue-167-main-dual-wing-stage2...issue-169-main-dual-wing-followup?expand=1)を用意した。PRは作成されておらず、Issueは未完了のまま。公開監査記録は別コミットで同じブランチへpushする。
