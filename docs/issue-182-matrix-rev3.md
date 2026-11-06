@@ -129,3 +129,15 @@ Rev.2 の履歴データや Main の D-022 は変更していない。
 POFV を要求しない設計成果であり、新たな見積・発注・課金は行っていない。
 メーカーの最終DFM・実装方向照合、磁気／ADC／外部治具の実機評価は別のリリース工程に残る。
 Draft PR の提出対象であり、merge は行わない。
+
+## 公開状況
+
+合格成果物をコミット `48a982762784adc03a43d6a28338b3efed6cb60b` として
+`issue-182-matrix-rev3` に push 済み。元ブランチを base とする Draft PR の作成を
+GitHub ツールで要求したが、`MCP tool call requires approval, but approval policy is never`
+という承認制約で拒否された。**Draft PR は未作成**。別経路でこの制約を迂回していない。
+
+[比較・PR作成用リンク](https://github.com/ihsinoky/he-piantor-42/compare/issue-178-m1-matrix-board...issue-182-matrix-rev3?expand=1)、
+[用意したPR本文](../hardware/kicad/qualification/issue-182-matrix-rev3/draft-pr-body.md)、
+[公開・拒否記録](../hardware/kicad/qualification/issue-182-matrix-rev3/publication.json)。
+提出する場合は Draft を指定する。発注・課金・merge は行っていない。
