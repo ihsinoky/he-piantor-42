@@ -1,0 +1,116 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-06T21:46:32+0900",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.8000 mm",
+                    "pos": {
+                        "x": 91.1,
+                        "y": 133.0
+                    },
+                    "uuid": "62f7981c-b649-4dd4-809d-255e0778c186"
+                },
+                {
+                    "description": "Pad 12 [GND] of J_WING on F.Cu",
+                    "pos": {
+                        "x": 94.375,
+                        "y": 133.0
+                    },
+                    "uuid": "3ad706ba-1a7d-4751-88eb-7455b4af71fe"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 5.8000 mm",
+                    "pos": {
+                        "x": 91.4,
+                        "y": 131.5
+                    },
+                    "uuid": "b0fa0c0a-f8d6-489a-84fc-9725ae2aa9b7"
+                },
+                {
+                    "description": "Pad 10 [GND] of J_WING on F.Cu",
+                    "pos": {
+                        "x": 96.875,
+                        "y": 133.0
+                    },
+                    "uuid": "0bc39a10-fb80-4003-addc-f52edb90b59e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_A on F.Cu",
+                    "pos": {
+                        "x": 84.932075,
+                        "y": 121.675
+                    },
+                    "uuid": "a400a2d9-5079-4a58-8b3b-16255a42ef75"
+                },
+                {
+                    "description": "Track [HALL_5V] on F.Cu, length 2.1213 mm",
+                    "pos": {
+                        "x": 87.0,
+                        "y": 120.2
+                    },
+                    "uuid": "982c400f-b494-4ee0-b892-3cf7f9ea921f"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 0.0203 mm",
+                    "pos": {
+                        "x": 120.725425,
+                        "y": 119.395312
+                    },
+                    "uuid": "a484be44-2e9d-4534-8252-30e635340846"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 2.2953 mm",
+                    "pos": {
+                        "x": 102.92855,
+                        "y": 121.670312
+                    },
+                    "uuid": "f956f811-edf4-4d2e-aa97-8f83318e6c4d"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        }
+    ]
+}
