@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""Read JSON and draw review projections; this is not a PCB or a 3D CAD model."""
+from pathlib import Path
+import json
+E=Path(__file__).resolve().parent
+g=json.loads((E/'mechanical.json').read_text())
+svg=['<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="560" viewBox="0 0 1040 560">',
+     '<rect width="1040" height="560" fill="white"/>',
+     '<style>text{font:13px sans-serif;fill:#172b42}.h{font:bold 17px sans-serif}.small{font:11px sans-serif}</style>',
+     '<text class="h" x="24" y="28">Plan C: selected hardware and unestablished mechanical gate</text>',
+     '<text x="24" y="52">Top view: proposed board outline; existing four holes retained</text>',
+     '<g transform="translate(-432,-340) scale(6)">',
+     '<rect x="76" y="70" width="48" height="52" fill="#eff7fb" stroke="#172b42" stroke-width=".25"/>',
+     '<path d="M79 92L121 81L102 111.5L79 119Z" fill="#e5eddf" stroke="#597a45" stroke-width=".2"/>',
+     '<path d="M76 78H124" stroke="#8993a1" stroke-dasharray="1 1" stroke-width=".15"/>',
+     '<rect x="92" y="71.5" width="26" height="7.5" fill="none" stroke="#3470a3" stroke-dasharray=".7 .5" stroke-width=".2"/>',
+     '<rect x="94.625" y="73.2" width="20.75" height="4.25" fill="#bfd9ed" stroke="#3470a3" stroke-width=".2"/>']
+for name,(x,y) in g['adopted_geometry']['holes_mm'].items():
+    svg.extend([f'<circle cx="{x}" cy="{y}" r="2.500004" fill="none" stroke="#b64a3d" stroke-width=".15"/>',
+                f'<circle cx="{x}" cy="{y}" r="2" fill="#ebdcb9" stroke="#a57b31" stroke-width=".1"/>',
+                f'<circle cx="{x}" cy="{y}" r="1.1" fill="white" stroke="#172b42" stroke-width=".1"/>'])
+svg.extend(['<circle cx="121" cy="81" r="2" fill="none" stroke="#0a7e94" stroke-width=".3"/>',
+            '<path d="M105 75.325L107.418 84.557" stroke="#c64c43" stroke-width=".3"/>',
+            '</g>',
+            '<text x="135" y="108">J3 (105,73)</text>',
+            '<text x="294" y="157">H2: washer OD4 / driver OD4</text>',
+            '<text x="180" y="176" fill="#c64c43">9.54 mm overhang</text>',
+            '<text class="small" x="24" y="414">Green: point-support polygon; orange: proposed OD4 washers</text>',
+            '<text class="small" x="24" y="434">Dashed blue: retained 26 x 7.5 mm service projection</text>',
+            '<text class="small" x="24" y="454">Housing centering, load datum and tolerances remain assumptions.</text>',
+            '<text class="h" x="560" y="86">Section / handling scenarios</text>',
+            '<rect x="575" y="325" width="420" height="12" fill="#9cbd9b" stroke="#172b42"/>',
+            '<text x="850" y="355">PCB t = 1.2 mm</text>',
+            '<rect x="635" y="252" width="70" height="73" fill="#bfd9ed" stroke="#3470a3"/>',
+            '<text x="718" y="286">7.3 mm assembly reference</text>',
+            '<path d="M670 252V232Q670 182 720 182H780" fill="none" stroke="#6f7682" stroke-width="10"/>',
+            '<text x="727" y="165">R5 + 2 mm rise + OD1</text>',
+            '<text x="735" y="210">wire top z = 14.8 mm</text>',
+            '<rect x="630" y="337" width="80" height="35" fill="#ffe0c2" stroke="#b56b2e" stroke-dasharray="4 3"/>',
+            '<text x="718" y="380">Local restraint NOT yet established</text>',
+            '<path d="M610 205V300M605 292L610 300L615 292M605 213L610 205L615 213" fill="none" stroke="#c64c43" stroke-width="2"/>',
+            '<text x="560" y="400">Insertion and extraction require opposite reactions.</text>',
+            '<text x="560" y="430">Probe selected: P-512-S, tip 0.4 x 3.5 mm</text>',
+            '<text x="560" y="452">Latch datum / stroke / swept tool body: unverified</text>',
+            '<text class="small" x="24" y="505">Review projections only. No validated case, latch motion, actual force, plate stiffness or solder-strain limit.</text>',
+            '<text class="small" x="24" y="528">No PCB change, routing, new-board qualification or manufacturing export. See mechanical.json and report for assumptions.</text>',
+            '</svg>'])
+(E/'mechanical-review.svg').write_text('\n'.join(svg)+'\n')
+print('Wrote review SVG from mechanical.json; not a CAD/qualification result')
