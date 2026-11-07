@@ -1,5 +1,7 @@
 # work 層方式と一次発信の入口についての議論
 
+> **位置づけ（2026-11-08 PO判断）**：本書は提案段階の議論記録である。確定方針は計画書（`docs/repo-cleanup-plan.md`）0節を正とする。本書が扱った work 層への一括移動案は、実測された影響の大きさを理由に**採用されなかった**（本書の反対意見が採用された）。Release 時の凍結コピーの考え方は、公開用リポジトリの GitHub Releases による配布として形を変えて採用されている。
+
 2026-11-08／PO・PMO向けの提案。基準は `repo-cleanup-plan` の `7e530399987391d9a3484e89251eb51529629a4d`。`.cleanup-runtime/discussion2-brief.md` を全文読み、[整理計画](repo-cleanup-plan.md)、[前回議論](publication-discussion.md)、実ファイルと照合した。既存文書の変更や配置方式の採択は本書では行わない。
 
 ## 1. 見解と前回議論の修正
