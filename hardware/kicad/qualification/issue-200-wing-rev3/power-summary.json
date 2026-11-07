@@ -1,0 +1,177 @@
+{
+  "assumptions": {
+    "load_A_per_wing": 0.127,
+    "simultaneously_powered_wings": 2,
+    "rail_nominal_V": 5.2,
+    "rail_tolerance_fraction": 0.02,
+    "unmodeled_rail_budget_V": 0.05,
+    "U5_Ron_ohm": 0.25,
+    "main_corner": "retained Issue196 125C / width80% Main common and branches for every row",
+    "main_common_loop_ohm": 0.03711396940290345,
+    "main_branch_loop_ohm": {
+      "J2": 0.0034708639881278697,
+      "J3": 0.028227454317213435
+    },
+    "wire_copper_area_mm2": 0.0804,
+    "contact_ohm_each": 0.05,
+    "contacts_per_wire": 2,
+    "return_conductors": 6,
+    "copper_um": 35,
+    "barrel_um": 20,
+    "temperature_coefficient_per_K": 0.00393,
+    "width_corner": "actual power track widths times0.8; native filled-plane geometry retained, as Issue196",
+    "mesh_selection": "larger coarse/fine combined loop drop at each terminal; maximum over all distributed loads"
+  },
+  "legacy_issue141_wing_drop_replaced": true,
+  "legacy_17mm_wing_drop_V": 0.147710145,
+  "boards": [
+    {
+      "board": "wing-rev3-16mm-left",
+      "source_sha256": "4a9dcada7ec42bad518a85206496ae9d6c82248aca7837f5fa9433df9f9c51a8",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HB1",
+          "loop_drop_20C_V": 0.0014038664559020881,
+          "effective_loop_20C_ohm": 0.011054066581906205,
+          "coarse_worst_drop_20C_V": 0.0014038664559020881,
+          "fine_worst_drop_20C_V": 0.0014010344619056335,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0027762302093575966
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HB1",
+          "loop_drop_20C_V": 0.0014299939559643357,
+          "effective_loop_20C_ohm": 0.011259794928853038,
+          "coarse_worst_drop_20C_V": 0.0014299939559643357,
+          "fine_worst_drop_20C_V": 0.0014275561786931523,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0025641809926577664
+        }
+      ],
+      "max_KCL_residual_A": 8.628830983070657e-10
+    },
+    {
+      "board": "wing-rev3-16mm-right",
+      "source_sha256": "cc93ff9f32871354891bc27758a60f563bd1a1ad376b3b3bb8e6183601692ed5",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.0009418218823160847,
+          "effective_loop_20C_ohm": 0.007415920333197517,
+          "coarse_worst_drop_20C_V": 0.0009406829716947081,
+          "fine_worst_drop_20C_V": 0.0009418218823160847,
+          "max_terminal_mesh_delta_over_worst_drop": 0.002283556384181554
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.0009454696089223815,
+          "effective_loop_20C_ohm": 0.007444642589940011,
+          "coarse_worst_drop_20C_V": 0.0009440812411566731,
+          "fine_worst_drop_20C_V": 0.0009454696089223815,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0022789250391797794
+        }
+      ],
+      "max_KCL_residual_A": 3.6149572224530857e-10
+    },
+    {
+      "board": "wing-rev3-17mm-left",
+      "source_sha256": "343725da1dcc121fd0fba3e5f24bbfe14c93f324d82a85de7f4d3b5308bb375c",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.0011798331072625063,
+          "effective_loop_20C_ohm": 0.009290024466633908,
+          "coarse_worst_drop_20C_V": 0.0011798331072625063,
+          "fine_worst_drop_20C_V": 0.0011781304854687447,
+          "max_terminal_mesh_delta_over_worst_drop": 0.002559790506693262
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.001182927029324014,
+          "effective_loop_20C_ohm": 0.009314386057669401,
+          "coarse_worst_drop_20C_V": 0.001182927029324014,
+          "fine_worst_drop_20C_V": 0.001181473963947811,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0023247365886012003
+        }
+      ],
+      "max_KCL_residual_A": 4.4346393224259373e-10
+    },
+    {
+      "board": "wing-rev3-17mm-right",
+      "source_sha256": "05e848c8b033efa9c1a136fdefe6aa4a3bf91b55c959e3ccb97850cdf43049af",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.0019445779706053438,
+          "effective_loop_20C_ohm": 0.015311637563821605,
+          "coarse_worst_drop_20C_V": 0.0019382050967232808,
+          "fine_worst_drop_20C_V": 0.0019445779706053438,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0032772529455731385
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC1",
+          "loop_drop_20C_V": 0.0019759278439335426,
+          "effective_loop_20C_ohm": 0.015558486960106635,
+          "coarse_worst_drop_20C_V": 0.0019661512851126463,
+          "fine_worst_drop_20C_V": 0.0019759278439335426,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0049478319013075405
+        }
+      ],
+      "max_KCL_residual_A": 7.038920557533856e-10
+    }
+  ],
+  "worst_by_length": {
+    "124.09716799907045": {
+      "board": "wing-rev3-17mm-right",
+      "main_branch": "J3",
+      "actual_assembly_branch": "J3",
+      "temperature_C": 125,
+      "track_width_factor": 0.8,
+      "length_mm": 124.09716799907045,
+      "load_A": 0.127,
+      "wing_far_terminal": "U_HC1",
+      "wing_drop_V": 0.002791294468732719,
+      "wing_effective_loop_ohm": 0.021978696604194638,
+      "harness_wire_ohm": 0.037592641886445066,
+      "harness_loop_ohm": 0.16052474886751927,
+      "harness_drop_V": 0.020386643106174947,
+      "main_common_and_switch_drop_V": 0.07292694822833748,
+      "main_branch_drop_V": 0.0035848866982861063,
+      "Vfar_V": 4.9463102274984685,
+      "margin_to_4p60_V": 0.34631022749846885
+    },
+    "200.0": {
+      "board": "wing-rev3-17mm-right",
+      "main_branch": "J3",
+      "actual_assembly_branch": "J3",
+      "temperature_C": 125,
+      "track_width_factor": 0.8,
+      "length_mm": 200.0,
+      "load_A": 0.127,
+      "wing_far_terminal": "U_HC1",
+      "wing_drop_V": 0.002791294468732719,
+      "wing_effective_loop_ohm": 0.021978696604194638,
+      "harness_wire_ohm": 0.06058581753731342,
+      "harness_loop_ohm": 0.18735012046019903,
+      "harness_drop_V": 0.023793465298445275,
+      "main_common_and_switch_drop_V": 0.07292694822833748,
+      "main_branch_drop_V": 0.0035848866982861063,
+      "Vfar_V": 4.942903405306199,
+      "margin_to_4p60_V": 0.342903405306199
+    }
+  },
+  "adopted_200mm_below_4p60": false,
+  "limitations": [
+    "Design model, not measured operating or minimum-material voltage guarantee",
+    "Ideal pad landing contacts and equal harness return resistances; six ground terminals ideal at PCB boundary",
+    "Copper/barrel/etch minima and assembled harness/contact resistance require acceptance",
+    "125C is an analytical sensitivity corner, beyond GH catalog105C rating; it is not a qualified assembly operating temperature",
+    "Regulated rail boundary presumes upstream UDB/SH/USB/efficiency conditions meet Issue196; no new upstream power guarantee"
+  ]
+}

@@ -29,6 +29,7 @@ table.
 | Main board | Rev.4 | Triangular Main with separate UDB C3, three mounting holes and 200 mm GH harnesses; routed and manufacturing package prepared in Issue #196 Phase B / PR #197. PMO review and requote pending. | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
 | Wing board (Left / Right) | Rev.2 (proposed) | [Issue #194 Phase B](issue-194-wing-rev2-stage2.md): separate left/right 21-key boards at 16/17mm, bottom Hall/local C, revised outline and locator holes, low-resistance pours, copper-free-tab Standard-PCBA panel. D-032 draft; physical fit/power acceptance and order release pending. | - |
+| Wing board (Left / Right) | Rev.3 (proposed) | [Issue #200 Stage 2](issue-200-wing-rev3-stage2.md): Stage 1b north shoulder/R5 and GH relocation, stepped south edge, north service layout, new copper resistance extraction and Standard-PCBA panels. D-034 draft supersedes D-032 for Rev.3; harness length remains undecided (200mm adopted baseline retained). | - |
 
 Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
 42-key product phase. Ordering the Wing Rev.1 bare boards together with the
@@ -40,6 +41,13 @@ decision.
 Kept here because the reasons behind a revision cannot be recovered from
 comparing artifacts. Detailed changes live in the decision records and the
 issue reports, not here.
+
+- Wing Rev.3 (proposed) - Issue #200 implements the Stage 1b broad R5 north
+  shoulder and relocated GH, trims the south while preserving keys/sensors,
+  relocates service parts and one mounting hole per side, and requalifies all
+  four PCBs plus panels. Replaces the historical Wing voltage drop with a new
+  copper extraction; compares 124.097mm and adopted 200mm harness lengths.
+  D-034 remains a draft; case modeling is owned by Issue #198.
 
 - Main Rev.1 - Built as the single-Wing evaluation Main; superseded before
   ordering when dual-Wing connection became a requirement.
