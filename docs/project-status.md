@@ -9,6 +9,50 @@ PMO run record (Issues #87–#169) are collected in
 [lessons-learned-device-development.md](lessons-learned-device-development.md).
 Read it when starting a new device development or revisiting a settled method.
 
+## Current situation（2026-11-08、Issue #207 / 整理計画 P3）
+
+**現在位置：MS1 完了、MS2 は未着手で PO の発注 GO 待ち。** 設計ベースラインは
+Main Rev.4／Matrix Rev.3／Wing Rev.3／ケース最終。正本と検証記録は
+[成果物索引](artifacts-index.md)を参照する。データ上の検証と実機合格を区別する。
+
+- Main Rev.4：三角形・3穴、USB は別基板 UDB C3。D-033 採択済み。
+- Matrix Rev.3：16mm／17mm 各3×3、計18キーの評価基板。D-028／D-029。
+- Wing Rev.3：16mm／17mm × 左右、単板4枚と左右一体製造パネル2種。D-034 採択済み。
+- ケース最終：17mm版が正、16mm版は再生成・検証版。固定点15点
+  （Wing 各4＋Main 3＋UDB 4）、GH ハーネスは各200mm。
+  **南辺フラッシュは PO 了解済み**（本P3要件による現行状態）。
+  過去のケース報告・整理計画に残る「最終判断持ち越し」は記録当時の状態。
+
+### 残件と次の責任者・着手条件
+
+| 残件 | 次の判断・条件 | 担当 |
+| --- | --- | --- |
+| 発注1（Main Rev.4＋Matrix Rev.3） | **PO の GO 待ち**。前提：CPL 原点確認、UDB 上流抵抗の実測。再見積・BOM調達・業者DFM／工程受入れも製造リリースの別ゲートとして残す | PMO が確認材料を整理、PO が発注判断 |
+| 量産ピッチ | **未決定**。Matrix 実測後に16mm／17mmを判断。17mmケース正本の存在は量産ピッチ確定ではない | PO（MS3→MS4） |
+| 実機・物理検証 | **未実施**。実ハーネス配索・嵌合・保持力・クリープ・足位置、USB、電源／ノイズ／磁気相互作用などを実機確認 | 実施担当は別途割当、PO が結果判断 |
+| ケース印刷 | **PO 判断待ち**。印刷・実造形検証は未実施 | PO |
+| Wing 発注・FW・完成・公開 | MS3以降のゲートに従う。押下推定方式はFW検証で確定。公開の詳細は別計画 | PO／PMO |
+
+設計採択は製造GO・実機動作保証ではない。旧EDA試験のSTOPを取り消さず、
+G1〜G5の完了もここで推定しない。旧記録は下の[履歴](#status-history)に保存する。
+
+### マイルストーン計画（PMO 案、P3 の PO PR ゲートで確認）
+
+従来のフェーズ名 M0／M1／M2 と、この計画の MS1〜MS8 は別体系。
+MS8 は完成成果の公開用リポジトリ／Releases の計画であり、既存開発リポジトリの公開履歴とは別。
+詳細状態は上記と各報告書を正とし、[ダッシュボード](../task/index.html)は計画と現在位置の大局ビューだけを表示する。
+
+| ID | マイルストーン | 状態 | 完了の根拠／次のゲート |
+| --- | --- | --- | --- |
+| MS1 | 設計ベースライン確定 | 完了 | Main Rev.4／Matrix Rev.3／Wing Rev.3／ケース最終データが揃い、版別の採択・検証記録あり。 |
+| MS2 | 発注1：Main Rev.4＋Matrix Rev.3 の製造 | 未着手 | PO の発注 GO 待ち。前提確認：CPL 原点、UDB 上流抵抗の実測。 |
+| MS3 | Matrix 実測 | 未着手 | MS2 後、相互作用の大きさと工場実装／手実装の精度を比較する。 |
+| MS4 | 量産ピッチ決定（16mm／17mm） | 未着手 | MS3 の結果で PO 判断。 |
+| MS5 | Wing 発注（Order 2）とケース印刷 | 未着手 | MS4 後に Wing 発注判断。ケース印刷は PO 判断待ち。 |
+| MS6 | 組立・通電確認 | 未着手 | 基板・ケースを揃え、組立・通電と物理適合を確認する。 |
+| MS7 | ファームウェア検証と完成 | 未着手 | 押下推定方式を確定し、実機でファームウェアを検証する。 |
+| MS8 | 成果公開（公開用リポジトリと Releases） | 未着手 | 完成後の公開。詳細は別計画。 |
+
 ## Board naming convention (PO decision, 2026-11-06)
 
 Milestone names and board revision names are kept separate. `M0` / `M1` / `M2`
@@ -21,20 +65,19 @@ table.
 | Board | Revision | Meaning | Former names |
 | --- | --- | --- | --- |
 | Main board | Rev.1 | Single-Wing version. Not an order target. | Rev.M1 Main (single-Wing) |
-| Main board | Rev.2 | Dual-Wing version (Issue #175 final board). Current Main; reused for the product. | Rev.M1 Main (dual-Wing) |
+| Main board | Rev.2 | Dual-Wing version (Issue #175 final board). Historical dual-Wing Main; superseded by Rev.4. | Rev.M1 Main (dual-Wing) |
 | Matrix board | Rev.1 | Separate 3x3 boards per pitch (16 mm and 17 mm), 9 keys each. Designed in Issue #127, routing-evaluated in Issue #129; never fabricated. | Evaluation Wing, pitch9 |
 | Matrix board | Rev.2 | One board carrying both pitches: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | - |
 | Matrix board | Rev.3 | Rev.2 with every via moved clear of component pads; no POFV required (Issue #182). | - |
-| Main board | Rev.3 | Rev.2 with 35 vias relocated clear of pads; no POFV required for this package (Issue #185). | - |
-| Main board | Rev.4 | Triangular Main with separate UDB C3, three mounting holes and 200 mm GH harnesses; routed and manufacturing package prepared in Issue #196 Phase B / PR #197. PMO review and requote pending. | - |
+| Main board | Rev.3 | Rev.2 with 35 vias relocated clear of pads; POFV removal proposed for this package (Issue #185); D-030 adoption unconfirmed per Issue #205. | - |
+| Main board | Rev.4 | Triangular Main with separate UDB C3, three mounting holes and 200 mm GH harnesses; routed and manufacturing package prepared in Issue #196 Phase B / PR #197. D-033 accepted; manufacturing release and physical validation pending. | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
-| Wing board (Left / Right) | Rev.2 (proposed) | [Issue #194 Phase B](issue-194-wing-rev2-stage2.md): separate left/right 21-key boards at 16/17mm, bottom Hall/local C, revised outline and locator holes, low-resistance pours, copper-free-tab Standard-PCBA panel. D-032 draft; physical fit/power acceptance and order release pending. | - |
-| Wing board (Left / Right) | Rev.3 (proposed) | [Issue #200 Stage 2](issue-200-wing-rev3-stage2.md): Stage 1b north shoulder/R5 and GH relocation, stepped south edge, north service layout, new copper resistance extraction and Standard-PCBA panels. D-034 draft supersedes D-032 for Rev.3; harness length remains undecided (200mm adopted baseline retained). | - |
+| Wing board (Left / Right) | Rev.2 (historical) | [Issue #194 Phase B](issue-194-wing-rev2-stage2.md): separate left/right 21-key boards at 16/17mm, bottom Hall/local C, revised outline and locator holes, low-resistance pours, copper-free-tab Standard-PCBA panel. D-032 accepted, specified scope superseded by D-034; physical acceptance/order release pending. | - |
+| Wing board (Left / Right) | Rev.3 | [Issue #200 Stage 2](issue-200-wing-rev3-stage2.md): Stage 1b north shoulder/R5 and GH relocation, stepped south edge, north service layout, new copper resistance extraction and Standard-PCBA panels. D-034 accepted, partially supersedes D-032; 200mm harness retained. | - |
 
-Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
-42-key product phase. Ordering the Wing Rev.1 bare boards together with the
-M1-phase boards is a PO-approved front-loading, ahead of the G2 pitch
-decision.
+Phase usage stays as before: M1 is the evaluation phase, M2 is the
+42-key product phase. The earlier PO-approved front-loading of Wing Rev.1
+bare boards was a historical plan; the current order plan is MS2 / MS5 above.
 
 ### Revision history (background, one line per revision)
 
@@ -42,12 +85,12 @@ Kept here because the reasons behind a revision cannot be recovered from
 comparing artifacts. Detailed changes live in the decision records and the
 issue reports, not here.
 
-- Wing Rev.3 (proposed) - Issue #200 implements the Stage 1b broad R5 north
+- Wing Rev.3 - Issue #200 implements the Stage 1b broad R5 north
   shoulder and relocated GH, trims the south while preserving keys/sensors,
   relocates service parts and one mounting hole per side, and requalifies all
   four PCBs plus panels. Replaces the historical Wing voltage drop with a new
   copper extraction; compares 124.097mm and adopted 200mm harness lengths.
-  D-034 remains a draft; case modeling is owned by Issue #198.
+  D-034 is accepted; the final case data is available from Issue #198.
 
 - Main Rev.1 - Built as the single-Wing evaluation Main; superseded before
   ordering when dual-Wing connection became a requirement.
@@ -76,12 +119,19 @@ issue reports, not here.
 - Main Rev.4 - Rebuilt around the Phase A-2 triangular placement, with USB-C/CC/
   data ESD moved to the separate UDB C3 and J4 added. Three mounting holes and
   200 mm GH harnesses supersede the previous mechanical/length baseline for
-  this package (D-033 draft). Full routing, independent qualification, 0.145 mm
+  this package (D-033 accepted). Full routing, independent qualification, 0.145 mm
   minimum via-to-pad clearance and manufacturing data are recorded in the
-  [Phase B report](issue-196-main-rev4-phaseb.md). PMO review/requote and physical
+  [Phase B report](issue-196-main-rev4-phaseb.md). Manufacturing release and physical
   assembly validation remain pending.
 
-## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
+<a id="status-history"></a>
+
+## Status history（2026-10-14 時点の状態と当時の評価記録）
+
+以下は当時の記述を保存した履歴。EDA停止・未承認・未着手や「current」は当時の範囲を指し、
+現行基板・ケースの状態は冒頭の2026-11-08節を参照する。技術的STOPの結論は変更しない。
+
+## Historical: Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
 **Location:** Before real Rev.M1/Main product design. Same Draft
 [PR #88](https://github.com/ihsinoky/he-piantor-42/pull/88), Issue87. PR #86 is an
@@ -163,7 +213,9 @@ Detailed product schedule, firmware/enclosure milestones and several acceptance
 conditions remain unplanned. G1–G5 remain not-ready. No method report starts
 product implementation or passes a manufacturing gate.
 
-## Current milestone
+<a id="current-milestone"></a>
+
+## Historical: Current milestone
 
 **M1 — Magnetic approach / evaluation board** (`current`)
 
@@ -173,7 +225,9 @@ product implementation or passes a manufacturing gate.
   range, noise, scan speed, power consumption, and the selected magnetic
   approach, production pitch and representative analog path at G2.
 
-## Roadmap
+<a id="roadmap"></a>
+
+## Historical: Roadmap
 
 | Milestone | Status | Deliverable | Exit criteria |
 | --- | --- | --- | --- |
@@ -183,7 +237,9 @@ product implementation or passes a manufacturing gate.
 | M3 — Integration / enclosure / test | `todo` | Enclosure, integrated unit, and assembly, calibration, and test procedures | Physical operation, all-key calibration, USB/Vial behavior, and enclosure fit pass testing. |
 | M4 — Final release | `todo` | Reproducible v1.0 manufacturing, firmware, and enclosure package | Final artifacts are fixed and the Product Owner approves the completed release. |
 
-## Human Gates
+<a id="human-gates"></a>
+
+## Historical: Human Gates
 
 | Gate | Current status | Check | Trigger | Unlock condition |
 | --- | --- | --- | --- | --- |
@@ -195,7 +251,9 @@ product implementation or passes a manufacturing gate.
 | G4 — Physical operation review | `not-ready` | Typing, calibration, Vial, USB, and enclosure fit | Integrated-unit bring-up is complete. | The final design may be fixed. |
 | G5 — Final approval | `not-ready` | All v1.0 artifacts and procedures | Acceptance testing passes. | v1.0 may be released. |
 
-## Workstreams
+<a id="workstreams"></a>
+
+## Historical: Workstreams
 
 | Workstream | Current high-level state |
 | --- | --- |
@@ -399,7 +457,9 @@ but is not the active EDA source. Each detailed increment is
 defined and accepted through its own GitHub Issue.
 
 
-## EDA-003 history and current planning decision
+<a id="eda-003-history-and-current-planning-decision"></a>
+
+## Historical: EDA-003 history and current planning decision
 
 Completed qualification work does not mean a qualified board or adopted backend.
 All reports and evidence remain unchanged:
@@ -469,8 +529,9 @@ and the other product risks listed above remain unchanged.
 ## Dashboard synchronization
 
 `docs/project-status.md` is authoritative for high-level project status.
-`task/data/project-status.js` is a manually synchronized Dashboard read-model
-copy. If they conflict, this document is correct. Synchronization is reviewed in
+`task/data/project-status.js` is a manually synchronized Dashboard read model of the milestone plan and current position. Detailed status is not copied.
+The PMO milestone proposal is reviewed at the P3 PO PR gate.
+If the read model conflicts with this document, this document is correct. Synchronization is reviewed in
 the same pull request as a status change; there is currently no generator or
 automatic synchronization.
 

@@ -5,8 +5,9 @@ defines reusable Main + Left/Right Wings; future Wing geometry must be
 project-owned or explicitly approved.
 
 > [!WARNING]
-> **Experimental hardware:** M1 and the planned Rev.A are engineering work in
-> progress. No PCB has completed physical validation, and this repository does
+> **Experimental hardware:** Main Rev.4, Matrix Rev.3, Wing Rev.3 and the final
+> case data are design baselines. No PCB has completed physical validation,
+> and this repository does
 > not describe a production-ready keyboard. Do not order or manufacture from
 > the current files without completing the documented review gates.
 
@@ -26,26 +27,20 @@ project-owned or explicitly approved.
 
 ## Development flow
 
-1. Freeze switch / keycap / geometry requirements
-2. Complete G0A EDA adoption and G0B Main/Wing architecture/interface freeze
-3. Design reusable Main + Evaluation Wing(s); complete G1 before ordering
-4. Measure magnetic, pitch and actual interconnect behavior; decide G2
-5. Reuse accepted Main with Left/Right 21-key Wings for Rev.A
-6. Implement Vial + Hall-effect firmware
-7. Finalize enclosure
-8. Generate JLCPCB and 3D-print manufacturing packages
-9. Bring-up and validation
-
-The authoritative status, including the permanent frozen four-key qualification
-fixture, separate physical Rev.M1 Main/Wing architecture and implementation gates, is in [`docs/project-status.md`](docs/project-status.md).
-`task/index.html` is a non-authoritative dashboard read model.
+The design baseline is Main Rev.4 / Matrix Rev.3 / Wing Rev.3 / final case data.
+Start with the [current artifacts index](docs/artifacts-index.md) for CAD,
+manufacturing packages, case exports and recorded verification.
+[Project status](docs/project-status.md) is authoritative for outstanding gates:
+Order 1 awaits PO GO, production pitch awaits Matrix measurements, and physical
+validation is pending. The [dashboard](task/index.html) shows the milestone plan
+and current position as a non-authoritative read model.
 
 ## Contribution status
 
 Public release is completed, as recorded in
 [`docs/public-release-readiness.md`](docs/public-release-readiness.md).
-Hardware design contributions are not currently being accepted while the JITX
-EDA evaluation gate remains unresolved. Prospective contributors should start
+JITX physical-backend evaluation concluded NO-GO (D-016); it is historical,
+not an unresolved current design gate. Prospective contributors should start
 with an Issue and follow
 [`docs/development-workflow.md`](docs/development-workflow.md); a green CI run
 does not replace Product Owner approval.
