@@ -856,7 +856,6 @@ The implementation and evidence are in
 [Issue #178 report](issue-178-m1-matrix-board.md). Passing routing/DRC does not
 establish magnetic interaction, harness/ADC settling, manufacturer PCBA
 acceptance or manufacturing release. No order, charge or merge is authorized.
-<<<<<<< HEAD
 
 ## D-029 - Matrix Rev.3: keep every via clear of component pads; no POFV
 
