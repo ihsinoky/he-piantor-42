@@ -26,6 +26,7 @@ table.
 | Matrix board | Rev.2 | One board carrying both pitches: 16 mm 3x3 block + 17 mm 3x3 block, 18 keys (Issue #178). Purpose: pitch comparison and simultaneous-press Hall-interaction measurement. | - |
 | Matrix board | Rev.3 | Rev.2 with every via moved clear of component pads; no POFV required (Issue #182). | - |
 | Main board | Rev.3 | Rev.2 with 35 vias relocated clear of pads; no POFV required for this package (Issue #185). | - |
+| Main board | Rev.4 | Triangular Main with separate UDB C3, three mounting holes and 200 mm GH harnesses; routed and manufacturing package prepared in Issue #196 Phase B / PR #197. PMO review and requote pending. | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
 | Wing board (Left / Right) | Rev.2 (proposed) | [Issue #194 Phase B](issue-194-wing-rev2-stage2.md): separate left/right 21-key boards at 16/17mm, bottom Hall/local C, revised outline and locator holes, low-resistance pours, copper-free-tab Standard-PCBA panel. D-032 draft; physical fit/power acceptance and order release pending. | - |
 
@@ -63,6 +64,14 @@ issue reports, not here.
   POFV specification from D-022 could be dropped for this package; the
   minimum via-to-pad gap is exactly 0.100 mm nominal. Cut the PCBA quote
   by $19.29.
+
+- Main Rev.4 - Rebuilt around the Phase A-2 triangular placement, with USB-C/CC/
+  data ESD moved to the separate UDB C3 and J4 added. Three mounting holes and
+  200 mm GH harnesses supersede the previous mechanical/length baseline for
+  this package (D-033 draft). Full routing, independent qualification, 0.145 mm
+  minimum via-to-pad clearance and manufacturing data are recorded in the
+  [Phase B report](issue-196-main-rev4-phaseb.md). PMO review/requote and physical
+  assembly validation remain pending.
 
 ## Current situation (Issue87 resumed Main incomplete / pass contract unqualified, 2026-10-14)
 
