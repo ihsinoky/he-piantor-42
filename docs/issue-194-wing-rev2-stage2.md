@@ -1,4 +1,6 @@
-# Issue #194 — Wing Rev.2 Stage 2 / Phase A 配置・外形確定案
+# Issue #194 — Wing Rev.2 Stage 2 / Phase A・B
+
+§1–7はPhase A時点の配置・外形案の記録。PMO GO後のPhase B実装・検証は§8以降に追記する。
 
 16mm版は **117.2×83.0mm**、17mm版は **123.2×87.0mm** の矩形を提案する。Stage 1 の中心を保持し、親指は左 +5°／−10°／−25°、右は符号反転する。C0 は Hall ランドへの影響を評価し **0°** とする。両ピッチ×左右で Jade Pro 15.8mm角の全包絡が外形内にあり、四隅φ5予約域・他キー包絡と重ならない。以下は PMO レビュー用の設計案であり、配線・製造資格の判定ではない。
 
@@ -139,3 +141,98 @@ PMO GO後は、この独立配置案をsource／generatorへ反映し、下面�
 作業コピーは `.issue194-runtime/git`、ブランチは `issue-194-wing-rev2-stage2`。元作業ツリーの既存変更は取り込まず、スクラッチは `.issue194-runtime/` に限定した。成果物はこのブランチにコミットし、pushはPMOへ引き継ぐ。
 
 Phase A はここで停止し PMO レビュー待ち
+
+
+## 8. Phase B：校正・製造値の採否
+
+PMO GO の `.issue194-runtime/instructions-194-phaseB.md` を全文読了し、同じ作業コピー・ブランチで継続した。以下 **B** は [hardware/kicad/qualification/issue-194-wing-rev2/](../hardware/kicad/qualification/issue-194-wing-rev2/)。Phase B開始時はPhase Aの4配置・外形・四隅穴・C0=0°を入力とした。2026-11-07のPO追加判断による南外形カット・南側穴移動は§10に記録する。
+
+[TI DRV5055 SBAS640C Rev.C](https://www.ti.com/lit/ds/symlink/drv5055.pdf) §6.3.8、p14、Fig6-5 の DBZ/SOT-23 素子位置はパッケージ中心、XY±50µm、リード着座面から650±80µm。既存JITXの `SOT23_3()` はボディ中心を原点とし、抽出ランドのX外端±1.67／2本側Y±0.95もこの基準に対称である。**採用する公称 δ=(0,0) mm** とした。3ランドの中心を平均すると2本側へずれるが、それはボディ中心ではなく、校正値に使わない。`F=K−R(θ)δ` を [source](../hardware/jitx/wing/rev2.py) に実装し、±0.05は固定オフセットではなく素子位置公差として残した。
+
+下面は実在ランドの native flip 後に上面視CCW角を設定する。この操作で、ゼロ角の上面視局所ランド `(x,y)` は `(x,−y)` になる。検出点δ=0はこの面変換でも0である。右も同じ実部品・同じ面変換を使い、pin番号やGHのpin1を絵として鏡映しない。独立検査で各部品の全ランド位置・ネット・面を直接照合する。[校正根拠](../hardware/kicad/qualification/issue-194-wing-rev2/sources/calibration.md) とメーカーPDF／該当図をB/sourcesへ保存した。
+
+[Jade Pro SPEC-KS-20T-041 v1](https://www.gateron.com/u_file/2505/21/file/GateronMagneticJadeProSwitchKS-20TF10B045NW-Y106PRO1.pdf) p7 の穴は同じ横線上で1.27方眼8区間離れ、軸を挟んで対称である。下面図の脚対とも照合し、公称中心を±5.08と読む。穴径1.70±0.05、PCB1.20は図の明記値である。**今回の製造データの公称設計値として±5.08／NPTHφ1.70を採用する**。完成穴径1.65–1.75を工程要求とし、一般NPTH公差への置換を認めない。
+
+ただし#150／#158は図面読取の実績であり、Jade Proを挿した製造・嵌合実績ではない。作業コピー内に独立した実物嵌合データはなく、今回も実測を行っていない。従ってこの採用はメーカー方眼図に基づく設計判断であり、脚径最大・穴位置公差・磁石軸との偏心を含む量産適合の認定ではない。指定full-height品での試作嵌合と公差照会は発注前ゲートとして残す。既存の仮説を「測定済み」に読み替えない。
+
+## 9. Phase B：source・PCB・配線
+
+`wing.rev2` が承認済み4案から独立した製造座標定義を生成し、B/build.py が既存部品ライブラリの実ランドを使って4枚の native KiCad PCB を構築する。各Wingは21 Hall＋21局所Cを下面、3 MUX＋3 C＋GH14を上面とし、42脚NPTH＋4取付NPTHを持つ。全pin-net／3群×7 address／S8 NC／6 GND帰線／100mm・14本1:1を保持した。PCBの鏡像コピーで右を代用していない。
+
+最初に KiCadRoutingTools で全面自動配線を実行した。D-021の2層1.2mm、信号0.10、電源/GND0.30、clearance0.10、via0.60/0.30をprojectとCLI双方に指定し、same-net via-padは0.15を目標にした。サービス領域の未接続は、配置固定の局所2層A*と電源ポアを含む追加自動配線で修復した。局所探索は現物ランド・穴・既存異ネット銅箔を障害物にし、提案stubをnative衝突判定してから挿入する。
+
+ルータの正常終了や内部接続数は合格に使わない。`--strict-sizes`／neckdown禁止でも一部rescue/plane tapが0.10の電源線を出したため、その候補を不合格として記録し、実線幅の0.30下限を是正して再検査した。via位置もnative判定で局所是正し、必要な同ネットstubを保持した。履歴・raw候補・修復スクリプトと、最終合格PCBを区別する。
+
+#165のWing導体改善として、0.30以上の配線に加えて HALL_5V F.Cu／GND B.Cu の広い補助ポアを作成・再fillした。物理銅箔グラフに充填ポリゴンを含め、ネット名だけで理想接続させない。広い銅経路を実装した証跡であり、#165の旧板DC値やシステム入力電圧保証を継承しない。Main、ハーネス、接触抵抗、温度を含むシステム電圧・ノイズ実測は別の受入れゲートである。
+
+
+## 10. 第3回再開：南内角カット・全数機械検査
+
+`.issue194-runtime/instructions-194-phaseB-resume.md` と元のPhase B指示書を全文読了し、未コミットの4基板・source・D-032草案・報告書・qualificationを引き継いだ。2回目の11:21 WebSocket停止直前の `cut.log` は16mm右と17mm左右のカットのみを記録し、16mm左の保存定義は旧矩形・旧穴だった。最初のfresh DRCは16mm左14 opens、16mm右0 opens＋残片1、17mm左1 open、17mm右0/0だった。既存配線から継続し、欠けていた16mm左のカットを追加した。[再開時監査](../hardware/kicad/qualification/issue-194-wing-rev2/resume-audit.md)参照。
+
+PO追加判断に従い、南辺を全スイッチ包絡の南限へ合わせ、南内角を45°でカットする。旧内角から北側への切上げは16mmで3.956mm、17mmで3.928mm。南辺全体の切上げは0.301484mmであり、内角の切上げ量とは区別する。新しい外接寸法は **117.2×82.698516mm／123.2×86.698516mm**。全キー中心・親指角度・Hall姿勢・固定原点は保持する。
+
+左の輪郭（mm、表示6桁）は次の5頂点。右はX符号反転した同形状で、右専用CSVとPCBに展開した。
+
+| ピッチ | 左輪郭の5頂点 (x,y) |
+| --- | --- |
+| 16mm | (-57.100000,-33.498516), (56.445484,-33.498516), (60.100000,-29.844000), (60.100000,49.200000), (-57.100000,49.200000) |
+| 17mm | (-60.100000,-35.498516), (59.473484,-35.498516), (63.100000,-31.872000), (63.100000,51.200000), (-60.100000,51.200000) |
+
+南外側の取付穴中心は新南辺から3mm内側へ追随し、左では16mmが(-54.1,-30.498516)、17mmが(-57.1,-32.498516)。南内側は旧位置から15.8mm北へ移動し、左16mm=(57.1,-15)、左17mm=(60.1,-17)。右はX符号反転、穴refは各専用定義のまま維持する。北側2穴は保持。4基板ともφ2.2／φ5 keepout、全中心→外形距離≥3mmを確認した。
+
+保存PCBをsourceと別に読んで、全84キー包絡・全168脚穴keepout（φ2.2）・全336取付φ5円対キーを検査した。包絡の外形外面積は全数0、基板南限とスイッチ南限は一致し、南側張出しは0。T2の南端は新南辺に接するため、その接点の公称支持余裕は0である。斜めカット線に対する干渉余裕は以下（左右で同値、銅箔は最終再fill後）。
+
+| 項目 mm | 16mm | 17mm |
+| --- | ---: | ---: |
+| T2包絡→カット線 | 3.385466 | 3.360492 |
+| 全脚穴keepout→カット線 最小 | 6.893253 | 6.873768 |
+| 全取付φ5円→キー包絡 最小 | 0.320628 | 0.297149 |
+| 全銅箔→カット線 最小 | 0.300500 | 0.300500 |
+
+数値原本は B/mechanical-verification.json、各基板のmechanical-key-audit.csv。銅箔には配線・via・pad・実際の充填ポアを含める。カットや穴移動と干渉する銅箔は局所的に除去・自動再配線し、全DRCと独立接続検査をやり直した。Phase Aの矩形最小余裕の値は履歴であり、新外形の判定には流用しない。
+
+## 11. 最終電気検証・via–pad全数検査
+
+KiCad 9.0.9のfresh native DRCは全4基板で**違反0・未接続0**。さらに独立銅箔グラフ、全pin-net／面／回転／脚穴／取付穴、source transfer、project規則を照合した。4指標は順に required unconnected／wrong-net contacts／material violations／unexplained transfer changes。
+
+| 基板 | DRC4指標 | via数 | 全via-pad組数 | 最小edge gap mm | 幅下限違反 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| wing-rev2-16mm-left | 0 / 0 / 0 / 0 | 150 | 28500 | 0.125000 | 0 |
+| wing-rev2-16mm-right | 0 / 0 / 0 / 0 | 184 | 34960 | 0.125000 | 0 |
+| wing-rev2-17mm-left | 0 / 0 / 0 / 0 | 181 | 34390 | 0.125000 | 0 |
+| wing-rev2-17mm-right | 0 / 0 / 0 / 0 | 167 | 31730 | 0.131375 | 0 |
+
+全682 via×各190 copper pad、計129,580組を検査し、same-netも除外しない。全数≥0.10mm、全体最小0.125mmで下限から25µmの余裕がある。0.10–0.11mmに張り付いたviaは0。viaごとの最近接距離の分布は次の通り（単位mm）。
+
+| 基板 | 0.11–0.15未満 | 0.15–0.20未満 | 0.20–0.30未満 | 中央値 | 90%分位 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| wing-rev2-16mm-left | 5 | 27 | 35 | 0.425000 | 3.569047 |
+| wing-rev2-16mm-right | 2 | 8 | 54 | 0.619073 | 3.550000 |
+| wing-rev2-17mm-left | 6 | 19 | 33 | 0.853917 | 4.457672 |
+| wing-rev2-17mm-right | 4 | 15 | 47 | 0.600000 | 4.175000 |
+
+完全分布・全PCB SHA-256は B/qualification-summary.json／各qualification.json、全組は各via-pad-all-pairs.csv.gz、viaごとの最近接padはvia-pad-nearest.json。旧runの非圧縮CSVはruntimeへ保管し、現行結果と混在させない。信号≥0.10mm、HALL_5V/GND≥0.30mm、via0.60/0.30を保存PCBの全数から検査し違反0。HALL_5V F.Cu／GND B.Cuポアはカット後に再fillして物理接続を確認した。
+
+## 12. 製造データ・ケース入力・改訂案
+
+#158に沿い、各ピッチで左右各1枚を上下に配置した独立回路パネルを生成した。3mm間隔、5mm無銅タブ、φ0.6×0.9mm pitchのmouse-bite計72穴、左右5mmレール、工具穴4、両面fiducial3組を持つ。パネル側でも実際の5頂点外形を移し、カット部を矩形に戻さない。全銅箔（pad・via・配線・充填ポア）→タブの最小距離は両ピッチ **2.000000mm**。NPTH mouse-biteの接触を許すrule-area設定と、実銅箔の2mm離隔検査を併用した。
+
+| パネル | 外接寸法 mm | 配置点数 | PTH via穴 | NPTH穴 | native DRC違反／opens |
+| --- | --- | ---: | ---: | ---: | --- |
+| panel-16mm | 133.200000×168.397032 | 98 | 334 | 168 | 0 / 0 |
+| panel-17mm | 139.200000×176.397032 | 98 | 348 | 168 | 0 / 0 |
+
+各パネルは下面Hall42＋局所C42、上面MUX6＋局所C6＋GH2の計98点、**Standard PCBA・両面実装**を前提とする。個別4基板と両パネルにGerber（銅箔・mask・paste・silk・Edge.Cuts）、PTH/NPTH drill、fabrication.zip、BOM、CPL、pin1 CSV、両面assembly SVG、source SHA付きmanifestを保存した。CPLはGerberと同じ原点、X=KiCad X／Y=−KiCad Y、上面視CCW角＋明示的side。下面機械回転はpin1位置・図面を用いて実装業者と照合する。
+
+B/verify-panel.pyで全440 footprintの全pad・net・面・姿勢・穴位置と全9,554配線/viaの転写を照合し、両カット形状を確認した。B/verify-cam.pyは出力Gerberの全profile線分（個別各5、パネル各42）、全drill hit、全BOM/CPL行をCADと比較し一致した。パネルDRCも両方違反0・opens0。原本はpanel-verification.json／cam-verification.json。
+
+[hardware/case/issue-194-rev2/](../hardware/case/issue-194-rev2/) に#150用のキー・穴・輪郭CSVを4組再生成した。キー中心とHall校正点は維持、新南辺・内角・南側取付穴を反映。source JSONのheightも外形の実寸へ更新し、旧83/87mmを現行値として残さない。[D-032草案](decisions.md)と[project-status改訂案](project-status.md)にもWing Rev.2・新外形・穴移動・Standard PCBAを反映した。
+
+## 13. 再検査・完了
+
+検証実行：Phase A generate --check／独立verify、wing.rev2 --check、ケースCSV再生成、4個別＋2パネルのfresh CLI DRC、verify.py、verify-mechanical.py、verify-panel.py、verify-cam.py。すべて合格。assembly SVGも最終PCBから再生成した。未合格rawルータ候補は履歴として区別し、製造対象はSHAに紐づくmain PCB／panel packageのみ。
+
+δ=0の公称校正と±5.08／完成φ1.70±0.05の設計採用は§8のメーカー根拠に基づく。実物嵌合、キーキャップ外形、磁気応答・Z方向stack、loaded-system電源、工程公差・タブ分離とCPL機械回転の受入れは既定の実物／業者ゲートとして残る。これはPhase Bデータ作成・検証の完了であり、量産適合・発注の承認ではない。
+
+**Issue #194 Phase B 完了（第3回起動、2026-11-07）。成果物一式を `issue-194-wing-rev2-stage2` へコミットし、ここで停止する。pushはPMOが行う。**
