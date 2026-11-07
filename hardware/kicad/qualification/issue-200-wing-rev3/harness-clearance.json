@@ -1,0 +1,374 @@
+{
+  "main_top_footprints_checked": 59,
+  "main_source_sha256": "b361a5a010a3ae2b08e5858735d46a5662112af4241ef55bab50d1ba3187b123",
+  "main_to_assembly": "(x-100,y-70)",
+  "height_source": "JST eGH.pdf pages 2-3: top-entry assembly reference (7.3), not a certified tolerance limit",
+  "height_source_url": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+  "bundle_rule": "14 wires, each insulation OD <=1mm, controlled hexagonal packing within diameter5mm (19-site packing capacity). Sleeve/retainer included in the <=5mm procurement/assembly envelope.",
+  "phi2_limitation": "phi2 is only Stage1 screening: even 14*OD0.76mm circular wire areas exceed phi2 cross-section. Do not specify phi2 as the completed 14-wire harness.",
+  "limitations": [
+    "8mm mated-height and phi5/R5 are assembly design reservations; actual harness must meet them",
+    "Only native top footprint/pad envelopes are known; fitted bodies must remain within these envelopes",
+    "At GH endpoint the plug is an intentional attachment, not an obstacle cleared by an air gap",
+    "Lid and retainers must clear cable top by 0.5mm; case changes belong to Issue198",
+    "200mm surplus retention in central/north space, strain relief, wire ordering and actual minimum bend radius require physical fit confirmation"
+  ],
+  "variants": [
+    {
+      "variant": "16mm-left",
+      "waypoints_assembly": [
+        [
+          -15.5,
+          43
+        ],
+        [
+          -13,
+          32
+        ],
+        [
+          -13,
+          -32
+        ],
+        [
+          -19,
+          -41
+        ],
+        [
+          -27,
+          -41
+        ]
+      ],
+      "xy_route_change_required": false,
+      "planar_route_mm": 93.56688198583427,
+      "proposed_z_bend_radius_mm": 5.0,
+      "centerline_with_two_z_bends_mm": 99.27484525378324,
+      "required_conductor_length_mm": 124.09716799907045,
+      "remaining_allowance_after_z_bends_mm": 24.82232274528721,
+      "gh_access_z_mm": [
+        11.2,
+        41.2
+      ],
+      "cases": [
+        {
+          "diameter_mm": 2.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J2",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 23.2,
+              "horizontal_gap_to_reservation_mm": 4.0,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 1.5500022854242963,
+          "other_main_nearest_reference": "U4",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 7.888015920190731,
+          "udb_gap_mm": 3.0,
+          "cable_top_z_mm": 25.2,
+          "lid_or_retainer_min_inner_z_mm": 25.7
+        },
+        {
+          "diameter_mm": 5.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J2",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 21.7,
+              "horizontal_gap_to_reservation_mm": 2.5,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 0.05002159665869758,
+          "other_main_nearest_reference": "U4",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 6.388015920190732,
+          "udb_gap_mm": 1.5,
+          "cable_top_z_mm": 26.7,
+          "lid_or_retainer_min_inner_z_mm": 27.2
+        }
+      ]
+    },
+    {
+      "variant": "16mm-right",
+      "waypoints_assembly": [
+        [
+          15.5,
+          43
+        ],
+        [
+          13,
+          32
+        ],
+        [
+          13,
+          -32
+        ],
+        [
+          19,
+          -41
+        ],
+        [
+          27,
+          -41
+        ]
+      ],
+      "xy_route_change_required": false,
+      "planar_route_mm": 93.56688198583427,
+      "proposed_z_bend_radius_mm": 5.0,
+      "centerline_with_two_z_bends_mm": 99.27484525378324,
+      "required_conductor_length_mm": 124.09716799907045,
+      "remaining_allowance_after_z_bends_mm": 24.82232274528721,
+      "gh_access_z_mm": [
+        11.2,
+        41.2
+      ],
+      "cases": [
+        {
+          "diameter_mm": 2.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J3",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 23.2,
+              "horizontal_gap_to_reservation_mm": 4.0,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 2.2711274889731756,
+          "other_main_nearest_reference": "C27",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 7.888015920190731,
+          "udb_gap_mm": 3.0,
+          "cable_top_z_mm": 25.2,
+          "lid_or_retainer_min_inner_z_mm": 25.7
+        },
+        {
+          "diameter_mm": 5.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J3",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 21.7,
+              "horizontal_gap_to_reservation_mm": 2.5,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 0.7711274889731755,
+          "other_main_nearest_reference": "C27",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 6.388015920190732,
+          "udb_gap_mm": 1.5,
+          "cable_top_z_mm": 26.7,
+          "lid_or_retainer_min_inner_z_mm": 27.2
+        }
+      ]
+    },
+    {
+      "variant": "17mm-left",
+      "waypoints_assembly": [
+        [
+          -15.5,
+          43
+        ],
+        [
+          -13,
+          32
+        ],
+        [
+          -13,
+          -32
+        ],
+        [
+          -19,
+          -41
+        ],
+        [
+          -27,
+          -41
+        ]
+      ],
+      "xy_route_change_required": false,
+      "planar_route_mm": 93.56688198583427,
+      "proposed_z_bend_radius_mm": 5.0,
+      "centerline_with_two_z_bends_mm": 99.27484525378324,
+      "required_conductor_length_mm": 124.09716799907045,
+      "remaining_allowance_after_z_bends_mm": 24.82232274528721,
+      "gh_access_z_mm": [
+        11.2,
+        41.2
+      ],
+      "cases": [
+        {
+          "diameter_mm": 2.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J2",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 23.2,
+              "horizontal_gap_to_reservation_mm": 4.0,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 1.5500022854242963,
+          "other_main_nearest_reference": "U4",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 9.008036198926511,
+          "udb_gap_mm": 3.0,
+          "cable_top_z_mm": 25.2,
+          "lid_or_retainer_min_inner_z_mm": 25.7
+        },
+        {
+          "diameter_mm": 5.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J2",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 21.7,
+              "horizontal_gap_to_reservation_mm": 2.5,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 0.05002159665869758,
+          "other_main_nearest_reference": "U4",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 7.508036198926511,
+          "udb_gap_mm": 1.5,
+          "cable_top_z_mm": 26.7,
+          "lid_or_retainer_min_inner_z_mm": 27.2
+        }
+      ]
+    },
+    {
+      "variant": "17mm-right",
+      "waypoints_assembly": [
+        [
+          15.5,
+          43
+        ],
+        [
+          13,
+          32
+        ],
+        [
+          13,
+          -32
+        ],
+        [
+          19,
+          -41
+        ],
+        [
+          27,
+          -41
+        ]
+      ],
+      "xy_route_change_required": false,
+      "planar_route_mm": 93.56688198583427,
+      "proposed_z_bend_radius_mm": 5.0,
+      "centerline_with_two_z_bends_mm": 99.27484525378324,
+      "required_conductor_length_mm": 124.09716799907045,
+      "remaining_allowance_after_z_bends_mm": 24.82232274528721,
+      "gh_access_z_mm": [
+        11.2,
+        41.2
+      ],
+      "cases": [
+        {
+          "diameter_mm": 2.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J3",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 23.2,
+              "horizontal_gap_to_reservation_mm": 4.0,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 2.2711274889731756,
+          "other_main_nearest_reference": "C27",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 9.008036198926511,
+          "udb_gap_mm": 3.0,
+          "cable_top_z_mm": 25.2,
+          "lid_or_retainer_min_inner_z_mm": 25.7
+        },
+        {
+          "diameter_mm": 5.0,
+          "main_components_under_sweep": [
+            {
+              "reference": "J3",
+              "value": "BM14B-GHS-TBT(LF)(SN)",
+              "mated_reference_height_mm": 7.3,
+              "reserved_mated_height_mm": 8.0,
+              "mated_reference_top_z_mm": 18.5,
+              "reservation_top_z_mm": 19.2,
+              "horizontal_cable_center_z_mm": 24.2,
+              "horizontal_cable_bottom_z_mm": 21.7,
+              "horizontal_gap_to_reservation_mm": 2.5,
+              "endpoint": "intentional plug/wire interface; zero separation at attachment, then vertical/R5 rise"
+            }
+          ],
+          "all_other_main_top_footprints_clear": true,
+          "other_main_min_planar_gap_mm": 0.7711274889731755,
+          "other_main_nearest_reference": "C27",
+          "keycap_count": 42,
+          "keycap_intersections": [],
+          "keycap_gap_mm": 7.508036198926511,
+          "udb_gap_mm": 1.5,
+          "cable_top_z_mm": 26.7,
+          "lid_or_retainer_min_inner_z_mm": 27.2
+        }
+      ]
+    }
+  ]
+}

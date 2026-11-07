@@ -1,0 +1,30 @@
+{
+  "issue": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/194",
+    "title": "Wing Rev.2 Stage 2：Cantor 配列での再レイアウト",
+    "issue_number": 194,
+    "body": "## 目的\nIssue #190 Stage 1（PR #193）の再導出座標と PO 判断（2026-11-07）に基づき、Wing を再レイアウトして **Wing Rev.2** とする。Rev.1 は未製造のまま supersede される。\n\n## 確定した前提（PO 判断 2026-11-07、#190 コメント参照）\n1. キー中心は Stage 1 の u 比・再アンカー座標を採用（`hardware/case/issue-190-layout/coordinates-u.csv` / `coordinates-{16,17}mm.csv`、PR #193 ブランチ）\n2. 親指キーは原典角度を採用（左：K30 +5°／K31 −10°／K32 −25°、右は鏡像）\n3. 外形は拡張し、Jade Pro の全平面包絡（保守値 15.8mm 角、回転込み）を基板内に収める。寸法は必要最小限に詰める（旧政策寸法 119.8×104／126.9×109 をそのまま使わない）\n4. キーキャップは Junana MX を想定（1U は16mmピッチ対応を確認済み）。キャップは包絡の律速にしない\n\n## Phase A（本ディスパッチ）：配置・外形の確定案\n- 両ピッチ×左右の配置確定案（キー中心＋姿勢、センサー位置はスイッチ姿勢に追随）\n- C0 列の 180°（Piantor 由来）はソケット都合の項目。Hall 基板でセンサー配置に影響するか評価し、影響がある場合は理由を明記して 0° とする（無言で落とさない）\n- 外形寸法の最小化（全包絡＋四隅の位置決め穴 φ2.2 NPTH／φ5 keepout を収める）\n- J1（GH14）とテストパッド等のサービス要素の配置案（新形状での置き場）\n- 包絡・クリアランスの数値検証結果と未決事項を報告書にまとめ、**PMO レビューで停止**する\n\n## Phase B（PMO GO 後）：配線・製造データ\n- D-021（2層、信号 0.10mm／電源・GND 0.30mm、via 0.60/0.30）で全面配線。自動配線最優先（PO 方針）\n- Wing 側導体の低抵抗化（#165 の宿題：HALL_5V／GND 経路）\n- via-パッド間隔は全数 ≥0.10mm を必須とし、最小値を報告する（マージンを意識する。Main Rev.3 の 0.100000mm ちょうどは繰り返さない）\n- DRC 4指標オール0\n- 製造データ再生成（左右1パネル、#158 の標準実装計画に沿う）、#150 キー計測 CSV の新座標での再生成\n- D-032（Wing Rev.2 ベースライン）草案と project-status.md 改訂表の更新案\n- Draft PR で提出\n\n## 対象外\nMain／Matrix の変更、ケース設計、発注。",
+    "state": "open",
+    "user": {
+      "login": "ihsinoky",
+      "name": "ihsinoky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+      "id": 42207341
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-11-06T22:51:11Z",
+    "updated_at": "2026-11-06T22:51:11Z",
+    "closed_at": null,
+    "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/194",
+    "display_title": "Wing Rev.2 Stage 2：Cantor 配列での再レイアウト"
+  },
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/194",
+  "title": "Wing Rev.2 Stage 2：Cantor 配列での再レイアウト",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/194",
+  "display_title": "Wing Rev.2 Stage 2：Cantor 配列での再レイアウト"
+}

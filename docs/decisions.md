@@ -856,7 +856,6 @@ The implementation and evidence are in
 [Issue #178 report](issue-178-m1-matrix-board.md). Passing routing/DRC does not
 establish magnetic interaction, harness/ADC settling, manufacturer PCBA
 acceptance or manufacturing release. No order, charge or merge is authorized.
-<<<<<<< HEAD
 
 ## D-029 - Matrix Rev.3: keep every via clear of component pads; no POFV
 
@@ -945,3 +944,136 @@ Knowledge in this project is kept in three layers:
 
 Not maintained: a lessons register, AAR, postmortem documents, design
 doc/RFC, runbook, and tech radar (the last is trigger-based only).
+
+## D-032 (draft) - Wing Rev.2 baseline (Issue #194)
+
+Status: **Draft for PMO review; not an order or production release**.
+
+Adopt the approved Phase A Stage 1 key centers and thumb poses, C0=0 degrees,
+with separate left/right 21-key boards at both 16 and 17mm pitch. Outlines have bounds
+117.2x82.698516mm (16mm) and 123.2x86.698516mm (17mm). Per the PO decision
+on 2026-11-07, trim the south edge to the full switch-envelope limit and
+chamfer the south inner corner by 3.956/3.928mm from the former corner.
+Move the outer south mounting center with the edge and move the inner south
+center north by 15.8mm, preserving the fixed coordinate frame and all key
+centers. See the exact five-vertex contours and four mounting centers in
+the Issue #194 report and generated case CSVs. All 21 DRV5055 DBZ
+sensors and their local 100nF capacitors are on the bottom. MUX/GH14 remain on
+top. Native bottom transformations preserve the physical pin map. Calibrate
+active point to land origin by F=K-R(theta)delta, delta=(0,0)mm nominal,
+using TI Rev.C Figure6-5 and the body-centered Wing land; device XY tolerance
++/-0.05mm remains separate.
+
+Adopt nominal locator pairs +/-5.08mm in the key frame and completed NPTH
+1.70+/-0.05mm from the Jade Pro manufacturer's drawing grid. This design
+adoption does not certify physical fit: no fabricated Jade Pro fit data was
+available. Complete a sample fit and supplier tolerance review before ordering.
+Keep D-017's GH14 pin map, six GND conductors, 100mm 1:1 harness, 3x7 MUX
+assignment, S8 NC and independent Main enable control.
+
+D-021 applies: two copper layers, 1.2mm PCB, signal tracks >=0.10mm,
+HALL_5V/GND tracks >=0.30mm, clearance >=0.10mm, ordinary through vias
+0.60/0.30mm. Supplementary HALL_5V front and GND rear pours implement the
+Wing conductor improvement requested by #165. Verify their actual filled
+connectivity; copper area is not a system voltage-drop guarantee.
+
+All four boards require independent zero required opens, wrong-net contacts,
+material violations and unexplained placement/pin transfer changes. Also audit
+every via against every copper pad, including same-net pads, for edge gap
+>=0.10mm, with actual minimum and distribution reported. Avoid the limit by
+routing with 0.15mm same-net pad target and explicit native-checked local
+margin repairs. The qualified package uses ordinary vias without POFV.
+
+Manufacture each pitch as one left/right panel with electrically independent
+halves, copper-free routed separation tabs and Standard PCBA for the two
+assembly sides. Review panel rails, tooling, mouse bites, bottom pin1 and CPL
+machine rotations with the assembler before ordering. Keep pitch selection,
+magnetic polarity/response, stack/locator fit, cap clearance and loaded-system
+power acceptance as physical gates. See [the Phase B report](issue-194-wing-rev2-stage2.md).
+
+## D-033 - Main Rev.4 triangular baseline and separated UDB
+
+Status: accepted 2026-11-07 (PO merge gate, PR #197).
+
+Use the accepted Phase A-2 triangle (75.785364 × 65.632051 mm bounding box),
+59 electrical components and three φ2.2 NPTH mounting holes. J2/J3 remain
+BM14B-GHS-TBT(LF)(SN), aligned to the slopes and mating from above (+Z).
+Each hole keeps its all-layer copper reservation of diameter 5.0004 mm.
+This supersedes D-025's previous Main outline and D-023's four-hole arrangement
+for this Rev.4 package only.
+
+Separate USB onto the PO-owned UDB C3. Remove Main J1, CC R1/R2 and data ESD U2;
+retain the RP2040-side 27 Ω R3/R4. Add J4 SM04B-SRSS-TB(LF)(SN), LCSC C160404,
+with 1:1 pins 1=protected VBUS, 2=D−, 3=D+, 4=GND. This replaces D-022's
+onboard USB-C assembly policy for Main Rev.4. The C3/SH case datum and physical
+cable assembly remain review items.
+
+**Supersede D-017's 100 mm GH harness length for Main Rev.4 with 200 mm × 2.**
+Keep D-024's electrical skeleton and pin assignments, regulated 5.2 V rail,
+TPS63070-class converter, RP2040 and common default-off supply control. The
+resistance model requires full 200 mm conductor paths, AWG28-equivalent minimum
+0.0804 mm² copper area and six return wires. Do not shorten the model to a chord
+or inherit the old 100 mm voltage-drop result.
+
+Keep D-019: four layers, 1.2 mm, minimum 0.10 mm track/clearance, 0.60/0.30 mm
+vias and In1.Cu dedicated GND. The [Phase B report](issue-196-main-rev4-phaseb.md)
+records four independent metrics at zero, all 130 vias clear of pads by at least
+0.145 mm, and common/branch loop resistance below 50 mΩ in the extracted model.
+At 127 mA/Wing with the explicit 200 mm harness model, the worst far-end voltage
+is 4.797985 V. These are design-model results, not measured manufacturing bounds.
+
+Use the Rev.4 manufacturing package and quote handoff from the report. Ordinary
+tented vias without POFV are proposed for this package, subject to manufacturer
+DFM. Requote through PMO; do not reuse Rev.3 pricing. This draft authorizes no
+order, charge, merge or manufacturing release. Prior revision artifacts retain
+their own baseline and qualification history.
+
+## D-034 (draft) - Wing Rev.3 baseline (Issue #200)
+
+Status: **Accepted 2026-11-07 (PO merge gate, PR #201)**. Harness length: 200mm retained (PO decision 2026-11-07, confirming D-033) — the Stage 2 power re-verification showed the farthest point at 4.943V with 200mm vs 4.946V at the ~124mm route length, a ~3mV difference, so voltage is not a deciding factor; the slack is absorbed by the case service-loop storage (Issue #198).
+
+For Wing Rev.3, supersede D-032's outline, GH/service-component placement,
+south mounting-hole placement and inherited 100mm harness assumption. Keep
+D-032 as the historical Rev.2 record. Use the Stage 1b broad north shoulder
+with R5 reentrant corner and stepped south trim in
+`hardware/case/issue-200-stage1/geometry.json`. Preserve Rev.2 key centers,
+Hall/local capacitor poses, physical bottom pin transforms, nominal active
+point delta=(0,0), locator pairs +/-5.08mm and completed NPTH1.70+/-0.05mm.
+Generate both pitches and both sides individually; never mirror copper pads.
+
+Put GH14 at assembly (-27,-41)/(27,-41)mm; relocate all three MUX, their
+capacitors and all 15 testpoints into the north service area. Keep the Stage 1
+mounting candidates: H1 left (3,-5)/(4,-6)mm at 16/17mm; H3 right uses the
+negative X. Other mounting centers remain Rev.2. Retain four phi2.2 NPTHs
+and full phi5 all-copper reservations. Case CSVs are in
+`hardware/case/issue-200-rev3/`.
+
+Keep D-021: two layers, 1.2mm, signal >=0.10mm, power/GND >=0.30mm,
+clearance >=0.10mm and ordinary via0.60/0.30mm. Use filled HALL_5V on the
+front and GND on the back; reserve the full southern 2mm strip against signal
+tracks and vias. Use the two-layer power copper in this strip as the power
+spine and GND band, with mounting exclusions bypassed through interior copper.
+Require native DRC zero and independent four metrics zero on every board;
+audit every via against all pads, including same-net and NPTH, >=0.10mm,
+with a 0.125mm-class practical minimum. No POFV is specified.
+
+D-024's electrical interface, six GND conductors, GH14 1:1 wiring, three
+seven-channel MUX groups, unused S8 and independent Wing enable remain.
+**The adopted Main Rev.4 harness length is still 200mm per D-033.** Evaluate
+both the new route's 124.097mm requirement and 200mm, using newly extracted
+Rev.3 copper resistance instead of the old Issue #141 Wing drop. This draft
+makes no decision to shorten the procured harness. Keep 127mA/Wing as the
+design load and the documented Main/rail/contact/temperature worst corner.
+
+Use the report's Main overhead route and Z reservation. Phi2 is only the old
+screening diameter; the 14-wire assembly must fit the proposed <=phi5 envelope,
+R5 bends and 8mm GH mated-height reservation. Transfer the required cable/lid
+clearance and GH overhead access space to Issue #198. Real harness OD, bend
+radius, strain relief, 200mm surplus storage and mating remain fit checks.
+
+Each pitch uses one electrically independent left/right manufacturing panel,
+with copper-free mouse-bite tabs and rails. Standard PCBA is required for
+bottom Hall/local capacitors and top MUX/GH assembly. Keep DFM, tab separation,
+locator fit, pin1/machine CPL rotation, magnetic response, noise and assembled
+power acceptance as the existing physical gates. This draft authorizes no
+order or quotation. See [the Stage 2 report](issue-200-wing-rev3-stage2.md).

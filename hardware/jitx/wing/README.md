@@ -37,3 +37,11 @@ as amended on 2026-11-05 (Issue #143);
 this generated data is unchanged and the README remains no manufacturing release.
 No routing, manufacturing package, final ergonomic layout or measured acceptance
 is included.
+
+Wing Rev.2 (Issue #194 Phase B) has a separate generator:
+`python -m wing.rev2` or `python -m wing.rev2 --check`, run from `hardware/jitx`.
+It consumes the PMO-approved four Phase A layouts, calibrates the Hall active
+point and emits separate left/right definitions at both pitches. The native
+PCB builder, routing evidence, independent qualification and Standard-PCBA
+panel data are in [issue-194-wing-rev2](../../kicad/qualification/issue-194-wing-rev2/README.md).
+The legacy six-variant exporter continues to describe the older evaluation boards.
