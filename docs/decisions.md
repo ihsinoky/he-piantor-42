@@ -1004,7 +1004,7 @@ their own baseline and qualification history.
 
 ## D-034 (draft) - Wing Rev.3 baseline (Issue #200)
 
-Status: **Draft for PMO review; harness length remains undecided**.
+Status: **Draft for PO merge gate (PR #201)**. Harness length: 200mm retained (PO decision 2026-11-07, confirming D-033) — the Stage 2 power re-verification showed the farthest point at 4.943V with 200mm vs 4.946V at the ~124mm route length, a ~3mV difference, so voltage is not a deciding factor; the slack is absorbed by the case service-loop storage (Issue #198).
 
 For Wing Rev.3, supersede D-032's outline, GH/service-component placement,
 south mounting-hole placement and inherited 100mm harness assumption. Keep
