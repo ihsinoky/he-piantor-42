@@ -2,6 +2,8 @@
 
 This file records decisions that materially affect hardware, firmware, manufacturing, or enclosure design.
 
+> **監査案内（2026-11-08、Issue #205）:** 状態・PO 根拠・適用範囲・後継関係は [全34件の監査報告](issue-205-adr-audit.md) を参照。既存 Status／本文／見出しは履歴として保存し、訂正・補足は監査注記で示す。採択根拠不足は「未確認」に分離している。
+
 ## D-001 - One-piece geometry
 
 Status: provisional
@@ -36,6 +38,8 @@ Do not release the 42-key production PCB based only on nominal switch data. Vali
 
 Status: accepted
 
+> **監査注記（2026-11-08、Issue #205）:** 原文 accepted に対応する PO の明示採択／マージゲートと決定日は未確認。初出 42caa276 は記録の根拠であり採択の代用ではない。本監査では「未確認」とする。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Use a dedicated power indicator LED independent of the MCU.
 
 Reason: it provides a basic hardware diagnostic when firmware or USB enumeration fails.
@@ -44,11 +48,15 @@ Reason: it provides a basic hardware diagnostic when firmware or USB enumeration
 
 Status: accepted
 
+> **監査注記（2026-11-08、Issue #205）:** 原文 accepted に対応する PO の明示採択／マージゲートと決定日は未確認。初出 42caa276 と採択判断を分け、本監査では「未確認」とする。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Use a separate MCU-controlled RGB LED for four-layer indication.
 
 ## D-006 - Manufacturing strategy
 
 Status: accepted
+
+> **監査注記（2026-11-08、Issue #205）:** 原文 accepted に対応する初期方針全体の PO 採択根拠と決定日は未確認。後続の個別 PCBA 方針を全体の採択に遡及させず、本監査では「未確認」とする。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 Target JLCPCB PCBA for the assembled PCB and FDM printing for the first enclosure.
 
@@ -95,6 +103,8 @@ Reason: TMUX1208 explicitly supports low-voltage digital control while operating
 
 Status: accepted measurement intent; one-piece four-key physical implementation assumption superseded by D-015
 
+> **監査注記（2026-11-08、Issue #205）:** 初期の accepted measurement intent の PO 採択根拠と決定日は未確認。D-015 の物理形態変更、D-017 の後続測定枠組み採択とは区別する。量産前実測の意図を失効させたり実測済みと判定したりする注記ではない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Do not release the 42-key PCB until a four-key Hall evaluation board has measured:
 - switch travel curve and polarity,
 - usable ADC span and clipping margin,
@@ -113,6 +123,8 @@ validate Hall behavior before releasing the 42-key design remains valid.
 ## D-012 - PCB layer baseline
 
 Status: accepted
+
+> **監査注記（2026-11-08、Issue #205）:** D-019 は Main に限り4層へ改定。D-021 は代表21キー Wing の独立した2層／ルール採択で、その Amendment は同じ ID の幅条件改定。D-028 は Matrix への適用を明示する。1.2mm厚は維持。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 Use a two-layer PCB for the evaluation board and as the current production
 baseline. Prioritize JLCPCB's low-cost manufacturing options. Four-layer
@@ -292,6 +304,8 @@ production-qualified physical Rev.M1 design.
 ## D-017 - Rev.M1 Main/Wing architecture and interface freeze
 
 Status: accepted
+
+> **監査注記（2026-11-08、Issue #205）:** D-024 は GH14 電気契約を維持して2ポートへ拡張。D-033 は Main Rev.4 に限り100mm前提を200mm×2へ置換し、D-034 が保持する。層・ルールの後継は Main が D-019、Wing が D-021、Matrix 評価構成は D-028。G0B 全体の取消ではない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 The [Issue #57 PO GO](https://github.com/ihsinoky/he-piantor-42/issues/57#issuecomment-6010634587)
 on 2026-10-06 accepts the [reviewed G0B record](../hardware/rev-m1/g0b-freeze-proposal.md).
@@ -557,6 +571,8 @@ unchanged.
 
 Status: accepted PO decision (2026-11-05)
 
+> **監査注記（2026-11-08、Issue #205）:** D-029 の POFV 不要判断は Matrix Rev.3 限定で、この旧 Main 仕様を取り消さない。Main Rev.3 の撤回提案 D-030 は未確認（PO 判断待ち）。D-033 は Main Rev.4 の J1 を UDB に分離し、同版の通常 tented／非POFVは業者 DFM 待ちの提案として記録する。旧版や UDB 全体の工程へ一括適用しない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Per the PO decision of 2026-11-05 ([Issue #145](https://github.com/ihsinoky/he-piantor-42/issues/145)),
 this decision **finalizes the two order specifications that
 [D-019](#d-019---revm1-main-four-layer-and-010-mm-design-rule-baseline) left
@@ -590,6 +606,8 @@ documents are unchanged.
 ## D-023 - Rev.M1 Main mounting revision: plan A, retained 48 x 44 mm outline
 
 Status: accepted PO decision (2026-11-06)
+
+> **監査注記（2026-11-08、Issue #205）:** D-024 の第2ポート、D-025 の外形変更では4穴を維持する。D-033 は Main Rev.4 に限り三角形／3穴へ置換する。旧版の4穴記録を Rev.4 の穴数として使わない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 Per [Issue #155](https://github.com/ihsinoky/he-piantor-42/issues/155), adopt
 **plan A** from [Issue #153 Stage 1](issue-153-main-mounting-stage1.md#2-第一案a48×44mm4穴部品ビア固定)
@@ -631,6 +649,8 @@ review remain required. It does not authorize ordering, billing or merge.
 
 Status: accepted PO scope decision (2026-11-06); implementation remains subject
 to the mechanical gate and independent qualification
+
+> **監査注記（2026-11-08、Issue #205）:** 案A配置は D-025 の案C採択へ、機構の先行ゲートは D-026 の設計先行方針へ、入力境界は D-027 へ部分更新。D-033 は Main Rev.4 の外形／UDB／200mmを更新する。GH14 pin配置・共通バス・独立enableは継承する。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 [Issue #160](https://github.com/ihsinoky/he-piantor-42/issues/160) adopts the
 interface proposed in [Issue #157 §2–4](issue-157-main-dual-wing-stage1.md)
@@ -701,6 +721,8 @@ or authorizes manufacturing release, ordering, billing or merge.
 
 Status: accepted PO decision (2026-11-06)
 
+> **監査注記（2026-11-08、Issue #205）:** 機構確認を本作業の先行ゲートとする条件は D-026 で後段へ移された。外形／穴／配置は Main Rev.4 の範囲で D-033 へ置換する。機構確認の合格を意味しない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Per [Issue #163](https://github.com/ihsinoky/he-piantor-42/issues/163), adopt
 **plan C** following the [Issue #160 mechanical gate](issue-160-main-dual-wing-stage2.md):
 extend Main north by **8 mm** to **48 x 52 mm**, KiCad absolute
@@ -728,6 +750,8 @@ charge, manufacturing release or merge.
 
 Status: accepted PO scope decision (2026-11-06); electrical implementation and
 qualification are not established by this decision
+
+> **監査注記（2026-11-08、Issue #205）:** D-027 は変換器入力4.75V要求を Main USB コネクタの入力範囲へ置換する。5.2V方式、127mA/Wing、出力・抵抗目標は維持。Main Rev.4 の形状と200mmハーネスは D-033 に従う。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 Per [Issue #167](https://github.com/ihsinoky/he-piantor-42/issues/167), retain
 D-025 plan C: X76–124 / Y70–122 (48 x 52 mm), J3=(105,73), 0 degrees,
@@ -890,6 +914,8 @@ later release tasks. This decision authorizes no order, charge or merge.
 
 Status: Issue #185 implementation proposal; pending PO review / merge (2026-11-06)
 
+> **監査注記（2026-11-08、Issue #205）:** **未確認（PO 判断待ち）**。実装は PR #187（f04ef1b7）でマージ済みだが、POFV 要求撤回の方針採択は PO の明示確認が未了。Issue #205 と PMO 引継ぎに従い Accepted にしない。採択日も未確認。D-033 は別版の判断であり、本提案の遡及採択ではない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Per [Issue #185](https://github.com/ihsinoky/he-piantor-42/issues/185), Main Rev.3
 relocates the 35 vias that failed the [Issue #183 audit](https://github.com/ihsinoky/he-piantor-42/pull/184)
 from the qualified Main Rev.2 board in PR #176. All 66 footprint positions and
@@ -949,6 +975,8 @@ doc/RFC, runbook, and tech radar (the last is trigger-based only).
 
 Status: **Draft for PMO review; not an order or production release**.
 
+> **監査注記（2026-11-08、Issue #205）:** **2026-11-07、PR #195 の PO マージゲートで採択済み。その後 D-034 で部分置換。** Issue #205 と PMO 引継ぎを a313ca4f／Phase B 報告書に照合した。旧 Draft 表記と見出しは履歴／アンカー維持のため保存する。外形、GH／サービス部品、南側穴、100mm前提は D-034 へ。キー中心、Hall姿勢、locator等の継承条件は有効。製造GOではない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Adopt the approved Phase A Stage 1 key centers and thumb poses, C0=0 degrees,
 with separate left/right 21-key boards at both 16 and 17mm pitch. Outlines have bounds
 117.2x82.698516mm (16mm) and 123.2x86.698516mm (17mm). Per the PO decision
@@ -995,6 +1023,8 @@ power acceptance as physical gates. See [the Phase B report](issue-194-wing-rev2
 
 Status: accepted 2026-11-07 (PO merge gate, PR #197).
 
+> **監査注記（2026-11-08、Issue #205）:** **2026-11-07、PR #197 の PO マージゲートで採択済み。** PMO 引継ぎ、既存 Status、90c8314b／Phase B 報告書を照合した。本文の draft／merge禁止は採択前の記録として保存する。D-017 の100mm、D-025 の外形、D-023 の4穴、D-022 のオンボードJ1工程の変更は Main Rev.4 限定。通常 tented／非POFVの提案、再見積・業者DFM・製造リリースの別ゲートは保持する。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
+
 Use the accepted Phase A-2 triangle (75.785364 × 65.632051 mm bounding box),
 59 electrical components and three φ2.2 NPTH mounting holes. J2/J3 remain
 BM14B-GHS-TBT(LF)(SN), aligned to the slopes and mating from above (+Z).
@@ -1031,6 +1061,8 @@ their own baseline and qualification history.
 ## D-034 (draft) - Wing Rev.3 baseline (Issue #200)
 
 Status: **Accepted 2026-11-07 (PO merge gate, PR #201)**. Harness length: 200mm retained (PO decision 2026-11-07, confirming D-033) — the Stage 2 power re-verification showed the farthest point at 4.943V with 200mm vs 4.946V at the ~124mm route length, a ~3mV difference, so voltage is not a deciding factor; the slack is absorbed by the case service-loop storage (Issue #198).
+
+> **監査注記（2026-11-08、Issue #205）:** **2026-11-07、PR #201 の PO マージゲートで採択済み。見出し draft は表記不整合。** PMO 引継ぎ、既存 Status、932b880c／Stage 2 報告書を照合した。見出しと本文の draft は履歴／旧アンカー維持のため保存し、この注記で状態を補足する。D-032 の指定範囲を置換し D-033 の200mmを保持する。124mmへの短縮決定や発注／製造GOではない。 詳細・根拠は [監査報告](issue-205-adr-audit.md)。
 
 For Wing Rev.3, supersede D-032's outline, GH/service-component placement,
 south mounting-hole placement and inherited 100mm harness assumption. Keep
