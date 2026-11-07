@@ -920,9 +920,55 @@ reduction or constitute manufacturing release. Vendor acceptance, revised
 quotation, material minima, procurement and physical validation remain separate.
 No order, charge or merge is authorized or performed.
 
-## D-033 - Main Rev.4 triangular baseline and separated UDB (draft)
+## D-032 (draft) - Wing Rev.2 baseline (Issue #194)
 
-Status: Draft baseline for Issue #196 Phase B / PR #197; pending PMO review.
+Status: **Draft for PMO review; not an order or production release**.
+
+Adopt the approved Phase A Stage 1 key centers and thumb poses, C0=0 degrees,
+with separate left/right 21-key boards at both 16 and 17mm pitch. Outlines have bounds
+117.2x82.698516mm (16mm) and 123.2x86.698516mm (17mm). Per the PO decision
+on 2026-11-07, trim the south edge to the full switch-envelope limit and
+chamfer the south inner corner by 3.956/3.928mm from the former corner.
+Move the outer south mounting center with the edge and move the inner south
+center north by 15.8mm, preserving the fixed coordinate frame and all key
+centers. See the exact five-vertex contours and four mounting centers in
+the Issue #194 report and generated case CSVs. All 21 DRV5055 DBZ
+sensors and their local 100nF capacitors are on the bottom. MUX/GH14 remain on
+top. Native bottom transformations preserve the physical pin map. Calibrate
+active point to land origin by F=K-R(theta)delta, delta=(0,0)mm nominal,
+using TI Rev.C Figure6-5 and the body-centered Wing land; device XY tolerance
++/-0.05mm remains separate.
+
+Adopt nominal locator pairs +/-5.08mm in the key frame and completed NPTH
+1.70+/-0.05mm from the Jade Pro manufacturer's drawing grid. This design
+adoption does not certify physical fit: no fabricated Jade Pro fit data was
+available. Complete a sample fit and supplier tolerance review before ordering.
+Keep D-017's GH14 pin map, six GND conductors, 100mm 1:1 harness, 3x7 MUX
+assignment, S8 NC and independent Main enable control.
+
+D-021 applies: two copper layers, 1.2mm PCB, signal tracks >=0.10mm,
+HALL_5V/GND tracks >=0.30mm, clearance >=0.10mm, ordinary through vias
+0.60/0.30mm. Supplementary HALL_5V front and GND rear pours implement the
+Wing conductor improvement requested by #165. Verify their actual filled
+connectivity; copper area is not a system voltage-drop guarantee.
+
+All four boards require independent zero required opens, wrong-net contacts,
+material violations and unexplained placement/pin transfer changes. Also audit
+every via against every copper pad, including same-net pads, for edge gap
+>=0.10mm, with actual minimum and distribution reported. Avoid the limit by
+routing with 0.15mm same-net pad target and explicit native-checked local
+margin repairs. The qualified package uses ordinary vias without POFV.
+
+Manufacture each pitch as one left/right panel with electrically independent
+halves, copper-free routed separation tabs and Standard PCBA for the two
+assembly sides. Review panel rails, tooling, mouse bites, bottom pin1 and CPL
+machine rotations with the assembler before ordering. Keep pitch selection,
+magnetic polarity/response, stack/locator fit, cap clearance and loaded-system
+power acceptance as physical gates. See [the Phase B report](issue-194-wing-rev2-stage2.md).
+
+## D-033 - Main Rev.4 triangular baseline and separated UDB
+
+Status: accepted 2026-11-07 (PO merge gate, PR #197).
 
 Use the accepted Phase A-2 triangle (75.785364 × 65.632051 mm bounding box),
 59 electrical components and three φ2.2 NPTH mounting holes. J2/J3 remain

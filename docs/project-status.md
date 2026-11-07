@@ -28,6 +28,7 @@ table.
 | Main board | Rev.3 | Rev.2 with 35 vias relocated clear of pads; no POFV required for this package (Issue #185). | - |
 | Main board | Rev.4 | Triangular Main with separate UDB C3, three mounting holes and 200 mm GH harnesses; routed and manufacturing package prepared in Issue #196 Phase B / PR #197. PMO review and requote pending. | - |
 | Wing board (Left / Right) | Rev.1 | 21-key Hall key boards, manufacturing data SILK-149A. | Rev.A Wing, "ver.A Wing" |
+| Wing board (Left / Right) | Rev.2 (proposed) | [Issue #194 Phase B](issue-194-wing-rev2-stage2.md): separate left/right 21-key boards at 16/17mm, bottom Hall/local C, revised outline and locator holes, low-resistance pours, copper-free-tab Standard-PCBA panel. D-032 draft; physical fit/power acceptance and order release pending. | - |
 
 Phase usage stays as before: M1 is the evaluation phase (current), M2 is the
 42-key product phase. Ordering the Wing Rev.1 bare boards together with the
