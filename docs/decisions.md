@@ -919,3 +919,40 @@ This change does not adopt quotation-only substitute parts, guarantee a cost
 reduction or constitute manufacturing release. Vendor acceptance, revised
 quotation, material minima, procurement and physical validation remain separate.
 No order, charge or merge is authorized or performed.
+
+## D-033 - Main Rev.4 triangular baseline and separated UDB (draft)
+
+Status: Draft baseline for Issue #196 Phase B / PR #197; pending PMO review.
+
+Use the accepted Phase A-2 triangle (75.785364 × 65.632051 mm bounding box),
+59 electrical components and three φ2.2 NPTH mounting holes. J2/J3 remain
+BM14B-GHS-TBT(LF)(SN), aligned to the slopes and mating from above (+Z).
+Each hole keeps its all-layer copper reservation of diameter 5.0004 mm.
+This supersedes D-025's previous Main outline and D-023's four-hole arrangement
+for this Rev.4 package only.
+
+Separate USB onto the PO-owned UDB C3. Remove Main J1, CC R1/R2 and data ESD U2;
+retain the RP2040-side 27 Ω R3/R4. Add J4 SM04B-SRSS-TB(LF)(SN), LCSC C160404,
+with 1:1 pins 1=protected VBUS, 2=D−, 3=D+, 4=GND. This replaces D-022's
+onboard USB-C assembly policy for Main Rev.4. The C3/SH case datum and physical
+cable assembly remain review items.
+
+**Supersede D-017's 100 mm GH harness length for Main Rev.4 with 200 mm × 2.**
+Keep D-024's electrical skeleton and pin assignments, regulated 5.2 V rail,
+TPS63070-class converter, RP2040 and common default-off supply control. The
+resistance model requires full 200 mm conductor paths, AWG28-equivalent minimum
+0.0804 mm² copper area and six return wires. Do not shorten the model to a chord
+or inherit the old 100 mm voltage-drop result.
+
+Keep D-019: four layers, 1.2 mm, minimum 0.10 mm track/clearance, 0.60/0.30 mm
+vias and In1.Cu dedicated GND. The [Phase B report](issue-196-main-rev4-phaseb.md)
+records four independent metrics at zero, all 130 vias clear of pads by at least
+0.145 mm, and common/branch loop resistance below 50 mΩ in the extracted model.
+At 127 mA/Wing with the explicit 200 mm harness model, the worst far-end voltage
+is 4.797985 V. These are design-model results, not measured manufacturing bounds.
+
+Use the Rev.4 manufacturing package and quote handoff from the report. Ordinary
+tented vias without POFV are proposed for this package, subject to manufacturer
+DFM. Requote through PMO; do not reuse Rev.3 pricing. This draft authorizes no
+order, charge, merge or manufacturing release. Prior revision artifacts retain
+their own baseline and qualification history.

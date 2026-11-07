@@ -1,0 +1,24 @@
+03:58:45: Debug: Adding duplicate image handler for 'PNG file'
+03:58:45: Debug: Adding duplicate image handler for 'JPEG file'
+03:58:45: Debug: Adding duplicate image handler for 'TIFF file'
+03:58:45: Debug: Adding duplicate image handler for 'GIF file'
+03:58:45: Debug: Adding duplicate image handler for 'PNM file'
+03:58:45: Debug: Adding duplicate image handler for 'PCX file'
+03:58:45: Debug: Adding duplicate image handler for 'IFF file'
+03:58:45: Debug: Adding duplicate image handler for 'Windows icon file'
+03:58:45: Debug: Adding duplicate image handler for 'Windows cursor file'
+03:58:45: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+03:58:45: Debug: Adding duplicate image handler for 'TGA file'
+03:58:45: Debug: Adding duplicate image handler for 'XPM file'
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/connectivity.py", line 3, in <module>
+    import pcbnew as p,collections,importlib.util,inspect
+  File "/home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspect.py", line 11, in <module>
+    assert run(label+'-drc',[B/'kicad/usr/bin/kicad-cli','pcb','drc','--format','json','--severity-all','-o',w/'drc.json',w/'main.kicad_pcb'])==0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/common.py", line 17, in run
+    w=E/'processes'/name;w.mkdir(parents=True,exist_ok=False);start=now();t=time.monotonic()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/processes/auto01-drc'

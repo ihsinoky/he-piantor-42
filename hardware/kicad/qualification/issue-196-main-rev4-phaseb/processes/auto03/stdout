@@ -1,0 +1,304 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue155-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/in.kicad_pcb /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pcb --escalation off --track-width 0.1 --clearance 0.13 --same-net-pad-clearance 0.13 --via-size 0.6 --via-drill 0.3 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 -1 1 1 --nets WING_EN --keep-input-copper
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli
+--clearance 0.13: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [board constraint].
+--board-edge-clearance not given; using 0.2mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/in.kicad_pcb to expand net patterns...
+Routing 1 nets: ['WING_EN']
+Loading /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/in.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=-1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.13mm (from flag, #581): vias stay off same-net pads
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 1 nets with 0 crossing conflicts detected
+MPS Round 1: 1 units: WING_EN
+
+Routing 1 single-ended net(s)...
+============================================================
+Building base obstacle map...
+29 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
+Pour guard (#1260): GND pour on In1.Cu: islands left crossable -- 1 hold a routed net's terminal
+Base obstacle map built in 2.60s
+Found 40 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.19s (40 nets)
+Plane fragility: exact-fill geometry (1 filled island(s) from KiCad refill)
+Plane fragility field: 108865 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/1] Routing WING_EN (id=30)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=17.63mm)
+  Phase 1 edge (pads 0,2) failed after 5390 iterations - trying next MST edge
+  Multi-point net Phase 1: retrying with next MST edge (2/2) (pads 2 and 1, length=16.59mm)
+  Phase 1 routed in 20856 iterations, 11 segments
+  SUCCESS: 11 segments, 2 vias, 20856 iterations, length=17.77mm (stubs=0.00mm) (0.79s)
+
+Sync pcb_data: 1213 -> 1202 (kept stubs) -> 1213 (after adding 11)
+
+============================================================
+Multi-point Phase 3: Routing 1 tap connections
+============================================================
+
+WING_EN (net 30):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [1/1] Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (383 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5383 iterations (0.00s)
+    Fallback: attempting orphaned pad 0 directly from connected copper
+    [2/1] (1 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (382 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5382 iterations (0.00s)
+  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
+  Phase 3 routing complete: 0 edges, 11 total segments, 2 total vias
+    Ripping MUX_A1 (net 8) to retry tap route...
+      PRE-EXISTING rip: 'MUX_A1' (earlier-step copper) removed -- queued for reroute this run; original restored if the reroute fails
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [2/1] (1 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (383 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5383 iterations (0.00s)
+    Fallback: attempting orphaned pad 0 directly from connected copper
+    [3/1] (2 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (382 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5382 iterations (0.00s)
+  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
+  Phase 3 routing complete: 0 edges, 11 total segments, 2 total vias
+    WING_EN: Retry FAILED (N=1): still 1 failed edges
+      Retry had 551 blocked cells
+    Re-analyzing 551 blocked cells from N=1 retry:
+      Frontier blocked by 6 nets (83 cells, 83 unique)
+      Coverage: 83/551 frontier cells attributed to routed nets; 468 static/unrippable
+      Top blockers:
+        1. XIN: 29 (34.9%), 29 uniq (100%)
+        2. RUN: 15 (18.1%), 15 uniq (100%)
+        3. MUX_A2: 10 (12.0%), 10 uniq (100%)
+        4. QSPI_SCLK: 10 (12.0%), 10 uniq (100%)
+        5. MUX_EN1: 10 (12.0%), 10 uniq (100%)
+        6. QSPI_SD2: 9 (10.8%), 9 uniq (100%)
+    Extending to N=2: ripping XIN (net 31)...
+      PRE-EXISTING rip: 'XIN' (earlier-step copper) removed -- queued for reroute this run; original restored if the reroute fails
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [2/1] (1 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (383 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5383 iterations (0.00s)
+    Fallback: attempting orphaned pad 0 directly from connected copper
+    [3/1] (2 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (382 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5382 iterations (0.00s)
+  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
+  Phase 3 routing complete: 0 edges, 11 total segments, 2 total vias
+    WING_EN: Retry FAILED (N=2): still 1 failed edges
+      Retry had 550 blocked cells
+    Re-analyzing 550 blocked cells from N=2 retry:
+      Frontier blocked by 5 nets (51 cells, 51 unique)
+      Coverage: 51/550 frontier cells attributed to routed nets; 499 static/unrippable
+      Top blockers:
+        1. XOUT: 12 (23.5%), 12 uniq (100%)
+        2. MUX_A2: 10 (19.6%), 10 uniq (100%)
+        3. QSPI_SCLK: 10 (19.6%), 10 uniq (100%)
+        4. MUX_EN1: 10 (19.6%), 10 uniq (100%)
+        5. QSPI_SD2: 9 (17.6%), 9 uniq (100%)
+    Extending to N=3: ripping XOUT (net 32)...
+      PRE-EXISTING rip: 'XOUT' (earlier-step copper) removed -- queued for reroute this run; original restored if the reroute fails
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [2/1] (1 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (383 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5383 iterations (0.00s)
+    Fallback: attempting orphaned pad 0 directly from connected copper
+    [3/1] (2 failed) Routing MST edge: pad 2 -> pad 0 (length=17.63mm) target=(84.19, 113.54)
+      backward stuck (382 < 5000), forward=5000
+        backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5382 iterations (0.00s)
+  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
+  Phase 3 routing complete: 0 edges, 11 total segments, 2 total vias
+    WING_EN: Retry FAILED (N=3): still 1 failed edges
+      Retry had 538 blocked cells
+    WING_EN: All rip-up attempts failed, restoring 3 net(s)...
+    Hint: the blocking copper belongs to 5 pre-existing net(s) committed by an earlier run/step; 5 of them this run may not rip. Retry with --rip-existing-nets 'HALL_5V' 'HALL_PWR_EN' 'MUX_A0' 'V3V3' 'VBUS' to rip and re-route them in this run (issue #103) -- the decisive blocker may be any of them, so start with the full set (each ripped net is re-routed and the run reports honestly if one cannot be), then bisect if you want a minimal rip. A rip lifts their tracks and vias only; their pads stay. If pads wall the failed pad, no rip frees it: check the pad first with py_tools/check_reachability.py <board> --pad <REF.PAD>, which sets the routing aside -- CAGED there is placement, not copper.
+  NOT CONNECTED (so far): WING_EN - J2 pad 7 at (84.19, 113.54) - may still be recovered; final verdict in the end-of-run summary
+  Net total time: 0.57s, 31621 iterations
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing WING_EN (partial, 2 disconnected parts)
+  WARNING: plane web under J2 (0.625mm pitch; GND poured at clearance 0.13, min width 0.1): no via on the fab ladder lets the plane pass between its vias -- its drops there may be islands; lower the pour's clearance
+  J2 placed at -120.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Layer costs: excluding forbidden layer(s) In1.Cu from the fanout
+BGA Grid Analysis for J2:
+  Pitch: 1.25 x 3.35 mm
+  Grid: 2 rows x 16 columns
+  Center: (84.50, 114.67)
+  Boundary: X[73.90, 95.10], Y[111.33, 118.02]
+  Dog-bone: 0/1 inner balls got a gap via site (1 via-in-pad fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Dropped ball(s) on J2, and what crowds each (#1217):
+    J2.7 WING_EN: no room for a 0.6mm via at the ball (HALL_5V track on B.Cu overlapping, MUX_A1 track on In2.Cu overlapping); nearest foreign copper (edge to ball centre): F.Cu: GND track 0.77mm, GND track 0.77mm; In1.Cu: clear within 1.25mm; In2.Cu: MUX_A1 track 0.04mm, MUX_A1 track 0.22mm; B.Cu: HALL_5V track over the ball, HALL_5V track 1.03mm
+  WARNING: plane web under J2 (0.625mm pitch; GND poured at clearance 0.13, min width 0.1): no via on the fab ladder lets the plane pass between its vias -- its drops there may be islands; lower the pour's clearance
+  J2 placed at -120.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Layer costs: excluding forbidden layer(s) In1.Cu from the fanout
+BGA Grid Analysis for J2:
+  Pitch: 1.25 x 3.35 mm
+  Grid: 2 rows x 16 columns
+  Center: (84.50, 114.67)
+  Boundary: X[73.90, 95.10], Y[111.33, 118.02]
+  Dog-bone: 0/1 inner balls got a gap via site (1 via-in-pad fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Dropped ball(s) on J2, and what crowds each (#1217):
+    J2.7 WING_EN: no room for a 0.6mm via at the ball (HALL_5V track on B.Cu overlapping, MUX_A1 track on In2.Cu overlapping); nearest foreign copper (edge to ball centre): F.Cu: GND track 0.77mm, GND track 0.77mm; In1.Cu: clear within 1.25mm; In2.Cu: MUX_A1 track 0.04mm, MUX_A1 track 0.22mm; B.Cu: HALL_5V track over the ball, HALL_5V track 1.03mm
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 1000000 iterations (forward), trying backward...
+No route found after 1016651 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 1000000 iterations (forward), trying backward...
+No route found after 1016651 iterations (both directions)
+    rescue failed (2.7s)
+Rescue pass: 0 recovered, 0 improved, 1 unchanged (2.7s)
+
+Pre-existing rip outcome(s) (3 net(s)):
+  'MUX_A1' (was blocking 'WING_EN'): original copper restored
+  'XIN' (was blocking 'WING_EN'): original copper restored
+  'XOUT' (was blocking 'WING_EN'): original copper restored
+Merged 1 collinear joint(s) on 1 net(s): -1 redundant segment(s) (#811)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  0/1 routed
+  Multi-point:   2/3 pads connected (1 FAILED)
+  Total vias:    2
+  Total time:    0.79s
+  Iterations:    20,856
+  Fragility refresh (#466): 7 windows, 0.04s total
+  History congestion (#590): 3 contest + 3 rip + 3 blocked-frontier event(s) over 8051 cell(s), peak 0.28mm-equiv (inc 0.1mm, cap 0.5, escalate 0.0, rip weight 1.0, frontier weight 0.25), 0.00s of field upkeep
+
+Failed multi-point connections:
+  WING_EN: J2 pad ? at (84.19, 113.54) not connected
+JSON_SUMMARY: {"routed_single": [], "failed_single": [], "open_single": [], "failed_multipoint": [{"net_name": "WING_EN", "failed_pads": [{"component_ref": "J2", "pad_number": "?", "x": 84.1875, "y": 113.541266}]}], "multipoint_nets": 1, "multipoint_pads_connected": 2, "multipoint_pads_total": 3, "multipoint_edges_routed": 1, "multipoint_edges_failed": 1, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 0, "failed": 1, "total_time": 0.79, "total_iterations": 20856, "total_vias": 2, "cleanup_disconnected": [], "min_clearance_used": 0.13, "design_rules": {"escalation_policy": "off", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 0, "nets": [], "narrowed": [], "min_delivered": {}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "advanced", "unsupported_rules": []}, "plane_fragility": {"source": "kicad_refill", "islands": 1, "refill_status": "ok", "why": "the KiCad refill succeeded (memo hit)", "machine_dependent": false}, "pour_guard": {"source": "kicad_refill", "why": "", "pours": [{"net": "GND", "layer": "In1.Cu", "blocked_islands": 0, "blocked_mm2": 0, "crossable_islands": 1, "minor_islands": 0}]}, "rescue": {"attempted": 1, "recovered": [], "improved": [], "unchanged": ["WING_EN"], "pads_reconnected": 0, "widths": {}, "time": 2.67}, "preexisting_rips": {"MUX_A1": "original copper restored [was blocking 'WING_EN']", "XIN": "original copper restored [was blocking 'WING_EN']", "XOUT": "original copper restored [was blocking 'WING_EN']"}, "oracle_check": "disabled", "blockers": [{"net": "WING_EN", "stage": "phase3", "blocked_by": [{"net": "XOUT", "blocked_count": 12, "unique_cells": 12, "track_cells": 7, "via_cells": 5, "near_target_cells": 0, "near_source_cells": 0}, {"net": "MUX_A2", "blocked_count": 10, "unique_cells": 10, "track_cells": 10, "via_cells": 0, "near_target_cells": 0, "near_source_cells": 0}, {"net": "QSPI_SCLK", "blocked_count": 10, "unique_cells": 10, "track_cells": 5, "via_cells": 5, "near_target_cells": 0, "near_source_cells": 0}, {"net": "MUX_EN1", "blocked_count": 10, "unique_cells": 10, "track_cells": 9, "via_cells": 2, "near_target_cells": 0, "near_source_cells": 0}, {"net": "QSPI_SD2", "blocked_count": 9, "unique_cells": 9, "track_cells": 0, "via_cells": 9, "near_target_cells": 0, "near_source_cells": 0}]}, {"net": "WING_EN", "stage": "preexisting", "blocked_by": [{"net": "HALL_5V", "preexisting": true}, {"net": "HALL_PWR_EN", "preexisting": true}, {"net": "MUX_A0", "preexisting": true}, {"net": "V3V3", "preexisting": true}, {"net": "VBUS", "preexisting": true}]}], "pad_pairs_connected": 6, "pad_pairs_total": 7, "pad_pairs_open": [{"net": "WING_EN", "pairs_connected": 1, "pairs_total": 2, "outcome": "open", "open_subtype": "partial"}], "scope": "run", "env_knobs": {"KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli"}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pcb...
+Successfully wrote /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pcb
+  Plane finalize: zone net(s) GND are OUTSIDE this route's --nets scope -- excluded from the finalize BY PLAN. Since #562 a pour alone connects nothing: unless a later route step covers these nets, their pads ship disconnected.
+
+Final reconciliation: retrying 1 incomplete/custody net(s) against the finished board: WING_EN
+Loading /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=-1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.13mm (from flag, #581): vias stay off same-net pads
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 1 nets with 0 crossing conflicts detected
+MPS Round 1: 1 units: WING_EN
+
+Routing 1 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 0.15s
+Found 40 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.05s (40 nets)
+Plane fragility: exact-fill geometry (1 filled island(s) from KiCad refill)
+Plane fragility field: 109659 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/1] Routing WING_EN (id=30)
+backward stuck (379 < 5000), forward=5000
+  backward cell (842, 1135, layer=0): ok, 0/8 neighbors blocked
+No route found after 5379 iterations (both directions)
+  FAILED: Could not find route (0.06s)
+  ROUTE FAILED - no rippable blockers found
+  Hint: search exhausted after only 5379 iterations with no rippable blockers - the start/target pads are boxed in by static obstacles (neighboring pads + clearance), not by congestion. For fine-pitch parts try a finer grid and/or smaller clearance/track, e.g. --grid-step 0.05 (current: grid 0.1, clearance 0.13, track 0.1 mm)
+  Hint: pad J2.7 is a fanout-dropped ball (no escape stub) -- it sits inside J2's pad field with no copper of WING_EN attached, so no rip authority or retry can reach it. Re-run the fanout for this net (bga_fanout.py / qfn_fanout.py --escape-method underpad, or a smaller --via-size).
+  Hint: the blocking copper belongs to 6 pre-existing net(s) committed by an earlier run/step; 6 of them this run may not rip. Retry with --rip-existing-nets 'HALL_5V' 'MUX_A1' 'HALL_PWR_EN' 'MUX_A0' 'MUX_EN1' 'V3V3' to rip and re-route them in this run (issue #103) -- the decisive blocker may be any of them, so start with the full set (each ripped net is re-routed and the run reports honestly if one cannot be), then bisect if you want a minimal rip. A rip lifts their tracks and vias only; their pads stay. If pads wall the failed pad, no rip frees it: check the pad first with py_tools/check_reachability.py <board> --pad <REF.PAD>, which sets the routing aside -- CAGED there is placement, not copper.
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing WING_EN (failed, 2 disconnected parts)
+  WARNING: plane web under J2 (0.625mm pitch; GND poured at clearance 0.13, min width 0.1): no via on the fab ladder lets the plane pass between its vias -- its drops there may be islands; lower the pour's clearance
+  J2 placed at -120.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Layer costs: excluding forbidden layer(s) In1.Cu from the fanout
+BGA Grid Analysis for J2:
+  Pitch: 1.25 x 3.35 mm
+  Grid: 2 rows x 16 columns
+  Center: (84.50, 114.67)
+  Boundary: X[73.90, 95.10], Y[111.33, 118.02]
+  Dog-bone: 0/1 inner balls got a gap via site (1 via-in-pad fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Dropped ball(s) on J2, and what crowds each (#1217):
+    J2.7 WING_EN: no room for a 0.6mm via at the ball (HALL_5V track on B.Cu overlapping, MUX_A1 track on In2.Cu overlapping); nearest foreign copper (edge to ball centre): F.Cu: GND track 0.77mm, GND track 0.77mm; In1.Cu: clear within 1.25mm; In2.Cu: MUX_A1 track 0.04mm, MUX_A1 track 0.22mm; B.Cu: HALL_5V track over the ball, HALL_5V track 1.03mm
+  WARNING: plane web under J2 (0.625mm pitch; GND poured at clearance 0.13, min width 0.1): no via on the fab ladder lets the plane pass between its vias -- its drops there may be islands; lower the pour's clearance
+  J2 placed at -120.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Layer costs: excluding forbidden layer(s) In1.Cu from the fanout
+BGA Grid Analysis for J2:
+  Pitch: 1.25 x 3.35 mm
+  Grid: 2 rows x 16 columns
+  Center: (84.50, 114.67)
+  Boundary: X[73.90, 95.10], Y[111.33, 118.02]
+  Dog-bone: 0/1 inner balls got a gap via site (1 via-in-pad fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Dropped ball(s) on J2, and what crowds each (#1217):
+    J2.7 WING_EN: no room for a 0.6mm via at the ball (HALL_5V track on B.Cu overlapping, MUX_A1 track on In2.Cu overlapping); nearest foreign copper (edge to ball centre): F.Cu: GND track 0.77mm, GND track 0.77mm; In1.Cu: clear within 1.25mm; In2.Cu: MUX_A1 track 0.04mm, MUX_A1 track 0.22mm; B.Cu: HALL_5V track over the ball, HALL_5V track 1.03mm
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 1000000 iterations (forward), trying backward...
+No route found after 1016651 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 1000000 iterations (forward), trying backward...
+No route found after 1016651 iterations (both directions)
+    rescue failed (3.4s)
+Rescue pass: 0 recovered, 0 improved, 1 unchanged (3.4s)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Total time:    0.06s
+  Iterations:    5,379
+
+Failed single-ended nets:
+  WING_EN
+
+============================================================
+FAILED NET HISTORIES
+============================================================
+
+WING_EN:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Boxed in at this geometry after 5379 iteration(s) (grid 0.1, clearance 0.13, track 0.1 mm)
+  [0] Fanout never escaped J2.7 -- no escape stub exists for a retry to rip
+  [0] Blocked by pre-existing copper: HALL_5V, MUX_A1, HALL_PWR_EN (+3 more)
+         Hint: the blocking copper belongs to 6 pre-existing net(s) committed by an earlier run/step; 6 of them this run may not rip. Retry with --rip-existing-nets 'HALL_5V' 'MUX_A1' 'HALL_PWR_EN' 'MUX_A0' 'MUX_EN1' 'V3V3' to rip and re-route them in this run (issue #103) -- the decisive blocker may be any of them, so start with the full set (each ripped net is re-routed and the run reports honestly if one cannot be), then bisect if you want a minimal rip. A rip lifts their tracks and vias only; their pads stay. If pads wall the failed pad, no rip frees it: check the pad first with py_tools/check_reachability.py <board> --pad <REF.PAD>, which sets the routing aside -- CAGED there is placement, not copper.
+  [0] rescue_failed
+JSON_SUMMARY: {"routed_single": [], "failed_single": ["WING_EN"], "open_single": [], "failed_multipoint": [], "multipoint_nets": 0, "multipoint_pads_connected": 0, "multipoint_pads_total": 0, "multipoint_edges_routed": 0, "multipoint_edges_failed": 0, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 0, "failed": 1, "total_time": 0.06, "total_iterations": 5379, "total_vias": 0, "cleanup_disconnected": [], "min_clearance_used": 0.13, "design_rules": {"escalation_policy": "off", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 0, "nets": [], "narrowed": [], "min_delivered": {}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "advanced", "unsupported_rules": []}, "plane_fragility": {"source": "kicad_refill", "islands": 1, "refill_status": "ok", "why": "the KiCad refill succeeded", "machine_dependent": false}, "rescue": {"attempted": 1, "recovered": [], "improved": [], "unchanged": ["WING_EN"], "pads_reconnected": 0, "widths": {}, "time": 3.39}, "oracle_check": "skipped", "blockers": [{"net": "WING_EN", "stage": "preexisting", "blocked_by": [{"net": "HALL_5V", "preexisting": true}, {"net": "MUX_A1", "preexisting": true}, {"net": "HALL_PWR_EN", "preexisting": true}, {"net": "MUX_A0", "preexisting": true}, {"net": "MUX_EN1", "preexisting": true}, {"net": "V3V3", "preexisting": true}]}], "boxed_in": [{"verdict": "boxed_in_static", "iterations": 5379, "geometry": {"grid_step": 0.1, "clearance": 0.13, "track_width": 0.1, "via_diameter": null}, "net": "WING_EN"}], "fanout_dropped": [{"verdict": "fanout_dropped", "pad": "J2.7", "component": "J2", "plane_like": false, "pads": ["J2.7"], "net": "WING_EN"}], "pad_pairs_connected": 1, "pad_pairs_total": 2, "pad_pairs_open": [{"net": "WING_EN", "pairs_connected": 1, "pairs_total": 2, "outcome": "open", "open_subtype": "unrouted"}], "scope": "reconciliation-subset", "board_scoped_keys": ["min_clearance_used"], "env_knobs": {"KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli"}}
+Note: the JSON_SUMMARY above covers only the reconciliation subset (it carries scope="reconciliation-subset"). The run's tally is the final re-grade of the shipped board (JSON_REGRADE, folded into JSON_SUMMARY_MIN and --json-out). Never scrape the LAST JSON_SUMMARY of a route log.
+VIA_IN_PAD_JSON: {"count": 0, "sites": [], "stamped": 0, "restored": 0, "protected": 0, "unstampable": 0, "site_created": 0, "unprotected": [], "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"}
+JSON_REGRADE: {"board": "file", "graded_nets": 4, "seconds": 0.2, "routed_single": [], "failed_single": ["WING_EN"], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 6, "multipoint_pads_connected": 6, "successful": 0, "failed": 1, "unowned_broken": [], "recovered": [], "pad_pairs": {"WING_EN": {"total": 2, "connected": 1, "copper": true}}, "broken_by_run": [], "pour_fill": {"graded_on": "kicad_refill", "islands": {"GND on In1.Cu": 1}, "poured_nothing": []}}
+
+============================================================
+Run complete -- whole run, re-graded on the written board (4 net(s), 0.2s)
+============================================================
+  Single-ended:  0/1 routed (1 FAILED)
+  Multi-point:   6/6 pads connected
+  Ships broken: 1 net(s) -- the `failed` count, over every net the run owns
+JSON_IMPROVEMENT_GATE: {"lost": [], "gained": [], "lost_zone": [], "gained_zone": [], "worsened": [], "disconnected_pads_before": 2, "disconnected_pads_after": 1, "nets_compared": 40, "verdict": "accept"}
+JSON_SUMMARY_MIN: {"escalations": 0, "failed": 1, "failed_single": ["WING_EN"], "finalize_excluded_nets": ["GND"], "main_loop_time_s": 0.8500000000000001, "min_clearance_used": 0.13, "multipoint_deficit": 0, "open_single": [], "pad_pairs_open": {"count": 1, "nets": ["WING_EN"]}, "regraded_nets": 4, "routed": 0, "scope": "merged", "terminal_restores_broken": [], "vias": 2}
+  Copper-to-hole floor this step's copper holds: 0.2 mm -- it held 0.2 mm and its own copper clears every foreign hole by it (#1369)
+  DRC settings: wrote 2 value(s) to /home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pro to match the routed floors (close+reopen in KiCad if it is open). WRITES, not changes: a key the project never declared counts here, and one logical value is written once per net class:
+      rules.min_via_drill: None -> 0.3 mm
+      kicad_routing_tools.fab_floor_origin: recorded
+PROJECT_WRITES_JSON: {"project": "/home/hatch/workspace/projects/he-piantor-mainrev4/.issue196-runtime/git/hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pro", "writes": ["rules.min_via_drill: None -> 0.3 mm", "kicad_routing_tools.fab_floor_origin: recorded"]}
+  Same-net pad via clearance 0.13mm recorded in out.kicad_pro (later steps keep vias off same-net pads)
+EXIT=0

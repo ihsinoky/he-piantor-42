@@ -1,0 +1,192 @@
+{
+  "board_sha256": "b361a5a010a3ae2b08e5858735d46a5662112af4241ef55bab50d1ba3187b123",
+  "common_and_branches_meet_50mOhm": true,
+  "design_Wing_A": 0.127,
+  "GH_length_m": 0.2,
+  "GH_wire_area_mm2": 0.0804,
+  "GH_gauge_model": "AWG28 equivalent from #165; finished harness must meet this minimum area/resistance assumption",
+  "rho20_ohm_m": 1.7241e-08,
+  "alpha_per_K": 0.00393,
+  "conductor_formula": "rho20 * 0.200m / 0.0804mm2 * (1+0.00393*(T-20)); one forward plus six full-length parallel return wires; 50mOhm each contact at both ends of each wire",
+  "six_return_worst": {
+    "pitch_mm": 17,
+    "temperature_C": 125,
+    "width_factor": 0.8,
+    "Wing_A": 0.127,
+    "branch": "J3",
+    "return_conductors": 6,
+    "each_conductor_path_m": 0.2,
+    "wire_ohm": 0.06058581753731342,
+    "contact_each_ohm": 0.05,
+    "harness_loop_ohm": 0.18735012046019903,
+    "wing_drop_V": 0.14771014479131223,
+    "farthest_V": 4.7979845549836195,
+    "design": true,
+    "meets_4p60": true
+  },
+  "single_return_sensitivity": {
+    "pitch_mm": 17,
+    "temperature_C": 125,
+    "width_factor": 0.8,
+    "Wing_A": 0.127,
+    "branch": "J3",
+    "return_conductors": 1,
+    "each_conductor_path_m": 0.2,
+    "wire_ohm": 0.06058581753731342,
+    "contact_each_ohm": 0.05,
+    "harness_loop_ohm": 0.32117163507462687,
+    "wing_drop_V": 0.14771014479131223,
+    "farthest_V": 4.7809892226275865,
+    "design": true,
+    "meets_4p60": true
+  },
+  "regulated_rail_min_V": 5.096,
+  "dynamic_allocation_V": 0.05,
+  "common_switch_Ron_ohm": 0.25,
+  "upstream_sensitivity": [
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.75,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.25,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.602459702221887,
+      "total_USB_A": 0.500288696961936,
+      "within_configured_500mA": false
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.75,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.5,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.471141294443653,
+      "total_USB_A": 0.5117515622313863,
+      "within_configured_500mA": false
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.75,
+      "UDB_PTC_SH_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.186750392219574,
+      "total_USB_A": 0.5390411015039547,
+      "within_configured_500mA": false
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.8,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.25,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.609825889479196,
+      "total_USB_A": 0.4753109771116009,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.8,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.5,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.4854797718469985,
+      "total_USB_A": 0.4854380993020433,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.8,
+      "UDB_PTC_SH_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.217870722572332,
+      "total_USB_A": 0.5092583250567184,
+      "within_configured_500mA": false
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.85,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.25,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.616305506297525,
+      "total_USB_A": 0.453339494718842,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.85,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.5,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.498052071419947,
+      "total_USB_A": 0.4623658630078196,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.85,
+      "UDB_PTC_SH_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.244912596719753,
+      "total_USB_A": 0.48337871249098857,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.9,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.25,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.622049592244705,
+      "total_USB_A": 0.4338620955470302,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.9,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.5,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.5091661344025145,
+      "total_USB_A": 0.44196973055529565,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.9,
+      "UDB_PTC_SH_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.268635201497538,
+      "total_USB_A": 0.4606757068726595,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.95,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.25,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.627176708337919,
+      "total_USB_A": 0.41647675562244674,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.95,
+      "UDB_PTC_SH_contacts_reservation_ohm": 0.5,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.519062135722377,
+      "total_USB_A": 0.4238089414733107,
+      "within_configured_500mA": true
+    },
+    {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.95,
+      "UDB_PTC_SH_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.044910316131604795,
+      "converter_V": 4.289618817838873,
+      "total_USB_A": 0.44059396778234333,
+      "within_configured_500mA": true
+    }
+  ],
+  "upstream_actual_resistance_guaranteed": false,
+  "limitations": [
+    "DC design model, not measured board or supplier resistance guarantee",
+    "200mm is finished electrical conductor length per wire including routing/bend slack; 156.341mm planar route plus 43.659mm bend/length allowance; no chord-length shortcut",
+    "AWG28 equivalent is a procurement constraint: unknown or thinner finished harness cannot inherit this pass",
+    "UDB C3 PTC hot resistance, SH cable gauge/length and contact losses require assembly acceptance. Upstream resistance sweep is a reservation, not a measured guarantee",
+    "Converter efficiency, 110mA Main allocation, startup, USB permissions, rail transient and ADC noise require prototype validation",
+    "Legacy #141 Wing copper is the #165/#175 load-model input; future routed Wing Rev.2 needs new extraction"
+  ]
+}

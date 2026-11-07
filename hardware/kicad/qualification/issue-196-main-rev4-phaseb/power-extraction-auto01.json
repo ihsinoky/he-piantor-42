@@ -1,0 +1,391 @@
+{
+  "utc": "2026-11-07T03:59:55.384762+00:00",
+  "candidate_qualified": false,
+  "PCB_sha256": "361e05b803b2e381b075cc036621169ef8afd250023e1adf68fae54e70214fdd",
+  "reference_model_sha256": "574fe5f2d505897c1f5f2866495599795ba3b1e17c1886dc956e9f727ffa5aa3",
+  "executed_model": "def model(inv, net, sensor_current, mux_current, width, temp):\n    ts = [t for t in inv['tracks'] if t['net'] == net]\n    ps = [p for p in inv['pads'] if p['net'] == net]\n    vs = [v for v in inv['vias'] if v['net'] == net]\n    lines = [LineString([t['start'], t['end']]) for t in ts]\n    cuts = [{0.0, l.length} for l in lines]\n    contacts, junctions, object_links = [], [], []\n    rho = RHO * (1 + 0.00393 * (temp - 20))\n    # Same-layer centerline intersections, including T junctions.\n    for i, a in enumerate(lines):\n        for j in range(i):\n            if ts[i]['layer'] != ts[j]['layer']:\n                continue\n            # Router joins can contact through end caps without exact centerline\n            # intersection. Add their short transverse copper connection.\n            for x, y in ((i, j), (j, i)):\n                for d in (0.0, lines[x].length):\n                    point = lines[x].interpolate(d)\n                    distance = point.distance(lines[y])\n                    if distance <= (ts[x]['width_mm'] + ts[y]['width_mm']) / 2 + 2e-6:\n                        target = lines[y].project(point)\n                        cuts[y].add(target)\n                        junctions.append((x, d, y, target, max(distance, 1e-5)))\n            intersection = a.intersection(lines[j])\n            if intersection.is_empty:\n                continue\n            if intersection.geom_type == 'Point':\n                points = [intersection]\n            elif intersection.geom_type == 'MultiPoint':\n                points = list(intersection.geoms)\n            elif intersection.geom_type == 'LineString':\n                points = [Point(intersection.coords[0]), Point(intersection.coords[-1])]\n            else:\n                raise AssertionError(intersection.geom_type)\n            for point in points:\n                cuts[i].add(a.project(point))\n                cuts[j].add(lines[j].project(point))\n    objects = [(p, 'pad') for p in ps] + [(v, 'via') for v in vs]\n    shapes = [pad_shape(obj) if kind == 'pad' else Point(obj['position']).buffer(obj['diameter_mm'] / 2, quad_segs=64)\n              for obj, kind in objects]\n    for i, (obj, kind) in enumerate(objects):\n        for j in range(i):\n            other, other_kind = objects[j]\n            if set(obj['layers']) & set(other['layers']) and shapes[i].distance(shapes[j]) < 2e-6:\n                length = math.dist(obj['position'], other['position'])\n                resistance = rho * max(length, 1e-5) * 1e-3 / (width * THICK * 1e-6)\n                object_links.append((kind + ':' + obj['uuid'], other_kind + ':' + other['uuid'], resistance))\n        shape = pad_shape(obj) if kind == 'pad' else Point(obj['position']).buffer(obj['diameter_mm'] / 2, quad_segs=64)\n        center = Point(obj['position'])\n        for i, line in enumerate(lines):\n            if ts[i]['layer'] not in obj['layers']:\n                continue\n            if line.distance(shape) > ts[i]['width_mm'] / 2 + 2e-6:\n                continue\n            distance = line.project(center)\n            cuts[i].add(distance)\n            # Lumped spreading approximation, explicitly not a guaranteed bound.\n            if kind == 'pad':\n                length = center.distance(line.interpolate(distance))\n                resistance = rho * (length * 1e-3) / (min(obj['size']) * THICK * 1e-6)\n            else:\n                # Half-barrel per attachment: a top-bottom traverse pays full R.\n                resistance = rho * 1.2e-3 / (math.pi * obj['drill_mm'] * 1e-3 * 20e-6) / 2\n            contacts.append((i, distance, kind + ':' + obj['uuid'], max(resistance, 1e-6)))\n    edges, nodes = [], {}\n\n    def node(key):\n        if key not in nodes:\n            nodes[key] = len(nodes)\n        return nodes[key]\n\n    def point_node(i, distance):\n        point = lines[i].interpolate(distance)\n        return node((ts[i]['layer'], round(point.x, 6), round(point.y, 6)))\n\n    for i, line in enumerate(lines):\n        positions = sorted(cuts[i])\n        for a, b in zip(positions, positions[1:]):\n            if b - a > 1e-6:\n                resistance = rho * ((b - a) * 1e-3) / (ts[i]['width_mm'] * width / .1 * THICK * 1e-6)\n                edges.append((point_node(i, a), point_node(i, b), resistance))\n    for i, distance, key, resistance in contacts:\n        edges.append((point_node(i, distance), node(key), resistance))\n    for i, di, j, dj, length in junctions:\n        a, b = point_node(i, di), point_node(j, dj)\n        if a != b:\n            edges.append((a, b, rho * length * 1e-3 / (min(ts[i]['width_mm'],ts[j]['width_mm']) * width / .1 * THICK * 1e-6)))\n    for a, b, resistance in object_links:\n        edges.append((node(a), node(b), resistance))\n    pin_nodes = {p['ref'] + '.' + p['number']: node('pad:' + p['uuid']) for p in ps}\n    sources = {pin_nodes[p['ref'] + '.' + p['number']] for p in ps if p['ref'] == 'J_WING'}\n    assert sources\n    adjacency = collections.defaultdict(list)\n    for a, b, r in edges:\n        adjacency[a].append((b, r))\n        adjacency[b].append((a, r))\n    reached, queue = set(sources), list(sources)\n    while queue:\n        a = queue.pop()\n        for b, _ in adjacency[a]:\n            if b not in reached:\n                reached.add(b)\n                queue.append(b)\n    assert set(pin_nodes.values()) <= reached, ('Approximate graph did not connect all actual pads',\n                                               [k for k, v in pin_nodes.items() if v not in reached])\n    unknown = sorted(reached - sources)\n    indices = {a: i for i, a in enumerate(unknown)}\n    conductance, load = np.zeros((len(unknown), len(unknown))), np.zeros(len(unknown))\n    for a, b, r in edges:\n        if a not in reached:\n            continue\n        g = 1 / r\n        for x, y in ((a, b), (b, a)):\n            if x in indices:\n                conductance[indices[x], indices[x]] += g\n                if y in indices:\n                    conductance[indices[x], indices[y]] -= g\n    for p in ps:\n        current = sensor_current if p['ref'].startswith('U_H') else mux_current if p['ref'].startswith('U_MUX_') else 0\n        if current:\n            load[indices[pin_nodes[p['ref'] + '.' + p['number']]]] += current\n    voltage = np.linalg.solve(conductance, load)\n    residual = float(np.max(np.abs(conductance @ voltage - load)))\n    assert residual < 1e-7\n    return dict(pins={key: float(voltage[indices[n]] if n in indices else 0) for key, n in pin_nodes.items()},\n                load_A=float(sum(load)), max_drop_V=float(max(voltage)), nodes=len(reached),\n                resistors=len(edges), kcl_residual_A=residual)\n",
+  "rows": [
+    {
+      "net": "VBUS",
+      "source_ref": "J4",
+      "source_pins": [
+        "1"
+      ],
+      "load_ref": "U6",
+      "load_pin": "12",
+      "temp_C": 20,
+      "width_factor": 1,
+      "positive_path_ohm": 0.007066561132107538,
+      "kcl_residual_A": 1.1866063687193673e-12,
+      "pins": {
+        "U4.1": 0.0028835626538742084,
+        "U4.3": 0.0028835626538773404,
+        "U_H_LOAD.12": 0.007066561132107538,
+        "U6.12": 0.00671253772048057,
+        "U6.13": 0.007066561132107537,
+        "C16.1": 0.0028835626538731046,
+        "C23.1": 0.0028835626538916462,
+        "C24.1": 0.0007276594978411741,
+        "C18.1": 0.00288356265388001,
+        "J_WING.1": 0.0
+      },
+      "track_count": 62,
+      "via_count": 8
+    },
+    {
+      "net": "V5V2",
+      "source_ref": "U6",
+      "source_pins": [
+        "7",
+        "8"
+      ],
+      "load_ref": "U5",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 1,
+      "positive_path_ohm": 0.02155540381611346,
+      "kcl_residual_A": 3.183231456205249e-12,
+      "pins": {
+        "C26.1": 0.00374130702339819,
+        "J_WING.7": 0.0,
+        "J_WING.8": 0.0,
+        "C28.1": 0.003741307023519992,
+        "C27.1": 0.0037413070235101046,
+        "U_H_LOAD.1": 0.02155540381611346,
+        "R17.1": 0.006969463026454545
+      },
+      "track_count": 105,
+      "via_count": 9
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J2",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 1,
+      "positive_path_ohm": 0.014520815403342416,
+      "kcl_residual_A": 9.094947017729282e-13,
+      "pins": {
+        "C19.1": 0.005741175725622424,
+        "J3.1": 0.010547599499848175,
+        "J_WING.6": 0.0,
+        "U_H_LOAD.1": 0.014520815403342416
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J3",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 1,
+      "positive_path_ohm": 0.029260488563594034,
+      "kcl_residual_A": 4.547473508864641e-13,
+      "pins": {
+        "C19.1": 0.005741175725622639,
+        "U_H_LOAD.1": 0.029260488563594034,
+        "J_WING.6": 0.0,
+        "J2.1": 0.010547599499848181
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "VBUS",
+      "source_ref": "J4",
+      "source_pins": [
+        "1"
+      ],
+      "load_ref": "U6",
+      "load_pin": "12",
+      "temp_C": 20,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.008316141410336474,
+      "kcl_residual_A": 1.0658141036401503e-12,
+      "pins": {
+        "U4.1": 0.00336550514058519,
+        "U4.3": 0.003365505140593733,
+        "U_H_LOAD.12": 0.008316141410336474,
+        "U6.12": 0.00792285682346259,
+        "U6.13": 0.008316141410336476,
+        "C16.1": 0.00336550514059228,
+        "C23.1": 0.0033655051405574285,
+        "C24.1": 0.0008926060190792821,
+        "C18.1": 0.003365505140589247,
+        "J_WING.1": 0.0
+      },
+      "track_count": 62,
+      "via_count": 8
+    },
+    {
+      "net": "V5V2",
+      "source_ref": "U6",
+      "source_pins": [
+        "7",
+        "8"
+      ],
+      "load_ref": "U5",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.026442946776555905,
+      "kcl_residual_A": 2.5011104298755527e-12,
+      "pins": {
+        "C26.1": 0.0044532433943932585,
+        "J_WING.7": 0.0,
+        "J_WING.8": 0.0,
+        "C28.1": 0.004453243394308374,
+        "C27.1": 0.004453243394306782,
+        "U_H_LOAD.1": 0.026442946776555905,
+        "R17.1": 0.008488438398291805
+      },
+      "track_count": 105,
+      "via_count": 9
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J2",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.01773211816039233,
+      "kcl_residual_A": 6.821210263296962e-13,
+      "pins": {
+        "C19.1": 0.006967150590178595,
+        "J3.1": 0.012975180455958305,
+        "J_WING.6": 0.0,
+        "U_H_LOAD.1": 0.01773211816039233
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J3",
+      "load_pin": "1",
+      "temp_C": 20,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.03607262890957801,
+      "kcl_residual_A": 9.094947017729282e-13,
+      "pins": {
+        "C19.1": 0.006967150590172805,
+        "U_H_LOAD.1": 0.03607262890957801,
+        "J_WING.6": 0.0,
+        "J2.1": 0.012975180455958307
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "VBUS",
+      "source_ref": "J4",
+      "source_pins": [
+        "1"
+      ],
+      "load_ref": "U6",
+      "load_pin": "12",
+      "temp_C": 125,
+      "width_factor": 1,
+      "positive_path_ohm": 0.009982432578663913,
+      "kcl_residual_A": 1.3891110484109959e-12,
+      "pins": {
+        "U4.1": 0.004073339433765813,
+        "U4.3": 0.004073339433759918,
+        "U_H_LOAD.12": 0.009982432578663913,
+        "U6.12": 0.009482340696698377,
+        "U6.13": 0.009982432578663913,
+        "C16.1": 0.004073339433772035,
+        "C23.1": 0.004073339433775289,
+        "C24.1": 0.0010278314080702329,
+        "C18.1": 0.004073339433772897,
+        "J_WING.1": 0.0
+      },
+      "track_count": 62,
+      "via_count": 8
+    },
+    {
+      "net": "V5V2",
+      "source_ref": "U6",
+      "source_pins": [
+        "7",
+        "8"
+      ],
+      "load_ref": "U5",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 1,
+      "positive_path_ohm": 0.030450241200774535,
+      "kcl_residual_A": 3.183231456205249e-12,
+      "pins": {
+        "C26.1": 0.005285157366505476,
+        "J_WING.7": 0.0,
+        "J_WING.8": 0.0,
+        "C28.1": 0.005285157366525424,
+        "C27.1": 0.005285157366533259,
+        "U_H_LOAD.1": 0.030450241200774535,
+        "R17.1": 0.009845411944262807
+      },
+      "track_count": 105,
+      "via_count": 9
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J2",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 1,
+      "positive_path_ohm": 0.020512829879575808,
+      "kcl_residual_A": 4.547473508864641e-13,
+      "pins": {
+        "C19.1": 0.00811027188882326,
+        "J3.1": 0.014900066433507138,
+        "J_WING.6": 0.0,
+        "U_H_LOAD.1": 0.020512829879575808
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J3",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 1,
+      "positive_path_ohm": 0.041334829169401094,
+      "kcl_residual_A": 9.094947017729282e-13,
+      "pins": {
+        "C19.1": 0.008110271888824959,
+        "U_H_LOAD.1": 0.041334829169401094,
+        "J_WING.6": 0.0,
+        "J2.1": 0.014900066433507135
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "VBUS",
+      "source_ref": "J4",
+      "source_pins": [
+        "1"
+      ],
+      "load_ref": "U6",
+      "load_pin": "12",
+      "temp_C": 125,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.011747679631214328,
+      "kcl_residual_A": 1.922018100231071e-12,
+      "pins": {
+        "U4.1": 0.004754178445568133,
+        "U4.3": 0.004754178445556875,
+        "U_H_LOAD.12": 0.011747679631214328,
+        "U6.12": 0.011192121106190672,
+        "U6.13": 0.011747679631214328,
+        "C16.1": 0.004754178445557675,
+        "C23.1": 0.004754178445603425,
+        "C24.1": 0.0012608628489387981,
+        "C18.1": 0.004754178445568045,
+        "J_WING.1": 0.0
+      },
+      "track_count": 62,
+      "via_count": 8
+    },
+    {
+      "net": "V5V2",
+      "source_ref": "U6",
+      "source_pins": [
+        "7",
+        "8"
+      ],
+      "load_ref": "U5",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.037354628764315445,
+      "kcl_residual_A": 2.2737367544323206e-12,
+      "pins": {
+        "C26.1": 0.006290874281760552,
+        "J_WING.7": 0.0,
+        "J_WING.8": 0.0,
+        "C28.1": 0.006290874282422657,
+        "C27.1": 0.006290874282430058,
+        "U_H_LOAD.1": 0.037354628764315445,
+        "R17.1": 0.011991192503759204
+      },
+      "track_count": 105,
+      "via_count": 9
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J2",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.025049276719302106,
+      "kcl_residual_A": 6.821210263296962e-13,
+      "pins": {
+        "C19.1": 0.009842145281228882,
+        "J3.1": 0.018329388671149187,
+        "J_WING.6": 0.0,
+        "U_H_LOAD.1": 0.025049276719302106
+      },
+      "track_count": 34,
+      "via_count": 4
+    },
+    {
+      "net": "HALL_5V",
+      "source_ref": "U5",
+      "source_pins": [
+        "6"
+      ],
+      "load_ref": "J3",
+      "load_pin": "1",
+      "temp_C": 125,
+      "width_factor": 0.8,
+      "positive_path_ohm": 0.050957999229187145,
+      "kcl_residual_A": 9.094947017729282e-13,
+      "pins": {
+        "C19.1": 0.009842145281228981,
+        "U_H_LOAD.1": 0.050957999229187145,
+        "J_WING.6": 0.0,
+        "J2.1": 0.018329388671149176
+      },
+      "track_count": 34,
+      "via_count": 4
+    }
+  ],
+  "limitations": [
+    "Positive copper only; GND plane not modelled",
+    "Variable actual widths used; conservative 0.1mm for short object links",
+    "35um copper and 20um barrel are assumptions, not manufacturing minima",
+    "Lumped centerline model, not field solver or manufactured bound"
+  ]
+}
