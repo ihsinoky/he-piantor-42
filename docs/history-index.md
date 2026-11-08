@@ -19,7 +19,7 @@
 
 単Wing Rev.1は #121／D-019の4層0.10mm条件を基礎に、#124→#137／D-022→#153→#155で4穴の旧最終へ。2Wing Rev.2は #157→#160（案A停止）→#163（案C）→#165／D-026→#167／D-027→#169→#173→#175の順。#175が旧最終で、#169の初回合格を部品更新後へ流用しない。
 
-Rev.2→Rev.3は[横断via監査 #183](issue-183-via-pad-audit.md)→#185。C26–C28／R17のBOM訂正は [PR #177](https://github.com/ihsinoky/he-piantor-42/pull/177)、C25訂正は [PR #189](https://github.com/ihsinoky/he-piantor-42/pull/189) の履歴も参照する。Rev.4は #196の旧Phase A案をA-2三角形へ更新し、Phase Bで現行最終となる。D-033／PR #197採択が後続判断であり、Phase B報告の「草案」を書き換えない。D-030／PR #187のPOFV撤回採択は依然未確認で、D-033はその遡及採択ではない。
+Rev.2→Rev.3は[横断via監査 #183](issue-183-via-pad-audit.md)→#185。C26–C28／R17のBOM訂正は [PR #177](https://github.com/ihsinoky/he-piantor-42/pull/177)、C25訂正は [PR #189](https://github.com/ihsinoky/he-piantor-42/pull/189) の履歴も参照する。Rev.4は #196の旧Phase A案をA-2三角形へ更新し、Phase Bで現行最終となる。D-033／PR #197採択が後続判断であり、Phase B報告の「草案」を書き換えない。D-030／PR #187のPOFV撤回は提案・実装当時には採択根拠が未確認で、Issue #205の監査でも「未確認」に分離されたが、2026-11-08にPOが採択を明示確認し、PR #206で「採択済み（PO確認済み）」として確定した。D-033は別版の判断であり、D-030の遡及採択ではない。
 
 | 報告（版・段階は原題） | Issue / PR | 入力・最終・失敗の役割 |
 | --- | --- | --- |
@@ -35,7 +35,7 @@ Rev.2→Rev.3は[横断via監査 #183](issue-183-via-pad-audit.md)→#185。C26�
 | [docs/issue-169-main-dual-wing-followup.md](issue-169-main-dual-wing-followup.md)<br>Issue #169 — Main 2 Wing Stage 2 フォローアップ：有限2回の結果と停止 | [#169](https://github.com/ihsinoky/he-piantor-42/issues/169) / [#172](https://github.com/ihsinoky/he-piantor-42/pull/172) | Main Rev.2継続。seed-a合格後、部品更新した2回目は不合格。 |
 | [docs/issue-173-main-dual-wing-final.md](issue-173-main-dual-wing-final.md)<br>Issue #173 — preflight 不合格で停止、合格済み seed-a を整理 | [#173](https://github.com/ihsinoky/he-piantor-42/issues/173) / [#174](https://github.com/ihsinoky/he-piantor-42/pull/174) | Main Rev.2の1210候補はpreflight停止。fallback seed-aは別の合格履歴。 |
 | [docs/issue-175-main-dual-wing-final2.md](issue-175-main-dual-wing-final2.md)<br>Issue #175 — C26配置成立、全体配線1回で独立4指標0、確定見積は未取得 | [#175](https://github.com/ihsinoky/he-piantor-42/issues/175) / [#176](https://github.com/ihsinoky/he-piantor-42/pull/176) | Main Rev.2最終履歴。1210出力C、44ネット・4指標0。見積／製造GOは別。 |
-| [docs/issue-185-main-rev3.md](issue-185-main-rev3.md)<br>Issue #185 — Main Rev.3：35 via を移設し POFV 不要化の設計条件を達成 | [#185](https://github.com/ihsinoky/he-piantor-42/issues/185) / [#187](https://github.com/ihsinoky/he-piantor-42/pull/187) | Main Rev.3旧最終。35via移設、POFV撤回はD-030提案（採択未確認）。 |
+| [docs/issue-185-main-rev3.md](issue-185-main-rev3.md)<br>Issue #185 — Main Rev.3：35 via を移設し POFV 不要化の設計条件を達成 | [#185](https://github.com/ihsinoky/he-piantor-42/issues/185) / [#187](https://github.com/ihsinoky/he-piantor-42/pull/187) | Main Rev.3旧最終。35via移設、POFV撤回のD-030は提案・実装当時の採択根拠が未確認。Issue #205の監査を経て2026-11-08にPOが採択を明示確認し、PR #206で採択済み（PO確認済み）と確定。 |
 | [docs/issue-196-main-rev4.md](issue-196-main-rev4.md)<br>Issue #196 — Main Rev.4 Phase A：配置・面取り外形案 | [#196](https://github.com/ihsinoky/he-piantor-42/issues/196) / [#197](https://github.com/ihsinoky/he-piantor-42/pull/197) | Phase A旧配置・面取り案。A-2三角形案へ更新された履歴入力。 |
 | [docs/issue-196-main-rev4-phasea2.md](issue-196-main-rev4-phasea2.md)<br>Issue #196 — Main Rev.4 Phase A-2：UDB 分離・三角形配置案 | [#196](https://github.com/ihsinoky/he-piantor-42/issues/196) / [#197](https://github.com/ihsinoky/he-piantor-42/pull/197) | Phase A-2三角形・UDB分離の配置入力。100mm不達と200mm候補。配線合格ではない。 |
 | [docs/issue-196-main-rev4-phaseb.md](issue-196-main-rev4-phaseb.md)<br>Issue #196 Phase B — Main Rev.4 配線・製造データ・再見積準備 | [#196](https://github.com/ihsinoky/he-piantor-42/issues/196) / [#197](https://github.com/ihsinoky/he-piantor-42/pull/197) | Phase B現行最終。40ネット・4指標0、製造パッケージ。記録時の草案は後続D-033／PR #197で採択。 |
@@ -220,7 +220,7 @@ Rev.2は #158標準搭載計画→#190配列検討→#194 Phase A/B。Rev.3は #
 | [hardware/kicad/qualification/issue-178-m1-matrix-board/](../hardware/kicad/qualification/issue-178-m1-matrix-board/) | [Matrix](#matrix) | Matrix Rev.2最終履歴。両ピッチ18キーの一枚基板、D-028。Rev.1を置換。 |
 | [hardware/kicad/qualification/issue-182-matrix-rev3/](../hardware/kicad/qualification/issue-182-matrix-rev3/) | [Matrix](#matrix) | Matrix Rev.3現行。158via非重複、D-029で当該版のみPOFV不要。 |
 | [hardware/kicad/qualification/issue-183-via-pad-audit/](../hardware/kicad/qualification/issue-183-via-pad-audit/) | [横断・運用](#cross) | Main Rev.2／Wing Rev.1のvia-pad監査。不適合と後続改版への入力。 |
-| [hardware/kicad/qualification/issue-185-main-rev3/](../hardware/kicad/qualification/issue-185-main-rev3/) | [Main](#main) | Main Rev.3旧最終。35via移設、POFV撤回はD-030提案（採択未確認）。 |
+| [hardware/kicad/qualification/issue-185-main-rev3/](../hardware/kicad/qualification/issue-185-main-rev3/) | [Main](#main) | Main Rev.3旧最終。35via移設、POFV撤回のD-030は提案・実装当時の採択根拠が未確認。Issue #205の監査を経て2026-11-08にPOが採択を明示確認し、PR #206で採択済み（PO確認済み）と確定。 |
 | [hardware/kicad/qualification/issue-194-wing-rev2/](../hardware/kicad/qualification/issue-194-wing-rev2/) | [Wing](#wing) | Wing Rev.2、配置案からPhase B最終4単板／2パネルまで。D-032。 |
 | [hardware/kicad/qualification/issue-196-main-rev4-phasea2/](../hardware/kicad/qualification/issue-196-main-rev4-phasea2/) | [Main](#main) | Phase A-2の三角形・UDB分離配置入力。配線済み最終ではない。 |
 | [hardware/kicad/qualification/issue-196-main-rev4-phaseb/](../hardware/kicad/qualification/issue-196-main-rev4-phaseb/) | [Main](#main) | 現行最終と工程履歴が併存。上のpackage役割表でfinal／runs等を区別。 |
