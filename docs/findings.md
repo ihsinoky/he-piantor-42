@@ -210,3 +210,170 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [最終17mm検証結果](../hardware/case/issue-198-final/17mm/verification.json)、
   [最終16mm検証結果](../hardware/case/issue-198-final/16mm/verification.json)。
 - **Promoted to:** —（未昇格。P6で基板–ケース引継ぎのCSV/hash/固定点集合照合への昇格を検討予定）
+
+### F-006 — 旧Wingの電源／GND拡幅はDC降下を減らすが最低電圧の保証は残る（K05）
+
+- **Conclusion:** #141の旧representative21 Wingでは、電源／GNDを0.30mm、
+  信号を0.10mmに分けた2層配線が16/17mm各1回で独立4指標0・幅監査合格となった。
+  #138の全線0.10mm基板とのDC比較で最大往復降下は約64–75%減ったが、
+  最低局所電圧4.5Vを割る計算条件は残った。
+  (confidence: high for saved routing outputs and model comparison;
+  trials: 配線2回＝各ピッチ1回、DC32ケース＝2ピッチ×前後×2電流×2温度×2幅。
+  実機試行数ではない)
+- **Conditions tried:** 2026-11-05 UTC、配線開始02:45:37／02:48:12。
+  KRT v0.23.8、commit `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`、KiCad 9.0.9。
+  #131 Stage 0のpads修正済み入力から派生し、配置・ネット・外形を保持。
+  保存版は本登録基準commit `a24896d2aa258371362840ee0f1f2f71cc0d7b9b` の
+  #138/#141証跡。Python実行版は本照合資料では未確認。
+  F.Cu/B.Cu、厚1.2mm、clearance0.10mm、via0.60/0.30mm、off、
+  CLIで信号0.10mm・HALL_5V/GND各0.30mmを明示固定した。
+  DCは21センサ各5/11mA＋3MUX各2.7µA、20/125°C、公称／−20%幅、
+  銅35µm・barrel20µmの中心線抵抗網。Wingコネクタ到達後4.75/5.00Vを仮定。
+- **Failed attempts:** CLI幅省略は信号0.127mmへのclampを事前読戻しで検出し、
+  配線前に拒否（追加配線に数えない）。16mmの初回厳密project比較は実測power_widths
+  記録追加を拒否したが、全設定一致を別監査し配線は再実行していない。
+  17mm・11mA/個・125°C・−20%幅では、拡幅後も往復降下0.268687V、
+  4.75V入力時の最低局所4.481313V（4.5V余裕−18.687mV）。
+  11mAは保守包絡でありデータシート保証最大値ではない。
+- **Validity scope:** 旧Wingの固定配置・保存配線と近似DCモデルに限定する。
+  **現行Wing Rev.3の実測値ではない**。#138の保存10ケースの再計算一致と、
+  未保存だった拡幅前6ケースの追加計算を区別する。Main・ハーネス損失、接触集中、
+  製造最小銅厚、起動／過渡、GND/ADC精度はこの比較で保証しない。
+  5V仮定の全ケース通過も供給最低保証の確定ではない。0.20mmは未試行。
+  基板改版・配線幅・負荷・供給境界・温度・帰路・材料条件変更時に再抽出・再検査する。
+  125°Cは抵抗率感度で、実機温度認定ではない。
+- **Evidence:** [#138報告](issue-138-wing-manufacturing-review-prep.md)、
+  [#141報告](issue-141-wing-power-integrity.md)、
+  [16mm実行記録](../hardware/kicad/qualification/issue-141-wing-power-integrity/processes/KRT-16-2L-P0300-route/record.json)、
+  [17mm実行記録](../hardware/kicad/qualification/issue-141-wing-power-integrity/processes/KRT-17-2L-P0300-route/record.json)、
+  [16mm独立判定](../hardware/kicad/qualification/issue-141-wing-power-integrity/inspection/KRT-16-2L-P0300/assessment.json)、
+  [17mm独立判定](../hardware/kicad/qualification/issue-141-wing-power-integrity/inspection/KRT-17-2L-P0300/assessment.json)、
+  [前後比較16行（各行2ケース）](../hardware/kicad/qualification/issue-141-wing-power-integrity/dc-comparison.csv)、
+  [DC計算源](../hardware/kicad/qualification/issue-141-wing-power-integrity/dc-model.py)。
+- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象。今回は手順・skillを変更しない）
+
+### F-007 — NPTHのpads禁止解除と全層の実銅予約は別に検証する（K06）
+
+- **Conclusion:** #129では取付NPTH自体がpads禁止に該当し、#131でその禁止だけを
+  解除すると入力DRCの当該各4件が解消した。#155では全層予約の多角形が座標量子化で
+  理想φ5円をわずかに下回り、4nmの外接補正と再充填・再検査で解消した。
+  (confidence: high for saved geometry and DRC;
+  trials: #129修正後／#131変更後の入力DRC各3基板、#131等価性ゲート1回、
+  #155補正前後各4予約。配線探索総数やDRC実行総回数とは区別する)
+- **Conditions tried:** #129/#131は2026-11-04 UTC、#129起点
+  `96166d3f266f6d423173fcd8cdc3a38a46a6767d`、#131起点
+  `e0374fe8e72f0bfc7a4a3a816a71ae42d2c6e962`。KiCad 9.0.9、
+  pitch9-16mm／representative21-16/17mm、2層・1.2mm、NPTHφ2.2×4、
+  φ5予約を256辺外接多角形で表現、整数nm座標。
+  #131は各4箇所のpads not_allowed→allowedのみ変更し、tracks/vias/copper pour/
+  footprints禁止は保持。#155は2026-11-05 UTC、起点
+  `d2139eed736984f2cda75bf2644d4a1190ece0a4`、48×44mm Main・4層・4穴、
+  F.Cu/In1.Cu/In2.Cu/B.Cuへ予約を伝達。保存証跡の版は本登録基準
+  `a24896d2aa258371362840ee0f1f2f71cc0d7b9b`。Python実行版と検査起動総数は未確認。
+- **Failed attempts:** #129修正後も入力のitems_not_allowed各4件は残り、
+  KRT smokeの物的違反4件にも数えられた（最初のLIB_ID不一致によるゲート停止とは別）。
+  #155の初期多角形は最小半径2.499999728mm、理想円とGND fillの重なり約1.45×10⁻⁷mm²。
+  閾値緩和はせず、対応する入力／出力の4 keepout頂点だけを半径方向に4nm拡張した。
+  配線・viaの変更／配線再実行は0。最終最小半径2.5000033779mm、充填GND重なり0。
+- **Validity scope:** pads allowedはNPTHオブジェクトの自己違反を避ける設定であり、
+  既存銅パッドの侵入許可とは扱わない。#155は全銅層のpad/track/viaと実GND fillを
+  別形状検査し、最終独立4指標0を確認した。rule areaの設定一致や2層での成功だけでは
+  内層・実fill・理想円の予約を証明しない。#129の停止／配線不合格全体をpadsだけの原因としない。
+  #131後の3基板入力DRC違反0は配線前の観測で、配線合格とは別。
+  円近似・保存形式／座標単位・KiCad版・層・穴位置・銅箔変更時は、保存後の外接性と
+  全層実銅・再fillを再照合する。4nmはこの入力の丸め補正で、製造公差の余裕ではない。
+- **Evidence:** [#129報告](issue-129-wing-2layer-routing.md)、
+  [#131報告](issue-131-wing-condition-search.md)、
+  [pads限定差分](../hardware/kicad/qualification/issue-131-wing-condition-search/evidence/stage0-change-audit.json)、
+  [変更後入力DRC](../hardware/kicad/qualification/issue-131-wing-condition-search/evidence/input-drc-summary.json)、
+  [#155報告](issue-155-main-mounting-stage2.md)、
+  [4nm補正原記録](../hardware/kicad/qualification/issue-155-main-mounting-stage2/reservation-quantization-guard.json)、
+  [最終半径・保持・試行数検証](../hardware/kicad/qualification/issue-155-main-mounting-stage2/verification.json)。
+- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象）
+
+### F-008 — 局所配線の合否には保持対象の銅箔差分も必要となる（K07）
+
+- **Conclusion:** #155の局所退避は接続・異ネット接触・物的DRCが0でも、保持配線68件の
+  被覆を失い不合格となった。範囲を固定した全体再配線で合格した一方、#167の局所修正も
+  対象外の保持銅を失った。局所という指定やexit 0だけでは保持を保証しなかった。
+  (confidence: high for saved outputs; trials: #155局所1回＋全体1回、
+  #167再開時全体1回＋局所1回。準備API失敗・読戻し・再検査は配線試行に含めない)
+- **Conditions tried:** #155は2026-11-05 UTC、起点
+  `d2139eed736984f2cda75bf2644d4a1190ece0a4`、#121合格板を元に48×44mm・4穴追加。
+  局所はVBUS/WING_EN/GNDの直接干渉3 segmentsだけを除去。局所開始19:57:48、
+  全体開始20:05:27。全体は0.10mm線537本＋via66個の除去を事前固定し、
+  元0.20mm線3本をkeep-input-copperで保護した。
+  #167再開は2026-11-06 UTC、head `0a1f355510e3f2fcadfdc68e7ae97ea90122eb6b`、
+  #155最終板から48×52mm・2 Wing候補へ変更、全体1800秒＋局所900秒の各1回上限。
+  両IssueはKRT v0.23.8、commit `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`、
+  KiCad 9.0.9、4層1.2mm、幅／間隙0.10mm、via0.60/0.30mm、off、
+  layer cost [1,-1,1,1]、In1.CuはGND専用。Python実行版は本照合資料では未確認。
+  保存源は本登録基準 `a24896d2aa258371362840ee0f1f2f71cc0d7b9b`。
+- **Failed attempts:** #155局所は独立4指標0/0/0/68。保持68 segmentsの同層・同幅・
+  同ネット被覆が失われた。全体は0/0/0/0で、その後の4nm予約補正でも配線は不変。
+  #167全体は直接観測3/0/0/1（保持via1個欠落）。V1V1/V3V3と診断対象XOUT/
+  QSPI_SD0だけを局所ripping対象にした最終出力は3/0/2/24で、
+  QSPI_SCLK/QSPI_SD2の保持20 segments＋4 viasが欠落した。
+  nonroute AST追加／削除0でも保持銅の保証にはならなかった。
+- **Validity scope:** 上記固定入力と有限試行の観測であり、局所修正一般の禁止や
+  全体再配線一般の成功へ一般化しない。#155の68件は保持被覆差分数で、未接続数ではない。
+  #167は44ネットの直接測定値と、未接続時に資格指標をnullとするassessmentを分ける。
+  F-003の入力境界停止とは別の再開配線失敗である。次の変更では対象ネットだけでなく、
+  保持segmentsの層・幅・ネット被覆、via一致、非配線AST、全ネット実銅接続、DRCを再検証する。
+  ツール版・入力・局所／全体範囲変更時に再確認し、試行上限を結果に応じて無断拡張しない。
+- **Evidence:** [#155報告](issue-155-main-mounting-stage2.md)、
+  [局所独立判定](../hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/local/assessment.json)、
+  [局所保持差分](../hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/local/transfer-diff.json)、
+  [全体範囲の固定](../hardware/kicad/qualification/issue-155-main-mounting-stage2/global-scope.json)、
+  [全体独立判定](../hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/global/assessment.json)、
+  [#167再開報告](issue-167-main-dual-wing-stage2.md)、
+  [再開試行数・直接観測値](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/status.json)、
+  [局所保持差分](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/local/transfer-diff.json)。
+- **Promoted to:** —（未昇格。計画5.4節のK07→検証手順の保持差分確認への昇格候補。
+  実装・採用判断はP6で行う）
+
+### F-009 — Rev.3の充填銅抽出に置換すると旧Wingの電圧予算は変わる（K11）
+
+- **Conclusion:** Main Rev.4の共通／分岐抵抗を維持し、旧#141由来のWing内降下を
+  Wing Rev.3の実形状から抽出した抵抗モデルへ置換すると、127mA/枚・2枚同時・
+  200mmで最悪最遠点は4.797985Vから4.942903Vへ変わった。
+  (confidence: high for saved model arithmetic, unverified physical performance;
+  trials: Rev.3の4基板×2ネット×2メッシュ×2幅＝32保存抽出行、
+  システム感度64計算行。配線探索・抽出再起動の総数と正確な実行環境版は未確認、実測試行数ではない)
+- **Conditions tried:** Main Rev.4 Phase B保存版の取り込みcommit
+  `90c8314be34fcaa8582df9af5814dd6f36a87d59`、Wing Rev.3 Stage 2保存版
+  `932b880c946f9cf6e66993e128ec7d456f311af4`（ともに2026-11-07 UTC、Git履歴）。
+  Main抵抗集約日時04:11:01 UTC。Wing個々の抽出実行日時・Python/SciPy/Triangleの
+  正確な実行版は未確認。保存源は本登録基準 `a24896d2aa258371362840ee0f1f2f71cc0d7b9b`。
+  Main最終PCB SHA256 `b361a5a010a3ae2b08e5858735d46a5662112af4241ef55bab50d1ba3187b123`。
+  Wingは16/17mm×左右の最終PCBをhash束縛し、2層充填銅＋via barrelのsheet FEM、
+  銅35µm／barrel20µm、メッシュ最大面積0.06/0.015mm²、track幅100/80%。
+  粗細の端子ごとの大きい降下を採用し20/125°Cへ換算する。
+  全行でMainは125°C・幅80%の共通37.113969mΩ／J2 3.470864mΩ／J3 28.227454mΩを保持。
+  レール5.2V±2%から未モデル分50mV、U5 Ron0.25Ω、127mA/枚×2、
+  GH導体各200mm・0.0804mm²・接点50mΩ×両端・帰路6本を仮定。
+  感度64行は4基板×2幅×2温度×2長（124.097168/200mm）×2枝であり、
+  全基板を両枝へ仮接続する感度も含む。実配置は左J2／右J3。
+- **Failed attempts:** #196初期抽出はPGNDが遠方viaへ細線接続し共通約187mΩで
+  50mΩ目標に未達。近傍GND via/stubと実許容幅への拡幅後に目標を満たした。
+  細meshのKCL残差超過も反復改善で解消し閾値を緩めていない。
+  #196最終の旧Wing項0.147710145Vは当時のモデル入力で、不合格測定ではない。
+  Rev.3では17mm-right/U_HC1・125°C・幅80%の項が0.002791294Vとなる。
+  旧項をRev.3へ流用するとこの置換結果を表せない。
+- **Validity scope:** **4.9429V等はMain Rev.4＋Wing Rev.3・127mA・200mmのモデル値で、実測ではない**。
+  同条件のハーネス降下0.023793465V、最遠点4.942903405V、4.60V余裕0.342903405V。
+  124.097mmでは4.946310Vで、約3.4mV差だけから長さを決定しない。
+  125°CはGHのカタログ上限105°Cを超える感度計算で、GH／組立の動作温度認定ではない。
+  native fill形状の保持とtrack幅80%のモデルは、plane/spokeのエッチングや仕上り銅厚の
+  保証下限ではない。理想pad接触・等しい帰線抵抗・#196上流UDB/SH/USB条件を前提とし、
+  実負荷・完成ハーネス抵抗・効率・起動／過渡・ADC性能は未保証。
+  PCB hash、面／thermal／via、材料、負荷、接点／長さ、レール・上流条件変更時は再抽出・予算再計算する。
+- **Evidence:** [#196 Phase B報告](issue-196-main-rev4-phaseb.md)、
+  [Main最終抵抗とhash](../hardware/kicad/qualification/issue-196-main-rev4-phaseb/resistance-summary.json)、
+  [#200 Stage 2報告](issue-200-wing-rev3-stage2.md)、
+  [17mm-right全抽出行・hash](../hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-right/resistance-extraction.json)、
+  [全4基板hash・条件・集約結果](../hardware/kicad/qualification/issue-200-wing-rev3/power-summary.json)、
+  [64感度行](../hardware/kicad/qualification/issue-200-wing-rev3/power-sensitivity.csv)、
+  [集約計算源](../hardware/kicad/qualification/issue-200-wing-rev3/power-summary.py)、
+  [FEM自己検証](../hardware/kicad/qualification/issue-200-wing-rev3/fem-selfcheck.json)。
+- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象）
