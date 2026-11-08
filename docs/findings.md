@@ -377,3 +377,177 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [集約計算源](../hardware/kicad/qualification/issue-200-wing-rev3/power-summary.py)、
   [FEM自己検証](../hardware/kicad/qualification/issue-200-wing-rev3/fem-selfcheck.json)。
 - **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象）
+
+### F-010 — 固定Hall footprintのimportでkeepoutと角丸銅箔が失われた（K01）
+
+- **Conclusion:** importer 0.0.117／0.0.142で固定Hall footprintの変換は成功したが、
+  必須の銅ポア禁止keepout 2個は出力0個、SMD 3個の角丸半径は0.15→0.075mmとなり、
+  いずれも個別警告なしで幾何資格に不合格だった。
+  (confidence: high for saved conversions; trials: EDA-003Aの固定asset×2版の保存結果各1件。
+  0.0.117のproject経路は報告上1回。0.0.142のclean install再現・合成対照は別枠で、
+  全変換起動総数と過去#13の試行総数は未確認)
+- **Conditions tried:** 2026-10-05、起点 `7d7f3cffe4fb98771e3ca47f800a54de22fa8c4f`。
+  productionはtscircuit 0.0.2646／importer 0.0.117の既存lock、
+  独立spikeはimporter 0.0.142（package報告gitHead
+  `967a8c823d8d19cdf18060fd7b66ce5d79e91c12`）、kicadts 0.0.58、
+  TypeScript 5.9.3、@flatten-js/core 1.6.14、circuit-json-util 0.0.120、
+  transformation-matrix 2.16.1。全解決版はversion-matrixに保存。Node実行版は未確認。
+  入力は `SW_MX_HE_0deg_1u.kicad_mod`、SHA256
+  `168d915310d9fecaf19d33d130a9171f296b2a3aa3d0447e9f064535e406190a`、
+  原点(0,0)・回転0、入力／出力補修なし、独立許容差0.001mm。
+- **Failed attempts:** 両版とも `pcb_keepout=0`・`pcb_copper_pour=0`、
+  `getWarnings()`・捕捉console warn/errorは空。パーサには2 zoneと12 arcsが残る。
+  基本pad／PTH／NPTH／pin3重複番号／Y反転は合格しても、欠落と角丸差は残った。
+  converter実行成功とfidelity gateの期待exit 1を区別する。
+- **Validity scope:** このassetと版・依存環境でのstandalone変換だけ。
+  source zoneの名称でなく宣言層を正とし、F.Cu側8 arcsのnotchとB.Cu側4 arcsを要求した。
+  内層再利用・mask/paste・zone_connectの将来ポア挙動・基板移行は未資格。
+  physical port 4個でもsource_port 0個で、電気graph parityの成功ではない。
+  将来版や別footprintの能力を断定しない。importer／parser／schema／依存版・asset・
+  transform・層構成が変われば、keepout形状・権限・実効ポア禁止と実銅箔を再検証する。
+- **Evidence:** [原報告・歴史#13との区別](tscircuit-kicad-importer-requalification.md)、
+  [版・入力hash](../hardware/tscircuit/spikes/eda-003a/evidence/version-matrix.json)、
+  [0.0.117保存結果](../hardware/tscircuit/spikes/eda-003a/evidence/project-result.json)、
+  [0.0.142保存結果](../hardware/tscircuit/spikes/eda-003a/evidence/upstream-result.json)、
+  [原zone・幾何比較](../hardware/tscircuit/spikes/eda-003a/evidence/geometry-comparison.json)、
+  [警告](../hardware/tscircuit/spikes/eda-003a/evidence/warnings.json)。
+- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+
+### F-011 — 固定JITX fixtureでは電気graph一致後も物理未接続が残った（K02）
+
+- **Conclusion:** C4B5の2候補は電気graph parityを保持し、非対話buildと
+  legacy-kicad exportに成功したが、独立KiCadでは40／39未接続が残った。
+  対象環境でsourceによる完全物理配線は実証されていない。
+  (confidence: high for retained outputs; trials: C4B5のfresh候補2件＝異なるsource各1回。
+  先行探索build 1件は別枠。C0〜C4B全体の配線起動総数は未確認)
+- **Conditions tried:** 2026-10-05（DRC各06:19:07／06:20:21 UTC）、
+  起点 `69dd846ac76d40f333b1b099a13d2a4720cfe758`、source hashはpipelineに固定。
+  Python 3.14.2、JITX 4.4.3、jitxlib-standard 4.4.0、Linux runtime 4.4.2、KiCad 9.0.9。
+  C4B由来の68部品・配置固定、80×60mm、名目1.2mm・2層、
+  source trace幅／copper clearance各0.20mm。公開Routeの単層topological engineと
+  公開pad／Net／Via／PortAttachmentを使用、capture境界は実験的RuntimeDesign。
+  候補1は近接pad spanning tree＋既存H0経路、候補2はMUX_A0を明示2via escapeに置換。
+  downstream入力はread-only、生成CAD編集・外部ルータ・ルール緩和なし。
+- **Failed attempts:** 先行探索は111/153 requests実現・未接続42。
+  fresh候補1は113/153・via2・未接続40とcopper sliver 1件。
+  fresh候補2は116/155・via4・未接続39とdangling via 1件で、MCU側escapeが未達だった。
+  既知USB hole clearance 4件・library登録警告68件も両方に残り、DRC exit 5。
+  完全配線未達なのでC4B5のGerber/Excellonと同一候補2回成功比較は未実施。
+- **Validity scope:** 電気照合は68部品・200 endpoints・43 named nets・185 edges・
+  direct links 4・intentional NC 7のPASSであり、幾何／物理接続のPASSへ転用しない。
+  この固定版で公開headless全体多層plannerは確認されなかったという調査結果に限り、
+  全配置／順序／熟練者の手動完配や将来版の不可能性は証明しない。
+  異なる2候補から決定性も認定しない。過去C4B4Bのdownstream製造経路成功と、
+  誤った1.6mm overall metadata・別途1.2mm指定、USBの発注前DFM残件は別の範囲。
+  採用NO-GO判断は[D-016](decisions.md#d-016---jitx-physical-backend-no-go-native-tscircuit-resumes-as-active-revm1-eda-candidate)に残す。
+  package／runtime変更時はC0 graph自己検査から再確認し、routing API・配置・制約・
+  export経路変更時は電気parityと独立物理検査を再実施する。
+- **Evidence:** [評価履歴](jitx-evaluation.md)、
+  [C4B5報告](../hardware/jitx/physical/EDA-002C4B5.md)、
+  [公開surface・環境](../hardware/jitx/physical/c4b5-evidence/routing-surface.json)、
+  [argv・source hash・実行](../hardware/jitx/physical/c4b5-evidence/pipeline.json)、
+  [候補1 DRC/capture](../hardware/jitx/physical/c4b5-evidence/experiment-1.json)、
+  [候補2 DRC/capture](../hardware/jitx/physical/c4b5-evidence/experiment-2.json)、
+  [電気照合](../hardware/jitx/physical/c4b5-evidence/reconciliation.json)。
+- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+
+### F-012 — 固定Mainでは層追加だけで完配せず、別の幅／間隔条件で完成した（K04）
+
+- **Conclusion:** 固定Mainの0.20mm幅／間隔では、2層fab_routerと4層の
+  fab_router／KRTの各保存結果に未接続が残った。一方、4層KRTの0.10mm幅／間隔では
+  独立4指標0を確認した。層数追加だけでpad直近のescape成立まで保証できない。
+  (confidence: high for cell outcomes, limited for congestion mechanism;
+  trials: 下表Main計4回＝各セル1回。対応smokeは#103 1回、
+  #117修正指示01は各ツール2回、#121 1回。過去停止・設定読戻し・内部rescueは別枠)
+- **Conditions tried:** Mainは48×44mmの固定配置、49 footprints・37非空ネット。
+  #103のDSN parseは197 pads、#117 native棚卸しは199物理ランドで、計数を同一視しない。
+  共通via外径／穴0.60/0.30mm、板厚1.2mm。
+  fab_routerはcommit `69cf598db98c136bff16bbe02bccdded95674b18`、Bun 1.4.4、
+  公開routeDsn API既定（detailedRouter/globalPlan off、fanout false）、budget1800000ms。
+  KRTはv0.23.8、commit `c64c0db25e6cf23afa6769ee05665c7ea22b3ff2`、
+  off・寸法CLI明示・In1 layer cost −1。独立検査KiCad 9.0.9。
+  KRT／検査Python実行版は本照合資料では未確認。
+  #103の基準mainは `9f97ebe6626ebf0c38e030bb8c9a2b9c27fb462d`、
+  Main DSN SHA256 `75b44553bf6c8cab8c7dba411ad83b11fd12b5416cd24055aa5b1a412fd54bb2`。
+  #117は前run `7917d82` の4層入力をbyte一致で再利用（native SHA256
+  `33f079d07bfb2dad9a76dce0667a1fd1371c94406df16f36ae17fe559d74af01`）。
+  #121は `ce2e27fe6495dbd08db86bdd9b22a3c93b002347` の#119入力を取得し、
+  ルールのみ変更、逆変更byte一致で配置・部品・ネット・既存0.20mm銅箔3本を保持した。
+
+  | 対象・実行日UTC | 固定層構成・幅／間隔 | ツール・保存観測 |
+  | --- | --- | --- |
+  | #103 Main、2026-11-03 22:57:23開始 | F/B 2層、0.20/0.20mm | fab_router：保存SES自己再適用未接続16、276 paths全0.20mm。Main独立import未実施、4指標null |
+  | #117 Main修正01、2026-11-04 09:29:19開始 | F/In2/B信号＋In1 GND、0.20/0.20mm | fab_router：独立再fill後26未接続、4指標null |
+  | #117 Main修正01、2026-11-04 09:29:20開始 | 同上（配置・ルール固定） | KRT off：独立再fill後28未接続、4指標null |
+  | #121 Mainセル1、2026-11-04 10:56:42開始 | 同じ4層役割、0.10/0.10mm | KRT off：独立未接続0・4指標0、信号537本0.10mm＋保持3本0.20mm、via66個 |
+
+- **Failed attempts:** #117の独立非印刷指摘はfab 17件（hole_to_hole 1・
+  track_dangling 16）、KRT 9件（via_dangling）。未配線時のnullを0にしない。
+  修正01の初回smokeはKRT thermal 1件で不合格、Nプレーンsolid化後に両方合格。
+  このsmoke固有変更をMain GNDへ移さず、Main各1回を守った。
+  #117以前のsmokeネットN／GND要件不整合による配線前停止は、Main配線失敗に数えない。
+- **Validity scope:** 測定主体が異なる#103の16と#117の26を差分効果として比較しない。
+  #121では幅とclearance、zone thermal寸法等も変わり、層数・線幅単独の因果や
+  0.10〜0.127mmの成立境界は未確認。セル2〜4は準備だけで未実行、失敗扱いしない。
+  #117のWing見通し（仮定mux pitch0.65／pad幅0.30なら隙間0.35に対し
+  0.20線＋両側0.20は0.60mm必要）は感度例で、実Wing footprintの測定ではない。
+  平均密度・層追加から局所escapeを保証できないが、混雑が全未接続の唯一原因と断定しない。
+  全ツール同条件の不可能性・配置不可能性・量産DFM・別seed再現性も未実証。
+  #121は生印刷指摘61件を保持し製造承認ではない。形状・配置・pad／穴keepout・
+  ツール版／設定・層／寸法・銅厚変更時は入力等価性と独立検査を再実施する。
+  F-002のexit／project差分の知見とは分け、本項は層・ルール別の到達条件を扱う。
+- **Evidence:** [#103報告](issue-103-fab-router-falsification.md)、
+  [#103保存SES判定](../hardware/kicad/qualification/issue-103-fab-router-falsification/evidence/assessment.json)、
+  [#117報告・入力同定・Wing推定](issue-117-four-layer-main-and-wing-outlook.md)、
+  [#117修正01判定](../hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/assessment.json)、
+  [#121報告・ルール差分](issue-121-full-auto-conditions.md)、
+  [#121実行セル・独立合格](../hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/verification.json)。
+- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+
+### F-013 — 旧Wing裸基板価格は両面PCBAパネルの見積根拠を代替しない（K10）
+
+- **Conclusion:** #133の旧representative21 Wingの裸基板参考価格は、
+  #147の手はんだ用各5枚・別設計候補に対しても最終見積ではなかった。
+  #194 Rev.2は左右ペア面付け・両面Standard PCBAへ前提が変わり、同じ価格は適用できない。
+  (confidence: high for saved price and package conditions, unverified supplier total;
+  trials: #133計算専用POST保存6応答＝16mm 4件・17mm 2件。
+  #147新規価格取得0、#194は個別4＋パネル2の保存CAM照合結果であり価格試行ではない。
+  全検査起動総数は未確認、製造／実装実績を数えたものではない)
+- **Conditions tried:** #133取得は2026-11-04 UTC 23:13:11〜23:13:17、
+  形状基準commit `5744eed8234a6c3a0a6a2fa36d2e7c6bb443e024`、入力PCB hashはgeometry-evidence。
+  JLCPCB公開計算専用API、ログイン／ファイルupload／注文なし、USD。
+  実行Python／curlの正確な版、サーバ計算機版は未確認。保存request／responseを観測対象とする。
+  FR4 TG135-140、2層、1.2mm、外層1oz、緑mask／白silk、HASL有鉛、
+  既定via選択、納期2 days追加$0、1設計×5枚、PCBA／stencilなし。
+  #147再開は2026-11-05、#194最終Phase Bは2026-11-07。
+  それぞれの保存版は取り込みcommit
+  `ba4b22c3b2885cd1c55fff8c3471f6a8f5f3f54d`／`a313ca4fcf210b1947ee9981cad056077dea0cea`。
+
+  | 記録・対象版 | 数量・面／面付け・費目の境界 |
+  | --- | --- |
+  | #133 representative21 16mm 110×100／17mm 116.5×104.75mm | 各5枚・単一設計の裸基板。各engineering $4＋board $5.30/$5.90＝$9.30/$9.90、計10枚$19.20（engineering計$8含む）。実装費なし、送料・税未取得 |
+  | #147 #141出力KRT-16/17-2L-P0300 | 同寸法の別設計各5枚、追加面付けなし。SMD全190 padは表面・裏mask開口0、手はんだ、PCBA／stencilなし。新規価格取得なし、#133値は参考のみ |
+  | #194 Wing Rev.2最終16/17mm左右 | 個別117.2×82.698516／123.2×86.698516mm。各ピッチ左右1枚ずつを上下に置くパネル133.2×168.397032／139.2×176.397032mm、3mm間隔・タブ／mouse-bite・レールあり。98実装点＝下面84＋上面14、Standard PCBA両面。発注ロット枚数・金額は本証跡では未確認 |
+
+- **Failed attempts:** #133の先行urllib取得は接続resetで価格未取得、curl版で取得した。
+  0.10／0.20mmと名付けた同ピッチrequestはbyte同一であり、線幅入力欄は存在しない。
+  $0差は線幅を変えた価格応答の実験ではなく、同一入力と当時の公開能力／加算規定の
+  照合結果に限る。#147の穴座標完全一致検査停止はCAM丸めの扱いで、価格取得失敗ではない。
+- **Validity scope:** 当時の裸基板費用だけに限定。Keyboard Design加算
+  $16.41＋$49.25/m²は未確定・上記額に含まれず、面積単位の解釈・送料統合も未確認。
+  #147の無印silk受入れ・業者DFMと最終費用承認は未完了。
+  #194のパネル／両面BOM・CPL整合は価格・CPL回転の業者受入れ保証ではない。
+  旧裸基板価格を現行Wing Rev.3のStandard PCBAへ流用しない。
+  版・外形・ピッチ／左右・ロット枚数（panel数と個片数）・面数・実装点・面付け／
+  タブ・仕上げ・銅厚・工程・送料税・見積日が変われば費目別に再見積し、
+  製造側のファイル審査と承認を別途確認する。
+- **Evidence:** [#133報告](issue-133-wing-cost-check.md)、
+  [形状・基準commit/hash](../hardware/kicad/qualification/issue-133-wing-cost-check/geometry-evidence.json)、
+  [当時価格と費目](../hardware/kicad/qualification/issue-133-wing-cost-check/price-evidence.json)、
+  [6取得記録・request hash](../hardware/kicad/qualification/issue-133-wing-cost-check/quote-capture/quote-records.json)、
+  [元request／response](../hardware/kicad/qualification/issue-133-wing-cost-check/quote-capture/)、
+  [#147対象PCB hash・発注残件](issue-147-wing-order-prep.md)、
+  [#194最終仕様・面付け](issue-194-wing-rev2-stage2.md)、
+  [Rev.2 panel転写照合](../hardware/kicad/qualification/issue-194-wing-rev2/panel-verification.json)、
+  [Rev.2 CAM/BOM/CPL・面別点数](../hardware/kicad/qualification/issue-194-wing-rev2/cam-verification.json)。
+- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
