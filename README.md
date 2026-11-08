@@ -64,3 +64,5 @@ Public-release audit evidence and the current Human Gate result are documented
 in [`docs/public-release-readiness.md`](docs/public-release-readiness.md). This
 repository has completed public release; the hardware remains experimental and
 is not production-ready.
+
+設計の世代・過去の試行・証跡は [履歴索引](docs/history-index.md) を参照。

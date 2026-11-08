@@ -4,3 +4,5 @@
 このディレクトリ名を現行PCBの保存先と解釈せず、
 [成果物索引](../../docs/artifacts-index.md)から最終CAD・回路源・製造データへ進んでください。
 [現行状態](../../docs/project-status.md)にある製造GO・実機検証ゲートは未了です。
+
+設計の世代・過去の試行・証跡は [履歴索引](../../docs/history-index.md) を参照。

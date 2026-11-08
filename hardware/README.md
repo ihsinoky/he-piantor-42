@@ -7,3 +7,5 @@ Matrix は評価用18キー基板で、製品Wingとは別です。
 
 設計採択と実機合格・発注GOは別です。[現行状態と残件](../docs/project-status.md)を参照。
 `sensor-test/`、`main/`、旧Rev.M1やEDA評価の資料は設計履歴を含みます。
+
+設計の世代・過去の試行・証跡は [履歴索引](../docs/history-index.md) を参照。
