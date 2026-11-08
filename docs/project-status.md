@@ -565,3 +565,5 @@ severity suppression, fork, GUI or KiCad version switch. Main/PCB/routing/spacin
 manufacturing/adoption NOT ENTERED. The report was accepted in merged PR #84 on 2026-10-14; acceptance is not
 source migration or a Human Gate. Issue #85 separately authorized EDA-004G, whose
 proposed STOP is the current evaluation above. No trial is authorized after that STOP. [Report/evidence](headless-schematic-qualification.md).
+
+設計の世代・過去の試行・証跡は [履歴索引](history-index.md) を参照。
