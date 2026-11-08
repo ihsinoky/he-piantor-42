@@ -78,7 +78,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [#115独立結果](../hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/main-independent.json)、
   [#115全差分](../hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/main-board-diff.json)、
   [別条件の後続合格#121](issue-121-full-auto-conditions.md)。
-- **Promoted to:** —（未昇格。P6で検証手順の独立判定・設定差分確認への昇格を検討予定）
+- **Promoted to:** [development-workflow.md — Verification evidence / Independent acceptance](development-workflow.md#independent-acceptance)、[PR template — Verification / CI](../.github/pull_request_template.md#verification--ci)。本PR（Issue #217 / `issue-217-p6`、PR番号未発行）、P6提案版。
 
 ### F-003 — 変換器入力の比較境界をUSB入力保証へ転記すると成立しない場合がある（K08）
 
@@ -121,7 +121,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [初回上流全4,320ケース](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/upstream-sensitivity.csv)、
   [初回検証結果](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/verification.json)、
   [#167再開報告](issue-167-main-dual-wing-stage2.md)。
-- **Promoted to:** —（未昇格。P6でIssueテンプレートの測定境界・設計負荷・ストレス欄への昇格を検討予定）
+- **Promoted to:** [Engineering work — Measurement boundaries and guarantees](../.github/ISSUE_TEMPLATE/engineering-work.md#measurement-boundaries-and-guarantees)。本PR（Issue #217 / `issue-217-p6`、PR番号未発行）、P6提案版。
 
 ### F-004 — 同ネットvia–padもannulus外周から全件の製造監査を要する（K09）
 
@@ -166,7 +166,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [Matrix最終検証](../hardware/kicad/qualification/issue-182-matrix-rev3/verification.json)、
   [#185報告](issue-185-main-rev3.md)、
   [Main最終全件集計](../hardware/kicad/qualification/issue-185-main-rev3/local35/audit/via-pad/summary.json)。
-- **Promoted to:** —（未昇格。P6で検証手順の全via・全pad監査への昇格を検討予定）
+- **Promoted to:** [development-workflow.md — Verification evidence / Full via-pad audit](development-workflow.md#full-via-pad-audit)、[PR template — Verification / CI](../.github/pull_request_template.md#verification--ci)。本PR（Issue #217 / `issue-217-p6`、PR番号未発行）、P6提案版。
 
 ### F-005 — ケース入力更新では外形だけでなく固定点集合とボスまで照合する（K12）
 
@@ -209,7 +209,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [最終16mm入力hash・固定点・ボス](../hardware/case/issue-198-final/16mm/dimensions.json)、
   [最終17mm検証結果](../hardware/case/issue-198-final/17mm/verification.json)、
   [最終16mm検証結果](../hardware/case/issue-198-final/16mm/verification.json)。
-- **Promoted to:** —（未昇格。P6で基板–ケース引継ぎのCSV/hash/固定点集合照合への昇格を検討予定）
+- **Promoted to:** [development-workflow.md — PCB-to-case handoff](development-workflow.md#pcb-to-case-handoff)、[PR template — Verification / CI](../.github/pull_request_template.md#verification--ci)。本PR（Issue #217 / `issue-217-p6`、PR番号未発行）、P6提案版。
 
 ### F-006 — 旧Wingの電源／GND拡幅はDC降下を減らすが最低電圧の保証は残る（K05）
 
@@ -250,7 +250,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [17mm独立判定](../hardware/kicad/qualification/issue-141-wing-power-integrity/inspection/KRT-17-2L-P0300/assessment.json)、
   [前後比較16行（各行2ケース）](../hardware/kicad/qualification/issue-141-wing-power-integrity/dc-comparison.csv)、
   [DC計算源](../hardware/kicad/qualification/issue-141-wing-power-integrity/dc-model.py)。
-- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象。今回は手順・skillを変更しない）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-007 — NPTHのpads禁止解除と全層の実銅予約は別に検証する（K06）
 
@@ -289,7 +289,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [#155報告](issue-155-main-mounting-stage2.md)、
   [4nm補正原記録](../hardware/kicad/qualification/issue-155-main-mounting-stage2/reservation-quantization-guard.json)、
   [最終半径・保持・試行数検証](../hardware/kicad/qualification/issue-155-main-mounting-stage2/verification.json)。
-- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-008 — 局所配線の合否には保持対象の銅箔差分も必要となる（K07）
 
@@ -329,8 +329,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [#167再開報告](issue-167-main-dual-wing-stage2.md)、
   [再開試行数・直接観測値](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/status.json)、
   [局所保持差分](../hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/local/transfer-diff.json)。
-- **Promoted to:** —（未昇格。計画5.4節のK07→検証手順の保持差分確認への昇格候補。
-  実装・採用判断はP6で行う）
+- **Promoted to:** [development-workflow.md — Verification evidence / Retained-artifact comparison](development-workflow.md#retained-artifact-comparison)、[PR template — Verification / CI](../.github/pull_request_template.md#verification--ci)。本PR（Issue #217 / `issue-217-p6`、PR番号未発行）、P6提案版。
 
 ### F-009 — Rev.3の充填銅抽出に置換すると旧Wingの電圧予算は変わる（K11）
 
@@ -376,7 +375,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [64感度行](../hardware/kicad/qualification/issue-200-wing-rev3/power-sensitivity.csv)、
   [集約計算源](../hardware/kicad/qualification/issue-200-wing-rev3/power-summary.py)、
   [FEM自己検証](../hardware/kicad/qualification/issue-200-wing-rev3/fem-selfcheck.json)。
-- **Promoted to:** —（未昇格。計画5.4節に沿ったP6での昇格判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-010 — 固定Hall footprintのimportでkeepoutと角丸銅箔が失われた（K01）
 
@@ -411,7 +410,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [0.0.142保存結果](../hardware/tscircuit/spikes/eda-003a/evidence/upstream-result.json)、
   [原zone・幾何比較](../hardware/tscircuit/spikes/eda-003a/evidence/geometry-comparison.json)、
   [警告](../hardware/tscircuit/spikes/eda-003a/evidence/warnings.json)。
-- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-011 — 固定JITX fixtureでは電気graph一致後も物理未接続が残った（K02）
 
@@ -449,7 +448,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [候補1 DRC/capture](../hardware/jitx/physical/c4b5-evidence/experiment-1.json)、
   [候補2 DRC/capture](../hardware/jitx/physical/c4b5-evidence/experiment-2.json)、
   [電気照合](../hardware/jitx/physical/c4b5-evidence/reconciliation.json)。
-- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-012 — 固定Mainでは層追加だけで完配せず、別の幅／間隔条件で完成した（K04）
 
@@ -502,7 +501,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [#117修正01判定](../hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/assessment.json)、
   [#121報告・ルール差分](issue-121-full-auto-conditions.md)、
   [#121実行セル・独立合格](../hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/verification.json)。
-- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
 ### F-013 — 旧Wing裸基板価格は両面PCBAパネルの見積根拠を代替しない（K10）
 
@@ -550,4 +549,4 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [#194最終仕様・面付け](issue-194-wing-rev2-stage2.md)、
   [Rev.2 panel転写照合](../hardware/kicad/qualification/issue-194-wing-rev2/panel-verification.json)、
   [Rev.2 CAM/BOM/CPL・面別点数](../hardware/kicad/qualification/issue-194-wing-rev2/cam-verification.json)。
-- **Promoted to:** —（未昇格。計画5.4節に具体的昇格候補なし、P6で判断対象）
+- **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
