@@ -98,6 +98,94 @@ Before the PO makes the merge decision:
 The GitHub merge-method and branch-cleanup settings are manual PO actions listed
 in [governance](governance.md#repository-settings-po-manual-action).
 
+## Verification evidence
+
+These checks supply evidence for the Merge gates above. The implementer / Codex
+runs and records each applicable check in the PR's Verification / CI section;
+PMO reviews that evidence read-only and PO retains the acceptance / Human Gate
+decision. Record why a check is not applicable rather than leaving it blank.
+
+### Independent acceptance
+
+- **Applies when:** accepting generated or modified engineering artifacts,
+  including routing results. Source: [F-002](findings.md) (K03).
+- **Inputs:** approved Issue criteria, source commit and input hashes, original
+  project rules, exact tool versions / effective settings, saved output artifacts
+  and tool logs.
+- **Check:** independently read and inspect the saved artifacts against the
+  approved criteria; for PCB routing include actual copper connectivity, DRC,
+  dimensions and input/output project-setting differences, using the original
+  approved rules. Record the independent method, versions, results and evidence
+  paths separately from the generator's exit code and self-reported unrouted /
+  violation counts. Neither exit code nor self-reported counts establish pass.
+- **Stop when:** independent checks fail, are missing, or settings differ without
+  authorization. Do not report acceptance or continue to a dependent stage;
+  report failed / unverified items, keep null results distinct from zero, and
+  obtain PO direction before changing requirements or retry limits.
+- **Owner:** implementer / Codex produces evidence; PMO checks it; PO decides.
+
+### Retained-artifact comparison
+
+- **Applies when:** making a local change or repair with wiring or data that must
+  remain unchanged. Source: [F-008](findings.md) (K07).
+- **Inputs:** frozen pre-change artifacts / hashes, permitted change scope and an
+  explicit retained wiring / data set, plus saved post-change artifacts.
+- **Check:** compare the retained set before and after as an acceptance condition,
+  alongside independent acceptance above. For PCB copper, check retained segment
+  coverage on the same layer, width and net, via identity / geometry, nonroute AST,
+  whole-board connectivity and DRC; compare retained data by content / structure
+  as appropriate. Record differences and evidence, including zero differences.
+- **Stop when:** the retained set is undefined, comparison is missing, or retained
+  wiring / data is lost or changed outside the permitted scope, even if connection
+  and DRC counts pass. Report and seek PO direction before expanding scope.
+- **Owner:** implementer / Codex defines the set from the approved scope and checks
+  it; PMO reviews the comparison; PO decides any scope change.
+
+### Full via-pad audit
+
+- **Applies when:** accepting a PCB containing vias, or changing PCB / pad / via
+  geometry, copper layers or manufacturing conditions. Source:
+  [F-004](findings.md) (K09).
+- **Inputs:** saved PCB hash, native effective pad copper shapes / common copper
+  layers, via outer diameters and the approved design-audit clearance criterion
+  (this project's criterion is at least 0.10 mm).
+- **Check:** audit every via against every copper pad on common copper layers,
+  including same-net, NC, reinforcement and bare test pads; exclude NPTH without
+  copper. Measure clearance from the via annulus outer edge to pad copper, not
+  from the drill edge. Record counts / coverage, minimum gap, violations and
+  evidence for the full set, including non-overlapping pairs. Electrical DRC or
+  overlap-only checks do not replace this audit. This nominal-geometry criterion
+  does not certify manufacturing tolerances, vendor DFM acceptance or cost.
+- **Stop when:** coverage or inputs are incomplete, or any pair misses the
+  approved clearance; report and hold acceptance pending correction and full
+  re-audit, with independent connectivity / DRC / CAM rechecks as applicable.
+- **Owner:** implementer / Codex performs the audit; PMO reviews coverage and
+  results; PO decides acceptance and any manufacturing Human Gate.
+
+## PCB-to-case handoff
+
+- **Applies when:** updating PCB-side inputs (such as CSVs) supplied to the case,
+  including changes to geometry, datums, coordinate transforms or mounting holes.
+  Source: [F-005](findings.md) (K12).
+- **Inputs:** approved source commit and complete input-file manifest with hashes
+  (including each pitch / side), received case-side copies, coordinate transforms,
+  expected mounting-point identities / positions and generated case artifacts.
+- **Check:** compare the complete file sets and hashes between approved PCB
+  sources and case inputs, not just outlines or filenames. Compare mounting-point
+  sets, including additions / removals, identities and transformed positions,
+  against case holes and bosses; counts alone are insufficient. Check boss wall
+  material, pilot-hole openings and inverse-transformed hole positions against
+  declared tolerances. Record expected / actual sets, hashes, differences and
+  evidence for every variant. Digital geometry checks do not establish physical
+  retention, creep or print-shrinkage performance.
+- **Stop when:** files / hashes / mounting-point sets differ, required boss or
+  hole checks fail, or inputs / tolerances / evidence are missing. Hold handoff
+  acceptance and downstream use until reconciled; report to PO rather than
+  carrying forward an old mounting-point count.
+- **Owner:** implementer / Codex records PCB-side inputs and case-side receipt /
+  checks; PMO reviews their correspondence; PO resolves input changes and accepts
+  the handoff.
+
 ## EDA method changes and retries
 
 Before proposing an EDA method change or retry, read
