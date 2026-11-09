@@ -98,6 +98,20 @@ Before the PO makes the merge decision:
 The GitHub merge-method and branch-cleanup settings are manual PO actions listed
 in [governance](governance.md#repository-settings-po-manual-action).
 
+## Part selection
+
+- When selecting a part (new design or substitute), check JLCPCB/LCSC stock at
+  selection time, not only at quote time. Prefer parts whose stock is
+  comfortably above the required quantity - as a guideline, at least 10x the
+  quantity needed for the planned builds including spares (PO rule, 2026-11-10).
+- A technically ideal part with thin stock is a risk discovered too late
+  (precedent: Issue #223 - the specified L1 had 3 units in stock against 5
+  required when the Rev.5 quote was taken). If no well-stocked alternative
+  exists, flag the thin stock at selection time in the issue or decision
+  record so the risk is visible before the order gate.
+- Stock figures are snapshots, not reservations: re-check when quoting and
+  again before ordering.
+
 ## Verification evidence
 
 These checks supply evidence for the Merge gates above. The implementer / Codex
