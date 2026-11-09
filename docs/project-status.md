@@ -4,6 +4,16 @@ This document is the authoritative record of the project's high-level progress.
 Detailed implementation work is tracked by GitHub Issues rather than duplicated
 here.
 
+### 更新草案（2026-11-10、Issue #221、未採択）
+
+発注1の Main を Rev.5（J4=Molex 781710004 / C588524、Geon × Wolf Fly DB）へ
+更新する案を準備中。**Fly の番号付きピン順が一次資料で未確認のため実装保留**。
+Rev.5 の基板・製造パッケージ・全検証は未完了で、発注対象の切替は成立していない。
+[D-035](decisions.md#d-035---main-rev5-fly-daughterboard-connector-proposal) は提案のみ。
+既存の採択済みベースラインは下記記録のまま。PMO はピン順一次資料を確保し、
+局所変更と全合格条件の完了後に PO ゲートへ提出する。
+[調査結果・再開条件](issue-221-main-rev5.md)参照。
+
 Cross-cutting lessons distilled from the decision record (D-001–D-027) and the
 PMO run record (Issues #87–#169) are collected in
 [lessons-learned-device-development.md](lessons-learned-device-development.md).

@@ -1109,3 +1109,27 @@ bottom Hall/local capacitors and top MUX/GH assembly. Keep DFM, tab separation,
 locator fit, pin1/machine CPL rotation, magnetic response, noise and assembled
 power acceptance as the existing physical gates. This draft authorizes no
 order or quotation. See [the Stage 2 report](issue-200-wing-rev3-stage2.md).
+
+## D-035 - Main Rev.5 Fly Daughterboard connector proposal
+
+Status: **提案（2026-11-10、Issue #221）。未採択。ピン順の一次資料確認待ち。**
+
+Main Rev.5 の J4 を JST SM04B-SRSS-TB(LF)(SN) / C160404 から
+Molex Pico-EZmate 781710004 / C588524 へ変更する案。採択時に限り D-033 の
+Main 側 USB ドーターボード用コネクタ部分を supersede する。D-033 全体を
+置換せず、基板外形・3穴・J2/J3・他部品配置・ネット構成・5.2V 電源設計・
+200mm GH 条件を継承する。Matrix／Wing データは対象外。
+
+Geon × Wolf Fly DB と同梱 EZmate↔EZmate 1:1 ケーブルを接続する前提だが、
+Fly のピン1〜4と VBUS/D−/D+/GND の番号付き対応は **未確認**。
+現時点では Rev.4 の 1=VBUS / 2=USB_DM_ESD / 3=USB_DP_ESD / 4=GND を
+Fly に流用すると決定しない。部品型番・ケーブル線色・UDB代替という説明だけで
+割付を推定しない。ランドは Molex 推奨寸法に従い、再配線は J4 周辺に限る。
+
+一次資料によるピン順確定後、DRC/ERC/未配線、全 via–pad 監査、Rev.4
+との差分限定、VBUS 抵抗変化、Rev.5 CAM/BOM/CPL・Gerber フレーム照合を
+完了してから PO マージゲートへ提出する。挿抜は内部接続用途を前提とし、
+頻繁に抜き差ししない。調達時の在庫・機構・完成上流経路の抵抗も別途確認する。
+
+実装・製造パッケージは未作成。詳細は
+[Issue #221 調査報告](issue-221-main-rev5.md)。本草案は採択・製造GOを意味しない。

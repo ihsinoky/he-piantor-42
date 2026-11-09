@@ -1,0 +1,24 @@
+{
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/221",
+  "title": "Main Rev.5：J4 を Molex Pico-EZmate 781710004 に変更（Fly Daughterboard 対応）",
+  "issue_number": 221,
+  "body": "## 背景\n手元の USB ドーターボード在庫は UDB C3 ではなく **Geon × Wolf Fly Daughterboard**（2個、2026-11-10 に実物写真と商品情報で特定）だった。Fly DB のコネクタは **Molex Pico-EZmate 781710004**（1.2mm・4極）で、Main Rev.4 の J4（JST SM04B-SRSS-TB、C160404）とは嵌合しない。PO 判断：変換ケーブルで逃げず、Main 基板側のコネクタを変更する（発注前なので基板変更が最も安く確実）。\n\n## 目的\nMain Rev.5 = Main Rev.4 の J4 だけを Molex 781710004 に載せ替えた版を作り、発注1の対象を Main Rev.5 に更新できる状態にする。\n\n## 要件\n1. J4 の部品・フットプリントを Molex 781710004（Pico-EZmate、4 circuits、1.2mm pitch、vertical SMD header）に変更する。ランドパターンは Molex の推奨寸法に従うこと\n2. JLCPCB で実装発注できる LCSC コードを特定し BOM に記録する。特定できない場合は黙って代替部品に置き換えず、停止して報告する（互換を名乗る他社品も同様）\n3. ピン順の照合：Fly Daughterboard のピン1〜4のネット対応を一次資料（Geon／Wolf／販売店の公式資料、EZmate↔JST ケーブルの規約など）で裏付け、Main J4 側のネット順が「Fly DB 付属の EZmate↔EZmate 1:1 ケーブルで正しく接続される」順になるよう割り付ける。Rev.4 の現行 J4 ネット順（UDB C3 の JST ピン順前提）も記録し、差分があれば明示する。推測で決めないこと\n4. 製造パッケージを Rev.5 用 qualification ディレクトリに再生成する：Gerber ZIP、BOM.csv、CPL.csv、CPL-jlcpcb-gerber-frame.csv（PR #220 と同じフレーム方式）、quote-handoff.md\n\n## 不変条件\n- 基板外形、取り付け穴、J2／J3、その他全ての部品と配置は Rev.4 から変えない（J4 のフットプリント差分に直接起因する変更を除く）\n- 電源設計（5.2V レール、最遠点 4.798V の検証前提、ネット構成）は変更しない\n- 再配線は J4 周辺の局所に限る。広域の再配線が必要になったら停止して報告する\n- Matrix／Wing には触れない。発注・支払いはしない\n\n## 合格条件\n- KiCad DRC 0、未配線 0、ERC クリーン\n- ビア-パッド全数監査（docs/development-workflow.md の手順）で Rev.4 と同等の基準を満たし、最小値を報告する\n- Rev.4 との差分一覧（変更ネット／変更フットプリント）を出し、J4 起因以外の差分がないことを示す\n- VBUS 経路への影響（J4 周辺の配線抵抗の変化）を評価し、電源検証の結論が変わらないことを述べる\n- D-035（D-033 のコネクタ部分を supersede）の ADR 草案と project-status 更新草案を含む（採択は PO のマージゲート）\n- 成果物は Draft PR。マージは PO ゲート\n\n## 参考\n- Fly DB の公知仕様：ESD（VBUS TVS 内蔵）／コモンモードフィルタ／1A トリップヒューズ／シールド RC フィルタ、ねじ M2×2、付属ケーブル EZmate↔EZmate 170mm\n- Pico-EZmate は定格挿抜回数が少ない（データシート上 10 回級）ことを承知の上で採用する（内部接続で頻繁な抜き差しはしない前提）",
+  "state": "open",
+  "user": {
+    "login": "ihsinoky",
+    "name": "ihsinoky",
+    "email": null,
+    "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+    "id": 42207341
+  },
+  "assignees": null,
+  "labels": null,
+  "milestone": null,
+  "state_reason": null,
+  "comments": 0,
+  "created_at": "2026-11-09T20:30:06Z",
+  "updated_at": "2026-11-09T20:30:06Z",
+  "closed_at": null,
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/221",
+  "display_title": "Main Rev.5：J4 を Molex Pico-EZmate 781710004 に変更（Fly Daughterboard 対応）"
+}
