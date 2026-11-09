@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "url": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750886847",
+      "body": "## PMO 判断：ピン順の根拠と再開条件（2026-11-10）\n\nワーカーの停止判断（番号付きピン表が一次資料に無く推測で進めない）は正しいものとして受け取る。以下を根拠として実装を再開する。\n\n### 根拠（文書チェーン）\n1. Rev.4 の現行 J4 ピン順は実測済み：pin1=VBUS、2=D−（USB_DM_ESD）、3=D+（USB_DP_ESD）、4=GND。これは UDB C3 の JST ピン順そのもの\n2. CannonKeys（Fly の公式販売店）のケーブル規約ページは、Molex↔JST ケーブルが **1:1／UDB 互換**であることを明記。Fly はその Molex ケーブルで UDB 系 PCB と接続される製品\n3. Geon（共同設計・販売）は Fly を「Unified Daughterboard の妥協なき代替」と位置づけ、UDB プロジェクトの説明でも Geon Fly が同じケーブルを使うことが述べられている\n4. もし Fly のピン順が UDB と異なれば、共有ケーブルで接続する全ての採用キーボードが誤配線になる。製品の互換性主張そのものがピン順同一の証拠として機能する\n\n### 安全側の担保（組立時チェックを必須化）\n- 基板完成後の初回通電前に、Fly DB 単体を USB 電源につなぎ、ケーブル先端で **VBUS=5V／GND=0V を実測確認**してから Main に接続する（破壊的となり得る VBUS↔GND 取り違えは、この実測で経験的に排除される）\n- D+/D− の取り違えが万一残っても結果は「認識しない」だけで無害であり、その場合のみ Rev.5.1 で是正する\n\n### 再開時の追加要件\n- 上記チェーンを D-035 草案と報告書に証拠として明記する（推測ではなく出典つきの根拠として）\n- LCSC は C588524（特定済み）を使う\n- その他の要件・不変条件・合格条件は Issue 本文どおり",
+      "user": {
+        "login": "ihsinoky",
+        "name": "ihsinoky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+        "id": 42207341
+      },
+      "id": 6750886847,
+      "pull_request_review_id": null,
+      "in_reply_to_id": null,
+      "created_at": null,
+      "updated_at": null,
+      "review": null,
+      "side": null,
+      "line": null,
+      "start_line": null,
+      "path": null,
+      "body_html": "<h2 dir=\"auto\">PMO 判断：ピン順の根拠と再開条件（2026-11-10）</h2>\n<p dir=\"auto\">ワーカーの停止判断（番号付きピン表が一次資料に無く推測で進めない）は正しいものとして受け取る。以下を根拠として実装を再開する。</p>\n<h3 dir=\"auto\">根拠（文書チェーン）</h3>\n<ol dir=\"auto\">\n<li>Rev.4 の現行 J4 ピン順は実測済み：pin1=VBUS、2=D−（USB_DM_ESD）、3=D+（USB_DP_ESD）、4=GND。これは UDB C3 の JST ピン順そのもの</li>\n<li>CannonKeys（Fly の公式販売店）のケーブル規約ページは、Molex↔JST ケーブルが <strong>1:1／UDB 互換</strong>であることを明記。Fly はその Molex ケーブルで UDB 系 PCB と接続される製品</li>\n<li>Geon（共同設計・販売）は Fly を「Unified Daughterboard の妥協なき代替」と位置づけ、UDB プロジェクトの説明でも Geon Fly が同じケーブルを使うことが述べられている</li>\n<li>もし Fly のピン順が UDB と異なれば、共有ケーブルで接続する全ての採用キーボードが誤配線になる。製品の互換性主張そのものがピン順同一の証拠として機能する</li>\n</ol>\n<h3 dir=\"auto\">安全側の担保（組立時チェックを必須化）</h3>\n<ul dir=\"auto\">\n<li>基板完成後の初回通電前に、Fly DB 単体を USB 電源につなぎ、ケーブル先端で <strong>VBUS=5V／GND=0V を実測確認</strong>してから Main に接続する（破壊的となり得る VBUS↔GND 取り違えは、この実測で経験的に排除される）</li>\n<li>D+/D− の取り違えが万一残っても結果は「認識しない」だけで無害であり、その場合のみ Rev.5.1 で是正する</li>\n</ul>\n<h3 dir=\"auto\">再開時の追加要件</h3>\n<ul dir=\"auto\">\n<li>上記チェーンを D-035 草案と報告書に証拠として明記する（推測ではなく出典つきの根拠として）</li>\n<li>LCSC は C588524（特定済み）を使う</li>\n<li>その他の要件・不変条件・合格条件は Issue 本文どおり</li>\n</ul>"
+    },
+    {
+      "url": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750942420",
+      "body": "PO 確認（2026-11-10）：Fly Daughterboard にはケーブルが付属している。Main Rev.5（J4 = EZmate）完成後は、その付属ケーブル（EZmate↔EZmate）で直接接続できる前提でよい。ケーブルの別途調達は不要。",
+      "user": {
+        "login": "ihsinoky",
+        "name": "ihsinoky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/42207341?v=4",
+        "id": 42207341
+      },
+      "id": 6750942420,
+      "pull_request_review_id": null,
+      "in_reply_to_id": null,
+      "created_at": null,
+      "updated_at": null,
+      "review": null,
+      "side": null,
+      "line": null,
+      "start_line": null,
+      "path": null,
+      "body_html": "<p dir=\"auto\">PO 確認（2026-11-10）：Fly Daughterboard にはケーブルが付属している。Main Rev.5（J4 = EZmate）完成後は、その付属ケーブル（EZmate↔EZmate）で直接接続できる前提でよい。ケーブルの別途調達は不要。</p>"
+    }
+  ],
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/221",
+  "title": "ihsinoky/he-piantor-42 Issue #221 comments",
+  "display_url": "https://github.com/ihsinoky/he-piantor-42/issues/221",
+  "display_title": "ihsinoky/he-piantor-42 Issue #221 comments"
+}

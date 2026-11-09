@@ -1112,24 +1112,43 @@ order or quotation. See [the Stage 2 report](issue-200-wing-rev3-stage2.md).
 
 ## D-035 - Main Rev.5 Fly Daughterboard connector proposal
 
-Status: **提案（2026-11-10、Issue #221）。未採択。ピン順の一次資料確認待ち。**
+Status: **提案（2026-11-10、Issue #221）。未採択。実装・データ上の検証完了、POマージゲート待ち。**
 
 Main Rev.5 の J4 を JST SM04B-SRSS-TB(LF)(SN) / C160404 から
-Molex Pico-EZmate 781710004 / C588524 へ変更する案。採択時に限り D-033 の
-Main 側 USB ドーターボード用コネクタ部分を supersede する。D-033 全体を
-置換せず、基板外形・3穴・J2/J3・他部品配置・ネット構成・5.2V 電源設計・
-200mm GH 条件を継承する。Matrix／Wing データは対象外。
+Molex Pico-EZmate **781710004 / C588524** へ変更する。PO在庫はGeon × Wolf Fly DBで、
+変換ケーブルを追加せず同梱EZmate↔EZmate 1:1ケーブル170mmを用いる。
+[POの追加確認](https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750942420)により、付属ケーブルで直接接続し、ケーブルの別途調達は不要。
+採択時に限り D-033 の **Main側USBドーターボード用コネクタ部分**を supersede する。
+外形・3穴・J2/J3・全他部品配置・ネット構成・5.2V電源設計・200mm GH条件を継承する。
+Matrix／Wingデータを変更しない。
 
-Geon × Wolf Fly DB と同梱 EZmate↔EZmate 1:1 ケーブルを接続する前提だが、
-Fly のピン1〜4と VBUS/D−/D+/GND の番号付き対応は **未確認**。
-現時点では Rev.4 の 1=VBUS / 2=USB_DM_ESD / 3=USB_DP_ESD / 4=GND を
-Fly に流用すると決定しない。部品型番・ケーブル線色・UDB代替という説明だけで
-割付を推定しない。ランドは Molex 推奨寸法に従い、再配線は J4 周辺に限る。
+ピン順は1=VBUS、2=USB_DM_ESD（D−）、3=USB_DP_ESD（D+）、4=GNDを維持する。
+直接のFly番号付き回路図を得たという意味ではなく、
+[PMOの再開判断](https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750886847)
+が承認した次の文書チェーンを根拠とする。
 
-一次資料によるピン順確定後、DRC/ERC/未配線、全 via–pad 監査、Rev.4
-との差分限定、VBUS 抵抗変化、Rev.5 CAM/BOM/CPL・Gerber フレーム照合を
-完了してから PO マージゲートへ提出する。挿抜は内部接続用途を前提とし、
-頻繁に抜き差ししない。調達時の在庫・機構・完成上流経路の抵抗も別途確認する。
+1. Rev.4のPCB・回路図XML・BOMで現行J4ピン順を照合済み。
+2. Fly公式販売店CannonKeysの[ケーブル規約](https://cannonkeys.com/products/molex-and-jst-cables)
+   がMolex↔JSTの1:1／UDB互換を明示し、[Fly販売情報](https://cannonkeys.com/products/fly-daughterboard-and-molex-cable)
+   はFlyとMolexケーブルの組合せを扱う。
+3. [Geon公式情報](https://geon.works/products/fly-daughter-board)と設計者のUDB代替という位置づけ、
+   [UDBプロジェクトの説明](https://hackmd.io/w7rV9b1fRHau51bIx631Hw)のGeon Flyも同じケーブルを使うという説明を結び付ける。
+4. 共通ケーブルを用いるUDB互換製品としての主張をピン順同一の根拠として採用する、というPMO判断。
+   これは資料の互換性主張からの判断であり、線色・写真だけからの割付ではない。
 
-実装・製造パッケージは未作成。詳細は
-[Issue #221 調査報告](issue-221-main-rev5.md)。本草案は採択・製造GOを意味しない。
+**初回通電前に必ず実測する。** Mainへ未接続のFly単体をUSB電源につなぎ、
+同梱ケーブル先端で端子4を基準に端子1が+5V（VBUS=5V／GND=0V）であることを測定・記録する。
+電源を切ってからMainへ接続する。極性異常なら接続・通電しない。USB認識も初回組立で確認し、
+D+/D−の取り違えが実証された場合のみRev.5.1で是正する。実測は本作業では未実施。
+
+Molex図面781710000-SD Aの推奨信号ランド0.60×0.85mm/pitch1.20mm、補強0.70×0.80mmを照合した。
+J4原点(100,90)mm・180°を維持し、局所のF.Cu3線分を削除・11線分を追加。via変更0。
+DRC/ERC/未配線0、40ネットの独立銅箔検査0異常、130via×232padの最小間隔0.145mm。
+入力往復抵抗モデルは44.910→48.686mΩ（+3.776mΩ）、下流最遠点4.797986Vを維持。
+電源の実材質・完成Fly上流抵抗・効率を測定した保証ではない。
+
+Rev.5 Gerber ZIP/BOM/CPL/GerberフレームCPL/quote-handoffを新生成しCAMと全55配置点を独立照合した。
+頻繁に抜き差ししない内部接続用途（挿抜10回級）。実在庫、ステンシル、業者DFM・pin1/回転受入れ、
+完成配索・機構・初回通電実測は別ゲート。
+[報告書と検証証跡](issue-221-main-rev5.md)をPOゲートへ提出する準備まで完了。
+採択・発注対象の正式切替・製造GOは行わず、push/PR作成/発注もしない。

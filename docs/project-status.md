@@ -6,13 +6,16 @@ here.
 
 ### 更新草案（2026-11-10、Issue #221、未採択）
 
-発注1の Main を Rev.5（J4=Molex 781710004 / C588524、Geon × Wolf Fly DB）へ
-更新する案を準備中。**Fly の番号付きピン順が一次資料で未確認のため実装保留**。
-Rev.5 の基板・製造パッケージ・全検証は未完了で、発注対象の切替は成立していない。
-[D-035](decisions.md#d-035---main-rev5-fly-daughterboard-connector-proposal) は提案のみ。
-既存の採択済みベースラインは下記記録のまま。PMO はピン順一次資料を確保し、
-局所変更と全合格条件の完了後に PO ゲートへ提出する。
-[調査結果・再開条件](issue-221-main-rev5.md)参照。
+発注1のMainをRev.5（J4=Molex 781710004 / C588524、Geon × Wolf Fly DB）へ
+更新する案の**実装・データ検証・製造パッケージ準備が完了**。
+[PMO判断](https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750886847)
+の互換性チェーンに基づき、ピン順1=VBUS/2=D−/3=D+/4=GNDを維持して再開した。
+DRC/ERC/未配線0、全via–pad最小0.145mm、下流最遠点モデル4.797986V。
+[D-035](decisions.md#d-035---main-rev5-fly-daughterboard-connector-proposal)は**提案**のまま。
+既存の採択済みベースラインは下記記録のままで、発注対象の正式切替はPOマージゲート。
+PMOはRev.5の再見積/在庫/DFM/実装向き/上流抵抗の確認材料を整理する。
+**初回通電前のFly単体・ケーブル先端VBUS/GND極性実測は未実施で必須**。
+[最終報告・製造引継ぎ](issue-221-main-rev5.md)参照。Matrix/Wingのデータ変更なし。
 
 Cross-cutting lessons distilled from the decision record (D-001–D-027) and the
 PMO run record (Issues #87–#169) are collected in

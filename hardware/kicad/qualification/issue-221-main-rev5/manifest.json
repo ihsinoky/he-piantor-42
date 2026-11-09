@@ -1,0 +1,839 @@
+{
+  "base_commit": "227eb17a",
+  "files": [
+    {
+      "path": ".issue221-runtime/REPORT.md",
+      "sha256": "a6116647e45a0dc00e1c3e4fe34c4b3f0fa4880e2c29371840669a76c6f16f02"
+    },
+    {
+      "path": "docs/decisions.md",
+      "sha256": "ae947a2dd40aca4334c5bf671b7aee34749ac5d1cb9c0996a2ac4bc93b8609fb"
+    },
+    {
+      "path": "docs/issue-221-main-rev5.md",
+      "sha256": "6f65523c02bd0cfa7dc103b5b803abdf3c6323452548bc329fdda2945b1675fc"
+    },
+    {
+      "path": "docs/project-status.md",
+      "sha256": "d85f80eb2f2cdcf9c527e00f98625433e27cf274f5480267e88a9e60a81cf858"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/.gitignore",
+      "sha256": "da9428fdfb4f8036b3c9734ca252253207feb437bc7a99f9111a2241d8140485"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/README.md",
+      "sha256": "d67cf78a46af76aa9766f93caaa4c6e78c6f527e34945200e5c6868d65c3bdb7"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/Rev5.pretty/J4.kicad_mod",
+      "sha256": "f14ce873e8da13cda741141d9c96fc8857bab5b1cf80a9e930606e2e44f28f6f"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/assembly-review.json",
+      "sha256": "e8a25a6c538af1505625baad0506237ec8e3bfb81c788cec7de193bf58aac0ae"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/assembly.py",
+      "sha256": "ebf57f97ba9b67d5f2c47765266037e14b559beb99fdf796ff54d92b316ab460"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/assess.py",
+      "sha256": "3129c99c66cd91028de5e2613d78089d5b8057e7926fb85563ba83d54bb2177e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/audit-vias.py",
+      "sha256": "d7eb01c6f0de9dc8b8deb0221e384245d52463c3fc2914b32a313259ad7b8d72"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/build.py",
+      "sha256": "28d21df829ee04dfdbc8d199471de2e7e43dac9caf394eb9fca71c1635ae7256"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/cam-check.json",
+      "sha256": "1867632b051c35dbd52cabd3c854b8f0004e080eac57217ec5beb537980bf4ed"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/cam-native-zones.json",
+      "sha256": "daf77bb9ec0c636bdb412cb95637af311a01687b4e8e94fd24e3171c577eca13"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/cam-source.py",
+      "sha256": "aa20eec174f47d0fa81fbad944884126a50c6553a1992903d1fd1b98def712f4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/check-cam.py",
+      "sha256": "1ba335b2367544aa4ffa95d2684ff1a9be3a72f1a8364812b99077d42cbcd4fe"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/check-diff.py",
+      "sha256": "95058403ec90a0e4db039089f7b8642ff33891a2a787cd85f38159b646f5892c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/check-land.py",
+      "sha256": "1488b26645ec3ed4696b5b82476786396dcf483152a3d9221647e2540231ad71"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/check-paste.py",
+      "sha256": "0945bd191f3de9f5a6f7f047b9d936d7e3a7b934413a9d1a196886c15195d74b"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/common.py",
+      "sha256": "e793ce12d220c8514bf616862306bc76851628340ba653731134cafe8e13ee79"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/connectivity.py",
+      "sha256": "01ef7da2d1445fe56d0866fe29f48bf7b5afec6e1d235500ec4831446790a37a"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/cpl-frame-check.json",
+      "sha256": "ad5c070f095630eaed586f152350e36fdfbf045b526a1a31a4da0ca99c3584bc"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/env.sh",
+      "sha256": "852ba6f2cee1ff42ff7bde54da064d9428683d6d27d6270e1fd1a2e082487dd4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/export-final.py",
+      "sha256": "db26e508052849825876a10cbc93eb7c62016381fbb1659463b9ed22cfdfd524"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/export-provenance.json",
+      "sha256": "3545b0062f04af524f2d42210bf2bada7c87a14d4ca1c9afad49894562e16eb9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/extract-ground.py",
+      "sha256": "04dab2f6dd49cd4deea4d4aac75f96d19d6140d9954c83991917fe1f620af0c7"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/extract-power.py",
+      "sha256": "fc2edc623e8e358b4c627f39b9ce8a037b8c6c3eb5a0b123ec537b53df9afa66"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/gerber-frame-cpl.py",
+      "sha256": "e270fdf2f4bdcafb33be47b0c94b0fe4d0fa6cbb94aa4212a40fc13d2c425c27"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/ground-extraction-final.json",
+      "sha256": "31afaf521e4eaf0e5b96d2954de25f599bd3a0845fad4dcc841bf16350b35e17"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/ground-extraction-rev4-reference.json",
+      "sha256": "59e3a387a60b2825fab4e17a585f2ad2648327f4fca370ec67725d4ed3b789bd"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/ground-model-verification.json",
+      "sha256": "b0beec823c33f55d6c634dd405051cfc8c5019eeb9ea5fd5040fcc59ac9c49c4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/input-contract.json",
+      "sha256": "8714eaa15175aa8dc5c8b7e29cbb9a0ae9601a44ab16e054bbe93c5cb6433768"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspect-input.py",
+      "sha256": "004759e0f71de48b9ec181fc5fd33f35cf76f1ff56533cc41d72958fe273f19c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/assessment.json",
+      "sha256": "a62f5e67dfa791affde998eb91ee2d79d89a9b58ab422c51f481514f227a3f76"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/snapshot.kicad_pcb.gz",
+      "sha256": "d61ab1d6443af42f713f6a8efa1dd621a19c02899d4b38474d883b392eb9475f"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/all-pairs.json.gz",
+      "sha256": "117d8b599c9e81f3e0b19bca1c3166e8fbc3a27f432f9eebc16603834a242056"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/all-vias.csv",
+      "sha256": "0954acab64e57967422b6463dc6427b812a085d70b1f57e3615507cd6515656d"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/all-vias.json",
+      "sha256": "af522d16d5c2b6555f6bdc44a01807fca694e9b969728f39df686e388787f3cb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/pad-hits.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/pads.json",
+      "sha256": "e1c39fd0da7355adcecc603758960564fae69b6d7f426ee26b9880d2b2c65b2b"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/audit/via-pad/summary.json",
+      "sha256": "f360dbdce45b3ec2fd7ad3b00b6c000dc6b018fd7b99ca1f2afbc558e4217d8a"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/connectivity.json",
+      "sha256": "b30373c4a7df453c82e851a2161f663f9adf51f9315221bd37ba86f0ab2eb365"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/drc.json",
+      "sha256": "8661da38b2e20a94b3dec321fdeb0bafa912bf6e969e8600eaceabda06e0bc61"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/fp-lib-table",
+      "sha256": "a2cc18d765b41327a05142b6a71af0f07e027eeff5f38b41be73882a00313932"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/graph-method.json",
+      "sha256": "2bd0b6846fdef6ab7320f7b6e19538ea17b92d2084663c7d6b8250a6b9744dee"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/main.kicad_pcb",
+      "sha256": "8b1754ebc5a67cf17bf2a6e54b49814e087d8d09e13f0eedf59a99715c06c286"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/main.kicad_pro",
+      "sha256": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/snapshot.json",
+      "sha256": "e59b0ac51b790fb4d740aefc9763f6bd95a75e6e30e39052e5c3a69d62e6d7c4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/issue221-comments.json",
+      "sha256": "c7d038168807c4c5c2ac85336a381bfcc3a6407159be98d0641dd180b69134ff"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/issue221-current.json",
+      "sha256": "f91e5a2598787d8440e578c4470cb0b9a534c1abe2e805f1a17fbb746bab6af6"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/issue221.json",
+      "sha256": "ec5c4e7f1ac15f53c602a571fd4090ade48ba1e2265174a655515e84c351e6e8"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/land-check.json",
+      "sha256": "9f5e734673a9cd8ec49bdc4766faf49b2bf3343304d660cfd05edb34ba9c6de5"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/main-bom.csv",
+      "sha256": "b0780c24ff3aed4812db68e8e7a50f13c945d16baaf468d99a9d33e78a986788"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/make-manifest.py",
+      "sha256": "3740d20dcbabba465f12fb33d53e4a6606bef433097c46aa9128865c1f837062"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/BOM.csv",
+      "sha256": "2e53d453e948e339ad680af6aa6f831cad9f7c9886aacb0876bc52b06afd2efd"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/CPL-jlcpcb-gerber-frame-NOTES.md",
+      "sha256": "306510bede72cb114abfe1209d959d69d75ba399febf909d7ee5da0fa89378cd"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/CPL-jlcpcb-gerber-frame.csv",
+      "sha256": "67e0c2c0b08f2992d8af044597c4daa979e76d35287cae75446e462dff8a6aee"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/CPL.csv",
+      "sha256": "7b65636c545658c26c964b619a58e983da0ba15687bf437b00553fd586678aa1"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/cam-review.png",
+      "sha256": "2123331763089111d0253a229b0adfe7f39c5ae24acc739205bc0535be78679e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/drill-report.txt",
+      "sha256": "c91022a3f03d403c6c16474cb6dfd71f81fa4ae21e16eca135ad179e29be2b7e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-B_Cu.gbl",
+      "sha256": "231fbe77d2d52aa501102bf826bdaeb4f13b8597ae006407d49cd2c4419874e4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-B_Mask.gbs",
+      "sha256": "4bbccf5567e547da40b0c7c81b92e7df89f1d4e384bcd1aae9e623edffbae28b"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-B_Silkscreen.gbo",
+      "sha256": "7da5e94176604656a762044eee83406fc663a25057a193b0a73d0e577f97d25d"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-Edge_Cuts.gm1",
+      "sha256": "b74f133a82c5a98e9ba04ed5ebca6ebd308202e8ec0166f37a463f4ddbf425fb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-F_Cu.gtl",
+      "sha256": "18daa517463872cf8b65d6991e1a597369f6766c64778144b43ccb4447951e4b"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-F_Mask.gts",
+      "sha256": "4f7169db99087c6ab83abfc9cd41acc9fcc94b096536dfdc3dc435f974827305"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-F_Silkscreen.gto",
+      "sha256": "f78613c236e0f591e29b64e93573656ae9bedc1157f3984b30db4345203e718d"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-In1_Cu.g1",
+      "sha256": "76ce231b92f2c92a9d886e5be7a0c33c21e8ea7c7449af8f7b1efa19406f26bb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-In2_Cu.g2",
+      "sha256": "f7140b4b98625df0e88f50c4a13f7e7a24a76fb9cd6566ad862da3894b6be683"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-NPTH.drl",
+      "sha256": "7e437530c62c8a1a1c5fdce400c23e6bed2c32be0601ad851a0b6001b2f79fc0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-PTH.drl",
+      "sha256": "808919774beea74346d888926a73a5a312b2bb337c5c0495c34b073ff0b5d349"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/gerber/main-rev5-job.gbrjob",
+      "sha256": "721aa2388ce451fba8dab7f0285a3a1e4ec3c2f8daac8abe3a91194c89f74383"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/main-rev5-fabrication-review.zip",
+      "sha256": "f82ce2387c20b3b909eb04a6338401329f6b8a60d982767dee7f53b54103e82c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/native-pos-absolute.csv",
+      "sha256": "052db42e74e3bc28f4b46ac08ac8511d96b2dbdfde0384332a882708ddb5d100"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/paste/main-rev5-B_Paste.gbp",
+      "sha256": "860791e8a4364f9366058f9274db6753eed4cce16e68c4541c81270944fd1594"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/paste/main-rev5-F_Paste.gtp",
+      "sha256": "64e1361b9f06e803b8b4f1060a685488506c8e7c3c9d1152170f80f6583f0886"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/paste/main-rev5-job.gbrjob",
+      "sha256": "48dbddec29520949e50e1d1475555fed902bde938ec6cedba5a11ab8c0bb9ef7"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/manufacturing/quote-handoff.md",
+      "sha256": "3de35084997a2b266d943aadf671e3e2185f9e0661f541d3a05cfa6f5e7894dc"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/paste-via-check.json",
+      "sha256": "379cfd0bc50d6732133254085b1eb71238ba34201f657b4ba5cd36bb59bd9beb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-budget.json",
+      "sha256": "53c52fc067b25bb7448e25e4ed3ba779accc0af0b58a3f74e84e03f2128c6c87"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-budget.py",
+      "sha256": "abe9ba76391c4d8fc75f1539b9989b8e855844d3a0fb07fe25097ac9bd079bea"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-extraction-final.json",
+      "sha256": "4a1ee0a6a40260c0cf9fefb985b0cd170330783df812e61cc7112e9bfa99c62b"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-extraction-rev4-reference.json",
+      "sha256": "f1731d9260ad6cd4db9427aea4278790ba77ad9632dcf97d9fb753ce563eea69"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-impact.json",
+      "sha256": "94cf5679d18e26ac94aed0cc464ffa5a3465785b8355f9cb1e41579883b61d7e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-impact.py",
+      "sha256": "9456d8f739304fc67bb30ef1484263aa62b575db8077a1c61fbe42ac7c8ec6ad"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/power-sensitivity.csv",
+      "sha256": "c7c0175da3b94b1cf885305d301bf4cac79dfd344ce2d5e81678f0e2465b281a"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/prepare-schematic.py",
+      "sha256": "b59182f8ada4a1f5e1c05583c3919690941337678ed472b874b3716635692410"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/cam-readback/record.json",
+      "sha256": "7105dd4a971a092d7da90e97127285a86e8da2a9eb4dc001f37dba7bd47560ff"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/cam-readback/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/cam-readback/stdout",
+      "sha256": "e6365461edc1d961e667577b475e340e0f98eb5f104fd60f10a07d327a4f13f9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-drc/record.json",
+      "sha256": "d0fad5e908066c10bced7d273f942d0a54963ae3930a9d9d90d8ccef71311755"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-drc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-drc/stdout",
+      "sha256": "09ab7297216aee99c3773e41b56460044d6573c1fad9df6b7b77d2bdae37caeb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-erc/record.json",
+      "sha256": "d466b412ecb1d3c9d507dcd32a147c7337b664c7900ea22529835609738a3096"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-erc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/final-native-erc/stdout",
+      "sha256": "d2ff7f9eae109449e6119b94c2a519eab79559a91b7b0d3126877634a569d8da"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/ground-extraction/record.json",
+      "sha256": "8f8ae08ad86fd6007021091c31e0fd38d7b1d157ac949e14e9e9c91ffe9dca34"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/ground-extraction/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/ground-extraction/stdout",
+      "sha256": "5ab855d03cf09d00a2246b1dcbeb82610f51cffdeaf5de3961263c7b49c3e718"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/physical-connectivity/record.json",
+      "sha256": "577472b00a6bca8dc314f08b9de63496fe6bbb3753c9b7b9d10b2483e4cf5f00"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/physical-connectivity/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/physical-connectivity/stdout",
+      "sha256": "cfda1b0f3e0ac5498b73ed39ee598069b4729566da34ceccbde3f779ab4e4be0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/power-extraction/record.json",
+      "sha256": "26441254cf616132dfc1a498b175e998cdd247a6fe8ffd2318d98e6187720f41"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/power-extraction/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/power-extraction/stdout",
+      "sha256": "e9413e8bb6464958f397296e43f45d757c8064881b267073f7b239667bf57689"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-drill/record.json",
+      "sha256": "d7df9176a85cd0d8921e6a008c7411e441091e06b7d6a8854abfbc841e0103a7"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-drill/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-drill/stdout",
+      "sha256": "1115f2eb90ce7bc7951859d980b1559e3d69a251bfc03e85f3705fc59d2de9de"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-gerbers/record.json",
+      "sha256": "7f3467d22898c832024e0e9df5a1372080aa2db9f4ae53a273738e7009f0711c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-gerbers/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-gerbers/stdout",
+      "sha256": "7bf674645c5e7d13cc865ea9655423a253eccc29a9e3314110e7a05bff92aafc"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-native-pos/record.json",
+      "sha256": "eddf93448a63704b9dd09ad38bfdd1b82aedc11fbe972a583563c9ae076cc24a"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-native-pos/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-native-pos/stdout",
+      "sha256": "bb7cefbad5338768e0ad63a0c5e135d06baf1db688ba631c7a827ed5b3cbc044"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-paste/record.json",
+      "sha256": "b071326fad224f252fe66f6f2d569ce76b2221986e367ba7fdeb769b0b641fa0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-paste/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/release-paste/stdout",
+      "sha256": "3ba637ca5d11121a881e9dea402293bfc8a68e454d34c02414ec13d121172b99"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-ground-reextract/record.json",
+      "sha256": "756e7d6016b8136c2325c209a0358128cffc17aa8c1ba3a99c9542f6271bd3f0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-ground-reextract/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-ground-reextract/stdout",
+      "sha256": "cd966685ba9024effedd1df225cf224e2499e5cd406748422769348c79376688"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-positive-reextract/record.json",
+      "sha256": "41946dc44f0055747250537792fd6a8957d8109391e7e8fff597f0d0baa84260"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-positive-reextract/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes/rev4-positive-reextract/stdout",
+      "sha256": "e9413e8bb6464958f397296e43f45d757c8064881b267073f7b239667bf57689"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/README.md",
+      "sha256": "29153e5f236ac081671132ede87dc39426e8dcfd90383b8c036ee55050b54c13"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/cam-readback/record.json",
+      "sha256": "aae636629d1ff75608964201223eb29d4133869430a5155db6bca5de4ef5a2e8"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/cam-readback/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/cam-readback/stdout",
+      "sha256": "e6365461edc1d961e667577b475e340e0f98eb5f104fd60f10a07d327a4f13f9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-drc/record.json",
+      "sha256": "6ac99112767e65a4a28529d80e8dfeac9864dd456e47232b7fce13df3aa43f69"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-drc/stderr",
+      "sha256": "24878e53e01acd5cc01f0064c07fb138e4db0cd7dab80c78bffe03ad5bcef240"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-drc/stdout",
+      "sha256": "09ab7297216aee99c3773e41b56460044d6573c1fad9df6b7b77d2bdae37caeb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-erc/record.json",
+      "sha256": "d466b412ecb1d3c9d507dcd32a147c7337b664c7900ea22529835609738a3096"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-erc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/final-native-erc/stdout",
+      "sha256": "d2ff7f9eae109449e6119b94c2a519eab79559a91b7b0d3126877634a569d8da"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/ground-extraction/record.json",
+      "sha256": "d3f010eb2994771a1c71dc6ef611b2ee33dec05b48a43f6bd0d8951f884e2992"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/ground-extraction/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/ground-extraction/stdout",
+      "sha256": "d74c46b15e366488556774a8e27f63f53e0d6555f220a7ed27fea5fa5d5853f9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/initial-drc/record.json",
+      "sha256": "9d1cc12d94257103bc8f6235f1b8aa8cec7eab70d4e0a469809821deaa023ad8"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/initial-drc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/initial-drc/stdout",
+      "sha256": "09ab7297216aee99c3773e41b56460044d6573c1fad9df6b7b77d2bdae37caeb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/physical-connectivity/record.json",
+      "sha256": "63d737a5c4fe72d370275dd95276edd6a20a004f7f4ceb9c59d8d89d63a8be0c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/physical-connectivity/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/physical-connectivity/stdout",
+      "sha256": "cfda1b0f3e0ac5498b73ed39ee598069b4729566da34ceccbde3f779ab4e4be0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/power-extraction/record.json",
+      "sha256": "8d848334b68d1fd2f39efc469350c9f21d63fca47bb77884da1f55bee40383d7"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/power-extraction/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/power-extraction/stdout",
+      "sha256": "e9413e8bb6464958f397296e43f45d757c8064881b267073f7b239667bf57689"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-drill/record.json",
+      "sha256": "09b13e9df5ade7b5fa9d25215b63a3d88d3f1a2d0cf6a5dbd2e23f16abfe3ce9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-drill/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-drill/stdout",
+      "sha256": "1115f2eb90ce7bc7951859d980b1559e3d69a251bfc03e85f3705fc59d2de9de"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-gerbers/record.json",
+      "sha256": "a28c68c68beb459f97242deb5fe22fe66862b4d41c1f863b895621c0f23fd4b4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-gerbers/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-gerbers/stdout",
+      "sha256": "7bf674645c5e7d13cc865ea9655423a253eccc29a9e3314110e7a05bff92aafc"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-native-pos/record.json",
+      "sha256": "65f2060e65b08812c48f17994ac26c22fa41437b3f427377814ddbc068481583"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-native-pos/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-native-pos/stdout",
+      "sha256": "bb7cefbad5338768e0ad63a0c5e135d06baf1db688ba631c7a827ed5b3cbc044"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-paste/record.json",
+      "sha256": "b364a3f21408c3d0baee47c4fe9dfa20e12b529f5ad78e986ac4c1c3ea74f476"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-paste/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/release-paste/stdout",
+      "sha256": "3ba637ca5d11121a881e9dea402293bfc8a68e454d34c02414ec13d121172b99"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc/record.json",
+      "sha256": "76a42b7de73209cab6f10cd697932837774ea70f88eb807230f467ba5f3cd9f4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc/stdout",
+      "sha256": "a56a7440747127beec7110a03d3439c633a0d6072af959c36e7fb95b43784d3c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc2/record.json",
+      "sha256": "fb47f8a21ac37b743206c1706671934d6c8e2a320572b43b875cd445bf103cbb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc2/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-erc2/stdout",
+      "sha256": "d2ff7f9eae109449e6119b94c2a519eab79559a91b7b0d3126877634a569d8da"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-netlist/record.json",
+      "sha256": "79a3d9dc1307477193ff096df3e3d10f977ea623347ccd708c15c4b103866cd3"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-netlist/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/repaired-netlist/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-ground-reextract/record.json",
+      "sha256": "756e7d6016b8136c2325c209a0358128cffc17aa8c1ba3a99c9542f6271bd3f0"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-ground-reextract/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-ground-reextract/stdout",
+      "sha256": "cd966685ba9024effedd1df225cf224e2499e5cd406748422769348c79376688"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-positive-reextract/record.json",
+      "sha256": "41946dc44f0055747250537792fd6a8957d8109391e7e8fff597f0d0baa84260"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-positive-reextract/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev4-positive-reextract/stdout",
+      "sha256": "e9413e8bb6464958f397296e43f45d757c8064881b267073f7b239667bf57689"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-erc/record.json",
+      "sha256": "67d8f8d739b854fa4bc7cf4b97d90a03902e3a47e294825b1530bfecb7348f72"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-erc/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-erc/stdout",
+      "sha256": "a19c41d2f4fa2a718a18257816b6fb3dcf1e0ab5f7a29d9eceb35119a87b1640"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-netlist/record.json",
+      "sha256": "070340b41e0fcb0b6018b39bf932845e7405d9422892decc09833f575b9a0c07"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-netlist/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/processes-initial/rev5-netlist/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/recovery-inventory.json",
+      "sha256": "221e7ea2757e0e65ee98606f074ad816ebbd4c261d55da45108f54ae6381884f"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/render-cam.py",
+      "sha256": "87e6f080b30244cbe34c4ee939a78e37554099bb3bd18ed0273a3ef9fd177dc8"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/resistance-summary.json",
+      "sha256": "8628c039e142917269cf8512f986d69752685973830882816ce10a7b1a27c8af"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/rev4-diff.json",
+      "sha256": "3e9fba3fe3413b0e9144aa772bab09d56104f5e776a02c9a09efa4078bc4e0b2"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/run-audit.py",
+      "sha256": "46eb861a5220681ff196256a19c52e7e1b7d570eccf708a9cdbe632a514aabf4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/erc-final.json",
+      "sha256": "25ddb70ac94ab0fd31bc371f6319b5b2a15fd8124be2a6a9de2cfb0ad45d6d5e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/erc.json",
+      "sha256": "fd4cee5dc3ff4b7194237e282fdb658591bbec81fc37aa7fc0b7f276b0cf0b36"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/fp-lib-table",
+      "sha256": "aafc81c8dbb6621a6351558ae35dbfa8818b14a97581e1c3f367ae1791ca7cdb"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/main.kicad_pro",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/main.kicad_sch",
+      "sha256": "0083bcb253f3f6aeea16469616b01bac1a7a14066e6a848c912287f6f21d0066"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/main.net.xml",
+      "sha256": "ad604a1eedfda08b2d97d1852b1f138abc0a1cc4ef393ee875e7a7908259f80d"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/review.kicad_sym",
+      "sha256": "616540248cb0b6fae29344241f3308ecc1f19a5ff20678c17d31e677687e1aba"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic/sym-lib-table",
+      "sha256": "8d80bbc8f04d71af2dc2bc8916d48990c4173b12535a1665ce01ea19b6dc3f2a"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/schematic-repairs.json",
+      "sha256": "70e5e4bac84466d54f2e798f215c49fc106699bb015181dbf933e6a6120b23ef"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/sources/781710000-SD-revA.pdf",
+      "sha256": "83210064e17d96b813604197d34e37286bd4558b798e848f863afbf7e8dac161"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/sources/molex-kicad-official.kicad_mod",
+      "sha256": "461c8b0cd4a8a09e13ed97685577c9021352a0367fc31006d2a7e5c7f96114db"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/sources.json",
+      "sha256": "55f1d042b8b38a77ddb4d1070289d570bd8cdf2ce8752af7ad7aaa537637d43c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/summarize-resistance.py",
+      "sha256": "0cb8157c99ca604d94bb1b2b77ed1a3b362077c589efb4c7734fefcba1d68a50"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/verify-ground-model.py",
+      "sha256": "d67854c31f0b6f1cedca97f9e72abd2bdf2e75cc2af0fcfe7b6a2c8fd312863c"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-221-main-rev5/verify.py",
+      "sha256": "594777eb8764fd94d052d4b78087f4c3f255b5aeaed3997b83b229a355cb1847"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/final/main.kicad_pcb",
+      "sha256": "b361a5a010a3ae2b08e5858735d46a5662112af4241ef55bab50d1ba3187b123"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/final/main.kicad_pro",
+      "sha256": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/final/snapshot.json",
+      "sha256": "7fb6404b04d732f43840340ed6032c15550031e906770f44e05c57adee05c51e"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/manufacturing/BOM.csv",
+      "sha256": "ccaae45078084a4df2566b5c01cf379b620e79069058afd79a454744be7f670d"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/manufacturing/CPL.csv",
+      "sha256": "7b65636c545658c26c964b619a58e983da0ba15687bf437b00553fd586678aa1"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/power-budget.json",
+      "sha256": "4e2387dd477f4552bd599d90b3c60a77eedf69205c5665acd88f0d82034ea3de"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/resistance-summary.json",
+      "sha256": "8e88d27e711392fb9207f85d4496778938430cf0e34d917a1e0355273045e7f4"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/schematic/main.kicad_sch",
+      "sha256": "03bded324fcae067354ceba2926107e153f1f188b1709b05f2f979ac7460eee9"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-196-main-rev4-phaseb/schematic/main.net.xml",
+      "sha256": "f11d33382478685badf0cc82fd3167512ead9fab5b3405110ec4fcfeeea3ebf5"
+    },
+    {
+      "path": "hardware/kicad/qualification/issue-219-cpl-frame/verification.json",
+      "sha256": "44b08ce5a25446b64ebacdfdf50761745e0539480848a63cf4d330a5850b6dec"
+    }
+  ]
+}

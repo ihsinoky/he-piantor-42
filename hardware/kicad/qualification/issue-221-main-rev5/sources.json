@@ -1,6 +1,6 @@
 {
   "checked_utc": "2026-11-10",
-  "decision": "HOLD: Fly pins 1 through 4 remain unconfirmed; no inferred pin assignment",
+  "decision": "RESUMED: PMO approved documented UDB/Fly compatibility chain, keeping pins 1 VBUS/2 DM/3 DP/4 GND; pre-power measured cable polarity mandatory",
   "sources": [
     {
       "url": "https://geon.works/products/fly-daughter-board",
@@ -85,5 +85,19 @@
         "explicit Fly pin-number-to-net table; this statement alone is insufficient to assert Fly electrical mapping"
       ]
     }
-  ]
+  ],
+  "historical_decision": "HOLD: Fly pins 1 through 4 remain unconfirmed; no inferred pin assignment",
+  "PMO_authority": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750886847",
+  "drawing_local_copy": {
+    "path": "sources/781710000-SD-revA.pdf",
+    "original_url": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/781/78171/781710004_sd.pdf",
+    "retrieved_from": "https://www.global-ic.com/pdf-21/0781710004.pdf",
+    "identity": "Molex-authored 781710000-SD PSD000 A, EC677110, 2022-06-07, 3 sheets; original host timed out; mirror PDF visually checked sheets1/2 against indexed official document",
+    "authority": "manufacturer drawing content; mirror is only delivery location"
+  },
+  "footprint_reference": "https://github.com/KiCad/kicad-footprints/blob/master/Connector_Molex.pretty/Molex_Pico-EZmate_78171-0004_1x04-1MP_P1.20mm_Vertical.kicad_mod",
+  "PO_supplied_cable_confirmation": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750942420",
+    "decision": "Use the supplied EZmate-to-EZmate cable directly; no separate cable procurement"
+  }
 }

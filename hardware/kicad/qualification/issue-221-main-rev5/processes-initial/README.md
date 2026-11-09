@@ -1,0 +1,3 @@
+初回評価基板 bdf2cf0eafd4bc3f4ebad2d789584339a6aacad84f659c036edefa7d65531f9e の履歴。
+最終はランド0.60mm幅引出し後に1.10mmへ拡幅した基板。合否には ../processes と最終manifestを用いる。
+回路図ERCとRev.4再抽出は基板修正の影響がないため記録を引き継ぐ。
