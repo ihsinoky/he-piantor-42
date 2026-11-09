@@ -1,0 +1,103 @@
+{
+  "checked_utc": "2026-11-10",
+  "decision": "RESUMED: PMO approved documented UDB/Fly compatibility chain, keeping pins 1 VBUS/2 DM/3 DP/4 GND; pre-power measured cable polarity mandatory",
+  "sources": [
+    {
+      "url": "https://geon.works/products/fly-daughter-board",
+      "kind": "manufacturer/vendor primary",
+      "confirmed": [
+        "Fly by Wolf; 781710004 and mating 781720004 linked",
+        "EZmate-to-EZmate cable included"
+      ],
+      "not_confirmed": [
+        "numbered pin-to-USB-net mapping",
+        "numbered electrical continuity of supplied cable"
+      ]
+    },
+    {
+      "url": "https://www.lcsc.com/product-detail/C588524.html",
+      "kind": "distributor primary",
+      "confirmed": [
+        "Molex 781710004 = C588524"
+      ],
+      "not_confirmed": [
+        "Fly circuit pinout"
+      ]
+    },
+    {
+      "url": "https://jlcpcb.com/partdetail/MOLEX-781710004/C588524",
+      "kind": "assembly supplier primary",
+      "confirmed": [
+        "Molex 781710004 = C588524; Extended; SMT Assembly; Economic and Standard"
+      ],
+      "not_confirmed": [
+        "live allocation/stock at order time"
+      ]
+    },
+    {
+      "url": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/781/78171/781710004_sd.pdf",
+      "kind": "connector manufacturer primary",
+      "confirmed": [
+        "781710000-SD PSD 000 A; 3 sheets; 2022-06-07",
+        "recommended component-side land pattern on sheet 2; circuit 1 mark on sheet 1"
+      ],
+      "not_confirmed": [
+        "Fly PCB application net assignment; connector drawing does not define USB nets"
+      ]
+    },
+    {
+      "url": "https://www.vwolf.be/",
+      "kind": "designer primary, search-index excerpt only; direct fetch 404",
+      "confirmed": [
+        "search-index description calls Fly a replacement for UDB and says open sourcing planned"
+      ],
+      "not_confirmed": [
+        "published schematic or numbered pin table"
+      ]
+    },
+    {
+      "url": "https://cannonkeys.com/products/fly-daughterboard-and-molex-cable",
+      "kind": "official retailer primary",
+      "confirmed": [
+        "Fly uses Pico-EZmate; included cable 170mm"
+      ],
+      "not_confirmed": [
+        "numbered Fly pin nets"
+      ]
+    },
+    {
+      "url": "https://cannonkeys.com/products/molex-and-jst-cables",
+      "kind": "official retailer primary",
+      "confirmed": [
+        "retail cable products described as 1:1 and UDB compatible"
+      ],
+      "not_confirmed": [
+        "explicit Fly pin-number-to-net table"
+      ]
+    },
+    {
+      "url": "https://hackmd.io/w7rV9b1fRHau51bIx631Hw",
+      "kind": "UDB project announcement primary for UDB, not Fly design",
+      "confirmed": [
+        "UDB uses 1:1 Pico-EZmate cables; text says Geon Fly uses same cables"
+      ],
+      "not_confirmed": [
+        "explicit Fly pin-number-to-net table; this statement alone is insufficient to assert Fly electrical mapping"
+      ]
+    }
+  ],
+  "historical_decision": "HOLD: Fly pins 1 through 4 remain unconfirmed; no inferred pin assignment",
+  "PMO_authority": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750886847",
+  "drawing_local_copy": {
+    "path": "sources/781710000-SD-revA.pdf",
+    "original_url": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/781/78171/781710004_sd.pdf",
+    "retrieved_from": "https://www.global-ic.com/pdf-21/0781710004.pdf",
+    "identity": "Molex-authored 781710000-SD PSD000 A, EC677110, 2022-06-07, 3 sheets; original host timed out; mirror PDF visually checked sheets1/2 against indexed official document",
+    "authority": "manufacturer drawing content; mirror is only delivery location"
+  },
+  "footprint_reference": "https://github.com/KiCad/kicad-footprints/blob/master/Connector_Molex.pretty/Molex_Pico-EZmate_78171-0004_1x04-1MP_P1.20mm_Vertical.kicad_mod",
+  "PO_supplied_cable_confirmation": {
+    "url": "https://github.com/ihsinoky/he-piantor-42/issues/221#issuecomment-6750942420",
+    "decision": "Use the supplied EZmate-to-EZmate cable directly; no separate cable procurement"
+  }
+}
