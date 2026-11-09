@@ -1,0 +1,245 @@
+{
+  "source_sha256": {
+    "hardware/kicad/qualification/issue-221-main-rev5/schematic/main.kicad_sch": "0083bcb253f3f6aeea16469616b01bac1a7a14066e6a848c912287f6f21d0066",
+    "hardware/kicad/qualification/issue-221-main-rev5/schematic/main.net.xml": "ad604a1eedfda08b2d97d1852b1f138abc0a1cc4ef393ee875e7a7908259f80d",
+    "hardware/kicad/qualification/issue-221-main-rev5/inspection/final/main.kicad_pcb": "8b1754ebc5a67cf17bf2a6e54b49814e087d8d09e13f0eedf59a99715c06c286",
+    "hardware/kicad/qualification/issue-221-main-rev5/power-budget.json": "53c52fc067b25bb7448e25e4ed3ba779accc0af0b58a3f74e84e03f2128c6c87",
+    "hardware/kicad/qualification/issue-221-main-rev5/power-budget.py": "abe9ba76391c4d8fc75f1539b9989b8e855844d3a0fb07fe25097ac9bd079bea",
+    "docs/decisions.md": "ae947a2dd40aca4334c5bf671b7aee34749ac5d1cb9c0996a2ac4bc93b8609fb",
+    "docs/issue-165-dual-wing-power-study.md": "23001b192002e22870cbfd4762db7d770938ab48767eaeeae626a5634dc084ed",
+    "docs/issue-167-main-dual-wing-stage2.md": "115fac1b3432eba1c3a6d5deaf3b4301a0c480ab0df45cbd73265a145f9d418a"
+  },
+  "extracted": {
+    "L1_value": "1.5uH XFL4020-152MEC",
+    "footprint": "Rev4:L1",
+    "U6_value": "TPS63070RNMR",
+    "pad_centers_x_mm": [
+      -1.55,
+      1.55
+    ],
+    "pad_size_mm": [
+      1.3,
+      3.6
+    ],
+    "pad_inner_gap_mm": 1.8,
+    "pad_outer_span_mm": 4.4,
+    "upstream_min_corner": {
+      "USB_V": 4.75,
+      "efficiency_assumption": 0.75,
+      "Fly_PTC_EZmate_contacts_reservation_ohm": 1.0,
+      "main_input_loop_ohm": 0.04868644763102149,
+      "converter_V": 4.18446967054311,
+      "total_USB_A": 0.5392749479450419,
+      "within_configured_500mA": false
+    }
+  },
+  "assumptions": {
+    "vin_V": 4.179708282192278,
+    "vout_V": 5.354,
+    "iout_A": 0.254,
+    "efficiency": 0.75,
+    "frequency_Hz": 2100000.0,
+    "L_tolerance_fraction": 0.2,
+    "L_bias_loss_fraction": 0.1,
+    "copper_alpha_per_K": 0.00393,
+    "warning": "Sensitivity corner, not guaranteed VIN/efficiency/temperature or startup/fault current"
+  },
+  "parts": {
+    "C3033018": {
+      "specification": {
+        "L_uH": 1.5,
+        "DCR_typ_mohm": 14.4,
+        "DCR_max_mohm": 15.8,
+        "Isat_10pct_A": 4.1,
+        "Isat_20pct_A": 4.4,
+        "Isat_30pct_A": 4.6,
+        "Irms_20C_A": 6.7,
+        "Irms_40C_A": 9.1
+      },
+      "effective_L_uH": 1.0800000000000003,
+      "waveform": {
+        "duty": 0.21932979413666825,
+        "average_A": 0.43381528348726994,
+        "ripple_pp_A": 0.4042039493318163,
+        "peak_A": 0.6359172581531781,
+        "rms_A": 0.4492335356750356
+      },
+      "required_Isat_with_20pct_margin_A": 0.7631007097838137,
+      "Isat_10pct_to_peak_ratio": 6.447379666825149,
+      "Irms_20C_to_model_rms_ratio": 14.914291716739985,
+      "dcr_sensitivity": [
+        {
+          "temperature_C": 25,
+          "DCR_ohm": 0.0158,
+          "copper_loss_W": 0.0031886101592864774,
+          "DCR_only_delta_loss_W": 0.0,
+          "DCR_only_output_equivalent_delta_ohm": 0.0,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9,
+          "delta_efficiency_percentage_points": 0.0
+        },
+        {
+          "temperature_C": 125,
+          "DCR_ohm": 0.022009400000000002,
+          "copper_loss_W": 0.004441733951886063,
+          "DCR_only_delta_loss_W": 0.0,
+          "DCR_only_output_equivalent_delta_ohm": 0.0,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9,
+          "delta_efficiency_percentage_points": 0.0
+        }
+      ]
+    },
+    "C7417180": {
+      "specification": {
+        "L_uH": 1.5,
+        "DCR_typ_mohm": 13.0,
+        "DCR_max_mohm": 14.3,
+        "Isat_10pct_A": 3.2,
+        "Isat_20pct_A": 5.3,
+        "Isat_30pct_A": 7.5,
+        "Irms_20C_A": 8.0,
+        "Irms_40C_A": 11.1
+      },
+      "effective_L_uH": 1.0800000000000003,
+      "waveform": {
+        "duty": 0.21932979413666825,
+        "average_A": 0.43381528348726994,
+        "ripple_pp_A": 0.4042039493318163,
+        "peak_A": 0.6359172581531781,
+        "rms_A": 0.4492335356750356
+      },
+      "required_Isat_with_20pct_margin_A": 0.7631007097838137,
+      "Isat_10pct_to_peak_ratio": 5.032101203375727,
+      "Irms_20C_to_model_rms_ratio": 17.808109512525355,
+      "dcr_sensitivity": [
+        {
+          "temperature_C": 25,
+          "DCR_ohm": 0.0143,
+          "copper_loss_W": 0.002885894004923837,
+          "DCR_only_delta_loss_W": -0.0003027161543626405,
+          "DCR_only_output_equivalent_delta_ohm": -0.004692109776840481,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9001803414461452,
+          "delta_efficiency_percentage_points": 0.018034144614520464
+        },
+        {
+          "temperature_C": 125,
+          "DCR_ohm": 0.0199199,
+          "copper_loss_W": 0.004020050348858904,
+          "DCR_only_delta_loss_W": -0.00042168360302715806,
+          "DCR_only_output_equivalent_delta_ohm": -0.006536108919138787,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9002512354190428,
+          "delta_efficiency_percentage_points": 0.025123541904281677
+        }
+      ]
+    },
+    "C3221841": {
+      "specification": {
+        "L_uH": 1.5,
+        "DCR_typ_mohm": 14.4,
+        "DCR_max_mohm": 15.8,
+        "Isat_10pct_A": 4.1,
+        "Isat_20pct_A": 4.5,
+        "Isat_30pct_A": 7.5,
+        "Irms_20C_A": 6.7,
+        "Irms_40C_A": 9.1
+      },
+      "effective_L_uH": 1.0800000000000003,
+      "waveform": {
+        "duty": 0.21932979413666825,
+        "average_A": 0.43381528348726994,
+        "ripple_pp_A": 0.4042039493318163,
+        "peak_A": 0.6359172581531781,
+        "rms_A": 0.4492335356750356
+      },
+      "required_Isat_with_20pct_margin_A": 0.7631007097838137,
+      "Isat_10pct_to_peak_ratio": 6.447379666825149,
+      "Irms_20C_to_model_rms_ratio": 14.914291716739985,
+      "dcr_sensitivity": [
+        {
+          "temperature_C": 25,
+          "DCR_ohm": 0.0158,
+          "copper_loss_W": 0.0031886101592864774,
+          "DCR_only_delta_loss_W": 0.0,
+          "DCR_only_output_equivalent_delta_ohm": 0.0,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9,
+          "delta_efficiency_percentage_points": 0.0
+        },
+        {
+          "temperature_C": 125,
+          "DCR_ohm": 0.022009400000000002,
+          "copper_loss_W": 0.004441733951886063,
+          "DCR_only_delta_loss_W": 0.0,
+          "DCR_only_output_equivalent_delta_ohm": 0.0,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9,
+          "delta_efficiency_percentage_points": 0.0
+        }
+      ]
+    },
+    "C5355380": {
+      "specification": {
+        "L_uH": 1.0,
+        "DCR_typ_mohm": 10.8,
+        "DCR_max_mohm": 11.9,
+        "Isat_10pct_A": 4.5,
+        "Isat_20pct_A": 5.1,
+        "Isat_30pct_A": 5.4,
+        "Irms_20C_A": 8.0,
+        "Irms_40C_A": 11.0
+      },
+      "effective_L_uH": 0.72,
+      "waveform": {
+        "duty": 0.21932979413666825,
+        "average_A": 0.43381528348726994,
+        "ripple_pp_A": 0.6063059239977246,
+        "peak_A": 0.7369682454861323,
+        "rms_A": 0.467792268330757
+      },
+      "required_Isat_with_20pct_margin_A": 0.8843618945833587,
+      "Isat_10pct_to_peak_ratio": 6.106097552455098,
+      "Irms_20C_to_model_rms_ratio": 17.101608003370256,
+      "dcr_sensitivity": [
+        {
+          "temperature_C": 25,
+          "DCR_ohm": 0.0119,
+          "copper_loss_W": 0.002604072315089416,
+          "DCR_only_delta_loss_W": -0.0007870620013428647,
+          "DCR_only_output_equivalent_delta_ohm": -0.01219948541978524,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.9004690381368945,
+          "delta_efficiency_percentage_points": 0.04690381368944729
+        },
+        {
+          "temperature_C": 125,
+          "DCR_ohm": 0.0165767,
+          "copper_loss_W": 0.0036274727349195563,
+          "DCR_only_delta_loss_W": -0.0010963773678706107,
+          "DCR_only_output_equivalent_delta_ohm": -0.016993883189760844,
+          "illustrative_eta_baseline": 0.9,
+          "illustrative_eta_after_increment": 0.900653503971012,
+          "delta_efficiency_percentage_points": 0.06535039710119372
+        }
+      ]
+    }
+  },
+  "RHPZ_at_Lmax_1p8uH_Hz": 1135867.011220185,
+  "geometry": {
+    "nominal_terminal_x_mm": [
+      0.785,
+      1.605
+    ],
+    "existing_pad_x_mm": [
+      0.9,
+      2.2
+    ],
+    "nominal_overlap_x_mm": 0.705,
+    "min_overlap_x_with_gap_and_width_tolerance_mm": 0.53,
+    "terminal_y_span_typ_mm": 3.25,
+    "pad_y_span_mm": 3.6,
+    "note": "XFL/XGL share terminal drawing and recommended land. PCB land differs from manufacturer recommendation; no new land/mask/paste introduced."
+  }
+}
