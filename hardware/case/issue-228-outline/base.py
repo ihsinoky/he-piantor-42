@@ -141,13 +141,17 @@ def generate(args):
     # One bottom sheet; side outlines follow boards, with a short UDB-to-main neck.
     cavity=unary_union([g.buffer(P['cavity_clearance']+.002,join_style=2) for g in boards.values()]+[box(-11,-24,11,12)]).simplify(.002,preserve_topology=True)
     legacy_outer=cavity.buffer(P['wall'],join_style=2)
-    from outline import proposed_outline
+    from outline import proposed_outline, usb_access
     outer=proposed_outline(cavity, boards, P['wall'], P['cavity_clearance']+.002)
     assert outer.geom_type=='Polygon'
     ring=outer.difference(cavity)
     key_union=unary_union([p for v in keycaps.values() for p in v])
     # Added outline material stays flush; preserve the existing high-wall masks.
-    upper=legacy_outer.difference(cavity).difference(unary_union(palms)).difference(key_union.buffer(P['key_wall_clearance'],join_style=2))
+    upper=legacy_outer.difference(cavity).difference(unary_union(palms)).difference(key_union.buffer(P['key_wall_clearance'],join_style=2)).intersection(outer)
+    # Round 2 closes the north silhouette. Continue the existing wall height
+    # over the new north material; all added palm material stays flush.
+    north_added=ring.difference(legacy_outer).intersection(box(-300,-200,300,-45)).difference(key_union.buffer(P['key_wall_clearance'],join_style=2))
+    upper=upper.union(north_added)
     # All stepped south-facing edges, not only the old south strip, stay flush.
     for side,v in variants.items():
         m=transforms[side]['matrix'];t=transforms[side]['translation']
@@ -158,9 +162,9 @@ def generate(args):
         palms.append(palm)
     upper=upper.difference(unary_union(palms))
     # Open north U-slot instead of a bridged aperture: no unsupported roof.
-    usb_slot=box(usb_front[0]-6,-50,usb_front[0]+6,-34)
+    usb_slot=usb_access(outer,usb_front[0])
     upper=upper.difference(usb_slot)
-    # Low rim, south flush at Wing top. USB slot begins at UDB top (11.6).
+    # Low rim, south flush at Wing top. USB open-top slot begins at flush rim top (11.2 by default).
     top=P['pcb_bottom']+P['pcb_thickness']
     cache_key=hashlib.sha256((sha(Path(__file__))+sha(HERE/'outline.py')+str(args.palm_offset)+''.join(sha(p) for p in sorted(set(inputs)))).encode()).hexdigest()
     cache=ROOT/'.issue228-runtime'/('outline-base-'+str(args.pitch)+'-'+cache_key+'.step')
