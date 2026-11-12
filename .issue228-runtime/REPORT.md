@@ -856,3 +856,167 @@ will consume round 4 via `outline.proposed_outline()`. Separate 16 mm and
 fasteners/harness/rack clearances and provisional USB alignment remain
 pending. No push or PR; local commit uses
 `GIT_DIR=./.issue228-runtime/git`, branch `issue-228-case-outline`.
+
+## Phase B — completed production case, 2026-11-12
+
+The PO approved ROUND 4 on 2026-11-12 and accepted its 17 mm shelf trade-off. This user dispatch authorizes Phase B and supersedes the historical approval/STOP language above. Production data is `hardware/case/issue-228-final/`. Both pitches pass the complete #198 verification suite and the added 2D/3D audits. No unresolved 3D design blocker was found. No push or PR.
+
+### Scope and unchanged interior
+
+The production tree mirrors #198: inputs, generator, and separate 17mm/16mm output directories. All 13 input files are byte-identical copies. For EACH pitch, the following complete metadata structures compare exactly to its own #198 final data: parameters, Wing transforms, board polygons, mounts, boss checks, joints, feet, Main components, PCB clearances, storage-200mm reservations and fasteners. This checks the unchanged daughterboard seat, all 15 fixing points, harness/rack, X=3.5 mm split, splice plates, heights and hardware. `details.py` differs from #198 only in STL tessellation settings; `verify.py` retains every original assertion and adds BRep counts. The Phase A directory is unchanged.
+
+The pocket remains the original +0.502 mm mitered union and central bay, simplified by 0.002 mm. No Fly seat rework was made. Baseline component envelopes retain their #198 design-reservation qualifications.
+
+### Per-pitch Phase A gates and fitting
+
+17 mm preserves the approved coefficients exactly; its sampled polygon has **0 mm Hausdorff deviation** from the active Phase A module. For 16 mm, the generator reconstructs its own Wing envelope, side supports, cavity, north controls and bridge, then runs the same SLSQP minimum-area quadratic/R5 fitting family, wall/convexity constraints, 128-chord fitting resolution and 512-chord final quadratic sampling as Phase A. The initial coefficients are a warm start in that pitch’s envelope frame, never copied 17 mm XY coordinates. Bounds are local to that seed. Final 16 mm solve: **optimization terminated successfully, 17 iterations**, full fitting polygon area 28,195.155921 mm². Its full-pocket and final dense sampled gates pass independently. USB is derived from each outline and the original seat.
+
+| 2D check | 17 mm | 16 mm |
+| --- | --- | --- |
+| Pocket outside perimeter (mm²) | 0.0 | 0.0 |
+| Each of 4 PCB +0.502 clearance envelopes outside (mm²) | 0 / 0 / 0 / 0 | 0 / 0 / 0 / 0 |
+| Minimum enclosing wall (mm) | 2.000000000 | 2.000000000 |
+| South curvature sign changes; sign | 0; strictly negative | 0; strictly negative |
+| Endpoint fillet radius (mm) | 5 / 5 | 5 / 5 |
+| Maximum sampled shelf (mm) | 16.801254538 | 16.844820445 |
+| Shelf sampling upper bound (mm) | 16.804644979 | 16.848058845 |
+| Profile samples per wing | 20,001 | 20,001 |
+| Added raw outline area vs legacy (mm²) | 2994.309578112 | 2593.417082246 |
+
+The 16 mm shelf is 0.043566 mm wider than the accepted 17 mm maximum. Both exceed the historical 13 mm shelf allowance; **no 13 mm pass is claimed**. The requested Phase B report treats shelf as the accepted trade-off, with no hidden geometry adjustment. The raw outline added-area metric above excludes splice-footprint union arithmetic; the historical Phase A final-footprint value is 2,981.489903 mm². Wall values differ from 2 mm only by <3e-14 mm arithmetic roundoff. The intentional seam and above-rim USB opening are excluded from this enclosing-wall metric, as in Phase A.
+
+17 mm shelf maximum witness: perimeter (-110.754619961, 32.533296758) → PCB (-111.885328091, 15.770133180); south-path arclength 50.537913699 mm. Full profiles and fitted controls are in `17mm/shelf-profile.csv` and `outline-check.json`.
+
+16 mm shelf maximum witness: perimeter (-138.323554967, -1.524402888) → PCB (-123.154391545, 5.799834746); south-path arclength 0.375654367 mm. Full profiles and fitted controls are in `16mm/shelf-profile.csv` and `outline-check.json`.
+
+### Full verify.py suite
+
+| Check / baseline limit | 17 mm | 16 mm |
+| --- | --- | --- |
+| Full suite | PASS | PASS |
+| Input SHA and export SHA mismatches | 0 | 0 |
+| Printed parts valid after STEP reload; solids each | 5/5; 1 | 5/5; 1 |
+| STL binary structure, distinct triangle vertices, closed manifold | 5/5 pass; 0 nonmanifold edges | 5/5 pass; 0 nonmanifold edges |
+| STL volume relative error <0.001 (maximum) | 0.000218194 | 0.000241718 |
+| Assembly solids | 114 | 114 |
+| Broadphase assembly candidate pairs | 207 | 207 |
+| Unexpected assembly interference | 0 detected overlaps / 0 detected mm³ | 0 detected overlaps / 0 detected mm³ |
+| Designed mating contacts above reporting cutoff | 0 | 0 |
+| Mount inverse-transform error (mm) | 1.00485917356e-14 | 7.94410929039e-15 |
+| Expected fixing identifiers; bosses with material; open pilots | 15 / 15 / 15 | 15 / 15 / 15 |
+| Palm mask ∩ high wall (mm²) | 0.0 | 0.0 |
+| Keycap mask → upper wall, >=0.25 mm | 0.250000000 | 0.250000000 |
+| Main component pairs / overlap failures | 1711 / 0 | 1711 / 0 |
+| Minimum Main gap, >=0.3 mm | C27–C28: 0.300000000 | C27–C28: 0.300000000 |
+| Baseline reported Wing underside→floor reservation (mm) | 4.6 | 4.6 |
+| Brim envelope <=220×220 and Z<=250 mm | 5/5 pass | 5/5 pass |
+
+The original assembly numerical cutoffs remain unchanged: broadphase separation <=1e-6 mm is skipped; a positive intersection >1e-4 mm³ is reported as interference. Thus “0” is the baseline CAD acceptance result at that resolution, not a stronger exact-arithmetic claim. Keycap/spacing comparisons retain the original 1e-8 mm numerical allowance. The 4.6 mm underside entry is the baseline declared reservation, not a newly measured physical component qualification.
+
+All 15 identifiers checked at BOTH pitches: Main H1/H2/H3; UDB MH1/MH2/MH3/MH4; left Wing H1/H2/H3/H4; right Wing H1/H2/H3/H4. Every boss has material at the specified wall probe and an open pilot. Boss top Z=10, pilot diameter=1.7 mm; Wing/Main bosses Ø4.5, UDB Ø3.5 mm. Parameters remain floor 2, PCB bottom 10, Wing/Main PCB thickness 1.2, UDB thickness 1.6, low rim 11.2, upper wall top 15.2 mm.
+
+### Harness, components, storage and PCB checks
+
+| Pitch | Route | Non-mating Main components checked; minimum gap mm | Keycap gap mm | Case gap mm | PCB gap mm |
+| --- | --- | --- | --- | --- | --- |
+| 17 | left | 58; U4 2.295776671 | 9.008036199 | 6.582632785 | 7.000000000 |
+| 17 | right | 58; C28 3.123040652 | 9.008036199 | 6.582632785 | 7.000000000 |
+| 16 | left | 58; U4 2.295776671 | 7.888015920 | 6.317610685 | 7.000000000 |
+| 16 | right | 58; C28 3.123040652 | 7.888015920 | 6.317610685 | 7.000000000 |
+
+All harness gaps exceed the original >0.2 mm threshold. Each route is 99.274845254 mm in 3D, with 30 mm service allowance totaling 129.274845254 mm, leaving 100.725154746 mm nominal slack on a 200 mm cable. Radius=5 mm, endpoint Z=18.2, cruise Z=23.2 mm; Wing GH endpoints remain (±27,−41). Full individual component distances are retained in each `dimensions.json`, with no excluded non-mating component.
+
+| Pitch | 200 mm storage side | Loop length after 30 mm allowance mm | Keycap gap mm | Main gap mm |
+| --- | --- | --- | --- | --- |
+| 17 | left | 70.725154746 | 13.283856512 | 36.761900172 |
+| 17 | right | 70.725154746 | 13.283856512 | 36.761900172 |
+| 16 | left | 70.725154746 | 12.872091806 | 36.761900172 |
+| 16 | right | 70.725154746 | 12.872091806 | 36.761900172 |
+
+The service-loop STEP remains a separate reservation, not another connected cable. The rack and its socket, eight feet, 15 PCB screws/washers and four splice screws are unchanged and present in the assembly interference checks.
+
+| Pitch | PCB A | PCB B | Gap mm | Overlap mm² |
+| --- | --- | --- | --- | --- |
+| 17 | main | wing_left | 1.999999308 | 0.000000000 |
+| 17 | main | wing_right | 1.999999904 | 0.000000000 |
+| 17 | main | udb | 22.017949000 | 0.000000000 |
+| 17 | wing_left | wing_right | 2.000000000 | 0.000000000 |
+| 17 | wing_left | udb | 4.000000000 | 0.000000000 |
+| 17 | wing_right | udb | 4.000000000 | 0.000000000 |
+| 16 | main | wing_left | 1.999999308 | 0.000000000 |
+| 16 | main | wing_right | 1.999999904 | 0.000000000 |
+| 16 | main | udb | 22.017949000 | 0.000000000 |
+| 16 | wing_left | wing_right | 2.000000000 | 0.000000000 |
+| 16 | wing_left | udb | 4.000000000 | 0.000000000 |
+| 16 | wing_right | udb | 4.000000000 | 0.000000000 |
+
+### Print envelopes, BRep and STL quality
+
+| Pitch | Printed part | XYZ mm | XY with 5 mm brim mm | Faces / edges | STL triangles | Volume error |
+| --- | --- | --- | --- | --- | --- | --- |
+| 17 | splice-1 | 28.000000 × 16.000000 × 4.200000 | 38.000000 × 26.000000 | 12 / 24 | 8068 | 0.000019866% |
+| 17 | splice-2 | 28.000000 × 16.000000 × 4.200000 | 38.000000 × 26.000000 | 12 / 24 | 8068 | 0.000019871% |
+| 17 | tray-left | 149.020524 × 146.068992 × 15.200000 | 159.020524 × 156.068992 | 305 / 824 | 63230 | 0.021819444% |
+| 17 | tray-right | 142.020524 × 146.068992 × 15.200000 | 152.020524 × 156.068992 | 301 / 824 | 55970 | 0.021708461% |
+| 17 | cable-rack | 64.000000 × 15.000000 × 20.200000 | 74.000000 × 25.000000 | 48 / 135 | 2216 | 0.000443968% |
+| 16 | splice-1 | 28.000000 × 16.000000 × 4.200000 | 38.000000 × 26.000000 | 12 / 24 | 8068 | 0.000019866% |
+| 16 | splice-2 | 28.000000 × 16.000000 × 4.200000 | 38.000000 × 26.000000 | 12 / 24 | 8068 | 0.000019871% |
+| 16 | tray-left | 142.317998 × 139.557564 × 15.200000 | 152.317998 × 149.557564 | 307 / 830 | 63178 | 0.023208506% |
+| 16 | tray-right | 135.317998 × 139.557564 × 15.200000 | 145.317998 × 149.557564 | 303 / 830 | 55918 | 0.024171840% |
+| 16 | cable-rack | 64.000000 × 15.000000 × 20.200000 | 74.000000 × 25.000000 | 48 / 135 | 2216 | 0.000443968% |
+
+Every printed part is one valid solid on STEP reload and every STL is closed with 0 nonmanifold edges. The right-tray maximum final volume error is 0.024171840% (16 mm), below 0.1%. No wall, height, fixing point or interior part was changed to achieve this.
+
+| Additional STEP | 17 mm faces / edges / solids | 16 mm faces / edges / solids |
+| --- | --- | --- |
+| assembly | 2037 / 5181 / 114 | 2041 / 5193 / 114 |
+| harness | 22 / 38 / 2 | 22 / 38 / 2 |
+| storage-200mm | 1168 / 3492 / 2 | 1168 / 3492 / 2 |
+
+All additional STEP compounds reload as valid. Harness contains two cables; storage contains two reservation solids. The complete assembly tessellates successfully for the PNGs.
+
+The original sampled 17 mm integrated base was valid but had **2,545 faces / 7,527 edges**, STEP **10,307,237 bytes**. This was disproportionately heavy for the eight-primitives-per-tray outline. Exact native curves reduce that integrated base to **509 faces / 1,417 edges**, **1,897,179 bytes**. Only outer sampled runs are replaced: exact quadratic Béziers and R5 circular arcs, using the same underlying curves across height layers. Interior straight edges are retained. Clipped outer endpoints are projected by at most the tiny sampled chord error; final manufactured perimeter error is measured below. No sampled-build mesher failure is claimed.
+
+Rejected intermediate results are recorded explicitly: the initial independently approximated B-spline representation yielded a **515-face / 1,429-edge invalid STEP on reload** despite pre-export validity; it was replaced by shared exact curves. At baseline STL tolerance 0.02 mm / angular 0.1 rad, the 16 mm right tray failed volume agreement at **0.001176657098 relative = 0.117665710%**, exceeding 0.1%. Final exports use **0.005 mm / 0.025 rad** and pass the unchanged verifier. These were representation/export failures; no approved silhouette or interior dimensions were tuned to suppress a design interference.
+
+Independent-fit development also rejected infeasible optimizer outputs, including a -2 mm south-distance constraint result, and a poor raw-envelope initialization with 26.864932 mm shelf / 5,953.869064 mm² added area. Neither is used. The delivered 16 mm solution is the converged full-pocket SLSQP fit documented above and re-derived by both the generator and gate. An audit initially used X=0 instead of the existing seat’s X=-0.002 mm and falsely counted 0.023685727 mm² obstruction at the slot shoulder; the corrected audit derives the seat datum and detects zero obstruction.
+
+### Actual 3D USB opening and intact material below
+
+USB remains W12 × H4 mm, open top over **Z=11.2..15.2 mm**, centered at the unchanged seat **X=-0.002 mm** (bounds X=-6.002..5.998). `check_3d.py` sections the exported trays, including inner wires, not a 2D generator surrogate. At Z=13.2 the entire slot corridor to Y=-34 has **0 mm² blocking material** at both pitches. At three wall witnesses per pitch, material is present at Z=1/2.1/10/11.19 and absent at Z=11.21/13.2/15.19. The upper wall is prismatic in this band; the opening has no roof.
+
+| Pitch | Below-slot wall depth at center mm | Below-slot depth across five X stations mm | Intact floor in corridor mm² | Intact low rim at Z10.5 mm² |
+| --- | --- | --- | --- | --- |
+| 17 | 18.061921000 | 18.061921000–18.090796000 | 249.882859264 | 216.858859264 |
+| 16 | 16.690736000 | 16.690736000–16.717014000 | 233.418229773 | 200.394229773 |
+
+17 mm upper-wall shoulder at X=-6.012000: total solid wall crossed 11.842989000 mm; bands Y=[-54.842989,-45.000000], thickness 9.842989000 mm; Y=[-38.752000,-36.752000], thickness 2.000000000 mm.
+
+17 mm upper-wall shoulder at X=6.008000: total solid wall crossed 11.842951000 mm; bands Y=[-54.842951,-45.000000], thickness 9.842951000 mm; Y=[-38.752000,-36.752000], thickness 2.000000000 mm.
+
+16 mm upper-wall shoulder at X=-6.012000: total solid wall crossed 10.469190000 mm; bands Y=[-53.469190,-45.000000], thickness 8.469190000 mm; Y=[-38.752000,-36.752000], thickness 2.000000000 mm.
+
+16 mm upper-wall shoulder at X=6.008000: total solid wall crossed 10.469155000 mm; bands Y=[-53.469155,-45.000000], thickness 8.469155000 mm; Y=[-38.752000,-36.752000], thickness 2.000000000 mm.
+
+The shoulder measurements distinguish the high north band and original UDB wall from the continuous, deeper low rim below. The slot clears both upper-wall bands. The original provisional seat alignment remains a future Fly task.
+
+### Exported 3D silhouette and PNGs
+
+| Pitch | Measured max perimeter deviation mm | Conservative sampling bound mm | Actual assembly top view |
+| --- | --- | --- | --- |
+| 17 | 0.000111547 | 0.010111547 | `17mm/assembled-top.png` |
+| 16 | 0.000111437 | 0.010111437 | `16mm/assembled-top.png` |
+
+The 17 mm reference is the exact approved Phase A sampled perimeter; 16 mm is its own independently derived counterpart. Both include unchanged splice-floor reinforcement footprints. Perimeter checks section actual exported tray STEP at Z=1, use only external floor wires to exclude screw bores, sample edges at <=0.02 mm spacing and snap to a 1e-6 mm grid. The conservative bound is well below **0.05 mm everywhere**. The PNGs tessellate every actual assembly STEP leaf and paint projected triangles in height order; the dashed line is the approval reference. Both PNGs were visually inspected. `review.svg` remains the inherited 2D review drawing and is not substituted for the required 3D PNG.
+
+### Export inventory and reproducibility
+
+`17mm/` (21 files): `3d-check.json`, `assembled-top.png`, `assembly.step`, `cable-rack.step`, `cable-rack.stl`, `dimensions.json`, `exports-sha256.json`, `harness.step`, `outline-check.json`, `review.svg`, `shelf-profile.csv`, `splice-1.step`, `splice-1.stl`, `splice-2.step`, `splice-2.stl`, `storage-200mm.step`, `tray-left.step`, `tray-left.stl`, `tray-right.step`, `tray-right.stl`, `verification.json`.
+
+`16mm/` (21 files): `3d-check.json`, `assembled-top.png`, `assembly.step`, `cable-rack.step`, `cable-rack.stl`, `dimensions.json`, `exports-sha256.json`, `harness.step`, `outline-check.json`, `review.svg`, `shelf-profile.csv`, `splice-1.step`, `splice-1.stl`, `splice-2.step`, `splice-2.stl`, `storage-200mm.step`, `tray-left.step`, `tray-left.stl`, `tray-right.step`, `tray-right.stl`, `verification.json`.
+
+Each pitch has STL+STEP for all five printable parts, plus the baseline assembly/harness/storage STEP compounds. Purchased hardware and electronics are reference solids in assembly STEP, following #198 organization. Export SHA-256 manifests cover STEP, STL, JSON audit/dimension files, CSV shelf profile, SVG and PNG (excluding the manifest itself and verifier output).
+
+Reproduction commands are in `hardware/case/issue-228-final/README.md`. CAD venv is local at `.issue228-runtime/cad-venv/`, reading existing CAD packages and local `.issue228-runtime/pydeps/`; scratch, caches, logs and MPL config remain under `.issue228-runtime/`. No CAD packages or runtime data were written to `/tmp` or shared tool directories. Final source syntax, input identity, source/documentation Git whitespace checks and full verification checks pass. A whole-export whitespace scan reports the native STEP writer’s trailing spaces and preserved input CSV CRLFs; these machine-export bytes are retained, and all 13 authoritative input copies remain byte-identical. Historical Phase A files are untouched.
+
+Remaining deviations: accepted shelf trade-off and unchanged provisional USB/seat qualification only. **No unresolved Phase B 3D blocker.** Local branch is `issue-228-case-outline`, using `GIT_DIR=./.issue228-runtime/git`; commit only, no push/PR.
