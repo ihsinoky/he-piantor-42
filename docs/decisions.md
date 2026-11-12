@@ -1152,3 +1152,41 @@ Rev.5 Gerber ZIP/BOM/CPL/GerberフレームCPL/quote-handoffを新生成しCAM�
 完成配索・機構・初回通電実測は別ゲート。
 [報告書と検証証跡](issue-221-main-rev5.md)をPOゲートへ提出する準備まで完了。
 採択・発注対象の正式切替・製造GOは行わず、push/PR作成/発注もしない。
+
+## D-036 - Main Rev.6 triangular vertex chamfers
+
+Status: **Proposed (2026-11-12, Issue #226). PO adoption and manufacturing release pending.**
+
+The PO identified the three sharp Main tips as a handling hazard. Propose Rev.6
+as Rev.5 plus an equal-leg **4 mm chamfer at each of the three approximately
+60° vertices**. Each new face is approximately 4 mm long, removing 3.464 mm of
+tip depth and replacing the original vertex with two approximately 120° corners.
+This is a substantive cut while retaining all three Ø2.2 mm mounting holes and
+their full Ø5 mm support disks. The nearest new edge is 2.382050 mm from a hole
+boundary; the minimum support-disk margin to the entire outline is 0.946152 mm.
+Larger 6 mm legs would leave only about 0.65 mm to a hole boundary, and would
+cut into the Ø5 mm support area; 4 mm retains practical mechanical margin.
+
+All 62 footprint placements, angles and complete footprint definitions, including
+J2/J3/J4, all 1,143 track segments, 130 vias, nets and project rules remain
+identical to Rev.5. The necessary copper change is limited to clipping the In1.Cu
+GND plane at all three corners, with a nominal 0.55 mm setback. Actual minimum
+copper/hole clearance to the new edges is **0.549999609 mm**. Parsed and geometric
+diffs enumerate this edit, including sub-grid oblique-boundary rounding inside
+the independently checked 2 nm numerical envelope. There is no routing change.
+
+The new outline is an exact subset of Rev.5 (outside area **0 mm²**): material
+removal only. Mounting locations and support areas are preserved, and existing
+case interference is unaffected. Matrix, Wing and case data are unchanged.
+Native DRC/ERC/unrouted counts are zero; independent 40-net connectivity and the
+30,160-pair via/pad audit pass (minimum gap 0.145 mm). Fresh Rev.6 power extraction
+using Rev.5 assumptions gives input loop **48.682870 mΩ** and farthest-point
+**4.797985723 V** at 127 mA/Wing. The tiny resistance decrease versus 48.686448 mΩ
+is within mesh error, not evidence that removing copper improves conductivity.
+These remain models with the inherited material/load/harness assumptions.
+
+The [Rev.6 qualification package](../hardware/kicad/qualification/issue-226-main-rev6/README.md)
+contains regenerated manufacturing data, independent CAM readback, a rederived
+Gerber-frame CPL translation and [outline comparison PNG](../hardware/kicad/qualification/issue-226-main-rev6/outline-comparison.png).
+D-035 electrical/assembly and first-power conditions remain. This draft proposes
+only the Main outline revision; it authorizes no adoption, order, merge or release.

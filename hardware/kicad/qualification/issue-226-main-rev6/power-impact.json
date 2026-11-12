@@ -1,0 +1,251 @@
+{
+  "pass_model_comparison": true,
+  "model_only": true,
+  "corner": "125C; actual track widths x0.8; 35um copper, 20um barrel, assumed z=[0,.2,1,1.2]mm; Rev6 freshly extracted with Rev5 scripts; Rev5 saved baseline extraction hash-linked via PCB",
+  "rev5": {
+    "PCB_sha256": "8b1754ebc5a67cf17bf2a6e54b49814e087d8d09e13f0eedf59a99715c06c286",
+    "values": {
+      "input_positive_ohm": 0.004788142986084148,
+      "input_GND_ohm": 0.043898304644937346,
+      "input_loop_ohm": 0.04868644763102149,
+      "rail_common_loop_ohm": 0.037108545136454014,
+      "branch_J2_loop_ohm": 0.003472697590379885,
+      "branch_J3_loop_ohm": 0.028229643090193306
+    },
+    "coarse_to_fine_abs_ohm": {
+      "input_positive_ohm": 0.0,
+      "input_GND_ohm": 0.00011697783187229749,
+      "input_loop_ohm": 0.00011697783187229749,
+      "rail_common_loop_ohm": 0.00016791472760115805,
+      "branch_J2_loop_ohm": 5.966954770622417e-06,
+      "branch_J3_loop_ohm": 1.9321404886054466e-05
+    },
+    "max_ground_KCL_residual_A": 3.830516126512862e-09,
+    "positive_cases": 16,
+    "ground_cases": 4
+  },
+  "rev6": {
+    "PCB_sha256": "e33712ba860060aca015f359ac8abf9378b623a9029d21df1061da295c2f9de8",
+    "values": {
+      "input_positive_ohm": 0.004788142986084148,
+      "input_GND_ohm": 0.04389472700582981,
+      "input_loop_ohm": 0.04868286999191396,
+      "rail_common_loop_ohm": 0.0371084881791048,
+      "branch_J2_loop_ohm": 0.0034717765247950843,
+      "branch_J3_loop_ohm": 0.028229217417677723
+    },
+    "coarse_to_fine_abs_ohm": {
+      "input_positive_ohm": 0.0,
+      "input_GND_ohm": 0.00012054446257782347,
+      "input_loop_ohm": 0.00012054446257782347,
+      "rail_common_loop_ohm": 0.00016797686960585284,
+      "branch_J2_loop_ohm": 6.882182804195114e-06,
+      "branch_J3_loop_ohm": 1.975365937820564e-05
+    },
+    "max_ground_KCL_residual_A": 3.6465732516921534e-09,
+    "positive_cases": 16,
+    "ground_cases": 4
+  },
+  "delta_ohm": {
+    "input_positive_ohm": 0.0,
+    "input_GND_ohm": -3.577639107535391e-06,
+    "input_loop_ohm": -3.577639107535391e-06,
+    "rail_common_loop_ohm": -5.6957349212072295e-08,
+    "branch_J2_loop_ohm": -9.210655848006927e-07,
+    "branch_J3_loop_ohm": -4.256725155832308e-07
+  },
+  "input_loop_meets_50mOhm_model": true,
+  "regulated_far_point_V": 4.797985723300705,
+  "rev5_regulated_far_point_V": 4.797985654773129,
+  "downstream_conclusion_unchanged": true,
+  "upstream_sensitivity": [
+    {
+      "efficiency": 0.75,
+      "upstream_reservation_ohm": 0.25,
+      "old_converter_V": 4.600521431922221,
+      "new_converter_V": 4.600523268930434,
+      "delta_converter_V": 1.8370082131013987e-06,
+      "old_total_USB_A": 0.5004531315811006,
+      "new_total_USB_A": 0.5004529756715296,
+      "delta_total_USB_A": -1.5590957103128744e-07,
+      "classification_unchanged": true,
+      "within_500mA": false
+    },
+    {
+      "efficiency": 0.75,
+      "upstream_reservation_ohm": 0.5,
+      "old_converter_V": 4.469108591612375,
+      "new_converter_V": 4.469110518198592,
+      "delta_converter_V": 1.9265862167827663e-06,
+      "old_total_USB_A": 0.5119342925278823,
+      "new_total_USB_A": 0.5119341192582653,
+      "delta_total_USB_A": -1.7326961698760357e-07,
+      "classification_unchanged": true,
+      "within_500mA": false
+    },
+    {
+      "efficiency": 0.75,
+      "upstream_reservation_ohm": 1.0,
+      "old_converter_V": 4.18446967054311,
+      "new_converter_V": 4.184471832456979,
+      "delta_converter_V": 2.1619138692585693e-06,
+      "old_total_USB_A": 0.5392749479450419,
+      "new_total_USB_A": 0.5392747261594736,
+      "delta_total_USB_A": -2.2178556835505958e-07,
+      "classification_unchanged": true,
+      "within_500mA": false
+    },
+    {
+      "efficiency": 0.8,
+      "upstream_reservation_ohm": 0.25,
+      "old_converter_V": 4.607987521655142,
+      "new_converter_V": 4.607989263939535,
+      "delta_converter_V": 1.7422843932024534e-06,
+      "old_total_USB_A": 0.4754567188140122,
+      "new_total_USB_A": 0.4754565806345371,
+      "delta_total_USB_A": -1.3817947508432127e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.8,
+      "upstream_reservation_ohm": 0.5,
+      "old_converter_V": 4.4835584167887,
+      "new_converter_V": 4.4835602377880015,
+      "delta_converter_V": 1.8209993015716464e-06,
+      "old_total_USB_A": 0.48559898711126,
+      "new_total_USB_A": 0.4855988345616215,
+      "delta_total_USB_A": -1.525496384768843e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.8,
+      "upstream_reservation_ohm": 1.0,
+      "old_converter_V": 4.2157356454053705,
+      "new_converter_V": 4.215737669167526,
+      "delta_converter_V": 2.0237621551899565e-06,
+      "old_total_USB_A": 0.5094605311258957,
+      "new_total_USB_A": 0.5094603393651248,
+      "delta_total_USB_A": -1.917607709289726e-07,
+      "classification_unchanged": true,
+      "within_500mA": false
+    },
+    {
+      "efficiency": 0.85,
+      "upstream_reservation_ohm": 0.25,
+      "old_converter_V": 4.614554728610378,
+      "new_converter_V": 4.614556387848891,
+      "delta_converter_V": 1.6592385128078035e-06,
+      "old_total_USB_A": 0.45346975888555413,
+      "new_total_USB_A": 0.45346963538543755,
+      "delta_total_USB_A": -1.2350011657780158e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.85,
+      "upstream_reservation_ohm": 0.5,
+      "old_converter_V": 4.496227667515559,
+      "new_converter_V": 4.496229396585145,
+      "delta_converter_V": 1.7290695861760241e-06,
+      "old_total_USB_A": 0.4625088401219211,
+      "new_total_USB_A": 0.4625087045611522,
+      "delta_total_USB_A": -1.35560768943499e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.85,
+      "upstream_reservation_ohm": 1.0,
+      "old_converter_V": 4.242901720992013,
+      "new_converter_V": 4.242903626954584,
+      "delta_converter_V": 1.9059625717687823e-06,
+      "old_total_USB_A": 0.4835556711479587,
+      "new_total_USB_A": 0.483555503342326,
+      "delta_total_USB_A": -1.6780563272256188e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.9,
+      "upstream_reservation_ohm": 0.25,
+      "old_converter_V": 4.620376238209111,
+      "new_converter_V": 4.620377824043742,
+      "delta_converter_V": 1.5858346307240367e-06,
+      "old_total_USB_A": 0.4339793881475933,
+      "new_total_USB_A": 0.43397927694938554,
+      "delta_total_USB_A": -1.111982077528495e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.9,
+      "upstream_reservation_ohm": 0.5,
+      "old_converter_V": 4.507426915924995,
+      "new_converter_V": 4.507428564225309,
+      "delta_converter_V": 1.6483003140166375e-06,
+      "old_total_USB_A": 0.4420978231234345,
+      "new_total_USB_A": 0.4420977016801463,
+      "delta_total_USB_A": -1.2144328820351546e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.9,
+      "upstream_reservation_ohm": 1.0,
+      "old_converter_V": 4.266731554435862,
+      "new_converter_V": 4.266733358705513,
+      "delta_converter_V": 1.8042696510178757e-06,
+      "old_total_USB_A": 0.4608321645195662,
+      "new_total_USB_A": 0.46083201616348823,
+      "delta_total_USB_A": -1.4835607797802908e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.95,
+      "upstream_reservation_ohm": 0.25,
+      "old_converter_V": 4.625572285686903,
+      "new_converter_V": 4.625573806171326,
+      "delta_converter_V": 1.5204844237004522e-06,
+      "old_total_USB_A": 0.41658305992780853,
+      "new_total_USB_A": 0.41658295915009175,
+      "delta_total_USB_A": -1.0077771678274061e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.95,
+      "upstream_reservation_ohm": 0.5,
+      "old_converter_V": 4.517398361926366,
+      "new_converter_V": 4.517399938696336,
+      "delta_converter_V": 1.5767699697022408e-06,
+      "old_total_USB_A": 0.42392451841648615,
+      "new_total_USB_A": 0.42392440884311205,
+      "delta_total_USB_A": -1.0957337409633894e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    },
+    {
+      "efficiency": 0.95,
+      "upstream_reservation_ohm": 1.0,
+      "old_converter_V": 4.287808722385127,
+      "new_converter_V": 4.287810437939243,
+      "delta_converter_V": 1.7155541165436716e-06,
+      "old_total_USB_A": 0.44073352779466257,
+      "new_total_USB_A": 0.4407333954680886,
+      "delta_total_USB_A": -1.323265739761048e-07,
+      "classification_unchanged": true,
+      "within_500mA": true
+    }
+  ],
+  "max_extra_input_drop_at_500mA_V": -1.7888195537676954e-06,
+  "upstream_500mA_classification_changes": 0,
+  "limitations": [
+    "No measured finished Fly/cable/contact/fuse resistance or converter efficiency; retained sweeps are sensitivity reservations",
+    "75% efficiency sensitivities already fail USB500mA in Rev5 and still fail in Rev6; no unconditional upstream power guarantee",
+    "Nominal-geometry/assumed-material extraction, not manufactured minima or operating hardware guarantee",
+    "GH each conductor200mm >=0.0804mm2, contacts50mOhm, six returns and 127mA per Wing are retained constraints; first-power cable polarity measurement mandatory"
+  ]
+}
