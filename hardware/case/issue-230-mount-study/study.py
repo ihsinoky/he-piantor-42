@@ -142,7 +142,9 @@ for pitch in (17,16):
   # Two deliberately transparent stiffness limits, same effective strip width17.
   # No shear-transfer/sandwich benefit claimed between discrete ties.
   b=float(pitch);web=float(pitch-14);EIpcb=20000*b*1.2**3/12
-  eis={'FR4':EIpcb+20000*web*1.5**3/12,'aluminium':EIpcb+69000*web*1.5**3/12,'POM':EIpcb+2800*web*1.5**3/12,'PC':EIpcb+2300*web*1.5**3/12}
+  # PMMA E=3300 MPa: PLEXIGLAS GS/XT technical information, ISO 527.
+  # Nominal short-term screening modulus; not a sheet-lot certificate.
+  eis={'FR4':EIpcb+20000*web*1.5**3/12,'aluminium':EIpcb+69000*web*1.5**3/12,'POM':EIpcb+2800*web*1.5**3/12,'PC':EIpcb+2300*web*1.5**3/12,'PMMA':EIpcb+3300*web*1.5**3/12}
   # Give floating plates a fairer six-point layout too: use the whole
   # pocket, without a socket over any 17mm keycap or tall connector.
   float_cand=[];drill_cand=[]
@@ -176,6 +178,10 @@ for pitch in (17,16):
   options['C_pcb_tadpole_rev4six']=(pcbfloat,EIpcb)
   options['D_legal_added_bosses_plateless']=(legalD,EIpcb)
   options['D_legal_added_bosses_al_plate']=(legalD,eis['aluminium'])
+  # PMMA supplement: preserve all original options, add matching rigid layouts.
+  options['E_tray_ribs_PMMA_plate']=(np.array(supp),eis['PMMA'])
+  options['D_legal_added_bosses_PMMA_plate']=(legalD,eis['PMMA'])
+  options['E_float_with_screw_fallback_PMMA']=(floating6,eis['PMMA'])
   per=[]
   for opt,(supports,ei) in options.items():
    dist=np.min(np.linalg.norm(keys[:,None,:]-supports[None,:,:],axis=2),axis=1)

@@ -199,3 +199,68 @@ export PYTHONDONTWRITEBYTECODE=1
 ```
 
 `study.py` reads only production sources, writes only its own study directory and emits hashes, support and collision screens, exact 2D drawing data, all per-key mechanical estimates and floating tables. `build_review.py` emits study STLs and the two review figures. `verify_study.py` checks regeneration invariants, hashes, aperture positions, clearances, fastener dimensions and CSV completeness. Results are in `verification.json`. No production STEP/STL, case generator, routed Wing board, or other electrical design was modified; no push or PR is part of this work.
+
+
+## Supplement — acrylic (PMMA) plate candidate, 2026-11-13
+
+This supplements the original study at `2f62ad3` for the PO's explicitly requested acrylic candidate. The original report, recommendation geometry and existing numerical results above remain unchanged. **Acrylic does not change the ranked recommendation: E-R with aluminium remains first.** PMMA is a conditional transparent/coloured appearance or potentially lower cutting-cost variant of E-R, not a stiffness upgrade or a qualified replacement for aluminium. No acrylic sample, supplier quote or retention-life test was obtained.
+
+### Same mechanical framework
+
+Use **E = 3.3 GPa (3300 N/mm²)** for ordinary unfilled PMMA, cast or extruded. [PLEXIGLAS GS/XT technical information 211-1, August 2024, page 4](https://www.plexiglas.de/files/plexiglas-content/pdf/technische-informationen/211-1-DE-PLEXIGLAS-GS-XT.pdf) gives this short-term tensile modulus under ISO 527-2/1B/1, at 23 °C / 50% RH, for standard GS and XT. It is a nominal screening input, not a flexural/creep modulus certified for a purchased 1.5 mm sheet; impact-modified grades require a different input.
+
+Keep `t = 1.50`, effective web `pitch−14`, the 1.2 mm PCB, all support coordinates, 1 N single-key load, independent-slip sum `EIstack = EIpcb + EIplate`, and the original `d³/(24 EI)…d³/(3 EI)` bracket. No sandwich multiplier or new shear-transfer assumption is introduced.
+
+| PMMA plate, pitch | Web width (mm) | Plate I (mm⁴) | E (GPa) | Perforated plate EI (N mm²) | Independent stack EI (N mm²) |
+|---|---:|---:|---:|---:|---:|
+| 1.50 mm, 17 mm | 3 | 0.84375 | 3.3 | 2784.375 | 51744.375 |
+| 1.50 mm, 16 mm | 2 | 0.56250 | 3.3 | 1856.250 | 47936.250 |
+
+At 17 mm PMMA adds only 5.69% to PCB EI; it is slightly stiffer than the POM and PC assumptions, far below FR4 and aluminium. The following rows use exactly the main comparison's definitions and can be compared directly with its material/layout rows. At 2 N double the bending values; the same model caveats apply. Floating spring sink is separate and unchanged at the same assumed load and pin stiffness; a lighter plate is not a substitute for measuring actual stack weight.
+
+| Option, 17 mm left | Distance min / median / max (mm) | Worst bend bracket (mm) | Deflection spread, upper proxy (mm) |
+|---|---:|---:|---:|
+| B: original four Tadpoles + PMMA | 11.424 / 31.364 / 55.980 | 0.141–1.130 | 1.120 |
+| B: six Tadpoles + PMMA | 13.000 / 25.495 / 47.012 | 0.084–0.669 | 0.655 |
+| D: eight screws + PMMA | 10.000 / 22.413 / 44.000 | 0.069–0.549 | 0.542 |
+| E-F: six Tadpoles + screw fallback + PMMA | 13.000 / 25.495 / 47.012 | 0.084–0.669 | 0.655 |
+| E-R: four screws + six ribs + PMMA | 7.000 / 10.039 / 19.209 | 0.006–0.046 | 0.043 |
+
+| Variant | B six-point PMMA worst bend (mm) | E-R PMMA worst bend (mm) | E-R PMMA upper-proxy spread (mm) |
+|---|---:|---:|---:|
+| 17mm-left | 0.084–0.669 | 0.006–0.046 | 0.043 |
+| 17mm-right | 0.084–0.669 | 0.006–0.046 | 0.043 |
+| 16mm-left | 0.080–0.638 | 0.005–0.039 | 0.037 |
+| 16mm-right | 0.080–0.638 | 0.005–0.039 | 0.036 |
+
+As with aluminium, E-R must also tolerate loss of plate coupling: the original PCB-only worst values remain 0.048 mm at 17 mm and 0.041 mm at 16 mm. Acrylic does not justify fewer underside supports. The figures are short-term elastic estimates; they do not predict clip damage or sustained-load creep.
+
+### Stock, laser process and switch fit
+
+**Nominal 1.5 mm acrylic is available; guaranteed 1.45–1.51 mm finished plate is a different procurement requirement.** The [PLEXIGLAS GS/XT range](https://www.plexiglas.de/de/produkte/plexiglas/plexiglas-gs-xt) lists clear extruded sheet at 1.5 mm; its standard cast sheet starts at 2 mm in technical information 211-1. Thin cast stock therefore needs a separately identified supplier/grade; do not substitute 2 mm or assume every colour is stocked at 1.5 mm. A [Japanese acrylic fabricator's published material list](https://www.rinz.co.jp/price1.html) also includes 1.5 mm clear/white stock, without certifying this switch tolerance.
+
+The [manufacturer's thickness guidance](https://www.plexiglas.de/en/contact) gives extruded XT **±10% below 3 mm**: nominal 1.5 means 1.35–1.65 mm. Its cast GS formula is **±(0.4 + 0.1t) mm**, much wider still; applying it at 1.5 would mean ±0.55 mm, but this is not evidence that standard 1.5 mm GS is offered. As another real thin-stock example, [ACRYLITE's extruded tolerance table](https://www.acrylite.co/resources/knowledge-base/article/what-is-the-thickness-tolerance-of-acrylite-r-extruded-ff-acrylic-sheet?category=product-properties) labels 0.060 inch as 1.5 mm but permits 0.054–0.066 inch, or **1.3716–1.6764 mm**. Even the nominal 0.060 inch is 1.524 mm, above Jade Pro's 1.51 maximum. Extrusion's better consistency is useful for sorting but does not guarantee fit. Generic cast or extruded stock cannot honestly be specified as meeting the switch drawing without inspection or a special tolerance agreement.
+
+CO₂ laser cutting is the ordinary practical channel for this thin, intricate PMMA plate. Here there are **42 switch apertures per pair**, nominal 14.02 mm with finished 14.00–14.04 flats, R0.20 corners, narrow 3 mm / 2 mm pitch webs, four tie holes per Wing and a connector notch. Kerf compensation, taper, corner dwell and local melting must be qualified with the actual sheet and machine. [ACRYLITE's laser-machining guidance](https://www.acrylite.co/resources/fabrication-manuals/laser-machining-acrylite) warns that glossy cuts can carry greater edge stress, and inside corners can overheat and craze under mechanical load or incompatible solvents. A visually polished aperture therefore does not certify a sound clip-bearing edge. At R0.20, use controlled corner energy and reject microcracks, chips and melted/rounded clip seats. A normal perpendicular laser cut also does not create the specified underside C0.20 lead-in; qualify a secondary operation while preserving the top retaining edge. Enlarging corner radii or apertures to avoid cracking would require renewed switch-fit qualification, not an unnoticed drawing change.
+
+This is a brittle, notch-sensitive plate with little material between switches. The switch's resilient plastic clips flex during insertion, but the PMMA edge must carry their bearing and pull-out loads. Repeated insertion, levering or extracting a switch with clips still engaged may chip that edge or start cracks at aperture corners. The risk is worse in the 16 mm webs and at stressed tie holes. This is an engineering assessment from this geometry and the manufacturer's machining cautions, not a measured cycle-life ranking. Cast stock may be worth testing for processing behaviour, but its thickness variation does not disappear; extruded stock's uniformity does not establish durable retention.
+
+Long-term clip bearing, screw preload and plate warp also need checks. [ACRYLITE cast physical properties](https://www.acrylite.co/files/content/acrylite.co/documents/product-information/ACRYLITE-cast-Physical-Properties.pdf) describes cold flow under sustained loading and stress crazing below short-term tensile strength. The 3.3 GPa calculation consequently cannot certify lifetime retention. Do not overtighten the existing ties, force a warped sheet flat, use solvent cement/threadlocker near apertures, or clean stressed edges with an unapproved chemical. Keep the existing independent spacers and insulating supports; they must carry assembly loads without demanding switch clips provide stack shear transfer. Supplier-approved stress relief may help, but remeasure dimensions and flatness after any thermal treatment.
+
+**Fit verdict: conditional feasibility only, with sorting and finished-part inspection.** Map sheet thickness before nesting and verify 1.45–1.51 mm at every aperture's clip-bearing regions after cutting/finishing, using a calibrated micrometer with suitable access and measurement uncertainty. Inspect all 42 apertures on both faces for finished dimensions, taper, R0.20/C0.20 and cracks under magnification; retain the existing ≤0.10 mm Wing flatness requirement. A representative coupon must reproduce the narrowest web, corners and clip edges, then demonstrate full Jade Pro seating, both clips engaged and no housing lift from the PCB. For a prototype, record retention before and after at least 20 supported insertion/removal cycles and a one-week assembled dwell at the intended maximum service temperature, then repeat fit and retention checks. Those are proposed screening gates, not demonstrated tests or a service-life qualification. Reject loosening, crazing or chips; measure longer-term retention before making a durability claim. Frequent switch swapping is a poor intended use for this variant.
+
+### Additional budget row (JPY per two-Wing keyboard)
+
+| Option | Incremental parts / manufacture budget | Assembly, tuning, fallback |
+|---|---|---|
+| E-R with 1.50 mm PMMA, CO₂ laser-cut handed pair | **¥2,500–6,500 plate pair** ordinary cutting allowance; **add ¥1,000–3,000** for thickness sorting, fit inspection and finishing; same ¥200–600 spacers/long screws + ¥50–200 posts/shims | Same supports/ties as E-R; coupon and retention checks required; replace cracked plates; frequent switch removal discouraged |
+
+Basis: two roughly 123×122 mm blanks (about 0.030 m² before nesting), 42 aperture loops plus outlines/tie holes, approximately 3.5 m total finished-loop cutting path (17 mm pair: 3496.8 mm, from `plate.geojson`; excludes machine lead-ins). The range allocates ¥500–1,500 material/offcut use, ¥1,500–3,500 setup/cutting, and ¥500–1,500 coupon/rework allowance. These are analyst planning allocations, not vendor rates. The fabricator list above gives a **¥2,200 / 550×400 / 1.5 mm clear sheet** reference; its page is an undated legacy price list, not a verified current quote. Shared sheet/offcut costing supports the allocation, but a whole-sheet minimum, special thin cast stock, colour, low sorting yield or precision finishing can exceed it. The additional inspection allowance is also an estimate, not a guaranteed service. Excludes freight/tax, laboratory life testing and PCBA/base case, consistently with the main budget. Any B/E-F PMMA experiment uses the same plate-pair allowance plus its original pins, ties and capture hardware. No purchase is proposed. There is no assured cost advantage over an accepted aluminium pair once fit assurance and replacements are included.
+
+### Recommendation and reproduction impact
+
+Keep the six-way mount ranking and aluminium E-R recommendation unchanged. Acrylic sits alongside POM/PC as an optional polymer variant, with slightly greater nominal EI in this model and useful transparency/colour, but added brittle-edge and retention risks. Accept it only for a supported E-R prototype whose actual stock passes thickness/flatness and aperture inspection, whose switch coupon passes seating and removal checks, and whose owner accepts restricted switch swapping and replacement on damage. It is not an approved drop-in vendor order or a reason to adopt the B floating layout. A bare nominal-thickness laser-cut acrylic pair without those checks fails the evidence needed to claim Jade Pro fit.
+
+`study.py` now adds PMMA through the same material dictionary and emits the original-four and six-point B rows plus D, E-F and E-R PMMA rows for every pitch/hand. `summary.json` and all four `per-key.csv` files include them; existing options retain their original values and ordering relative to one another. Original aluminium geometry and review figures are unchanged. Run the existing reproduction commands above; `verify_study.py` also checks PMMA's independent EI and matching support distances. Physical acrylic acceptance remains unperformed.
+
+Supplement validation: regenerated `study.py` data and passed `verify_study.py` (all four variants; hashes, geometry, meshes, arithmetic and PMMA layout/EI checks). Compared against `2f62ad3`: all 76 original summary rows and 1,596 original per-key rows are exactly preserved; 20 PMMA summary rows and 420 PMMA per-key rows are added. The original report is an unchanged prefix; no geometry, floating tables, source hashes or review figures changed. `git diff --check` passed. Scratch validation output is under `.issue230-runtime/`.

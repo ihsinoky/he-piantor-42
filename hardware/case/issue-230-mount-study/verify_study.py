@@ -44,6 +44,12 @@ for d in sorted(P.glob('*mm-*')):
   assert math.isclose(float(r['bend_bracket_high_mm']),dist**3/(3*ei),rel_tol=1e-10)
   assert math.isclose(float(r['bend_bracket_high_mm']),8*float(r['bend_bracket_low_mm']),rel_tol=1e-10)
  assert all(len(v)==21 and len({r['key'] for r in v})==21 for v in opts.values())
+ # PMMA supplement: independently check modulus/web arithmetic and reuse of layouts.
+ pmma_ei=20000*pitch*1.2**3/12+3300*(pitch-14)*1.5**3/12
+ for added,reference in [('B_plate_tadpole_PMMA','B_plate_tadpole_aluminium'),('B_six_point_PMMA','B_six_point_aluminium'),('E_tray_ribs_PMMA_plate','E_tray_ribs_al_plate'),('D_legal_added_bosses_PMMA_plate','D_legal_added_bosses_al_plate'),('E_float_with_screw_fallback_PMMA','E_float_with_screw_fallback')]:
+  entry=next(x for x in summ if x['variant']==d.name and x['option']==added)
+  assert math.isclose(entry['EI_Nmm2'],pmma_ei,rel_tol=1e-12)
+  assert [(r['key'],r['nearest_support_mm']) for r in opts[added]]==[(r['key'],r['nearest_support_mm']) for r in opts[reference]]
  assert len(flo)==21*3*3
  for r in flo:assert float(r['sink_high_mm'])==2*float(r['sink_1N_mm'])
  if pitch==17:
