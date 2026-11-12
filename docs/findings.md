@@ -585,3 +585,33 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [power comparison](../hardware/kicad/qualification/issue-226-main-rev6/power-impact.json),
   [verification](../hardware/kicad/qualification/issue-226-main-rev6/verification.json).
 - **Promoted to:** Proposed D-036; no accepted process/decision change yet.
+
+### F-015 — Official Fly V4.2 STEP is envelope-grade, not mating-proof-grade
+
+- **Conclusion:** The official Fly Daughterboard V4.2 STEP is authoritative for
+  board outline, mounting holes and connector envelope/mouth/axis, but cannot
+  support a strict connector-internal mating proof: solid 42 (USB shell,
+  41.484 mm³) is an invalid BRep on direct import of the untouched file, and a
+  USB-IF nominal hollow plug overlaps modelled internal solids 41/42 starting
+  at 4.805 mm / 4.901 mm penetration (zero overlap through 4.75 mm), reaching
+  4.561 / 0.236 mm³ at the 6.20 mm nominal full-mate pose, growing linearly
+  with depth. Confidence: high — invalidity reproduced independently by PMO on
+  the pristine file; overlap curve sampled at 0.25 mm steps with bisected
+  onsets, identical at both case pitches.
+- **Conditions tried:** Issue #228 Phase C; STEP SHA-256
+  `5707b0866c41ebe3e1776fb918f55f2ae8503a37a938268fe3ef24b1c29c1ee7`
+  (68 solids, only #42 invalid). Case-side continuous insertion sweep over
+  30 mm travel: zero overlap with case/boards/hardware; the overlap is solely
+  with the connector's modelled internals. No healing, remodeling or exclusion
+  of the connector was performed at any point.
+- **Validity scope:** This finding concerns the supplied CAD model's fidelity,
+  not the physical board: the Fly is a commercial product and PO's two units
+  accept the included EZmate cable; USB-C receptacle mating on the real board
+  is to be confirmed physically at assembly. Envelope dimensions taken from
+  the same model were cross-validated against PO's viewer measurements
+  (21.2 mm outer-edge / 16.8 mm inner-edge hole readings both imply the
+  modelled 19.00 mm centres with Ø2.2 mm holes).
+- **Evidence:** `hardware/case/issue-228-final/{17mm,16mm}/usb-overlap-curve.json`,
+  `3d-check.json`, and the Phase C sections of the Issue #228 run report.
+- **Promoted to:** D-037 (PO accepted the qualification limit at the merge
+  gate, 2026-11-13).

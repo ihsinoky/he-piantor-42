@@ -1189,3 +1189,52 @@ contains regenerated manufacturing data, independent CAM readback, a rederived
 Gerber-frame CPL translation and [outline comparison PNG](../hardware/kicad/qualification/issue-226-main-rev6/outline-comparison.png).
 D-035 electrical/assembly and first-power conditions remain. This draft proposes
 only the Main outline revision; it authorizes no adoption, order, merge or release.
+
+## D-037 - Case outline smoothing and Fly Daughterboard seat (Issue #228)
+
+Status: **Adopted (2026-11-13, Issue #228, PR #229). PO approved the Phase A outline on 2026-11-12 and accepted the connector qualification limit below at the Phase C merge gate on 2026-11-13.**
+
+The case outline supersedes the #198 stepped south edge: each Wing's south edge
+is a single strictly convex quadratic Bézier sweep from the pinky side to the
+thumb side (R5 tangent fillets at both ends, curvature sign changes 0), and the
+north edge is a single curve with the former USB notch removed. The maximum
+south shelf depth is 16.80 mm in the pinky band only; a geometric lower bound of
+15.64 mm applies to any convex boundary satisfying pocket containment plus the
+2 mm wall, and PO accepted this trade-off at the Phase A gate. All other #198
+interior structure (Wing/Main pockets, split at X=3.5 mm, cable rack, Wing
+harness and its 200 mm storage) is unchanged; the case volume outside the
+daughterboard bay is identical to the #198/Phase B data (0 mm³ added/removed).
+
+The daughterboard seat is adapted from the UDB C3 to the real **Fly
+Daughterboard (Geon × Wolf, V4.2)**, dimensioned from the official STEP
+(PO-supplied; SHA-256 `5707b0866c41ebe3e1776fb918f55f2ae8503a37a938268fe3ef24b1c29c1ee7`):
+board 23.57 × 8.30 × 1.59 mm, mounting holes Ø2.2 mm at 19.00 mm spacing,
+USB-C mouth 0.235 mm proud of the board edge with its axis ≈3.3 mm above the
+board bottom, EZmate header hanging 1.45 mm below the bottom face. The seat
+moves to the north outer wall — at the former centre seat the receptacle face
+sat ≈20 mm behind the wall and a USB-C plug could not reach it (PO finding,
+2026-11-13). The mouth now sits 0.30 mm inside the outer wall surface behind a
+W16 mm open-top opening. Fixings are the Fly's 2× M2 (MH1/MH2, Ø4.5 mm bosses),
+so total PCB fixing points change from 15 to 13. A continuous plug-insertion
+sweep (USB-IF nominal plug, 30 mm travel) shows zero interference with case,
+boards and hardware at both pitches, reaching 6.20 mm penetration. The included
+170 mm EZmate cable is modelled end-to-end (73.9 mm route plus a central
+service loop), with all clearances > 0.20 mm. The full retained #198
+verification suite passes at both 17 mm and 16 mm pitches; production data is
+`hardware/case/issue-228-final/`.
+
+**Accepted qualification limit.** The strict mating proof against the official
+STEP's connector internals cannot pass, because the supplied model itself is
+defective (Finding F-015): its USB shell solid is an invalid BRep, and a
+USB-IF nominal plug overlaps the modelled internal solids beyond 4.805 mm
+penetration (4.80 mm³ at the 6.20 mm full-mate pose, growing linearly — the
+signature of envelope-modelled internals, not of seat misalignment; the
+case-side insertion path is completely clear). PO accepts this limit and
+adopts the design on the following basis: the case design depends only on the
+receptacle's external envelope, mouth plane and axis, which are measured from
+the model and cross-validated against PO's own viewer measurements (hole
+spacing 19.00 mm); the physical Fly is a commercial product whose receptacle
+accepts standard USB-C plugs by design; and physical mating is confirmed with
+the real board at assembly. This decision authorizes no order or print; the
+print pitch decision (MS4, 16/17 mm) and the case print GO remain separate PO
+gates.
