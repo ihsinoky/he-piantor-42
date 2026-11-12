@@ -1,4 +1,6 @@
 {
+  "connector_internal_zero_overlap": false,
+  "phase_c_passed": false,
   "main_component_minimum": {
     "a": "C27",
     "b": "C28",
@@ -41,13 +43,13 @@
     "tray-left": {
       "valid": true,
       "solids": 1,
-      "faces": 305,
-      "edges": 824,
-      "triangles": 63230,
+      "faces": 272,
+      "edges": 735,
+      "triangles": 59098,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.00021819444497970055,
+      "mesh_volume_relative_error": 0.0002390553964951048,
       "size_mm": [
-        149.0205239252,
+        149.02052392520002,
         146.06899176301698,
         15.200000199999998
       ]
@@ -55,11 +57,11 @@
     "tray-right": {
       "valid": true,
       "solids": 1,
-      "faces": 301,
-      "edges": 824,
-      "triangles": 55970,
+      "faces": 270,
+      "edges": 741,
+      "triangles": 51844,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.00021708460788924283,
+      "mesh_volume_relative_error": 0.0002271026190925665,
       "size_mm": [
         142.02052392526,
         146.06899176301698,
@@ -81,10 +83,41 @@
       ]
     }
   },
-  "assembly_solids": 114,
-  "assembly_broadphase_candidate_pairs": 207,
+  "assembly_solids": 183,
+  "assembly_broadphase_candidate_pairs": 423,
   "unexpected_overlaps": [],
-  "intended_mating_contacts": [],
+  "intended_mating_contacts": [
+    {
+      "a": "Fly-official-41",
+      "b": "USB-reference-shell",
+      "volume_mm3": 4.561305120785465
+    },
+    {
+      "a": "Fly-official-42",
+      "b": "USB-reference-shell",
+      "volume_mm3": 0.23601220425377156
+    },
+    {
+      "a": "Fly-official-56",
+      "b": "Fly-official-57",
+      "volume_mm3": 0.06932539816339958
+    },
+    {
+      "a": "Fly-official-56",
+      "b": "Fly-official-58",
+      "volume_mm3": 0.06932539816339964
+    },
+    {
+      "a": "Fly-official-67",
+      "b": "EZmate-Fly-plug",
+      "volume_mm3": 1.534705908392862
+    },
+    {
+      "a": "Main-envelope-J4",
+      "b": "EZmate-Main-plug",
+      "volume_mm3": 0.23634199999999925
+    }
+  ],
   "mount_inverse_error_mm": 1.0048591735576161e-14,
-  "fixed_points_with_boss": 15
+  "fixed_points_with_boss": 13
 }

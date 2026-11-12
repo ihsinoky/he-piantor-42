@@ -32,15 +32,6 @@ def check(pitch):
     for a,b,c in zip(south['path_xy_mm'],south['path_xy_mm'][1:],south['path_xy_mm'][2:]):
         cross=(b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0])
         turns.append(1 if cross>0 else -1 if cross<0 else 0)
-    pcb_source=HERE.parents[2]/'hardware/kicad/qualification/issue-196-main-rev4-phasea2/inputs/udb/c3.kicad_pcb'
-    text=pcb_source.read_text()
-    def position(ref):
-        for block in text.split('(module ')[1:]:
-            if re.search(r'\(fp_text reference '+ref+r'\s',block):
-                m=re.search(r'\(at ([0-9.-]+) ([0-9.-]+)',block)
-                return tuple(map(float,m.groups()))
-        raise ValueError(ref)
-    j1,j2=position('J1'),position('J2');usb_center=j1[0]-j2[0]
     result=dict(pitch_mm=pitch,pocket_outside_mm2=cavity.difference(outer).area,
                 minimum_wall_mm=cavity.boundary.distance(outer.boundary),
                 board_clearance_outside_mm2={k:g.buffer(.502,join_style=2).difference(outer).area for k,g in boards.items()},
@@ -49,7 +40,7 @@ def check(pitch):
                 shelf_upper_bound_mm=max(r[1] for r in profile)+path.length/40000,
                 shelf_max_witness=max(profile,key=lambda r:r[1]),
                 design=design,outer_xy_mm=list(outer.exterior.coords),cavity_xy_mm=list(cavity.exterior.coords),
-                usb_center_x_mm=usb_center,usb_slot_xy_mm=list(usb_access(outer,usb_center).exterior.coords),
+                usb_opening_check='See Phase C 3d-check.json and exported assembly; Phase B provisional slot superseded',
                 added_area_mm2=outer.difference(cavity.buffer(2,join_style=2)).area)
     if pitch==17:
         approved=json.loads((HERE.parent/'issue-228-outline/17mm-outline.json').read_text())

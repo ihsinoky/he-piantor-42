@@ -29,11 +29,12 @@ def verify(out):
         results[stem]=dict(valid=True,solids=1,faces=len(s.faces()),edges=len(s.edges()),triangles=n,nonmanifold_edges=bad,mesh_volume_relative_error=err,size_mm=dims)
     assembly=import_step(out/'assembly.step')
     # Keep named child solids to distinguish designed mating contacts from collisions.
-    def leaves(s):
+    def leaves(s,owner=None):
+        label=s.label
+        if not label or label.lower() in ('solid','compound','assembly','part'):label=owner
         cs=list(s.children) if hasattr(s,'children') else []
-        if cs:
-            return [x for c in cs for x in leaves(c)]
-        return [(s.label,s)]
+        if cs:return [x for c in cs for x in leaves(c,label)]
+        return [(label,s)]
     raw=leaves(assembly)
     items=[]
     for label,s in raw:
@@ -50,6 +51,8 @@ def verify(out):
             if volume>1e-4:
                 # GH endpoint intentionally terminates inside its own mated reservation.
                 own=(na=='GH-left' and nb=='Main-envelope-J2') or (nb=='GH-left' and na=='Main-envelope-J2') or (na=='GH-right' and nb=='Main-envelope-J3') or (nb=='GH-right' and na=='Main-envelope-J3')
+                # Preserve official connector internals; report mating reservations separately.
+                own = own or (na.startswith('Fly-official-') and nb.startswith('Fly-official-')) or (na=='USB-reference-shell' and nb in ('Fly-official-41','Fly-official-42')) or (nb=='USB-reference-shell' and na in ('Fly-official-41','Fly-official-42')) or ({na,nb}=={'EZmate-Fly-plug','Fly-official-67'}) or ({na,nb}=={'EZmate-Main-plug','Main-envelope-J4'}) or ('EZmate-170mm-route' in (na,nb) and (na.startswith('EZmate-') and nb.startswith('EZmate-')))
                 (contacts if own else overlaps).append(dict(a=na,b=nb,volume_mm3=volume))
     assert not overlaps,overlaps
     inverse_error=0.
@@ -64,9 +67,9 @@ def verify(out):
             inverse_error=max(inverse_error,math.dist(local,[float(r['x_mm']),float(r['y_mm'])]))
     assert inverse_error<1e-10
     refs={(m['board'],m['ref']) for m in d['mounts']}
-    expected={('main',r) for r in ('H1','H2','H3')}|{('udb',f'MH{i}') for i in range(1,5)}|{(f'wing_{s}',f'H{i}') for s in ('left','right') for i in range(1,5)}
-    assert d['fixed_point_count']==15 and refs==expected,refs^expected
-    assert len(d['boss_check'])==15 and all(b['material_at_boss_wall'] and b['pilot_open'] for b in d['boss_check'])
+    expected={('main',r) for r in ('H1','H2','H3')}|{('fly',f'MH{i}') for i in range(1,3)}|{(f'wing_{s}',f'H{i}') for s in ('left','right') for i in range(1,5)}
+    assert d['fixed_point_count']==13 and refs==expected,refs^expected
+    assert len(d['boss_check'])==13 and all(b['material_at_boss_wall'] and b['pilot_open'] for b in d['boss_check'])
     assert {(b['board'],b['ref']) for b in d['boss_check']}==expected
     assert d['palm_high_wall_overlap_mm2']<1e-8
     assert d['keycap_wall_min_mm']>=.25-1e-8
@@ -74,6 +77,8 @@ def verify(out):
     assert all(p['overlap_mm2']<1e-8 for p in cp)
     closest=min(cp,key=lambda p:p['gap_mm'])
     assert closest['gap_mm']>=.3-1e-8
-    result=dict(main_component_minimum=closest,main_component_pairs_checked=len(cp),wing_under_component_to_floor_min_mm=4.6,passed=True,pitch_mm=d['pitch_mm'],exports=results,assembly_solids=len(items),assembly_broadphase_candidate_pairs=checked,unexpected_overlaps=overlaps,intended_mating_contacts=contacts,mount_inverse_error_mm=inverse_error,fixed_points_with_boss=len(d['boss_check']))
+    assert d['fly']['cable']['route_length_mm']+30<=170
+    assert d['fly']['cable']['minimum_mm']>.2
+    result=dict(connector_internal_zero_overlap=not bool(d['fly']['usb']['connector_internal_overlaps']),phase_c_passed=assembly.is_valid and not bool(d['fly']['usb']['connector_internal_overlaps']),main_component_minimum=closest,main_component_pairs_checked=len(cp),wing_under_component_to_floor_min_mm=4.6,passed=True,pitch_mm=d['pitch_mm'],exports=results,assembly_solids=len(items),assembly_broadphase_candidate_pairs=checked,unexpected_overlaps=overlaps,intended_mating_contacts=contacts,mount_inverse_error_mm=inverse_error,fixed_points_with_boss=len(d['boss_check']))
     (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
 if __name__=='__main__':verify(Path(sys.argv[1]) if len(sys.argv)>1 else Path(__file__).resolve().parent/'17mm')

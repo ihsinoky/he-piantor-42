@@ -1,4 +1,6 @@
 {
+  "connector_internal_zero_overlap": false,
+  "phase_c_passed": false,
   "main_component_minimum": {
     "a": "C27",
     "b": "C28",
@@ -7,7 +9,7 @@
   },
   "main_component_pairs_checked": 1711,
   "wing_under_component_to_floor_min_mm": 4.6,
-  "passed": true,
+  "passed": false,
   "pitch_mm": 16,
   "exports": {
     "splice-1": {
@@ -41,13 +43,13 @@
     "tray-left": {
       "valid": true,
       "solids": 1,
-      "faces": 307,
-      "edges": 830,
-      "triangles": 63178,
+      "faces": 254,
+      "edges": 681,
+      "triangles": 58962,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.0002320850622285801,
+      "mesh_volume_relative_error": 0.0002532921620584607,
       "size_mm": [
-        142.31799781779998,
+        142.3179978178,
         139.55756390259302,
         15.200000199999998
       ]
@@ -55,11 +57,11 @@
     "tray-right": {
       "valid": true,
       "solids": 1,
-      "faces": 303,
-      "edges": 830,
-      "triangles": 55918,
+      "faces": 250,
+      "edges": 681,
+      "triangles": 51702,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.00024171839815374902,
+      "mesh_volume_relative_error": 0.00025399004204025794,
       "size_mm": [
         135.31799781788,
         139.55756390259302,
@@ -81,10 +83,42 @@
       ]
     }
   },
-  "assembly_solids": 114,
-  "assembly_broadphase_candidate_pairs": 207,
+  "assembly_solids": 183,
+  "assembly_broadphase_candidate_pairs": 423,
   "unexpected_overlaps": [],
-  "intended_mating_contacts": [],
+  "intended_mating_contacts": [
+    {
+      "a": "Fly-official-41",
+      "b": "USB-reference-shell",
+      "volume_mm3": 4.561305120785462
+    },
+    {
+      "a": "Fly-official-42",
+      "b": "USB-reference-shell",
+      "volume_mm3": 0.23601220425377167
+    },
+    {
+      "a": "Fly-official-56",
+      "b": "Fly-official-57",
+      "volume_mm3": 0.0693253981633996
+    },
+    {
+      "a": "Fly-official-56",
+      "b": "Fly-official-58",
+      "volume_mm3": 0.06932539816339964
+    },
+    {
+      "a": "Fly-official-67",
+      "b": "EZmate-Fly-plug",
+      "volume_mm3": 1.5347059083928307
+    },
+    {
+      "a": "Main-envelope-J4",
+      "b": "EZmate-Main-plug",
+      "volume_mm3": 0.23634199999999925
+    }
+  ],
   "mount_inverse_error_mm": 7.944109290391274e-15,
-  "fixed_points_with_boss": 15
+  "fixed_points_with_boss": 13,
+  "checkpoint_recheck_failure": "PCB/case 0.2986286416 mm3 and Fly washer/case 0.0780902693 mm3 per half; source tree late protected-Wing clipping was not represented by previous PASS output."
 }

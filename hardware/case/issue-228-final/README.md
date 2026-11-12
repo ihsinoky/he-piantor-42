@@ -1,43 +1,62 @@
-# Issue #228 — Phase B production case data
+# Issue #228 — Phase C Fly candidate (BLOCKED)
 
-Consumes the ROUND 4 silhouette approved by the PO on 2026-11-12, including
-its accepted shelf trade-off. `17mm/` is primary; `16mm/` is independently
-fitted from its own Wing/pocket geometry. Phase A remains reproducible in
-`../issue-228-outline/` and is not modified by this generator.
+Extends the PO-approved Phase A/B production tree. Both pitches have a local
+north-wall Fly V4.2 seat; the receptacle face is 0.30 mm inside the outer wall.
+PCB bottom remains Z10 mm. Two M2x6 screws / 0.5 mm insulating washers use
+Ø4.5 mm bosses and Ø1.7 mm pilots, on 19 mm centers. There are **13 PCB fixing
+points** (Main 3 + Wings 8 + Fly 2); four separate splice screws remain.
 
-- `inputs/`: byte-identical copies of the #198 final Rev.3 CSVs and geometry.
-- `generate.py`, `base.py`, `details.py`: full #198 interior design with the
-  approved outline integrated. `details.py` changes only STL tessellation.
-- `outline.py`: approved 17 mm coefficients; a per-input cached SLSQP
-  minimum-area fit of the same quadratic/R5 family for the other pitch.
-  The seed uses coefficients in that pitch's own envelope frame, never
-  copied 17 mm XY coordinates. North controls follow each PCB's datums;
-  the USB opening follows that outline and the unchanged seat datum.
-- `native_curves.py`: exact quadratic Bézier and circular BRep edges.
-  Analytic curves replace thousands of sampled edges; clipped endpoints
-  project onto the same analytic curves at every height. See the report
-  for measured deviation, rejected spline attempt and mesh refinement.
-- `verify.py`: every #198 assertion retained, plus face/edge count reporting.
-- `check_outline.py`: independent CSV reconstruction, containment, walls,
-  curvature, dense shelf profiles and the 17 mm Phase A equality check.
-- `check_3d.py`: exported STEP sections, USB height/material probes, BRep
-  counts, and a top-view PNG rendered from the actual assembly tessellation.
+**This candidate does not pass the complete Phase C acceptance gate.** The
+PO-supplied official STEP has an invalid USB shell (solid index 42 on direct
+import). Its modeled internals also overlap the hollow reference USB plug at
+nominal 6.2 mm engagement. The model is preserved without healing or remodeling.
+`check_3d.py` writes its measurements and PNGs, then exits nonzero for these
+blockers. A passed `verify.py` means the retained #198 checks with explicitly
+reported connector mating reservations; see `phase_c_passed` as well.
 
-Each pitch contains five printable parts (`tray-left`, `tray-right`,
-`splice-1`, `splice-2`, `cable-rack`) in both STEP and STL, plus
-`assembly.step`, `harness.step`, `storage-200mm.step`, `dimensions.json`,
-`verification.json`, `exports-sha256.json`, `review.svg`,
-`outline-check.json`, `shelf-profile.csv`, `3d-check.json` and
-`assembled-top.png`. Assembly includes reference electronics, hardware and
-harness envelopes; the storage STEP is the unchanged separate service-loop
-reservation. Print only the five printable parts.
+The source STEP is copied byte-for-byte to
+`inputs/TheFly_DaughterBoard_V4.2.stp`; assembly uses its complete 68 solids with
+only a rigid Z180 rotation and translation. `fly.py` measures the PCB and holes,
+creates the local recess/bosses, the USB reference plug, two EZmate reservations,
+and an R5 / Ø2 mm cable route. Actual Rev.6 PCB data verifies Main J4's unchanged
+position and 781710004 identity. Main's inherited board envelope is conservative
+at the Rev.6 chamfered corners; its pocket and all other reference components
+remain unchanged. J4 uses the official Fly's identical header solid aligned to
+the Rev.6 pad row, top face up.
 
-The pocket, all 15 fixing points, harness, rack, X=3.5 mm split, splice
-plates, heights and daughterboard seat are unchanged. USB is provisional:
-W12 × H4 mm, open top Z=11.2..15.2, at the existing X=-0.002 mm seat datum.
-The Fly seat rework is a future task.
+The front recess follows the real PCB scallops and lobes with 0.5 mm nominal
+clearance, clipped to preserve the existing Wing walls; the 16 mm pitch
+locally reduces the Fly edge clearance. Wall material beside the port is retained. The opening is W16, starts at Z9.7, and opens through the Z15.2 case top. Its cut
+ends at Z16.7 above the case. Reference plug: 8.25 × 2.40 mm hollow rounded shell,
+0.20 mm wall, 6.65 mm exposed length; 12 × 6 mm overmold, 15 mm long; Ø4 mm cable
+exit, 25 mm long. A larger 8.9 × 3.2 mm shell travel envelope checks the requested
+case clearance. A continuous 30 mm insertion sweep checks every intermediate
+position against case, PCB, hardware and other assembly parts. Intended connector
+internals are reported separately and prevent a strict mating pass.
 
-Reproduce from the checkout root, keeping every writable runtime path local:
+EZmate 781720004 reservations use 5.0 × 3.5 × 1.3 mm housing and a 1.9 mm mated
+stack from Molex drawings 781720000-SD / 781710000-SD. Fly mates from below;
+Main J4 mates from above. Routed lengths are 73.871 / 72.499 mm (17 / 16 pitch),
+with 30 mm service allowance and 66.129 / 67.501 mm remaining budget. The exported
+solid is the nominal route, not a connected model of all 170 mm including stored
+slack. Placement of all residual cable slack is still unqualified.
+
+The approved outline, Wing/Main pockets, split at X3.5, splice plates, Wing
+harness, storage rack and heights elsewhere are retained. `check_scope.py`
+compares the trays against Phase B commit e54f583c: zero added/removed volume
+outside the daughterboard bay, and zero added/removed volume in the existing
+Wing clearance-plus-2-mm wall reservations. It also compares the unchanged auxiliary STEP
+DATA records, normalizing only assembly occurrence serial numbers.
+
+Each pitch has STEP/STL for the five printable parts, `assembly.step`,
+`harness.step`, `storage-200mm.step`, `fly-harness-and-usb.step`, dimension,
+verification, outline, scope and 3D JSON, shelf CSV, review SVG, export manifest,
+`assembled-top.png` and `north-wall-closeup.png`. The PNGs use actual exported
+BRep triangles; the invalid official USB shell is shown using its actual BRep
+edges because that source solid cannot tessellate. Only the five printable parts
+are printable; the assembly is a blocked review candidate.
+
+Reproduce from the checkout root; all writable runtime paths remain local:
 
 ```bash
 mkdir -p .issue228-runtime/tmp .issue228-runtime/mplconfig
@@ -45,20 +64,18 @@ export TMPDIR="$PWD/.issue228-runtime/tmp"
 export XDG_CACHE_HOME="$PWD/.issue228-runtime/cache"
 export MPLCONFIGDIR="$PWD/.issue228-runtime/mplconfig"
 export PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
-# Use the prepared local .issue228-runtime/cad-venv, or create a local venv
-# and install requirements.txt into it. The prepared venv reads existing
-# shared CAD packages and .issue228-runtime/pydeps through cad-runtime.pth.
 CAD_PY="$PWD/.issue228-runtime/cad-venv/bin/python"
 "$CAD_PY" hardware/case/issue-228-final/check_outline.py
 for pitch in 17 16; do
   "$CAD_PY" hardware/case/issue-228-final/generate.py --pitch "$pitch"
-  "$CAD_PY" hardware/case/issue-228-final/verify.py "hardware/case/issue-228-final/${pitch}mm"
+done
+GIT_DIR=./.issue228-runtime/git "$CAD_PY" hardware/case/issue-228-final/check_scope.py
+for pitch in 17 16; do
+  # Expected nonzero: writes audit/PNGs, then reports the two reference blockers.
   "$CAD_PY" hardware/case/issue-228-final/check_3d.py "$pitch"
+  "$CAD_PY" hardware/case/issue-228-final/verify.py "hardware/case/issue-228-final/${pitch}mm"
 done
 ```
 
-`generate.py` updates its baseline export hashes; `check_3d.py` creates
-additional audit artifacts and refreshes the hashes to cover those files. Base STEP caches stay under `.issue228-runtime/`; never use `/tmp`.
-See [Phase B report](../../../.issue228-runtime/REPORT.md) for all numeric
-checks, limitations and export inventory. This is nominal mechanical CAD
-with the same component-envelope qualifications as #198.
+See [Phase C report](../../../.issue228-runtime/REPORT.md) for exact results and
+remaining blockers. No push or PR changes; PR #229 remains held.

@@ -63,21 +63,24 @@ def finish(args,ctx):
         feet.append(dict(xy=[x,y],diameter=8,height=6,seat_depth=.4))
     print('Feet done',flush=True)
     # All PCB screws: M2x6 plastic thread-forming, with 0.5 insulating washers.
-    # UDB uses nylon screws and washers on all four PTH/NPTH sites.
+    # Fly uses the same M2x6 / 0.5 mm insulating washer scheme at two NPTH sites.
     for h in holes:
-        x,y=h['xy'];thick=P['udb_thickness'] if h['board']=='udb' else P['pcb_thickness']
-        z=P['pcb_bottom']+thick
-        washer=cylinder(x,y,1.75 if h['board']=='udb' else 2.25,z,.5).cut(cylinder(x,y,1.1,z,.5))
+        x,y=h['xy'];thick=1.59 if h['board']=='fly' else P['pcb_thickness']
+        z=(ctx['fly']['board_bottom'] if h['board']=='fly' else P['pcb_bottom'])+thick
+        washer=cylinder(x,y,2.25,z,.5).cut(cylinder(x,y,1.1,z,.5))
         screw=cylinder(x,y,.8,z+.5-6,6).fuse(cylinder(x,y,1.7,z+.5,1.6))
         hardware['washer-'+h['board']+'-'+h['ref']]=washer
         hardware['screw-'+h['board']+'-'+h['ref']]=screw
-        h.update(screw='M2x6 nylon thread-forming' if h['board']=='udb' else 'M2x6 polymer-compatible thread-forming',washer_thickness=.5,engagement_mm=6-thick-.5,seat_z_mm=z)
+        h.update(screw='M2x6 nylon thread-forming' if h['board']=='fly' else 'M2x6 polymer-compatible thread-forming',washer_thickness=.5,engagement_mm=6-thick-.5,seat_z_mm=z)
     parts['tray-left']=Compound(children=list(body.intersect(prism(box(-300,-200,3.5,200),-1,40))))
     parts['tray-right']=Compound(children=list(body.intersect(prism(box(3.5,-200,300,200),-1,40))))
     # Main placement is checked against every final-board footprint by base.generate.
     components={};component_data=[]
     bomfile=PB/'main-bom.csv';ctx['inputs'].append(bomfile)
     bom={r['ref']:r for r in rows(bomfile)}
+    rev6bom=ROOT/'hardware/kicad/qualification/issue-226-main-rev6/main-bom.csv'
+    ctx['inputs'].append(rev6bom)
+    bom['J4']=next(r for r in rows(rev6bom) if r['ref']=='J4')
     for c in ctx['plan']['main']['placements']:
         ref=c['ref']
         if ref.startswith('H'):continue
@@ -89,7 +92,10 @@ def finish(args,ctx):
             x,y=c['at_mm'];g=g.union(box(x-2.15,y-2.15,x+2.15,y+2.15));h=2.3
             basis='Coilcraft XFL4020 2.1 max +0.2 solder; 4.3 square body'
         if ref=='U6':h=1.2;basis='TI RNM0015A 1.0 max +0.2 solder'
-        components[ref]=prism(g,top,h)
+        if ref=='J4':
+            from fly import main_header
+            components[ref],g,h,basis=main_header(ctx)
+        else:components[ref]=prism(g,top,h)
         component_data.append(dict(ref=ref,part_number=bom.get(ref,{}).get('part_number'),height_mm=h,basis=basis,xy=coords(g)))
     print('Components done',flush=True)
     routes=[];cables={}
@@ -145,8 +151,8 @@ def finish(args,ctx):
     for side,clip in [('left',box(-300,-200,3.5,200)),('right',box(3.5,-200,300,200))]:
         parts['tray-'+side]=Compound(children=list(body.intersect(prism(clip,-1,50))))
     print('Storage done',flush=True)
-    # Final fixed points: Main 3 + UDB 4 + Wing 4 per side = 15, each with a boss and open pilot.
-    assert len(holes)==15,len(holes)
+    # Main 3 + Fly 2 + Wing 4 per side = 13 PCB fixing points.
+    assert len(holes)==13,len(holes)
     for side,v in variants.items():
         assert math.dist(v['connector']['assembly'],[-27 if side=='left' else 27,-41])<1e-9
         assert math.dist(v['harness']['waypoints_assembly'][-1],v['connector']['assembly'])<1e-9
@@ -157,7 +163,9 @@ def finish(args,ctx):
         pilot_open=not any(s.is_inside(Vector(x,y,6)) for k in ('tray-left','tray-right') for s in parts[k].solids())
         top_z=max(s.bounding_box().max.Z for s in owner) if owner else None
         assert len(owner)==1 and pilot_open,(h['board'],h['ref'])
-        bosses.append(dict(board=h['board'],ref=h['ref'],xy=[x,y],boss_diameter=h['boss_diameter'],pilot_diameter=P['screw_pilot_diameter'],boss_top_z_mm=P['pcb_bottom'],material_at_boss_wall=True,pilot_open=pilot_open))
+        bosses.append(dict(board=h['board'],ref=h['ref'],xy=[x,y],boss_diameter=h['boss_diameter'],pilot_diameter=P['screw_pilot_diameter'],boss_top_z_mm=ctx['fly']['board_bottom'] if h['board']=='fly' else P['pcb_bottom'],material_at_boss_wall=True,pilot_open=pilot_open))
+    from fly import harness
+    fly_parts,fly_data=harness(ctx,body,parts,components,cables,hardware)
     printing=[]
     for name,s in parts.items():
         assert s.is_valid and len(s.solids())==1,(name,len(s.solids()))
@@ -169,14 +177,15 @@ def finish(args,ctx):
     for name,s in hardware.items():s.label=name
     for name,s in cables.items():s.label=name
     for name,s in components.items():s.label='Main-envelope-'+name
-    assembly=Compound(children=list(parts.values())+ctx['board_solids']+list(hardware.values())+list(cables.values())+list(components.values())+list(wing_components.values()))
+    assembly=Compound(children=list(parts.values())+ctx['board_solids']+list(hardware.values())+list(cables.values())+list(components.values())+list(wing_components.values())+list(fly_parts.values()))
     export_step(assembly,out/'assembly.step')
+    export_step(Compound(children=list(fly_parts.values())),out/'fly-harness-and-usb.step')
     export_step(Compound(children=list(cables.values())),out/'harness.step')
     export_step(Compound(children=list(slack_models.values())),out/'storage-200mm.step')
     clearances=[dict(a=a,b=b,gap_mm=g.distance(h),overlap_mm2=g.intersection(h).area) for (a,g),(b,h) in itertools.combinations(boards.items(),2)]
     assert all(x['overlap_mm2']<1e-8 for x in clearances)
     for h in holes:assert boards[h['board']].covers(Point(*h['xy']).buffer(h['diameter']/2))
-    data=dict(schema='issue198-final-v1',pitch_mm=args.pitch,source='Wing Rev3 final CSV (Issue #200, PR #201, D-034); harness 200mm final (PO 2026-11-07)',parameters={**P,'palm_offset_mm':args.palm_offset},wing_transforms=ctx['transforms'],boards={k:coords(v) for k,v in boards.items()},mounts=holes,boss_check=bosses,fixed_point_count=len(holes),joints=joints,feet=feet,main_components=component_data,routes=routes,storage_200mm=slack_data,pcb_clearances=clearances,printing=printing,palm_high_wall_overlap_mm2=ctx['upper'].intersection(unary_union(ctx['palms'])).area,keycap_wall_min_mm=ctx['upper'].distance(ctx['key_union']),inputs_sha256={str(p.relative_to(ROOT)):sha(p) for p in sorted(set(ctx['inputs']))},assembly_solid_count=sum(len(s.solids()) for s in list(parts.values())+ctx['board_solids']+list(hardware.values())+list(cables.values())+list(components.values())+list(wing_components.values())),surface_approximation_mm=.002,fasteners=dict(pcb_screws=len(holes),pcb_insulating_washers=len(holes),splice_screws=4,splice_screw_spec='M2x8 thread-forming, core diameter1.6 in CAD; thread crest2.0 nominal',rubber_feet=len(feet)),height_sources=dict(L1='https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xfl/xfl4020/',U6='https://www.ti.com/lit/ds/symlink/tps63070.pdf'))
+    data=dict(fly=fly_data,schema='issue198-final-v1',pitch_mm=args.pitch,source='Wing Rev3 final CSV (Issue #200, PR #201, D-034); harness 200mm final (PO 2026-11-07)',parameters={**P,'palm_offset_mm':args.palm_offset},wing_transforms=ctx['transforms'],boards={k:coords(v) for k,v in boards.items()},mounts=holes,boss_check=bosses,fixed_point_count=len(holes),joints=joints,feet=feet,main_components=component_data,routes=routes,storage_200mm=slack_data,pcb_clearances=clearances,printing=printing,palm_high_wall_overlap_mm2=ctx['upper'].intersection(unary_union(ctx['palms'])).area,keycap_wall_min_mm=ctx['upper'].distance(ctx['key_union']),inputs_sha256={str(p.relative_to(ROOT)):sha(p) for p in sorted(set(ctx['inputs']))},assembly_solid_count=sum(len(s.solids()) for s in list(parts.values())+ctx['board_solids']+list(hardware.values())+list(cables.values())+list(components.values())+list(wing_components.values())+list(fly_parts.values())),surface_approximation_mm=.002,fasteners=dict(pcb_screws=len(holes),pcb_insulating_washers=len(holes),splice_screws=4,splice_screw_spec='M2x8 thread-forming, core diameter1.6 in CAD; thread crest2.0 nominal',rubber_feet=len(feet)),height_sources=dict(L1='https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xfl/xfl4020/',U6='https://www.ti.com/lit/ds/symlink/tps63070.pdf'))
     save(out/'dimensions.json',data)
     # Top view with route, joint and rubber-foot locations, no external rendering dependency.
     x0,y0,x1,y1=outer.bounds

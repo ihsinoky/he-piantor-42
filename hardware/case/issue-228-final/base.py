@@ -60,7 +60,7 @@ def rect_key(x,y,a,w):
 
 def generate(args):
     out=args.out.resolve();out.mkdir(parents=True,exist_ok=True)
-    inputs=[args.geometry, HERE/'outline.py', HERE/'native_curves.py']
+    inputs=[args.geometry, HERE/'outline.py', HERE/'native_curves.py', HERE/'fly.py', HERE/'details.py']
     variants={v['side']:v for v in json.loads(args.geometry.read_text())['variants'] if v['pitch_mm']==args.pitch}
     def use(p): inputs.append(p);return p
     plan=json.loads(use(A2/'geometry-plan.json').read_text())
@@ -114,7 +114,8 @@ def generate(args):
         palms.append(palm)
         gh=variants[side]['connector']['assembly']
         wings[side]=dict(gh=gh,south_local_y=south,palm_local_y_max=south+8)
-    # Source UDB C3: local copy pinned to upstream commit; no schematic image scaling.
+    # Historical UDB C3 XY defines the approved Phase A/B pocket/outline input only.
+    # Phase C replaces its assembly solid and all fixings below; do not move the outline.
     ufile=use(A2/'inputs/udb/c3.kicad_pcb');udb=read_board(ufile)
     mods={ref(n):n for n in children(udb,'module')}
     anchor=xy(child(mods['J2'],'at'))
@@ -167,6 +168,9 @@ def generate(args):
     # Open north U-slot instead of a bridged aperture: no unsupported roof.
     usb_slot=usb_access(outer,usb_front[0])
     upper=upper.difference(usb_slot)
+    from fly import prepare
+    fly = prepare(outer, inputs, boards)
+    holes[:] = [h for h in holes if h['board'] != 'udb'] + fly['holes']
     # Low rim, south flush at Wing top. USB open-top slot begins at flush rim top (11.2 by default).
     top=P['pcb_bottom']+P['pcb_thickness']
     cache_key=hashlib.sha256((sha(Path(__file__))+sha(HERE/'outline.py')+sha(HERE/'native_curves.py')+str(args.palm_offset)+''.join(sha(p) for p in sorted(set(inputs)))).encode()).hexdigest()
@@ -179,9 +183,16 @@ def generate(args):
         if not upper.is_empty:body=body.fuse(prism(upper,top+args.palm_offset,P['upper_wall_height']-args.palm_offset))
         print('Adding bosses', flush=True)
         for h in holes:
+            if h['board']=='fly':continue
             x,y=h['xy'];boss=cylinder(x,y,h['boss_diameter']/2,P['bottom'],P['pcb_bottom']-P['bottom'])
             body=body.fuse(boss)
             body=body.cut(cylinder(x,y,P['screw_pilot_diameter']/2,P['bottom'],P['pcb_bottom']-P['bottom']+.01))
+        # Phase C changes stay within the daughterboard bay; floor/perimeter retained.
+        body=body.cut(fly['seat_cut']).cut(fly['opening_cut'])
+        for h in fly['holes']:
+            x,y=h['xy']
+            body=body.fuse(cylinder(x,y,h['boss_diameter']/2,2,fly['board_bottom']-2).cut(fly['protected']))
+            body=body.cut(cylinder(x,y,P['screw_pilot_diameter']/2,2,fly['board_bottom']-2+.01).cut(fly['protected']))
         # Narrow load-spreading ribs directly under Main J2/J3, no bottom components on Main.
         ribs=[]
         for name in ['J2','J3']:
@@ -192,9 +203,13 @@ def generate(args):
         assert body.is_valid and len(body.solids())==1
         print('Tray done',flush=True)
         export_step(body,cache)
+    boards.pop('udb')
+    boards['fly']=fly['polygon']
     # PCB mounting holes are represented in assembly too.
     board_solids=[]
     for name,g in boards.items():
+        if name=='fly':
+            board_solids.append(fly['solid']);continue
         thick=P['udb_thickness'] if name=='udb' else P['pcb_thickness']
         s=prism(g,P['pcb_bottom'],thick)
         for h in holes:
