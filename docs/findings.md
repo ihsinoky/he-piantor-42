@@ -550,3 +550,38 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [Rev.2 panel転写照合](../hardware/kicad/qualification/issue-194-wing-rev2/panel-verification.json)、
   [Rev.2 CAM/BOM/CPL・面別点数](../hardware/kicad/qualification/issue-194-wing-rev2/cam-verification.json)。
 - **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
+
+### F-014 — Main tip removal requires plane setback despite distant routes
+
+- **Conclusion:** All three Main Rev.5 60° tips can accept 4 mm equal-leg chamfers
+  while preserving footprints, routes, vias, holes and Ø5 mm mounting support.
+  The apparently empty tips contain In1.Cu GND fill: outline-only trimming would
+  leave copper at the new edges. Clipping this fill/boundary to a nominal 0.55 mm
+  setback produces a measured minimum 0.549999609 mm clearance. Confidence: high
+  for saved geometry; one final Rev.6 candidate, with implementation trials
+  retained in the runtime; no manufactured-board handling trial.
+- **Conditions tried:** Issue #226, KiCad 9.0.9; Rev.5 PCB SHA-256
+  `8b1754ebc5a67cf17bf2a6e54b49814e087d8d09e13f0eedf59a99715c06c286`;
+  final Rev.6 `e33712ba860060aca015f359ac8abf9378b623a9029d21df1061da295c2f9de8`.
+  Native DRC/ERC, actual-copper union-find, all via/pad pairs, new-edge distance,
+  material-removal subset and preserved support-disk checks pass. Rev.5 positive
+  path and sheet-FEM models were rerun on Rev.6, including coarse/fine mesh and
+  track-width factors. At 125°C / width×0.8 the input loop is 48.682870 mΩ,
+  versus 48.686448 mΩ; farthest point 4.797985723 V at 127 mA/Wing.
+- **Failed attempts:** A missing matching project file in a temporary PCB path
+  selected default rules. Global refill also changed distant oblique boundaries
+  at grid scale. Reconstructing filled polygons with unfractured holes lost the
+  holes on serialization; DRC rejected that trial. The final method preserves
+  the original fractured ring and clips it directly, with the matching project.
+  No rejected trial is used in final acceptance or manufacturing output.
+- **Validity scope:** Model/geometry only, not manufacturing or physical safety
+  certification. The apparent 3.578 µΩ improvement from copper removal is mesh
+  sensitivity, not a conductivity benefit. New oblique endpoints land on a 1 nm
+  grid; remote raw symmetric-difference slivers total 0.000002698 mm² and lie
+  wholly within a 2 nm original-boundary envelope. That numerical comparison
+  allowance is not deducted from the >=0.5 mm clearance requirement. No change
+  to material assumptions, harness model, case files or physical acceptance gates.
+- **Evidence:** [geometry/diff/clearance](../hardware/kicad/qualification/issue-226-main-rev6/rev5-diff-and-clearance.json),
+  [power comparison](../hardware/kicad/qualification/issue-226-main-rev6/power-impact.json),
+  [verification](../hardware/kicad/qualification/issue-226-main-rev6/verification.json).
+- **Promoted to:** Proposed D-036; no accepted process/decision change yet.
