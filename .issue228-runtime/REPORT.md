@@ -2,7 +2,7 @@
 
 2026-11-12. **Proposal complete; awaiting PO approval. Phase B is not authorized by this report.**
 
-**Round 1 below is historical and rejected. The authoritative round-2 section at the end supersedes its design, numbers, and handoff notes.**
+**Rounds 1–2 below are historical and rejected. The authoritative round-3 section at the end supersedes the south design, numbers, and handoff notes; the round-2 north and USB remain unchanged.**
 
 The 17mm proposal replaces each Wing's entire stepped thumb-to-pinky south
 boundary with one straight segment. Both Wings keep their original PCB,
@@ -183,7 +183,7 @@ untouched. No push, PR or merge was performed.
 
 **STOP: PO approval is required before Phase B.**
 
-## Phase A ROUND 2 — authoritative proposal, 2026-11-12
+## Phase A ROUND 2 — historical rejected proposal, 2026-11-12
 
 **Complete at the 2D gate; awaiting PO review.** The PO rejected the round-1
 straight south run and retained north USB notch. This section supersedes
@@ -383,3 +383,231 @@ endpoint and retained-neck handoff assumptions are withdrawn.
 manufacturing exports.** Only 2D approval figures and JSON were regenerated.
 Git uses `.issue228-runtime/git`, branch `issue-228-case-outline`; round 2
 builds on round-1 commit `cdecdc89`. No push or PR.
+
+## Phase A ROUND 3 — authoritative proposal, 2026-11-12
+
+**Complete at the 2D gate; awaiting PO review.** This section supersedes
+round 2 for the south curve, footprint, area, segment counts and endpoint
+joins. The round-2 north quadratic, removed notch, current daughterboard
+seat datum and W12 × H4 open-top USB access are unchanged. Rounds 1–2 above
+are historical rejected proposals.
+
+### Evidence and construction
+
+- [Assembled overlay](../hardware/case/issue-228-outline/17mm-outline-overlay.png):
+  #198 red dashed; round 2 faint purple; round 3 solid teal.
+- [South-edge zoom](../hardware/case/issue-228-outline/17mm-south-edge-zoom.png):
+  unchanged pocket and bare boards, stepped #198 outline, shallow spline,
+  endpoint fillets and valley distance witnesses. Right mirrors left.
+- [North-center detail](../hardware/case/issue-228-outline/17mm-north-center-zoom.png).
+- [Exact polygon and design controls](../hardware/case/issue-228-outline/17mm-outline.json).
+- [Measurement ledger](measurements.json): shelf profile, all junctions,
+  removed regions, distance witnesses and primitive/chord counts.
+
+Each wing has **one continuous C1 cubic spline with six polynomial spans**
+(no internal corner), terminated by **two circular R5 mm fillets**. It is
+not the round-2 single cubic with its long tangent handles. The spline
+interpolates three projecting stepped tips shifted 0.8 mm outward along
+the original support normal. Two additional valley controls draw it inward
+by 12 mm and 2 mm relative to the adjacent shifted-tip chord midpoints.
+These are inward reductions of shelf width, not outward bulges. The deep
+finger-column recess needs the larger reduction to keep the nearest PCB
+distance below 10 mm. The endpoint support corners come from round 1;
+R5 fillets trim them back toward the actual PCB tips.
+
+All spline spans share their tangent at each internal knot. The chord-axis
+coordinate increases linearly on every span, so its derivative cannot
+vanish: there is no cusp. The end derivatives match the circular fillets;
+the fillets meet the retained pinky/inner-thumb sides tangentially. Each
+cubic uses 512 chords; each fillet uses 128. Phase B consumes exactly this
+sampled 2D boundary through `outline.proposed_outline()`.
+
+### S1 — shelf-depth profile and tip tracking
+
+Depth here means **nearest Euclidean distance FROM a point on the south
+perimeter TO the bare PCB south-edge chain**, not to the pocket or to #198.
+The direction matters: it is not distance from a recessed PCB vertex back
+to the curve, nor a normal-ray depth. Stations are placed at chord-axis
+projections of the projecting #198 tips; valley centers are midpoint
+stations between adjacent tips. The thumb-tip station falls beyond the
+trimmed spline domain, so it uses the nearest point on its endpoint fillet.
+The first and last intervals are continuous sloping edge groups rather
+than deep column recesses; all four interval centers are reported.
+
+Maximum sampled depth: **9.823802 mm**, perimeter **(-102.288038, 18.798274)** → bare PCB **(-97.376137, 10.290612)**.
+
+The complete 20,001-station arclength check has spacing
+0.007475218 mm. Distance-to-set is 1-Lipschitz; adding half
+the spacing gives a conservative maximum **9.827540 mm**
+over the actual consumed polygon. This proves the whole curve is below
+10 mm, including all valley centers. The JSON profile records every 100th
+sample plus the exact maximum and all specified stations. The largest
+analytic-curve/chord bound is 0.000111142 mm
+(the endpoint arcs); the bound also leaves the ideal curve below 10 mm.
+
+| Interval center, pinky → thumb | Curve XY mm | Bare-PCB depth mm |
+|---|---|---:|
+| 1 (tips 0–1) | (-130.443768, 11.802836) | 5.843439 |
+| 2 (tips 1–2) | (-97.427400, 19.882778) | 8.332691 |
+| 3 (tips 2–3) | (-83.319976, 51.149425) | 5.791803 |
+| 4 (tips 3–4) | (-59.377208, 75.847322) | 5.517944 |
+
+| Protruding tip, pinky → thumb | #198 tip XY mm | Curve-to-PCB depth at station mm | Nearest #198-tip-to-curve distance mm |
+|---|---|---:|---:|
+| 0 | (-145.662125, -0.841849) | 3.129503 | 0.197484 |
+| 1 | (-110.969533, 19.187929) | 4.058853 | 0.692574 |
+| 2 | (-97.999898, 38.021079) | 4.214784 | 0.630872 |
+| 3 | (-70.150723, 66.144718) | 4.212160 | 0.796730 |
+| 4 | (-44.762388, 80.802680) | 3.471145 | 0.082127 |
+
+The three internal projecting tips remain outside #198 and within 0.8 mm
+of it. The two endpoint fillets clip the old miter tips slightly (below),
+as permitted by S4; all clearance and wall constraints still hold.
+
+### S2 — every front junction, fillets and minimum angle
+
+Left junctions are listed below; every right junction has X negated with
+the same angle/radius. Interior angles exclude the curved arc interiors.
+These are tangent joins at the fillets, not the former sharp support
+corners. Their hypothetical unfilleted support angles are 85.403871° at
+the pinky and 82.201630° at the thumb; those corners are removed entirely.
+
+| Junction | Left XY mm | Interior angle | Adjacent fillet radius mm |
+|---|---|---:|---:|
+| pinky side / fillet | (-144.952764, -2.070499) | 180° | 5.0 |
+| pinky fillet / spline | (-142.767618, 4.946033) | 180° | 5.0 |
+| spline knot 1 | (-111.476636, 19.806674) | 180° | — |
+| spline knot 2 | (-97.385261, 19.942070) | 180° | — |
+| spline knot 3 | (-98.507002, 38.639824) | 180° | — |
+| spline knot 4 | (-83.314655, 51.154781) | 180° | — |
+| spline knot 5 | (-70.657827, 66.763464) | 180° | — |
+| spline / thumb fillet | (-51.702271, 81.466036) | 180° | 5.0 |
+| thumb fillet / inner side | (-44.307721, 80.015174) | 180° | 5.0 |
+| inner side / south bridge | (-38.757553, 70.402000) | 120° | — |
+
+**Minimum front interior angle: 120°**, at both retained inner-side/bridge
+joins; no acute front junction. The spline-only sampled minimum is
+**179.411974°**, at
+(-97.372672, 19.960555). Including fillet chords and their
+endpoint joins, the sampled south minimum is
+179.235950°. Sampling vertices
+are not design corners. All four endpoint fillets have radius **5 mm**.
+
+### S3 — north and USB unchanged
+
+The gate asserts exact equality of the north controls and of the complete
+north boundary (Y ≤ -45 mm) against reproducible round 2. Controls remain
+(108.986093174,-64.366600111), (0,-45.261241305),
+(-108.986093174,-64.366600111) mm. The notch remains removed.
+The USB opening stays W12 × H4 mm, open top, X center -0.002 mm,
+Z=11.2..15.2 mm, current connector front (-0.002,-34.750) mm,
+plan cut X=[-6.002,5.998], Y=[-65.366600111,-34] mm.
+The slot geometry is identical; floor and low rim remain intact. Final
+plug alignment still belongs to the pending Fly seat rework.
+
+### S4 — containment, minimum wall and material changes
+
+The unchanged pocket is reconstructed by the same #198 arithmetic and
+independent Wing CSV/transform checks as before. The dimension input hash
+remains `6aa22662e6e17bd797de505303033fa1a2f729e74169e32c2a6355ff39ead086`.
+Continuous GEOS set checks prove pocket outside proposal = **0 mm²**,
+and **all four complete PCB + 0.502 mm mitered clearance envelopes are
+covered**, each with **0 mm² outside**. These checks cover entire edges
+and regions; they are independent of the sampled shelf profile.
+
+Minimum enclosing pocket-to-perimeter wall: **2.000000 mm**,
+pocket (-142.930074, -1.573900) → perimeter (-144.662125, -2.573900);
+right mirrors left. Floating-point result is 1.9999999999999614 mm.
+The intentional split seam and above-rim USB opening are excluded from
+this enclosing XY wall metric, as in rounds 1–2.
+
+| Board | Bare PCB minimum to perimeter mm | PCB → perimeter witness XY mm | Clearance-envelope margin mm |
+|---|---:|---|---:|
+| main | 2.502000 | (-37.892683, 67.900000) → (-37.892683, 70.402000) | 2.000000 |
+| wing_left | 2.502000 | (-142.244330, -1.757645) → (-144.411125, -3.008645) | 2.000000 |
+| wing_right | 2.502000 | (142.244330, -1.757645) → (144.411125, -3.008645) | 2.000000 |
+| udb | 18.563921 | (0.000000, -36.250000) → (0.000000, -54.813921) | 18.061921 |
+
+| Complete silhouette comparison, including unchanged splice pads | Added mm² | Removed mm² | Net mm² |
+|---|---:|---:|---:|
+| Round 3 versus #198 | 2099.155951 | 0.243454 | +2098.912498 |
+| Round 3 versus round 2 | 0.000015 | 6054.879972 | -6054.879957 |
+| Round 3 versus round 1 | 877.601481 | 1064.969819 | -187.368338 |
+
+Added area is comfortably below +3,500 mm² and close to round 1's
++2,273 mm², rather than round 2's +8,154 mm². Approximately 6,055 mm² of
+the rejected round-2 silhouette disappears. The 0.000015 mm² added versus
+round 2 is a negligible near-coincident endpoint sampling sliver, not a
+new shelf.
+
+The four removed #198 regions are two pinky miter tips and two thumb
+miter tips, total **0.243453532 mm²**. For readable local bounds/witnesses,
+the region ledger strips numerical zero-width tails along shared straight
+supports by a 0.0000001 mm opening; each area changes by less than 1e-7 mm².
+Global and per-region areas, containment, and the exact current/proposed
+polygons use the original unmodified geometry. Local wall witnesses below use a 0.01 mm
+neighborhood of each cleaned region.
+
+| Removed location | Area mm² | X bounds mm | Y bounds mm | Interior witness XY mm | Local minimum wall mm |
+|---|---:|---|---|---|---:|
+| Left thumb | 0.025257951 | [-44.834681, -44.307736] | [80.015200, 80.802680] | (-44.564579, 80.434967) | 2.273303 |
+| Right thumb | 0.025257951 | [44.307736, 44.834681] | [80.015200, 80.802680] | (44.564579, 80.434967) | 2.273303 |
+| Right pinky | 0.096468815 | [144.952779, 145.662125] | [-2.070472, -0.739053] | (145.306352, -1.403058) | 2.079999 |
+| Left pinky | 0.096468815 | [-145.662125, -144.952779] | [-2.070472, -0.739053] | (-145.306352, -1.403058) | 2.079999 |
+
+All removal is outside the unchanged pocket. Exact nearest-point pairs
+for the local walls and all global PCB/clearance distances are in JSON.
+
+### S5 — footprint, primitive counts and unchanged interior
+
+Assembled bounds: X=±145.622568436 mm,
+Y=[-64.366600111,82.515075147] mm. Assembled footprint is
+**291.245137 × 146.881675 mm**. Relative to #198, total width changes
+**-0.079114 mm**, depth **+1.712395 mm**. Split remains X=3.5 mm.
+
+| Tray | XY mm | With 5 mm brim, XY mm | XY change versus #198 mm | Raw sampled segments (#198 / round 2 / round 3) |
+|---|---|---|---|---|
+| left | 149.122568 × 146.881675 | 159.122568 × 156.881675 | -0.039557 × 1.712395 | 37 / 781 / 3597 |
+| right | 142.122568 × 146.881675 | 152.122568 × 156.881675 | -0.039557 × 1.712395 | 37 / 764 / 3580 |
+
+Both trays, including brim, fit 220 × 220 mm. Primitive counts per tray:
+**one south spline (six cubic spans), two circular fillets, one north
+quadratic portion, four straight segments including seam** = **8** when
+treating the spline as one curve, **13** resolving its spans. Baseline #198
+has 37 straight segments per tray. Raw sampled counts are reported without
+simplifying away curve chords; closure duplicates are excluded.
+
+`base.py`, `generate.py`, `details.py`, `verify.py`, all PCB inputs and all
+interior geometry are unchanged from round 2. The new south material uses
+the same flush-level ring (default PCB top Z=11.2 mm); the existing high-wall
+masks are unchanged. Mounts, 15 fixings, bosses, harness, cable rack, seat,
+heights, splice pads and split are unchanged. This is a source/2D invariant
+statement, not completed 3D validation.
+
+### Reproduction, validation and Phase B handoff
+
+Use the README's 2D command. `outline.proposed_outline()` is the active
+round-3 implementation consumed directly by Phase B. Historical
+`round2_outline.py` is the byte-identical round-2 module from commit
+`d720f5e9`; call its `proposed_outline()` to reproduce round 2. Its polygon
+is also regenerated into `round2_xy` in the evidence JSON. Round 1 remains
+reproducible with `round1_outline()`. The historical full round-2 evidence
+and gate script remain available in `d720f5e9`.
+
+The 17 mm gate passes: continuous containment/wall checks for all boards,
+both entire south boundary exposures, spline/fillet tangency, front angles,
+shelf upper bound, tip tracking, area guideline, north equality, USB reach,
+independent Wing CSV matching and both bed checks. All three updated PNGs
+were visually inspected. Source parsing and Git whitespace checks pass.
+
+After explicit PO approval and a separate Phase B dispatch, validate both
+17 mm and 16 mm generated solids, spline/chord BRep quality (including the
+concave valley and R5 joins), component/fastener/rack/harness clearances,
+palm masks, bed fit and provisional USB passage with pending Fly seat
+alignment. The spline landmarks use the current Wing boundary vertex
+ordering; the 16 mm input still requires its separate geometry validation.
+
+**STOPPED at the 2D gate. No 3D, verify.py, renders or CAD/manufacturing
+exports.** Git uses `GIT_DIR=./.issue228-runtime/git`, branch
+`issue-228-case-outline`, building on `d720f5e9`. Local commit only; no push
+or PR. Phase B remains unauthorized until its separate dispatch.

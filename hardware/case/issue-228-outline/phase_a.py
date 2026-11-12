@@ -14,9 +14,10 @@ os.environ.setdefault('MPLCONFIGDIR', str(RUNTIME / 'mplconfig'))
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from shapely.geometry import Polygon, LineString, box
+from shapely.geometry import Polygon, LineString, Point, box
 from shapely.ops import unary_union, nearest_points
 from outline import proposed_outline, round1_outline, curve_design, bezier, usb_access
+from round2_outline import proposed_outline as round2_outline, curve_design as round2_design
 
 
 def vertices(g):
@@ -47,10 +48,16 @@ def main():
     old = cavity.buffer(2., join_style=2)
     new = proposed_outline(cavity, boards)
     r1 = round1_outline(cavity, boards)
+    r2 = round2_outline(cavity, boards)
+    r2_final = unary_union([r2,*[box(-10.5,y-8,17.5,y+8) for y in (-8.,55.)]])
+    assert curve_design(boards)["north_controls_xy_mm"] == round2_design(boards)["north_controls_xy_mm"]
     design = curve_design(boards)
     plates = [box(-10.5,y-8,17.5,y+8) for y in (-8.,55.)]
     old_final, r1_final, new_final = [unary_union([g,*plates]) for g in (old,r1,new)]
     assert new_final.covers(cavity)
+    assert new_final.difference(old_final).area<=3500.
+    # North boundary and USB geometry are identical to round 2.
+    assert new.boundary.intersection(box(-300,-200,300,-45)).equals(r2.boundary.intersection(box(-300,-200,300,-45)))
     wall = distance_record(cavity.boundary,new.boundary)
     assert wall['mm'] >= 2.-1e-8
     # Seat/connector datum: same J1/J2 positions and transformation as base.py.
@@ -66,6 +73,7 @@ def main():
     j1,j2=position('J1'),position('J2')
     usb_front=[j1[0]-j2[0],j1[1]-6.8-j2[1]-20]
     slot=usb_access(new,usb_front[0])
+    assert slot.equals(usb_access(r2,usb_front[0]))
     crossing=new.boundary.intersection(slot)
     assert not crossing.is_empty
     # The north passage goes all the way from outside to the unchanged seat.
@@ -79,31 +87,67 @@ def main():
             cosine=sum(u[k]*v[k] for k in (0,1))/math.hypot(*u)/math.hypot(*v)
             out.append(dict(degrees=math.degrees(math.acos(max(-1.,min(1.,cosine)))),xy=list(b)))
         return out
-    front=[design['left_north_xy_mm'],*bezier(design['south_left_controls_xy_mm']),
-           design['left_bridge_xy_mm']]
+    south=design['south_left']
+    front=[design['left_north_xy_mm'],*south['path_xy_mm'],design['left_bridge_xy_mm']]
     front_angles=angles(front)
     assert min(a['degrees'] for a in front_angles)>=120
-    # Prove no cusp: at each real X-derivative root, Y derivative is nonzero.
-    p=design['south_left_controls_xy_mm']
-    dx=[3*(p[i+1][0]-p[i][0]) for i in range(3)]
-    dy=[3*(p[i+1][1]-p[i][1]) for i in range(3)]
-    assert dx[0]<0<dx[1] and dx[2]>0
-    assert dy[0]>0 and dy[1]>0>dy[2]
-    qa,qb,qc=dx[0]-2*dx[1]+dx[2],2*(dx[1]-dx[0]),dx[0]
-    disc=qb*qb-4*qa*qc
-    roots=[(-qb+sign*math.sqrt(disc))/(2*qa) for sign in (-1,1)]
-    for t in roots:
-        if 0<=t<=1:
-            assert abs((1-t)**2*dy[0]+2*t*(1-t)*dy[1]+t*t*dy[2])>1e-8
-    # The tangent vectors at both curve ends are parallel to the side lines.
-    for a,b,c in [(front[0],p[0],p[1]),(p[-2],p[-1],front[-1])]:
-        u=[b[k]-a[k] for k in (0,1)];v=[c[k]-b[k] for k in (0,1)]
-        assert abs(u[0]*v[1]-u[1]*v[0])<1e-7
-        assert sum(u[k]*v[k] for k in (0,1))>0
-    # Include the retained junction from inner thumb side into central bridge.
     bridge=design['left_bridge_xy_mm']
     bridge_angle=angles([front[-2],bridge,(-bridge[0],bridge[1])])[0]
     assert bridge_angle['degrees']>=120.-1e-8
+    # Every spline/fillet join is analytically tangent. Internal spline knots
+    # share derivatives; check the actual control vectors at all joins.
+    spans=south['spans_controls_xy_mm']
+    for left,right in zip(spans,spans[1:]):
+        u=[left[-1][k]-left[-2][k] for k in (0,1)]
+        v=[right[1][k]-right[0][k] for k in (0,1)]
+        assert abs(u[0]*v[1]-u[1]*v[0])<1e-8
+        assert sum(u[k]*v[k] for k in (0,1))>0
+    for span,fillet,index in [(spans[0],south['fillets'][0],0),(spans[-1],south['fillets'][1],-1)]:
+        u=[span[1][k]-span[0][k] if index==0 else span[-1][k]-span[-2][k] for k in (0,1)]
+        radius=[span[index][k]-fillet['center_xy_mm'][k] for k in (0,1)]
+        assert abs(sum(u[k]*radius[k] for k in (0,1)))<1e-8
+    # Shelf definition: nearest Euclidean distance FROM the south curve TO
+    # the bare PCB south chain (never distance to pocket or #198 outline).
+    # A dense arclength profile has a rigorous distance upper bound because
+    # distance-to-set is 1-Lipschitz; half the sample spacing bounds the gap.
+    curve=LineString(south['path_xy_mm'])
+    pcb_south=LineString(list(boards['wing_left'].exterior.coords)[:14])
+    count=20000
+    profile=[]
+    for i in range(count+1):
+        q=curve.interpolate(curve.length*i/count)
+        rec=distance_record(q,pcb_south)
+        rec['arclength_mm']=curve.length*i/count
+        profile.append(rec)
+    maximum=max(profile,key=lambda r:r['mm'])
+    shelf=dict(definition='nearest Euclidean distance from south perimeter to bare PCB south chain',
+        maximum_sample=maximum,maximum_upper_bound_mm=maximum['mm']+curve.length/(2*count),
+        sample_count=count+1,sample_spacing_mm=curve.length/count,profile=profile[::100])
+    # Stations: midpoint in chord projection of neighboring protruding tips.
+    # This defines valley centers independently of curve parameterization.
+    tips=south['stepped_tip_xy_mm']
+    axis=[tips[-1][k]-tips[0][k] for k in (0,1)]
+    length=math.hypot(*axis);axis=[v/length for v in axis]
+    def station(p):
+        normal=(-axis[1],axis[0])
+        ray=LineString([tuple(p[k]+sign*400*normal[k] for k in (0,1)) for sign in (-1,1)])
+        q=curve.intersection(ray)
+        if q.is_empty:q=nearest_points(curve, Point(p))[0]
+        if q.geom_type=='MultiPoint':q=max(q.geoms,key=lambda p:p.y)
+        return distance_record(q,pcb_south)
+    shelf['valley_centers']=[dict(between_tips=[i,i+1],**station(tuple((tips[i][k]+tips[i+1][k])/2 for k in (0,1)))) for i in range(len(tips)-1)]
+    shelf['tips']=[dict(tip_index=i,stepped_outline_to_curve=distance_record(Point(p),curve),**station(p)) for i,p in enumerate(tips)]
+    assert shelf['maximum_upper_bound_mm']<=10.
+    assert all(r['stepped_outline_to_curve']['mm']<=4. for r in shelf['tips'])
+    junctions=[dict(name='pinky side / fillet',xy=south['fillets'][0]['start_xy_mm'],interior_angle_degrees=180.,fillet_radius_mm=5.),
+        dict(name='pinky fillet / spline',xy=spans[0][0],interior_angle_degrees=180.,fillet_radius_mm=5.)]
+    junctions.extend(dict(name='spline knot '+str(i+1),xy=p[-1],interior_angle_degrees=180.) for i,p in enumerate(spans[:-1]))
+    junctions.extend([dict(name='spline / thumb fillet',xy=spans[-1][-1],interior_angle_degrees=180.,fillet_radius_mm=5.),
+        dict(name='thumb fillet / inner side',xy=south['fillets'][1]['end_xy_mm'],interior_angle_degrees=180.,fillet_radius_mm=5.),
+        dict(name='inner side / south bridge',xy=bridge,interior_angle_degrees=bridge_angle['degrees'])])
+    spline_points=bezier(spans[0])
+    for span in spans[1:]:spline_points.extend(bezier(span)[1:])
+    spline_min=min(angles(spline_points),key=lambda r:r['degrees'])
     removed=old_final.difference(new_final)
     def parts(g):
         if g.is_empty:return []
@@ -111,21 +155,32 @@ def main():
     removed_records=[]
     for g in parts(removed):
         if g.area<1e-10:continue
+        # Strip only zero-area floating-point tails along shared supports.
+        raw_polygon=list(g.exterior.coords)
+        raw_area=g.area
+        cleaned=g.buffer(-1e-7).buffer(1e-7).simplify(1e-8,preserve_topology=False)
+        assert abs(cleaned.area-g.area)<1e-7
+        g=cleaned
         witness=g.representative_point()
+        assert g.contains(witness), (g.wkt, g.area)
         assert cavity.distance(g)>0
         local_wall=distance_record(cavity.boundary,new.boundary.intersection(g.buffer(.01)))
         assert local_wall['mm']>=2.-1e-8
-        removed_records.append(dict(area_mm2=g.area,bounds_xy_mm=list(g.bounds),
+        removed_records.append(dict(area_mm2=raw_area,exact_polygon_xy=raw_polygon,
+            numerical_tail_cleanup_mm=1e-7,bounds_xy_mm=list(g.bounds),
             interior_witness_xy=list(witness.coords[0]),polygon_xy=list(g.exterior.coords),
             adjacent_wall=local_wall))
-    measures=dict(round=2,pitch_mm=17,coordinates='assembly XY mm; +Y south',
+    measures=dict(round=3,pitch_mm=17,coordinates='assembly XY mm; +Y south',
         source_dimensions_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
         pocket_outside_proposal_mm2=cavity.difference(new).area,
-        wall_minimum=wall,curves=design,
+        wall_minimum=wall,curves=design,shelf_depth=shelf,
+        left_front_junctions=junctions,right_front_junctions=[dict(r,xy=[-r["xy"][0],r["xy"][1]]) for r in junctions],
+        spline_only_sampled_minimum=spline_min,
         front_curve_and_endpoint_minimum=min(front_angles,key=lambda a:a['degrees']),
         front_endpoint_angles=[front_angles[0],front_angles[-1]],
         retained_bridge_interior_angle=bridge_angle,
-        analytic_endpoint_join='tangent at both ends of each south cubic',
+        analytic_endpoint_join='R5 circular fillets; all line/arc/spline joins tangent',
+        design_primitive_counts_per_tray=dict(south_spline=1,south_cubic_spans=6,endpoint_circular_fillets=2,north_quadratic_portion=1,straight_segments_including_seam=4,total_treating_spline_as_one=8,total_resolving_spline_spans=13),
         analytic_front_minimum_interior_angle_degrees=120.,
         usb=dict(center_x_mm=usb_front[0],existing_connector_front_xy_mm=usb_front,
             width_mm=12.,z_open_from_mm=11.2,z_wall_top_mm=15.2,
@@ -135,6 +190,8 @@ def main():
         removed_material_vs_198=dict(area_mm2=removed.area,regions=removed_records),
         area_vs_198=dict(added_mm2=new_final.difference(old_final).area,
             removed_mm2=removed.area,net_mm2=new_final.area-old_final.area),
+        area_vs_round2=dict(added_mm2=new_final.difference(r2_final).area,
+            removed_mm2=r2_final.difference(new_final).area,net_mm2=new_final.area-r2_final.area),
         area_vs_round1=dict(added_mm2=new_final.difference(r1_final).area,
             removed_mm2=r1_final.difference(new_final).area,net_mm2=new_final.area-r1_final.area),
         trays={},boards={})
@@ -145,29 +202,30 @@ def main():
             clearance_margin=distance_record(clear.boundary,new.boundary),
             clearance_outside_mm2=clear.difference(new).area,clearance_covered=True)
     for side,clip in [('left',box(-300,-200,3.5,200)),('right',box(3.5,-200,300,200))]:
-        geometries=[g.intersection(clip) for g in (old_final,r1_final,new_final)]
-        before,previous,after=geometries
+        geometries=[g.intersection(clip) for g in (old_final,r1_final,r2_final,new_final)]
+        before,previous,r2_tray,after=geometries
         b=after.bounds
         counts={name:dict(raw=len(g.exterior.coords)-1,normalized=vertices(g))
-                for name,g in zip(('issue198','round1','round2'),geometries)}
+                for name,g in zip(('issue198','round1','round2','round3'),geometries)}
         measures['trays'][side]=dict(counts=counts,bounds_xy_mm=list(b),
             footprint_xy_mm=[b[2]-b[0],b[3]-b[1]],
             with_5mm_brim_xy_mm=[b[2]-b[0]+10,b[3]-b[1]+10],
             footprint_change_vs_198_xy_mm=[(b[2]-b[0])-(before.bounds[2]-before.bounds[0]),(b[3]-b[1])-(before.bounds[3]-before.bounds[1])],
             footprint_change_vs_round1_xy_mm=[(b[2]-b[0])-(previous.bounds[2]-previous.bounds[0]),(b[3]-b[1])-(previous.bounds[3]-previous.bounds[1])])
         assert max(measures['trays'][side]['with_5mm_brim_xy_mm'])<=220
-        curve=LineString(bezier(design['south_'+side+'_controls_xy_mm']))
+        curve=LineString(south['path_xy_mm'] if side=='left' else [(-x,y) for x,y in south['path_xy_mm']])
         assert curve.difference(new.boundary.buffer(1e-8)).length<1e-8
     # Bound Bezier-vs-chord deviation by max |B''| / (8*N^2).
     error={}
-    for name in ('south_left','north'):
-        p=design[name+'_controls_xy_mm'];degree=len(p)-1
+    for name,p in [('south_span_'+str(i),p) for i,p in enumerate(spans)]+[('north',design['north_controls_xy_mm'])]:
+        degree=len(p)-1
         second=[tuple(degree*(degree-1)*(p[j+2][k]-2*p[j+1][k]+p[j][k]) for k in (0,1)) for j in range(degree-1)]
         error[name]=max(math.hypot(*v) for v in second)/(8*design['steps_per_span']**2)
+    error['circular_fillets']=max(f['radius_mm']*(1-math.cos(f['sweep_radians']/256)) for f in south['fillets'])
     measures['chord_deviation_upper_bound_mm']=error
     (HERE/'17mm-outline.json').write_text(json.dumps(dict(measurements=measures,
         cavity_xy=list(cavity.exterior.coords),current_xy=list(old_final.exterior.coords),
-        round1_xy=list(r1_final.exterior.coords),proposed_xy=list(new_final.exterior.coords)),indent=2)+'\n')
+        round1_xy=list(r1_final.exterior.coords),round2_xy=list(r2_final.exterior.coords),proposed_xy=list(new_final.exterior.coords)),indent=2)+'\n')
     (RUNTIME/'measurements.json').write_text(json.dumps(measures,indent=2)+'\n')
     def draw(ax,g,**kw):
         x,y=g.exterior.xy;ax.plot(x,y,**kw)
@@ -175,8 +233,8 @@ def main():
         for g in boards.values():ax.fill(*g.exterior.xy,color='#d9e5ee',alpha=.85)
         draw(ax,cavity,color='#748596',lw=.7,label='Unchanged pocket (+0.502 mm)')
         draw(ax,old_final,color='#d65343',lw=1.4,ls='--',label='Current #198')
-        draw(ax,r1_final,color='#947399',lw=1.2,alpha=.45,ls=':',label='Round 1 straight (rejected)')
-        draw(ax,new_final,color='#007c83',lw=2,label='Round 2 Bezier curves')
+        draw(ax,r2_final,color='#947399',lw=1.4,alpha=.4,ls='-',label='Round 2 (rejected)')
+        draw(ax,new_final,color='#007c83',lw=2,label='Round 3 shallow spline + R5 fillets')
         ax.axvline(3.5,color='#5e4b95',ls=':',lw=.7,label='Split X=3.5 mm')
         # Plan projection of wall opening above intact low rim/floor.
         x,y=slot.exterior.xy
@@ -186,16 +244,19 @@ def main():
         ax.legend(loc='upper right',fontsize=8,framealpha=.95)
     fig,ax=plt.subplots(figsize=(14,8));plot(ax)
     ax.set_xlim(-160,160);ax.set_ylim(102,-78)
-    ax.set_title('Issue #228 • Phase A round 2 • assembled 17 mm trays • 2D gate')
+    ax.set_title('Issue #228 • Phase A round 3 • assembled 17 mm trays • 2D gate')
     fig.tight_layout();fig.savefig(HERE/'17mm-outline-overlay.png',dpi=180);plt.close(fig)
     fig,ax=plt.subplots(figsize=(11,9));plot(ax)
     ax.set_xlim(-166,-24);ax.set_ylim(103,-20)
-    controls=design['south_left_controls_xy_mm']
-    for label,point,offset in [('Pinky tangent',controls[0],(12,-8)),('Thumb tangent',controls[-1],(-58,15))]:
+    for label,point,offset in [('Pinky R5 fillet',south['fillets'][0]['points_xy_mm'][64],(12,-8)),('Thumb R5 fillet',south['fillets'][1]['points_xy_mm'][64],(-58,15))]:
         ax.scatter(*point,color='#005e63',s=24,zorder=5)
         ax.annotate(label,xy=point,xytext=offset,textcoords='offset points',arrowprops=dict(arrowstyle='->'),fontsize=10)
+    for row in shelf['valley_centers']:
+        p,q=row['first_xy'],row['second_xy']
+        ax.plot([p[0],q[0]],[p[1],q[1]],color='#e09612',lw=1.2)
+        ax.annotate(f"{row['mm']:.2f} mm",p,xytext=(5,5),textcoords='offset points',fontsize=8)
     ax.annotate('120° retained bridge join',xy=bridge,xytext=(-100,98),arrowprops=dict(arrowstyle='->'),fontsize=10)
-    ax.set_title('Complete left south cubic + both tangent endpoints • right mirrored')
+    ax.set_title('Shallow continuous left south spline + R5 endpoint fillets • right mirrored')
     fig.tight_layout();fig.savefig(HERE/'17mm-south-edge-zoom.png',dpi=180);plt.close(fig)
     fig,ax=plt.subplots(figsize=(11,8));plot(ax)
     ax.set_xlim(-43,43);ax.set_ylim(-17,-68)
@@ -204,7 +265,7 @@ def main():
     ax.plot(*usb_front,marker='+',color='#996600',ms=10)
     ax.set_title('North-center detail • USB aperture above intact plan footprint')
     fig.tight_layout();fig.savefig(HERE/'17mm-north-center-zoom.png',dpi=180);plt.close(fig)
-    print(json.dumps(measures,indent=2))
+    print(json.dumps({k:v for k,v in measures.items() if k not in ('curves','shelf_depth')},indent=2))
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
-"""Issue 228 Phase A: round 2 tangent Bezier silhouette; unchanged pocket.
+"""Issue 228 Phase A: round 3 shallow south spline silhouette; unchanged pocket.
 
 Pure 2D Shapely construction shared by the generator and approval drawing.
-Coordinates are assembly XY in mm (positive Y south). Curves sampled in 512 uniform parameter intervals per span.
+Coordinates are assembly XY in mm (positive Y south). Cubic/quadratic spans use 512 chords; R5 endpoint arcs use 128 chords.
 """
 import math
 from shapely.geometry import Polygon
@@ -76,35 +76,23 @@ def bezier(controls, steps=CURVE_STEPS):
                   for k in (0,1)) for i in range(steps+1)]
 
 
-def curve_design(boards, wall=2., clearance=.502):
+def _datums(boards, wall=2., clearance=.502):
     envelope, line = wing_envelope(boards['wing_left'], clearance, wall)
     n = min(envelope.exterior.coords, key=lambda p:p[1])
-    pinky, thumb = sorted(line['endpoints'])
+    _, thumb = sorted(line['endpoints'])
     pts = list(boards['wing_left'].exterior.coords)[:-1]
     sn = min(pts,key=lambda p:p[1])
-    sp = max(pts,key=lambda p:abs(p[0]))
     st = max(pts,key=lambda p:p[1])
     si = min(pts,key=lambda p:abs(p[0]))
-    def unit(a,b):
-        d = tuple(b[i]-a[i] for i in (0,1)); l=math.hypot(*d)
-        return tuple(x/l for x in d)
-    dp, dt = unit(sn,sp), unit(st,si)
-    # Preserve the original center-south bridge and both side directions.
+    # Preserve the round-2 center-south bridge and north-side datums.
+    dt=_unit(tuple(si[i]-st[i] for i in (0,1)))
     bridge_y = boards['main'].bounds[3]+clearance+wall
-    a_y, z_y = sp[1]+1.7576445984952933, bridge_y+9.598
-    a = (pinky[0]+(a_y-pinky[1])*dp[0]/dp[1],a_y)
-    z = (thumb[0]+(z_y-thumb[1])*dt[0]/dt[1],z_y)
     bridge = (thumb[0]+(bridge_y-thumb[1])*dt[0]/dt[1],bridge_y)
-    handle=40.
-    south=[a,tuple(a[i]+handle*dp[i] for i in (0,1)),
-           tuple(z[i]-handle*dt[i] for i in (0,1)),z]
     neck=min((p for p in pts if abs(p[1]+45.)<1e-7),key=lambda p:abs(p[0]))
     slope=(neck[1]-sn[1])/(neck[0]-sn[0])
     north=[(-n[0],n[1]),(0.,n[1]-n[0]*slope),n]
-    return dict(south_left_controls_xy_mm=south,
-                south_right_controls_xy_mm=[(-x,y) for x,y in south],
-                north_controls_xy_mm=north,left_north_xy_mm=n,
-                left_bridge_xy_mm=bridge,handle_length_mm=handle,
+    return dict(north_controls_xy_mm=north,left_north_xy_mm=n,
+                left_bridge_xy_mm=bridge,
                 steps_per_span=CURVE_STEPS)
 
 
@@ -118,13 +106,88 @@ def usb_access(outer, center_x=0.):
     return box(center_x-6.,outer.bounds[1]-1.,center_x+6.,-34.)
 
 
+def _unit(v):
+    length=math.hypot(*v)
+    return tuple(x/length for x in v)
+
+
+def _fillet(a, corner, b, radius=5.):
+    """Exact circular fillet of incoming/outgoing support lines."""
+    u=_unit(tuple(a[k]-corner[k] for k in (0,1)))
+    v=_unit(tuple(b[k]-corner[k] for k in (0,1)))
+    angle=math.acos(sum(u[k]*v[k] for k in (0,1)))
+    trim=radius/math.tan(angle/2)
+    start=tuple(corner[k]+trim*u[k] for k in (0,1))
+    end=tuple(corner[k]+trim*v[k] for k in (0,1))
+    bisector=_unit(tuple(u[k]+v[k] for k in (0,1)))
+    center=tuple(corner[k]+radius/math.sin(angle/2)*bisector[k] for k in (0,1))
+    t0=math.atan2(start[1]-center[1],start[0]-center[0])
+    t1=math.atan2(end[1]-center[1],end[0]-center[0])
+    sweep=(t1-t0+math.pi)%(2*math.pi)-math.pi
+    points=[(center[0]+radius*math.cos(t0+sweep*i/128),
+             center[1]+radius*math.sin(t0+sweep*i/128)) for i in range(129)]
+    return dict(radius_mm=radius,unfilleted_interior_angle_degrees=math.degrees(angle),
+                corner_xy_mm=corner,center_xy_mm=center,start_xy_mm=start,end_xy_mm=end,
+                sweep_radians=sweep,points_xy_mm=points)
+
+
+def south_design(boards,wall=2.,clearance=.502):
+    old=boards['wing_left'].buffer(clearance,join_style=2).buffer(wall,join_style=2)
+    # Projecting column and thumb tips, in their boundary order. Landmarks
+    # derive from the unchanged Wing polygon rather than a second PCB model.
+    pcb=list(boards['wing_left'].exterior.coords)
+    tips=[pcb[i] for i in (13,10,5,1,0)]
+    outer=list(old.exterior.coords)
+    stepped=[min(outer,key=lambda q:math.dist(p,q)) for p in tips]
+    _,line=wing_envelope(boards['wing_left'],clearance,wall)
+    a,z=sorted(line['endpoints'])
+    n=_datums(boards,wall,clearance)['left_north_xy_mm']
+    bridge=_datums(boards,wall,clearance)['left_bridge_xy_mm']
+    normal=line['normal']
+    knots=[tuple(p[k]+.8*normal[k] for k in (0,1)) for p in stepped[1:-1]]
+    first=_fillet(n,a,knots[0]);last=_fillet(knots[-1],z,bridge)
+    # Shallow inward sag across the two recessed column groups.
+    original=knots
+    knots=[original[0],tuple((original[0][k]+original[1][k])/2-12.*normal[k] for k in (0,1)),
+           original[1],tuple((original[1][k]+original[2][k])/2-2.*normal[k] for k in (0,1)),original[2]]
+    points=[first['end_xy_mm'],*knots,last['start_xy_mm']]
+    # Cubic Hermite interpolation in chord coordinates. Adjacent spans share
+    # the same derivative: one C1 spline, no corners at internal knots.
+    axis=_unit(tuple(z[k]-a[k] for k in (0,1)))
+    def project(p):return (sum(p[k]*axis[k] for k in (0,1)),sum(p[k]*normal[k] for k in (0,1)))
+    uv=[project(p) for p in points]
+    assert all(b[0]>a[0] for a,b in zip(uv,uv[1:]))
+    sec=[(uv[i+1][1]-uv[i][1])/(uv[i+1][0]-uv[i][0]) for i in range(len(uv)-1)]
+    slopes=[sec[0],*[(sec[i-1]+sec[i])/2 for i in range(1,len(sec))],sec[-1]]
+    # Clamp the end derivatives to the circular fillet's support lines.
+    for i,d in [(0,tuple(knots[0][k]-a[k] for k in (0,1))),(-1,tuple(z[k]-knots[-1][k] for k in (0,1)))]:
+        slopes[i]=sum(d[k]*normal[k] for k in (0,1))/sum(d[k]*axis[k] for k in (0,1))
+    spans=[]
+    for i in range(len(points)-1):
+        h=(uv[i+1][0]-uv[i][0])/3
+        spans.append([points[i],tuple(points[i][k]+h*(axis[k]+slopes[i]*normal[k]) for k in (0,1)),
+                      tuple(points[i+1][k]-h*(axis[k]+slopes[i+1]*normal[k]) for k in (0,1)),points[i+1]])
+    path=first['points_xy_mm'][:]
+    for span in spans:path.extend(bezier(span)[1:])
+    path.extend(last['points_xy_mm'][1:])
+    return dict(spans_controls_xy_mm=spans,fillets=[first,last],path_xy_mm=path,
+                pcb_tip_xy_mm=tips,stepped_tip_xy_mm=stepped,knots_xy_mm=points,
+                continuity='C1 cubic spline; circular endpoint fillets tangent to spline and sides')
+
+
 def proposed_outline(cavity, boards, wall=2., clearance=.502):
-    d=curve_design(boards,wall,clearance)
-    left=[d['left_north_xy_mm'],*bezier(d['south_left_controls_xy_mm']),
-          d['left_bridge_xy_mm']]
+    d=_datums(boards,wall,clearance)
+    south=south_design(boards,wall,clearance)
+    left=[d['left_north_xy_mm'],*south['path_xy_mm'],d['left_bridge_xy_mm']]
     result=Polygon([*left,*[(-x,y) for x,y in reversed(left)],
                     *bezier(d['north_controls_xy_mm'])[1:-1]])
     assert result.is_valid and result.geom_type=='Polygon'
     assert result.buffer(1e-8).covers(cavity)
     assert result.boundary.distance(cavity.boundary)>=wall-1e-8
     return result
+
+
+def curve_design(boards, wall=2., clearance=.502):
+    d=_datums(boards,wall,clearance)
+    d['south_left']=south_design(boards,wall,clearance)
+    return d
