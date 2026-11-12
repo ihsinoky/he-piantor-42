@@ -1,7 +1,7 @@
-"""Issue 228 Phase A: round 3 shallow south spline silhouette; unchanged pocket.
+"""Issue 228 Phase A: round 4 convex south sweep silhouette; unchanged pocket.
 
 Pure 2D Shapely construction shared by the generator and approval drawing.
-Coordinates are assembly XY in mm (positive Y south). Cubic/quadratic spans use 512 chords; R5 endpoint arcs use 128 chords.
+Coordinates are assembly XY in mm (positive Y south). Quadratic spans use 512 chords; R5 endpoint arcs use 128 chords.
 """
 import math
 from shapely.geometry import Polygon
@@ -143,36 +143,24 @@ def south_design(boards,wall=2.,clearance=.502):
     a,z=sorted(line['endpoints'])
     n=_datums(boards,wall,clearance)['left_north_xy_mm']
     bridge=_datums(boards,wall,clearance)['left_bridge_xy_mm']
-    normal=line['normal']
-    knots=[tuple(p[k]+.8*normal[k] for k in (0,1)) for p in stepped[1:-1]]
-    first=_fillet(n,a,knots[0]);last=_fillet(knots[-1],z,bridge)
-    # Shallow inward sag across the two recessed column groups.
-    original=knots
-    knots=[original[0],tuple((original[0][k]+original[1][k])/2-12.*normal[k] for k in (0,1)),
-           original[1],tuple((original[1][k]+original[2][k])/2-2.*normal[k] for k in (0,1)),original[2]]
-    points=[first['end_xy_mm'],*knots,last['start_xy_mm']]
-    # Cubic Hermite interpolation in chord coordinates. Adjacent spans share
-    # the same derivative: one C1 spline, no corners at internal knots.
+    # One quadratic Bezier, chosen by minimum-area fitting in this family
+    # against the unchanged pocket's 2 mm wall. No valley/tip interpolation.
+    # Store offsets in the envelope frame so the construction follows inputs;
+    # only the 17 mm variant has passed the Phase A measurements.
     axis=_unit(tuple(z[k]-a[k] for k in (0,1)))
-    def project(p):return (sum(p[k]*axis[k] for k in (0,1)),sum(p[k]*normal[k] for k in (0,1)))
-    uv=[project(p) for p in points]
-    assert all(b[0]>a[0] for a,b in zip(uv,uv[1:]))
-    sec=[(uv[i+1][1]-uv[i][1])/(uv[i+1][0]-uv[i][0]) for i in range(len(uv)-1)]
-    slopes=[sec[0],*[(sec[i-1]+sec[i])/2 for i in range(1,len(sec))],sec[-1]]
-    # Clamp the end derivatives to the circular fillet's support lines.
-    for i,d in [(0,tuple(knots[0][k]-a[k] for k in (0,1))),(-1,tuple(z[k]-knots[-1][k] for k in (0,1)))]:
-        slopes[i]=sum(d[k]*normal[k] for k in (0,1))/sum(d[k]*axis[k] for k in (0,1))
-    spans=[]
-    for i in range(len(points)-1):
-        h=(uv[i+1][0]-uv[i][0])/3
-        spans.append([points[i],tuple(points[i][k]+h*(axis[k]+slopes[i]*normal[k]) for k in (0,1)),
-                      tuple(points[i+1][k]-h*(axis[k]+slopes[i+1]*normal[k]) for k in (0,1)),points[i+1]])
-    path=first['points_xy_mm'][:]
-    for span in spans:path.extend(bezier(span)[1:])
-    path.extend(last['points_xy_mm'][1:])
-    return dict(spans_controls_xy_mm=spans,fillets=[first,last],path_xy_mm=path,
-                pcb_tip_xy_mm=tips,stepped_tip_xy_mm=stepped,knots_xy_mm=points,
-                continuity='C1 cubic spline; circular endpoint fillets tangent to spline and sides')
+    normal=line['normal']
+    control=tuple((a[k]+z[k])/2-.4973600073038203*axis[k]
+                  +.8591183323990996*normal[k] for k in (0,1))
+    # Move along the existing side supports; north and bridge stay identical.
+    a=(a[0]+1.3271297251184493/math.sqrt(3),a[1]-1.3271297251184493)
+    z=(z[0]+.8153908363390627/math.sqrt(3),z[1]-.8153908363390627)
+    first=_fillet(n,a,control);last=_fillet(control,z,bridge)
+    span=[first['end_xy_mm'],control,last['start_xy_mm']]
+    path=first['points_xy_mm']+bezier(span)[1:]+last['points_xy_mm'][1:]
+    return dict(spans_controls_xy_mm=[span],fillets=[first,last],path_xy_mm=path,
+                pcb_tip_xy_mm=tips,stepped_tip_xy_mm=stepped,
+                family='single quadratic Bezier; strictly convex control triangle',
+                continuity='tangent quadratic sweep and R5 circular endpoint fillets')
 
 
 def proposed_outline(cavity, boards, wall=2., clearance=.502):

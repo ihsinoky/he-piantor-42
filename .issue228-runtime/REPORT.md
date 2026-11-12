@@ -2,7 +2,7 @@
 
 2026-11-12. **Proposal complete; awaiting PO approval. Phase B is not authorized by this report.**
 
-**Rounds 1–2 below are historical and rejected. The authoritative round-3 section at the end supersedes the south design, numbers, and handoff notes; the round-2 north and USB remain unchanged.**
+**Rounds 1–3 below are historical. The authoritative ROUND 4 (RETRY) section at the end supersedes the south design, numbers, and handoff notes; the round-2/3 north and USB remain unchanged. Round 4 reports a shelf-limit conflict for PMO/PO resolution.**
 
 The 17mm proposal replaces each Wing's entire stepped thumb-to-pinky south
 boundary with one straight segment. Both Wings keep their original PCB,
@@ -611,3 +611,248 @@ ordering; the 16 mm input still requires its separate geometry validation.
 exports.** Git uses `GIT_DIR=./.issue228-runtime/git`, branch
 `issue-228-case-outline`, building on `d720f5e9`. Local commit only; no push
 or PR. Phase B remains unauthorized until its separate dispatch.
+
+
+## Phase A ROUND 4 (RETRY) — convex south sweep; supersedes round 3 south
+
+**2D candidate ready for PMO/PO review; T3 conflict, not an all-target pass.**
+The active `outline.py` now supplies round 4 to Phase B. One quadratic
+Bézier per wing replaces the six-span interpolating round-3 spline. It
+bridges the recessed columns without following any valleys or interpolating
+column tips. North and USB remain the round-2/3 design. Earlier sections
+remain historical; this section is authoritative for the south outline.
+No 3D generation, `verify.py`, renders or CAD/manufacturing exports were run.
+
+### T1/T2 — one convex curve family
+
+The curve is a **single quadratic Bézier with a strictly convex control
+triangle**, plus tangent R5 endpoint fillets. A minimum-area numerical fit
+within this family, constrained by the unchanged pocket and 2 mm wall,
+selected the stored envelope-relative offsets. This is a fitted candidate,
+not a claim of global optimality across every possible convex curve family.
+There are no internal knots, inward controls, inflections or column shoulders.
+
+Left Bézier controls, in assembly XY mm (+Y south):
+
+| Control | XY mm |
+| --- | --- |
+| 0 | (-143.829403, 4.001145) |
+| 1 | (-98.346875, 44.149426) |
+| 2 | (-51.230953, 80.654849) |
+
+Signed sampled turns: left **negative**, mirrored right **positive**;
+**0 sign changes per wing**, checking all 511 interior triples
+of the 512-chord sweep. The exact derivative cross product is constant,
+-925.057530303 mm², strictly negative for every parameter.
+Thus the continuous polynomial also has no hidden inflections between samples.
+All 767 interior triples of the full sweep-plus-fillets path also turn
+strictly negative on the left (positive by reflection on the right).
+
+Minimum sweep curvature radius: **1831.186829 mm analytic**,
+at t=1.0; sampled circumcircle minimum
+1831.356095 mm. Including endpoint fillets, minimum
+radius is **5 mm**. Curvature magnitude can jump at the tangent R5 joins;
+tangent continuity is exact. It keeps the same sign across those joins.
+The requested run from pinky fillet exit to thumb fillet entry is the single
+quadratic, not the fillets.
+
+### T3 — shelf profile and unavoidable conflict
+
+Shelf means nearest Euclidean distance **from the perimeter curve to the
+bare PCB south chain**, not to the pocket or old case edge. Measured along
+the entire south path, including both fillets, with 20001 equally
+spaced arclength samples (0.006780882 mm spacing).
+
+Maximum sample **16.801255 mm**, at
+(-110.754620, 32.533297); nearest bare PCB witness
+(-111.885328, 15.770133), arclength
+50.537914 mm from the pinky fillet start.
+The 1-Lipschitz sampling upper bound is **16.804645 mm**.
+The right wing mirrors this witness. This exceeds 13 mm by
+3.801255 mm, and **does not meet T3**.
+
+The oversize shelf is a band, not just one exceptional station. Depth is
+above 10 mm from arclength 28.764502 to 58.620725 mm, approximately
+X=-127.322392..-104.563131; above 13 mm from arclength 43.682442 to
+54.843774 mm, approximately X=-115.988515..-107.459069. Threshold locations
+are sampled to within one profile spacing. In particular tip station 1 is
+12.462335 mm, so the ordinary 10 mm target also fails outside the single
+deep valley-center station. These are explicit conflicts for PMO/PO, not
+additional accepted exceptions.
+
+Valley stations use the midpoint of adjacent #198 projecting tips in the
+pinky-to-thumb chord projection; the normal ray intersects the new curve.
+The same station definition as round 3 is retained. Endpoint rays that miss
+the trimmed fillet use the nearest curve point. Tip numbering runs pinky 0
+to thumb 4; the deep notch is between tips 1 and 2.
+
+| Valley between tips | Shelf mm | Curve XY mm | Nearest PCB XY mm |
+| --- | --- | --- | --- |
+| [0, 1] | 8.758378 | (-132.300096, 14.096965) | (-127.920907, 6.511987) |
+| [1, 2] | 14.649532 | (-108.916051, 34.080935) | (-94.582102, 37.105284) |
+| [2, 3] | 8.751228 | (-85.305832, 53.603629) | (-78.103719, 48.632354) |
+| [3, 4] | 4.319602 | (-58.614064, 74.904197) | (-56.454263, 71.163312) |
+
+| Tip station | Shelf mm | Curve XY mm | #198 miter-tip distance to curve mm |
+| --- | --- | --- | --- |
+| 0 | 3.045455 | (-145.260723, -1.337919) | 0.256861 |
+| 1 | 12.462335 | (-117.290291, 26.999388) | 10.045385 |
+| 2 | 7.148728 | (-100.501773, 41.113002) | 3.977022 |
+| 3 | 3.321882 | (-69.979352, 65.932931) | 0.272428 |
+| 4 | 3.241074 | (-44.973852, 80.548502) | 0.330641 |
+
+All 20,001 profile rows and nearest-point witnesses are saved in
+`17mm-shelf-profile.csv`. JSON includes a 201-row overview, max, tip and
+valley stations, and the >10/>13 mm bands. The smooth perimeter lies outside
+the bare PCB tips with required clearance/wall; tiny old miter protrusions
+can be trimmed without violating containment (T7 ledger below).
+
+**Independent convexity lower bound:** take the unchanged pocket convex-hull
+support edge from (-142.930074,-1.573900) to (-67.418672,65.412668).
+The 2 mm wall requires both endpoints translated by 2 mm along outward
+normal (-0.663618,0.748071) to be inside or on the case. A convex south
+boundary must also enclose their connecting chord. At chord witness
+**(-109.050119,31.154730)**, nearest bare PCB distance is
+**15.643664 mm**, to (-111.885328,15.770133). All PCB points lie on the
+north side of this supporting line. Along its outward normal, distance to
+every PCB point, hence to the complete bare south chain, cannot decrease.
+Any convex south boundary crossing that outward ray therefore has shelf
+at least **15.643664 mm**, already **2.643664 mm over 13 mm**.
+The opposite endpoint disks and chord lie in the south domain between the
+retained sides; the ray meets the south run. This lower bound uses necessary
+pocket/wall containment, not the proposed Bézier or optimization result.
+It also applies to a non-strict convex hull, so strict convexity cannot
+restore the 13 mm allowance. The numerical witness suffices for the bound;
+it need not be the exact maximum of the support chord.
+
+### T4 — complete silhouette material changes
+
+Areas include the unchanged splice reinforcement footprints, exactly as
+rounds 1–3. Added and removed values are separate set differences.
+
+| Round 4 comparison | Added mm² | Removed mm² | Net mm² |
+| --- | --- | --- | --- |
+| #198 | 2981.489903 | 1.227967 | 2980.261936 |
+| round 2 | 0.000000 | 5173.530519 | -5173.530519 |
+| round 3 | 958.902397 | 77.552959 | 881.349438 |
+
+Added area **2,981.489903 mm²** is below the 3,500 mm² guideline by
+518.510097 mm², but 882.333951 mm² greater than round 3's added area.
+Round-2 added slivers below 3e-12 mm² are floating-point coincidence noise.
+
+### T5/T6 — joins, fillets, unchanged north and USB
+
+| Left junction (right mirrors) | XY mm | Interior angle ° | Radius mm |
+| --- | --- | --- | --- |
+| pinky side / fillet | (-144.850651, -2.247364) | 180.000000 | 5.0 |
+| pinky fillet / sweep | (-143.829403, 4.001145) | 180.000000 | 5.0 |
+| sweep / thumb fillet | (-51.230953, 80.654849) | 180.000000 | 5.0 |
+| thumb fillet / inner side | (-43.838461, 79.202391) | 180.000000 | 5.0 |
+| inner side / south bridge | (-38.757553, 70.402000) | 120.000000 | — |
+
+Analytic tangents at both ends of both R5 fillets are checked against the
+Bézier derivative and retained side supports. Entire sampled front has no
+acute angles. Each retained inner-side/bridge join is **120°**, and all
+curve joins are **180°**. The bridge datum and split X=3.5 mm are unchanged.
+
+North Bézier controls are asserted **exactly equal** to both round 2 and
+round 3. Clipped full north boundaries (Y<=-45 mm) have set equality on a
+1e-10 mm grid; raw Hausdorff difference is **1.588822e-14 mm**, from GEOS
+interpolation of the same analytic side supports at the clip line. This
+machine-roundoff difference is explicitly recorded, not a geometric edit.
+The USB plan slot is asserted equal as an unrounded GEOS set against both
+round 2 and round 3. The north-center PNG is byte-preserved from round 3.
+USB remains W12 × H4 mm, open top Z=11.2..15.2 mm, same provisional seat
+and connector datum; final alignment belongs to the pending Fly seat rework.
+
+### T7 — unchanged pocket, walls and every board, with witnesses
+
+Authoritative #198 dimension hash remains
+`6aa22662e6e17bd797de505303033fa1a2f729e74169e32c2a6355ff39ead086`.
+Both Wing CSV polygons are independently rebuilt and matched to the source
+transforms. Pocket is reconstructed by the same +0.502 mm mitered union,
+connector bay and 0.002 mm simplification arithmetic. **Pocket outside
+proposal: 0 mm²**. Every entire PCB +0.502 mm envelope is covered,
+**0 mm² outside for each of all four boards**.
+
+Minimum enclosing XY wall **2.000000 mm** (computed
+1.9999999999999878 mm), pocket (-142.930074,-1.573900) →
+perimeter (-144.662125,-2.573900); right mirrors left. The intentional
+tray seam and above-rim USB opening remain excluded from this enclosing
+wall metric, as in prior rounds.
+
+| Board | Bare PCB margin mm | PCB → perimeter XY mm | Clearance margin mm | Clearance → perimeter XY mm |
+| --- | --- | --- | --- | --- |
+| main | 2.502000 | (-37.892683, 67.900000) → (-37.892683, 70.402000) | 2.000000 | (-38.757553, 68.402000) → (-38.757553, 70.402000) |
+| wing_left | 2.502000 | (-45.678184, 77.384885) → (-43.511388, 78.635885) | 2.000000 | (-142.930074, -1.573900) → (-144.662125, -2.573900) |
+| wing_right | 2.502000 | (45.678184, 77.384885) → (43.511388, 78.635885) | 2.000000 | (142.930074, -1.573900) → (144.662125, -2.573900) |
+| udb | 18.563921 | (0.000000, -36.250000) → (0.000000, -54.813921) | 18.061921 | (0.000000, -36.752000) → (0.000000, -54.813921) |
+
+Removed #198 material totals **1.227967075 mm²** in six regions, all outside
+the unchanged pocket. These are pinky/thumb miter trims and the adjacent
+thumb-column miter tips, not PCB or pocket removal. Raw exact polygons and
+nearest local wall witnesses are in JSON. For readable bounds only, the
+ledger removes 1e-7 mm floating-point tails, with <1e-7 mm² area effect
+per region; areas and global checks use the raw geometry.
+
+| Removed location | Area mm² | X bounds mm | Y bounds mm | Interior witness XY mm | Local wall mm |
+| --- | --- | --- | --- | --- | --- |
+| left thumb column | 0.254075227 | [-70.150723, -68.551293] | [65.906161, 67.068150] | (-69.439749, 66.473987) | 2.000779 |
+| left thumb | 0.214994790 | [-45.069049, -43.838476] | [79.202417, 80.802680] | (-44.345613, 79.987573) | 2.005047 |
+| right thumb | 0.214994790 | [43.838476, 45.069049] | [79.202417, 80.802680] | (44.345613, 79.987573) | 2.005047 |
+| right thumb column | 0.254075227 | [68.551293, 70.150723] | [65.906161, 67.068150] | (69.439749, 66.473987) | 2.000779 |
+| right pinky | 0.144913520 | [144.850669, 145.662125] | [-2.247332, -0.706468] | (145.243980, -1.497258) | 2.033410 |
+| left pinky | 0.144913520 | [-145.662125, -144.850669] | [-2.247332, -0.706468] | (-145.243980, -1.497258) | 2.033410 |
+
+### Footprint, primitives, evidence and handoff
+
+Assembled bounds X=±145.520519 mm, Y=[-64.366600,81.702303] mm;
+footprint **291.041039 × 146.068903 mm**, versus #198 total width
+**-0.283212 mm**, depth **+0.899622 mm**.
+
+| Tray | XY mm | With 5 mm brim XY mm | XY delta vs #198 mm | Raw segments #198 / R2 / R3 / R4 |
+| --- | --- | --- | --- | --- |
+| left | 149.020519 × 146.068903 | 159.020519 × 156.068903 | -0.141606 × +0.899622 | 37 / 781 / 3597 / 1037 |
+| right | 142.020519 × 146.068903 | 152.020519 × 156.068903 | -0.141606 × +0.899622 | 37 / 764 / 3580 / 1020 |
+
+Both trays fit the 220 × 220 mm bed including 5 mm brim. **8 design
+primitives per tray**: one south quadratic sweep, two R5 circular fillets,
+one unchanged north quadratic portion, four straight segments including
+seam. Round 3 required 13 primitives when its six spline spans were counted
+separately; #198 used 37 straight segments per tray. Sampling uses 512
+chords per quadratic and 128 per R5 fillet. Maximum chord-deviation bounds:
+south 0.000003808 mm; north 0.000036441 mm; fillets 0.000111074 mm.
+The shelf upper bound is for the consumed sampled perimeter; adding the
+maximum chord bound covers its ideal-curve counterpart as well.
+
+Evidence in `hardware/case/issue-228-outline/`:
+
+- `17mm-outline-overlay.png`: assembled #198 dashed, round 3 faint, round 4 solid.
+- `17mm-south-edge-zoom.png`: calm sweep against stepped #198 outline and unchanged pocket, with shelf witnesses.
+- `17mm-outline.json`: all round polygons, constraints, curvature, shelf and distance witnesses.
+- `17mm-shelf-profile.csv`: full 20,001-row dense shelf profile.
+- `17mm-north-center-zoom.png`: unchanged round-3 north/USB evidence.
+
+README reproduces the active 2D gate. Historical `round2_outline.py` and
+`round3_outline.py` are byte-identical to their respective committed active
+modules; round 1 remains available as `round1_outline()`. The gate regenerates
+all three historical polygons and writes them beside the round-4 polygon.
+Historical complete round-3 evidence/script remain in commit `078b1e35`;
+round-2 evidence/script remain in `d720f5e9`.
+
+The active 2D run passes containment, walls, all boards, 0 curvature sign
+changes, tangencies, front angles, area guideline, north/USB equality,
+CSV/transform consistency and bed fit. **T3 remains a reported conflict**
+with a necessary 15.643664 mm convex lower bound; no 13 mm pass is claimed.
+Both updated PNGs were visually inspected. Source syntax and Git whitespace
+checks pass. `base.py`, `generate.py`, `details.py`, `verify.py`, inputs and
+all interior geometry remain unchanged from round 3. Only the active 2D
+outline and approval evidence changed.
+
+**STOP at the 2D gate.** Phase B must await separate dispatch after the
+PMO/PO resolves the shelf trade-off and approves the silhouette. Phase B
+will consume round 4 via `outline.proposed_outline()`. Separate 16 mm and
+17 mm solid/clearance checks, sampled BRep quality, front ring masks,
+fasteners/harness/rack clearances and provisional USB alignment remain
+pending. No push or PR; local commit uses
+`GIT_DIR=./.issue228-runtime/git`, branch `issue-228-case-outline`.
