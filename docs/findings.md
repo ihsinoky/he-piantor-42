@@ -551,7 +551,7 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   [Rev.2 CAM/BOM/CPL・面別点数](../hardware/kicad/qualification/issue-194-wing-rev2/cam-verification.json)。
 - **Promoted to:** —（P6では昇格しない。理由・将来候補は[Issue #217 作業報告](issue-217-p6.md#昇格しないfindingの判断)を参照）
 
-### F-014 — Main tip removal requires plane setback despite distant routes (draft)
+### F-014 — Main tip removal requires plane setback despite distant routes
 
 - **Conclusion:** All three Main Rev.5 60° tips can accept 4 mm equal-leg chamfers
   while preserving footprints, routes, vias, holes and Ø5 mm mounting support.

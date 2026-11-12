@@ -1155,10 +1155,9 @@ Rev.5 Gerber ZIP/BOM/CPL/GerberフレームCPL/quote-handoffを新生成しCAM�
 
 ## D-036 - Main Rev.6 triangular vertex chamfers
 
-Status: **Proposed (2026-11-12, Issue #226). PO adoption and manufacturing release pending.**
+Status: **Adopted (2026-11-12, Issue #226, PR #227). PO approved the 4 mm chamfers at the merge gate.**
 
-The PO identified the three sharp Main tips as a handling hazard. Propose Rev.6
-as Rev.5 plus an equal-leg **4 mm chamfer at each of the three approximately
+The PO identified the three sharp Main tips as a handling hazard. Rev.6 is Rev.5 plus an equal-leg **4 mm chamfer at each of the three approximately
 60° vertices**. Each new face is approximately 4 mm long, removing 3.464 mm of
 tip depth and replacing the original vertex with two approximately 120° corners.
 This is a substantive cut while retaining all three Ø2.2 mm mounting holes and
