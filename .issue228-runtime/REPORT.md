@@ -1181,3 +1181,115 @@ Each pitch now has **25 files**: the checkpoint's 24 plus `usb-overlap-curve.jso
 The unresolved cable-length/storage qualification item is now closed for the nominal Ø2/R5 assembly model. Source connector validity, strict full-mating overlap and the inherited 16 mm PCB/washer-to-case conflicts remain blockers. No merge GO is warranted. Scratch, logs and caches remain inside `.issue228-runtime/`. This continuation uses local commits only; no push, PR mutation or merge.
 
 Final audit: all 23 export-manifest hashes and every recorded source-input hash match at both pitches. Python syntax and source/document whitespace checks pass. The regenerated 17 mm assembled top and 16 mm north-wall close-up were visually inspected; the connected central service loop and preserved source shell edge rendering are present. Final 3D check exits are both 1 for the stated blockers; final retained verifier exits are 0 (17 mm) and 1 (16 mm). The latter writes exactly the four pre-continuation collisions and no cable collisions.
+
+## Phase C fix round — 16 mm daughterboard seat (2026-11-13)
+
+The 16 mm seat defects are resolved. This section supersedes the checkpoint
+and continuation's 16 mm PCB/washer collision and side-clearance blockers.
+The independent strict connector qualification remains FAIL; overall Phase C
+remains HELD for the preserved source connector defects.
+
+### Local geometry and scope
+
+Only the 16 mm seat changes. Its PCB-height cutter now includes the complete
+real Fly outline buffered by the existing nominal 0.5 mm, sampled/simplified
+with the same settings as the passing 17 mm pattern. The additional relief
+starts at Z9.8 and its cutter ends at Z16.0, above the Z15.2 case. It restores
+the scalloped/lobed clearance that the old Wing clearance-plus-2-mm wall-band
+clipping had truncated. The deeper Z2-floor cavity, underside leg relief,
+USB opening, board position and all other assembly placements remain intact.
+Boss restoration at 16 mm is constrained by the actual Wing pockets rather
+than their extra wall band, preserving the complete Ø4.5 mm boss top rims at
+Z10 and Ø1.7 mm pilots on the original 19 mm centers. Both full annular boss
+volumes have **0 mm³ missing material**, and both pilots have **0 mm³ obstruction**.
+The retained checks still confirm all thirteen PCB fixing points.
+
+`scope-check.json` compares the final exports with Phase B `e54f583c` and
+checkpoint `84e2ec10`. Final checkpoint removal is **4.776462580 mm³ left** /
+**4.782660995 mm³ right**, with **0 mm³ added**. Every removed volume is inside
+the explicit scalloped PCB-height relief and the authorized daughterboard
+bay. Phase B comparison gives **0 mm³ added and 0 mm³ removed outside the bay**
+on each side. The old full wall-band freeze in `check_scope.py` is replaced
+only at 16 mm by this explicit relief exception; zero removal elsewhere in
+that band and zero added material are still enforced. No clearance threshold
+or retained `verify.py` / `check_3d.py` gate was changed.
+
+The relief is disjoint from both actual Wing PCB+0.502 mm pocket envelopes,
+with a minimum **1.698051628 mm** separation. The actual Wing midplane-to-case
+clearances are unchanged at **0.501999999958 mm left** and
+**0.501999999960 mm right**. Checkpoint comparisons of all Wing route and storage
+dimension fields, bosses/mounts, transforms, feet, joints, palm and keycap
+measurements are identical. Splice plates, rack, Wing routes and Wing storage
+retain identical complete normalized STEP DATA relative to Phase B.
+
+Both pitches were regenerated because the seat source is shared. The **17 mm
+tray STEP DATA is identical to checkpoint** after the existing occurrence-ID
+normalization; all 17 mm printable geometry is unchanged. No pitch-17 recess
+arithmetic, source connector, cable pose or mounting placement was altered.
+
+### Before/after measured at the exported solids
+
+| 16 mm defect | Checkpoint / continuation | Final fix |
+| --- | ---: | ---: |
+| Fly PCB ∩ left tray | 0.298628642 mm³ | 0 mm³ |
+| Fly PCB ∩ right tray | 0.298628642 mm³ | 0 mm³ |
+| Fly MH1 washer ∩ left tray | 0.078090269 mm³ | 0 mm³ |
+| Fly MH2 washer ∩ right tray | 0.078090269 mm³ | 0 mm³ |
+| Fly PCB midplane minimum to either tray | 0.000000000 mm | 0.496177984 mm |
+
+The final PCB side clearance matches the 17 mm reference
+(**0.496177984 mm**) and exceeds the strict **>0.20 mm** requirement. Both Fly
+screws and both washers have zero overlap with either tray; the complete
+retained assembly check reports no unexpected overlaps. Integral boss support
+is preserved as described above, with intended PCB-to-boss seating contact.
+
+### Final gate table and regenerated deliverables
+
+| Final gate | 16 mm | 17 mm |
+| --- | --- | --- |
+| Full retained `verify.py` suite | PASS, exit 0; zero unexpected overlaps | PASS, exit 0 |
+| Fly PCB side clearance >0.20 mm | PASS, 0.496177984 mm | PASS, 0.496177984 mm |
+| Wing PCB clearances / pockets | PASS, unchanged 0.502 mm; pockets intact | PASS, unchanged |
+| MH1/MH2 full bosses and open pilots | PASS, zero missing/obstructing volume | PASS |
+| Underside housing / mated Fly plug / shell legs to case | PASS, 0.535776245 / 1.020000000 / 0.250000000 mm | PASS, same values |
+| Connected 170 mm cable, including all stored allowance/residual | PASS; minimum obstacle gap 0.400000000 mm | PASS; minimum 0.400000000 mm |
+| Cable to trays / rack | PASS, 2.027079539 / 0.924179941 mm | PASS, 2.027079539 / 0.890105436 mm |
+| Continuous USB insertion against case/boards/hardware | PASS, zero unexpected swept overlaps | PASS |
+| Phase B scope outside daughterboard bay | PASS, 0 added / 0 removed mm³ | PASS, 0 / 0 mm³ |
+| 17 mm case freeze vs checkpoint | — | PASS, complete normalized STEP DATA identical |
+| Printable STEP/STL topology, meshes, bed fit | PASS; max mesh volume error 0.025412150% | PASS; max error 0.023905540% |
+| Strict connector-internal qualification | FAIL, preserved | FAIL, preserved |
+| Overall `check_3d.py` / overall Phase C | FAIL, expected exit 1 / HELD | FAIL, expected exit 1 / HELD |
+
+The final strict checker completes all geometry, underside, insertion, cable,
+curve and render checks before exiting for exactly the two preserved connector
+blockers: invalid original solid **42**, and strict full-mate overlap with
+original solids **41/42**. At the unchanged 6.20 mm nominal pose these remain
+**4.561305121 / 0.236012204 mm³** respectively. No healing, remodeling, exclusion
+or shallower mating substitution occurred. The original source hash remains
+`5707b0866c41ebe3e1776fb918f55f2ae8503a37a938268fe3ef24b1c29c1ee7`.
+All 68 source solids are retained. The complete normalized
+`fly-harness-and-usb.step` DATA is identical to continuation `db229e4c` at both
+pitches, proving the connected cable and plug reservations themselves stayed
+unchanged; their obstacle checks were rerun against the final case solids.
+Cable minimums remain strictly above 0.20 mm, including source solids 41/42,
+Wing routes/storage and keycaps.
+
+Each pitch retains its 25-file export set. STEP/STL, dimensions, scope/3D audits,
+review PNGs and manifests were regenerated; each final manifest's **23 hashes**
+and all **18 source-input hashes** pass an independent integrity audit. The
+full retained verifier was rerun after final geometry generation for each
+pitch; final manifest integrity was checked again after the strict checkers
+finished. Both `check_outline.py` results pass. The final 16 mm north-wall
+section PNG was visually inspected; the intact floor, underside cavity,
+unchanged mouth and preserved invalid-shell edge rendering are present.
+Generator/checker Python sources parse and source/document whitespace checks
+pass.
+
+Reproduction remains the README command sequence, now with both retained
+verifiers expected to pass and both strict checkers expected to exit 1 solely
+for connector defects. Local fix-round logs and the independent collision,
+Wing clearance and integrity audits are in `.issue228-runtime/fix-*`.
+Scratch stayed in `.issue228-runtime/`. Committed locally on
+`issue-228-case-outline`; no push, PR mutation or merge. The seat fix is complete;
+overall Phase C remains HELD pending the separately scoped connector decision.

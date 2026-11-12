@@ -21,7 +21,7 @@ def outline_polygon(s):
         pts.extend([(v.X,v.Y) for v in e.positions([i/n for i in range(n)])])
     return Polygon(pts)
 
-def prepare(outer,inputs,boards):
+def prepare(outer,inputs,boards,pitch):
     inputs.extend([MODEL,REV6])
     official=import_step(MODEL)
     solids=official.solids();pcb=solids[0];b=pcb.bounding_box()
@@ -42,11 +42,21 @@ def prepare(outer,inputs,boards):
     # stays inside the 0.5 mm nominal PCB clearance allowance.
     protected=unary_union([boards['wing_'+side].buffer(2.502,join_style=2) for side in ['left','right']])
     seat=polygon.buffer(.5,resolution=48).simplify(.005,preserve_topology=True).union(box(-12.30,cy-1.65,12.30,-18.)).difference(protected)
+    if pitch==16:
+        # The full Wing wall band crosses the Fly at this pitch. Relieve only
+        # the PCB-height scalloped pocket; retain the protected deep cavity.
+        relief=polygon.buffer(.5,resolution=48).simplify(.005,preserve_topology=True)
+        wing_pockets=unary_union([boards['wing_'+side].buffer(.502,join_style=2) for side in ['left','right']])
+        assert relief.disjoint(wing_pockets)
+        seat=seat.union(relief)
     deep=box(-12.3,cy-1.65,12.3,-18).difference(protected)
     legs=box(-4.9,cy-4.1,4.9,cy-1.5).difference(protected)
     opening=box(-8.,wall-25,8.,cy+3.).difference(protected)
     tower_polygon=outer.intersection(box(-12.3,wall-1,12.3,wall+2.)).difference(protected)
-    protected_solid=prism(protected,2,40)
+    # Restore the complete MH1/MH2 support up to Z10 after the shallow relief.
+    # At 16 mm the old wall band also crosses their top rims; only the real
+    # Wing pockets constrain boss/pilot restoration. 17 mm stays unchanged.
+    protected_solid=prism(wing_pockets if pitch==16 else protected,2,40)
     holes=[dict(board='fly',ref=f'MH{i}',xy=[x,cy],diameter=2.2,boss_diameter=4.5) for i,x in enumerate([-9.5,9.5],1)]
     return dict(solid=solid,polygon=polygon,holes=holes,center_y=cy,wall_y=wall,board_bottom=BOTTOM,tower_polygon=tower_polygon,protected=protected_solid,
                 seat_cut=prism(seat,BOTTOM-.2,6.2).fuse(prism(deep,2,BOTTOM-2)).fuse(prism(legs,BOTTOM-.7,.7)),opening_cut=prism(opening,BOTTOM-.3,7),

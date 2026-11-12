@@ -169,7 +169,7 @@ def generate(args):
     usb_slot=usb_access(outer,usb_front[0])
     upper=upper.difference(usb_slot)
     from fly import prepare
-    fly = prepare(outer, inputs, boards)
+    fly = prepare(outer, inputs, boards,args.pitch)
     holes[:] = [h for h in holes if h['board'] != 'udb'] + fly['holes']
     # Low rim, south flush at Wing top. USB open-top slot begins at flush rim top (11.2 by default).
     top=P['pcb_bottom']+P['pcb_thickness']

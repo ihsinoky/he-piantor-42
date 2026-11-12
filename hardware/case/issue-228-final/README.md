@@ -25,8 +25,9 @@ remain unchanged. J4 uses the official Fly's identical header solid aligned to
 the Rev.6 pad row, top face up.
 
 The front recess follows the real PCB scallops and lobes with 0.5 mm nominal
-clearance, clipped to preserve the existing Wing walls; the 16 mm pitch
-has the inherited Fly PCB/washer collisions reported below. Wall material beside the port is retained. The opening is W16, starts at Z9.7, and opens through the Z15.2 case top. Its cut
+clearance. At 16 mm, the PCB-height scalloped relief extends into the old Wing
+wall protection band, within the daughterboard bay, while remaining disjoint
+from both Wing clearance pockets. Deep cavity and mounting features are retained. Wall material beside the port is retained. The opening is W16, starts at Z9.7, and opens through the Z15.2 case top. Its cut
 ends at Z16.7 above the case. Reference plug: 8.25 × 2.40 mm hollow rounded shell,
 0.20 mm wall, 6.65 mm exposed length; 12 × 6 mm overmold, 15 mm long; Ø4 mm cable
 exit, 25 mm long. A larger 8.9 × 3.2 mm shell travel envelope checks the requested
@@ -53,16 +54,19 @@ with original source solids 41 and 42 at 0..6 mm in 0.25 mm increments, plus
 These curves are decision material; strict connector qualification remains FAIL.
 
 Checkpoint reconciliation found stale 16 mm PASS claims in the interrupted
-report: its Fly PCB and two washers intersect the preserved Wing wall at Z10.
-The retained 16 mm verifier therefore exits nonzero, as does the strict checker.
-The 17 mm retained verifier passes. The case is frozen for this continuation;
-no board, fixing, rack, Wing reservation or connector is moved to fit the cable.
+report. The subsequent fix round relieves its Fly PCB/washer collisions at Z10.
+Both retained verifiers now pass; strict checkers retain the source connector
+blockers. The 17 mm case remains identical to checkpoint STEP DATA. No board,
+fixing, rack, Wing reservation or connector is moved.
 
 The approved outline, Wing/Main pockets, split at X3.5, splice plates, Wing
 harness, storage rack and heights elsewhere are retained. `check_scope.py`
 compares the trays against Phase B commit e54f583c: zero added/removed volume
-outside the daughterboard bay, and zero added/removed volume in the existing
-Wing clearance-plus-2-mm wall reservations. It also compares the unchanged auxiliary STEP
+outside the daughterboard bay. The only permitted removal in the old Wing
+clearance-plus-2-mm wall band is the 16 mm scalloped PCB-height relief; the
+actual Wing clearance pockets remain intact. The 16 mm checkpoint comparison
+allows only that relief, with zero added material; the 17 mm trays must retain
+identical normalized STEP DATA. It also compares the unchanged auxiliary STEP
 DATA records, normalizing only assembly occurrence serial numbers.
 
 Each pitch has STEP/STL for the five printable parts, `assembly.step`,
@@ -90,7 +94,7 @@ GIT_DIR=./.issue228-runtime/git "$CAD_PY" hardware/case/issue-228-final/check_sc
 for pitch in 17 16; do
   # Expected nonzero: writes audits/PNGs/curves, then reports preserved blockers.
   "$CAD_PY" hardware/case/issue-228-final/check_3d.py "$pitch"
-  # 17mm PASS; 16mm nonzero: inherited PCB/washer-to-case collisions.
+  # Both pitches PASS the complete retained suite.
   "$CAD_PY" hardware/case/issue-228-final/verify.py "hardware/case/issue-228-final/${pitch}mm"
 done
 ```
