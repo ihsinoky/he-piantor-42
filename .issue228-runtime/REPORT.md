@@ -1093,3 +1093,91 @@ The complete STL/STEP/JSON/SVG/CSV/PNG set is regenerated, with official source 
 The interrupted tree also contained a later unfinished Z15.5/tower experiment, inconsistent with this authoritative Z10 Phase C report and the Z10 assembly data. It was reverted before the checkpoint and both pitches regenerated. The actual opening is W16 (as in the exported dimensions and bracketing probes); the historical W14 wording above was a transcription error. No raised tower is retained. Export manifests were refreshed after regeneration.
 
 Checkpoint rechecks further found that the late protected-Wing clipping had left stale 16 mm PASS outputs: at Z10 its PCB intersects each tray by **0.298628642 mm³**, and each Fly washer by **0.078090269 mm³**; PCB midplane clearance is **0 mm**. This is present before cable continuation. The 17 mm retained verifier passes. The 16 mm retained verifier fails, and both strict gates fail. These measured rechecks supersede the earlier 16 mm PASS claims; case geometry will remain frozen at this reconciled checkpoint during continuation. Both scope gates pass. The late raised-board experiment is not adopted.
+
+## Phase C continuation — connected cable and connector decision material (2026-11-13)
+
+**BLOCKED remains the overall result.** Checkpoint `84e2ec10` preserves the reconciled Phase C candidate before this continuation. The checkpoint reconciliation above supersedes the historical 16 mm PASS claims: a late Wing-wall protection edit had left stale audit outputs before the restart. The Z15.5/tower experiment was incomplete and has not been adopted. Fly PCB bottom stays Z10; the actual inherited opening is W16. No case geometry or other assembly part is moved during the cable continuation.
+
+### Entire included 170 mm cable is now modeled
+
+Each exported `EZmate-170mm-route` is one valid, connected solid with a **170.000000000 mm analytic centerline**, Ø2 mm circular section and analytic **R5 mm** corner fillets. The service storage is an **open detour in that connected path**, not a detached capsule or a second cable. Both housing exits remain the same. The central portion of the prior direct route is replaced by the service detour; the historical direct-route lengths are retained as budget references, not added as a second coincident physical route.
+
+| Pitch | Nominal direct-route reference mm | Retained service allowance mm | Residual included cable mm | Physically modeled service detour above nominal mm | Actual connected cable mm | Unmodeled mm |
+| --- | --- | --- | --- | --- | --- | --- |
+| 17 | 73.870504390 | 30.000000000 | 66.129495610 | 96.129495610 | 170.000000000 | 0 |
+| 16 | 72.499319982 | 30.000000000 | 67.500680018 | 97.500680018 | 170.000000000 | 0 |
+
+The loop stays within the daughterboard/central bay: the tube has X bounds **±8 mm**. Its elevated storage run is at centerline **Z25 mm**, tube top **Z26 mm**, above the unchanged rack; it is an assembly reservation, not a printable case feature. It rises north of the rack at waypoint Y−29.5 and descends on its east side. North loop-crossbar waypoint Y is **−40.908910057 mm (17 pitch)** / **−41.282381362 mm (16 pitch)**. South loop-crossbar waypoint Y is −12 mm. The exact waypoints, nominal references, stored budget and all obstacle clearances are in `dimensions.json`. Both connected solids have the expected π×170 mm³ volume, within 1e−5 mm³, and remain valid single solids after STEP reload.
+
+The strict cable threshold remains **>0.20 mm**. Every assembly source instance, non-mating component, board, fixing, both trays, rack, original Wing routes, separate Wing `storage-200mm.step` solids and all 42 keycap reservations are checked. The two EZmate housings and their intended header mates remain separately reported mating volumes. USB source solids 41/42 are obstacles to this cable and are not excluded from its clearance proof.
+
+| Pitch | PCB minimum mm | Case minimum mm | Rack mm | Wing route minimum mm | Wing storage minimum mm | Keycap minimum mm | Main H1 screw mm |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 17 | 0.400000000 | 2.027079539 | 0.890105436 | 4.000000000 | 4.000000000 | 15.008036199 | 0.891206431 |
+| 16 | 0.400000000 | 2.027079539 | 0.924179941 | 4.000000000 | 4.000000000 | 13.888015920 | 0.891206431 |
+
+Rejected development placements: an unnecessarily long high loop could not retain R5 tangent lengths at 170 mm; the first shortened 16 mm rise touched the rack (0 mm clearance). Moving only the cable rise north produced the final clear layout. No clearance threshold, other part or cable reservation was reduced or moved.
+
+### Connector-internal curve method and unchanged strict FAIL
+
+`check_3d.py` translates the actual exported nominal hollow reference shell along its insertion axis, keeping the shell's dimensions, wall and 6.65 mm exposed length unchanged. It intersects the preserved **original source solids 41 and 42** at depths **0, 0.25, …, 6.00, 6.20 mm** (26 samples per pitch). No connector healing, replacement, exclusion or shallower substitute mating pose is used. `usb-overlap-curve.json` and the embedded `connector_overlap_curve` in `3d-check.json` contain every volume and per-solid onset. Numerical onset is bracketed within the first positive 0.25 mm sample interval by 16 bisections using a stated **1e−8 mm³** overlap threshold; this is a numerical CAD onset, not a physical engagement qualification. The invalid source solid 42 remains invalid and its results carry that limitation.
+
+| Pitch | Solid | First positive sampled depth mm | Numerical onset bracket mm (1e−8 mm³ threshold) | At 6.20 mm, overlap mm³ |
+| --- | --- | --- | --- | --- |
+| 17 | 41 | 5.00 | [4.805000305, 4.805004120] | 4.561305121 |
+| 17 | 42 | 5.00 | [4.901409149, 4.901412964] | 0.236012204 |
+| 16 | 41 | 5.00 | [4.805000305, 4.805004120] | 4.561305121 |
+| 16 | 42 | 5.00 | [4.901409149, 4.901412964] | 0.236012204 |
+
+Complete sampled volumes (mm³), computed separately for both pitches:
+
+| Depth mm | 17 mm: solid 41 | 17 mm: solid 42 | 16 mm: solid 41 | 16 mm: solid 42 |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 0.25 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 0.50 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 0.75 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 1.00 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 1.25 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 1.50 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 1.75 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 2.00 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 2.25 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 2.50 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 2.75 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 3.00 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 3.25 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 3.50 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 3.75 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 4.00 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 4.25 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 4.50 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 4.75 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| 5.00 | 0.536777688 | 0.047005739 | 0.536777688 | 0.047005739 |
+| 5.25 | 1.224954212 | 0.166203822 | 1.224954212 | 0.166203822 |
+| 5.50 | 1.913130735 | 0.236012204 | 1.913130735 | 0.236012204 |
+| 5.75 | 2.855571473 | 0.236012204 | 2.855571473 | 0.236012204 |
+| 6.00 | 3.803201277 | 0.236012204 | 3.803201277 | 0.236012204 |
+| 6.20 | 4.561305121 | 0.236012204 | 4.561305121 | 0.236012204 |
+
+At 6.20 mm the combined overlap is **4.797317325 mm³** for either pitch. Both first positive grid samples are 5.00 mm, with zero sampled overlap through 4.75 mm. A lower depth is decision material only and has not been substituted for the required 6.20 mm nominal full-mate target. **The strict connector-internal gate is FAIL at both pitches.**
+
+### Reverification, frozen scope and deliverables
+
+| Check | 17 mm | 16 mm |
+| --- | --- | --- |
+| Connected 170 mm cable, all stored allowance/residual, >0.20 mm obstacle clearance | PASS | PASS |
+| Retained verify.py suite | PASS, exit 0 | FAIL, exit 1; same four checkpoint PCB/washer collisions |
+| Printable STEP/STL topology, meshes, bed fit and <0.1% mesh volume error | PASS | PASS |
+| Phase B scope: case volume added/removed outside daughterboard bay | 0 / 0 mm³ | 0 / 0 mm³ |
+| Continuation case freeze vs checkpoint 84e2ec10 | Complete normalized STEP DATA identical; 0 mm³ change | Complete normalized STEP DATA identical; 0 mm³ change |
+| Splice plates, rack, Wing routes and Wing storage geometry | Identical to Phase B | Identical to Phase B |
+| Connector-internal gate / overall check_3d.py | FAIL, expected exit 1 | FAIL, expected exit 1 |
+
+The four 16 mm unexpected overlaps remain exactly those measured before cable continuation: PCB with left/right tray **0.298628641635 / 0.298628641638 mm³**, and Fly MH1/MH2 insulating washer with left/right tray **0.078090269325 / 0.078090269325 mm³**. There are **no new unexpected assembly overlaps** from the cable. `verify.py` now writes its full failure data before its final assertion so stale PASS files cannot survive these measured collision failures. `check_3d.py` likewise records the inherited zero Fly PCB midplane clearance as a blocker while completing the requested diagnostics. Neither acceptance threshold nor strict gate is relaxed.
+
+Each pitch now has **25 files**: the checkpoint's 24 plus `usb-overlap-curve.json`. Regenerated `fly-harness-and-usb.step`, `assembly.step`, dimensions, 3D audits and review PNGs include the connected cable. Manifests cover all **23** exported audit/model files other than the manifest and `verification.json`. The five printable parts per pitch are valid single solids with closed meshes; maximum mesh volume errors are **0.023905540% (17 mm)** and **0.025410011% (16 mm)**. All original 68 Fly solids remain; the source STEP hash and invalid-solid index **42** are unchanged. The source shell is rendered as BRep edges, without healing. Reproduction and expected failure exits are documented in `hardware/case/issue-228-final/README.md`.
+
+The unresolved cable-length/storage qualification item is now closed for the nominal Ø2/R5 assembly model. Source connector validity, strict full-mating overlap and the inherited 16 mm PCB/washer-to-case conflicts remain blockers. No merge GO is warranted. Scratch, logs and caches remain inside `.issue228-runtime/`. This continuation uses local commits only; no push, PR mutation or merge.
+
+Final audit: all 23 export-manifest hashes and every recorded source-input hash match at both pitches. Python syntax and source/document whitespace checks pass. The regenerated 17 mm assembled top and 16 mm north-wall close-up were visually inspected; the connected central service loop and preserved source shell edge rendering are present. Final 3D check exits are both 1 for the stated blockers; final retained verifier exits are 0 (17 mm) and 1 (16 mm). The latter writes exactly the four pre-continuation collisions and no cable collisions.

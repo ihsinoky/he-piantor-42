@@ -1,6 +1,7 @@
 """Phase C scope gate against the committed Phase B STEP data; scratch stays local."""
 from base import *
 import os,re,subprocess
+CHECKPOINT='84e2ec10'
 BASE='e54f583c2fcb0cbdfde5363f3d43b281927fa2e3'
 SCRATCH=ROOT/'.issue228-runtime/phase-c-baseline'
 
@@ -32,6 +33,15 @@ def check(pitch):
         wing_added=sum(s.volume for s in wing_added_shape) if wing_added_shape else 0.
         assert max(wing_removed,wing_added)<1e-5,('Wing wall modified',pitch,side,wing_removed,wing_added)
         result[side]=dict(added_outside_mm3=outside[0],removed_outside_mm3=outside[1],removed_wing_wall_mm3=wing_removed,added_wing_wall_mm3=wing_added)
+    result['continuation_case_checkpoint']=CHECKPOINT
+    result['continuation_case_volume_change_mm3']={}
+    for side in ['left','right']:
+        name=f'tray-{side}.step'
+        raw=subprocess.check_output(['git','show',f'{CHECKPOINT}:hardware/case/issue-228-final/{pitch}mm/{name}'],cwd=ROOT,env={**os.environ,'GIT_DIR':os.environ.get('GIT_DIR',str(ROOT/'.issue228-runtime/git'))})
+        current=(out/name).read_bytes()
+        # Exact complete geometry records prove all case material stayed frozen.
+        assert payload(raw)==payload(current),('Continuation changed case DATA',pitch,side)
+        result['continuation_case_volume_change_mm3'][side]=dict(added=0.,removed=0.,proof='Identical complete normalized STEP DATA records')
     result['unchanged_data_sha256']={}
     for name in ['splice-1.step','splice-2.step','cable-rack.step','harness.step','storage-200mm.step']:
         old=baseline(pitch,name).read_bytes();new=(out/name).read_bytes()

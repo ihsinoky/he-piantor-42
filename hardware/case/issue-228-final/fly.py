@@ -77,6 +77,30 @@ def smooth_path(points,r=5.):
         edges.extend([Edge.make_line(prev,start),Edge.make_three_point_arc(start,mid,end)]);prev=end
     edges.append(Edge.make_line(prev,points[-1]));return Wire(edges)
 
+def nominal_cable_points(cy):
+    return [(0,cy+2.87,8.6),(0,cy+10,8.6),(-7,cy+17,8.6),(-7,cy+29,18.2),(-7,7,18.2),(0,14,12.6),(0,17.435,12.6)]
+
+def connected_cable(cy):
+    """Open, connected service detour: baseline route + all 170mm length budget.
+
+    Replaces the central transit with an elevated loop, not a disconnected ring.
+    All corners are the same analytic R5 arcs used by the nominal route.
+    The north crossbar position absorbs the pitch-dependent length difference.
+    """
+    def points(north):
+        return [(0,cy+2.87,8.6),(0,cy+10,8.6),(-7,cy+17,8.6),
+                (-7,-29.5,25),(-7,-12,25),(7,-12,25),(7,north,25),
+                (-7,north,25),(-7,-29,25),(7,-29,18.2),
+                (7,7,18.2),(0,14,12.6),(0,17.435,12.6)]
+    trial=smooth_path(points(-44))
+    north=-44+(trial.length-170)/2  # Two parallel straight legs vary together.
+    pts=points(north);path=smooth_path(pts)
+    assert abs(path.length-170)<1e-9,path.length
+    cable=sweep(Face(Wire.make_circle(1,Plane(origin=pts[0],z_dir=(0,1,0)))),path=path)
+    assert cable.is_valid and len(cable.solids())==1
+    assert abs(cable.volume-math.pi*path.length)<1e-5,(cable.volume,path.length)
+    return cable,path,pts
+
 def volume(a,b):
     v=a.intersect(b);return sum(q.volume for q in v) if v else 0.
 
@@ -95,7 +119,7 @@ def usb_plug(cy):
     shell.label='USB-reference-shell';overmold.label='USB-reference-overmold';exit.label='USB-reference-cable-exit'
     return dict(zip(['USB-reference-shell','USB-reference-overmold','USB-reference-cable-exit'],[shell,overmold,exit]))
 
-def harness(ctx,body,parts,components,cables,hardware):
+def harness(ctx,body,parts,components,cables,hardware,storage,key_solids):
     f=ctx['fly'];cy=f['center_y'];out=ctx['out'];shapes=usb_plug(cy)
     # Molex 781720000-SD: 4-way A=5.0, body length3.5, height1.3;
     # 781710000-SD mated stack1.9. Conservative solid mating reservations.
@@ -103,13 +127,15 @@ def harness(ctx,body,parts,components,cables,hardware):
     mainplug=prism(box(-2.5,17.435,2.5,20.935),11.8,1.3)
     flyplug.label='EZmate-Fly-plug';mainplug.label='EZmate-Main-plug'
     shapes.update({'EZmate-Fly-plug':flyplug,'EZmate-Main-plug':mainplug})
-    pts=[(0,cy+2.87,BOTTOM-1.4),(0,cy+10,BOTTOM-1.4),(-7,cy+17,BOTTOM-1.4),(-7,cy+29,18.2),(-7,7,18.2),(0,14,12.6),(0,17.435,12.6)]
-    path=smooth_path(pts)
-    cable=sweep(Face(Wire.make_circle(1,Plane(origin=pts[0],z_dir=(0,1,0)))),path=path)
+    nominal=smooth_path(nominal_cable_points(cy))
+    cable,path,pts=connected_cable(cy)
     cable.label='EZmate-170mm-route';shapes[cable.label]=cable
-    assert cable.is_valid and path.length+30<=170,(path.length,path.length+30)
+    assert cable.is_valid and abs(path.length-170)<1e-9
     obstacles={'case':body,**{'part-'+k:v for k,v in parts.items() if not k.startswith('tray')},**{'Main-'+k:v for k,v in components.items() if k!='J4'},**cables,**hardware}
     obstacles.update({'pcb-'+s.label:s for s in ctx['board_solids'] if s.label!='fly'})
+    obstacles.update({'storage-'+k:v for k,v in storage.items()})
+    obstacles.update({'keycap-'+str(i):v for i,v in enumerate(key_solids)})
+    obstacles.update({q.label:q for q in f['solid'].children if q.label!='Fly-official-67'})
     gaps={k:cable.distance_to(v) for k,v in obstacles.items()}
     # Source header / receptacle are intended mates; real PCB is always an obstacle.
     pcb=f['solid'].children[0]
@@ -126,5 +152,5 @@ def harness(ctx,body,parts,components,cables,hardware):
       opening=dict(width_mm=16,z_min_mm=BOTTOM-.3,z_max_mm=BOTTOM+6.7,case_top_z_mm=FLY_TOP,open_above_case=True,center_x_mm=0),
       usb=dict(shell_outer_xz_mm=[8.25,2.4],shell_wall_mm=.2,exposed_shell_length_mm=6.65,engagement_mm=6.2,overmold_xyz_mm=[12,15,6],cable_diameter_mm=4,cable_exit_length_mm=25,connector_internal_overlaps=mate,qualification='Intended mating volumes reported separately; strict connector-internal zero-overlap is NOT demonstrated.'),
       ezmate=dict(part_number='781720004',housing_xyz_mm=[5,3.5,1.3],mated_stack_mm=1.9,source='https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/781/78172/781720002_sd.pdf'),
-      cable=dict(nominal_mm=170,route_length_mm=path.length,service_allowance_mm=30,remaining_mm=170-path.length-30,diameter_mm=2,bend_radius_mm=5,waypoints_mm=pts,clearances_mm=gaps,minimum_mm=min(gaps.values()),threshold_mm=.2),local_edit_xy_mm=f['local_edit_xy'])
+      cable=dict(nominal_mm=170,route_length_mm=nominal.length,service_allowance_mm=30,remaining_mm=170-nominal.length-30,connected_length_mm=path.length,stored_service_detour_mm=path.length-nominal.length,unmodeled_mm=0.,stored_loop_includes_service_allowance=True,placement='Central bay; elevated open service detour at Z25 (tube top Z26), rising north of rack and descending east; replaces nominal central transit.',diameter_mm=2,bend_radius_mm=5,waypoints_mm=pts,nominal_waypoints_mm=nominal_cable_points(cy),clearances_mm=gaps,minimum_mm=min(gaps.values()),threshold_mm=.2),local_edit_xy_mm=f['local_edit_xy'])
     return shapes,data

@@ -43,11 +43,11 @@
     "tray-left": {
       "valid": true,
       "solids": 1,
-      "faces": 254,
-      "edges": 681,
-      "triangles": 58962,
+      "faces": 275,
+      "edges": 744,
+      "triangles": 58930,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.0002532921620584607,
+      "mesh_volume_relative_error": 0.00025410011333921664,
       "size_mm": [
         142.3179978178,
         139.55756390259302,
@@ -57,11 +57,11 @@
     "tray-right": {
       "valid": true,
       "solids": 1,
-      "faces": 250,
-      "edges": 681,
-      "triangles": 51702,
+      "faces": 273,
+      "edges": 750,
+      "triangles": 51676,
       "nonmanifold_edges": 0,
-      "mesh_volume_relative_error": 0.00025399004204025794,
+      "mesh_volume_relative_error": 0.0002516535760661855,
       "size_mm": [
         135.31799781788,
         139.55756390259302,
@@ -84,8 +84,29 @@
     }
   },
   "assembly_solids": 183,
-  "assembly_broadphase_candidate_pairs": 423,
-  "unexpected_overlaps": [],
+  "assembly_broadphase_candidate_pairs": 433,
+  "unexpected_overlaps": [
+    {
+      "a": "tray-left",
+      "b": "Fly-official-00",
+      "volume_mm3": 0.29862864163544534
+    },
+    {
+      "a": "tray-left",
+      "b": "washer-fly-MH1",
+      "volume_mm3": 0.07809026932498923
+    },
+    {
+      "a": "tray-right",
+      "b": "Fly-official-00",
+      "volume_mm3": 0.2986286416377343
+    },
+    {
+      "a": "tray-right",
+      "b": "washer-fly-MH2",
+      "volume_mm3": 0.0780902693254116
+    }
+  ],
   "intended_mating_contacts": [
     {
       "a": "Fly-official-41",
@@ -119,6 +140,5 @@
     }
   ],
   "mount_inverse_error_mm": 7.944109290391274e-15,
-  "fixed_points_with_boss": 13,
-  "checkpoint_recheck_failure": "PCB/case 0.2986286416 mm3 and Fly washer/case 0.0780902693 mm3 per half; source tree late protected-Wing clipping was not represented by previous PASS output."
+  "fixed_points_with_boss": 13
 }

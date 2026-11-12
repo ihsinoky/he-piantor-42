@@ -38,6 +38,29 @@ def leaves(shape,owner=None):
     if label:shape.label=label
     return [shape]
 
+def overlap_curve(shell,items):
+    """Translate the exported nominal hollow shell; never alter source solids."""
+    depths=[i*.25 for i in range(25)]+[6.20]
+    threshold=1e-8
+    def overlap(depth,index):
+        q=shell.translate((0,depth-6.2,0)).intersect(items[f'Fly-official-{index:02d}'])
+        return sum(v.volume for v in q) if q else 0.
+    rows=[dict(depth_mm=depth,**{f'solid_{i}_mm3':overlap(depth,i) for i in [41,42]}) for depth in depths]
+    onset={}
+    for index in [41,42]:
+        first=next((j for j,row in enumerate(rows) if row[f'solid_{index}_mm3']>threshold),None)
+        if first is None:onset[str(index)]=None;continue
+        lo=depths[max(0,first-1)];hi=depths[first];bracket=[lo,hi]
+        for _ in range(16):
+            mid=(lo+hi)/2
+            if overlap(mid,index)>threshold:hi=mid
+            else:lo=mid
+        onset[str(index)]=dict(first_positive_sample_mm=depths[first],sample_bracket_mm=bracket,
+                              numerical_onset_mm=hi,numerical_bracket_mm=[lo,hi])
+    return dict(depth_step_mm=.25,additional_endpoint_mm=6.2,volume_threshold_mm3=threshold,
+                onset=onset,samples=rows,strict_gate='FAIL',
+                method='Exported unmodified hollow shell translated along +Y; overlap with original source solids 41 and 42, including invalid source shell 42. Numerical onset uses stated volume threshold; no physical engagement qualification.')
+
 def check(pitch):
     out=HERE/f'{pitch}mm';gate=json.loads((out/'outline-check.json').read_text())
     trays=[import_step(out/f'tray-{side}.step') for side in ('left','right')]
@@ -69,7 +92,6 @@ def check(pitch):
     assert abs(pcb_bb.min.Z-board_bottom)<1e-6 and abs(pcb_bb.max.Z-board_bottom-1.59)<1e-6
     pcb_sections=items['Fly-official-00'].intersect(Plane.XY.offset(board_bottom+.795))
     pcb_side_gap=min(face.distance_to(t) for face in pcb_sections for t in trays)
-    assert pcb_side_gap>.2,('Fly lateral PCB clearance',pcb_side_gap)
     # Independently bracket both 16 mm face edges and the opening's bottom.
     probes=[]
     for x,z,want in [(0,board_bottom-.31,True),(0,board_bottom-.29,False),(-7.99,board_bottom+3.32,False),(7.99,board_bottom+3.32,False),(-8.01,board_bottom+3.32,True),(8.01,board_bottom+3.32,True)]:
@@ -100,7 +122,20 @@ def check(pitch):
     route=items['EZmate-170mm-route']
     route_gaps={label:route.distance_to(shape) for label,shape in items.items() if label not in ('EZmate-170mm-route','EZmate-Fly-plug','EZmate-Main-plug','Main-envelope-J4') and not label.startswith('USB-reference-') and label!='Fly-official-67'}
     route_gaps['Fly-PCB']=route.distance_to(items['Fly-official-00'])
+    storage=import_step(out/'storage-200mm.step')
+    route_gaps.update({'Wing-storage-'+str(i):route.distance_to(shape) for i,shape in enumerate(storage.solids())})
+    from base import rows,rect_key,coords,prism
+    for side in ['left','right']:
+        t=d['wing_transforms'][side];m=t['matrix'];tr=t['translation']
+        for i,k in enumerate(rows(HERE/f'inputs/rev3-final/keys-{pitch}mm-{side}.csv')):
+            g=rect_key(*[float(k[v]) for v in ['x_mm','y_mm','rotation_deg']],17)
+            poly=Polygon([[sum(m[a][b]*pt[b] for b in range(2))+tr[a] for a in range(2)] for pt in coords(g)])
+            route_gaps[f'keycap-{side}-{i}']=route.distance_to(prism(poly,11.2,14))
     assert min(route_gaps.values())>.2,sorted(route_gaps.items(),key=lambda q:q[1])[:5]
+    expected_volume=math.pi*170
+    assert abs(route.volume-expected_volume)<1e-5,(route.volume,expected_volume)
+    curve=overlap_curve(shell,items)
+    (out/'usb-overlap-curve.json').write_text(json.dumps(curve,indent=2)+'\n')
     # Under-board mating envelopes and all official components, including shell legs.
     under={label: min(shape.distance_to(t) for t in trays) for label,shape in items.items() if label.startswith('EZmate-') or (label.startswith('Fly-official-') and shape.bounding_box().min.Z<9.99)}
     assert all(v>.2 for v in under.values()),under
@@ -113,8 +148,11 @@ def check(pitch):
                          connector_internal_overlaps=f['usb']['connector_internal_overlaps'],
                          strict_connector_internal_zero_overlap=not bool(f['usb']['connector_internal_overlaps'])),
                 fly_pcb_midplane_to_case_mm=pcb_side_gap,under_board_case_clearances_mm=under,route_clearances_mm=route_gaps,
+                connected_cable=dict(length_mm=170.,exported_volume_mm3=route.volume,expected_volume_mm3=expected_volume,unmodeled_mm=0.),
+                connector_overlap_curve=curve,
                 brep={p.stem:dict(faces=len((s:=import_step(p)).faces()),edges=len(s.edges()),solids=len(s.solids()),valid=s.is_valid) for p in sorted(out.glob('*.step'))})
     result['blockers']=[]
+    if pcb_side_gap<=.2:result['blockers'].append(f'Fly PCB midplane clearance {pcb_side_gap:.9f} mm is not strictly greater than 0.20 mm.')
     source=import_step(HERE/'inputs/TheFly_DaughterBoard_V4.2.stp')
     result['source_invalid_solid_indices']=[i for i,s in enumerate(source.solids()) if not s.is_valid]
     if result['source_invalid_solid_indices']:result['blockers'].append('Supplied official Fly has invalid BRep solids on direct import; preserved without healing.')

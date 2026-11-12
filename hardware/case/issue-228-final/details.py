@@ -165,7 +165,7 @@ def finish(args,ctx):
         assert len(owner)==1 and pilot_open,(h['board'],h['ref'])
         bosses.append(dict(board=h['board'],ref=h['ref'],xy=[x,y],boss_diameter=h['boss_diameter'],pilot_diameter=P['screw_pilot_diameter'],boss_top_z_mm=ctx['fly']['board_bottom'] if h['board']=='fly' else P['pcb_bottom'],material_at_boss_wall=True,pilot_open=pilot_open))
     from fly import harness
-    fly_parts,fly_data=harness(ctx,body,parts,components,cables,hardware)
+    fly_parts,fly_data=harness(ctx,body,parts,components,cables,hardware,slack_models,key_solids)
     printing=[]
     for name,s in parts.items():
         assert s.is_valid and len(s.solids())==1,(name,len(s.solids()))

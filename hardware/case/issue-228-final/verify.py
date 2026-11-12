@@ -54,7 +54,6 @@ def verify(out):
                 # Preserve official connector internals; report mating reservations separately.
                 own = own or (na.startswith('Fly-official-') and nb.startswith('Fly-official-')) or (na=='USB-reference-shell' and nb in ('Fly-official-41','Fly-official-42')) or (nb=='USB-reference-shell' and na in ('Fly-official-41','Fly-official-42')) or ({na,nb}=={'EZmate-Fly-plug','Fly-official-67'}) or ({na,nb}=={'EZmate-Main-plug','Main-envelope-J4'}) or ('EZmate-170mm-route' in (na,nb) and (na.startswith('EZmate-') and nb.startswith('EZmate-')))
                 (contacts if own else overlaps).append(dict(a=na,b=nb,volume_mm3=volume))
-    assert not overlaps,overlaps
     inverse_error=0.
     # Outline and mounting CSVs are authoritative; do not assume old Rev2 holes survived.
     for side in ['left','right']:
@@ -79,6 +78,9 @@ def verify(out):
     assert closest['gap_mm']>=.3-1e-8
     assert d['fly']['cable']['route_length_mm']+30<=170
     assert d['fly']['cable']['minimum_mm']>.2
-    result=dict(connector_internal_zero_overlap=not bool(d['fly']['usb']['connector_internal_overlaps']),phase_c_passed=assembly.is_valid and not bool(d['fly']['usb']['connector_internal_overlaps']),main_component_minimum=closest,main_component_pairs_checked=len(cp),wing_under_component_to_floor_min_mm=4.6,passed=True,pitch_mm=d['pitch_mm'],exports=results,assembly_solids=len(items),assembly_broadphase_candidate_pairs=checked,unexpected_overlaps=overlaps,intended_mating_contacts=contacts,mount_inverse_error_mm=inverse_error,fixed_points_with_boss=len(d['boss_check']))
+    assert abs(d['fly']['cable']['connected_length_mm']-170)<1e-8
+    assert d['fly']['cable']['unmodeled_mm']==0
+    result=dict(connector_internal_zero_overlap=not bool(d['fly']['usb']['connector_internal_overlaps']),phase_c_passed=not overlaps and assembly.is_valid and not bool(d['fly']['usb']['connector_internal_overlaps']),main_component_minimum=closest,main_component_pairs_checked=len(cp),wing_under_component_to_floor_min_mm=4.6,passed=not overlaps,pitch_mm=d['pitch_mm'],exports=results,assembly_solids=len(items),assembly_broadphase_candidate_pairs=checked,unexpected_overlaps=overlaps,intended_mating_contacts=contacts,mount_inverse_error_mm=inverse_error,fixed_points_with_boss=len(d['boss_check']))
     (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+    assert not overlaps,overlaps
 if __name__=='__main__':verify(Path(sys.argv[1]) if len(sys.argv)>1 else Path(__file__).resolve().parent/'17mm')
