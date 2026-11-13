@@ -1,41 +1,39 @@
 {
   "board": "wing-rev4-16mm-left",
   "kicad": "9.0.9",
-  "sha256": "0a351011bb244564268a0086f97e9bf99da63b8c92ce3192739cd2e7a3358f44",
+  "sha256": "6812a98ac887d29b289de231ee4b6cd325799e23f6a9780bc4f823ff069ccf11",
   "metrics": {
-    "required_unconnected": 1,
+    "required_unconnected": 0,
     "wrong_net_contacts": 0,
     "material_violations": 0,
     "unexplained_transfer_changes": 0
   },
-  "drc_unconnected": 1,
+  "drc_unconnected": 0,
   "drc_types": {},
   "transfer_changed_refs": [],
-  "physical_disconnected": {
-    "HALL_5V": 2
-  },
+  "physical_disconnected": {},
   "shorts": [],
-  "all_vias": 153,
+  "all_vias": 156,
   "all_pads_including_npth": 236,
-  "via_pad_pairs": 36108,
-  "min_via_pad_gap_mm": 0.10134,
+  "via_pad_pairs": 36816,
+  "min_via_pad_gap_mm": 0.129641,
   "via_pad_below_0p10": 0,
   "via_pad_gap_histogram": {
     "0.00..0.10": 0,
-    "0.10..0.11": 1,
-    "0.11..0.15": 0,
+    "0.10..0.11": 0,
+    "0.11..0.15": 3,
     "0.15..0.20": 2,
     "0.20..0.30": 41,
     "0.30..0.50": 19,
-    "0.50..1.00": 26,
+    "0.50..1.00": 27,
     "1.00..1000.00": 64
   },
   "via_pad_gap_quantiles": {
-    "0": 0.10134,
-    "0.1": 0.221964,
-    "0.25": 0.277885,
+    "0": 0.129641,
+    "0.1": 0.22,
+    "0.25": 0.277196,
     "0.5": 0.755371,
-    "0.75": 2.209805,
+    "0.75": 2.158254,
     "0.9": 4.054194,
     "1": 8.742399
   },
@@ -44,7 +42,7 @@
       "0.3": 330
     },
     "HALL_5V": {
-      "0.3": 330
+      "0.3": 336
     },
     "H_A0_RAW": {
       "0.1": 8
@@ -113,7 +111,7 @@
       "0.1": 22
     },
     "MUX_A1": {
-      "0.1": 37
+      "0.1": 39
     },
     "MUX_A2": {
       "0.1": 33
@@ -135,12 +133,12 @@
     {
       "net": "HALL_5V",
       "layer": "F.Cu",
-      "area_mm2": 7789.35496376525
+      "area_mm2": 7793.054341062883
     },
     {
       "net": "GND",
       "layer": "B.Cu",
-      "area_mm2": 8800.32411090184
+      "area_mm2": 8798.71263721903
     }
   ],
   "poses": [
@@ -530,5 +528,5 @@
     }
   ],
   "width_below_floor": 0,
-  "pass": false
+  "pass": true
 }
