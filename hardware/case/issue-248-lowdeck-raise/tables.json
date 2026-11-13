@@ -1,0 +1,541 @@
+{
+  "units": "mm; assembly X right, Y south, Z up; floor underside Z0; feet excluded",
+  "status": "Phase A conditional envelope; no CAD/physical gate claimed",
+  "stack": {
+    "floor_top": 2,
+    "gh_nominal": 4.35,
+    "gh_allowance": 0.5,
+    "floor_gap": 0.5,
+    "pcb_underside": 7.35,
+    "pcb_thickness": 1.2,
+    "pcb_top": 8.55,
+    "spacer": 3.5,
+    "plate_thickness": 1.5,
+    "plate_bottom": 12.05,
+    "plate_top": 13.549999999999999,
+    "post_bottom": 1.2,
+    "post_height": 6.15
+  },
+  "bounds": [
+    {
+      "item": "Hall + floor + gap + upper stack",
+      "plate_min": 12.1
+    },
+    {
+      "item": "MUX",
+      "plate_min": 10.1
+    },
+    {
+      "item": "capacitor",
+      "plate_min": 9.7
+    },
+    {
+      "item": "mated GH including allowance (binding)",
+      "plate_min": 13.549999999999999
+    },
+    {
+      "item": "retained M2x12, 5.5 engagement, 1.2 residual boss root",
+      "plate_min": 12.9
+    }
+  ],
+  "references": [
+    {
+      "design": "D-041 Delta6",
+      "plate_top": 22.2,
+      "underside": 16
+    },
+    {
+      "design": "issue232 Delta0",
+      "plate_top": 16.2,
+      "underside": 10
+    },
+    {
+      "design": "issue248 conditional minimum",
+      "plate_top": 13.549999999999999,
+      "underside": 7.35
+    }
+  ],
+  "keytop": {
+    "pcb_to_housing_top": 11.1,
+    "stem_above_housing": 3.5,
+    "pcb_to_plate_top": 5,
+    "cap_top_above_stem_tip_assumed": 1.5,
+    "cap_offset_assumption_range": [
+      0.5,
+      2.5
+    ],
+    "relative_nominal": 11.1,
+    "absolute_nominal": 24.65,
+    "offset_uncertainty_budget": 1.75,
+    "travel_nominal": 3.5,
+    "travel_max": 3.7,
+    "pressed_top_nominal": 21.15
+  },
+  "slope": {
+    "start_y": 8,
+    "toe_y": 69.7,
+    "run": 61.7,
+    "rise": 11.1,
+    "angle_deg": 10.198576775578559
+  },
+  "clearance": {
+    "assumed_max_cap_square": 16,
+    "well_square": 18,
+    "nominal_radial": 1,
+    "radial_budget": 0.5,
+    "residual_radial": 0.5,
+    "required": 0.3,
+    "switch_max_width_budget": 15.8,
+    "switch_radial": 1.1,
+    "skirt_bottom_full_press_required_above_plate": 0.4,
+    "cap_measurement_available": false
+  },
+  "route_baseline": [
+    {
+      "side": "left",
+      "longest": 198.07845296563485,
+      "margin": 1.9215470343651475,
+      "reserve": 30.19999999999999
+    },
+    {
+      "side": "right",
+      "longest": 199.43522226672323,
+      "margin": 0.5647777332767703,
+      "reserve": 30.19999999999996
+    }
+  ],
+  "slope_checks": [
+    {
+      "y": 8,
+      "roof": 24.65,
+      "underside_2mm_shell": 22.65
+    },
+    {
+      "y": 22.1,
+      "roof": 22.113371150729336,
+      "underside_2mm_shell": 20.113371150729336
+    },
+    {
+      "y": 30.315,
+      "roof": 20.635470016207453,
+      "underside_2mm_shell": 18.635470016207453
+    },
+    {
+      "y": 51.86,
+      "roof": 16.759465153970826,
+      "underside_2mm_shell": 14.759465153970826
+    },
+    {
+      "y": 61.12,
+      "roof": 15.09356564019449,
+      "underside_2mm_shell": 13.09356564019449
+    },
+    {
+      "y": 64.4,
+      "roof": 14.50348460291734,
+      "underside_2mm_shell": 12.50348460291734
+    },
+    {
+      "y": 67.9,
+      "roof": 13.873824959481361,
+      "underside_2mm_shell": 11.873824959481361
+    },
+    {
+      "y": 69.7,
+      "roof": 13.549999999999999,
+      "underside_2mm_shell": 11.549999999999999
+    }
+  ],
+  "print_envelopes_including_5mm_brim": [
+    {
+      "part": "tray-left or north-left insert upper bound",
+      "xy": [
+        159.021,
+        156.069
+      ]
+    },
+    {
+      "part": "tray-right or north-right insert upper bound",
+      "xy": [
+        152.021,
+        156.069
+      ]
+    },
+    {
+      "part": "central shell allocation",
+      "xy": [
+        100,
+        150
+      ]
+    }
+  ],
+  "cost_assumptions": {
+    "currency": "USD, planning only, no quote, excludes trays and existing plates",
+    "printed_material_grams": [
+      60,
+      140
+    ],
+    "filament_usd_per_kg": [
+      20,
+      30
+    ],
+    "printed_material_cost": [
+      1.2,
+      4.2
+    ],
+    "printed_hardware": [
+      2,
+      6
+    ],
+    "printed_shop_allowance": [
+      20,
+      60
+    ],
+    "machined_set_one_off": [
+      120,
+      400
+    ],
+    "machined_set_batch10_each": [
+      45,
+      140
+    ]
+  },
+  "keys": [
+    {
+      "key": "L_R0_C0",
+      "center_xy": [
+        -113.2314114527715,
+        -35.69838204663214
+      ],
+      "cap_well_radial_nominal": 1.0000000000000107
+    },
+    {
+      "key": "L_R0_C1",
+      "center_xy": [
+        -98.50897958843603,
+        -27.19838204663214
+      ],
+      "cap_well_radial_nominal": 1.0000000000000033
+    },
+    {
+      "key": "L_R0_C2",
+      "center_xy": [
+        -77.7865477241006,
+        -29.090686892045404
+      ],
+      "cap_well_radial_nominal": 0.9999999999999969
+    },
+    {
+      "key": "L_R0_C3",
+      "center_xy": [
+        -60.56411585976515,
+        -24.920813910967603
+      ],
+      "cap_well_radial_nominal": 0.9999999999999948
+    },
+    {
+      "key": "L_R0_C4",
+      "center_xy": [
+        -48.3416839954297,
+        -12.090686892045406
+      ],
+      "cap_well_radial_nominal": 0.9999999999999991
+    },
+    {
+      "key": "L_R0_C5",
+      "center_xy": [
+        -34.61925213109424,
+        -1.8586360844765295
+      ],
+      "cap_well_radial_nominal": 1.000000000000002
+    },
+    {
+      "key": "L_R1_C0",
+      "center_xy": [
+        -121.7314114527715,
+        -20.97595018229669
+      ],
+      "cap_well_radial_nominal": 18.000000000000007
+    },
+    {
+      "key": "L_R1_C1",
+      "center_xy": [
+        -107.00897958843606,
+        -12.475950182296689
+      ],
+      "cap_well_radial_nominal": 18.0
+    },
+    {
+      "key": "L_R1_C2",
+      "center_xy": [
+        -86.2865477241006,
+        -14.368255027709955
+      ],
+      "cap_well_radial_nominal": 10.091955957976472
+    },
+    {
+      "key": "L_R1_C3",
+      "center_xy": [
+        -69.06411585976515,
+        -10.198382046632146
+      ],
+      "cap_well_radial_nominal": 15.011248436350465
+    },
+    {
+      "key": "L_R1_C4",
+      "center_xy": [
+        -56.84168399542969,
+        2.631744972290047
+      ],
+      "cap_well_radial_nominal": 16.94198089727259
+    },
+    {
+      "key": "L_R1_C5",
+      "center_xy": [
+        -43.119252131094235,
+        12.863795779858927
+      ],
+      "cap_well_radial_nominal": 18.000000000000004
+    },
+    {
+      "key": "L_R2_C0",
+      "center_xy": [
+        -130.2314114527715,
+        -6.253518317961233
+      ],
+      "cap_well_radial_nominal": 35.00000000000001
+    },
+    {
+      "key": "L_R2_C1",
+      "center_xy": [
+        -115.50897958843606,
+        2.246481682038768
+      ],
+      "cap_well_radial_nominal": 35.0
+    },
+    {
+      "key": "L_R2_C2",
+      "center_xy": [
+        -94.7865477241006,
+        0.3541768366255047
+      ],
+      "cap_well_radial_nominal": 24.69817807045694
+    },
+    {
+      "key": "L_R2_C3",
+      "center_xy": [
+        -77.56411585976515,
+        4.524049817703311
+      ],
+      "cap_well_radial_nominal": 29.718401555323602
+    },
+    {
+      "key": "L_R2_C4",
+      "center_xy": [
+        -65.34168399542968,
+        17.35417683662551
+      ],
+      "cap_well_radial_nominal": 33.82554117076148
+    },
+    {
+      "key": "L_R2_C5",
+      "center_xy": [
+        -51.619252131094235,
+        27.58622764419438
+      ],
+      "cap_well_radial_nominal": 22.244443909790174
+    },
+    {
+      "key": "L_T0",
+      "center_xy": [
+        -79.93124840286309,
+        33.17959920459871
+      ],
+      "cap_well_radial_nominal": 43.299862462484036
+    },
+    {
+      "key": "L_T1",
+      "center_xy": [
+        -62.43716501292733,
+        44.43451349738315
+      ],
+      "cap_well_radial_nominal": 21.921240866051676
+    },
+    {
+      "key": "L_T2",
+      "center_xy": [
+        -48.760994504824644,
+        60.413357990374216
+      ],
+      "cap_well_radial_nominal": 0.9999999999999911
+    },
+    {
+      "key": "R_R0_C0",
+      "center_xy": [
+        113.2314114527715,
+        -35.69838204663215
+      ],
+      "cap_well_radial_nominal": 1.0000000000000107
+    },
+    {
+      "key": "R_R0_C1",
+      "center_xy": [
+        98.50897958843603,
+        -27.19838204663214
+      ],
+      "cap_well_radial_nominal": 1.0000000000000029
+    },
+    {
+      "key": "R_R0_C2",
+      "center_xy": [
+        77.78654772410059,
+        -29.090686892045404
+      ],
+      "cap_well_radial_nominal": 0.9999999999999969
+    },
+    {
+      "key": "R_R0_C3",
+      "center_xy": [
+        60.56411585976515,
+        -24.920813910967603
+      ],
+      "cap_well_radial_nominal": 0.9999999999999947
+    },
+    {
+      "key": "R_R0_C4",
+      "center_xy": [
+        48.34168399542968,
+        -12.090686892045403
+      ],
+      "cap_well_radial_nominal": 0.9999999999999989
+    },
+    {
+      "key": "R_R0_C5",
+      "center_xy": [
+        34.61925213109424,
+        -1.8586360844765295
+      ],
+      "cap_well_radial_nominal": 1.000000000000002
+    },
+    {
+      "key": "R_R1_C0",
+      "center_xy": [
+        121.7314114527715,
+        -20.97595018229669
+      ],
+      "cap_well_radial_nominal": 18.000000000000007
+    },
+    {
+      "key": "R_R1_C1",
+      "center_xy": [
+        107.00897958843606,
+        -12.475950182296689
+      ],
+      "cap_well_radial_nominal": 18.0
+    },
+    {
+      "key": "R_R1_C2",
+      "center_xy": [
+        86.28654772410061,
+        -14.368255027709953
+      ],
+      "cap_well_radial_nominal": 10.091955957976472
+    },
+    {
+      "key": "R_R1_C3",
+      "center_xy": [
+        69.06411585976517,
+        -10.198382046632146
+      ],
+      "cap_well_radial_nominal": 15.011248436350467
+    },
+    {
+      "key": "R_R1_C4",
+      "center_xy": [
+        56.84168399542969,
+        2.6317449722900466
+      ],
+      "cap_well_radial_nominal": 16.941980897272593
+    },
+    {
+      "key": "R_R1_C5",
+      "center_xy": [
+        43.119252131094235,
+        12.863795779858924
+      ],
+      "cap_well_radial_nominal": 18.000000000000004
+    },
+    {
+      "key": "R_R2_C0",
+      "center_xy": [
+        130.23141145277148,
+        -6.253518317961233
+      ],
+      "cap_well_radial_nominal": 35.00000000000001
+    },
+    {
+      "key": "R_R2_C1",
+      "center_xy": [
+        115.50897958843603,
+        2.246481682038768
+      ],
+      "cap_well_radial_nominal": 34.99999999999999
+    },
+    {
+      "key": "R_R2_C2",
+      "center_xy": [
+        94.7865477241006,
+        0.3541768366255047
+      ],
+      "cap_well_radial_nominal": 24.69817807045694
+    },
+    {
+      "key": "R_R2_C3",
+      "center_xy": [
+        77.56411585976515,
+        4.524049817703312
+      ],
+      "cap_well_radial_nominal": 29.718401555323602
+    },
+    {
+      "key": "R_R2_C4",
+      "center_xy": [
+        65.34168399542968,
+        17.35417683662551
+      ],
+      "cap_well_radial_nominal": 33.82554117076148
+    },
+    {
+      "key": "R_R2_C5",
+      "center_xy": [
+        51.61925213109424,
+        27.586227644194377
+      ],
+      "cap_well_radial_nominal": 22.244444489600134
+    },
+    {
+      "key": "R_T0",
+      "center_xy": [
+        79.93124840286312,
+        33.17959920459871
+      ],
+      "cap_well_radial_nominal": 43.29986330820129
+    },
+    {
+      "key": "R_T1",
+      "center_xy": [
+        62.43716501292733,
+        44.43451349738314
+      ],
+      "cap_well_radial_nominal": 21.92124156593787
+    },
+    {
+      "key": "R_T2",
+      "center_xy": [
+        48.760994504824644,
+        60.413357990374216
+      ],
+      "cap_well_radial_nominal": 0.9999999999999953
+    }
+  ]
+}
