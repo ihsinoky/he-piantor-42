@@ -1,0 +1,10 @@
+{
+  "placement_trials_per_variant": 1,
+  "krt_attempts_per_variant": 4,
+  "krt_timeout_seconds": 1200,
+  "repair_passes_maximum": 2,
+  "rules": "D-021 unchanged; same-net via-pad minimum .10, target .125; power .30; escalation off",
+  "stop": "retain failing congestion evidence after bounded trials; voltage only after all routing gates pass",
+  "launch_note": "Superseded setup/pose trials are archived only in runtime. Final accepted evidence is regenerated for the native-probe-verified southward header pose. One KRT launch per final-pose variant, followed by at most two bounded local-repair passes; no relaxation.",
+  "bounded_reproduction_plan": true
+}

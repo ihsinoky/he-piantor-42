@@ -1,0 +1,152 @@
+{
+  "assumptions": {
+    "load_A_per_wing": 0.127,
+    "simultaneously_powered_wings": 2,
+    "rail_nominal_V": 5.2,
+    "rail_tolerance_fraction": 0.02,
+    "unmodeled_rail_budget_V": 0.05,
+    "U5_Ron_ohm": 0.25,
+    "main_corner": "retained Issue196 125C / width80% Main common and branches for every row",
+    "main_common_loop_ohm": 0.03711396940290345,
+    "main_branch_loop_ohm": {
+      "J2": 0.0034708639881278697,
+      "J3": 0.028227454317213435
+    },
+    "wire_copper_area_mm2": 0.0804,
+    "contact_ohm_each": 0.05,
+    "contacts_per_wire": 2,
+    "return_conductors": 6,
+    "copper_um": 35,
+    "barrel_um": 20,
+    "temperature_coefficient_per_K": 0.00393,
+    "width_corner": "actual power track widths times0.8; native filled-plane geometry retained, as Issue196",
+    "mesh_selection": "larger coarse/fine combined loop drop at each terminal; maximum over all distributed loads"
+  },
+  "legacy_issue141_wing_drop_replaced": true,
+  "legacy_17mm_wing_drop_V": 0.147710145,
+  "boards": [
+    {
+      "board": "wing-rev4-16mm-right",
+      "source_sha256": "4f8faa25c00093e5db7b2db3b252a8494723ae172a245cfdf84ae06fba6fce84",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC3",
+          "loop_drop_20C_V": 0.0013367681548760294,
+          "effective_loop_20C_ohm": 0.010525733502960861,
+          "coarse_worst_drop_20C_V": 0.0013237155517694943,
+          "fine_worst_drop_20C_V": 0.0013367681548760294,
+          "max_terminal_mesh_delta_over_worst_drop": 0.01118417657276198
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC3",
+          "loop_drop_20C_V": 0.0014692362641038248,
+          "effective_loop_20C_ohm": 0.011568789481132479,
+          "coarse_worst_drop_20C_V": 0.0014547921427067348,
+          "fine_worst_drop_20C_V": 0.0014692362641038248,
+          "max_terminal_mesh_delta_over_worst_drop": 0.010373130455985317
+        }
+      ],
+      "max_KCL_residual_A": 3.3580249692022335e-11
+    },
+    {
+      "board": "wing-rev4-17mm-left",
+      "source_sha256": "1e87d933b12e7344262a2598e804985ca468e7778b8586fb9152c4ec0ea03247",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC6",
+          "loop_drop_20C_V": 0.011344878423878872,
+          "effective_loop_20C_ohm": 0.08932975136912498,
+          "coarse_worst_drop_20C_V": 0.011288517472127158,
+          "fine_worst_drop_20C_V": 0.011344878423878872,
+          "max_terminal_mesh_delta_over_worst_drop": 0.005087611254153324
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC6",
+          "loop_drop_20C_V": 0.013682586620672168,
+          "effective_loop_20C_ohm": 0.1077369025249777,
+          "coarse_worst_drop_20C_V": 0.013611044045000024,
+          "fine_worst_drop_20C_V": 0.013682586620672168,
+          "max_terminal_mesh_delta_over_worst_drop": 0.005241630348183627
+        }
+      ],
+      "max_KCL_residual_A": 4.1387693272554316e-10
+    },
+    {
+      "board": "wing-rev4-17mm-right",
+      "source_sha256": "165a2d988fc1d171d61e7a0cb56b67cbb23e29739359554a1604f531e43f900f",
+      "cases": [
+        {
+          "track_width_factor": 1.0,
+          "far_terminal": "U_HC6",
+          "loop_drop_20C_V": 0.0071143254130494014,
+          "effective_loop_20C_ohm": 0.056018310338971665,
+          "coarse_worst_drop_20C_V": 0.007075198035968882,
+          "fine_worst_drop_20C_V": 0.0071143254130494014,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0055916309966113536
+        },
+        {
+          "track_width_factor": 0.8,
+          "far_terminal": "U_HC6",
+          "loop_drop_20C_V": 0.008578019796815403,
+          "effective_loop_20C_ohm": 0.06754346296705041,
+          "coarse_worst_drop_20C_V": 0.008550356560370823,
+          "fine_worst_drop_20C_V": 0.008578019796815403,
+          "max_terminal_mesh_delta_over_worst_drop": 0.0032488127859578333
+        }
+      ],
+      "max_KCL_residual_A": 4.0171244108933024e-10
+    }
+  ],
+  "worst_by_length": {
+    "124.09716799907045": {
+      "board": "wing-rev4-17mm-left",
+      "main_branch": "J3",
+      "actual_assembly_branch": "J2",
+      "temperature_C": 125,
+      "track_width_factor": 0.8,
+      "length_mm": 124.09716799907045,
+      "load_A": 0.127,
+      "wing_far_terminal": "U_HC6",
+      "wing_drop_V": 0.019328705989692538,
+      "wing_effective_loop_ohm": 0.15219453535190974,
+      "harness_wire_ohm": 0.037592641886445066,
+      "harness_loop_ohm": 0.16052474886751927,
+      "harness_drop_V": 0.020386643106174947,
+      "main_common_and_switch_drop_V": 0.07292694822833748,
+      "main_branch_drop_V": 0.0035848866982861063,
+      "Vfar_V": 4.929772815977509,
+      "margin_to_4p60_V": 0.32977281597750974
+    },
+    "200.0": {
+      "board": "wing-rev4-17mm-left",
+      "main_branch": "J3",
+      "actual_assembly_branch": "J2",
+      "temperature_C": 125,
+      "track_width_factor": 0.8,
+      "length_mm": 200.0,
+      "load_A": 0.127,
+      "wing_far_terminal": "U_HC6",
+      "wing_drop_V": 0.019328705989692538,
+      "wing_effective_loop_ohm": 0.15219453535190974,
+      "harness_wire_ohm": 0.06058581753731342,
+      "harness_loop_ohm": 0.18735012046019903,
+      "harness_drop_V": 0.023793465298445275,
+      "main_common_and_switch_drop_V": 0.07292694822833748,
+      "main_branch_drop_V": 0.0035848866982861063,
+      "Vfar_V": 4.926365993785239,
+      "margin_to_4p60_V": 0.326365993785239
+    }
+  },
+  "adopted_200mm_below_4p60": false,
+  "limitations": [
+    "Design model, not measured operating or minimum-material voltage guarantee",
+    "Ideal pad landing contacts and equal harness return resistances; six ground terminals ideal at PCB boundary",
+    "Copper/barrel/etch minima and assembled harness/contact resistance require acceptance",
+    "125C is an analytical sensitivity corner, beyond GH catalog105C rating; it is not a qualified assembly operating temperature",
+    "Regulated rail boundary presumes upstream UDB/SH/USB/efficiency conditions meet Issue196; no new upstream power guarantee"
+  ]
+}
