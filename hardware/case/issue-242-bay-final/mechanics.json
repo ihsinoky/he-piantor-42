@@ -1,0 +1,83 @@
+{
+  "design_load_N": 10.0,
+  "reacting_retainer_count": 2,
+  "per_retainer_N": 5.0,
+  "load_path": "North: lid countersink -> M2x6 screw -> captured nut -> pocket roof -> OD8 pillar -> tray floor. South: lid countersink -> M2x10 screw -> existing Main H2/H3 boss threads -> tray floor. Downward south load passes through a removable POM spacer and original Main washer/PCB/boss stack.",
+  "screw_nominal_core_diameter_mm": 1.6,
+  "screw_tension_MPa": 2.4867959858108644,
+  "nut_roof_ligament_area_mm2": 6.08,
+  "nut_roof_stress_MPa": 0.8223684210526315,
+  "printed_case_screen_allowable_MPa": 3,
+  "roof_screen_factor": 3.648,
+  "pillar_annulus_area_mm2": 46.46415534659304,
+  "pillar_axial_stress_MPa": 0.1076098330574005,
+  "south_boss_thread_engagement_mm": 3.8,
+  "south_boss_thread_shear_area_mm2": 11.938052083641214,
+  "south_boss_thread_screen_stress_MPa": 0.4188287976102509,
+  "south_spacers_mm": {
+    "OD": 4.5,
+    "ID": 2.2,
+    "height": 3.0,
+    "bottom_Z": 11.7,
+    "top_Z": 14.7
+  },
+  "nut_AF_mm": 4,
+  "nut_thickness_mm": 1.6,
+  "nut_slot_mm": [
+    4.2,
+    1.7
+  ],
+  "roof_ligament_mm": 1.6,
+  "screw": "2 x ISO 10642 M2x6 north + 2 x M2x10 south; minor shaft1.6, head OD4 x1.0. South pair replaces original Main H2/H3 M2x6; other Main screw unchanged.",
+  "nuts": "2 x ISO 4032 M2, AF4, t1.6, captured without adhesive; south threads engage existing printed Main bosses.",
+  "skin_screen": [
+    {
+      "thickness_mm": 0.25,
+      "ten_newton_deflection_mm": 0.05055663034993042,
+      "ten_newton_bending_stress_MPa": 87.11943793911007,
+      "material_yield_screen_MPa": 240,
+      "margin_to_yield": 2.7548387096774194
+    },
+    {
+      "thickness_mm": 0.22,
+      "ten_newton_deflection_mm": 0.07418739192502469,
+      "ten_newton_bending_stress_MPa": 112.49927419823099,
+      "material_yield_screen_MPa": 240,
+      "margin_to_yield": 2.133347096774193
+    }
+  ],
+  "polymer_E_screen_MPa": 2000,
+  "polymer_nominal_skin_deflection_mm": 1.7442037470725995,
+  "whole_cover_load_qualified": false,
+  "qualification_limit": "Local strip and retention checks do not qualify the full perforated/pocketed panel, printed layer strength or 10N deflection of the unsupported centre. The colliding assembly cannot certify service/inversion. No gate5 PASS.",
+  "cost_USD": {
+    "one_off_cover_range": [
+      85,
+      290
+    ],
+    "batch10_per_cover_range": [
+      25,
+      80
+    ],
+    "retention_parts_range": [
+      1,
+      4
+    ],
+    "modified_trays_incremental_material_range": [
+      0.1,
+      0.5
+    ],
+    "basis": "Planning only: 1.0\u20132.0 shop hours at $60\u2013120/h; stock/fixture/finish $25\u201350. Batch amortizes setup. Not supplier quotations; no order proposed."
+  },
+  "material": "6061-T6 aluminium, machined from supported stock to 1.50 nominal / 0.25 GH skin. 5052-H32 Wing stock is a comparison, not an automatic pocket machining qualification.",
+  "sources": [
+    {
+      "url": "https://srd.nist.gov/NSRDS/NSRDS-NBS-61-V.pdf",
+      "purpose": "6061-T6 material context; E69GPa and 240MPa yield are explicit conservative study inputs, not lot certificates."
+    },
+    {
+      "url": "https://www.protolabs.com/media/iw0mfa0k/datasheet-sm-aluminum5052-h32.pdf",
+      "purpose": "Wing-style 5052 comparison: typical E70.3GPa/yield193MPa; supplier cautions typical data is not for design."
+    }
+  ]
+}

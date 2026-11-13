@@ -1,0 +1,12 @@
+{
+  "body": "## 背景と区切り\nIssue #240 で Main Rev.7（サイドエントリー）は電気資格に合格したが、蓋下の Wing ハーネス経路が #232 経路の流用では干渉し、サービス代も 30mm→4〜5mm に痩せた。PO 判断（2026-11-14）：蓋下配線を専用設計してもう1ラウンド行う。**合格条件にサービス代 ≥30mm（アクセス可能な形で）を含め、このラウンドで閉じなければ蓋の検討は打ち切る**（ベイ開放で確定する）。\n\n## 今回の設計自由度（前回と違うところ）\n- ケース側の変更を許可する：接合ネジの移設、トレイ／床へのケーブル溝の追加・形状変更、ラック撤去（#240 で確定）、下側経路の Z 変更、ガイド形状の追加。ケース改訂案として提示すること（生産ケースの変更は採用後の実装で行う）\n- 蓋の材質も検討対象とする（印刷／アルミ等）。#240 のポケット天井 Z15.95・残り肉厚 0.25mm の成立性とあわせて評価し、コスト感を示すこと\n- Main は #240 の Rev.7 候補（外向き嵌合）を前提とする。基板の追加変更はしない\n\n## 不変条件\n- Wing Rev.4 基板と D-024 電気仕様、D-037 の Fly 座・USB 開口、蓋上面は全域 Z16.2 ツライチ\n- ハーネスは実在する1本のケーブルとして接続された形でモデル化する（切り離した輪を余長と数えない）\n\n## 合格条件\n- 蓋を被せた全組立で干渉 0（監査は全数。#240 のような早期停止で済ませない）\n- Wing ハーネスのサービス代 ≥30mm がアクセス可能な形で確保され、手順が示される\n- Fly 170mm が1本のケーブルとして蓋下に収納される\n- USB 挿入試験（D-037 の物差し）合格\n- 蓋の支持・固定と保守手順が、強度の未検証な概念で終わらず、作れる形で示される",
+  "comments": [
+    {
+      "url": "https://github.com/ihsinoky/he-piantor-42/issues/242#issuecomment-6857066008",
+      "date": "2026-11-14",
+      "body": "PO direction: withdraw stop-if-failed. Finish current-height round and use its collision map as input to a following search for minimum height increase Δ satisfying all gates. Preserve a single flush Wing deck / bay-cover plane. State increased total keyboard height and remade-case cost."
+    }
+  ],
+  "title": "ベイ蓋 最終ラウンド：蓋下専用配線設計（サービス代30mmを合格条件に含む）",
+  "url": "https://github.com/ihsinoky/he-piantor-42/issues/242"
+}
