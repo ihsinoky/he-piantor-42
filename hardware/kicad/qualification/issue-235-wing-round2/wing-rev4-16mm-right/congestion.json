@@ -1,0 +1,200 @@
+{
+  "stage": "initial post-router diagnostic; see qualification.json and blocking-regions.json for final repaired candidate",
+  "qualified": true,
+  "open_connections": [],
+  "router": {
+    "JSON_SUMMARY": {
+      "routed_single": [
+        "MUX_OUT_B"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_nets": 0,
+      "multipoint_pads_connected": 0,
+      "multipoint_pads_total": 0,
+      "multipoint_edges_routed": 0,
+      "multipoint_edges_failed": 0,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 1,
+      "failed": 0,
+      "total_time": 0.89,
+      "total_iterations": 1010000,
+      "total_vias": 7,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.25,
+          "annular": 0.1,
+          "board_edge": 0.3
+        },
+        "count": 1,
+        "nets": [
+          1
+        ],
+        "narrowed": [
+          {
+            "net": 1,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          }
+        ],
+        "min_delivered": {
+          "track_width": 0.1
+        },
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "none",
+        "islands": 0,
+        "refill_status": null,
+        "why": "the board has no zones",
+        "machine_dependent": false
+      },
+      "rescue": {
+        "attempted": 1,
+        "recovered": [
+          "MUX_OUT_B"
+        ],
+        "improved": [],
+        "unchanged": [],
+        "pads_reconnected": 0,
+        "widths": {
+          "MUX_OUT_B": {
+            "requested_mm": 0.1,
+            "delivered_mm": 0.1,
+            "rescue_min_mm": 0.1,
+            "rescue_max_mm": 0.1,
+            "rescue_segments_emitted": 24,
+            "rescue_by_width": {
+              "0.1": 24
+            },
+            "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."
+          }
+        },
+        "time": 5.7
+      },
+      "oracle_check": "skipped",
+      "pad_pairs_connected": 2,
+      "pad_pairs_total": 2,
+      "power_trace_ampacity": [
+        {
+          "net": "GND",
+          "bottleneck_width_mm": 0.3,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 1.0,
+          "max_current_ipc2152_a": 1.0,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 536.1
+        },
+        {
+          "net": "HALL_5V",
+          "bottleneck_width_mm": 0.3,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 1.0,
+          "max_current_ipc2152_a": 1.0,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 504.2
+        }
+      ],
+      "scope": "reconciliation-subset",
+      "board_scoped_keys": [
+        "power_trace_ampacity",
+        "min_clearance_used"
+      ],
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli",
+        "KRT_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools"
+      }
+    },
+    "JSON_REGRADE": {
+      "board": "file",
+      "graded_nets": 30,
+      "seconds": 0.74,
+      "routed_single": [
+        "WING_EN",
+        "MUX_A0",
+        "H_A1_RAW",
+        "H_B1_RAW",
+        "H_C1_RAW",
+        "H_A3_RAW",
+        "H_B3_RAW",
+        "H_A5_RAW",
+        "H_B5_RAW",
+        "H_C5_RAW",
+        "H_A0_RAW",
+        "H_B6_RAW",
+        "H_C6_RAW",
+        "H_A4_RAW",
+        "MUX_A1",
+        "H_C3_RAW",
+        "H_C2_RAW",
+        "H_B0_RAW",
+        "MUX_A2",
+        "H_A2_RAW",
+        "H_C4_RAW",
+        "H_B4_RAW",
+        "MUX_OUT_A",
+        "MUX_OUT_B",
+        "MUX_OUT_C",
+        "H_A6_RAW",
+        "H_C0_RAW",
+        "H_B2_RAW",
+        "GND",
+        "HALL_5V"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_pads_total": 146,
+      "multipoint_pads_connected": 146,
+      "successful": 30,
+      "failed": 0,
+      "unowned_broken": [],
+      "recovered": [
+        "MUX_OUT_B"
+      ],
+      "pad_pairs": {},
+      "broken_by_run": []
+    },
+    "JSON_SUMMARY_MIN": {
+      "escalations": 0,
+      "failed": 0,
+      "failed_single": [],
+      "main_loop_time_s": 4.35,
+      "min_clearance_used": 0.1,
+      "multipoint_deficit": 0,
+      "open_single": [],
+      "pad_pairs_open": {
+        "count": 0,
+        "nets": []
+      },
+      "regraded_nets": 30,
+      "routed": 30,
+      "scope": "merged",
+      "terminal_restores_broken": [],
+      "vias": 143
+    }
+  },
+  "power_voltage_extraction": "initial routing diagnostic; see final-state.json and any resistance-extraction.json for final status",
+  "erc": "NOT RUN: no native Wing schematic in Rev.3 package; routing gate not passed"
+}

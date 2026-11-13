@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-13T13:48:48+0900",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 0.4243 mm",
+                    "pos": {
+                        "x": 129.7,
+                        "y": 33.8
+                    },
+                    "uuid": "7a37cf0f-fd40-408e-ae97-69bf2489f3c1"
+                },
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_C on B.Cu",
+                    "pos": {
+                        "x": 130.675817,
+                        "y": 39.699969
+                    },
+                    "uuid": "bce2c6a3-4dc4-4d16-b813-25fb3036acc3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Clearance violation ( clearance 0.1000 mm; actual 0.0672 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 0.2828 mm",
+                    "pos": {
+                        "x": 113.8,
+                        "y": 48.9
+                    },
+                    "uuid": "094cbe27-21a6-416a-85bb-8e043f4ccc8f"
+                },
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_A on B.Cu",
+                    "pos": {
+                        "x": 113.355309,
+                        "y": 49.699969
+                    },
+                    "uuid": "52528565-4a7b-4424-903c-169bee83ba38"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1000 mm; actual 0.0672 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 0.6000 mm",
+                    "pos": {
+                        "x": 113.6,
+                        "y": 49.1
+                    },
+                    "uuid": "3673ba50-69a7-4cfb-ab9a-9620585d03ad"
+                },
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_A on B.Cu",
+                    "pos": {
+                        "x": 113.355309,
+                        "y": 49.699969
+                    },
+                    "uuid": "52528565-4a7b-4424-903c-169bee83ba38"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        }
+    ]
+}
