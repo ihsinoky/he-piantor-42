@@ -1,0 +1,170 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-13T12:02:11+0900",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'Study GND' [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": 160.1,
+                        "y": 50.8
+                    },
+                    "uuid": "50e14343-6108-4fb7-9c2b-e03cd2991876"
+                },
+                {
+                    "description": "Zone 'Study GND' [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": 160.1,
+                        "y": 50.8
+                    },
+                    "uuid": "50e14343-6108-4fb7-9c2b-e03cd2991876"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 16.2000 mm",
+                    "pos": {
+                        "x": 126.6,
+                        "y": 63.0
+                    },
+                    "uuid": "71057d84-b2a3-4e76-8099-a85062449e52"
+                },
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_B on B.Cu",
+                    "pos": {
+                        "x": 126.419065,
+                        "y": 40.598761
+                    },
+                    "uuid": "aa46c79c-5d19-4b88-90b6-57dd610df447"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [MUX_A0] of U_MUX_A on B.Cu",
+                    "pos": {
+                        "x": 113.655309,
+                        "y": 50.219585
+                    },
+                    "uuid": "fee7d732-7e1f-4ea5-9408-68aa50e5df7c"
+                },
+                {
+                    "description": "Track [MUX_A0] on B.Cu, length 2.1213 mm",
+                    "pos": {
+                        "x": 123.8,
+                        "y": 43.7
+                    },
+                    "uuid": "c08dbb76-5fd1-4e5f-90b7-1e5d9d2c1904"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [MUX_A1] on F.Cu, length 3.6500 mm",
+                    "pos": {
+                        "x": 129.65,
+                        "y": 33.7
+                    },
+                    "uuid": "5286ef4e-a609-4804-b3b9-db26d04fef13"
+                },
+                {
+                    "description": "Pad 16 [MUX_A1] of U_MUX_B on B.Cu",
+                    "pos": {
+                        "x": 127.394065,
+                        "y": 42.287511
+                    },
+                    "uuid": "f0aff90f-ae61-4fca-a9be-f1c653240474"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [WING_EN] on B.Cu, length 0.4000 mm",
+                    "pos": {
+                        "x": 122.4,
+                        "y": 44.7
+                    },
+                    "uuid": "734d045a-4355-480a-aca0-e90e6e55f7d8"
+                },
+                {
+                    "description": "Pad 2 [WING_EN] of U_MUX_A on B.Cu",
+                    "pos": {
+                        "x": 113.330309,
+                        "y": 49.656669
+                    },
+                    "uuid": "6dbf6d57-3a84-4645-b011-97d1125bb38c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [WING_EN] on F.Cu, length 0.6000 mm",
+                    "pos": {
+                        "x": 127.1,
+                        "y": 33.4
+                    },
+                    "uuid": "21eca3de-dc99-45e8-839e-77964d1e1e21"
+                },
+                {
+                    "description": "Pad 2 [WING_EN] of U_MUX_C on B.Cu",
+                    "pos": {
+                        "x": 130.650817,
+                        "y": 39.656669
+                    },
+                    "uuid": "eb6de770-1244-4b3c-a26f-8bcf8c523f09"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [WING_EN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 131.7,
+                        "y": 39.0
+                    },
+                    "uuid": "6e894f2c-01f1-4a4f-ba7e-4db270da7b8b"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        }
+    ]
+}

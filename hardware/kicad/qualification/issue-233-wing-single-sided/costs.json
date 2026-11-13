@@ -1,0 +1,129 @@
+{
+  "currency": "USD",
+  "quantity": "5 assembled left/right panels = 10 Wings, one pitch only",
+  "basis_urls": [
+    "https://jlcpcb.com/help/article/pcb-assembly-price",
+    "https://jlcpcb.com/capabilities/pcb-assembly-capabilities"
+  ],
+  "historical_bare_basis": "docs/issue-133-wing-cost-check.md ($9.30/$9.90 per five OLD single Wings, NOT Rev4 panel quotes)",
+  "parts_unit_assumptions": {
+    "DRV5055A3QDBZR": [
+      0.8,
+      1.6
+    ],
+    "TMUX1208PWR": [
+      0.25,
+      0.8
+    ],
+    "BM14B-GHS-TBT(LF)(SN)": [
+      0.8,
+      2.0
+    ],
+    "GRM188R71C104KA01D": [
+      0.01,
+      0.04
+    ]
+  },
+  "parts_quantities_per_panel": {
+    "BM14B-GHS-TBT(LF)(SN)": 2,
+    "DRV5055A3QDBZR": 42,
+    "GRM188R71C104KA01D": 48,
+    "TMUX1208PWR": 6
+  },
+  "parts_per_five_panels_usd": [
+    185.9,
+    389.6
+  ],
+  "bare_five_panels_budget_usd": [
+    30,
+    60
+  ],
+  "joints_per_panel": 350,
+  "smt_5panels_usd": 2.8000000000000003,
+  "public_rate_inputs": {
+    "economic_setup": 8.18,
+    "economic_stencil": 1.53,
+    "standard_double_setup": 51.12,
+    "standard_double_stencil": 16.42,
+    "panel": 8.21,
+    "economic_feeder_type": 3.07,
+    "standard_feeder_type": 1.53,
+    "standard_rigid_fixture_5panels": 16.42,
+    "standard_packing_allowance": 0.55
+  },
+  "rows": [
+    {
+      "method": "Rev4 Economic one side",
+      "batch_cash_usd": [
+        245.83,
+        482.6
+      ],
+      "per_pair_cash_usd": [
+        49.166000000000004,
+        96.52000000000001
+      ]
+    },
+    {
+      "method": "Rev3 Standard two sides",
+      "batch_cash_usd": [
+        317.54,
+        551.24
+      ],
+      "per_pair_cash_usd": [
+        63.508,
+        110.248
+      ]
+    },
+    {
+      "method": "Hand hot plate, tools owned",
+      "batch_cash_usd": [
+        235.9,
+        494.6
+      ],
+      "per_pair_cash_usd": [
+        47.18,
+        98.92
+      ]
+    },
+    {
+      "method": "Hand hot plate, buy kit",
+      "batch_cash_usd": [
+        275.9,
+        614.6
+      ],
+      "per_pair_cash_usd": [
+        55.17999999999999,
+        122.92
+      ]
+    }
+  ],
+  "manual_batch_hours": [
+    15,
+    30
+  ],
+  "manual_labor_usd_per_hour": [
+    15,
+    30
+  ],
+  "manual_owned_tools_with_valued_labor_usd": [
+    460.9,
+    1394.6
+  ],
+  "manual_new_kit_with_valued_labor_usd": [
+    500.9,
+    1514.6
+  ],
+  "kit_oneoff_increment_usd": [
+    40,
+    120
+  ],
+  "stencil_budget_usd": [
+    10,
+    20
+  ],
+  "consumables_batch_usd": [
+    10,
+    25
+  ],
+  "excluded": "freight, import/tax, stock/MOQ/attrition, keyboard surcharge, PCB/PCBA DFM revisions, case, switches, plate, Main, harness, training, failed boards; no live BOM reservation"
+}

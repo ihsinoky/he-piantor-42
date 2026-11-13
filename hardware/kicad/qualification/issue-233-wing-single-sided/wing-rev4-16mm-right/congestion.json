@@ -1,0 +1,295 @@
+{
+  "qualified": false,
+  "open_connections": [],
+  "router": {
+    "JSON_SUMMARY": {
+      "routed_single": [
+        "MUX_OUT_A",
+        "H_A1_RAW",
+        "H_B1_RAW",
+        "H_C1_RAW",
+        "H_A2_RAW",
+        "H_C5_RAW",
+        "H_B4_RAW",
+        "MUX_A2",
+        "MUX_OUT_B",
+        "H_C3_RAW",
+        "H_A0_RAW",
+        "H_A4_RAW",
+        "H_A3_RAW",
+        "H_B2_RAW",
+        "H_B5_RAW",
+        "H_C6_RAW",
+        "MUX_OUT_C",
+        "H_B3_RAW",
+        "H_A5_RAW",
+        "H_C0_RAW",
+        "H_B0_RAW",
+        "H_C4_RAW",
+        "MUX_A1",
+        "H_A6_RAW",
+        "WING_EN",
+        "MUX_A0",
+        "GND",
+        "HALL_5V",
+        "H_C2_RAW",
+        "H_B6_RAW"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_nets": 12,
+      "multipoint_pads_connected": 146,
+      "multipoint_pads_total": 146,
+      "multipoint_edges_routed": 133,
+      "multipoint_edges_failed": 2,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 30,
+      "failed": 0,
+      "total_time": 6.36,
+      "total_iterations": 2512464,
+      "total_vias": 135,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.25,
+          "annular": 0.1,
+          "board_edge": 0.3
+        },
+        "count": 9,
+        "nets": [
+          1,
+          2
+        ],
+        "narrowed": [
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 1,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 1,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 1,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          },
+          {
+            "net": 1,
+            "net_name": "GND",
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "net rescue",
+            "count": 1
+          }
+        ],
+        "min_delivered": {
+          "track_width": 0.1
+        },
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "none",
+        "islands": 0,
+        "refill_status": null,
+        "why": "the board has no zones",
+        "machine_dependent": false
+      },
+      "rescue": {
+        "attempted": 1,
+        "recovered": [
+          "GND"
+        ],
+        "improved": [],
+        "unchanged": [],
+        "pads_reconnected": 1,
+        "widths": {
+          "GND": {
+            "requested_mm": 0.3,
+            "delivered_mm": 0.1,
+            "rescue_min_mm": 0.1,
+            "rescue_max_mm": 0.3,
+            "rescue_segments_emitted": 22,
+            "rescue_by_width": {
+              "0.1": 16,
+              "0.3": 6
+            },
+            "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."
+          }
+        },
+        "time": 9.53
+      },
+      "oracle_check": "disabled",
+      "pad_pairs_connected": 152,
+      "pad_pairs_total": 152,
+      "power_trace_ampacity": [
+        {
+          "net": "GND",
+          "bottleneck_width_mm": 0.1,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 0.45,
+          "max_current_ipc2152_a": 0.45,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 516.0
+        },
+        {
+          "net": "HALL_5V",
+          "bottleneck_width_mm": 0.3,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 1.0,
+          "max_current_ipc2152_a": 1.0,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 488.9
+        }
+      ],
+      "scope": "run",
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli"
+      }
+    },
+    "JSON_REGRADE": {
+      "board": "file",
+      "graded_nets": 30,
+      "seconds": 0.92,
+      "routed_single": [
+        "MUX_OUT_A",
+        "H_A1_RAW",
+        "H_B1_RAW",
+        "H_C1_RAW",
+        "H_A2_RAW",
+        "H_C5_RAW",
+        "H_B4_RAW",
+        "MUX_A2",
+        "MUX_OUT_B",
+        "H_C3_RAW",
+        "H_A0_RAW",
+        "H_A4_RAW",
+        "H_A3_RAW",
+        "H_B2_RAW",
+        "H_B5_RAW",
+        "H_C6_RAW",
+        "MUX_OUT_C",
+        "H_B3_RAW",
+        "H_A5_RAW",
+        "H_C0_RAW",
+        "H_B0_RAW",
+        "H_C4_RAW",
+        "MUX_A1",
+        "H_A6_RAW",
+        "WING_EN",
+        "MUX_A0",
+        "GND",
+        "HALL_5V",
+        "H_C2_RAW",
+        "H_B6_RAW"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [],
+      "multipoint_pads_total": 146,
+      "multipoint_pads_connected": 146,
+      "successful": 30,
+      "failed": 0,
+      "unowned_broken": [],
+      "recovered": [],
+      "pad_pairs": {},
+      "broken_by_run": []
+    },
+    "JSON_SUMMARY_MIN": {
+      "escalations": 1,
+      "failed": 0,
+      "failed_single": [],
+      "main_loop_time_s": 6.36,
+      "min_clearance_used": 0.1,
+      "multipoint_deficit": 0,
+      "open_single": [],
+      "pad_pairs_open": {
+        "count": 0,
+        "nets": []
+      },
+      "regraded_nets": 30,
+      "routed": 30,
+      "scope": "merged",
+      "terminal_restores_broken": [],
+      "vias": 135
+    }
+  },
+  "power_voltage_extraction": "NOT performed on a failing/disconnected board",
+  "erc": "NOT RUN: no native Wing schematic in Rev.3 package; routing gate not passed"
+}

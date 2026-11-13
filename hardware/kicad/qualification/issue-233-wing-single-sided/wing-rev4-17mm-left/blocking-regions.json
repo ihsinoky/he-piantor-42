@@ -1,0 +1,164 @@
+{
+  "variant": "wing-rev4-17mm-left",
+  "independent_disconnected_pad_components": {
+    "GND": [
+      {
+        "pads": [
+          "C_HA0.2",
+          "C_HA1.2",
+          "C_HA2.2",
+          "C_HA3.2",
+          "C_HA4.2",
+          "C_HA5.2",
+          "C_HA6.2",
+          "C_HB0.2",
+          "C_HB1.2",
+          "C_HB2.2",
+          "C_HB3.2",
+          "C_HB4.2",
+          "C_HB5.2",
+          "C_HB6.2",
+          "C_HC0.2",
+          "C_HC1.2",
+          "C_HC2.2",
+          "C_HC3.2",
+          "C_HC4.2",
+          "C_HC5.2",
+          "C_HC6.2",
+          "C_MUX_A.2",
+          "C_MUX_B.2",
+          "C_MUX_C.2",
+          "J_WING.10",
+          "J_WING.12",
+          "J_WING.14",
+          "J_WING.2",
+          "J_WING.4",
+          "J_WING.8",
+          "TP_W_GND.1",
+          "TP_W_GND_A.1",
+          "TP_W_GND_B.1",
+          "TP_W_GND_C.1",
+          "U_HA0.3",
+          "U_HA1.3",
+          "U_HA2.3",
+          "U_HA3.3",
+          "U_HA4.3",
+          "U_HA5.3",
+          "U_HA6.3",
+          "U_HB0.3",
+          "U_HB1.3",
+          "U_HB2.3",
+          "U_HB3.3",
+          "U_HB4.3",
+          "U_HB5.3",
+          "U_HB6.3",
+          "U_HC0.3",
+          "U_HC1.3",
+          "U_HC2.3",
+          "U_HC3.3",
+          "U_HC4.3",
+          "U_HC5.3",
+          "U_HC6.3",
+          "U_MUX_A.14"
+        ],
+        "copper_bbox_mm": [
+          40.2005,
+          16.233817,
+          162.7995,
+          137.855868
+        ]
+      },
+      {
+        "pads": [
+          "U_MUX_C.14"
+        ],
+        "copper_bbox_mm": [
+          137.403896,
+          33.550508,
+          139.257371,
+          35.6995
+        ]
+      },
+      {
+        "pads": [
+          "U_MUX_B.14"
+        ],
+        "copper_bbox_mm": [
+          129.0005,
+          38.541765,
+          130.637944,
+          39.85771
+        ]
+      }
+    ],
+    "MUX_A2": [
+      {
+        "pads": [
+          "J_WING.6",
+          "TP_W_A2.1"
+        ],
+        "copper_bbox_mm": [
+          117.774734,
+          25.5,
+          132.564171,
+          29.271162
+        ]
+      },
+      {
+        "pads": [
+          "U_MUX_A.15"
+        ],
+        "copper_bbox_mm": [
+          120.69707,
+          44.209747,
+          123.2,
+          45.239441
+        ]
+      },
+      {
+        "pads": [
+          "U_MUX_C.15"
+        ],
+        "copper_bbox_mm": [
+          138.017578,
+          34.209747,
+          139.44106,
+          35.239441
+        ]
+      },
+      {
+        "pads": [
+          "U_MUX_B.15"
+        ],
+        "copper_bbox_mm": [
+          129.357324,
+          39.209747,
+          130.780806,
+          40.239441
+        ]
+      }
+    ]
+  },
+  "native_DRC_violations": [
+    {
+      "description": "Via is not connected or connected on only one layer",
+      "items": [
+        {
+          "description": "Via [MUX_A2] on F.Cu - B.Cu",
+          "pos": {
+            "x": 122.9,
+            "y": 44.7
+          },
+          "uuid": "5c8d391e-abbd-4d4f-8046-559c5a1f7d03"
+        }
+      ],
+      "severity": "warning",
+      "type": "via_dangling"
+    }
+  ],
+  "DRC_unconnected": 5,
+  "ERC": "not reached: failed route gate; native ERC not run",
+  "min_via_pad_gap_mm": 0.153003,
+  "width_below_floor": 0,
+  "pass": false
+}

@@ -1,0 +1,441 @@
+{
+  "qualified": false,
+  "open_connections": [
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Zone 'Study GND' [GND] on B.Cu, priority 0",
+          "pos": {
+            "x": 163.1,
+            "y": 138.156368
+          },
+          "uuid": "aa93f512-19a8-4885-bb97-57e28fbda089",
+          "net": null
+        },
+        {
+          "description": "Zone 'Study GND' [GND] on B.Cu, priority 0",
+          "pos": {
+            "x": 163.1,
+            "y": 138.156368
+          },
+          "uuid": "aa93f512-19a8-4885-bb97-57e28fbda089",
+          "net": null
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Track [GND] on F.Cu, length 3.1113 mm",
+          "pos": {
+            "x": 138.3,
+            "y": 32.7
+          },
+          "uuid": "6a62930f-f9e3-47f5-a714-7a902694e370",
+          "net": "GND"
+        },
+        {
+          "description": "Pad 14 [GND] of U_MUX_C on B.Cu",
+          "pos": {
+            "x": 138.404319,
+            "y": 34.161678
+          },
+          "uuid": "f39a01c0-183c-4988-ae7b-431af066be0f",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Pad 15 [MUX_A2] of U_MUX_B on B.Cu",
+          "pos": {
+            "x": 130.069065,
+            "y": 39.724594
+          },
+          "uuid": "492b2cf4-8218-4d3c-97b0-467516071baf",
+          "net": "MUX_A2"
+        },
+        {
+          "description": "Via [MUX_A2] on F.Cu - B.Cu",
+          "pos": {
+            "x": 122.9,
+            "y": 44.7
+          },
+          "uuid": "5c8d391e-abbd-4d4f-8046-559c5a1f7d03",
+          "net": "MUX_A2"
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Pad 15 [MUX_A2] of U_MUX_B on B.Cu",
+          "pos": {
+            "x": 130.069065,
+            "y": 39.724594
+          },
+          "uuid": "492b2cf4-8218-4d3c-97b0-467516071baf",
+          "net": "MUX_A2"
+        },
+        {
+          "description": "Pad 15 [MUX_A2] of U_MUX_C on B.Cu",
+          "pos": {
+            "x": 138.729319,
+            "y": 34.724594
+          },
+          "uuid": "cdccc809-2677-4db1-b5d8-3f939bf1db59",
+          "net": "MUX_A2"
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Pad 15 [MUX_A2] of U_MUX_C on B.Cu",
+          "pos": {
+            "x": 138.729319,
+            "y": 34.724594
+          },
+          "uuid": "cdccc809-2677-4db1-b5d8-3f939bf1db59",
+          "net": "MUX_A2"
+        },
+        {
+          "description": "Track [MUX_A2] on B.Cu, length 3.3941 mm",
+          "pos": {
+            "x": 129.6,
+            "y": 26.3
+          },
+          "uuid": "f05e1161-87c3-4c69-8345-2c64b63f4040",
+          "net": "MUX_A2"
+        }
+      ]
+    }
+  ],
+  "router": {
+    "JSON_SUMMARY": {
+      "routed_single": [],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [
+        {
+          "net_name": "MUX_A2",
+          "failed_pads": [
+            {
+              "component_ref": "U_MUX_C",
+              "pad_number": "?",
+              "x": 138.729319,
+              "y": 34.724594
+            },
+            {
+              "component_ref": "U_MUX_B",
+              "pad_number": "?",
+              "x": 130.069065,
+              "y": 39.724594
+            },
+            {
+              "component_ref": "U_MUX_A",
+              "pad_number": "?",
+              "x": 121.408811,
+              "y": 44.724594
+            }
+          ]
+        },
+        {
+          "net_name": "GND",
+          "failed_pads": [
+            {
+              "component_ref": "U_MUX_C",
+              "pad_number": "?",
+              "x": 138.404319,
+              "y": 34.161678
+            },
+            {
+              "component_ref": "U_MUX_B",
+              "pad_number": "?",
+              "x": 129.744065,
+              "y": 39.161678
+            }
+          ]
+        }
+      ],
+      "multipoint_nets": 2,
+      "multipoint_pads_connected": 58,
+      "multipoint_pads_total": 63,
+      "multipoint_edges_routed": 0,
+      "multipoint_edges_failed": 5,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 0,
+      "failed": 2,
+      "total_time": 1.61,
+      "total_iterations": 438624,
+      "total_vias": 0,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.25,
+          "annular": 0.1,
+          "board_edge": 0.3
+        },
+        "count": 1,
+        "nets": [
+          1
+        ],
+        "narrowed": [
+          {
+            "net": 1,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          }
+        ],
+        "min_delivered": {
+          "track_width": 0.1
+        },
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "none",
+        "islands": 0,
+        "refill_status": null,
+        "why": "the board has no zones",
+        "machine_dependent": false
+      },
+      "rescue": {
+        "attempted": 2,
+        "recovered": [],
+        "improved": [],
+        "unchanged": [
+          "GND",
+          "MUX_A2"
+        ],
+        "pads_reconnected": 0,
+        "widths": {},
+        "time": 21.0
+      },
+      "oracle_check": "skipped",
+      "blockers": [
+        {
+          "net": "MUX_A2",
+          "stage": "phase3",
+          "blocked_by": [
+            {
+              "net": "HALL_5V",
+              "blocked_count": 1,
+              "unique_cells": 1,
+              "track_cells": 1,
+              "via_cells": 0,
+              "near_target_cells": 1,
+              "near_source_cells": 0
+            }
+          ]
+        },
+        {
+          "net": "GND",
+          "stage": "phase3",
+          "blocked_by": [
+            {
+              "net": "HALL_5V",
+              "blocked_count": 1,
+              "unique_cells": 1,
+              "track_cells": 1,
+              "via_cells": 0,
+              "near_target_cells": 1,
+              "near_source_cells": 0
+            }
+          ]
+        }
+      ],
+      "pad_pairs_connected": 56,
+      "pad_pairs_total": 61,
+      "pad_pairs_open": [
+        {
+          "net": "GND",
+          "pairs_connected": 55,
+          "pairs_total": 57,
+          "outcome": "open",
+          "open_subtype": "partial"
+        },
+        {
+          "net": "MUX_A2",
+          "pairs_connected": 1,
+          "pairs_total": 4,
+          "outcome": "open",
+          "open_subtype": "partial"
+        }
+      ],
+      "power_trace_ampacity": [
+        {
+          "net": "GND",
+          "bottleneck_width_mm": 0.3,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 1.0,
+          "max_current_ipc2152_a": 1.0,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 532.6
+        },
+        {
+          "net": "HALL_5V",
+          "bottleneck_width_mm": 0.3,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 1.0,
+          "max_current_ipc2152_a": 1.0,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 492.4
+        }
+      ],
+      "scope": "reconciliation-subset",
+      "board_scoped_keys": [
+        "power_trace_ampacity",
+        "min_clearance_used"
+      ],
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli"
+      }
+    },
+    "JSON_REGRADE": {
+      "board": "file",
+      "graded_nets": 30,
+      "seconds": 0.74,
+      "routed_single": [
+        "MUX_OUT_C",
+        "MUX_OUT_A",
+        "H_A1_RAW",
+        "H_B1_RAW",
+        "H_C1_RAW",
+        "H_C3_RAW",
+        "H_B5_RAW",
+        "H_C5_RAW",
+        "H_A4_RAW",
+        "MUX_OUT_B",
+        "H_B3_RAW",
+        "H_A5_RAW",
+        "H_A0_RAW",
+        "H_B6_RAW",
+        "H_C6_RAW",
+        "H_A2_RAW",
+        "H_C2_RAW",
+        "H_B2_RAW",
+        "MUX_A1",
+        "H_C0_RAW",
+        "H_A3_RAW",
+        "H_A6_RAW",
+        "H_B0_RAW",
+        "H_C4_RAW",
+        "H_B4_RAW",
+        "WING_EN",
+        "MUX_A0",
+        "HALL_5V"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [
+        {
+          "net_name": "GND",
+          "failed_pads": [
+            {
+              "x": 138.4043,
+              "y": 34.1617,
+              "component_ref": "U_MUX_C",
+              "pad_number": "?"
+            },
+            {
+              "x": 129.7441,
+              "y": 39.1617,
+              "component_ref": "U_MUX_B",
+              "pad_number": "?"
+            }
+          ]
+        },
+        {
+          "net_name": "MUX_A2",
+          "failed_pads": [
+            {
+              "x": 138.7293,
+              "y": 34.7246,
+              "component_ref": "U_MUX_C",
+              "pad_number": "?"
+            },
+            {
+              "x": 130.0691,
+              "y": 39.7246,
+              "component_ref": "U_MUX_B",
+              "pad_number": "?"
+            },
+            {
+              "x": 121.4088,
+              "y": 44.7246,
+              "component_ref": "U_MUX_A",
+              "pad_number": "?"
+            }
+          ]
+        }
+      ],
+      "multipoint_pads_total": 146,
+      "multipoint_pads_connected": 141,
+      "successful": 28,
+      "failed": 2,
+      "unowned_broken": [],
+      "recovered": [],
+      "pad_pairs": {
+        "GND": {
+          "total": 57,
+          "connected": 55,
+          "copper": true
+        },
+        "MUX_A2": {
+          "total": 4,
+          "connected": 1,
+          "copper": true
+        }
+      },
+      "broken_by_run": []
+    },
+    "JSON_SUMMARY_MIN": {
+      "escalations": 0,
+      "failed": 2,
+      "failed_single": [],
+      "main_loop_time_s": 8.56,
+      "min_clearance_used": 0.1,
+      "multipoint_deficit": 5,
+      "open_single": [],
+      "pad_pairs_open": {
+        "count": 2,
+        "nets": [
+          "GND",
+          "MUX_A2"
+        ]
+      },
+      "regraded_nets": 30,
+      "routed": 28,
+      "scope": "merged",
+      "terminal_restores_broken": [],
+      "vias": 124
+    }
+  },
+  "power_voltage_extraction": "NOT performed on a failing/disconnected board",
+  "erc": "NOT RUN: no native Wing schematic in Rev.3 package; routing gate not passed"
+}
