@@ -1,0 +1,2824 @@
+{
+  "pitch_mm": 17,
+  "cad_passed": true,
+  "failures": [],
+  "provenance": {
+    "hardware/case/issue-228-final/17mm/assembly.step": true,
+    "hardware/case/issue-228-final/17mm/dimensions.json": true,
+    "hardware/case/issue-228-final/17mm/outline-check.json": true,
+    "hardware/case/issue-228-final/17mm/tray-left.step": true,
+    "hardware/case/issue-228-final/17mm/tray-right.step": true,
+    "hardware/case/issue-230-mount-study/17mm-left/cutouts.csv": true,
+    "hardware/case/issue-230-mount-study/17mm-left/supports.csv": true,
+    "hardware/case/issue-230-mount-study/17mm-left/tie-holes.csv": true,
+    "hardware/case/issue-230-mount-study/17mm-right/cutouts.csv": true,
+    "hardware/case/issue-230-mount-study/17mm-right/supports.csv": true,
+    "hardware/case/issue-230-mount-study/17mm-right/tie-holes.csv": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/case/17mm/tray-left-channel-candidate.step": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/case/17mm/tray-right-channel-candidate.step": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/main-native-obstacles.json": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-left/definition.json": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-left/main.kicad_pcb": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-right/definition.json": true,
+    "hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-right/main.kicad_pcb": true
+  },
+  "printing": {
+    "tray-left": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        159.02052392520002,
+        156.06899176301698
+      ],
+      "passed": true,
+      "triangles": 137698,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 0.0003779770986945352
+    },
+    "tray-right": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        152.02052392526042,
+        156.06899176301698
+      ],
+      "passed": true,
+      "triangles": 135162,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 0.0003857804920628605
+    },
+    "splice-1": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        38.0,
+        26.0
+      ],
+      "passed": true,
+      "triangles": 8068,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 1.986582478441087e-07
+    },
+    "splice-2": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        38.0,
+        26.0
+      ],
+      "passed": true,
+      "triangles": 8068,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 1.9871084741232758e-07
+    },
+    "cable-rack": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        74.0,
+        25.0
+      ],
+      "passed": true,
+      "triangles": 2216,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 4.4396803812390716e-06
+    },
+    "support-post": {
+      "valid": true,
+      "solids": 1,
+      "with_5mm_brim_xy_mm": [
+        14.5,
+        14.5
+      ],
+      "passed": true,
+      "triangles": 5812,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 2.6395956072234308e-05
+    }
+  },
+  "assembly_solids": 413,
+  "broadphase_pairs": 1513,
+  "unexpected_overlaps": [],
+  "intended_mating_contacts": [
+    {
+      "a": "Main-envelope-J4",
+      "b": "EZmate-Main-plug",
+      "volume_mm3": 0.23634199999999927,
+      "reason": "own intended Main EZmate mate"
+    },
+    {
+      "a": "USB-reference-shell",
+      "b": "Fly-official-41-instance-41",
+      "volume_mm3": 4.5613051207854705,
+      "reason": "D-037 accepted defective USB source mating envelope"
+    },
+    {
+      "a": "USB-reference-shell",
+      "b": "Fly-official-42-instance-42",
+      "volume_mm3": 0.23601220425381772,
+      "reason": "D-037 accepted defective USB source mating envelope"
+    },
+    {
+      "a": "EZmate-Fly-plug",
+      "b": "Fly-official-67-instance-67",
+      "volume_mm3": 1.5347059083928605,
+      "reason": "own intended Fly EZmate mate"
+    },
+    {
+      "a": "Fly-official-56-instance-56",
+      "b": "Fly-official-57-instance-57",
+      "volume_mm3": 0.06932539816339958,
+      "reason": "D-037 official source internal solids"
+    },
+    {
+      "a": "Fly-official-56-instance-56",
+      "b": "Fly-official-58-instance-58",
+      "volume_mm3": 0.06932539816339964,
+      "reason": "D-037 official source internal solids"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987244,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987244,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987244,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-left-J_WING",
+      "b": "GH-fanout-left",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.005809957983807,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.011700431798351,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.021787250296915,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.039295001582163,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.070087648548084,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.124946816639614,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.224420425850871,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.411173849018663,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.506386163758847,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 11.11756267659843,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 10.589568364023107,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 10.05708776223051,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 9.530167480443613,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-left",
+      "b": "GH-fanout-left",
+      "volume_mm3": 9.016129299939275,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872414,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872414,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872414,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.3926990816987242,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872425,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872453,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872453,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "underside-right-J_WING",
+      "b": "GH-fanout-right",
+      "volume_mm3": 0.39269908169872453,
+      "reason": "own intended mated GH termination"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 9.01613116848731,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 9.530168498381599,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 10.057088545625437,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 10.58956853575499,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.117561536855249,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.506386405801287,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.411173859968095,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.224424269912735,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.12494321120708,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.070087008628914,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.039296775293653,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.021787279287253,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.01170190415992,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-bundle-right",
+      "b": "GH-fanout-right",
+      "volume_mm3": 11.005807957258362,
+      "reason": "connected conservative bundle/fanout envelope union"
+    }
+  ],
+  "self_envelope_pairs": [
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        274
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        275
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        276
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        277
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        278
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        273,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        275
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        276
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        277
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        278
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        274,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        276
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        277
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        278
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        275,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        277
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        278
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        276,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        278
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        277,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        279
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        278,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        280
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        279,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        281
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        280,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        281,
+        282
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        281,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        281,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        281,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        281,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        282,
+        283
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        282,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        282,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        282,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        283,
+        284
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        283,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        283,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        284,
+        285
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        284,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-left",
+      "b": "GH-fanout-left",
+      "solid_indices": [
+        285,
+        286
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        400
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        401
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        402
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        403
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        404
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        399,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        401
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        402
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        403
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        404
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        400,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        402
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        403
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        404
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        401,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        403
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        404
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        402,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        404
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        403,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        405
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        404,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        406
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        405,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        407
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        406,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        407,
+        408
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        407,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        407,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        407,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        407,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        408,
+        409
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        408,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        408,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        408,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        409,
+        410
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        409,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        409,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        410,
+        411
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        410,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    },
+    {
+      "a": "GH-fanout-right",
+      "b": "GH-fanout-right",
+      "solid_indices": [
+        411,
+        412
+      ],
+      "intersection_status": "not evaluated: same conservative envelope union",
+      "volume_mm3": null,
+      "reason": "connected conservative bundle/fanout envelope union"
+    }
+  ],
+  "unqualified_cap_reservation_overlaps": [],
+  "cap_skirt_actual_profile_verified": false,
+  "cap_acceptance_envelope_gap_mm": 0.4,
+  "cap_acceptance_envelope_keys": 42,
+  "full_acceptance_passed": false,
+  "remaining_gate": "Actual keycap skirt/profile and physical build acceptance are unavailable",
+  "plate_checks": [
+    {
+      "side": "left",
+      "dxf_mm_units": true,
+      "closed_loops": true,
+      "aperture_count": 21,
+      "tie_hole_count": 4,
+      "connector_notch": false
+    },
+    {
+      "side": "right",
+      "dxf_mm_units": true,
+      "closed_loops": true,
+      "aperture_count": 21,
+      "tie_hole_count": 4,
+      "connector_notch": false
+    }
+  ],
+  "palm": [
+    {
+      "side": "left",
+      "max_step_mm": 0.0,
+      "min_seam_gap_mm": 0.19999999999996415,
+      "max_seam_gap_mm": 0.20000000000002463,
+      "whole_perimeter_max_seam_mm": 0.4000000027222258,
+      "datum_faces_case": 1,
+      "datum_faces_plate": 1,
+      "nominal_z_mm": 16.2,
+      "physical_measurement": false
+    },
+    {
+      "side": "right",
+      "max_step_mm": 0.0,
+      "min_seam_gap_mm": 0.1999999999999742,
+      "max_seam_gap_mm": 0.20000000000001464,
+      "whole_perimeter_max_seam_mm": 0.39999999876367326,
+      "datum_faces_case": 2,
+      "datum_faces_plate": 1,
+      "nominal_z_mm": 16.2,
+      "physical_measurement": false
+    }
+  ],
+  "floor": {
+    "left": {
+      "removed_below_socket_bottom_mm3": 0.0
+    },
+    "right": {
+      "removed_below_socket_bottom_mm3": -7.639755494892597e-11
+    }
+  },
+  "passages": {
+    "left": {
+      "original_wall_removed_mm3": 68.61777785072186,
+      "removed_bbox_mm": [
+        [
+          -16.335638436247724,
+          -21.4302988842807,
+          1.9999999
+        ],
+        [
+          -8.122735261037585,
+          -14.538447227139796,
+          8.449229636624557
+        ]
+      ],
+      "conservative_original_roof_mm": 2.750770363375443,
+      "removed_floor_mm3": 0.0,
+      "historical_study_removed_floor_mm3": 0.0,
+      "source_valid": true,
+      "source_solid_count": 1,
+      "tray_harness_overlap_mm3": 0.0
+    },
+    "right": {
+      "original_wall_removed_mm3": 68.8175996847162,
+      "removed_bbox_mm": [
+        [
+          8.122735262553702,
+          -21.430298884280703,
+          1.9999999
+        ],
+        [
+          16.33692112684063,
+          -14.538447248281972,
+          8.449229636681443
+        ]
+      ],
+      "conservative_original_roof_mm": 2.7507703633185567,
+      "removed_floor_mm3": 0.0,
+      "historical_study_removed_floor_mm3": 0.0,
+      "source_valid": true,
+      "source_solid_count": 1,
+      "tray_harness_overlap_mm3": 0.0
+    }
+  },
+  "posts": [
+    {
+      "side": "left",
+      "id": "R1",
+      "xy_mm": [
+        -89.1026094393491,
+        -5.601804171650006
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "left",
+      "id": "R2",
+      "xy_mm": [
+        -51.88979651824707,
+        -6.056286843554339
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "left",
+      "id": "R3",
+      "xy_mm": [
+        -113.98529534152894,
+        -16.50372796029669
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "left",
+      "id": "R4",
+      "xy_mm": [
+        -56.667364653911605,
+        36.21870390403876
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "left",
+      "id": "R5",
+      "xy_mm": [
+        -69.80838080528915,
+        -21.020388458692093
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "left",
+      "id": "R6",
+      "xy_mm": [
+        -39.167364653911605,
+        5.907814771583418
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R1",
+      "xy_mm": [
+        89.1026094393491,
+        -5.601804171650006
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R2",
+      "xy_mm": [
+        51.88979651824707,
+        -6.056286843554339
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R3",
+      "xy_mm": [
+        113.98529534152894,
+        -16.50372796029669
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R4",
+      "xy_mm": [
+        56.667364653911605,
+        36.21870390403876
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R5",
+      "xy_mm": [
+        69.80838080528915,
+        -21.020388458692093
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    },
+    {
+      "side": "right",
+      "id": "R6",
+      "xy_mm": [
+        39.167364653911605,
+        5.907814771583418
+      ],
+      "socket_diameter_mm": 3.1,
+      "socket_depth_mm": 0.8,
+      "floor_remaining_mm": 1.2,
+      "top_z_mm": 10.0,
+      "pcb_gap_mm": 0.0,
+      "free_peg_diameter_mm": 3.15,
+      "assembly_peg_diameter_mm": 3.1,
+      "socket_axis_open": true,
+      "socket_bottom_closed": true,
+      "socket_wall_present": true,
+      "passed": true
+    }
+  ],
+  "fasteners": {
+    "pcb_sites": 13,
+    "wing_stack_M2x12": 8,
+    "main_and_Fly_M2x6": 5,
+    "splice_M2x8": 4,
+    "total_screws": 17,
+    "additional_shelf_fasteners": 0
+  }
+}
