@@ -83,7 +83,7 @@ def run():
   lengths=read(out/'length-fly.json')
   for w in lengths['conductors']:
    assert len(w['all_conductors'])==14 and abs(w['minimum_reserve_mm']-30.2)<1e-6
-   assert abs(w['cut_length_upper_mm']-w['longest_mm']-2*w['internal_wire_bound_mm_per_end'])<1e-6
+   assert abs(w['cut_length_upper_mm']-w['longest_mm']-w['total_unrouted_wire_bound_mm'])<1e-6
    assert w['complete_cut_length_verified']
    assert w['passed']==(w['cut_length_upper_mm']<=200 and all(a['minimum_straight_slack_mm']>0 and a['minimum_bend_radius_mm']>=5-1e-7 for a in w['all_conductors']))
   assert lengths['dressed_164_8_reference_only']

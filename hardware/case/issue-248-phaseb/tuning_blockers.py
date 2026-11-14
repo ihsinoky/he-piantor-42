@@ -5,7 +5,8 @@ from certified_distance import boundary_distance
 def run(pitch):
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch)
  regions={r['properties']['name']:shape(r['geometry']) for r in read(out/'surface-plan.geojson')['features']}
- low=fuseall(sloped(regions['low_south'],PLATE,0));slope=fuseall(sloped(regions['slope'],TOP+M*START,M))
+ exceptions=unary_union([shape(b['outer']) for b in read(out/'measurements.json')['blisters']]+[Point(x,y).buffer(2.55,quad_segs=64) for x,y in P['south_opening_xy_mm']])
+ low=fuseall(sloped(regions['low_south'].difference(exceptions),PLATE,0));slope=fuseall(sloped(regions['slope'].difference(exceptions),TOP+M*START,M))
  conflicts=[]
  for n,k,q in raw:
   if n.startswith('plate-') and not n.startswith('plate-screw-') or n.startswith('POM-'):
