@@ -1,3 +1,215 @@
+# Issue #248 Phase B — Round 3 continuation
+
+**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
+
+## Round 3 results
+
+The plate-boundary seam rule supersedes the tuning round's shell/plate ownership. The entire preceding report is preserved below and its evidence is frozen in [tuning-round/](tuning-round/REPORT.md); first-candidate evidence is also retained. Current results below supersede earlier current-candidate statements. Restart WIP disposition is recorded in [ROUND3-WIP-INVENTORY.md](ROUND3-WIP-INVENTORY.md), checkpoint cdc2085.
+
+| Gate | 17 mm | 16 mm |
+|---|---|---|
+| 1 Exhaustive fitted collision | FAIL | FAIL |
+| 2 Finished conductors ≤200 mm | PASS | PASS |
+| 3 Accessible ~30 mm service | FAIL | FAIL |
+| 4 Connected Fly 170 / R5 / roof gap | PASS | PASS |
+| 5 USB 30 mm insertion | PASS | PASS |
+| 6 Assumed swept caps after allowances | PASS | PASS |
+| 7 Print envelopes and manufacturing data | FAIL | FAIL |
+| 8 Fitted preview STEP | PASS | PASS |
+
+**Routing remains unresolved.** The finite local-repair screen examined 1071 admissible waypoint variants with R5, positive stored/released tangent slack, finished length including 7.30 mm tails ≤200 mm, and connected 30.20 mm reserve. The three shortlisted changes were individually tested by exact Common against the 16 mm fitted assembly: Wire-right-04: 8 contacts, Wire-right-08: 6 contacts, Wire-right-09: 9 contacts. All three remain blocked by fixed bodies and strands; the attempts also introduce tray/POM contacts. They are rejected and the frozen fitted round-3 route is retained. Full attempted waypoints, constraint checks and exact contacts are in [route-repair-attempts.json](route-repair-attempts.json). A separated fan/height-transition redesign is still required. This bounded unsuccessful search does not prove a compliant route impossible. No overlap exemption, thinner skin, shortened reserve or length waiver is used.
+
+Deck Z13.55, slope lines, plateau Z24.65, 2.00 mm normal skin, unchanged boards/aluminium, M2×10 E screws, GH/Fly blister dimensions and Ø5.10 south openings remain binding. Tail-source.json supplies 3.40 mm/end plus the 0.50 mm Wing dress lead: 7.30 mm added to every routed conductor. The 164.8 mm value remains a reported reference. Physical Junana skirt/full-press and retention tests remain OPEN.
+
+Tray route relief is an explicit conservative union of the projected conductor paths, buffered 0.87 mm and cut through their common height interval (clamped at Z2). This replaces overlapping per-strand Boolean tools; it may remove additional tray material within that reservation. The actual channel polygon and height are recorded in measurements.json. Initial floor restoration precedes splice remaking; the redundant post-pilot floor fuse is omitted because it produced invalid coincident topology. The final exact Common checks the complete original Z0…2 floor band, excluding only the authorized relocated pilot holes. Source floor, E thread-bearing support material and dedicated shell pillars are restored before the independent material, engagement, palm-band, fitted and print audits. Shell skin and aluminium are not cut by these channels.
+
+### Round 3 — 17 mm
+
+Exhaustive audit: 366 constituents, 66795 unordered pairs; 65281 AABB exclusions, 132 explicit own mates, 1382 exact Commons, 0 Boolean errors. Threshold stays 1e−6 mm³. All gates bind to assembly-index.json; no prior PASS certifies changed operands.
+
+Final tray seating removes 53.262826830 mm³ only from trays north of the protected palm band. The two shell/tray contacts clear to zero Common. Shell, plate, POM and wire operands are byte-identical across that change. The full unordered-pair audit is re-enumerated; 998 exact current-round results are reused only when both serialized operand hashes, names and indices match. Every changed-tray pair is recomputed. The independent package verifier replays that proof; all service/material/export gates rerun on the new index. Seam proof rebinding likewise verifies every unchanged shell/plate operand. See tray-seating-relief.json and audit-E-restoration-reuse.json.
+
+| Collision category | Tuning | Round 3 |
+|---|---:|---:|
+| E screws / conductors | 6 | 0 |
+| E screws / shell-central | 2 | 0 |
+| POM-left-H3 / shell-central | 1 | 1 |
+| POM-right-H1 / shell-central | 1 | 1 |
+| aluminium plates / conductors | 28 | 10 |
+| aluminium plates / shell-central | 2 | 0 |
+| conductors / conductors | 172 | 52 |
+| conductors / main | 0 | 2 |
+| conductors / shell-central | 28 | 0 |
+| conductors / strip-left | 14 | 0 |
+| conductors / strip-right | 14 | 0 |
+| conductors / trays | 25 | 0 |
+| conductors / wing_left | 0 | 7 |
+| conductors / wing_right | 0 | 7 |
+| shell-central / trays | 2 | 0 |
+
+| Side | Longest finished mm | Routed mm | Connected reserve mm | Minimum radius mm |
+|---|---:|---:|---:|---:|
+| left | 198.400068 | 191.100068 | 30.200000 | 5.000000 |
+| right | 198.400068 | 191.100068 | 30.200000 | 5.000000 |
+
+Fly: 170.000000000 mm, R5, exact roof gap 0.300000 mm. USB sweep: PASS. Sourced tails and per-wire geometry are in [length-fly.json](17mm/length-fly.json).
+
+**Seam geometry:** shell ownership ends at the full unchanged aluminium blank silhouette, including apertures; no shell is allowed inside plate apertures. Nominal horizontal gap and overlap are both 0 mm. Actual shell/plate Common maximum 0.000000000 mm³; ownership maximum 0.000000000 mm³. Full 2.00 mm normal skin check PASS; maximum missing required material 0.000000000 mm³. Slope vertical skin is 2.090056857 mm.
+
+| Seam region | Length mm | Shell top minus plate top mm |
+|---|---:|---|
+| plateau | 3.651030 | 11.100000 … 11.100000 |
+| slope | 84.475209 | 0.000000 … 11.100000 |
+| low_south | 51.492992 | 0.000000 … 0.000000 |
+| north_left | 172.333674 | 11.100000 … 11.100000 |
+| north_right | 172.333674 | 11.100000 … 11.100000 |
+
+Exact seam lines, trimmed boundary-distance witnesses (explicit [0, upper] intervals at ≤0.000001 mm for nominally coincident boundaries), and removed ownership regions are in [seam.json](17mm/seam.json). The central footprint is the component containing the declared bay datum (0,20); disconnected outer south perimeter regions are explicitly outside ownership, not discarded by volume ranking. No bridge crosses a well. Central shell: **1 solid(s)**. Single solid under the seam rule.
+
+
+Fixed bodies intersecting the full required 2.00 mm skin (an underside pocket here removes required material):
+
+| Fixed body | Roof region | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770488 |
+| POM-right-H1 | low_south | 0.040770024 |
+
+These residual contacts require a further explicit footprint, exterior or fixed-stack change. The seam rule is applied; no skin pocket or additional footprint exception is used to hide them.
+
+Continuous service motion (caps and Main removed, Wing hardware fitted):
+
+- left: 4 contacts, 0 errors; release 30.200000 mm.
+- right: 4 contacts, 0 errors; release 30.200000 mm.
+
+The remaining continuous-motion blockers are tray contacts (the fitted route itself has no tray contact); the translating reserve envelope is therefore not clear even after the caps/Main removal procedure:
+
+- left strand 02 / tray-left: 0.018565946 mm³.
+- left strand 09 / tray-left: 0.006182203 mm³.
+- left strand 10 / tray-left: 0.000328737 mm³.
+- left strand 14 / tray-left: 0.000292079 mm³.
+- right strand 01 / tray-right: 0.000292079 mm³.
+- right strand 05 / tray-right: 0.000328737 mm³.
+- right strand 06 / tray-right: 0.474144643 mm³.
+- right strand 13 / tray-right: 1.447755172 mm³.
+
+Accessible service is NOT certified. The envelope covers every intermediate reserve-turn translation plus 0.020 mm allowance. Own moving harness is excluded as in the tuning method; fitted crossings remain independently disqualifying. See [service.json](17mm/service.json).
+
+E screws full engagement/root: PASS. Board/plate stack, protected palm and complete source floor band: PASS. Certified cap check: PASS. Independent manufacturing reload: 18/19 parts; preview 366/366 constituents.
+
+**17 mm central-shell manufacturing verdict: PASS** — STEP valid=True, 1 solid(s), 0 nonmanifold STL edges. This shell-specific verdict does not waive any other part's manufacturing failure.
+
+Manufacturing blocker **tray-left**: independently reloaded STEP valid=False, 1 solid(s), STEP volume delta 7.82165444e-09 mm³; STL has 0 nonmanifold edges and 0 degenerate triangles. Source validity or a manifold STL cannot substitute for a valid STEP reload.
+
+Rejected serialization repair attempts and the invalid splice-boss face are recorded in [tray-step-diagnostics.json](17mm/tray-step-diagnostics.json). No validity check is relaxed.
+
+Inherited constituent **Fly-official-42-instance-42** is invalid: 8 invalid faces, bounds [[-4.470000100000003, -54.51392080832, 7.9499999999999975], [4.4700001000000045, -47.20892060831999, 12.250000100000001]]; diagnostic fix valid=False, volume delta 0.0 mm³. It remains a gate-1 blocker. Face areas/bounds are recorded in audit.json.
+
+Remaining failed gates and evidence:
+
+- **1 Exhaustive fitted collision**: 80 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid constituents: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+- **7 Print envelopes and manufacturing data**: tray-left: STEP valid=False, 1 solids, 0 nonmanifold edges, volume delta 7.82165444e-09 mm³ Required skin PASS; stack/palm/floor invariants PASS.
+
+Full named fitted blockers and intersection bounds are in audit.json / collision-map.json; exact roof blockers and shell separations are in tuning-blockers.json. A failed route is not proof that a compliant route is impossible.
+
+### Round 3 — 16 mm
+
+Exhaustive audit: 366 constituents, 66795 unordered pairs; 65267 AABB exclusions, 132 explicit own mates, 1396 exact Commons, 0 Boolean errors. Threshold stays 1e−6 mm³. All gates bind to assembly-index.json; no prior PASS certifies changed operands.
+
+Final tray seating removes 41.340542540 mm³ only from trays north of the protected palm band. The two shell/tray contacts clear to zero Common. Shell, plate, POM and wire operands are byte-identical across that change. The full unordered-pair audit is re-enumerated; 1012 exact current-round results are reused only when both serialized operand hashes, names and indices match. Every changed-tray pair is recomputed. The independent package verifier replays that proof; all service/material/export gates rerun on the new index. Seam proof rebinding likewise verifies every unchanged shell/plate operand. See tray-seating-relief.json and audit-E-restoration-reuse.json.
+
+| Collision category | Tuning | Round 3 |
+|---|---:|---:|
+| E screws / conductors | 6 | 0 |
+| E screws / shell-central | 2 | 0 |
+| POM-left-H3 / shell-central | 1 | 1 |
+| POM-right-H1 / shell-central | 1 | 1 |
+| aluminium plates / conductors | 28 | 10 |
+| aluminium plates / shell-central | 4 | 0 |
+| conductors / conductors | 172 | 52 |
+| conductors / main | 0 | 2 |
+| conductors / shell-central | 28 | 0 |
+| conductors / strip-left | 14 | 0 |
+| conductors / strip-right | 14 | 0 |
+| conductors / switch-envelope-L_R0_C5 | 0 | 1 |
+| conductors / switch-envelope-L_R1_C5 | 0 | 2 |
+| conductors / switch-envelope-R_R0_C5 | 0 | 1 |
+| conductors / switch-envelope-R_R1_C5 | 0 | 2 |
+| conductors / trays | 25 | 0 |
+| conductors / wing_left | 0 | 7 |
+| conductors / wing_right | 0 | 7 |
+| shell-central / trays | 4 | 0 |
+
+| Side | Longest finished mm | Routed mm | Connected reserve mm | Minimum radius mm |
+|---|---:|---:|---:|---:|
+| left | 198.400068 | 191.100068 | 30.200000 | 5.000000 |
+| right | 198.400068 | 191.100068 | 30.200000 | 5.000000 |
+
+Fly: 170.000000000 mm, R5, exact roof gap 0.300000 mm. USB sweep: PASS. Sourced tails and per-wire geometry are in [length-fly.json](16mm/length-fly.json).
+
+**Seam geometry:** shell ownership ends at the full unchanged aluminium blank silhouette, including apertures; no shell is allowed inside plate apertures. Nominal horizontal gap and overlap are both 0 mm. Actual shell/plate Common maximum 0.000000000 mm³; ownership maximum 0.000000000 mm³. Full 2.00 mm normal skin check PASS; maximum missing required material 0.000000000 mm³. Slope vertical skin is 2.090056857 mm.
+
+| Seam region | Length mm | Shell top minus plate top mm |
+|---|---:|---|
+| slope | 84.475209 | 0.000000 … 11.100000 |
+| low_south | 43.544804 | 0.000000 … 0.000000 |
+| north_left | 164.588453 | 11.100000 … 11.100000 |
+| north_right | 164.588453 | 11.100000 … 11.100000 |
+
+Exact seam lines, trimmed boundary-distance witnesses (explicit [0, upper] intervals at ≤0.000001 mm for nominally coincident boundaries), and removed ownership regions are in [seam.json](16mm/seam.json). The central footprint is the component containing the declared bay datum (0,20); disconnected outer south perimeter regions are explicitly outside ownership, not discarded by volume ranking. No bridge crosses a well. Central shell: **1 solid(s)**. Single solid under the seam rule.
+
+
+Fixed bodies intersecting the full required 2.00 mm skin (an underside pocket here removes required material):
+
+| Fixed body | Roof region | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770468 |
+| POM-right-H1 | low_south | 0.040770032 |
+
+These residual contacts require a further explicit footprint, exterior or fixed-stack change. The seam rule is applied; no skin pocket or additional footprint exception is used to hide them.
+
+Continuous service motion (caps and Main removed, Wing hardware fitted):
+
+- left: 4 contacts, 0 errors; release 30.200000 mm.
+- right: 4 contacts, 0 errors; release 30.200000 mm.
+
+The remaining continuous-motion blockers are tray contacts (the fitted route itself has no tray contact); the translating reserve envelope is therefore not clear even after the caps/Main removal procedure:
+
+- left strand 02 / tray-left: 0.018565946 mm³.
+- left strand 09 / tray-left: 0.006182203 mm³.
+- left strand 10 / tray-left: 0.000328737 mm³.
+- left strand 14 / tray-left: 0.000292079 mm³.
+- right strand 01 / tray-right: 0.000292079 mm³.
+- right strand 05 / tray-right: 0.000328737 mm³.
+- right strand 06 / tray-right: 0.474144643 mm³.
+- right strand 13 / tray-right: 1.447755172 mm³.
+
+Accessible service is NOT certified. The envelope covers every intermediate reserve-turn translation plus 0.020 mm allowance. Own moving harness is excluded as in the tuning method; fitted crossings remain independently disqualifying. See [service.json](16mm/service.json).
+
+E screws full engagement/root: PASS. Board/plate stack, protected palm and complete source floor band: PASS. Certified cap check: PASS. Independent manufacturing reload: 18/19 parts; preview 366/366 constituents.
+
+**16 mm central-shell manufacturing verdict: PASS** — STEP valid=True, 1 solid(s), 0 nonmanifold STL edges. This shell-specific verdict does not waive any other part's manufacturing failure.
+
+Manufacturing blocker **tray-left**: independently reloaded STEP valid=False, 1 solid(s), STEP volume delta 7.0722308e-09 mm³; STL has 0 nonmanifold edges and 0 degenerate triangles. Source validity or a manifold STL cannot substitute for a valid STEP reload.
+
+Rejected serialization repair attempts and the invalid splice-boss face are recorded in [tray-step-diagnostics.json](16mm/tray-step-diagnostics.json). No validity check is relaxed.
+
+Inherited constituent **Fly-official-42-instance-42** is invalid: 8 invalid faces, bounds [[-4.470000100000003, -53.142736400370005, 7.9499999999999975], [4.4700001000000045, -45.837736200369996, 12.250000100000001]]; diagnostic fix valid=False, volume delta 0.0 mm³. It remains a gate-1 blocker. Face areas/bounds are recorded in audit.json.
+
+Remaining failed gates and evidence:
+
+- **1 Exhaustive fitted collision**: 86 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid constituents: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+- **7 Print envelopes and manufacturing data**: tray-left: STEP valid=False, 1 solids, 0 nonmanifold edges, volume delta 7.0722308e-09 mm³ Required skin PASS; stack/palm/floor invariants PASS.
+
+Full named fitted blockers and intersection bounds are in audit.json / collision-map.json; exact roof blockers and shell separations are in tuning-blockers.json. A failed route is not proof that a compliant route is impossible.
+
+## Round 3 reproduction
+
+Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` with the retained CAD Python environment. All runtime scratch is in `.issue248-runtime/`. Every gate, independent STEP/STL reload, preview constituent count, collision witness and package hash/coverage check is rerun. Metrology runs length, USB, continuous service and invariants as separate processes; caps_only supplies the independent certified cap audit. This bounds memory and checkpoints completed sections without changing their geometric checks. Geometry ownership and full required skin are additionally checked by seam.py. Authorized openings are subtracted with the exact CAD cylinders: Ø5.10 south through-holes, Ø2.20 north through-holes and Ø4.00 north counterbores only over their top 1 mm. The preliminary inscribed-polygon masks falsely left circular slivers in the required material and are preserved under per-pitch evidence/; the collision/material thresholds are unchanged. No mesh welding, discarded in-footprint solid, changed collision threshold or strand-overlap exemption is used.
+
+## Preserved tuning report (historical evidence)
+
 # Issue #248 Phase B — tuning continuation
 
 **PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
