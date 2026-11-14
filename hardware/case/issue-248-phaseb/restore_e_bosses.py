@@ -27,6 +27,9 @@ def run(pitch):
    for r in pieces:q=q.fuse(r)
   assert q.is_valid and len(q.solids())==1
   groups[n]=[q];changes.append(dict(part=n,restored_volume_mm3=q.volume-before,region_radius_mm=3.5,z_mm=[2,7.35],reason='Preserve source E bosses and original pilots; wire relief cannot remove thread-bearing material.'))
+ # Validate both restored trays before rewriting either operand.
+ for side in ('left','right'):
+  n='tray-'+side;q=groups[n][0]
   # Only these operands are rewritten. All other serialized BReps stay byte-identical.
   ii=next(i for i,r in enumerate(idx) if r['name']==n);assert sum(r['name']==n for r in idx)==1
   path=RUN/f'geometry{pitch}/{ii}.brep';BRepTools.Write_s(q.wrapped,str(path))

@@ -26,7 +26,7 @@ def run(pitch):
    if pn not in ('plate-left','plate-right'):continue
    print(pitch,'seam boundary',n,pn,flush=True)
    dist,proof=boundary_distance(q,plate,zero_precision_mm=1e-6)
-   contacts.append(dict(shell=n,shell_solid=k,plate=pn,common_mm3=volume(q,plate),minimum_boundary_gap_mm=dist,distance_proof=proof))
+   contacts.append(dict(shell=n,shell_solid=k,plate=pn,common_mm3=volume(q,plate),minimum_boundary_gap_mm=dist,minimum_boundary_gap_interval_mm=proof['minimum_distance_interval_mm'],distance_proof=proof))
  actual={r['properties']['name']:shape(r['geometry']) for r in read(out/'surface-plan.geojson')['features']}
  blisters=meta['blisters'];seams=[];required=[]
  voids=unary_union([Point(x,y).buffer(2.55,quad_segs=128) for x,y in P['south_opening_xy_mm']]+[Point(x,-30).buffer(2,quad_segs=128) for x in (-8,8)])

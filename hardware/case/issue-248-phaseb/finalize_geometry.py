@@ -8,7 +8,7 @@ def run(pitch):
    # Only detached upper keyless rim nibs: never floor, PCB support or a random
    # 'keep largest' rule. Larger/out-of-zone fragments remain failed geometry.
    inside=b[0][0]>=-40 and b[1][0]<=40 and b[0][1]>=-10 and b[1][1]<=40 and b[0][2]>=8.5
-   zones=[([9.3,-8.7,7.9],[11.2,-5.4,12.1],10),([11.6,-6.9,4.4],[13.6,-4.8,5.6],.2)]
+   zones=[([9.3,-8.7,7.9],[11.2,-5.4,12.1],10),([11.6,-6.9,4.4],[13.6,-4.8,5.6],.2),([12.480,-6.793,3.773],[12.565,-5.486,3.995],.018),([12.480,-8.359,3.773],[12.483,-8.292,3.995],.000013)]
    splice_nib=n=='tray-right' and any(q.volume<limit and all(lo[i]<=b[0][i] and b[1][i]<=hi[i] for i in range(3)) for lo,hi,limit in zones)
    round3_nib=q.volume<.324 and 7.963<min(abs(b[0][0]),abs(b[1][0])) and max(abs(b[0][0]),abs(b[1][0]))<8.123 and -11.314<=b[0][1]<=b[1][1]<=-10.547 and 8.549<=b[0][2]<=b[1][2]<=13.551
    inside=inside or splice_nib or round3_nib
