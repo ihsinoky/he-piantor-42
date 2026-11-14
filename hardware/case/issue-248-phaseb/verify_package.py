@@ -7,6 +7,9 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def run():
  for manifest,root in [(H/'artifact-sha256.json',H),(H/'inputs-sha256.json',R)]:
   for name,digest in read(manifest).items():assert sha(root/name)==digest,(manifest.name,name)
+ frozen=read(H/'first-candidate-sha256.json')
+ for n,digest in frozen['files'].items():assert sha(H/'first-candidate'/n)==digest,('first-candidate changed',n)
+ assert set(frozen['files'])=={str(p.relative_to(H/'first-candidate')) for p in (H/'first-candidate').rglob('*') if p.is_file()}
  covered=set(read(H/'artifact-sha256.json'))
  actual={str(p.relative_to(H)) for p in H.rglob('*') if p.is_file() and p.name!='artifact-sha256.json' and '__pycache__' not in str(p)}
  assert covered==actual,('manifest coverage',covered.symmetric_difference(actual))
