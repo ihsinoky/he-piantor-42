@@ -1,0 +1,94 @@
+"""Independent length arithmetic, exact clearances, USB and continuous reserve sweep."""
+from common import *
+def analytic(points,r=5):
+ p=[np.array(v,float) for v in points];t=[0.];arcs=[]
+ for i in range(1,len(p)-1):
+  u=p[i-1]-p[i];v=p[i+1]-p[i];u/=np.linalg.norm(u);v/=np.linalg.norm(v)
+  theta=math.acos(float(np.clip(np.dot(u,v),-1,1)));d=r/math.tan(theta/2)
+  t.append(d);arcs.append(r*(math.pi-theta))
+ t.append(0.);slack=[float(np.linalg.norm(p[i+1]-p[i]))-t[i]-t[i+1] for i in range(len(p)-1)]
+ return dict(length_mm=sum(slack)+sum(arcs),minimum_straight_slack_mm=min(slack),minimum_bend_radius_mm=r)
+def motion(sgn,i):
+ from routes import points
+ p=points(sgn,i,22.1);dx=abs(p[4][0])-7;z=p[4][2]
+ cap=[]
+ for j in range(65):
+  a=math.pi-j*math.pi/128;cap.append((sgn*(12+dx+5*math.cos(a)),2+5*math.sin(a)))
+ for j in range(65):
+  a=math.pi/2-j*math.pi/128;cap.append((sgn*(14+dx+5*math.cos(a)),2+5*math.sin(a)))
+ strip=Polygon(cap+[(x,y+15.1) for x,y in reversed(cap)])
+ path=rounded([p[3],p[4],p[5],p[6]])
+ xy=[(v.X,v.Y) for v in path.positions([j/600 for j in range(601)])]
+ # 0.020 mm excess over OD1 bounds arc chord and path sampling error.
+ g=unary_union([strip,LineString(xy)]).buffer(.52,quad_segs=32)
+ return prism(g,z-.52,1.04)
+def run(pitch):
+ out=HERE/f'{pitch}mm';idx,raw=cached(pitch);d=read(out/'measurements.json')
+ physical=[(n,k,s) for n,k,s in raw if not n.startswith('USB-reference-')]
+ shells=[(n,k,s) for n,k,s in physical if n.startswith(('shell-central','strip-left','strip-right')) and '-screw-' not in n]
+ lengths=[]
+ for w in d['wings']:
+  aa=[analytic(p) for p in w['conductor_waypoints_mm']]
+  assert all(abs(a['length_mm']-v)<1e-6 for a,v in zip(aa,w['conductor_lengths_mm']))
+  reserve=w['per_wire_reserve_mm']
+  lengths.append(dict(side=w['side'],longest_mm=max(a['length_mm'] for a in aa),margin_to_200_mm=200-max(a['length_mm'] for a in aa),dressed_longest_mm=max(w['dressed_reference_lengths_mm']),dressed_margin_to_164_8_mm=164.8-max(w['dressed_reference_lengths_mm']),minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and max(w['conductor_lengths_mm'])<=200 and max(w['dressed_reference_lengths_mm'])<=164.8))
+ fly=next(s for n,k,s in physical if n=='Fly-170mm')
+ f=analytic(d['fly']['waypoints_mm']);dist=min(s.distance_to(fly) for n,k,s in shells)
+ f.update(solid_count=len(fly.solids()),valid=fly.is_valid,volume_mm3=fly.volume,volume_error_mm3=abs(fly.volume-170*math.pi),shell_gap_mm=dist)
+ f['passed']=abs(f['length_mm']-170)<1e-6 and f['minimum_straight_slack_mm']>0 and f['valid'] and f['solid_count']==1 and f['volume_error_mm3']<.001 and dist>=.3-1e-6
+ save(out/'length-fly.json',dict(status=P['status'],conductors=lengths,fly=f))
+ print(pitch,'length/Fly',f['shell_gap_mm'],flush=True)
+ usb=[]
+ for n,k,s in raw:
+  if not n.startswith('USB-reference-'):continue
+  hits=[];errors=[]
+  for b,l,t in physical:
+   if b.startswith(('Fly-official','Main-study','Main-GH','EZmate')) or b=='main':continue
+   try:
+    v=volume(s,t)
+    if v>1e-6:hits.append(dict(part=b,solid=l,volume_mm3=v))
+   except Exception as e:errors.append(dict(part=b,error=repr(e)))
+  usb.append(dict(part=n,travel_mm=30,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+ save(out/'usb.json',dict(status=P['status'],reservations=usb,passed=all(r['passed'] for r in usb)))
+ print(pitch,'USB complete',flush=True)
+ caps=[]
+ for k in read(out/'cap-plan.json'):
+  cap=prism(shape(k['cap']),PLATE+.4,TOP-(PLATE+.4))
+  gaps=[(cap.distance_to(s),n) for n,j,s in shells]
+  gap,n=min(gaps);caps.append(dict(key=k['key'],nominal_gap_mm=gap,allowance_mm=.5,remaining_gap_mm=gap-.5,nearest_part=n,passed=gap-.5>=.3-1e-6))
+ save(out/'caps.json',dict(status=P['status'],assumption='16x16 swept cap, from plate+0.4 to provisional plateau; combined XY/process allowance 0.50 mm',keys=caps,passed=all(k['passed'] for k in caps),full_press_skirt_physical_gate='OPEN: actual Junana q/skirt/full-press test required; never certified by this envelope'))
+ print(pitch,'caps complete',flush=True)
+ # Remove central/strip caps and Main for access, leaving Wing assemblies fitted.
+ services=[]
+ for side,sgn in [('left',-1),('right',1)]:
+  envs=[motion(sgn,i) for i in range(14)];hits=[];errors=[]
+  for n,k,s in physical:
+   removed=n.startswith(('shell-central','strip-left','strip-right','shell-screw','Main-study','Main-GH','cover-screw','cover-Main-spacer','washer-main','screw-main','EZmate-Main','Wire-'+side)) or n in ('main','Fly-170mm')
+   if removed:continue
+   for i,e in enumerate(envs):
+    try:
+     v=volume(e,s)
+     if v>1e-6:hits.append(dict(part=n,solid=k,wire=i+1,volume_mm3=v))
+    except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
+  for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
+  export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
+  services.append(dict(side=side,turn_y_mm=[22.1,7],release_mm=30.2,method='continuous swept R5 U cap strip plus fixed legs; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate and lay Fly cable aside; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+  print(pitch,side,'service',len(hits),'hits',flush=True)
+ save(out/'service.json',dict(status=P['status'],sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
+ # Verify stack and palm datums from actual fitted parts, not prior verdicts.
+ invariants=[]
+ original=source(pitch)
+ for n,k,s in physical:
+  if n in ('main','wing_left','wing_right','plate-left','plate-right'):
+   ref=original[n].translate((0,0,-2.65))
+   invariants.append(dict(part=n,volume_difference_mm3=abs(ref.volume-s.volume),bounds_match=all(abs(a-b)<1e-6 for aa,bb in zip(bounds(ref),bounds(s)) for a,b in zip(aa,bb)),passed=abs(ref.volume-s.volume)<1e-6))
+ palm=[]
+ for side in ('left','right'):
+  tray=next(s for n,k,s in physical if n=='tray-'+side);zs=[]
+  for face in tray.faces():
+   try:
+    if face.normal_at().Z>.999999 and abs(face.center().Z-PLATE)<1e-5:zs.append(face.center().Z)
+   except Exception:pass
+  palm.append(dict(side=side,plate_top_z_mm=PLATE,tray_top_faces_at_plate=len(zs),maximum_step_mm=max([abs(z-PLATE) for z in zs],default=999),passed=bool(zs) and max(abs(z-PLATE) for z in zs)<1e-6))
+ save(out/'invariants.json',dict(status=P['status'],boards_and_plates=invariants,palm=palm,passed=all(r['passed'] for r in invariants+palm)))
+if __name__=='__main__':run(int(sys.argv[1]))

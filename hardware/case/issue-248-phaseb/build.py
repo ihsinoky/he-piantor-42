@@ -79,7 +79,7 @@ def make(pitch):
  walls=[]
  for n in ('plateau','slope','low_south'):
   g=ring.intersection(regions[n]);a,m=(TOP+M*START,M) if n=='slope' else ((PLATE,0) if n=='low_south' else (TOP,0))
-  for mask,z in [(decks,PLATE),(box(-300,-200,300,200).difference(decks),3.)]:
+  for mask,z in [(box(-300,-200,300,200),PLATE)]:
    part=clean(g.intersection(mask))
    if part.is_empty:continue
    raw=prism(part,z,30-z)
@@ -92,12 +92,12 @@ def make(pitch):
  for name,g,ceil,top in [('GH-left',ghfeet[0],13.2,15.2),('GH-right',ghfeet[1],13.2,15.2),('Fly-storage',LineString([(x,y) for x,y,z in fs]).simplify(.003).buffer(1.003,quad_segs=16),13.25,15.25)]:
   cavity=g.buffer(.30,join_style=2);outer=g.buffer(2.30,join_style=2)
   # Restrict to where a lift is required; blending remains inside A4 plan.
-  cross=START+(TOP-top)/M
+  cross=START+(TOP-top)/M-.5
   outer=clean(outer.intersection(footprint).intersection(box(-300,cross,300,300)))
   if outer.is_empty:continue
   central=central.fuse(prism(outer,PLATE-2,top-(PLATE-2)))
   central=central.cut(prism(clean(cavity.intersection(outer)), -10,ceil+10))
-  blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer)))
+  blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer),north_blend_extension_mm=.5))
  for x,y in P['south_opening_xy_mm']:central=central.cut(cylinder(x,y,2.55,-1,40))
  # Four independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
  sites=[(-8,-30),(8,-30)]
@@ -141,6 +141,9 @@ def make(pitch):
    cut,_=tube(pts,.85);cuts.append(cut)
  for side in ('left','right'):
   q=fixed['tray-'+side]
+  # Seat the low cover on the remade bay rim; the aluminium plates are untouched.
+  bayseat=clean(footprint.difference(decks))
+  q=q.cut(prism(bayseat,PLATE-2,20))
   print(pitch,side,'pre-channel',q.is_valid,len(q.solids()),flush=True)
   # Projected 0.85 mm clearance grooves avoid pathological coincident sweep booleans.
   # Grooves are conservative subtractive case geometry, never a wire simplification.

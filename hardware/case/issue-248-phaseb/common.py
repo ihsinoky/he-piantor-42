@@ -11,10 +11,22 @@ sys.path.insert(0,str(HERE.parent/'issue-232-final'))
 from geometry import *
 HERE=Path(__file__).resolve().parent
 RUN=ROOT/'.issue248-runtime'/'phaseb'
+sys.path.insert(0,str(HERE))
 from build123d import Shape, Axis
 from OCP.BRepTools import BRepTools
 from OCP.BRep import BRep_Builder
 from OCP.TopoDS import TopoDS_Shape
+def volume(a,b):
+ aa=a.bounding_box();bb=b.bounding_box()
+ if any(min(getattr(aa.max,k),getattr(bb.max,k))-max(getattr(aa.min,k),getattr(bb.min,k))<=1e-7 for k in 'XYZ'):return 0.
+ from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+ from OCP.BRepGProp import BRepGProp
+ from OCP.GProp import GProp_GProps
+ op=BRepAlgoAPI_Common(a.wrapped,b.wrapped);op.SetRunParallel(True);op.SetUseOBB(True);op.Build()
+ if not op.IsDone():raise RuntimeError('OCCT Common failed')
+ if op.Shape().IsNull():return 0.
+ props=GProp_GProps();BRepGProp.VolumeProperties_s(op.Shape(),props,True,False,False)
+ return abs(props.Mass())
 P=json.loads((HERE/'parameters.json').read_text())
 def polygons(g):
  if g.is_empty:return []
@@ -40,6 +52,7 @@ def cleanring(ring):
   else:return p
 def clean(g):return unary_union([Polygon(cleanring(p.exterior),[cleanring(r) for r in p.interiors]) for p in polygons(g.simplify(1e-7,preserve_topology=True))])
 def sloped(g,a,m,thickness=2):
+ if m and thickness==2:thickness=2*math.sqrt(1+m*m)
  parts=[]
  for p in polygons(clean(g)):
   w=lambda r:Wire.make_polygon([(x,y,a-m*y-thickness) for x,y in list(r.coords)[:-1]],close=True)
