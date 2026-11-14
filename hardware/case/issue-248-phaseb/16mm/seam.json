@@ -1,6 +1,6 @@
 {
   "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
-  "geometry_sha256": "79e78de44d6e653add47757d023392c9aef2ecda644524f9770f567fe73eafc1",
+  "geometry_sha256": "dd58205322c0b462dbe4834d4f0012aef11320322ef1d9b0e2ce4567cec0e5c7",
   "rule": "Shell ownership ends at full aluminium blank silhouette, including apertures. Central ownership is the component containing bay datum (0,20); external south perimeter rim is outside that footprint. North strips obey the same silhouette boundary. No bridge over a key well.",
   "plate_boundary_source": "unchanged #232 dimensions.json blank_outline_xy_mm, not deck_outline and not aperture edges",
   "out_of_ownership_fragments": [
@@ -3314,7 +3314,7 @@
         1.1446647338905396e-11
       ],
       "distance_proof": {
-        "a_face": 39,
+        "a_face": 42,
         "b_face": 4,
         "a_point_mm": [
           -35.508159124576,
@@ -3349,7 +3349,7 @@
         1.1634066010659079e-12
       ],
       "distance_proof": {
-        "a_face": 11,
+        "a_face": 14,
         "b_face": 4,
         "a_point_mm": [
           4.17168615258953,
@@ -3395,7 +3395,7 @@
     {
       "region": "plateau",
       "required_volume_mm3": 1935.9025648516642,
-      "actual_common_mm3": 1935.9025648516647,
+      "actual_common_mm3": 1935.9025648516656,
       "missing_required_skin_mm3": 0,
       "normal_thickness_mm": 2.0
     },
@@ -3452,7 +3452,5 @@
   "authorized_skin_void_method": "Exact CAD cylinders: south radius2.55 through; north radius1.1 through and radius2 counterbore only at top1mm. No polygon hole approximation and no blanket radius2 roof exception.",
   "ownership_passed": true,
   "skin_passed": true,
-  "plate_contact_passed": true,
-  "previous_geometry_sha256": "cc8567f70e60c61710fe372c67f2352169bf6cb3d7b5fef0b8b98711e187af4a",
-  "geometry_rebind_proof": "Only the two tray operands changed; shell/strip/plate serialized operand hashes unchanged, listed in tray-seating-relief.json. All ownership/skin/seam operands identical."
+  "plate_contact_passed": true
 }
