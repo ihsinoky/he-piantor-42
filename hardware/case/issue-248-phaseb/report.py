@@ -31,6 +31,8 @@ def run():
     if n.startswith(prefix):return label
    return n
   for h in hits:categories[' / '.join(sorted([cat(h['a']),cat(h['b'])]))]+=1
+  muxhits=sum('MUX' in r['a'] or 'MUX' in r['b'] for r in hits)
+  strandhits=sum(r['a'].startswith('Wire-') and r['b'].startswith('Wire-') for r in hits)
   contacts='\n'.join(f'- {n}: {count} contacts.' for n,count in categories.most_common()) or '- None.'
   motion='\n'.join(f"- {r['side']}: {len(r['unexpected'])} contacts, {len(r['boolean_errors'])} errors; represented release {r['release_mm']:.2f} mm." for r in s['sides'])
   checks='\n'.join(f"| {r['part']} | {r['solids']} | {r['mesh']['nonmanifold_edges']} | {'PASS' if r['passed'] else 'FAIL'} |" for r in v['checks'])
@@ -54,7 +56,7 @@ Continuous service-motion results:
 
 {motion}
 
-The swept envelope includes every intermediate translation of each concentric reserve U, plus a 0.020 mm excess. Wing stacks and the other harness remain fitted. Main and its removable hardware, shell caps and own moving harness are excluded as documented in service.json. The fixed legs shorten along their existing loci. A clear reserve-motion result alone cannot certify a harness with fitted fan/upper-route crossings. Individual own-harness motion was not promoted to service certification while those crossings remain.
+The swept envelope includes every intermediate translation of each concentric reserve U, plus a 0.020 mm excess. Wing stacks and the other harness remain fitted. Main and its removable hardware, shell caps and own moving harness are excluded as documented in service.json. The fixed legs shorten along their existing loci. A clear reserve-motion result alone cannot certify a harness with fitted fan/upper-route crossings. Individual own-harness motion was not promoted to service certification while those crossings remain. The new route clears every fixed Wing MUX bound ({muxhits} MUX contacts), but still has {strandhits} strand/strand fitted contacts plus the fixed-body contacts listed above; it is not a successful separated-harness qualification.
 
 Hardware: all eight **M2×10** E replacements {'PASS' if hw['all_E_replacements_passed'] else 'FAIL'}. Under-head Z13.85, tip Z3.85, boss top Z7.35: **3.50 mm nominal engagement**, tip **1.85 mm above floor top**, **≥1.20 mm root material** verified with material probes. Washer and head envelope are retained. Existing pilot depths remain recorded per seat. Replacement procurement must preserve the polymer-compatible thread and Ø3.4 ×1.3 mm head envelope; physical retention remains untested. [hardware-inventory.json]({pitch}mm/hardware-inventory.json) lists each seat. New north-head wall relief is below the plateau roof. Required-skin contacts are not excused by it.
 
