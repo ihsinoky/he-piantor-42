@@ -112,6 +112,8 @@ def run():
   assert read(out/'hardware-inventory.json')['all_E_replacements_passed']
   assert read(out/'hardware-inventory.json')['geometry_sha256']==a['geometry_sha256']
   assert read(out/'invariants.json')['passed']
+  assert len(read(out/'invariants.json')['source_floor_band'])==2
+  assert all(r['passed'] for r in read(out/'invariants.json')['source_floor_band'])
   gates=read(out/'gates.json');assert len(gates['gates'])==8 and not gates['production_release']
   if cw['solver_inconsistencies']:assert not gates['gates'][5]['passed']
   usb=read(out/'usb.json');service=read(out/'service.json');caps=read(out/'caps.json');inv=read(out/'invariants.json');ret=read(out/'retention-check.json')
@@ -120,7 +122,7 @@ def run():
   hardware_ok=read(out/'hardware-inventory.json')['all_E_replacements_passed']
   seam=read(out/'seam.json');assert seam['geometry_sha256']==a['geometry_sha256']
   fitted=a['passed'] and hardware_ok and seam['ownership_passed'] and seam['plate_contact_passed']
-  expected=[fitted,all(r['passed'] for r in lengths['conductors']),fitted and service['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed'],lengths['fly']['passed'] and not flyhits,usb['passed'],caps['certified'] and caps['passed'] and not cw['solver_inconsistencies'],verification['passed'] and all(r['envelope_passed'] for r in prints['parts']) and seam['skin_passed'],verification['preview_exists'] and verification['preview_inventory_passed']]
+  expected=[fitted,all(r['passed'] for r in lengths['conductors']),fitted and service['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed'],lengths['fly']['passed'] and not flyhits,usb['passed'],caps['certified'] and caps['passed'] and not cw['solver_inconsistencies'],verification['passed'] and all(r['envelope_passed'] for r in prints['parts']) and seam['skin_passed'] and inv['passed'],verification['preview_exists'] and verification['preview_inventory_passed']]
   assert [g['passed'] for g in gates['gates']]==expected
   assert service['accessible_reserve_certified']==expected[2]
 

@@ -101,5 +101,13 @@ def run(pitch):
   oldband=clip(original['tray-'+side].translate((0,0,-2.65)));newband=clip(tray)
   common=volume(oldband,newband);removed=max(0,oldband.volume-common);added=max(0,newband.volume-common)
   palm.append(dict(side=side,plate_top_z_mm=PLATE,tray_top_faces_at_plate=len(zs),maximum_step_mm=max([abs(z-PLATE) for z in zs],default=999),protected_band_y_mm=[69.7001,100],palm_material_removed_mm3=removed,palm_material_added_mm3=added,passed=bool(zs) and max(abs(z-PLATE) for z in zs)<1e-6 and max(removed,added)<1e-4))
- save(out/'invariants.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),boards_and_plates=invariants,palm=palm,passed=all(r['passed'] for r in invariants+palm)))
+ floors=[]
+ for side,x in [('left',0),('right',15)]:
+  n='tray-'+side;tray=next(s for name,k,s in physical if name==n)
+  pieces=original[n].intersect(prism(box(-300,-200,300,200),0,2));floor=Compound(children=list(pieces))
+  pilots=Compound(children=[cylinder(x,y,.85,-.01,2.02) for y in (-8,55)])
+  permitted=volume(floor,pilots);retained=volume(floor,tray);pilot_material=volume(pilots,tray)
+  expected=floor.volume-permitted;missing=max(0,expected-retained)
+  floors.append(dict(side=side,source_floor_band_z_mm=[0,2],source_volume_mm3=floor.volume,authorized_relocated_pilot_void_mm3=permitted,expected_retained_mm3=expected,actual_retained_mm3=retained,missing_required_material_mm3=missing,pilot_void_material_mm3=pilot_material,passed=missing<1e-6 and pilot_material<1e-6))
+ save(out/'invariants.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),boards_and_plates=invariants,palm=palm,source_floor_band=floors,passed=all(r['passed'] for r in invariants+palm+floors)))
 if __name__=='__main__':run(int(sys.argv[1]))

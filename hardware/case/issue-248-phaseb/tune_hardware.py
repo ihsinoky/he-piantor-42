@@ -4,7 +4,9 @@ def run(pitch):
  from finalize_geometry import run as finish_route_nibs
  finish_route_nibs(pitch)
  from restore_floor import run as preserve_floor
- preserve_floor(pitch)
+ # Build clamps channel cuts at Z2; floor restoration precedes splice pilots.
+ # Re-fusing the floor after those pilots creates invalid coincident topology.
+ if not read(HERE/f'{pitch}mm/measurements.json').get('floor_restoration'):preserve_floor(pitch)
  from restore_e_bosses import run as preserve_E_bosses
  preserve_E_bosses(pitch)
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);groups={};inventory=[]
