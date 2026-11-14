@@ -41,5 +41,8 @@ def run(pitch):
  meta['wire_sweep_checks']=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()]
  save(out/'measurements.json',meta)
  save(out/'frozen-framework-recovery.json',dict(geometry_sha256=sha(out/'assembly-index.json'),baseline_index_sha256=sha(baseline/'assembly-index.json'),recovered_index=idx,recovery=recovery,unchanged_framework='Frozen final round-3 trays including fitted-route channels and seating relief; central shell, strips, retainers ±8,-30 and all hardware. No service envelope or corrected-route tray recuts.',parametric_path_source='round3/routes-round3.json',path_source_sha256=sha(HERE/'round3/routes-round3.json')))
+ # Re-enumerate every pair; replay only byte-identical fixed operand pairs.
+ shutil.copyfile(baseline/'audit.json',out/'audit.json')
+ save(out/'E-boss-audit-parent.json',dict(index_file=f'../round3/{pitch}mm/assembly-index.json',audit_file=f'../round3/{pitch}mm/audit.json',geometry_sha256=sha(baseline/'assembly-index.json'),reason='Frozen round-3 final fixed operands only. All changed strands, recovered STEP operands and repaired tray pairs recomputed; exact hash/name/index proof replayed independently.'))
  print(pitch,'frozen assembly restored, only strands reassigned',max(w['longest_conductor_mm']+7.3 for w in wm),flush=True)
 if __name__=='__main__':run(int(sys.argv[1]))

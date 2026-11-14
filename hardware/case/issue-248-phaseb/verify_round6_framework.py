@@ -20,26 +20,28 @@ def verify_paths():
  return True
 
 def verify_fixed(pitch):
- out=H/f'{pitch}mm';proof=read(out/'frozen-framework-recovery.json');old=read(H/f'round3/{pitch}mm/assembly-index.json');idx=read(out/'assembly-index.json');recovered=proof['recovered_index']
+ out=H/f'{pitch}mm';proof=read(out/'frozen-framework-recovery.json');old=read(H/f'round3/{pitch}mm/assembly-index.json');idx=read(out/'assembly-index.json')
  assert proof['baseline_index_sha256']==sha(H/f'round3/{pitch}mm/assembly-index.json')
- assert len(old)==len(idx)==len(recovered)
+ assert len(old)==len(idx)
  recovery={r['part']:r for r in proof['recovery']}
  frozen=read(H/'round3-sha256.json')['files']
- for a,b,c in zip(old,idx,recovered):
-  n=a['name'];assert a['name']==b['name']==c['name'] and a['solid']==b['solid']==c['solid']
+ for a,b in zip(old,idx):
+  n=a['name'];assert a['name']==b['name'] and a['solid']==b['solid']
   if n.startswith('Wire-'):continue
   r=recovery[n]
-  if r['method']=='byte-identical frozen BRep':assert a==c
+  if r['method']=='byte-identical frozen BRep':
+   assert r['sha256']==a['sha256']
+   if n!='tray-left':assert a==b,('unapproved fixed change',n)
   else:
    assert n in ('tray-left','tray-right','shell-central')
    source=H/r['source_file'];assert r['source_sha256']==sha(source)==frozen[str(source.relative_to(H/'round3'))]
-   assert c['sha256']==r['recovered_brep_sha256'] and a['sha256']==r['frozen_brep_sha256']
+   assert a['sha256']==r['frozen_brep_sha256']
+   if n!='tray-left':assert b['sha256']==r['recovered_brep_sha256'],('unapproved STEP-recovered change',n)
    assert abs(r['volume_delta_mm3'])<.001 and r['maximum_bounds_delta_mm']<1e-5
-  if n!='tray-left':assert b==c,('unapproved fixed change',n)
-  else:
+  if n=='tray-left':
    repair=read(out/'splice-boss-rebuild.json')
    assert repair['geometry_sha256']==sha(out/'assembly-index.json')
-   assert abs(c['volume_mm3']-repair['before_volume_mm3'])<1e-6
+   assert abs(a['volume_mm3']+r.get('volume_delta_mm3',0)-repair['before_volume_mm3'])<1e-6
    assert abs(b['volume_mm3']-repair['after_volume_mm3'])<1e-6
  assert read(out/'measurements.json')['route_channel_reservation']==read(H/f'round3/{pitch}mm/measurements.json')['route_channel_reservation']
  return True

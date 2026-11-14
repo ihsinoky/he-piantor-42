@@ -32,6 +32,12 @@ def run(pitch):
  record=dict(part='tray-left',feature='X0/Y55 south splice boss',boss_od_mm=7.,pilot_od_mm=1.7,boss_top_z_mm=5.5,cleanup_xy_bounds_mm=[-4,51,4,59],cleanup_z_mm=[1.8,5.8],floor_overlap_mm=.4,source_floor_top_rebuilt_mm=.2,before_volume_mm3=q.volume,after_volume_mm3=s.volume,volume_change_mm3=s.volume-q.volume,source_valid=s.is_valid,required_local_floor_mm3=required_floor.volume,local_floor_common_mm3=floor_common,local_floor_missing_mm3=max(0,required_floor.volume-floor_common),reloaded_step_valid=reload.is_valid,reloaded_step_solids=len(reload.solids()),roundtrip_volume_delta_mm3=reload.volume-s.volume)
  items['tray-left']=s;d=read(out/'measurements.json')
  for k in ('status','pitch_mm','parameters'):d.pop(k,None)
- d['round5_splice_boss_rebuild']=record;save_geometry(pitch,items,d)
+ # Preserve every other serialized operand; repair only tray-left.
+ row=next(r for r in idx if r['name']=='tray-left');i=idx.index(row)
+ target=RUN/f'geometry{pitch}/{i}.brep';BRepTools.Write_s(s.wrapped,str(target))
+ row.update(bounds=bounds(s),valid=s.is_valid,volume_mm3=s.volume,sha256=sha(target))
+ save(RUN/f'geometry{pitch}/index.json',idx);save(out/'assembly-index.json',idx)
+ d['round6_splice_boss_rebuild']=record
+ save(out/'measurements.json',dict(status=P['status'],pitch_mm=pitch,parameters=P,**d))
  save(out/'splice-boss-rebuild.json',dict(geometry_sha256=sha(out/'assembly-index.json'),**record));print(pitch,record,flush=True)
 if __name__=='__main__':run(int(sys.argv[1]))
