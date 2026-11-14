@@ -11,7 +11,15 @@ pitches=("$@")
 if ((${#pitches[@]} == 0)); then pitches=(17 16); fi
 for pitch in "${pitches[@]}"; do
   for stage in build restore_floor finalize_geometry blend remake_joints tune_hardware regularize_shell finalize_geometry seam audit retention_check metrology qualify_lengths caps_only local_measures export drawings verify_exports witnesses shell_diagnostics tuning_blockers verify_hardware; do
-    "$cad_python" "$tree/$stage.py" "$pitch"
+    if [[ "$stage" == metrology ]]; then
+      # Separate processes bound OCCT memory and retain each completed audit.
+      # caps_only below supplies the independent certified cap check.
+      for section in length usb service invariants; do
+        "$cad_python" "$tree/metrology.py" "$pitch" "$section"
+      done
+    else
+      "$cad_python" "$tree/$stage.py" "$pitch"
+    fi
   done
 done
 "$cad_python" "$tree/report.py"
