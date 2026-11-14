@@ -19,6 +19,26 @@ def boundary_distance(a,b,zero_precision_mm=0.):
    i,j=np.unravel_index(squared.argmin(),squared.shape);value=math.sqrt(float(squared[i,j]));i+=start
    if value<best:
     best=value;pa=tuple(ax[i]);pb=tuple(bx[j]);witness=dict(a_face=av[pa],b_face=bv[pb],a_point_mm=list(pa),b_point_mm=list(pb),seed='actual BRep vertex distance upper bound')
+  if best>zero_precision_mm:
+   from build123d import GeomType
+   edge_rows={}
+   for fi,(face,bound) in enumerate(bb):
+    for edge in face.edges():
+     if edge.geom_type!=GeomType.LINE:continue
+     a=tuple(edge.position_at(0));b=tuple(edge.position_at(1))
+     if math.dist(a,b)<1e-10:continue
+     key=tuple(sorted([a,b]))
+     edge_rows.setdefault(key,(a,b,fi))
+   if edge_rows:
+    er=list(edge_rows.values());starts=np.array([r[0] for r in er]);ends=np.array([r[1] for r in er]);vec=ends-starts;den=np.sum(vec*vec,axis=1)
+    for start in range(0,len(ax),128):
+     points=ax[start:start+128,None,:]
+     t=np.clip(np.sum((points-starts[None,:,:])*vec[None,:,:],axis=2)/den[None,:],0,1)
+     projection=starts[None,:,:]+t[:,:,None]*vec[None,:,:]
+     squared=np.sum((points-projection)**2,axis=2);i,j=np.unravel_index(squared.argmin(),squared.shape)
+     value=math.sqrt(float(squared[i,j]))
+     if value<best:
+      best=value;pa=tuple(ax[start+i]);pb=tuple(projection[i,j]);witness=dict(a_face=av[pa],b_face=er[j][2],a_point_mm=list(pa),b_point_mm=list(pb),seed='actual BRep vertex to trimmed straight-edge upper bound')
  for lower,i,j in pairs:
   # Euclidean boundary distance has a global lower bound of zero.
   # Default callers require an exact zero. Seam reporting alone may request

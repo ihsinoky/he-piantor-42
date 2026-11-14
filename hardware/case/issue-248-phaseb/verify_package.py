@@ -23,6 +23,9 @@ def run():
   assert a['geometry_sha256']==sha(out/'assembly-index.json')
   assert len(a.get('wire_sweep_checks',[]))==28
   for r in a['wire_sweep_checks']:
+   wire=next(w for w in physical if w['name']==r['part'])
+   assert abs(wire['volume_mm3']-r['volume_mm3'])<1e-6
+   assert abs(r['volume_error_mm3']-abs(r['volume_mm3']-r['expected_volume_mm3']))<1e-6
    assert r['passed']==(r['volume_error_mm3']<.001)
   assert a['all_pairs_enumerated'] and a['all_exact_candidates_completed']
   assert a['assembly_solids']==len(physical)
@@ -106,6 +109,10 @@ def run():
    assert abs(w['cut_length_upper_mm']-w['longest_mm']-w['total_unrouted_wire_bound_mm'])<1e-6
    assert w['complete_cut_length_verified']
    assert w['passed']==(w['cut_length_upper_mm']<=200 and all(a['minimum_straight_slack_mm']>0 and a['minimum_bend_radius_mm']>=5-1e-7 for a in w['all_conductors']))
+  for check in a['wire_sweep_checks']:
+   side='left' if '-left-' in check['part'] else 'right';wire=int(check['part'][-2:])-1
+   conductor=next(w for w in lengths['conductors'] if w['side']==side)['all_conductors'][wire]
+   assert abs(check['expected_volume_mm3']-conductor['length_mm']*math.pi*.25)<1e-6
   assert lengths['dressed_164_8_reference_only']
   assert read(out/'caps.json')['certified']
   assert not cw['solver_inconsistencies']

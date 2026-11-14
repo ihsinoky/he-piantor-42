@@ -50,6 +50,8 @@ Tray route relief is an explicit conservative union of the projected conductor p
   for r in service['sides']:text+=f"- {r['side']}: {len(r['unexpected'])} contacts, {len(r['boolean_errors'])} errors; release {r['release_mm']:.6f} mm.\n"
   text+=f"\nAccessible service is {'certified' if service['accessible_reserve_certified'] else 'NOT certified'}. The envelope covers every intermediate reserve-turn translation plus 0.020 mm allowance. Own moving harness is excluded as in the tuning method; fitted crossings remain independently disqualifying. See [service.json]({pitch}mm/service.json).\n\n"
   text+=f"E screws full engagement/root: {'PASS' if hw['all_E_replacements_passed'] else 'FAIL'}. Board/plate stack, protected palm and complete source floor band: {'PASS' if inv['passed'] else 'FAIL'}. Certified cap check: {'PASS' if caps['passed'] else 'FAIL'}. Independent manufacturing reload: {sum(r['passed'] for r in v['checks'])}/19 parts; preview {v['preview_reloaded_solids']}/{v['preview_expected_solids']} constituents.\n\n"
+  for r in a['invalid_solids']:
+   text+=f"Inherited constituent **{r['name']}** is invalid: {len(r.get('invalid_faces',[]))} invalid faces, bounds {r['bounds']}; diagnostic fix valid={r.get('diagnostic_fix_valid')}, volume delta {r.get('diagnostic_fix_volume_delta_mm3')} mm³. It remains a gate-1 blocker. Face areas/bounds are recorded in audit.json.\n\n"
   text+='Remaining failed gates and evidence:\n\n'
   for r in g['gates']:
    if not r['passed']:text+=f"- **{r['gate']}**: {r['evidence']}\n"
