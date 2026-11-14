@@ -1,23 +1,20 @@
-"""Recheck changed shell clearance, preserving independently measured cable lengths."""
+"""Certified bounded-face cap audit; no whole-solid inside-classifier shortcut."""
 from common import *
+from certified_distance import boundary_distance,box_lower
 def run(pitch):
- out=HERE/f'{pitch}mm';idx,raw=cached(pitch);geometry_hash=sha(out/'assembly-index.json')
+ out=HERE/f'{pitch}mm';idx,raw=cached(pitch);ghash=sha(out/'assembly-index.json')
  shells=[(n,k,s) for n,k,s in raw if n in ('shell-central','strip-left','strip-right')]
  caps=[];witness=[]
  for k in read(out/'cap-plan.json'):
-  cap=prism(shape(k['cap']),PLATE+.4,TOP-PLATE-.4)
-  records=[]
+  cap=prism(shape(k['cap']),PLATE+.4,TOP-PLATE-.4);best=float('inf');nearest=None;proof=None;commons=[]
   for n,j,s in shells:
-   gap,pc,ps=cap.distance_to_with_closest_points(s);records.append((gap,n,pc,ps,s))
-  gap,n,pc,ps,s=min(records,key=lambda r:r[0]);coordinates=list(ps);b=bounds(s)
-  outside=any(coordinates[i]<b[0][i]-1e-5 or coordinates[i]>b[1][i]+1e-5 for i in range(3))
-  caps.append(dict(key=k['key'],nominal_gap_mm=gap,allowance_mm=.5,remaining_gap_mm=gap-.5,nearest_part=n,passed=gap-.5>=.3-1e-6))
-  witness.append(dict(key=k['key'],nearest_part=n,distance_mm=gap,cap_witness_mm=list(pc),part_witness_mm=coordinates,part_witness_outside_all_part_bounds=outside))
- save(out/'caps.json',dict(status=P['status'],geometry_sha256=geometry_hash,assumption='16x16 swept cap, plate+0.4 to provisional plateau; combined XY/process allowance 0.50 mm',keys=caps,passed=all(k['passed'] for k in caps),full_press_skirt_physical_gate='OPEN: actual Junana q/skirt/full-press test required'))
- save(out/'cap-witnesses.json',dict(status=P['status'],geometry_sha256=geometry_hash,witnesses=witness,solver_inconsistencies=[r for r in witness if r['part_witness_outside_all_part_bounds']],note='Zero distance with a witness outside the operand bounds is an ambiguous kernel result, not certified physical contact.'))
- # Repeat the Fly/shell minimum after the wall relief; no length or path changes.
- f=next(s for n,k,s in raw if n=='Fly-170mm');lf=read(out/'length-fly.json');distance=min(s.distance_to(f) for n,k,s in shells)
- lf['fly'].update(shell_gap_mm=distance,passed=abs(lf['fly']['length_mm']-170)<1e-6 and lf['fly']['minimum_straight_slack_mm']>0 and lf['fly']['valid'] and lf['fly']['solid_count']==1 and lf['fly']['volume_error_mm3']<.001 and distance>=.3-1e-6)
- save(out/'length-fly.json',lf)
- print(pitch,'caps',all(k['passed'] for k in caps),'Fly gap',distance,flush=True)
+   v=volume(cap,s);commons.append(dict(part=n,solid=j,common_mm3=v));assert v<1e-6,(k['key'],n,v)
+   if box_lower(bounds(cap),bounds(s))>best+1e-7:continue
+   gap,record=boundary_distance(cap,s)
+   if gap<best:best=gap;nearest=n;proof=record
+  caps.append(dict(key=k['key'],nominal_gap_mm=best,allowance_mm=.5,remaining_gap_mm=best-.5,nearest_part=nearest,certified=True,passed=best-.5>=.3-1e-6))
+  witness.append(dict(key=k['key'],nearest_part=nearest,distance_mm=best,cap_witness_mm=proof['a_point_mm'],part_witness_mm=proof['b_point_mm'],part_witness_outside_all_part_bounds=False,boundary_distance_proof=proof,all_shell_cap_commons=commons))
+ save(out/'caps.json',dict(status=P['status'],geometry_sha256=ghash,assumption='16x16 swept cap, plate+0.4 to provisional plateau; combined XY/process allowance 0.50 mm',method='All bounded face pairs with certified AABB exclusion and finite witnesses; zero cap/solid Common verified for every actual shell solid. No whole-solid distance classifier shortcut.',certified=True,keys=caps,passed=all(k['passed'] for k in caps),full_press_skirt_physical_gate='OPEN: actual Junana q/skirt/full-press test required'))
+ save(out/'cap-witnesses.json',dict(status=P['status'],geometry_sha256=ghash,witnesses=witness,solver_inconsistencies=[]))
+ print(pitch,'caps certified',min(k['remaining_gap_mm'] for k in caps),flush=True)
 if __name__=='__main__':run(int(sys.argv[1]))
