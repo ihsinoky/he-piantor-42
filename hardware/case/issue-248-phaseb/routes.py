@@ -13,6 +13,9 @@ def segments(sgn,i,south=STORED):
 def route(sgn,i,south=STORED):
  before,after,r,mid=segments(sgn,i,south)
  assert r>=5
+ assert np.linalg.norm(np.cross(np.array(before[-1])-before[-2],[0,-1,0]))<1e-7
+ assert np.linalg.norm(np.cross(np.array(after[1])-after[0],[0,1,0]))<1e-7
+ assert before[-2][1]>south and after[1][1]>south
  a=rounded(before);b=rounded(after)
  arc=Edge.make_three_point_arc(Vector(*before[-1]),Vector(*mid),Vector(*after[0]))
  return Wire([*a.edges(),arc,*b.edges()])
