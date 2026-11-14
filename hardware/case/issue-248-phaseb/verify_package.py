@@ -107,7 +107,8 @@ def run():
   usb=read(out/'usb.json');service=read(out/'service.json');caps=read(out/'caps.json');inv=read(out/'invariants.json');ret=read(out/'retention-check.json')
   for data in (lengths,usb,service,caps,inv,ret):assert data['geometry_sha256']==a['geometry_sha256']
   flyhits=[r for r in a['unexpected_interferences'] if 'Fly-170mm' in (r['a'],r['b'])]
-  expected=[a['passed'],all(r['passed'] for r in lengths['conductors']),a['passed'] and service['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed'],lengths['fly']['passed'] and not flyhits,usb['passed'],caps['certified'] and caps['passed'] and not cw['solver_inconsistencies'],verification['passed'] and all(r['envelope_passed'] for r in prints['parts']),verification['preview_exists'] and verification['preview_inventory_passed']]
+  hardware_ok=read(out/'hardware-inventory.json')['all_E_replacements_passed']
+  expected=[a['passed'] and hardware_ok,all(r['passed'] for r in lengths['conductors']),a['passed'] and hardware_ok and service['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed'],lengths['fly']['passed'] and not flyhits,usb['passed'],caps['certified'] and caps['passed'] and not cw['solver_inconsistencies'],verification['passed'] and all(r['envelope_passed'] for r in prints['parts']),verification['preview_exists'] and verification['preview_inventory_passed']]
   assert [g['passed'] for g in gates['gates']]==expected
   assert service['accessible_reserve_certified']==expected[2]
 
