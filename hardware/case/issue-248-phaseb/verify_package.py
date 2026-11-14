@@ -48,6 +48,17 @@ def run():
    assert hashlib.sha256((json.dumps(prefix,indent=2,ensure_ascii=False)+'\n').encode()).hexdigest()==proof['previous_geometry_sha256']
    assert [r['sha256'] for r in prefix]==proof['unchanged_operand_sha256']
    assert proof['geometry_sha256']==(support['previous_geometry_sha256'] if support else sha(out/'assembly-index.json'))
+  reusepath=out/'audit-E-restoration-reuse.json'
+  if reusepath.exists():
+   proof=read(reusepath);assert proof['geometry_sha256']==a['geometry_sha256']
+   parent=proof['parent'];oldidx=read(out/parent['index_file']);old_a=read(out/parent['audit_file'])
+   assert sha(out/parent['index_file'])==parent['geometry_sha256']==old_a['geometry_sha256']
+   oldphysical=[r for r in oldidx if not r['name'].startswith('USB-reference-')]
+   oldresults={(r['i'],r['j']):r for r in old_a['exact_results']};newresults={(r['i'],r['j']):r for r in a['exact_results']}
+   assert len(proof['reused_pairs'])==proof['reused_pair_count']
+   for pair in proof['reused_pairs']:
+    for k in pair:assert oldphysical[k]['sha256']==physical[k]['sha256'] and oldphysical[k]['name']==physical[k]['name'] and oldphysical[k]['solid']==physical[k]['solid']
+    assert oldresults[tuple(pair)]==newresults[tuple(pair)]
   prints=read(out/'manufacturing.json');verification=read(out/'export-verification.json');checks={r['part']:r for r in verification['checks']}
   assert len(prints['parts'])==len(checks)==19
   assert verification['geometry_sha256']==sha(out/'assembly-index.json')

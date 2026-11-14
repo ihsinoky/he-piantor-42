@@ -33,6 +33,21 @@ def audit(pitch):
  if progress.exists():
   p=read(progress)
   if p['geometry_hash']==geometry_hash:done=p['results']
+ reuseproof=out/'audit-E-restoration-reuse.json'
+ if reuseproof.exists() and read(reuseproof)['geometry_sha256']!=geometry_hash:
+  folder=out/'evidence';folder.mkdir(exist_ok=True);reuseproof.replace(folder/(read(reuseproof)['geometry_sha256'][:12]+'-audit-E-restoration-reuse.json'))
+ parentpath=out/'E-boss-audit-parent.json'
+ if not done and parentpath.exists() and (out/'audit.json').exists():
+  parent=read(parentpath);oldidx=read(out/parent['index_file']);old=read(out/parent['audit_file'])
+  if sha(out/parent['index_file'])==parent['geometry_sha256']==old['geometry_sha256'] and read(out/'audit.json')['geometry_sha256']==old['geometry_sha256']:
+   oldidx=[r for r in oldidx if not r['name'].startswith('USB-reference-')]
+   reused=[]
+   for r in old['exact_results']:
+    i,j=r['i'],r['j']
+    if max(i,j)>=len(idx):continue
+    if all(oldidx[k]['name']==idx[k]['name'] and oldidx[k]['solid']==idx[k]['solid'] and oldidx[k]['sha256']==idx[k]['sha256'] for k in (i,j)):
+     done[f'{i}:{j}']={k:v for k,v in r.items() if k not in ('i','j')};reused.append([i,j])
+   save(reuseproof,dict(status=P['status'],geometry_sha256=geometry_hash,parent=parent,reused_pairs=reused,reused_pair_count=len(reused),rule='Both serialized operand hashes, names and constituent numbers identical. Every changed tray pair recomputed. Coverage independently replayed in verify_package.py.'))
  rejects=0;mates=[];candidates=[];hits=[];errors=[];references=[]
  for i,(a,k,s) in enumerate(raw):
   for j in range(i+1,len(raw)):

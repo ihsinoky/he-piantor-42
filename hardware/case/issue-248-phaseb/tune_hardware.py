@@ -3,6 +3,8 @@ from common import *
 def run(pitch):
  from restore_floor import run as preserve_floor
  preserve_floor(pitch)
+ from restore_e_bosses import run as preserve_E_bosses
+ preserve_E_bosses(pitch)
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);groups={};inventory=[]
  for n,k,q in raw:groups.setdefault(n,[]).append(q)
  for n,ss in list(groups.items()):
