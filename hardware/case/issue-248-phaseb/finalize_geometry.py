@@ -11,9 +11,19 @@ def run(pitch):
    zones=[([9.3,-8.7,7.9],[11.2,-5.4,12.1],10),([11.6,-6.9,4.4],[13.6,-4.8,5.6],.2),([12.480,-6.793,3.773],[12.565,-5.486,3.995],.018),([12.480,-8.359,3.773],[12.483,-8.292,3.995],.000013)]
    splice_nib=n=='tray-right' and any(q.volume<limit and all(lo[i]<=b[0][i] and b[1][i]<=hi[i] for i in range(3)) for lo,hi,limit in zones)
    round3_nib=q.volume<.324 and 7.963<min(abs(b[0][0]),abs(b[1][0])) and max(abs(b[0][0]),abs(b[1][0]))<8.123 and -11.314<=b[0][1]<=b[1][1]<=-10.547 and 8.549<=b[0][2]<=b[1][2]<=13.551
-   inside=inside or splice_nib or round3_nib
+   # Named route-isolated case rim fragments; never source floor or E bosses.
+   # Bounds include both mirrored bay sides. Their removal is explicit and
+   # remains subject to the independent floor, palm and hardware material gates.
+   r4zones=[([12.70,-39.001,12.049],[13.001,-37.67,13.551],.276),
+            ([13.50,-17.50,4.75],[13.803,-16.78,12.051],.702),
+            ([0,-39.001,8.549],[2.295,-36.75,11.551],26.855),
+            ([12.769,-10.615,3.569],[13.572,-9.90,5.501],.104)]
+   absolute_x=sorted([abs(b[0][0]),abs(b[1][0])]) if b[0][0]*b[1][0]>=0 else [0,max(abs(b[0][0]),abs(b[1][0]))]
+   r4b=[[absolute_x[0],b[0][1],b[0][2]],[absolute_x[1],b[1][1],b[1][2]]]
+   round4_nib=any(q.volume<limit and all(lo[i]<=r4b[0][i] and r4b[1][i]<=hi[i] for i in range(3)) for lo,hi,limit in r4zones)
+   inside=inside or splice_nib or round3_nib or round4_nib
    if inside:
-    changes.append(dict(action='remove explicitly bounded Round 3 keyless bay-rim sliver (volume <0.324 mm3)' if round3_nib else 'remove explicitly bounded detached splice exterior nib' if splice_nib else 'remove detached upper bay rim nib isolated by routing recess',part=n,solid=k,bounds_mm=b,volume_mm3=q.volume));continue
+    changes.append(dict(action='remove explicitly bounded Round 4 route-isolated case rim fragment' if round4_nib else 'remove explicitly bounded Round 3 keyless bay-rim sliver (volume <0.324 mm3)' if round3_nib else 'remove explicitly bounded detached splice exterior nib' if splice_nib else 'remove detached upper bay rim nib isolated by routing recess',part=n,solid=k,bounds_mm=b,volume_mm3=q.volume));continue
   if n.startswith(('tray-','shell-central','strip-','post-','splice-')) and not q.is_valid:
    fixed=q.fix()
    change=dict(action='OCCT topology repair; no dimensional relaxation',part=n,solid=k,before_valid=False,after_valid=fixed.is_valid,volume_change_mm3=fixed.volume-q.volume)
