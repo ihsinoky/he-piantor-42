@@ -1,0 +1,48 @@
+{
+  "status": "FAIL; no export validity waiver",
+  "geometry_sha256": "79e78de44d6e653add47757d023392c9aef2ecda644524f9770f567fe73eafc1",
+  "part": "tray-left",
+  "source_brep_valid": true,
+  "reloaded_step_valid": false,
+  "source_brep_sha256": "bcb7c760b43273d0e82e6867160445e8b3bf22c11e3ea07b7321a8527550f284",
+  "failed_faces": [
+    {
+      "index": 131,
+      "area_mm2": 60.40422505099126,
+      "bounds_mm": [
+        [
+          -3.5,
+          51.5,
+          2.0
+        ],
+        [
+          3.5,
+          58.5,
+          5.5
+        ]
+      ]
+    }
+  ],
+  "baseline": {
+    "part": "tray-left",
+    "valid": false,
+    "solids": 1,
+    "step_volume_delta_mm3": 7.07223080098629e-09,
+    "brim_xy_mm": [
+      152.31799781780003,
+      149.55756390259302
+    ],
+    "mesh": {
+      "triangles": 82940,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 3.9207816563846285e-06
+    },
+    "step_sha256": "d39990825398d3ae6be1f0826ea3390e6f9e0160f16be342d0bbcfe631399733",
+    "stl_sha256": "5bc7a15002af8d00cd221f8f45931e184af402466b69190a237bf55ec204defb",
+    "passed": false
+  },
+  "location": "outer surface of relocated south splice boss",
+  "repair_experiments": "17mm/tray-step-diagnostics.json records rejected repair experiments at 17 mm; no experiment or PASS is transferred to this different tray.",
+  "decision": "Retain failed independent STEP gate. Fitted geometry and thresholds unchanged; the single-solid manifold central shell passes independently. Requires a valid tray STEP round-trip."
+}
