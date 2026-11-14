@@ -1,7 +1,7 @@
-"""Round 3 candidate: ordered inlet fan, low concentric reserve, raised return fan.
+"""Round 5: corrected native pins, separated lanes and horizontal reserve.
 
-Frozen analytic waypoints are reviewable inputs, not a runtime optimizer dependency.
-Fitted contact and continuous service gates determine acceptance.
+Reconstructed analytic waypoints remain reviewable inputs. Fitted contacts and
+continuous motion, not candidate screening, determine acceptance.
 """
 from common import *
 DESIGN=read(HERE/'routes-round5.json')
