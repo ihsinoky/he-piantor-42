@@ -4,7 +4,7 @@ from round4_report import counts
 
 def render(rows):
  from report import GATES
- lines=['# Issue #248 Phase B — Round 5','', '**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**','', '## Round 5 results','', '| Gate | 17 mm | 16 mm |','|---|---|---|']
+ lines=['# Issue #248 Phase B — Round 5','', '**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**','', '## Round 5 results','', 'The corrected-map reconstruction remains a failed routing candidate. All contacts and current blockers are retained below; no production release is claimed.','', '| Gate | 17 mm | 16 mm |','|---|---|---|']
  lines += [f'| {n} | {rows[17][i]} | {rows[16][i]} |' for i,n in enumerate(GATES)]
  lines += ['', '### Reconstruction and physical correspondence','',
  'PO direction was reread with `gh issue view 248 --comments`; the snapshot is in sources/issue248-round5.json. Round 4 evidence, route inputs, build sources and both manufacturing packages are frozen in [round4/](round4/REPORT.md) with round4-sha256.json; all earlier frozen evidence is retained.', '',
