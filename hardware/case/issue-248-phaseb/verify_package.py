@@ -104,6 +104,7 @@ def run():
   assert read(out/'caps.json')['certified']
   assert not cw['solver_inconsistencies']
   assert read(out/'hardware-inventory.json')['all_E_replacements_passed']
+  assert read(out/'hardware-inventory.json')['geometry_sha256']==a['geometry_sha256']
   assert read(out/'invariants.json')['passed']
   gates=read(out/'gates.json');assert len(gates['gates'])==8 and not gates['production_release']
   if cw['solver_inconsistencies']:assert not gates['gates'][5]['passed']

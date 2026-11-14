@@ -1,0 +1,77 @@
+{
+  "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
+  "geometry_sha256": "b26431f9fdfa7418fc72b1e437441b64552770f0975227580b6378fb3bc378d4",
+  "fixed_roof_conflicts": [
+    {
+      "fixed_part": "POM-left-H3",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 3.6530995514771862,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-left",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 1158.1942422779327,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-left",
+      "required_skin_region": "slope",
+      "intersection_mm3": 175.4001935012487,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "POM-right-H1",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 3.653099551474832,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-right",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 1158.1837662852568,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-right",
+      "required_skin_region": "slope",
+      "intersection_mm3": 175.40019707473695,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "tray-left protected south palm band",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 89.48272627724474,
+      "roof_rule": "2.00 mm roof and unchanged protected palm material Y69.7001..100",
+      "resolution_blocker": "Tray relief here changes the protected palm material invariant; shell relief removes required roof skin. Neither waived."
+    },
+    {
+      "fixed_part": "tray-right protected south palm band",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 84.19689084720811,
+      "roof_rule": "2.00 mm roof and unchanged protected palm material Y69.7001..100",
+      "resolution_blocker": "Tray relief here changes the protected palm material invariant; shell relief removes required roof skin. Neither waived."
+    }
+  ],
+  "central_shell_components": 1,
+  "central_shell_separations": [],
+  "settled_footprint_components": [
+    {
+      "area_mm2": 7641.307371249449,
+      "bounds_mm": [
+        -79.66878265594589,
+        -53.661519331630416,
+        79.66878265594589,
+        81.70230263160963
+      ]
+    }
+  ],
+  "shell_connection_blocker": null,
+  "wiring_blocker": "See exhaustive constituent collision-map and continuous service-motion results. Candidate is not accepted unless all contacts clear; no strand/strand overlap exemption."
+}

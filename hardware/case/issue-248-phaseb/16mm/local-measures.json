@@ -1,6 +1,6 @@
 {
   "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
-  "geometry_sha256": "9a11a662c879e45aacfa83a12979fda8d731eea3e3d2a7c1777cfe3704e36f46",
+  "geometry_sha256": "5558eecf3ee1515cf84d6eb1241d90320dcf5f9b1eeb722bb633da5a347b97af",
   "dimensions": {
     "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
     "plateau_top_z_mm": 24.65,
@@ -51,6 +51,23 @@
         64.4,
         11.55
       ],
+      "boundary_distance_proof": {
+        "a_face": 288,
+        "b_face": 0,
+        "a_point_mm": [
+          -29.342683,
+          64.4,
+          11.55
+        ],
+        "b_point_mm": [
+          -29.642683,
+          64.4,
+          11.55
+        ],
+        "exact_face_pairs": 5,
+        "all_face_pairs": 3868,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     },
     {
@@ -66,6 +83,23 @@
         64.4,
         13.549999999999999
       ],
+      "boundary_distance_proof": {
+        "a_face": 288,
+        "b_face": 1,
+        "a_point_mm": [
+          -29.342683,
+          64.4,
+          13.55
+        ],
+        "b_point_mm": [
+          -29.892683,
+          64.4,
+          13.549999999999999
+        ],
+        "exact_face_pairs": 6,
+        "all_face_pairs": 3868,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     },
     {
@@ -81,6 +115,23 @@
         64.4,
         11.55
       ],
+      "boundary_distance_proof": {
+        "a_face": 287,
+        "b_face": 0,
+        "a_point_mm": [
+          29.342683,
+          64.4,
+          11.55
+        ],
+        "b_point_mm": [
+          29.642682,
+          64.4,
+          11.55
+        ],
+        "exact_face_pairs": 5,
+        "all_face_pairs": 3868,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     },
     {
@@ -96,38 +147,89 @@
         64.4,
         13.549999996447285
       ],
+      "boundary_distance_proof": {
+        "a_face": 287,
+        "b_face": 1,
+        "a_point_mm": [
+          29.342683,
+          64.4,
+          13.54999999547029
+        ],
+        "b_point_mm": [
+          29.892682,
+          64.4,
+          13.549999996447285
+        ],
+        "exact_face_pairs": 6,
+        "all_face_pairs": 3868,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     },
     {
       "part": "Main-GH-left-DRAWING-BOUND",
       "distance_mm": 0.29999999999994076,
       "roof_witness_mm": [
-        -21.6301063223846,
-        38.217658333026,
-        11.55
+        -21.054005353944877,
+        52.11982218539889,
+        12.9
       ],
       "part_witness_mm": [
-        -21.370298701249233,
-        38.36765833302602,
-        11.55
+        -20.9040053539449,
+        51.8600145642636,
+        12.9
       ],
+      "boundary_distance_proof": {
+        "a_face": 667,
+        "b_face": 2,
+        "a_point_mm": [
+          -21.054005353944877,
+          52.11982218539889,
+          12.9
+        ],
+        "b_point_mm": [
+          -20.9040053539449,
+          51.8600145642636,
+          12.9
+        ],
+        "exact_face_pairs": 201,
+        "all_face_pairs": 9670,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     },
     {
       "part": "Main-GH-right-DRAWING-BOUND",
       "distance_mm": 0.29999999999994076,
       "roof_witness_mm": [
-        12.8525188566361,
-        38.5144308744699,
-        11.4599431430608
+        21.054005353944877,
+        52.11982218539889,
+        12.9
       ],
       "part_witness_mm": [
-        13.112326477771422,
-        38.36443087446991,
-        11.4599431430608
+        20.9040053539449,
+        51.8600145642636,
+        12.9
       ],
+      "boundary_distance_proof": {
+        "a_face": 678,
+        "b_face": 1,
+        "a_point_mm": [
+          21.054005353944877,
+          52.11982218539889,
+          12.9
+        ],
+        "b_point_mm": [
+          20.9040053539449,
+          51.8600145642636,
+          12.9
+        ],
+        "exact_face_pairs": 98,
+        "all_face_pairs": 9670,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      },
       "common_mm3": 0.0
     }
   ],
-  "note": "GH uses B1 nominal drawing bounds. Inspect cap-witnesses.json for 17 mm solid-classifier inconsistency; distance alone is not promoted to release approval."
+  "note": "GH uses B1 nominal drawing bounds. Exact trimmed-face distances bypass the whole-solid classifier; no allowance relaxed."
 }

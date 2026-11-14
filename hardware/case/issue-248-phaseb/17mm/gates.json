@@ -5,42 +5,42 @@
     {
       "gate": "1 Exhaustive fitted collision",
       "passed": false,
-      "evidence": "305 unexpected contacts; 0 Boolean errors; see audit.json"
+      "evidence": "295 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS."
     },
     {
-      "gate": "2 Conductors and dressed target",
-      "passed": false,
-      "evidence": "Outlet routes pass, but crimp tails are unsourced. Conservative 5.70 mm/end bound: L 201.151412, R 202.169482 mm; full/dressed limits unclosed"
+      "gate": "2 Finished conductors ≤200 mm",
+      "passed": true,
+      "evidence": "Longest finished upper bound 197.822584 mm including 3.90 mm Wing / 3.40 mm Main sourced dress-to-tip bounds and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json."
     },
     {
       "gate": "3 Accessible ~30 mm service",
       "passed": false,
-      "evidence": "30.20 mm represented; motion blocked; accessible certification requires fitted audit and invariants"
+      "evidence": "Motion blocked; fitted collisions additionally prevent accessible certification."
     },
     {
       "gate": "4 Connected Fly 170 / R5 / roof gap",
       "passed": true,
-      "evidence": "170.000000000 mm; gap 0.300000; 0 other fitted contacts"
+      "evidence": "170.000000000 mm, R5; true roof gap 0.300000 mm; 0 fitted contacts."
     },
     {
       "gate": "5 USB 30 mm insertion",
       "passed": true,
-      "evidence": "Three continuous 30 mm reservations; see usb.json"
+      "evidence": "Three continuous 30 mm reservations recomputed."
     },
     {
       "gate": "6 Assumed swept caps after allowances",
-      "passed": false,
-      "evidence": "Minimum reported after 0.50 allowance -0.500000 mm; physical skirt gate OPEN; kernel reports zero distance with witnesses outside shell bounds, so no physical-contact or clearance verdict is certified"
+      "passed": true,
+      "evidence": "Certified trimmed-face minimum after 0.50 mm allowance: 0.500000 mm; physical Junana skirt test OPEN."
     },
     {
       "gate": "7 Print envelopes and manufacturing data",
-      "passed": false,
-      "evidence": "Independent STEP/STL failures: shell-central: 1 solids, 12 nonmanifold STL edges, relative volume error 1.44980838e-07"
+      "passed": true,
+      "evidence": "All nineteen STEP/STL sets independently reloaded with unchanged verifier."
     },
     {
       "gate": "8 Fitted preview STEP",
       "passed": true,
-      "evidence": "fitted-assembly-PROVISIONAL.step"
+      "evidence": "Preview reloaded 366 / 366 constituents."
     }
   ],
   "all_cad_gates_pass": false,
