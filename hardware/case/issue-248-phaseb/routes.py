@@ -1,4 +1,4 @@
-"""Round 6 candidate: ordered inlet fan, low concentric reserve, raised return fan.
+"""Round 6: corrected Main termination assignment on frozen round-3 final paths.
 
 Frozen analytic waypoints are reviewable inputs, not a runtime optimizer dependency.
 Fitted contact and continuous service gates determine acceptance.
@@ -41,7 +41,7 @@ def make_routes():
    for south,target in [(STORED,proofs),(RELEASED,releasedproofs)]:
     before,after,r,mid=segments(sgn,i,south)
     target.append(dict(before=before,after=after,turn_radius_mm=r,turn_arc_length_mm=math.pi*r))
-  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,analytic_segments=proofs,released_analytic_segments=releasedproofs,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=min(5,min(r['turn_radius_mm'] for r in proofs)),service_turn_y_mm=[STORED,RELEASED],outlet_axis_qualification=read(HERE/'tail-source.json')['dress_plane_definition'],unmodeled_length_mm=7.3,routed_curve_only=False,terminal_internal_bound_mm_per_end=3.4,terminal_internal_length_verified=True,wing_tail_plus_dress_lead_bound_mm=3.9,main_tail_bound_mm=3.4,route_qualification='Round 6 development candidate: ordered inlet fan, lower concentric connected reserve, independently positioned return fan. Exact all-pair and service audits decide acceptance; search clearance is not certification.'))
+  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,analytic_segments=proofs,released_analytic_segments=releasedproofs,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=min(5,min(r['turn_radius_mm'] for r in proofs)),service_turn_y_mm=[STORED,RELEASED],outlet_axis_qualification=read(HERE/'tail-source.json')['dress_plane_definition'],unmodeled_length_mm=7.3,routed_curve_only=False,terminal_internal_bound_mm_per_end=3.4,terminal_internal_length_verified=True,wing_tail_plus_dress_lead_bound_mm=3.9,main_tail_bound_mm=3.4,route_qualification='Round 6 assignment correction only: frozen round-3 final inlet, pack, reserve and return-fan interior; corrected final Main approach and endpoint. Exact fitted, finished-length and service gates remain binding.'))
  return parts,rows
 if __name__=='__main__':
  parts,rows=make_routes();save(RUN/'route-candidate.json',rows)
