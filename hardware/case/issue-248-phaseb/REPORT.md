@@ -1,3 +1,266 @@
+# Issue #248 Phase B — Round 6
+
+**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
+
+## Round 6 results
+
+Assignment correction inside the frozen round-3 final framework. Failed gates remain binding; no production release or exception is claimed.
+
+| Gate | 17 mm | 16 mm |
+|---|---|---|
+| 1 Exhaustive fitted collision | FAIL | FAIL |
+| 2 Finished conductors ≤200 mm | FAIL | FAIL |
+| 3 Accessible ~30 mm service | FAIL | FAIL |
+| 4 Connected Fly 170 / R5 / roof gap | PASS | PASS |
+| 5 USB 30 mm insertion | PASS | PASS |
+| 6 Assumed swept caps after allowances | PASS | PASS |
+| 7 Print envelopes and manufacturing data | PASS | PASS |
+| 8 Fitted preview STEP | PASS | PASS |
+
+### Frozen base, physical assignment and exact deviation scope
+
+The latest PO direction was read with `gh issue view 248 --comments` and is preserved in sources/issue248-round6.json. The entire round-5 package and report are frozen in round5/ with round5-sha256.json; all earlier evidence remains unchanged. Checkpoint 84be3a5 froze round 5 before work began.
+
+BASE is the FINAL round-3 assembly whose 17 mm audit has 80 contacts and whose longest finished conductor is 198.400068 mm. Its stored/released turn-tangent datums are Y10.0/Y−5.1, reserve centre X±17.40, and travel 15.10 mm (connected reserve 30.20 mm). The tuning-round Y17.1/Y2.0 datums are not used. No reserve, lane pack, pack spacing/height, shell, strip, retainer (±8,−30), hardware, tray channel or tray seating relief is redesigned.
+
+The frozen round-3 strand geometry DOES exist as parametric paths in round3/routes-round3.json and round3/routes.py, consistent with the frozen measurements. No paths are fitted from solids. Each corrected conductor retains the entire path belonging to its physical Wing outlet, including every inlet waypoint, low-pack radius/height, reserve turn and return-fan waypoint through the last interior vertex. Only the final two Main approach waypoints are taken from the frozen path that terminates at the corrected same-numbered Main cavity. right Wing pin1 is X35.125, pin14 X18.875; left pin1 is X−18.875. Native KiCad pads/nets independently verify all 28 endpoints in pinmap-round6.json against immutable pinmap-round4.json / pinmap-round5.json. Conductor names now denote corrected physical cavity numbers. Named-pair deltas therefore include renumbering; assignment-geometry-comparison.json supplies the physical-strand correspondence, so a renamed pair alone is not a cleared physical contact.
+
+The complete deviation register is assignment-deviations-round6.json plus per-pitch assignment-geometry-comparison.json (including all 28 exact length changes), naming all 28 conductors (right pin and its mirrored left pin), original physical lane, old/new Main approach coordinates, unchanged waypoint indices and affected geometry. For each strand: after vertices5/6 change; edges4→5 and5→6 and R5 fillets at vertices4/5 regenerate; the tangent trim at unchanged vertex4 on edge3→4 consequently changes. Vertex4 itself does not move. All indices are zero-based. Entire inlet/reserve geometry and preceding fan vertices remain exactly unchanged. routes-round6.json is checked against the frozen arrays by verify_round6_framework.py; there is no route optimizer or extra clearance cut.
+
+Frozen solid recovery uses content-addressed byte-identical BReps for 338 fixed constituents, including boards, plates, Fly, strips, retainers and hardware. Only central shell and two tray serialized BReps were absent from scratch; these three operands are read from their immutable final round-3 manufacturing STEP exports without healing. Their representation roundtrip volume/bounds changes are recorded individually in frozen-framework-recovery.json. This is solid recovery, not path reconstruction or a new shape design. The first partial 17 mm attempt exposed whole-assembly reserialization by the legacy boss-repair writer; it was stopped after a bounded chunk, retained under .issue248-runtime/round6/rejected-operand-reserialization/, and replaced with a writer that changes only tray-left. Its partial pair results are not reused. Independent final scope checks reject any change beyond the strand edits and carried tray-left repair.
+
+CARRIED manufacturing-data repair: fresh analytic OD7 tray-left splice boss at X0/Y55 with original Ø1.7 pilot; explicit X−4…4/Y51…59/Z1.8…5.8 cleanup, native floor patch restored through Z1.6…2.0. splice-boss-rebuild.json records exact before/after volume and floor preservation. No other tray relief is cut, including no continuous-service or corrected-route channel enlargement. Required skin, source floor, full E supports, palm band and stack checks remain unchanged.
+
+The two-waypoint termination correction exceeds the finished-length limit. The >200 mm route is preserved for an exact audit and a failed gate; no routing shortening, tail reduction, reserve shift or waiver is substituted. Binding thresholds remain deck Z13.55, plateau Z24.65/q1.50 provisional, seam ownership and 2.00 mm skin, byte-unchanged board/plate design inputs, GH/Fly blisters, M2×10, fourteen OD1/R≥5 strands per side, finished ≤200 mm including unchanged 3.90/3.40 mm tails, Fly 170/R5/0.30 gap, and 1e−6 mm³ collision threshold.
+
+### Round 6 — 17 mm
+
+Exhaustive audit: 366 physical constituents, 66795 unordered pairs; 65277 AABB exclusions, 132 explicit own mates, 1386 exact Commons, 0 Boolean errors. Every pair is re-enumerated. Exact Common results replay only for byte-identical frozen operands with identical names/indices; all changed-operand candidates recompute in bounded processes (80 new Commons per process). audit-E-restoration-reuse.json is independently checked; all gates bind to current assembly-index.json.
+
+| Collision category | Round 3 | Round 4 | Round 5 | Round 6 |
+|---|---:|---:|---:|---:|
+| E screws / conductors | 0 | 2 | 0 | 0 |
+| Fly-170mm / conductors | 0 | 4 | 0 | 0 |
+| Fly-170mm / trays | 0 | 1 | 0 | 0 |
+| POM-left-H3 / shell-central | 1 | 1 | 1 | 1 |
+| POM-left-H4 / conductors | 0 | 1 | 0 | 0 |
+| POM-right-H1 / shell-central | 1 | 1 | 1 | 1 |
+| POM-right-H2 / conductors | 0 | 1 | 0 | 0 |
+| Wing underside bounds / conductors | 0 | 12 | 0 | 0 |
+| aluminium plates / conductors | 10 | 22 | 0 | 10 |
+| conductors / conductors | 52 | 23 | 163 | 174 |
+| conductors / joint-screw-1-12_0 | 0 | 1 | 0 | 0 |
+| conductors / main | 2 | 0 | 0 | 2 |
+| conductors / shell-central | 0 | 16 | 0 | 0 |
+| conductors / strip-left | 0 | 9 | 0 | 0 |
+| conductors / strip-right | 0 | 9 | 0 | 0 |
+| conductors / switch-envelope-L_R0_C5 | 0 | 1 | 0 | 0 |
+| conductors / switch-envelope-R_R0_C5 | 0 | 1 | 0 | 0 |
+| conductors / trays | 0 | 10 | 0 | 4 |
+| conductors / wing_left | 7 | 12 | 0 | 7 |
+| conductors / wing_right | 7 | 12 | 0 | 7 |
+| strip-left / trays | 0 | 1 | 0 | 0 |
+| strip-right / trays | 0 | 1 | 0 | 0 |
+| **Total** | **80** | **141** | **165** | **206** |
+
+Named pairs, exact volumes and bounds: [17mm/audit.json](17mm/audit.json), collision-map.json and round6-comparison.json.
+
+| Side | Longest strand | Routed mm | Finished mm | Margin to 200 mm | Connected reserve mm | Min bend mm |
+|---|---:|---:|---:|---:|---:|---:|
+| left | 10 | 197.210171 | 204.510171 | -4.510171 | 30.200000 | 5.000000 |
+| right | 05 | 197.210171 | 204.510171 | -4.510171 | 30.200000 | 5.000000 |
+
+All over-limit strands: left-10: 204.510171 mm, left-14: 200.496278 mm, right-01: 200.496278 mm, right-05: 204.510171 mm. Finished lengths include unchanged tail-source.json tails. All R5 stored/released tangent slack is measured in length-fly.json; the dressed 164.8 mm figure remains reference only.
+
+Fly: 170.000000000 mm, R5, roof gap 0.300000 mm; 0 fitted contacts. USB continuous 30 mm insertion: PASS. Certified cap envelope: PASS; physical q/skirt/full-press remains OPEN.
+
+Service motion with Main/removable caps removed and Wing hardware fitted:
+
+- left: 8 contacts (4 tray, 4 own fixed fan), 0 Boolean errors; 30.200000 mm release.
+  - strand 01 / tray-left: 0.000292079 mm³.
+  - strand 05 / tray-left: 0.000328737 mm³.
+  - strand 06 / tray-left: 0.006182203 mm³.
+  - strand 13 / tray-left: 0.018565946 mm³.
+  - strand 08 / Wire-left-08-fixed-upper-fan: 0.647478711 mm³.
+  - strand 09 / Wire-left-08-fixed-upper-fan: 1.893580431 mm³.
+  - strand 10 / Wire-left-08-fixed-upper-fan: 0.000010086 mm³.
+  - strand 11 / Wire-left-08-fixed-upper-fan: 0.037500277 mm³.
+- right: 8 contacts (4 tray, 4 own fixed fan), 0 Boolean errors; 30.200000 mm release.
+  - strand 02 / tray-right: 1.447755172 mm³.
+  - strand 09 / tray-right: 0.474144643 mm³.
+  - strand 10 / tray-right: 0.000328737 mm³.
+  - strand 14 / tray-right: 0.000292079 mm³.
+  - strand 04 / Wire-right-07-fixed-upper-fan: 0.037500277 mm³.
+  - strand 05 / Wire-right-07-fixed-upper-fan: 0.000010086 mm³.
+  - strand 06 / Wire-right-07-fixed-upper-fan: 1.893580448 mm³.
+  - strand 07 / Wire-right-07-fixed-upper-fan: 0.647478672 mm³.
+
+Geometric service motion: **FAIL**. Accessible service: **FAIL**. All intermediate translations plus 0.020 mm allowance are checked against fixed bodies and own fixed fans. Round 3 broadly excluded its own harness; the stronger carried round-4/5 check also audits fixed inlet/upper fan pieces, so any additional own-fan contacts are explicitly distinguished from the inherited tray grazes. Inherited strand crossings are independently disqualifying; no assertion of mutually separated round-3 turns is used. Fitted channels are frozen, so inherited motion grazes are retained rather than relieved.
+
+Manufacturing: **PASS**, 19/19 independent STEP/STL reloads; exact edge incidence, degenerates, volume and print envelopes unchanged. Required skin PASS; source floor/stack/palm PASS; full E support/M2×10 PASS; retention probes PASS.
+
+| Part | STEP valid | Solids | Nonmanifold edges | Degenerates | Verdict |
+|---|---|---:|---:|---:|---|
+| splice-1 | True | 1 | 0 | 0 | PASS |
+| splice-2 | True | 1 | 0 | 0 | PASS |
+| post-left-R1 | True | 1 | 0 | 0 | PASS |
+| post-left-R2 | True | 1 | 0 | 0 | PASS |
+| post-left-R3 | True | 1 | 0 | 0 | PASS |
+| post-left-R4 | True | 1 | 0 | 0 | PASS |
+| post-left-R5 | True | 1 | 0 | 0 | PASS |
+| post-left-R6 | True | 1 | 0 | 0 | PASS |
+| tray-left | True | 1 | 0 | 0 | PASS |
+| post-right-R1 | True | 1 | 0 | 0 | PASS |
+| post-right-R2 | True | 1 | 0 | 0 | PASS |
+| post-right-R3 | True | 1 | 0 | 0 | PASS |
+| post-right-R4 | True | 1 | 0 | 0 | PASS |
+| post-right-R5 | True | 1 | 0 | 0 | PASS |
+| post-right-R6 | True | 1 | 0 | 0 | PASS |
+| tray-right | True | 1 | 0 | 0 | PASS |
+| strip-left | True | 1 | 0 | 0 | PASS |
+| strip-right | True | 1 | 0 | 0 | PASS |
+| shell-central | True | 1 | 0 | 0 | PASS |
+
+Inherited POM residuals remain **unauthorized blockers**:
+
+| Fixed body | Required roof | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770488 |
+| POM-right-H1 | low_south | 0.040770024 |
+
+F-015/D-037: the invalid Fly-official-42-instance-42 is accepted only as the inherited source-model defect when its serialized operand hash exactly matches frozen round 3. It is neither healed nor exempted from contacts. All actual contacts remain audited.
+
+Failed gates and blockers:
+
+- **1 Exhaustive fitted collision**: 206 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid design constituents: none; F-015/D-037 preserved source defects: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **2 Finished conductors ≤200 mm**: Longest finished upper bound 204.510171 mm including 3.90 mm Wing / 3.40 mm Main sourced dress-to-tip bounds and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+
+Frozen recovery details:
+
+- tray-left: frozen STEP representation roundtrip volume delta 7.82165443525e-09 mm³; maximum bounds delta 2.13162820728e-14 mm; no healing.
+- tray-right: frozen STEP representation roundtrip volume delta -8.75334080774e-07 mm³; maximum bounds delta 4.88498130835e-15 mm; no healing.
+- shell-central: frozen STEP representation roundtrip volume delta -7.47604644857e-10 mm³; maximum bounds delta 1.45909950788e-11 mm; no healing.
+- carried tray-left analytic boss junction repair: volume change -15.921584297 mm³; required local floor missing 0.000000000 mm³.
+
+### Round 6 — 16 mm
+
+Exhaustive audit: 366 physical constituents, 66795 unordered pairs; 65267 AABB exclusions, 132 explicit own mates, 1396 exact Commons, 0 Boolean errors. Every pair is re-enumerated. Exact Common results replay only for byte-identical frozen operands with identical names/indices; all changed-operand candidates recompute in bounded processes (80 new Commons per process). audit-E-restoration-reuse.json is independently checked; all gates bind to current assembly-index.json.
+
+| Collision category | Round 3 | Round 4 | Round 5 | Round 6 |
+|---|---:|---:|---:|---:|
+| E screws / conductors | 0 | 2 | 0 | 0 |
+| Fly-170mm / conductors | 0 | 4 | 0 | 0 |
+| Fly-170mm / trays | 0 | 1 | 0 | 0 |
+| POM-left-H3 / shell-central | 1 | 1 | 1 | 1 |
+| POM-left-H4 / conductors | 0 | 1 | 0 | 0 |
+| POM-right-H1 / shell-central | 1 | 1 | 1 | 1 |
+| POM-right-H2 / conductors | 0 | 1 | 0 | 0 |
+| Wing underside bounds / conductors | 0 | 12 | 0 | 0 |
+| aluminium plates / conductors | 10 | 22 | 0 | 10 |
+| conductors / conductors | 52 | 23 | 163 | 174 |
+| conductors / joint-screw-1-12_0 | 0 | 1 | 0 | 0 |
+| conductors / main | 2 | 0 | 0 | 2 |
+| conductors / shell-central | 0 | 16 | 0 | 0 |
+| conductors / strip-left | 0 | 9 | 0 | 0 |
+| conductors / strip-right | 0 | 9 | 0 | 0 |
+| conductors / switch-envelope-L_R0_C5 | 1 | 1 | 0 | 1 |
+| conductors / switch-envelope-L_R1_C5 | 2 | 0 | 0 | 2 |
+| conductors / switch-envelope-R_R0_C5 | 1 | 1 | 0 | 1 |
+| conductors / switch-envelope-R_R1_C5 | 2 | 0 | 0 | 2 |
+| conductors / trays | 0 | 10 | 0 | 4 |
+| conductors / wing_left | 7 | 12 | 0 | 7 |
+| conductors / wing_right | 7 | 12 | 0 | 7 |
+| strip-left / trays | 0 | 1 | 0 | 0 |
+| strip-right / trays | 0 | 1 | 0 | 0 |
+| **Total** | **86** | **141** | **165** | **212** |
+
+Named pairs, exact volumes and bounds: [16mm/audit.json](16mm/audit.json), collision-map.json and round6-comparison.json.
+
+| Side | Longest strand | Routed mm | Finished mm | Margin to 200 mm | Connected reserve mm | Min bend mm |
+|---|---:|---:|---:|---:|---:|---:|
+| left | 10 | 197.210171 | 204.510171 | -4.510171 | 30.200000 | 5.000000 |
+| right | 05 | 197.210171 | 204.510171 | -4.510171 | 30.200000 | 5.000000 |
+
+All over-limit strands: left-10: 204.510171 mm, left-14: 200.496278 mm, right-01: 200.496278 mm, right-05: 204.510171 mm. Finished lengths include unchanged tail-source.json tails. All R5 stored/released tangent slack is measured in length-fly.json; the dressed 164.8 mm figure remains reference only.
+
+Fly: 170.000000000 mm, R5, roof gap 0.300000 mm; 0 fitted contacts. USB continuous 30 mm insertion: PASS. Certified cap envelope: PASS; physical q/skirt/full-press remains OPEN.
+
+Service motion with Main/removable caps removed and Wing hardware fitted:
+
+- left: 8 contacts (4 tray, 4 own fixed fan), 0 Boolean errors; 30.200000 mm release.
+  - strand 01 / tray-left: 0.000292079 mm³.
+  - strand 05 / tray-left: 0.000328737 mm³.
+  - strand 06 / tray-left: 0.006182203 mm³.
+  - strand 13 / tray-left: 0.018565946 mm³.
+  - strand 08 / Wire-left-08-fixed-upper-fan: 0.647478711 mm³.
+  - strand 09 / Wire-left-08-fixed-upper-fan: 1.893580431 mm³.
+  - strand 10 / Wire-left-08-fixed-upper-fan: 0.000010086 mm³.
+  - strand 11 / Wire-left-08-fixed-upper-fan: 0.037500277 mm³.
+- right: 8 contacts (4 tray, 4 own fixed fan), 0 Boolean errors; 30.200000 mm release.
+  - strand 02 / tray-right: 1.447755172 mm³.
+  - strand 09 / tray-right: 0.474144643 mm³.
+  - strand 10 / tray-right: 0.000328737 mm³.
+  - strand 14 / tray-right: 0.000292079 mm³.
+  - strand 04 / Wire-right-07-fixed-upper-fan: 0.037500277 mm³.
+  - strand 05 / Wire-right-07-fixed-upper-fan: 0.000010086 mm³.
+  - strand 06 / Wire-right-07-fixed-upper-fan: 1.893580448 mm³.
+  - strand 07 / Wire-right-07-fixed-upper-fan: 0.647478672 mm³.
+
+Geometric service motion: **FAIL**. Accessible service: **FAIL**. All intermediate translations plus 0.020 mm allowance are checked against fixed bodies and own fixed fans. Round 3 broadly excluded its own harness; the stronger carried round-4/5 check also audits fixed inlet/upper fan pieces, so any additional own-fan contacts are explicitly distinguished from the inherited tray grazes. Inherited strand crossings are independently disqualifying; no assertion of mutually separated round-3 turns is used. Fitted channels are frozen, so inherited motion grazes are retained rather than relieved.
+
+Manufacturing: **PASS**, 19/19 independent STEP/STL reloads; exact edge incidence, degenerates, volume and print envelopes unchanged. Required skin PASS; source floor/stack/palm PASS; full E support/M2×10 PASS; retention probes PASS.
+
+| Part | STEP valid | Solids | Nonmanifold edges | Degenerates | Verdict |
+|---|---|---:|---:|---:|---|
+| splice-1 | True | 1 | 0 | 0 | PASS |
+| splice-2 | True | 1 | 0 | 0 | PASS |
+| post-left-R1 | True | 1 | 0 | 0 | PASS |
+| post-left-R2 | True | 1 | 0 | 0 | PASS |
+| post-left-R3 | True | 1 | 0 | 0 | PASS |
+| post-left-R4 | True | 1 | 0 | 0 | PASS |
+| post-left-R5 | True | 1 | 0 | 0 | PASS |
+| post-left-R6 | True | 1 | 0 | 0 | PASS |
+| tray-left | True | 1 | 0 | 0 | PASS |
+| post-right-R1 | True | 1 | 0 | 0 | PASS |
+| post-right-R2 | True | 1 | 0 | 0 | PASS |
+| post-right-R3 | True | 1 | 0 | 0 | PASS |
+| post-right-R4 | True | 1 | 0 | 0 | PASS |
+| post-right-R5 | True | 1 | 0 | 0 | PASS |
+| post-right-R6 | True | 1 | 0 | 0 | PASS |
+| tray-right | True | 1 | 0 | 0 | PASS |
+| strip-left | True | 1 | 0 | 0 | PASS |
+| strip-right | True | 1 | 0 | 0 | PASS |
+| shell-central | True | 1 | 0 | 0 | PASS |
+
+Inherited POM residuals remain **unauthorized blockers**:
+
+| Fixed body | Required roof | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770468 |
+| POM-right-H1 | low_south | 0.040770032 |
+
+F-015/D-037: the invalid Fly-official-42-instance-42 is accepted only as the inherited source-model defect when its serialized operand hash exactly matches frozen round 3. It is neither healed nor exempted from contacts. All actual contacts remain audited.
+
+Failed gates and blockers:
+
+- **1 Exhaustive fitted collision**: 212 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid design constituents: none; F-015/D-037 preserved source defects: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **2 Finished conductors ≤200 mm**: Longest finished upper bound 204.510171 mm including 3.90 mm Wing / 3.40 mm Main sourced dress-to-tip bounds and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+
+Frozen recovery details:
+
+- tray-left: frozen STEP representation roundtrip volume delta 7.07223080099e-09 mm³; maximum bounds delta 1.06581410364e-14 mm; no healing.
+- tray-right: frozen STEP representation roundtrip volume delta -7.56204826757e-07 mm³; maximum bounds delta 1.7763568394e-15 mm; no healing.
+- shell-central: frozen STEP representation roundtrip volume delta -2.21552909352e-09 mm³; maximum bounds delta 1.45981005062e-11 mm; no healing.
+- carried tray-left analytic boss junction repair: volume change -15.921584291 mm³; required local floor missing 0.000000000 mm³.
+
+## Round 6 reproduction and integrity
+
+Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` with the retained CAD environment and runtime source BRep caches. Content-addressed recovery is checked against the frozen index before any substitution. Each pitch is sequential; exact all-pair work is bounded at 80 new operations and service motion runs per side. All eight gates, independent STEP/STL reloads, contact witnesses, seam/material/retention checks and final package verifier rerun. verify_round6_framework.py enforces frozen arrays and fixed-operand scope; verify_package.py additionally checks all five prior frozen evidence sets, native endpoint binding, current hashes, complete pair arithmetic and per-gate binding. Scratch stays under .issue248-runtime; checkpoints are committed through .issue248-runtime/git. No silent relaxation or physical release.
+
+---
+
 # Issue #248 Phase B — Round 5
 
 **PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
