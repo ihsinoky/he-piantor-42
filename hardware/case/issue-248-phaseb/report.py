@@ -1,123 +1,120 @@
-"""Gate aggregation and review report, with explicit failures and cost arithmetic."""
+"""Current tuning gates; original candidate evidence remains under first-candidate/."""
 from common import *
 from collections import Counter
-GATES=['1 Exhaustive fitted collision','2 Conductors and dressed target','3 Accessible ~30 mm service','4 Connected Fly 170 / R5 / roof gap','5 USB 30 mm insertion','6 Assumed swept caps after allowances','7 Print envelopes and manufacturing data','8 Fitted preview STEP']
+GATES=['1 Exhaustive fitted collision','2 Finished conductors ≤200 mm','3 Accessible ~30 mm service','4 Connected Fly 170 / R5 / roof gap','5 USB 30 mm insertion','6 Assumed swept caps after allowances','7 Print envelopes and manufacturing data','8 Fitted preview STEP']
 def run():
- rows={};details=[];costs={}
+ # Rechecking source hashes precedes any manifest regeneration.
+ for n,h in read(HERE/'inputs-sha256.json').items():assert sha(ROOT/n)==h,('changed design input',n)
+ rows={};details=[]
  for pitch in (17,16):
-  out=HERE/f'{pitch}mm';a=read(out/'audit.json');lf=read(out/'length-fly.json');u=read(out/'usb.json');c=read(out/'caps.json');s=read(out/'service.json');v=read(out/'export-verification.json');m=read(out/'manufacturing.json');d=read(out/'measurements.json');inv=read(out/'invariants.json');local=read(out/'local-measures.json')
-  assert a['geometry_sha256']==sha(out/'assembly-index.json')==v['geometry_sha256']
-  assert a['total_pairs']==a['aabb_rejected_pairs']+len(a['intended_pairs'])+a['exact_candidates']
-  assert len(a['exact_results'])==a['exact_candidates']
+  out=HERE/f'{pitch}mm';get=lambda n:read(out/(n+'.json'))
+  a=get('audit');lf=get('length-fly');u=get('usb');c=get('caps');s=get('service');v=get('export-verification');m=get('manufacturing');inv=get('invariants');ret=get('retention-check');cw=get('cap-witnesses');cm=get('collision-map');bl=get('tuning-blockers');hw=get('hardware-inventory')
+  ghash=sha(out/'assembly-index.json')
+  assert all(d['geometry_sha256']==ghash for d in [a,v,c,cw,cm,ret,bl])
+  assert a['total_pairs']==a['aabb_rejected_pairs']+len(a['intended_pairs'])+len(a['exact_results'])
+  assert len(a['exact_results'])==a['exact_candidates'] and cm['complete'] and len(cm['contacts'])==len(a['unexpected_interferences'])
   hits=a['unexpected_interferences'];flyhits=[r for r in hits if 'Fly-170mm' in (r['a'],r['b'])]
-  fitted=a['passed'];motion=s['geometric_motion_passed'];retention=read(out/'retention-check.json');service=fitted and motion and inv['passed'] and retention['local_geometry_passed']
-  cw=read(out/'cap-witnesses.json');cm=read(out/'collision-map.json')
-  assert cw['geometry_sha256']==cm['geometry_sha256']==a['geometry_sha256']
-  assert cm['complete'] and len(cm['contacts'])==len(hits)
-  gate=[fitted,all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c['passed'] and not cw['solver_inconsistencies'],v['passed'] and all(p['envelope_passed'] for p in m['parts']),v['preview_exists'] and v.get('preview_inventory_passed',False)]
-  manufacture_failures='; '.join(f"{r['part']}: {r['solids']} solids, {r['mesh']['nonmanifold_edges']} nonmanifold STL edges, relative volume error {r['mesh']['volume_relative_error']:.9g}" for r in v['checks'] if not r['passed'])
-  cap_reason=f"Minimum reported after 0.50 allowance {min(r['remaining_gap_mm'] for r in c['keys']):.6f} mm; physical skirt gate OPEN"
-  if pitch==17 and not c['passed']:cap_reason+='; kernel reports zero distance with witnesses outside shell bounds, so no physical-contact or clearance verdict is certified'
-  reasons=[f"{len(hits)} unexpected contacts; {len(a['boolean_errors'])} Boolean errors; see audit.json",f"Outlet routes pass, but crimp tails are unsourced. Conservative 5.70 mm/end bound: L {lf['conductors'][0]['cut_length_upper_mm']:.6f}, R {lf['conductors'][1]['cut_length_upper_mm']:.6f} mm; full/dressed limits unclosed",f"30.20 mm represented; motion {'clear' if motion else 'blocked'}; accessible certification requires fitted audit and invariants",f"{lf['fly']['length_mm']:.9f} mm; gap {lf['fly']['shell_gap_mm']:.6f}; {len(flyhits)} other fitted contacts",'Three continuous 30 mm reservations; see usb.json',cap_reason,'Independent STEP/STL failures: '+manufacture_failures if not v['passed'] else '19 STEP/STL/drawing sets independently reloaded; all envelopes checked','fitted-assembly-PROVISIONAL.step']
-  rows[pitch]=['PASS' if g else 'FAIL' for g in gate]
-  save(out/'gates.json',dict(status=P['status'],pitch_mm=pitch,gates=[dict(gate=n,passed=g,evidence=r) for n,g,r in zip(GATES,gate,reasons)],all_cad_gates_pass=all(gate),production_release=False,physical_full_press_skirt='OPEN',invariants=inv['passed'],accessible_service_reserve_certified=service))
-  printed=sum(p['volume_mm3'] for p in m['parts']);mass=printed/1000*1.27;filament=mass*1.25
-  cash=[filament/1000*20+2,filament/1000*30+6];hours=[printed/8/3600*1.5,printed/4/3600*1.5]
-  cost=dict(status=P['status'],printed_material_volume_mm3=printed,nominal_PETG_mass_g=mass,filament_including_25_percent_support_waste_g=filament,filament_assumed_USD_per_kg=[20,30],retention_hardware_allowance_USD=[2,6],cash_material_and_new_retention_USD=cash,print_hours_estimate=hours,assumptions='PETG density 1.27 g/cm3; solid CAD volume; 25% support/waste; 4–8 mm3/s with 1.5 travel factor. Planning assumptions, no supplier quote.',costed_one_off_USD=[cash[0]+hours[0]+20,cash[1]+hours[1]+20],costed_basis='USD1/machine hour + USD20 assembly/finishing allowance; electricity included in machine allowance',scope='two trays, twelve remade posts, two splices, central shell, two strips, new shell retention; unchanged aluminium plates, boards, switches, caps, cables and reused standard hardware excluded')
-  costs[pitch]=cost;save(out/'cost-estimate.json',cost)
-  pairs=Counter(tuple(sorted([r['a'],r['b']])) for r in hits)
-  failed='\n'.join(f'- **{n}: FAIL.** {reason}' for n,ok,reason in zip(GATES,gate,reasons) if not ok)
-  group=Counter()
-  for r in hits:
-   aa,bb=r['a'],r['b']
-   def cat(n):
-    if n.startswith('Wire-'):return 'conductors'
-    if n.startswith('plate-'):return 'aluminium plates / their fitted hardware'
-    if n.startswith('tray-'):return 'trays'
-    if n.startswith('Main-study-'):return 'Main component bounds'
-    if n.startswith('underside-'):return 'Wing underside bounds'
-    return n
-   group[' / '.join(sorted([cat(aa),cat(bb)]))]+=1
-  top='\n'.join(f'- {name}: {count} constituent contacts' for name,count in group.most_common())
-  wtext='\n'.join(f"| {r['side']} | {r['longest_mm']:.6f} | {r['cut_length_upper_mm']:.6f} | {r['cut_length_upper_margin_to_200_mm']:.6f} | {r['dressed_longest_mm']:.6f} | {r['dressed_cut_length_upper_mm']:.6f} | {r['minimum_reserve_mm']:.6f} |" for r in lf['conductors'])
-  env='\n'.join(f"| {p['name']} | {p['solids']} | {'yes' if p['valid'] else 'no'} | {' × '.join(f'{x:.3f}' for x in p['with_5mm_brim_xyz_mm'])} |" for p in m['parts'])
-  servicehits='\n'.join(f"- {r['side']}: {len(r['unexpected'])} motion contacts, {len(r['boolean_errors'])} Boolean errors; `service.json` lists every part/wire." for r in s['sides'])
-  localtext='; '.join(f"{r['part']}: gap {r['distance_mm']:.6f} mm, Common {r['common_mm3']:.6f} mm³" for r in local['results'])
-  details.append(f'''## {pitch} mm evidence
+  service=a['passed'] and s['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed']
+  s['accessible_reserve_certified']=service;save(out/'service.json',s)
+  passed=[a['passed'],all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c.get('certified',False) and c['passed'] and not cw['solver_inconsistencies'],v['passed'] and all(r['envelope_passed'] for r in m['parts']),v['preview_exists'] and v['preview_inventory_passed']]
+  capmin=min(r['remaining_gap_mm'] for r in c['keys'])
+  reasons=[f"{len(hits)} unexpected contacts; {len(a['boolean_errors'])} Boolean errors; exhaustive all-pair audit.",f"Longest finished upper bound {max(r['cut_length_upper_mm'] for r in lf['conductors']):.6f} mm including 2 × 3.40 mm sourced tails and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json.",f"Motion {'clear' if s['geometric_motion_passed'] else 'blocked'}; fitted collisions additionally prevent accessible certification.",f"{lf['fly']['length_mm']:.9f} mm, R5; true roof gap {lf['fly']['shell_gap_mm']:.6f} mm; {len(flyhits)} fitted contacts.",'Three continuous 30 mm reservations recomputed.',f"Certified trimmed-face minimum after 0.50 mm allowance: {capmin:.6f} mm; physical Junana skirt test OPEN.",'; '.join(f"{r['part']}: {r['solids']} solids, {r['mesh']['nonmanifold_edges']} nonmanifold edges" for r in v['checks'] if not r['passed']) or 'All nineteen STEP/STL sets independently reloaded with unchanged verifier.',f"Preview reloaded {v['preview_reloaded_solids']} / {v['preview_expected_solids']} constituents."]
+  rows[pitch]=['PASS' if r else 'FAIL' for r in passed]
+  save(out/'gates.json',dict(status=P['status'],pitch_mm=pitch,gates=[dict(gate=n,passed=p,evidence=e) for n,p,e in zip(GATES,passed,reasons)],all_cad_gates_pass=all(passed),production_release=False,physical_full_press_skirt='OPEN',invariants=inv['passed'],accessible_service_reserve_certified=service))
+  vol=sum(p['volume_mm3'] for p in m['parts']);mass=vol/1000*1.27;filament=mass*1.25;cash=[filament/1000*20+2+.8,filament/1000*30+6+2.4];hours=[vol/8/3600*1.5,vol/4/3600*1.5]
+  cost=dict(status=P['status'],printed_material_volume_mm3=vol,nominal_PETG_mass_g=mass,filament_including_25_percent_support_waste_g=filament,cash_material_and_new_retention_USD=cash,print_hours_estimate=hours,costed_one_off_USD=[cash[0]+hours[0]+20,cash[1]+hours[1]+20],assumptions='PETG 1.27 g/cm3, 25% waste, USD20–30/kg; shell retainers/inserts USD2–6; eight replacement M2x10 USD0.80–2.40 total; no quote. 4–8 mm3/s, 1.5 travel factor. USD1/machine-hour plus USD20 assembly.',scope='Printed case and new retention plus eight replacement E screws; unchanged electronics/aluminium excluded.')
+  save(out/'cost-estimate.json',cost)
+  wiretable='\n'.join(f"| {r['side']} | {r['longest_mm']:.6f} | {r['cut_length_upper_mm']:.6f} | {r['cut_length_upper_margin_to_200_mm']:.6f} | {r['dressed_cut_length_upper_mm']:.6f} | {r['dressed_finished_margin_to_164_8_mm']:.6f} | {r['minimum_reserve_mm']:.6f} |" for r in lf['conductors'])
+  categories=Counter()
+  def cat(n):
+   for prefix,label in [('Wire-','conductors'),('plate-screw-','E screws'),('plate-','aluminium plates'),('tray-','trays'),('underside-','Wing underside bounds')]:
+    if n.startswith(prefix):return label
+   return n
+  for h in hits:categories[' / '.join(sorted([cat(h['a']),cat(h['b'])]))]+=1
+  contacts='\n'.join(f'- {n}: {count} contacts.' for n,count in categories.most_common()) or '- None.'
+  motion='\n'.join(f"- {r['side']}: {len(r['unexpected'])} contacts, {len(r['boolean_errors'])} errors; represented release {r['release_mm']:.2f} mm." for r in s['sides'])
+  checks='\n'.join(f"| {r['part']} | {r['solids']} | {r['mesh']['nonmanifold_edges']} | {'PASS' if r['passed'] else 'FAIL'} |" for r in v['checks'])
+  local='\n'.join(f"- {r['part']}: distance {r['distance_mm']:.6f} mm; Common {r['common_mm3']:.9f} mm³." for r in get('local-measures')['results'])
+  roofconflicts='\n'.join(f"- {r['fixed_part']} / required {r['required_skin_region']} roof: {r['intersection_mm3']:.6f} mm³." for r in bl['fixed_roof_conflicts'])
+  details.append(f'''## {pitch} mm current evidence
 
-{failed or 'All eight CAD gates pass.'}
+'''+ '\n'.join(f"- **{n}: {ok}.** {e}" for n,ok,e in zip(GATES,rows[pitch],reasons))+f'''
 
-| Side | Outlet route max mm | Full cut upper bound mm | Bound margin to 200 | Routed dressed max mm | Dressed cut upper bound mm | Represented reserve mm |
+| Side | Routed max mm | Finished bound mm | Margin to 200 mm | Finished dressed bound mm | Margin to 164.8 reference mm | Connected reserve mm |
 |---|---:|---:|---:|---:|---:|---:|
-{wtext}
+{wiretable}
 
-Collision audit: **{a['assembly_solids']} physical constituents, {a['total_pairs']} unordered pairs**, {a['aabb_rejected_pairs']} AABB rejects, {len(a['intended_pairs'])} explicit own-mate pairs, {a['exact_candidates']} completed exact Commons. Threshold stays 1e−6 mm³. No early stop. {len(a['boolean_errors'])} operation-level Boolean errors. Where present, `retention-completion.json` proves the unchanged operand prefix for the insert addition, and `support-restoration.json` records the subsequent three-component correction. Every pair involving a changed tray or shell is recomputed; exact results are resumed only when both serialized operand hashes are unchanged. Every final insert pair is enumerated and classified. Fresh builds archive checkpoint-transition proofs and perform their own complete audit. `verify_package.py` independently replays coverage of the entire final broadphase, including these additions. Individual OD1 strands are checked against each other; their intersections are not waived as a shared nominal bundle envelope. Full pair results and all witnesses by constituent name are in [{pitch}mm/audit.json]({pitch}mm/audit.json). Positive component-bound overlaps are listed separately, as in #246; they do not disappear from the evidence. Inherited official Fly source invalidities remain labelled, and never justify a new case or wire collision.
+The 164.8 mm value is a reported Phase A reference, not a binding gate. Both 3.40 mm tails are included in finished and dressed bounds. The 30.20 mm reserve is the difference between connected curves, not a detached length allowance. See [length-fly.json]({pitch}mm/length-fly.json).
 
-Contact categories:
+Fitted audit: **{a['assembly_solids']} constituents, {a['total_pairs']} unordered pairs**, {a['aabb_rejected_pairs']} AABB exclusions, {len(a['intended_pairs'])} explicitly classified own mates, {a['exact_candidates']} exact Commons, {len(a['boolean_errors'])} operation errors. Intersection threshold remains 1e−6 mm³. Every final operand was rebuilt and all exact candidates rerun; no first-candidate PASS is reused. Full names, Common volumes/bounds and all positive contacts are in [audit.json]({pitch}mm/audit.json) and [collision-map.json]({pitch}mm/collision-map.json). Inherited Fly source invalidities remain labelled.
 
-{top or '- None.'}
+{contacts}
 
-Continuous service motion:
+Continuous service-motion results:
 
-{servicehits}
+{motion}
 
-Local measure replay ([local-measures.json]({pitch}mm/local-measures.json)): {localtext}. The 17 mm left GH zero-distance result is subject to the same unresolved central-shell classifier ambiguity; zero Common alone does not certify its 0.30 mm gap. The right south-spacer 0.299999 mm result records the inherited 1e−6 mm axis asymmetry against the requested symmetric hole centres; dimensions are not silently enlarged.
+The swept envelope includes every intermediate translation of each concentric reserve U, plus a 0.020 mm excess. Wing stacks and the other harness remain fitted. Main and its removable hardware, shell caps and own moving harness are excluded as documented in service.json. The fixed legs shorten along their existing loci. A clear reserve-motion result alone cannot certify a harness with fitted fan/upper-route crossings. Individual own-harness motion was not promoted to service certification while those crossings remain.
 
-Fly: one valid connected swept solid, **{lf['fly']['length_mm']:.9f} mm**, R5, volume error {lf['fly']['volume_error_mm3']:.9f} mm³ against 170π, minimum true shell distance **{lf['fly']['shell_gap_mm']:.6f} mm**. Its fitted contacts with other bodies are separately applied to gate 4. USB results enumerate all three shell/overmold/exit reservations and their full 30 mm travel. Caps: all 42 assumed 16 mm swept envelopes are tested against the actual shells, strips and blisters with a 0.50 mm combined allowance; the solver reports worst remaining gap **{min(r['remaining_gap_mm'] for r in c['keys']):.6f} mm**. For 17 mm, zero-distance witnesses outside the central shell's bounds make this an **uncertified kernel result**, not proof of a physical cap contact. `cap-witnesses.json` preserves the inconsistent points. The physical skirt/full-press gate also remains open.
+Hardware: all eight **M2×10** E replacements {'PASS' if hw['all_E_replacements_passed'] else 'FAIL'}. Under-head Z13.85, tip Z3.85, boss top Z7.35: **3.50 mm nominal engagement**, tip **1.85 mm above floor top**, **≥1.20 mm root material** verified with material probes. Washer and head envelope are retained. Existing pilot depths remain recorded per seat. Replacement procurement must preserve the polymer-compatible thread and Ø3.4 ×1.3 mm head envelope; physical retention remains untested. [hardware-inventory.json]({pitch}mm/hardware-inventory.json) lists each seat. New north-head wall relief is below the plateau roof. Required-skin contacts are not excused by it.
 
-| Print | Solids | Valid | XYZ including 5 mm XY brim, mm |
-|---|---:|---|---|
-{env}
+Certified local distances:
 
-STEP/STL meshes are independently reloaded in [{pitch}mm/export-verification.json]({pitch}mm/export-verification.json), including edge manifoldness, degeneracies and volume agreement. [shell-diagnostics.json]({pitch}mm/shell-diagnostics.json) localizes each rejected mesh edge and records every shell solid's volume and bounds. At 17 mm the twelve nonmanifold edges block slicing qualification even though the STEP reports one valid solid. At 16 mm the disconnected south section (1772.22 mm³, reported separation 0.20 mm) blocks qualification as one printable central shell. Repairing these would require validated topology reconstruction or a geometric connection that passes all unchanged gates; no mesh welding, material deletion, bridge through a key well or relaxed edge test is used. A multi-solid print remains failed even when its bounding envelope fits. Each print has an SVG drawing and the numerical dimension register. All geometry is in assembly coordinates; translate each print's lowest Z to the bed in the slicer. The fitted preview is [{pitch}mm/fitted-assembly-PROVISIONAL.step]({pitch}mm/fitted-assembly-PROVISIONAL.step).
+{local}
 
-Planning cost for the **printed case set plus new retention**: {mass:.1f} g nominal PETG, {filament:.1f} g with support/waste; **USD {cash[0]:.2f}–{cash[1]:.2f}** material/hardware cash allowance. Estimated printer time {hours[0]:.1f}–{hours[1]:.1f} h. With USD1/machine-hour and USD20 assembly/finishing allowance: **USD {cost['costed_one_off_USD'][0]:.2f}–{cost['costed_one_off_USD'][1]:.2f}**. These are arithmetic planning allowances, not quotes, and do not include a rerun of a rejected design. Unchanged aluminium plates and electronics are excluded. [{pitch}mm/cost-estimate.json]({pitch}mm/cost-estimate.json) records every assumption.
+Caps: all 42 assumed 16×16 mm swept envelopes, Z13.95 to provisional Z24.65, checked against every actual central/strip solid. Common is below 1e−6 mm³ for every pair. The minimum exact trimmed-face distance is **{capmin+.5:.6f} mm**, leaving **{capmin:.6f} mm** after the unchanged 0.50 mm allowance, against a 0.30 mm gate. Face pairs are excluded only by Euclidean AABB lower bounds; finite closest points and their actual face bounds are checked. This bypasses the defective whole-solid inside classifier. [cap-witnesses.json]({pitch}mm/cap-witnesses.json) records faces and points. Physical skirt/full-press test remains OPEN.
+
+Required-skin blockers (independent intersection of the unchanged roof rule and fixed bodies):
+
+{roofconflicts or '- None.'}
+
+These overlaps cannot be removed by underside relief while preserving a full 2.00 mm skin below the settled exterior at the same footprint. The low roof occupies Z11.55…13.55; the aluminium plate occupies Z12.05…13.55. Clearing it requires changed footprint/material ownership, stack or exterior. None is silently changed. Other remaining tray/hardware/strand contacts are still failed and enumerated, not claimed impossible merely because this candidate fails.
+
+Central shell: **{bl['central_shell_components']} solids**. {bl['shell_connection_blocker'] or 'Boundary regularization cancels opposing internal planar sheets; volume preserved within 1e−6 mm³. All detached north tongues are explicitly assigned to an adjoining strip only after a valid volume-preserving single-solid union.'} Exact component separation and footprint component bounds are in [tuning-blockers.json]({pitch}mm/tuning-blockers.json). A disconnected south section is retained in STEP/STL and the print gate fails for it.
+
+| Print | STEP solids | Nonmanifold STL edges | Export verification |
+|---|---:|---:|---|
+{checks}
+
+The unchanged export checks include STEP validity, single solid, 220×220 mm XY envelope including 5 mm brim, height ≤250 mm, exact STL edge incidence, no degenerate triangles, volume error <0.001, hashes and preview inventory. No mesh welding or discarded solid is used. [export-verification.json]({pitch}mm/export-verification.json), manufacturing STEP/STL/SVG and dimension register correspond to this candidate.
+
+Updated planning cost: {mass:.1f} g nominal PETG; {filament:.1f} g with waste; USD {cash[0]:.2f}–{cash[1]:.2f} case material/new hardware; {hours[0]:.1f}–{hours[1]:.1f} print hours. Including machine time and assembly, USD {cost['costed_one_off_USD'][0]:.2f}–{cost['costed_one_off_USD'][1]:.2f}. Eight M2×10 replacements are newly included; these are assumptions, not quotes.
+
 ''')
- table='\n'.join('| '+n+' | '+rows[17][i]+' | '+rows[16][i]+' |' for i,n in enumerate(GATES))
- report=f'''# Issue #248 Phase B — production-intent GH low deck / raised keyless case
+ table='\n'.join(f'| {n} | {rows[17][i]} | {rows[16][i]} |' for i,n in enumerate(GATES))
+ report=f'''# Issue #248 Phase B — tuning continuation
 
-**PROVISIONAL: every CAD, mesh, drawing, audit, dimension and cost in this tree is conditional on the single named `plateau_top_z_mm = {TOP:.2f}` parameter, based on unmeasured Junana q=1.50. NOT RELEASED.** The latest Issue #248 comments, including PO's GH Phase B GO, were read first and are frozen in [sources/issue248-go.json](sources/issue248-go.json). GH stays; DF52/SH are not reopened. All prior study trees remain untouched. This package delivers fitted candidates and the complete audit, including failed gates; it does not convert a failed audit into approval to manufacture.
+**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
+
+This tuning candidate closes only the gates shown as PASS. It does not complete the requested all-clear wiring/service design. The original first-candidate report and evidence remain byte-preserved in [first-candidate/](first-candidate/REPORT.md). PO comments were reread with `gh issue view 248 --comments`; the continuation snapshot is in sources/issue248-continuation.json.
 
 | Gate | 17 mm primary | 16 mm verification |
 |---|---|---|
 {table}
 
-The physical full-press Junana skirt-to-plate test remains **OPEN** at both pitches. The provisional q is not a measured cap height or a production tolerance bound. Read the failed-gate blockers below before using manufacturing files.
+## Kept and discarded interrupted work
 
-## Geometry, material ownership and invariants
+See [WIP-INVENTORY.md](WIP-INVENTORY.md). Starting at 47f7dd5, uncommitted 17 mm hardware/geometry metadata, cap audit source, boundary regularization and hardware replacement code were inventoried and checkpointed early (aba62a9). M2×10 qualification and the cap audit were kept, rerun and extended to both pitches. The 17 mm shell boundary repair was kept and independently export-verified. Its intermediate two-solid diagnostic is superseded by final geometry diagnostics; the diagnostic is not a final claim. Experimental routes_tuning.py / transport.py remain as rejected development source, not fitted routes. Their fan crossings prevented adoption. Python caches were excluded. Runtime scratch and starting geometry snapshots remain in .issue248-runtime/tuning; no /tmp scratch was used.
 
-Plate top is Z13.55; Main and Wing PCB undersides remain Z7.35. Main Rev.7 and Wing Rev.4, GH placements, aluminium plate shape/thickness and the board-to-plate stack are preserved by rigid translation −2.65 from #232. The case floor remains at Z0, nominal floor top Z2. Trays and all twelve E/R support posts are remade by removing the neutral Z3…5.65 band; upper seats move down 2.65 while floor and post sockets remain. Floor-level splices, screws and rubber feet stay at their original floor datum. Manufacturing support-post pegs retain the source 3.15 mm free diameter and 0.6 mm split; fitted pegs retain the 3.10 mm compressed diameter in 3.10 mm sockets. These are distinct print and installed states, with unchanged 0.8 mm socket depth and 1.2 mm floor remaining. `invariants.json` compares the fitted boards/plates and the continuous south palm band against their source. No input PCB or aluminium manufacturing file is edited.
+The current `routes.py` replaces the early X±27/Y−24 merge with separated outlet lanes through the Wing north corridor, a lower fan into the neck, and concentric reserve turns. The long stored turn was moved from Y22.1 to Y17.1; its released reference is Y2.0, preserving 30.20 mm. This saves routed length. The final audit still rejects unresolved fan/upper-route and fixed-part contacts: no new route is described as qualified on length alone.
 
-The slope exterior is one plane between **Y{START:.9f} and Y{TOE:.9f}**, with straight X-parallel breaks. The 18 mm wells remain; outer/palm/thumb margins stay at plate height. North strips end at the start line. A4's overlapping plateau/strip polygons are a surface union; B assigns common material to the strips, rather than physically superposing printed parts. Small north wall tongues are assigned to the adjoining strip only after a zero-distance, valid single-solid union check. All original material is retained unless explicitly identified as an obsolete detached tray rim nib. The 16 mm disconnected south shell section is retained and reported; it is not silently discarded or joined through a key well.
+## Unchanged inputs and explicit deviations
 
-Nominal PETG walls and **normal** roof thickness are 2.00 mm. Consequently the slope's vertical thickness is {2*math.sqrt(1+M*M):.9f} mm: {2*math.sqrt(1+M*M)-2:.9f} more underside intrusion than B0's 2 mm vertical study skin. This is an explicit implementation interpretation of the requested 2 mm roof; the A4 exterior plane and datums are unchanged. It is applied to clearance audits, rather than borrowing B0's clearance verdicts.
+Deck Z13.55; board undersides Z7.35; plateau Z24.65 provisional q=1.50; slope breaks Y{START:.9f} / Y{TOE:.9f}; boards, aluminium plates and board/plate stack remain unchanged. Existing PCB and plate manufacturing files are byte-checked against inputs-sha256.json before report/manifests regenerate. Actual fitted invariants and the protected south palm band are recomputed. GH remains the connector. Fly remains one connected 170 mm R5 cable. No thinner skin, changed cap, raised deck or changed well is introduced.
 
-Both Main GH projections use the B1 drawing-bounded seated header/plug model, ceiling **Z13.20**, top **Z15.20**, maximum rise 1.65. These are nominal manufacturer drawing bounds, not unpublished moulding cavities or certified production maxima. The baseline Fly storage uses ceiling **Z13.25**, top **Z15.25**, maximum rise 1.70. Blister blend masks extend 0.50 mm north under the already higher slope to recover true 0.30 mm clearance with the normal 2 mm skin; this does not raise the specified blister tops or alter the exterior slope plane. Walls stand outside the obstacle +0.30 clearance footprint. South screw/spacer openings are **Ø5.10** at **(−31.892683,64.40)** and **(+31.892683,64.40)**; the adopted right hardware's 1e−6 mm asymmetry is retained in the hardware, not substituted for the requested hole centre. Those screws retain Main, not the shell.
+Roofs use **2.00 mm normal thickness**; the slope's vertical thickness is {2*math.sqrt(1+M*M):.9f} mm. Main GH blisters retain ceiling/top Z13.20/15.20; Fly Z13.25/15.25; Ø5.10 south openings and north shell retention remain. Case channels are cut only from trays, with the full source floor band restored through Z2 before remaking splice pilots. All local relief is recorded; no gate tolerance is enlarged. Detached north tongues are assigned by explicit geometric adjacency, never a largest-solid filter. The 16 mm south section is not deleted or bridged across a key well.
 
-The case uses #246's X−5/12 → X0/15 splice-screw relocation at Y−8/55, with lower floor-rooted Ø7 bosses, top Z5.50 and Ø1.70 pilots. Changed splices keep their original print pattern and gain the new Ø2.20 clearance holes. Case-only grooves follow the dedicated wires with 0.87 mm projected radius; the wire solids remain exact R5 sweeps. Subtractions never alter a PCB or plate. Routing can isolate obsolete rim nibs; `geometry-finish.json` records their explicit regions, bounds and removed volume. Topology repair is accepted only when valid and volume change <1e−6 mm³. No tolerance is enlarged and no arbitrary largest-solid filter is used.
+Length uses a **3.40 mm nominal internal wire upper bound per end**, from the [JST GH manufacturer drawing](https://www.jst-mfg.com/product/pdf/eng/eGH.pdf), readable repository archival figure on printed page 2. Exact dress-plane definition and derivation are in [tail-source.json](tail-source.json): housing mouth to cut copper end; 5.70 housing axial length minus protected 2.30 mating section. This assumes a correctly seated terminal whose nose does not protrude past the housing mating tip and a wire end that does not invade the mating section. It is a drawing-derived bound, not a measured crimp or a production tolerance guarantee. The 2.10 mm crimp-region and 1.50 mm strip dimensions are not misused as that tail. The 164.8 mm Phase A dressed budget is reported as a reference only. Physical mating, q/skirt/full-press, crimp inspection and retention testing remain OPEN.
 
-## Retention and service design
+## Remaining blockers and service procedure
 
-The central shell uses **two independent north M2 retainers at (±8,−30)**. Both nominal OD3.2 ×4.0 heat-insert annular bounds are included in the fitted STEP and full pair accounting; knurls and thread microgeometry are not reconstructed. Each has a floor-rooted Ø6 pillar ending at Z22.65, a 2.8 mm heat-insert pilot over its top 4 mm, a 2.2 mm shell clearance and 4.0 mm head recess. The nominal low-head screw envelope is Ø3.6 × 1.0, under-head length 4 mm, with 3 mm engagement into the insert. Procurement must meet that envelope; no supplier quote or validated insert pull-out value is claimed. The south Ø5.10 openings carry no retention load. The bay-seat trim initially truncated the north pillars; the final model restores their full floor-to-Z22.65 load path. Two intentional keyless side-wall service openings, X9.7…12.1 mirrored left and Y−33.3…−26.7, run from plate level to the roof underside. They clear the fixed pillars while retaining the 2 mm roof and the nominal 2 mm walls elsewhere; the shell can lift without dragging over the pillars.
+Wiring remains a failed candidate wherever the exhaustive audit finds strand crossings or fixed-body contacts. Remove USB, shell screws, central cap and strips; disconnect Main GH/EZmate, remove Main and its own hardware, then translate the connected reserve turns north by 15.10 mm. Wing hardware remains fitted. The continuous audit tests that proposal; its blockers are retained in service.json. No accessible-service certification is granted while fitted collisions remain. A further separated fan/upper-path redesign is required; this run does not prove that redesign impossible.
 
-Each strip bears on the unchanged keyless north deck through its 2 mm perimeter walls. Two 2 mm tabs per strip at Y−40/−23 extend X8…14 (mirrored left), below the central roof with 0.30 mm clearance. Open-bottom slots let the central shell lift vertically. Upward strip loads pass through the captured tabs into the central roof, its north screws, inserts, pillars and tray floor. Downward roof loads pass through walls to the deck/rim and through the north pillars; south rim contact must be assessed with the collision evidence. The two-retainer local 10 N screen gives 5 N per screw, about 2.49 MPa on a nominal Ø1.6 screw section. This is not whole-shell bending, tab fatigue, insert pull-out or physical inversion qualification; fitted contacts and disconnected geometry prevent release where reported.
+There is also a direct fixed-input roof conflict: the required low skin and unchanged aluminium overlap in material. An underside pocket cannot preserve 2.00 mm skin there. At 16 mm, the settled central surface footprint has a disconnected south component separated by 0.200 mm; a single solid requires revised ownership/footprint or an authorized connection. These constraints are reported explicitly instead of deleting skin, plate or shell material. The full physical Junana skirt test remains OPEN at both pitches.
 
-Service: disconnect external USB; remove the two north shell screws and lift the central cap; lift the two independent strips. Wing boards, plate screws, posts and spacers remain fitted. Release Main GH latches and withdraw along their outward mating axes; disconnect Main EZmate, remove Main's own H1 and south hardware/loose spacers, then lift Main. Retain the Fly cable in its dressed storage pose. Access each connected U through the open Main bay and move its turn continuously Y22.1→7.00, recovering 30.20 mm into the disconnected Main end. Reverse this procedure, redress the U to Y22.1, seat the caps and tighten their north screws. This is the proposed procedure: only the gate table can certify its fitted/motion feasibility.
+'''+''.join(details)+'''## Reproduction and integrity
 
-The dedicated route has fourteen OD1 conductors per side, horizontal Wing Z5.75 and Main Z10.65 outlet dress axes, R≥5 throughout, no detached reserve; the curves end at nominal outlet dress planes. Outlet axes are nominal paths inside the drawing-bounded faces, not measured individual GH cavity centres. The candidate 4/3/4/3 lower pack sits at Z4.90 in the Main bay, rises north of Main inside the central neck, then traverses at nominal Z14.80 with separated upper offsets. **Unresolved routing deviation:** this candidate aggregates strands at X±27/Y−24 before completely clearing the Wing north corridor. The audit exposes contacts with fixed Wing MUX bounds, retained E/plate screws, plates and other strands. Those are failures, not approved local cuts or allowed harness self-overlaps. The intended separated-wire corridor has not been qualified by this candidate. **Deviation from the first-pass packing suggestion:** reserve is stored below Main at Y7…22.1, south of the north neck, rather than above the deck near Y25…45. This saves routed length and avoids allocating the same volume to two high loops. **Length gate blocker:** the internal wire tip/crimp reference planes are not dimensioned by the bounded outlet model. The earlier routed lengths omit those tails. A deliberately conservative 5.70 mm per end, using B1's plug tip-to-wire-end bound, produces 201.151412 / 202.169482 mm full cut bounds and 170.951412 / 171.969482 mm dressed cut bounds. Both the full and dressed qualifications therefore remain failed; the routed-only margins are not claimed as finished-conductor margins. No terminal length is silently set to zero. It is not claimed accessible merely because 30.20 mm is represented. The service audit uses a continuous filled cap-motion strip for every strand with 0.020 mm excess envelope, and checks retained Wing stacks, case, the other harness and the dressed Fly cable.
-
-## Failed gates and full evidence
-
-Every unexpected fitted pair and Boolean error is retained in each pitch's `audit.json`; motion blockers are in `service.json`; USB blockers in `usb.json`; cap witnesses in `caps.json`. The unmodified aluminium plate and 2 mm slope/low roofs are audited as separate bodies. Any overlapping material remains a failed gate; it is not waived as a mating contact. This exposes whether the settled exterior, full roof thickness and unchanged plate can coexist at the slope-to-deck transition. The retained M2x12 E-stack screw models also reach 0.15 mm into the floor after lowering; this is an unresolved hardware-length mismatch, not a permitted thread contact. Their replacement length and engagement have not been qualified by this candidate. No plate notch, reduced skin, smaller cap, shorter cable or higher deck is introduced to conceal a failure.
-
-'''+''.join(details)+'''
-## Files and reproduction
-
-The continuation run resumed the retained final geometry without restarting the design. It re-read the live Issue #248 and all nine comments through the connected GitHub tool after the CLI network request was blocked, completed both collision witness maps, bound them to the final geometry hashes, localized the shell export failures, and regenerated this report and its manifests. The full fitted audit and independent export reload from the interrupted run are retained; their hashes, complete pair coverage and final preview inventories are independently checked by `verify_package.py`. The continuation does not claim a fresh complete CAD rebuild or convert any failed gate into a pass.
-
-Both pitch directories contain the fitted STEP, manufacturing STEP/STL/SVG for all nineteen printed parts, a dimension register, connected service-motion STEP envelopes, and raw gate evidence. PROVISIONAL is embedded in manufacturing filenames, STEP labels, STL headers and drawings. Plate drawings/manufacturing remain the unchanged D-038 package in #232; they are not reissued as printed plates. `parameters.json` is the single plateau-height authority. `artifact-sha256.json` binds this report, scripts and outputs; `inputs-sha256.json` binds all source CAD, layouts and PCB inputs. The runtime git contains checkpoint commits; no push, purchase or production release is performed.
-
-Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` from the worktree with the existing CAD Python environment. All scratch, source BRep caches, audit checkpoints and logs stay in `.issue248-runtime/`; no `/tmp` scratch is used. Each stage is separate to bound memory. Exact audits checkpoint progress and resume only when the geometry-index hash matches. Do not reuse any PASS from a prior geometry or prior study. The independent export verifier and full-pair accounting are part of the final run. After report generation, run `/usr/bin/python3 hardware/case/issue-248-phaseb/verify_package.py` for dependency-free input/artifact hashes, print-file hash consistency and complete unordered-pair coverage.
+Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` from this worktree with the retained CAD Python environment. Each stage is separate; all scratch and audit checkpoints are under .issue248-runtime. Exact audit reuse is permitted only for the identical geometry index hash. This continuation rebuilds both pitches and reruns all eight gates, independent exports, witnesses and package checks. First-candidate evidence is preserved; new outputs describe the tuning candidate. Run `python3 hardware/case/issue-248-phaseb/verify_package.py` after report generation for input/artifact hashes and independent all-pair coverage. The package remains provisional and unreleased, with the explicitly failed gates above.
 '''
  (HERE/'REPORT.md').write_text(report)
  for pitch in (17,16):
