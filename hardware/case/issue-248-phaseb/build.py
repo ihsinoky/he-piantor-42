@@ -42,8 +42,15 @@ def make(pitch):
  exclude=lambda n:n.startswith(('GH-','EZmate-170mm','Main-envelope-','USB-reference-','cap-gauge-')) or n=='cable-rack'
  fixed={n:s.translate((0,0,-2.65)) for n,s in items.items() if not exclude(n)}
  for n,s in items.items():
+  if n.startswith(('splice-','joint-screw-','rubber-')):fixed[n]=s
+ # Same adopted Main south screws and loose spacers as B0, including exact seats.
+ b0=ROOT/'.issue248-runtime/b0-source';bm=read(b0/'index.json')
+ for i,n in enumerate(bm['names']):
+  if n.startswith(('cover-screw-','cover-Main-spacer-')):fixed[n]=loadbrep(b0/f'{i}.brep').translate((0,0,-8.65))
+ for n in ('screw-main-H2','screw-main-H3'):fixed.pop(n,None)
+ for n,s in items.items():
   if n.startswith(('tray-','post-')):fixed[n]=compress(s)
- print(pitch,'floor-preserving compression complete',flush=True)
+ print(pitch,'floor-preserving compression complete',[(n,q.is_valid,len(q.solids())) for n,q in fixed.items() if n.startswith('tray-')],flush=True)
  # Exact Main GH B1 seated bounds replace inherited coarse reservations.
  ghfeet=[]
  for side in ('left','right'):
@@ -57,6 +64,10 @@ def make(pitch):
  fm=read(flysource/'measurements.json')['fly'];fpts=[[x,y,z-2.65] for x,y,z in fm['waypoints_mm']]
  fpath=rounded(fpts);assert abs(fpath.length-170)<1e-7
  fs=[[v.X,v.Y,v.Z] for v in fpath.positions([i/2000 for i in range(2001)])]
+ # A4 is a surface UNION: north strips overlap its plateau in plan. Assign that
+ # material to strips so three manufactured parts never occupy the same volume.
+ strips_union=regions['north_left'].union(regions['north_right'])
+ regions['plateau']=regions['plateau'].difference(strips_union)
  footprint=unary_union([regions[n] for n in ('plateau','slope','low_south')])
  roof=[]
  for n in ('plateau','slope','low_south'):
@@ -74,7 +85,8 @@ def make(pitch):
    raw=prism(part,z,30-z)
    # Clip wall tops with a solid extending down from the piecewise surface.
    cap=fuseall(sloped(part,a,m,40))
-   walls+=list(raw.intersect(cap))
+   intersection=raw.intersect(cap)
+   if intersection is not None:walls+=list(intersection)
  if walls:central=central.fuse(*walls)
  blistermeta=[]
  for name,g,ceil,top in [('GH-left',ghfeet[0],13.2,15.2),('GH-right',ghfeet[1],13.2,15.2),('Fly-storage',LineString([(x,y) for x,y,z in fs]).simplify(.003).buffer(1.003,quad_segs=16),13.25,15.25)]:
@@ -88,7 +100,7 @@ def make(pitch):
   blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer)))
  for x,y in P['south_opening_xy_mm']:central=central.cut(cylinder(x,y,2.55,-1,40))
  # Four independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
- sites=[(-8,-30),(8,-30),(-8,66),(8,66)]
+ sites=[(-8,-30),(8,-30)]
  retention=[]
  for i,(x,y) in enumerate(sites):
   top=TOP if y<=START else PLATE
@@ -101,27 +113,20 @@ def make(pitch):
   head=cylinder(x,y,1.8,top-1,1)
   fixed[f'shell-screw-{i}']=shaft.fuse(head)
   retention.append(dict(part='central',xy_mm=[x,y],seat_top_z_mm=top,insert_pilot_od_mm=2.8,insert_depth_mm=4))
- fixed['shell-central']=central
- # North strips are independent roof/wall caps, attached to tray rims outside plates.
+ # North strips are deck-supported; two tabs per side are captured beneath the
+ # removable central roof. No new hole crosses an unchanged aluminium plate.
  for side in ('left','right'):
   g=clean(regions['north_'+side]);ring=g.difference(g.buffer(-2,join_style=2))
   strip=fuseall(sloped(g,TOP,0)+[prism(ring,PLATE,TOP-PLATE-2)])
-  # Select two well-separated interior sites with >=3 mm footprint land.
-  safe=g.buffer(-3.2)
-  candidates=[Point(x,y) for x in range(-150,151) for y in range(-65,2) if safe.contains(Point(x,y))]
-  selected=[]
-  if candidates:
-   selected=[min(candidates,key=lambda p:p.x),max(candidates,key=lambda p:p.x)]
-  for j,p in enumerate(selected):
-   x,y=p.x,p.y
-   sleeve=cylinder(x,y,3,PLATE,TOP-PLATE-2).cut(cylinder(x,y,1.1,PLATE-.01,TOP-PLATE+1))
-   strip=strip.fuse(sleeve).cut(cylinder(x,y,1.1,PLATE-.01,TOP-PLATE+1)).cut(cylinder(x,y,2,TOP-1,2))
-   # Screw into tray-supported raised boss; no plate/PCB alteration.
-   b=cylinder(x,y,3,2,PLATE-2).cut(cylinder(x,y,1.4,PLATE-4,5))
-   fixed['tray-'+side]=fixed['tray-'+side].fuse(b)
-   fixed[f'strip-{side}-screw-{j}']=cylinder(x,y,.8,PLATE-3,TOP-PLATE+2).fuse(cylinder(x,y,1.8,TOP-1,1))
-   retention.append(dict(part='strip-'+side,xy_mm=[x,y],seat_top_z_mm=TOP))
+  sgn=-1 if side=='left' else 1
+  for y in (-40,-23):
+   x0,x1=sorted([sgn*8,sgn*14])
+   tab=box(x0,y-3,x1,y+3)
+   strip=strip.fuse(prism(tab,TOP-4.3,2))
+   central=central.cut(prism(tab.buffer(.3,join_style=2),2.99,TOP-4.99))
+   retention.append(dict(part='strip-'+side,tab_xy_bounds_mm=list(tab.bounds),tab_z_mm=[TOP-4.3,TOP-2.3],capture_clearance_mm=.3,method='two tabs captured below central roof; open-bottom wall slots'))
   fixed['strip-'+side]=strip
+ fixed['shell-central']=central
  print(pitch,'shells / local measures / retention built',flush=True)
  save(out/'surface-plan.geojson',dict(type='FeatureCollection',features=[dict(type='Feature',properties=dict(name=n,status=P['status']),geometry=mapping(g)) for n,g in regions.items()]))
  save(out/'cap-plan.json',[dict(key=k['key'],cap=mapping(k['cap']),well=mapping(k['well'])) for k in keys])
@@ -136,9 +141,16 @@ def make(pitch):
    cut,_=tube(pts,.85);cuts.append(cut)
  for side in ('left','right'):
   q=fixed['tray-'+side]
-  for cutter in cuts:
-   # Each cut is exact; no largest-solid filtering.
-   if volume(q,cutter)>1e-6:q=q.cut(cutter)
+  print(pitch,side,'pre-channel',q.is_valid,len(q.solids()),flush=True)
+  # Projected 0.85 mm clearance grooves avoid pathological coincident sweep booleans.
+  # Grooves are conservative subtractive case geometry, never a wire simplification.
+  for w in wm:
+   for pts,samples in zip(w['conductor_waypoints_mm'],w['conductor_samples_mm']):
+    g=LineString([(x,y) for x,y,z in samples]).simplify(.01).buffer(.87,quad_segs=8)
+    z=min(p[2] for p in pts)-.87;h=max(p[2] for p in pts)+.87-z
+    cutter=prism(g,z,h)
+    b,bq=bounds(cutter),bounds(q)
+    if all(min(b[1][i],bq[1][i])-max(b[0][i],bq[0][i])>1e-7 for i in range(3)):q=q.cut(cutter)
   fixed['tray-'+side]=q
  # USB reservations use actual #232 positioned shells; translate with the board.
  usb=[]

@@ -16,6 +16,10 @@ from OCP.BRepTools import BRepTools
 from OCP.BRep import BRep_Builder
 from OCP.TopoDS import TopoDS_Shape
 P=json.loads((HERE/'parameters.json').read_text())
+def polygons(g):
+ if g.is_empty:return []
+ if g.geom_type=='Polygon':return [g]
+ return [p for c in getattr(g,'geoms',[]) for p in polygons(c)]
 PLATE=P['plate_top_z_mm']; TOP=P['plateau_top_z_mm']
 START=P['slope_start_y_mm']; TOE=P['slope_toe_y_mm']; M=(TOP-PLATE)/(TOE-START)
 def read(p):return json.loads(p.read_text())
