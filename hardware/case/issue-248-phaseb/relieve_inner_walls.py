@@ -23,9 +23,23 @@ def run(pitch):
  cutter=Compound(children=list(clipped));items={};changes=[]
  for name,k,q in raw:
   if name in ('shell-central','strip-left','strip-right'):
-   before=q.volume;s=q.cut(cutter)
+   before=q.volume;s=q.cut(cutter);blocked=None
+   detached=[]
+   if len(s.solids())>1:
+    retained=[]
+    for piece in s.solids():
+     # Only remove a detached underside rib if exact subtraction proves it
+     # contains no material outside the independent below-skin allowed volume.
+     protected=piece.cut(allowed)
+     if abs(protected.volume)<1e-7:
+      detached.append(dict(bounds_mm=bounds(piece),volume_mm3=piece.volume,protected_material_mm3=abs(protected.volume)))
+     else:retained.append(piece)
+    if len(retained)!=1:
+     blocked=dict(reason='proposed passage disconnects required-skin-bearing pieces; original part preserved',skin_bearing_components=len(retained))
+     s=q;detached=[]
+    else:s=retained[0]
    assert s.is_valid and len(s.solids())==1,(name,s.is_valid,len(s.solids()))
-   changes.append(dict(part=name,removed_volume_mm3=before-s.volume,valid=s.is_valid,solids=len(s.solids())))
+   changes.append(dict(part=name,removed_volume_mm3=before-s.volume,detached_underside_ribs=detached,blocked_passage=blocked,valid=s.is_valid,solids=len(s.solids())))
    q=s
   assert name not in items
   items[name]=q
