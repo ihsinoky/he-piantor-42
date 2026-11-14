@@ -77,13 +77,15 @@ def audit(pitch):
  total=len(raw)*(len(raw)-1)//2
  assert total==rejects+len(mates)+len(candidates)
  invalids=[]
+ precedent={r['name']:r for r in read(HERE/f'round3/{pitch}mm/assembly-index.json') if r['name']=='Fly-official-42-instance-42'}
  from OCP.BRepCheck import BRepCheck_Analyzer
  for r,(name,solid,q) in zip(idx,raw):
   if r['valid']:continue
   analyzer=BRepCheck_Analyzer(q.wrapped);fixed=q.fix()
-  invalids.append(dict(r,diagnostic_fix_valid=fixed.is_valid,diagnostic_fix_volume_delta_mm3=fixed.volume-q.volume,invalid_faces=[dict(face_index=j,area_mm2=face.area,bounds_mm=bounds(face)) for j,face in enumerate(q.faces()) if not analyzer.IsValid(face.wrapped)],diagnostic_note='Diagnosis only; invalid inherited body retained, not exempted or discarded.'))
+  accepted=name in precedent and r['sha256']==precedent[name]['sha256']
+  invalids.append(dict(r,classification='KNOWN_SOURCE_MODEL_DEFECT_F-015_D-037' if accepted else 'UNACCEPTED_INVALID_DESIGN_CONSTITUENT',accepted_source_model_defect=accepted,precedent='docs/findings.md F-015; docs/decisions.md D-037' if accepted else None,diagnostic_fix_valid=fixed.is_valid,diagnostic_fix_volume_delta_mm3=fixed.volume-q.volume,invalid_faces=[dict(face_index=j,area_mm2=face.area,bounds_mm=bounds(face)) for j,face in enumerate(q.faces()) if not analyzer.IsValid(face.wrapped)],diagnostic_note='Source body preserved and labelled. Only byte-identical official solid 42 receives F-015/D-037 source-model classification. All its actual contact pairs remain audited without an exemption.'))
  wirechecks=read(out/'measurements.json').get('wire_sweep_checks',[])
- result=dict(status=P['status'],all_pairs_enumerated=True,all_exact_candidates_completed=True,assembly_solids=len(raw),total_pairs=total,aabb_rejected_pairs=rejects,intended_pairs=mates,exact_candidates=len(candidates),exact_results=[dict(i=i,j=j,**done[f'{i}:{j}']) for i,j in candidates],unexpected_interferences=hits,clearance_reservation_overlaps=references,boolean_errors=errors,invalid_solids=invalids,passed=not hits and not errors and all(r['valid'] for r in idx) and all(r['passed'] for r in wirechecks),geometry_sha256=geometry_hash,threshold_mm3=1e-6,wire_sweep_checks=wirechecks)
+ result=dict(status=P['status'],all_pairs_enumerated=True,all_exact_candidates_completed=True,assembly_solids=len(raw),total_pairs=total,aabb_rejected_pairs=rejects,intended_pairs=mates,exact_candidates=len(candidates),exact_results=[dict(i=i,j=j,**done[f'{i}:{j}']) for i,j in candidates],unexpected_interferences=hits,clearance_reservation_overlaps=references,boolean_errors=errors,invalid_solids=invalids,passed=not hits and not errors and all(r['accepted_source_model_defect'] for r in invalids) and all(r['passed'] for r in wirechecks),geometry_sha256=geometry_hash,threshold_mm3=1e-6,wire_sweep_checks=wirechecks)
  save(out/'audit.json',result)
  print('COMPLETE',pitch,'hits',len(hits),'errors',len(errors),flush=True)
 if __name__=='__main__':audit(int(sys.argv[1]))
