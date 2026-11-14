@@ -86,6 +86,7 @@ def run(pitch,stage="all"):
   # Remove central/strip caps and Main for access, leaving Wing assemblies fitted.
   services=[]
   for side,sgn in [('left',-1),('right',1)]:
+   if os.environ.get('SERVICE_SIDE') and side!=os.environ['SERVICE_SIDE']:continue
    envs=[motion(sgn,i) for i in range(14)];hits=[];errors=[]
    for n,k,s in physical:
     removed=n.startswith(('shell-central','strip-left','strip-right','shell-screw','Main-study','Main-GH','cover-screw','cover-Main-spacer','washer-main','screw-main','EZmate-Main','Wire-'+side)) or n=='main'
@@ -112,6 +113,13 @@ def run(pitch,stage="all"):
    export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
    services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,own_fixed_fan_contacts=own_fan_hits,method='continuous translated horizontal concentric R>=5 U strip extruded through Z; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
    print(pitch,side,'service',len(hits),'hits',flush=True)
+  if os.environ.get('SERVICE_SIDE'):
+   save(out/('service-'+os.environ['SERVICE_SIDE']+'.json'),dict(geometry_sha256=sha(out/'assembly-index.json'),side=services[0]))
+   services=[]
+   for side in ('left','right'):
+    f=out/('service-'+side+'.json')
+    if not f.exists() or read(f)['geometry_sha256']!=sha(out/'assembly-index.json'):return
+    services.append(read(f)['side'])
   save(out/'service.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  if stage in ("all","invariants"):
   # Verify stack and palm datums from actual fitted parts, not prior verdicts.

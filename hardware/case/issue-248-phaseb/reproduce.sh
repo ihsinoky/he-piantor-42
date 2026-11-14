@@ -16,7 +16,9 @@ for pitch in "${pitches[@]}"; do
       # Separate processes bound OCCT memory and retain each completed audit.
       # caps_only below supplies the independent certified cap check.
       for section in length usb service invariants; do
-        "$cad_python" "$tree/metrology.py" "$pitch" "$section"
+        if [[ "$section" == service ]]; then
+          for side in left right; do SERVICE_SIDE="$side" "$cad_python" "$tree/metrology.py" "$pitch" service; done
+        else "$cad_python" "$tree/metrology.py" "$pitch" "$section"; fi
       done
     elif [[ "$stage" == audit ]]; then
       while true; do

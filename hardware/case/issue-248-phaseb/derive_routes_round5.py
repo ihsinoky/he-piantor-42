@@ -13,7 +13,7 @@ for i,w in enumerate(right):
  upper=[((j-2)*1.05,-1.05) for j in range(5)]+[((j-2)*1.05,0) for j in range(5)]+[((j-1.5)*1.05,1.05) for j in range(4)]
  off,uz=upper[i];ep=w['main_endpoint_mm'];angle=math.radians(120)
  ap=[ep[0]+7*math.sin(angle),ep[1]+7*math.cos(angle),10.65]
- b=[[20.1-dx,10.55,z],[20.1-dx,-9,z],[5+off,-18,z],[5+off,-7,14.8+uz],[17+off,8,14.8+uz],ap,ep]
+ b=[[20.1-dx,10.55,z],[20.1-dx,-9,z],[5+off,-18,z],[5+off,-7,11.8+uz],[17+off,8,11.8+uz],ap,ep]
  before.append(a);after.append(b)
 out=dict(before=before,after=after,centre_x_mm=13.55,turn_centre_y_mm=17.1,turn_tangent_offset_mm=6.55,service_travel_mm=15.1,provenance='Analytic reconstruction of separated Wing corridor and low horizontal concentric reserve from tuning-round/17mm/measurements.json; every strand reassigned from immutable round-4 native pin map; upper fan follows corrected Main cavity order. Stored/released datum is Y17.1/Y2.0; arc tangent is 6.55 mm north of that datum.')
 (p/'routes-round5.json').write_text(json.dumps(out,indent=2)+'\n')
