@@ -76,7 +76,8 @@ def audit(pitch):
  save(progress,dict(geometry_hash=geometry_hash,results=done))
  total=len(raw)*(len(raw)-1)//2
  assert total==rejects+len(mates)+len(candidates)
- result=dict(status=P['status'],all_pairs_enumerated=True,all_exact_candidates_completed=True,assembly_solids=len(raw),total_pairs=total,aabb_rejected_pairs=rejects,intended_pairs=mates,exact_candidates=len(candidates),exact_results=[dict(i=i,j=j,**done[f'{i}:{j}']) for i,j in candidates],unexpected_interferences=hits,clearance_reservation_overlaps=references,boolean_errors=errors,invalid_solids=[r for r in idx if not r['valid']],passed=not hits and not errors and all(r['valid'] for r in idx),geometry_sha256=geometry_hash,threshold_mm3=1e-6)
+ wirechecks=read(out/'measurements.json').get('wire_sweep_checks',[])
+ result=dict(status=P['status'],all_pairs_enumerated=True,all_exact_candidates_completed=True,assembly_solids=len(raw),total_pairs=total,aabb_rejected_pairs=rejects,intended_pairs=mates,exact_candidates=len(candidates),exact_results=[dict(i=i,j=j,**done[f'{i}:{j}']) for i,j in candidates],unexpected_interferences=hits,clearance_reservation_overlaps=references,boolean_errors=errors,invalid_solids=[r for r in idx if not r['valid']],passed=not hits and not errors and all(r['valid'] for r in idx) and all(r['passed'] for r in wirechecks),geometry_sha256=geometry_hash,threshold_mm3=1e-6,wire_sweep_checks=wirechecks)
  save(out/'audit.json',result)
  print('COMPLETE',pitch,'hits',len(hits),'errors',len(errors),flush=True)
 if __name__=='__main__':audit(int(sys.argv[1]))

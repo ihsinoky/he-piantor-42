@@ -168,13 +168,15 @@ def make(pitch):
   print(pitch,side,'pre-channel',q.is_valid,len(q.solids()),flush=True)
   # Projected 0.85 mm clearance grooves avoid pathological coincident sweep booleans.
   # Grooves are conservative subtractive case geometry, never a wire simplification.
+  cutters=[]
   for w in wm:
    for pts,samples in zip(w['conductor_waypoints_mm'],w['conductor_samples_mm']):
     g=LineString([(x,y) for x,y,z in samples]).simplify(.01).buffer(.87,quad_segs=8)
     z=max(2.,min(p[2] for p in pts)-.87);h=max(p[2] for p in pts)+.87-z
     cutter=prism(g,z,h)
     b,bq=bounds(cutter),bounds(q)
-    if all(min(b[1][i],bq[1][i])-max(b[0][i],bq[0][i])>1e-7 for i in range(3)):q=q.cut(cutter)
+    if all(min(b[1][i],bq[1][i])-max(b[0][i],bq[0][i])>1e-7 for i in range(3)):cutters.append(cutter)
+  if cutters:q=q.cut(*cutters)
   fixed['tray-'+side]=q
  # Bay seating must never truncate the dedicated north retention load path.
  for i,(x,y) in enumerate(sites):
@@ -189,6 +191,6 @@ def make(pitch):
   q=items[n].translate((0,0,-2.65));b=bounds(q)
   usb.append((n,prism(box(b[0][0],b[0][1]-30,b[1][0],b[1][1]),b[0][2],b[1][2]-b[0][2])))
  for n,q in usb:fixed[n]=q
- save_geometry(pitch,fixed,dict(wings=wm,fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
+ save_geometry(pitch,fixed,dict(wings=wm,wire_sweep_checks=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()],fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
  print(pitch,'geometry checkpoint saved',flush=True)
 if __name__=='__main__':make(int(sys.argv[1]))

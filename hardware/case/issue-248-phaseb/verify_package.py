@@ -10,6 +10,9 @@ def run():
  frozen=read(H/'first-candidate-sha256.json')
  for n,digest in frozen['files'].items():assert sha(H/'first-candidate'/n)==digest,('first-candidate changed',n)
  assert set(frozen['files'])=={str(p.relative_to(H/'first-candidate')) for p in (H/'first-candidate').rglob('*') if p.is_file()}
+ tuning=read(H/'tuning-round-sha256.json')
+ for n,digest in tuning['files'].items():assert sha(H/'tuning-round'/n)==digest,('tuning-round changed',n)
+ assert set(tuning['files'])=={str(p.relative_to(H/'tuning-round')) for p in (H/'tuning-round').rglob('*') if p.is_file() and '__pycache__' not in str(p)}
  covered=set(read(H/'artifact-sha256.json'))
  actual={str(p.relative_to(H)) for p in H.rglob('*') if p.is_file() and p.name!='artifact-sha256.json' and '__pycache__' not in str(p)}
  assert covered==actual,('manifest coverage',covered.symmetric_difference(actual))
@@ -18,6 +21,9 @@ def run():
  for pitch in (17,16):
   out=H/f'{pitch}mm';idx=read(out/'assembly-index.json');physical=[r for r in idx if not r['name'].startswith('USB-reference-')];a=read(out/'audit.json')
   assert a['geometry_sha256']==sha(out/'assembly-index.json')
+  assert len(a.get('wire_sweep_checks',[]))==28
+  for r in a['wire_sweep_checks']:
+   assert r['passed']==(r['volume_error_mm3']<.001)
   assert a['all_pairs_enumerated'] and a['all_exact_candidates_completed']
   assert a['assembly_solids']==len(physical)
   broad=set();rejected=0

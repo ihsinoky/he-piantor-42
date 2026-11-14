@@ -10,7 +10,7 @@ def analytic(points,r=5):
  return dict(length_mm=sum(slack)+sum(arcs),minimum_straight_slack_mm=min(slack),minimum_bend_radius_mm=r)
 def motion(sgn,i):
  from routes import segments
- a,b,r,mid=segments(sgn,i);z=mid[2];xc=sgn*13.55;yc=17.1-6.55
+ a,b,r,mid=segments(sgn,i);z=mid[2];xc=mid[0];yc=a[-1][1]
  arc=[(xc+sgn*r*math.cos(math.pi-j*math.pi/256),yc+r*math.sin(math.pi-j*math.pi/256)) for j in range(257)]
  # The U translates continuously 15.10 mm north; its two straight legs shorten.
  # Buffer covers circular chord error (<0.0002 mm) by >0.019 mm.
@@ -27,6 +27,13 @@ def run(pitch):
    a=analytic(r['before']);b=analytic(r['after'])
    aa.append(dict(length_mm=a['length_mm']+b['length_mm']+r['turn_arc_length_mm'],minimum_straight_slack_mm=min(a['minimum_straight_slack_mm'],b['minimum_straight_slack_mm']),minimum_bend_radius_mm=min(5,r['turn_radius_mm'])))
   assert all(abs(a['length_mm']-v)<1e-6 for a,v in zip(aa,w['conductor_lengths_mm']))
+  if 'released_analytic_segments' in w:
+   for stored,ref in zip(aa,w['released_analytic_segments']):
+    x=analytic(ref['before']);y=analytic(ref['after'])
+    stored['released_length_mm']=x['length_mm']+y['length_mm']+ref['turn_arc_length_mm']
+    stored['released_minimum_straight_slack_mm']=min(x['minimum_straight_slack_mm'],y['minimum_straight_slack_mm'])
+    stored['minimum_straight_slack_mm']=min(stored['minimum_straight_slack_mm'],stored['released_minimum_straight_slack_mm'])
+    assert abs(stored['length_mm']-stored['released_length_mm']-30.2)<1e-6
   reserve=w['per_wire_reserve_mm']
   routed=max(a['length_mm'] for a in aa);dressed=max(w['dressed_reference_lengths_mm'])
   lengths.append(dict(side=w['side'],longest_mm=routed,margin_to_200_mm=200-routed,dressed_longest_mm=dressed,dressed_margin_to_164_8_mm=164.8-dressed,minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,routed_budget_passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and routed<=200,cut_length_upper_mm=routed+11.4,cut_length_upper_margin_to_200_mm=200-routed-11.4,dressed_cut_length_upper_mm=dressed+11.4,internal_wire_bound_mm_per_end=5.7,complete_cut_length_verified=False,qualification='Curves end at nominal outlet dress planes, not sourced crimp wire-tip reference planes. Conservative internal allowance 5.70 mm/end uses B1 plug tip-to-wire-end drawing bound; actual crimp tails remain unqualified.',passed=False))
@@ -71,7 +78,7 @@ def run(pitch):
     except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
   for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
   export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
-  services.append(dict(side=side,turn_y_mm=[17.1,2],release_mm=30.2,method='continuous translated concentric R>=5 U strip; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+  services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,method='continuous translated concentric R>=5 U strip; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
   print(pitch,side,'service',len(hits),'hits',flush=True)
  save(out/'service.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  # Verify stack and palm datums from actual fitted parts, not prior verdicts.
