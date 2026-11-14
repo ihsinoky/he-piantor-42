@@ -12,6 +12,9 @@ def common_record(a,b):
  props=GProp_GProps();BRepGProp.VolumeProperties_s(op.Shape(),props,True,False,False);v=abs(props.Mass())
  return dict(volume_mm3=v,common_bounds_mm=bounds(Shape.cast(op.Shape()))) if v>1e-6 else dict(volume_mm3=v)
 def intended(a,b):
+ for i,side in [(0,'left'),(1,'right')]:
+  if {a,b}=={f'shell-insert-{i}','tray-'+side}:return 'own specified heat-insert press fit: OD3.2 in OD2.8 pilot'
+  if {a,b}=={f'shell-insert-{i}',f'shell-screw-{i}'}:return 'own nominal M2 insert/thread mating'
  why=prior.intended(a,b)
  if why:return why
  if a==b and a.startswith(('shell-','strip-')):return 'same manufactured part constituent'

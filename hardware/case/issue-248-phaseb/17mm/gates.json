@@ -1,0 +1,51 @@
+{
+  "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
+  "pitch_mm": 17,
+  "gates": [
+    {
+      "gate": "1 Exhaustive fitted collision",
+      "passed": false,
+      "evidence": "305 unexpected contacts; 0 Boolean errors; see audit.json"
+    },
+    {
+      "gate": "2 Conductors and dressed target",
+      "passed": false,
+      "evidence": "Outlet routes pass, but crimp tails are unsourced. Conservative 5.70 mm/end bound: L 201.151412, R 202.169482 mm; full/dressed limits unclosed"
+    },
+    {
+      "gate": "3 Accessible ~30 mm service",
+      "passed": false,
+      "evidence": "30.20 mm represented; motion blocked; accessible certification requires fitted audit and invariants"
+    },
+    {
+      "gate": "4 Connected Fly 170 / R5 / roof gap",
+      "passed": true,
+      "evidence": "170.000000000 mm; gap 0.300000; 0 other fitted contacts"
+    },
+    {
+      "gate": "5 USB 30 mm insertion",
+      "passed": true,
+      "evidence": "Three continuous 30 mm reservations; see usb.json"
+    },
+    {
+      "gate": "6 Assumed swept caps after allowances",
+      "passed": false,
+      "evidence": "Minimum reported after 0.50 allowance -0.500000 mm; physical skirt gate OPEN; kernel reports zero distance with witnesses outside shell bounds, so no physical-contact or clearance verdict is certified"
+    },
+    {
+      "gate": "7 Print envelopes and manufacturing data",
+      "passed": false,
+      "evidence": "Independent STEP/STL failures: shell-central: 1 solids, 12 nonmanifold STL edges, relative volume error 1.39626373e-07"
+    },
+    {
+      "gate": "8 Fitted preview STEP",
+      "passed": true,
+      "evidence": "fitted-assembly-PROVISIONAL.step"
+    }
+  ],
+  "all_cad_gates_pass": false,
+  "production_release": false,
+  "physical_full_press_skirt": "OPEN",
+  "invariants": true,
+  "accessible_service_reserve_certified": false
+}

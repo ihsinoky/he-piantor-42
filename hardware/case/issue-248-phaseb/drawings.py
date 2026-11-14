@@ -23,7 +23,7 @@ def run(pitch):
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);m=read(out/'manufacturing.json');groups={}
  for n,k,s in raw:groups.setdefault(n,[]).append(s)
  for p in m['parts']:
-  ss=groups[p['name']];q=ss[0] if len(ss)==1 else Compound(children=ss)
+  q=import_step(out/'manufacturing'/(p['filename']+'.step'))
   drawing(q,p['name'],out/'manufacturing'/(p['filename']+'.svg'))
  # Numerical drawing register supplies explicit absolute datums for every print.
  source_dimensions=read(HERE.parent/f'issue-232-final/{pitch}mm/dimensions.json')

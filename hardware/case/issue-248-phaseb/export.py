@@ -1,5 +1,8 @@
 """Manufacturing and fitted preview exports, including rejected candidates."""
 from common import *
+def free_post(x,y):
+ # Preserve #232's compliant 3.15 free / 3.10 installed peg distinction.
+ return cylinder(x,y,1.5,2.5,PLATE-6.2-2.5).fuse(cylinder(x,y,2.25,2,.5)).fuse(cylinder(x,y,1.575,1.2,.8)).cut(prism(box(x-.3,y-2,x+.3,y+2),1.19,.91))
 def mesh_absolute(q,path):
  from OCP.BRepMesh import BRepMesh_IncrementalMesh
  from OCP.StlAPI import StlAPI_Writer
@@ -16,6 +19,8 @@ def run(pitch):
   if n.startswith('USB-reference-'):continue
   q=ss[0] if len(ss)==1 else Compound(children=ss);q.label=n+'-PROVISIONAL-q1.50';assembly.append(q)
   if not n.startswith(('tray-','post-','splice-','shell-central','strip-left','strip-right')) or '-screw-' in n:continue
+  if n.startswith('post-'):
+   b=bounds(q);q=free_post((b[0][0]+b[1][0])/2,(b[0][1]+b[1][1])/2);q.label=n+'-FREE-PEG-3.15-PROVISIONAL'
   folder=out/'manufacturing';folder.mkdir(exist_ok=True)
   stem=n+'-PROVISIONAL'
   q.parent=None;export_step(q,folder/(stem+'.step'))

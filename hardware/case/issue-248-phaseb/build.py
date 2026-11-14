@@ -38,6 +38,11 @@ def gh(side):
  return prism(h,8.65,4.25).fuse(prism(p,8.75,4.15)),h.union(p)
 def make(pitch):
  out=HERE/f'{pitch}mm';out.mkdir(exist_ok=True)
+ for name in ('retention-completion.json','support-restoration.json'):
+  p=out/name
+  if p.exists():
+   archive=out/'evidence';archive.mkdir(exist_ok=True)
+   p.replace(archive/(read(p)['geometry_sha256'][:12]+'-'+name))
  items=source(pitch);d,keys,regions,decks,cover=plan(pitch)
  exclude=lambda n:n.startswith(('GH-','EZmate-170mm','Main-envelope-','USB-reference-','cap-gauge-')) or n=='cable-rack'
  fixed={n:s.translate((0,0,-2.65)) for n,s in items.items() if not exclude(n)}
@@ -45,6 +50,7 @@ def make(pitch):
   if n.startswith(('splice-','joint-screw-','rubber-')):fixed[n]=s
  # Same adopted Main south screws and loose spacers as B0, including exact seats.
  b0=ROOT/'.issue248-runtime/b0-source';bm=read(b0/'index.json')
+ assert bm['source_sha256']==sha(HERE.parent/'issue-246-delta6-tuning/packed/delta-6/17mm/assembly-with-cover.step')
  for i,n in enumerate(bm['names']):
   if n.startswith(('cover-screw-','cover-Main-spacer-')):fixed[n]=loadbrep(b0/f'{i}.brep').translate((0,0,-8.65))
  for n in ('screw-main-H2','screw-main-H3'):fixed.pop(n,None)
@@ -112,6 +118,7 @@ def make(pitch):
   shaft=cylinder(x,y,.8,top-5,4)
   head=cylinder(x,y,1.8,top-1,1)
   fixed[f'shell-screw-{i}']=shaft.fuse(head)
+  fixed[f'shell-insert-{i}']=cylinder(x,y,1.6,top-6,4).cut(cylinder(x,y,.8,top-6.01,4.02))
   retention.append(dict(part='central',xy_mm=[x,y],seat_top_z_mm=top,insert_pilot_od_mm=2.8,insert_depth_mm=4))
  # North strips are deck-supported; two tabs per side are captured beneath the
  # removable central roof. No new hole crosses an unchanged aluminium plate.
@@ -155,6 +162,13 @@ def make(pitch):
     b,bq=bounds(cutter),bounds(q)
     if all(min(b[1][i],bq[1][i])-max(b[0][i],bq[0][i])>1e-7 for i in range(3)):q=q.cut(cutter)
   fixed['tray-'+side]=q
+ # Bay seating must never truncate the dedicated north retention load path.
+ for i,(x,y) in enumerate(sites):
+  side='left' if x<0 else 'right'
+  pillar=cylinder(x,y,3,2,TOP-4).cut(cylinder(x,y,1.4,TOP-6,6))
+  fixed['tray-'+side]=fixed['tray-'+side].fuse(pillar)
+  x0,x1=sorted([(-12.1 if x<0 else 9.7),(-9.7 if x<0 else 12.1)])
+  fixed['shell-central']=fixed['shell-central'].cut(prism(box(x0,y-3.3,x1,y+3.3),PLATE,TOP-2-PLATE))
  # USB reservations use actual #232 positioned shells; translate with the board.
  usb=[]
  for n in ('USB-reference-shell','USB-reference-overmold','USB-reference-cable-exit'):
