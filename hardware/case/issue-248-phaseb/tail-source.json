@@ -1,0 +1,13 @@
+{
+  "qualification": "Nominal drawing-derived upper bound on conductor inside each housing, conditional on correct terminal seating and no cut-wire intrusion into the mating section. Not a measured production tail or strip length.",
+  "catalog_url": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+  "readable_archived_manufacturer_figure": "hardware/kicad/qualification/issue-240-main-rev7/connector/eGH-distributor-copy.pdf, printed page 2, Contact and Housing side views (JST UK 14/7/05)",
+  "current_catalog_figure": "hardware/kicad/qualification/issue-240-main-rev7/connector/JST-current-eGH.pdf, PDF pages 2 Contact and 3 Housing",
+  "housing_axial_length_mm": 5.7,
+  "contact_total_length_mm": 4.8,
+  "contact_mating_section_mm": 2.3,
+  "tail_bound_mm_per_end": 3.4,
+  "derivation": "5.70 - 2.30 = 3.40. The seated female contact nose is at or behind the housing mating tip; the cut copper end must remain behind the dimensioned 2.30 mm mating section. Recessing the contact nose reduces, rather than increases, this bound. Using the housing mating tip as the nose limit therefore bounds the internal wire segment without guessing the contact setback. The 2.10 mm crimp-region callout and 1.50 mm strip length are not substituted for a housing-mouth-to-wire-tip length.",
+  "dress_plane_definition": "External routed centerline ends exactly on housing wire-entry mouth plane, perpendicular to insertion axis: Main B1 local v=+5.55 (housing tip v=-0.15); Wing Y=-34.95 (drawing-bound mouth). Internal tail runs inward from that plane to the cut copper end. Both ends receive the full 3.40 mm bound; service reserve is already in the routed curve.",
+  "assembly_acceptance": "Verify contact fully latched, housing drawing bounds and copper end behind the mating-section boundary. These are nominal drawing/assembly conditions, matching the B1 bounding model; no unpublished tolerance or measured crimp-tail value is claimed."
+}

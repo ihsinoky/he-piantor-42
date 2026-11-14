@@ -142,10 +142,6 @@ def make(pitch):
  wires,wm=make_routes()
  fixed.update(wires)
  # Cut real case-only routing clearance and service relief; never alter boards or plates.
- cuts=[]
- for w in wm:
-  for pts in w['conductor_waypoints_mm']:
-   cut,_=tube(pts,.85);cuts.append(cut)
  for side in ('left','right'):
   q=fixed['tray-'+side]
   # Seat the low cover on the remade bay rim; the aluminium plates are untouched.
@@ -157,7 +153,7 @@ def make(pitch):
   for w in wm:
    for pts,samples in zip(w['conductor_waypoints_mm'],w['conductor_samples_mm']):
     g=LineString([(x,y) for x,y,z in samples]).simplify(.01).buffer(.87,quad_segs=8)
-    z=min(p[2] for p in pts)-.87;h=max(p[2] for p in pts)+.87-z
+    z=max(2.,min(p[2] for p in pts)-.87);h=max(p[2] for p in pts)+.87-z
     cutter=prism(g,z,h)
     b,bq=bounds(cutter),bounds(q)
     if all(min(b[1][i],bq[1][i])-max(b[0][i],bq[0][i])>1e-7 for i in range(3)):q=q.cut(cutter)

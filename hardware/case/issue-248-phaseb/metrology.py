@@ -9,32 +9,30 @@ def analytic(points,r=5):
  t.append(0.);slack=[float(np.linalg.norm(p[i+1]-p[i]))-t[i]-t[i+1] for i in range(len(p)-1)]
  return dict(length_mm=sum(slack)+sum(arcs),minimum_straight_slack_mm=min(slack),minimum_bend_radius_mm=r)
 def motion(sgn,i):
- from routes import points
- p=points(sgn,i,22.1);dx=abs(p[4][0])-7;z=p[4][2]
- cap=[]
- for j in range(65):
-  a=math.pi-j*math.pi/128;cap.append((sgn*(12+dx+5*math.cos(a)),2+5*math.sin(a)))
- for j in range(65):
-  a=math.pi/2-j*math.pi/128;cap.append((sgn*(14+dx+5*math.cos(a)),2+5*math.sin(a)))
- strip=Polygon(cap+[(x,y+15.1) for x,y in reversed(cap)])
- path=rounded([p[3],p[4],p[5],p[6]])
- xy=[(v.X,v.Y) for v in path.positions([j/600 for j in range(601)])]
- # 0.020 mm excess over OD1 bounds arc chord and path sampling error.
- g=unary_union([strip,LineString(xy)]).buffer(.52,quad_segs=32)
- return prism(g,z-.52,1.04)
+ from routes import segments
+ a,b,r,mid=segments(sgn,i);z=mid[2];xc=sgn*13.55;yc=17.1-6.55
+ arc=[(xc+sgn*r*math.cos(math.pi-j*math.pi/256),yc+r*math.sin(math.pi-j*math.pi/256)) for j in range(257)]
+ # The U translates continuously 15.10 mm north; its two straight legs shorten.
+ # Buffer covers circular chord error (<0.0002 mm) by >0.019 mm.
+ strip=Polygon(arc+[(x,y-15.1) for x,y in reversed(arc)])
+ return prism(strip.buffer(.52,quad_segs=32),z-.52,1.04)
 def run(pitch):
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);d=read(out/'measurements.json')
  physical=[(n,k,s) for n,k,s in raw if not n.startswith('USB-reference-')]
  shells=[(n,k,s) for n,k,s in physical if n.startswith(('shell-central','strip-left','strip-right')) and '-screw-' not in n]
  lengths=[]
  for w in d['wings']:
-  aa=[analytic(p) for p in w['conductor_waypoints_mm']]
+  aa=[]
+  for r in w['analytic_segments']:
+   a=analytic(r['before']);b=analytic(r['after'])
+   aa.append(dict(length_mm=a['length_mm']+b['length_mm']+r['turn_arc_length_mm'],minimum_straight_slack_mm=min(a['minimum_straight_slack_mm'],b['minimum_straight_slack_mm']),minimum_bend_radius_mm=min(5,r['turn_radius_mm'])))
   assert all(abs(a['length_mm']-v)<1e-6 for a,v in zip(aa,w['conductor_lengths_mm']))
   reserve=w['per_wire_reserve_mm']
   routed=max(a['length_mm'] for a in aa);dressed=max(w['dressed_reference_lengths_mm'])
-  lengths.append(dict(side=w['side'],longest_mm=routed,margin_to_200_mm=200-routed,dressed_longest_mm=dressed,dressed_margin_to_164_8_mm=164.8-dressed,minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,routed_budget_passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and routed<=200 and dressed<=164.8,cut_length_upper_mm=routed+11.4,cut_length_upper_margin_to_200_mm=200-routed-11.4,dressed_cut_length_upper_mm=dressed+11.4,internal_wire_bound_mm_per_end=5.7,complete_cut_length_verified=False,qualification='Curves end at nominal outlet dress planes, not sourced crimp wire-tip reference planes. Conservative internal allowance 5.70 mm/end uses B1 plug tip-to-wire-end drawing bound; actual crimp tails remain unqualified.',passed=False))
+  lengths.append(dict(side=w['side'],longest_mm=routed,margin_to_200_mm=200-routed,dressed_longest_mm=dressed,dressed_margin_to_164_8_mm=164.8-dressed,minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,routed_budget_passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and routed<=200,cut_length_upper_mm=routed+11.4,cut_length_upper_margin_to_200_mm=200-routed-11.4,dressed_cut_length_upper_mm=dressed+11.4,internal_wire_bound_mm_per_end=5.7,complete_cut_length_verified=False,qualification='Curves end at nominal outlet dress planes, not sourced crimp wire-tip reference planes. Conservative internal allowance 5.70 mm/end uses B1 plug tip-to-wire-end drawing bound; actual crimp tails remain unqualified.',passed=False))
  fly=next(s for n,k,s in physical if n=='Fly-170mm')
- f=analytic(d['fly']['waypoints_mm']);dist=min(s.distance_to(fly) for n,k,s in shells)
+ f=analytic(d['fly']['waypoints_mm']);from certified_distance import boundary_distance
+ dist=min(boundary_distance(s,fly)[0] for n,k,s in shells)
  f.update(solid_count=len(fly.solids()),valid=fly.is_valid,volume_mm3=fly.volume,volume_error_mm3=abs(fly.volume-170*math.pi),shell_gap_mm=dist)
  f['passed']=abs(f['length_mm']-170)<1e-6 and f['minimum_straight_slack_mm']>0 and f['valid'] and f['solid_count']==1 and f['volume_error_mm3']<.001 and dist>=.3-1e-6
  save(out/'length-fly.json',dict(status=P['status'],conductors=lengths,fly=f))
@@ -73,7 +71,7 @@ def run(pitch):
     except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
   for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
   export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
-  services.append(dict(side=side,turn_y_mm=[22.1,7],release_mm=30.2,method='continuous swept R5 U cap strip plus fixed legs; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+  services.append(dict(side=side,turn_y_mm=[17.1,2],release_mm=30.2,method='continuous translated concentric R>=5 U strip; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
   print(pitch,side,'service',len(hits),'hits',flush=True)
  save(out/'service.json',dict(status=P['status'],sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  # Verify stack and palm datums from actual fitted parts, not prior verdicts.
