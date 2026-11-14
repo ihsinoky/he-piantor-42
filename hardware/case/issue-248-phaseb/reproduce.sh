@@ -7,6 +7,7 @@ export MPLCONFIGDIR="$TMPDIR/mpl" XDG_CACHE_HOME="$TMPDIR/cache"
 cad_python="${CAD_PYTHON:-/home/hatch/workspace/tools/cad-venv/bin/python}"
 tree=hardware/case/issue-248-phaseb
 "$cad_python" "$tree/cache_sources.py"
+"$cad_python" "$tree/derive_routes_round5.py"
 "$cad_python" "$tree/verify_pinmap.py"
 pitches=("$@")
 if ((${#pitches[@]} == 0)); then pitches=(17 16); fi
