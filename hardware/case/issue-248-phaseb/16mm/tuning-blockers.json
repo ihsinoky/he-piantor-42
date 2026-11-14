@@ -1,0 +1,129 @@
+{
+  "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
+  "geometry_sha256": "5558eecf3ee1515cf84d6eb1241d90320dcf5f9b1eeb722bb633da5a347b97af",
+  "fixed_roof_conflicts": [
+    {
+      "fixed_part": "POM-left-H3",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 3.67259486551864,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-left",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 915.1434786523765,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-left",
+      "required_skin_region": "slope",
+      "intersection_mm3": 160.26027234263768,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "POM-right-H1",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 3.672594865516545,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-right",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 915.1392040967067,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "plate-right",
+      "required_skin_region": "slope",
+      "intersection_mm3": 160.26027591612583,
+      "roof_rule": "2.00 mm normal skin beneath settled exterior",
+      "resolution_blocker": "Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized."
+    },
+    {
+      "fixed_part": "tray-left protected south palm band",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 75.03309254495606,
+      "roof_rule": "2.00 mm roof and unchanged protected palm material Y69.7001..100",
+      "resolution_blocker": "Tray relief here changes the protected palm material invariant; shell relief removes required roof skin. Neither waived."
+    },
+    {
+      "fixed_part": "tray-right protected south palm band",
+      "required_skin_region": "low_south",
+      "intersection_mm3": 69.74229860017144,
+      "roof_rule": "2.00 mm roof and unchanged protected palm material Y69.7001..100",
+      "resolution_blocker": "Tray relief here changes the protected palm material invariant; shell relief removes required roof skin. Neither waived."
+    }
+  ],
+  "central_shell_components": 2,
+  "central_shell_separations": [
+    {
+      "solids": [
+        1,
+        0
+      ],
+      "gap_mm": 0.19999999999994042,
+      "proof": {
+        "a_face": 286,
+        "b_face": 1,
+        "a_point_mm": [
+          -41.0103744819142,
+          69.7,
+          13.55
+        ],
+        "b_point_mm": [
+          -41.18357956188523,
+          69.5999999986389,
+          13.55
+        ],
+        "exact_face_pairs": 607,
+        "all_face_pairs": 555058,
+        "method": "minimum exact distance over actual trimmed boundary faces; all other pairs excluded only by Euclidean AABB lower bound"
+      }
+    }
+  ],
+  "settled_footprint_components": [
+    {
+      "area_mm2": 6262.660727626562,
+      "bounds_mm": [
+        -58.131868965493176,
+        -52.28605986580114,
+        58.131868965493176,
+        69.7
+      ]
+    },
+    {
+      "area_mm2": 2.8823529409062503,
+      "bounds_mm": [
+        -35.06140967884952,
+        -13.694883028099335,
+        -28.999231852358456,
+        -9.481685636814309
+      ]
+    },
+    {
+      "area_mm2": 2.8823529409062503,
+      "bounds_mm": [
+        28.999231852358456,
+        -13.694883028099335,
+        35.06140967884952,
+        -9.481685636814309
+      ]
+    },
+    {
+      "area_mm2": 886.1102542738196,
+      "bounds_mm": [
+        -75.30761585825356,
+        45.772027499330186,
+        75.30761585825356,
+        78.22729208607119
+      ]
+    }
+  ],
+  "shell_connection_blocker": "Disconnected south surface footprint at 16 mm: a bridge would add exterior footprint or cross an excluded well. No bridge/deletion used.",
+  "wiring_blocker": "See exhaustive constituent collision-map and continuous service-motion results. Candidate is not accepted unless all contacts clear; no strand/strand overlap exemption."
+}

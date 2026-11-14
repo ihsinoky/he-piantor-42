@@ -1,0 +1,19 @@
+{
+  "qualification": "Nominal drawing-derived upper bound on conductor inside each housing, conditional on correct terminal seating and no cut-wire intrusion into the mating section. Not a measured production tail or strip length.",
+  "catalog_url": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+  "readable_archived_manufacturer_figure": "hardware/kicad/qualification/issue-240-main-rev7/connector/eGH-distributor-copy.pdf, printed page 2, Contact and Housing side views (JST UK 14/7/05)",
+  "current_catalog_figure": "hardware/kicad/qualification/issue-240-main-rev7/connector/JST-current-eGH.pdf, PDF pages 2 Contact and 3 Housing",
+  "housing_axial_length_mm": 5.7,
+  "contact_total_length_mm": 4.8,
+  "contact_mating_section_mm": 2.3,
+  "tail_bound_mm_per_end": 3.4,
+  "derivation": "5.70 - 2.30 = 3.40. The seated female contact nose is at or behind the housing mating tip; the cut copper end must remain behind the dimensioned 2.30 mm mating section. Recessing the contact nose reduces, rather than increases, this bound. Using the housing mating tip as the nose limit therefore bounds the internal wire segment without guessing the contact setback. The 2.10 mm crimp-region callout and 1.50 mm strip length are not substituted for a housing-mouth-to-wire-tip length.",
+  "dress_plane_definition": "Main: B1 housing mouth local v=+5.55 (mating tip v=-0.15), routed endpoint axis Z10.65. Wing actual housing mouth Y=-35.45: header rear Y=-42.60 plus JST 7.15 mm seated extent (#235 round-2 REPORT.md). This candidate starts at conservative reservation plane Y=-34.95, axis Z5.75, 0.50 mm outside the actual mouth. Add that 0.50 mm straight dress lead as well as 3.40 mm internal tail at the Wing end. Hence Wing 3.90 + Main 3.40 = 7.30 mm total, on top of routed curves. The omitted 0.50 mm lead lies within the own GH reservation already audited against every other body.",
+  "assembly_acceptance": "Verify contact fully latched, housing drawing bounds and copper end behind the mating-section boundary. These are nominal drawing/assembly conditions, matching the B1 bounding model; no unpublished tolerance or measured crimp-tail value is claimed.",
+  "main_internal_tail_bound_mm": 3.4,
+  "wing_internal_tail_bound_mm": 3.4,
+  "wing_external_dress_lead_mm": 0.5,
+  "wing_tail_plus_dress_lead_bound_mm": 3.9,
+  "total_unrouted_wire_bound_mm": 7.3,
+  "wing_mouth_source": "hardware/kicad/qualification/issue-235-wing-round2/REPORT.md, line 45; native header rear -42.60 + JST assembly extent 7.15 = -35.45"
+}

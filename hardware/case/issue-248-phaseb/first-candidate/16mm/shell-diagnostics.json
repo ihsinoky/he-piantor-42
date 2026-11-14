@@ -1,0 +1,54 @@
+{
+  "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
+  "geometry_sha256": "9a11a662c879e45aacfa83a12979fda8d731eea3e3d2a7c1777cfe3704e36f46",
+  "step_sha256": "322cae874f748ca9ed486af621d01e2fed135fc6ef9a7b04ae61d22db2c65f11",
+  "stl_sha256": "1264991ece2561fae0e64ffa1a6aee42d7bc55a7469baa1f750c48d2b7c04644",
+  "solids": [
+    {
+      "index": 0,
+      "valid": true,
+      "volume_mm3": 17246.452495274014,
+      "bounds_mm": [
+        [
+          -58.131868965490185,
+          -52.2860598658,
+          11.459943143052257
+        ],
+        [
+          58.131868965493,
+          69.7,
+          24.650000000013826
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "valid": true,
+      "volume_mm3": 1772.2205085466646,
+      "bounds_mm": [
+        [
+          -75.30761585825434,
+          45.77202749932511,
+          11.55
+        ],
+        [
+          75.307615858254,
+          78.22729208607105,
+          13.55
+        ]
+      ]
+    }
+  ],
+  "solid_separations": [
+    {
+      "solids": [
+        0,
+        1
+      ],
+      "distance_mm": 0.199999999998139
+    }
+  ],
+  "nonmanifold_edges": [],
+  "verdict": "FAIL: central shell contains disconnected solids",
+  "qualification": "Exact binary STL vertex equality and edge incidence, unchanged from #232 verifier. No welding, dropped material, added bridges or tolerance changes. Distances are kernel results subject to the cap classifier ambiguity."
+}
