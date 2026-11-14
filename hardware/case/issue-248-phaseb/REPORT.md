@@ -1,3 +1,181 @@
+# Issue #248 Phase B — Round 4
+
+**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**
+
+## Round 4 results
+
+The structural reserve redesign is audited but **not collision-free**: both pitches retain 141 fitted contacts. Exact blockers are reported below; no all-clear or production release is claimed.
+
+| Gate | 17 mm | 16 mm |
+|---|---|---|
+| 1 Exhaustive fitted collision | FAIL | FAIL |
+| 2 Finished conductors ≤200 mm | PASS | PASS |
+| 3 Accessible ~30 mm service | FAIL | FAIL |
+| 4 Connected Fly 170 / R5 / roof gap | FAIL | FAIL |
+| 5 USB 30 mm insertion | PASS | PASS |
+| 6 Assumed swept caps after allowances | PASS | PASS |
+| 7 Print envelopes and manufacturing data | FAIL | PASS |
+| 8 Fitted preview STEP | PASS | PASS |
+
+### Fan and height-transition design
+
+The inherited route index paired the right Wing outlet at X18.875 with Main pin1. The #235 placement certificate puts **right Wing pin1 at X35.125 and pin14 at X18.875** (left pin1 X−18.875). Main local pin1 is u=−8.125. D-024 requires 1→1 through 14→14. Thus the inherited geometric index reversed the Wing cavity order; an analysis based on that index alone incorrectly suggests a required full endpoint reversal. Round 4 corrects the physical correspondence and independently verifies all 28 numbered endpoints against native pad coordinates/nets in pinmap-round4.json. No net assignment or PCB is changed. Round 3 additionally used non-monotone low-pack radii/heights and independently rising return legs through the low inlet fan; those caused 52 exact strand contacts. Its 1071 local waypoint variants are not reused.
+
+Round 4 replaces the low horizontal U plus independent return-rise topology with a **north-facing tilted concentric reserve that performs the height transition itself**. The inlet pack is specified in physical low-plane X/Z coordinates at 1.10 mm hexagonal spacing. For two turn centerlines, distance² is at least (Δradius)²+(Δnormal offset)², since their additional angular term is nonnegative; this lower bound is 1.10² mm² for the closest pair, giving 0.10 mm OD1 surface separation throughout their common translation. See fan-structure-proof.json. An orthonormal transform gives each strand a radius and normal-plane offset. Distinct turns on parallel planes have real normal separation; turns in a common plane have radial separation. Their swept conductor clearance is checked exactly along with the fans. The upper fan leaves the reserve above the low inlet instead of threading a rising return through it. This construction separates the reserve/height transition; it does not exempt any fan contact the exact audit still finds.
+
+The two shell retainers move from (±8,−30) to (±4,−10) to release the north service corridor. The OD6 pillars retain OD3.2×4 inserts, shell screws, counterbores and engagement. Their lower-front relief clears the existing splice hardware; an independent exact Ø0.9 vertical material probe tests the rear load path at (x,y−2), in addition to the insert fit and point witnesses. The selected candidate fails this stronger check despite passing point samples; the missing material and incomplete press fit are retained as service/retention blockers. The roof is rebuilt with the two functional holes at the new sites; all remaining required skin, unchanged plate-boundary ownership and retention material are independently checked. This does not alter the low-south footprint, exterior or POM stack. See routing-structure-round4.json, routes-round4.json and per-pitch retention-check.json.
+
+Proposed underside-rib passages are clipped below the independent required-skin volumes and then checked for connectivity. The selected-route cuts would disconnect skin-bearing material on all three 17 mm shell pieces, so those passages are rejected and the original single-solid parts are retained. Per-pitch inner-wall-passages.json records each blocked cut; ensuing wire/shell contacts remain failed. Complete nominal roofs and blister caps remain intact, and the exact skin check still binds. The tray reservation includes the full translated turn projection as well as the fitted route. Its 0.87 mm projected clearance is conservative case-only removal above Z2; original source floors, full E thread-bearing support and shell pillars remain restored and separately audited. No board, plate, cap, strand OD, bend threshold, reserve or tail allowance is reduced.
+
+### Round 4 — 17 mm
+
+Exhaustive audit: 366 physical constituents, 66795 unordered pairs; 64983 AABB exclusions, 160 explicit own mates, 1652 exact Commons, 0 Boolean errors. Threshold remains 1e−6 mm³. Heavy exact passes checkpoint every 80 new operations and restart the CAD process. Every gate is bound to the current assembly-index.json.
+
+| Collision category | Round 3 | Round 4 |
+|---|---:|---:|
+| E screws / conductors | 0 | 2 |
+| Fly-170mm / conductors | 0 | 4 |
+| Fly-170mm / trays | 0 | 1 |
+| POM-left-H3 / shell-central | 1 | 1 |
+| POM-left-H4 / conductors | 0 | 1 |
+| POM-right-H1 / shell-central | 1 | 1 |
+| POM-right-H2 / conductors | 0 | 1 |
+| Wing underside bounds / conductors | 0 | 12 |
+| aluminium plates / conductors | 10 | 22 |
+| conductors / conductors | 52 | 23 |
+| conductors / joint-screw-1-12_0 | 0 | 1 |
+| conductors / main | 2 | 0 |
+| conductors / shell-central | 0 | 16 |
+| conductors / strip-left | 0 | 9 |
+| conductors / strip-right | 0 | 9 |
+| conductors / switch-envelope-L_R0_C5 | 0 | 1 |
+| conductors / switch-envelope-R_R0_C5 | 0 | 1 |
+| conductors / trays | 0 | 10 |
+| conductors / wing_left | 7 | 12 |
+| conductors / wing_right | 7 | 12 |
+| strip-left / trays | 0 | 1 |
+| strip-right / trays | 0 | 1 |
+
+Total unexpected contacts: **80 → 141**. Complete named pairs, volumes and witnesses are in [17mm/audit.json](17mm/audit.json) and collision-map.json.
+
+| Side | Routed max mm | Finished max including 7.30 mm tails | Connected reserve mm | Min bend mm |
+|---|---:|---:|---:|---:|
+| left | 192.501349 | 199.801349 | 30.200000 | 5.000000 |
+| right | 192.501349 | 199.801349 | 30.200000 | 5.000000 |
+
+Fly: 170.000000000 mm, R5, roof gap 0.300000 mm. USB continuous 30 mm insertion: PASS. Certified caps: PASS; physical q/skirt/full-press remains OPEN.
+
+Continuous service motion (caps and Main removed; Wing hardware fitted):
+
+- left: 24 contacts (0 tray; 24 own fixed fan), 0 errors, 30.200000 mm connected release.
+- right: 24 contacts (0 tray; 24 own fixed fan), 0 errors, 30.200000 mm connected release.
+
+Retention probes: left: missing load path 2.569140932 mm³, insert fit 6.883509834/7.539822369 mm³; right: missing load path 2.569140932 mm³, insert fit 6.883509834/7.539822369 mm³
+
+Geometric motion: **FAIL**. Accessible reserve certification: **FAIL**; fitted contacts remain independently binding.
+
+Manufacturing: **18/19** independent STEP/STL reloads pass. Tray-left: STEP valid=True. The X0/Y55 splice boss was rebuilt with fresh analytic OD7 topology and Ø1.7 pilot; 0.001 mm radial cleanup above the Z2 source-floor boundary and 0.20 mm floor overlap are recorded in splice-boss-rebuild.json. Source floor, palm, board/plate stack and E support checks remain binding.
+
+The inherited invalid Fly-official-42-instance-42 is **preserved and labelled as the known F-015 / D-037 source model defect**, contingent on an exact serialized operand hash match against frozen round 3. Its eight invalid faces remain reported. It is not a new design-contact count and is not discarded, healed or used to excuse any real Common. Every actual contact involving that body still fails normally.
+
+**Unresolved required-skin POM blockers (no exception authorized):**
+
+| Fixed body | Roof region | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770488 |
+| POM-right-H1 | low_south | 0.040770024 |
+
+Tray-left STL remains blocked by eight exact edge-incidence failures at the rebuilt boss/floor boundary; see [tray-left-diagnostics.json](17mm/tray-left-diagnostics.json) for endpoints and operand hashes. STEP reload itself passes. The cleanup boundary was aligned to Z2; this closes the 16 mm export but does not eliminate the 17 mm mesh residual. No vertex welding, omitted triangles or relaxed mesh test is used.
+
+No low-south footprint/exterior/stack exception or thinner skin is introduced to eliminate these residuals.
+
+Failed gates and their current blockers:
+
+- **1 Exhaustive fitted collision**: 141 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid design constituents: none; F-015/D-037 preserved source defects: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+- **4 Connected Fly 170 / R5 / roof gap**: 170.000000000 mm, R5; true roof gap 0.300000 mm; 5 fitted contacts.
+- **7 Print envelopes and manufacturing data**: tray-left: STEP valid=True, 1 solids, 8 nonmanifold edges, volume delta 6.38829079e-09 mm³ Required skin PASS; stack/palm/floor invariants PASS.
+
+### Round 4 — 16 mm
+
+Exhaustive audit: 366 physical constituents, 66795 unordered pairs; 64967 AABB exclusions, 160 explicit own mates, 1668 exact Commons, 0 Boolean errors. Threshold remains 1e−6 mm³. Heavy exact passes checkpoint every 80 new operations and restart the CAD process. Every gate is bound to the current assembly-index.json.
+
+| Collision category | Round 3 | Round 4 |
+|---|---:|---:|
+| E screws / conductors | 0 | 2 |
+| Fly-170mm / conductors | 0 | 4 |
+| Fly-170mm / trays | 0 | 1 |
+| POM-left-H3 / shell-central | 1 | 1 |
+| POM-left-H4 / conductors | 0 | 1 |
+| POM-right-H1 / shell-central | 1 | 1 |
+| POM-right-H2 / conductors | 0 | 1 |
+| Wing underside bounds / conductors | 0 | 12 |
+| aluminium plates / conductors | 10 | 22 |
+| conductors / conductors | 52 | 23 |
+| conductors / joint-screw-1-12_0 | 0 | 1 |
+| conductors / main | 2 | 0 |
+| conductors / shell-central | 0 | 16 |
+| conductors / strip-left | 0 | 9 |
+| conductors / strip-right | 0 | 9 |
+| conductors / switch-envelope-L_R0_C5 | 1 | 1 |
+| conductors / switch-envelope-L_R1_C5 | 2 | 0 |
+| conductors / switch-envelope-R_R0_C5 | 1 | 1 |
+| conductors / switch-envelope-R_R1_C5 | 2 | 0 |
+| conductors / trays | 0 | 10 |
+| conductors / wing_left | 7 | 12 |
+| conductors / wing_right | 7 | 12 |
+| strip-left / trays | 0 | 1 |
+| strip-right / trays | 0 | 1 |
+
+Total unexpected contacts: **86 → 141**. Complete named pairs, volumes and witnesses are in [16mm/audit.json](16mm/audit.json) and collision-map.json.
+
+| Side | Routed max mm | Finished max including 7.30 mm tails | Connected reserve mm | Min bend mm |
+|---|---:|---:|---:|---:|
+| left | 192.501349 | 199.801349 | 30.200000 | 5.000000 |
+| right | 192.501349 | 199.801349 | 30.200000 | 5.000000 |
+
+Fly: 170.000000000 mm, R5, roof gap 0.300000 mm. USB continuous 30 mm insertion: PASS. Certified caps: PASS; physical q/skirt/full-press remains OPEN.
+
+Continuous service motion (caps and Main removed; Wing hardware fitted):
+
+- left: 24 contacts (0 tray; 24 own fixed fan), 0 errors, 30.200000 mm connected release.
+- right: 24 contacts (0 tray; 24 own fixed fan), 0 errors, 30.200000 mm connected release.
+
+Retention probes: left: missing load path 2.569140932 mm³, insert fit 6.883509834/7.539822369 mm³; right: missing load path 2.569140932 mm³, insert fit 6.883509834/7.539822369 mm³
+
+Geometric motion: **FAIL**. Accessible reserve certification: **FAIL**; fitted contacts remain independently binding.
+
+Manufacturing: **19/19** independent STEP/STL reloads pass. Tray-left: STEP valid=True. The X0/Y55 splice boss was rebuilt with fresh analytic OD7 topology and Ø1.7 pilot; 0.001 mm radial cleanup above the Z2 source-floor boundary and 0.20 mm floor overlap are recorded in splice-boss-rebuild.json. Source floor, palm, board/plate stack and E support checks remain binding.
+
+The inherited invalid Fly-official-42-instance-42 is **preserved and labelled as the known F-015 / D-037 source model defect**, contingent on an exact serialized operand hash match against frozen round 3. Its eight invalid faces remain reported. It is not a new design-contact count and is not discarded, healed or used to excuse any real Common. Every actual contact involving that body still fails normally.
+
+**Unresolved required-skin POM blockers (no exception authorized):**
+
+| Fixed body | Roof region | Common mm³ |
+|---|---|---:|
+| POM-left-H3 | low_south | 0.040770468 |
+| POM-right-H1 | low_south | 0.040770032 |
+
+No low-south footprint/exterior/stack exception or thinner skin is introduced to eliminate these residuals.
+
+Failed gates and their current blockers:
+
+- **1 Exhaustive fitted collision**: 141 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS. Invalid design constituents: none; F-015/D-037 preserved source defects: Fly-official-42-instance-42. Ownership PASS; plate seam contacts PASS; strand sweep checks 28/28.
+- **3 Accessible ~30 mm service**: Motion blocked; fitted collisions additionally prevent accessible certification.
+- **4 Connected Fly 170 / R5 / roof gap**: 170.000000000 mm, R5; true roof gap 0.300000 mm; 5 fitted contacts.
+
+## Interrupted round 4 WIP disposition
+
+The continuation inventoried the alternate Git index and the disconnected-run log before any rebuild. Checkpoint 8e66419 retains the selected final-030 route, its native pin map, the stricter own-fixed-fan service audit, report explanation and independent verifier additions. Candidate screening was not accepted as a clearance verdict. Runtime optimization arrays/logs remain scratch; Python caches are excluded. A full source rebuild exposed route-isolated tray rim fragments; fd187a5 adds explicit mirrored bounds and volume limits for their removal, followed by unchanged floor, palm, skin, E-support and manufacturing gates. No arbitrary largest-solid filter or gate relaxation is used.
+
+## Round 4 reproduction and preservation
+
+Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16`. All scratch stays in `.issue248-runtime/`; the all-pair stage restarts at bounded checkpoints and metrology runs length/USB/service/invariants in separate processes. The independent unchanged manufacturing verifier reloads all nineteen STEP/STL sets at both pitches. `verify_package.py` replays current all-pair coverage, acceptance classification, gate arithmetic, source/artifact hashes and all frozen evidence.
+
+The complete prior report and round-3 artifacts are frozen in [round3/](round3/REPORT.md), with round3-sha256.json. First-candidate and tuning evidence remain frozen with their original manifests. Checkpoints are committed through `.issue248-runtime/git`. All physical validation remains provisional; no release is claimed.
+
+---
+
 # Issue #248 Phase B — Round 3 continuation
 
 **PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**

@@ -8,7 +8,7 @@ def category(n):
 def counts(hits):return Counter(' / '.join(sorted([category(h['a']),category(h['b'])])) for h in hits)
 def render(rows):
  from report import GATES
- lines=['# Issue #248 Phase B — Round 4','', '**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**','', '## Round 4 results','', '| Gate | 17 mm | 16 mm |','|---|---|---|']
+ lines=['# Issue #248 Phase B — Round 4','', '**PROVISIONAL on plateau Z24.65 / unmeasured Junana q=1.50. NOT RELEASED.**','', '## Round 4 results','', 'The structural reserve redesign is audited but **not collision-free**: both pitches retain 141 fitted contacts. Exact blockers are reported below; no all-clear or production release is claimed.', '', '| Gate | 17 mm | 16 mm |','|---|---|---|']
  lines += [f'| {n} | {rows[17][i]} | {rows[16][i]} |' for i,n in enumerate(GATES)]
  lines += ['', '### Fan and height-transition design','',
  'The inherited route index paired the right Wing outlet at X18.875 with Main pin1. The #235 placement certificate puts **right Wing pin1 at X35.125 and pin14 at X18.875** (left pin1 X−18.875). Main local pin1 is u=−8.125. D-024 requires 1→1 through 14→14. Thus the inherited geometric index reversed the Wing cavity order; an analysis based on that index alone incorrectly suggests a required full endpoint reversal. Round 4 corrects the physical correspondence and independently verifies all 28 numbered endpoints against native pad coordinates/nets in pinmap-round4.json. No net assignment or PCB is changed. Round 3 additionally used non-monotone low-pack radii/heights and independently rising return legs through the low inlet fan; those caused 52 exact strand contacts. Its 1071 local waypoint variants are not reused.',  '',
@@ -27,6 +27,7 @@ def render(rows):
  'The inherited invalid Fly-official-42-instance-42 is **preserved and labelled as the known F-015 / D-037 source model defect**, contingent on an exact serialized operand hash match against frozen round 3. Its eight invalid faces remain reported. It is not a new design-contact count and is not discarded, healed or used to excuse any real Common. Every actual contact involving that body still fails normally.','',
  '**Unresolved required-skin POM blockers (no exception authorized):**','', '| Fixed body | Roof region | Common mm³ |','|---|---|---:|']
   lines += [f"| {r['fixed_part']} | {r['required_skin_region']} | {r['intersection_mm3']:.9f} |" for r in skin['fixed_roof_conflicts'] if r['fixed_part'].startswith('POM-')]
+  if pitch==17:lines += ['', 'Tray-left STL remains blocked by eight exact edge-incidence failures at the rebuilt boss/floor boundary; see [tray-left-diagnostics.json](17mm/tray-left-diagnostics.json) for endpoints and operand hashes. STEP reload itself passes. The cleanup boundary was aligned to Z2; this closes the 16 mm export but does not eliminate the 17 mm mesh residual. No vertex welding, omitted triangles or relaxed mesh test is used.']
   lines += ['', 'No low-south footprint/exterior/stack exception or thinner skin is introduced to eliminate these residuals.','', 'Failed gates and their current blockers:','']
   lines += [f"- **{g['gate']}**: {g['evidence']}" for g in get('gates')['gates'] if not g['passed']]
   lines += ['']
