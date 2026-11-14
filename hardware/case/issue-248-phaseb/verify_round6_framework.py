@@ -43,7 +43,21 @@ def verify_fixed(pitch):
    assert repair['geometry_sha256']==sha(out/'assembly-index.json')
    assert abs(a['volume_mm3']+r.get('volume_delta_mm3',0)-repair['before_volume_mm3'])<1e-6
    assert abs(b['volume_mm3']-repair['after_volume_mm3'])<1e-6
- assert read(out/'measurements.json')['route_channel_reservation']==read(H/f'round3/{pitch}mm/measurements.json')['route_channel_reservation']
+ meta=read(out/'measurements.json');base_meta=read(H/f'round3/{pitch}mm/measurements.json');design=read(H/'routes-round6.json')
+ assert meta['route_channel_reservation']==base_meta['route_channel_reservation']
+ for w in meta['wings']:
+  sign=-1 if w['side']=='left' else 1
+  assert w['service_turn_y_mm']==[10,-5.1] or all(abs(a-b)<1e-10 for a,b in zip(w['service_turn_y_mm'],[10,-5.1]))
+  for i,row in enumerate(w['analytic_segments']):
+   j=13-i if sign<0 else i
+   before=[[sign*x,y,z] for x,y,z in design['before'][j]];after=[[sign*x,y,z] for x,y,z in design['after'][j]]
+   assert row['before']==before and row['after']==after
+   assert abs(row['turn_radius_mm']-(17.4-design['before'][j][-1][0]))<1e-10
+   released=w['released_analytic_segments'][i]
+   before[-1][1]=after[0][1]=10-15.1
+   assert released['before']==before and released['after']==after
+   assert abs(w['per_wire_reserve_mm'][i]-30.2)<1e-6
+
  return True
 if __name__=='__main__':
  verify_paths()

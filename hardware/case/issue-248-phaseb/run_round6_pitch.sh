@@ -23,6 +23,8 @@ for stage in assemble_round6 rebuild_splice_boss seam audit retention_check metr
  else "$py" "$tree/$stage.py" "$pitch"; fi
  if [[ "$stage" == seam || "$stage" == audit || "$stage" == metrology || "$stage" == verify_hardware ]]; then
   git --git-dir=.issue248-runtime/git --work-tree=. add "$tree" ":(exclude)$tree/__pycache__"
-  git --git-dir=.issue248-runtime/git --work-tree=. commit -m "Issue 248 round 6: checkpoint $pitch mm $stage evidence" > "$TMPDIR/round6/commit-$pitch-$stage.log"
+  if ! git --git-dir=.issue248-runtime/git --work-tree=. diff --cached --quiet; then
+   git --git-dir=.issue248-runtime/git --work-tree=. commit -m "Issue 248 round 6: checkpoint $pitch mm $stage evidence" > "$TMPDIR/round6/commit-$pitch-$stage.log"
+  fi
  fi
 done
