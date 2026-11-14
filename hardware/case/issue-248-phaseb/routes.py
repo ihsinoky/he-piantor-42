@@ -22,7 +22,7 @@ def make_routes():
    parts[f'Wire-{side}-{i+1:02d}']=q
    lengths.append(path.length);refs.append(ref.length);ptsall.append(pts)
    samples.append([[v.X,v.Y,v.Z] for v in path.positions([j/600 for j in range(601)])])
-  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=5,service_turn_y_mm=[22.1,7],outlet_axis_qualification='Wing Z5.75 and Main Z10.65 are nominal dress axes inside drawing-bounded outlets, not dimensioned cavity centres',unmodeled_length_mm=0))
+  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=5,service_turn_y_mm=[22.1,7],outlet_axis_qualification='Wing Z5.75 and Main Z10.65 are nominal dress axes inside drawing-bounded outlets, not dimensioned cavity centres',unmodeled_length_mm=None,routed_curve_only=True,terminal_internal_bound_mm_per_end=5.7,terminal_internal_length_verified=False))
  return parts,rows
 if __name__=='__main__':
  parts,rows=make_routes();save(RUN/'route-candidate.json',rows)

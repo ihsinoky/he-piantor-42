@@ -1,5 +1,13 @@
 """Manufacturing and fitted preview exports, including rejected candidates."""
 from common import *
+def mesh_absolute(q,path):
+ from OCP.BRepMesh import BRepMesh_IncrementalMesh
+ from OCP.StlAPI import StlAPI_Writer
+ BRepTools.Clean_s(q.wrapped)
+ mesh=BRepMesh_IncrementalMesh(q.wrapped,.005,False,.025,True);mesh.Perform()
+ writer=StlAPI_Writer();writer.ASCIIMode=False;assert writer.Write(q.wrapped,str(path))
+ data=path.read_bytes();header=f'PROVISIONAL plateau Z{TOP:.2f}; Junana q=1.50; absolute mesh 0.005 mm'.encode().ljust(80,b' ')
+ path.write_bytes(header+data[80:])
 def run(pitch):
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);groups={}
  for n,k,s in raw:groups.setdefault(n,[]).append(s)
@@ -11,10 +19,7 @@ def run(pitch):
   folder=out/'manufacturing';folder.mkdir(exist_ok=True)
   stem=n+'-PROVISIONAL'
   q.parent=None;export_step(q,folder/(stem+'.step'))
-  export_stl(q,folder/(stem+'.stl'),tolerance=.01,angular_tolerance=.05)
-  mesh=folder/(stem+'.stl');data=mesh.read_bytes()
-  header=f'PROVISIONAL plateau Z{TOP:.2f}; Junana q=1.50; see REPORT.md'.encode().ljust(80,b' ')
-  mesh.write_bytes(header+data[80:])
+  mesh_absolute(import_step(folder/(stem+'.step')),folder/(stem+'.stl'))
   b=bounds(q);size=[b[1][i]-b[0][i] for i in range(3)];brim=[size[0]+10,size[1]+10,size[2]]
   prints.append(dict(name=n,filename=stem,bounds_mm=b,valid=q.is_valid,solids=len(ss),volume_mm3=q.volume,with_5mm_brim_xyz_mm=brim,envelope_passed=brim[0]<=220 and brim[1]<=220 and brim[2]<=250,manufacturing_geometry_passed=q.is_valid and len(ss)==1,step_sha256=sha(folder/(stem+'.step')),stl_sha256=sha(folder/(stem+'.stl'))))
   print(pitch,'export',n,len(ss),'solids',flush=True)

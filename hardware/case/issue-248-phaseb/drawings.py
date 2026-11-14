@@ -26,5 +26,17 @@ def run(pitch):
   ss=groups[p['name']];q=ss[0] if len(ss)==1 else Compound(children=ss)
   drawing(q,p['name'],out/'manufacturing'/(p['filename']+'.svg'))
  # Numerical drawing register supplies explicit absolute datums for every print.
- save(out/'manufacturing/dimension-register.json',dict(status=P['status'],units='mm',parameters=P,parts=m['parts'],instructions=dict(material='PETG; remade support posts and splices retain source fits',nominal_shell_wall_and_normal_roof_mm=2,source_plate='D-038 aluminium 1.50 mm; 14.00–14.04 apertures; unchanged manufacturing geometry',print='0.4 nozzle / 0.2 layer starting point; 5 wall lines; support roofs as required; remove supports through open underside; inspect dimensions',retention=read(out/'measurements.json')['retention'])))
+ source_dimensions=read(HERE.parent/f'issue-232-final/{pitch}mm/dimensions.json')
+ with (out/'manufacturing/BOM-PROVISIONAL.csv').open('w') as f:
+  writer=csv.writer(f);writer.writerow(['part','quantity','material_or_acceptance_spec','status'])
+  for p in m['parts']:writer.writerow([p['filename'],1,'PETG; see STEP and drawing',P['status']])
+  writer.writerow(['north shell screw',2,'M2x4 under head; head at most OD3.6 x1.0; nominal envelope, supplier qualification pending',P['status']])
+  writer.writerow(['north shell insert',2,'M2; OD3.2 x4.0; pilot OD2.8; pull-out qualification pending',P['status']])
+ posts=[dict(p,top_z_mm=p['top_z_mm']-2.65,status=P['status']) for p in source_dimensions['posts']]
+ for side in ('left','right'):
+  with (out/'manufacturing'/f'post-positions-{side}-PROVISIONAL.csv').open('w') as f:
+   fields=['id','x_mm','y_mm','base_z_mm','top_z_mm','status'];writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()
+   for p in posts:
+    if p['side']==side:writer.writerow(dict(id=p['id'],x_mm=p['xy_mm'][0],y_mm=p['xy_mm'][1],base_z_mm=1.2,top_z_mm=p['top_z_mm'],status=P['status']))
+ save(out/'manufacturing/dimension-register.json',dict(status=P['status'],units='mm',parameters=P,parts=m['parts'],posts=posts,splice_relocations=read(out/'measurements.json')['splice_relocations'],instructions=dict(material='PETG; remade support posts and splices retain source fits',nominal_shell_wall_and_normal_roof_mm=2,source_plate='D-038 aluminium 1.50 mm nominal, 1.45–1.51 finished; 14.00–14.04 apertures; unchanged manufacturing geometry',print='0.4 nozzle / 0.2 layer starting point; 5 wall lines; support roofs as required; remove supports through open underside; inspect dimensions',retention=read(out/'measurements.json')['retention'])))
 if __name__=='__main__':run(int(sys.argv[1]))

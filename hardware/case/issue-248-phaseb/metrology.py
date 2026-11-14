@@ -31,7 +31,8 @@ def run(pitch):
   aa=[analytic(p) for p in w['conductor_waypoints_mm']]
   assert all(abs(a['length_mm']-v)<1e-6 for a,v in zip(aa,w['conductor_lengths_mm']))
   reserve=w['per_wire_reserve_mm']
-  lengths.append(dict(side=w['side'],longest_mm=max(a['length_mm'] for a in aa),margin_to_200_mm=200-max(a['length_mm'] for a in aa),dressed_longest_mm=max(w['dressed_reference_lengths_mm']),dressed_margin_to_164_8_mm=164.8-max(w['dressed_reference_lengths_mm']),minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and max(w['conductor_lengths_mm'])<=200 and max(w['dressed_reference_lengths_mm'])<=164.8))
+  routed=max(a['length_mm'] for a in aa);dressed=max(w['dressed_reference_lengths_mm'])
+  lengths.append(dict(side=w['side'],longest_mm=routed,margin_to_200_mm=200-routed,dressed_longest_mm=dressed,dressed_margin_to_164_8_mm=164.8-dressed,minimum_reserve_mm=min(reserve),maximum_reserve_mm=max(reserve),all_conductors=aa,routed_budget_passed=all(a['minimum_straight_slack_mm']>0 for a in aa) and routed<=200 and dressed<=164.8,cut_length_upper_mm=routed+11.4,cut_length_upper_margin_to_200_mm=200-routed-11.4,dressed_cut_length_upper_mm=dressed+11.4,internal_wire_bound_mm_per_end=5.7,complete_cut_length_verified=False,qualification='Curves end at nominal outlet dress planes, not sourced crimp wire-tip reference planes. Conservative internal allowance 5.70 mm/end uses B1 plug tip-to-wire-end drawing bound; actual crimp tails remain unqualified.',passed=False))
  fly=next(s for n,k,s in physical if n=='Fly-170mm')
  f=analytic(d['fly']['waypoints_mm']);dist=min(s.distance_to(fly) for n,k,s in shells)
  f.update(solid_count=len(fly.solids()),valid=fly.is_valid,volume_mm3=fly.volume,volume_error_mm3=abs(fly.volume-170*math.pi),shell_gap_mm=dist)

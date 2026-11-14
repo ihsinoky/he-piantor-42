@@ -2,6 +2,15 @@
 from common import *
 import importlib.util
 spec=importlib.util.spec_from_file_location('prior_verify',HERE.parent/'issue-232-final/verify.py');prior=importlib.util.module_from_spec(spec);spec.loader.exec_module(prior)
+def common_record(a,b):
+ from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+ from OCP.BRepGProp import BRepGProp
+ from OCP.GProp import GProp_GProps
+ op=BRepAlgoAPI_Common(a.wrapped,b.wrapped);op.SetRunParallel(True);op.SetUseOBB(True);op.Build()
+ if not op.IsDone():raise RuntimeError('OCCT Common failed')
+ if op.Shape().IsNull():return dict(volume_mm3=0.)
+ props=GProp_GProps();BRepGProp.VolumeProperties_s(op.Shape(),props,True,False,False);v=abs(props.Mass())
+ return dict(volume_mm3=v,common_bounds_mm=bounds(Shape.cast(op.Shape()))) if v>1e-6 else dict(volume_mm3=v)
 def intended(a,b):
  why=prior.intended(a,b)
  if why:return why
@@ -32,8 +41,12 @@ def audit(pitch):
  print(pitch,len(raw),'solids',len(candidates),'exact pairs',flush=True)
  for count,(i,j) in enumerate(candidates):
   key=f'{i}:{j}';a,k,s=raw[i];b,l,t=raw[j]
-  if key not in done:
-   try:done[key]=dict(volume_mm3=volume(s,t))
+  needs_witness=key in done and done[key].get('volume_mm3',0)>1e-6 and 'common_bounds_mm' not in done[key]
+  if key not in done or needs_witness:
+   try:
+    replay=common_record(s,t)
+    if needs_witness:assert abs(replay['volume_mm3']-done[key]['volume_mm3'])<1e-6
+    done[key]=replay
    except Exception as e:done[key]=dict(error=repr(e))
   r=dict(i=i,j=j,a=a,b=b,**done[key])
   if 'error' in r:errors.append(r)

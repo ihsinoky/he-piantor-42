@@ -10,7 +10,7 @@ tree=hardware/case/issue-248-phaseb
 pitches=("$@")
 if ((${#pitches[@]} == 0)); then pitches=(17 16); fi
 for pitch in "${pitches[@]}"; do
-  for stage in build finalize_geometry blend remake_joints finalize_geometry audit metrology export drawings verify_exports; do
+  for stage in build finalize_geometry blend remake_joints finalize_geometry audit metrology qualify_lengths local_measures export drawings verify_exports witnesses; do
     "$cad_python" "$tree/$stage.py" "$pitch"
   done
 done
