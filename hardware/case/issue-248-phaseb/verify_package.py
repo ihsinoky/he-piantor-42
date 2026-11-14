@@ -67,7 +67,19 @@ def run():
   assert sha(out/'fitted-assembly-PROVISIONAL.step')==prints['preview_sha256']
   assert verification['preview_inventory_passed'] and verification['preview_reloaded_solids']==len(physical)
   cm=read(out/'collision-map.json');assert cm['complete'] and len(cm['contacts'])==len(a['unexpected_interferences'])
+  assert cm['geometry_sha256']==a['geometry_sha256']
+  for witness,contact in zip(cm['contacts'],a['unexpected_interferences']):
+   assert (witness['i'],witness['j'],witness['a'],witness['b'])==(contact['i'],contact['j'],contact['a'],contact['b'])
+   assert 'witness_error' not in witness and 'common_bounds_mm' in witness
+   assert abs(witness['replay_volume_mm3']-contact['volume_mm3'])<1e-6
   cw=read(out/'cap-witnesses.json');assert len(cw['witnesses'])==42
+  assert cw['geometry_sha256']==a['geometry_sha256']
+  diagnostic=read(out/'shell-diagnostics.json')
+  assert diagnostic['geometry_sha256']==a['geometry_sha256']
+  assert diagnostic['step_sha256']==checks['shell-central']['step_sha256']
+  assert diagnostic['stl_sha256']==checks['shell-central']['stl_sha256']
+  assert len(diagnostic['nonmanifold_edges'])==checks['shell-central']['mesh']['nonmanifold_edges']
+  assert len(diagnostic['solids'])==checks['shell-central']['solids']
   lengths=read(out/'length-fly.json')
   for w in lengths['conductors']:
    assert len(w['all_conductors'])==14 and abs(w['minimum_reserve_mm']-30.2)<1e-6
@@ -75,6 +87,7 @@ def run():
    assert not w['complete_cut_length_verified'] and not w['passed']
   assert read(out/'invariants.json')['passed']
   gates=read(out/'gates.json');assert len(gates['gates'])==8 and not gates['production_release']
+  if cw['solver_inconsistencies']:assert not gates['gates'][5]['passed']
   summary.append(dict(pitch_mm=pitch,solids=len(physical),all_pairs=a['total_pairs'],unexpected=len(a['unexpected_interferences']),boolean_operation_errors=len(a['boolean_errors']),manufacturing_checks_passed=sum(c['passed'] for c in checks.values()),gates=[g['passed'] for g in gates['gates']]))
  print(json.dumps(dict(artifact_and_input_hashes='PASS',independent_pair_coverage='PASS',pitches=summary),indent=2))
 if __name__=='__main__':run()

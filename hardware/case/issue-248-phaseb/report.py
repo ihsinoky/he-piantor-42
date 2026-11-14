@@ -11,7 +11,10 @@ def run():
   assert len(a['exact_results'])==a['exact_candidates']
   hits=a['unexpected_interferences'];flyhits=[r for r in hits if 'Fly-170mm' in (r['a'],r['b'])]
   fitted=a['passed'];motion=s['geometric_motion_passed'];retention=read(out/'retention-check.json');service=fitted and motion and inv['passed'] and retention['local_geometry_passed']
-  gate=[fitted,all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c['passed'],v['passed'] and all(p['envelope_passed'] for p in m['parts']),v['preview_exists'] and v.get('preview_inventory_passed',False)]
+  cw=read(out/'cap-witnesses.json');cm=read(out/'collision-map.json')
+  assert cw['geometry_sha256']==cm['geometry_sha256']==a['geometry_sha256']
+  assert cm['complete'] and len(cm['contacts'])==len(hits)
+  gate=[fitted,all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c['passed'] and not cw['solver_inconsistencies'],v['passed'] and all(p['envelope_passed'] for p in m['parts']),v['preview_exists'] and v.get('preview_inventory_passed',False)]
   manufacture_failures='; '.join(f"{r['part']}: {r['solids']} solids, {r['mesh']['nonmanifold_edges']} nonmanifold STL edges, relative volume error {r['mesh']['volume_relative_error']:.9g}" for r in v['checks'] if not r['passed'])
   cap_reason=f"Minimum reported after 0.50 allowance {min(r['remaining_gap_mm'] for r in c['keys']):.6f} mm; physical skirt gate OPEN"
   if pitch==17 and not c['passed']:cap_reason+='; kernel reports zero distance with witnesses outside shell bounds, so no physical-contact or clearance verdict is certified'
@@ -66,7 +69,7 @@ Fly: one valid connected swept solid, **{lf['fly']['length_mm']:.9f} mm**, R5, v
 |---|---:|---|---|
 {env}
 
-STEP/STL meshes are independently reloaded in [{pitch}mm/export-verification.json]({pitch}mm/export-verification.json), including edge manifoldness, degeneracies and volume agreement. A multi-solid print remains failed even when its bounding envelope fits. Each print has an SVG drawing and the numerical dimension register. All geometry is in assembly coordinates; translate each print's lowest Z to the bed in the slicer. The fitted preview is [{pitch}mm/fitted-assembly-PROVISIONAL.step]({pitch}mm/fitted-assembly-PROVISIONAL.step).
+STEP/STL meshes are independently reloaded in [{pitch}mm/export-verification.json]({pitch}mm/export-verification.json), including edge manifoldness, degeneracies and volume agreement. [shell-diagnostics.json]({pitch}mm/shell-diagnostics.json) localizes each rejected mesh edge and records every shell solid's volume and bounds. At 17 mm the twelve nonmanifold edges block slicing qualification even though the STEP reports one valid solid. At 16 mm the disconnected south section (1772.22 mm³, reported separation 0.20 mm) blocks qualification as one printable central shell. Repairing these would require validated topology reconstruction or a geometric connection that passes all unchanged gates; no mesh welding, material deletion, bridge through a key well or relaxed edge test is used. A multi-solid print remains failed even when its bounding envelope fits. Each print has an SVG drawing and the numerical dimension register. All geometry is in assembly coordinates; translate each print's lowest Z to the bed in the slicer. The fitted preview is [{pitch}mm/fitted-assembly-PROVISIONAL.step]({pitch}mm/fitted-assembly-PROVISIONAL.step).
 
 Planning cost for the **printed case set plus new retention**: {mass:.1f} g nominal PETG, {filament:.1f} g with support/waste; **USD {cash[0]:.2f}–{cash[1]:.2f}** material/hardware cash allowance. Estimated printer time {hours[0]:.1f}–{hours[1]:.1f} h. With USD1/machine-hour and USD20 assembly/finishing allowance: **USD {cost['costed_one_off_USD'][0]:.2f}–{cost['costed_one_off_USD'][1]:.2f}**. These are arithmetic planning allowances, not quotes, and do not include a rerun of a rejected design. Unchanged aluminium plates and electronics are excluded. [{pitch}mm/cost-estimate.json]({pitch}mm/cost-estimate.json) records every assumption.
 ''')
@@ -109,6 +112,8 @@ Every unexpected fitted pair and Boolean error is retained in each pitch's `audi
 
 '''+''.join(details)+'''
 ## Files and reproduction
+
+The continuation run resumed the retained final geometry without restarting the design. It re-read the live Issue #248 and all nine comments through the connected GitHub tool after the CLI network request was blocked, completed both collision witness maps, bound them to the final geometry hashes, localized the shell export failures, and regenerated this report and its manifests. The full fitted audit and independent export reload from the interrupted run are retained; their hashes, complete pair coverage and final preview inventories are independently checked by `verify_package.py`. The continuation does not claim a fresh complete CAD rebuild or convert any failed gate into a pass.
 
 Both pitch directories contain the fitted STEP, manufacturing STEP/STL/SVG for all nineteen printed parts, a dimension register, connected service-motion STEP envelopes, and raw gate evidence. PROVISIONAL is embedded in manufacturing filenames, STEP labels, STL headers and drawings. Plate drawings/manufacturing remain the unchanged D-038 package in #232; they are not reissued as printed plates. `parameters.json` is the single plateau-height authority. `artifact-sha256.json` binds this report, scripts and outputs; `inputs-sha256.json` binds all source CAD, layouts and PCB inputs. The runtime git contains checkpoint commits; no push, purchase or production release is performed.
 
