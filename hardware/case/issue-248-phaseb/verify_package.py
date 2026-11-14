@@ -71,6 +71,24 @@ def run():
    for pair in proof['reused_pairs']:
     for k in pair:assert oldphysical[k]['sha256']==physical[k]['sha256'] and oldphysical[k]['name']==physical[k]['name'] and oldphysical[k]['solid']==physical[k]['solid']
     assert oldresults[tuple(pair)]==newresults[tuple(pair)]
+  seatpath=out/'tray-seating-relief.json'
+  if seatpath.exists():
+   seat=read(seatpath);assert seat['geometry_sha256']==a['geometry_sha256']
+   parent=read(out/'E-boss-audit-parent.json');before=read(out/parent['index_file'])
+   assert sha(out/parent['index_file'])==seat['previous_geometry_sha256']==parent['geometry_sha256']
+   assert len(before)==len(idx)
+   unchanged=[]
+   for i,(old,new) in enumerate(zip(before,idx)):
+    if new['name'] not in ('tray-left','tray-right'):
+     assert old==new;unchanged.append(dict(index=i,name=new['name'],sha256=new['sha256']))
+   assert seat['unchanged_operands']==unchanged
+   seamproof=read(out/'seam.json');assert seamproof['previous_geometry_sha256']==seat['previous_geometry_sha256']
+   assert seamproof['geometry_sha256']==seat['geometry_sha256'] and 'geometry_rebind_proof' in seamproof
+   for r in seat['changes']:
+    old=next(w for w in before if w['name']==r['part']);new=next(w for w in idx if w['name']==r['part'])
+    assert old['sha256']==r['before_sha256'] and new['sha256']==r['after_sha256']
+    assert abs(old['volume_mm3']-new['volume_mm3']-r['removed_volume_mm3'])<1e-6
+    assert r['new_shell_common_mm3']<1e-6 and r['protected_palm_min_y_mm']==69.7001
   prints=read(out/'manufacturing.json');verification=read(out/'export-verification.json');checks={r['part']:r for r in verification['checks']}
   assert len(prints['parts'])==len(checks)==19
   assert verification['geometry_sha256']==sha(out/'assembly-index.json')

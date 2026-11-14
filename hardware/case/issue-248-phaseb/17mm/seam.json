@@ -1,6 +1,6 @@
 {
   "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
-  "geometry_sha256": "2c0e4cc97dd768cc12a08f22f86056b14e3dbc101a490f9f06790a3d22815b88",
+  "geometry_sha256": "02f390f12782526c80406c881868b390773f653711df9f6b6a5000ece0f1de2f",
   "rule": "Shell ownership ends at full aluminium blank silhouette, including apertures. Central ownership is the component containing bay datum (0,20); external south perimeter rim is outside that footprint. North strips obey the same silhouette boundary. No bridge over a key well.",
   "plate_boundary_source": "unchanged #232 dimensions.json blank_outline_xy_mm, not deck_outline and not aperture edges",
   "out_of_ownership_fragments": [
@@ -3550,5 +3550,7 @@
   "authorized_skin_void_method": "Exact CAD cylinders: south radius2.55 through; north radius1.1 through and radius2 counterbore only at top1mm. No polygon hole approximation and no blanket radius2 roof exception.",
   "ownership_passed": true,
   "skin_passed": true,
-  "plate_contact_passed": true
+  "plate_contact_passed": true,
+  "previous_geometry_sha256": "2c0e4cc97dd768cc12a08f22f86056b14e3dbc101a490f9f06790a3d22815b88",
+  "geometry_rebind_proof": "Only the two tray operands changed; shell/strip/plate serialized operand hashes unchanged, listed in tray-seating-relief.json. All ownership/skin/seam operands identical."
 }

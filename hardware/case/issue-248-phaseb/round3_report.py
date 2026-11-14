@@ -37,6 +37,9 @@ Tray route relief is an explicit conservative union of the projected conductor p
   save(out/'round3-comparison.json',comparison)
   text+=f'### Round 3 — {pitch} mm\n\n'
   text+=f"Exhaustive audit: {a['assembly_solids']} constituents, {a['total_pairs']} unordered pairs; {a['aabb_rejected_pairs']} AABB exclusions, {len(a['intended_pairs'])} explicit own mates, {a['exact_candidates']} exact Commons, {len(a['boolean_errors'])} Boolean errors. Threshold stays 1e−6 mm³. All gates bind to assembly-index.json; no prior PASS certifies changed operands.\n\n"
+  if (out/'tray-seating-relief.json').exists():
+   seat=get('tray-seating-relief');reuse=get('audit-E-restoration-reuse')
+   text+=f"Final tray seating removes {sum(r['removed_volume_mm3'] for r in seat['changes']):.9f} mm³ only from trays north of the protected palm band. The two shell/tray contacts clear to zero Common. Shell, plate, POM and wire operands are byte-identical across that change. The full unordered-pair audit is re-enumerated; {reuse['reused_pair_count']} exact current-round results are reused only when both serialized operand hashes, names and indices match. Every changed-tray pair is recomputed. The independent package verifier replays that proof; all service/material/export gates rerun on the new index. Seam proof rebinding likewise verifies every unchanged shell/plate operand. See tray-seating-relief.json and audit-E-restoration-reuse.json.\n\n"
   text+='| Collision category | Tuning | Round 3 |\n|---|---:|---:|\n'+'\n'.join(f'| {k} | {before[k]} | {after[k]} |' for k in sorted(before.keys()|after.keys()))+'\n\n'
   text+='| Side | Longest finished mm | Routed mm | Connected reserve mm | Minimum radius mm |\n|---|---:|---:|---:|---:|\n'
   for w in lf['conductors']:text+=f"| {w['side']} | {w['cut_length_upper_mm']:.6f} | {w['longest_mm']:.6f} | {w['minimum_reserve_mm']:.6f} | {min(r['minimum_bend_radius_mm'] for r in w['all_conductors']):.6f} |\n"

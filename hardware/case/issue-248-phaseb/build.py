@@ -51,7 +51,7 @@ def gh(side):
  return prism(h,8.65,4.25).fuse(prism(p,8.75,4.15)),h.union(p)
 def make(pitch):
  out=HERE/f'{pitch}mm';out.mkdir(exist_ok=True)
- for name in ('retention-completion.json','support-restoration.json'):
+ for name in ('retention-completion.json','support-restoration.json','tray-seating-relief.json'):
   p=out/name
   if p.exists():
    archive=out/'evidence';archive.mkdir(exist_ok=True)
@@ -160,11 +160,18 @@ def make(pitch):
  wires,wm=make_routes()
  fixed.update(wires)
  # Cut real case-only routing clearance and service relief; never alter boards or plates.
+ seating_meta=[]
  for side in ('left','right'):
   q=fixed['tray-'+side]
   # Seat the low cover on the remade bay rim; the aluminium plates are untouched.
   bayseat=clean(footprint.difference(decks))
   q=q.cut(prism(bayseat,PLATE-2,20))
+  # Raised-shell ownership also seats against the tray rim outside aluminium.
+  # Only tray material is relieved; preserve the entire protected palm band.
+  seating=fixed['shell-central'].intersect(prism(box(-300,-200,300,69.7001),-20,70))
+  if seating is not None:
+   before_seat=q.volume;q=q.cut(Compound(children=list(seating)))
+   seating_meta.append(dict(part='tray-'+side,removed_volume_mm3=before_seat-q.volume,protected_palm_min_y_mm=69.7001,method='actual central-shell seating volume subtracted from tray only'))
   print(pitch,side,'pre-channel',q.is_valid,len(q.solids()),flush=True)
   # Projected 0.85 mm clearance grooves avoid pathological coincident sweep booleans.
   # Grooves are conservative subtractive case geometry, never a wire simplification.
@@ -192,6 +199,6 @@ def make(pitch):
   q=items[n].translate((0,0,-2.65));b=bounds(q)
   usb.append((n,prism(box(b[0][0],b[0][1]-30,b[1][0],b[1][1]),b[0][2],b[1][2]-b[0][2])))
  for n,q in usb:fixed[n]=q
- save_geometry(pitch,fixed,dict(wings=wm,route_channel_reservation=dict(geometry=mapping(channel),z_mm=[zlo,zhi],clearance_radius_mm=.87,method='union of sampled projected routes with one conservative common height interval; case trays only; source floor and E support material restored independently'),wire_sweep_checks=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()],fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
+ save_geometry(pitch,fixed,dict(wings=wm,round3_tray_seating_relief=seating_meta,route_channel_reservation=dict(geometry=mapping(channel),z_mm=[zlo,zhi],clearance_radius_mm=.87,method='union of sampled projected routes with one conservative common height interval; case trays only; source floor and E support material restored independently'),wire_sweep_checks=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()],fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
  print(pitch,'geometry checkpoint saved',flush=True)
 if __name__=='__main__':make(int(sys.argv[1]))
