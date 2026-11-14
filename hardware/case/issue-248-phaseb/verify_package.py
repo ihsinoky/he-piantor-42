@@ -166,6 +166,13 @@ def run():
   if cw['solver_inconsistencies']:assert not gates['gates'][5]['passed']
   usb=read(out/'usb.json');service=read(out/'service.json');caps=read(out/'caps.json');inv=read(out/'invariants.json');ret=read(out/'retention-check.json')
   for data in (lengths,usb,service,caps,inv,ret):assert data['geometry_sha256']==a['geometry_sha256']
+  assert [r['side'] for r in service['sides']]==['left','right']
+  for result in service['sides']:
+   per_side=read(out/('service-'+result['side']+'.json'))
+   assert per_side['geometry_sha256']==a['geometry_sha256'] and per_side['side']==result
+   assert result['passed']==(not result['unexpected'] and not result['boolean_errors'])
+   assert abs(result['release_mm']-30.2)<1e-6
+  assert service['geometric_motion_passed']==all(r['passed'] for r in service['sides'])
   flyhits=[r for r in a['unexpected_interferences'] if 'Fly-170mm' in (r['a'],r['b'])]
   hardware_ok=read(out/'hardware-inventory.json')['all_E_replacements_passed']
   seam=read(out/'seam.json');assert seam['geometry_sha256']==a['geometry_sha256']
