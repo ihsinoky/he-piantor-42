@@ -96,9 +96,10 @@ def run(pitch,stage="all"):
       v=volume(e,s)
       if v>1e-6:hits.append(dict(part=n,solid=k,wire=i+1,volume_mm3=v))
      except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
-   # Concentric moving turns remain mutually separated analytically. Also
-   # check every moving turn against the fixed inlet/upper fan pieces, which
-   # the inherited broad own-harness exclusion did not inspect.
+   # Check every moving turn against fixed inlet/upper fan pieces.
+   # Frozen round-3 turn separation is not assumed: its moving/moving
+   # fitted crossings remain disqualifying in the independent fitted gate.
+   # The inherited broad own-harness exclusion did not inspect fixed fans.
    own_fan_hits=[]
    for j in range(14):
     for which,fan in enumerate(fixed_fans(sgn,j)):
