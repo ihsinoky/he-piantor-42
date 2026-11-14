@@ -23,6 +23,6 @@ def run():
    net_ok=mn==wn or (side=='right' and pin==7 and mn=='MUX_EN1' and wn=='WING_EN')
    result.append(dict(side=side,wire=pin,wing_pin=pin,main_pin=pin,wing_net=wn,main_net=mn,wing_endpoint_mm=a[0],main_endpoint_mm=b[-1],maximum_endpoint_error_mm=error,passed=error<1e-6 and net_ok))
  assert all(r['passed'] for r in result)
- save(HERE/'pinmap-round5.json',dict(passed=True,electrical_contract='D-024 / #235: each harness cavity 1→1 through 14→14; J3 pin7 is independent Main EN1 to Wing WING_EN',wing_coordinate_source='hardware/kicad/qualification/issue-235-wing-round2/REPORT.md line17 and connector/placement.json: right pin1 X35.125; left pin1 X-18.875',main_coordinate_source='native J2/J3 pad X=-8.125..8.125, B1 declared assembly poses, outlet local v=5.55',routes_sha256=sha(HERE/'routes-round5.json'),wires=result))
+ save(HERE/'pinmap-round6.json',dict(passed=True,electrical_contract='D-024 / #235: each harness cavity 1→1 through 14→14; J3 pin7 is independent Main EN1 to Wing WING_EN',wing_coordinate_source='hardware/kicad/qualification/issue-235-wing-round2/REPORT.md line17 and connector/placement.json: right pin1 X35.125; left pin1 X-18.875',main_coordinate_source='native J2/J3 pad X=-8.125..8.125, B1 declared assembly poses, outlet local v=5.55',routes_sha256=sha(HERE/'routes-round6.json'),wires=result))
  print('28 native pad/physical outlet correspondences PASS',flush=True)
 if __name__=='__main__':run()
