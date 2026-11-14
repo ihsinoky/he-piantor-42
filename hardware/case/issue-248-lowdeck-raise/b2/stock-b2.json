@@ -1,0 +1,115 @@
+{
+  "screen_date": "2026-11-14",
+  "batch_assumption_complete_units_including_spares": 15,
+  "required": {
+    "headers": 120,
+    "housings": 120,
+    "terminals": 840,
+    "double_ended_leads": 420
+  },
+  "preferred_stock_10x": {
+    "headers": 1200,
+    "housings": 1200,
+    "terminals": 8400,
+    "double_ended_leads": 4200
+  },
+  "JLC_direct_HTTP": {
+    "header": {
+      "part": "781715007",
+      "lcsc_code": "C564184",
+      "source_html": "sources/jlc-header.html.gz",
+      "overseasStockCount": [
+        0
+      ],
+      "canPresaleNumber": [
+        0
+      ],
+      "preMinPurchaseNum": [
+        24
+      ]
+    },
+    "housing": {
+      "part": "781725007",
+      "lcsc_code": "C588525",
+      "source_html": "sources/jlc-housing.html.gz",
+      "overseasStockCount": [
+        1
+      ],
+      "canPresaleNumber": [
+        1
+      ],
+      "preMinPurchaseNum": [
+        42
+      ]
+    },
+    "terminal": {
+      "part": "781720410",
+      "lcsc_code": "C505105",
+      "source_html": "sources/jlc-terminal.html.gz",
+      "overseasStockCount": [
+        12680
+      ],
+      "canPresaleNumber": [
+        12680
+      ],
+      "preMinPurchaseNum": [
+        141
+      ]
+    }
+  },
+  "lcsc_direct_HTTP": {
+    "header": 403,
+    "housing": 403,
+    "terminal": 403,
+    "stock_verdict": "unknown, not zero"
+  },
+  "cached_web_results_indicative_only": {
+    "lcsc_terminal": {
+      "stock": 24900,
+      "url": "https://www.lcsc.com/product-detail/C505105.html"
+    },
+    "lcsc_housing": {
+      "stock": 0,
+      "url": "https://www.lcsc.com/product-image/C588525.html"
+    },
+    "mouser_header": {
+      "stock": 5567,
+      "minimum": 1,
+      "observation": "indexed two weeks ago; discontinuance links; direct fetch timed out"
+    },
+    "mouser_housing": {
+      "stock": 48311,
+      "minimum": 1,
+      "observation": "indexed two months ago; direct fetch timed out"
+    },
+    "mouser_terminal_loose": {
+      "stock": 23210,
+      "minimum": 1
+    },
+    "mouser_terminal_cut_strip": {
+      "stock": 35500,
+      "minimum": 100
+    },
+    "digikey_header_marketplace": {
+      "stock": 540000,
+      "vendor": "WEC",
+      "lifecycle": "obsolete"
+    },
+    "digikey_housing_marketplace": {
+      "stock": 554443,
+      "vendor": "WEC",
+      "lifecycle": "obsolete"
+    },
+    "digikey_terminal": {
+      "stock": 139621,
+      "url": "https://www.digikey.com/en/products/detail/molex/0781720410/2421925"
+    },
+    "mouser_797581010": {
+      "stock": 14947,
+      "length_mm": 300,
+      "observation": "indexed series listing; not compatible with <=200mm as sold"
+    }
+  },
+  "verdict": "FAIL current JLC header stock; fallback inventory indicative and lifecycle unresolved; compliant custom cable not yet procured",
+  "no_orders_or_reservations": true
+}
