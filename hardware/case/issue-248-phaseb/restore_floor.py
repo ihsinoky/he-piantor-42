@@ -9,6 +9,10 @@ def run(pitch):
   if floor is not None:
    f=Compound(children=list(floor));before=q.volume;q=q.fuse(f)
    changes.append(dict(part=n,restored_floor_volume_mm3=q.volume-before,top_z_mm=2))
+  if read(HERE/f'{pitch}mm/measurements.json').get('splice_relocations'):
+   for y in (-8,55):
+    for x in (0,15):
+     if (x<3.5)==(side=='left'):q=q.cut(cylinder(x,y,.85,-.01,5.52))
   groups[n]=list(q.solids())
  meta=read(HERE/f'{pitch}mm/measurements.json')
  for k in ('status','pitch_mm','parameters'):meta.pop(k,None)

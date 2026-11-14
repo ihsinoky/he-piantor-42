@@ -17,6 +17,11 @@ def run(pitch):
   for j in range(i):
    gap,proof=boundary_distance(shell[i],shell[j]);separation.append(dict(solids=[i,j],gap_mm=gap,proof=proof))
  footprint=unary_union([regions[n] for n in ('plateau','slope','low_south')])
+ first=read(HERE/'first-candidate'/f'{pitch}mm/audit.json')
+ current=read(out/'audit.json')
+ oldpairs={tuple(sorted([r['a'],r['b']])) for r in first['unexpected_interferences']}
+ newpairs={tuple(sorted([r['a'],r['b']])) for r in current['unexpected_interferences']}
+ save(out/'tuning-comparison.json',dict(geometry_sha256=sha(out/'assembly-index.json'),first_candidate_contacts=len(first['unexpected_interferences']),current_contacts=len(current['unexpected_interferences']),cleared_named_pairs=[list(r) for r in sorted(oldpairs-newpairs)],new_named_pairs=[list(r) for r in sorted(newpairs-oldpairs)],remaining_named_pairs=[list(r) for r in sorted(newpairs&oldpairs)]))
  save(out/'tuning-blockers.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),fixed_roof_conflicts=conflicts,central_shell_components=len(shell),central_shell_separations=separation,settled_footprint_components=[dict(area_mm2=p.area,bounds_mm=list(p.bounds)) for p in polygons(footprint)],shell_connection_blocker='Disconnected south surface footprint at 16 mm: a bridge would add exterior footprint or cross an excluded well. No bridge/deletion used.' if len(shell)>1 else None,wiring_blocker='See exhaustive constituent collision-map and continuous service-motion results. Candidate is not accepted unless all contacts clear; no strand/strand overlap exemption.'))
  print(pitch,'required-skin conflicts',len(conflicts),'shell solids',len(shell),flush=True)
 if __name__=='__main__':run(int(sys.argv[1]))

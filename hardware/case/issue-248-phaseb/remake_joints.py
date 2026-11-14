@@ -28,7 +28,8 @@ def run(pitch):
      a,b=pts[j:j+2]
      if min(a[2],b[2])>6.37:continue
      g=LineString([(a[0],a[1]),(b[0],b[1])]).buffer(.87,quad_segs=8)
-     cut=prism(g,min(a[2],b[2])-.87,abs(a[2]-b[2]) +1.74)
+     z=max(2.,min(a[2],b[2])-.87)
+     cut=prism(g,z,max(a[2],b[2])+.87-z)
      if volume(q,cut)>1e-6:q=q.cut(cut)
   groups[n]=list(q.solids())
   print(pitch,n,q.is_valid,len(q.solids()),flush=True)

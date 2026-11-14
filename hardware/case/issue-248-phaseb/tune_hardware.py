@@ -1,6 +1,8 @@
 """M2x10 replacement at all eight unchanged E-stack seats."""
 from common import *
 def run(pitch):
+ from restore_floor import run as preserve_floor
+ preserve_floor(pitch)
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);groups={};inventory=[]
  for n,k,q in raw:groups.setdefault(n,[]).append(q)
  for n,ss in list(groups.items()):
