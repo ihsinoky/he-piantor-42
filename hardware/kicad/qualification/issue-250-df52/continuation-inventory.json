@@ -1,0 +1,657 @@
+{
+  "captured_at": "2026-11-14T02:49:43.380800+00:00",
+  "files": {
+    "hardware/kicad/qualification/issue-250-df52/issue.json": "def87f3625514b80d8fe869749ee710200c83c78709c6dc364028dd513cc79c3",
+    "hardware/kicad/qualification/issue-250-df52/build.py": "d7c471c9e33e23603b119e2a61abf3679cc06f23929305c43792cb35b0b22470",
+    "hardware/kicad/qualification/issue-250-df52/DF52.kicad_sym": "963a6042bdb728c2ed22df16bac72769c2c6b367823550709de613c873dd51b8",
+    "hardware/kicad/qualification/issue-250-df52/construction.json": "093a5667db0d20cd5da8b543776741e244b2da216c2aee419a6c27186d741b97",
+    "hardware/kicad/qualification/issue-250-df52/route.py": "d87ce1125f5a9f9172d722fb5c1910446ae5b3f1c348cc5485458730f56c46f6",
+    "hardware/kicad/qualification/issue-250-df52/setup-runtime.py": "7f01e29e2ff07015e9f3dc385ef5ed2f0c709e7b7e446ea251032db3ae255611",
+    "hardware/kicad/qualification/issue-250-df52/run.sh": "7589e986aabcac21daffaaa6e97dc526707aea20bc81fcef6bf682d087463ef2",
+    "hardware/kicad/qualification/issue-250-df52/toolchain.json": "a9bd993898533fe15f3e887689fe460e11e56dd1924c6e5d87cf549be4ff6ac4",
+    "hardware/kicad/qualification/issue-250-df52/verify.py": "92ae6b21885a8d2e8fbdccdb3a658c1444687c10a7a2a2863f3aad95a459fc63",
+    "hardware/kicad/qualification/issue-250-df52/finalize.py": "be9003246626ac8901e08f9cbf8fd98523ec57bd21127d5c4bc77de9969edeb3",
+    "hardware/kicad/qualification/issue-250-df52/schematic.py": "a397db8f63a9f8d3ae1b0c44970e026b6b3121c5d18f7b5a0f9bd84566d4da2c",
+    "hardware/kicad/qualification/issue-250-df52/cleanup.py": "44e1e096f891089880cbf9330509f5b694a9f006a26ace72ae1fdc255fe9c5b5",
+    "hardware/kicad/qualification/issue-250-df52/plane-components.py": "cba8c04271b40026afb6d91f2bc8aa5a41a15d6d7483959713e7b983e5a890d4",
+    "hardware/kicad/qualification/issue-250-df52/qualification-summary.json": "9eaed195a19598a60ae0574e6f4e225c07763379cb5f1f73622148d532b0ccf8",
+    "hardware/kicad/qualification/issue-250-df52/prepare-repair.py": "28717cebb07908fff88aff2026c4b5dd9274f14ce4c7897075cd701e8a6045c9",
+    "hardware/kicad/qualification/issue-250-df52/common.py": "4f16b74866b89d6e357639f2daeb99ca63600bfdbf1a875731483af2ff8a7e4c",
+    "hardware/kicad/qualification/issue-250-df52/extract-power.py": "e8c505115f0db752834ec2613f28b324672057c812e2d032f63844bfc23c8cdc",
+    "hardware/kicad/qualification/issue-250-df52/extract-ground.py": "c8312fcc7c5e115d6f8b3095cc7c940708e104df50b67ac8dea34abc6f4d6f0a",
+    "hardware/kicad/qualification/issue-250-df52/summarize-resistance.py": "9cc588d43813e8328d41951c4ee2b331eb775597e1eaea1704ea284a904259fc",
+    "hardware/kicad/qualification/issue-250-df52/verify-ground-model.py": "d67854c31f0b6f1cedca97f9e72abd2bdf2e75cc2af0fcfe7b6a2c8fd312863c",
+    "hardware/kicad/qualification/issue-250-df52/extract-wing.py": "ada9b63e7adb937a93b883a9ceee1cbd978d59b3e5296327bbd4dde5b6764dd5",
+    "hardware/kicad/qualification/issue-250-df52/solver-provenance.json": "30e42cef22099b660c95b7bcac040144762063e51f7e074e53ba9ff75c27107c",
+    "hardware/kicad/qualification/issue-250-df52/repair-vias.py": "2571f524a8d6b2d4ff48a47c9f7ffa2491b8cf7eb9ea6c5e41964dfcfc167d7d",
+    "hardware/kicad/qualification/issue-250-df52/main-fanout.py": "269172bffe43d38de859422bb2274dc0ef53b084fee6bc946ac7790e7a5017a9",
+    "hardware/kicad/qualification/issue-250-df52/harness.py": "57220859b9d77e9807eb24b0168ac830419a606baba4e58c4811c36f6ef93859",
+    "hardware/kicad/qualification/issue-250-df52/extract-main.sh": "e784d2078460431a06d04ed6941b0ea6f8af0b17e334414bb3d9c697201608dc",
+    "hardware/kicad/qualification/issue-250-df52/power-extraction-final.json": "0f1b6c69f231988f5f69bf0d52302007655d4683cc1992f5d788664f1484f14f",
+    "hardware/kicad/qualification/issue-250-df52/ground-extraction-final.json": "14d014c053cb6b70fe7133c0c48132592c471745cd4d0e7bc4c5da3eea885a52",
+    "hardware/kicad/qualification/issue-250-df52/resistance-summary.json": "8945fea2da73eaf4d215f07c41f62cb54be1d71423146eeda05f084383a79ecb",
+    "hardware/kicad/qualification/issue-250-df52/ground-model-verification.json": "2ae3be07211bad9ca470180f95db2cb7a8b13bcf11d3c77de998ac1b2b981185",
+    "hardware/kicad/qualification/issue-250-df52/scope.py": "bee0ec70547fcce42e037cdef1fdf4307a66db2312aa67314c367c1d1516e451",
+    "hardware/kicad/qualification/issue-250-df52/scope-summary.json": "64f7b703e5611ec4fa2cb8fe678faf7baf5ccd0f895c2f25e8bb8f01da8ec806",
+    "hardware/kicad/qualification/issue-250-df52/power-budget.py": "2b88e0edc54f6ee3cd3b8ac92fa0fac90a84ce489582edf1a274b99415fa3dd6",
+    "hardware/kicad/qualification/issue-250-df52/restore-17r-signal.py": "1f8a5a36d9b62e43b2d8b62c93b8326148cf3e9e04c769ad0cbd0acd67225365",
+    "hardware/kicad/qualification/issue-250-df52/power-budget.json": "4fd79c2bb879b64c03dc44af98652ed58313343055004fbe394c55b6a26f3264",
+    "hardware/kicad/qualification/issue-250-df52/power-sensitivity.csv": "0a4473831ec056f4b773e697f2e4d4043e2dd82cddcb1fa6c90b7382f27c9f10",
+    "hardware/kicad/qualification/issue-250-df52/connector/check-stock.py": "0647dedca13df82367c38aa32bb5c67c24e37977b31b33a6d64d72cb30e46b7d",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock.json": "ec63d540e962da5a03c6b1b5786ea947eb52d8de3bded5a51f33b13b8e93359d",
+    "hardware/kicad/qualification/issue-250-df52/connector/hirose-df52-2024.pdf": "c561851170a058b70db64535c1527d651429eaf4800c671ec510e874dc696042",
+    "hardware/kicad/qualification/issue-250-df52/connector/hirose-df52-legacy.pdf": "b0b2ae0a48096942e4de68fc21a9ee9219fe4fa568c88f08f8616ad1d159ba72",
+    "hardware/kicad/qualification/issue-250-df52/connector/fallback-browser-observations.json": "b0fb85f7e5f0db98280a65f4d1d652324670e61edede97b2c558261152589744",
+    "hardware/kicad/qualification/issue-250-df52/connector/PROVENANCE.md": "df1758f1ca757df68c70a4db261c62323322fed94a29bbe877e9ba518c9770a6",
+    "hardware/kicad/qualification/issue-250-df52/DF52.pretty/DF52-14S-0.8H_14.kicad_mod": "e2aae0e1269535d1718fbe0ee97fd5c8edd4b37ccd01e6ce274b85d71738fb58",
+    "hardware/kicad/qualification/issue-250-df52/main/input.kicad_pcb": "548e7c2eaafa4b1bc6aae3e19708a7e785f857377a543a660022596c99041cc7",
+    "hardware/kicad/qualification/issue-250-df52/main/input.kicad_pro": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+    "hardware/kicad/qualification/issue-250-df52/main/main.kicad_pro": "7e8c57ca47f38ad370fc9fa67c574e62e5b4eb118c8a894e2e49288be0707c45",
+    "hardware/kicad/qualification/issue-250-df52/main/fp-lib-table": "c7f06d4c85cfa451be8f232ee1f9e18d34ddecea6947be243678003ffa0a299e",
+    "hardware/kicad/qualification/issue-250-df52/main/construction.json": "8f304325fff8616e63ef7c1247b4fed2bd86548adbc28012b817c02c84cdda8e",
+    "hardware/kicad/qualification/issue-250-df52/main/route-execution.json": "ac610c7cac238db3bc3c9cd7db0cc11bfd0faaf87ef97cd0023f35f33809dad9",
+    "hardware/kicad/qualification/issue-250-df52/main/main.kicad_pcb": "541f6ef35315999c49841fab3d70ff019dfa08f235bbe3780f51bb578219a32c",
+    "hardware/kicad/qualification/issue-250-df52/main/main.kicad_prl": "c231d93b548414fbecb64ae77ea2a8b2e8fee0f7464124c34d33489cb3d59cca",
+    "hardware/kicad/qualification/issue-250-df52/main/drc.json": "a40e8cc57a6beb8cd4c73ac524ae6f07890d1b8081533eeabe26174422524a1f",
+    "hardware/kicad/qualification/issue-250-df52/main/main.kicad_sch": "62c55598eadd94930293ed221213ed3f0fd22c10620388391207a80c43df42cf",
+    "hardware/kicad/qualification/issue-250-df52/main/review.kicad_sym": "590b70ef80e3b08ac97a12e215e9946b53c24aad14add5ed8efae548b639fe3a",
+    "hardware/kicad/qualification/issue-250-df52/main/sym-lib-table": "8d80bbc8f04d71af2dc2bc8916d48990c4173b12535a1665ce01ea19b6dc3f2a",
+    "hardware/kicad/qualification/issue-250-df52/main/erc.json": "d9034f13e6d7beab735ebe74a9c77178b9f9a6b7ca26aabfc74c08e321b85096",
+    "hardware/kicad/qualification/issue-250-df52/main/via-pad-all-pairs.csv.gz": "53c4097ee7a6b9c53e61f526e898357024980c3315288d5a3bc53e3ce82505e2",
+    "hardware/kicad/qualification/issue-250-df52/main/qualification.json": "0ccb9cf89a3131e9c9bc05b2b38f16659ac3092b562f1bf5df807beed8a1d981",
+    "hardware/kicad/qualification/issue-250-df52/main/cleanup.json": "01fe36f58df5a3bc6c144af31bca949d75d1710fe7742adcf4fa6eaaff73dbfb",
+    "hardware/kicad/qualification/issue-250-df52/main/fanout.json": "243875002a60e9cfe57298fff63dac5e744bdc5087b2a5857da301739d1ae861",
+    "hardware/kicad/qualification/issue-250-df52/main/snapshot.json": "6f02e3249d6588b641cac57bdd9ac6bdfe488ea646a6f41b5c565d2e0004bb29",
+    "hardware/kicad/qualification/issue-250-df52/main/assessment.json": "caabccbccc307525e3d08c68b42c77576caaa1e28c0627079c8fd5465e9aac2c",
+    "hardware/kicad/qualification/issue-250-df52/main/connectivity.json": "170edfe934a166df2242c8c09dd805e68b935fb4800c85a00fec86e3014dff95",
+    "hardware/kicad/qualification/issue-250-df52/main/scope.json": "3d08f0c460b97d6e560c91d0167ab4fab997da16143fe9b460a76a4c4018e572",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/input.kicad_pcb": "d7213652025cbf91633b72c9d8c800e0800280ab8b31aabfd4b0f3a09e3dc463",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/input.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/input.kicad_prl": "6ba8ccccf65b78b2145017eb7e6e1038adfef5ae2e8ce41a6c51f677db371ce6",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/main.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/fp-lib-table": "4d8de097031dd0fa902c11832450600545eff8e47a38c7fb10173ccc40dedfa8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/construction.json": "96e9082543ff6f3631c09974c90e74d6f81b9164565e563f910df7e6a9a5d280",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/route-execution.json": "3abedd52f95b270f0dd94cd1442391baf1c995f3dd22433a9a5a43a6fa930c5e",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/main.kicad_pcb": "72b0e96ba128f1502c0ad6551f06d622583a2cfe3b9851fa786fa0e14fbdb6ce",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/drc.json": "b00b790f47f5f2c0e991a998c98f1571ad784b9810ac3b94300a425ab3d1d1b5",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/via-pad-all-pairs.csv.gz": "f5753d709f2ee59a899a8aaf3ec31f02b4663a3515cb41c2c1944ebadeb29ff2",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/qualification.json": "c7572ede0253cc01c275c38df7d53fb7cb56af3ab4803e87e6266760208b7f3e",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/main.kicad_prl": "c231d93b548414fbecb64ae77ea2a8b2e8fee0f7464124c34d33489cb3d59cca",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/cleanup.json": "16d3887832907534d397e9bdce93294610fdd1d5d89f1c4a5c838719e2570ba9",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/via-width-repair.json": "f6f1f9c5602a0a58f3c2839a39de364c882773713d87ddd730be1974ba9bf8e9",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/resistance-extraction.json": "f6a1ac9b8911ae1ada07b770e222eb47aa9d6f12930028e0ee412655a18e3183",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-left/scope.json": "eb7a2b5573ea921d4cd1b9ff6c8dbd31a04a19f0758ac3afd366644ad21e9480",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/input.kicad_pcb": "a3381734f9504a9545d98f6d3d8e7ece9649bb5026d2a57e755007eb8d136abb",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/input.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/input.kicad_prl": "6ba8ccccf65b78b2145017eb7e6e1038adfef5ae2e8ce41a6c51f677db371ce6",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/main.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/fp-lib-table": "4d8de097031dd0fa902c11832450600545eff8e47a38c7fb10173ccc40dedfa8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/construction.json": "ef6c84d738664a748456c91f5a0829fcb280ce597ce770fbc776bea972bc29f0",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/route-execution.json": "43528fd94c9a04a4ba44db70014c9bd37a311d83a824abed301873deb016ed67",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/main.kicad_pcb": "22871ed835e2e88ed534124fc7050a2d93254af498a7f4e69ed5c7e1174d5577",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/drc.json": "395be146e2c624e0070bb3914925cbffadc7c6250293e81759bc0bb5897b23db",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/main.kicad_prl": "c231d93b548414fbecb64ae77ea2a8b2e8fee0f7464124c34d33489cb3d59cca",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/cleanup.json": "2ae2977aca8472e1ff3fd9027d0048d7416a6ffed4cef4a8c9b8467fc3a1507a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/via-pad-all-pairs.csv.gz": "99b34021ef017442e480f66f250d03c669f2d8a3cc2d733d3498f26b7c55be9c",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/qualification.json": "cfafd7e4ef362e1d4c6b2b41b108a94b2b1ec0f682467851c229f7d3918fdd14",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/resistance-extraction.json": "80855c1914c06a42c34dc744be60aa97bcc2b6af3396c26ea47c7390214e2e7c",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-16mm-right/scope.json": "96635f871461f924966bc516fb37a839d8c188d2a2c23438ab17bfb2267e1162",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/input.kicad_pcb": "2118b586eff8b616b0621fbaf015965cf7cb276e514f00ec88fb8b0be01bf8b2",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/input.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/input.kicad_prl": "6ba8ccccf65b78b2145017eb7e6e1038adfef5ae2e8ce41a6c51f677db371ce6",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/main.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/fp-lib-table": "4d8de097031dd0fa902c11832450600545eff8e47a38c7fb10173ccc40dedfa8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/construction.json": "3b8c094eca9db1b2ba9cc7c6d6bde5f68e6e2a48791df746643c8b96d998b506",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/main.kicad_pcb": "b6a6c4a87da770b835410f7e0cf07991fda8ed54816918f26c4987fed7957551",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/drc.json": "8c420a342f5b282045b785dd00710c13449661e8932d857067502726c419abcb",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/route-execution.json": "7550aaeb7dcdc073d2a04eb3f620995268064454ca7fdcc6eb91ad5a84766ef8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/cleanup.json": "d0143b2d0f0da8ea70fd6657920583bbe7d48f6fbf5cfaf8268be94b655392ce",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/via-pad-all-pairs.csv.gz": "5d34ba81fd7cf417ad9c1ac9fdaf29860455ac0848833c3e7e1d6e5e95a607b4",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/qualification.json": "cd1517489b0155664cafc6240bcc295ecbfc0c777fe0180010f50bdc3c28d1d9",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/main.kicad_prl": "c231d93b548414fbecb64ae77ea2a8b2e8fee0f7464124c34d33489cb3d59cca",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/via-width-repair.json": "3405b077ed68d0e4cc34f8af03fcd32b4b23887b768ad20300bebdf99fe5d6af",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/resistance-extraction.json": "5f948328bcce3577b8a3f83581cd59fe47497d1dc48b8b90c720ddd6ec79cc14",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-left/scope.json": "81b2011dbac9f5e3f9a01ae863da991d190f0ce9cac7c29817a95e84a096aa53",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/input.kicad_pcb": "b5f59ab0ef803b24349333f232f045bd2b3dcc8c1a2f24ce94af9111f5a0c1e7",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/input.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/input.kicad_prl": "6ba8ccccf65b78b2145017eb7e6e1038adfef5ae2e8ce41a6c51f677db371ce6",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/main.kicad_pro": "24bb6e0707d824d66f915911844315c85ccc1ccb475423846496bc425c949f8a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/fp-lib-table": "4d8de097031dd0fa902c11832450600545eff8e47a38c7fb10173ccc40dedfa8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/construction.json": "fcaa1c1957787f71b40029a267fb8af44d42005303b351672a81af1732e99140",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/route-execution.json": "695be76304feb3cadf749e7f5fb40668ec46f847f8463f7baa8b2cb46ffaa90c",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/main.kicad_pcb": "87b3c78cd4b438c3f75f6fdc19d3d8cf913984f400347968b8c21d7e9e985831",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/drc.json": "377d599aeba8c9b5909b58c860b6da07c8b2844c7290f37cbc4e9ba680883a8e",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/main.kicad_prl": "c231d93b548414fbecb64ae77ea2a8b2e8fee0f7464124c34d33489cb3d59cca",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/cleanup.json": "0f413637af9d4b7b41b75169383bf245c3b1acfb778096afe8dc8e16ed075e0a",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/via-pad-all-pairs.csv.gz": "f7f4af583e45bb83b81b4793e565a0984fb63fc54ed459ab05cf812ceb6fd8e3",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/qualification.json": "18858d0e9dc6ceefafa12bb5dbbf0b619f7f4e96c69873d6cb24c49c1a7576a8",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/via-width-repair.json": "ebada14103425b49235d4b987ed3c8a6449f08f838b9eb5a434c107d06a9c721",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/scope.json": "2db93db5b2210101d9b5b54cc8b77fab2585f0e932bbd8e9006ba6e6523ecf98",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/resistance-extraction.json": "aa6410b6df6e2022a1288026fcb142775e86a478aa691ffea61be7292181fffe",
+    "hardware/kicad/qualification/issue-250-df52/wing-rev4-17mm-right/rejected-target-moves.json": "2f29a50e4bd2042de8bd39b5d3a0a257f6336cc755e1c63b7b233932030e3e87",
+    "hardware/kicad/qualification/issue-250-df52/harness/mated-and-first-dress-local.step": "489a95943b84460b96ff03e19a0577a99ceb031371c5e39f8d7e7eac68374614",
+    "hardware/kicad/qualification/issue-250-df52/harness/main-J2.step": "451563d441b8ddd69991776a88cb7cd1cdcb329d73210729e540c4fa1682cb6a",
+    "hardware/kicad/qualification/issue-250-df52/harness/main-J3.step": "950c0d2f4cf87f750de7b2ebb671e8c7dd0f99dfdc038876da990b291acfcbc0",
+    "hardware/kicad/qualification/issue-250-df52/harness/wing-rev4-16mm-left-J_WING.step": "2e2a4be9e383068c5be2629de5c20829cd95f0a4e29cc5c02dc72879ab2422c1",
+    "hardware/kicad/qualification/issue-250-df52/harness/wing-rev4-16mm-right-J_WING.step": "eb40ddcf5f624f885c8900310cdc25ca10e65339b57049fcf245e8646eebc6ad",
+    "hardware/kicad/qualification/issue-250-df52/harness/wing-rev4-17mm-left-J_WING.step": "1988aa6a5bb3bd317270f223268c2f40318c40ed1d82aac328ce152bb035f81d",
+    "hardware/kicad/qualification/issue-250-df52/harness/wing-rev4-17mm-right-J_WING.step": "6deed70901b39c8035281fbea03a2b2a34db1b8df098a347ef5bf2db13f1c17d",
+    "hardware/kicad/qualification/issue-250-df52/harness/geometry.json": "f5584e5021698503b2a0d8ce8c731ab426fb7da53e2e8865c32286b2ca407da4",
+    "hardware/kicad/qualification/issue-250-df52/harness/SPEC.md": "7e8ee239ec33c664aaee7a0c688ba1aa70a8dfbc2422e2643d04f37001591a08",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/lcsc-housing.html.gz": "3cd9d3981c5b15a720dab11b09c2d00eaf5a72c06637b523714f61d6bdfa2d3e",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/lcsc-header.html.gz": "5ee5db34cd3fabfa84883acfbd4fc49613bae90217b844578c8299cef3d985f4",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/lcsc-terminal.html.gz": "5f0b8a1c8cd13fc0b5cce5f350c4b288e10bbbdefd8fdb2962a0716e25ffa51d",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/jlcpcb-header.html.gz": "cae3dd1716ef73b597eb64ed6bfce2bc82c0836686142cf5d9d6ee3614921276",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/jlcpcb-housing.html.gz": "35c33e5edcaf5adb7e29f9a6d9391ba59821e35a3c989098104d68ba06062d23",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/jlcpcb-terminal.html.gz": "68d835c3157ff9374cc93c21917aba2c70b0f738038d84aca0aa9382ecbba61e",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/mouser-header.html.gz": "86b6a79b1d56687bf72200390c874b5f93450b027805336ec348935079a906f8",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/mouser-housing.html.gz": "7b5452a1faba43a4933230ee57ad604720a180f17f2b8f0997db08a4a0b2accc",
+    "hardware/kicad/qualification/issue-250-df52/connector/stock-responses/mouser-terminal.html.gz": "9f7b29da99f8f158bf3cd0dc30b8265595b8beeea1908e7f251a86d9b73dab6e"
+  },
+  "qualification": [
+    {
+      "name": "main",
+      "board_sha256": "541f6ef35315999c49841fab3d70ff019dfa08f235bbe3780f51bb578219a32c",
+      "source_sha256": "4ae6ce07bb17eba2bb8f03d35dc4452e04f86ecb35db4ff1ff7ea153d72541f6",
+      "invariant_errors": [],
+      "cavity_contract_errors": [],
+      "native_drc_violations": 1,
+      "native_unconnected": 1,
+      "schematic_parity": 202,
+      "native_drc_types": {
+        "items_not_allowed": 1
+      },
+      "erc_violations": 0,
+      "erc_status": "tested",
+      "independent_unconnected": 1,
+      "wrong_net_contacts": 0,
+      "shorts": [],
+      "disconnected": {
+        "MUX_OUT_B": [
+          [
+            "J3.11",
+            "R12.1"
+          ],
+          [
+            "J2.11"
+          ]
+        ]
+      },
+      "nets_checked": 40,
+      "via_count": 129,
+      "via_pad_pairs": 30315,
+      "via_pad_min_mm": 0.145,
+      "via_pad_below_0p10": [],
+      "via_pad_below_0p125": 0,
+      "via_pad_target_class": ">=0.125 mm",
+      "main_GND_below_0p30_disclosed": 43,
+      "minimum_power_width_mm": 0.1,
+      "width_below_floor": 0,
+      "all_components_B_Cu": null,
+      "routing_pass": false,
+      "full_gate_pass": false
+    },
+    {
+      "name": "wing-rev4-16mm-left",
+      "board_sha256": "72b0e96ba128f1502c0ad6551f06d622583a2cfe3b9851fa786fa0e14fbdb6ce",
+      "source_sha256": "6812a98ac887d29b289de231ee4b6cd325799e23f6a9780bc4f823ff069ccf11",
+      "invariant_errors": [],
+      "cavity_contract_errors": [],
+      "native_drc_violations": 0,
+      "native_unconnected": 0,
+      "schematic_parity": 0,
+      "native_drc_types": {},
+      "erc_violations": null,
+      "erc_status": "BLOCKED: no inherited native Wing schematic; logical contract is not ERC",
+      "independent_unconnected": 0,
+      "wrong_net_contacts": 0,
+      "shorts": [],
+      "disconnected": {},
+      "nets_checked": 30,
+      "via_count": 175,
+      "via_pad_pairs": 41300,
+      "via_pad_min_mm": 0.10539,
+      "via_pad_below_0p10": [],
+      "via_pad_below_0p125": 1,
+      "via_pad_target_class": "0.100 mm floor only; misses 0.125 target",
+      "main_GND_below_0p30_disclosed": null,
+      "minimum_power_width_mm": 0.1,
+      "width_below_floor": 3,
+      "all_components_B_Cu": true,
+      "routing_pass": false,
+      "full_gate_pass": false
+    },
+    {
+      "name": "wing-rev4-16mm-right",
+      "board_sha256": "22871ed835e2e88ed534124fc7050a2d93254af498a7f4e69ed5c7e1174d5577",
+      "source_sha256": "4f8faa25c00093e5db7b2db3b252a8494723ae172a245cfdf84ae06fba6fce84",
+      "invariant_errors": [],
+      "cavity_contract_errors": [],
+      "native_drc_violations": 0,
+      "native_unconnected": 0,
+      "schematic_parity": 0,
+      "native_drc_types": {},
+      "erc_violations": null,
+      "erc_status": "BLOCKED: no inherited native Wing schematic; logical contract is not ERC",
+      "independent_unconnected": 0,
+      "wrong_net_contacts": 0,
+      "shorts": [],
+      "disconnected": {},
+      "nets_checked": 30,
+      "via_count": 151,
+      "via_pad_pairs": 35636,
+      "via_pad_min_mm": 0.13318,
+      "via_pad_below_0p10": [],
+      "via_pad_below_0p125": 0,
+      "via_pad_target_class": ">=0.125 mm",
+      "main_GND_below_0p30_disclosed": null,
+      "minimum_power_width_mm": 0.3,
+      "width_below_floor": 0,
+      "all_components_B_Cu": true,
+      "routing_pass": true,
+      "full_gate_pass": false
+    },
+    {
+      "name": "wing-rev4-17mm-left",
+      "board_sha256": "b6a6c4a87da770b835410f7e0cf07991fda8ed54816918f26c4987fed7957551",
+      "source_sha256": "1e87d933b12e7344262a2598e804985ca468e7778b8586fb9152c4ec0ea03247",
+      "invariant_errors": [],
+      "cavity_contract_errors": [],
+      "native_drc_violations": 0,
+      "native_unconnected": 0,
+      "schematic_parity": 0,
+      "native_drc_types": {},
+      "erc_violations": null,
+      "erc_status": "BLOCKED: no inherited native Wing schematic; logical contract is not ERC",
+      "independent_unconnected": 0,
+      "wrong_net_contacts": 0,
+      "shorts": [],
+      "disconnected": {},
+      "nets_checked": 30,
+      "via_count": 147,
+      "via_pad_pairs": 34692,
+      "via_pad_min_mm": 0.125198,
+      "via_pad_below_0p10": [],
+      "via_pad_below_0p125": 0,
+      "via_pad_target_class": ">=0.125 mm",
+      "main_GND_below_0p30_disclosed": null,
+      "minimum_power_width_mm": 0.1,
+      "width_below_floor": 2,
+      "all_components_B_Cu": true,
+      "routing_pass": false,
+      "full_gate_pass": false
+    },
+    {
+      "name": "wing-rev4-17mm-right",
+      "board_sha256": "87b3c78cd4b438c3f75f6fdc19d3d8cf913984f400347968b8c21d7e9e985831",
+      "source_sha256": "165a2d988fc1d171d61e7a0cb56b67cbb23e29739359554a1604f531e43f900f",
+      "invariant_errors": [],
+      "cavity_contract_errors": [],
+      "native_drc_violations": 0,
+      "native_unconnected": 0,
+      "schematic_parity": 0,
+      "native_drc_types": {},
+      "erc_violations": null,
+      "erc_status": "BLOCKED: no inherited native Wing schematic; logical contract is not ERC",
+      "independent_unconnected": 0,
+      "wrong_net_contacts": 0,
+      "shorts": [],
+      "disconnected": {},
+      "nets_checked": 30,
+      "via_count": 157,
+      "via_pad_pairs": 37052,
+      "via_pad_min_mm": -0.3,
+      "via_pad_below_0p10": [
+        [
+          "a0aca569-ab0b-43ad-b97f-06ffdd8bd384",
+          "J_WING.10",
+          true,
+          -0.3
+        ],
+        [
+          "cbb44af9-b91e-4dcc-b418-07d626ec6f9c",
+          "J_WING.8",
+          true,
+          -0.3
+        ],
+        [
+          "fd490f87-fd69-43c4-8955-135d5453050f",
+          "J_WING.12",
+          true,
+          -0.3
+        ]
+      ],
+      "via_pad_below_0p125": 6,
+      "via_pad_target_class": "0.100 mm floor only; misses 0.125 target",
+      "main_GND_below_0p30_disclosed": null,
+      "minimum_power_width_mm": 0.1,
+      "width_below_floor": 4,
+      "all_components_B_Cu": true,
+      "routing_pass": false,
+      "full_gate_pass": false
+    }
+  ],
+  "draft_stock": {
+    "batch_keyboards": 15,
+    "installed": {
+      "headers": 60,
+      "housings": 60,
+      "terminals": 840
+    },
+    "spares_assumption": "20% on complete batch, explicit conservative procurement allowance; B3 exact spare count not available",
+    "required_including_spares": {
+      "headers": 72,
+      "housings": 72,
+      "terminals": 1008
+    },
+    "preferred_10x_stock": {
+      "headers": 720,
+      "housings": 720,
+      "terminals": 10080
+    },
+    "observations": {
+      "lcsc-header": {
+        "url": "https://www.lcsc.com/product-detail/C5343398.html",
+        "checked_at_utc": "2026-11-14T02:21:48.790415+00:00",
+        "http_status": 200,
+        "final_url": "https://www.lcsc.com/product-detail/C5343398.html",
+        "response_sha256": "b5c91e3ddfdd950e07122ec477df7f45c1783936c8dd9e970a68931a878c4101",
+        "fields": {
+          "stockNumber": [
+            5079
+          ],
+          "stockSz": [
+            5079
+          ],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": [],
+        "primary_product": {
+          "productCode": "C5343398",
+          "productModel": "DF52-14S-0.8H(21)",
+          "stockNumber": 5079,
+          "stockSz": 5079,
+          "minBuyNumber": 1,
+          "minPacketNumber": 5000,
+          "domesticStockVO": {
+            "total": 5079,
+            "shipImmediately": 5079,
+            "ship3Days": 0
+          },
+          "overseasStockVO": {
+            "total": 5079,
+            "shipImmediately": 5079,
+            "ship3Days": 0
+          }
+        },
+        "extraction_note": "Only primary webData is authoritative for selected MPN; alternatePartList stock is excluded"
+      },
+      "lcsc-housing": {
+        "url": "https://www.lcsc.com/product-detail/C2904692.html",
+        "checked_at_utc": "2026-11-14T02:21:48.792215+00:00",
+        "http_status": 200,
+        "final_url": "https://www.lcsc.com/product-detail/C2904692.html",
+        "response_sha256": "025890e00935bde9b86132bb303986eddd2798b6fff1bf0cb350764c4609a90d",
+        "fields": {
+          "stockNumber": [
+            0,
+            1000
+          ],
+          "stockSz": [
+            0,
+            1000
+          ],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": [],
+        "primary_product": {
+          "productCode": "C2904692",
+          "productModel": "DF52-14P-0.8C",
+          "stockNumber": 0,
+          "stockSz": 0,
+          "minBuyNumber": 5,
+          "minPacketNumber": 100,
+          "domesticStockVO": {
+            "total": 0,
+            "shipImmediately": 0,
+            "ship3Days": 0
+          },
+          "overseasStockVO": {
+            "total": 0,
+            "shipImmediately": 0,
+            "ship3Days": 0
+          }
+        },
+        "extraction_note": "Only primary webData is authoritative for selected MPN; alternatePartList stock is excluded"
+      },
+      "lcsc-terminal": {
+        "url": "https://www.lcsc.com/product-detail/C506724.html",
+        "checked_at_utc": "2026-11-14T02:21:48.795855+00:00",
+        "http_status": 200,
+        "final_url": "https://www.lcsc.com/product-detail/C506724.html",
+        "response_sha256": "d7e95842607ecf47ed4615edf2667088168a282061201de89ba92b513a7bf1b8",
+        "fields": {
+          "stockNumber": [
+            29400,
+            129400
+          ],
+          "stockSz": [
+            29400,
+            129400
+          ],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": [],
+        "primary_product": {
+          "productCode": "C506724",
+          "productModel": "DF52-2832PCF",
+          "stockNumber": 129400,
+          "stockSz": 129400,
+          "minBuyNumber": 100,
+          "minPacketNumber": 40000,
+          "domesticStockVO": {
+            "total": 129400,
+            "shipImmediately": 129400,
+            "ship3Days": 0
+          },
+          "overseasStockVO": {
+            "total": 129400,
+            "shipImmediately": 129400,
+            "ship3Days": 0
+          }
+        },
+        "extraction_note": "Only primary webData is authoritative for selected MPN; alternatePartList stock is excluded"
+      },
+      "jlcpcb-header": {
+        "url": "https://jlcpcb.com/partdetail/HRS-DF52_14S_08H_21/C5343398",
+        "checked_at_utc": "2026-11-14T02:21:48.846775+00:00",
+        "http_status": 200,
+        "final_url": "https://jlcpcb.com/partdetail/HRS-DF52_14S_08H_21/C5343398",
+        "response_sha256": "3cd51e6dda87eb90aec6127bc53b9e40ba3f38dc9ee4219c1fb3d4f5d52fd1dd",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [
+            5084
+          ],
+          "canPresaleNumber": [
+            5082
+          ],
+          "preMinPurchaseNum": [
+            20
+          ]
+        },
+        "inventory_snippets": [
+          "line transition-colors text-white\" href=\"/parts/in-stock-parts\"><span>In Stock Parts</span></a></li><li class=\"parts-nav-tab-item relative\"><a href=\"https://jlcpcb.com/parts/bom-",
+          "afe translations\",\"feature3\":\"Easy-to-use API\"},\"partsHero\":{\"title\":\"In-Stock Electronic Parts, Ready for PCB Assembly\",\"imageAlt\":\"In-Stock Electronic Components Warehouse\",\"de",
+          "gent design revisions, and just-in-time manufacturing.\",\"cta\":\"Browse In-Stock Parts\"},\"partsHowItWorks\":{\"heading\":\"Assemble Your PCBs in 3 Easy Steps\",\"step1Title\":\"Upload \\u00",
+          "artsFeatured\":{\"heading\":\"Featured Components for Your PCB Assembly\",\"inStock\":\"In Stock: {count}\"},\"partsRecommended\":{\"heading\":\"Recommended for You\",\"subtitle\":\"Customers who",
+          "rt\",\"add\":\"Add\",\"prevPage\":\"Previous\",\"nextPage\":\"Next\"},\"partsNav\":{\"inStockParts\":\"In Stock Parts\",\"inStockPartsCount\":\"In Stock Parts ({count})\"}},\"parts\":{\"i18n_web_app_143\"",
+          "be made in US dollars.\",\"i18n_shared_369\":\"Home\",\"i18n_shared_504_1\":\"In Stock Parts\",\"i18n_shared_592_2\":\"Electronic Parts\",\"i18n_shared_593\":\"My Parts Lib\",\"i18n_shared_883\":\"C"
+        ]
+      },
+      "jlcpcb-housing": {
+        "url": "https://jlcpcb.com/partdetail/HRS-DF52_14P_08C/C2904692",
+        "checked_at_utc": "2026-11-14T02:21:52.067022+00:00",
+        "http_status": 200,
+        "final_url": "https://jlcpcb.com/partdetail/HRS-DF52_14P_08C/C2904692",
+        "response_sha256": "db76312c4b841cef2274cab0fb9dfb4802916ea3a4903fbef5f3961b76bef048",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [
+            4
+          ],
+          "canPresaleNumber": [
+            4
+          ],
+          "preMinPurchaseNum": [
+            35
+          ]
+        },
+        "inventory_snippets": [
+          "line transition-colors text-white\" href=\"/parts/in-stock-parts\"><span>In Stock Parts</span></a></li><li class=\"parts-nav-tab-item relative\"><a href=\"https://jlcpcb.com/parts/bom-",
+          "afe translations\",\"feature3\":\"Easy-to-use API\"},\"partsHero\":{\"title\":\"In-Stock Electronic Parts, Ready for PCB Assembly\",\"imageAlt\":\"In-Stock Electronic Components Warehouse\",\"de",
+          "gent design revisions, and just-in-time manufacturing.\",\"cta\":\"Browse In-Stock Parts\"},\"partsHowItWorks\":{\"heading\":\"Assemble Your PCBs in 3 Easy Steps\",\"step1Title\":\"Upload \\u00",
+          "artsFeatured\":{\"heading\":\"Featured Components for Your PCB Assembly\",\"inStock\":\"In Stock: {count}\"},\"partsRecommended\":{\"heading\":\"Recommended for You\",\"subtitle\":\"Customers who",
+          "rt\",\"add\":\"Add\",\"prevPage\":\"Previous\",\"nextPage\":\"Next\"},\"partsNav\":{\"inStockParts\":\"In Stock Parts\",\"inStockPartsCount\":\"In Stock Parts ({count})\"}},\"parts\":{\"i18n_web_app_143\"",
+          "be made in US dollars.\",\"i18n_shared_369\":\"Home\",\"i18n_shared_504_1\":\"In Stock Parts\",\"i18n_shared_592_2\":\"Electronic Parts\",\"i18n_shared_593\":\"My Parts Lib\",\"i18n_shared_883\":\"C"
+        ]
+      },
+      "jlcpcb-terminal": {
+        "url": "https://jlcpcb.com/partdetail/HRS-DF52_2832PCF/C506724",
+        "checked_at_utc": "2026-11-14T02:21:53.458868+00:00",
+        "http_status": 200,
+        "final_url": "https://jlcpcb.com/partdetail/HRS-DF52_2832PCF/C506724",
+        "response_sha256": "57c40311e61874fd9054f49d0ef467bc18d6d5be6604606398a0b845895c019f",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [
+            129490
+          ],
+          "canPresaleNumber": [
+            129490
+          ],
+          "preMinPurchaseNum": [
+            458
+          ]
+        },
+        "inventory_snippets": [
+          "line transition-colors text-white\" href=\"/parts/in-stock-parts\"><span>In Stock Parts</span></a></li><li class=\"parts-nav-tab-item relative\"><a href=\"https://jlcpcb.com/parts/bom-",
+          "afe translations\",\"feature3\":\"Easy-to-use API\"},\"partsHero\":{\"title\":\"In-Stock Electronic Parts, Ready for PCB Assembly\",\"imageAlt\":\"In-Stock Electronic Components Warehouse\",\"de",
+          "gent design revisions, and just-in-time manufacturing.\",\"cta\":\"Browse In-Stock Parts\"},\"partsHowItWorks\":{\"heading\":\"Assemble Your PCBs in 3 Easy Steps\",\"step1Title\":\"Upload \\u00",
+          "artsFeatured\":{\"heading\":\"Featured Components for Your PCB Assembly\",\"inStock\":\"In Stock: {count}\"},\"partsRecommended\":{\"heading\":\"Recommended for You\",\"subtitle\":\"Customers who",
+          "rt\",\"add\":\"Add\",\"prevPage\":\"Previous\",\"nextPage\":\"Next\"},\"partsNav\":{\"inStockParts\":\"In Stock Parts\",\"inStockPartsCount\":\"In Stock Parts ({count})\"}},\"parts\":{\"i18n_web_app_143\"",
+          "be made in US dollars.\",\"i18n_shared_369\":\"Home\",\"i18n_shared_504_1\":\"In Stock Parts\",\"i18n_shared_592_2\":\"Electronic Parts\",\"i18n_shared_593\":\"My Parts Lib\",\"i18n_shared_883\":\"C"
+        ]
+      },
+      "digikey-header": {
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-14S-0-8H-21/5721379",
+        "checked_at_utc": "2026-11-14T02:21:54.589689+00:00",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      "digikey-housing": {
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-14P-0-8C/5721346",
+        "checked_at_utc": "2026-11-14T02:21:55.683248+00:00",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      "digikey-terminal": {
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-2832PCF/5721364",
+        "checked_at_utc": "2026-11-14T02:21:57.172456+00:00",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      "mouser-housing": {
+        "url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-14P-0.8C?qs=%2FKR40Cd6GUphscnWMeDLpg%3D%3D",
+        "checked_at_utc": "2026-11-14T02:21:57.173659+00:00",
+        "http_status": 200,
+        "final_url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-14P-0.8C?qs=%2FKR40Cd6GUphscnWMeDLpg%3D%3D",
+        "response_sha256": "0524de9fc50c4d45bfd26efc93c66469f6c08231672bd5de16fc7e64244773cf",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": []
+      },
+      "mouser-header": {
+        "url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-14S-0.8H21?qs=%2FKR40Cd6GUofAddN3Zbsbg%3D%3D",
+        "checked_at_utc": "2026-11-14T02:21:57.174926+00:00",
+        "http_status": 200,
+        "final_url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-14S-0.8H21?qs=%2FKR40Cd6GUofAddN3Zbsbg%3D%3D",
+        "response_sha256": "a2a5bb81641e80904c9af382526510b134198e89ce5e7bb8e35d24121b5f5ab1",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": []
+      },
+      "mouser-terminal": {
+        "url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-2832PCF",
+        "checked_at_utc": "2026-11-14T02:21:58.477879+00:00",
+        "http_status": 200,
+        "final_url": "https://www.mouser.com/ProductDetail/Hirose-Connector/DF52-2832PCF",
+        "response_sha256": "f44c55f0871b681416e4e39d8f2c4cbb6ec05ca3c48ed0a929e605e4c00f960b",
+        "fields": {
+          "stockNumber": [],
+          "stockSz": [],
+          "overseasStockCount": [],
+          "canPresaleNumber": [],
+          "preMinPurchaseNum": []
+        },
+        "inventory_snippets": []
+      }
+    },
+    "verdict": "FAIL: selected housing primary LCSC stock 0; JLC overseas 4; preferred threshold 720 incl. explicit spare allowance. Header and terminals pass stock target.",
+    "fallback_browser_observations": [
+      {
+        "part": "DF52-14P-0.8C",
+        "supplier": "DigiKey",
+        "supplier_code": "H125091-ND",
+        "stock": 0,
+        "incoming": "100 estimated 2026-12-23; not stock",
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-14P-0-8C/5721346",
+        "retrieved_date": "2026-11-14",
+        "method": "Browser-rendered product page; direct HTTP 403; older search cache stock 840 rejected"
+      },
+      {
+        "part": "DF52-14P-0.8C",
+        "supplier": "Mouser",
+        "supplier_code": "798-DF52-14P-0.8C",
+        "stock": 0,
+        "incoming": "1000 expected 2026-12-17; not stock",
+        "url": "https://www.mouser.in/en/ProductDetail/Hirose-Connector/DF52-14P-0.8C?qs=%2FKR40Cd6GUphscnWMeDLpg%3D%3D",
+        "retrieved_date": "2026-11-14",
+        "method": "Browser-rendered product page; other locale/search-cache stock 3351 rejected as conflicting and older"
+      },
+      {
+        "part": "DF52-14S-0.8H(21)",
+        "supplier": "DigiKey",
+        "stock": 53,
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-14S-0-8H-21/5721379",
+        "retrieved_date": "2026-11-14",
+        "method": "Browser product page; search-cache count2550 rejected"
+      },
+      {
+        "part": "DF52-2832PCF",
+        "supplier": "DigiKey",
+        "stock": 266723,
+        "purchase_limit_CT": 80000,
+        "url": "https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/DF52-2832PCF/5721364",
+        "retrieved_date": "2026-11-14",
+        "method": "Browser product page"
+      }
+    ]
+  }
+}

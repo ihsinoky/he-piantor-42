@@ -1,0 +1,305 @@
+{
+  "units": "mm",
+  "kind": "case keepout solid; not exact manufacturer model",
+  "local_frame": "x numbered row (cavity1 x=-5.2), +y mate/exit, +z away from mounting face",
+  "body_local_bounds_mm": [
+    -6.7,
+    -1.26,
+    0,
+    6.7,
+    2.84,
+    1.75
+  ],
+  "first_dress": "14 individual 0.60 mm OD cylinders, .80 mm pitch; y=2.84..12.84, z=.875; first 10 mm straight and flat; no gathering before rear+10 mm",
+  "first_restraint_mm_from_exit": 10,
+  "wire_gauge": "AWG28 UL1571 thin-wall 7/0.127 mm, OD .50-.60 mm",
+  "finished_conductor_spec_mm": {
+    "nominal": 195,
+    "tolerance": 5,
+    "maximum": 200,
+    "service_reserve_included": 30.2,
+    "maximum_active_path_excluding_reserve": 169.8
+  },
+  "cavity_mapping": "n to n at both ends, six independent grounds 2/4/8/10/12/14; MP is not a cable cavity",
+  "wing_underside_B_mm": 6.7,
+  "main_roof_screen": {
+    "unchanged_poses": true,
+    "B3_nominal_clearance_mm": 1.9,
+    "allowance_mm": 0.5,
+    "after_allowance_mm": 1.4,
+    "required_minimum_mm": 0.3,
+    "status": "PASS at supplied B3 datum; not a fresh roof solid collision study"
+  },
+  "endpoints": [
+    {
+      "board": "main",
+      "ref": "J2",
+      "file": "main-J2.step",
+      "sha256": "451563d441b8ddd69991776a88cb7cd1cdcb329d73210729e540c4fa1682cb6a",
+      "local_to_native_board_mm": [
+        [
+          -0.4999999999999998,
+          -0.8660254037844387,
+          0,
+          82.897854
+        ],
+        [
+          0.8660254037844387,
+          -0.4999999999999998,
+          0,
+          112.075001
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        -0.8660254037844387,
+        -0.4999999999999998
+      ],
+      "native_bounds_mm": [
+        69.0280878154078,
+        100.89186127918558,
+        0.0,
+        87.33904600876839,
+        118.50737120535575,
+        1.75
+      ],
+      "assembly_transform": "Main B3 native datum: x_assembly=x_native-100, y_assembly=y_native-70; Z requires B3 mounting datum"
+    },
+    {
+      "board": "main",
+      "ref": "J3",
+      "file": "main-J3.step",
+      "sha256": "950c0d2f4cf87f750de7b2ebb671e8c7dd0f99dfdc038876da990b291acfcbc0",
+      "local_to_native_board_mm": [
+        [
+          -0.4999999999999998,
+          0.8660254037844387,
+          0,
+          117.102146
+        ],
+        [
+          -0.8660254037844387,
+          -0.4999999999999998,
+          0,
+          112.075001
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        0.8660254037844387,
+        -0.4999999999999998
+      ],
+      "native_bounds_mm": [
+        112.66095399123161,
+        100.89186127918558,
+        0.0,
+        130.9719121845922,
+        118.50737120535574,
+        1.75
+      ],
+      "assembly_transform": "Main B3 native datum: x_assembly=x_native-100, y_assembly=y_native-70; Z requires B3 mounting datum"
+    },
+    {
+      "board": "wing-rev4-16mm-left",
+      "ref": "J_WING",
+      "file": "wing-rev4-16mm-left-J_WING.step",
+      "sha256": "2e2a4be9e383068c5be2629de5c20829cd95f0a4e29cc5c02dc72879ab2422c1",
+      "local_to_native_board_mm": [
+        [
+          -0.8660254037844387,
+          0.49999999999999994,
+          0,
+          117.08334
+        ],
+        [
+          0.49999999999999994,
+          0.8660254037844387,
+          0,
+          28.292958
+        ],
+        [
+          0,
+          0,
+          -1,
+          -1.2
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        0.49999999999999994,
+        0.8660254037844387
+      ],
+      "native_bounds_mm": [
+        110.65096979464425,
+        23.851765991231606,
+        -2.95,
+        128.26647972081443,
+        42.16272418459219,
+        -1.1999999999999997
+      ],
+      "assembly_transform": "For planar case: local_wing=(x_native-100,100-y_native), then hardware/case/issue-228-final/{pitch}mm/dimensions.json wing_transforms[hand]; mounting-face normal is underside. Apply Phase B Z datum."
+    },
+    {
+      "board": "wing-rev4-16mm-right",
+      "ref": "J_WING",
+      "file": "wing-rev4-16mm-right-J_WING.step",
+      "sha256": "eb40ddcf5f624f885c8900310cdc25ca10e65339b57049fcf245e8646eebc6ad",
+      "local_to_native_board_mm": [
+        [
+          -0.8660254037844387,
+          -0.49999999999999994,
+          0,
+          82.91666
+        ],
+        [
+          -0.49999999999999994,
+          0.8660254037844387,
+          0,
+          28.292958
+        ],
+        [
+          0,
+          0,
+          -1,
+          -1.2
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        -0.49999999999999994,
+        0.8660254037844387
+      ],
+      "native_bounds_mm": [
+        71.73352027918557,
+        23.851765991231606,
+        -2.95,
+        89.34903020535573,
+        42.16272418459219,
+        -1.1999999999999997
+      ],
+      "assembly_transform": "For planar case: local_wing=(x_native-100,100-y_native), then hardware/case/issue-228-final/{pitch}mm/dimensions.json wing_transforms[hand]; mounting-face normal is underside. Apply Phase B Z datum."
+    },
+    {
+      "board": "wing-rev4-17mm-left",
+      "ref": "J_WING",
+      "file": "wing-rev4-17mm-left-J_WING.step",
+      "sha256": "1988aa6a5bb3bd317270f223268c2f40318c40ed1d82aac328ce152bb035f81d",
+      "local_to_native_board_mm": [
+        [
+          -0.8660254037844387,
+          0.49999999999999994,
+          0,
+          120.08334
+        ],
+        [
+          0.49999999999999994,
+          0.8660254037844387,
+          0,
+          26.292958
+        ],
+        [
+          0,
+          0,
+          -1,
+          -1.2
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        0.49999999999999994,
+        0.8660254037844387
+      ],
+      "native_bounds_mm": [
+        113.65096979464425,
+        21.851765991231606,
+        -2.95,
+        131.26647972081443,
+        40.16272418459219,
+        -1.1999999999999997
+      ],
+      "assembly_transform": "For planar case: local_wing=(x_native-100,100-y_native), then hardware/case/issue-228-final/{pitch}mm/dimensions.json wing_transforms[hand]; mounting-face normal is underside. Apply Phase B Z datum."
+    },
+    {
+      "board": "wing-rev4-17mm-right",
+      "ref": "J_WING",
+      "file": "wing-rev4-17mm-right-J_WING.step",
+      "sha256": "6deed70901b39c8035281fbea03a2b2a34db1b8df098a347ef5bf2db13f1c17d",
+      "local_to_native_board_mm": [
+        [
+          -0.8660254037844387,
+          -0.49999999999999994,
+          0,
+          79.91666
+        ],
+        [
+          -0.49999999999999994,
+          0.8660254037844387,
+          0,
+          26.292958
+        ],
+        [
+          0,
+          0,
+          -1,
+          -1.2
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "native_exit_unit_xy": [
+        -0.49999999999999994,
+        0.8660254037844387
+      ],
+      "native_bounds_mm": [
+        68.73352027918557,
+        21.851765991231606,
+        -2.95,
+        86.34903020535573,
+        40.16272418459219,
+        -1.1999999999999997
+      ],
+      "assembly_transform": "For planar case: local_wing=(x_native-100,100-y_native), then hardware/case/issue-228-final/{pitch}mm/dimensions.json wing_transforms[hand]; mounting-face normal is underside. Apply Phase B Z datum."
+    }
+  ]
+}

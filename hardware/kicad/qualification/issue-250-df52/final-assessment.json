@@ -1,0 +1,136 @@
+{
+  "design_qualification_pass": false,
+  "boards": {
+    "main": {
+      "verdict": "FAIL",
+      "routing_pass": false,
+      "native_drc": 1,
+      "unrouted": 1,
+      "erc": 0,
+      "via_pad_min_mm": 0.145,
+      "Vfar_V": 4.77079228706062,
+      "blockers": [
+        "Native DRC violation",
+        "Physical open net",
+        "Common-loop and J2 branch resistance target misses",
+        "29 disclosed native parity NC-name mismatches",
+        "Current exact no-pattern coverage unverified",
+        "Housing stock gate failed",
+        "Copper routing exceeds connector-local windows"
+      ],
+      "board_sha256": "541f6ef35315999c49841fab3d70ff019dfa08f235bbe3780f51bb578219a32c"
+    },
+    "wing-rev4-16mm-left": {
+      "verdict": "BLOCKED; copper-routing gates pass",
+      "routing_pass": true,
+      "native_drc": 0,
+      "unrouted": 0,
+      "erc": null,
+      "via_pad_min_mm": 0.10539,
+      "Vfar_V": 4.9390226747012305,
+      "blockers": [
+        "Native Wing ERC unavailable",
+        "Current exact no-pattern coverage unverified",
+        "Housing stock gate failed",
+        "Copper routing exceeds connector-local windows"
+      ],
+      "board_sha256": "6fec39bc18f724719019690069f82661c6560e60e6664888dc9710f90786507e"
+    },
+    "wing-rev4-16mm-right": {
+      "verdict": "BLOCKED; copper-routing gates pass",
+      "routing_pass": true,
+      "native_drc": 0,
+      "unrouted": 0,
+      "erc": null,
+      "via_pad_min_mm": 0.13318,
+      "Vfar_V": 4.943659402475134,
+      "blockers": [
+        "Native Wing ERC unavailable",
+        "Current exact no-pattern coverage unverified",
+        "Housing stock gate failed",
+        "Copper routing exceeds connector-local windows"
+      ],
+      "board_sha256": "22871ed835e2e88ed534124fc7050a2d93254af498a7f4e69ed5c7e1174d5577"
+    },
+    "wing-rev4-17mm-left": {
+      "verdict": "BLOCKED; copper-routing gates pass",
+      "routing_pass": true,
+      "native_drc": 0,
+      "unrouted": 0,
+      "erc": null,
+      "via_pad_min_mm": 0.125198,
+      "Vfar_V": 4.938265921108451,
+      "blockers": [
+        "Native Wing ERC unavailable",
+        "Current exact no-pattern coverage unverified",
+        "Housing stock gate failed",
+        "Copper routing exceeds connector-local windows"
+      ],
+      "board_sha256": "88b407785fdaed3551aba1fd8d6e956043f1047d0fd0060dca275f4efda8e393"
+    },
+    "wing-rev4-17mm-right": {
+      "verdict": "FAIL",
+      "routing_pass": false,
+      "native_drc": 0,
+      "unrouted": 0,
+      "erc": null,
+      "via_pad_min_mm": -0.3,
+      "Vfar_V": 4.942841509879728,
+      "blockers": [
+        "Via-pad floor violation",
+        "Power/GND width floor violation",
+        "Native Wing ERC unavailable",
+        "Current exact no-pattern coverage unverified",
+        "Housing stock gate failed",
+        "Copper routing exceeds connector-local windows"
+      ],
+      "board_sha256": "87b3c78cd4b438c3f75f6fdc19d3d8cf913984f400347968b8c21d7e9e985831"
+    }
+  },
+  "voltage_families": {
+    "coupled-new-candidates": {
+      "family": "coupled-new-candidates",
+      "board": "wing-rev4-17mm-left",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J2",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.007428778666480307,
+      "Vfar_V": 4.9110736531854515,
+      "meets_4p60": true
+    },
+    "main-rev7-yardstick": {
+      "family": "main-rev7-yardstick",
+      "board": "main",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J2",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200,
+      "wing_drop_V": 0.14771014479131223,
+      "Vfar_V": 4.77079228706062,
+      "meets_4p60": true
+    },
+    "wing-rev4-yardstick": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-17mm-left",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.007428778666480307,
+      "Vfar_V": 4.938265921108451,
+      "meets_4p60": true
+    }
+  },
+  "case_datum_screen": "PASS inherited B3 datum: Wing B=6.70; Main +1.40mm after 0.50mm allowance; Phase B collision study remains separate",
+  "stock": "FAIL: no confirmed in-stock housing path"
+}

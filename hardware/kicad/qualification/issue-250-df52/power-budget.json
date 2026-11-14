@@ -1,0 +1,233 @@
+{
+  "status": "Diagnostic voltages do not override failed copper, schematic or procurement gates",
+  "assumptions": {
+    "load_A_each_wing": 0.127,
+    "two_simultaneous_wings": true,
+    "rail_min_V": 5.096,
+    "dynamic_budget_V": 0.05,
+    "U5_Ron_ohm": 0.25,
+    "wire_minimum_area_mm2": 0.0804,
+    "wire_rho20_ohm_m": 1.7241e-08,
+    "alpha_per_K": 0.00393,
+    "DF52_initial_contact_each_ohm": 0.01,
+    "crimp_each_ohm_conservative": 0.04,
+    "crimp_method_status": "B2/B3 numeric crimp allowance absent from supplied summary; explicitly conservative 40mOhm assumption pending confirmation, with 0/10/20/40mOhm sweep. Not falsely represented as recovered B2/B3 data",
+    "returns": 6,
+    "contacts_per_conductor": 2,
+    "conductor_max_mm": 200,
+    "service_reserve_included_mm": 30.2,
+    "copper_um": 35,
+    "barrel_um": 20,
+    "temperature_corner_C": 125,
+    "width_factor_corner": 0.8,
+    "temperature_limitation": "125C numerical extrapolation, beyond DF52 +85C operating rating; not an assembly rating"
+  },
+  "main_resistance_mOhm": {
+    "input_loop": 28.631620262264178,
+    "common_loop": 109.51581797329412,
+    "branches": {
+      "J2": 97.53610302681828,
+      "J3": 5.453519303626582
+    }
+  },
+  "wing_extractions": [
+    {
+      "board": "wing-rev4-16mm-left",
+      "board_sha256": "6fec39bc18f724719019690069f82661c6560e60e6664888dc9710f90786507e",
+      "cases": [
+        {
+          "width_factor": 1.0,
+          "far_terminal": "U_HB5",
+          "drop20_V": 0.004407028802479711,
+          "effective_loop20_ohm": 0.03470101419275363,
+          "mesh_disagreement_fraction": 0.004684587336639613,
+          "mesh_pass": true
+        },
+        {
+          "width_factor": 0.8,
+          "far_terminal": "U_HB5",
+          "drop20_V": 0.0047230560108319,
+          "effective_loop20_ohm": 0.037189417408125196,
+          "mesh_disagreement_fraction": 0.004176731937818773,
+          "mesh_pass": true
+        }
+      ],
+      "KCL_max_A": 1.3019985090068076e-10,
+      "routing_qualified": true
+    },
+    {
+      "board": "wing-rev4-16mm-right",
+      "board_sha256": "22871ed835e2e88ed534124fc7050a2d93254af498a7f4e69ed5c7e1174d5577",
+      "cases": [
+        {
+          "width_factor": 1.0,
+          "far_terminal": "U_HC3",
+          "drop20_V": 0.0013356726442484538,
+          "effective_loop20_ohm": 0.010517107435027196,
+          "mesh_disagreement_fraction": 0.008556967763364946,
+          "mesh_pass": true
+        },
+        {
+          "width_factor": 0.8,
+          "far_terminal": "U_HC3",
+          "drop20_V": 0.001440765440694499,
+          "effective_loop20_ohm": 0.011344609769248023,
+          "mesh_disagreement_fraction": 0.009655806844435422,
+          "mesh_pass": true
+        }
+      ],
+      "KCL_max_A": 5.2651216719823424e-11,
+      "routing_qualified": true
+    },
+    {
+      "board": "wing-rev4-17mm-left",
+      "board_sha256": "88b407785fdaed3551aba1fd8d6e956043f1047d0fd0060dca275f4efda8e393",
+      "cases": [
+        {
+          "width_factor": 1.0,
+          "far_terminal": "U_HC6",
+          "drop20_V": 0.00453713251319244,
+          "effective_loop20_ohm": 0.03572545285978299,
+          "mesh_disagreement_fraction": 0.003422649061106592,
+          "mesh_pass": true
+        },
+        {
+          "width_factor": 0.8,
+          "far_terminal": "U_HC6",
+          "drop20_V": 0.005258753878512234,
+          "effective_loop20_ohm": 0.04140751085442704,
+          "mesh_disagreement_fraction": 0.004859286644629492,
+          "mesh_pass": true
+        }
+      ],
+      "KCL_max_A": 1.1405631994421128e-10,
+      "routing_qualified": true
+    },
+    {
+      "board": "wing-rev4-17mm-right",
+      "board_sha256": "87b3c78cd4b438c3f75f6fdc19d3d8cf913984f400347968b8c21d7e9e985831",
+      "cases": [
+        {
+          "width_factor": 1.0,
+          "far_terminal": "U_HA4",
+          "drop20_V": 0.0018717005907862732,
+          "effective_loop20_ohm": 0.01473779992745097,
+          "mesh_disagreement_fraction": 0.004287627552280821,
+          "mesh_pass": true
+        },
+        {
+          "width_factor": 0.8,
+          "far_terminal": "U_HA4",
+          "drop20_V": 0.0020197429619532824,
+          "effective_loop20_ohm": 0.015903487889395922,
+          "mesh_disagreement_fraction": 0.005307385440379374,
+          "mesh_pass": true
+        }
+      ],
+      "KCL_max_A": 2.411297828075476e-10,
+      "routing_qualified": false
+    }
+  ],
+  "worst_by_family": {
+    "coupled-new-candidates": {
+      "family": "coupled-new-candidates",
+      "board": "wing-rev4-17mm-left",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J2",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.007428778666480307,
+      "Vfar_V": 4.9110736531854515,
+      "meets_4p60": true
+    },
+    "main-rev7-yardstick": {
+      "family": "main-rev7-yardstick",
+      "board": "main",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J2",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200,
+      "wing_drop_V": 0.14771014479131223,
+      "Vfar_V": 4.77079228706062,
+      "meets_4p60": true
+    },
+    "wing-rev4-yardstick": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-17mm-left",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.007428778666480307,
+      "Vfar_V": 4.938265921108451,
+      "meets_4p60": true
+    }
+  },
+  "wing_worst_by_board": {
+    "wing-rev4-16mm-left": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-16mm-left",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.0066720250737016835,
+      "Vfar_V": 4.9390226747012305,
+      "meets_4p60": true
+    },
+    "wing-rev4-16mm-right": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-16mm-right",
+      "pitch_mm": 16,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.002035297299797084,
+      "Vfar_V": 4.943659402475134,
+      "meets_4p60": true
+    },
+    "wing-rev4-17mm-left": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-17mm-left",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.007428778666480307,
+      "Vfar_V": 4.938265921108451,
+      "meets_4p60": true
+    },
+    "wing-rev4-17mm-right": {
+      "family": "wing-rev4-yardstick",
+      "board": "wing-rev4-17mm-right",
+      "pitch_mm": 17,
+      "temperature_C": 125,
+      "width_factor": 0.8,
+      "branch": "J3",
+      "crimp_each_ohm": 0.04,
+      "DF52_contact_each_ohm": 0.01,
+      "length_mm": 200.0,
+      "wing_drop_V": 0.002853189895203304,
+      "Vfar_V": 4.942841509879728,
+      "meets_4p60": true
+    }
+  }
+}
