@@ -26,6 +26,8 @@ The plate-boundary seam rule supersedes the tuning round's shell/plate ownership
  text+='\n'.join(f'| {n} | {rows[17][i]} | {rows[16][i]} |' for i,n in enumerate(GATES))+'\n\n'
  text+='''Deck Z13.55, slope lines, plateau Z24.65, 2.00 mm normal skin, unchanged boards/aluminium, M2×10 E screws, GH/Fly blister dimensions and Ø5.10 south openings remain binding. Tail-source.json supplies 3.40 mm/end plus the 0.50 mm Wing dress lead: 7.30 mm added to every routed conductor. The 164.8 mm value remains a reported reference. Physical Junana skirt/full-press and retention tests remain OPEN.
 
+Tray route relief is an explicit conservative union of the projected conductor paths, buffered 0.87 mm and cut through their common height interval (clamped at Z2). This replaces overlapping per-strand Boolean tools; it may remove additional tray material within that reservation. The actual channel polygon and height are recorded in measurements.json. Source floor, E thread-bearing support material and dedicated shell pillars are restored before the independent material, engagement, palm-band, fitted and print audits. Shell skin and aluminium are not cut by these channels.
+
 '''
  for pitch in (17,16):
   out=HERE/f'{pitch}mm';get=lambda n:read(out/(n+'.json'))

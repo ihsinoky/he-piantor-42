@@ -1,6 +1,8 @@
 """M2x10 replacement at all eight unchanged E-stack seats."""
 from common import *
 def run(pitch):
+ from finalize_geometry import run as finish_route_nibs
+ finish_route_nibs(pitch)
  from restore_floor import run as preserve_floor
  preserve_floor(pitch)
  from restore_e_bosses import run as preserve_E_bosses
