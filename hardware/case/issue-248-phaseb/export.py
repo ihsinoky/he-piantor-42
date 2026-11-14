@@ -9,10 +9,14 @@ def run(pitch):
   q=ss[0] if len(ss)==1 else Compound(children=ss);q.label=n+'-PROVISIONAL-q1.50';assembly.append(q)
   if not n.startswith(('tray-','post-','splice-','shell-central','strip-left','strip-right')) or '-screw-' in n:continue
   folder=out/'manufacturing';folder.mkdir(exist_ok=True)
-  q.parent=None;export_step(q,folder/(n+'.step'))
-  export_stl(q,folder/(n+'.stl'),tolerance=.01,angular_tolerance=.05)
+  stem=n+'-PROVISIONAL'
+  q.parent=None;export_step(q,folder/(stem+'.step'))
+  export_stl(q,folder/(stem+'.stl'),tolerance=.01,angular_tolerance=.05)
+  mesh=folder/(stem+'.stl');data=mesh.read_bytes()
+  header=f'PROVISIONAL plateau Z{TOP:.2f}; Junana q=1.50; see REPORT.md'.encode().ljust(80,b' ')
+  mesh.write_bytes(header+data[80:])
   b=bounds(q);size=[b[1][i]-b[0][i] for i in range(3)];brim=[size[0]+10,size[1]+10,size[2]]
-  prints.append(dict(name=n,bounds_mm=b,valid=q.is_valid,solids=len(ss),volume_mm3=q.volume,with_5mm_brim_xyz_mm=brim,envelope_passed=brim[0]<=220 and brim[1]<=220 and brim[2]<=250,manufacturing_geometry_passed=q.is_valid and len(ss)==1,step_sha256=sha(folder/(n+'.step')),stl_sha256=sha(folder/(n+'.stl'))))
+  prints.append(dict(name=n,filename=stem,bounds_mm=b,valid=q.is_valid,solids=len(ss),volume_mm3=q.volume,with_5mm_brim_xyz_mm=brim,envelope_passed=brim[0]<=220 and brim[1]<=220 and brim[2]<=250,manufacturing_geometry_passed=q.is_valid and len(ss)==1,step_sha256=sha(folder/(stem+'.step')),stl_sha256=sha(folder/(stem+'.stl'))))
   print(pitch,'export',n,len(ss),'solids',flush=True)
  for q in assembly:q.parent=None
  export_step(Compound(children=assembly),out/'fitted-assembly-PROVISIONAL.step')

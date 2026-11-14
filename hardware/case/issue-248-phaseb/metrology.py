@@ -63,7 +63,7 @@ def run(pitch):
  for side,sgn in [('left',-1),('right',1)]:
   envs=[motion(sgn,i) for i in range(14)];hits=[];errors=[]
   for n,k,s in physical:
-   removed=n.startswith(('shell-central','strip-left','strip-right','shell-screw','Main-study','Main-GH','cover-screw','cover-Main-spacer','washer-main','screw-main','EZmate-Main','Wire-'+side)) or n in ('main','Fly-170mm')
+   removed=n.startswith(('shell-central','strip-left','strip-right','shell-screw','Main-study','Main-GH','cover-screw','cover-Main-spacer','washer-main','screw-main','EZmate-Main','Wire-'+side)) or n=='main'
    if removed:continue
    for i,e in enumerate(envs):
     try:
@@ -72,7 +72,7 @@ def run(pitch):
     except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
   for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
   export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
-  services.append(dict(side=side,turn_y_mm=[22.1,7],release_mm=30.2,method='continuous swept R5 U cap strip plus fixed legs; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate and lay Fly cable aside; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+  services.append(dict(side=side,turn_y_mm=[22.1,7],release_mm=30.2,method='continuous swept R5 U cap strip plus fixed legs; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
   print(pitch,side,'service',len(hits),'hits',flush=True)
  save(out/'service.json',dict(status=P['status'],sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  # Verify stack and palm datums from actual fitted parts, not prior verdicts.
@@ -89,6 +89,11 @@ def run(pitch):
    try:
     if face.normal_at().Z>.999999 and abs(face.center().Z-PLATE)<1e-5:zs.append(face.center().Z)
    except Exception:pass
-  palm.append(dict(side=side,plate_top_z_mm=PLATE,tray_top_faces_at_plate=len(zs),maximum_step_mm=max([abs(z-PLATE) for z in zs],default=999),passed=bool(zs) and max(abs(z-PLATE) for z in zs)<1e-6))
+  # Entire inherited south palm band, not just a sample of coplanar faces.
+  probe=prism(box(-200,69.7001,200,100),PLATE-1.501,1.502)
+  def clip(s):return Compound(children=list(s.intersect(probe) or []))
+  oldband=clip(original['tray-'+side].translate((0,0,-2.65)));newband=clip(tray)
+  common=volume(oldband,newband);removed=max(0,oldband.volume-common);added=max(0,newband.volume-common)
+  palm.append(dict(side=side,plate_top_z_mm=PLATE,tray_top_faces_at_plate=len(zs),maximum_step_mm=max([abs(z-PLATE) for z in zs],default=999),protected_band_y_mm=[69.7001,100],palm_material_removed_mm3=removed,palm_material_added_mm3=added,passed=bool(zs) and max(abs(z-PLATE) for z in zs)<1e-6 and max(removed,added)<1e-4))
  save(out/'invariants.json',dict(status=P['status'],boards_and_plates=invariants,palm=palm,passed=all(r['passed'] for r in invariants+palm)))
 if __name__=='__main__':run(int(sys.argv[1]))
