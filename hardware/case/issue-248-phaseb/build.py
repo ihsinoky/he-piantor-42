@@ -1,7 +1,7 @@
 """Production-intent case remake. Failed gates are evidence, never suppressed."""
 from common import *
 from shapely.affinity import rotate,translate
-def plan(pitch):
+def legacy_plan(pitch):
  d=read(HERE.parent/f'issue-232-final/{pitch}mm/dimensions.json')
  old=read(HERE.parent/f'issue-246-delta6-tuning/packed/delta-6/{pitch}mm/measurements.json')
  keys=[];strips=[];margins=[];decks=[]
@@ -26,6 +26,19 @@ def plan(pitch):
   prior={f['properties']['name']:shape(f['geometry']) for f in read(HERE.parent/'issue-248-lowdeck-raise/raised-regions-a4.geojson')['features'] if f['properties']['role']=='current surface footprint'}
   assert all(regions[n].symmetric_difference(g).area<1e-6 for n,g in prior.items())
  return d,keys,regions,unary_union(decks),shape(old['cover_outline'])
+def plan(pitch):
+ d,keys,regions,decks,cover=legacy_plan(pitch)
+ plates=unary_union([Polygon(p['blank_outline_xy_mm']) for p in d['plates']])
+ revised=unary_union([regions[n] for n in ('plateau','slope','low_south')]).difference(plates)
+ # Ownership is the central bay facing the inward plate edges. The separate
+ # outer south perimeter rim is outside this footprint, at both pitches.
+ # Select by the declared bay datum, never by component size.
+ central=[g for g in polygons(revised) if g.covers(Point(0,20))]
+ assert len(central)==1
+ for n in ('plateau','slope','low_south'):regions[n]=clean(regions[n].intersection(central[0]))
+ for n in ('north_left','north_right'):regions[n]=clean(regions[n].difference(plates))
+ return d,keys,regions,decks,cover
+
 def compress(s):
  # Remove the 2.65 mm neutral band Z3..5.65; preserve floor and all upper seats.
  lower=list(s.intersect(prism(box(-300,-200,300,200),-20,23)))
@@ -133,6 +146,11 @@ def make(pitch):
    central=central.cut(prism(tab.buffer(.3,join_style=2),2.99,TOP-4.99))
    retention.append(dict(part='strip-'+side,tab_xy_bounds_mm=list(tab.bounds),tab_z_mm=[TOP-4.3,TOP-2.3],capture_clearance_mm=.3,method='two tabs captured below central roof; open-bottom wall slots'))
   fixed['strip-'+side]=strip
+ # Every shell constituent, including capture tabs, obeys the same plate
+ # silhouette boundary; aperture holes never create permission to overhang.
+ plate_mask=prism(unary_union([Polygon(p['blank_outline_xy_mm']) for p in d['plates']]),-20,70)
+ central=central.cut(plate_mask)
+ for side in ('left','right'):fixed['strip-'+side]=fixed['strip-'+side].cut(plate_mask)
  fixed['shell-central']=central
  print(pitch,'shells / local measures / retention built',flush=True)
  save(out/'surface-plan.geojson',dict(type='FeatureCollection',features=[dict(type='Feature',properties=dict(name=n,status=P['status']),geometry=mapping(g)) for n,g in regions.items()]))
