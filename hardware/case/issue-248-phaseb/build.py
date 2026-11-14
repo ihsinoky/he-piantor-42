@@ -120,7 +120,7 @@ def make(pitch):
   central=central.cut(prism(clean(cavity.intersection(outer)), -10,ceil+10))
   blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer),north_blend_extension_mm=.5))
  for x,y in P['south_opening_xy_mm']:central=central.cut(cylinder(x,y,2.55,-1,40))
- # Four independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
+ # Two independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
  sites=read(HERE/'routing-structure-round5.json')['shell_retainer_sites_mm']
  retention=[]
  for i,(x,y) in enumerate(sites):
