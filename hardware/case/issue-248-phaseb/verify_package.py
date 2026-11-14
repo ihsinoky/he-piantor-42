@@ -20,6 +20,9 @@ def run():
  actual={str(p.relative_to(H)) for p in H.rglob('*') if p.is_file() and p.name!='artifact-sha256.json' and '__pycache__' not in str(p)}
  assert covered==actual,('manifest coverage',covered.symmetric_difference(actual))
  for p in H.glob('*.py'):compile(p.read_text(),str(p),'exec')
+ pinmap=read(H/'pinmap-round4.json');assert pinmap['passed'] and len(pinmap['wires'])==28
+ assert pinmap['routes_sha256']==sha(H/'routes-round4.json')
+ assert all(r['wing_pin']==r['main_pin']==r['wire'] and r['passed'] for r in pinmap['wires'])
  summary=[]
  for pitch in (17,16):
   out=H/f'{pitch}mm';idx=read(out/'assembly-index.json');physical=[r for r in idx if not r['name'].startswith('USB-reference-')];a=read(out/'audit.json')

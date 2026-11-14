@@ -23,6 +23,20 @@ def motion(sgn,i):
  def wire(ring):
   return Wire.make_polygon([Vector(*(centre+axis*u+np.array([0,y-STORED,0])-normal*.52)) for u,y in list(ring.coords)[:-1]],close=True)
  return extrude(Face(wire(strip.exterior),[wire(ring) for ring in strip.interiors]),amount=1.04,dir=tuple(normal))
+def fixed_fans(sgn,i):
+ from routes import segments
+ a,b,r,mid=segments(sgn,i);result=[]
+ for points,endpoint in [(a,a[-1]),(b,b[0])]:
+  path=rounded(points);edges=[]
+  for e in path.edges():
+   ends=[np.array(tuple(e.position_at(t))) for t in (0,1)]
+   if min(np.linalg.norm(p-np.array(endpoint)) for p in ends)<1e-7:continue
+   edges.append(e)
+  fixed=Wire(edges);start=fixed.position_at(0);tangent=fixed.tangent_at(0)
+  q=sweep(Face(Wire.make_circle(.5,Plane(origin=start,z_dir=tangent))),path=fixed)
+  assert q.is_valid and len(q.solids())==1
+  result.append(q)
+ return result
 def run(pitch,stage="all"):
  assert stage in ("all","length","usb","caps","service","invariants"),stage
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);d=read(out/'measurements.json')
@@ -88,9 +102,22 @@ def run(pitch,stage="all"):
       v=volume(e,s)
       if v>1e-6:hits.append(dict(part=n,solid=k,wire=i+1,volume_mm3=v))
      except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
+   # Concentric moving turns remain mutually separated analytically. Also
+   # check every moving turn against the fixed inlet/upper fan pieces, which
+   # the inherited broad own-harness exclusion did not inspect.
+   own_fan_hits=[]
+   for j in range(14):
+    for which,fan in enumerate(fixed_fans(sgn,j)):
+     for i,e in enumerate(envs):
+      try:
+       v=volume(e,fan)
+       if v>1e-6:
+        hit=dict(part=f'Wire-{side}-{j+1:02d}-fixed-'+('inlet' if which==0 else 'upper')+'-fan',solid=0,wire=i+1,volume_mm3=v)
+        hits.append(hit);own_fan_hits.append(hit)
+      except Exception as error:errors.append(dict(part=f'Wire-{side}-{j+1:02d}-fixed-fan',wire=i+1,error=repr(error)))
    for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
    export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
-   services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,method='continuous translated tilted concentric R>=5 U strip extruded normal to its plane; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+   services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,own_fixed_fan_contacts=own_fan_hits,method='continuous translated tilted concentric R>=5 U strip extruded normal to its plane; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
    print(pitch,side,'service',len(hits),'hits',flush=True)
   save(out/'service.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  if stage in ("all","invariants"):
