@@ -18,12 +18,14 @@ def run(pitch):
  mask=prism(plates,-20,70);shells=[(n,k,q) for n,k,q in raw if n in ('shell-central','strip-left','strip-right')]
  material=[]
  for n,k,q in shells:
+  print(pitch,'seam ownership',n,k,flush=True)
   material.append(dict(part=n,solid=k,plate_silhouette_overlap_mm3=volume(q,mask)))
  contacts=[]
  for n,k,q in shells:
   for pn,pk,plate in raw:
    if pn not in ('plate-left','plate-right'):continue
-   dist,proof=boundary_distance(q,plate)
+   print(pitch,'seam boundary',n,pn,flush=True)
+   dist,proof=boundary_distance(q,plate,zero_precision_mm=1e-6)
    contacts.append(dict(shell=n,shell_solid=k,plate=pn,common_mm3=volume(q,plate),minimum_boundary_gap_mm=dist,distance_proof=proof))
  actual={r['properties']['name']:shape(r['geometry']) for r in read(out/'surface-plan.geojson')['features']}
  blisters=meta['blisters'];seams=[];required=[]
@@ -50,9 +52,11 @@ def run(pitch):
   base=g.difference(exceptions)
   if not base.is_empty:
    a,m=(TOP+M*START,M) if n=='slope' else (PLATE,0) if n=='low_south' else (TOP,0)
+   print(pitch,'required skin',n,flush=True)
    roof=fuseall(sloped(base,a,m));common=sum(volume(roof,q) for sn,sk,q in shells)
    required.append(dict(region=n,required_volume_mm3=roof.volume,actual_common_mm3=common,missing_required_skin_mm3=max(0,roof.volume-common),normal_thickness_mm=2.))
  for b in blisters:
+  print(pitch,'blister skin',b['name'],flush=True)
   g=shape(b['outer']).difference(voids);top=b['top_z_mm'];roof=prism(g,top-2,2)
   common=sum(volume(roof,q) for sn,sk,q in shells)
   required.append(dict(region=b['name']+' blister cap',required_volume_mm3=roof.volume,actual_common_mm3=common,missing_required_skin_mm3=max(0,roof.volume-common),normal_thickness_mm=2.))
