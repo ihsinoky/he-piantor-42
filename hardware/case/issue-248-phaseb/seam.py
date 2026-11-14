@@ -29,7 +29,9 @@ def run(pitch):
    contacts.append(dict(shell=n,shell_solid=k,plate=pn,common_mm3=volume(q,plate),minimum_boundary_gap_mm=dist,minimum_boundary_gap_interval_mm=proof['minimum_distance_interval_mm'],distance_proof=proof))
  actual={r['properties']['name']:shape(r['geometry']) for r in read(out/'surface-plan.geojson')['features']}
  blisters=meta['blisters'];seams=[];required=[]
- voids=unary_union([Point(x,y).buffer(2.55,quad_segs=128) for x,y in P['south_opening_xy_mm']]+[Point(x,-30).buffer(2,quad_segs=128) for x in (-8,8)])
+ # Use the exact authorized CAD openings, not inscribed polygon approximations.
+ holes=[cylinder(x,y,2.55,-1,40) for x,y in P['south_opening_xy_mm']]
+ holes += [cylinder(x,-30,r,TOP-d,h) for x in (-8,8) for r,d,h in [(1.1,3,5),(2,1,2)]]
  for n,g in actual.items():
   # Diagnostic boundary matching only; the 1e-7 buffer never edits geometry.
   seam=g.boundary.intersection(plates.boundary.buffer(1e-7,join_style=2))
@@ -48,18 +50,20 @@ def run(pitch):
       if p.geom_type=='Point':pts.append(tuple(p.coords[0]))
     steps=[top(x,y)-PLATE for x,y in pts]
     seams.append(dict(region=n,length_mm=seam.length,geometry=mapping(seam),nominal_horizontal_gap_mm=0.,nominal_horizontal_overlap_mm=0.,shell_minus_plate_top_step_range_mm=[min(steps),max(steps)],plate_top_z_mm=PLATE,plate_bottom_z_mm=PLATE-1.5,matching_tolerance_mm=1e-7))
-  exceptions=voids.union(unary_union([shape(b['outer']) for b in blisters])) if n in ('plateau','slope','low_south') else Polygon()
+  exceptions=unary_union([shape(b['outer']) for b in blisters]) if n in ('plateau','slope','low_south') else Polygon()
   base=g.difference(exceptions)
   if not base.is_empty:
    a,m=(TOP+M*START,M) if n=='slope' else (PLATE,0) if n=='low_south' else (TOP,0)
    print(pitch,'required skin',n,flush=True)
-   roof=fuseall(sloped(base,a,m));common=sum(volume(roof,q) for sn,sk,q in shells)
+   roof=fuseall(sloped(base,a,m))
+   if n in ('plateau','slope','low_south'):roof=roof.cut(*holes)
+   common=sum(volume(roof,q) for sn,sk,q in shells)
    required.append(dict(region=n,required_volume_mm3=roof.volume,actual_common_mm3=common,missing_required_skin_mm3=max(0,roof.volume-common),normal_thickness_mm=2.))
  for b in blisters:
   print(pitch,'blister skin',b['name'],flush=True)
-  g=shape(b['outer']).difference(voids);top=b['top_z_mm'];roof=prism(g,top-2,2)
+  g=shape(b['outer']);top=b['top_z_mm'];roof=prism(g,top-2,2).cut(*holes)
   common=sum(volume(roof,q) for sn,sk,q in shells)
   required.append(dict(region=b['name']+' blister cap',required_volume_mm3=roof.volume,actual_common_mm3=common,missing_required_skin_mm3=max(0,roof.volume-common),normal_thickness_mm=2.))
- save(out/'seam.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),rule='Shell ownership ends at full aluminium blank silhouette, including apertures. Central ownership is the component containing bay datum (0,20); external south perimeter rim is outside that footprint. North strips obey the same silhouette boundary. No bridge over a key well.',plate_boundary_source='unchanged #232 dimensions.json blank_outline_xy_mm, not deck_outline and not aperture edges',out_of_ownership_fragments=exterior,removed_plate_owned_area_mm2=oldcentral.intersection(plates).area,retained_central_footprint_area_mm2=central.area,seams=seams,shell_plate_contacts=contacts,ownership_material=material,required_skin=required,ownership_passed=all(r['plate_silhouette_overlap_mm3']<1e-6 for r in material),skin_passed=all(r['missing_required_skin_mm3']<1e-6 for r in required),plate_contact_passed=all(r['common_mm3']<1e-6 for r in contacts)))
+ save(out/'seam.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),rule='Shell ownership ends at full aluminium blank silhouette, including apertures. Central ownership is the component containing bay datum (0,20); external south perimeter rim is outside that footprint. North strips obey the same silhouette boundary. No bridge over a key well.',plate_boundary_source='unchanged #232 dimensions.json blank_outline_xy_mm, not deck_outline and not aperture edges',out_of_ownership_fragments=exterior,removed_plate_owned_area_mm2=oldcentral.intersection(plates).area,retained_central_footprint_area_mm2=central.area,seams=seams,shell_plate_contacts=contacts,ownership_material=material,required_skin=required,authorized_skin_void_method='Exact CAD cylinders: south radius2.55 through; north radius1.1 through and radius2 counterbore only at top1mm. No polygon hole approximation and no blanket radius2 roof exception.',ownership_passed=all(r['plate_silhouette_overlap_mm3']<1e-6 for r in material),skin_passed=all(r['missing_required_skin_mm3']<1e-6 for r in required),plate_contact_passed=all(r['common_mm3']<1e-6 for r in contacts)))
  print(pitch,'ownership',max(r['plate_silhouette_overlap_mm3'] for r in material),'skin missing',max(r['missing_required_skin_mm3'] for r in required),'central solids',sum(n=='shell-central' for n,k,q in shells),flush=True)
 if __name__=='__main__':run(int(sys.argv[1]))

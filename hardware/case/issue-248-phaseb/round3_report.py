@@ -46,6 +46,10 @@ Tray route relief is an explicit conservative union of the projected conductor p
   for r in s['seams']:text+=f"| {r['region']} | {r['length_mm']:.6f} | {r['shell_minus_plate_top_step_range_mm'][0]:.6f} … {r['shell_minus_plate_top_step_range_mm'][1]:.6f} |\n"
   text+=f"\nExact seam lines, trimmed boundary-distance witnesses (explicit [0, upper] intervals at ≤0.000001 mm for nominally coincident boundaries), and removed ownership regions are in [seam.json]({pitch}mm/seam.json). The central footprint is the component containing the declared bay datum (0,20); disconnected outer south perimeter regions are explicitly outside ownership, not discarded by volume ranking. No bridge crosses a well. Central shell: **{bl['central_shell_components']} solid(s)**. {bl['shell_connection_blocker'] or 'Single solid under the seam rule.'}\n\n"
   for r in bl['central_shell_separations']:text+=f"- Central solids {r['solids']}: exact gap {r['gap_mm']:.9f} mm.\n"
+  if bl['fixed_roof_conflicts']:
+   text+='\nFixed bodies intersecting the full required 2.00 mm skin (an underside pocket here removes required material):\n\n| Fixed body | Roof region | Common mm³ |\n|---|---|---:|\n'
+   for r in bl['fixed_roof_conflicts']:text+=f"| {r['fixed_part']} | {r['required_skin_region']} | {r['intersection_mm3']:.9f} |\n"
+   text+='\nThese residual contacts require a further explicit footprint, exterior or fixed-stack change. The seam rule is applied; no skin pocket or additional footprint exception is used to hide them.\n'
   text+='\nContinuous service motion (caps and Main removed, Wing hardware fitted):\n\n'
   for r in service['sides']:text+=f"- {r['side']}: {len(r['unexpected'])} contacts, {len(r['boolean_errors'])} errors; release {r['release_mm']:.6f} mm.\n"
   text+=f"\nAccessible service is {'certified' if service['accessible_reserve_certified'] else 'NOT certified'}. The envelope covers every intermediate reserve-turn translation plus 0.020 mm allowance. Own moving harness is excluded as in the tuning method; fitted crossings remain independently disqualifying. See [service.json]({pitch}mm/service.json).\n\n"
@@ -59,7 +63,7 @@ Tray route relief is an explicit conservative union of the projected conductor p
   text+='\nFull named fitted blockers and intersection bounds are in audit.json / collision-map.json; exact roof blockers and shell separations are in tuning-blockers.json. A failed route is not proof that a compliant route is impossible.\n\n'
  text+='''## Round 3 reproduction
 
-Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` with the retained CAD Python environment. All runtime scratch is in `.issue248-runtime/`. Every gate, independent STEP/STL reload, preview constituent count, collision witness and package hash/coverage check is rerun. Geometry ownership and full required skin are additionally checked by seam.py. No mesh welding, discarded in-footprint solid, changed collision threshold or strand-overlap exemption is used.
+Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` with the retained CAD Python environment. All runtime scratch is in `.issue248-runtime/`. Every gate, independent STEP/STL reload, preview constituent count, collision witness and package hash/coverage check is rerun. Geometry ownership and full required skin are additionally checked by seam.py. Authorized openings are subtracted with the exact CAD cylinders: Ø5.10 south through-holes, Ø2.20 north through-holes and Ø4.00 north counterbores only over their top 1 mm. The preliminary inscribed-polygon masks falsely left circular slivers in the required material and are preserved under per-pitch evidence/; the collision/material thresholds are unchanged. No mesh welding, discarded in-footprint solid, changed collision threshold or strand-overlap exemption is used.
 
 ## Preserved tuning report (historical evidence)
 
