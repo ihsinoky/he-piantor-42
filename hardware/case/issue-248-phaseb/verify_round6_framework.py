@@ -59,6 +59,34 @@ def verify_fixed(pitch):
    assert abs(w['per_wire_reserve_mm'][i]-30.2)<1e-6
 
  return True
+def verify_comparisons(pitch):
+ from collections import Counter
+ out=H/f'{pitch}mm';current=read(out/'audit.json');comparison=read(out/'round6-comparison.json')
+ assert comparison['geometry_sha256']==sha(out/'assembly-index.json')
+ def category(n):
+  for prefix,label in [('Wire-','conductors'),('plate-screw-','E screws'),('plate-','aluminium plates'),('tray-','trays'),('underside-','Wing underside bounds')]:
+   if n.startswith(prefix):return label
+  return n
+ def counts(a):return Counter(' / '.join(sorted([category(r['a']),category(r['b'])])) for r in a['unexpected_interferences'])
+ def pairs(a):return {tuple(sorted((r['a'],r['b']))) for r in a['unexpected_interferences']}
+ for row in comparison['baselines']:
+  path=H/f"round{row['round']}/{pitch}mm/audit.json";base=read(path)
+  assert row['baseline_audit_sha256']==sha(path)
+  aa=counts(base);bb=counts(current)
+  assert row['categories']=={n:dict(baseline=aa[n],round6=bb[n]) for n in sorted(set(aa)|set(bb))}
+  assert row['cleared_named_pairs']==[list(p) for p in sorted(pairs(base)-pairs(current))]
+  assert row['remaining_named_pairs']==[list(p) for p in sorted(pairs(base)&pairs(current))]
+  assert row['new_named_pairs']==[list(p) for p in sorted(pairs(current)-pairs(base))]
+ geometry=read(out/'assignment-geometry-comparison.json');assert geometry['geometry_sha256']==sha(out/'assembly-index.json') and len(geometry['deviations'])==28
+ meta=read(out/'measurements.json');old=read(H/f'round3/{pitch}mm/measurements.json')
+ for r in geometry['deviations']:
+  w=next(w for w in meta['wings'] if w['side']==r['side']);base=next(w for w in old['wings'] if w['side']==r['side']);i=r['strand']-1
+  assert r['frozen_physical_strand']==14-i
+  assert r['corrected_routed_length_mm']==w['conductor_lengths_mm'][i]
+  assert r['frozen_routed_length_mm']==base['conductor_lengths_mm'][13-i]
+  assert abs(r['length_change_mm']-(r['corrected_routed_length_mm']-r['frozen_routed_length_mm']))<1e-9
+ return True
+
 if __name__=='__main__':
  verify_paths()
  for pitch in (17,16):verify_fixed(pitch)

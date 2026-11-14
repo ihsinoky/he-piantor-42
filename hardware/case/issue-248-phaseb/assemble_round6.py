@@ -14,7 +14,7 @@ def run(pitch):
  cache=RUN/f'geometry{pitch}';cache.mkdir(exist_ok=True)
  for f in out.iterdir():
   if f.is_file():f.unlink()
- for name in ('surface-plan.geojson','cap-plan.json'):
+ for name in ('surface-plan.geojson','cap-plan.json','hardware-inventory.json'):
   shutil.copyfile(baseline/name,out/name)
  from routes import make_routes
  wires,wm=make_routes();idx=[];recovery=[]

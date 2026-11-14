@@ -36,11 +36,11 @@ def run():
  for new,old in zip(current_pinmap['wires'],pinmap['wires']):
   assert new['wing_pin']==new['main_pin']==new['wire'] and new['passed']
   assert new['wing_endpoint_mm']==old['wing_endpoint_mm'] and new['main_endpoint_mm']==old['main_endpoint_mm']
- from verify_round6_framework import verify_paths,verify_fixed
+ from verify_round6_framework import verify_paths,verify_fixed,verify_comparisons
  verify_paths()
  summary=[]
  for pitch in (17,16):
-  verify_fixed(pitch)
+  verify_fixed(pitch);verify_comparisons(pitch)
   out=H/f'{pitch}mm';idx=read(out/'assembly-index.json');physical=[r for r in idx if not r['name'].startswith('USB-reference-')];a=read(out/'audit.json')
   assert a['geometry_sha256']==sha(out/'assembly-index.json')
   assert len(a.get('wire_sweep_checks',[]))==28
