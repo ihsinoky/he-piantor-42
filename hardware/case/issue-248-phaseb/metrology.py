@@ -9,13 +9,20 @@ def analytic(points,r=5):
  t.append(0.);slack=[float(np.linalg.norm(p[i+1]-p[i]))-t[i]-t[i+1] for i in range(len(p)-1)]
  return dict(length_mm=sum(slack)+sum(arcs),minimum_straight_slack_mm=min(slack),minimum_bend_radius_mm=r)
 def motion(sgn,i):
- from routes import segments
- a,b,r,mid=segments(sgn,i);z=mid[2];xc=mid[0];yc=a[-1][1]
- arc=[(xc+sgn*r*math.cos(math.pi-j*math.pi/256),yc+r*math.sin(math.pi-j*math.pi/256)) for j in range(257)]
- # The U translates continuously 15.10 mm north; its two straight legs shorten.
- # Buffer covers circular chord error (<0.0002 mm) by >0.019 mm.
- strip=Polygon(arc+[(x,y-15.1) for x,y in reversed(arc)])
- return prism(strip.buffer(.52,quad_segs=32),z-.52,1.04)
+ from routes import DESIGN,STORED,RELEASED
+ slot=13-i if sgn<0 else i;r=DESIGN['radii_mm'][slot]
+ axis=np.array(DESIGN['axis'],float);normal=np.array(DESIGN['normal'],float)
+ axis[0]*=sgn;normal[0]*=sgn
+ centre=np.array(DESIGN['centre_mm'],float);centre[0]*=sgn
+ centre+=normal*DESIGN['normal_offsets_mm'][slot]
+ arc=[(r*math.cos(math.pi-j*math.pi/256),STORED-r*math.sin(math.pi-j*math.pi/256)) for j in range(257)]
+ travel=RELEASED-STORED
+ strip=Polygon(arc+[(u,y+travel) for u,y in reversed(arc)]).buffer(.52,quad_segs=32)
+ # Exact extrusion of the entire planar translation strip in its tilted plane.
+ # Buffer covers OD1 plus .020 allowance and circular chord sagitta (<.0002).
+ def wire(ring):
+  return Wire.make_polygon([Vector(*(centre+axis*u+np.array([0,y-STORED,0])-normal*.52)) for u,y in list(ring.coords)[:-1]],close=True)
+ return extrude(Face(wire(strip.exterior),[wire(ring) for ring in strip.interiors]),amount=1.04,dir=tuple(normal))
 def run(pitch,stage="all"):
  assert stage in ("all","length","usb","caps","service","invariants"),stage
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);d=read(out/'measurements.json')
@@ -83,7 +90,7 @@ def run(pitch,stage="all"):
      except Exception as error:errors.append(dict(part=n,wire=i+1,error=repr(error)))
    for i,e in enumerate(envs):e.label=f'{side}-wire-{i+1}-continuous-motion'
    export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
-   services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,method='continuous translated concentric R>=5 U strip; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
+   services.append(dict(side=side,turn_y_mm=next(w['service_turn_y_mm'] for w in d['wings'] if w['side']==side),release_mm=30.2,method='continuous translated tilted concentric R>=5 U strip extruded normal to its plane; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
    print(pitch,side,'service',len(hits),'hits',flush=True)
   save(out/'service.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  if stage in ("all","invariants"):

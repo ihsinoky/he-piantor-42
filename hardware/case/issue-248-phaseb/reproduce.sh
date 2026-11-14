@@ -17,6 +17,10 @@ for pitch in "${pitches[@]}"; do
       for section in length usb service invariants; do
         "$cad_python" "$tree/metrology.py" "$pitch" "$section"
       done
+    elif [[ "$stage" == audit ]]; then
+      while true; do
+        if "$cad_python" "$tree/audit.py" "$pitch"; then break; else code=$?; [[ "$code" == 75 ]] || exit "$code"; fi
+      done
     else
       "$cad_python" "$tree/$stage.py" "$pitch"
     fi

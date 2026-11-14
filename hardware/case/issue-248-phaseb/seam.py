@@ -31,7 +31,7 @@ def run(pitch):
  blisters=meta['blisters'];seams=[];required=[]
  # Use the exact authorized CAD openings, not inscribed polygon approximations.
  holes=[cylinder(x,y,2.55,-1,40) for x,y in P['south_opening_xy_mm']]
- holes += [cylinder(x,-30,r,TOP-d,h) for x in (-8,8) for r,d,h in [(1.1,3,5),(2,1,2)]]
+ holes += [cylinder(x,y,r,TOP-d,h) for x,y in read(HERE/'routing-structure-round4.json')['shell_retainer_sites_mm'] for r,d,h in [(1.1,3,5),(2,1,2)]]
  for n,g in actual.items():
   # Diagnostic boundary matching only; the 1e-7 buffer never edits geometry.
   seam=g.boundary.intersection(plates.boundary.buffer(1e-7,join_style=2))

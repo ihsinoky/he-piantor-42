@@ -57,10 +57,14 @@ def audit(pitch):
    if why:mates.append(dict(i=i,j=j,a=a,b=b,reason=why));continue
    candidates.append((i,j))
  print(pitch,len(raw),'solids',len(candidates),'exact pairs',flush=True)
+ new_operations=0;chunk=int(os.environ.get('AUDIT_PAIR_CHUNK','80'))
  for count,(i,j) in enumerate(candidates):
   key=f'{i}:{j}';a,k,s=raw[i];b,l,t=raw[j]
+  if key not in done and new_operations>=chunk:
+   save(progress,dict(geometry_hash=geometry_hash,results=done));print(pitch,'bounded chunk checkpoint; restart to continue',flush=True);return 75
   needs_witness=key in done and done[key].get('volume_mm3',0)>1e-6 and 'common_bounds_mm' not in done[key]
   if key not in done or needs_witness:
+   new_operations+=1
    try:
     replay=common_record(s,t)
     if needs_witness:assert abs(replay['volume_mm3']-done[key]['volume_mm3'])<1e-6
@@ -88,4 +92,4 @@ def audit(pitch):
  result=dict(status=P['status'],all_pairs_enumerated=True,all_exact_candidates_completed=True,assembly_solids=len(raw),total_pairs=total,aabb_rejected_pairs=rejects,intended_pairs=mates,exact_candidates=len(candidates),exact_results=[dict(i=i,j=j,**done[f'{i}:{j}']) for i,j in candidates],unexpected_interferences=hits,clearance_reservation_overlaps=references,boolean_errors=errors,invalid_solids=invalids,passed=not hits and not errors and all(r['accepted_source_model_defect'] for r in invalids) and all(r['passed'] for r in wirechecks),geometry_sha256=geometry_hash,threshold_mm3=1e-6,wire_sweep_checks=wirechecks)
  save(out/'audit.json',result)
  print('COMPLETE',pitch,'hits',len(hits),'errors',len(errors),flush=True)
-if __name__=='__main__':audit(int(sys.argv[1]))
+if __name__=='__main__':sys.exit(audit(int(sys.argv[1])) or 0)

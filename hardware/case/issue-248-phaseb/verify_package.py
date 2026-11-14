@@ -13,6 +13,9 @@ def run():
  tuning=read(H/'tuning-round-sha256.json')
  for n,digest in tuning['files'].items():assert sha(H/'tuning-round'/n)==digest,('tuning-round changed',n)
  assert set(tuning['files'])=={str(p.relative_to(H/'tuning-round')) for p in (H/'tuning-round').rglob('*') if p.is_file() and '__pycache__' not in str(p)}
+ frozen_round3=read(H/'round3-sha256.json')
+ for n,digest in frozen_round3['files'].items():assert sha(H/'round3'/n)==digest,('round3 changed',n)
+ assert set(frozen_round3['files'])=={str(p.relative_to(H/'round3')) for p in (H/'round3').rglob('*') if p.is_file()}
  covered=set(read(H/'artifact-sha256.json'))
  actual={str(p.relative_to(H)) for p in H.rglob('*') if p.is_file() and p.name!='artifact-sha256.json' and '__pycache__' not in str(p)}
  assert covered==actual,('manifest coverage',covered.symmetric_difference(actual))
@@ -45,6 +48,14 @@ def run():
   assert positive==listed
   for r in a['unexpected_interferences']:
    assert physical[r['i']]['name']==r['a'] and physical[r['j']]['name']==r['b']
+  accepted=[]
+  old_fly=[r for r in read(H/f'round3/{pitch}mm/assembly-index.json') if r['name']=='Fly-official-42-instance-42']
+  for r in a['invalid_solids']:
+   is_known=r['name']=='Fly-official-42-instance-42' and len(old_fly)==1 and r['sha256']==old_fly[0]['sha256']
+   assert r['accepted_source_model_defect']==is_known
+   if is_known:assert r['classification']=='KNOWN_SOURCE_MODEL_DEFECT_F-015_D-037'
+   accepted.append(is_known)
+  assert a['passed']==(not a['unexpected_interferences'] and not a['boolean_errors'] and all(accepted) and all(r['passed'] for r in a['wire_sweep_checks']))
   proof=read(out/'retention-completion.json') if (out/'retention-completion.json').exists() else None
   support=read(out/'support-restoration.json') if (out/'support-restoration.json').exists() else None
   prior_index=idx

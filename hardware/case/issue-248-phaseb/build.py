@@ -119,7 +119,7 @@ def make(pitch):
   blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer),north_blend_extension_mm=.5))
  for x,y in P['south_opening_xy_mm']:central=central.cut(cylinder(x,y,2.55,-1,40))
  # Four independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
- sites=[(-8,-30),(8,-30)]
+ sites=read(HERE/'routing-structure-round4.json')['shell_retainer_sites_mm']
  retention=[]
  for i,(x,y) in enumerate(sites):
   top=TOP if y<=START else PLATE
@@ -191,8 +191,7 @@ def make(pitch):
   side='left' if x<0 else 'right'
   pillar=cylinder(x,y,3,2,TOP-4).cut(cylinder(x,y,1.4,TOP-6,6))
   fixed['tray-'+side]=fixed['tray-'+side].fuse(pillar)
-  x0,x1=sorted([(-12.1 if x<0 else 9.7),(-9.7 if x<0 else 12.1)])
-  fixed['shell-central']=fixed['shell-central'].cut(prism(box(x0,y-3.3,x1,y+3.3),PLATE,TOP-2-PLATE))
+  fixed['shell-central']=fixed['shell-central'].cut(cylinder(x,y,3.3,PLATE,TOP-2-PLATE))
  # USB reservations use actual #232 positioned shells; translate with the board.
  usb=[]
  for n in ('USB-reference-shell','USB-reference-overmold','USB-reference-cable-exit'):
