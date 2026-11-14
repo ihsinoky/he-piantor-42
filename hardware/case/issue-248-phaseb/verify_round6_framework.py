@@ -37,7 +37,7 @@ def verify_fixed(pitch):
    source=H/r['source_file'];assert r['source_sha256']==sha(source)==frozen[str(source.relative_to(H/'round3'))]
    assert a['sha256']==r['frozen_brep_sha256']
    if n!='tray-left':assert b['sha256']==r['recovered_brep_sha256'],('unapproved STEP-recovered change',n)
-   assert abs(r['volume_delta_mm3'])<.001 and r['maximum_bounds_delta_mm']<1e-5
+   assert abs(r['volume_delta_mm3'])<1e-6 and r['maximum_bounds_delta_mm']<1e-6
   if n=='tray-left':
    repair=read(out/'splice-boss-rebuild.json')
    assert repair['geometry_sha256']==sha(out/'assembly-index.json')

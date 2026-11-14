@@ -32,7 +32,7 @@ def run(pitch):
    assert len(q.solids())==1
    q=q.solids()[0];BRepTools.Write_s(q.wrapped,str(target))
    bd=bounds(q);dv=q.volume-r['volume_mm3'];db=max(abs(a-b) for a,b in zip(sum(bd,[]),sum(r['bounds'],[])))
-   assert abs(dv)<.001 and db<1e-5,(n,dv,db)
+   assert abs(dv)<1e-6 and db<1e-6,(n,dv,db)
    row=dict(name=n,solid=r['solid'],bounds=bd,valid=q.is_valid,volume_mm3=q.volume,sha256=sha(target))
    recovery.append(dict(part=n,method='frozen round-3 final manufacturing STEP representation roundtrip; no healing or geometry edits',source_file=str(step.relative_to(HERE)),source_sha256=sha(step),frozen_brep_sha256=r['sha256'],recovered_brep_sha256=row['sha256'],volume_delta_mm3=dv,maximum_bounds_delta_mm=db,valid=q.is_valid))
   idx.append(row)
