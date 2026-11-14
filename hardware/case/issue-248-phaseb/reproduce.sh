@@ -11,7 +11,7 @@ tree=hardware/case/issue-248-phaseb
 pitches=("$@")
 if ((${#pitches[@]} == 0)); then pitches=(17 16); fi
 for pitch in "${pitches[@]}"; do
-  for stage in build restore_floor finalize_geometry blend remake_joints tune_hardware regularize_shell finalize_geometry rebuild_splice_boss relieve_inner_walls seam audit retention_check metrology qualify_lengths caps_only local_measures export drawings verify_exports witnesses shell_diagnostics tuning_blockers verify_hardware; do
+  for stage in build restore_floor finalize_geometry blend remake_joints tune_hardware regularize_shell finalize_geometry rebuild_splice_boss seam audit retention_check metrology qualify_lengths caps_only local_measures export drawings verify_exports witnesses shell_diagnostics tuning_blockers verify_hardware; do
     if [[ "$stage" == metrology ]]; then
       # Separate processes bound OCCT memory and retain each completed audit.
       # caps_only below supplies the independent certified cap check.

@@ -4,7 +4,7 @@ from build import shell_pillar
 def run(pitch):
  out=HERE/f'{pitch}mm';idx,raw=cached(pitch);rows=[]
  shells=[q for n,k,q in raw if n=='shell-central']
- for i,(x,y) in enumerate(read(HERE/'routing-structure-round4.json')['shell_retainer_sites_mm']):
+ for i,(x,y) in enumerate(read(HERE/'routing-structure-round5.json')['shell_retainer_sites_mm']):
   n='tray-left' if x<0 else 'tray-right';tray=next(q for name,k,q in raw if name==n);insert=next(q for name,k,q in raw if name==f'shell-insert-{i}')
   samples=[dict(z_mm=z,material_present=tray.is_inside(Vector(x,y-2,z))) for z in (1.9,2.1,11.7,18,22)]
   pillar=shell_pillar(x,y)

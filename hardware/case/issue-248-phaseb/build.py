@@ -50,10 +50,7 @@ def gh(side):
  h=poly(-10.375,-1.6,10.375,2.45);p=poly(-9.375,-.15,9.375,5.55)
  return prism(h,8.65,4.25).fuse(prism(p,8.75,4.15)),h.union(p)
 def shell_pillar(x,y):
- q=cylinder(x,y,3,2,TOP-4).cut(cylinder(x,y,1.4,TOP-6,6))
- # Keep the inherited X0/Y-8 splice and its screw/head clear. The rear root
- # remains continuous through the full height and is independently probed.
- return q.cut(prism(box(-20,-11.2,20,-4.8),2,4.5))
+ return cylinder(x,y,3,2,TOP-4).cut(cylinder(x,y,1.4,TOP-6,6))
 def make(pitch):
  out=HERE/f'{pitch}mm';out.mkdir(exist_ok=True)
  for name in ('retention-completion.json','support-restoration.json','tray-seating-relief.json'):
@@ -124,7 +121,7 @@ def make(pitch):
   blistermeta.append(dict(name=name,ceiling_z_mm=ceil,top_z_mm=top,cavity=mapping(cavity),outer=mapping(outer),north_blend_extension_mm=.5))
  for x,y in P['south_opening_xy_mm']:central=central.cut(cylinder(x,y,2.55,-1,40))
  # Four independent M2 shell screws, all keyless; south Wing/Main screws no longer retain shell.
- sites=read(HERE/'routing-structure-round4.json')['shell_retainer_sites_mm']
+ sites=read(HERE/'routing-structure-round5.json')['shell_retainer_sites_mm']
  retention=[]
  for i,(x,y) in enumerate(sites):
   top=TOP if y<=START else PLATE
@@ -189,14 +186,12 @@ def make(pitch):
   # This is case-only subtraction; the source floor and E supports remain
   # independently restored/checked. The service gate still audits every body.
   from routes import DESIGN,STORED,RELEASED
+  from routes import segments
   for sgn in (-1,1):
-   axis=np.array(DESIGN['axis']);normal=np.array(DESIGN['normal']);centre=np.array(DESIGN['centre_mm'])
-   for r,offset in zip(DESIGN['radii_mm'],DESIGN['normal_offsets_mm']):
-    theta=np.linspace(math.pi,0,257)
-    arc=centre+normal*offset+r*np.cos(theta)[:,None]*axis+r*np.sin(theta)[:,None]*np.array([0,-1,0])
-    arc[:,0]*=sgn
-    moved=arc+np.array([0,RELEASED-STORED,0])
-    channels.append(Polygon([(x,y) for x,y,z in arc]+[(x,y) for x,y,z in moved[::-1]]).buffer(.87,quad_segs=16))
+   for i in range(14):
+    a,b,r,mid=segments(sgn,i)
+    arc=[(mid[0]+sgn*r*math.cos(t),a[-1][1]+r*math.sin(t)) for t in np.linspace(math.pi,0,257)]
+    channels.append(Polygon(arc+[(x,y+RELEASED-STORED) for x,y in reversed(arc)]).buffer(.87,quad_segs=16))
   # One explicit conservative channel reservation avoids intersecting dozens of
   # overlapping Boolean tools. Full source floor and E supports are restored
   # below; the unchanged protected palm band is independently audited.
@@ -215,6 +210,6 @@ def make(pitch):
   q=items[n].translate((0,0,-2.65));b=bounds(q)
   usb.append((n,prism(box(b[0][0],b[0][1]-30,b[1][0],b[1][1]),b[0][2],b[1][2]-b[0][2])))
  for n,q in usb:fixed[n]=q
- save_geometry(pitch,fixed,dict(wings=wm,round3_tray_seating_relief=seating_meta,route_channel_reservation=dict(geometry=mapping(channel),z_mm=[zlo,zhi],clearance_radius_mm=.87,method='union of fitted projected routes and complete continuous translated tilted-turn projections, with one conservative common height interval; case trays only; source floor and E support material restored independently'),wire_sweep_checks=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()],fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
+ save_geometry(pitch,fixed,dict(wings=wm,round3_tray_seating_relief=seating_meta,route_channel_reservation=dict(geometry=mapping(channel),z_mm=[zlo,zhi],clearance_radius_mm=.87,method='union of fitted projected routes and complete continuous translated horizontal-turn projections, with one conservative common height interval; case trays only; source floor and E support material restored independently'),wire_sweep_checks=[dict(part=n,volume_mm3=q.volume,expected_volume_mm3=wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25,volume_error_mm3=abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25),passed=q.is_valid and len(q.solids())==1 and abs(q.volume-wm[0 if '-left-' in n else 1]['conductor_lengths_mm'][int(n[-2:])-1]*math.pi*.25)<.001) for n,q in wires.items()],fly=dict(connected_length_mm=fpath.length,minimum_radius_mm=5,waypoints_mm=fpts,path_samples_mm=fs,solid_count=len(fly.solids()),volume_mm3=fly.volume),blisters=blistermeta,retention=retention,source_sha256={str(p.relative_to(ROOT)):sha(p) for p in [HERE/'parameters.json',HERE.parent/f'issue-232-final/{pitch}mm/assembly.step',flysource/'fly-170mm.step']}))
  print(pitch,'geometry checkpoint saved',flush=True)
 if __name__=='__main__':make(int(sys.argv[1]))

@@ -16,6 +16,9 @@ def run():
  frozen_round3=read(H/'round3-sha256.json')
  for n,digest in frozen_round3['files'].items():assert sha(H/'round3'/n)==digest,('round3 changed',n)
  assert set(frozen_round3['files'])=={str(p.relative_to(H/'round3')) for p in (H/'round3').rglob('*') if p.is_file()}
+ frozen_round4=read(H/'round4-sha256.json')
+ for n,digest in frozen_round4['files'].items():assert sha(H/'round4'/n)==digest,('round4 changed',n)
+ assert set(frozen_round4['files'])=={str(p.relative_to(H/'round4')) for p in (H/'round4').rglob('*') if p.is_file()}
  covered=set(read(H/'artifact-sha256.json'))
  actual={str(p.relative_to(H)) for p in H.rglob('*') if p.is_file() and p.name!='artifact-sha256.json' and '__pycache__' not in str(p)}
  assert covered==actual,('manifest coverage',covered.symmetric_difference(actual))
@@ -23,6 +26,12 @@ def run():
  pinmap=read(H/'pinmap-round4.json');assert pinmap['passed'] and len(pinmap['wires'])==28
  assert pinmap['routes_sha256']==sha(H/'routes-round4.json')
  assert all(r['wing_pin']==r['main_pin']==r['wire'] and r['passed'] for r in pinmap['wires'])
+ current_pinmap=read(H/'pinmap-round5.json')
+ assert current_pinmap['passed'] and len(current_pinmap['wires'])==28
+ assert current_pinmap['routes_sha256']==sha(H/'routes-round5.json')
+ for new,old in zip(current_pinmap['wires'],pinmap['wires']):
+  assert new['wing_pin']==new['main_pin']==new['wire'] and new['passed']
+  assert new['wing_endpoint_mm']==old['wing_endpoint_mm'] and new['main_endpoint_mm']==old['main_endpoint_mm']
  summary=[]
  for pitch in (17,16):
   out=H/f'{pitch}mm';idx=read(out/'assembly-index.json');physical=[r for r in idx if not r['name'].startswith('USB-reference-')];a=read(out/'audit.json')
