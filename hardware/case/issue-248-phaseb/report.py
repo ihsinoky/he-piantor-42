@@ -10,7 +10,7 @@ def run():
   out=HERE/f'{pitch}mm';get=lambda n:read(out/(n+'.json'))
   a=get('audit');lf=get('length-fly');u=get('usb');c=get('caps');s=get('service');v=get('export-verification');m=get('manufacturing');inv=get('invariants');ret=get('retention-check');cw=get('cap-witnesses');cm=get('collision-map');bl=get('tuning-blockers');hw=get('hardware-inventory')
   ghash=sha(out/'assembly-index.json')
-  assert all(d['geometry_sha256']==ghash for d in [a,v,c,cw,cm,ret,bl])
+  assert all(d['geometry_sha256']==ghash for d in [a,v,c,cw,cm,ret,bl,lf,u,s,inv])
   assert a['total_pairs']==a['aabb_rejected_pairs']+len(a['intended_pairs'])+len(a['exact_results'])
   assert len(a['exact_results'])==a['exact_candidates'] and cm['complete'] and len(cm['contacts'])==len(a['unexpected_interferences'])
   hits=a['unexpected_interferences'];flyhits=[r for r in hits if 'Fly-170mm' in (r['a'],r['b'])]

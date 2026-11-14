@@ -13,6 +13,12 @@ def run(pitch):
    for area,roof in [('low_south',low),('slope',slope)]:
     v=volume(roof,q)
     if v>1e-6:conflicts.append(dict(fixed_part=n,required_skin_region=area,intersection_mm3=v,roof_rule='2.00 mm normal skin beneath settled exterior',resolution_blocker='Clearing this fixed body by cutting required skin would violate the roof rule. Requires a changed exterior/footprint, changed fixed stack, or explicit different material ownership; none authorized.'))
+ for n,k,q in raw:
+  if n.startswith('tray-'):
+   band=q.intersect(prism(box(-200,69.7001,200,100),PLATE-1.501,1.502))
+   if band is not None:
+    v=volume(low,Compound(children=list(band)))
+    if v>1e-6:conflicts.append(dict(fixed_part=n+' protected south palm band',required_skin_region='low_south',intersection_mm3=v,roof_rule='2.00 mm roof and unchanged protected palm material Y69.7001..100',resolution_blocker='Tray relief here changes the protected palm material invariant; shell relief removes required roof skin. Neither waived.'))
  shell=[q for n,k,q in raw if n=='shell-central'];separation=[]
  for i in range(len(shell)):
   for j in range(i):

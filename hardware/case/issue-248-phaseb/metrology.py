@@ -35,7 +35,7 @@ def run(pitch):
  dist=min(boundary_distance(s,fly)[0] for n,k,s in shells)
  f.update(solid_count=len(fly.solids()),valid=fly.is_valid,volume_mm3=fly.volume,volume_error_mm3=abs(fly.volume-170*math.pi),shell_gap_mm=dist)
  f['passed']=abs(f['length_mm']-170)<1e-6 and f['minimum_straight_slack_mm']>0 and f['valid'] and f['solid_count']==1 and f['volume_error_mm3']<.001 and dist>=.3-1e-6
- save(out/'length-fly.json',dict(status=P['status'],conductors=lengths,fly=f))
+ save(out/'length-fly.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),conductors=lengths,fly=f))
  print(pitch,'length/Fly',f['shell_gap_mm'],flush=True)
  usb=[]
  for n,k,s in raw:
@@ -48,7 +48,7 @@ def run(pitch):
     if v>1e-6:hits.append(dict(part=b,solid=l,volume_mm3=v))
    except Exception as e:errors.append(dict(part=b,error=repr(e)))
   usb.append(dict(part=n,travel_mm=30,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
- save(out/'usb.json',dict(status=P['status'],reservations=usb,passed=all(r['passed'] for r in usb)))
+ save(out/'usb.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),reservations=usb,passed=all(r['passed'] for r in usb)))
  print(pitch,'USB complete',flush=True)
  caps=[]
  for k in read(out/'cap-plan.json'):
@@ -73,7 +73,7 @@ def run(pitch):
   export_step(Compound(children=envs),out/f'service-motion-{side}-PROVISIONAL.step')
   services.append(dict(side=side,turn_y_mm=[17.1,2],release_mm=30.2,method='continuous translated concentric R>=5 U strip; unchanged legs lie in fitted route; 0.020 mm per-strand envelope allowance',removed='central/strip caps, Main and its hardware; disconnect Main EZmate while retaining Fly cable in its dressed storage pose; own moving harness excluded',wing_stacks_remain_fitted=True,unexpected=hits,boolean_errors=errors,passed=not hits and not errors))
   print(pitch,side,'service',len(hits),'hits',flush=True)
- save(out/'service.json',dict(status=P['status'],sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
+ save(out/'service.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),sides=services,geometric_motion_passed=all(r['passed'] for r in services),accessible_reserve_certified=False,note='Accessible reserve additionally requires fitted collision gate and removable retention to pass.'))
  # Verify stack and palm datums from actual fitted parts, not prior verdicts.
  invariants=[]
  original=source(pitch)
@@ -94,5 +94,5 @@ def run(pitch):
   oldband=clip(original['tray-'+side].translate((0,0,-2.65)));newband=clip(tray)
   common=volume(oldband,newband);removed=max(0,oldband.volume-common);added=max(0,newband.volume-common)
   palm.append(dict(side=side,plate_top_z_mm=PLATE,tray_top_faces_at_plate=len(zs),maximum_step_mm=max([abs(z-PLATE) for z in zs],default=999),protected_band_y_mm=[69.7001,100],palm_material_removed_mm3=removed,palm_material_added_mm3=added,passed=bool(zs) and max(abs(z-PLATE) for z in zs)<1e-6 and max(removed,added)<1e-4))
- save(out/'invariants.json',dict(status=P['status'],boards_and_plates=invariants,palm=palm,passed=all(r['passed'] for r in invariants+palm)))
+ save(out/'invariants.json',dict(status=P['status'],geometry_sha256=sha(out/'assembly-index.json'),boards_and_plates=invariants,palm=palm,passed=all(r['passed'] for r in invariants+palm)))
 if __name__=='__main__':run(int(sys.argv[1]))
