@@ -14,10 +14,11 @@ def run():
   assert a['total_pairs']==a['aabb_rejected_pairs']+len(a['intended_pairs'])+len(a['exact_results'])
   assert len(a['exact_results'])==a['exact_candidates'] and cm['complete'] and len(cm['contacts'])==len(a['unexpected_interferences'])
   hits=a['unexpected_interferences'];flyhits=[r for r in hits if 'Fly-170mm' in (r['a'],r['b'])]
-  fitted=a['passed'] and hw['all_E_replacements_passed']
+  seam=get('seam');assert seam['geometry_sha256']==ghash
+  fitted=a['passed'] and hw['all_E_replacements_passed'] and seam['ownership_passed'] and seam['plate_contact_passed']
   service=fitted and s['geometric_motion_passed'] and inv['passed'] and ret['local_geometry_passed']
   s['accessible_reserve_certified']=service;save(out/'service.json',s)
-  passed=[fitted,all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c.get('certified',False) and c['passed'] and not cw['solver_inconsistencies'],v['passed'] and all(r['envelope_passed'] for r in m['parts']),v['preview_exists'] and v['preview_inventory_passed']]
+  passed=[fitted,all(r['passed'] for r in lf['conductors']),service,lf['fly']['passed'] and not flyhits,u['passed'],c.get('certified',False) and c['passed'] and not cw['solver_inconsistencies'],v['passed'] and all(r['envelope_passed'] for r in m['parts']) and seam['skin_passed'],v['preview_exists'] and v['preview_inventory_passed']]
   capmin=min(r['remaining_gap_mm'] for r in c['keys'])
   reasons=[f"{len(hits)} unexpected contacts; {len(a['boolean_errors'])} Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root {'PASS' if hw['all_E_replacements_passed'] else 'FAIL'}.",f"Longest finished upper bound {max(r['cut_length_upper_mm'] for r in lf['conductors']):.6f} mm including 3.90 mm Wing / 3.40 mm Main sourced dress-to-tip bounds and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json.",f"Motion {'clear' if s['geometric_motion_passed'] else 'blocked'}; fitted collisions additionally prevent accessible certification.",f"{lf['fly']['length_mm']:.9f} mm, R5; true roof gap {lf['fly']['shell_gap_mm']:.6f} mm; {len(flyhits)} fitted contacts.",'Three continuous 30 mm reservations recomputed.',f"Certified trimmed-face minimum after 0.50 mm allowance: {capmin:.6f} mm; physical Junana skirt test OPEN.",'; '.join(f"{r['part']}: {r['solids']} solids, {r['mesh']['nonmanifold_edges']} nonmanifold edges" for r in v['checks'] if not r['passed']) or 'All nineteen STEP/STL sets independently reloaded with unchanged verifier.',f"Preview reloaded {v['preview_reloaded_solids']} / {v['preview_expected_solids']} constituents."]
   rows[pitch]=['PASS' if r else 'FAIL' for r in passed]
@@ -119,7 +120,8 @@ There is also a direct fixed-input roof conflict: the required low skin and unch
 
 Run `bash hardware/case/issue-248-phaseb/reproduce.sh 17 16` from this worktree with the retained CAD Python environment. Each stage is separate; all scratch and audit checkpoints are under .issue248-runtime. Exact audit reuse is permitted only for the identical geometry index hash. This continuation rebuilds both pitches and reruns all eight gates, independent exports, witnesses and package checks. All 44 preserved first-candidate files are independently checked against the frozen 47f7dd5 hashes in first-candidate-sha256.json; new outputs describe the tuning candidate. Run `python3 hardware/case/issue-248-phaseb/verify_package.py` after report generation for input/artifact hashes and independent all-pair coverage. The package remains provisional and unreleased, with the explicitly failed gates above.
 '''
- (HERE/'REPORT.md').write_text(report)
+ from round3_report import render
+ (HERE/'REPORT.md').write_text(render(rows))
  for pitch in (17,16):
   for folder in [HERE/f'{pitch}mm',HERE/f'{pitch}mm/manufacturing']:
    (folder/'PROVISIONAL.txt').write_text(P['status']+'\nAll files in this directory are conditional on plateau_top_z_mm in parameters.json. See ../../REPORT.md and the per-pitch gates before manufacturing.\n')
