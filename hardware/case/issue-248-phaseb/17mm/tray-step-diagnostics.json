@@ -1,0 +1,72 @@
+{
+  "status": "FAIL; no export validity waiver",
+  "geometry_sha256": "02f390f12782526c80406c881868b390773f653711df9f6b6a5000ece0f1de2f",
+  "part": "tray-left",
+  "source_brep_valid": true,
+  "reloaded_step_valid": false,
+  "failed_face_index": 131,
+  "failed_face_area_mm2": 60.40422505099126,
+  "failed_face_bounds_mm": [
+    [
+      -3.5,
+      51.5,
+      2.0
+    ],
+    [
+      3.5,
+      58.5,
+      5.5
+    ]
+  ],
+  "location": "outer surface of relocated south splice boss",
+  "baseline": {
+    "part": "tray-left",
+    "valid": false,
+    "solids": 1,
+    "step_volume_delta_mm3": 7.821654435247183e-09,
+    "brim_xy_mm": [
+      159.02052392520005,
+      156.06899176301698
+    ],
+    "mesh": {
+      "triangles": 83314,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "volume_relative_error": 3.2679322531935687e-06
+    },
+    "step_sha256": "653ab9bc1131c8ca7574ed74240d5a85952186c3d366487df5b23ea2a19f9053",
+    "stl_sha256": "ba96bcf4d2c8522056e16847d1ec4c6c96138f9ce8dd45e1d44393a325dc1e42",
+    "passed": false
+  },
+  "attempts": [
+    {
+      "method": "STEP precision LEAST; pcurves retained",
+      "reload_valid": false,
+      "volume_delta_mm3": 7.821654435247183e-09
+    },
+    {
+      "method": "STEP AVERAGE/LEAST without pcurves",
+      "reload_valid": false,
+      "volume_delta_mm3": 8.856877684593201e-07
+    },
+    {
+      "method": "OCCT shape fix on imported STEP",
+      "fixed_valid": true,
+      "volume_delta_mm3": 0.0,
+      "reexport_reload_valid": false
+    },
+    {
+      "method": "ShapeDivideClosed 1 split point",
+      "pre_export_valid": true,
+      "reload_valid": false,
+      "volume_delta_mm3": 3.766035661101341e-08
+    },
+    {
+      "method": "ShapeDivideClosed 2 split points",
+      "pre_export_valid": false,
+      "reload_valid": false,
+      "volume_delta_mm3": 5.402398528531194e-08
+    }
+  ],
+  "decision": "All attempts rejected. Shipped baseline STEP and STL are retained with failing independent STEP-validity gate. Fitted geometry, collision evidence, seam proof and verifier thresholds remain unchanged. Requires a valid STEP round-trip of the tray boss topology; source validity/manifold STL cannot substitute for that gate."
+}
