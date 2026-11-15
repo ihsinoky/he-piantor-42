@@ -35,6 +35,7 @@ _ap.add_argument('--chunks', type=int, default=4)
 _ap.add_argument('--iters', type=int, default=25)
 _ap.add_argument('--wmul', type=float, default=1.0)
 _ap.add_argument('--wmulw', type=float, default=None)
+_ap.add_argument('--trimul', type=float, default=1.0)
 _ap.add_argument('--seed', type=int, default=16)
 _ap.add_argument('--solver', default='lbfgsb')   # lbfgsb | adam
 _ap.add_argument('--steps', type=int, default=50)  # adam steps per chunk
@@ -250,13 +251,13 @@ def objective(x):
                 else: grad[i * 6 + 3:i * 6 + 6] += -gv
     for i in range(14):
         v = x[i * 6:(i + 1) * 6]
-        pen0 = feed_build_pen(i, v)
+        pen0 = feed_build_pen(i, v) * ARGS.trimul
         _st['trim'] += pen0
         loss += pen0
         eps = 1e-5
         for k in range(6):
             vp = v.copy(); vp[k] += eps
-            grad[i * 6 + k] += (feed_build_pen(i, vp) - pen0) / eps
+            grad[i * 6 + k] += (feed_build_pen(i, vp) * ARGS.trimul - pen0) / eps
     loss += 0.001 * float(np.sum((x - X0) ** 2)); grad += 0.002 * (x - X0)
     STATS.update(_st)
     if not np.isfinite(loss): loss = 1e12
