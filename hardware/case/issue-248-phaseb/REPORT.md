@@ -1,3 +1,152 @@
+# Issue #248 Phase B — Round 13
+
+## Mandate — service-mechanism / interconnect change study (PO authorization 2026-11-15)
+
+Rounds 8–12 closed the sliding-reserve problem from three sides (assignment
+floor 110 true; vertical family by proof; flat order-preserving turn by
+proof). The PO authorized studying changes **outside the frozen set**: the
+service mechanism and the interconnect itself. This round is a STUDY: no
+frozen tree, board, or decision was modified. Screens/probes live in
+`sources/round13/` and `.issue248-runtime/round13/`. All gate-1 screens use
+the centreline screen of rounds 5–12 plus exact-Common probes against the
+frozen round-9 solids (17 mm, right side; probe pipeline validated by a
+positive control: wire-vs-itself Common = 72.68 mm³ ≈ its swept volume).
+
+## Candidate A — no reserve, unplug-first service
+
+Route: Wing outlets → corridor → fan/rise → round 9's on-axis G approach →
+Main inlets. No reversal anywhere, so no re-sort is needed.
+
+**Centreline screen (variant A6 — best of eight constructions A1–A8):**
+inversions **0 at every Y cut** (−32/−27/−21/−12/0); longest polyline
+93.42 mm, **100.72 mm incl. tails**; a harness built with the full +30.2 mm
+of slack is ≈131 mm, 69 mm under the 200 cap. Only **4 pairs < 1.0 mm**,
+all in the feed family round 9 already carries (pins 10–14 G-station
+pass-bys, 0.54–0.61 mm; round 9's fitted tail count for this family was 9).
+The reserve knot (45 screen pairs / 110 true) is **gone by construction**.
+
+**Fixed-body probe (exact Common, A6 wires 1–7 vs all frozen solids): FAIL
+for the A6 geometry as drawn.** The eastern fan ladder (fx to 28.85, bow to
+38.85) trespasses on the Wing's east column: `wing_right` PCB corner
+2.14 mm³, `switch-envelope-R_R0_C5` up to 12.50 mm³, `R_R1_C5` up to
+10.66 mm³, `underside-right-U_MUX_B` ≈0.03 mm³ (round 9's own wires score
+0.0 against the same solids). The mirror construction A8 (round 9's proven
+western feed + one diagonal replacing the reserve) fails the centreline
+screen instead: **49 pairs < 1.0, min 0.0** — the diagonal family collapses
+at the shared fan stations. **The open design problem for A is the fan**:
+converging 14 strands from the 16.25 mm outlet row into the western feed
+inside the corridor's Z band (3.6–5.75 mm, capped above by the Wing
+underside sensor bounds). It is bounded and has named levers (Z-laddered
+diagonals, Y-staggered fan stations, longer convergence over the corridor);
+crucially it is **not** subject to the proven funnel bound — only 14 passes
+cross the neck, and round 12 showed that plane essentially free for a wide
+row. A build round must close it under the fitted audit.
+
+**Service story (replaces the slide reserve):** (1) remove the central
+shell and north strips (removable parts; no Wing stack disturbance);
+(2) with the bay open, unplug the Wing GH from the bay side — extraction
+travel ≈6 mm along the axis; the harness is built +30.2 mm over the
+installed path and the excess is dressed as one gentle open loop in the
+bay's free volume (not a routed pack), feeding ≥16 mm to the Wing end
+(6 extraction + ~10 handling); (3) the Wing lifts vertically out of its
+pocket with the harness detached. **Requirement change for PO:** gate 3's
+connected slide-service (30.20 mm release while mated) is deleted and
+replaced by unplug-first service; Wing GH mating cycles become the service
+budget (low-frequency service; GH-class rating). Tray pack channels become
+vestigial; boards, plates, GH, pin maps untouched.
+
+## Candidate B — serpentine (S-fold) service loop in the bay — KILLED at screen
+
+Construction: candidate A's route with an own-plane S-fold (two R5 arcs,
+shared tangent, upper leg at zf+10) inserted in the rise→bow leg — two
+reversals restore end order; X order is never disturbed. Arithmetic passes:
+release ≈32.0 mm ≥ 30.2; longest 125.41 mm polyline, 132.71 incl. tails;
+crown centreline max Z21.41 vs plateau underside 22.56. **Screen fails:
+21 pairs < 1.0 mm, min 0.08** (pairs 11/13, 12/14) — each strand's exit leg
+must cross every intermediate strand's fold plane, and the neighbours' arc
+crowns sit exactly in the exit legs' Z band. Alternative placements are
+proof-blocked: under the Wing = round 11's PCB pierce; under Main the
+headroom is 5.35 mm < the 10 mm fold height; downstream of G there is no
+run left. The kill is structural to folding inside a shared corridor with
+diagonal exits, not a tuning miss. B was the only candidate preserving
+connected slide-service; none survives.
+
+## Candidate C — mid-harness connector split (on candidate A's route)
+
+Concept: a small carrier PCB (~34×16 mm, 2-layer) in the bay NE of Main
+carrying two SM14B-GHS-TB (C265343) back-to-back, pin n→n straight through
+(D-024 invariant); both sub-harnesses end in GHR-14V-S plugs. Electrical
+(B2/B3 framework): the split adds per line +2 mated GH pairs + 2 crimps +
+a short trace ≈ **+86 mΩ loop worst case** (30 mΩ contact class, ×7/6
+return factor), +44 mΩ typical → Vfar 4.792958 V degrades by ≤10.9 mV to
+≈**4.782 V, margin ≈182 mV** to the 4.60 V target. **PASS.** Service:
+shells off → unplug at the split (open bay access) → Wing-side sub-harness
+comes away in hand for its own GH unplug and Wing lift-out; no dressed
+slack loop needed. Cost delta ≈ **+$6–12/unit class** (carrier PCB,
+2 headers, 2 housings, 28 extra crimps, +1 harness assembly). Unfreezes
+only the harness definition (D-033 becomes two sub-harnesses + carrier)
+plus a small carrier-retention feature in the bay. It does **not** solve
+candidate A's fan problem (same route); it buys service modularity
+(Wing swap without disturbing the Main-side dressing; bench-testable
+sub-harnesses) at extra cost and a new failure point (two more mated
+pairs in the power path). Build scope if adopted: A build round + carrier
+PCB design/retention + harness re-specification.
+
+## Candidate D — FFC / custom FPC
+
+**Stock FFC (Molex 152660149 + FH12) — killed.** The cable is straight;
+the route is bent in plan (fan shift, bow lean, NE flights), and a straight
+chord crosses unscreened volumes. Its lane resistance is unspecified
+(B3), so the electrical claim cannot be closed (on B3's assumed
+0.035 mm² lanes it would pass: loop ≈203 mΩ vs the incumbent 187.350 mΩ,
+ΔVfar ≈ −2 mV; FH12's 0.5 A/contact > 127 mA on the HALL_5V lane). The
+Wing-side FH12 actuator sits under the Wing PCB in the 5.35 mm cavity —
+in-situ actuation is not demonstrated. **Custom FPC — viable but
+dominated.** Patterned to candidate A's plan shape, its lanes never
+converge (0.5 mm pitch printed), so the fan problem dissolves by
+construction, and service works (unplug the Main-end ZIF in the open bay,
+lift Wing + FPC out together, bench-open the Wing ZIF). But it respins
+**both boards (Main Rev.8 / Wing Rev.5)**, reopening the adopted D-040 /
+D-039 baselines with full requalification and new manufacturing packages —
+round #250 showed how fragile Main's power copper is under connector
+changes — plus FPC prototype cost class ($50–150+/iteration) and a
+20-cycle ZIF rating. Largest backtracking and highest cost of the set.
+
+## Comparison (PO priorities: cost, low backtracking, freedom, speed)
+
+| Candidate | Knot dissolved? | Service | Electrical | Unfreezes | Cost delta |
+|---|---|---|---|---|---|
+| A no-reserve | Yes (screen: 4 feed pairs left; fan = build-round problem) | Unplug-first (requirement change) | Unchanged (PASS) | Service requirement (gate 3); case reserve geometry | ≈0 (deletes features) |
+| B S-fold | **Killed at screen** (21 pairs, min 0.08) | Would have preserved slide-service | Unchanged | — | — |
+| C split | Inherits A | Unplug at split (requirement change) | PASS (Vfar ≈4.782, margin 182 mV) | Harness definition (D-033) | +$6–12/unit class |
+| D stock FFC | **Killed** (straight vs bent path; actuator access) | — | Unclosable (lane R unspecified) | Both boards | — |
+| D custom FPC | Yes, by construction | Unplug Main ZIF + lift-out | PASS on assumed lanes | **Both boards (Rev.8/Rev.5), D-039/D-040 reopened** | Highest (FPC + respins) |
+
+## Recommendation
+
+**Adopt candidate A** and take it to a build round. It is the cheapest
+option (it deletes parts), reopens no adopted baseline (boards, D-024,
+D-039, D-040 untouched; the #248 case is still a study), and its one open
+problem — the western-corridor fan — is a bounded routing task under the
+fitted audit, not a proven bound. Candidate C is the fallback if PO values
+service modularity over the added cost and failure point; it shares A's
+build round. **Requirement change A (and C) asks of PO:** delete gate 3's
+connected 30.20 mm slide-service and replace it with unplug-first service
+(Wing GH extraction ≈6 mm + lift-out, fed by +30.2 mm of dressed harness
+slack in the bay). If connected slide-service is non-negotiable, no
+candidate in this study survives, and the low-deck case should be closed
+in favour of the adopted Δ+6 design (D-041).
+
+## Remaining blockers
+
+1. Candidate A build round: western-corridor fan convergence (screen
+   evidence above), feed-tail tuning (4-pair family), fitted-audit gates
+   1–8, service-procedure qualification (extraction access, slack-loop
+   dressing, GH cycle budget).
+2. Physical Junana cap measurement — still open, PO-side; plateau Z24.65
+   remains provisional.
+
+---
 # Issue #248 Phase B — Round 12
 
 **PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
