@@ -1,3 +1,121 @@
+# Round 16 — Curriculum feed optimisation + continuous slack placement: optimisation machinery REPAIRED (3 defects); feed NOT converged (topology-bound); continuous slack placement NOT converged (capacity); gates 1/3 still FAIL
+
+## Feed — machinery diagnosis and repair (the round's durable result)
+
+Rounds 15-16's optimiser stalls were traced to three defects in the
+screen objective, each proven before repair:
+
+1. **Sample birth/death cliffs.** `var_samples` used
+   n = ceil(len/1.5) per segment; counts changed as segments moved,
+   making the objective discontinuous. FD gradient check (all 84 vars,
+   stage-1 state): var 18 FD = -2.24e7 vs analytic -2.04.
+   FIX: sample counts frozen from the init state (`SEG_N`).
+2. **Kinked trim penalty.** The capped cot-form trim penalty's FD
+   gradient exploded near sharp corners. FIX: smooth deflection-angle
+   fillet tangents t = R*tan(defl/2) over the chain
+   [corridor, ORG, M1, M2, P, G, ep] (G corner included).
+3. **Medial-ridge gradient flips.** The exact signed distance is
+   non-differentiable on medial surfaces; the returned witness flips
+   and the analytic gradient points the wrong way. Proven at strand-1
+   sample 56 vs plate-right: d = -0.750 (the exact plate mid-plane),
+   FD -211.1 vs analytic +211.1 per pitch (x2 pitches = the whole
+   844.4 discrepancy on var 11). FIX: soft-min signed distance over
+   the body's two closest faces (tau = 0.08; clearance underestimated
+   by <= 0.055 mm, i.e. conservative).
+
+After repair: FD gradcheck is clean apart from the explained ridge
+variable (pre-fix); L-BFGS-B chunks complete 30/30 iterations in
+~40 s (previously ABNORMAL stalls of 130-160 s) with monotone loss.
+
+## Feed — stage-1 curriculum results (fitted counts are the verdict)
+
+Stage 1 = 24 bodies (C5 switch envelopes + Wing PCBs + plates).
+Warm starts and methods tried, all on the design_r15 skeleton:
+
+| attempt | screen result | fitted (17mm) |
+|---|---|---|
+| L-BFGS-B from taut14 (broken obj) | 101,658 -> ~19,450, ABNORMAL stalls | - |
+| Adam lr 0.08 from taut14 | oscillates (loss rose), killed | - |
+| geometric init (broken obj) | WW valley, converged 210,137, body -1.53 | - |
+| Gauss-Seidel sweeps from taut14 | joint loss 338,860 -> 68,784, body -2.41 | INVALID: 6 strands unbuildable (R5 trims) |
+| joint polish from GS state (smooth obj) | 72,301 -> 54,605 plateau, body -0.75, WW 0.23 | WW 46 pairs, WF 72 hits, 6 unbuildable |
+| joint from taut14 (smooth obj) | 338,307 -> 58,961 plateau, body -0.61, WW 0.41 | WW 70 pairs, WF 74 hits, 2 unbuildable |
+
+Stages 2/3 were NOT run: stage 1 is a relaxation of the full body
+set, and it does not converge for this topology, which settles the
+harder stages. Target WF 0 with WW <= 2 NOT achieved. The incumbents
+are unchanged: **round-14 taut feed remains the best fitted feed**
+(true WW 2/pitch, WF 94 @17mm / 106 @16mm, buildable, longest
+102.20 mm); round-15 taut: WW 6, WF 108/118. Screen loss and fitted
+WW anti-correlate in the optimised states because R5 fillet corner
+cutting moves fitted wires off the screened polylines. Binding
+constraint: the two-point (M1/M2) feed topology on the design_r15
+skeleton cannot simultaneously clear the stage-1 bodies and hold
+1.35 mm chain separation; a third intermediate point or a new
+skeleton is a design change, not an optimisation setting.
+
+## Slack — continuous placement (place16.py)
+
+Formulation: 14 design rings x (cx, cy, Z, R, entry angle a0, sweep
+theta), R in [5.0, 9.6] (a near-full loop at R~5 stores +30.2 mm in a
+~11 mm footprint vs 18.4 mm for the round-15 R9.2 disk), full-circle
+clearance vs the exact oracle at both pitches, ring-ring and
+ring-vs-fixed-route hinges, arc-extra target ~29 mm (phase-B fans +
+theta re-solve would close the exact +30.20 accounting). Runs:
+greedy grid init + joint L-BFGS-B (4 chunks, exact distance), a
+6-chunk continuation, then a soft-distance run. **NOT converged:**
+best min body distance across all runs -1.01 mm; the soft-distance
+run converges (normal termination) to a local optimum with one ring
+sample 1.96 mm inside switch-envelope-R_R1_C5 at (40.3, 19.3, 10.5)
+and min ring pair 0.362 mm. `opt_fans16.py` / `build16.py` were
+written but not run - there is no placement to build on.
+
+This joins round 15's gridded evidence (feasible bands Z 3.9-6.75
+dense + sparse northern pockets 9.2-11.5; three assignment solvers
+failed; capacity ~5 bands x ~5 disks < 28 at R 7.5-9.2). The
+continuous search removes the grid quantisation caveat but reaches
+the same wall: at >= 1.05 mm clearance with same-band separation
+>= 2R+1, the frozen bay volume does not host 28 storage rings.
+Not a proof over every conceivable storage shape (non-circular
+coils and partial-arc shapes were not exhaustively searched); the
+reel/disk family is closed at optimisation standard, as were round
+14's hairpins and round 15's assignment. Storage would need case
+free volume the frozen geometry does not provide (step-4 / PO
+territory).
+
+## Gate table (both pitches, inherited where marked)
+
+| gate | result |
+|---|---|
+| 1 fitted collision | FAIL - no new fitted candidate; incumbents stand (R14 taut: WW 2 true, WF 94/106; 2 known POM FF residuals) |
+| 2 finished length | PASS (inherited; taut longest 102.3 mm, ~132 with a loop - budget not binding) |
+| 3 unplug-first service | FAIL - no fitted-clean stored loop exists (placement not converged); motion steps not qualified |
+| 4 Fly 170 / 5 USB / 7 manufacturing / 8 preview | PASS (inherited, unchanged) |
+| 6 keycap clearance | OPEN (Junana physical measurement, PO-side) |
+
+## Unfreeze ledger (round 16)
+
+Consumed this round: NOTHING new. Step 1 (route envelope) stands as
+consumed in round 15 (design_r15 rise skeleton). No fixed-body
+change of any kind; the pre-authorised neck tray cut was not used;
+the POM notch (step 3) was not used; steps 2 and 4 untouched.
+Boards, plates, GH + D-024, wire spec, deck Z13.55, plateau Z24.65
+(provisional), seam rule, blisters, M2x10, retainers (+/-8,-30),
+R>=5: all unchanged. F-015: D-037 classification preserved.
+
+## Remaining blockers
+
+1. Feed topology: fitted-clean feed needs a third intermediate
+   point per chain or a new rise/feed skeleton (design decision).
+   The repaired machinery (fixed sample counts, smooth trim,
+   soft-min distance) is in `sources/round16/` and removes the
+   solver-stall class for any successor round.
+2. Slack storage capacity in the frozen bay volume: reel/disk
+   family closed at screen + optimisation standard (rounds 14-16).
+   A case-geometry change for storage is step-4/PO territory.
+3. Junana cap physical measurement (PO-side) still open; plateau
+   Z24.65 remains provisional.
+
 # Round 15 — Body-aware routing: exact machinery VALIDATED; feed not converged; slack-disk placement infeasible in the discretised space; gates 1/3 still FAIL
 
 ## Exact-distance optimiser — built and validated (task 1, machinery)
