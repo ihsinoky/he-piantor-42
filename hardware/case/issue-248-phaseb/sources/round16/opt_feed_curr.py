@@ -36,6 +36,9 @@ _ap.add_argument('--iters', type=int, default=25)
 _ap.add_argument('--wmul', type=float, default=1.0)
 _ap.add_argument('--wmulw', type=float, default=None)
 _ap.add_argument('--seed', type=int, default=16)
+_ap.add_argument('--solver', default='lbfgsb')   # lbfgsb | adam
+_ap.add_argument('--steps', type=int, default=50)  # adam steps per chunk
+_ap.add_argument('--lr', type=float, default=0.08)
 ARGS = _ap.parse_args()
 
 def _stage_ok(name):
@@ -285,6 +288,37 @@ if __name__ == '__main__':
 
     x = X0.copy(); save(x, f's{ARGS.stage}_init')
     logf = open(f'{RT16}/feed_log.jsonl', 'a')
+    if ARGS.solver == 'adam':
+        sig = f"{ARGS.stage}|{ARGS.wmul}|{ARGS.wmulw}"
+        sigf = f'{RT16}/adam_sig.txt'
+        if os.path.exists(sigf) and open(sigf).read() == sig and os.path.exists(f'{RT16}/adam_m.npy'):
+            am = np.load(f'{RT16}/adam_m.npy'); av = np.load(f'{RT16}/adam_v.npy'); at = int(open(f'{RT16}/adam_t.txt').read())
+            print('adam moments resumed, t =', at, flush=True)
+        else:
+            am = np.zeros(84); av = np.zeros(84); at = 0
+            open(sigf, 'w').write(sig)
+        lo = np.array([b[0] for b in BND]); hi = np.array([b[1] for b in BND])
+        for chunk in range(ARGS.chunks):
+            t = time.time(); fcur = None
+            for step in range(ARGS.steps):
+                fcur, g = objective(x)
+                g = np.clip(g, -3000.0, 3000.0)
+                at += 1
+                am = 0.9 * am + 0.1 * g; av = 0.999 * av + 0.001 * g * g
+                mh = am / (1 - 0.9 ** at); vh = av / (1 - 0.999 ** at)
+                x = np.clip(x - ARGS.lr * mh / (np.sqrt(vh) + 1e-8), lo, hi)
+            np.save(f'{RT16}/adam_m.npy', am); np.save(f'{RT16}/adam_v.npy', av)
+            open(f'{RT16}/adam_t.txt', 'w').write(str(at))
+            wb, ww2 = report(x, f'  s{ARGS.stage} adam chunk {chunk}')
+            save(x, f's{ARGS.stage}_c{chunk}')
+            rec = dict(stage=ARGS.stage, chunk=chunk, solver='adam', wmul=ARGS.wmul,
+                       wmulw=ARGS.wmulw, loss=round(float(fcur), 1), steps=ARGS.steps,
+                       min_body=round(float(wb[0]), 3), min_ww=round(float(ww2[0]), 3),
+                       secs=round(time.time() - t))
+            logf.write(json.dumps(rec) + '\n'); logf.flush()
+            print('  rec', rec, flush=True)
+        print('done stage', ARGS.stage, '(adam)', flush=True)
+        sys.exit(0)
     for chunk in range(ARGS.chunks):
         t = time.time()
         r = minimize(objective, x, jac=True, method='L-BFGS-B', bounds=BND,
