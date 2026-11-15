@@ -61,6 +61,50 @@ FIXALL = np.vstack([FIXR, FIXL])
 
 NS = 32           # full-circle samples per ring
 NV = 6            # cx, cy, Z, R, a0, th  per design strand
+
+_TAU2 = 0.08
+def soft_dist_grad(ob, p, cap):
+    """Soft-min signed distance over the body's two closest faces
+    (smooth across medial ridges; see opt_feed_curr.body_dist_grad).
+    Returns (d, grad_d) or (cap, None)."""
+    from OCP.BRepClass3d import BRepClass3d_SolidClassifier
+    from OCP.gp import gp_Pnt
+    from OCP.TopAbs import TopAbs_IN
+    p = np.asarray(p, float)
+    lbn = np.maximum(np.maximum(ob._flo - p, p - ob._fhi), 0.0)
+    lb = np.sqrt(np.sum(lbn * lbn, axis=1))
+    cand = [k for k in np.argsort(lb) if lb[k] < cap + 0.5]
+    if not cand: return cap, None
+    ds = []
+    for k in cand:
+        d, q = ob.faces[k].dist(p)
+        ds.append((float(d), q))
+        if len(ds) >= 6: break
+    ds.sort(key=lambda t: t[0])
+    d1, q1 = ds[0]
+    if d1 >= cap + 0.5: return cap, None
+    if len(ds) > 1 and ds[1][0] < d1 + 6 * _TAU2:
+        d2, q2 = ds[1]
+        e1 = np.exp(-d1 / _TAU2); e2 = np.exp(-d2 / _TAU2)
+        U = -_TAU2 * np.log(e1 + e2)
+        w1 = e1 / (e1 + e2); w2 = e2 / (e1 + e2)
+        gU = np.zeros(3)
+        for (dd, qq, ww) in ((d1, q1, w1), (d2, q2, w2)):
+            if dd > 1e-7 and qq is not None:
+                gU += ww * (p - qq) / dd
+    else:
+        U = d1
+        gU = (p - q1) / d1 if d1 > 1e-7 and q1 is not None else np.zeros(3)
+    if U >= cap: return cap, None
+    if U <= 1e-12: return 0.0, gU
+    if np.all(p >= ob.lo) and np.all(p <= ob.hi):
+        if ob._cls is None:
+            ob._cls = BRepClass3d_SolidClassifier(ob.shape.wrapped)
+        ob._cls.Perform(gp_Pnt(float(p[0]), float(p[1]), float(p[2])), 1e-7)
+        if ob._cls.State() == TopAbs_IN:
+            return -U, -gU
+    return U, gU
+
 HB2, WB2 = 1.05, 60.0     # body hinge / weight
 HR2, WR2 = 1.10, 60.0     # ring-ring + ring-fixed hinge / weight
 WSLK = 2.0
@@ -117,14 +161,11 @@ def objective(x):
                 ob = OBST[key]
                 dlb = np.maximum(np.maximum(ob.lo - p, p - ob.hi), 0.0)
                 if float(dlb @ dlb) > (HB2 + 0.6) ** 2: continue
-                d, q = ob.dist_capped(p, HB2)
-                if d < HB2 and q is not None:
+                d, gd = soft_dist_grad(ob, p, HB2)
+                if d < HB2 and gd is not None:
                     loss += WB2 * ((HB2 - d) / 0.3) ** 2
-                    nrm = float(np.linalg.norm(p - q))
-                    if nrm > 1e-9:
-                        dirv = (p - q) / nrm if d >= 0 else (q - p) / nrm
-                        gv = -2 * WB2 * (HB2 - d) / 0.09 * dirv
-                        grad[i * NV:(i + 1) * NV] += J[s][k].T @ gv
+                    gv = -2 * WB2 * (HB2 - d) / 0.09 * gd
+                    grad[i * NV:(i + 1) * NV] += J[s][k].T @ gv
     # ring-ring + ring-fixed term (sample pairs)
     comb = np.vstack([P, FIXALL])
     own = np.array([o[0] * 100 + o[1] for o in O] + [-1] * len(FIXALL))
