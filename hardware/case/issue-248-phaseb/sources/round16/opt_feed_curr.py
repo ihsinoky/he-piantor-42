@@ -187,6 +187,55 @@ for i in range(14):
     CAND[i] = cand
 print('cand per strand:', [len(CAND[i]) for i in range(14)], flush=True)
 
+
+_TAU = 0.08
+def body_dist_grad(ob, p, cap):
+    """Soft-min signed distance over the body's two closest faces
+    (round-16 fix): the exact distance is non-differentiable on
+    medial surfaces (e.g. mid-plane of a plate), where the returned
+    witness flips and the analytic gradient points the wrong way -
+    this broke every L-BFGS-B line search. Soft-min over faces
+    (tau=0.08) is smooth, and conservative (underestimates the
+    clearance by <= tau*ln2 = 0.055 mm). Returns (d, grad_d) with
+    d >= cap signalled as (cap, None)."""
+    from OCP.BRepClass3d import BRepClass3d_SolidClassifier
+    from OCP.gp import gp_Pnt
+    from OCP.TopAbs import TopAbs_IN
+    p = np.asarray(p, float)
+    lbn = np.maximum(np.maximum(ob._flo - p, p - ob._fhi), 0.0)
+    lb = np.sqrt(np.sum(lbn * lbn, axis=1))
+    cand = [k for k in np.argsort(lb) if lb[k] < cap + 0.5]
+    if not cand: return cap, None
+    ds = []
+    for k in cand:
+        d, q = ob.faces[k].dist(p)
+        ds.append((float(d), q))
+        if len(ds) >= 6: break
+    ds.sort(key=lambda t: t[0])
+    d1, q1 = ds[0]
+    if d1 >= cap + 0.5: return cap, None
+    if len(ds) > 1 and ds[1][0] < d1 + 6 * _TAU:
+        d2, q2 = ds[1]
+        e1 = np.exp(-d1 / _TAU); e2 = np.exp(-d2 / _TAU)
+        U = -_TAU * np.log(e1 + e2)
+        w1 = e1 / (e1 + e2); w2 = e2 / (e1 + e2)
+        gU = np.zeros(3)
+        for (dd, qq, ww) in ((d1, q1, w1), (d2, q2, w2)):
+            if dd > 1e-7 and qq is not None:
+                gU += ww * (p - qq) / dd
+    else:
+        U = d1
+        gU = (p - q1) / d1 if d1 > 1e-7 and q1 is not None else np.zeros(3)
+    if U >= cap: return cap, None
+    if U <= 1e-12: return 0.0, gU
+    if np.all(p >= ob.lo) and np.all(p <= ob.hi):
+        if ob._cls is None:
+            ob._cls = BRepClass3d_SolidClassifier(ob.shape.wrapped)
+        ob._cls.Perform(gp_Pnt(float(p[0]), float(p[1]), float(p[2])), 1e-7)
+        if ob._cls.State() == TopAbs_IN:
+            return -U, -gU
+    return U, gU
+
 HB, WB = 1.15, 30.0 * ARGS.wmul
 HW, WW = 1.35, 3.0 * (ARGS.wmul if ARGS.wmulw is None else ARGS.wmulw)
 WC = 2.0
@@ -228,16 +277,13 @@ def objective(x):
                 ob = OBST[key]
                 dlb = np.maximum(np.maximum(ob.lo - p, p - ob.hi), 0.0)
                 if float(dlb @ dlb) > (HB + 0.6) ** 2: continue
-                d, q = ob.dist_capped(p, HB)
-                if d < HB and q is not None:
+                d, gd = body_dist_grad(ob, p, HB)
+                if d < HB and gd is not None:
                     _st['body'] += WB * ((HB - d) / 0.3) ** 2; _st['n_body_viol'] += 1
                     if d < _st['worst_body'][0]: _st['worst_body'] = (d, (i, key))
                     loss += WB * ((HB - d) / 0.3) ** 2
-                    nrm = float(np.linalg.norm(p - q))
-                    if nrm > 1e-9:
-                        dirv = (p - q) / nrm if d >= 0 else (q - p) / nrm
-                        gv = -2 * WB * (HB - d) / 0.09 * dirv
-                        grad[i * 6:i * 6 + 6] += Js[k].T @ gv
+                    gv = -2 * WB * (HB - d) / 0.09 * gd
+                    grad[i * 6:i * 6 + 6] += Js[k].T @ gv
             c, dc = ceiling(p[1])
             if p[2] > c:
                 u = p[2] - c

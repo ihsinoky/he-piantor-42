@@ -61,14 +61,11 @@ def strand_objective(v, x, i, env_pts):
             ob = ofc.OBST[key]
             dlb = np.maximum(np.maximum(ob.lo - p, p - ob.hi), 0.0)
             if float(dlb @ dlb) > (HB + 0.6) ** 2: continue
-            d, q = ob.dist_capped(p, HB)
-            if d < HB and q is not None:
+            d, gd = ofc.body_dist_grad(ob, p, HB)
+            if d < HB and gd is not None:
                 loss += WB * ((HB - d) / 0.3) ** 2
-                nrm = float(np.linalg.norm(p - q))
-                if nrm > 1e-9:
-                    dirv = (p - q) / nrm if d >= 0 else (q - p) / nrm
-                    gv = -2 * WB * (HB - d) / 0.09 * dirv
-                    grad += Js[k].T @ gv
+                gv = -2 * WB * (HB - d) / 0.09 * gd
+                grad += Js[k].T @ gv
         c, dc = ofc.ceiling(p[1])
         if p[2] > c:
             u = p[2] - c
