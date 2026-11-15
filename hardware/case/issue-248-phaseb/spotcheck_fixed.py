@@ -58,10 +58,18 @@ def spotcheck(pitch):
         ops += 1
         rec = {}
         try:
-            d = solid_distance(solids[a], solids[b])
-            rec['distance_mm'] = d
-            if d <= DIST_CLEAR:
+            if a == 'Fly-170mm' or b == 'Fly-170mm':
+                # BRepExtrema against the long swept Fly cable is
+                # pathological (one pair hung >9 min). The gate
+                # criterion is volume, so resolve by clipped Common
+                # alone (exact overlap volume; zero = no hit).
                 rec['clipped_volume_mm3'] = clipped_common_volume(solids[a], solids[b])
+                rec['method'] = 'clipped-common-only (Fly pair)'
+            else:
+                d = solid_distance(solids[a], solids[b])
+                rec['distance_mm'] = d
+                if d <= DIST_CLEAR:
+                    rec['clipped_volume_mm3'] = clipped_common_volume(solids[a], solids[b])
         except Exception as e:
             rec['error'] = repr(e)
         done[f'{a}|{b}'] = rec
