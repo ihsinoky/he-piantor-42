@@ -179,8 +179,11 @@ def ceiling(y):
     t = min(max((y - 1.935593) / 36.578838, 0), 1)
     return 21.65 - 11.10 * t, (-11.10 / 36.578838 if t < 1 else 0.0)
 
+STATS = {}
 def objective(x):
     loss = 0.0; grad = np.zeros(84)
+    _st = dict(ww=0.0, body=0.0, ceil=0.0, appr=0.0, seg=0.0, trim=0.0,
+               n_body_viol=0, worst_body=(9, None), n_ww_viol=0, worst_ww=(9, None))
     allp = []; allo = []; allJ = []
     for i in range(14):
         sp, Js = var_samples(x, i); allp.append(sp); allJ += Js; allo += [i] * len(sp)
@@ -192,6 +195,8 @@ def objective(x):
         if own[a] == own[b] or (a >= len(allp) and b >= len(allp)): continue
         dvec = comb[a] - comb[b]; d = float(np.linalg.norm(dvec))
         if d < 1e-9: continue
+        _st['ww'] += WW * ((HW - d) / 0.3) ** 2; _st['n_ww_viol'] += 1
+        if d < _st['worst_ww'][0]: _st['worst_ww'] = (d, (int(own[a]), int(own[b])))
         loss += WW * ((HW - d) / 0.3) ** 2
         gv = -2 * WW * (HW - d) / 0.09 * (dvec / d)
         for idx, sgn in ((a, 1.0), (b, -1.0)):
@@ -208,6 +213,8 @@ def objective(x):
                 if float(dlb @ dlb) > (HB + 0.6) ** 2: continue
                 d, q = ob.dist_capped(p, HB)
                 if d < HB and q is not None:
+                    _st['body'] += WB * ((HB - d) / 0.3) ** 2; _st['n_body_viol'] += 1
+                    if d < _st['worst_body'][0]: _st['worst_body'] = (d, (i, key))
                     loss += WB * ((HB - d) / 0.3) ** 2
                     nrm = float(np.linalg.norm(p - q))
                     if nrm > 1e-9:
@@ -217,6 +224,7 @@ def objective(x):
             c, dc = ceiling(p[1])
             if p[2] > c:
                 u = p[2] - c
+                _st['ceil'] += WC * (u / 0.3) ** 2
                 loss += WC * (u / 0.3) ** 2
                 gv = 2 * WC * u / 0.09 * np.array([0.0, -dc, 1.0])
                 grad[i * 6:i * 6 + 6] += Js[k].T @ gv
@@ -226,6 +234,7 @@ def objective(x):
         u = TGT[i] - m2; L = float(np.linalg.norm(u)); k = -AXV
         c = float(u @ k) / L
         if c < 0.3:
+            _st['appr'] += 6.0 * ((0.3 - c) / 0.2) ** 2
             loss += 6.0 * ((0.3 - c) / 0.2) ** 2
             dcdu = k / L - (u @ k) * u / L ** 3
             grad[i * 6 + 3:i * 6 + 6] += (-2 * 6.0 * (0.3 - c) / 0.04) * (-dcdu)
@@ -233,6 +242,7 @@ def objective(x):
         for s in range(3):
             a, b = chain[s], chain[s + 1]; ab = b - a; L = float(np.linalg.norm(ab))
             if 1e-9 < L < 7.0:
+                _st['seg'] += 10.0 * ((7.0 - L) / 1.5) ** 2
                 loss += 10.0 * ((7.0 - L) / 1.5) ** 2
                 gv = -2 * 10.0 * (7.0 - L) / 2.25 * (ab / L)  # dpen/d(end)
                 if s == 0: grad[i * 6:i * 6 + 3] += gv
@@ -241,12 +251,14 @@ def objective(x):
     for i in range(14):
         v = x[i * 6:(i + 1) * 6]
         pen0 = feed_build_pen(i, v)
+        _st['trim'] += pen0
         loss += pen0
         eps = 1e-5
         for k in range(6):
             vp = v.copy(); vp[k] += eps
             grad[i * 6 + k] += (feed_build_pen(i, vp) - pen0) / eps
     loss += 0.001 * float(np.sum((x - X0) ** 2)); grad += 0.002 * (x - X0)
+    STATS.update(_st)
     if not np.isfinite(loss): loss = 1e12
     grad = np.clip(np.nan_to_num(grad, nan=0.0, posinf=1e4, neginf=-1e4), -1e4, 1e4)
     return loss, grad
@@ -273,6 +285,11 @@ def report(x, label):
           '| min WW pair', round(float(worst_w[0]), 3), worst_w[1], flush=True)
     return worst_b, worst_w
 
+if __name__ == '__main__' and '--diag' in sys.argv:
+    f, g = objective(X0)
+    print('total', round(float(f), 1))
+    for k, v in STATS.items(): print(' ', k, v if not isinstance(v, float) else round(v, 1), flush=True)
+    sys.exit(0)
 if __name__ == '__main__':
     rng = np.random.default_rng(ARGS.seed)
     f0, g0 = objective(X0)
