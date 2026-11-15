@@ -17,6 +17,7 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.spatial import cKDTree
 
+_MYARGS = sys.argv[1:]
 STAGE = os.environ.get('GS_STAGE', '1')
 INIT = os.environ.get('GS_INIT', 'taut14')
 WMUL = os.environ.get('GS_WMUL', '1.0')
@@ -120,8 +121,8 @@ def save(x, tag):
     if tag: json.dump(M, open(f'{RT16}/feed_state_{tag}.json', 'w'), indent=1)
 
 if __name__ == '__main__':
-    sweeps = int(sys.argv[1]) if len(sys.argv) > 1 else 3
-    iters = int(sys.argv[2]) if len(sys.argv) > 2 else 40
+    sweeps = int(_MYARGS[0]) if len(_MYARGS) > 0 else 3
+    iters = int(_MYARGS[1]) if len(_MYARGS) > 1 else 40
     x = ofc.X0.copy()
     f0, _ = ofc.objective(x)
     print('GS init joint loss', round(float(f0), 1), flush=True)
