@@ -1,3 +1,172 @@
+# Round 17 — Feed 3-point chain + case-change slack storage: feed NOT converged (joint optimisation wall reproduced in 5 runs; incumbent unchanged); slack storage CLOSED at proof standard across all remaining families; case delta EMPTY; gates 1/3 still FAIL
+
+## Feed — 3-point chain (corridor -> ORG -> M1 -> M2 -> M3 -> P -> G -> ep)
+
+Machinery: `sources/round17/opt_feed17.py` = round-16 repaired
+machinery generalised to 9 vars/strand (126 total). FD gradcheck over
+all 126 vars PASSED (the only mismatches are the objective's own
++-10000 gradient clip, inherited from round 16). Fitted verdicts by
+`sources/round17/probe17.py` (strict build, no point-dropping,
+plain-Common counts; WW counts are lower bounds per the round-10
+blind-spot finding).
+
+Validation probes (both pitches, 28 wires each):
+- Incumbent (round-14 taut feed, 2-point): builds 28/28;
+  WW 6 / WF 108 @17mm, WW 6 / WF 118 @16mm; longest finished
+  102.3 mm. (Round 15's audit of the same feed read WW 2 / WF 94/106
+  under its builder; the numbers here are this round's probe
+  standard, applied uniformly to every state below.)
+- geom3 init (the optimiser's geometric start): strict build FAILS
+  on all sampled pins (segment-6 'R5 straight too short', need
+  5.58-5.77 mm in the M3->P->G region). The screen's starting point
+  is not a fitted object.
+
+Stage-1 curriculum runs (bodies: C5 envelopes + Wing PCBs + plates):
+1. taut14 warm start, wmul 1.0, 6 chunks: loss 357,917 -> 47,370;
+   screen min body -0.62 (plate), min WW pair 0.425.
+2. geom init, wmul 1.0, 8 chunks: loss -> 38,900; min body -0.694,
+   stuck at strand 9, sample (24.1, -10.5, 12.9) vs plate-right;
+   min WW 0.503.
+3. Bounded run (chain Z <= 11.4, X <= 40.5 - plate penetration
+   impossible for chain points and, Z being linear on segments, for
+   samples), wmul 2.0, 8 chunks: min body -0.25 (strand 1 vs
+   wing_right at (25.9, 17.3, 8.3)), min WW 0.368. FITTED PROBE of
+   this best screen state: WW 21 / WF 55 @17mm, WW 21 / WF 59
+   @16mm, and 18 of 56 wires UNBUILDABLE (R5 straights 4.66-9.40 mm
+   at segments 4/6/7). Screen-feasible is not fitted-feasible.
+4. WW-weighted continuation (wmulw 4.0): degraded (min body -0.585,
+   min WW 0.149) - stopped.
+5. Tight-hinge continuation (HB 0.85 / HW 1.15): same wall at
+   chunk 2 (min body -0.585, min WW 0.153) - stopped.
+
+Stages 2/3 NOT run: stage 1 is a relaxation of stages 2/3 (fewer
+bodies); no stage-1 state was both fitted-buildable and better than
+the incumbent, so the curriculum has nothing to promote. The
+binding constraint is the round-16 one, now confirmed for the
+3-point topology: the feed must thread the C5/plate/PCB slot while
+holding chain separation into the on-axis approach, and joint
+L-BFGS-B on this VM converges to screen states whose fitted builds
+fail or score worse than the incumbent. Incumbent unchanged:
+round-14 taut feed. Untried lever (named, not attempted at scale):
+per-strand Gauss-Seidel repair with strict-build fitted acceptance
+per move.
+
+## Slack storage — every remaining family closed
+
+Requirement: exactly +30.20 mm fitted per strand, stored
+fitted-clean, releasing toward the Wing-side GH. Case-change
+authority (PO 2026-11-16) was available for grooves/pockets/bosses.
+
+1. Closed loops (discs/reels). Any closed curve with bend radius
+   >= 5 has length >= 2*pi*5 = 31.42 (total curvature 2*pi), so a
+   closed loop cannot account exactly +30.20. Independently, the
+   dress-disc grid (144 configs/strand, exact oracle, tray treated
+   as carveable) shows a three-way pincer: neighbour separation
+   1.25*|n_x| >= 1.05 needs |n_x| >= 0.84; body clearance md >= 0.72;
+   desk clearance (feet plane -6.0; groove floor = zmin - 0.8;
+   floor skin 1.2) needs zmin >= -4.0. ZERO of 14 strands has a
+   config meeting all three (the only strands passing md+nx,
+   5-8 at beta=20, have zmin -4.19 -> protrusion 6.19 > 6.0).
+   Rounds 14-16 had already closed circular storage at
+   optimisation standard; this closes the exact-length identity.
+2. Secant loops (chord entry/exit on a segment). Entry deflection
+   at the near intersection is 180 - acos(h/R) degrees > 90 for
+   every h < R (134.6 deg at h = 3.5): R5 trim 11.97 mm against
+   <= ~7 mm of available straight. Unbuildable by arithmetic.
+3. Point detours. Corridor detour DET (fx-7, -31.5, 1.8): corner
+   deflections 125 deg (corridor) / 155 deg (DET). Strict build
+   fails; the standard split_corners chamfer amputates DET from
+   (21.85, -31.5, 1.8) to ~(23.9, -27.4, 2.8), destroying the
+   stored length it was meant to create (proto v2 build log,
+   .issue248-runtime/round17/proto1.log).
+4. Bights (arc hairpin hosted on a segment). Footprint along the
+   host = junction trims 2*5*tan(gamma/2) + arc extent 2R*sin(gamma)
+   + leg progress >= ~19-20 mm for gamma in [70, 90] deg. The
+   dress segment is 15.2 mm. A bight spanning dress+climb reaches
+   Delta ~ 9.4; plus the best buildable climb bulge ~ +4.5;
+   total ~ 14 << 30.20.
+5. Climb bulges / westward detours. Delta <= ~6.3 per bulge at
+   buildable deflections. Steeper variants hit splice-1
+   (X -10.5..17.5, Y -16..0, Z -3..1.2) and the joint-screw boxes
+   (X 13..17, Y -10..-6, Z -4.6..5.0) for strands 11-14, or the
+   Wing PCB (climb-disc probe: -0.595 at (fx, -14.1, 7.9)).
+6. Rectangular detours (4x 90 deg). Every leg needs >= 10 mm
+   (two R5 trims). Forward variant: Delta = 2a, so a = 15.1 puts
+   the spur end at (fx, -2.0, -1.8), crossing splice-1 / joint
+   screws for strands 11-14. Backward variant rejoins behind its
+   own start (self-crossing).
+7. Host-segment alternatives. Climb discs pierce the Wing PCB
+   (round-11 column-scan class evidence); B0->B1 is 3.9 mm;
+   eastward detours exist only for strand 1 (outlet fan).
+
+Conclusion: under the frozen set (boards/plates byte-unchanged,
+deck Z13.55, R >= 5, OD1 lanes at 1.25 mm, desk plane -6.0), no
+storage mechanism accounts +30.20 mm fitted-clean per strand.
+The binding constraints are wire geometry and fixed-body
+geography, not case volume - the PO's case-change authority does
+not rescue it. CASE DELTA = NONE: no case solid is modified by
+this round, so gates 4/5/7/8 inherit round-16 status (their space
+is untouched).
+
+## Gate table (incumbent candidate: round-14 taut feed, no storage)
+
+| Gate | 17mm | 16mm | Note |
+|---|---|---|---|
+| 1 fitted collisions | FAIL (WW 6, WF 108) | FAIL (WW 6, WF 118) | probe17 standard; WW = lower bound |
+| 2 finished <= 200 mm | PASS (102.3) | PASS (102.3) | budget not binding |
+| 3 unplug-first service | FAIL | FAIL | no fitted-clean stored slack exists |
+| 4 Fly 170 | PASS (inherited) | PASS (inherited) | no case change |
+| 5 USB insertion | PASS (inherited) | PASS (inherited) | no case change |
+| 6 keycap clearance | OPEN | OPEN | Junana physical measurement, PO-side |
+| 7 manufacturing | PASS (inherited) | PASS (inherited) | no changed parts |
+| 8 preview STEP | PASS (inherited) | PASS (inherited) | no changed parts |
+
+The 2 known POM-spacer FF residuals are inside the gate-1 WF
+counts above (not separately waived this round).
+
+## Unfreeze ledger
+
+Consumed: route envelope only (feed chain points inside the
+existing volume; the design_r15 skeleton from round 15 stands).
+NOT consumed: the PO-authorised case change for storage (no case
+solid modified - no design survived to need it); POM skin notch;
+neck tray cut. Retainers remain at (+-8, -30). Boards and
+aluminium plates byte-unchanged. Deck Z13.55 / plateau Z24.65
+(provisional, Junana q = 1.50) unchanged.
+
+## Comparison
+
+- Round 16: feed machinery repaired; joint optimisation plateaued
+  at fitted WF 72-74 with a 2-point chain. Round 17: 3-point
+  chain, five stage-1 runs, same wall; the best screen state is
+  fitted-worse and partly unbuildable.
+- Round 14: incumbent feed produced (WW-cleanest fitted feed of
+  the study; still WF 108/118 under this round's probe).
+- Rounds 14-16 closed circular slack storage at optimisation
+  standard. Round 17 closes secant loops, point detours, bights,
+  bulges and rectangular detours at proof/arithmetic standard,
+  plus the exact-length identity for closed loops.
+
+## Remaining blockers (PO-level)
+
+1. Feed: WF 0 not reached by joint optimisation in rounds 15-17
+   (three machinery generations). Untried: per-strand
+   fitted-acceptance repair; or a hand-designed feed corridor
+   from the fitted hit map (round-9 method) carrying the
+   round-14 assignment.
+2. Slack: +30.20 mm is proven unreachable under the current
+   frozen set. Gate 3 can only close via a PO change: (a) reduce
+   the qualified reserve (the physical extraction need is ~6 mm
+   plus handling; the largest storage this round's arithmetic
+   admits is ~14 mm via dress+climb bight + climb bulge, at
+   trim-feasibility bounds, not fitted-built), (b) relax R >= 5
+   for the storage section only, (c) revisit the interconnect /
+   service concept (round-13 candidate C), or (d) close the
+   low-deck study in favour of D-041 (Delta+6), whose 30.2 mm
+   reserve is already qualified.
+3. Junana measurement (PO-side) still blocks the final plateau
+   height; plateau stays provisional.
+
 # Round 16 — Curriculum feed optimisation + continuous slack placement: optimisation machinery REPAIRED (3 defects); feed NOT converged (topology-bound); continuous slack placement NOT converged (capacity); gates 1/3 still FAIL
 
 ## Feed — machinery diagnosis and repair (the round's durable result)
