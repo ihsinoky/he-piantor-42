@@ -1,3 +1,114 @@
+# Issue #248 Phase B — Round 11
+
+**PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
+
+## Verdict — Concept C is refuted at the build stage; no candidate built
+
+Round 11 was tasked to build round 10's winning reserve, Concept C
+(own-plane vertical hairpin), grafted with round 9's a3'/a4 bow feed.
+The junction screen's fixed-body half fails decisively before any
+build: the hairpin's own centreline passes through frozen fixed
+solids, and an exhaustive column scan proves no placement of an
+own-plane vertical hairpin exists in this case geometry. No round-11
+candidate was built, so gates 2–8 have nothing to run on; the latest
+buildable candidate remains round 9 (true strand–strand count 110,
+repaired audit). Round 10's Concept C ranking is superseded: its
+concept screen was centreline strand–strand plus AABB flag counts,
+and the flags it recorded (wing_right 154, plate-right 42,
+switch-envelope 276 sample points) were never resolved by exact
+Common. Resolved here, they are real material.
+
+### Evidence 1 — concept C centrelines inside fixed solids (exact Common)
+
+Round 10's own `concept_C` centrelines for strands 1, 7 and 14 were
+tested point by point (0.8 mm probe box, exact `BRepAlgoAPI_Common`)
+against the frozen round-9 fixed solids. A hit means the centreline
+itself is strictly inside a fixed solid — a certain gate-1 contact,
+independent of wire radius. Full log:
+`sources/round11/probe_cl.log`.
+
+- Leg 1 (the Z5.1 run south in its own plane) enters
+  `underside-right-U_HC1` (13 points, strand 1, Y −4.0…−1.8): the
+  corridor datum is only clear north of the Wing's southern Hall
+  sensors; round 9 turned west by Y −13.5, Concept C runs to Y +10.
+  Strand 14's leg 1 also enters `tray-right` (2 points, Y −8.5…−7.8).
+- Both hairpin arcs pierce `wing_right` (12 points on every probed
+  strand: the up-arc bulge at Y 14.5/Z 8.0, the down-arc and exit
+  rise at Y −6.7…5.0, Z 7.1…8.4) — the Wing PCB (Z 7.35–8.55) spans
+  the hairpin's whole Y band at the outlet planes.
+- The up-arc enters `switch-envelope-R_R1_C5` (20 points, strand 1)
+  and `plate-right` (3–5 points per strand, Z 11.8–13.9).
+- The crown leg at Z 15.1 sits inside `switch-envelope-R_R0_C5`
+  (21 points strand 1, 14 points strand 7, Y −2…+7.5). The flagged
+  build check "crowns vs slope underside" is moot: the crowns never
+  reach the slope, they land in the R0 cap envelope. The "crown
+  slide corridor" check is moot for the same reason.
+- The exit rise enters `underside-right-C_HC1` (2 points, strand 1).
+- Only the two endpoint hits (`J_WING`, Main GH bound) are the
+  strands' own classified terminations.
+
+### Evidence 2 — column scan: no clear rise exists at any outlet plane
+
+For planes x0 = 35.125 (pin 1), 27.625 (pin 7), 18.875 (pin 14),
+every Y from −34 to +32 (1 mm steps) was probed at eight Z levels
+(5.1, 6.6, 8.0, 9.5, 11.0, 12.8, 14.0, 15.1) by exact Common against
+all fixed solids. **Zero of 67 Y rows is clear through the full
+column at any of the three planes.** Blocker counts (blocked probe
+points per solid): pin 1 — wing_right 67, switch-envelope-R_R0_C5
+93, plate-right 45, R_R1_C5 37, U_HC1 10; pin 7 — wing_right 67,
+plate-right 60, R_R0_C5 47, U_MUX_B 7; pin 14 — wing_right 66,
+plate-right 64, shell-central 10, U_MUX_C 7. The Wing PCB alone
+blocks the Z 8.0 level at 66–67 of 67 rows per plane. Grid saved in
+`sources/round11/column-scan.json`, log alongside.
+
+### Evidence 3 — the crown height is forced, so there is no lower variant
+
+An in-plane (Y–Z) 180° reversal with bend radius ≥ 5 mm has a
+perpendicular extent of at least 2R = 10 mm. From the corridor datum
+Z 5.1 the crown of any own-plane vertical hairpin is therefore at
+Z ≥ 15.1 — exactly as round 10 drew it — and the rise must pierce
+the Wing PCB sheet (Z 7.35–8.55) that the scan shows present at
+essentially every Y. Tilting the turn out of plane is a different
+concept (it spends X, where the neighbouring planes are 1.25 mm
+away). A crown below the aluminium plate is equally impossible:
+plate underside Z 12.05 leaves 6.45 mm above the corridor datum,
+less than the 10 mm any R5 reversal needs. The vertical-hairpin
+reserve family is closed in this case geometry, not just round 10's
+instance of it.
+
+### Gate table — round 11
+
+| Gate | Result |
+|---|---|
+| 1 fitted collision | FAIL at screen stage vs fixed bodies (Evidence 1–2); no fitted candidate exists to audit |
+| 2–8 | Not run — no buildable candidate |
+
+Comparison: round 9 candidate (built, repaired audit): strand–strand
+110 true, gates 2/4/5/6/7/8 PASS, service motion 0 hits. Round 10:
+no build (concept study). Round 11: no build (Concept C refuted).
+The reserve neck knot from round 9 remains the open problem.
+
+### Unfreeze ledger
+
+None consumed. No fixed body was modified, no tray/shell channel
+geometry changed, the POM notch is untouched, and no board, plate,
+connector or harness parameter moved. Round 10 was frozen before
+the screen work (`round10/` + `round10-sha256.json`, 3679 files).
+
+### Remaining blockers / what a successor must satisfy
+
+- Any reserve must fit under the plate (crown ≤ Z 11.55) or inside
+  a genuine plate/PCB aperture column; Evidence 2 shows no such
+  column exists in the outlet planes, and the 10 mm reversal bound
+  rules out a vertical hairpin under the plate anywhere.
+- The strand–strand knot therefore has to be attacked in the flat
+  reserve family (round 9's pack topology, true count 110) or by a
+  new concept that spends its reversal width in Y at corridor
+  height, not in Z. That choice is a PMO/PO decision; this round
+  only closes the vertical-hairpin branch with evidence.
+
+---
+
 # Issue #248 Phase B — Round 10
 
 **PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
