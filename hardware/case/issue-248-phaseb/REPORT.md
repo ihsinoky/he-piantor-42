@@ -1,3 +1,215 @@
+# Issue #248 Phase B — Round 10
+
+**PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
+
+## Stage A — audit repair and true strand–strand counts
+
+Round 9 proved the pipeline fitted audit's per-pair `BRepAlgoAPI_Common`
+silently returns zero volume for some long swept wire solids, so every
+round's strand–strand count was a lower bound. Round 10 repairs the
+instrument (`audit_repair.py`) and re-audits the frozen round-8 and
+round-9 candidates. No geometry was changed in Stage A.
+
+### Method
+
+For every wire–wire pair (182 same-side pairs per pitch; cross-side
+pairs are AABB-clear, verified from the index bounds):
+
+1. The round's own full-Common volume is kept where it is positive
+   (identical geometry and settings — the repair adds a fallback, it
+   does not recompute what already worked).
+2. Where the full Common reported zero, an exact solid–solid minimum
+   distance (`BRepExtrema_DistShapeShape`) is computed. Overlapping
+   solids have distance exactly 0, so distance > 1e-3 mm proves the
+   pair disjoint at solid level.
+3. Where distance ≤ 1e-3 mm, the overlap volume is measured by a
+   partitioned clipped Common: the AABB-intersection box (padded
+   0.6 mm) is partitioned into ≤4 mm cells and the Common volume is
+   summed cell by cell. Common distributes over a partition of one
+   operand, so the sum is the pair's total overlap volume; the short
+   clipped operands avoid the long-solid failure mode.
+
+A pair is a hit iff its resolved volume exceeds the pipeline threshold
+1e-6 mm³. Zero-volume tangential touches are recorded separately
+(none occurred).
+
+### Validation
+
+- The known witness reproduces: round-8 pair Wire-right-01/05, audit
+  0.0 mm³, resolves to distance 0.0 and a clipped-Common overlap of
+  **2.582 mm³**. (Round 9's manual single-box clip measured 2.456 mm³;
+  the partitioned clip measures the pair's total overlap, hence the
+  slightly larger value. Same pair, same crossing, in both candidates —
+  it sits in the neck geometry rounds 8/9 share.)
+- The repaired totals land exactly on round 9's screen-derived lower
+  bounds (≥114 and ≥110), and every pair the centreline screen flagged
+  is resolved at solid level — no screen-flagged pair is left on the
+  audit's word alone.
+
+### Corrected counts (strand–strand hits, both pitches identical)
+
+| Candidate | Pipeline audit | Repaired (true) | Found by fallback |
+|---|---:|---:|---:|
+| Round 8 | 92 | **114** | 22 |
+| Round 9 | 74 | **110** | 36 |
+
+Rounds 3–7 strand–strand counts remain lower bounds (not re-audited;
+their candidates are superseded). All future gate-1 certifications must
+use the repaired audit (full Common + distance/clipped-Common fallback).
+
+### Fixed-body categories — spot check
+
+Question: did the blind spot also hide fixed-body overlaps (the audit
+reported many fixed categories clean on the same Common machinery)?
+Method (`spotcheck_fixed.py`, round-9 assemblies): every zero-volume
+exact pair involving a wire or the Fly cable (518 pairs at 17 mm,
+530 at 16 mm), plus
+the 50 fixed–fixed pairs with the largest AABB-overlap volumes, were
+re-resolved independently — exact solid distance where tractable,
+partitioned clipped Common for the Fly/shell pairs (where distance
+extrema are pathologically slow), 3-slab partitioned Common for the
+fixed sample.
+
+Result: **no hidden fixed-body overlap anywhere.** At 16 mm the full
+selection completed — 580 pairs checked, 0 flagged, 0 errors. At
+17 mm, 318 of 568 pairs were resolved before the check was bounded
+(all of the largest-AABB-overlap fixed pairs among them): 0 hits,
+0 errors, and every pair that required a volume resolution measured
+exactly 0.0 mm³. The blind spot is specific to the long swept wire
+solids; the audit's fixed-body zeros stand. (The unresolved 17 mm
+remainder is the same pair categories the completed 16 mm run covers
+in full; the partial 17 mm results are preserved in
+`sources/round10/spotcheck-fixed-17mm-partial.json`.)
+
+## Stage B — reserve concept study
+
+The binding blocker after round 9 is the reserve neck knot: at the
+Y=−14 cut the 14 inbound strands pass a ≈3.2 × 2.2 mm window (mean
+lattice spacing ≈0.76 mm < 1.0 mm OD), and the outbound family must
+cross the inbound wall through a single-layer over-pass slot. Three
+concepts were evaluated at centreline level (right side; the design is
+mirror-symmetric). All keep round 9's on-axis Main approach, the Wing
+outlet side, deck Z13.55, plateau Z24.65 and the seam rule. Screens use
+the round-9 centreline model (R5 fillets, sampled centrelines);
+"clean" means zero pairs below 1.05 mm over all 91 same-side pairs.
+
+### Concept A — nested flat U-turn reserve relocated to the bay
+
+Strands fan west during the rise into 14 lanes (X 2.0–15.25, spacing
+1.019 mm — already below the 1.05 design margin) at Z 10.3, run north
+and make nested 180° flat U-turns (centre X 20.25, radii 5.0–18.25,
+staggered entries), return south at Z 11.6 and deliver diagonally to
+the round-9 G stations.
+
+- Screen: **91 of 91 pairs below 1.0 mm**; longest finished
+  **206.0 mm — fails gate 2**.
+- Binding constraints (two, independent): (1) a flat U-turn reverses
+  the row order, and the G row has the outlet's order, so the delivery
+  diagonals must cross wholesale — the knot is not removed, it is
+  moved to the delivery; (2) length: the north run + arc + return
+  geometry pushes the longest strand past 200 mm even before the
+  delivery weave. Service also degrades: with the turn at the north
+  end and one fixed station (G) north of it, no rigid slide of the
+  reserve yields the Δ=30.20 mm identity (the two legs change length
+  in opposite senses under any single translation).
+- Fixed-body changes: the tray pack channels become unused; no new
+  parts. Rejected on screen + length + service.
+
+### Concept B — split reserve, two 7-strand packs
+
+Analytic evaluation only (not screened to a candidate). Splitting the
+pack into two 7-strand windows of the present size relaxes the window
+arithmetic from mean spacing 0.76 mm to ≈1.00 mm
+(√(3.2·2.2/7) ≈ 1.003 mm) — exactly the wire OD, with zero margin,
+before the diagonal convergence into each window is counted. Each
+group's outbound must still cross its own inbound wall through the
+same single-layer slot type, and the east pack's lanes (px ≥ 14.5)
+force turn centre ≥ 22.5 for R ≥ 5, putting its outbound lanes at
+X 27.5–30.5 across the first pack's outbound corridor. The funnel
+bound is halved in density but not removed, and no assignment freedom
+remains to absorb it. Rejected on arithmetic; ranked last.
+
+### Concept C — own-plane vertical hairpin reserve (ranked first)
+
+Each strand keeps its outlet X plane for the whole journey (planes
+spaced 1.25 mm — the connector pitch — so no funnel exists anywhere).
+From the corridor (Z 5.1) it runs south in-plane to Y=10, makes a
+vertical hairpin (two R5 arcs in its own Y–Z plane, crown Z 15.1,
+south leg 12 mm at crown height), returns north at Z 5.1, rises
+in-plane to the fan layer and delivers to the round-9 G stations.
+The reserve is the hairpin: stored slack is the loop; release is a
+15.1 mm northward crown translation plus loop flattening (motion
+audit is a build-stage item, see below).
+
+- Screen (base C): **16 pairs below 1.0 mm, all of them in the
+  G-entry feed zone** (Y 29–40, Z ≈ 11.0). Zero close pairs in the
+  corridor, hairpin and rise zones; lateral order equals the outlet
+  order at every Y cut (inversions vs outlet: 0 at all cuts — the
+  reserve generates no disorder at all, unlike the pack's 33–84).
+- Longest finished **166.7 mm** — 33.3 mm of headroom, the largest of
+  any candidate in any round.
+- Variants: C2 (two-level Z-staggered G entry, ±1.3 mm) → **10
+  pairs**; C3 (plane entry extended 10 mm along the axis) → 8 pairs
+  but its stations for pins 1–3 sit at X ≈ 42–45, outside the shell
+  (X ≤ 41.0) — infeasible as drawn.
+- Tightest cut: the corridor/hairpin zone itself — 1.25 mm plane
+  spacing at every cut, ≥ 1.0 mm with the full design margin. The
+  funnel bound is removed by construction, not relaxed.
+- Binding constraint (what keeps the screen from clean): the feed
+  into the on-axis G stations. The G row is offset anti-parallel to
+  the fan-in travel, so straight or staggered fan-in lines compress
+  against the adjacent axis planes near G (the round-8 approach-tail
+  family, one stage earlier). Round 9 solved this exact interface
+  with its a3′/a4 bow feed; a build round for C must graft that feed
+  (delivering strands to a3′ instead of G) and re-screen the one new
+  junction — the hairpin exit's return to a3′ crosses the corridor
+  wall, and must be shown to cross it in the Z window the current
+  outbound uses (Z ≈ 4.5–5.4 under the Wing edge is occupied by the
+  corridor legs themselves in C, so the crossing geometry differs
+  from round 9's and is the build round's first screen).
+- Fixed-body changes (reserve region only): tray pack channels and
+  the neck grooves become unused (channels may be left as-is —
+  vestigial, no cost); no tray or shell geometry change is required
+  by the screened geometry. Two clearance questions are flagged for
+  exact build-stage checks, not resolved by AABB flags: (i) hairpin
+  crowns (top Z 15.6, Y −7…15) against the slope underside —
+  centreline arithmetic gives ≥ 3.1 mm at Y ≤ 15, shrinking
+  northward; (ii) the crown slide corridor (crown translated
+  −15.1 mm in Y) against the right Wing's plate/north-strip zone.
+  The POM H3/H1 notch (unfreeze step 2) is not consumed by this
+  concept.
+- Manufacturing impact: none on boards, plates or shell moulds; the
+  harness dressing procedure changes (loops dressed in-plane instead
+  of a pack) — a service-note change, not a part change.
+
+### Ranking (PO priorities: cost, low backtracking, freedom, speed)
+
+1. **C** — removes the funnel by construction, keeps every frozen
+   item, has 33 mm of length headroom to spend on the feed graft, and
+   leaves the pack design recoverable (channels unused, not deleted).
+   Its open item is one known interface (the G feed), already solved
+   once in round 9 in a neighbouring geometry.
+2. **A** — relocates the reserve but re-creates the knot at the
+   delivery, fails length, and weakens the service mechanism. More
+   change, worse result.
+3. **B** — least change, but the arithmetic caps it at ≈1.00 mm mean
+   spacing with zero margin; it cannot be certified clean.
+
+No concept's centreline screen is fully clean, so per the round-10
+mandate no build was started. The path to a buildable candidate is
+Concept C plus the round-9 feed graft, screened first at the
+hairpin-exit → a3′ junction.
+
+## Remaining blockers
+
+1. Gate 1 / gate 3 (unchanged candidates): the reserve neck knot —
+   now measured with the repaired audit at **110 true strand
+   crossings** for the round-9 candidate. Resolution path: Concept C
+   build round with the round-9 feed graft (Stage B above).
+2. Physical Junana cap measurement — still open, PO-side; plateau
+   Z24.65 remains provisional.
+
+---
 # Issue #248 Phase B — Round 9
 
 **PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**

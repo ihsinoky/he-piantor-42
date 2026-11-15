@@ -8,6 +8,15 @@ progress in .issue248-runtime/round10/."""
 from common import *
 from audit_repair import solid_distance, clipped_common_volume, load_round9, DIST_CLEAR
 
+import os as _os
+def save(p, x):
+    """Atomic save (tmp + rename): a crashed/interrupted write must not
+    truncate the only copy of accumulated results (observed 2026-11-15:
+    a non-atomic write_text truncated the 17mm progress file to 0)."""
+    tmp = p.with_suffix(p.suffix + '.tmp')
+    tmp.write_text(json.dumps(x, indent=2, ensure_ascii=False) + '\n')
+    _os.replace(tmp, p)
+
 R10 = ROOT / '.issue248-runtime' / 'round10'
 
 def aabb_overlap_volume(ab, bb):
@@ -58,13 +67,40 @@ def spotcheck(pitch):
         ops += 1
         rec = {}
         try:
-            if a == 'Fly-170mm' or b == 'Fly-170mm':
+            if sel[(a, b)] == 'fixed-sample':
+                # Chunky fixed solids: exact-distance extrema and fine
+                # partitions are both pathologically slow on the big
+                # printed shells, and the gate criterion is volume.
+                # Resolve by a 3-slab partitioned Common along the
+                # intersection's longest axis (a different boolean
+                # decomposition from the audit's single full Common).
+                from audit_repair import common_shape, shape_volume
+                from build123d import Pos, Shape, Solid
+                ab_, bb_ = solids[a].bounding_box(), solids[b].bounding_box()
+                lo = [max(ab_.min.X, bb_.min.X), max(ab_.min.Y, bb_.min.Y), max(ab_.min.Z, bb_.min.Z)]
+                hi = [min(ab_.max.X, bb_.max.X), min(ab_.max.Y, bb_.max.Y), min(ab_.max.Z, bb_.max.Z)]
+                if any(hi[d] - lo[d] <= 0 for d in range(3)):
+                    rec['clipped_volume_mm3'] = 0.
+                else:
+                    ax = max(range(3), key=lambda d: hi[d] - lo[d])
+                    cuts = [lo[ax] + (hi[ax] - lo[ax]) * k / 3 for k in range(4)]
+                    tot = 0.
+                    for s in range(3):
+                        c_lo = list(lo); c_hi = list(hi)
+                        c_lo[ax] = cuts[s]; c_hi[ax] = cuts[s + 1]
+                        cell = Pos(*c_lo) * Solid.make_box(c_hi[0]-c_lo[0], c_hi[1]-c_lo[1], c_hi[2]-c_lo[2])
+                        ac = common_shape(solids[a], cell)
+                        if not ac.IsNull():
+                            tot += shape_volume(common_shape(Shape.cast(ac), solids[b]))
+                    rec['clipped_volume_mm3'] = tot
+                rec['method'] = 'slab-common x3 (fixed sample)'
+            elif a == 'Fly-170mm' or b == 'Fly-170mm' or a.startswith('shell-') or b.startswith('shell-'):
                 # BRepExtrema against the long swept Fly cable is
                 # pathological (one pair hung >9 min). The gate
                 # criterion is volume, so resolve by clipped Common
                 # alone (exact overlap volume; zero = no hit).
                 rec['clipped_volume_mm3'] = clipped_common_volume(solids[a], solids[b])
-                rec['method'] = 'clipped-common-only (Fly pair)'
+                rec['method'] = 'clipped-common-only (Fly/shell pair)'
             else:
                 d = solid_distance(solids[a], solids[b])
                 rec['distance_mm'] = d
