@@ -57,7 +57,7 @@ def audit(pitch):
    if why:mates.append(dict(i=i,j=j,a=a,b=b,reason=why));continue
    candidates.append((i,j))
  print(pitch,len(raw),'solids',len(candidates),'exact pairs',flush=True)
- new_operations=0;chunk=int(os.environ.get('AUDIT_PAIR_CHUNK','80'))
+ new_operations=0;chunk=int(os.environ.get('AUDIT_PAIR_CHUNK','30'))
  for count,(i,j) in enumerate(candidates):
   key=f'{i}:{j}';a,k,s=raw[i];b,l,t=raw[j]
   if key not in done and new_operations>=chunk:
