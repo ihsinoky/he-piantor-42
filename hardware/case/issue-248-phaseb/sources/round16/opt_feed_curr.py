@@ -117,13 +117,18 @@ FIX = {i: fixed_samples(i) for i in range(14)}
 FIXALL = np.vstack([FIX[i] for i in range(14)])
 FIXOWN = np.concatenate([[i] * len(FIX[i]) for i in range(14)])
 
+SEG_N = {}
+for _i in range(14):
+    _ch = [ORG[_i], X0[_i * 6:_i * 6 + 3], X0[_i * 6 + 3:_i * 6 + 6], TGT[_i]]
+    SEG_N[_i] = [max(NSEG, int(np.ceil(float(np.linalg.norm(_ch[_s + 1] - _ch[_s])) / 1.5))) for _s in range(3)]
+
 def var_samples(x, i):
     m1 = x[i * 6:i * 6 + 3]; m2 = x[i * 6 + 3:i * 6 + 6]
     chain = [ORG[i], m1, m2, TGT[i]]
     pts = []; Js = []
     for s in range(3):
         a, b = chain[s], chain[s + 1]
-        ns = max(NSEG, int(np.ceil(float(np.linalg.norm(b - a)) / 1.5)))
+        ns = SEG_N[i][s]   # FIXED counts: length-dependent counts made the objective discontinuous (sample birth/death cliffs) and broke every L-BFGS-B line search
         for k in range(ns):
             t = k / ns
             pts.append(a + (b - a) * t)
@@ -145,12 +150,23 @@ def _trim15(p_prev, p, p_next):
     return float(min(d, 50.0)) if np.isfinite(d) else 50.0
 
 def feed_build_pen(i, v):
-    """R5 trim-margin penalty on the feed chain (buffer 0.3 mm);
-    keeps the fitted fillets from cutting across neighbours."""
+    """SMOOTH R5 buildability penalty (round-16 fix): per-corner
+    fillet tangent length t = R*tan(deflection/2) on the chain
+    [corridor, ORG, M1, M2, P, G, ep]; each straight must cover its
+    two end trims + 0.3 mm buffer. Replaces the kinked/capped
+    _trim15 form whose FD gradient exploded near sharp corners."""
     m1 = v[0:3]; m2 = v[3:6]
     ep, G, P = dz.stations(B, A, i)
-    ch = [dz15.corridor(i), ORG[i], m1, m2, P, G]
-    tr = [0.0] + [_trim15(ch[k - 1], ch[k], ch[k + 1]) for k in range(1, len(ch) - 1)] + [0.0]
+    ch = [dz15.corridor(i), ORG[i], m1, m2, P, G, ep]
+    tr = [0.0]
+    for k in range(1, len(ch) - 1):
+        u = ch[k] - ch[k - 1]; w = ch[k + 1] - ch[k]
+        nu = float(np.linalg.norm(u)); nv = np.linalg.norm(w)
+        if nu < 1e-9 or nv < 1e-9: tr.append(12.9); continue
+        c = float(np.clip((u @ w) / (nu * nv), -1.0, 1.0))
+        thd = min(float(np.arccos(c)), 2.4)   # deflection angle, 0 = straight
+        tr.append(5.0 * float(np.tan(thd / 2.0)))
+    tr.append(0.0)
     pen = 0.0
     for k in range(len(ch) - 1):
         seg = float(np.linalg.norm(ch[k + 1] - ch[k]))
@@ -254,7 +270,7 @@ def objective(x):
         pen0 = feed_build_pen(i, v) * ARGS.trimul
         _st['trim'] += pen0
         loss += pen0
-        eps = 1e-5
+        eps = 1e-6
         for k in range(6):
             vp = v.copy(); vp[k] += eps
             grad[i * 6 + k] += (feed_build_pen(i, vp) * ARGS.trimul - pen0) / eps
