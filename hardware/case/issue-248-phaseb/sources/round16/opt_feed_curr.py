@@ -37,6 +37,13 @@ _ap.add_argument('--wmul', type=float, default=1.0)
 _ap.add_argument('--seed', type=int, default=16)
 ARGS = _ap.parse_args()
 
+def _stage_ok(name):
+    if ARGS.stage >= 3: return True
+    if name.startswith('switch-envelope') or name in ('wing_right', 'wing_left') \
+       or name.startswith('plate-'): return True
+    if ARGS.stage == 1: return False
+    return name.startswith('tray-') or name.startswith('underside-') or name.startswith('POM-')
+
 D = json.load(open(f'{HERE}/routes-round9.json')); B, A = D['before'], D['after']
 TAUT14 = json.load(open(f'{RT14}/taut_opt.json'))
 
@@ -46,6 +53,7 @@ for pitch in (17, 16):
     idx, raw = cached(pitch)
     for n, k, s in raw:
         if n.startswith('Wire'): continue
+        if not _stage_ok(n): continue
         lo = np.array([s.bounding_box().min.X, s.bounding_box().min.Y, s.bounding_box().min.Z])
         hi = np.array([s.bounding_box().max.X, s.bounding_box().max.Y, s.bounding_box().max.Z])
         if np.any(hi < ROUTE_BOX_LO) or np.any(lo > ROUTE_BOX_HI): continue
@@ -145,11 +153,6 @@ def feed_build_pen(i, v):
         if margin < 0.3: pen += 50.0 * (0.3 - margin) ** 2
     return pen
 
-def _stage_ok(name):
-    if ARGS.stage >= 3: return True
-    if name.startswith('switch-envelope') or name in ('wing_right', 'wing_left')        or name.startswith('plate-'): return True
-    if ARGS.stage == 1: return False
-    return name.startswith('tray-') or name.startswith('underside-') or name.startswith('POM-')
 OBST = {k: v for k, v in OBST.items() if _stage_ok(k[1])}
 print('stage', ARGS.stage, 'bodies:', len(OBST), flush=True)
 
