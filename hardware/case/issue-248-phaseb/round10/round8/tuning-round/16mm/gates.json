@@ -1,0 +1,51 @@
+{
+  "status": "PROVISIONAL on Junana q=1.50; production-intent CAD, release subject to gates",
+  "pitch_mm": 16,
+  "gates": [
+    {
+      "gate": "1 Exhaustive fitted collision",
+      "passed": false,
+      "evidence": "299 unexpected contacts; 0 Boolean errors; exhaustive all-pair audit; full E thread-bearing annuli/root PASS."
+    },
+    {
+      "gate": "2 Finished conductors ≤200 mm",
+      "passed": true,
+      "evidence": "Longest finished upper bound 197.822584 mm including 3.90 mm Wing / 3.40 mm Main sourced dress-to-tip bounds and 30.20 mm connected reserve; nominal assembly conditions in tail-source.json."
+    },
+    {
+      "gate": "3 Accessible ~30 mm service",
+      "passed": false,
+      "evidence": "Motion blocked; fitted collisions additionally prevent accessible certification."
+    },
+    {
+      "gate": "4 Connected Fly 170 / R5 / roof gap",
+      "passed": true,
+      "evidence": "170.000000000 mm, R5; true roof gap 0.300000 mm; 0 fitted contacts."
+    },
+    {
+      "gate": "5 USB 30 mm insertion",
+      "passed": true,
+      "evidence": "Three continuous 30 mm reservations recomputed."
+    },
+    {
+      "gate": "6 Assumed swept caps after allowances",
+      "passed": true,
+      "evidence": "Certified trimmed-face minimum after 0.50 mm allowance: 0.500000 mm; physical Junana skirt test OPEN."
+    },
+    {
+      "gate": "7 Print envelopes and manufacturing data",
+      "passed": false,
+      "evidence": "shell-central: 2 solids, 0 nonmanifold edges"
+    },
+    {
+      "gate": "8 Fitted preview STEP",
+      "passed": true,
+      "evidence": "Preview reloaded 367 / 367 constituents."
+    }
+  ],
+  "all_cad_gates_pass": false,
+  "production_release": false,
+  "physical_full_press_skirt": "OPEN",
+  "invariants": true,
+  "accessible_service_reserve_certified": false
+}
