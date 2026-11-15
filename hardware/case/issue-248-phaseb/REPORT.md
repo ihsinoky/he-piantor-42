@@ -39,6 +39,14 @@ A 14-radius coplanar nested U has13×1.05=13.65 mm spread and π×13.65=42.88274
 
 Stage-0 verdict: **(a) pure-reversal claim REFUTED in verified assembly endpoint frames; (b) zero-contact claim UNPROVEN and not implied by a reversal count; (c) radial length differential VERIFIED, universal length-unaffordability NOT PROVED.** No strand solids may be swept until a complete candidate passes analytic length and bend screening.
 
+### Complete candidate screen before solids
+
+The stacked low/high two-row crossing prototype was rejected without sweeping: longest finished200.260842 mm; released return fillets have negative tangent slack on all14 strands (−1.250446…−0.077952 mm). It also retains60 sampled close pairs at the Main fan. The radius certificate exposed a separate sampling hazard in the R8.2 return candidate: pin2’s continuous lower bound4.973302 mm invalidated its sampled R5.086848 result. That candidate was rejected. See sources/round7/rejected-r8p2-curve-certificates.json.
+
+The selected **diagnostic** fallback uses R8.5 central return bends and the original14 reserve lanes, with Z spread before inlet compression and an ordered transported return. It has a complete finished upper bound186.056270 mm (13.943730 mm margin), including unchanged7.30 mm tails. The14 non-rational spline curves are certified continuously by converting to Bezier patches and bounding |v×a| / |v|³ using Bernstein control-vector convex hulls, with adaptive subdivision. Lowest certified spline radius5.276689 mm; the overall minimum is the unchanged inner reserve radius5.035 mm. Independent per-patch quadrature agrees with kernel spline lengths within2.1e−13 mm. These tests precede ALL new conductor solids. See curve-certificates-round7.json and curve_certificate_round7.py.
+
+This fallback is not asserted contact-free: the cheap screen still has79 close same-side pairs, notably where the inlet diagonal meets the low return and at the Main fan. It is carried through the required full audit to expose actual fixed-body, strand and service blockers. No dedicated180° twist was installed: the verified endpoint frames do not require the advisor’s asserted permutation, the full-width station fails its envelope, no complete upstream7+7 station was qualified, and the post-reserve rise cannot silently be called upstream. The fallback is explicitly a nested horizontal U with existing Z-spread, followed by an ordered return hairpin; it is a failed routing trial unless the independent gates establish otherwise. It does not fulfil an exactly-one-twist construction.
+
 ## Build and complete eight-gate audit
 
 IN PROGRESS. No new routing PASS or reuse of round-6 geometry is claimed. POM-left-H3 / POM-right-H1 remain unauthorized required-skin blockers, with no exception. Prior complete results follow unchanged.

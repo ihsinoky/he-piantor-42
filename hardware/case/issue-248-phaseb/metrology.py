@@ -8,6 +8,12 @@ def analytic(points,r=5):
   t.append(d);arcs.append(r*(math.pi-theta))
  t.append(0.);slack=[float(np.linalg.norm(p[i+1]-p[i]))-t[i]-t[i+1] for i in range(len(p)-1)]
  return dict(length_mm=sum(slack)+sum(arcs),minimum_straight_slack_mm=min(slack),minimum_bend_radius_mm=r)
+def analytic_round7(r):
+ a=analytic(r['before'],r['corner_radius_mm']);b=analytic(r['after'],r['corner_radius_mm']);proof=r['round7_curve_certificate']
+ assert proof['passed'] and proof['minimum_radius_lower_bound_mm']>=5
+ assert abs(proof['length_delta_mm'])<1e-6
+ length=a['length_mm']+b['length_mm']+r['turn_arc_length_mm']+proof['independent_quadrature_length_mm']-r['curve_trimmed_length_mm']
+ return dict(length_mm=length,minimum_straight_slack_mm=min(a['minimum_straight_slack_mm'],b['minimum_straight_slack_mm'],r['return_initial_straight_lower_bound_mm']-r['curve_trimmed_length_mm']),minimum_bend_radius_mm=min(r['corner_radius_mm'],r['turn_radius_mm'],proof['minimum_radius_lower_bound_mm']),independent_spline_quadrature_error_estimate_mm=proof['quadrature_error_estimate_mm'],continuous_spline_curvature_bound_mm=proof['minimum_radius_lower_bound_mm'])
 def motion(sgn,i):
  from routes import segments
  a,b,r,mid=segments(sgn,i);z=mid[2];xc=mid[0];yc=a[-1][1]
@@ -18,6 +24,8 @@ def motion(sgn,i):
  return prism(strip.buffer(.52,quad_segs=32),z-.52,1.04)
 def fixed_fans(sgn,i):
  from routes import segments
+ from routes import fixed_parts
+ if fixed_parts is not None:return fixed_parts(sgn,i)
  a,b,r,mid=segments(sgn,i);result=[]
  for points,endpoint in [(a,a[-1]),(b,b[0])]:
   path=rounded(points);edges=[]
@@ -40,14 +48,20 @@ def run(pitch,stage="all"):
   for w in d['wings']:
    aa=[]
    for r in w['analytic_segments']:
-    a=analytic(r['before']);b=analytic(r['after'])
-    aa.append(dict(length_mm=a['length_mm']+b['length_mm']+r['turn_arc_length_mm'],minimum_straight_slack_mm=min(a['minimum_straight_slack_mm'],b['minimum_straight_slack_mm']),minimum_bend_radius_mm=min(5,r['turn_radius_mm'])))
+    if 'round7_curve_certificate' in r:
+     aa.append(analytic_round7(r))
+    else:
+     a=analytic(r['before']);b=analytic(r['after'])
+     aa.append(dict(length_mm=a['length_mm']+b['length_mm']+r['turn_arc_length_mm'],minimum_straight_slack_mm=min(a['minimum_straight_slack_mm'],b['minimum_straight_slack_mm']),minimum_bend_radius_mm=min(5,r['turn_radius_mm'])))
    assert all(abs(a['length_mm']-v)<1e-6 for a,v in zip(aa,w['conductor_lengths_mm']))
    if 'released_analytic_segments' in w:
     for stored,ref in zip(aa,w['released_analytic_segments']):
-     x=analytic(ref['before']);y=analytic(ref['after'])
-     stored['released_length_mm']=x['length_mm']+y['length_mm']+ref['turn_arc_length_mm']
-     stored['released_minimum_straight_slack_mm']=min(x['minimum_straight_slack_mm'],y['minimum_straight_slack_mm'])
+     if 'round7_curve_certificate' in ref:
+      q=analytic_round7(ref);stored['released_length_mm']=q['length_mm'];stored['released_minimum_straight_slack_mm']=q['minimum_straight_slack_mm']
+     else:
+      x=analytic(ref['before']);y=analytic(ref['after'])
+      stored['released_length_mm']=x['length_mm']+y['length_mm']+ref['turn_arc_length_mm']
+      stored['released_minimum_straight_slack_mm']=min(x['minimum_straight_slack_mm'],y['minimum_straight_slack_mm'])
      stored['minimum_straight_slack_mm']=min(stored['minimum_straight_slack_mm'],stored['released_minimum_straight_slack_mm'])
      assert abs(stored['length_mm']-stored['released_length_mm']-30.2)<1e-6
    reserve=w['per_wire_reserve_mm']

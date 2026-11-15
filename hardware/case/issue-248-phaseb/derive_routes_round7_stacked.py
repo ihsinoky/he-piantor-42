@@ -21,7 +21,12 @@ def derive():
   ns.append(ns[-1] if sin<1e-10 else Rotation.from_rotvec(axis/sin*math.atan2(sin,cos)).apply(ns[-1]))
  ns=np.array(ns);target=np.array([ts[-1,1],-ts[-1,0],0]);target/=np.linalg.norm(target)
  angle=math.atan2(np.dot(np.cross(ns[-1],target),ts[-1]),np.dot(ns[-1],target))
- phase=f**3*(10-15*f+6*f*f);roll=angle*phase
+ edges=list(core.edges());lengths=np.array([e.length for e in edges]);eligible=lengths>=7;total=float(lengths[eligible].sum());ss=f*L;phase=np.zeros(len(f));offset=0.;done=0.
+ for length,active in zip(lengths,eligible):
+  if active:
+   local=np.clip((ss-offset)/length,0,1);blend=local**3*(10-15*local+6*local*local);phase+=length*blend/total
+  offset+=length
+ roll=angle*phase
  nn=np.cos(roll)[:,None]*ns+np.sin(roll)[:,None]*np.cross(ts,ns);zz=np.cross(nn,ts)
  rows=[]
  for i,(dx,dz) in enumerate(pack):
@@ -37,10 +42,16 @@ def derive():
   target=nn[-1];b4=np.array([17,8,10.5])+flat*target+(level-.5)*1.01*np.array([0,0,1]);ap=np.array(ep)+np.array([7*math.sin(math.radians(120)),7*math.cos(math.radians(120)),0])
   fan=[q[-1].tolist(),b4.tolist(),ap.tolist(),ep];wf=rounded(fan,5.05)
   path=Wire([*wa.edges(),arc,*wp.edges(),curve,*wf.edges()]);minr=curvature(curve)
-  rr=dict(side='right',pin=i+1,pack_offset_mm=[dx,dz],before=before,turn_radius_mm=R,turn_z_mm=z,prefix=prefix,core_control_samples_mm=q[inds].tolist(),core_start_tangent=ts[0].tolist(),core_end_tangent=ts[-1].tolist(),fan=fan,core_length_mm=curve.length,core_minimum_sampled_curvature_radius_mm=minr,routed_length_mm=path.length,finished_length_mm=path.length+7.3,minimum_bend_radius_mm=min(5.05,R,minr),samples_mm=sample(path,step=.25).tolist())
+  rr=dict(side='right',pin=i+1,pack_offset_mm=[dx,dz],before=before,turn_radius_mm=R,turn_z_mm=z,prefix=prefix,core_control_samples_mm=q[inds].tolist(),core_start_tangent=ts[0].tolist(),core_end_tangent=ts[-1].tolist(),fan=fan,core_length_mm=curve.length,core_minimum_sampled_curvature_radius_mm=minr,routed_length_mm=path.length,finished_length_mm=path.length+7.3,minimum_bend_radius_mm=min(5.05,R,minr),samples_mm=[])
   rows.append(rr);print(i+1,'length',path.length+7.3,'R',minr,flush=True)
  d=dict(candidate='Low/high two-row fixed crossing; immutable fourteen-lane horizontal nested reserve; horizontal lateral return frame.',round5_routes_sha256=sha(HERE/'round5/routes-round5.json'),stored_tangent_y_mm=10.55,released_tangent_y_mm=-4.55,service_translation_mm=15.1,reserve_mm=30.2,tail_mm=7.3,right=rows)
+ save(HERE/'routes-round7-stacked-progress.json',d)
+ if any(w['minimum_bend_radius_mm']<5 or w['finished_length_mm']>200 for w in rows):
+  print('RADIUS/LENGTH SCREEN FAIL; no solids or pair sampling',flush=True);return
  contacts=[]
+ # Reconstruct paths once for the separation screen.
+ from routes_round7 import path_for_row
+ for row in rows:row['samples_mm']=sample(path_for_row(row),step=.25).tolist()
  for i in range(14):
   for j in range(i+1,14):
    a=np.array(rows[i]['samples_mm']);b=np.array(rows[j]['samples_mm']);ds,ii=cKDTree(b).query(a);k=int(ds.argmin())
