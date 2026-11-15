@@ -1,3 +1,149 @@
+# Round 15 — Body-aware routing: exact machinery VALIDATED; feed not converged; slack-disk placement infeasible in the discretised space; gates 1/3 still FAIL
+
+## Exact-distance optimiser — built and validated (task 1, machinery)
+
+- `exact_oracle.py`: exact signed point-to-solid distance. PLANE/CYLINDER
+  faces are evaluated analytically from the face's own BRep (trimmed-region
+  ray casting in UV); other faces use per-face DistShapeShape with AABB
+  pruning; sign from the BRepClass3d classifier. VERIFIED against raw
+  DistShapeShape on 60 random points x 190 bodies (both pitches, route
+  region): max |difference| = 0.0 everywhere
+  (`.issue248-runtime/round15/oracle_verify.json`). Face census:
+  PLANE 10696, BSPLINE 1344, CYLINDER 489.
+- Hit-map validation PASSED: the round-14 taut candidate's fitted
+  wire-fixed hit map is reproduced exactly by path sampling against the
+  oracle — 17mm 94/94 hits, 16mm 106/106; 149 zero-volume near pairs at
+  17mm, none falsely flagged. The round-14 wire-wire crossings localise
+  to centreline min distance 0.732 mm (both pairs, tail/P region).
+- Analytic gradients FD-checked (max err 0.004-0.005) for both the feed
+  and reel optimisers.
+- TWO screen-blindness defects found and fixed, both inherited from the
+  round-14 methodology: (1) sampling at 6 points/segment is blind to
+  shallow crossings on long segments — an earlier screen-"clean" feed
+  state fitted to 84 wire-wire overlap pairs; round 15 samples at
+  <= 1.5 mm spacing everywhere and adds an R5 trim-margin penalty so
+  fitted fillets cannot cut across neighbours. (2) `routes_round14.wire()`
+  silently DROPS feed points (indices 5, then 4, then 4+5) when the R5
+  builder asserts — a fitted "candidate" built through it is not always
+  the designed chain. All round-15 fitted probes build STRICTLY
+  (assert = recorded strand failure; none occurred).
+
+## Rise skeleton — round-14 rise proven inside the switch envelopes; design_r15 (unfreeze step 1)
+
+Exact distances of the round-14 rise tops: strand 1 sits INSIDE
+switch-envelope R0_C5 at both pitches (-0.563 @17mm, -0.975 @16mm);
+strand 2 +0.062/-0.350; strand 3 +0.687/+0.275. A Z-scan over
+Z 7.6-11.6 at the strand-1/2 lanes has max clearance 0.0 — no vertical
+window exists for a 1.0 mm wire there (the envelope sits on the Wing
+PCB). The round-14 fitted audit agrees: strand 01 x R0_C5 = 12.09 mm3
+(17mm) is its largest single wire-fixed hit.
+`design_r15.py` moves the rise tops north and down the (Y,Z) scan
+(worst case over both pitches): strands 1-9 Y=-11, Z=10.3 (clearance
+1.67-1.75); strand 10 Y=-12, Z=9.9 (1.51); strands 11-14 Y=-13, Z=8.2
+(0.82-1.35). Corridor (fx, -18, 5.1), P/G/ep stations unchanged.
+This is a route-envelope change only (unfreeze step 1); no fixed body
+was touched.
+
+## Taut candidate fitted verdict (design_r15 skeleton + round-14 feed, strict build)
+
+| pitch | wire-wire pairs | wire-fixed hits | longest finished |
+|---|---|---|---|
+| 17mm | 6 (max 0.75 mm3) | 108 | 102.3 mm |
+| 16mm | 6 | 118 | 102.3 mm |
+
+vs round 14 (WW 2, WF 94/106, longest 102.20): the skeleton change
+ALONE does not improve the fitted candidate — round-14's body-blind
+feed still ploughs the C5 column and plates from the new rise tops
+(strand 01 x R0_C5 = 12.11 mm3 persists via the feed segment, not the
+rise). The feed must be re-optimised against the exact oracle; that
+optimisation (below) did not converge this round.
+
+## Exact feed optimisation — progress, NOT converged
+
+Dense-sampling run (warm start, hinge targets 1.30 WW / 1.15 body,
+R5 trim-margin penalty): loss 853,660 -> 164,950 in chunk 0
+(40 iterations), then L-BFGS-B stalls (ABNORMAL termination, nit 0 on
+chunks 1-3). Fitted probe of the chunk-0 state (17mm): wire-wire
+42 pairs (volumes 0.02-2.80 mm3), wire-fixed 100 hits (28 of them
+Main-GH DRAWING-BOUND grazes <= 0.006 mm3), longest finished
+117.45 mm. Better than the pre-round-15 screen-blind state on every
+axis, far from fitted-clean. The machinery is validated; the run is
+compute-bound on this VM (1.5 shared CPUs; one objective evaluation
+costs seconds at dense sampling) and the hinge landscape stalls the
+solver. No silent relaxation was applied.
+
+## Slack reel — shared axis proven impossible; per-strand placement infeasible in the discretised space (task 2)
+
+- Round 14's shared axis C=(0,5) is PROVEN impossible for two sides:
+  the mirror construction pairs left pin 15-p with right pin p at the
+  same ladder Z and the same radius, and the two 270-degree sweeps
+  overlap volumetrically on the north and south bands.
+- Shared-axis centre scans (20 + 25 centres, R 6.5-9.2, all ladder
+  levels): worst clearance -0.59..-1.8 everywhere. Blockers rotate:
+  tray bosses (low), Wing slab Z 7.35-8.55 (mid), switch envelopes
+  (east), plates (over key fields), slope cheeks/ceiling (north).
+- Per-strand disk placement instead: two exact scans found
+  130 feasible (centre, Z) at R=9.2 (coarse grid) and 289 feasible
+  (centre, Z, R in {7.5, 9.2}) on the fine grid (Z step 0.95 from 3.9;
+  centres on a 2 mm grid; clearance >= 0.55 vs all fixed bodies, both
+  pitches; feasible bands Z 3.9-6.75 dense, 9.2-11.5 sparse northern
+  pockets, 12.35+ none).
+- The 28-disk assignment (conflict: |dZ| < 1.05 AND centre distance
+  < R1+R2+1.0) was attacked with three solvers and NOT solved:
+  static-order DFS (exhausted), MRV DFS x2 (900 s caps, ~300k nodes
+  each), min-conflicts local search (200 restarts x 400 steps; best
+  total conflict count 16, plateaued). Capacity estimate agrees:
+  ~5 usable Z bands x ~5 disks/band < 28 once same-band separation
+  (16.0-19.4 mm) is enforced in the two pocket regions.
+- Therefore NO fitted slack loop exists this round and gate 3 cannot
+  be qualified. Search-space caveats (state, do not overclaim):
+  centres/Z/R are grid-quantised as above; entry/exit directions and
+  the 270-degree sweep are inherited from round 14; off-grid centres,
+  intermediate radii, or different entry angles were not searched.
+  Reel fan optimisation (`opt_reel3.py`, built and gradient-verified)
+  had no placement to optimise around and was not run to a build.
+
+## Gate table (round 15)
+
+| gate | 17mm | 16mm | basis |
+|---|---|---|---|
+| 1 fitted collision | FAIL: WW 6 pairs, WF 108 hits (+2 known POM residuals, FF, reported as before) | FAIL: WW 6, WF 118 (+2 POM) | strict fitted probe of the taut candidate above |
+| 2 finished <= 200 | PASS for the taut route: longest 102.3, margin 97.7 (a +30.2 loop would put it at ~132, still <= 200 — but no loop exists) | same | builder lengths |
+| 3 unplug-first service | FAIL: no fitted-clean stored loop (placement infeasible, above); motion steps not qualified | FAIL | reel evidence |
+| 4 Fly | PASS (inherited) | PASS (inherited) | fixed assembly unchanged this round |
+| 5 USB | PASS (inherited) | PASS (inherited) | fixed assembly unchanged |
+| 6 caps | OPEN (inherited; Junana physical measurement still PO-side) | OPEN | — |
+| 7 manufacturing 19/19 + envelopes | PASS (inherited) | PASS (inherited) | fixed assembly unchanged |
+| 8 preview STEP | PASS (inherited) | PASS (inherited) | no new assembly produced (no complete candidate) |
+
+## Unfreeze ledger
+
+Consumed: step 1 (route envelope) — the design_r15 rise skeleton
+(rise-top Y/Z only; corridor, stations, tails unchanged). NOT used:
+the neck tray cut; no fixed-body change of any kind was made in
+round 15. Steps 2-4 untouched. Boards, plates, GH/D-024, wire spec,
+deck Z13.55, plateau Z24.65 (provisional), seam rule, blisters,
+M2x10, retainers (+/-8,-30), R>=5 certification: all unchanged.
+
+## Remaining blockers
+
+1. Feed convergence: exact machinery validated, but the dense
+   objective needs either a faster host, a reduced/curriculum body
+   set, or a sturdier solver schedule (softened-hinge continuation)
+   to reach fitted-clean. Current best fitted state: taut candidate
+   above (WW 6 / WF 108 @17mm).
+2. Slack storage: per-strand 270-degree disks do not pack in the
+   discretised placement space (3 solver failures + capacity bound).
+   Unexplored continuations: continuous (off-grid) placement
+   optimisation; smaller radii via a larger joint-loss budget in the
+   fans; different entry/exit angles; or a different storage concept
+   — the last two change the round-14 reel assumptions and the
+   service concept itself is PO territory (step 4) if case geometry
+   must move.
+3. Junana cap physical measurement (PO-side) still open; plateau
+   Z24.65 remains provisional.
+
+
 # Round 14 — Candidate A build round: fan closed at screen level; slack loop NOT fitted-qualified; gate 3 FAIL
 
 ## Requirement change (PO decision, 2026-11-15)
