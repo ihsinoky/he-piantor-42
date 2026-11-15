@@ -18,6 +18,7 @@ idx,by_name=load_round9('17')
 BOXES=[]
 for n,s in by_name.items():
     if n.startswith('Wire'): continue
+    if not n.startswith(('switch-envelope','POM-','plate-screw-','underside-')): continue
     b=Bnd_Box(); BRepBndLib.Add_s(s.wrapped if hasattr(s,'wrapped') else s,b,True)
     BOXES.append((n,(b.GetXMin()-0.3,b.GetXMax()+0.3,b.GetYMin()-0.3,b.GetYMax()+0.3,b.GetZMin()-0.3,b.GetZMax()+0.3)))
 def in_box(p,bx): return (bx[0]<p[0]<bx[1] and bx[2]<p[1]<bx[3] and bx[4]<p[2]<bx[5])
@@ -29,8 +30,9 @@ def fixed_samples(i):
     pts=[]
     ep,G,P=dz.stations(B,A,i)
     lp=dz.loop_points(B,A,i)
+    K1=lp[3]+8.0*dz.UF2
     chains=[[np.array(B[i][0],float),np.array(B[i][1],float),dz.corridor(i),dz.rise_top(B,A,i)],
-            [dz.rise_top(B,A,i),lp[0],lp[1],lp[2],lp[3],dz.feed_origin(B,A,i)],
+            [dz.rise_top(B,A,i),lp[0],lp[1],lp[2],lp[3],K1,dz.feed_origin(B,A,i)],
             [P,G,ep]]
     for ch in chains:
         for a,b in zip(ch,ch[1:]):
@@ -74,9 +76,13 @@ def objective(x):
         if a>=len(allp) and b>=len(allp): continue
         d=np.linalg.norm(comb[a]-comb[b])
         if d<1.3: loss+=((1.3-d)/0.3)**2
+    if False and BOXES:
+        BARR=np.array([bx for _,bx in BOXES])
+        inside=((allp[:,None,0]>BARR[None,:,0])&(allp[:,None,0]<BARR[None,:,1])&
+                (allp[:,None,1]>BARR[None,:,2])&(allp[:,None,1]<BARR[None,:,3])&
+                (allp[:,None,2]>BARR[None,:,4])&(allp[:,None,2]<BARR[None,:,5]))
+        loss+=25.0*float(inside.any(axis=1).sum())
     for p in allp:
-        for n,bx in BOXES:
-            if in_box(p,bx): loss+=25.0; break
         c=ceiling(p[1])
         if p[2]>c: loss+=((p[2]-c)/0.3)**2*2
     return loss+0.002*np.sum((x-X0)**2)

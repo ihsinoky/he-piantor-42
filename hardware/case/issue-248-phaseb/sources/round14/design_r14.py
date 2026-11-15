@@ -20,7 +20,8 @@ outlet dress B0,B1 -> corridor point (fx,-18,5.1), fx = 28.85-1.25i
 import json
 import numpy as np
 AX=np.array([0.8660254,-0.5,0.0])
-UF2=np.array([0.72,0.69,-0.06]); UF2=UF2/np.linalg.norm(UF2)
+UF2=np.array([-0.35,0.94,-0.06]); UF2=UF2/np.linalg.norm(UF2)
+UD=np.array([-0.55,0.35,-0.76]); UD=UD/np.linalg.norm(UD)
 W2=np.array([0,0,1.0])-UF2*UF2[2]; W2=W2/np.linalg.norm(W2)
 RT='/home/hatch/workspace/projects/he-piantor-raise/.issue248-runtime/round14'
 try:
@@ -34,7 +35,7 @@ def rise_top(B,A,i): return np.array([fx_of(i),-7.0,A[i][3][2]])
 def stations(B,A,i):
     ep=np.array(A[i][6],float)
     G=np.array(A[i][5],float)
-    P=G+6.0*AX+np.array([0,0,-1.6])
+    P=G+6.0*AX
     return ep,G,P
 def feed_M(i):
     o=_OPT[str(i+1)]
@@ -47,7 +48,7 @@ def loop_points(B,A,i,p_loop=9.0):
     C1=RTp+10.0*W2
     return H1,Amid,B1,C1
 def feed_origin(B,A,i,p_loop=9.0):
-    return loop_points(B,A,i,p_loop)[3]+8.0*UF2
+    return loop_points(B,A,i,p_loop)[3]+8.0*UF2+11.0*UD
 def design_points(B,A,i,p_loop=9.0,with_loop=True):
     ep,G,P=stations(B,A,i)
     M1,M2=feed_M(i)
@@ -55,7 +56,8 @@ def design_points(B,A,i,p_loop=9.0,with_loop=True):
     pts=[list(B[i][0]),list(B[i][1]),corridor(i).tolist(),RTp.tolist()]
     if with_loop:
         H1,Amid,B1,C1=loop_points(B,A,i,p_loop)
+        K1=C1+8.0*UF2
         pts+= [H1.tolist(),Amid.tolist(),B1.tolist(),C1.tolist(),
-               feed_origin(B,A,i,p_loop).tolist()]
+               K1.tolist(),feed_origin(B,A,i,p_loop).tolist()]
     pts+= [M1.tolist(),M2.tolist(),P.tolist(),G.tolist(),list(A[i][6])]
     return pts
