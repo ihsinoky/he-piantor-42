@@ -6,6 +6,9 @@ continuous motion, not candidate screening, determine acceptance.
 from common import *
 DESIGN=read(HERE/'routes-round8.json')
 STORED=DESIGN['turn_centre_y_mm'];RELEASED=STORED-DESIGN['service_travel_mm']
+# Round 8 keeps the round-5 fan construction in metrology (fans built from
+# segments); there is no separate fixed-fan solid source as in round 7.
+fixed_parts=None
 def segments(sgn,i,south=STORED):
  j=13-i if sgn<0 else i
  before=[p[:] for p in DESIGN['before'][j]];after=[p[:] for p in DESIGN['after'][j]]
