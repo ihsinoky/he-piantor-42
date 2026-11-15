@@ -23,7 +23,9 @@ RISE_YZ = {0: (-11., 10.3), 1: (-11., 10.3), 2: (-11., 10.3), 3: (-11., 10.3),
 def corridor(i):
     # unchanged from round 14: (fx, -18, 5.1); the climb segment runs
     # from here north-up at constant X = fx to the new rise top.
-    return dz.corridor(i)
+    # (Computed directly, not via dz.corridor, so callers may safely
+    # monkeypatch design_r14.corridor with this function.)
+    return np.array([dz.fx_of(i), -18.0, 5.1])
 
 def rise_top(i):
     y, z = RISE_YZ[i]

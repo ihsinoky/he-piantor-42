@@ -48,6 +48,23 @@ NSEG = 6
 X0 = np.zeros(84)
 for j in range(14):
     X0[j * 6:j * 6 + 3] = TAUT14[str(j + 1)]['M1']; X0[j * 6 + 3:j * 6 + 6] = TAUT14[str(j + 1)]['M2']
+# Geometric warm init (round 15 run 2): M2 on the -a approach ray at
+# P's height (the proven tail slot Z ~11), M1 mid-way at clamped Z.
+# Round 14's body-blind M points sit in the plate band (Z ~12.7) and
+# trap the optimiser in a stiff coupled valley.
+AXU = np.array([0.8660254, -0.5, 0.0])
+for j in range(14):
+    ep, G, P = dz.stations(B, A, j)
+    M2 = P - 5.5 * AXU
+    M1 = ORG[j] + 0.45 * (P - ORG[j]); M1[2] = min(M1[2], 11.2)
+    X0[j * 6:j * 6 + 3] = M1; X0[j * 6 + 3:j * 6 + 6] = M2
+import os
+if os.path.exists(f'{RT15}/feed_exact.json'):
+    _WARM = json.load(open(f'{RT15}/feed_exact.json'))
+    for j in range(14):
+        X0[j * 6:j * 6 + 3] = _WARM[str(j + 1)]['M1']; X0[j * 6 + 3:j * 6 + 6] = _WARM[str(j + 1)]['M2']
+    print('warm start from feed_exact.json', flush=True)
+
 
 def fixed_samples(i):
     pts = []
@@ -69,8 +86,9 @@ def var_samples(x, i):
     pts = []; Js = []
     for s in range(3):
         a, b = chain[s], chain[s + 1]
-        for k in range(NSEG):
-            t = k / NSEG
+        ns = max(NSEG, int(np.ceil(float(np.linalg.norm(b - a)) / 1.5)))
+        for k in range(ns):
+            t = k / ns
             pts.append(a + (b - a) * t)
             J = np.zeros((3, 6))
             if s == 0: J[:, 0:3] = t * np.eye(3)
@@ -79,6 +97,29 @@ def var_samples(x, i):
             Js.append(J)
     pts.append(TGT[i].copy()); Js.append(np.zeros((3, 6)))
     return np.array(pts), Js
+
+def _trim15(p_prev, p, p_next):
+    u = p_prev - p; v = p_next - p
+    nu = np.linalg.norm(u); nv = np.linalg.norm(v)
+    if nu < 1e-12 or nv < 1e-12: return 50.0
+    th = np.arccos(np.clip(float(u @ v) / (nu * nv), -1, 1))
+    th = min(max(th, 1e-4), np.pi - 1e-4)
+    d = 5.0 / np.tan(th / 2)
+    return float(min(d, 50.0)) if np.isfinite(d) else 50.0
+
+def feed_build_pen(i, v):
+    """R5 trim-margin penalty on the feed chain (buffer 0.3 mm);
+    keeps the fitted fillets from cutting across neighbours."""
+    m1 = v[0:3]; m2 = v[3:6]
+    ep, G, P = dz.stations(B, A, i)
+    ch = [dz15.corridor(i), ORG[i], m1, m2, P, G]
+    tr = [0.0] + [_trim15(ch[k - 1], ch[k], ch[k + 1]) for k in range(1, len(ch) - 1)] + [0.0]
+    pen = 0.0
+    for k in range(len(ch) - 1):
+        seg = float(np.linalg.norm(ch[k + 1] - ch[k]))
+        margin = seg - tr[k] - tr[k + 1]
+        if margin < 0.3: pen += 50.0 * (0.3 - margin) ** 2
+    return pen
 
 CAND = {}
 for i in range(14):
@@ -158,6 +199,14 @@ def objective(x):
                 if s == 0: grad[i * 6:i * 6 + 3] += gv
                 elif s == 1: grad[i * 6:i * 6 + 3] += -gv; grad[i * 6 + 3:i * 6 + 6] += gv
                 else: grad[i * 6 + 3:i * 6 + 6] += -gv
+    for i in range(14):
+        v = x[i * 6:(i + 1) * 6]
+        pen0 = feed_build_pen(i, v)
+        loss += pen0
+        eps = 1e-6
+        for k in range(6):
+            vp = v.copy(); vp[k] += eps
+            grad[i * 6 + k] += (feed_build_pen(i, vp) - pen0) / eps
     loss += 0.001 * float(np.sum((x - X0) ** 2)); grad += 0.002 * (x - X0)
     return loss, grad
 
@@ -199,12 +248,17 @@ if __name__ == '__main__':
     for i in range(14): BND += [(0, 46), (-10, 44), (5.6, 21.8)] * 2
     x = X0.copy()
     for rnd in range(int(sys.argv[1]) if len(sys.argv) > 1 else 2):
-        t = time.time()
-        r = minimize(objective, x, jac=True, method='L-BFGS-B', bounds=BND,
-                     options={'maxiter': 120, 'ftol': 1e-12})
-        x = r.x
-        print(f'round {rnd}: loss {r.fun:.3f} nit {r.nit} time {time.time()-t:.0f}s', flush=True)
-        report(x, f'round {rnd}')
+        t = time.time(); nit = 0
+        for chunk in range(4):
+            r = minimize(objective, x, jac=True, method='L-BFGS-B', bounds=BND,
+                         options={'maxiter': 40, 'ftol': 1e-11, 'maxls': 25})
+            x = r.x; nit += r.nit
+            print(f'  chunk {chunk}: loss {r.fun:.1f} nit {r.nit} msg {r.message}', flush=True)
+            report(x, f'  chunk {chunk}')
+            json.dump({str(i + 1): {'M1': [round(float(v), 3) for v in x[i * 6:i * 6 + 3]],
+                                    'M2': [round(float(v), 3) for v in x[i * 6 + 3:i * 6 + 6]]} for i in range(14)},
+                      open(f'{RT15}/feed_exact.json', 'w'), indent=1)
+        print(f'round {rnd}: loss {r.fun:.3f} nit {nit} time {time.time()-t:.0f}s', flush=True)
     json.dump({str(i + 1): {'M1': [round(float(v), 3) for v in x[i * 6:i * 6 + 3]],
                             'M2': [round(float(v), 3) for v in x[i * 6 + 3:i * 6 + 6]]} for i in range(14)},
               open(f'{RT15}/feed_exact.json', 'w'), indent=1)
