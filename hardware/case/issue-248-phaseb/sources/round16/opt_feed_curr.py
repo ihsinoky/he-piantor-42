@@ -242,11 +242,13 @@ def objective(x):
         v = x[i * 6:(i + 1) * 6]
         pen0 = feed_build_pen(i, v)
         loss += pen0
-        eps = 1e-6
+        eps = 1e-5
         for k in range(6):
             vp = v.copy(); vp[k] += eps
             grad[i * 6 + k] += (feed_build_pen(i, vp) - pen0) / eps
     loss += 0.001 * float(np.sum((x - X0) ** 2)); grad += 0.002 * (x - X0)
+    if not np.isfinite(loss): loss = 1e12
+    grad = np.clip(np.nan_to_num(grad, nan=0.0, posinf=1e4, neginf=-1e4), -1e4, 1e4)
     return loss, grad
 
 def report(x, label):
@@ -319,19 +321,22 @@ if __name__ == '__main__':
             print('  rec', rec, flush=True)
         print('done stage', ARGS.stage, '(adam)', flush=True)
         sys.exit(0)
+    x_best = x.copy(); f_best = float(f0)
     for chunk in range(ARGS.chunks):
         t = time.time()
         r = minimize(objective, x, jac=True, method='L-BFGS-B', bounds=BND,
-                     options={'maxiter': ARGS.iters, 'ftol': 1e-11, 'maxls': 25})
+                     options={'maxiter': ARGS.iters, 'ftol': 1e-11, 'maxls': 40})
+        if float(r.fun) < f_best: f_best = float(r.fun); x_best = r.x.copy()
         x = r.x
         wb, ww2 = report(x, f'  s{ARGS.stage} chunk {chunk}')
-        save(x, f's{ARGS.stage}_c{chunk}')
-        rec = dict(stage=ARGS.stage, chunk=chunk, wmul=ARGS.wmul, loss=round(float(r.fun), 1),
+        save(x_best, f's{ARGS.stage}_c{chunk}')
+        x = x_best
+        rec = dict(stage=ARGS.stage, chunk=chunk, wmul=ARGS.wmul, wmulw=ARGS.wmulw, loss=round(float(r.fun), 1), f_best=round(f_best, 1),
                    nit=int(r.nit), msg=str(r.message)[:40], min_body=round(float(wb[0]), 3),
                    min_ww=round(float(ww2[0]), 3), secs=round(time.time() - t))
         logf.write(json.dumps(rec) + '\n'); logf.flush()
         print('  rec', rec, flush=True)
         if r.nit == 0 or 'ABNORMAL' in str(r.message):
-            x = x + rng.normal(0, 0.03, size=84)
+            x = x + rng.normal(0, 0.05, size=84)
             print('  jitter applied (stall escape)', flush=True)
     print('done stage', ARGS.stage, flush=True)
