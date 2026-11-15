@@ -193,14 +193,13 @@ class FacePrim:
 
     def _edge_dist(self, p, best):
         if len(self.eA):
-            lb = _box_lb_arr(p, self.eLo, self.eHi)
-            idx = np.where(lb < best[0])[0]
-            for k in idx:
-                ab = self.eAB[k]
-                s = 0.0 if self.eL2[k] == 0 else float(np.clip(((p - self.eA[k]) @ ab) / self.eL2[k], 0, 1))
-                q = self.eA[k] + s * ab
-                d = float(np.linalg.norm(p - q))
-                if d < best[0]: best = (d, q)
+            t = np.where(self.eL2 > 0,
+                         np.clip(np.sum((p - self.eA) * self.eAB, axis=1) /
+                                 np.maximum(self.eL2, 1e-300), 0, 1), 0.0)
+            Q = self.eA + t[:, None] * self.eAB
+            D = np.linalg.norm(Q - p, axis=1)
+            k = int(np.argmin(D))
+            if float(D[k]) < best[0]: best = (float(D[k]), Q[k])
         for e in self.arcs:
             if float(_box_lb_arr(p, e['lo'], e['hi'])) > best[0]: continue
             d, q = _pt_arc(p, e)
@@ -255,6 +254,29 @@ class OracleBody:
         keep = [f for f in self.faces
                 if np.all(f.hi >= lo) and np.all(f.lo <= hi)]
         return OracleBody(name or self.name, self.shape, faces=keep)
+    def dist_capped(self, p, cap):
+        """Exact (d, q) if the true distance < cap, else (cap, None)
+        as soon as the face lower bounds prove it."""
+        p = np.asarray(p, float)
+        lbn = _box_lb_arr(p, self._flo, self._fhi)
+        order = np.argsort(lbn)
+        best = (float('inf'), None)
+        for k in order:
+            if lbn[k] >= cap and best[0] >= cap:
+                return cap, None
+            if lbn[k] > best[0]: break
+            d, q = self.faces[k].dist(p)
+            if d < best[0]: best = (d, q)
+        if best[0] >= cap: return cap, None
+        d, q = best
+        if d <= 1e-12: return 0.0, (q if q is not None else p)
+        if np.all(p >= self.lo) and np.all(p <= self.hi):
+            if self._cls is None:
+                self._cls = BRepClass3d_SolidClassifier(self.shape.wrapped)
+            self._cls.Perform(gp_Pnt(float(p[0]), float(p[1]), float(p[2])), 1e-7)
+            if self._cls.State() == TopAbs_IN:
+                return -d, q
+        return d, q
     def dist(self, p, fast=False):
         p = np.asarray(p, float)
         lbn = _box_lb_arr(p, self._flo, self._fhi)
