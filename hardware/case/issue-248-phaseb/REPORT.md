@@ -1,3 +1,156 @@
+# Round 14 — Candidate A build round: fan closed at screen level; slack loop NOT fitted-qualified; gate 3 FAIL
+
+## Requirement change (PO decision, 2026-11-15)
+
+Candidate A (no-reserve + unplug-first service) is adopted as the build
+direction. Gate 3 is REDEFINED: the connected 30.20 mm slide-service
+requirement is DELETED and replaced by UNPLUG-FIRST SERVICE:
+(1) remove the raised shells, (2) extract the Wing-side GH plug
+(~6 mm along its axis, fed by +30.2 mm of harness slack dressed as an
+open loop in the bay), (3) lift the Wing out. The new gate 3 qualifies
+this procedure: the stored loop geometry must be fitted-clean, and each
+motion step collision-free by exact Common at sampled positions.
+All other gates unchanged.
+
+## Fan convergence (task 1) — SOLVED at screen level; fitted-clean NOT achieved
+
+Construction (right side; left mirrored): Wing outlets → uniform
+translation of the outlet row to the western corridor (fx = 28.85 −
+1.25i, Y −18, Z 5.1; parallel segments, 1.25 mm spacing preserved —
+this is round 13's A6 corridor/rise, whose corridor and rise are
+fitted-clean; A6's failure was its EASTERN fan, which is discarded) →
+rise at the corridor lane X = fx to round 9's zf ladder → optimised
+two-point feed (per-strand M1/M2, L-BFGS-B; hinge 1.3 mm on all
+cross-strand centreline sample pairs incl. the fixed west transit and
+the P/G/ep tail; ceiling constraint; approach-angle penalty at P) →
+P = G + 6a ON the connector axis (a = (0.866, −0.5, 0); the inlet-row
+offset is exactly perpendicular to a, 1.25 mm) → G → ep (round 9 tail
+stations verbatim).
+
+Screen result (both the design feed and its mirror): min centreline
+pair distance 1.25 mm (= the row spacing itself; binding pair is the
+adjacent rise-top origins), optimiser loss 2.13. Round 13's open
+problem — the western-corridor fan convergence — is closed at screen
+level. Two fitted-level facts temper this:
+
+- The feed optimiser is blind to fixed bodies. The fitted audit of the
+  assembled taut candidate finds the feed crossing fixed bodies
+  (see gate 1 below). A body-aware variant (fixed-solid surface-sample
+  distance penalty, 104,058 samples) was built and audited; it was
+  WORSE on every axis (132 hits, 26 wire–wire pairs, 371 mm³
+  wire–fixed volume) and is rejected; its numbers are recorded in the
+  round-14 runtime logs.
+- Fitted wire–wire overlaps of the taut candidate: 2 pairs per pitch
+  (left 04×05 and right 10×11, 0.211 mm³ each, audit.py volumes;
+  repaired-audit true count: see gate table).
+
+## Slack loop (task 2) — NOT closed; three mechanisms, proof-standard evidence
+
+The +30.2 mm per-strand slack was attempted three ways:
+
+1. Discrete vertical hairpin loops (corridor / rise / feed zones):
+   REFUTED by fixed-body geography — the plate (Z 12.05–13.55) and the
+   northern sensor row block the corridor/rise zones; at the feed, a
+   uniform-family hairpin's descent crosses neighbours (optimiser min
+   pair 0.51–0.54). Plan-view coils cannot tile at 1.25 mm strand
+   spacing (10 mm loop footprint).
+2. Distributed detour in the feed: at polyline level PERFECT (min pair
+   1.25, +30.14…30.21 mm on all 14 strands). FITTED realisation fails:
+   R5 fillet corner losses consume ≈13 mm of the detour (fitted gain
+   ≈17 of 30.2 mm at blend α = 1); extrapolating α to recover the
+   length destroys the geometry of the high-offset strands, and
+   raising the polyline target to 44.2 mm collapses the screen
+   (min pair 0.32 body-blind, 0.73 body-aware with strand 1 at +19.6).
+3. Slack reel (the mechanism taken furthest): each strand's slack is
+   one horizontal 270° turn around a shared vertical axis at bay
+   centre C = (0, 5), at its own Z (ladder 4.6 + 1.12i), radius
+   bisected per strand so the ANALYTIC slack (fitted path minus taut
+   path, with exact R5 corner-loss corrections at the two miter-modelled
+   reel joints) is exactly +30.20 mm. Strand-level results: pins 1–2
+   BUILD (R 7.64 / 7.38; fitted stored 166.04 / 176.87; finished
+   173.34 / 184.17 mm — within the 200 mm budget); wire–wire fitted
+   overlaps among built wires: none. BUT pins 3–14 FAIL to build
+   ("R5 straight too short", needs 2.93–6.95 mm, in the reel fan
+   segments), and the two built wires FAIL fitted probes vs fixed
+   bodies (pin 1: wing_right 3.875, tray-left 3.021, tray-right 2.414,
+   R0_C5 envelope 3.026 mm³; pin 2: wing_right 5.256, R0_C5 8.310,
+   tray-left 3.065, tray-right 2.849 mm³) — the reel fans were
+   optimised against route samples only, never against fixed bodies.
+
+Named remaining path (not attempted; next round): body-aware fan
+optimisation with EXACT BRep distance penalties (the sampled-surface
+penalty used this round demonstrably under-resolves the large flat
+bodies), applied to BOTH the main feed and the reel fans, or a manual
+corridor design driven by the fitted hit map.
+
+## Gate table — taut route candidate (the route WITHOUT slack)
+
+## Gate table — taut route candidate (the route WITHOUT slack)
+
+17 mm: gate 1 fitted audit COMPLETE, 0 errors — 98 unexpected hits:
+wire–wire 2, wire–fixed 94, fixed–fixed 2 (the known POM skin
+residuals, 0.040770 mm³ ×2, carried since round 5). REPAIRED audit
+(audit_repair.py, clipped-Common over every zero-volume pair):
+TRUE wire–wire hits = 2 (Wire-left-04 × Wire-left-05 and
+Wire-right-10 × Wire-right-11, 0.211 mm³ each, full-Common), 0
+zero-volume touches, 0 errors. Wire–fixed hits by body: wing_left /
+wing_right 12 each, switch envelopes R1_C5 7 and R0_C5 6 per side,
+plate-left / plate-right 7 each, tray-left / tray-right 5 each,
+underside U_MUX_B 5 per side.
+16 mm: fitted audit COMPLETE, 0 errors — 110 unexpected hits:
+wire–wire 2, wire–fixed 106, fixed–fixed 2 (same POM residuals).
+REPAIRED audit: TRUE wire–wire hits = 2 (same pairs, 0.211 mm³
+each), 0 touches, 0 errors.
+Gate 1 verdict: FAIL (target 0 unexpected) — on wire–fixed crossings
+and 2 residual wire–wire pairs; the strand–strand problem itself is
+fitted-solved (110 → 2 true crossings vs round 9).
+Gate 2 (route only): longest finished 102.20 mm (pin 1; tails
+3.90 + 3.40 included), margin 97.80 mm — PASS with wide margin.
+For the full candidate (route + loop) gate 2 is not evaluable: no
+fitted loop exists. Budget is not the binding constraint (route +
+30.2 mm ≈ 132 mm « 200 mm; the two built reel strands finished at
+173.34 / 184.17 mm).
+
+- Gate 3 (unplug-first service): FAIL. No fitted-clean stored loop
+  exists (above), so the motion steps were not run. The service
+  procedure itself is documented below for the builder; it is NOT
+  qualified.
+- Gates 4–8: inherited from round 9 — the fixed assembly is
+  byte-identical to round 5/round 9 (assembly index fixed-scope check:
+  all fixed operands hash-matched), and gates 4 (Fly), 5 (USB),
+  6 (swept caps), 7 (manufacturing), 8 (preview STEP) are properties
+  of the fixed bodies. Gate 6 keeps its inherited OPEN flag: the
+  Junana cap physical test has not been performed (PO-side).
+
+## Service procedure (builder document — NOT qualified, gate 3 FAIL)
+
+1. Remove the raised shells (bay cover and raised shell parts).
+2. At each Wing-side GH connector, draw the stored slack loop out of
+   the bay and extract the plug ≈6 mm along its axis; the +30.2 mm
+   loop feeds the extraction.
+3. Lift the Wing out.
+Reassembly is the reverse. This procedure is specified by the PO
+decision of 2026-11-15; round 14 did not qualify it (no fitted-clean
+stored loop; motion states not run).
+
+## Unfreeze ledger
+
+None consumed. The pre-authorised neck tray cut (step 1) was NOT used;
+no step-2 items were used. All fixed bodies remain byte-identical to
+round 5.
+
+## Comparison vs round 9
+
+Round 9 candidate: true 110 strand crossings (repaired audit), longest
+finished 198.366 mm, gates 2/4/5/6/7/8 PASS under the OLD gate set.
+Round 14 taut route: screen min pair 1.25 (round 9's feed family was
+its crossing source); fitted wire–wire TRUE count 2 per pitch (repaired audit) — but the
+feed crosses fixed bodies where round 9's wires score 0, and the
+candidate carries NO service slack, so it does not satisfy the new
+gate 3 at all. Round 14 does not supersede round 9 as a buildable
+candidate; it closes the fan-convergence sub-problem at screen level
+and maps the slack problem's remaining lever precisely.
+
 # Issue #248 Phase B — Round 13
 
 ## Mandate — service-mechanism / interconnect change study (PO authorization 2026-11-15)

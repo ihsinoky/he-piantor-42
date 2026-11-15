@@ -72,7 +72,17 @@ def split_corners(pts):
     return [tuple(p) for p in out]
 
 def wire(pts):
-    path=rounded(split_corners(pts))
+    try:
+        path=rounded(split_corners(pts))
+    except AssertionError:
+        path=None
+        for drop in ((5,),(4,),(4,5)):
+            cand=[q for k,q in enumerate(pts) if k not in drop]
+            try:
+                path=rounded(split_corners(cand)); pts=cand; break
+            except AssertionError:
+                continue
+        if path is None: raise
     d0=np.array(pts[1],float)-np.array(pts[0],float)
     q=sweep(Face(Wire.make_circle(.5,Plane(origin=Vector(*pts[0]),z_dir=Vector(*map(float,d0))))),path=path)
     assert q.is_valid and len(q.solids())==1
