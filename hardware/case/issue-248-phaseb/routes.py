@@ -1,10 +1,10 @@
-"""Round 8: round-5 skeleton, traversal-order lane/fan assignment.
+"""Round 9: round-8 skeleton/assignments; on-axis Main-side approach.
 
 Reconstructed analytic waypoints remain reviewable inputs. Fitted contacts and
 continuous motion, not candidate screening, determine acceptance.
 """
 from common import *
-DESIGN=read(HERE/'routes-round8.json')
+DESIGN=read(HERE/'routes-round9.json')
 STORED=DESIGN['turn_centre_y_mm'];RELEASED=STORED-DESIGN['service_travel_mm']
 # Round 8 keeps the round-5 fan construction in metrology (fans built from
 # segments); there is no separate fixed-fan solid source as in round 7.
@@ -44,7 +44,7 @@ def make_routes():
    for south,target in [(STORED,proofs),(RELEASED,releasedproofs)]:
     before,after,r,mid=segments(sgn,i,south)
     target.append(dict(before=before,after=after,turn_radius_mm=r,turn_arc_length_mm=math.pi*r))
-  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,analytic_segments=proofs,released_analytic_segments=releasedproofs,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=min(5,min(r['turn_radius_mm'] for r in proofs)),service_turn_y_mm=[STORED,RELEASED],outlet_axis_qualification=read(HERE/'tail-source.json')['dress_plane_definition'],unmodeled_length_mm=7.3,routed_curve_only=False,terminal_internal_bound_mm_per_end=3.4,terminal_internal_length_verified=True,wing_tail_plus_dress_lead_bound_mm=3.9,main_tail_bound_mm=3.4,route_qualification='Round 8: frozen round-5 assembly and envelopes; reserve lanes and return-fan positions reassigned strictly by physical traversal order from the verified native pin map (D-032 discipline transferred). Exact all-pair and service audits decide acceptance; centreline screening is not certification.'))
+  rows.append(dict(side=side,conductor_lengths_mm=lengths,dressed_reference_lengths_mm=refs,conductor_waypoints_mm=ptsall,conductor_samples_mm=samples,analytic_segments=proofs,released_analytic_segments=releasedproofs,longest_conductor_mm=max(lengths),longest_dressed_reference_mm=max(refs),margin_to_200_mm=200-max(lengths),per_wire_reserve_mm=[a-b for a,b in zip(lengths,refs)],minimum_radius_mm=min(5,min(r['turn_radius_mm'] for r in proofs)),service_turn_y_mm=[STORED,RELEASED],outlet_axis_qualification=read(HERE/'tail-source.json')['dress_plane_definition'],unmodeled_length_mm=7.3,routed_curve_only=False,terminal_internal_bound_mm_per_end=3.4,terminal_internal_length_verified=True,wing_tail_plus_dress_lead_bound_mm=3.9,main_tail_bound_mm=3.4,route_qualification='Round 9: round-8 assignments and frozen fixed bodies; Main-side approach rebuilt onto connector-axis lines (staggered on-axis pre-approach stations NE of Main, axis-parallel final approach). Exact all-pair and service audits decide acceptance; centreline screening is not certification.'))
  return parts,rows
 if __name__=='__main__':
  parts,rows=make_routes();save(RUN/'route-candidate.json',rows)
