@@ -34,6 +34,7 @@ _ap.add_argument('--init', default='state')   # taut14 | state | geom | exact15
 _ap.add_argument('--chunks', type=int, default=4)
 _ap.add_argument('--iters', type=int, default=25)
 _ap.add_argument('--wmul', type=float, default=1.0)
+_ap.add_argument('--wmulw', type=float, default=None)
 _ap.add_argument('--seed', type=int, default=16)
 ARGS = _ap.parse_args()
 
@@ -167,7 +168,7 @@ for i in range(14):
 print('cand per strand:', [len(CAND[i]) for i in range(14)], flush=True)
 
 HB, WB = 1.15, 30.0 * ARGS.wmul
-HW, WW = 1.35, 3.0 * ARGS.wmul
+HW, WW = 1.35, 3.0 * (ARGS.wmul if ARGS.wmulw is None else ARGS.wmulw)
 WC = 2.0
 
 def ceiling(y):
