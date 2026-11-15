@@ -9,8 +9,8 @@ per-strand rise lines with >= 0.82 mm point clearance at both pitches:
   strands 1-9:  Y=-11, Z=10.3  (clearance 1.67-1.75)
   strand 10:    Y=-12, Z=9.9   (1.51)
   strands 11-14: Y=-13, Z=8.2  (0.82-1.35)
-Corridor point per strand moves to the same Y (northward run at
-Z 5.75 unchanged); fx ladder unchanged.
+Corridor point unchanged (fx, -18, 5.1); the climb segment runs
+north-up at constant X = fx from Y -18 to the new rise Y.
 """
 import numpy as np
 import design_r14 as dz
@@ -21,9 +21,10 @@ RISE_YZ = {0: (-11., 10.3), 1: (-11., 10.3), 2: (-11., 10.3), 3: (-11., 10.3),
            12: (-13., 8.2), 13: (-13., 8.2)}
 
 def corridor(i):
-    y, z = RISE_YZ[i]
-    return np.array([dz.fx(i) + 6.25, y, 5.75])
+    # unchanged from round 14: (fx, -18, 5.1); the climb segment runs
+    # from here north-up at constant X = fx to the new rise top.
+    return dz.corridor(i)
 
 def rise_top(i):
     y, z = RISE_YZ[i]
-    return np.array([dz.fx(i), y, z])
+    return np.array([dz.fx_of(i), y, z])

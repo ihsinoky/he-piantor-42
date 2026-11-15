@@ -17,9 +17,9 @@ import opt_reel_exact as ore
 from routes_round14 import split_corners
 
 RT15 = '/home/hatch/workspace/projects/he-piantor-raise/.issue248-runtime/round15'
-FANS = {int(k): ([np.array(p) for p in v['F1']], [np.array(p) for p in v['F2']])
-        for k, v in json.load(open(f'{RT15}/reel_fans.json')).items()}
-FANS = {k - 1: v for k, v in FANS.items()}
+SOL = {int(k) - 1: (np.array(v['W']), [np.array(p) for p in v['F1']],
+                    [np.array(p) for p in v['F2']])
+       for k, v in json.load(open(f'{RT15}/reel_fans.json')).items()}
 RADII = {int(k) - 1: v for k, v in json.load(open(f'{RT15}/reel_R.json')).items()}
 
 def wire_from_chains(pre, M, post):
@@ -39,7 +39,7 @@ def build_all():
         for pin in range(1, 15):
             i = (pin - 1) if sgn > 0 else (14 - pin)
             R = RADII[i]
-            pre, M, post, E, X, F1, F2 = ore.chains(i, R, FANS)
+            pre, M, post, E, X = ore.chains(i, R, SOL)
             if sgn < 0:
                 mir = lambda pts: [[-q[0], q[1], q[2]] for q in pts]
                 pre, post = mir(pre), mir(post)
@@ -47,7 +47,7 @@ def build_all():
             q, L = wire_from_chains(pre, M, post)
             name = f'Wire-{side}-{pin:02d}'
             wires[name] = q
-            s, st, tt = ore.slack_true(i, R, FANS)
+            s, st, tt = ore.slack_true(i, R, SOL)
             meta[name] = dict(design_i=i, R=round(R, 3), fitted=round(L, 3),
                               finished=round(L + 7.3, 3), slack=round(s, 3),
                               stored_ref=round(st, 3), taut_ref=round(tt, 3))

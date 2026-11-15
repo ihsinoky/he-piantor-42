@@ -42,7 +42,7 @@ def moved_names(side, allnames):
     return out
 
 def state_wire(i, R, fans, sgn, delta, sag):
-    pre, M, post, E, X, F1, F2 = ore.chains(i, R, fans)
+    pre, M, post, E, X = ore.chains(i, R, fans)
     pre = [list(p) for p in pre]; post = [list(p) for p in post]; M = list(M)
     b0 = np.array(B9[i][0], float)
     b1 = np.array(B9[i][1], float)
@@ -87,7 +87,7 @@ if __name__ == '__main__':
         for pin in range(1, 15):
             i = (pin - 1) if sgn > 0 else (14 - pin)
             name = f'Wire-{side}-{pin:02d}'
-            q, L = state_wire(i, br.RADII[i], br.FANS, sgn, 0.0, 1.0)
+            q, L = state_wire(i, br.RADII[i], br.SOL, sgn, 0.0, 1.0)
             stored_wires[name] = q; base_len[name] = L
     for delta in (2.0, 4.0, 6.0):
         wires = {}
@@ -98,11 +98,11 @@ if __name__ == '__main__':
                 lo, hi = 0.0, 1.0
                 for _ in range(12):
                     mid = (lo + hi) / 2
-                    q, L = state_wire(i, br.RADII[i], br.FANS, sgn, delta, mid)
+                    q, L = state_wire(i, br.RADII[i], br.SOL, sgn, delta, mid)
                     if L > base_len[name]: hi = mid
                     else: lo = mid
                 sag = (lo + hi) / 2
-                q, L = state_wire(i, br.RADII[i], br.FANS, sgn, delta, sag)
+                q, L = state_wire(i, br.RADII[i], br.SOL, sgn, delta, sag)
                 wires[name] = q
                 print(name, f'delta {delta} sag {sag:.3f} len {L:.2f} vs {base_len[name]:.2f}', flush=True)
         check_state(wires, fixed_all, f'extract_{delta:g}mm', out)
@@ -115,10 +115,10 @@ if __name__ == '__main__':
             lo, hi = 0.0, 1.0
             for _ in range(12):
                 mid = (lo + hi) / 2
-                q, L = state_wire(i, br.RADII[i], br.FANS, sgn, 6.0, mid)
+                q, L = state_wire(i, br.RADII[i], br.SOL, sgn, 6.0, mid)
                 if L > base_len[name]: hi = mid
                 else: lo = mid
-            q, L = state_wire(i, br.RADII[i], br.FANS, sgn, 6.0, (lo + hi) / 2)
+            q, L = state_wire(i, br.RADII[i], br.SOL, sgn, 6.0, (lo + hi) / 2)
             wires[name] = q
     fixed_lift = dict(fixed_all)
     moved = []
