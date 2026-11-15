@@ -170,7 +170,9 @@ def init_state():
         except Exception: pass
     feas = []
     for k, v in grid.items():
-        cx, cy, Z, R = [float(q) for q in k.split(',')]
+        q = [float(t) for t in k.split(',')]
+        if len(q) == 3: q.append(9.2)   # disk_grid.json: R fixed at 9.2 in the round-15 coarse scan
+        cx, cy, Z, R = q
         feas.append((cx, cy, Z, R))
     rng = np.random.default_rng(7)
     order = list(range(14)); rng.shuffle(order)
