@@ -1,3 +1,174 @@
+# Issue #248 Phase B — Round 9
+
+**PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
+
+## Mandate
+
+Round 9 implements the station change round 8 named as its way out and the PO
+approved: the Main-side approach is rebuilt so each strand aligns onto **its own
+connector-axis line** at a pre-approach station in the bay volume NE of Main,
+then runs its final approach **parallel to the connector axis** into the GH
+inlet. Round 8's assignment discipline (physical traversal order from the
+verified native pin map) and the frozen round-5 assembly are retained; all
+fixed bodies remain byte-identical (`17mm/round9-fixed-scope.json`,
+`16mm/round9-fixed-scope.json`: `all_fixed_byte_identical: true`). The POM
+H3/H1 skin residuals (0.040770 mm³ each) are retained and reported. F-015 keeps
+its D-037 classification.
+
+Mid-round, the PO authorized progressive unfreezing if zero crossings proved
+unreachable: (1) tray/shell local wiring-channel geometry, then (2) local shell
+reliefs/blister adjustments and the POM H3/H1 skin notch as a named exception.
+The unfreeze ledger is at the end of this section. Still frozen throughout:
+Main Rev.7 / Wing Rev.4 boards, aluminium plates, GH connector and pin maps,
+harness wire spec, deck Z13.55, plateau Z24.65, the seam rule.
+
+## Station geometry — why it removes the round-8 bound
+
+Round 8 proved the old approach tail collapses because the inter-strand offset
+vector rotates into near-anti-parallelism with the approach travel direction
+(max achievable adjacent-pair distances 0.756–0.993 mm < 1.0 mm). The new
+approach never lets the offset rotate: each strand's final approach runs inside
+its own **axis-parallel vertical plane**. The Main J2/J3 row direction
+d = (−0.625, −1.082532, 0) is exactly perpendicular to the connector axis
+a = (0.866025, −0.5, 0) (d·a = 0), so the 14 axis planes are parallel and
+spaced exactly **1.25 mm** (the connector pitch). A strand inside its own plane
+is ≥1.25 mm from any in-plane path of its neighbours; crossings can then only
+be generated before the planes are entered, not inside the approach.
+
+Per strand (right side; left mirrored): after the retained R8 bow point
+a4 = (fx+12, 8, z_f), the strand flies to the alignment station
+**G = ep + s·a + 0.35ẑ** on its own axis line, with staggered entry distance
+s = 7.0 − 0.9·(pin − 6.5) mm (inner pins enter closer, outer pins farther out),
+then runs G → ep parallel to the axis. Pins 11–14 carry a floor
+s ≥ 5.0 + 0.15·(pin − 10): unfloored, their G→ep slant (down to 1.52 mm) is
+shorter than the R5 fillet trim at G (4.42 mm) and the route does not build.
+Per-stage order is the endpoint order by construction at G and ep (the planes
+are entered in row order); the screen's remaining close pairs sit upstream of
+the feed, not in the approach (below).
+
+Result on the tail: fitted-audit contacts with bounds centre Y>15 fall from
+**52 (round 8) to 9 (round 9, 17 mm)**. The residual tail pairs are early-feed
+expansion pairs, not approach pairs.
+
+## Stage 1 — centreline screen
+
+The centreline screen (round-5-exact model, right side) for the swept
+candidate: **55 same-side pairs below 1.0 mm** (round 8 candidate: 57 by the
+same screen; round 5: 85), longest finished **198.366 mm**. Composition:
+descent/outbound knot at the pack-entry corner (segments 3/7, 3/3, 7/7) ≈ 45,
+feed/approach ≈ 8–11 depending on variant bookkeeping, rise ≈ 2. A direct
+a3′→G feed (no bow point) was screened first (54 pairs) but the fitted audit
+showed it clipping the centre POM spacers (H2/H4) and the tray neck wall
+(12 wire–fixed contacts, 17 mm); retaining round 8's a4 bow point removes all
+12 at a cost of +0.52 mm on the longest conductor.
+
+## Audit blind spot — the gate-1 counts of ALL rounds are undercounts
+
+While verifying the screen against the round-8 audit, a defect in the
+pipeline's fitted audit was found and proven: its per-pair
+`BRepAlgoAPI_Common` silently returns zero volume for some long swept wire
+solids. On the round-8 assembly (17 mm, right side), the audit's 46 wire–wire
+pairs are a **strict subset** of the centreline screen's 57 sub-1.0 mm pairs;
+the 11 missing pairs are real crossings — pair Wire-right-01/05, recorded as
+0.0 mm³ by the audit, has a wire–wire distance of ~1e-14 mm at
+(17.62, −11.93, 4.54), a point-classifier hit inside both solids, and a
+box-clipped Common volume of **2.456 mm³**. All four OBB/parallel Common
+configurations return zero for this pair while returning the correct
+9.683 mm³ for pair 03/04. The defect persists unchanged on this round's
+candidate: right side screen 55 pairs vs audit 36 pairs — again a strict
+subset, 19 pairs audit-blind, so round 9's true strand crossings number
+≥110 across both sides against the audited 74. Consequences: (a) round 8's
+true strand crossings number ≥114 across both sides, not the audited 92;
+(b) round 9's gate-1 acceptance is therefore read from screen + audit
+together — the screen is the complete instrument for strand pairs, the audit
+for everything else; (c) the pipeline audit needs a clipped-Common or
+distance-based fallback for wire pairs before any future round's gate 1 can
+be certified by the audit alone.
+
+## The remaining blocker — the reserve neck knot (upstream of the feed)
+
+Zero crossings is **not** reached. The remaining strand crossings are
+generated in the reserve neck — the descent funnel into the pack and the
+outbound diagonal crossing it — upstream of everything this round changed:
+
+- Two independent assignment optimizers floor at the same place: round 8's
+  550-iteration greedy + 1,900-iteration annealing reached 55 screen pairs;
+  this round's searches reach 54–55. Sorted and identity constructions give
+  83–88. The floor is structural, not a search failure.
+- Station moves do not break it: fan-in station Y ∈ {−18, −16, −14, −12},
+  two-stage descent, staggered pack entry (0 / 0.75 / 1.5 mm per pin),
+  staggered return start — all leave the count at 54.
+- Funnel bound: at the Y=−14 cut the 14 inbound strands pass a window of
+  ≈3.2 mm (X, set by the pack width) × ≈2.2 mm (Z) — mean lattice spacing
+  ≈0.76 mm < 1.0 mm before the outbound family crosses the same corner.
+- Gate bound: the outbound family must cross the inbound wall in plan. The
+  only over-pass slot is under the Wing PCB edge (inbound top 5.41 + 1.0 ≤ Z ≤
+  6.85 under-Wing centre limit) — a single wire layer over a ≈3 mm frontage
+  at the pack-entry corner (X 10–13); 14 strands cannot pass it in one layer.
+  A two-layer split (half the outbound climbing to Z 6.6 on the diagonal) was
+  screened: 54–91 pairs, all groupings ≥ baseline — the climbs braid.
+- The service model forbids the south loop: the stored/released length
+  identity (Δ = 30.20 mm exactly) requires the first fixed station north of
+  the released tangent (Y ≲ −5), so the outbound cannot first run south and
+  loop around the pack's south end.
+- Widening the pack/channel (unfreeze step 1) is length-poisoned: a 5-4-5
+  lattice (dx 1.2, dz 1.5) screens at 69 pairs with longest finished
+  215.1 mm > 200; and the pack cannot widen east at all — max px 12.36 is
+  already at the turn-radius ≥5 cap (px ≤ 12.458).
+
+What would have to change is outside the still-frozen set and this round's
+unfreeze authorization: a different reserve concept (e.g. single-row pack
+travel with a widened neck channel AND a length budget recovered elsewhere),
+or a connector/interconnect change. The binding constraint is the pack-entry
+funnel + wall-crossing gate, proven above; it is not the Main approach, which
+this round fixed.
+
+## Stage 2 — sweep and eight-gate audit, both pitches
+
+| Gate | 17 mm | 16 mm |
+|---|---|---|
+| 1 Exhaustive fitted collision | **FAIL** — 76 contacts: 74 strand–strand + 2 POM residuals; 0 wire–fixed; 0 Boolean errors | **FAIL** — 76 contacts: 74 strand–strand + 2 POM residuals; 0 wire–fixed; 0 Boolean errors |
+| 2 Finished ≤200 mm | PASS — longest 198.366 mm, margin 1.634 mm | PASS — longest 198.366 mm, margin 1.634 mm |
+| 3 Accessible ~30.20 mm service | **FAIL by fitted collisions only** — motion clear; service sweep 0 hits both sides | **FAIL by fitted collisions only** — motion clear; service sweep 0 hits both sides |
+| 4 Fly 170.000 / R5 / gap 0.30 | PASS — 0 fitted contacts | PASS — 0 fitted contacts |
+| 5 USB 30 mm insertion | PASS | PASS |
+| 6 Assumed swept caps | PASS — physical Junana skirt test OPEN | PASS — physical Junana skirt test OPEN |
+| 7 Manufacturing + envelopes | PASS — export verification PASS; retention load path complete; required-skin conflicts = the 2 known POM residuals only | PASS — export verification PASS; retention load path complete; required-skin conflicts = the 2 known POM residuals only |
+| 8 Fitted preview STEP | PASS | PASS |
+
+Collision counts by category (unexpected contacts, exhaustive fitted audit):
+
+| Round | Strand–strand | Wire–fixed | Other fixed | Longest finished | Note |
+|---|---:|---:|---:|---:|---|
+| 5 | 163 | 0 | 2 POM | 196.87 PASS | frozen base |
+| 8 | 92 (audit; ≥114 true, see blind spot) | 0 | 2 POM | 195.205 PASS | assignment only |
+| 9 | 74 | 0 | 2 POM | 198.366 PASS | on-axis approach; tail-zone 52 → 9 |
+
+## Unfreeze ledger (PO authorization 2026-11-15)
+
+| Step | Item | Used? | Evidence / effect |
+|---|---|---|---|
+| 1 | Tray/shell local wiring-channel geometry (widened pack channel for a 5-4-5 lattice) | **Evaluated, not consumed** | Screened: 69 pairs, longest finished 215.1 mm — fails gate 2 and does not reach zero; eastward widening impossible (turn-radius cap). No tray/shell geometry was changed; byte-identical checks stand unqualified. |
+| 2 | POM H3/H1 skin notch (0.040770 mm³ ×2) as named exception | **Not consumed** | The notch would clear only the 2 fixed–fixed residuals; gate 1's binding failure is the strand–strand neck knot, which the notch cannot unblock. Residuals remain reported, per the pre-unfreeze discipline. |
+| 2 | Local shell reliefs / blister adjustments | **Not needed** | The rebuilt approach fits the existing shell volume; no wire–shell contacts in either pitch audit. |
+
+No fixed body was modified in round 9. All byte-identical results above are
+therefore unqualified.
+
+## Remaining blockers
+
+1. Gate 1 / gate 3: the reserve neck knot (see above) — strand–strand
+   crossings generated in the descent funnel and wall crossing, upstream of
+   the fixed approach. Binding constraint named with proof; resolution needs
+   a reserve-concept change outside the frozen set.
+2. Physical Junana cap measurement (q, installed skirt, swept width) — still
+   open, PO-side; plateau Z24.65 remains provisional.
+3. The pipeline audit's wire-pair Common blind spot must be repaired (or a
+   distance/clipped-Common fallback added) before gate 1 can be certified by
+   the audit alone in any future round.
+
+---
+
 # Issue #248 Phase B — Round 8
 
 **PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
