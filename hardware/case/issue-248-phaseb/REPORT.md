@@ -1,3 +1,70 @@
+# Issue #248 Phase B — Round 8
+
+**PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
+
+## Mandate and transferred discipline
+
+Round 8 changes ONLY strand routing on the frozen round-5 assembly (operands recovered by serialized hash; `17mm/round8-fixed-scope.json` and `16mm/round8-fixed-scope.json` both report `all_fixed_byte_identical: true`). Fixed bodies, shells, trays, retainers (±8,−30), blisters (GH ceiling/top Z13.20/15.20; Fly Z13.25/15.25), M2×10, deck Z13.55, plateau Z24.65, the seam rule, and the byte-unchanged boards/plates are untouched. The POM H3/H1 skin residuals (0.040770 mm³ each) are retained and reported, not fixed. F-015's invalid Fly solid 42 keeps its D-037 classification (preserved, labelled, not a design contact).
+
+The working discipline is transferred from Wing Rev.2 (Issue #194 / PR #195, D-032). There, the asymmetric DRV5055 footprint mirrors when rotated, and D-032 resolves it by deriving order from the actual physical presentation — "Native bottom transformations preserve the physical pin map. Calibrate active point to land origin … using TI Rev.C Figure 6-5 and the body-centered Wing land" — instead of forcing the nominal order. Transferred here: reserve lanes and downstream fan positions are assigned strictly by the physical traversal order of the verified native pin map (round-7 Stage 0: the endpoint permutation in assembly frames is the identity; disorder is generated inside the route), never by nominal index order. Round 8 therefore re-assigns, per pin, which reserve pack position, which return-fan x, and which fan z the strand takes, keeping every round-5 station coordinate, the concentric reserve, and the 30.20 mm service slide.
+
+## Stage 1 — centreline design and screen
+
+A centreline model reproducing round 5 exactly (max routed 189.566 vs 189.569 mm; 85 sub-1.05 pairs per side, matching Stage 0's 1001-sample screen) was used to search the three assignments (pack σB, fan-x σF, fan-z σZ) in two fan-rise modes (rise late at the fan, rise early during the return). A traversal-order construction, greedy local search (550+ iterations/mode), and simulated annealing (1,900 iterations, violating-pair-focused proposals) all converge to the same floor: the best assignment found leaves **55 of 91 same-side pairs below 1.0 mm centreline distance on the right** (round 5: 85), with screen max finished 195.20 mm. Per-stage pin orders read at route waypoints (global X, ties by Z; the method reproduces Stage 0's round-5 Δ values 33 / 84 / 40 / 61 exactly):
+
+| Stage | R5 Δinv vs prev | R8 Δinv vs prev | R5 inv vs outlet | R8 inv vs outlet |
+|---|---:|---:|---:|---:|
+| outlet | 0 | 0 | 0 | 0 |
+| corridor | 0 | 0 | 0 | 0 |
+| reserve_in | 33 | 32 | 33 | 32 |
+| reserve_out | 84 | 84 | 51 | 52 |
+| fan_in (rise base) | 40 | 48 | 57 | 12 |
+| rise_top | 4 | 2 | 61 | 10 |
+| fan_out | 0 | 0 | 61 | 10 |
+| Main_row | 61 | 10 | 0 | 0 |
+
+The fan now delivers strands in near-endpoint order (inversions vs outlet 57–61 → 10–12). The reserve readings are dominated by the 2D pack and the U-turn's lateral-normal sign change, as Stage 0 warned; projected inversions are not themselves contacts. The candidate was swept because its remaining close pairs are located (below) and bounded, not because the screen is clean.
+
+### Binding constraint: the Main approach tail
+
+For adjacent pin pairs, the maximum centreline distance achievable on the round-5 approach tail (fan4 station (fx+12, 8, z_f) → approach point at 7.00 mm on the connector axis → endpoint, R5 fillets) was computed exhaustively over the full round-5 fan grid (every fx × z_f combination for both strands, independently per pair):
+
+| Adjacent pair | 1–2 | 2–3 | 5–6 | 6–7 | 9–10 | 10–11 | 13–14 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Max achievable min-distance (mm) | 0.756 | 0.779 | 0.859 | 0.890 | 0.993 | 1.032 | 1.167 |
+
+Five of seven tested adjacent pairs cannot reach the 1.0 mm OD1 clearance under ANY assignment within the round-5 stations, even with mutually incompatible per-pair optima. Cause: the inter-strand offset vector rotates from the fan4 spacing direction to the Main row direction (−0.625,−1.083,0), which is nearly anti-parallel to the approach travel direction, collapsing the perpendicular distance. A staggered axis-join tail was also screened analytically and rejected on length (join points at s≈16.6 mm push the longest finished conductor past 200 mm). **Zero strand crossings is therefore not achievable by assignment inside the frozen round-5 fan/approach envelope.** What would have to change is a station change, outside this round's mandate: relocate the pre-approach station onto the connector-axis lines (needs shell/bay space north-east of Main beyond the current fan envelope), or widen the reserve neck channel so the pack can travel as a single row (a fixed-body change), or change the interconnect concept.
+
+## Stage 2 — sweep and eight-gate audit, both pitches
+
+The candidate (routes-round8.json; pack/fan assignments in its provenance) was assembled on the frozen operands and audited with the unchanged pipeline. `routes.py` now holds the round-8 module, following the round-7 pattern (round-7 module preserved as routes_round7.py); metrology keeps the round-5 fan construction (`fixed_parts=None`).
+
+| Gate | 17 mm | 16 mm |
+|---|---|---|
+| 1 Exhaustive fitted collision | **FAIL** — 94 contacts: 92 strand–strand + 2 POM residuals; 0 Boolean errors; 66,795 pairs, 1,417 exact candidates (17 mm) | **FAIL** — 94 contacts: 92 strand–strand + 2 POM residuals; 0 Boolean errors |
+| 2 Finished ≤200 mm | PASS — longest 195.205 mm, margin 4.795 mm (tails 3.90 + 3.40) | PASS — longest 195.205 mm, margin 4.795 mm |
+| 3 Accessible ~30.20 mm service | **FAIL by fitted collisions only** — motion clear; service sweep 0 hits on both sides | **FAIL by fitted collisions only** — motion clear; service sweep 0 hits on both sides |
+| 4 Fly 170.000 / R5 / gap 0.30 | PASS — 0 fitted contacts | PASS — 0 fitted contacts |
+| 5 USB 30 mm insertion | PASS | PASS |
+| 6 Assumed swept caps | PASS — certified minimum after 0.50 allowance 0.577 mm; physical Junana skirt test OPEN | PASS — physical Junana skirt test OPEN |
+| 7 Manufacturing 19/19 + envelopes | PASS — required skin PASS; stack/palm/floor invariants PASS | PASS |
+| 8 Fitted preview STEP | PASS — 366/366 constituents reloaded | PASS |
+
+Collision counts by category, rounds 3–6 vs 8 (unexpected contacts, exhaustive fitted audit):
+
+| Round | Strand–strand | Other | Longest finished | Note |
+|---|---:|---:|---:|---|
+| 3 | 52 | 28 fixed | — | built on the reversed right-Wing pin map (invalid premise) |
+| 4 | part of 141 total | — | — | corrected pin map, fan topology regressed |
+| 5 | 163 | 2 POM residuals | 196.87 PASS | frozen base of rounds 7–8 |
+| 6 | part of 206 total | — | 204.51 FAIL | permutation applied at terminations only |
+| **8** | **92** | **2 POM residuals** | **195.21 PASS** | assignment by physical traversal order; −44% strand contacts vs round 5, best length margin of any full-audit round |
+
+## Verdict
+
+Round 8 is the strongest routing candidate so far — strand contacts cut from 163 to 92, length margin improved to 4.795 mm, service motion and all non-collision gates pass at both pitches, and the fan-stage order is nearly the endpoint order — but gate 1 still fails, so the candidate is **not adoptable** and no service certification is granted. The remaining contacts are concentrated where the analysis says they must be: the Main approach tail, whose station geometry caps five adjacent pairs below OD1 clearance for any assignment. Further assignment search inside the frozen round-5 envelopes is not expected to close gate 1; the next step is a PO decision on changing the approach/fan stations (envelope change), the neck channel (fixed-body change), or the interconnect concept.
+
+
 # Issue #248 Phase B — Round 7
 
 **PROVISIONAL on plateau Z24.65 / q=1.50. NOT RELEASED.**
