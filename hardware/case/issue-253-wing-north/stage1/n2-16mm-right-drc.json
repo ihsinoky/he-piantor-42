@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-16T09:29:27+0000",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "routed.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 72.792305,
+                        "y": 17.828857
+                    },
+                    "uuid": "8a75f4d7-0f9e-4e69-9bc6-0369d7332f38"
+                },
+                {
+                    "description": "Pad MP [<no net>] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 76.703057,
+                        "y": 19.105235
+                    },
+                    "uuid": "d82d13de-3a40-462c-afd2-caca00343e71"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 72.792305,
+                        "y": 17.828857
+                    },
+                    "uuid": "8a75f4d7-0f9e-4e69-9bc6-0369d7332f38"
+                },
+                {
+                    "description": "Segment of J_WING on B.Silkscreen",
+                    "pos": {
+                        "x": 77.966236,
+                        "y": 18.437344
+                    },
+                    "uuid": "3d1a4be5-095a-4c8a-8e26-3706500223c0"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}
