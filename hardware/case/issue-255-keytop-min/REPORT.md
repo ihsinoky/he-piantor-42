@@ -96,5 +96,109 @@ Issue #235 programme re-run for one footprint); Main Rev.7 unchanged in the
 carrier configuration. Case: tray floor remake at 1.60 with ribs (print
 qualification + seam/flatness gauges inherited from #248).
 
-*Stage 2 (harness + service qualification at this stack, and the
-harness-qualified minimum if it differs) follows below.*
+---
+
+# Stage 2 — Harness + service at the minimum stack
+
+## 2.1 Sibling interconnect status (read at Stage 2 time, 2026-11-16)
+
+| Study | State | Usable route? |
+|---|---|---|
+| Issue #252 — candidate C (mid-harness carrier, GH↔GH) | IN FLIGHT: carrier PCB build scripts/logs exist in its runtime; **no REPORT.md yet, no verdict** | No |
+| Issue #253 round 2 — north extension, minimal tab + 3D climb-turn | IN FLIGHT: plan commit only (`71fefdfe6`); REPORT still carries the round-1 verdict (harness FAIL, 272–312 fitted) | No (round-1 route is fitted-failed) |
+| Fallback: round-9 direct route (GH, B=7.35) | Complete — fitted TRUE strand contacts **110** at plate 13.55; frontier study: gate 1 FAIL at **every** plate 13.55 → 22.2 in this architecture | No — fitted-failed at all heights |
+
+**No qualified interconnect exists today at any stack in the #248
+architecture.** Stage 2 therefore cannot certify a harness at the Stage-1
+minimum; what it can do — and does below — is (a) screen the minimum stack
+for analytic admissibility of a harness, and (b) state the harness-qualified
+minimum as an open quantity with the exact audit that closes it. Inventing a
+fitted verdict without running the repaired audit on a real SH-exit route
+design would violate this study's own rule (fitted audit is the only
+verdict), and no SH-exit route design exists yet to audit.
+
+## 2.2 Analytic admissibility screen at B=5.35 (SH, floor 1.60)
+
+| Check | Numbers | Result |
+|---|---|---|
+| SH envelope bottom vs floor | B − 2.95 = 2.40; floor top 1.60 → 0.80 = 0.50 allowance + 0.30 gap | ✓ by construction |
+| Wire exit (horizontal, axis ≈ B − 1.48 ≈ 3.87) | OD1 wire bottom ≈ 3.37 → 1.77 above floor top; wire top ≈ 4.37 → 0.98 below PCB underside | ✓ no new under-Wing bound |
+| In-plane R5 bend under Wing | bend occupies the XY plane at exit height; envelope/floor clearances above hold through the bend | ✓ admissible |
+| Rise into central mass | wires climb ≈3.9 → ≈20.3 (plateau underside at keytop 22.65 − 2.00 skin − 0.30 gap). The #248 slope/plateau geometry is stack-relative (plateau follows keytop), so the climb's relative geometry is preserved to first order — the same symmetry the frontier study found upward | ✓ admissible, no relative relief or penalty |
+| Fan / neck zones | this is where the fitted failures lived at 13.55 (110 true). The stack change does **not** redesign the fan; the SH outlet (6.25 deep vs GH plug geometry) re-opens the outlet design instead of inheriting round-9's | ⚠ the open problem, unchanged in kind |
+| Finished length | round-9's longest was 198.37 (margin 1.63) at B=7.35; the SH outlet position differs → length must be re-measured in the qualification audit, not inherited | ⚠ to be measured |
+
+## 2.3 The two minima
+
+| Minimum | Plate top | Keytop (q=1.50, provisional) | Status |
+|---|---:|---:|---|
+| **Stack-arithmetic minimum** (Stage 1, lever set §1.4) | **11.55** | **22.65** (q-range 21.65–23.65) | Established arithmetically; binding bound = SH envelope 2.95; next bound M2×10 tie at 10.90 |
+| **Harness-qualified minimum** | **NOT ESTABLISHED** | — | No fitted audit passes at any plate ≤ 22.2 in the #248 architecture (frontier study, uniform repaired-audit method). The minimum stack is *below* the swept range and changes the connector, so no existing verdict covers it |
+| Only harness-qualified design point anywhere | 22.20 (Δ+6, Issue #246 architecture — different routing in kind) | 33.30 | Qualified (D-041) |
+
+What binds each: the arithmetic minimum is bound by a **component envelope**
+(SH 2.95). The harness minimum is bound by the **fan/neck fitted-contact
+family** — strand routing geometry, not stack height (frontier: heights
+13.55 → 22.2 all fail; contacts plateau because the obstacles are
+stack-relative).
+
+## 2.4 Gate table at the Stage-1 minimum stack (plate 11.55)
+
+| Gate | Verdict | Basis |
+|---|---|---|
+| 1 Fitted collisions | **OPEN — not run** | No SH-exit route design exists to audit; sibling routes pending (#252 / #253-r2) |
+| 2 Finished length ≤ 200 | OPEN — analytic headroom only | Must be measured on the real route (§2.2) |
+| 3 Service (unplug-first) | **OPEN — not qualified** | Depends on the route and, in the carrier configuration, on #252's verdict |
+| 4 Fly 170 storage | CONDITIONAL | Frontier found gates 4/5 height-invariant in this architecture; at the new stack the Fly blister/slope solids must be re-cut and re-audited |
+| 5 USB insertion | CONDITIONAL | Seat/wall geometry unchanged in kind; deck-relative recheck required with the re-cut shells |
+| 6 Cap clearance (physical) | OPEN | Junana MX measurement, PO-side — unchanged, and now also the q input |
+| 7 Manufacturing / print | NOT RUN for the 1.60 ribbed floor | Floor print qualification + seam/flatness gauges are a named condition |
+| 8 Preview STEP | NOT RUN | Follows the route design |
+
+## 2.5 The qualification that closes Stage 2 (named, in order)
+
+1. A sibling route verdict lands (#252 carrier and/or #253-r2 north route),
+   or a fresh SH-exit fan design is built on the round-9 tail.
+2. Rebuild the fitted assembly at B=5.35 (SH outlet geometry, floor 1.60,
+   plateau 22.65) and run the repaired audit + service steps at the
+   frontier study's uniform budget. If gate 1/3 fail, step the plate up in
+   ~0.5 mm increments with the same method — noting the frontier evidence
+   says height alone did not close this family at GH; an SH/carrier route
+   must win on geometry, not on height.
+3. Wing Rev.5 qualification round (SH footprint, D-021 yardsticks, via-pad
+   audit, electrical requal) and the floor print qualification.
+
+## 2.6 Cost of the minimum vs the 13.55 / GH baseline
+
+| Item | Delta |
+|---|---|
+| Keytop | **−2.00 mm** (24.65 → 22.65 provisional) |
+| Connector parts | SH set ≈ GH class per unit; **+ carrier set** (2 GH headers + 2 plugs + carrier PCB) in the carrier configuration (Issue #252 costing applies) |
+| Boards | Wing Rev.5 respin (design + full requal); Main Rev.7 unchanged (carrier config) |
+| Case | tray floor remake (1.60 ribbed) + shell re-cut at plateau 22.65 |
+| Supply risk added | SH header: presale-only channel (1,342) — pre-purchase required; cycle rating unpublished |
+| Programme risk | harness qualification at the new stack is **open** (§2.3) — the −2.00 is an arithmetic entitlement, not yet a buildable design |
+
+## 2.7 Remaining provisional items (in order)
+
+1. **q (Junana MX cap term)** — physical measurement of real caps on Jade Pro;
+   moves every keytop figure 1:1 (range ±1.00 around the assumed 1.50).
+2. Harness + service qualification at B=5.35 (§2.5).
+3. SH header supply (pre-purchase) and cycle-rating supplier qualification.
+4. Floor 1.60 print-strength qualification; M2×10 physical pull-out test
+   (inherited open item).
+
+## 2.8 Draft decision text (for PO gate — NOT entered in docs/decisions.md)
+
+> **D-04x (DRAFT) — Keytop-minimum stack recorded as a study target.**
+> The Issue #255 study establishes a stack-arithmetic minimum of plate top
+> Z11.55 / keytop Z22.65 (provisional on the unmeasured Junana cap term
+> q=1.50) via: JST SH side-entry connectors on the Wing side only, M2×10
+> plate ties, a 1.60 mm ribbed tray floor, a 0.30 mm free gap, and a 2.40 mm
+> Hall-sensor reservation. Hirose DF52 and Pico-EZmate 7+7 remain rejected
+> (Issue #250 failures, supply). This stack is NOT adopted: its harness and
+> service qualification is open, pending the Issue #252 / #253 route
+> verdicts and a fitted audit at B=5.35. The qualified baseline remains
+> D-041 (Δ+6, keytop 33.30 provisional). Adoption, if proposed later,
+> requires: the §2.5 audit PASS, a Wing Rev.5 qualification, SH header
+> pre-purchase, and floor print qualification.

@@ -16,9 +16,9 @@ Refs: plate 13.55 → keytop 24.65 (GH baseline); Δ+6 plate 22.2 → keytop 33.
 - [ ] CHECKPOINT commit (Stage 1 alone).
 
 ## Stage 2 — harness + service at minimum stack
-- [ ] Read sibling REPORTs at this time: #252 (midconn carrier C), #253 r2 (north extension 3D bends) — excerpts.
-- [ ] Best interconnect → qualify at Stage-1 minimum in #248 case design (plateau = new keytop, slope/seam unchanged): repaired-audit fitted, target 0 unexpected (2 known POM residuals only if inherited unchanged), length ≤200, unplug-first service, Fly 170 + USB PASS, print envelopes.
-- [ ] If harness fails: step plate up ~0.5mm increments, same method, until pass. Report harness-qualified minimum separately; name binding constraint at each.
+- [x] Read sibling REPORTs at this time: #252 IN FLIGHT (no REPORT yet), #253 r2 IN FLIGHT (plan only) — fallback round-9 route is fitted-failed at all heights (frontier). Stage 2 = admissibility screen + named qualification protocol; harness-qualified minimum NOT ESTABLISHED.
+- [x] Stage 2 written: analytic admissibility at B=5.35 PASS; fitted audit cannot be run (no SH-exit route design exists).
+- [x] Step-up protocol named in REPORT §2.5 with the frontier caveat (height alone did not close the fan family at GH).
 - [ ] CHECKPOINT commit.
 
 ## Deliverable
