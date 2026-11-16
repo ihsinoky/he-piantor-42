@@ -95,7 +95,8 @@ def seg_points(D, i, side):
     ep, G, P = stations(i)
     TW = tail_W(i); TM = tail_M(i)
     apW = [TW[0] + 6.0 * AX_W[0], TW[1] + 6.0 * AX_W[1], TW[2]]
-    apM = [TM[0] + 6.0 * AX_M[0], TM[1] + 6.0 * AX_M[1], TM[2]]
+    runM = d.get('runM', 6.0)
+    apM = [TM[0] + runM * AX_M[0], TM[1] + runM * AX_M[1], TM[2]]
     wpts = wf + [[float(x) for x in p] for p in d['W']] + [apW, TW]
     mpts = [TM, apM] + [[float(x) for x in p] for p in d['N']] + \
            [P.tolist(), G.tolist(), ep.tolist()]
@@ -145,20 +146,88 @@ def full_score(D, bodies):
             'ww_count': len(ww), 'wf_17': len(wf[17]), 'wf_16': len(wf[16]),
             'lens': lens, 'longest_seg': max(lens.values())}
 
+def _buildable(pts):
+    import repair18_lib as _R
+    import routes_round17 as _rr
+    r, _ = _R.build_s(_rr.split_corners(pts))
+    return r is not None
+
 def seed_design():
-    """Seed free points from the incumbent round-18/frontier M chain."""
+    """Seed free points per strand, searched over variants until both
+    segments pass the strict build (split_corners + R5 rounded).
+    SegW: incumbent M1/M2 + mid point(s) on the M2->AP_W run.
+    SegM: N0 = P - t*r_hat + z (approach P near-perpendicular to AX)."""
     M = json.load(open('/home/hatch/workspace/projects/he-piantor-raise/.issue248-runtime/frontier/state_z1355.json'))['M']
     D = {}
+    RH = (0.5, 0.8660254, 0.0)
     for i in range(14):
         m = M[str(i + 1)]
-        W = []
-        for k in ('M1', 'M2', 'M3'):
-            if k in m: W.append([float(x) for x in m[k]])
-        while len(W) < 3:
-            W.append(list(W[-1]))
-        W[2] = [W[2][0], W[2][1], W[2][2] + 2.5]
+        M1 = [float(x) for x in m['M1']]; M2 = [float(x) for x in m['M2']]
+        TW = tail_W(i); apW = [TW[0] - 6.0, TW[1], TW[2]]
         ep, G, P = stations(i)
-        TM = np.array(tail_M(i)); apM = TM + np.array([0.0, 6.0, 0.0])
-        N1 = ((apM + np.array(P)) / 2 + np.array([0.0, 0.0, 0.3])).tolist()
-        D[str(i + 1)] = {'W': W, 'N': [N1]}
+        TM = tail_M(i); apM = [TM[0], TM[1] + 6.0, TM[2]]
+        wf = wing_fixed(i)
+        # hairpin seed: west run north of the tail row, south leg,
+        # east axis join into AP. Per-pin stagger so the 14 hairpins
+        # nest instead of stacking: legs spread in X (1.05/pin),
+        # runs laddered in Z (0.5/pin), both centred on pin 7.5.
+        dz = (i - 6.5) * 0.35
+        legX = 7.0 - i * 1.04
+        Q3 = [legX, apW[1] - 1.38, apW[2] + 0.5 * dz]
+        Q2 = [legX + 1.5, Q3[1] + 13.5, apW[2] + dz - 0.05]
+        Q1 = [Q2[0] + 19.0, Q2[1] - 6.0, Q2[2] - 0.6]
+        wvars = [[Q1, Q2, Q3],
+                 [Q1, Q2, [Q3[0], Q3[1] - 2.0, Q3[2]]],
+                 [[Q1[0], Q1[1] + 3.0, Q1[2]], Q2, Q3]]
+        W = None
+        for cand in wvars:
+            pts = wf + cand + [apW, TW]
+            if _buildable(pts): W = cand; break
+        assert W is not None, f'SegW seed unbuildable pin {i + 1}'
+        N = None; runM = 6.0
+        for runM_c in (6.0, 8.0, 10.0, 12.0):
+            apM_c = [TM[0], TM[1] + runM_c, TM[2]]
+            for t in (13.0, 11.0, 9.0, 7.0, 15.0):
+                for z in (2.0, 3.5, 0.5):
+                    N0 = [P[0] - t * RH[0], P[1] - t * RH[1], P[2] + z]
+                    pts = [TM, apM_c, N0, P.tolist(), G.tolist(), ep.tolist()]
+                    if _buildable(pts): N = [N0]; runM = runM_c; break
+                if N: break
+            if N: break
+        if N is None:
+            # two-point chain: N0 north-east of AP_M, N1 on the r_hat
+            # approach line to P
+            for dx in (4.0, 6.0, 8.0):
+                for dy in (2.0, 3.5, 5.0):
+                    for t in (7.0, 9.0, 11.0):
+                        N0 = [apM[0] + dx, apM[1] + dy, apM[2] + 2.3]
+                        N1 = [P[0] - t * RH[0], P[1] - t * RH[1], P[2] + 2.0]
+                        pts = [TM, apM, N0, N1, P.tolist(), G.tolist(), ep.tolist()]
+                        if _buildable(pts): N = [N0, N1]; break
+                    if N: break
+                if N: break
+        if N is None:
+            mid = [(apM[k] + float(P[k])) / 2 for k in range(3)]
+            for a in (-4.0, 0.0, 4.0):
+                for b in (-4.0, 0.0, 4.0):
+                    for c in (2.0, 4.0, 6.0):
+                        N0 = [mid[0] + a, mid[1] + b, mid[2] + c]
+                        pts = [TM, apM, N0, P.tolist(), G.tolist(), ep.tolist()]
+                        if _buildable(pts): N = [N0]; break
+                    if N: break
+                if N: break
+        if N is None:
+            for runM_c in (10.0, 6.0, 14.0):
+                apM_c = [TM[0], TM[1] + runM_c, TM[2]]
+                for X in range(10, 30, 2):
+                    for Y in range(18, 40, 2):
+                        for Z in (12.0, 14.0, 16.0):
+                            N0 = [float(X), float(Y), Z]
+                            pts = [TM, apM_c, N0, P.tolist(), G.tolist(), ep.tolist()]
+                            if _buildable(pts): N = [N0]; runM = runM_c; break
+                        if N: break
+                    if N: break
+                if N: break
+        assert N is not None, f'SegM seed unbuildable pin {i + 1}'
+        D[str(i + 1)] = {'W': W, 'N': N, 'runM': runM}
     return D
