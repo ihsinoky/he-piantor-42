@@ -293,3 +293,141 @@ to beat C alone at the low deck on this evidence.
 > is NOT adopted as a low-deck enabler. The bay-facing connector
 > variant (N3) is recorded as the remaining named direction;
 > D-039 (Wing Rev.4) and D-041 (Δ+6 case) stand unchanged.
+
+## Round 2 — corrected premise: minimal strip, connector south, 3D bend examined
+
+PO correction (2026-11-16): do not maximise the extension — open only a
+connector's worth of space, place the connector as far south as its
+footprint allows, and use the tall volume above the north margin for a
+3D climb-and-turn. Round 2 tests exactly that.
+
+### R2-1 Strip budget (extension E minimal)
+
+Placement variable t = northward shift of the 180°-rotated SM14B-GHS-TB
+from the Rev.4 anchor (round 1 used t = +3.5). Binding element at every t
+is the MP (mounting) pad's copper-to-edge clearance against the
+un-extended D-037 outline; board rule = 0.30 mm.
+
+| quantity | 17 mm | 16 mm |
+|---|---|---|
+| MP edge clearance at t = +3.5 (round 1) | 0.000 (violates 0.30 rule; matches round-1 DRC) | 0.000 |
+| south shift Δ* restoring the 0.30 rule | 1.887 | 1.968 |
+| t_min (northernmost legal placement) | +1.613 | +1.532 |
+| **MP edge clearance at t = 0 (rotate in place, extension = 0)** | **1.889** | **1.815** |
+| nearest foreign pad at t = 0 (TP_W_A1) | 4.7 (all variants) | 4.7 |
+
+**Adopted placement: t = 0 — the rotated header fits the EXISTING tab
+with zero outline extension**, >1.5 mm clear of the edge rule. The strip
+budget is therefore [header footprint + plug + exit room] only, as the PO
+directed; no PCB area is added at all. Practical southward limit is the
+fanout/test-pad field (TP_W_A1 at 4.7 mm), not copper.
+
+Plug tip at t = 0: case Y = −50.25 (body spans Y −50.25..−42.1).
+Tip-to-silhouette at the pin row (17 mm): inner pins ≈ 4.86 mm, outer
+pins ≈ 5.54 mm. Planar R5 westward turn needs 5.0 mm of northward reach
+(inner pins short by ≈0.14); a 45° pre-bend needs 4.57 mm (margin ≈0.29,
+thin). At 16 mm the silhouette face sits ≈1.4 mm closer, so tip-to-face
+≈ 3.4–4.1 mm and even the pre-bend need is unmet.
+
+Fanout confirmation at t = 0 (fresh KRT route of textually shifted input
+boards + KiCad DRC): **17L 0 violations / 0 unconnected; 17R 0/0; 16L
+0/0; 16R 2 via_dangling + 1 unconnected** (one stub of the same
+local-repair class #235 round 3 closed; flagged, not repaired here).
+t = 0 is strictly better than round 1's t = +3.5 screen (which left 17L
+with the MP edge violation and a MUX_OUT_B stub). Round 1's N2
+position-independent fanout verdict (pad order along the row) carries
+over unchanged.
+
+### R2-2 The at-plug 3D climb-and-turn: decomposed failure
+
+Profiles scanned numerically (integrated centrelines, azimuth 0→90°
+while climbing ΔZ up to 15.15 mm into the under-strip volume; min
+circumradius over ~1 mm triples; script r2_curve.py):
+
+- Best min radius over all variants (σ profile × entry radius × growth
+  delay): **0.91–1.70 mm — R ≥ 5 is not approached in any variant.** The
+  pitch rotation concentrates where the arc speed is lowest (profile
+  ramp at the bottom, level-off at the top).
+- Analytic bound: pitching from northbound-horizontal to climb tilt β
+  on an R ≥ 5 arc costs northward reach 5·sin β (≈4.9 mm at β = 80°,
+  ≈4.3 mm at 60°) before the wire is even established on its climb.
+- Available centreline reach budgets (exit line to notch wall =
+  silhouette − 2.0 mm land − 0.5 mm wire surface): **worst wire (inner
+  pins) = 1.66 mm @17 / 0.27 mm @16.** Even with land and surface margin
+  both set to zero, the 17 mm inner-pin absolute maximum is 4.36 mm <
+  4.3–4.9 mm; 16 mm reaches only ≈2.9 mm.
+- Binding body: the tray rim land / D-037 outer silhouette at the tab.
+  Round 1's "height-invariant squeeze" verdict is confirmed and
+  strengthened: the squeeze is not planar-only — it is the R5 pitch-up
+  reach against the silhouette, and no profile shaping removes it.
+- Single closing change: none inside the frozen set. Cutting the notch
+  through the wall (land 2.0 → 0) still leaves 17 mm at 4.36 mm < 4.9 mm
+  and is structurally absurd; moving the connector south does not deepen
+  the notch (the notch wall, not the tip, sets the budget).
+- Companion bound (fan): the exit row is a comb along the travel
+  direction (pitch 1.25 mm vs wire OD 1.0 mm). Any fan from the common
+  exit point puts adjacent blends ≈0.1–0.5 mm apart — below OD — which
+  is the analytic counterpart of round 1's WW = 156 in the channel.
+
+### R2-3 Constructive fallback built and audited: low channel + waist climb
+
+Construction: t = 0 connector; wires exit into the low north channel
+(per-pitch cut, ≥2.0 mm land retained: north edge −52.6 @17 / −51.6
+@16, Z 2.2–10.0), fan smoothly (smoothstep blend over each wire's own
+westward travel, fan completes at X = ±9) to a (Y,Z) lane grid, then
+climb at the waist — where the bay margin has horizontal room — onto
+the round-9 tail at the round-1 junction. This spends the tall volume
+at the waist/under-shell region instead of at the plug, where the R5
+pitch-up has room. Fitted repaired audit (round-10 standard):
+
+| gate | 17 mm | 16 mm |
+|---|---|---|
+| wires built | 26/28 (Wire-03 L/R fail R5 trim at a fan corner; excluded — counts are lower bounds) | 26/28 |
+| **gate 1 unexpected contacts** | **261 (WW 155 + WF 106)** | **292 (WW 156 + WF 136)** |
+| gate 2 longest finished | 139.37 mm PASS | 140.46 mm PASS |
+| gate 3 service | not qualified (no fitted-clean state) | not qualified |
+| gates 4/5 (Fly 170 / USB) | NOT inherited clean: WF includes Fly-seat hardware hits (screw-fly MH1/MH2, Fly body, 6 wires) at the junction | same |
+
+WF composition @17: tray 13/side, J_WING-N2t0 body 13/side, plate
+7/side, Fly-seat hardware 6, Main-GH drawing-bound 6. WW structure is
+the comb signature: Wire-01 (westernmost exit) crosses nearly every
+other wire — the analytic fan bound of R2-2 made visible. Comparison:
+round 1's abrupt fan scored 272–312; the smooth staggered fan + waist
+climb improves this only to 261/292, the same class, and far from the
+#248 incumbent's 96/98 (itself failing). The fan, not the fan's
+polish, is the binding constraint.
+
+### R2-4 Verdict
+
+**The north-extension direction does NOT make the low deck achievable,
+with the PO's corrected premise applied in full.** The placement half
+of the premise is vindicated — the connector needs no extension at all
+(t = 0, fanout closes on 3 of 4 variants, better than round 1) — but
+the harness fails for placement-independent reasons, now decomposed
+to numbers: (1) the at-plug 3D climb-and-turn is impossible at R ≥ 5
+(pitch-up reach ≈4.3–4.9 mm vs usable budgets 1.66 mm @17 / 0.27 mm
+@16; even the zero-margin absolute maximum at 17 mm inner pins,
+4.36 mm, is below the 80°-climb need of ≈4.9 mm); (2) the low-channel
+fan is comb-bound (two fitted constructions, 272–312 and 261/292,
+WW ≈ 155 in both). **Single binding number: R5 pitch-up reach
+≈ 4.9 mm vs tip-to-silhouette 4.86 mm at the 17 mm inner pins —
+negative before any land or surface margin is applied.** The
+extension is not adopted as a low-deck enabler; D-039 and D-041 stand.
+The bay-facing variant (N3, named in round 1) remains the only
+untested connector direction; it avoids the north wall entirely by
+construction but was not routed in this study.
+
+### Case-delta ledger (round 2 changes vs round 1)
+- North channel: north edge now per pitch (17: −52.6 as round 1;
+  16: −51.6) so the ≥2.0 mm residual land holds at BOTH pitches (round
+  1's single box left only ≈1.03 mm land at 16 mm — disclosed here).
+- No through-rim tall notch is cut in the v2 construction (the climb is
+  at the waist); the under-strip volume is not consumed by the harness.
+- PCB outline extension: 0 (t = 0) — round 1's tab extension is NOT
+  needed for the connector itself.
+
+### Candidate C compatibility (updated)
+Unchanged in substance: a waist carrier split remains geometrically
+compatible (the v2 route passes the waist, a natural split point) and
+would restore a near-Wing service disconnect. It does not cure the
+Wing-side fan/exit geometry, which is upstream of any split.
