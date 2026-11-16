@@ -1,0 +1,261 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-16T20:22:04+0000",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "routed.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 0.6000 mm",
+                    "pos": {
+                        "x": 72.5,
+                        "y": 31.2
+                    },
+                    "uuid": "d91507fb-c7be-4873-9c71-03971c847361"
+                },
+                {
+                    "description": "Pad 14 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 74.252013,
+                        "y": 32.404414
+                    },
+                    "uuid": "db1928fe-2107-43e7-a4aa-e7d13936cdd2"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 81.752013,
+                        "y": 19.414033
+                    },
+                    "uuid": "e04bc613-dbdb-40bb-89f0-43fe5fbc4db9"
+                },
+                {
+                    "description": "Pad 4 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 80.502013,
+                        "y": 21.579097
+                    },
+                    "uuid": "467c01fb-ca71-400c-9591-7179e555c4a8"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [HALL_5V] of TP_W_H5V on B.Cu",
+                    "pos": {
+                        "x": 73.924802,
+                        "y": 32.071162
+                    },
+                    "uuid": "0cfa0793-fedc-4f6d-982b-2719683dd3f7"
+                },
+                {
+                    "description": "Pad 1 [HALL_5V] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 82.377013,
+                        "y": 18.331502
+                    },
+                    "uuid": "75be22e5-66d1-4359-b230-04be15e6b45c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 0.0458 mm",
+                    "pos": {
+                        "x": 75.2,
+                        "y": 36.5
+                    },
+                    "uuid": "ab17c7f2-e0de-4355-8073-f3bf22fbf307"
+                },
+                {
+                    "description": "Pad 1 [HALL_5V] of TP_W_H5V on B.Cu",
+                    "pos": {
+                        "x": 73.924802,
+                        "y": 32.071162
+                    },
+                    "uuid": "0cfa0793-fedc-4f6d-982b-2719683dd3f7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 14 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 74.252013,
+                        "y": 32.404414
+                    },
+                    "uuid": "db1928fe-2107-43e7-a4aa-e7d13936cdd2"
+                },
+                {
+                    "description": "Pad 1 [H_C0_RAW] of TP_H_DIAG_RAW on B.Cu",
+                    "pos": {
+                        "x": 75.397045,
+                        "y": 32.921162
+                    },
+                    "uuid": "41b3a022-1f14-4462-ba46-1c13c84d12d6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 14 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 74.252013,
+                        "y": 32.404414
+                    },
+                    "uuid": "db1928fe-2107-43e7-a4aa-e7d13936cdd2"
+                },
+                {
+                    "description": "Pad 1 [HALL_5V] of TP_W_H5V on B.Cu",
+                    "pos": {
+                        "x": 73.924802,
+                        "y": 32.071162
+                    },
+                    "uuid": "0cfa0793-fedc-4f6d-982b-2719683dd3f7"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.0787 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 69.792305,
+                        "y": 15.828857
+                    },
+                    "uuid": "774aaadf-2c58-4a09-8c3b-7c25e727368e"
+                },
+                {
+                    "description": "Pad 3 [MUX_A0] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 81.127013,
+                        "y": 20.496565
+                    },
+                    "uuid": "e16e8981-b91d-4fac-aad4-c01db602c29e"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GND and HALL_5V)",
+            "items": [
+                {
+                    "description": "Pad 14 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 74.252013,
+                        "y": 32.404414
+                    },
+                    "uuid": "db1928fe-2107-43e7-a4aa-e7d13936cdd2"
+                },
+                {
+                    "description": "Pad 1 [HALL_5V] of TP_W_H5V on B.Cu",
+                    "pos": {
+                        "x": 73.924802,
+                        "y": 32.071162
+                    },
+                    "uuid": "0cfa0793-fedc-4f6d-982b-2719683dd3f7"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GND and H_C0_RAW)",
+            "items": [
+                {
+                    "description": "Pad 14 [GND] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 74.252013,
+                        "y": 32.404414
+                    },
+                    "uuid": "db1928fe-2107-43e7-a4aa-e7d13936cdd2"
+                },
+                {
+                    "description": "Pad 1 [H_C0_RAW] of TP_H_DIAG_RAW on B.Cu",
+                    "pos": {
+                        "x": 75.397045,
+                        "y": 32.921162
+                    },
+                    "uuid": "41b3a022-1f14-4462-ba46-1c13c84d12d6"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of J_WING on B.Silkscreen",
+                    "pos": {
+                        "x": 86.741185,
+                        "y": 19.592534
+                    },
+                    "uuid": "e8bc8a45-bad4-4587-b841-93d4f8922977"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 69.792305,
+                        "y": 15.828857
+                    },
+                    "uuid": "774aaadf-2c58-4a09-8c3b-7c25e727368e"
+                },
+                {
+                    "description": "Segment of J_WING on B.Silkscreen",
+                    "pos": {
+                        "x": 86.741185,
+                        "y": 19.592534
+                    },
+                    "uuid": "e8bc8a45-bad4-4587-b841-93d4f8922977"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}
