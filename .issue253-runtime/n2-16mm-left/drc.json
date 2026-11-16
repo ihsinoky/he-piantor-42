@@ -1,0 +1,85 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-16T09:28:33+0000",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "routed.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 0.7000 mm",
+                    "pos": {
+                        "x": 129.5,
+                        "y": 33.8
+                    },
+                    "uuid": "47b99729-0176-440c-b683-9d28f677e83a"
+                },
+                {
+                    "description": "Pad 13 [HALL_5V] of U_MUX_C on B.Cu",
+                    "pos": {
+                        "x": 130.675817,
+                        "y": 39.699969
+                    },
+                    "uuid": "bce2c6a3-4dc4-4d16-b813-25fb3036acc3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.9,
+                        "y": 50.8
+                    },
+                    "uuid": "fe4356f6-2d14-46ae-9779-17bac0238f2c"
+                },
+                {
+                    "description": "Pad MP [<no net>] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 123.296943,
+                        "y": 19.105235
+                    },
+                    "uuid": "930b000a-9909-46ec-b440-4e105348443d"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.9,
+                        "y": 50.8
+                    },
+                    "uuid": "fe4356f6-2d14-46ae-9779-17bac0238f2c"
+                },
+                {
+                    "description": "Segment of J_WING on B.Silkscreen",
+                    "pos": {
+                        "x": 106.072916,
+                        "y": 27.652344
+                    },
+                    "uuid": "d35b9f4c-3b75-4854-8770-095db98f5a61"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}
