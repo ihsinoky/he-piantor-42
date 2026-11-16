@@ -51,7 +51,8 @@ log('seed chosen, gate1 sum', best[0][0])
 
 rep = FL.Repair(M, bodies)
 traj_all = []
-for pno in range(2):
+NPASS = int(sys.argv[4]) if len(sys.argv) > 4 else 2
+for pno in range(NPASS):
     traj = rep.run_pass(budget_s=900, eval_cap=40, log=log)
     traj_all += [{'pass': pno, **t} for t in traj]
     M = rep.M

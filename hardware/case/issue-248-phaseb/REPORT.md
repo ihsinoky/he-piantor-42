@@ -1,3 +1,169 @@
+# Frontier study — how low CAN the deck go? (2026-11-16, after Round 18)
+
+PO question (2026-11-16): the low-deck study closed negative at plate
+top Z13.55 — before deciding between the qualified Δ+6 design and
+other options, find the achievable frontier: sweep the deck height
+and determine the LOWEST height at which the harness fits clean and
+a service mechanism qualifies.
+
+**Answer: there is no passing height below Z22.2 in this
+architecture, and Z22.2 itself passes only in the different #246
+architecture (D-041), not in this one.** Gate 1 improves from 90 to
+65 fitted contacts as the plate rises 13.55 → 16.2 mm, then PLATEAUS
+at 84–92 for every height from 17.5 to 22.2 — added height stops
+buying contact relief because the obstacle stack rises with the deck
+while the floor-anchored corridor geography does not move. Gate 3
+(unplug-first service) fails at every height ≤ 20.5 (worst-strand
+stored slack ≤ 4.4 mm; extraction reach s_max = 0–1.41 mm of the
+required ~6 mm). At 22.2 the per-strand storage capacity finally
+jumps to ≈ 28.7 mm and the extraction arithmetic passes, but the
+fitted stored assembly fails (WW 94 — the parallel deep bulges cross
+each other), so even 22.2 does not qualify in this architecture.
+The connected 30.2 mm slide-service is not qualifiable at any
+height in this architecture (best per-strand Δ = 29.15 mm < 30.2 at
+22.2, stored audit failing); it remains qualified only by the #246
+design at Δ+6.
+
+## Method (uniform budget per height, stated up front)
+
+Parameter: plate top Z = Wing PCB underside B + 6.20; sweep
+Z ∈ {13.55, 15.0, 16.2, 17.5, 19.0, 20.5, 22.2}. Height model,
+derived from the frozen round-18 body set (369 solids/pitch): parts
+mounted on the board plane SHIFT rigidly by s = Z − 13.55 (boards,
+components, plates, envelopes, POM/washers, Fly set, USB reference,
+raised shells/strips — the plateau follows at plate + 11.10,
+provisional q = 1.50 as before); floor-anchored case parts EXTEND
+(trays, E-R posts, plate/cover screws — fused with their +s
+translate, a CONSERVATIVE overstatement: tray hits at high s mark
+where a per-height channel recut would be required, see caveat);
+splice screws, joint screws and feet stay FIXED. Route: round-9
+topology (on-axis G stations, corrected pin map) with round-15
+rise tops and the round-18 repaired M chain, all shifted +s;
+corridor stays absolute at (fx, −18, 5.1). Per height: 2 seed
+candidates scored (rigid shift; fan-lowered), then 2 passes of
+round-18 per-strand fitted repair (900 s wall / 40 evals per design
+per pass), then the round-18 bulge slack build (directions W/E/U/D,
+target 30.2 mm) and gate-3 Part A extraction arithmetic. All
+verdicts are fitted (strict build + repaired audit, round-10
+standard). Validation: at s = 0 the pipeline reproduces round 18
+exactly (WW 6, gate 1 = 96 @17 / 98 @16, longest 106.09 mm).
+Machinery: `sources/frontier/` (`fitlibF.py`, `frontier_lib.py`,
+`run_height.py`, `finish_height.py`); per-height results:
+`sources/frontier/result_*.json`; gate-8 preview STEP at 20.5 mm:
+`sources/frontier/preview-plate20.5-17mm.step`.
+Process note: two heights were killed mid-run by service restarts
+and resumed from their per-pass state checkpoints; 20.5 was run
+twice from independent seed lineages (z205r / z205b) with the same
+outcome (86/92 vs 84/88), so the plateau is not a seed artefact.
+
+## Frontier table (fitted counts; gate 1 = WW pairs + WF hits)
+
+| plate Z | B | plateau Z | gate 1 @17 (WW/WF) | gate 1 @16 | longest taut (mm) | slack Δ min/med/max (mm) | stored gate 1 @17/@16 | extraction s_max min (mm) | service | overall |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 13.55 | 7.35 | 24.65 | 90 (4/86) | 92 | 106.4 | 0.03 / 5.29 / 14.50 | 88/90 | 0.00 | none | FAIL |
+| 15.0 | 8.80 | 26.10 | 71 (4/67) | 75 | 108.0 | 1.33 / 5.41 / 14.62 | 88/92 | 1.41 | none | FAIL |
+| 16.2 | 10.00 | 27.30 | 65 (2/63) | 69 | 110.0 | 1.37 / 5.51 / 14.75 | 82/86 | 1.41 | none | FAIL |
+| 17.5 | 11.30 | 28.60 | 86 (4/82) | 92 | 113.1 | 3.84 / 4.01 / 4.29 | 86/92 | 0.00 | none | FAIL |
+| 19.0 | 12.65 | 30.10 | 84 (2/82) | 88 | 116.7 | 4.09 / 4.26 / 4.49 | 84/88 | 0.00 | none | FAIL |
+| 20.5 | 14.15 | 31.60 | 84 (2/82) | 88 | 118.8 | 4.39 / 4.68 / 4.95 | 84/88 | 0.00 | none | FAIL |
+| 22.2 | 15.85 | 33.30 | 84 (4/80) | 92 | 119.2 | 28.65 / 28.65 / 29.15 | 174/182 | 6.00 | none (see text) | FAIL in this architecture; PASS at this height only via #246/D-041 |
+
+Gate 2 passes at every height (longest finished ≤ 119.2 mm taut,
+≤ 147.9 mm stored, vs the 200 mm bound). Gates 4/5 are invariant
+under the height model (Fly set, USB reference and shells shift
+together; the audit shows zero wire-vs-Fly-cable hits at every
+height) — spot-checked by construction, re-verified in the 20.5 mm
+preview STEP. Gate 6 stays OPEN (Junana physical measurement,
+PO-side) at every height. Gate 7: per-height part envelopes stay
+inside Ender-3 Pro limits (XY unchanged from the frozen design;
+tallest part = extended tray, top Z = 22.65 + s ≤ 31.3 mm).
+
+## What the height buys — the trade-off in plain terms
+
+- **13.55 → 16.2 mm (+2.65):** the only productive band. Gate 1
+  falls 90 → 65 (≈ −9 contacts per mm), WW nearly closes (4 → 2),
+  worst-strand slack rises 0.03 → 1.37 mm. Still 65 contacts and a
+  4.6 mm extraction shortfall from passing.
+- **16.2 → 20.5 mm (+4.3):** gate 1 does not improve (65 → 84,
+  i.e. the plateau band 84–92; the apparent rise is the conservative
+  tray-union model filling the climb band — those 28 tray hits are
+  "channel recut required" deltas, not new physics). Even deleting
+  ALL tray hits hypothetically, 20.5 still fails gate 1 with ≈ 54
+  residual WF (plates 12, Wing PCBs 22, C5 envelopes 8, GH drawing-
+  bound reservations 12 at ≈ 0 volume) and fails gate 3 outright.
+  Worst-strand slack creeps 1.37 → 4.39 mm (≈ +0.7 mm per 1.5 mm of
+  height) — extraction still reaches only s_max = 0.
+- **20.5 → 22.2 mm (+1.7):** a step change in storage CAPACITY
+  only: the deepened bay admits depth-20 east bulges, per-strand
+  Δ jumps to ≈ 28.7 mm and extraction arithmetic passes
+  (s_max = 6.0 on all strands) — but the 14 parallel bulges cross
+  each other (stored WW 94), so the dressed assembly is worse than
+  the taut one. Capacity is not qualification.
+
+## Binding constraints, by zone
+
+- **Feed (gate 1), all heights:** strand–strand is nearly solved
+  (WW 2–6 everywhere — the round-9/round-14 fan work holds at every
+  height). The residual is wire-vs-fixed grazes distributed over
+  the rising stack itself: aluminium plates (12 hits), Wing PCB
+  undersides (22), R0_C5 switch envelopes (8), GH drawing-bound
+  reservations (12, ≈ 0 mm³ — reservation grazes, present at all
+  heights), trays (9 at 16.2; 28 at ≥ 17.5 under the conservative
+  union model = per-height channel-recut deltas). Because these
+  bodies rise WITH the deck, deck height cannot clear them; the
+  feed's ~65–90 simultaneous grazes are a property of the route
+  topology in the bay, not of the deck height.
+- **Service (gate 3), ≤ 20.5:** the bulge host segment
+  (Wing outlet → corridor) is hemmed in by the Wing underside
+  bounds above and the floor channel below; the fitted-choice
+  storage saturates at Δ ≈ 4–5 mm per strand at high decks.
+  (Budget note: at 13.55 the frontier's 900 s slack build reaches
+  median Δ = 5.29 mm where round 18's unhurried build reached
+  ≈ 10.4 mm on 11 strands — the frontier slack figures are
+  uniform-budget values; round 18's better build still failed
+  gate 3 on its 1.29 mm strands and on its stored audit, so the
+  conclusion does not hinge on the slack budget.) Extraction
+  needs Δ ≳ 6–10 mm
+  on EVERY strand (round-18 evidence); the worst strand never
+  exceeds 4.39 mm below 22.2.
+- **Service (gate 3), 22.2:** storage capacity arrives, mutual
+  crossing of parallel bulges (WW 94) replaces the capacity
+  problem — the same failure round 18 recorded for parallel
+  storage at 13.55. A separated-lane storage (the #246 pattern) is
+  a different routing architecture, not a height.
+
+## Case deltas ledger (per height; study method, not unfreezes)
+
+At every height: trays/posts/screws EXTEND by s (union model;
+production equivalent = coordinated remake as in #246, with tray
+wiring channels recut at the climb band — flagged by the tray
+hits above); shells/strips/plateau SHIFT by s (plateau = plate +
+11.10, provisional); GH/Fly blister local geometry unchanged
+(they sit in the shifted stack; B0/B1-verified clearances are
+stack-relative and carry over); M2×10 ties unchanged (engagement
+is stack-relative; the B = 6.70 tie bound stays below the sweep
+floor). Boards Main Rev.7 / Wing Rev.4 and the aluminium plates
+are byte-unchanged at every height; retainers stay at (±8, −30);
+the 2 known POM-vs-skin residuals (0.040770 mm³ ×2, fixed-fixed)
+are height-invariant under the model and remain open as before.
+No unfreeze-ladder item was consumed by this study.
+
+## Conclusion for the PO decision
+
+Deck height is not the lever that was missing. Between the GH
+floor (13.55) and Δ+6 (22.2) there is no height at which this
+architecture — raised keyless shells, PO slope, seam rule,
+horizontal GH exit rising into the central mass — fits the harness
+clean or qualifies a service mechanism, under a uniform bounded
+effort at each height. The only qualified point in the range
+remains Δ+6 as designed in Issue #246 (D-041), whose routing
+architecture (under-cover separated lanes, connected 30.2 mm
+slide-service) is different in kind, not just in height. If a
+lower-than-22.2 deck is ever revisited, the evidence says the
+work must go into a new feed/storage topology, not into height
+selection.
+
+---
 # Round 18 — FINAL ROUND: per-strand fitted feed repair + ~14 mm slack build: repair improves gate 1 (114→96 @17 mm) but does not close it; the slack build saturates at Δ≈10.4 mm (strands 11/12/14: 1.29 mm) and is fitted-catastrophic (WW 6→98); gate 3 fails on a 4.38 mm extraction shortfall for strands 11/12/14. THE LOW-DECK STUDY CLOSES NEGATIVE — see the closing assessment.
 
 PO requirement change for this round (2026-11-16): gate 3's stored
