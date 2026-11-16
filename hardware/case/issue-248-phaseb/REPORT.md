@@ -1,3 +1,215 @@
+# Round 18 — FINAL ROUND: per-strand fitted feed repair + ~14 mm slack build: repair improves gate 1 (114→96 @17 mm) but does not close it; the slack build saturates at Δ≈10.4 mm (strands 11/12/14: 1.29 mm) and is fitted-catastrophic (WW 6→98); gate 3 fails on a 4.38 mm extraction shortfall for strands 11/12/14. THE LOW-DECK STUDY CLOSES NEGATIVE — see the closing assessment.
+
+PO requirement change for this round (2026-11-16): gate 3's stored
+slack is reduced from +30.20 mm to ~14 mm per strand (round 17 proved
+30.20 unreachable and ~14 mm the largest arithmetically admissible
+storage). This is the final round of the study. Machinery:
+`sources/round18/` — `fitlib18.py` (strict builds via the round-17
+builder), `repair18.py` (per-strand Gauss-Seidel fitted repair),
+`slack18.py` (storage build), `audit18.py` (full fitted audit of an
+arbitrary point-list assembly), `gate3.py` (service motion). All
+verdicts are fitted (strict build + repaired audit with the
+clipped-Common/distance fallback of round 10); WW counts are TRUE
+counts under that standard, not plain-Common lower bounds.
+
+## 1. Feed repair — per-strand Gauss-Seidel with fitted acceptance
+
+Method: start = round-14 taut incumbent on the round-15 skeleton
+(the round-17 incumbent). One strand at a time (worst-first), move
+set = its chain-point coordinates (2-point chain, 3-point insertion
+allowed), plus — added in pass 1 after pass 0 showed single-point
+moves only shave volumes — coordinated SHIFT moves (whole chain
+translated rigidly). Every candidate is strictly rebuilt and scored
+fitted (that strand vs all fixed bodies at both pitches + all other
+strands, repaired standard); a move is accepted only if the strand's
+fitted count does not regress (strict count improvement preferred;
+≥2% volume improvement at equal count otherwise). The incumbent
+changes only through accepted moves.
+
+Baseline (incumbent, repaired standard, this round's measurement):
+WW 6 pair-instances (per side: 02×03 0.750 mm³, 09×10 0.449,
+10×11 0.211), WF 108 @17 / 118 @16, gate 1 = 114 @17 / 124 @16,
+longest finished 102.3 mm — consistent with round 17's probe17
+counts (WW 6 / WF 108 / WF 118).
+
+Trajectory (global fitted gate 1, full re-score after each pass):
+
+| state | gate 1 @17 | gate 1 @16 | WW | longest finished |
+|---|---|---|---|---|
+| incumbent (round-14 taut) | 114 | 124 | 6 | 102.3 |
+| after pass 0 (single-point moves) | 112 | 122 | 6 | 103.2 |
+| after pass 1 (+ shift moves) | 100 | 112 | 6 | 103.0 |
+| after pass 2 (larger shifts) | 96 | 98 | 6 | 106.1 |
+
+36 accepted moves (26 in passes 0–1, 10 in pass 2); every accepted
+count improvement after pass 0 came from a shift move, dominantly
+westward (−X, up to −7.5 mm cumulative on some strands) or ±Z —
+i.e. the repair progressively re-positions the whole feed inside
+the corridor rather than untangling it locally. Three structural
+observations:
+
+- **WW never moves.** The 6 WW pair-instances are invariant across
+  all passes: each pair's two strands accept near-identical shifts,
+  so their mutual overlaps (≤0.75 mm³) persist. Single-strand moves
+  cannot separate a pair that translates together.
+- **Gains are not converging to zero.** Pass gains @17: −2, −12,
+  −4 (pass 2 processed all strands except design 8, the lowest-count
+  strand at 4, no-improve in pass 1). ~96 pairs remain, spread over
+  Wing PCBs, C5 switch envelopes, plates, trays, MUX bounds and the
+  Main GH drawing bound — simultaneous multi-body grazes, the same
+  wall the joint optimisers hit in rounds 15–17 (stage-1 body
+  distance −0.25…−0.75), now confirmed from the per-strand side.
+- The repair is therefore recorded as **unclosed at the
+  per-strand fitted-repair standard**: it is the best fitted feed
+  of the study (96/98), it is NOT proven impossible to improve
+  further, and no bounded continuation of this method reaches 0 —
+  the trajectory and the WW invariance are the evidence. The only
+  remaining lever class is a new body-aware feed skeleton designed
+  from scratch (a design change, i.e. a new study); there is no
+  concrete evidence it closes the gap, and it is not named as a
+  closing lever.
+
+## 2. Slack build — shallow host bulge, max-Δ per strand
+
+Construction (on the repaired feed): a shallow lateral bulge on the
+B1→corridor host segment (apex points at 25%/75% of the segment,
+offset depth d along a horizontal perpendicular or +Z), with an
+optional small climb-triangle top-up; depth bisected per strand
+toward Δ = 13.8 mm (target ≤14.0), capped at d = 10.5. Direction =
+the largest-Δ buildable direction per strand. All 28 wires build
+strictly (R ≥ 5 by builder construction). Exact accounting
+(stored path length − taut path length, strict builds):
+
+- Strands 1–10 and 13 (per side): **Δ = 10.36–10.46 mm** (east
+  bulge, d = 10.5). The bulge saturates: beyond d ≈ 10.5 the R5
+  trim losses eat the gains — 13.8 mm is not reachable in this
+  family even before any fitted check.
+- Strands 11, 12, 14 (per side): **Δ = 1.289 mm only** (west bulge,
+  d = 3.0). These strands (rise tops at Y=−13/Z=8.2) have no
+  buildable deeper bulge in any direction.
+- Finished lengths with slack dressed: max **116.51 mm** (strand 1)
+  — gate 2 passes with 83.5 mm margin.
+
+Fitted verdict on the stored assembly (repaired audit, both
+pitches): **gate 1 = 188 @17 / 190 @16** (WF 90/92 — slightly
+better than the taut feed's 108/118, the bulge lifts wires off
+some bodies — but **WW explodes 6 → 98 pair-instances, 49 per
+side**): fourteen parallel bulges in a converging corridor cross
+each other wholesale. The stored candidate is ~2× worse than the
+feed it hangs on. No case pocket was cut: the binding constraints
+are wire–wire geometry in the corridor, not case volume (the
+round-17 result, confirmed constructively).
+
+## 3. Gate 3 qualification (unplug-first, with the built slack)
+
+Model: extraction state = plug + dress translate −Y by s (the GH
+axis at the Wing), host bulge flattens under exact length
+conservation; per-strand feasibility and shortfalls computed from
+strict builds (17 mm; the arithmetic is pitch-independent, the
+16 mm assembly is the mirror twin). Plug-body clearance itself is
+not re-modelled (round 9's GH envelope qualification stands).
+
+- **Step 1 — shells off: PASS.** Shell-central + both north strips
+  translated +Z ∈ {2, 5, 10, 25} vs stored wires + switch
+  envelopes: 0 overlaps at every step.
+- **Step 2 — extract Wing GH ≈6 mm: FAIL.** Strands 1–10/13:
+  full 6.0 mm feasible, shortfall 0. **Strands 11, 12, 14:
+  s_max = 1.31 mm; shortfall at 6 mm = 4.38 mm per strand** —
+  the stored 1.289 mm cannot feed the extraction span growth
+  (≈5.67 mm); the plug cannot be unplugged on those strands
+  without stretching the harness or disturbing the Wing stack.
+- **Step 3 — lift the Wing out: FAIL as a clean motion.** Right
+  Wing group (PCB + plate + envelopes + underside bounds) at
+  +Z 5 vs extraction-state wires + trays + Main: **17 overlaps**
+  (Wing body vs its own freed harness wires, up to 13.1 mm³);
+  clear by +Z 20. The transit is blocked by the Wing's own
+  harness; a clean vertical lift would need the freed wires
+  displaced toward the bay — not modelled, not qualified.
+
+Gate 3 therefore fails independently of gate 1: even if the feed
+were fitted-clean, this storage build cannot service strands
+11/12/14.
+
+## 4. Gate table — final candidate (stored build on repaired feed)
+
+| gate | 17 mm | 16 mm | basis |
+|---|---|---|---|
+| 1 fitted collisions | **FAIL 188** | **FAIL 190** | repaired audit; +2 known POM FF residuals (0.040770 mm³ ea., as rounds 5–17) reported separately |
+| 2 finished ≤200 mm | PASS 116.51 | PASS 116.51 | strict builds incl. tails 3.90+3.40, slack dressed |
+| 3 unplug-first service | **FAIL** | **FAIL** | §3: step 2 shortfall 4.38 mm (strands 11/12/14); step 3 transit blocked |
+| 4 Fly 170 mm | PASS (inherited) | PASS (inherited) | fixed assembly byte-identical to round 9; round 18 changed wire point lists only |
+| 5 USB insertion | PASS (inherited) | PASS (inherited) | same basis |
+| 6 keycap envelopes | OPEN | OPEN | Junana physical measurement still PO-side; unchanged |
+| 7 manufacturing | PASS (inherited) | PASS (inherited) | no case solid modified in round 18 (or in Phase B at all) |
+| 8 fitted preview STEP | PASS (inherited) | PASS (inherited) | fixed assembly unchanged; stored wires are audit solids in `sources/round18/results/stored.json` |
+
+For reference, the repaired TAUT feed (no storage) scores gate 1
+= 96 @17 / 98 @16 — also FAIL, and it has no service slack at all.
+
+## 5. Comparison
+
+| round | candidate | gate 1 (true) | gate 3 |
+|---|---|---|---|
+| 9 | on-axis approach, connected reserve | 110 strand + 2 POM | motion clean, fitted FAIL |
+| 14 | Candidate A taut (no reserve) | WW 2, WF 94 @17 (plain-Common WW; repaired recount this round: 114 total) | no fitted loop — FAIL |
+| 17 | 3-point joint optimisation | incumbent unchanged (114 class) | storage closed at proof standard for 30.2 mm |
+| 18 | per-strand repair + bulge storage | feed 96/98; stored 188/190 | FAIL, shortfall 4.38 mm |
+
+## 6. Unfreeze ledger (round 18)
+
+Consumed: **nothing.** No fixed body was modified; no case solid
+was cut (the authorised storage pocket and the neck tray cut were
+not needed — the failures are wire-geometry, not case volume);
+the POM skin notch (step 3) remains unconsumed and the 2 POM
+residuals stand as before. Route-envelope changes are the repair
+moves themselves (chain-point coordinates + per-strand shifts ≤
+7.5 mm, inside the round-15 step-1 envelope authority). Boards,
+plates, GH, pin maps, Z13.55/Z24.65 (provisional), seam rule,
+blisters, M2×10, retainers (±8, −30): all unchanged.
+
+## 7. Closing assessment — the low-deck study closes NEGATIVE
+
+What is proven (proof standard, this study's own machinery):
+
+- The +30.20 mm connected reserve is impossible in the frozen
+  set (rounds 11/12/17: vertical family by column scan, flat
+  order-preserving family by topology, loops/discs/serpentine by
+  arithmetic and screens).
+- ~14 mm of storage per strand is not achievable either: the
+  largest buildable shallow-bulge storage saturates at
+  Δ ≈ 10.4 mm, three strands per side admit only 1.29 mm, and
+  the resulting assembly is fitted-catastrophic (WW 98) with a
+  4.38 mm extraction shortfall on exactly those strands.
+- The feed itself resists every optimisation standard applied:
+  joint L-BFGS-B (rounds 15–17, after the machinery was itself
+  repaired and validated) and per-strand fitted Gauss-Seidel
+  (round 18) both plateau with ~96–114 fitted pairs; the
+  residual is a simultaneous multi-body graze field in the
+  C5/plate/Wing corridor plus a shift-invariant WW core of 6.
+
+What is NOT proven: that no body-aware feed skeleton exists.
+That is a design change (new skeleton, not a repair), it has no
+supporting evidence in 18 rounds, and this report does not name
+it as a closing lever.
+
+**Conclusion:** under the frozen set (boards Main Rev.7 /
+Wing Rev.4, aluminium plates, GH, Z13.55 deck, printed shells),
+the low-deck + raised-keyless-region design does not reach a
+buildable, serviceable candidate. The study's closing evidence
+supports the PO decision between the already-qualified Δ+6
+design (D-041; 30.2 mm reserve qualified, top Z22.2) and
+round-13 candidate C (mid-harness GH split on the Δ+6-class
+architecture). Candidate A (low deck) should not be adopted.
+
+Round 17 is frozen as found (its REPORT section and
+`sources/round17/` are untouched by this round). Round-18
+artefacts: `sources/round18/` (plan, fitlib18, repair18,
+repair18_lib, slack18, audit18, gate3, score18, baseline18) and
+`sources/round18/results/` (score_pass2.json — repaired feed;
+stored.json — stored build point lists + accounting;
+audit_stored.json — full fitted audit; gate3_partA/B/C.json).
+
+
 # Round 17 — Feed 3-point chain + case-change slack storage: feed NOT converged (joint optimisation wall reproduced in 5 runs; incumbent unchanged); slack storage CLOSED at proof standard across all remaining families; case delta EMPTY; gates 1/3 still FAIL
 
 ## Feed — 3-point chain (corridor -> ORG -> M1 -> M2 -> M3 -> P -> G -> ep)

@@ -23,22 +23,28 @@ M = state['M']
 def unit(v):
     v = np.array(v, float); return v / np.linalg.norm(v)
 
-def stored_points(M, i, side, direction, d):
+def perp_h(t, direction):
+    n = np.array([t[1], -t[0], 0.]); n = n / np.linalg.norm(n)
+    if direction == 'W' and n[0] > 0: n = -n
+    if direction == 'E' and n[0] < 0: n = -n
+    return n
+
+def stored_points(M, i, side, direction, d_host, d_climb=0.0):
     pts = F.points_of(M, i, 'right')
     B0, B1, COR, RISE = [np.array(p, float) for p in pts[:4]]
     rest = pts[4:]
     t_in = unit(COR - B1); t_out = unit(RISE - COR)
     if direction == 'U':
-        n = np.array([0., 0., 1.])
+        n = np.array([0., 0., 1.]); n2 = n
     else:
-        n = np.array([t_in[1], -t_in[0], 0.]); n = unit(n)
-        if direction == 'W' and n[0] > 0: n = -n
-        if direction == 'E' and n[0] < 0: n = -n
-    q0 = B1 + 4.5 * t_in
-    q3 = COR + 2.5 * t_out
-    q1 = q0 + d * n + 1.5 * t_in
-    q2 = q3 + d * n - 1.5 * t_out
-    out = [B0, B1, q0, q1, q2, q3, RISE] + [np.array(p, float) for p in rest]
+        n = perp_h(t_in, direction); n2 = perp_h(t_out, direction)
+    Pa = B1 + 0.25 * (COR - B1) + d_host * n
+    Pb = B1 + 0.75 * (COR - B1) + d_host * n
+    out = [B0, B1, Pa, Pb, COR]
+    if d_climb > 0:
+        out.append(COR + 0.5 * (RISE - COR) + d_climb * n2)
+    out.append(RISE)
+    out += [np.array(p, float) for p in rest]
     out = [list(map(float, p)) for p in out]
     if side == 'left':
         out = [[-p[0], p[1], p[2]] for p in out]
@@ -57,27 +63,47 @@ for i in range(14):
 log('taut lengths ok; max', round(max(taut_len.values()), 2))
 
 def solve_d(i, direction, target):
-    lo, hi = 0.0, 9.0
-    Lhi = build_len(stored_points(M, i, 'right', direction, hi))
-    if Lhi is None: return None, None
-    if Lhi - taut_len[i] < target:
-        return hi, Lhi - taut_len[i]
-    for _ in range(7):
-        mid = (lo + hi) / 2
-        L = build_len(stored_points(M, i, 'right', direction, mid))
-        if L is None: hi = mid; continue
-        if L - taut_len[i] < target: lo = mid
-        else: hi = mid
-    d = (lo + hi) / 2
-    L = build_len(stored_points(M, i, 'right', direction, d))
-    return (d, L - taut_len[i]) if L is not None else (None, None)
+    def delta(dh, dc):
+        L = build_len(stored_points(M, i, 'right', direction, dh, dc))
+        return None if L is None else L - taut_len[i]
+    dh_max = None
+    for cand in (10.5, 9.0, 7.5, 6.0, 4.5, 3.0, 1.5):
+        if delta(cand, 0.0) is not None:
+            dh_max = cand; break
+    if dh_max is None: return None, None, None
+    top = delta(dh_max, 0.0)
+    if top >= target:
+        lo, hi = 0.0, dh_max
+        for _ in range(7):
+            mid = (lo + hi) / 2
+            dl = delta(mid, 0.0)
+            if dl is None: hi = mid; continue
+            if dl < target: lo = mid
+            else: hi = mid
+        dh = (lo + hi) / 2
+        return dh, 0.0, delta(dh, 0.0)
+    dh = dh_max
+    top2 = delta(dh, 3.0)
+    if top2 is None or top2 <= top:
+        return dh, 0.0, top
+    if top2 >= target:
+        lo, hi = 0.0, 3.0
+        for _ in range(6):
+            mid = (lo + hi) / 2
+            dl = delta(dh, mid)
+            if dl is None: hi = mid; continue
+            if dl < target: lo = mid
+            else: hi = mid
+        dc = (lo + hi) / 2
+        return dh, dc, delta(dh, dc)
+    return dh, 3.0, top2
 
 plan = {}
 for i in range(14):
     plan[i] = {}
     for dr in ('W', 'E', 'U'):
-        d, dl = solve_d(i, dr, TARGET)
-        plan[i][dr] = (d, None if dl is None else round(dl, 2))
+        dh, dc, dl = solve_d(i, dr, TARGET)
+        plan[i][dr] = (dh, dc, None if dl is None else round(dl, 2))
     log('strand', i + 1, plan[i])
 json.dump({str(i + 1): plan[i] for i in plan},
           open(f'{RT}/round18/slack_plan.json', 'w'), indent=1)
@@ -97,40 +123,50 @@ log('taut assembly built')
 choices = {}
 for i in range(14):
     best = None
-    for dr in ('W', 'E', 'U'):
-        d, dl = plan[i][dr]
-        if d is None: continue
-        cand = {}
-        ok = True
-        for side in ('right', 'left'):
-            r, why = R.build_s(stored_points(M, i, side, dr, d))
-            if r is None: ok = False; break
-            cand[side] = r
-        if not ok: continue
-        tot_c, tot_v = 0, 0.0
-        for side in ('right', 'left'):
-            nm = f'Wire-{side}-{i + 1:02d}'
-            c, v, _ = R.eval_wire(nm, cand[side][0], cand[side][1],
-                                  wires, samp, wb, bodies, body_bnd)
-            tot_c += c; tot_v += v
-        if best is None or (tot_c, tot_v) < (best[0], best[1]):
-            best = (tot_c, tot_v, dr, d, cand)
-        log('strand', i + 1, dr, 'd', d, 'local', tot_c, round(tot_v, 1))
-    assert best is not None, i
-    tot_c, tot_v, dr, d, cand = best
+    order = sorted(('W', 'E', 'U'),
+                   key=lambda dr: -(plan[i][dr][2] if plan[i][dr][2] is not None else -1))
+    for dr in order:
+        dh0, dc0, dl0 = plan[i][dr]
+        if dh0 is None: continue
+        for dh, dc, dl in ((dh0, dc0, dl0),):
+            cand = {}
+            ok = True
+            for side in ('right', 'left'):
+                r, why = R.build_s(stored_points(M, i, side, dr, dh, dc))
+                if r is None: ok = False; break
+                cand[side] = r
+            if not ok: continue
+            tot_c, tot_v = 0, 0.0
+            for side in ('right', 'left'):
+                nm = f'Wire-{side}-{i + 1:02d}'
+                c, v, _ = R.eval_wire(nm, cand[side][0], cand[side][1],
+                                      wires, samp, wb, bodies, body_bnd)
+                tot_c += c; tot_v += v
+            if dl is None:
+                _w, _L = F.build_wire(stored_points(M, i, 'right', dr, dh, dc))
+                dl = None if _L is None else _L - taut_len[i]
+            dlv = dl if dl is not None else -1
+            if best is None:
+                best = (tot_c, tot_v, dr, (dh, dc), cand, dlv)
+            log('strand', i + 1, dr, 'd', (dh, dc), 'local', tot_c, round(tot_v, 1))
+    if best is None:
+        choices[i] = {'dir': 'TAUT', 'd': [0.0, 0.0], 'local': [None, None]}
+        log('strand', i + 1, 'NO BUILDABLE STORAGE - stays taut')
+        continue
+    tot_c, tot_v, dr, d, cand, _dlv = best
     for side in ('right', 'left'):
         nm = f'Wire-{side}-{i + 1:02d}'
         wires[nm] = cand[side][0]; samp[nm] = cand[side][1]; wb[nm] = F.bounds(cand[side][0])
-    choices[i] = {'dir': dr, 'd': d, 'local': [tot_c, round(tot_v, 2)]}
+    choices[i] = {'dir': dr, 'd': list(d), 'local': [tot_c, round(tot_v, 2)]}
     log('CHOOSE strand', i + 1, dr, 'd', d, 'local', tot_c, round(tot_v, 1))
 
 # ---------- accounting + save ----------
 out = {'target': TARGET, 'M': M, 'strands': {}}
 for i in range(14):
-    dr, d = choices[i]['dir'], choices[i]['d']
-    rec = {'dir': dr, 'd': d, 'local': choices[i]['local']}
+    dr = choices[i]['dir']; dh, dc = choices[i]['d']
+    rec = {'dir': dr, 'd': [dh, dc], 'local': choices[i]['local']}
     for side in ('right', 'left'):
-        pts = stored_points(M, i, side, dr, d)
+        pts = F.points_of(M, i, side) if dr == 'TAUT' else stored_points(M, i, side, dr, dh, dc)
         w, L = F.build_wire(pts)
         rec[f'points_{side}'] = pts
         rec[f'len_{side}'] = round(L, 3)
