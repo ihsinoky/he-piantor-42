@@ -41,3 +41,12 @@
   housing centre, local +1.40 from pad-row origin, documented like the Rev.3 GH centroid note).
 - Include CPL-jlcpcb-gerber-frame-NOTES.md + quote-handoff.md (Rev.6 exemplar) in the package.
 - FABRICATION.md marked DRAFT / NOT FOR ORDER.
+
+## Placement correction (stage 1 build)
+- FootprintLoad + SetLayer(B_Cu) does NOT mirror geometry; the Wing boards' B.Cu footprints are
+  truly flipped. Fix applied: Flip() about the anchor -> rot 180, IsFlipped=True.
+- Final pose (measured): anchor (100,133) B.Cu; pad1 (103.25,132.0) east, pad14 (96.75,132.0);
+  MP pads y=134.2 (mouth south, board edge 140.025; housing front ~137.2, on-board).
+- Mouth-view handedness (script mouthview.py; viewer at mouth, up = toward board):
+  Wing 17L LEFT, Wing 17R LEFT, Main J2 LEFT, Main J3 LEFT, Matrix Rev.4 LEFT -> congruent.
+- Zone deletion (Z2 = x 85..115, y 129.5..140.03): 111 link-net items removed (ledger step1.json).
