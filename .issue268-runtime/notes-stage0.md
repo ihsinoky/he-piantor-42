@@ -86,3 +86,21 @@
   (Z2). Tail is connected copper (east HALL bus). No other-net copper within 2.6mm on
   either layer to terminate it on; deleting the arm would remove ~15mm of original
   power copper feeding real pads. Disclosed in REPORT.
+
+## Stage 4/5 (continuation worker): verification, package, report
+- Assignment: Matrix Rev.4 J_WING pad n = D-024 signal n PASS; Wing 17L/17R PASS;
+  Main J2 PASS reversed; Main J3 PASS reversed (signal 7 net named MUX_EN1 on Main).
+- Outline identical; footprint census 65=65, only J_WING differs.
+- Copper diff confined to the 9 link nets; per-net extents in REPORT (reconnections
+  reach y=111.75 (OUT_C island), x=82.00 (OUT_A), y=115.25/x=122.40 (HALL bridge)).
+- Via-pad (rect model): different-net min 0.100 (at floor, A2 escape via vs TP_W_MUXB.1);
+  same-net exceptions: OUT_A via overlaps TP_W_MUXA.1 corner by 0.25; HALL via 0.048
+  from C_MUX_C.1. Both disclosed in REPORT + FABRICATION.
+- Extraction (centreline Dijkstra, 1oz): loops A 91.9 / B 44.4 / C 107.2 mOhm
+  -> 11.7/5.6/13.6 mV @127mA reference. Graph needed overlap-joint handling
+  (node links <0.45mm for 0.30 power nets, via T-splits, pad pass-throughs).
+- Package in manufacturing/: gerber (10 files, Rev.3 set) + zip, paste (F 144 / B 16),
+  BOM-jlcpcb.csv (43 rows, FH12=C5378715), consolidated (4 groups),
+  CPL-jlcpcb-gerber-frame.csv (J_WING 100.000000,-134.400000,bottom,180) + NOTES,
+  FABRICATION.md, quote-handoff.md, drc.json. DRAFT / NOT FOR ORDER.
+- REPORT.md written. Not pushed (PMO publishes). decisions.md untouched.
