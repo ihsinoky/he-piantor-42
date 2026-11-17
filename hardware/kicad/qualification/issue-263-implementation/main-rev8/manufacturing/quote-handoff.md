@@ -11,7 +11,7 @@ empty and the CPL uses KiCad headers.
   RT0603BRD0754K9L / C728593 per docs/issue-175; L1 = C3033018 per the
   order-time rule, stock 19,053 on 2026-11-16). Unmapped parts: NONE.
 - FH12: J2/J3 (Hirose FH12-14S-0.5SH(55)) carry the placeholder
-  `C-HIROSE-FH12-14S` — this part is NOT sourced at JLCPCB. Expect the SMT
+  `C5378715` — this part is NOT sourced at JLCPCB. Expect the SMT
   flow to flag it as unmatched; the quote must state how it is handled
   (consigned / hand-fitted later). Do not substitute another connector.
 - Excluded from the JLCPCB BOM (as in the Rev.6 package): mounting holes

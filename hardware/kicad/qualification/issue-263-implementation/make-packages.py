@@ -22,7 +22,7 @@ def package(board, outdir, name):
  with (outdir/'BOM.csv').open('w',newline='') as fh:
   w=csv.writer(fh); w.writerow(['Comment','Designator','Footprint','LCSC Part #','Quantity'])
   for (val,fp),refs in sorted(rows.items()):
-   lcsc='C-HIROSE-FH12-14S' if val.startswith('FH12') else ''
+   lcsc='C5378715' if val.startswith('FH12') else ''
    w.writerow([val,','.join(sorted(refs)),fp,lcsc,len(refs)])
  print('package', name, 'components', sum(len(v) for v in rows.values()))
 W=E/'main-rev8'
