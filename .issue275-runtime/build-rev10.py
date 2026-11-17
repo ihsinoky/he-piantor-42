@@ -142,6 +142,8 @@ def pad_rect(a, exp=0.03):
     return poly.buffer(exp, join_style=2) if exp else poly
 
 delete = {}
+J2NETS_PRE = {a.GetNetname() for a in pads.values() if a.GetNumber() != "MP"}
+OLD_C_PT = Point(OLD_C := (76.048074, 112.073215))
 for num, a in pads.items():
     if num == "MP":
         continue
@@ -159,7 +161,21 @@ for num, a in pads.items():
                 print("STOP: FOREIGN through-track crosses pad", num, t.m_Uuid.AsString())
                 sys.exit(1)
             print("note: same-net through-track crosses pad", num, a.GetNetname(), t.m_Uuid.AsString()[:8])
-print("stub segments to delete:", len(delete))
+# wider rip: every F.Cu segment of J2's nets passing within 8mm of the old
+# centre goes - chain fragments that miss the pad rects still short the
+# moved pads (found by the B2 gates on the first build: 7 shorts).
+extra = 0
+for t in tracks:
+    if isinstance(t, p.PCB_VIA) or t.GetLayer() != p.F_Cu:
+        continue
+    if t.GetNetname() not in J2NETS_PRE or t.m_Uuid.AsString() in delete:
+        continue
+    s, e = t.GetStart(), t.GetEnd()
+    ls = LineString([(s.x / MM, s.y / MM), (e.x / MM, e.y / MM)])
+    if ls.distance(OLD_C_PT) < 8.0:
+        delete[t.m_Uuid.AsString()] = t
+        extra += 1
+print("stub segments to delete:", len(delete), "(wide-rip extra:", extra, ")")
 width_by_pad = {}
 for num, a in pads.items():
     if num == "MP":
@@ -227,6 +243,10 @@ print("max signal-pad deviation vs mirrored J3 (15-k):", round(maxdev, 6))
 import subprocess, os
 J2NETS = sorted({a.GetNetname() for a in pads.values() if a.GetNumber() != "MP"})
 print("J2 nets:", J2NETS)
+# lock every surviving track/via: KRT must only ADD copper, never re-plan
+for t in b.GetTracks():
+    t.SetLocked(True)
+print("locked all surviving tracks/vias")
 b.Save(str(BOARD))
 KRT = Path("/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools")
 KRT_PY = "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/venv/bin/python3"
@@ -236,7 +256,7 @@ cmd = [KRT_PY, str(KRT / "py_router/route.py"), str(BOARD), str(ROUTED),
        "--track-width", "0.1", "--power-nets", "HALL_5V", "GND",
        "--power-nets-widths", "0.3", "0.3", "--clearance", "0.1",
        "--via-size", "0.6", "--via-drill", "0.3",
-       "--same-net-pad-clearance", "0.15", "--layers", "F.Cu"]
+       "--same-net-pad-clearance", "0.15", "--escalation", "board"]
 print("running KRT ...", flush=True)
 with open(RT / "krt-rev10.log", "w") as lf:
     r = subprocess.run(cmd, cwd=KRT, stdout=lf, stderr=subprocess.STDOUT, timeout=1800)
