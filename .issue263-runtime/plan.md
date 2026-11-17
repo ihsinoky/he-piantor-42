@@ -32,3 +32,27 @@ REPORT.md ties stages; draft decision text in REPORT only.
 
 Rules: scratch only in .issue263-runtime/; CAD python cad-venv; do NOT
 push; no silent yardstick relaxation.
+
+## Follow-up round (PO decision 2026-11-17: option (a))
+F0. Main Rev.8: extend outline with tabs under both ZIFs (~+4.1 mm past
+    slanted edges in connector zones; REPORT 3.3(a)); route at spec
+    poses, reversal assignment. Gates: DRC 0 / unrouted 0 / ERC 0,
+    via-pad >=0.10; resistance extraction (input/common/branch) vs
+    Rev.7 class; Rev.8-native Vfar @127mA/Wing incl #264 cable term;
+    copper-diff locality disclosed.
+F1. Wing Rev.5: close the 1 GND island per variant by local repair
+    only (no placement moves, no rule relaxation); unconnected 0,
+    wrong-net 0, via-pad not worse than 0.1013/0.1072/0.1252/0.1301.
+F2. Case re-audit: tray pocket fit for extended Main outline (0.50 mm
+    class clearance; silhouette D-037 NOT to be exceeded), then fitted
+    repaired audit re-run (as-routed boards + #264 folded cable):
+    gate 1 = 0 unexpected (name residuals), service, Fly/USB inherit.
+F3. FH12 footprint verification vs Hirose official land pattern
+    (CL586-0533-0 or official product-page drawing) from the web;
+    pad-by-pad compare; correct + re-run affected checks if differs;
+    if unobtainable, keep the flag explicit in REPORT.
+F4. Regenerate manufacturing packages (Main Rev.8 + Wing Rev.5 x4)
+    with final boards; status reflects closed gates; still NOT FOR
+    ORDER (PO GO, Junana, order-time stock re-verify listed open).
+REPORT.md: add follow-up-round section; remaining-before-order list
+updated. decisions.md untouched.
