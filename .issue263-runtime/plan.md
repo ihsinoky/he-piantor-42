@@ -74,3 +74,24 @@ updated. decisions.md untouched.
   package review, then actually applied — see REPORT F3 note.)
 - F4 Packages regenerated; FABRICATION.md x5 rewritten; case README updated.
 - REPORT.md follow-up section written. decisions.md NOT edited.
+
+## Wing respin round (2026-11-17) — PO option (i)
+PO decision: notch Wing inner corners in Main-tab zones AND respin the
+Wing fanout to close the 3 F1 blockers, in one round.
+R0. Plan + checkpoint (this entry).
+R1. Notch design per variant: geometry from F2 seam data (tab outline in
+    board frame per variant; clearance 0.50 mm class). Inventory copper/
+    features removed per variant; ZIF poses invariant (±27.0, -37.5).
+R2. Fanout respin + full route x4 variants (KRT machinery as prior
+    rounds). Gates: unconnected 0, wrong-net 0, material DRC 0,
+    via-pad >= 0.10 (no regression vs 0.1013/0.1072/0.1252/0.1301),
+    width floors PASS, Vfar >= 4.60 V @127 mA.
+R3. Seam verification: notched Wing outlines vs as-built extended Main
+    Rev.8 at fitted poses = 0 overlap @ stated clearance. Add F2 tray
+    relief (+3.94 L / +3.61 R mm3) to case production tree.
+R4. Fitted audit re-run (final boards + #264 folded cable): gate 1 = 0
+    unexpected (name residuals), service PASS, Fly/USB inheritance.
+R5. Regenerate Wing manufacturing packages x4; FABRICATION.md status
+    blocks updated (still DRAFT / NOT FOR ORDER).
+REPORT.md: append respin-round section + final remaining-before-order
+list + draft Wing Rev.5 adoption text. decisions.md untouched.
