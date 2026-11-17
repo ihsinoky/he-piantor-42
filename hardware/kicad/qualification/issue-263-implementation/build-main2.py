@@ -85,14 +85,22 @@ for ref,s in spec.items():
  def tn(P):
   rel=P-A; return float(rel@u), float(rel@n)
  pad_tn=[tn(q) for q in padpts]; cy_tn=[tn(q) for q in cypts]
+ # silkscreen rect corners (footprint local frame) must also stay
+ # on-board (Rev.7 final DRC was fully clean, silk included)
+ th_=math.radians(f.GetOrientationDegrees()); ox_,oy_=mm(f.GetPosition().x),mm(f.GetPosition().y)
+ silk_tn=[]
+ for lx,ly in [(-5.55,-1.80),(5.55,-1.80),(5.55,4.60),(-5.55,4.60)]:
+  q=np.array([ox_+lx*math.cos(th_)+ly*math.sin(th_),oy_-lx*math.sin(th_)+ly*math.cos(th_)])
+  silk_tn.append(tn(q))
  d_pad=max(d for t,d in pad_tn)+0.20+0.20   # rule + margin
  d_cy=max(d for t,d in cy_tn)+0.10
- depth=max(d_pad,d_cy)
- tall=[t for t,d in pad_tn]+[t for t,d in cy_tn]
+ d_silk=max(d for t,d in silk_tn)+0.15
+ depth=max(d_pad,d_cy,d_silk)
+ tall=[t for t,d in pad_tn]+[t for t,d in cy_tn]+[t for t,d in silk_tn]
  t0,t1=min(tall)-2.0,max(tall)+2.0
  c=[A+u*t0+n*(-1.0),A+u*t1+n*(-1.0),A+u*t1+n*depth,A+u*t0+n*depth]
  tabpolys.append(Polygon([tuple(q) for q in c]))
- tabs[ref]=dict(edge=s['edge'],depth_mm=round(depth,3),d_pad_req_mm=round(d_pad,3),d_courtyard_req_mm=round(d_cy,3),t_range_mm=[round(t0,3),round(t1,3)],corners=[[round(float(q[0]),3),round(float(q[1]),3)] for q in c])
+ tabs[ref]=dict(edge=s['edge'],depth_mm=round(depth,3),d_pad_req_mm=round(d_pad,3),d_courtyard_req_mm=round(d_cy,3),d_silk_req_mm=round(d_silk,3),t_range_mm=[round(t0,3),round(t1,3)],corners=[[round(float(q[0]),3),round(float(q[1]),3)] for q in c])
 newoutline=unary_union([outline]+tabpolys)
 assert newoutline.geom_type=='Polygon', newoutline.geom_type
 coords=list(newoutline.exterior.coords)
@@ -106,14 +114,8 @@ for ref,s in spec.items():
    if d<worst: worst,worstid=d,f"{ref}.{a.GetNumber()}"
 print('new outline vertices:',len(coords)-1,'worst pad-corner clearance:',round(worst,3),'at',worstid)
 assert worst>=0.20-1e-9
-# replace Edge.Cuts
-for d in list(b.GetDrawings()):
- if d.GetLayer()==p.Edge_Cuts: b.Remove(d)
-for i in range(len(coords)-1):
- sh=p.PCB_SHAPE(b); sh.SetShape(p.SHAPE_T_SEGMENT)
- sh.SetStart(p.VECTOR2I(round(coords[i][0]*1e6),round(coords[i][1]*1e6)))
- sh.SetEnd(p.VECTOR2I(round(coords[i+1][0]*1e6),round(coords[i+1][1]*1e6)))
- sh.SetLayer(p.Edge_Cuts); sh.SetWidth(0); b.Add(sh)
+# NOTE: Edge.Cuts replacement deferred to the end of the script -
+# removing drawings invalidates outstanding pcbnew proxies.
 (W/'outline-extension.json').write_text(json.dumps(dict(tabs=tabs,worst_pad_corner_clearance_mm=round(worst,4),worst_at=worstid,new_outline_area_mm2=round(newoutline.area,2),old_outline_area_mm2=round(outline.area,2)),indent=2)+'\n')
 
 # --- copper strip (identical to build-main.py)
@@ -142,6 +144,35 @@ for t in list(b.GetTracks()):
  if near: b.Remove(t); removed+=1
 for f in oldfps.values(): b.Remove(f)
 p.SaveBoard(str(W/'input.kicad_pcb'),b)
+# Edge.Cuts replacement as a TEXT edit of the saved file: doing it via
+# pcbnew after Remove() calls invalidates item proxies in this build.
+import re, uuid as _uuid
+fp_=W/'input.kicad_pcb'; txt=fp_.read_text()
+def blocks(text, pat):
+ out=[]; i=0
+ while True:
+  m=re.search(pat, text[i:])
+  if not m: break
+  j=i+m.start(); depth=0; k=j
+  while k<len(text):
+   if text[k]=='(': depth+=1
+   elif text[k]==')':
+    depth-=1
+    if depth==0: break
+   k+=1
+  out.append((j,k+1)); i=k+1
+ return out
+removed_ec=0
+for a_,b_ in reversed(blocks(txt, r'\(gr_line')):
+ blk=txt[a_:b_]
+ if '"Edge.Cuts"' in blk: txt=txt[:a_]+txt[b_:]; removed_ec+=1
+newl=[]
+for i in range(len(coords)-1):
+ newl.append('\t(gr_line (start %.4f %.4f) (end %.4f %.4f) (stroke (width 0) (type default)) (layer "Edge.Cuts") (uuid "%s"))\n'%(coords[i][0],coords[i][1],coords[i+1][0],coords[i+1][1],_uuid.uuid4()))
+anchor=txt.index('\n\t(footprint ')
+txt=txt[:anchor]+'\n'+''.join(newl)+txt[anchor:]
+fp_.write_text(txt)
+print('edge.cuts text edit: removed',removed_ec,'inserted',len(newl))
 src=BASE/'schematic/main.kicad_sch'
 if src.exists(): shutil.copyfile(src,W/'main.kicad_sch')
 (W/'swap.json').write_text(json.dumps(dict(removed_local_tracks=removed,sites=info),indent=2)+'\n')
