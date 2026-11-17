@@ -50,3 +50,15 @@
 - Mouth-view handedness (script mouthview.py; viewer at mouth, up = toward board):
   Wing 17L LEFT, Wing 17R LEFT, Main J2 LEFT, Main J3 LEFT, Matrix Rev.4 LEFT -> congruent.
 - Zone deletion (Z2 = x 85..115, y 129.5..140.03): 111 link-net items removed (ledger step1.json).
+
+## Update (PMO, 2026-11-17): FH12 LCSC code CONFIRMED
+- Hirose FH12-14S-0.5SH(55) = LCSC C5378715 (Extended, stock 3,907, ~$0.53/pc; auto-matched
+  in the Main/Wing PCBA quotes). Use C5378715 in the Rev.4 BOM - no placeholder.
+
+## Continuation assessment (second worker, 2026-11-17)
+- Uncommitted board = build2.py output of run2.sh's last attempt: all 9 link nets have
+  A* routes drawn (step2.json), but the script's own GND connectivity DIAG failed
+  (goalTot 0/520) and it saved a "partial" board.
+- CALL: KEEP the uncommitted board as working state (coherent, complete-looking routing;
+  nothing corrupt). The custom DIAG is not authoritative - KiCad DRC/connectivity decides.
+  If DRC shows GND truly unconnected, fix GND locally; else proceed to gates.
