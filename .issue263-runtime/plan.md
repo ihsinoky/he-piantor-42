@@ -56,3 +56,21 @@ F4. Regenerate manufacturing packages (Main Rev.8 + Wing Rev.5 x4)
     ORDER (PO GO, Junana, order-time stock re-verify listed open).
 REPORT.md: add follow-up-round section; remaining-before-order list
 updated. decisions.md untouched.
+
+## Follow-up round OUTCOME (2026-11-17)
+- F0 Main Rev.8: CLOSED (unconnected 0, DRC errors 0, ERC 0, via-pad 0.1596).
+  Closure: 6 std rolls (4) + 5 esc rolls (2) + 4 KRT completion passes (1)
+  + J3.8 knot rip-up (7 segments) + 1 completion pass (0). 5 dangling
+  warnings documented. Extraction: input 37.0 / common 75.6 (MISS) /
+  branch J2 114.2, J3 240.9 mOhm (MISS); Vfar 4.754 V PASS.
+- F1 Wing: 17L CLOSED (plane-repair A* 0.025 window). 16L/16R/17R BLOCKED
+  with named pinching nets + NO PATH evidence at two grids.
+- F2 Case: tray relief +3.94/+3.61 mm3 (inside D-037 silhouette);
+  WING SEAM CONFLICT: tabs bite <=1.95 mm into true Wing outlines —
+  PO disposition required (options in REPORT).
+- F3 Footprint: catalog verified; land length 1.50->1.30 corrected in
+  .kicad_mod + all embedded footprints, re-audited clean. MP flag remains.
+  (Correction had been checkpointed as done before execution; caught on
+  package review, then actually applied — see REPORT F3 note.)
+- F4 Packages regenerated; FABRICATION.md x5 rewritten; case README updated.
+- REPORT.md follow-up section written. decisions.md NOT edited.

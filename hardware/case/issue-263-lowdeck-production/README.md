@@ -45,6 +45,35 @@ connector envelope positions and the cable model are the audited
 ones (pose verification above). Copper-level changes are inside
 the board solids.
 
+## Follow-up round (2026-11-17) — extended Main outline fit
+
+The Main Rev.8 outline grew two connector tabs (PO option (a);
+depths 4.738 mm (J2) / 4.721 mm (J3) past the Rev.7 slanted edges,
+silkscreen-governed). Fit was re-checked against the #261 audit
+body set with an exact board->case transform (H1/H2/H3 washer
+anchors, residuals 0.000 mm):
+
+- Tray pockets: the tab corners enter tray material by
+  3.94 mm³ (left; case X −28.96..−26.44, Y 46.57..49.92,
+  Z 4.70..5.90) and 3.61 mm³ (right; X 26.44..28.82,
+  Y 46.57..49.68). CASE DELTA: add a local pocket relief of
+  exactly those two volumes to tray-left / tray-right. The relief
+  cuts into existing tray material only — the D-037 silhouette
+  is NOT exceeded.
+- Wing/Main seam — CONFLICT: the tabs also overlap the Wing
+  boards' inner corners. Verified against the TRUE Wing Rev.5
+  outlines placed at the fitted poses (J_WING anchor + ±30.5°
+  fit, section symdiff 2.9%): plan overlap 47.5 mm² (left) /
+  46.7 mm² (right), bite up to 1.95 mm into the Wing outline.
+  The Rev.7 edge-to-Wing seam gap is 1.516 mm, and the FH12 pad
+  corners themselves reach ~4.0 mm past the Rev.7 edge — tab
+  shrinking cannot clear this; the #261 Main ZIF poses are
+  inconsistent with the Wing outlines at board level (the #261
+  audit checked above-board envelopes, never board-vs-board at
+  the seam). DISPOSITION IS A PO DECISION (see Issue #263
+  REPORT follow-up §F2); the case delta above is necessary but
+  not sufficient while the seam conflict stands.
+
 ## Print / production notes
 
 - Trays + shells: PETG, per #261/#248 production settings; formed
