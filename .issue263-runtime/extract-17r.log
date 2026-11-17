@@ -1,0 +1,13 @@
+DIAGNOSTIC extraction on unqualified board (1 GND open remains)
+wing-rev5-17mm-right HALL_5V 0.06 1.0
+wing-rev5-17mm-right HALL_5V 0.06 0.8
+wing-rev5-17mm-right HALL_5V 0.015 1.0
+wing-rev5-17mm-right HALL_5V 0.015 0.8
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/extract-resistance.py", line 139, in <module>
+    K,terms,stats=assemble(area,factor);result=solve(K,terms,sources,[loads])[0]
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/extract-resistance.py", line 102, in solve
+    src=np.array(sorted({i for key in source for i in terms[key]}),dtype=int);_,labels=connected_components(K,directed=False);assert len(set(labels[src]))==1
+                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
