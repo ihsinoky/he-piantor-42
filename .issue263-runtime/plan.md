@@ -95,3 +95,17 @@ R5. Regenerate Wing manufacturing packages x4; FABRICATION.md status
     blocks updated (still DRAFT / NOT FOR ORDER).
 REPORT.md: append respin-round section + final remaining-before-order
 list + draft Wing Rev.5 adoption text. decisions.md untouched.
+
+## Respin round R1 outcome (notch design)
+- Poses validated for all 4 variants vs fitlib sections (symdiff
+  3.0% @16mm, 2.9% @17mm; same J_WING->envelope mapping, rot -/+30.5).
+- Overlap reproduced exactly: 46.7 (R) / 47.5 (L) mm2, bite <=1.96 mm.
+- Notch design (r1-notch-design.json): slanted floor fitted to the
+  (tab + 0.50 mm) region, R1.0 fillets at floor corners, entries
+  extended 0.6 mm; covers required region; case-frame distance from
+  new outline to tab = 0.522 mm (>= 0.50). Removed area 62.6-63.5 mm2.
+- COPPER INVENTORY: notch polygon intersects NO footprint, pad, track
+  or via in any variant; nothing within 0.6 mm either. Only overlap is
+  the 'South reserved band' rule-area keepout (no copper). The notch
+  removes bare board in a reserved band -> no re-route forced by the
+  notch itself; 17L needs notch + re-verify only.
