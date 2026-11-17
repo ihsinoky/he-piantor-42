@@ -1,0 +1,352 @@
+{
+  "stage": "initial post-router diagnostic; see qualification.json and blocking-regions.json for final repaired candidate",
+  "qualified": false,
+  "open_connections": [
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Pad 13 [HALL_5V] of U_MUX_C on B.Cu",
+          "pos": {
+            "x": 130.675817,
+            "y": 39.699969
+          },
+          "uuid": "bce2c6a3-4dc4-4d16-b813-25fb3036acc3",
+          "net": "HALL_5V"
+        },
+        {
+          "description": "Via [HALL_5V] on F.Cu - B.Cu",
+          "pos": {
+            "x": 130.9,
+            "y": 34.2
+          },
+          "uuid": "1235838a-17dc-4ee5-a3c0-32b076171c47",
+          "net": "HALL_5V"
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Pad 13 [MUX_OUT_C] of J_WING on B.Cu",
+          "pos": {
+            "x": 115.25177,
+            "y": 30.620585
+          },
+          "uuid": "bae26037-6e1b-4c0a-b7f6-a9ca8d429962",
+          "net": "MUX_OUT_C"
+        },
+        {
+          "description": "Track [MUX_OUT_C] on B.Cu, length 1.1314 mm",
+          "pos": {
+            "x": 114.9,
+            "y": 37.5
+          },
+          "uuid": "16bc8872-538e-45a2-bd30-9e0132d428c5",
+          "net": "MUX_OUT_C"
+        }
+      ]
+    },
+    {
+      "description": "Missing connection between items",
+      "ends": [
+        {
+          "description": "Track [MUX_OUT_C] on B.Cu, length 2.8284 mm",
+          "pos": {
+            "x": 122.2,
+            "y": 48.0
+          },
+          "uuid": "4c94def6-a870-46e5-94da-14359f8691fd",
+          "net": "MUX_OUT_C"
+        },
+        {
+          "description": "Pad 1 [MUX_OUT_C] of TP_W_MUXC on B.Cu",
+          "pos": {
+            "x": 115.713982,
+            "y": 38.321162
+          },
+          "uuid": "42d61a0f-c37e-49d9-9cdd-4f8082b92987",
+          "net": "MUX_OUT_C"
+        }
+      ]
+    }
+  ],
+  "router": {
+    "JSON_SUMMARY": {
+      "routed_single": [],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [
+        {
+          "net_name": "MUX_OUT_C",
+          "failed_pads": [
+            {
+              "component_ref": "U_MUX_C",
+              "pad_number": "?",
+              "x": 137.054319,
+              "y": 39.019561
+            },
+            {
+              "component_ref": "TP_W_MUXC",
+              "pad_number": "?",
+              "x": 115.713982,
+              "y": 38.321162
+            }
+          ]
+        },
+        {
+          "net_name": "HALL_5V",
+          "failed_pads": [
+            {
+              "component_ref": "U_MUX_C",
+              "pad_number": "?",
+              "x": 130.675817,
+              "y": 39.699969
+            }
+          ]
+        }
+      ],
+      "multipoint_nets": 2,
+      "multipoint_pads_connected": 50,
+      "multipoint_pads_total": 53,
+      "multipoint_edges_routed": 0,
+      "multipoint_edges_failed": 3,
+      "ripup_success_pairs": [],
+      "rerouted_pairs": [],
+      "single_ended_target_swaps": [],
+      "layer_swaps": 0,
+      "successful": 0,
+      "failed": 2,
+      "total_time": 1.03,
+      "total_iterations": 434042,
+      "total_vias": 0,
+      "cleanup_disconnected": [],
+      "min_clearance_used": 0.1,
+      "design_rules": {
+        "escalation_policy": "off",
+        "fab_tier": "auto",
+        "board_floors": {
+          "clearance": 0.1,
+          "track_width": 0.1,
+          "via_diameter": 0.6,
+          "via_drill": 0.3,
+          "hole_to_hole": 0.25,
+          "annular": 0.1,
+          "board_edge": 0.3
+        },
+        "count": 1,
+        "nets": [
+          2
+        ],
+        "narrowed": [
+          {
+            "net": 2,
+            "net_name": null,
+            "kind": "track_width",
+            "requested": 0.3,
+            "delivered": 0.1,
+            "site": "plane tap",
+            "count": 1
+          }
+        ],
+        "min_delivered": {
+          "track_width": 0.1
+        },
+        "fab_tier_escalations": 0,
+        "fab_tier_contexts": [],
+        "fab_tier_target": "advanced",
+        "unsupported_rules": []
+      },
+      "plane_fragility": {
+        "source": "none",
+        "islands": 0,
+        "refill_status": null,
+        "why": "the board has no zones",
+        "machine_dependent": false
+      },
+      "rescue": {
+        "attempted": 2,
+        "recovered": [],
+        "improved": [],
+        "unchanged": [
+          "HALL_5V",
+          "MUX_OUT_C"
+        ],
+        "pads_reconnected": 0,
+        "widths": {},
+        "time": 46.49
+      },
+      "oracle_check": "skipped",
+      "blockers": [
+        {
+          "net": "MUX_OUT_C",
+          "stage": "phase3",
+          "blocked_by": [
+            {
+              "net": "GND",
+              "blocked_count": 1,
+              "unique_cells": 1,
+              "track_cells": 1,
+              "via_cells": 0,
+              "near_target_cells": 1,
+              "near_source_cells": 0
+            }
+          ]
+        },
+        {
+          "net": "HALL_5V",
+          "stage": "phase3",
+          "blocked_by": [
+            {
+              "net": "WING_EN",
+              "blocked_count": 1,
+              "unique_cells": 1,
+              "track_cells": 1,
+              "via_cells": 0,
+              "near_target_cells": 1,
+              "near_source_cells": 0
+            }
+          ]
+        }
+      ],
+      "pad_pairs_connected": 48,
+      "pad_pairs_total": 51,
+      "pad_pairs_open": [
+        {
+          "net": "HALL_5V",
+          "pairs_connected": 48,
+          "pairs_total": 49,
+          "outcome": "open",
+          "open_subtype": "partial"
+        },
+        {
+          "net": "MUX_OUT_C",
+          "pairs_connected": 0,
+          "pairs_total": 2,
+          "outcome": "open",
+          "open_subtype": "partial"
+        }
+      ],
+      "power_trace_ampacity": [
+        {
+          "net": "GND",
+          "bottleneck_width_mm": 0.1,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 0.45,
+          "max_current_ipc2152_a": 0.45,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 520.2
+        },
+        {
+          "net": "HALL_5V",
+          "bottleneck_width_mm": 0.1,
+          "bottleneck_layer": "B.Cu",
+          "copper_oz": 1.0,
+          "max_current_a": 0.45,
+          "max_current_ipc2152_a": 0.45,
+          "temp_rise_c": 10.0,
+          "trace_length_mm": 518.2
+        }
+      ],
+      "scope": "reconciliation-subset",
+      "board_scoped_keys": [
+        "power_trace_ampacity",
+        "min_clearance_used"
+      ],
+      "env_knobs": {
+        "KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli",
+        "KRT_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools"
+      }
+    },
+    "JSON_REGRADE": {
+      "board": "file",
+      "graded_nets": 14,
+      "seconds": 0.51,
+      "routed_single": [
+        "MUX_A2",
+        "MUX_A1",
+        "MUX_A0",
+        "MUX_OUT_A",
+        "MUX_OUT_B",
+        "GND",
+        "WING_EN"
+      ],
+      "failed_single": [],
+      "open_single": [],
+      "failed_multipoint": [
+        {
+          "net_name": "HALL_5V",
+          "failed_pads": [
+            {
+              "x": 130.6758,
+              "y": 39.7,
+              "component_ref": "U_MUX_C",
+              "pad_number": "?"
+            }
+          ]
+        },
+        {
+          "net_name": "MUX_OUT_C",
+          "failed_pads": [
+            {
+              "x": 137.0543,
+              "y": 39.0196,
+              "component_ref": "U_MUX_C",
+              "pad_number": "?"
+            },
+            {
+              "x": 115.714,
+              "y": 38.3212,
+              "component_ref": "TP_W_MUXC",
+              "pad_number": "?"
+            }
+          ]
+        }
+      ],
+      "multipoint_pads_total": 137,
+      "multipoint_pads_connected": 134,
+      "successful": 7,
+      "failed": 2,
+      "unowned_broken": [],
+      "recovered": [],
+      "pad_pairs": {
+        "HALL_5V": {
+          "total": 49,
+          "connected": 48,
+          "copper": true
+        },
+        "MUX_OUT_C": {
+          "total": 2,
+          "connected": 0,
+          "copper": true
+        }
+      },
+      "broken_by_run": []
+    },
+    "JSON_SUMMARY_MIN": {
+      "escalations": 2,
+      "failed": 2,
+      "failed_single": [],
+      "main_loop_time_s": 5.760000000000001,
+      "min_clearance_used": 0.1,
+      "multipoint_deficit": 3,
+      "open_single": [],
+      "pad_pairs_open": {
+        "count": 2,
+        "nets": [
+          "HALL_5V",
+          "MUX_OUT_C"
+        ]
+      },
+      "regraded_nets": 14,
+      "routed": 7,
+      "scope": "merged",
+      "terminal_restores_broken": [],
+      "vias": 46
+    }
+  },
+  "power_voltage_extraction": "initial routing diagnostic; see final-state.json and any resistance-extraction.json for final status",
+  "erc": "NOT RUN: no native Wing schematic in Rev.3 package; routing gate not passed"
+}

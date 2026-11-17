@@ -1,0 +1,100 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-17T07:08:25+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [MUX_OUT_C] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.9,
+                        "y": 37.5
+                    },
+                    "uuid": "988985aa-d089-4348-bb9a-7293a7779999"
+                },
+                {
+                    "description": "Pad 13 [MUX_OUT_C] of J_WING on B.Cu",
+                    "pos": {
+                        "x": 115.25177,
+                        "y": 30.620585
+                    },
+                    "uuid": "bae26037-6e1b-4c0a-b7f6-a9ca8d429962"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of J_WING",
+                    "pos": {
+                        "x": 120.93334,
+                        "y": 34.961352
+                    },
+                    "uuid": "e5d4939e-db91-4cc9-be52-060f92ce6271"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Polygon of J_WING on B.Silkscreen",
+                    "pos": {
+                        "x": 122.039781,
+                        "y": 25.777764
+                    },
+                    "uuid": "3ef924d5-722c-446a-af7f-ea1003e75013"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on B.Cu, length 4.8083 mm",
+                    "pos": {
+                        "x": 107.4,
+                        "y": 47.0
+                    },
+                    "uuid": "c66002f2-974f-4d9f-b9fd-aa825f190fc2"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [MUX_OUT_C] on F.Cu, length 5.3740 mm",
+                    "pos": {
+                        "x": 129.2,
+                        "y": 44.3
+                    },
+                    "uuid": "7d401230-4835-403d-8bd1-14d65cd189d0"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        }
+    ]
+}

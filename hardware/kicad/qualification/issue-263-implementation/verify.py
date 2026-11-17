@@ -123,6 +123,6 @@ def qualify(w):
  save(w/'qualification.json',out);print(w.name,metrics,'drc opens',out['drc_unconnected'],'via min',min(gaps),flush=True)
  return out
 if __name__=='__main__':
- results=[qualify(w) for w in sorted(E.glob('wing-rev4-*')) if len(sys.argv)==1 or w.name in sys.argv[1:]]
+ results=[qualify(w) for w in sorted(E.glob('wing-rev5-*')) if len(sys.argv)==1 or w.name in sys.argv[1:]]
  save(E/'qualification-summary.json',results)
  assert all(x['pass'] for x in results)

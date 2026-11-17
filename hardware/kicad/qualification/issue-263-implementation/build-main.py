@@ -38,6 +38,21 @@ for ref,s in spec.items():
   else:
    sig=str(15-int(a.GetNumber())); a.SetNetCode(olds[ref][sig]); assign[a.GetNumber()]=olds[ref+'_names'][olds[ref][sig]]
  info[ref]=dict(origin_mm=[ox,oy],yaw_deg=s['yaw'],envelope_centre_board_mm=list(s['centre']),assignment_pad_to_net=assign)
+# Remove ANY kept copper colliding with the new pads (+0.10 mm): Rev.7
+# copper (e.g. V5V2) passes under the FH12 fitting pads.
+from shapely.geometry import box as sbox, LineString as SLine, Point as SPoint
+padpolys=[]
+for ref in ('J2','J3'):
+ f=[x for x in b.GetFootprints() if x.GetReference()==ref][0]
+ for a in f.Pads():
+  padpolys.append(sbox(p.ToMM(a.GetPosition().x)-p.ToMM(a.GetSize().x)/2-.10,p.ToMM(a.GetPosition().y)-p.ToMM(a.GetSize().y)/2-.10,p.ToMM(a.GetPosition().x)+p.ToMM(a.GetSize().x)/2+.10,p.ToMM(a.GetPosition().y)+p.ToMM(a.GetSize().y)/2+.10))
+collided=[]
+for t in list(b.GetTracks()):
+ if isinstance(t,p.PCB_VIA): g=SPoint(p.ToMM(t.GetPosition().x),p.ToMM(t.GetPosition().y)).buffer(p.ToMM(t.GetWidth(p.F_Cu))/2)
+ else: g=SLine([(p.ToMM(t.GetStart().x),p.ToMM(t.GetStart().y)),(p.ToMM(t.GetEnd().x),p.ToMM(t.GetEnd().y))]).buffer(p.ToMM(t.GetWidth())/2,cap_style=1)
+ if any(g.intersects(pp) for pp in padpolys): collided.append(t)
+for t in collided: b.Remove(t)
+print('removed colliding kept copper:',len(collided))
 removed=0; netcodes=set()
 for ref in spec: netcodes|=set(olds[ref].values())
 for t in list(b.GetTracks()):

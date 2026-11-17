@@ -1,0 +1,404 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/routed.kicad_pcb --track-width 0.1 --power-nets HALL_5V GND --power-nets-widths 0.3 0.3 --escalation board --clearance 0.1 --via-size 0.6 --via-drill 0.3 --same-net-pad-clearance 0.15
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli KRT_HOME=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.25mm [board constraint].
+--board-edge-clearance not given; using 0.3mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb to expand net patterns...
+Pattern '*' matched 30 nets
+Routing 30 nets: ['GND', 'HALL_5V', 'H_A0_RAW', 'H_A1_RAW', 'H_A2_RAW']...
+Netclass clearances for 2 net(s), honored in full (no --clearance-ceiling) (mm: [0.1]); cross-class max(A,B) respected.
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb...
+Using 2 routing layers: ['F.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, B.Cu=3.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.15mm (from flag, #581): vias stay off same-net pads
+
+Power net width assignments (2 nets):
+  0.3mm: GND, HALL_5V
+
+Skipping 21 already-routed net(s): Already fully connected
+
+Analyzing layer swaps for 7 multi-point net(s) spanning layers...
+  No common layer found for 7 multi-point net(s) (left as-is)
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 9 nets with 10 crossing conflicts detected
+WARNING: Could not find pads for both stub groups in GND (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_A1 (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_A2 (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_OUT_A (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_OUT_C (found 0 pads)
+WARNING: Could not find pads for both stub groups in WING_EN (found 0 pads)
+MPS Round 1: 5 units: MUX_A2, MUX_OUT_C, MUX_A1, MUX_A0, MUX_OUT_A
+MPS Round 2: 2 units: MUX_OUT_B, GND
+MPS Round 3: 1 units: WING_EN
+MPS Round 4: 1 units: HALL_5V
+
+Routing 9 single-ended net(s)...
+============================================================
+Building base obstacle map...
+20 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
+Copper-to-hole 0.25mm for NPTH holes (from the board's own min_hole_clearance, above the 0.2mm fab floor); plated holes and vias: copper clearance
+Base obstacle map built in 0.30s
+Found 30 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.26s (30 nets)
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/9] Routing MUX_A2 (id=26)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 5 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=14.79mm)
+  Phase 1 routed in 1780 iterations, 7 segments
+  SUCCESS: 7 segments, 1 vias, 1780 iterations, length=13.95mm (stubs=4.66mm) (0.91s)
+
+[2/9] Routing MUX_OUT_C (id=29)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Existing copper joins 5 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 3 and 4, length=12.30mm)
+  Phase 1 routed in 17023 iterations, 8 segments
+  SUCCESS: 8 segments, 1 vias, 17023 iterations, length=30.65mm (stubs=18.23mm) (0.10s)
+
+[3/9] Routing MUX_A1 (id=25)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 5 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=17.43mm)
+  Phase 1 routed in 20711 iterations, 12 segments
+  SUCCESS: 12 segments, 2 vias, 20711 iterations, length=23.87mm (stubs=10.00mm) (0.11s)
+
+[4/9] Routing MUX_A0 (id=24)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 3, length=13.66mm)
+  Phase 1 routed in 15139 iterations, 12 segments
+  SUCCESS: 12 segments, 2 vias, 15139 iterations, length=15.95mm (stubs=0.00mm) (0.11s)
+
+[5/9] Routing MUX_OUT_A (id=27)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Existing copper joins 5 terminals into 3 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 4, length=19.26mm)
+  Phase 1 routed in 20451 iterations, 6 segments
+  SUCCESS: 6 segments, 0 vias, 20451 iterations, length=46.95mm (stubs=31.56mm) (0.11s)
+
+[6/9] Routing MUX_OUT_B (id=28)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=19.62mm)
+  Phase 1 routed in 26430 iterations, 14 segments
+  SUCCESS: 14 segments, 2 vias, 26430 iterations, length=22.19mm (stubs=0.00mm) (0.11s)
+
+[7/9] Routing GND (id=1)
+  Detected multi-point net with 46 pads (Phase 1: main route only)
+  Existing copper joins 46 terminals into 16 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 38 and 41, length=8.49mm)
+  Phase 1 routed in 4531 iterations, 10 segments
+  SUCCESS: 10 segments, 2 vias, 4531 iterations, length=454.17mm (stubs=445.44mm) (0.38s)
+
+[8/9] Routing WING_EN (id=30)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 2 and 4, length=16.00mm)
+  Phase 1 routed in 24216 iterations, 18 segments
+  SUCCESS: 18 segments, 1 vias, 24216 iterations, length=52.16mm (stubs=34.18mm) (0.12s)
+
+[9/9] Routing HALL_5V (id=2)
+  Detected multi-point net with 24 pads (Phase 1: main route only)
+  Existing copper joins 24 terminals into 8 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 9 and 14, length=10.13mm)
+  Phase 1 routed in 344362 iterations, 19 segments
+  SUCCESS: 19 segments, 0 vias, 344362 iterations, length=480.67mm (stubs=436.25mm) (3.12s)
+
+Sync pcb_data: 839 -> 733 (kept stubs) -> 839 (after adding 106)
+
+============================================================
+Multi-point Phase 3: Routing 35 tap connections
+============================================================
+Phase 3 order (boxed-in risk first): MUX_A2, MUX_A1, MUX_A0, MUX_OUT_B, WING_EN, MUX_OUT_C, GND, HALL_5V, MUX_OUT_A
+
+MUX_A2 (net 26):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [1/35] Routing MST edge: pad 3 -> pad 5 (length=13.66mm) target=(130.03, 38.57)
+      Routed in 44045 iterations (0.02s)
+    [2/35] Routing MST edge: pad 5 -> pad 4 (length=8.96mm) target=(128.96, 30.67)
+      Routed in 1313 iterations (0.00s)
+    [3/35] Routing MST edge: pad 4 -> pad 2 (length=12.48mm) target=(118.28, 28.87)
+      Routed in 21437 iterations (0.01s)
+  Phase 3 routing complete: 3 edges, 31 total segments, 3 total vias
+  Added 24 tap segments, 2 tap vias
+  Net total time: 0.14s, 68575 iterations
+
+MUX_A1 (net 25):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [4/35] Routing MST edge: pad 3 -> pad 5 (length=13.66mm) target=(129.70, 38.01)
+      Routed in 31848 iterations (0.02s)
+    [5/35] Routing MST edge: pad 5 -> pad 4 (length=8.70mm) target=(127.49, 31.52)
+      Routed in 3438 iterations (0.00s)
+    [6/35] Routing MST edge: pad 4 -> pad 2 (length=11.68mm) target=(118.72, 28.62)
+      Routed in 28804 iterations (0.02s)
+  Phase 3 routing complete: 3 edges, 32 total segments, 5 total vias
+  Added 20 tap segments, 3 tap vias
+  Net total time: 0.21s, 84801 iterations
+
+MUX_A0 (net 24):
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [7/35] Routing MST edge: pad 3 -> pad 2 (length=7.81mm) target=(126.02, 32.37)
+      Routed in 20242 iterations (0.01s)
+    [8/35] Routing MST edge: pad 2 -> pad 4 (length=11.47mm) target=(134.78, 35.08)
+      Routed in 36298 iterations (0.02s)
+    [9/35] Routing MST edge: pad 2 -> pad 1 (length=10.69mm) target=(119.58, 28.12)
+      Routed in 19990 iterations (0.01s)
+  Phase 3 routing complete: 3 edges, 34 total segments, 4 total vias
+  Added 22 tap segments, 2 tap vias
+  #444 seam re-ask: MUX_A0 tree is 1.50x its MST bound -- re-asking whole
+
+  Re-routing MUX_A0 (net 24)...
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 3, length=13.66mm)
+  Phase 1 routed in 4612 iterations, 12 segments
+    Re-routed main path: 12 segments, 2 vias
+  Multi-point net Phase 3: routing 3 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 3 -> pad 2 (length=7.81mm) target=(126.02, 32.37)
+      Routed in 20242 iterations (0.02s)
+    [2/0] Routing MST edge: pad 2 -> pad 4 (length=11.47mm) target=(134.78, 35.08)
+      Routed in 36298 iterations (0.02s)
+    [3/0] Routing MST edge: pad 2 -> pad 1 (length=10.69mm) target=(119.58, 28.12)
+      Routed in 19990 iterations (0.01s)
+  Phase 3 routing complete: 3 edges, 34 total segments, 4 total vias
+    Re-routed 22 tap segments, 2 tap vias
+  Net total time: 0.34s, 91669 iterations
+
+MUX_OUT_B (net 28):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [10/35] Routing MST edge: pad 0 -> pad 1 (length=13.25mm) target=(116.12, 30.12)
+      Routed in 8973 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 25 total segments, 3 total vias
+  Added 11 tap segments, 1 tap vias
+  #444 seam re-ask: MUX_OUT_B tree is 1.31x its MST bound -- re-asking whole
+
+  Re-routing MUX_OUT_B (net 28)...
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=19.62mm)
+  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+  Phase 1 routed in 32396 iterations, 16 segments
+    Re-routed main path: 16 segments, 2 vias
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 0 -> pad 1 (length=13.25mm) target=(116.12, 30.12)
+      Routed in 27292 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 25 total segments, 4 total vias
+    Re-routed 9 tap segments, 2 tap vias
+      restore skipped (net 28): saved copper would short other-net copper; left ripped (#134)
+  Net total time: 0.22s, 35403 iterations
+
+WING_EN (net 30):
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [11/35] Routing MST edge: pad 4 -> pad 5 (length=15.30mm) target=(130.90, 29.80)
+      Routed in 32832 iterations (0.04s)
+    [12/35] Routing MST edge: pad 5 -> pad 3 (length=13.73mm) target=(117.85, 29.12)
+      Routed in 34121 iterations (0.02s)
+  Phase 3 routing complete: 2 edges, 41 total segments, 3 total vias
+  Added 23 tap segments, 2 tap vias
+  #444 seam re-ask: WING_EN tree is 1.31x its MST bound -- re-asking whole
+
+  Re-routing WING_EN (net 30)...
+  Existing copper joins 6 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 2 and 4, length=16.00mm)
+  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+  Phase 1 routed in 24282 iterations, 18 segments
+    Re-routed main path: 18 segments, 1 vias
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 4 -> pad 5 (length=15.30mm) target=(130.90, 29.80)
+      Routed in 32832 iterations (0.01s)
+    [2/0] Routing MST edge: pad 5 -> pad 3 (length=13.73mm) target=(117.85, 29.12)
+      Routed in 34121 iterations (0.02s)
+  Phase 3 routing complete: 2 edges, 41 total segments, 3 total vias
+    Re-routed 23 tap segments, 2 tap vias
+  Net total time: 0.36s, 91169 iterations
+
+MUX_OUT_C (net 29):
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [13/35] Routing MST edge: pad 2 -> pad 1 (length=12.16mm) target=(115.71, 38.32)
+      Routed in 68245 iterations (0.03s)
+    [14/35] Routing MST edge: pad 1 -> pad 0 (length=8.16mm) target=(115.25, 30.62)
+      Routed in 22843 iterations (0.04s)
+  Phase 3 routing complete: 2 edges, 36 total segments, 6 total vias
+  Added 28 tap segments, 5 tap vias
+  #444 seam re-ask: MUX_OUT_C tree is 1.58x its MST bound -- re-asking whole
+
+  Re-routing MUX_OUT_C (net 29)...
+  Existing copper joins 5 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 3 and 4, length=12.30mm)
+  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+  Phase 1 routed in 16800 iterations, 8 segments
+    Re-routed main path: 8 segments, 1 vias
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 2 -> pad 1 (length=12.16mm) target=(115.71, 38.32)
+      Routed in 68245 iterations (0.06s)
+    [2/0] Routing MST edge: pad 1 -> pad 0 (length=8.16mm) target=(115.25, 30.62)
+      Routed in 22843 iterations (0.02s)
+  Phase 3 routing complete: 2 edges, 36 total segments, 6 total vias
+    Re-routed 28 tap segments, 5 tap vias
+      restore skipped (net 29): saved copper would short other-net copper; left ripped (#134)
+  Net total time: 0.31s, 108111 iterations
+
+GND (net 1):
+  Multi-point net Phase 3: routing 14 remaining MST edges (longest first)
+    [15/35] Routing MST edge: pad 38 -> pad 37 (length=5.17mm) target=(121.69, 44.14)
+      Routed in 9848 iterations (0.04s)
+    [16/35] Routing MST edge: pad 37 -> pad 40 (length=6.97mm) target=(126.40, 46.40)
+      Routed in 1521 iterations (0.01s)
+    [17/35] Routing MST edge: pad 41 -> pad 42 (length=5.17mm) target=(131.30, 34.92)
+      Routed in 761 iterations (0.00s)
+    [18/35] Routing MST edge: pad 42 -> pad 39 (length=8.45mm) target=(124.55, 33.22)
+      Routed in 22549 iterations (0.09s)
+    [19/35] Routing MST edge: pad 22 -> pad 20 (length=2.30mm) target=(113.98, 44.92)
+      Routed in 217 iterations (0.00s)
+    [20/35] Routing MST edge: pad 20 -> pad 23 (length=6.01mm) target=(114.24, 39.17)
+      Routed in 856 iterations (0.00s)
+    [21/35] Routing MST edge: pad 23 -> pad 17 (length=4.64mm) target=(111.30, 40.87)
+      Routed in 1099 iterations (0.00s)
+    [22/35] Routing MST edge: pad 23 -> pad 32 (length=4.64mm) target=(117.19, 37.47)
+      Routed in 1326 iterations (0.01s)
+    [23/35] Routing MST edge: pad 32 -> pad 30 (length=8.24mm) target=(116.55, 29.87)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 35781 iterations (0.10s)
+    [24/35] Routing MST edge: pad 30 -> pad 34 (length=1.37mm) target=(117.42, 29.37)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 5515 iterations (0.05s)
+    [25/35] Routing MST edge: pad 34 -> pad 35 (length=2.73mm) target=(119.15, 28.37)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 29807 iterations (0.12s)
+    [26/35] Routing MST edge: pad 35 -> pad 36 (length=1.37mm) target=(120.01, 27.87)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 5003 iterations (0.03s)
+    [27/35] Routing MST edge: pad 30 -> pad 29 (length=1.37mm) target=(115.68, 30.37)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 5153 iterations (0.03s)
+    [28/35] Routing MST edge: pad 29 -> pad 26 (length=1.37mm) target=(114.82, 30.87)
+      Routed in 351 iterations (0.00s)
+  Phase 3 routing complete: 14 edges, 159 total segments, 8 total vias
+  Added 149 tap segments, 6 tap vias
+  Net total time: 0.92s, 124318 iterations
+
+HALL_5V (net 2):
+  Multi-point net Phase 3: routing 6 remaining MST edges (longest first)
+    [29/35] Routing MST edge: pad 9 -> pad 7 (length=9.08mm) target=(107.50, 46.90)
+      Routed in 1 iterations (0.00s)
+    [30/35] Routing MST edge: pad 14 -> pad 13 (length=6.47mm) target=(121.80, 38.45)
+      Routed in 30739 iterations (0.14s)
+    [31/35] Routing MST edge: pad 13 -> pad 15 (length=5.66mm) target=(123.08, 34.07)
+      Routed in 4748 iterations (0.02s)
+    [32/35] Routing MST edge: pad 15 -> pad 12 (length=9.08mm) target=(120.45, 27.62)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 12574 iterations (0.07s)
+    [33/35] Routing MST edge: pad 15 -> pad 19 (length=8.00mm) target=(130.46, 33.45)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 44572 iterations (0.17s)
+    [34/35] Routing MST edge: pad 19 -> pad 20 (length=6.47mm) target=(130.68, 39.70)
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Routed in 115192 iterations (0.38s)
+  Phase 3 routing complete: 6 edges, 113 total segments, 10 total vias
+  Added 94 tap segments, 10 tap vias
+  Net total time: 1.09s, 552188 iterations
+
+MUX_OUT_A (net 27):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [35/35] Routing MST edge: pad 1 -> pad 0 (length=10.30mm) target=(107.80, 50.00)
+      Routed in 48670 iterations (0.02s)
+  Phase 3 routing complete: 1 edges, 10 total segments, 1 total vias
+  Added 4 tap segments, 1 tap vias
+  Net total time: 0.07s, 69121 iterations
+Issue #134 recovery: re-routing 2 net(s) left ripped to avoid a short: MUX_OUT_B, MUX_OUT_C
+
+[REROUTE 10/11] Re-routing ripped net MUX_OUT_B
+  Multi-point net with 3 pads - routing main + taps
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=19.62mm)
+  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+  dynamic iterations (#529): search extended to 273636 (base 200000)
+  Phase 1 routed in 283636 iterations, 46 segments
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 0 -> pad 1 (length=13.25mm) target=(116.12, 30.12)
+      Routed in 1845 iterations (0.00s)
+  Phase 3 routing complete: 1 edges, 52 total segments, 8 total vias
+    Tap routing: 6 segments, 0 vias
+  REROUTE SUCCESS: 52 segments, 8 vias, length=61.48mm (stubs=0.00mm) (0.20s)
+
+[REROUTE 11/11] Re-routing ripped net MUX_OUT_C
+  Multi-point net with 5 pads - routing main + taps
+  Existing copper joins 5 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 3 and 4, length=12.30mm)
+  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+  Phase 1 routed in 132806 iterations, 20 segments
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [1/0] Routing MST edge: pad 2 -> pad 1 (length=12.16mm) target=(115.71, 38.32)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x2]
+      No route found after 200000 iterations (forward), trying backward...
+      No route found after 5000 iterations (forward), trying backward...
+      Failed to route MST edge after 410000 iterations (0.41s)
+    Fallback: attempting orphaned pad 1 directly from connected copper
+    [2/0] (1 failed) Routing MST edge: pad 3 -> pad 1 (length=18.16mm) target=(115.71, 38.32)
+      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x2]
+      No route found after 200000 iterations (forward), trying backward...
+      No route found after 5000 iterations (forward), trying backward...
+      Failed to route MST edge after 410000 iterations (0.30s)
+    Fallback: attempting orphaned pad 0 directly from connected copper
+    [3/0] (2 failed) Routing MST edge: pad 3 -> pad 0 (length=26.33mm) target=(115.25, 30.62)
+      backward stuck (94 < 5000), forward=5000
+        backward cell (1153, 306, layer=1): ok, 0/8 neighbors blocked
+      Failed to route MST edge after 5094 iterations (0.10s)
+  Warning: 2 pad(s) not connected (3 MST edge(s) failed)
+  Phase 3 routing complete: 0 edges, 20 total segments, 3 total vias
+    Tap routing: 0 segments, 0 vias
+    NOT CONNECTED (so far): MUX_OUT_C - J_WING pad 13 at (115.25, 30.62) - may still be recovered; final verdict in the end-of-run summary
+    NOT CONNECTED (so far): MUX_OUT_C - TP_W_MUXC pad 1 at (115.71, 38.32) - may still be recovered; final verdict in the end-of-run summary
+  REROUTE SUCCESS: 20 segments, 3 vias, length=70.49mm (stubs=18.23mm) (0.93s)
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing MUX_OUT_C (partial, 3 disconnected parts)
+  Netclass clearances for 2 net(s), honoured in full (no --clearance-ceiling) (mm: [0.1]); escape copper spaced at KiCad's pairwise max(A, B).
+  J_WING sits on B.Cu - routing the board turned over and mirroring back (flip_frame)
+  J_WING placed at 150.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Track width 0.1000mm is below the 2-layer fab floor 0.1270mm - clamping escape stubs up (issue #223)
+BGA Grid Analysis for J_WING:
+  Pitch: 0.50 x 2.20 mm
+  Grid: 2 rows x 16 columns
+  Center: (118.13, 123.99)
+  Boundary: X[113.18, 123.08], Y[121.79, 126.19]
+  Under-pad: WARNING via 0.60mm is large for 0.50mm pitch (track 0.13, clearance 0.10); expect drops. No via fits: the smallest the fab ladder reaches is 0.6mm. A narrower track or clearance, or a via-less escape, is the lever.
+  Dog-bone: 0/1 inner balls got a gap via site (1 off-pad-or-fail (#581) fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Under-pad shrink rescue @ track 0.1000mm / via 0.60mm / clearance 0.1000mm (nominal 0.1270/0.60/0.1000): rescued 0 of 1 dropped ball(s)
+  Dropped ball(s) on J_WING, and what crowds each (#1217):
+    J_WING.13 MUX_OUT_C: no room for a 0.6mm via at the ball (GND track on B.Cu 0.05mm from it, GND track on B.Cu 0.05mm from it); nearest foreign copper (edge to ball centre): F.Cu: clear within 0.50mm; B.Cu: GND track 0.35mm, GND track 0.35mm
+  Netclass clearances for 2 net(s), honoured in full (no --clearance-ceiling) (mm: [0.1]); escape copper spaced at KiCad's pairwise max(A, B).
+  J_WING sits on B.Cu - routing the board turned over and mirroring back (flip_frame)
+  J_WING placed at 150.0° - routing in the footprint frame and mapping back (issue #137; every rotation since #622's pose gate)
+  Track width 0.1000mm is below the 2-layer fab floor 0.1270mm - clamping escape stubs up (issue #223)
+BGA Grid Analysis for J_WING:
+  Pitch: 0.50 x 2.20 mm
+  Grid: 2 rows x 16 columns
+  Center: (118.13, 123.99)
+  Boundary: X[113.18, 123.08], Y[121.79, 126.19]
+  Under-pad: WARNING via 0.60mm is large for 0.50mm pitch (track 0.13, clearance 0.10); expect drops. No via fits: the smallest the fab ladder reaches is 0.6mm. A narrower track or clearance, or a via-less escape, is the lever.
+  Dog-bone: 0/1 inner balls got a gap via site (1 off-pad-or-fail (#581) fallback)
+  Dog-bone escape: 0/1 signals escaped, 0 vias, 6 plane balls skipped, 8 already-fanned skipped, 1 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+  Under-pad shrink rescue @ track 0.1000mm / via 0.60mm / clearance 0.1000mm (nominal 0.1270/0.60/0.1000): rescued 0 of 1 dropped ball(s)
+  Dropped ball(s) on J_WING, and what crowds each (#1217):
+    J_WING.13 MUX_OUT_C: no room for a 0.6mm via at the ball (GND track on B.Cu 0.05mm from it, GND track on B.Cu 0.05mm from it); nearest foreign copper (edge to ball centre): F.Cu: clear within 0.50mm; B.Cu: GND track 0.35mm, GND track 0.35mm
+    bare-ball escape: TP_W_MUXC.1 dogbone (9 seg(s), 1 via(s)) (#666)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 98151 iterations (forward), trying backward...
+No route found after 781760 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 98151 iterations (forward), trying backward...
+No route found after 781760 iterations (both directions)
+backward stuck (1641 < 5000), forward=5000
+  backward cell (4610, 1225, layer=1): ok, 0/8 neighbors blocked
+No route found after 6641 iterations (both directions)
+backward stuck (1641 < 5000), forward=5000
+  backward cell (4610, 1225, layer=1): ok, 0/8 neighbors blocked
+No route found after 6641 iterations (both directions)
+    improved (3 -> 3 parts, 6.5s)
+Rescue pass: 0 recovered, 1 improved, 0 unchanged (6.5s)
+Closed 12 stub gap(s) to same-net copper
+Cycle prune: removed 35 redundant loop segment(s) across 7 net(s)
+Dead-end sweep: trimmed 5 dead-end segment(s) and 0 unsupported via(s)
+Dangle trim: cut 1 dead-end tail(s) back to their mid-body anchor
