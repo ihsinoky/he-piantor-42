@@ -74,6 +74,29 @@ anchors, residuals 0.000 mm):
   REPORT follow-up §F2); the case delta above is necessary but
   not sufficient while the seam conflict stands.
 
+## Respin round (2026-11-17) — seam closed by the Wing notch; tray relief adopted
+
+PO disposition (i): the Wing boards' inner corners are notched in
+the tab zones and the Wing fanout was respun in the same round
+(Issue #263 REPORT, respin section). The notch (slanted floor
+fitted to the tab + 0.50 mm region, R1.0 fillets) removes
+62.6–63.5 mm² of bare corner per Wing board; it touches no
+footprint, pad, track or via in any variant.
+
+- Seam verification (final notched Wing outlines vs the as-built
+  extended Main Rev.8 outline, fitted poses, both pitches):
+  **overlap 0.000 mm²; board-to-board distance 0.5215 mm (L) /
+  0.5221 mm (R) ≥ 0.50 mm — PASS.**
+- Tray pocket relief: the two local reliefs quantified in the
+  follow-up round (**+3.94 mm³ left**, case X −28.96..−26.44,
+  Y 46.57..49.92, Z 4.70..5.90; **+3.61 mm³ right**, X 26.44..28.82,
+  Y 46.57..49.68, Z 4.70..5.90) are ADOPTED into this production
+  record: cut exactly those volumes from tray-left / tray-right
+  when the trays are next generated. They cut into existing tray
+  material only; the D-037 silhouette is not exceeded. The tray
+  geometry itself stays sourced from the #261 tree — this README
+  is the delta record, per the sources-of-truth rule above.
+
 ## Print / production notes
 
 - Trays + shells: PETG, per #261/#248 production settings; formed
