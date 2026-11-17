@@ -103,6 +103,49 @@ footprint, pad, track or via in any variant.
   only removes material from the audited Wing solid; the Main
   tabs' only body-set hits were the tray pockets relieved above.
 
+## Issue #270 round (2026-11-17) — trapezoid tabs + matched Wing re-notch
+
+PO aesthetic direction on Issue #270: the Rev.8 connector tabs
+looked distorted; the pair was reshaped together (Stage 2a shape
+approved by the PO before board work). Main Rev.9 carries
+trapezoid tabs identical at both sites (depth 4.738 mm, front
+16.689 mm, base 22.160 mm, walls at 60 degrees to the slanted
+edges — the design record's true-60-degree spec; see the #270
+REPORT for the Stage 2a script discrepancy disclosure). Wing
+Rev.6 (all four variants) re-cuts the notch floor as the exact
+0.55 mm offset of the new tab. Rev.9 and Rev.6 are a MATCHED PAIR:
+the Rev.9 tabs overlap the Rev.5 notch mouths, and the Rev.8 tabs
+do not respect the Rev.6 floor — do not mix revisions.
+
+- Seam verification (final Rev.9 / Rev.6 outlines from the saved
+  board files, fitted poses, both pitches, both sides):
+  **overlap 0.000 mm²; board-to-board distance 0.550 mm ≥ 0.52 mm
+  target — PASS** (was 0.5215 / 0.5221 for the Rev.8/Rev.5 pair).
+- Tray pocket relief: the Rev.9 tab solid (Z 4.70..5.90) enters
+  tray material by **6.52 mm³ (left)** and **6.31 mm³ (right)**
+  in total — i.e. **+2.58 mm³ / +2.70 mm³** beyond the Rev.8
+  reliefs adopted above (3.94 / 3.61 mm³). The Stage 2a estimate
+  for this delta (+1.81 / +1.94 mm³) was computed on the
+  superseded 67.9-degree script geometry; the implemented
+  true-60-degree trapezoid is wider at the base. ADOPTED into
+  this production record as the new totals: cut 6.52 mm³ (left)
+  / 6.31 mm³ (right) of local pocket relief from tray-left /
+  tray-right when the trays are next generated. The growth
+  solid's only body-set intersections are the two trays and the
+  (un-notched, audited) Wing solids — the latter dispositioned
+  by the Rev.6 notch above; no shell, plate or Fly body is
+  touched. Reliefs cut into existing tray material only; the
+  D-037 silhouette is not exceeded.
+- Fitted audit: the #264 verification bundle re-run with the
+  Rev.9/Rev.6 record reproduces the recorded audit EXACTLY
+  (`audit-rerun/audit270-rerun.log` + `final_eval.json` — identical
+  to the #264 record on every key): gate 1 = 0 unexpected
+  contacts, service PASS with the one named #264 residual. The
+  outline-specific interactions are dispositioned by the seam
+  and tray computations above and the growth-vs-bodies census
+  (`audit-rerun/case-delta-270.log`, both pitches, identical
+  results).
+
 ## Print / production notes
 
 - Trays + shells: PETG, per #261/#248 production settings; formed
