@@ -16,7 +16,7 @@ from shapely.ops import unary_union
 bodies = dict(FF.bodies_at(17, -2.65))
 trays = [bodies['tray-left'], bodies['tray-right']]
 
-WIN = {'L': (-48, 20, -2, 72), 'R': (2, 20, 48, 72)}  # x0,y0,x1,y1 case mm
+WIN = {'L': (-48, 20, -2, 72), 'R': (2, 20, 48, 72), 'C': (-20, -5, 20, 30)}  # x0,y0,x1,y1 case mm
 
 
 def local_tray(x0, y0, x1, y1):
