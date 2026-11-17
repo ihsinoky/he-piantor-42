@@ -228,7 +228,10 @@ def splice_part(part_case):
         near_s = S1b if math.dist(S1b, s) < math.dist(S2b, s) else S2b
         far_s = S2b if near_s is S1b else S1b
         b.Remove(d)
-        add_seg(s, near_s); add_seg(far_s, e)
+        if math.dist(s, near_s) > 1e-6:
+            add_seg(s, near_s)
+        if math.dist(far_s, e) > 1e-6:
+            add_seg(far_s, e)
         print("  same-item splice")
     else:
         adj = defaultdict(list)

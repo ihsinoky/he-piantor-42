@@ -1,9 +1,11 @@
-# Issue #270 — Stage 2b REPORT: Main Rev.9 + Wing Rev.6 (outline-only revision)
+# Issue #270 — REPORT: Main Rev.9 + Wing Rev.6 (outline-only revision)
 
-Date: 2026-11-17. Basis: adopted Main Rev.8 / Wing Rev.5 (D-043).
+Date: 2026-11-17 (Stage 2b) / 2026-11-18 (Stage 2d, §6).
+Basis: adopted Main Rev.8 / Wing Rev.5 (D-043).
 Shape spec: Stage 2a design record (`.issue270-runtime/stage2a-design.md`),
-approved by the PO 2026-11-17. All work is Edge.Cuts-only in intent;
-every deviation from a pure outline change is listed in §5.
+approved by the PO 2026-11-17; Stage 2d shape: Stage 2c study,
+approved by the PO 2026-11-18. All work is Edge.Cuts-only in intent;
+every deviation from a pure outline change is listed in §5 / §6.6.
 
 ## 1. What changed
 
@@ -178,16 +180,154 @@ origins match the fresh exports exactly; frame offset (0,0)), plus
    was not needed: the buffer construction's mouths are the offset
    lines/arcs themselves, and no gate failed.
 
-## 6. Draft adoption line (for the PO; NOT entered in docs/decisions.md)
+## 6. Stage 2d — connector-aligned tab fronts + simplified Wing notch
+
+Basis: the Stage 2c study (`.issue270-runtime/stage2c-design.md`,
+PO-approved 2026-11-18). Measured skew between each FH12 connector
+axis (the 14-pad row / mouth line) and the board's slanted edge:
+**J2 22.0°** (edge 120.0°, axis 142.0°), **J3 17.0°** (edge 60.0°,
+axis 43.0°) — the sites are not mirror-identical, so the tabs are
+per-site shapes. The Rev.9 trapezoid bodies are kept; only each
+tab's front edge is replaced by a line parallel to its connector
+axis, raised +0.65 mm (the smallest 0.05 step restoring zero copper
+cuts at a minimum edge clearance ≥ the 2b value).
+
+### 6.1 Main Rev.9 (in place, outline only)
+
+- J2's diving corner (front-line depth d = 0.151 mm) carries a
+  build fillet. The corner's wall stub is only 0.1739 mm and the
+  interior angle is 142.0°, capping the radius at ≈0.50 mm:
+  R0.55 is infeasible (tangent length 0.1894 > stub); **R0.50**
+  chosen (tangent length 0.1722, pocket removed 0.0032 mm², stub
+  residual 0.0017 mm). The arc's wall tangent point was snapped
+  1.7 µm onto the existing base vertex W0 (disclosed; below the
+  board's own coordinate significance for the outline chain).
+- Final-board checks (all Stage 2c checks re-verified on the
+  filleted outline): pad-corner clearance **1.4864 mm** (J3.14;
+  floor 0.70, 2b value 0.8364), pads uncovered 0, **copper cuts
+  0**, minimum edge-to-copper **0.323 mm** (2b: 0.284), silk
+  minimum 1.482 mm, inside the D-037 silhouette. Board area
+  2637.71 mm² (−12.55 vs the 2b Rev.9, matching the Stage 2c
+  prediction). Non-outline census identical to the 2b board
+  (1919 items); the board-file diff is 39 lines, Edge.Cuts only.
+
+### 6.2 Wing Rev.6 — simplified notch (PO redirect, 2026-11-18)
+
+The notch is NOT the exact 0.55 mm offset of the new tab (the PO
+judged that outline unnecessarily complex). It is a simple floor
+of **three straights parallel to the tab's diving wall / front /
+rising wall**, joined by tangent fillets, standing off the final
+tab so the **minimum seam is ≥ 0.55 mm everywhere** (uniformity
+not required), overlap 0 at both pitches, inside the D-037
+silhouette. Fillet radius chosen by sweep: RF = 1.0 needs the
+floor raised δ = 0.12/0.10 mm (L/R) to hold the minimum;
+RF = 0.75 needs δ = 0.05; **RF = 0.55 needs δ = 0.01** and removes
+the least material — adopted (it is also the project's established
+notch-arc radius from the exact-offset chain). Offsets therefore
+sit at 0.56 mm.
+
+- **Seam minimum 0.5600 mm** (design polygons), occurring at case
+  (−29.92, 52.11) left — against the tab's rising base corner —
+  and (18.45, 32.64) right. From the final saved boards: **0.5595
+  (L) / 0.5585 (R)**, identical at 16 mm and 17 mm; overlap
+  0.0000 everywhere. (The ≈0.001–0.002 below the design value is
+  KiCad's arc faceting in the saved outline.)
+- **Copper:** the notch removes only zone-fill fringe (GND pour:
+  fill L 19.51 / R 17.61 mm² per layer set, refilled per the #263
+  procedure with the delta confined to the removed region +
+  0.75 mm band, component counts unchanged). **No routed copper
+  is touched** — the non-outline census is identical on all four
+  variants and DRC wrong-net / unconnected stay 0.
+- **Segment counts** (same rule both stages: Edge.Cuts items whose
+  midpoint lies in that board's removed region vs Rev.5, buffered
+  1.0 mm): left **22 → 17**, right **26 → 23**. The 2b counts are
+  all straight facets (the exact-offset chain was emitted faceted,
+  no arcs); the 2d counts include true arcs (L: 16 seg + 1 arc;
+  R: 21 seg + 2 arcs). The new floor itself is emitted as exact
+  design elements — L: 4 elements in 2 parts (3 lines + 1 arc),
+  R: 7 elements in 3 parts (5 lines + 2 arcs) — the remaining
+  stretches of the new boundary are surviving Rev.5 boundary,
+  which already stands deeper than the new floor there.
+  Figure: `.issue270-runtime/fig-2d-wing-notch.png` (tab +
+  simplified notch, exact-offset outline ghosted).
+- **Notch area change:** material removed vs Rev.5 is L 12.91 /
+  R 12.68 mm², against the 2b exact-offset notch's 2.70 / 3.40 —
+  **+10.21 / +9.28 mm²**. The increase is the price of following
+  the larger connector-aligned tab (its rising side reaches
+  d = 7.35 mm vs the trapezoid's 4.74) with straight segments at a
+  guaranteed minimum seam; all removed material is bare corner /
+  pour fringe, no routed copper (§6.2 above).
+
+### 6.3 Gates (Stage 2d, #263 yardsticks; `gates-2d.json` per board)
+
+| board | DRC total | unconnected | wrong-net | via-pad min | verdict |
+|---|---|---|---|---|---|
+| Main Rev.9 | 509 = clearance 500 (pre-existing phantom class, as 2b) + copper_edge_clearance **4** (2b: 6) + track_dangling 5 | 0 | 0 | 0.1596 | no new class; pass profile as 2b |
+| Wing 16L | silk warning only (excluded class) | 0 | 0 | 0.1032 | pass |
+| Wing 16R | 0 | 0 | 0 | 0.1063 | pass |
+| Wing 17L | silk warning only (excluded class) | 0 | 0 | 0.1252 | pass |
+| Wing 17R | 0 | 0 | 0 | 0.1400 | pass |
+
+Main ERC 0 (schematic unchanged, run for the record). The two
+fewer copper_edge_clearance items on Main match the improved
+minimum edge-to-copper (0.284 → 0.323). Via-pad minima are
+unchanged on every board. One build defect was found and fixed
+during 2d: an endpoint snap in the left variants' same-item
+splice emitted a zero-length Edge.Cuts segment (DRC
+invalid_outline); the splice now guards zero-length pieces and
+the rebuilt boards are clean.
+
+### 6.4 Case and fitted audit
+
+- Tray relief for the final tab, recomputed from the final
+  geometry against the #264 audit body set: **6.521 (L) / 6.305
+  (R) mm³ — identical to the 2b totals** at both pitches, so the
+  low-deck production tree is NOT modified.
+- Fitted audit: the #264 verification bundle re-run with the
+  final Rev.9/Rev.6 pair reproduces the recorded audit EXACTLY —
+  `final_eval.json` byte-identical (md5 079ccaa78c2f4046e38ab9ed5ee2dc4e)
+  to the recorded `audit-rerun/final_eval.json`: gate 1 = 0
+  unexpected contacts at nominal, service PASS with the one
+  named #264 residual (records:
+  `audit-rerun/audit270-2d-rerun.log`,
+  `audit-rerun/case-delta-270-2d.log`).
+
+### 6.5 Packages
+
+Manufacturing packages regenerated for Main Rev.9 and Wing Rev.6
+×4 from the final boards (fresh gerbers/drill/POS; BOM/CPL
+re-verified row-by-row against the #267 JLCPCB set, FH12 =
+C5378715). DRAFT / NOT FOR ORDER.
+
+### 6.6 Deviations from the Stage 2c numbers
+
+1. Seam from saved boards 0.5585–0.5595 vs the 0.5600 design
+   value (KiCad arc faceting; the ≥0.55 floor holds).
+2. Saved-outline symdiff vs the design polygons 0.055–0.079 mm²
+   per Wing — µm-wide transform/rounding slivers plus endpoint
+   snaps (largest genuine component 0.017 mm² at a splice
+   junction); no shape deviation.
+3. The Main fillet's wall tangent point snapped 1.7 µm onto the
+   existing vertex W0 (§6.1).
+
+## 7. Draft adoption line (for the PO; NOT entered in docs/decisions.md)
 
 > **D-044 (DRAFT)** — Main Rev.9 and Wing Rev.6 (all four variants),
-> the matched trapezoid-tab pair of Issue #270, supersede Main
-> Rev.8 and Wing Rev.5 as the order baselines under D-042/D-043.
-> Seam 0.550 mm, tray relief totals 6.52 / 6.31 mm³ adopted in the
-> low-deck production record. All other D-043 terms (FH12 MP-land
-> flag, pre-fold lane measurement ≤1.30 Ω, Junana measurement,
-> pitch decision, Wing assembly method) are unchanged.
+> the matched pair of Issue #270 **in its final Stage 2d shape** —
+> Main tabs with connector-aligned fronts (J2 skew 22°, J3 skew
+> 17° to the board edges; R0.50 fillet at the J2 diving corner),
+> Wing notches simplified to three tab-parallel straights with
+> R0.55 fillets at a minimum seam of 0.56 mm (overlap 0) —
+> supersede Main Rev.8 and Wing Rev.5 as the order baselines
+> under D-042/D-043. Tray relief totals 6.52 / 6.31 mm³ stand as
+> adopted in the low-deck production record. All other D-043
+> terms (FH12 MP-land flag, pre-fold lane measurement ≤1.30 Ω,
+> Junana measurement, pitch decision, Wing assembly method) are
+> unchanged.
 
 Methods/scripts: `.issue270-runtime/` (geom2b, build-main-rev9,
 build-wing-rev6, verify-main-rev9, verify-wing-rev6, gates-2b,
-case-delta, make-packages-2b) on branch `issue-270-main-outline`.
+case-delta, make-packages-2b; Stage 2d: plan-2d, design-main-2d,
+build-main-rev9-2d, verify-main-2d, design-notch-2d,
+build-wing-rev6-2d, count-segments-2d, gates-2d, case-delta-2d)
+on branch `issue-270-main-outline`.
