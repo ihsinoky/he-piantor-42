@@ -110,3 +110,142 @@ recorded (both respins, FPC iteration cost, 20-cycle ZIF) are accepted
 and carried as flagged risks, not hidden.
 
 Stage 1 builds (b) at plate 10.90.
+
+---
+
+## Stage 1 — build to audit (plate-top 10.90, pitch 17)
+
+### Stack at the selected height
+
+| Layer | Z (mm) | Note |
+|---|---|---|
+| Tray floor (design) | 1.60 | ribbed; the audit body set models the floor at 2.00 (conservative by 0.40 under the sheet) |
+| FPC cruise centreline | 2.95 | sheet modelled 10.2 wide x 0.25 thick (real FPC ~9.0 wide, 0.15 + tail stiffeners) — conservative |
+| Wing PCB underside B | 4.70 | = plate 10.90 − 6.20 |
+| Wing PCB | 4.70–5.90 | ZIF on the underside at the former GH site, mouth facing Main |
+| Main PCB top | 5.90 | ZIF entry centreline 6.90 (top + 1.00) |
+| Plate top | 10.90 | B + 6.20 (datasheet-fixed stack) |
+| Keytop (provisional) | 22.00 | plate + 11.10; Junana term unmeasured (gate 6 OPEN) |
+
+The binding bound is the M2x10 tie (10.90), exactly as screened. The
+ZIF envelope itself would allow 10.60; the tie is a screw-length choice
+and is NOT the constraint relaxed here — 10.90 is the audited height.
+
+### Fitted architecture
+
+- **Connectors (FH12-14S class, 14-pos ZIF, both boards).**
+  Wing underside at the GH site: envelope centre (±27.0, −37.5),
+  entry slot at (±27.0, −34.2), entry centreline Z 2.95.
+  Main top, NW-facing poses (row yaw from the fitted approach):
+  J2 centre (23.3, 40.8), yaw −43°, mouth (20.92, 38.24);
+  J3 centre (−23.09, 40.97), yaw 38°, mouth (−20.92, 38.24);
+  entry centreline Z 6.90 both. Pin order at all four footprints is
+  assigned to the arriving lane order (D-024 content; no lane crossings
+  by construction).
+- **Route (per side).** Exit the Wing ZIF southward at cruise 2.95,
+  run west under the Wing (clear of the underside envelope field,
+  bottoms 3.30), pass south of the pocket-rim terrain, climb in the
+  open pocket NW of Main's vertex (west of the H1 screw, clear of the
+  POM plate post), ride south at 6.90 in the seam corridor above the
+  Wing/Main seam, final straight into the Main ZIF. Patterned
+  centreline length: right 111.2 mm, left 110.6 mm (blank ~120 mm
+  with the two connector tails).
+- **Case delta — formed FPC channel.** The tray carries a formed
+  channel along the whole route: the swept sheet footprint (width
+  11.4) relieved 0.225 below and 0.30 above the sheet at every
+  station. It notches the Wing-pocket rim, the seam rim, and the
+  flank of the tray boss east of the H2 plate screw (channel edge
+  passes ~1.5 mm from the H2 screw axis; the screw seat itself is
+  untouched). No other case change: exterior language, footprint and
+  raised keyless regions are the #248 low deck's, 2.65 lower.
+
+### Gate results
+
+| # | Gate | Result |
+|---|---|---|
+| 1 | Fitted REPAIRED audit, unexpected contacts | **PASS — 0** both FPCs, FPC x FPC 0 (`audit_static.json`; #248 frontier body set at s=−2.65, GH bounds removed, ZIF envelopes added, tray channel delta applied; the body set overstates tray/shell material at negative s — conservative) |
+| 2 | Interconnect length within spec | **PASS by construction** — custom FPC patterned to the fitted shape (centreline 111.2 / 110.6 mm); adopted spec: the patterned shape itself, blank ~120 mm incl. tails |
+| 3 | Service procedure fitted-clean | **PASS with one named residual** — procedure below; unplug sweep clean at every sampled pose; peel-lift shows contact only against the formed channel's own rim (≤4.49 mm³, rigid-surrogate flex artefact), no contact with any hard body |
+| 4 | Fly 170 stored | **PASS by inheritance** — Fly/USB geometry is the Δ+6-qualified arrangement shifted with the deck; the FPC route never enters the Fly zone (Fly bodies were in the audited set; no contacts) |
+| 5 | USB insertion | **PASS by inheritance** — same as gate 4 |
+| 6 | Junana keytop | **OPEN** — caps unmeasured; keytop 22.00 provisional (±1.00 class) |
+| 7 | Print envelopes (Ender-3 220x220/half incl. brim) | **PASS** — case plan footprint unchanged from the #248 low-deck case, which fit; this case is 2.65 lower |
+| 8 | Preview STEP | exported — `preview.step` in this tree (FPCs, ZIF envelopes, Wing/Main solids) |
+
+### Service procedure (defined; gate 3 model)
+
+1. Open the case top; remove the switch plate and its screws.
+2. Open the Main-end ZIF actuators and pull each FPC end out along
+   its mating axis (Phase A: tip sweep audited at 1.25/2.5/3.75/5.0 mm
+   extraction — no contacts).
+3. Lift the Wing out with its FPC attached; the sheet peels out of
+   the formed channel (Phase B peel model: Wing-side stations lift
+   first). The Wing-end ZIF is opened on the bench only.
+Service-life note: ZIF mating rating ~20 cycles (FH12 class) applies
+to the Main end, the routine disconnect — carried as the top
+service-life risk, as flagged in Stage 0.
+
+### Electrical (extraction-based)
+
+FPC lanes: 1 oz Cu; HALL_5V widened to 1.0 mm (59.0 mΩ over the
+120 mm conservative path), GND = 6 lanes x 0.30 mm in parallel
+(32.8 mΩ), ZIF contacts 50 mΩ each (5V path x2 = 100 mΩ; GND x2 per
+lane, 6 parallel = 16.7 mΩ). Loop total 208.5 mΩ vs the GH harness
+baseline 143.0 mΩ (#252 extraction): delta +65.5 mΩ = 8.3 mV at
+127 mA. **Vfar = 4.785 V ≥ 4.60 V — PASS, margin +185 mV.**
+5V lane current 127 mA < 0.5 A/contact rating. Main-side ≤50 mΩ
+targets are unchanged: Rev.8 keeps the Rev.7 extraction except the
+J2/J3 site (local re-route, board-verification item below).
+
+### Board candidates — status and placement spec
+
+The full JITX regeneration of the two boards with routed fanout and
+DRC/ERC-0 evidence was NOT completed in this study; what is fixed and
+delivered is the placement the respin must use (from the fitted
+audit) plus the escape analysis:
+
+- Wing Rev.5: ZIF footprint at the Rev.4 GH site, underside, mouth
+  facing Main (poses above). Main Rev.8: ZIF footprints at the Rev.7
+  J2/J3 sites rotated to the NW-facing poses above.
+- Escape: at 0.5 mm pitch the pad gap is 0.20 — a 0.10 trace cannot
+  escape between pads on the same layer at 0.10/0.10 rules (needs
+  0.30). Escapes therefore fan outward beyond the row ends and drop
+  on 0.60/0.30 vias to the back layer at the established yardsticks
+  (Wing D-021 2-layer, Main D-019 4-layer) — the same escape class
+  the GH fanouts closed at these sites in #235/#240.
+- Remaining for the implementation round: regenerate Wing Rev.5 /
+  Main Rev.8 in the JITX flow with FH12-14S-class footprints at the
+  poses above, close the local fanouts, and produce DRC / unrouted /
+  ERC / via-pad (≥0.10 floor) evidence. This is a bounded task; the
+  site geometry it must satisfy is now fixed by a passing audit.
+
+### Stock / cost delta vs the adopted (Δ+6 GH) design
+
+- Removed: GH plugs/housings x4, 28 crimped wires, harness labour.
+- Added: FH12-14S-class ZIF x4 (LCSC stock to be re-verified at
+  order time — Stage 0 flag stands), custom FPC x2 (prototype class
+  $50–150/iteration; unit cost low in quantity), one respin each of
+  Wing (Rev.5) and Main (Rev.8).
+- Case: formed channel added to the tray (print geometry only).
+- Height effect: keytop 33.30 (adopted Δ+6) → 22.00 provisional.
+
+### Draft decision (for PO; not entered in docs/decisions.md)
+
+Adopt the custom-FPC + ZIF low-deck architecture at plate-top
+10.90 mm (keytop 22.00 provisional) as the design baseline,
+superseding the Δ+6 bay-cover baseline (D-041) for case and
+interconnect, conditional on: (i) Junana physical measurement
+closing gate 6; (ii) Wing Rev.5 / Main Rev.8 respin evidence
+(DRC/unrouted/ERC 0, via-pad ≥0.10) in the implementation round;
+(iii) ZIF stock re-verification at order time.
+
+### Top remaining risks
+
+1. ZIF mating-cycle life (~20) on the Main-end routine disconnect.
+2. Gate 6 OPEN: real Junana caps unmeasured — keytop is provisional
+   and the 16 mm-pitch cap check (MS4) is untouched by this study.
+3. FPC fabrication iteration cost if the first article's bend/stiffener
+   details need a second spin.
+4. The audit body set overstates tray/shell material at s=−2.65
+   (conservative for clearance); the formed channel must be drawn
+   into the production case tree and re-verified there.
