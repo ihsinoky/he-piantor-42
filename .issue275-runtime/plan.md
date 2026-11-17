@@ -57,17 +57,17 @@ same 5 deg discrepancy seen from the board edges (120/60 deg).
 
 ## Work sequence
 1. [done] Verification extract (above) + checkpoint commit.
-2. Read REPORT.md Stage 2c/2d + #264 fold record + case production tree
+2. [done] Read REPORT.md Stage 2c/2d + #264 fold record + case production tree
    (tray bosses, FPC channel, Main pocket Z stack) + Fly dimensions.
-3. Candidate symmetric pose pairs (a) mirror-J2, (b) mirror-J3,
+3. [done] Candidate symmetric pose pairs (a) mirror-J2, (b) mirror-J3,
    (c) meet-in-middle: tab consequences vs D-037 silhouette, fanout room
    from the Rev.9 copper/footprint map, FFC approach, J4/power proximity.
-4. Hole verdict (board done; case bosses remain) — collision check for any
+4. [done] Hole verdict (board done; case bosses remain) — collision check for any
    hypothetical hole move is moot if offsets are 0; verify case side.
-5. Flip feasibility (a) FFC contact faces, (b) flipped component clearance
+5. [done] Flip feasibility (a) FFC contact faces, (b) flipped component clearance
    (top-5 heights vs under-Main space), (c) J4/Fly + 170mm cable,
    (d) EN0/EN1-only swap confirmation from pad net assignment.
-6. Wing impact scope statement.
-7. Stage B brief outline + fig-sym-tabs.png (Rev.9 tabs vs recommended
+6. [done] Wing impact scope statement.
+7. [done] Stage B brief outline + fig-sym-tabs.png (Rev.9 tabs vs recommended
    symmetric tabs, from measured geometry).
-8. stageA-design.md + stageA.json; final compact report. Do NOT push.
+8. [done] stageA-design.md + stageA.json; final compact report. Do NOT push.
