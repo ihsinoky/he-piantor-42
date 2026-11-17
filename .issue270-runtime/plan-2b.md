@@ -33,3 +33,18 @@ Matched pair: Rev.9 Main requires Rev.6 Wings and vice versa.
 - Checkpoint-commit after each board. Do NOT push.
 - No silent yardstick relaxation; iterate within approved spec (mouth fillets free).
 - Scratch only in .issue270-runtime/.
+
+## Notes (during execution)
+- Main DRC via standalone kicad-cli flags 500 clearance items @0.2mm rule on
+  BOTH Rev.8 (fresh run) and Rev.9: the #263 tree's Main main.kicad_pro
+  carries only a Default netclass at 0.2mm (Wing's carries 0.1). Pre-existing
+  baseline-records defect; #263's graph gates are the operative yardstick.
+  Comparative DRC (same invocation): clearance 500=500, dangling 5=5,
+  copper_edge_clearance 14 -> 6 (4 new at J3 tab wall, actual >=0.2821 =
+  the designed 0.284 edge-to-copper). Saved Rev.8 drc.json (448) is stale
+  vs a fresh run on the same file (500).
+- Main tree must nest the board in main-rev9/ subdir: fp-lib-table uses
+  ${KIPRJMOD}/../../ paths (Rev.8 sat 3 levels below qualification/).
+  Wing tree depth already matches Rev.5. Move Main after Wing builds end;
+  ERC 59 footprint_link_issues in the flat layout were this artefact
+  (schematic md5 identical to Rev.8; ERC 0 expected after the move).
