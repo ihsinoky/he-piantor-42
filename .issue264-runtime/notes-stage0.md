@@ -1,22 +1,36 @@
-# Stage 0 notes
-#261 adopted config: plate 10.90 (s=-2.65 in #248 frontier frame), B=4.70,
-cruise Z 2.95 (low) / 6.90 (high, Main entry centreline), sheet modelled
-10.2w x 0.25t. Wing ZIF slot (±27.0,-34.2) mouth facing Main (+Y);
-Main ZIF J2 centre (23.3,40.8) yaw -43, mouth (20.92,38.24); J3 mirrored
-yaw +38, mouth (-20.92,38.24). Route R centreline length 111.2, blank ~120.
-Electrical #261: loop 208.5 mOhm -> Vfar 4.785 (designed lanes 1oz Cu,
-5V lane 1.0mm = 59 mOhm/120mm, GND 6x0.30 parallel = 32.8, ZIF 50 mOhm).
-Gate1 PASS 0; gate3 PASS w/ named residual (channel rim peel 4.49 mm3);
-gates 4/5 inheritance; gate 7 PASS.
-#248 round13 Candidate D: stock FFC killed for (1) straight vs bent plan
-path, (2) lane R unspecified -> guarantee unclosable (on B3 assumed
-0.035 mm2 lanes loop ~203 mOhm, dVfar ~-2 mV -> would pass), (3) Wing-side
-FH12 actuator in 5.35 cavity, in-situ actuation not demonstrated.
-B3: FH12-14S-0.5SH(55) LCSC C5378715 JLC O3919/P3909; 0.5 A/contact,
-50 mOhm, FFC tail 0.30+-0.05 mm, flip-lock 20 cycles. Molex 152660149:
-same-side tails, 152+-4 mm, active. LCSC generic: SHOU HAN
-FFC-0.5-14P-150mm C6936336 (stock unverified, not prequalified).
-Fold geometry fact: a single ribbon fold turns heading by 2*gamma
-(gamma = fold-line angle to strip axis); small turns = long diagonal
-fold lines + triangular doubled zones; folds flip contact face (over or
-under both flip); vertical bends do not flip.
+# Issue 264 — stage 0/1 notes (cable selection + face bookkeeping)
+
+## Connector variant fact (decides the face bookkeeping)
+- Hirose FH12-14S-0.5SH(55) [#261 selection] is the BOTTOM-contact variant
+  (TME listing: "bottom contacts; ZIF"; Hirose code: the "A" suffix variant
+  FH12A-... is the top-contact type). (55) = gold plating. Height 2.0 mm,
+  FPC adaptive thickness 0.30±0.05 mm, 0.5 A/contact, 50 mOhm, 20 cycles.
+- Bottom-contact: contact springs sit in the housing's lower part; the cable's
+  conductive face must point TOWARD the PCB-side the springs face.
+  - Main Rev.8: ZIF top-mounted, bottom-contact -> springs face DOWN -> cable
+    contacts face world DOWN at the Main tail.
+  - Wing Rev.5: ZIF underside-mounted (connector rotated 180 deg about the
+    travel axis) -> springs face world UP -> cable contacts face world UP at
+    the Wing tail.
+  - Required net face change Wing->Main: UP -> DOWN = ODD number of folds.
+
+## Selected cable (seed confirmed)
+- Molex Premo-Flex FFC 152660149: 14 circuits, 0.50 mm pitch, Type A
+  (same-side contacts), length 152.00 mm, cable thickness 0.27 mm, tin
+  plating, 0.5 A/contact, Active. Same-family Type A lengths: 102 (15266-0145),
+  127, 152 (152660149), 203 (15266-0153). Type D (opposite-side) exists as the
+  parity escape hatch if the fold count were even.
+- Fold plan has FIVE folds (odd) -> Type A delivers UP at Wing, DOWN at Main:
+  CONSISTENT with FH12-14S-0.5SH(55) at all four sites. NO board-side delta.
+- Conductor transport (reflection across each fold line, computed):
+  net mapping is a REVERSAL k -> 15-k on BOTH sides. Absorbed by the #263
+  respin exactly as #261 already assigns pin order at the footprints to the
+  arriving lane order; binding note for #263: with this cable, the Main
+  footprint assigns D-024 signal k to the position the Wing delivers as 15-k.
+- Length budget: fixed parts T0->B 39.1 + S2->T1 42.5 = 81.6 mm; the middle
+  (B->S1 run + S-pair leg) absorbs the rest: leg2 = 19.6..27.6 mm for cable
+  lengths 148..156 (152 nominal -> 23.6). S2/V7/final fixed from the Main end;
+  S1 floats +-2 mm (jig slider detents per measured cable length).
+- Audit model allowances: sheet width 9.6 (real ~9.0 + placement), thickness
+  0.32 (real 0.27), fold patches +0.30 below, sensitivity run: S1 +2.3 mm,
+  width 10.4, patch 0.35.
