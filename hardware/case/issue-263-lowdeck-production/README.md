@@ -96,6 +96,12 @@ footprint, pad, track or via in any variant.
   material only; the D-037 silhouette is not exceeded. The tray
   geometry itself stays sourced from the #261 tree — this README
   is the delta record, per the sources-of-truth rule above.
+- Fitted audit with the final boards: the #264 verification
+  bundle re-run reproduces the recorded audit byte-for-byte
+  (`audit-rerun/audit264-rerun-respin.log`; gate 1 = 0 unexpected,
+  service PASS with the one named #264 residual). The Wing notch
+  only removes material from the audited Wing solid; the Main
+  tabs' only body-set hits were the tray pockets relieved above.
 
 ## Print / production notes
 

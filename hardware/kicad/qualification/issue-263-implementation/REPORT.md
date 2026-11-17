@@ -429,3 +429,171 @@ official 1.3 mm pattern; MP geometry flag remains.
    DigiKey/UniKeyic stock was >=10x in round 1).
 6. PO order GO. (Also open, non-order-blocking: measurement B
    for the Fly DB upstream resistance, before assembly.)
+
+---
+
+# Respin round (2026-11-17) — PO option (i): Wing notch + fanout respin
+
+PO disposition of the F2 seam conflict: **(i) notch the Wing
+boards' inner corners in the Main-tab zones, closing the three
+F1 blockers in the same respin.** ZIF poses invariant; D-021
+rules; via-pad floor 0.10 mm (0.125 target). Board-to-board
+clearance used for the notch: **0.50 mm** (the project's
+case-pocket clearance class).
+
+## R1 — Notch design and copper inventory
+
+Poses re-validated for all four variants against the fitted
+study solids (section symdiff 3.0% @16 mm / 2.9% @17 mm; same
+J_WING→envelope mapping as the follow-up round). The tab/Wing
+overlap reproduces exactly: 46.7 mm² (R) / 47.5 mm² (L), bite
+≤1.96 mm.
+
+Notch profile (per side, mirrored): a slanted floor fitted to
+the (Main tab + 0.50 mm) region, R1.0 fillets at both floor
+corners, entries extended 0.6 mm past the region's ends along
+the west edge so no sliver remains. The west edge stays a
+single straight Edge.Cuts segment per board. Outline area
+removed: **63.5 mm² (L) / 62.6 mm² (R)** per board; new outline
+to tab distance in the case frame 0.522 mm (≥0.50).
+
+**Copper inventory: the notch polygon intersects NO footprint,
+pad, track or via in any variant, and nothing lies within
+0.6 mm of it.** The only intersected item is the 'South
+reserved band' rule-area keepout (no copper). The notch removes
+bare board inside a reserved band; no re-route is forced by the
+notch itself, and 17L needs the notch + re-verification only.
+
+## R2 — Fanout respin: ALL FOUR VARIANTS CLOSED
+
+Respin inputs: notch applied to the qualify reference and to
+the candidate bases; every track/via whose net touched the
+J_WING fanout box was removed (16L 921 pieces / 22 mm box; 16R
+472 / 18 mm; 17R 500 / 18 mm; 17L none — notch only). Routes:
+KRT standard (D-021 options), with escalation and targeted KRT
+re-runs, plane-repair A* joins and dangling cleanup as needed
+per variant (16L: esc route + KRT re-run closed the J_WING.5/6
+and U_MUX_C.15 escapes; plane-repair deleted two clearance-
+violating GND taps and re-joined GND. 16R: std route + KRT
+re-run closed WING_EN/GND; plane-repair removed the two GND
+tap stubs at J_WING.3/.9. 17R: std route closed the GND island;
+one HALL_5V via sat exactly on U_HC4.1 — moved 0.62 mm south
+along its own B.Cu track, pad-edge gap 0.14 mm. 17L: notch
+only, cleanup of three inherited dangling items).
+
+Two consistency fixes landed with the respin: the F3 land
+correction (1.50 → 1.30 mm) is now also applied to the qualify
+reference boards (it was the sole 'J_WING' transfer change in
+every earlier qualification), and the diagnose-generated Study
+pour zones now follow the notched outline (definition.json
+regenerated). The only remaining DRC item on every variant is
+the inherited silk_over_copper warning (excluded from material
+violations by the project's own filter).
+
+| Gate | 16L | 16R | 17L | 17R |
+|---|---|---|---|---|
+| required_unconnected | 0 | 0 | 0 | 0 |
+| wrong-net contacts | 0 | 0 | 0 | 0 |
+| material DRC violations | 0 | 0 | 0 | 0 |
+| unexplained transfer changes | 0 | 0 | 0 | 0 |
+| width floors (0.10 sig / 0.30 pwr) | PASS | PASS | PASS | PASS |
+| via-pad min (mm) | 0.1032 | 0.1063 | 0.1252 | 0.1400 |
+| via-pad vs pre-respin | 0.1013 ↑ | 0.1072 ↓0.0009 ⚠ | 0.1252 = | 0.1301 ↑ |
+
+⚠ 16R via-pad minimum is 0.0009 mm below its pre-respin value —
+flagged as a marginal regression per the round's yardstick; it
+remains above the 0.10 mm floor. All other variants meet or
+improve their pre-respin minima; the 0.125 target is met by the
+17 mm pair.
+
+**Electrical (FEM, now completable):** the round-1 extraction
+assert ("all J_WING source pads share one component") was
+caused by the isolated GND pads; with all variants connected,
+the Wing FEM completes. Worst-sensor Wing drop at the design
+corner (125 °C, widths −20%, fine mesh; mesh sensitivity <1%,
+width-factor effect ~15%): **4.2 (16L) / 4.3 (16R) / 9.6 (17L)
+/ 7.5 (17R) mV**. Substituting the measured drop for the #141
+term (184.7 mV, backed out of — and verified against — both
+published Rev.8-native values 4.754/4.770 V) in the otherwise
+unchanged Rev.8-native chain: **configuration Vfar = 4.934 /
+4.934 / 4.929 / 4.931 V ≥ 4.60 V — PASS** (margin ≈ +330 mV).
+With the conservative #141 term retained, the follow-up
+round's 4.754 V stands unchanged; the respin weakens nothing.
+
+## R3 — Seam verification + case delta
+
+Final notched Wing outlines vs the AS-BUILT extended Main
+Rev.8 outline at the fitted poses (both pitches, F2
+transforms): **overlap 0.000 mm²; board-to-board distance
+0.5215 mm (L) / 0.5221 mm (R) ≥ 0.50 mm — PASS.** The F2 tray
+pocket relief (+3.94 mm³ L / +3.61 mm³ R) is recorded as
+adopted in `hardware/case/issue-263-lowdeck-production/
+README.md` (delta record; tray geometry stays sourced from
+the #261 tree).
+
+## R4 — Fitted audit re-run with the final boards
+
+The #264 final verification bundle (`run_final.py`) was re-run
+unchanged (log: case tree `audit-rerun/audit264-rerun-respin.log`).
+**The re-run reproduces the recorded audit byte-for-byte**
+(sorted diff vs the follow-up round's rerun log: 0 lines):
+nominal gate 1 = **0 unexpected contacts** for both folded
+cables, cable-vs-cable 0; tray pairs dispositioned by the
+formed channel (corridor census, as in #264); the sensitivity
+(mis-set detent) run shows exactly the two named grazes from
+#264 — Wing PCB underside 0.2857 mm³ per side and Main C23
+0.0191 mm³ — and nothing else; service classification tables
+identical, service **PASS** with the one named residual from
+#264 (the unplugged drape end resting on the Main top face,
+0.499 mm³ model overlap at 0.07 mm penetration).
+
+Board-delta coverage: the bundle audits the study body set.
+The final boards differ from it in exactly two outline deltas,
+both dispositioned outside the bundle: (1) the Wing notch only
+REMOVES material from the Wing solid — contact-monotone, it
+cannot create a contact the audit did not see; (2) the Main
+tabs ADD material — intersected against the full case body
+set in the follow-up round (F2): the only hits were the tray
+pockets, relieved and adopted in R3 above. Connector envelope
+poses are invariant (verified round 1; J_WING anchors are
+unchanged by the respin — qualify transfer check = 0 changes
+on all four variants). Fly/USB gates 4/5 PASS by inheritance,
+unchanged. Gate 6 (Junana) remains OPEN, as in every round.
+
+## R5 — Packages
+
+Wing manufacturing packages regenerated from the final boards
+(make-packages.py); all five FABRICATION.md status blocks
+(4 Wing + Main) updated to the respin state. Status remains
+**DRAFT / NOT FOR ORDER**.
+
+## Draft decision text (for PO adoption; decisions.md untouched)
+
+> **D-043 (draft) — Wing Rev.5 adoption.** Wing Rev.5 (FH12 ZIF
+> underside at the GH site, inner-corner notch per the respin
+> round) is adopted as the Wing order baseline, superseding
+> Rev.4 as order target (D-039) per D-042's configuration. All
+> four variants (16/17 mm × L/R) are routed and closed:
+> unconnected 0, material DRC 0, via-pad minima ≥0.1032 mm,
+> configuration Vfar ≥4.929 V. Remaining order gates are the
+> standing list below.
+
+## Remaining before an order (final, respin round)
+
+1. **PO order GO** — the board set (Main Rev.8 + Wing Rev.5
+   ×4) is closed and packaged DRAFT; adoption of Wing Rev.5
+   as the order baseline is the PO decision above.
+2. **Junana cap measurement** (PO-side, parts on hand
+   unconfirmed) — fixes final shell heights (gate 6 OPEN in
+   every study; keytop 22.00 provisional).
+3. **FH12 MP fitting-land geometry flag** — obtain the full
+   manufacturer drawing or accept the catalog reconstruction
+   at order release.
+4. **ZIF stock re-verification at order time** (JLCPCB
+   overseas stock of FH12-14S-0.5SH(55) unconfirmed; DigiKey
+   4,996 / Unikeyic 2,742 at the round-1 check).
+5. **Wing assembly method** (hand-solder vs PCBA) — undecided,
+   waits on the Matrix evaluation.
+6. Non-order-blocking: Fly DB measurement B before assembly;
+   FFC lane-resistance measurement ≤1.30 Ω/lane before
+   folding (procedure in the package notes).

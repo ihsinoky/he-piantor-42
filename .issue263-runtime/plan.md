@@ -109,3 +109,8 @@ list + draft Wing Rev.5 adoption text. decisions.md untouched.
   the 'South reserved band' rule-area keepout (no copper). The notch
   removes bare board in a reserved band -> no re-route forced by the
   notch itself; 17L needs notch + re-verify only.
+- R2 DONE: all 4 variants CLOSED (metrics all 0; via-pad 0.1032/0.1063/0.1252/0.1400; 16R -0.0009 flagged). FEM Vfar 4.934/4.934/4.929/4.931 PASS.
+- R3 DONE: seam overlap 0, distance 0.5215/0.5221 >= 0.50; case README updated (relief adopted).
+- R4 DONE: run_final.py re-run byte-identical to recorded audit (diff 0). Gate 1 = 0, service PASS, named residuals unchanged.
+- R5 DONE: packages regenerated x5; FABRICATION.md updated x5 (DRAFT).
+- REPORT respin section written. Final commit next.
