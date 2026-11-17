@@ -4,7 +4,7 @@ Poses (case frame, #261 REPORT/audit): envelope centres J2-side
 (-23.09,40.97) yaw +38, J3-side (+23.30,40.80) yaw -43; case = board -
 (100,70) (verified from H1/H2/H3 hole correspondences, issue-228 dims).
 Footprint origin (pad-row centre) = envelope centre + R(yaw)*(0,+1.40)
-(housing centre sits at local y=-1.40, pad row at y=+1.00).
+(housing centre at local y=+1.40, pad row at y=-1.00. KiCad file-frame rotation maps local (0,1) to (sin, -cos) of the orientation angle, so KiCad orientation = #261 case yaw, and origin = centre - (1.40 sin(yaw), -1.40 cos(yaw)) in file coords. Verified against built pad coordinates in pose-check.py.).
 Assignment: pad n of each ZIF carries D-024 signal (15-n) - the cable's
 k -> 15-k reversal is absorbed here (binding note, Issue #263 comment).
 Verification from built pad coordinates follows in verify-main.py.

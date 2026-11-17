@@ -12,7 +12,7 @@
     "land_pitch": 0.5,
     "ffc_thickness": "0.30 +/- 0.05"
   },
-  "footprint_local_frame": "origin at signal pad-row centre; +X toward pin 14; mouth (FFC entry) toward -Y; pads on the +Y (rear) side of the housing",
-  "pads": "14 signal pads 0.30 x 1.50 at y=+1.00, x=(k-7.5)*0.5 for k=1..14; 2 MP fitting pads 1.20 x 1.60 at x=+/-4.70, y=-1.20 (housing front corners, clear of the signal row; mechanical, NC)",
+  "footprint_local_frame": "origin at signal pad-row centre; +X toward pin 14; mouth (FFC entry) toward +Y; pads on the -Y (rear) side of the housing; housing centre at local y=+1.40",
+  "pads": "14 signal pads 0.30 x 1.50 at y=-1.00, x=(k-7.5)*0.5 for k=1..14; 2 MP fitting pads 1.20 x 1.60 at x=+/-4.70, y=+1.20 (housing front corners, clear of the signal row; mechanical, NC)",
   "uncertainty": "Signal pad length (1.50) and MP pad size/row are engineering reconstructions from the catalog land tables (land width 0.30 and D span are datasheet values; the catalog text extraction does not fully resolve pad length). Verify against Hirose drawing CL586-0533-0 before order release; routing escape class and the fitted audit envelope are insensitive to +/-0.3 mm tail length. MP pads moved off the signal row in Rev.5 build round 1 after DRC showed overlap with pads 1/14 at the D-span positions; fitting location is a reconstruction from housing length B=10.1 (ends at +/-5.05)."
 }

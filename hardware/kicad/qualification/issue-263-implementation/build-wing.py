@@ -33,6 +33,13 @@ for src in sorted(BASE.glob("wing-rev4-*")):
  newrow=[a.GetPosition() for a in f.Pads() if a.GetNumber()!='MP']
  nc=(sum(q.x for q in newrow)/len(newrow), sum(q.y for q in newrow)/len(newrow))
  f.SetPosition(p.VECTOR2I(int(pos.x+(oc[0]-nc[0])), int(pos.y+(oc[1]-nc[1]))))
+ # Shift along the mouth direction so the housing (envelope) centre
+ # matches the #261 spec: pad row sits 2.40 mm behind the housing
+ # centre; the GH pad row it was aligned to sits 2.95 mm further back.
+ rowc=[sum(p.ToMM(a.GetPosition().x) for a in f.Pads() if a.GetNumber()!='MP')/14,sum(p.ToMM(a.GetPosition().y) for a in f.Pads() if a.GetNumber()!='MP')/14]
+ mpc=[sum(p.ToMM(a.GetPosition().x) for a in f.Pads() if a.GetNumber()=='MP')/2,sum(p.ToMM(a.GetPosition().y) for a in f.Pads() if a.GetNumber()=='MP')/2]
+ dx,dy=mpc[0]-rowc[0],mpc[1]-rowc[1]; L=math.hypot(dx,dy); ux,uy=dx/L,dy/L
+ fp0=f.GetPosition(); f.SetPosition(p.VECTOR2I(int(fp0.x+ux*2.95*1e6),int(fp0.y+uy*2.95*1e6)))
  anchor=[p.ToMM(f.GetPosition().x),p.ToMM(f.GetPosition().y)]
  for a in f.Pads():
   if a.GetNumber()=='MP': a.SetNetCode(0)
