@@ -1,13 +1,13 @@
-CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/input.kicad_pcb /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pcb --track-width .1 --escalation off --clearance .1 --via-size .6 --via-drill .3 --same-net-pad-clearance .15 --keep-thermal --keep-input-copper --no-stub-layer-swap --max-iterations 100000 --power-nets HALL_5V GND VBUS V5V2 --power-nets-widths .5 .3 .5 .5
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/repair-in.kicad_pcb /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pcb --track-width .1 --escalation board --clearance .1 --via-size .6 --via-drill .3 --same-net-pad-clearance .15 --keep-thermal --keep-input-copper --no-stub-layer-swap --max-iterations 100000 --power-nets HALL_5V GND VBUS V5V2 --power-nets-widths .5 .3 .5 .5
 ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli KRT_HOME=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools
 --clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
 --hole-to-hole-clearance not given; using 0.2mm [board constraint].
 --board-edge-clearance not given; using 0.2mm [board constraint].
-Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/input.kicad_pcb to expand net patterns...
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/repair-in.kicad_pcb to expand net patterns...
 Using all 4 copper layers: F.Cu In1.Cu In2.Cu B.Cu (override with --layers)
 Pattern '*' matched 40 nets
 Routing 40 nets: ['ADC_A', 'ADC_B', 'ADC_C', 'FB_5V2', 'GND']...
-Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/input.kicad_pcb...
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/repair-in.kicad_pcb...
 Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
   Layer costs: F.Cu=1.0x, In1.Cu=1.0x, In2.Cu=1.0x, B.Cu=1.0x
 No BGA components detected - no exclusion zones needed
@@ -19,1043 +19,131 @@ Power net width assignments (4 nets):
   FB_5V2: pads grade connected, but its copper is 2 separate track fragment(s) -- routing to join them
   QSPI_SD1: pads grade connected, but its copper is 2 separate track fragment(s) -- routing to join them
 
-Skipping 27 already-routed net(s): Already fully connected
+Skipping 35 already-routed net(s): Already fully connected
 
 Using MPS ordering strategy...
 MPS: Using segment intersection method (no nets on BGA chips)
-MPS: 13 nets with 50 crossing conflicts detected
+MPS: 5 nets with 4 crossing conflicts detected
 WARNING: Could not find pads for both stub groups in FB_5V2 (found 1 pads)
-WARNING: Could not find pads for both stub groups in GND (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_A1 (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_EN1 (found 1 pads)
 WARNING: Could not find pads for both stub groups in QSPI_SD1 (found 1 pads)
-WARNING: Could not find pads for both stub groups in V5V2 (found 0 pads)
-MPS Round 1: 4 units: MUX_A2, FB_5V2, QSPI_SD1, WING_EN
-MPS Round 2: 2 units: MUX_EN1, V5V2
-MPS Round 3: 1 units: MUX_A1
-MPS Round 4: 1 units: HALL_5V
-MPS Round 5: 1 units: MUX_A0
-MPS Round 6: 1 units: MUX_OUT_B
-MPS Round 7: 1 units: MUX_OUT_A
-MPS Round 8: 1 units: GND
-MPS Round 9: 1 units: MUX_OUT_C
+MPS Round 1: 3 units: FB_5V2, QSPI_SD1, MUX_EN1
+MPS Round 2: 1 units: MUX_A1
+MPS Round 3: 1 units: GND
 
-Routing 13 single-ended net(s)...
+Routing 5 single-ended net(s)...
 ============================================================
 Building base obstacle map...
-24 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
-Base obstacle map built in 0.17s
+26 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
+Base obstacle map built in 0.20s
 Found 40 unrouted nets in PCB for stub proximity
 Pre-computing net obstacle cache...
-Net obstacle cache built in 0.19s (40 nets)
+Net obstacle cache built in 0.21s (40 nets)
 Plane fragility: exact-fill geometry (1 filled island(s) from KiCad refill)
-Plane fragility field: 94329 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+Plane fragility field: 104562 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
 History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
 
-[1/13] Routing MUX_A2 (id=9)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 2 and 3, length=32.88mm)
-  Phase 1 routed in 705 iterations, 16 segments
-  SUCCESS: 16 segments, 1 vias, 705 iterations, length=33.40mm (stubs=7.44mm) (0.03s)
-
-[2/13] Routing FB_5V2 (id=37)
+[1/5] Routing FB_5V2 (id=37)
   Detected multi-point net with 3 pads (Phase 1: main route only)
   Existing copper joins 3 terminals into 1 group(s)
   All pads already connected by existing copper - nothing to route
-  SUCCESS: 0 segments, 0 vias, 0 iterations, length=7.73mm (stubs=7.73mm) (0.01s)
+  SUCCESS: 0 segments, 0 vias, 0 iterations, length=7.73mm (stubs=7.73mm) (0.24s)
 
-[3/13] Routing QSPI_SD1 (id=15)
-  SUCCESS: 1 segments, 0 vias, 4 iterations, length=13.84mm (stubs=13.54mm) (0.01s)
+[2/5] Routing QSPI_SD1 (id=15)
+  SUCCESS: 1 segments, 0 vias, 4 iterations, length=13.84mm (stubs=13.54mm) (0.04s)
 
-[4/13] Routing WING_EN (id=30)
+[3/5] Routing MUX_EN1 (id=34)
+  Detected multi-point net with 4 pads (Phase 1: main route only)
+  Existing copper joins 4 terminals into 2 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 2 and 3, length=34.96mm)
+  Phase 1 routed in 192 iterations, 12 segments
+  SUCCESS: 12 segments, 1 vias, 192 iterations, length=49.89mm (stubs=26.44mm) (0.09s)
+
+[4/5] Routing MUX_A1 (id=8)
   Detected multi-point net with 3 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=28.60mm)
-  Phase 1 routed in 217 iterations, 8 segments
-  SUCCESS: 8 segments, 0 vias, 217 iterations, length=24.60mm (stubs=0.00mm) (0.02s)
+  Existing copper joins 3 terminals into 2 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=2.00mm)
+  Phase 1 routed in 514 iterations, 4 segments
+  SUCCESS: 4 segments, 1 vias, 514 iterations, length=59.73mm (stubs=56.80mm) (0.06s)
 
-[5/13] Routing MUX_EN1 (id=34)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=35.66mm)
-  Phase 1 routed in 5275 iterations, 10 segments
-  SUCCESS: 10 segments, 1 vias, 5275 iterations, length=38.28mm (stubs=11.09mm) (0.02s)
+[5/5] Routing GND (id=4)
+  Detected multi-point net with 31 pads (Phase 1: main route only)
+  Existing copper joins 31 terminals into 2 group(s)
+  POUR-LAUNCH v3: +8 region-laddered target(s) across 1 component(s) (phase 1)
+  Multi-point net Phase 1: routing longest MST edge (pads 29 and 30, length=6.40mm)
+  Phase 1 routed in 2453 iterations, 4 segments
+  SUCCESS: 4 segments, 1 vias, 2453 iterations, length=226.84mm (stubs=223.56mm) (0.89s)
 
-[6/13] Routing V5V2 (id=38)
-  Detected multi-point net with 12 pads (Phase 1: main route only)
-  Existing copper joins 12 terminals into 2 group(s)
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 2, length=12.50mm)
-  Phase 1 routed in 5203 iterations, 9 segments
-  SUCCESS: 9 segments, 0 vias, 5203 iterations, length=71.40mm (stubs=61.00mm) (0.07s)
-
-[7/13] Routing MUX_A1 (id=8)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 2 and 3, length=32.01mm)
-  Phase 1 routed in 1620 iterations, 25 segments
-  SUCCESS: 25 segments, 2 vias, 1620 iterations, length=33.06mm (stubs=8.69mm) (0.02s)
-
-[8/13] Routing HALL_5V (id=5)
-  Detected multi-point net with 5 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 3 and 4, length=46.10mm)
-  Wide power route blocked - kept at 0.5000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-  Phase 1 routed in 5811 iterations, 17 segments
-  SUCCESS: 17 segments, 1 vias, 5811 iterations, length=42.16mm (stubs=12.01mm) (0.06s)
-
-[9/13] Routing MUX_A0 (id=7)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 2 and 3, length=33.11mm)
-  Phase 1 routed in 1768 iterations, 24 segments
-  SUCCESS: 24 segments, 1 vias, 1768 iterations, length=33.87mm (stubs=6.30mm) (0.02s)
-
-[10/13] Routing MUX_OUT_B (id=11)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 3 and 2, length=29.58mm)
-  Phase 1 routed in 21000 iterations, 26 segments
-  SUCCESS: 26 segments, 2 vias, 21000 iterations, length=47.58mm (stubs=6.70mm) (0.03s)
-
-[11/13] Routing MUX_OUT_A (id=10)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=34.17mm)
-  Phase 1 edge (pads 1,3) failed after 5211 iterations - trying next MST edge
-  Multi-point net Phase 1: retrying with next MST edge (2/3) (pads 3 and 2, length=33.63mm)
-  Phase 1 edge (pads 3,2) failed after 5158 iterations - trying next MST edge
-  Multi-point net Phase 1: retrying with next MST edge (3/3) (pads 0 and 1, length=23.71mm)
-  Phase 1 routed in 10580 iterations, 13 segments
-  SUCCESS: 13 segments, 1 vias, 10580 iterations, length=32.09mm (stubs=8.80mm) (0.38s)
-
-[12/13] Routing GND (id=4)
-  Detected multi-point net with 61 pads (Phase 1: main route only)
-  POUR-LAUNCH v3: +408 region-laddered target(s) across 1 component(s) (phase 1)
-  Multi-point net Phase 1: routing longest MST edge (pads 5 and 16, length=15.63mm)
-  Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-  Phase 1 routed in 10832 iterations, 18 segments
-  SUCCESS: 18 segments, 0 vias, 10832 iterations, length=41.53mm (stubs=26.41mm) (0.83s)
-
-[13/13] Routing MUX_OUT_C (id=12)
-  Detected multi-point net with 4 pads (Phase 1: main route only)
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=45.04mm)
-  Phase 1 routed in 7651 iterations, 13 segments
-  SUCCESS: 13 segments, 2 vias, 7651 iterations, length=38.04mm (stubs=6.30mm) (0.03s)
-
-Sync pcb_data: 651 -> 472 (kept stubs) -> 651 (after adding 179)
+Sync pcb_data: 1284 -> 1263 (kept stubs) -> 1284 (after adding 21)
 
 ============================================================
-Multi-point Phase 3: Routing 77 tap connections
+Multi-point Phase 3: Routing 0 tap connections
 ============================================================
-Phase 3 order (boxed-in risk first): GND, MUX_A2, MUX_EN1, MUX_A1, MUX_A0, MUX_OUT_B, MUX_OUT_A, V5V2, MUX_OUT_C, HALL_5V, FB_5V2, WING_EN
+Phase 3 order (boxed-in risk first): MUX_EN1, GND, FB_5V2, MUX_A1
+
+MUX_EN1 (net 34):
+  No remaining MST edges to route in Phase 3
+  Net total time: 0.13s, 192 iterations
 
 GND (net 4):
-  POUR-LAUNCH v3: +408 region-laddered target(s) across 1 component(s) (phase 3)
-  Multi-point net Phase 3: routing 59 remaining MST edges (longest first)
-    [1/77] Routing MST edge: pad 16 -> pad 21 (length=7.19mm) target=(94.51, 115.50)
-      Routed in 6846 iterations (0.02s)
-    [2/77] Routing MST edge: pad 16 -> pad 13 (length=5.96mm) target=(86.36, 116.50)
-      Routed in 1310 iterations (0.00s)
-    [3/77] Routing MST edge: pad 13 -> pad 10 (length=3.35mm) target=(85.51, 119.00)
-      Routed in 28870 iterations (0.10s)
-    [4/77] Routing MST edge: pad 10 -> pad 14 (length=3.81mm) target=(88.83, 119.50)
-      Routed in 26388 iterations (0.10s)
-    [5/77] Routing MST edge: pad 10 -> pad 12 (length=2.77mm) target=(86.15, 121.12)
-      Routed in 13 iterations (0.00s)
-    [6/77] Routing MST edge: pad 12 -> pad 9 (length=4.05mm) target=(83.85, 122.88)
-      Routed in 7812 iterations (0.03s)
-    [7/77] Routing MST edge: pad 9 -> pad 11 (length=3.79mm) target=(85.51, 125.00)
-      Routed in 10 iterations (0.00s)
-    [8/77] Routing MST edge: pad 11 -> pad 7 (length=5.35mm) target=(81.16, 126.00)
-      Routed in 4592 iterations (0.01s)
-    [9/77] Routing MST edge: pad 7 -> pad 8 (length=5.67mm) target=(83.83, 129.00)
-      Routed in 2 iterations (0.00s)
-    [10/77] Routing MST edge: pad 11 -> pad 15 (length=4.31mm) target=(88.83, 126.00)
-      Routed in 54 iterations (0.00s)
-    [11/77] Routing MST edge: pad 21 -> pad 22 (length=2.50mm) target=(94.51, 118.00)
-      Routed in 26 iterations (0.00s)
-    [12/77] Routing MST edge: pad 22 -> pad 23 (length=3.00mm) target=(94.51, 121.00)
-      Routed in 770 iterations (0.00s)
-    [13/77] Routing MST edge: pad 23 -> pad 24 (length=7.31mm) target=(94.83, 128.00)
-      Routed in 39506 iterations (0.14s)
-    [14/77] Routing MST edge: pad 24 -> pad 18 (length=4.00mm) target=(93.83, 131.00)
-      Routed in 21 iterations (0.00s)
-    [15/77] Routing MST edge: pad 23 -> pad 31 (length=3.29mm) target=(97.80, 121.00)
-      Routed in 34921 iterations (0.12s)
-    [16/77] Routing MST edge: pad 31 -> pad 34 (length=4.70mm) target=(98.90, 124.60)
-      Routed in 2067 iterations (0.01s)
-    [17/77] Routing MST edge: pad 7 -> pad 6 (length=1.83mm) target=(79.33, 126.00)
-      Routed in 281 iterations (0.00s)
-    [18/77] Routing MST edge: pad 34 -> pad 35 (length=1.80mm) target=(100.30, 124.20)
-      Routed in 21 iterations (0.00s)
-    [19/77] Routing MST edge: pad 35 -> pad 39 (length=5.01mm) target=(104.51, 125.00)
-      Routed in 2848 iterations (0.01s)
-    [20/77] Routing MST edge: pad 39 -> pad 43 (length=5.00mm) target=(106.00, 121.49)
-      Routed in 603 iterations (0.00s)
-    [21/77] Routing MST edge: pad 43 -> pad 42 (length=2.50mm) target=(106.00, 118.99)
-      Routed in 106 iterations (0.00s)
-    [22/77] Routing MST edge: pad 42 -> pad 46 (length=3.52mm) target=(109.51, 119.00)
-      Routed in 35 iterations (0.00s)
-    [23/77] Routing MST edge: pad 46 -> pad 48 (length=4.98mm) target=(111.00, 122.49)
-      Routed in 28 iterations (0.00s)
-    [24/77] Routing MST edge: pad 48 -> pad 51 (length=4.00mm) target=(115.00, 122.49)
-      Routed in 1629 iterations (0.01s)
-    [25/77] Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (123 < 5000), forward=5000
-      backward stuck (114 < 5000), forward=5000
-      backward stuck (130 < 5000), forward=5000
-      backward stuck (129 < 5000), forward=5000
-      Failed to route MST edge after 58732 iterations (0.35s)
-    [26/77] (1 failed) Routing MST edge: pad 48 -> pad 49 (length=2.69mm) target=(111.00, 125.17)
-      Routed in 20 iterations (0.00s)
-    [27/77] (1 failed) Routing MST edge: pad 51 -> pad 52 (length=2.69mm) target=(115.00, 125.17)
-      Routed in 8 iterations (0.00s)
-    [28/77] (1 failed) Routing MST edge: pad 42 -> pad 41 (length=2.50mm) target=(106.00, 116.49)
-      Routed in 4155 iterations (0.01s)
-    [29/77] (1 failed) Routing MST edge: pad 41 -> pad 44 (length=2.90mm) target=(106.91, 114.50)
-      Routed in 21 iterations (0.00s)
-    [30/77] (1 failed) Routing MST edge: pad 44 -> pad 36 (length=7.90mm) target=(102.01, 111.50)
-      Routed in 1511 iterations (0.01s)
-    [31/77] (1 failed) Routing MST edge: pad 36 -> pad 38 (length=3.79mm) target=(103.55, 109.25)
-      Routed in 243 iterations (0.00s)
-    [32/77] (1 failed) Routing MST edge: pad 38 -> pad 40 (length=5.60mm) target=(105.60, 105.70)
-      Routed in 34 iterations (0.00s)
-    [33/77] (1 failed) Routing MST edge: pad 40 -> pad 29 (length=8.70mm) target=(97.20, 106.00)
-      Routed in 2 iterations (0.00s)
-    [34/77] (1 failed) Routing MST edge: pad 29 -> pad 17 (length=3.88mm) target=(93.33, 106.00)
-      Routed in 40 iterations (0.00s)
-    [35/77] (1 failed) Routing MST edge: pad 29 -> pad 32 (length=2.90mm) target=(98.00, 103.90)
-      Routed in 7439 iterations (0.03s)
-    [36/77] (1 failed) Routing MST edge: pad 32 -> pad 28 (length=2.72mm) target=(96.78, 102.40)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5037 iterations (0.02s)
-    [37/77] (1 failed) Routing MST edge: pad 28 -> pad 30 (length=2.05mm) target=(97.42, 101.00)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5137 iterations (0.02s)
-    [38/77] (1 failed) Routing MST edge: pad 28 -> pad 26 (length=1.58mm) target=(95.85, 101.75)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5019 iterations (0.02s)
-    [39/77] (1 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Neck-down at 0.1500mm rejected: path 3.8mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.10mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (178 < 5000), forward=5000
-        backward cell (940, 1015, layer=0): ok, 5/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(2 track)
-      backward stuck (167 < 5000), forward=5000
-        backward cell (936, 1010, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(1 track, 1 pad), USB_DM_ESD(1 track)
-      Failed to route MST edge after 11127 iterations (0.25s)
-    [40/77] (2 failed) Routing MST edge: pad 26 -> pad 25 (length=1.50mm) target=(95.85, 100.25)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5200 iterations (0.02s)
-    [41/77] (2 failed) Routing MST edge: pad 46 -> pad 45 (length=1.50mm) target=(109.51, 117.50)
-      Routed in 6303 iterations (0.03s)
-    [42/77] (2 failed) Routing MST edge: pad 45 -> pad 50 (length=4.39mm) target=(111.40, 115.00)
-      Routed in 17732 iterations (0.06s)
-    [43/77] (2 failed) Routing MST edge: pad 50 -> pad 47 (length=4.00mm) target=(110.90, 111.50)
-      Routed in 20433 iterations (0.07s)
-    [44/77] (2 failed) Routing MST edge: pad 47 -> pad 55 (length=14.28mm) target=(122.56, 108.88)
-      backward stuck (115 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad), MUX_OUT_B(1 pad)
-      backward stuck (169 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 7/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad)
-      backward stuck (235 < 5000), forward=5000  [x2]
-        backward cell (1226, 1089, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (152 < 5000), forward=5000
-        backward cell (1216, 1089, layer=0): ok, 0/8 neighbors blocked (margin=3)
-      Failed to route MST edge after 25906 iterations (0.26s)
-    [45/77] (3 failed) Routing MST edge: pad 5 -> pad 4 (length=1.40mm) target=(76.81, 110.21)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5071 iterations (0.02s)
-    [46/77] (3 failed) Routing MST edge: pad 4 -> pad 3 (length=2.81mm) target=(75.24, 111.44)
-      Neck-down at 0.1500mm rejected: path 4.0mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 7595 iterations (0.03s)
-    [47/77] (3 failed) Routing MST edge: pad 3 -> pad 2 (length=1.40mm) target=(74.45, 112.05)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.0mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5188 iterations (0.02s)
-    [48/77] (3 failed) Routing MST edge: pad 2 -> pad 1 (length=1.40mm) target=(73.66, 112.67)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5198 iterations (0.02s)
-    [49/77] (3 failed) Routing MST edge: pad 1 -> pad 0 (length=1.40mm) target=(72.87, 113.29)
-      Routed in 73 iterations (0.00s)
-    [50/77] (3 failed) Routing MST edge: pad 25 -> pad 27 (length=1.08mm) target=(96.28, 99.60)
-      Routed in 8 iterations (0.00s)
-    [51/77] (3 failed) Routing MST edge: pad 27 -> pad 33 (length=9.65mm) target=(98.20, 91.88)
-      Routed in 238 iterations (0.00s)
-    [52/77] (3 failed) Routing MST edge: pad 27 -> pad 37 (length=7.74mm) target=(102.41, 98.00)
-      Routed in 3417 iterations (0.01s)
-    Fallback: attempting orphaned pad 20 directly from connected copper
-    [53/77] (3 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Routed in 25 iterations (0.00s)
-    [54/77] (3 failed) Routing MST edge: pad 20 -> pad 19 (length=2.60mm) target=(93.91, 99.00)
-      Routed in 3052 iterations (0.01s)
-    Fallback: attempting orphaned pad 53 directly from connected copper
-    [55/77] (3 failed) Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x4]
-      backward stuck (130 < 5000), forward=5000  [x3]
-      backward stuck (118 < 5000), forward=5000
-      Failed to route MST edge after 103485 iterations (0.51s)
-    Fallback: attempting orphaned pad 54 directly from connected copper
-    [55/77] (3 failed) Routing MST edge: pad 52 -> pad 54 (length=4.00mm) target=(119.00, 125.17)
-      Routed in 15840 iterations (0.07s)
-    [56/77] (3 failed) Routing MST edge: pad 54 -> pad 53 (length=3.69mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (116 < 5000), forward=5000
-      backward stuck (118 < 5000), forward=5000
-      backward stuck (128 < 5000), forward=5000
-      backward stuck (131 < 5000), forward=5000
-      Failed to route MST edge after 42111 iterations (0.25s)
-    Fallback: attempting orphaned pad 55 directly from connected copper
-    [57/77] (4 failed) Routing MST edge: pad 47 -> pad 55 (length=14.28mm) target=(122.56, 108.88)
-      backward stuck (115 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad), MUX_OUT_B(1 pad)
-      backward stuck (169 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 7/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad)
-      backward stuck (235 < 5000), forward=5000  [x2]
-        backward cell (1226, 1089, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (152 < 5000), forward=5000
-        backward cell (1216, 1089, layer=0): ok, 0/8 neighbors blocked (margin=3)
-      Failed to route MST edge after 25906 iterations (0.26s)
-    Fallback: attempting orphaned pad 56 directly from connected copper
-    [57/77] (4 failed) Routing MST edge: pad 47 -> pad 56 (length=14.33mm) target=(123.29, 109.56)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5033 iterations (0.02s)
-    [58/77] (4 failed) Routing MST edge: pad 56 -> pad 55 (length=1.41mm) target=(122.56, 108.88)
-      backward stuck (115 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad), MUX_OUT_B(1 pad)
-      backward stuck (169 < 5000), forward=5000
-        backward cell (1226, 1089, layer=0): ok, 7/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad)
-      backward stuck (235 < 5000), forward=5000  [x2]
-        backward cell (1226, 1089, layer=0): ok, 0/8 neighbors blocked  [x4]
-      backward stuck (300 < 5000), forward=5000
-      backward stuck (299 < 5000), forward=5000
-      backward stuck (136 < 5000), forward=5000
-        backward cell (1216, 1089, layer=0): ok, 0/8 neighbors blocked (margin=3)
-      Failed to route MST edge after 36494 iterations (0.26s)
-    [59/77] (5 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (69 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (126 < 5000), forward=5000  [x2]
-        backward cell (1240, 1102, layer=0): ok, 0/8 neighbors blocked  [x5]
-      backward stuck (156 < 5000), forward=5000
-      backward stuck (147 < 5000), forward=5000
-      backward stuck (158 < 5000), forward=5000
-      backward stuck (36 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 40850 iterations (0.27s)
-    Fallback: attempting orphaned pad 57 directly from connected copper
-    [60/77] (6 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (69 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (126 < 5000), forward=5000  [x2]
-        backward cell (1240, 1102, layer=0): ok, 0/8 neighbors blocked  [x5]
-      backward stuck (156 < 5000), forward=5000
-      backward stuck (147 < 5000), forward=5000
-      backward stuck (158 < 5000), forward=5000
-      backward stuck (36 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 40851 iterations (0.26s)
-    Fallback: attempting orphaned pad 58 directly from connected copper
-    [60/77] (6 failed) Routing MST edge: pad 56 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      backward stuck (13 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (44 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (88 < 5000), forward=5000  [x2]
-        backward cell (1248, 1109, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (37 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 25270 iterations (0.26s)
-    Fallback: attempting orphaned pad 59 directly from connected copper
-    [61/77] (7 failed) Routing MST edge: pad 56 -> pad 59 (length=5.65mm) target=(126.22, 112.29)
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5384 iterations (0.03s)
-    [62/77] (7 failed) Routing MST edge: pad 59 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      backward stuck (13 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (40 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (69 < 5000), forward=5000  [x2]
-        backward cell (1248, 1109, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (37 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 25228 iterations (0.25s)
-    [63/77] (8 failed) Routing MST edge: pad 59 -> pad 60 (length=1.41mm) target=(126.95, 112.97)
-      Routed in 30 iterations (0.00s)
-  Warning: 4 pad(s) not connected (8 MST edge(s) failed)
-  Phase 3 routing complete: 55 edges, 374 total segments, 21 total vias
-    Ripping MUX_OUT_C (net 12) to retry tap route...
-  POUR-LAUNCH v3: +408 region-laddered target(s) across 1 component(s) (phase 3)
-  Multi-point net Phase 3: routing 59 remaining MST edges (longest first)
-    [64/77] (8 failed) Routing MST edge: pad 16 -> pad 21 (length=7.19mm) target=(94.51, 115.50)
-      Routed in 6846 iterations (0.02s)
-    [65/77] (8 failed) Routing MST edge: pad 16 -> pad 13 (length=5.96mm) target=(86.36, 116.50)
-      Routed in 1310 iterations (0.01s)
-    [66/77] (8 failed) Routing MST edge: pad 13 -> pad 10 (length=3.35mm) target=(85.51, 119.00)
-      Routed in 28870 iterations (0.10s)
-    [67/77] (8 failed) Routing MST edge: pad 10 -> pad 14 (length=3.81mm) target=(88.83, 119.50)
-      Routed in 26388 iterations (0.10s)
-    [68/77] (8 failed) Routing MST edge: pad 10 -> pad 12 (length=2.77mm) target=(86.15, 121.12)
-      Routed in 13 iterations (0.00s)
-    [69/77] (8 failed) Routing MST edge: pad 12 -> pad 9 (length=4.05mm) target=(83.85, 122.88)
-      Routed in 7812 iterations (0.03s)
-    [70/77] (8 failed) Routing MST edge: pad 9 -> pad 11 (length=3.79mm) target=(85.51, 125.00)
-      Routed in 10 iterations (0.00s)
-    [71/77] (8 failed) Routing MST edge: pad 11 -> pad 7 (length=5.35mm) target=(81.16, 126.00)
-      Routed in 4592 iterations (0.01s)
-    [72/77] (8 failed) Routing MST edge: pad 7 -> pad 8 (length=5.67mm) target=(83.83, 129.00)
-      Routed in 2 iterations (0.00s)
-    [73/77] (8 failed) Routing MST edge: pad 11 -> pad 15 (length=4.31mm) target=(88.83, 126.00)
-      Routed in 54 iterations (0.00s)
-    [74/77] (8 failed) Routing MST edge: pad 21 -> pad 22 (length=2.50mm) target=(94.51, 118.00)
-      Routed in 26 iterations (0.00s)
-    [75/77] (8 failed) Routing MST edge: pad 22 -> pad 23 (length=3.00mm) target=(94.51, 121.00)
-      Routed in 770 iterations (0.00s)
-    [76/77] (8 failed) Routing MST edge: pad 23 -> pad 24 (length=7.31mm) target=(94.83, 128.00)
-      Routed in 39506 iterations (0.13s)
-    [77/77] (8 failed) Routing MST edge: pad 24 -> pad 18 (length=4.00mm) target=(93.83, 131.00)
-      Routed in 21 iterations (0.00s)
-    [78/77] (8 failed) Routing MST edge: pad 23 -> pad 31 (length=3.29mm) target=(97.80, 121.00)
-      Routed in 34921 iterations (0.12s)
-    [79/77] (8 failed) Routing MST edge: pad 31 -> pad 34 (length=4.70mm) target=(98.90, 124.60)
-      Routed in 2067 iterations (0.01s)
-    [80/77] (8 failed) Routing MST edge: pad 7 -> pad 6 (length=1.83mm) target=(79.33, 126.00)
-      Routed in 281 iterations (0.00s)
-    [81/77] (8 failed) Routing MST edge: pad 34 -> pad 35 (length=1.80mm) target=(100.30, 124.20)
-      Routed in 21 iterations (0.00s)
-    [82/77] (8 failed) Routing MST edge: pad 35 -> pad 39 (length=5.01mm) target=(104.51, 125.00)
-      Routed in 2848 iterations (0.01s)
-    [83/77] (8 failed) Routing MST edge: pad 39 -> pad 43 (length=5.00mm) target=(106.00, 121.49)
-      Routed in 603 iterations (0.00s)
-    [84/77] (8 failed) Routing MST edge: pad 43 -> pad 42 (length=2.50mm) target=(106.00, 118.99)
-      Routed in 106 iterations (0.00s)
-    [85/77] (8 failed) Routing MST edge: pad 42 -> pad 46 (length=3.52mm) target=(109.51, 119.00)
-      Routed in 35 iterations (0.00s)
-    [86/77] (8 failed) Routing MST edge: pad 46 -> pad 48 (length=4.98mm) target=(111.00, 122.49)
-      Routed in 28 iterations (0.00s)
-    [87/77] (8 failed) Routing MST edge: pad 48 -> pad 51 (length=4.00mm) target=(115.00, 122.49)
-      Routed in 1629 iterations (0.01s)
-    [88/77] (8 failed) Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (129 < 5000), forward=5000  [x2]
-      backward stuck (116 < 5000), forward=5000
-      backward stuck (136 < 5000), forward=5000
-      Failed to route MST edge after 58746 iterations (0.31s)
-    [89/77] (9 failed) Routing MST edge: pad 48 -> pad 49 (length=2.69mm) target=(111.00, 125.17)
-      Routed in 20 iterations (0.00s)
-    [90/77] (9 failed) Routing MST edge: pad 51 -> pad 52 (length=2.69mm) target=(115.00, 125.17)
-      Routed in 8 iterations (0.00s)
-    [91/77] (9 failed) Routing MST edge: pad 42 -> pad 41 (length=2.50mm) target=(106.00, 116.49)
-      Routed in 4155 iterations (0.02s)
-    [92/77] (9 failed) Routing MST edge: pad 41 -> pad 44 (length=2.90mm) target=(106.91, 114.50)
-      Routed in 21 iterations (0.00s)
-    [93/77] (9 failed) Routing MST edge: pad 44 -> pad 36 (length=7.90mm) target=(102.01, 111.50)
-      Routed in 1511 iterations (0.01s)
-    [94/77] (9 failed) Routing MST edge: pad 36 -> pad 38 (length=3.79mm) target=(103.55, 109.25)
-      Routed in 243 iterations (0.00s)
-    [95/77] (9 failed) Routing MST edge: pad 38 -> pad 40 (length=5.60mm) target=(105.60, 105.70)
-      Routed in 34 iterations (0.00s)
-    [96/77] (9 failed) Routing MST edge: pad 40 -> pad 29 (length=8.70mm) target=(97.20, 106.00)
-      Routed in 2 iterations (0.00s)
-    [97/77] (9 failed) Routing MST edge: pad 29 -> pad 17 (length=3.88mm) target=(93.33, 106.00)
-      Routed in 40 iterations (0.00s)
-    [98/77] (9 failed) Routing MST edge: pad 29 -> pad 32 (length=2.90mm) target=(98.00, 103.90)
-      Routed in 7439 iterations (0.03s)
-    [99/77] (9 failed) Routing MST edge: pad 32 -> pad 28 (length=2.72mm) target=(96.78, 102.40)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5037 iterations (0.02s)
-    [100/77] (9 failed) Routing MST edge: pad 28 -> pad 30 (length=2.05mm) target=(97.42, 101.00)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5137 iterations (0.02s)
-    [101/77] (9 failed) Routing MST edge: pad 28 -> pad 26 (length=1.58mm) target=(95.85, 101.75)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5019 iterations (0.03s)
-    [102/77] (9 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Neck-down at 0.1500mm rejected: path 3.8mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.10mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (178 < 5000), forward=5000
-        backward cell (940, 1015, layer=0): ok, 5/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(2 track)
-      backward stuck (167 < 5000), forward=5000
-        backward cell (936, 1010, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(1 track, 1 pad), USB_DM_ESD(1 track)
-      Failed to route MST edge after 11143 iterations (0.23s)
-    [103/77] (10 failed) Routing MST edge: pad 26 -> pad 25 (length=1.50mm) target=(95.85, 100.25)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5200 iterations (0.02s)
-    [104/77] (10 failed) Routing MST edge: pad 46 -> pad 45 (length=1.50mm) target=(109.51, 117.50)
-      Routed in 6303 iterations (0.03s)
-    [105/77] (10 failed) Routing MST edge: pad 45 -> pad 50 (length=4.39mm) target=(111.40, 115.00)
-      Routed in 17732 iterations (0.06s)
-    [106/77] (10 failed) Routing MST edge: pad 50 -> pad 47 (length=4.00mm) target=(110.90, 111.50)
-      Routed in 20433 iterations (0.07s)
-    [107/77] (10 failed) Routing MST edge: pad 47 -> pad 55 (length=14.28mm) target=(122.56, 108.88)
-      Routed in 26 iterations (0.00s)
-    [108/77] (10 failed) Routing MST edge: pad 55 -> pad 56 (length=1.41mm) target=(123.29, 109.56)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5963 iterations (0.02s)
-    [109/77] (10 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (75 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (145 < 5000), forward=5000  [x2]
-        backward cell (1240, 1102, layer=0): ok, 0/8 neighbors blocked  [x5]
-      backward stuck (172 < 5000), forward=5000
-      backward stuck (167 < 5000), forward=5000
-      backward stuck (170 < 5000), forward=5000
-      backward stuck (36 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 40943 iterations (0.27s)
-    [110/77] (11 failed) Routing MST edge: pad 5 -> pad 4 (length=1.40mm) target=(76.81, 110.21)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5071 iterations (0.02s)
-    [111/77] (11 failed) Routing MST edge: pad 4 -> pad 3 (length=2.81mm) target=(75.24, 111.44)
-      Neck-down at 0.1500mm rejected: path 4.0mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 7595 iterations (0.03s)
-    [112/77] (11 failed) Routing MST edge: pad 3 -> pad 2 (length=1.40mm) target=(74.45, 112.05)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.0mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5188 iterations (0.02s)
-    [113/77] (11 failed) Routing MST edge: pad 2 -> pad 1 (length=1.40mm) target=(73.66, 112.67)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5198 iterations (0.02s)
-    [114/77] (11 failed) Routing MST edge: pad 1 -> pad 0 (length=1.40mm) target=(72.87, 113.29)
-      Routed in 73 iterations (0.00s)
-    [115/77] (11 failed) Routing MST edge: pad 25 -> pad 27 (length=1.08mm) target=(96.28, 99.60)
-      Routed in 8 iterations (0.00s)
-    [116/77] (11 failed) Routing MST edge: pad 27 -> pad 33 (length=9.65mm) target=(98.20, 91.88)
-      Routed in 238 iterations (0.00s)
-    [117/77] (11 failed) Routing MST edge: pad 27 -> pad 37 (length=7.74mm) target=(102.41, 98.00)
-      Routed in 3417 iterations (0.01s)
-    Fallback: attempting orphaned pad 57 directly from connected copper
-    [118/77] (11 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (75 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (145 < 5000), forward=5000  [x2]
-        backward cell (1240, 1102, layer=0): ok, 0/8 neighbors blocked  [x5]
-      backward stuck (172 < 5000), forward=5000
-      backward stuck (167 < 5000), forward=5000
-      backward stuck (170 < 5000), forward=5000
-      backward stuck (36 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 40943 iterations (0.25s)
-    Fallback: attempting orphaned pad 20 directly from connected copper
-    [118/77] (11 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Routed in 25 iterations (0.00s)
-    [119/77] (11 failed) Routing MST edge: pad 20 -> pad 19 (length=2.60mm) target=(93.91, 99.00)
-      Routed in 3052 iterations (0.01s)
-    Fallback: attempting orphaned pad 58 directly from connected copper
-    [120/77] (11 failed) Routing MST edge: pad 56 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      backward stuck (13 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (48 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (99 < 5000), forward=5000  [x2]
-        backward cell (1248, 1109, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (37 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 25296 iterations (0.24s)
-    Fallback: attempting orphaned pad 53 directly from connected copper
-    [121/77] (12 failed) Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x4]
-      backward stuck (135 < 5000), forward=5000  [x2]
-      backward stuck (131 < 5000), forward=5000
-      backward stuck (115 < 5000), forward=5000
-      Failed to route MST edge after 103493 iterations (0.50s)
-    Fallback: attempting orphaned pad 54 directly from connected copper
-    [121/77] (12 failed) Routing MST edge: pad 52 -> pad 54 (length=4.00mm) target=(119.00, 125.17)
-      Routed in 15840 iterations (0.07s)
-    [122/77] (12 failed) Routing MST edge: pad 54 -> pad 53 (length=3.69mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (117 < 5000), forward=5000
-      backward stuck (115 < 5000), forward=5000
-      backward stuck (127 < 5000), forward=5000
-      backward stuck (131 < 5000), forward=5000
-      Failed to route MST edge after 42108 iterations (0.24s)
-    Fallback: attempting orphaned pad 59 directly from connected copper
-    [123/77] (13 failed) Routing MST edge: pad 56 -> pad 59 (length=5.65mm) target=(126.22, 112.29)
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5726 iterations (0.03s)
-    [124/77] (13 failed) Routing MST edge: pad 59 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      backward stuck (13 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (42 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_EN1(3 track, 1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (87 < 5000), forward=5000  [x2]
-        backward cell (1248, 1109, layer=0): ok, 0/8 neighbors blocked  [x2]
-      backward stuck (37 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 25266 iterations (0.24s)
-    [125/77] (14 failed) Routing MST edge: pad 59 -> pad 60 (length=1.41mm) target=(126.95, 112.97)
-      Routed in 30 iterations (0.00s)
-  Warning: 3 pad(s) not connected (6 MST edge(s) failed)
-  Phase 3 routing complete: 56 edges, 377 total segments, 21 total vias
-    GND: Retry SUCCESS (N=1): 8 -> 6 failed edges
-    Adding 360 tap segments, 21 tap vias to obstacles before re-routing...
-    Re-routing 1 ripped net(s)...
+  No remaining MST edges to route in Phase 3
+  Net total time: 0.22s, 2453 iterations
 
-  Re-routing MUX_OUT_C (net 12)...
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=45.04mm)
-  backward stuck (112 < 5000), forward=5000
-    backward cell (1229, 1092, layer=0): ok, 1/8 neighbors blocked
-      Blocking obstacles: GND(2 pad)
-  Phase 1 edge (pads 1,3) failed after 5112 iterations - trying next MST edge
-  Multi-point net Phase 1: retrying with next MST edge (2/3) (pads 0 and 1, length=44.41mm)
-  Phase 1 routed in 8617 iterations, 24 segments
-    Re-routed main path: 24 segments, 0 vias
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [1/0] Routing MST edge: pad 1 -> pad 3 (length=45.04mm) target=(122.93, 109.22)
-      backward stuck (99 < 5000), forward=5000
-        backward cell (1229, 1092, layer=0): ok, 1/8 neighbors blocked
-          Blocking obstacles: GND(2 pad)
-      Failed to route MST edge after 5099 iterations (0.23s)
-    Fallback: attempting orphaned pad 3 directly from connected copper
-    [2/0] (1 failed) Routing MST edge: pad 1 -> pad 3 (length=45.04mm) target=(122.93, 109.22)
-      backward stuck (99 < 5000), forward=5000
-        backward cell (1229, 1092, layer=0): ok, 1/8 neighbors blocked
-          Blocking obstacles: GND(2 pad)
-      Failed to route MST edge after 5099 iterations (0.37s)
-    Fallback: attempting orphaned pad 2 directly from connected copper
-    [2/0] (1 failed) Routing MST edge: pad 1 -> pad 2 (length=62.72mm) target=(119.00, 130.82)
-      Routed in 67064 iterations (0.08s)
-    [3/0] (1 failed) Routing MST edge: pad 2 -> pad 3 (length=25.53mm) target=(122.93, 109.22)
-      backward stuck (83 < 5000), forward=5000
-        backward cell (1229, 1092, layer=0): ok, 1/8 neighbors blocked
-          Blocking obstacles: GND(2 pad)
-      Failed to route MST edge after 5083 iterations (0.29s)
-  Warning: 1 pad(s) not connected (2 MST edge(s) failed)
-  Phase 3 routing complete: 1 edges, 57 total segments, 0 total vias
-    MUX_OUT_C: Attempting rip-up retry for 2 failed tap edge(s)...
-    Ripping MUX_EN1 (net 34) to retry tap route...
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [1/0] Routing MST edge: pad 1 -> pad 3 (length=45.04mm) target=(122.93, 109.22)
-      Routed in 64610 iterations (0.04s)
-    [2/0] Routing MST edge: pad 3 -> pad 2 (length=25.53mm) target=(119.00, 130.82)
-      Routed in 16765 iterations (0.01s)
-  Phase 3 routing complete: 2 edges, 74 total segments, 2 total vias
-    MUX_OUT_C: Retry SUCCESS (N=1): 2 -> 0 failed edges
-    Adding 50 tap segments, 2 tap vias to obstacles before re-routing...
-    Re-routing 1 ripped net(s)...
-
-  Re-routing MUX_EN1 (net 34)...
-  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=35.66mm)
-  backward stuck (109 < 5000), forward=5000
-    backward cell (1251, 1113, layer=0): ok, 0/8 neighbors blocked
-  Phase 1 edge (pads 1,3) failed after 5109 iterations - trying next MST edge
-  Multi-point net Phase 1: retrying with next MST edge (2/3) (pads 0 and 2, length=12.19mm)
-  Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
-  Phase 1 routed in 29315 iterations, 15 segments
-    Re-routed main path: 15 segments, 2 vias
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [1/0] Routing MST edge: pad 2 -> pad 1 (length=0.96mm) target=(96.50, 118.30)
-      Routed in 419 iterations (0.00s)
-    [2/0] Routing MST edge: pad 1 -> pad 3 (length=35.66mm) target=(125.12, 111.26)
-      backward stuck (109 < 5000), forward=5000
-        backward cell (1251, 1113, layer=0): ok, 0/8 neighbors blocked
-      Failed to route MST edge after 5109 iterations (0.32s)
-    Fallback: attempting orphaned pad 3 directly from connected copper
-    [3/0] (1 failed) Routing MST edge: pad 1 -> pad 3 (length=35.66mm) target=(125.12, 111.26)
-      backward stuck (109 < 5000), forward=5000
-        backward cell (1251, 1113, layer=0): ok, 0/8 neighbors blocked
-      Failed to route MST edge after 5109 iterations (0.20s)
-  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
-  Phase 3 routing complete: 1 edges, 16 total segments, 2 total vias
-    Re-routed 1 tap segments, 0 tap vias
-    NOT CONNECTED (so far): MUX_EN1 - J3 pad 8 at (125.12, 111.26) - may still be recovered; final verdict in the end-of-run summary
-    MUX_OUT_C: Rip-up retry succeeded!
-    Re-routed 50 tap segments, 2 tap vias
-  NOT CONNECTED (so far): GND - C22 pad 2 at (118.00, 122.49) - may still be recovered; final verdict in the end-of-run summary
-  NOT CONNECTED (so far): GND - J3 pad 5 at (124.02, 110.24) - may still be recovered; final verdict in the end-of-run summary
-  NOT CONNECTED (so far): GND - J3 pad 7 at (124.75, 110.92) - may still be recovered; final verdict in the end-of-run summary
-  Added 360 tap segments, 21 tap vias
-  Net total time: 14.75s, 1382518 iterations
-
-MUX_A2 (net 9):
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [64/77] (8 failed) Routing MST edge: pad 2 -> pad 0 (length=27.05mm) target=(76.02, 110.82)
-      Routed in 52483 iterations (0.03s)
-    [65/77] (8 failed) Routing MST edge: pad 2 -> pad 1 (length=2.84mm) target=(96.56, 118.40)
-      Routed in 151 iterations (0.00s)
-  Phase 3 routing complete: 2 edges, 50 total segments, 4 total vias
-  Added 34 tap segments, 3 tap vias
-  Net total time: 0.08s, 53339 iterations
+FB_5V2 (net 37):
+  No remaining MST edges to route in Phase 3
+  Net total time: 0.03s, 0 iterations
 
 MUX_A1 (net 8):
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [66/77] (8 failed) Routing MST edge: pad 2 -> pad 1 (length=3.34mm) target=(96.56, 118.00)
-      Routed in 3228 iterations (0.00s)
-    [67/77] (8 failed) Routing MST edge: pad 1 -> pad 0 (length=27.63mm) target=(76.42, 110.52)
-      backward stuck (75 < 5000), forward=5000
-        backward cell (764, 1105, layer=0): ok, 0/8 neighbors blocked
-      Failed to route MST edge after 5075 iterations (0.22s)
-    Fallback: attempting orphaned pad 0 directly from connected copper
-    [68/77] (9 failed) Routing MST edge: pad 1 -> pad 0 (length=27.63mm) target=(76.42, 110.52)
-      backward stuck (75 < 5000), forward=5000
-        backward cell (764, 1105, layer=0): ok, 0/8 neighbors blocked
-      Failed to route MST edge after 5075 iterations (0.19s)
-  Warning: 1 pad(s) not connected (1 MST edge(s) failed)
-  Phase 3 routing complete: 1 edges, 32 total segments, 4 total vias
-    Ripping GND (net 4) to retry tap route...
-  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
-    [68/77] (9 failed) Routing MST edge: pad 2 -> pad 1 (length=3.34mm) target=(96.56, 118.00)
-      Routed in 3228 iterations (0.00s)
-    [69/77] (9 failed) Routing MST edge: pad 1 -> pad 0 (length=27.63mm) target=(76.42, 110.52)
-      Routed in 25645 iterations (0.02s)
-  Phase 3 routing complete: 2 edges, 67 total segments, 4 total vias
-    MUX_A1: Retry SUCCESS (N=1): 1 -> 0 failed edges
-    Adding 42 tap segments, 2 tap vias to obstacles before re-routing...
-    Re-routing 1 ripped net(s)...
+  No remaining MST edges to route in Phase 3
+  Net total time: 0.04s, 514 iterations
+Closed 17 stub gap(s) to same-net copper
+Cycle prune: removed 8 redundant loop segment(s) across 7 net(s)
+Octolinear smoothing: collapsed 2 staircase span(s) on 1 net(s), -0.17 mm of copper (#536)
 
-  Re-routing GND (net 4)...
-  POUR-LAUNCH v3: +408 region-laddered target(s) across 1 component(s) (phase 1)
-  Multi-point net Phase 1: routing longest MST edge (pads 5 and 16, length=15.63mm)
-  forward stuck (11 < 5000), backward=5000
-    forward cell (776, 1096, layer=0): ok, 8/8 neighbors blocked (margin=3)
-      Blocking obstacles: HALL_5V(1 pad), MUX_A0(1 pad)
-  forward stuck (11 < 5000), backward=5000
-    forward cell (776, 1096, layer=0): ok, 8/8 neighbors blocked (margin=3)
-      Blocking obstacles: HALL_5V(1 pad), MUX_A0(1 pad)
-  Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-  Phase 1 routed in 10183 iterations, 29 segments
-    Re-routed main path: 28 segments, 0 vias
-  POUR-LAUNCH v3: +408 region-laddered target(s) across 1 component(s) (phase 3)
-  Multi-point net Phase 3: routing 59 remaining MST edges (longest first)
-    [1/0] Routing MST edge: pad 16 -> pad 21 (length=7.19mm) target=(94.51, 115.50)
-      Routed in 20402 iterations (0.07s)
-    [2/0] Routing MST edge: pad 16 -> pad 13 (length=5.96mm) target=(86.36, 116.50)
-      Routed in 637 iterations (0.00s)
-    [3/0] Routing MST edge: pad 13 -> pad 10 (length=3.35mm) target=(85.51, 119.00)
-      Routed in 24599 iterations (0.08s)
-    [4/0] Routing MST edge: pad 10 -> pad 14 (length=3.81mm) target=(88.83, 119.50)
-      Routed in 21554 iterations (0.08s)
-    [5/0] Routing MST edge: pad 10 -> pad 12 (length=2.77mm) target=(86.15, 121.12)
-      Routed in 14 iterations (0.00s)
-    [6/0] Routing MST edge: pad 12 -> pad 9 (length=4.05mm) target=(83.85, 122.88)
-      Routed in 28197 iterations (0.10s)
-    [7/0] Routing MST edge: pad 9 -> pad 11 (length=3.79mm) target=(85.51, 125.00)
-      Routed in 10 iterations (0.00s)
-    [8/0] Routing MST edge: pad 11 -> pad 7 (length=5.35mm) target=(81.16, 126.00)
-      Routed in 16069 iterations (0.06s)
-    [9/0] Routing MST edge: pad 7 -> pad 8 (length=5.67mm) target=(83.83, 129.00)
-      Routed in 4 iterations (0.00s)
-    [10/0] Routing MST edge: pad 11 -> pad 15 (length=4.31mm) target=(88.83, 126.00)
-      Routed in 78 iterations (0.00s)
-    [11/0] Routing MST edge: pad 21 -> pad 22 (length=2.50mm) target=(94.51, 118.00)
-      Routed in 8597 iterations (0.04s)
-    [12/0] Routing MST edge: pad 22 -> pad 23 (length=3.00mm) target=(94.51, 121.00)
-      Routed in 319 iterations (0.00s)
-    [13/0] Routing MST edge: pad 23 -> pad 24 (length=7.31mm) target=(94.83, 128.00)
-      Routed in 45188 iterations (0.15s)
-    [14/0] Routing MST edge: pad 24 -> pad 18 (length=4.00mm) target=(93.83, 131.00)
-      Routed in 1107 iterations (0.00s)
-    [15/0] Routing MST edge: pad 23 -> pad 31 (length=3.29mm) target=(97.80, 121.00)
-      Routed in 26724 iterations (0.09s)
-    [16/0] Routing MST edge: pad 31 -> pad 34 (length=4.70mm) target=(98.90, 124.60)
-      Routed in 1981 iterations (0.01s)
-    [17/0] Routing MST edge: pad 7 -> pad 6 (length=1.83mm) target=(79.33, 126.00)
-      Routed in 2159 iterations (0.01s)
-    [18/0] Routing MST edge: pad 34 -> pad 35 (length=1.80mm) target=(100.30, 124.20)
-      Routed in 21 iterations (0.00s)
-    [19/0] Routing MST edge: pad 35 -> pad 39 (length=5.01mm) target=(104.51, 125.00)
-      Routed in 3104 iterations (0.01s)
-    [20/0] Routing MST edge: pad 39 -> pad 43 (length=5.00mm) target=(106.00, 121.49)
-      Routed in 839 iterations (0.01s)
-    [21/0] Routing MST edge: pad 43 -> pad 42 (length=2.50mm) target=(106.00, 118.99)
-      Routed in 317 iterations (0.00s)
-    [22/0] Routing MST edge: pad 42 -> pad 46 (length=3.52mm) target=(109.51, 119.00)
-      Routed in 25 iterations (0.00s)
-    [23/0] Routing MST edge: pad 46 -> pad 48 (length=4.98mm) target=(111.00, 122.49)
-      Routed in 26 iterations (0.00s)
-    [24/0] Routing MST edge: pad 48 -> pad 51 (length=4.00mm) target=(115.00, 122.49)
-      Routed in 2694 iterations (0.01s)
-    [25/0] Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (129 < 5000), forward=5000  [x2]
-      backward stuck (136 < 5000), forward=5000
-      backward stuck (115 < 5000), forward=5000
-      Failed to route MST edge after 60283 iterations (0.34s)
-    [26/0] (1 failed) Routing MST edge: pad 48 -> pad 49 (length=2.69mm) target=(111.00, 125.17)
-      Routed in 16 iterations (0.00s)
-    [27/0] (1 failed) Routing MST edge: pad 51 -> pad 52 (length=2.69mm) target=(115.00, 125.17)
-      Routed in 5 iterations (0.00s)
-    [28/0] (1 failed) Routing MST edge: pad 42 -> pad 41 (length=2.50mm) target=(106.00, 116.49)
-      Routed in 4298 iterations (0.02s)
-    [29/0] (1 failed) Routing MST edge: pad 41 -> pad 44 (length=2.90mm) target=(106.91, 114.50)
-      Routed in 21 iterations (0.00s)
-    [30/0] (1 failed) Routing MST edge: pad 44 -> pad 36 (length=7.90mm) target=(102.01, 111.50)
-      Routed in 1654 iterations (0.01s)
-    [31/0] (1 failed) Routing MST edge: pad 36 -> pad 38 (length=3.79mm) target=(103.55, 109.25)
-      Routed in 278 iterations (0.00s)
-    [32/0] (1 failed) Routing MST edge: pad 38 -> pad 40 (length=5.60mm) target=(105.60, 105.70)
-      Routed in 62 iterations (0.00s)
-    [33/0] (1 failed) Routing MST edge: pad 40 -> pad 29 (length=8.70mm) target=(97.20, 106.00)
-      Routed in 3 iterations (0.00s)
-    [34/0] (1 failed) Routing MST edge: pad 29 -> pad 17 (length=3.88mm) target=(93.33, 106.00)
-      Routed in 75 iterations (0.00s)
-    [35/0] (1 failed) Routing MST edge: pad 29 -> pad 32 (length=2.90mm) target=(98.00, 103.90)
-      Routed in 9042 iterations (0.04s)
-    [36/0] (1 failed) Routing MST edge: pad 32 -> pad 28 (length=2.72mm) target=(96.78, 102.40)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5129 iterations (0.02s)
-    [37/0] (1 failed) Routing MST edge: pad 28 -> pad 30 (length=2.05mm) target=(97.42, 101.00)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - routed short edge at 0.1000mm (down from 0.3000)
-      Routed in 5219 iterations (0.02s)
-    [38/0] (1 failed) Routing MST edge: pad 28 -> pad 26 (length=1.58mm) target=(95.85, 101.75)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5015 iterations (0.02s)
-    [39/0] (1 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Neck-down at 0.1500mm rejected: path 3.8mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.10mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (181 < 5000), forward=5000
-        backward cell (940, 1015, layer=0): ok, 5/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(2 track)
-      backward stuck (167 < 5000), forward=5000
-        backward cell (936, 1010, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: VAUX(1 track, 1 pad), USB_DM_ESD(1 track)
-      Failed to route MST edge after 11403 iterations (0.24s)
-    [40/0] (2 failed) Routing MST edge: pad 26 -> pad 25 (length=1.50mm) target=(95.85, 100.25)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5203 iterations (0.02s)
-    [41/0] (2 failed) Routing MST edge: pad 46 -> pad 45 (length=1.50mm) target=(109.51, 117.50)
-      Routed in 6885 iterations (0.03s)
-    [42/0] (2 failed) Routing MST edge: pad 45 -> pad 50 (length=4.39mm) target=(111.40, 115.00)
-      Routed in 18307 iterations (0.07s)
-    [43/0] (2 failed) Routing MST edge: pad 50 -> pad 47 (length=4.00mm) target=(110.90, 111.50)
-      Routed in 21133 iterations (0.09s)
-    [44/0] (2 failed) Routing MST edge: pad 47 -> pad 55 (length=14.28mm) target=(122.56, 108.88)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5028 iterations (0.02s)
-    [45/0] (2 failed) Routing MST edge: pad 55 -> pad 56 (length=1.41mm) target=(123.29, 109.56)
-      Neck-down at 0.1500mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.1mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5910 iterations (0.03s)
-    [46/0] (2 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      Neck-down at 0.1000mm rejected: path 2.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.92mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (79 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (38 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 15989 iterations (0.25s)
-    [47/0] (3 failed) Routing MST edge: pad 5 -> pad 4 (length=1.40mm) target=(76.81, 110.21)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5075 iterations (0.02s)
-    [48/0] (3 failed) Routing MST edge: pad 4 -> pad 3 (length=2.81mm) target=(75.24, 111.44)
-      Neck-down at 0.1500mm rejected: path 5.6mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 5.2mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 30399 iterations (0.11s)
-    [49/0] (3 failed) Routing MST edge: pad 3 -> pad 2 (length=1.40mm) target=(74.45, 112.05)
-      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
-      Routed in 5088 iterations (0.03s)
-    [50/0] (3 failed) Routing MST edge: pad 2 -> pad 1 (length=1.40mm) target=(73.66, 112.67)
-      Neck-down at 0.1500mm rejected: path 2.2mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.0mm exceeds the 2mm pad-entry allowance
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 8597 iterations (0.04s)
-    [51/0] (3 failed) Routing MST edge: pad 1 -> pad 0 (length=1.40mm) target=(72.87, 113.29)
-      Neck-down at 0.1500mm rejected: path 3.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.9mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.89mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (39 < 5000), forward=5000
-        backward cell (729, 1133, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad)
-      Failed to route MST edge after 13186 iterations (0.22s)
-    [52/0] (4 failed) Routing MST edge: pad 25 -> pad 27 (length=1.08mm) target=(96.28, 99.60)
-      Routed in 8 iterations (0.00s)
-    [53/0] (4 failed) Routing MST edge: pad 27 -> pad 33 (length=9.65mm) target=(98.20, 91.88)
-      Routed in 334 iterations (0.00s)
-    [54/0] (4 failed) Routing MST edge: pad 27 -> pad 37 (length=7.74mm) target=(102.41, 98.00)
-      Routed in 3934 iterations (0.02s)
-    Fallback: attempting orphaned pad 0 directly from connected copper
-    [55/0] (4 failed) Routing MST edge: pad 1 -> pad 0 (length=1.40mm) target=(72.87, 113.29)
-      Neck-down at 0.1500mm rejected: path 3.1mm exceeds the 2mm pad-entry allowance
-      Neck-down at 0.1000mm rejected: path 2.9mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.89mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (39 < 5000), forward=5000
-        backward cell (729, 1133, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_C(3 track, 1 pad)
-      Failed to route MST edge after 13186 iterations (0.22s)
-    Fallback: attempting orphaned pad 57 directly from connected copper
-    [55/0] (4 failed) Routing MST edge: pad 56 -> pad 57 (length=1.41mm) target=(124.02, 110.24)
-      Neck-down at 0.1000mm rejected: path 2.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 0.92mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (23 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      backward stuck (79 < 5000), forward=5000
-        backward cell (1240, 1102, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_OUT_A(1 pad)
-      backward stuck (38 < 5000), forward=5000
-        backward cell (1234, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(1 track, 1 pad), MUX_OUT_A(1 pad)
-      Failed to route MST edge after 15989 iterations (0.25s)
-    Fallback: attempting orphaned pad 20 directly from connected copper
-    [55/0] (4 failed) Routing MST edge: pad 26 -> pad 20 (length=2.09mm) target=(94.01, 101.50)
-      Routed in 25 iterations (0.00s)
-    [56/0] (4 failed) Routing MST edge: pad 20 -> pad 19 (length=2.60mm) target=(93.91, 99.00)
-      Routed in 1857 iterations (0.01s)
-    Fallback: attempting orphaned pad 58 directly from connected copper
-    [57/0] (4 failed) Routing MST edge: pad 56 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 1.98mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (15 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (52 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_A2(1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (39 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 15636 iterations (0.25s)
-    Fallback: attempting orphaned pad 53 directly from connected copper
-    [58/0] (5 failed) Routing MST edge: pad 51 -> pad 53 (length=3.00mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      backward stuck (135 < 5000), forward=5000  [x2]
-      backward stuck (131 < 5000), forward=5000
-      backward stuck (115 < 5000), forward=5000
-      Failed to route MST edge after 59467 iterations (0.35s)
-    Fallback: attempting orphaned pad 54 directly from connected copper
-    [58/0] (5 failed) Routing MST edge: pad 52 -> pad 54 (length=4.00mm) target=(119.00, 125.17)
-      Routed in 8517 iterations (0.04s)
-    [59/0] (5 failed) Routing MST edge: pad 54 -> pad 53 (length=3.69mm) target=(118.00, 122.49)
-      backward stuck (30 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 6/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(8 track), ADC_C(1 track)
-      backward stuck (56 < 5000), forward=5000
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked (margin=2)
-      backward stuck (90 < 5000), forward=5000  [x2]
-        backward cell (1180, 1225, layer=0): ok, 0/8 neighbors blocked  [x6]
-      Probe: forward=5000, backward=5000 iters, trying forward with full iterations...  [x4]
-      backward stuck (135 < 5000), forward=5000  [x2]
-      backward stuck (131 < 5000), forward=5000
-      backward stuck (115 < 5000), forward=5000
-      Failed to route MST edge after 103512 iterations (0.53s)
-    Fallback: attempting orphaned pad 59 directly from connected copper
-    [60/0] (6 failed) Routing MST edge: pad 56 -> pad 59 (length=5.65mm) target=(126.22, 112.29)
-      Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
-      Routed in 5636 iterations (0.03s)
-    [61/0] (6 failed) Routing MST edge: pad 59 -> pad 58 (length=2.83mm) target=(124.75, 110.92)
-      Neck-down at 0.1000mm rejected: path 3.7mm exceeds the 2mm pad-entry allowance
-      Neck-down refused (--escalation off): the edge spans 1.98mm and only a 0.1000mm track reaches it, but no route keeps 0.3000mm outside the 2mm pad-entry allowance
-      backward stuck (15 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_EN1(1 pad), MUX_A1(1 pad), MUX_A2(1 pad), MUX_OUT_A(1 pad), MUX_OUT_B(1 pad)
-      backward stuck (46 < 5000), forward=5000
-        backward cell (1248, 1109, layer=0): ok, 8/8 neighbors blocked (margin=2)
-          Blocking obstacles: MUX_A2(1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad)
-      backward stuck (39 < 5000), forward=5000
-        backward cell (1240, 1103, layer=0): ok, 8/8 neighbors blocked (margin=3)
-          Blocking obstacles: MUX_OUT_B(2 track, 1 pad), MUX_EN1(1 pad), MUX_OUT_A(1 pad), MUX_OUT_C(1 pad)
-      Failed to route MST edge after 16618 iterations (0.24s)
-    [62/0] (7 failed) Routing MST edge: pad 59 -> pad 60 (length=1.41mm) target=(126.95, 112.97)
-      Routed in 53 iterations (0.00s)
-  Warning: 4 pad(s) not connected (7 MST edge(s) failed)
-  Phase 3 routing complete: 55 edges, 379 total segments, 24 total vias
-    GND: Attempting rip-up retry for 7 failed tap edge(s)...
-    Ripping MUX_OUT_B (net 11) to retry tap route...
+============================================================
+Routing complete
+============================================================
+  Single-ended:  5/5 routed
+  Multi-point:   69/69 pads connected (4 nets)
+  Total vias:    3
+  Total time:    1.33s
+  Iterations:    3,163
+  Fragility refresh (#466): 4 windows, 0.02s total
+
+Power trace ampacity (bottleneck segment, IPC-2152):
+  GND: 0.45A max (0.100mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 0.45A)
+  HALL_5V: 0.45A max (0.100mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 0.45A)
+  V5V2: 0.45A max (0.100mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 0.45A)
+  VBUS: 1.34A max (0.450mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 1.34A)
+JSON_SUMMARY: {"routed_single": ["FB_5V2", "QSPI_SD1", "MUX_EN1", "MUX_A1", "GND"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_nets": 4, "multipoint_pads_connected": 69, "multipoint_pads_total": 69, "multipoint_edges_routed": 3, "multipoint_edges_failed": 0, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 5, "failed": 0, "total_time": 1.33, "total_iterations": 3163, "total_vias": 3, "cleanup_disconnected": [], "min_clearance_used": 0.1, "design_rules": {"escalation_policy": "board", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 0, "nets": [], "narrowed": [], "min_delivered": {}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "board_floors", "unsupported_rules": []}, "plane_fragility": {"source": "kicad_refill", "islands": 1, "refill_status": "ok", "why": "the KiCad refill succeeded", "machine_dependent": false}, "oracle_check": "disabled", "pad_pairs_connected": 66, "pad_pairs_total": 66, "power_trace_ampacity": [{"net": "GND", "bottleneck_width_mm": 0.1, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 0.45, "max_current_ipc2152_a": 0.45, "temp_rise_c": 10.0, "trace_length_mm": 225.6}, {"net": "HALL_5V", "bottleneck_width_mm": 0.1, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 0.45, "max_current_ipc2152_a": 0.45, "temp_rise_c": 10.0, "trace_length_mm": 94.5}, {"net": "V5V2", "bottleneck_width_mm": 0.1, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 0.45, "max_current_ipc2152_a": 0.45, "temp_rise_c": 10.0, "trace_length_mm": 70.5}, {"net": "VBUS", "bottleneck_width_mm": 0.45, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 1.34, "max_current_ipc2152_a": 1.34, "temp_rise_c": 10.0, "trace_length_mm": 60.2}], "scope": "run", "env_knobs": {"KICAD_CLI": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli", "KRT_HOME": "/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools"}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pcb...
+Successfully wrote /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pcb
+
+Plane finalize (#562): all zone nets complete (fill-aware) -- skipping engine/cleanup legs, oracle verifies
+  KiCad-oracle recheck: deterministic exact-fill link source (pcbnew refill)
+  KiCad-oracle recheck: KiCad reports all processed nets complete
+  [finalize timing] oracle leg: 1.8s
+JSON_ORACLE: {"available": true, "reason": "ok", "why": "the oracle ran", "rounds": 0, "links_routed": 0, "links_failed": 0, "remaining": 0, "collapsed_duplicate_links": 0, "remaining_links": [], "cross_board": 0, "off_board": 0, "removed_segments": [], "removed_vias": []}
+  Strict collapse (#1063, end of run): removed 14 redundant segment(s) on 8 net(s)
+VIA_IN_PAD_JSON: {"count": 0, "sites": [], "stamped": 0, "restored": 0, "protected": 0, "unstampable": 0, "site_created": 0, "unprotected": [], "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"}
+Power widths: GND 51.8/225.6 mm under the requested 0.3 (min 0.1); HALL_5V 42.7/94.5 mm under the requested 0.5 (min 0.1); VBUS 1.0/60.2 mm under the requested 0.5 (min 0.45); V5V2 2.9/70.3 mm under the requested 0.5 (min 0.1) -- JSON_SUMMARY power_widths
+JSON_SHIPPED_RULES: {"min_clearance_used": 0.1, "design_rules": {"escalation_policy": "board", "fab_tier": "auto", "board_floors": {"clearance": 0.1, "track_width": 0.1, "via_diameter": 0.6, "via_drill": 0.3, "hole_to_hole": 0.2, "annular": 0.1, "board_edge": 0.2}, "count": 4, "nets": [4, 5, 29, 38], "narrowed": [{"net": 4, "net_name": "GND", "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "power copper shipped under width", "count": 1, "length_mm": 51.78}, {"net": 5, "net_name": "HALL_5V", "kind": "track_width", "requested": 0.5, "delivered": 0.1, "site": "power copper shipped under width", "count": 1, "length_mm": 42.67}, {"net": 29, "net_name": "VBUS", "kind": "track_width", "requested": 0.5, "delivered": 0.45, "site": "power copper shipped under width", "count": 1, "length_mm": 0.99}, {"net": 38, "net_name": "V5V2", "kind": "track_width", "requested": 0.5, "delivered": 0.1, "site": "power copper shipped under width", "count": 1, "length_mm": 2.93}], "min_delivered": {"track_width": 0.1}, "fab_tier_escalations": 0, "fab_tier_contexts": [], "fab_tier_target": "board_floors"}}
+JSON_REGRADE: {"board": "file", "graded_nets": 5, "seconds": 0.45, "routed_single": ["FB_5V2", "QSPI_SD1", "MUX_EN1", "MUX_A1", "GND"], "failed_single": [], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 69, "multipoint_pads_connected": 69, "successful": 5, "failed": 0, "unowned_broken": [], "recovered": [], "pad_pairs": {}, "broken_by_run": []}
+
+============================================================
+Run complete -- whole run, re-graded on the written board (5 net(s), 0.5s)
+============================================================
+  Single-ended:  5/5 routed
+  Multi-point:   69/69 pads connected
+JSON_IMPROVEMENT_GATE: {"lost": [], "gained": ["GND", "MUX_A1", "MUX_EN1"], "lost_zone": [], "gained_zone": ["GND"], "worsened": [], "disconnected_pads_before": 4, "disconnected_pads_after": 0, "nets_compared": 40, "verdict": "accept"}
+  Design rules [--escalation board, --fab-tier auto]: 4 feature(s) on 4 net(s) delivered below the requested size (smallest track width 0.1 mm). Details: JSON_SUMMARY design_rules.
+JSON_SUMMARY_MIN: {"escalations": 4, "failed": 0, "failed_single": [], "main_loop_time_s": 1.33, "min_clearance_used": 0.1, "multipoint_deficit": 0, "open_single": [], "pad_pairs_open": {"count": 0, "nets": []}, "regraded_nets": 5, "routed": 5, "scope": "merged", "terminal_restores_broken": [], "vias": 3}
+  Copper-to-hole floor this step's copper holds: 0.2 mm -- it held 0.2 mm and its own copper clears every foreign hole by it (#1369)
+  DRC settings already consistent (/home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pro)
+  FAB FLOOR RELAXED -- the output project declares a smaller minimum than the board originally did:
+    copper-to-hole clearance: 0.1 mm, unchanged by this step but still below the board's ORIGINAL 0.2mm; the router holds it at NPTH walls only -- plated holes and vias sit at copper clearance, which re-routing does not change
+    Every checker (check_drc, board_score, KiCad's own DRC) grades against the NEW value, so this copper will read clean. Confirm your fab supports it; if the original number was a real process limit, re-route at that floor rather than shipping this project.
+  Copper-to-hole floor stays 0.1 mm, below the 0.2 mm this step's copper holds: a routing step never raises a floor, so the lower value an earlier step wrote stands
+EXIT=0
