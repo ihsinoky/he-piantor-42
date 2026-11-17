@@ -1,52 +1,54 @@
 {
   "board": "wing-rev5-17mm-left",
   "kicad": "9.0.9",
-  "sha256": "9a76743d4843f211ed721ffe640bf3026e83db757e3e1010affcc1abeb29a635",
+  "sha256": "d2eeda2f565bc43b8bef371d270678011f28a05404f3c5a38d72a88dacc634f1",
   "metrics": {
     "required_unconnected": 1,
     "wrong_net_contacts": 0,
-    "material_violations": 0,
+    "material_violations": 3,
     "unexplained_transfer_changes": 0
   },
   "drc_unconnected": 1,
   "drc_types": {
-    "silk_over_copper": 2
+    "silk_over_copper": 2,
+    "track_dangling": 1,
+    "via_dangling": 2
   },
   "transfer_changed_refs": [],
   "physical_disconnected": {
-    "GND": 2
+    "HALL_5V": 2
   },
   "shorts": [],
-  "all_vias": 124,
+  "all_vias": 123,
   "all_pads_including_npth": 236,
-  "via_pad_pairs": 29264,
+  "via_pad_pairs": 29028,
   "min_via_pad_gap_mm": 0.125198,
   "via_pad_below_0p10": 0,
   "via_pad_gap_histogram": {
     "0.00..0.10": 0,
     "0.10..0.11": 0,
     "0.11..0.15": 1,
-    "0.15..0.20": 3,
-    "0.20..0.30": 41,
-    "0.30..0.50": 25,
-    "0.50..1.00": 19,
-    "1.00..1000.00": 35
+    "0.15..0.20": 8,
+    "0.20..0.30": 37,
+    "0.30..0.50": 22,
+    "0.50..1.00": 16,
+    "1.00..1000.00": 39
   },
   "via_pad_gap_quantiles": {
     "0": 0.125198,
-    "0.1": 0.22,
-    "0.25": 0.269444,
+    "0.1": 0.212687,
+    "0.25": 0.254367,
     "0.5": 0.38463,
-    "0.75": 1.22224,
+    "0.75": 1.214271,
     "0.9": 3.281969,
     "1": 6.466334
   },
   "width_histogram": {
     "GND": {
-      "0.3": 187
+      "0.3": 217
     },
     "HALL_5V": {
-      "0.3": 172
+      "0.3": 165
     },
     "H_A0_RAW": {
       "0.1": 6
@@ -55,7 +57,7 @@
       "0.1": 4
     },
     "H_A2_RAW": {
-      "0.1": 18
+      "0.1": 16
     },
     "H_A3_RAW": {
       "0.1": 4
@@ -91,13 +93,13 @@
       "0.1": 9
     },
     "H_C0_RAW": {
-      "0.1": 16
+      "0.1": 18
     },
     "H_C1_RAW": {
       "0.1": 8
     },
     "H_C2_RAW": {
-      "0.1": 16
+      "0.1": 24
     },
     "H_C3_RAW": {
       "0.1": 6
@@ -112,37 +114,38 @@
       "0.1": 8
     },
     "MUX_A0": {
-      "0.1": 13
+      "0.1": 16
     },
     "MUX_A1": {
-      "0.1": 25
+      "0.1": 20
     },
     "MUX_A2": {
-      "0.1": 27
+      "0.1": 157,
+      "0.127": 3
     },
     "MUX_OUT_A": {
       "0.1": 8
     },
     "MUX_OUT_B": {
-      "0.1": 21
+      "0.1": 18
     },
     "MUX_OUT_C": {
       "0.1": 14
     },
     "WING_EN": {
-      "0.1": 19
+      "0.1": 18
     }
   },
   "zones": [
     {
       "net": "HALL_5V",
       "layer": "F.Cu",
-      "area_mm2": 8971.171300553851
+      "area_mm2": 8911.591580343522
     },
     {
       "net": "GND",
       "layer": "B.Cu",
-      "area_mm2": 9662.216165189062
+      "area_mm2": 9679.73059285464
     }
   ],
   "poses": [
