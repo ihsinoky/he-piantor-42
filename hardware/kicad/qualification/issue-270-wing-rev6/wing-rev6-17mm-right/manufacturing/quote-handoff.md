@@ -2,8 +2,10 @@
 
 Upload together: a zip of this directory's `gerber/` contents,
 `BOM-jlcpcb.csv` and `CPL-jlcpcb-gerber-frame.csv` (Issue #267 conversion,
-carried over unchanged — Issue #270 changed the notch-zone outline only;
-parts, footprints and positions are identical to Wing Rev.5).
+carried over unchanged — Issues #270/#273 changed the notch-zone
+outline only; parts, footprints and positions are identical to
+Wing Rev.5). Gerbers in this package were regenerated in Stage 2e
+(Issue #273) from the final Rev.6 boards.
 Do NOT upload the KiCad-native `BOM.csv` / `CPL.csv` — their LCSC column is
 empty (except FH12) and the CPL uses KiCad headers.
 
@@ -24,10 +26,11 @@ empty (except FH12) and the CPL uses KiCad headers.
   +0.000000 / +0.000000 mm; all 49 footprint origins re-verified against
   the fresh Rev.6 CPL export, max deviation < 0.000001 mm). Use only the
   converted file, not `CPL.csv`.
-- Board change vs Rev.5: Edge.Cuts only (notch floor re-cut as the exact
-  0.55 mm offset of the Main Rev.9 trapezoid tab; pour fringe refilled,
-  delta confined to the notch band). Routing and footprints unchanged;
-  see the Issue #270 REPORT.md.
+- Board change vs Rev.5: Edge.Cuts only (Stage 2e notch: straights
+  following the Main Rev.9 tab + single fillets/arcs, whole notch span
+  replaced; pour fringe refilled, fill delta confined to the
+  removed+added notch band). Routing and footprints unchanged;
+  see the Issue #270 REPORT.md, Stage 2e section.
 - Inherited gates: supplier DFM, stencil/paste acceptance, stock
   confirmation at order time, CPL rotation/pin-1 acceptance (bottom-side
   parts), physical fit checks. Wing assembly method (PCBA vs hand) is NOT
