@@ -1,0 +1,118 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/routed.kicad_pcb --track-width 0.1 --power-nets HALL_5V GND --power-nets-widths 0.3 0.3 --escalation off --clearance 0.1 --via-size 0.6 --via-drill 0.3 --same-net-pad-clearance 0.15
+ENV KNOBS: KICAD_CLI=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/kicad/usr/bin/kicad-cli KRT_HOME=/home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.25mm [board constraint].
+--board-edge-clearance not given; using 0.3mm [board constraint].
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb to expand net patterns...
+Pattern '*' matched 30 nets
+Routing 30 nets: ['GND', 'HALL_5V', 'H_A0_RAW', 'H_A1_RAW', 'H_A2_RAW']...
+Netclass clearances for 2 net(s), honored in full (no --clearance-ceiling) (mm: [0.1]); cross-class max(A,B) respected.
+Loading /home/hatch/workspace/projects/he-piantor-boards/hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb...
+Using 2 routing layers: ['F.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, B.Cu=3.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.15mm (from flag, #581): vias stay off same-net pads
+
+Power net width assignments (2 nets):
+  0.3mm: GND, HALL_5V
+
+Skipping 21 already-routed net(s): Already fully connected
+
+Analyzing layer swaps for 7 multi-point net(s) spanning layers...
+  No common layer found for 7 multi-point net(s) (left as-is)
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 9 nets with 10 crossing conflicts detected
+WARNING: Could not find pads for both stub groups in GND (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_A1 (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_A2 (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_OUT_A (found 1 pads)
+WARNING: Could not find pads for both stub groups in MUX_OUT_C (found 0 pads)
+WARNING: Could not find pads for both stub groups in WING_EN (found 0 pads)
+MPS Round 1: 5 units: MUX_A2, MUX_OUT_C, MUX_A0, MUX_A1, MUX_OUT_A
+MPS Round 2: 2 units: MUX_OUT_B, GND
+MPS Round 3: 1 units: WING_EN
+MPS Round 4: 1 units: HALL_5V
+
+Routing 9 single-ended net(s)...
+============================================================
+Building base obstacle map...
+20 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
+Copper-to-hole 0.25mm for NPTH holes (from the board's own min_hole_clearance, above the 0.2mm fab floor); plated holes and vias: copper clearance
+Base obstacle map built in 0.40s
+Found 30 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.41s (30 nets)
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/9] Routing MUX_A2 (id=26)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 5 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 4 and 2, length=16.51mm)
+  Phase 1 routed in 21636 iterations, 5 segments
+  SUCCESS: 5 segments, 0 vias, 21636 iterations, length=18.80mm (stubs=4.66mm) (0.98s)
+
+[2/9] Routing MUX_OUT_C (id=29)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Existing copper joins 5 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 3 and 4, length=12.30mm)
+  Phase 1 routed in 17023 iterations, 8 segments
+  SUCCESS: 8 segments, 1 vias, 17023 iterations, length=30.65mm (stubs=18.23mm) (0.09s)
+
+[3/9] Routing MUX_A0 (id=24)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 2 and 1, length=14.72mm)
+  Phase 1 routed in 26109 iterations, 7 segments
+  SUCCESS: 7 segments, 2 vias, 26109 iterations, length=10.85mm (stubs=0.00mm) (0.08s)
+
+[4/9] Routing MUX_A1 (id=25)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 5 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=17.43mm)
+  Phase 1 routed in 20062 iterations, 9 segments
+  SUCCESS: 9 segments, 2 vias, 20062 iterations, length=23.80mm (stubs=10.00mm) (0.10s)
+
+[5/9] Routing MUX_OUT_A (id=27)
+  Detected multi-point net with 5 pads (Phase 1: main route only)
+  Existing copper joins 5 terminals into 3 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 1 and 3, length=20.34mm)
+  Phase 1 routed in 22058 iterations, 6 segments
+  SUCCESS: 6 segments, 0 vias, 22058 iterations, length=48.84mm (stubs=31.56mm) (0.09s)
+
+[6/9] Routing MUX_OUT_B (id=28)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=19.62mm)
+  Phase 1 routed in 27104 iterations, 10 segments
+  SUCCESS: 10 segments, 0 vias, 27104 iterations, length=20.31mm (stubs=0.00mm) (0.03s)
+
+[7/9] Routing GND (id=1)
+  Detected multi-point net with 46 pads (Phase 1: main route only)
+  Existing copper joins 46 terminals into 16 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 25 and 24, length=11.39mm)
+  Wide power route blocked - kept at 0.3000mm with a pad-entry neck to 0.1000mm (at most the 2mm pad-entry allowance, --escalation off)
+  Phase 1 routed in 69769 iterations, 21 segments
+  SUCCESS: 21 segments, 2 vias, 69769 iterations, length=463.88mm (stubs=445.44mm) (0.87s)
+
+[8/9] Routing WING_EN (id=30)
+  Detected multi-point net with 6 pads (Phase 1: main route only)
+  Existing copper joins 6 terminals into 4 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 5 and 2, length=17.76mm)
+  Phase 1 routed in 31658 iterations, 7 segments
+  SUCCESS: 7 segments, 0 vias, 31658 iterations, length=52.32mm (stubs=34.18mm) (0.09s)
+
+[9/9] Routing HALL_5V (id=2)
+  Detected multi-point net with 24 pads (Phase 1: main route only)
+  Existing copper joins 24 terminals into 8 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 15 and 12, length=13.11mm)
+  Phase 1 routed in 21116 iterations, 8 segments
+  SUCCESS: 8 segments, 2 vias, 21116 iterations, length=448.19mm (stubs=436.25mm) (0.50s)
+
+Sync pcb_data: 814 -> 733 (kept stubs) -> 814 (after adding 81)
+
+============================================================
+Multi-point Phase 3: Routing 35 tap connections
+============================================================
+Phase 3 order (boxed-in risk first): MUX_A1, MUX_OUT_B, MUX_A2, MUX_OUT_C, GND, WING_EN, MUX_A0, HALL_5V, MUX_OUT_A
+
+MUX_A1 (net 25):
