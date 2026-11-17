@@ -1,41 +1,79 @@
-"""Issue #273 Stage 2e design: Wing Rev.6 notch with GENUINELY simple
-mouth transitions. Per variant, in case frame at the fitted pose:
-floor = the Stage 2d offset lines (dive/front/rise at GAP 0.55 +
-delta, corner fillets R0.55 reused exactly from notch2d.json);
-the dive straight is EXTENDED to intersect the Wing's existing
-inner edge E1 and the rise straight to intersect the existing far
-edge E2 (both lines taken from the Rev.5 board's own long Edge.Cuts
-elements), with ONE tangent fillet at each intersection (largest R
-in 1.00..0.30 step 0.05 leaving >= 0.15 mm of straight; if no R
-fits, a sharp corner is recorded with the geometric reason).
-The new outline is built by REPLACING the Rev.5 ring arc between
-the two fillet tangent points with the new chain - NOT by keepout
-difference - so no Rev.5 mouth geometry survives.
-Checks: seam >= 0.550 vs the final Rev.9 outline (this worktree),
-overlap 0, inside D-037 silhouette, removed-region copper = fills
-only, added-region copper = none. Writes notch2e.json."""
+#!/usr/bin/env python3
+"""Issue #273 stage 2e - Wing Rev.6 notch redesign (v4).
+
+Chain (travel order): [dive mouth fillet] dive straight - corner
+arc - front straight - corner fillet R0.55 - rise straight -
+[rise mouth fillet]. The three straights are the Stage 2d design
+lines at the 2d offsets (parallel to the adopted Rev.9 tab's front
+/ walls; 0.56mm from the tab features they face).
+
+Corner geometry (the subtle part): at the dive->front corner the
+two lines meet at a shallow 38deg board wedge pointing at the Main.
+The 2d chain's R0.55 arc there is the VOID-side fillet: its tangent
+point on the dive line lies PAST the lines' intersection, so a
+board built from it would fold back on itself in a thin sliver
+(cusp) - in 2d it never reached the board (the keepout difference
+kept Rev.5's E1 there), which is also why the 2d figure's mouth
+looked unfixed. The 2e corner arc is the BOARD-side tangent arc
+(centre on the board side of both lines): its dive-line tangent
+point lies WEST of the intersection, no fold. Its radius shares
+the short dive run (A to the tangent point) with the dive mouth
+fillet: R_c is scanned 0.40 -> 0.15 and the largest R_c that still
+leaves room for a mouth fillet R_d >= 0.30 (and >= 0.15mm residual
+straight) wins. The front->rise corner keeps the 2d R0.55 fillet
+(its tangent points straddle the intersection correctly - no fold).
+
+Mouth transitions: the dive/rise straights are EXTENDED to
+intersect the Wing's own long edge line (points A / K2 on the
+Rev.5 edge SEGMENTS); ONE tangent fillet at each intersection
+where the run allows (largest R in 1.00..0.30 leaving >= 0.15mm
+residual straight), else a sharp corner at the intersection
+(reported with the max feasible R). No tangent-arc chains.
+
+New outline by RING-ARC REPLACEMENT on the Rev.5 outline (the 2d
+defect was a keepout difference that kept Rev.5's faceted mouth
+arcs). Checks: seam vs final Rev.9 Main outline >= 0.55, overlap
+0, inside the D-037 silhouette (case_geometry.json tray
+sections), removed-region copper = fills/zone outlines only,
+added-region copper = none. Output: notch2e.json.
+"""
 import json, math, sys
 from pathlib import Path
 import numpy as np
 import pcbnew as p
-from shapely.geometry import Polygon, LineString, Point
+from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
 from shapely.affinity import rotate as shp_rotate, translate as shp_translate
 
 MM = 1e6
 W = Path("/home/hatch/workspace/projects/he-piantor-wingnotch")
+RT = W / ".issue273-runtime"
 SRT = Path("/home/hatch/workspace/projects/he-piantor-mainoutline/.issue270-runtime")
 sys.path.insert(0, str(SRT))
 from geom2b import copper_items
 from notchain import wing_xf_factory
 
 Q263 = W / "hardware/kicad/qualification/issue-263-implementation"
-Q270M = W / "hardware/kicad/qualification/issue-270-main-rev9/main-rev9"
-ND = json.loads((SRT / "notch2d.json").read_text())
-case = json.loads((SRT / "case_geometry.json").read_text())
-SIL = unary_union([Polygon(q) for q in case["silhouette_parts"]])
+Q270M = W / "hardware/kicad/qualification/issue-270-main-rev9"
 GAP = 0.55
 RESID = 0.15
+ND = json.loads((SRT / "notch2d.json").read_text())
+CASE = json.loads((SRT / "case_geometry.json").read_text())
+SIL = unary_union([Polygon(q) for q in CASE["silhouette_parts"]])
+VARIANTS = [("17mm-left", "left"), ("17mm-right", "right"),
+            ("16mm-left", "left"), ("16mm-right", "right")]
+
+
+def unit(v):
+    v = np.asarray(v, float)
+    return v / np.linalg.norm(v)
+
+
+def line_x(p1, d1, p2, d2):
+    A = np.column_stack([d1, -d2])
+    t = np.linalg.solve(A, np.asarray(p2, float) - np.asarray(p1, float))
+    return np.asarray(p1, float) + d1 * t[0]
+
 
 def outline_kicad(board):
     ps = p.SHAPE_POLY_SET(); board.GetBoardPolygonOutlines(ps)
@@ -43,277 +81,322 @@ def outline_kicad(board):
     return Polygon([(ch.CPoint(j).x / MM, ch.CPoint(j).y / MM)
                     for j in range(ch.PointCount())])
 
-MAIN = shp_translate(outline_kicad(p.LoadBoard(str(Q270M / "main.kicad_pcb"))),
-                     xoff=-100.0, yoff=-70.0)
 
-def unit(v):
-    v = np.array(v, float)
-    return v / np.linalg.norm(v)
+mb = p.LoadBoard(str(Q270M / "main-rev9/main.kicad_pcb"))
+MAIN = shp_translate(outline_kicad(mb), xoff=-100.0, yoff=-70.0)
 
-def line_x(p1, d1, p2, d2):
-    den = d1[0] * d2[1] - d1[1] * d2[0]
-    t = ((p2[0] - p1[0]) * d2[1] - (p2[1] - p1[1]) * d2[0]) / den
-    return np.array(p1, float) + np.array(d1, float) * t
 
 def fillet(I, u1, u2, R):
-    """Tangent arc at intersection I; u1/u2 = unit vectors AWAY from
-    I along the incoming/outgoing lines. Returns dict or None."""
-    u1, u2 = unit(u1), unit(u2)
-    cos = float(np.clip(np.dot(u1, u2), -1, 1))
-    alpha = math.acos(cos)
-    if alpha < 0.05 or alpha > math.pi - 0.05:
-        return None
+    """Tangent fillet at corner I; u1/u2 = unit vectors pointing
+    AWAY from I along the two lines (travel-in reverse / travel-out)."""
+    alpha = math.acos(float(np.clip(np.dot(u1, u2), -1, 1)))
     Lt = R / math.tan(alpha / 2)
-    Ta = np.array(I, float) + u1 * Lt
-    Tb = np.array(I, float) + u2 * Lt
-    bis = unit(u1 + u2)
-    O = np.array(I, float) + bis * (R / math.sin(alpha / 2))
-    mid = O + R * unit(np.array(I, float) - O)
-    return dict(Ta=tuple(Ta), Tb=tuple(Tb), O=tuple(O), mid=tuple(mid),
-                Lt=Lt, alpha_deg=math.degrees(alpha))
+    bis = unit(np.array(u1) + np.array(u2))
+    O = np.asarray(I, float) + bis * (R / math.sin(alpha / 2))
+    Ta = np.asarray(I, float) + u1 * Lt
+    Tb = np.asarray(I, float) + u2 * Lt
+    mid = O + R * unit((Ta - O) + (Tb - O))
+    return {"Ta": tuple(Ta), "Tb": tuple(Tb), "O": tuple(O),
+            "mid": tuple(mid), "Lt": Lt, "alpha_deg": math.degrees(alpha)}
 
-def arc_pts(O, r, a, b):
-    a0 = math.atan2(a[1] - O[1], a[0] - O[0])
-    a1 = math.atan2(b[1] - O[1], b[0] - O[0])
-    while a1 - a0 > math.pi: a1 -= 2 * math.pi
-    while a1 - a0 < -math.pi: a1 += 2 * math.pi
-    n = max(8, int(abs(a1 - a0) / 0.01))
-    return [tuple(O + r * np.array([math.cos(a0 + (a1 - a0) * i / n),
-                                    math.sin(a0 + (a1 - a0) * i / n)]))
+
+def nrm_toward(d, ref, p0):
+    n = np.array([-d[1], d[0]])
+    return n if np.dot(n, np.asarray(ref) - np.asarray(p0)) > 0 else -n
+
+
+def corner_fillet_sides(Lp, Ld_, Mp, Md, R, refA, refB):
+    """Fillet of radius R tangent to lines (Lp,Ld_) and (Mp,Md);
+    centre on refA's side of the first line, refB's side of the
+    second. Returns O, Ta (on first line), Tb (on second), mid."""
+    na = nrm_toward(Ld_, refA, Lp)
+    nb = nrm_toward(Md, refB, Mp)
+    O = line_x(np.asarray(Lp) + na * R, Ld_, np.asarray(Mp) + nb * R, Md)
+    Ta = np.asarray(Lp) + Ld_ * float(np.dot(O - np.asarray(Lp), Ld_))
+    Tb = np.asarray(Mp) + Md * float(np.dot(O - np.asarray(Mp), Md))
+    mid = O + R * unit((Ta - O) + (Tb - O))
+    return {"O": tuple(O), "Ta": tuple(Ta), "Tb": tuple(Tb), "mid": tuple(mid)}
+
+
+def pick_fillet(I, u1, u2, run):
+    for R in [1.00, 0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60,
+              0.55, 0.50, 0.45, 0.40, 0.35, 0.30]:
+        F = fillet(I, u1, u2, R)
+        if run - F["Lt"] >= RESID:
+            return R, F
+    return None, None
+
+
+def arc_pts(O, R, a, b, step_deg=3.0):
+    O = np.asarray(O, float)
+    a0 = math.atan2(*(np.asarray(a) - O)[::-1])
+    a1 = math.atan2(*(np.asarray(b) - O)[::-1])
+    sw_ccw = (a1 - a0) % (2 * math.pi)
+    sw_cw = -((a0 - a1) % (2 * math.pi))
+    sw = sw_ccw if abs(sw_ccw) < abs(sw_cw) else sw_cw
+    n = max(4, int(abs(math.degrees(sw)) / step_deg))
+    return [tuple(O + R * np.array([math.cos(a0 + sw * i / n),
+                                    math.sin(a0 + sw * i / n)]))
             for i in range(n + 1)]
 
-results = {}
-for variant in ("17mm-left", "17mm-right", "16mm-left", "16mm-right"):
-    pitch, side = variant.split("-")
-    site = "J2" if side == "left" else "J3"
+
+out = {}
+for variant, side in VARIANTS:
+    els_nd = ND[variant]["elements_case"]
+    Ld_p = np.array(els_nd[0][1]); Ld_d = unit(np.array(els_nd[0][2]) - Ld_p)
+    Lf_p = np.array(els_nd[2][1]); Lf_d = unit(np.array(els_nd[2][2]) - Lf_p)
+    Lr_p = np.array(els_nd[4][1]); Lr_d = unit(np.array(els_nd[4][2]) - Lr_p)
+    O1_ref = np.array(els_nd[1][1]); O2_ref = np.array(els_nd[3][1])
+    I1 = line_x(Ld_p, Ld_d, Lf_p, Lf_d)
+    I2 = line_x(Lf_p, Lf_d, Lr_p, Lr_d)
+    # validate: the stored 2d arcs are reproduced by corner_fillet_sides
+    # with both refs = the stored centre (void-side fillets)
+    for C, el in ((corner_fillet_sides(Ld_p, Ld_d, Lf_p, Lf_d, 0.55, O1_ref, O1_ref), els_nd[1]),
+                  (corner_fillet_sides(Lf_p, Lf_d, Lr_p, Lr_d, 0.55, O2_ref, O2_ref), els_nd[3])):
+        assert np.linalg.norm(np.array(C["O"]) - np.array(el[1])) < 0.01
+        assert np.linalg.norm(np.array(C["Ta"]) - np.array(el[3])) < 0.01
+        assert np.linalg.norm(np.array(C["Tb"]) - np.array(el[4])) < 0.01
+    # corner 2 keeps the stored (void-side, correctly straddling) fillet
+    C2 = corner_fillet_sides(Lf_p, Lf_d, Lr_p, Lr_d, 0.55, O2_ref, O2_ref)
+    T2a, T2b = np.array(C2["Ta"]), np.array(C2["Tb"])
+    # corner 1: the board-side centre is on O1_ref's side of the dive
+    # line and on ONE of the two sides of the front line; try both
+    # front sides and keep the centre whose tangent points straddle
+    # I1 without folding (T1a on the approach side, T1b on the
+    # departure side). (Left: front side opposite O1_ref. Right:
+    # to be seen - the J3 corner is not a mirror of J2.)
+    n_front_toward_O1 = nrm_toward(Lf_d, O1_ref, Lf_p)
+    front_travel = Lf_d if np.dot(Lf_d, T2a - I1) > 0 else -Lf_d
+
+    def corner1(R_c):
+        cands = []
+        for refB in (I1 - n_front_toward_O1 * 2.0, I1 + n_front_toward_O1 * 2.0):
+            C = corner_fillet_sides(Ld_p, Ld_d, Lf_p, Lf_d, R_c, O1_ref, refB)
+            Ta, Tb = np.array(C["Ta"]), np.array(C["Tb"])
+            if np.dot(Ta - I1, unit(I1 - A_pt)) < 0 and \
+                    np.dot(Tb - I1, front_travel) > 0:
+                cands.append(C)
+        assert len(cands) == 1, f"{variant}: corner1 candidates {len(cands)}"
+        return cands[0]
+
     b5 = p.LoadBoard(str(Q263 / f"wing-rev5-{variant}/main.kicad_pcb"))
     fwd, inv, jw = wing_xf_factory(b5, side)
-    deg = 30.5 if side == "left" else -30.5
+    ang = 30.5 if side == "left" else -30.5
     env = (-27.0, -37.5) if side == "left" else (27.0, -37.5)
+
     def to_case(poly):
         q = shp_translate(poly, xoff=-jw[0], yoff=-jw[1])
-        q = shp_rotate(q, deg, origin=(0, 0))
+        q = shp_rotate(q, ang, origin=(0, 0))
         return shp_translate(q, xoff=env[0], yoff=env[1])
+
     def pt_case(pt):
-        q = shp_translate(Point(pt), xoff=-jw[0], yoff=-jw[1])
-        q = shp_rotate(q, deg, origin=(0, 0))
-        q = shp_translate(q, xoff=env[0], yoff=env[1])
+        q = to_case(Point(pt))
         return (q.x, q.y)
+
     wing_old = to_case(outline_kicad(b5))
-    nd = ND[variant]
-    els_nd = nd["elements_case"]
-    # floor lines/arcs from the 2d design (exact reuse)
-    Ld_p, Ld_d = np.array(els_nd[0][1], float), unit(np.array(els_nd[0][2], float) - np.array(els_nd[0][1], float))
-    A1 = els_nd[1]; Lf_a, Lf_b = np.array(els_nd[2][1], float), np.array(els_nd[2][2], float)
-    Lf_d = unit(Lf_b - Lf_a)
-    A2 = els_nd[3]
-    Lr_p, Lr_d = np.array(els_nd[4][1], float), unit(np.array(els_nd[4][2], float) - np.array(els_nd[4][1], float))
-    T1a, T1b = np.array(A1[3], float), np.array(A1[4], float)
-    T2a, T2b = np.array(A2[3], float), np.array(A2[4], float)
-    I1 = line_x(Ld_p, Ld_d, Lf_a, Lf_d)
-    I2 = line_x(Lf_a, Lf_d, Lr_p, Lr_d)
     chain_union = unary_union([LineString([els_nd[0][1], els_nd[0][2]]),
-                               LineString([Lf_a, Lf_b]),
+                               LineString([els_nd[2][1], els_nd[2][2]]),
                                LineString([els_nd[4][1], els_nd[4][2]])])
-    # flank edges: Rev.5 long line elements near the design chain
     flanks = []
     for d in b5.GetDrawings():
         if d.GetLayer() != p.Edge_Cuts or str(d.GetShape()) not in ("0", "SEGMENT"):
             continue
         s = pt_case((d.GetStart().x / MM, d.GetStart().y / MM))
         e = pt_case((d.GetEnd().x / MM, d.GetEnd().y / MM))
-        if math.dist(s, e) >= 15.0 and LineString([s, e]).distance(chain_union) < 6.0 \
-                and max(Point(s).distance(chain_union), Point(e).distance(chain_union)) > 10.0:
+        ls = LineString([s, e])
+        if math.dist(s, e) >= 15.0 and ls.distance(chain_union) < 6.0 \
+                and max(Point(s).distance(chain_union),
+                        Point(e).distance(chain_union)) > 10.0:
             flanks.append((np.array(s), np.array(e)))
     assert len(flanks) == 2, f"{variant}: {len(flanks)} flank candidates"
-    # assign dive/rise flanks: the dive flank is the one whose
-    # SEGMENT contains the dive-line intersection A (the two flanks
-    # can be collinear - both on the Wing's one long edge line - so
-    # line-intersection proximity alone ties; segment containment
-    # is the discriminator)
     cand = []
     for s, e in flanks:
         d = unit(e - s)
         x = line_x(Ld_p, Ld_d, s, d)
-        segdist = LineString([s, e]).distance(Point(x))
-        cand.append((segdist, float(np.linalg.norm(x - I1)), (s, e), x))
+        cand.append((LineString([s, e]).distance(Point(x)),
+                     float(np.linalg.norm(x - I1)), (s, e)))
     cand.sort(key=lambda c: (round(c[0], 6), c[1]))
-    assert cand[0][0] < 0.01 and cand[0][1] < 6.0, \
-        f"{variant}: dive flank segdist {cand[0][0]:.3f} distI1 {cand[0][1]:.2f}"
-    (E1s, E1e), A_pt = cand[0][2], cand[0][3]
+    assert cand[0][0] < 0.01, f"{variant}: dive flank segdist {cand[0][0]:.3f}"
+    (E1s, E1e) = cand[0][2]
     (E2s, E2e) = cand[1][2]
-    # headings from the FAR endpoint of each flank segment: hE1 points
-    # toward the notch (toward A), hE2 away from the notch (from K2)
+    E1_d = unit(E1e - E1s)
+    E2_d = unit(E2e - E2s)
+    A_pt = line_x(Ld_p, Ld_d, E1s, E1_d)
     far1 = E1s if np.linalg.norm(A_pt - E1s) > np.linalg.norm(A_pt - E1e) else E1e
     hE1 = unit(A_pt - far1)
-    K2_pt = line_x(Lr_p, Lr_d, E2s, unit(E2e - E2s))
+    K2_pt = line_x(Lr_p, Lr_d, E2s, E2_d)
+    assert LineString([E2s, E2e]).distance(Point(K2_pt)) < 0.01
     far2 = E2s if np.linalg.norm(K2_pt - E2s) > np.linalg.norm(K2_pt - E2e) else E2e
     hE2 = unit(far2 - K2_pt)
-    assert LineString([E2s, E2e]).distance(Point(K2_pt)) < 0.01, f"{variant}: K2 off E2 segment"
-    hRise = unit(K2_pt - T2b)
     dDive = unit(I1 - A_pt)
-    run_dive = float(np.linalg.norm(T1a - A_pt))
+    hRise = unit(K2_pt - T2b)
     run_rise = float(np.linalg.norm(K2_pt - T2b))
-    def pick(I, u1, u2, run):
-        for ri in range(20, 5, -1):
-            R = ri * 0.05
-            f = fillet(I, u1, u2, R)
-            if f and run - f["Lt"] >= RESID:
-                return R, f
-        return None, None
-    R_d, F_d = pick(A_pt, -hE1, dDive, run_dive)
-    R_r, F_r = pick(K2_pt, -hRise, hE2, run_rise)
-    mode_dive = "fillet" if F_d else "sharp"
-    if not F_d:
-        f0 = fillet(A_pt, -hE1, dDive, 1.0)
-        Rmax_dive = run_dive * math.tan(math.radians(f0["alpha_deg"]) / 2) if f0 else 0.0
-    else:
-        Rmax_dive = None
-    assert F_r, f"{variant}: rise mouth fillet infeasible (run {run_rise:.3f})"
-    # ---- assemble elements (dive -> rise) ----
-    els = []
-    chain_pts = []
-    if F_d:
-        els.append(("arc", F_d["O"], R_d, F_d["Ta"], F_d["Tb"], F_d["mid"]))
-        els.append(("line", F_d["Tb"], tuple(T1a)))
-        chain_pts += arc_pts(F_d["O"], R_d, F_d["Ta"], F_d["Tb"])
-        chain_pts.append(tuple(T1a))
-        start_pt = F_d["Ta"]
-    else:
-        els.append(("line", tuple(A_pt), tuple(T1a)))
-        chain_pts += [tuple(A_pt), tuple(T1a)]
-        start_pt = tuple(A_pt)
-    els.append(("arc", tuple(A1[1]), A1[2], tuple(T1a), tuple(T1b), tuple(A1[5])))
-    chain_pts += arc_pts(tuple(A1[1]), A1[2], tuple(T1a), tuple(T1b))[1:]
-    els.append(("line", tuple(T1b), tuple(T2a)))
-    chain_pts.append(tuple(T2a))
-    els.append(("arc", tuple(A2[1]), A2[2], tuple(T2a), tuple(T2b), tuple(A2[5])))
-    chain_pts += arc_pts(tuple(A2[1]), A2[2], tuple(T2a), tuple(T2b))[1:]
-    els.append(("line", tuple(T2b), F_r["Ta"]))
-    chain_pts.append(F_r["Ta"])
-    els.append(("arc", F_r["O"], R_r, F_r["Ta"], F_r["Tb"], F_r["mid"]))
-    chain_pts += arc_pts(F_r["O"], R_r, F_r["Ta"], F_r["Tb"])[1:]
-    end_pt = F_r["Tb"]
-    front_idx = 3 if F_d else 2
-    # ---- replace the ring arc ----
-    ring = [tuple(c) for c in wing_old.exterior.coords[:-1]]
+    R_r, F_r = pick_fillet(K2_pt, -hRise, hE2, run_rise)
+    sharp = {}
+    if F_r is None:
+        F = fillet(K2_pt, -hRise, hE2, 0.30)
+        sharp["rise_Rmax"] = (run_rise - RESID) / (F["Lt"] / 0.30)
+
+    def build_chain(R_c):
+        C1 = corner1(R_c)
+        T1a, T1b = np.array(C1["Ta"]), np.array(C1["Tb"])
+        run_dive = float(np.dot(T1a - A_pt, dDive))
+        R_d, F_d = pick_fillet(A_pt, -hE1, dDive, run_dive)
+        lsharp = {}
+        if F_d is None:
+            F = fillet(A_pt, -hE1, dDive, 0.30)
+            lsharp["dive_Rmax"] = (run_dive - RESID) / (F["Lt"] / 0.30)
+        els, pts = [], []
+        if F_d is not None:
+            els.append(("arc", F_d["O"], R_d, F_d["Ta"], F_d["Tb"], F_d["mid"]))
+            pts += arc_pts(F_d["O"], R_d, F_d["Ta"], F_d["Tb"])
+            els.append(("line", F_d["Tb"], tuple(T1a)))
+            pts.append(tuple(T1a))
+            start_pt = F_d["Ta"]
+        else:
+            els.append(("line", tuple(A_pt), tuple(T1a)))
+            pts += [tuple(A_pt), tuple(T1a)]
+            start_pt = tuple(A_pt)
+        els.append(("arc", C1["O"], R_c, tuple(T1a), tuple(T1b), C1["mid"]))
+        pts += arc_pts(C1["O"], R_c, tuple(T1a), tuple(T1b))[1:]
+        fi = len(els)
+        els.append(("line", tuple(T1b), tuple(T2a)))
+        pts.append(tuple(T2a))
+        els.append(("arc", C2["O"], 0.55, tuple(T2a), tuple(T2b), C2["mid"]))
+        pts += arc_pts(C2["O"], 0.55, tuple(T2a), tuple(T2b))[1:]
+        if F_r is not None:
+            els.append(("line", tuple(T2b), F_r["Ta"]))
+            pts.append(F_r["Ta"])
+            els.append(("arc", F_r["O"], R_r, F_r["Ta"], F_r["Tb"], F_r["mid"]))
+            pts += arc_pts(F_r["O"], R_r, F_r["Ta"], F_r["Tb"])[1:]
+            end_pt = F_r["Tb"]
+        else:
+            els.append(("line", tuple(T2b), tuple(K2_pt)))
+            pts.append(tuple(K2_pt))
+            end_pt = tuple(K2_pt)
+        return {"els": els, "pts": pts, "front_index": fi, "start": start_pt,
+                "end": end_pt, "R_c": R_c, "R_d": R_d, "run_dive": run_dive,
+                "T1a": tuple(T1a), "sharp": lsharp}
+
+    scan = []
+    chosen = None
+    for R_c in [0.40, 0.375, 0.35, 0.325, 0.30, 0.275, 0.25, 0.225,
+                0.20, 0.175, 0.15]:
+        ch = build_chain(R_c)
+        s_chain = MAIN.distance(LineString(ch["pts"]))
+        scan.append((R_c, ch["R_d"], s_chain))
+        if chosen is None and ch["R_d"] is not None and ch["R_d"] >= 0.30:
+            chosen = ch
+    if chosen is None:
+        chosen = build_chain(0.15)
+    ch = chosen
+    els, chain_pts = ch["els"], ch["pts"]
+    print(f"{variant}: R_c={ch['R_c']} R_d={ch['R_d']} R_r={R_r} scan "
+          + " ".join(f"{r}:Rd{rd}/s{s:.3f}" for r, rd, s in scan))
+
+    # ring-arc replacement on the Rev.5 outline
+    ring = [tuple(c) for c in wing_old.exterior.coords]
+    n = len(ring) - 1
+
     def seg_proj(pt):
-        best = None
-        for i in range(len(ring)):
-            a, b = ring[i], ring[(i + 1) % len(ring)]
-            ab = np.array(b) - np.array(a)
-            t = float(np.clip(np.dot(np.array(pt) - np.array(a), ab) / np.dot(ab, ab), 0, 1))
-            q = np.array(a) + ab * t
-            dd = float(np.linalg.norm(np.array(pt) - q))
-            if best is None or dd < best[0]:
-                best = (dd, i, t, tuple(q))
+        pt = np.array(pt)
+        best = (1e9, -1, 0.0, None)
+        for i in range(n):
+            a, b = np.array(ring[i]), np.array(ring[i + 1])
+            ab = b - a
+            t = float(np.clip(np.dot(pt - a, ab) / np.dot(ab, ab), 0, 1))
+            q = a + ab * t
+            d = float(np.linalg.norm(pt - q))
+            if d < best[0]:
+                best = (d, i, t, tuple(q))
         return best
-    print("DBG", variant, "A", A_pt, "K2", K2_pt, "hE1", hE1, "hE2", hE2, "Rd", R_d, "Rr", R_r)
-    print("DBG Fd", F_d)
-    print("DBG Fr", F_r)
-    print("DBG start", start_pt, "end", end_pt)
-    dA = seg_proj(start_pt); dB = seg_proj(end_pt)
-    assert dA[0] < 1e-3 and dB[0] < 1e-3, f"{variant}: tangent pts off ring {dA[0]:.4f} {dB[0]:.4f}"
-    tab_pt = Point(tuple((Lf_a + Lf_b) / 2))
-    def arc_walk(i0, t0, i1, t1, forward):
-        pts = []
-        n = len(ring)
-        if forward:
-            pts.append(tuple(np.array(ring[i0]) + (np.array(ring[(i0 + 1) % n]) - np.array(ring[i0])) * t0))
-            i = (i0 + 1) % n
-            while i != (i1 + 1) % n:
-                pts.append(ring[i]); i = (i + 1) % n
-            pts.append(tuple(np.array(ring[i1]) + (np.array(ring[(i1 + 1) % n]) - np.array(ring[i1])) * t1))
-        else:
-            pts.append(tuple(np.array(ring[(i0 + 1) % n]) + (np.array(ring[i0]) - np.array(ring[(i0 + 1) % n])) * (1 - t0)))
-            i = i0
-            while i != i1:
-                pts.append(ring[i]); i = (i - 1) % n
-            pts.append(tuple(np.array(ring[i1]) + (np.array(ring[(i1 + 1) % n]) - np.array(ring[i1])) * t1))
+
+    dA, dB = seg_proj(ch["start"]), seg_proj(ch["end"])
+    assert dA[0] < 1e-3 and dB[0] < 1e-3, \
+        f"{variant}: tangent pts off ring {dA[0]:.4f} {dB[0]:.4f}"
+    tab_pt = Point(np.mean([np.array(els_nd[2][1]), np.array(els_nd[2][2])], axis=0))
+
+    def build_arc(forward):
+        pts = [ch["start"]]
+        i = (dA[1] + 1) % n if forward else dA[1]
+        target = (dB[1] + 1) % n if forward else dB[1]
+        while i != target:
+            pts.append(ring[i])
+            i = (i + 1) % n if forward else (i - 1) % n
+        pts.append(ch["end"])
         return pts
-    # candidate arcs from start_pt to end_pt, both directions
-    def build_arc(fwd):
-        # walk ring from start (seg dA) to end (seg dB)
-        n = len(ring)
-        pts = [start_pt]
-        if fwd:
-            i = (dA[1] + 1) % n
-            while i != (dB[1] + 1) % n:
-                pts.append(ring[i]); i = (i + 1) % n
-        else:
-            i = dA[1]
-            while i != dB[1]:
-                pts.append(ring[i]); i = (i - 1) % n
-        pts.append(end_pt)
-        return pts
+
     arcs = [build_arc(True), build_arc(False)]
-    def arc_score(a):
-        return LineString(a).distance(tab_pt) if len(a) > 2 else 99
-    scores = [arc_score(a) for a in arcs]
+    scores = [LineString(a).distance(tab_pt) if len(a) > 2 else 99 for a in arcs]
     notch_arc = arcs[0] if scores[0] < scores[1] else arcs[1]
     long_arc = arcs[1] if scores[0] < scores[1] else arcs[0]
-    assert min(scores) < 5.0 < max(scores), f"{variant}: arc split ambiguous {scores}"
+    assert min(scores) < 5.0 < max(scores), f"{variant}: arc split {scores}"
     new_ring = long_arc + chain_pts[::-1][1:]
     wing_new = Polygon(new_ring)
     assert wing_new.is_valid, f"{variant}: invalid new polygon"
-    assert wing_new.geom_type == "Polygon"
-    # ---- checks ----
+    removed = wing_old.difference(wing_new)
+    added = wing_new.difference(wing_old)
     seam = MAIN.distance(wing_new)
     ovl = MAIN.intersection(wing_new).area
     sil_ok = SIL.covers(wing_new)
-    removed = wing_old.difference(wing_new)
-    added = wing_new.difference(wing_old)
-    def to_board_poly(poly):
-        q = shp_translate(poly, xoff=-env[0], yoff=-env[1])
-        q = shp_rotate(q, -deg, origin=(0, 0))
-        return shp_translate(q, xoff=jw[0], yoff=jw[1])
-    hits_r, hits_a = {}, {}
-    for kind, geom in copper_items(b5):
-        for poly, acc in ((removed, hits_r), (added, hits_a)):
-            if poly.area <= 0:
-                continue
-            inter = geom.intersection(to_board_poly(poly))
-            if inter.area > 1e-6:
-                acc[kind] = acc.get(kind, 0) + inter.area
-    hard_r = {k: v for k, v in hits_r.items() if k not in ("fill", "zonepoly")}
-    hard_a = {k: v for k, v in hits_a.items() if k not in ("fill", "zonepoly")}
-    print(f"{variant}: A={tuple(round(v,3) for v in A_pt)} K2={tuple(round(v,3) for v in K2_pt)} "
-          f"dive {mode_dive} R={R_d} (run {run_dive:.3f}) rise R={R_r} (run {run_rise:.3f})")
-    print(f"   seam {seam:.4f} ovl {ovl:.5f} sil {sil_ok} removed {removed.area:.3f} added {added.area:.3f} "
-          f"area {wing_old.area:.1f}->{wing_new.area:.1f}")
-    print(f"   copper removed { {k: round(v,4) for k,v in hits_r.items()} or 'NONE' } "
-          f"added { {k: round(v,4) for k,v in hits_a.items()} or 'NONE' }")
-    from shapely.ops import nearest_points
-    np1, np2 = nearest_points(MAIN, wing_new)
-    print("DBG seam at main", (round(np1.x,3), round(np1.y,3)), "wing", (round(np2.x,3), round(np2.y,3)))
-    print("DBG added parts:", [(round(g.area,2), tuple(round(v,2) for v in g.bounds)) for g in (list(added.geoms) if added.geom_type == "MultiPolygon" else [added])])
-    assert seam >= GAP - 1e-9 and ovl == 0.0 and sil_ok
-    assert not hard_r, f"{variant}: removed hits routed copper {hard_r}"
-    assert not hard_a, f"{variant}: added covers routed copper {hard_a}"
-    def el_board(el):
-        if el[0] == "line":
-            return ("line", inv(el[1]), inv(el[2]))
-        return ("arc", inv(el[1]), el[2], inv(el[3]), inv(el[4]), inv(el[5]))
-    results[variant] = dict(
-        site=site, delta=nd["delta"], front_index=front_idx,
-        A=[round(v, 4) for v in A_pt], K2=[round(v, 4) for v in K2_pt],
-        I1=[round(v, 4) for v in I1], I2=[round(v, 4) for v in I2],
-        mode_dive=mode_dive, R_dive=R_d, R_rise=R_r,
-        Rmax_dive=round(Rmax_dive, 3) if Rmax_dive else None,
-        run_dive=round(run_dive, 4), run_rise=round(run_rise, 4),
-        Lt_dive=round(F_d["Lt"], 4) if F_d else None,
-        Lt_rise=round(F_r["Lt"], 4),
-        seam_min=round(float(seam), 4), overlap_mm2=round(float(ovl), 5),
-        removed_area_mm2=round(float(removed.area), 3),
-        added_area_mm2=round(float(added.area), 3),
-        removed_area_2d_mm2=nd["removed_area_mm2"],
-        copper_removed={k: round(v, 5) for k, v in hits_r.items()},
-        copper_added={k: round(v, 5) for k, v in hits_a.items()},
-        inside_silhouette=bool(sil_ok),
-        E1=[[round(v, 4) for v in E1s], [round(v, 4) for v in E1e]],
-        E2=[[round(v, 4) for v in E2s], [round(v, 4) for v in E2e]],
-        elements_case=[list(e) if e[0] == "line" else [e[0], list(e[1]), e[2], list(e[3]), list(e[4]), list(e[5])] for e in els],
-        elements_board=[list(e) if e[0] == "line" else [e[0], list(e[1]), e[2], list(e[3]), list(e[4]), list(e[5])] for e in map(el_board, els)],
-        wing_new_case=[list(c) for c in wing_new.exterior.coords])
-json.dump(results, open(W / ".issue273-runtime/notch2e.json", "w"), indent=1)
-print("saved notch2e.json")
+    assert seam >= GAP - 1e-9 and ovl == 0.0 and sil_ok, \
+        f"{variant}: seam {seam:.4f} ovl {ovl} sil {sil_ok}"
+    rem_kinds, add_kinds = {}, {}
+    for kind, poly in copper_items(b5):
+        cp = to_case(poly)
+        ra = cp.intersection(removed).area if not removed.is_empty else 0.0
+        aa = cp.intersection(added).area if not added.is_empty else 0.0
+        if ra > 1e-6:
+            rem_kinds[kind] = rem_kinds.get(kind, 0.0) + ra
+        if aa > 1e-6:
+            add_kinds[kind] = add_kinds.get(kind, 0.0) + aa
+    bad_rem = {k: v for k, v in rem_kinds.items() if k not in ("fill", "zonepoly")}
+    assert not bad_rem, f"{variant}: removed copper {bad_rem}"
+    assert not add_kinds, f"{variant}: added-region copper {add_kinds}"
+
+    def els_json(els):
+        r = []
+        for e in els:
+            if e[0] == "line":
+                r.append(["line", [float(v) for v in e[1]], [float(v) for v in e[2]]])
+            else:
+                r.append(["arc", [float(v) for v in e[1]], float(e[2]),
+                          [float(v) for v in e[3]], [float(v) for v in e[4]],
+                          [float(v) for v in e[5]]])
+        return r
+
+    def to_board(pt):
+        q = shp_translate(Point(pt), xoff=-env[0], yoff=-env[1])
+        q = shp_rotate(q, -ang, origin=(0, 0))
+        q = shp_translate(q, xoff=jw[0], yoff=jw[1])
+        return (q.x, q.y)
+
+    eb = []
+    for e in els:
+        if e[0] == "line":
+            eb.append(["line", list(to_board(e[1])), list(to_board(e[2]))])
+        else:
+            eb.append(["arc", list(to_board(e[1])), e[2], list(to_board(e[3])),
+                       list(to_board(e[4])), list(to_board(e[5]))])
+    out[variant] = {
+        "elements_case": els_json(els),
+        "elements_board": eb,
+        "front_index": ch["front_index"],
+        "wing_new_case": [[float(x), float(y)] for x, y in new_ring],
+        "diag": {
+            "A": [float(v) for v in A_pt], "K2": [float(v) for v in K2_pt],
+            "R_dive_mouth": ch["R_d"], "R_corner_dive": ch["R_c"],
+            "R_corner_rise": 0.55, "R_rise_mouth": R_r,
+            "sharp": {**sharp, **ch["sharp"]}, "run_dive": ch["run_dive"], "run_rise": run_rise,
+            "corner_scan": [[r, rd, round(s, 4)] for r, rd, s in scan],
+            "seam": seam, "overlap": ovl, "silhouette": bool(sil_ok),
+            "removed_area": removed.area, "added_area": added.area,
+            "removed_copper": rem_kinds, "added_copper": add_kinds,
+            "n_elements": len(els),
+        },
+    }
+    print(f"   seam {seam:.4f} ovl {ovl:.5f} sil {sil_ok} removed "
+          f"{removed.area:.3f} added {added.area:.3f} sharp {sharp} els {len(els)}")
+
+(RT / "notch2e.json").write_text(json.dumps(out, indent=1))
+print("wrote notch2e.json")
