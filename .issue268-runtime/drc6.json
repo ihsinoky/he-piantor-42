@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-17T12:17:49+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "m1-matrix18.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Items shorting two nets (nets MUX_OUT_A and GND)",
+            "items": [
+                {
+                    "description": "Track [MUX_OUT_A] on B.Cu, length 0.7500 mm",
+                    "pos": {
+                        "x": 99.1,
+                        "y": 130.199999
+                    },
+                    "uuid": "7525e933-59e0-4a02-8d7c-46ce2e4e6741"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 0.3500 mm",
+                    "pos": {
+                        "x": 98.55,
+                        "y": 130.199999
+                    },
+                    "uuid": "ea44225d-9391-42ec-95be-80f4fab93a1d"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GND and MUX_OUT_A)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 0.3500 mm",
+                    "pos": {
+                        "x": 98.55,
+                        "y": 130.199999
+                    },
+                    "uuid": "ea44225d-9391-42ec-95be-80f4fab93a1d"
+                },
+                {
+                    "description": "Track [MUX_OUT_A] on B.Cu, length 0.2121 mm",
+                    "pos": {
+                        "x": 99.25,
+                        "y": 130.35
+                    },
+                    "uuid": "ed70918d-3cd9-4791-9359-40f2229f0c3b"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [HALL_5V] on F.Cu, length 0.2000 mm",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 127.2
+                    },
+                    "uuid": "fa4b16a9-7468-4d49-8b0e-7a64fb23b6f4"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [MUX_A2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 103.6,
+                        "y": 128.4
+                    },
+                    "uuid": "4ab706de-3668-4542-9c4f-6bdc226ff505"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        }
+    ]
+}

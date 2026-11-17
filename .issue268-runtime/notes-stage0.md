@@ -62,3 +62,27 @@
 - CALL: KEEP the uncommitted board as working state (coherent, complete-looking routing;
   nothing corrupt). The custom DIAG is not authoritative - KiCad DRC/connectivity decides.
   If DRC shows GND truly unconnected, fix GND locally; else proceed to gates.
+
+## Stage 3 (continuation worker): routing completion
+- Previous worker's A* connected every J_WING pad to *a* surviving fragment, but the
+  Z2 deletion had also severed U_MUX_C's HALL_5V/MUX_A2/WING_EN and split GND into
+  east/west comps + 5 isolated pad stubs (its own DIAG failed on GND; run2.sh retried 6x).
+- GND stubs were trapped by the signal-escape via wall (vias at y=130.75, 0.5mm from each
+  GND lane; a 0.30 track needs 0.55 clearance, has 0.50). Fix: 0.15mm necks in-lane
+  y131.00->129.90 (clearance 0.125 to flanking vias), then 0.30 A* bridges north of the wall.
+  NOTE: pad-10 (98.75) neck initially met the y=130.20 bus only by a 0.025mm graze;
+  bus extended to x=98.78 for a full-width joint (0.12 clearance to MUX_OUT_A jog).
+- Bridges driven by capsule union-find (validated 1:1 vs kicad-cli DRC counts);
+  build2's endpoint-only component model fragmented and wasted attempts on 0.0/0.1mm
+  micro-bridges - duplicates cleaned (GND x7, HALL x8 stacks, A2 gap x7).
+- Vestigial A2 via at (103.60,128.40) deleted: its two B.Cu tracks already joint there;
+  F.Cu spur (failed route tail) deleted. A2 diagonal restored after finding it carried
+  the east B.Cu chain (fixup2 error, reverted in fixup3).
+- Dangling cleanup: EN spur trimmed onto its via (107.50,126.35); GND chain-B micro
+  segments deleted; necks trimmed onto their crossing bus tracks.
+- FINAL DRC (kicad-cli, severity-all): 0 errors, 0 unconnected, 1 warning:
+  track_dangling on HALL_5V F.Cu 0.20mm at (112.6,127.2) - Rev.3-original bus tail;
+  its Rev.3 continuation (108.1,131.7)->(112.6,127.2) was deleted in stage 1 by design
+  (Z2). Tail is connected copper (east HALL bus). No other-net copper within 2.6mm on
+  either layer to terminate it on; deleting the arm would remove ~15mm of original
+  power copper feeding real pads. Disclosed in REPORT.

@@ -80,7 +80,7 @@ PAD_COL = {  # FH12 pad centre x per net (GND has six)
     'MUX_A0': [102.25], 'MUX_A1': [101.25], 'MUX_A2': [100.75], 'WING_EN': [100.25],
     'MUX_OUT_A': [99.25], 'MUX_OUT_B': [98.25], 'MUX_OUT_C': [97.25]}
 PAD_W = {'HALL_5V': 0.3, 'GND': 0.3}
-def raster_blocked(exclude_net, width, via=False):
+def raster_blocked(exclude_net, width, via=False, reserve=True):
     """blocked[2][NY][NX] bool: cell centre too close to other-net copper."""
     need = (0.3 if via else width/2) + CLR
     blocked = [np.zeros((NY, NX), bool), np.zeros((NY, NX), bool)]
@@ -101,7 +101,7 @@ def raster_blocked(exclude_net, width, via=False):
     # x-band reservation would exceed the 0.5 pad pitch and ban own-column vias.
     # North of 129.5 the escapes have fanned out; horizontal travel is allowed
     # there (subject to copper), which the east/west-target nets require.
-    if not via:
+    if not via and reserve:
         iy0 = max(0, int((129.5-WIN[2])/STEP)); iy1 = min(NY-1, int((132.7-WIN[2])/STEP)+1)
         for net, cols in PAD_COL.items():
             if net == exclude_net: continue
@@ -290,8 +290,8 @@ for net in ['GND', 'HALL_5V', 'MUX_A2', 'WING_EN']:
         comps.sort(key=lambda c: -len(c))
         target = comps[0]
         source = comps[-1]
-        blocked = raster_blocked(net, width)
-        viablocked = raster_blocked(net, width, via=True)
+        blocked = raster_blocked(net, width, reserve=(net != 'GND'))
+        viablocked = raster_blocked(net, width, via=True, reserve=(net != 'GND'))
         goal = goal_mask(target, width)
         startmask = goal_mask(source, width)
         hints = []

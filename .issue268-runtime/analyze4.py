@@ -100,6 +100,6 @@ for net in LINK:
     out[net] = clist
     print(net, 'components:', len(clist))
     for c in clist:
-        print('   pads=%d items=%d %s bbox=%s' % (c['pads'], c['items'], c['padlabels'][:4], c['bbox']))
-json.dump(out, open('.issue268-runtime/components3.json', 'w'), indent=1)
-print('saved components3.json')
+        print('   pads=%d items=%d %s bbox=%s' % (c['pads'], c['items'], c['padlabels'], c['bbox']))
+json.dump(out, open('.issue268-runtime/components4.json', 'w'), indent=1)
+print('saved components4.json')
