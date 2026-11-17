@@ -13,10 +13,12 @@ V = path_V(0.0)
 pts = catmull(V)
 # base plate: x -4..38, y -48..50, z 0..6
 jig = box_at(17, 1, 3, 42, 98, 6)
-# path groove: width 10.0, z 3.2..6.05 (cut)
+# path groove: width 10.0, z 3.2..6.05 (fuse cutters, single cut)
+groove = None
 for a, b in zip(pts[:-1], pts[1:]):
     s = seg_box((a[0], a[1], 0), (b[0], b[1], 0), 10.0, 2.85, zoff=4.62, extra_len=1.0)
-    if s is not None: jig = jig.cut(s)
+    if s is not None: groove = s if groove is None else groove.fuse(s)
+jig = jig.cut(groove)
 # stack fences along the S-pair run (line (11.79,-13)->(13.81,30.6))
 mid = np.array([13.45, 9.80]); perp = np.array([0.99892, -0.04643])
 for sgn in (1, -1):
@@ -28,13 +30,13 @@ for (x, y) in [(25.2, -15.0), (11.37, -22.0), (14.41, 30.60), (13.00, 0.43)]:
     pin = Pos(x, y, 7.0) * Cylinder(radius=2.0, height=8.0)
     jig = jig.fuse(pin)
 # S1 slider rail slot along the run through S1 detents y=22.4..26.4
-s1s = [(14.08 - (24.4 - y) * 0.04643, y) for y in (22.4, 23.4, 24.4, 25.4, 26.4)]
+s1s = [(14.41 - (30.6 - y) * 0.04643, y) for y in (21.8, 22.8, 23.8, 24.8, 25.8)]  # detents for cable 148/150/152/154/156
 rail_a = (s1s[0][0], s1s[0][1] - 4, 0); rail_b = (s1s[-1][0], s1s[-1][1] + 4, 0)
-s = seg_box(rail_a, rail_b, 8.0, 3.0, zoff=4.5, extra_len=0.0)
-jig = jig.cut(s)
+rail = seg_box(rail_a, rail_b, 8.0, 3.0, zoff=4.5, extra_len=0.0)
 for (x, y) in s1s:  # detent notches
     notch = Pos(x, y, 5.5) * Rot(0, 0, 87.34) * Box(1.2, 10.0, 1.0)
-    jig = jig.cut(notch)
+    rail = rail.fuse(notch)
+jig = jig.cut(rail)
 # Wing-tail end stop (tip registers at y=-38.5)
 jig = jig.fuse(box_at(27.0, -39.9, 8.5, 13, 2.6, 5.0))
 # Main-end tip target pocket at T1 (22.6, 40.0)

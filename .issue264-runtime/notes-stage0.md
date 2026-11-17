@@ -34,3 +34,18 @@
 - Audit model allowances: sheet width 9.6 (real ~9.0 + placement), thickness
   0.32 (real 0.27), fold patches +0.30 below, sensitivity run: S1 +2.3 mm,
   width 10.4, patch 0.35.
+
+## Path revision after audit run 1 (2026-11-17)
+- Run 1 (right side valid): U_MUX_C graze 0.0233 mm3 REAL (repair estimator is
+  an exact partitioned Common): the sheet's east edge rises with the climb
+  while passing ~3 mm from the MUX envelope corner in plan. Fix: climb delayed
+  3 mm north (flat to y=-19, climb y -19..-11) - no climb under the MUX field.
+- Main ZIF hits 2.81 mm3: modelling artefact of the inherited envelope (its
+  slot cut was a mouth notch; #261's sheet stopped at the mouth). Real FH12
+  slot runs the connector depth -> slot cut deepened to full depth, both ZIFs.
+- Stack run shifted +0.6 mm outboard (S1 x 14.08, S2 x 13.00, V7 x 14.41) for
+  Main-study-C23 clearance (its top z 7.55 vs leg3 z band 7.38..7.70).
+- Left-side mirror bug found and fixed (double negation on S1 points).
+- Final length budget (sharp-corner polyline): total 153.2 mm at S1 y=24.4;
+  absorber slope ~2 mm per 1 mm of S1 travel -> S1 detents y = 21.8 (cable
+  148) .. 25.8 (cable 156), nominal 23.8 for a 152.0 mm unit.
