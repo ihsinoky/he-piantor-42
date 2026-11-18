@@ -24,3 +24,44 @@ STUDY ONLY. No KiCad implementation in this stage.
 
 ## Deliverables
 - .issue288-runtime/wmatrix-design.md + .json
+
+---
+# Issue #288 Stage 2 plan — KiCad implementation (appended 2026-11-19)
+
+New tree: `hardware/kicad/qualification/issue-288-wmatrix/` (board/ + manufacturing/ + REPORT.md).
+Donor: Rev.3 board file (field routing + MUX placement preserved by in-place edit).
+
+## Frozen design table (from study; pin map frozen here, gate §10.4)
+- Field: 18x TMAG5253BA3, Rev.3 coordinates exact; sensor->MUX-input assignment
+  preserved from Rev.3 (extracted from donor pads, not retyped).
+- MUX out A/B/C -> XIAO D0 (AIN0) / D1 (AIN1) / D2 (AIN4).
+- XIAO pin map: D0=MUXA_OUT, D1=MUXB_OUT, D2=MUXC_OUT (AIN); D6/D7/D8=A0/A1/A2;
+  D9/D10/D3=EN_A/EN_B/EN_C; D5=status LED; D4=spare. 10 of 11 header GPIO used.
+- Spare MUX inputs per group: S7->GND (offset ref), S8->sensor rail via divider
+  (10k/10k from HALL_3V3, node = rail/2) (rail ref).
+- Power: VIN node <- board USB-C (CC 5.1k x2) OR battery 2-pin header via
+  AO3401 P-MOS reverse-polarity protection. VIN -> AP2112K-3.3 LDO (600 mA)
+  -> HALL_3V3 sensor rail (sensors + MUX VDD). Shunt position (0-ohm jumper
+  footprint + sense pads) in HALL_3V3 after the LDO.
+- TPs: raw per-pitch CTR/N/DIAG (from Rev.3 pattern), TP_MUXA/B/C, TP_A0/A1/A2,
+  TP_EN_A/B/C, TP rail at LDO out + far end of each section, TP_VIN, TP_GND.
+- Board: Rev.3 outline 128x80, 2L, 1.2 mm, 0.10/0.30 mm widths, 0.10 clearance;
+  south strip (ex-GH zone) hosts XIAO socket (antenna end at board edge,
+  copper keep-out), USB-C, LDO, battery header.
+
+## Steps
+- S2.0 plan + toolchain env (KiCad 9.0.9 runtime from main clone .issue129-runtime)
+- S2.1 fact extraction: donor inventory (pads/nets/outline/netclasses);
+  TMAG pinout + DMR land pattern (tmag worktree sources / TI SBASAI5);
+  XIAO pinout (PO he_kbd_module lib / Seeed); TMUX1208 pad map (donor board);
+  LCSC codes (Rev.3 BOM + LCSC pages for new parts)
+- S2.2 footprints: TMAG X2SON-4 DMR (cited), XIAO socket; project .pretty lib
+- S2.3 native schematic (.kicad_sch generated; project symbol lib) -> ERC 0;
+  schematic<->PCB pad/net consistency diff = assignment verification
+- S2.4 PCB build: donor in-place edit via pcbnew (sensor swap, rail rename,
+  readout-end replacement, south-strip routing); DRC iterate to 0/0
+- S2.5 gates: DRC severity-all, ERC, via-pad audit (donor method), field
+  deviation table (from placed data), assignment table (from placed pads),
+  rail droop extraction (graph model, 1 oz, worst path @ 90 mA)
+- S2.6 package per #267 conventions + TMAG stock re-observation at package time
+- S2.7 REPORT.md (gates with numbers, deviations, draft adoption line)
