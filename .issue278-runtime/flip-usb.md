@@ -209,9 +209,10 @@ R ≈ 5.25-5.5 mm centreline, inside the modelled R >= 5 discipline.
 **Audit result (full flipped fitted set, 343 bodies)**: unexpected
 contacts **0**; engagement only with the J4 header (35.42 mm³), the
 Fly EZmate housing (1.55 mm³) and the body-set plug model
-(22.73 mm³) — all mating interfaces. Under-sheet clearance at the
-crossings 0.325 mm (family C measurement at the identical z-stack;
-gate sheet volume = 0). USB-C insertion bodies were in the gate set:
+(22.73 mm³) — all mating interfaces. Minimum distance from the
+dressed cable to the right FFC sheet, measured by extrema on the
+final solid: **0.314 mm** (left sheet 5.29 mm; gate sheet volume = 0;
+family C's straight-crossing figure at the same z-stack is 0.325). USB-C insertion bodies were in the gate set:
 0 contacts — insertion at the Fly is unaffected.
 
 **Case change**: as §3-A2 (channel 7.5 wide, floor Z 1.20,
