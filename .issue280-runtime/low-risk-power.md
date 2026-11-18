@@ -71,3 +71,151 @@ dedicated charger ≈¥2,500, at a *realistic* 300 cycles/set →
 ≈¥8.5/d (¥5/d at the rated 500). LFP — cells ≈¥500–2,400 ea +
 LFP-profile charger ≈¥2,600, cycle life never binds before the
 5-y cap → ≈¥4–5/d. Alkaline — ≈¥500 per 4-pack / 1.99 d.
+
+## 2. NiMH AA — the reference (unchanged energy results)
+
+- **Risk profile.** Aqueous KOH electrolyte, sealed recombinant
+  construction. **No thermal-runaway mechanism** at this device's
+  abuse envelope: no flammable solvent, no oxygen-releasing
+  cathode. Abuse outcomes are venting (H₂ under gross external
+  overcharge — the external smart charger with −ΔV/temperature
+  termination is the mitigation, and it is mature, commodity
+  technology) and, rarely, KOH seepage from a damaged or
+  reverse-charged cell; KOH is corrosive to contacts/PCB but not a
+  fire or toxicity event. Storage/transport: unrestricted (not
+  dangerous goods). This is the lowest-risk rechargeable chemistry
+  in the set, full stop.
+- **Cycle life / charging.** Maker claim up to ~2100 cycles
+  (standard eneloop, JIS conditions), ~500 for eneloop pro;
+  calendar life (5–10 y) binds before cycle life at this swap
+  rhythm. Any AA NiMH smart charger works — no special charger,
+  no profile risk.
+- **Electrical/case.** As aa-sizing: ×3 is the smallest robust
+  configuration (fresh 4.35 V / EOD 3.0 V, whole curve in range);
+  ×4 buys 1.86 d. Under-case pod (c) +16.5 mm; south pod (a) costs
+  a +5.6 mm palm hump.
+
+## 3. NiZn AA — higher voltage, weaker longevity, thinner supply
+
+- **Energy/electrical.** 1.6 V nominal (fresh off charger ≈1.85 V,
+  plateau ≈1.6 V, practical knee ≈1.2 V, maker EOD reference
+  1.0 V), 2250 mWh min. The voltage is the one real win: **2 cells
+  clear the 3.0 V cold start with margin (fresh ≈3.7 V, plateau
+  3.2 V)** — the only 2-cell configuration in the study that does —
+  and 3× gives 1.45 d with the whole curve ≥3.0 V at EOD. Low Ri
+  (≤20 mΩ) shrugs off the 0.52 A typing draw.
+- **Risk profile.** Aqueous KOH like NiMH; **no thermal runaway,
+  no flammable solvent**. The chemistry's failure mode is not
+  energetic: zinc dendrite growth eventually shorts the cell
+  internally — the cell quietly dies (and can get warm on charge),
+  it does not vent flame. Venting under abuse is H₂/steam class,
+  same family as NiMH.
+- **The honest weakness — cycle life.** Rated 500+ cycles by
+  PKCELL/ANSMANN, but NiZn's dendrite/shape-change wear is the
+  documented historical reason the chemistry stayed niche:
+  independent long-term users report individual cells failing
+  within 1–2 years of light service, and capacity spread between
+  cells in a set grows with age (a series set is only as good as
+  its weakest cell — and a weak cell in a 3S string gets
+  reverse-stressed at end of discharge). Budget on ~300 effective
+  cycles, not 500. PKCELL also warns against low-drain use
+  (self-discharge + shallow cycling shorten life) — this device's
+  deep daily cycling is actually the favourable regime, which is
+  the one mitigating fact.
+- **Charger.** **Dedicated NiZn charger is mandatory** (1.9 V/cell
+  taper profile; a NiMH charger undercharges and a Li-ion charger
+  would be destructive). Chargers exist (Melasta/PKCell bundled,
+  ISDT C4-class smart chargers with a NiZn mode) but this is a
+  second charger ecosystem in the house.
+- **Availability scan (2026-11-18).** Amazon JP: Melasta NiZn AA
+  8-pack (2600 mWh class, ASIN B082DXWN1M) in stock; Z-Power Cell
+  USB-C-port NiZn AA 4-pack ¥1,639 (MAKERZ, sale price reported
+  2026-10); PKCELL via import sellers. **Not stocked by JP
+  electronics chains** (no NiZn at Akizuki/Yodobashi class
+  retailers in this check) — supply is Amazon-marketplace-only.
+  Mainstream-ness: ANSMANN (EU) legitimises the chemistry, but it
+  has been "about to take off" for 15 years; 3-year buyability is
+  plausible, not assured. That is a freedom-axis (PO priority 3)
+  cost NiMH does not have.
+
+## 4. LiFePO4 — ⚠ still a lithium chemistry (PO to judge)
+
+**What the flag means precisely.** LFP's cathode (olivine
+LiFePO₄) does not release oxygen on heating, which removes the
+self-sustaining core of NMC thermal runaway. The peer-reviewed
+abuse record (Ohneseit et al., KIT, *Batteries* 2023, commercial
+21700s, identical protocols): **no thermal runaway under nail
+penetration at any state of charge, peak ≤132 °C**, and no
+runaway under heating at SOC 0/30 up to 350 °C — where NMC/NCA ran
+away at every SOC ≥30% and peaked at 732/1220 °C. Runaway onset
+for LFP is ~270 °C class vs ~210 °C for NMC (FPA figures).
+**What it does not forgive:** the electrolyte is still a flammable
+organic solvent — a crushed *and* overcharged cell can vent
+flammable gas (incl. HF) and burn, just without the cathode-fed
+explosion; over-discharge below ~2.0 V permanently damages the
+cell (and makes recharge hazardous); charging below 0 °C plates
+metallic lithium; and charging on a 4.2 V Li-ion profile (wrong
+external charger) overcharges it — the external charger must have
+a true 3.65 V LFP profile. Transport/storage: still UN38.3
+lithium rules for shipping; store at partial charge. In short:
+categorically milder than NMC, categorically **not** in the
+aqueous chemistries' risk class.
+
+- **14500 (AA form, 3.2 V — its own configuration, NOT a 1.5 V
+  drop-in).** 1.92 Wh/cell is barely above NiZn per cell, and the
+  voltage forces 1S-parallel thinking: ×1 = 0.39 d (a non-starter),
+  ×4 parallel = 1.57 d — NiMH ×3 class runtime for lithium
+  handling plus the worst human-factors trap in the study: a
+  3.2 V cell in an AA slot invites fatal mix-ups (a 14500 placed
+  in a 1.5 V device destroys it; the keyboard's parallel holder
+  would need keying/labelling as designed rework). No material
+  win; not recommended.
+- **18650.** 5.76 Wh/cell: ×1 = 1.18 d, ×2 parallel = 2.37 d
+  (eneloop-pro class) at +20.5 mm pod height. A real configuration
+  but no step change, and JP retail supply of *LFP* 18650 (as
+  opposed to NMC 18650, which is everywhere and OUT of scope) is
+  the thinnest of the three LFP forms.
+- **32700.** The only step change in the study: **20.8 Wh in one
+  cell → 4.26 d; ×2 → 8.5 d, the first configuration anywhere in
+  Issue #280 that reaches the week.** ≥2000 cycles, ≤9 mΩ, and at
+  this device's 0.08 C draw it delivers full datasheet capacity.
+  The costs are physical and categorical: Ø32 × 70 mm, 145–163 g
+  per cell, under-case pod grows to **+34 mm** — the keyboard sits
+  on a brick — and it is unambiguously a lithium cell, i.e. it
+  asks the PO to read "avoid Li-ion" as "avoid cobalt/NMC
+  Li-ion". Availability: solar-DIY demand keeps 32700 plentiful
+  (Amazon JP marketplace sellers stock it; regional platforms move
+  tens of thousands/month), and LFP as a chemistry is becoming
+  *more* mainstream in JP (Elecom's 2026 LFP power-bank line) —
+  the 3-year outlook is good.
+
+## 5. Alkaline AA primary — benchmark and emergency fallback
+
+Energy is fine (×4 = 1.99 d, clean electricals) and fire risk is
+nil, but two numbers disqualify it as the primary source:
+**≈¥250/day** (≈¥7,500/month of consumables — two orders above
+every rechargeable) and its main hazard, **KOH electrolyte
+leakage**: alkaline cells left installed — especially deeply
+discharged, warm, or aged — leak corrosive electrolyte that eats
+contacts and PCB traces; manufacturer guidance is to remove cells
+from devices in storage. In a device that deep-cycles a set every
+2 days the leak exposure per set is short, but a forgotten spent
+set left in the pod is exactly the leak scenario, and the damage
+lands on the keyboard. Verdict: keep as the emergency/benchmark
+column, not a design choice.
+
+## 6. Supercapacitor / hybrid — dismissed by arithmetic
+
+Maxwell BCAP3000 (the largest mainstream EDLC cell): 3.04 Wh
+stored in 510 g (6.0 Wh/kg), Ø60.4 × 138 mm. One day of this
+device (4.65 Wh) needs ≈2 cells ≈ **1.02 kg of capacitors, each
+wider than the keyboard is thick** — before self-discharge
+(leakage ~mA class per cell; a charged bank sheds a meaningful
+fraction of a day's energy per day of sitting) is even counted.
+A hybrid cap+cell buys nothing: the load is not pulse-limited
+(NiMH/LFP internal resistance is already ≪ the 0.5 A typing draw),
+so the cap adds mass, volume and a balancing problem to solve a
+problem the cells do not have. **Dismissed.**
+
+NiCd, for completeness: dismissed in one line — cadmium toxicity
+(RoHS-restricted); no property it offers is unavailable elsewhere.
