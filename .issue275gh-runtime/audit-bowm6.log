@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-ghcheck/.issue275gh-runtime/bow_audit.py", line 200, in <module>
+    solid, path = tube([list(p) for p in pts], 0.5)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-raise/hardware/case/issue-232-final/geometry.py", line 61, in tube
+    path=rounded(points,bend);direction=np.array(points[1])-np.array(points[0])
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-raise/hardware/case/issue-232-final/geometry.py", line 52, in rounded
+    assert need<np.linalg.norm(pts[i+1]-pts[i])-1e-6,('R5 straight too short',i,need,points)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('R5 straight too short', 12, 5.500454958494294, [[32.625, -34.5, 5.15], [32.625, -27.0, 4.3], [31.85, -13.0, 2.6], [33.13642024197559, -8.369685285107353, 2.6], [34.147275127239084, -3.9481309197342096, 2.6], [34.81450340003032, 0.22649242680481774, 2.6], [35.038007161732324, 4.375994290299621, 2.6], [34.64918222186504, 8.219603292741798, 2.6], [33.50745445347584, 12.031360669984732, 2.6], [31.55121058538864, 15.86936187495052, 2.6], [28.781030588245983, 19.993881935088865, 2.6], [25.50764480622628, 24.50887756759341, 2.6], [22.228875, 31.408749999999998, 2.6], [25.979875, 35.429249999999996, 2.6], [27.684875, 37.25675, 5.15]])
+EXIT=1
