@@ -161,3 +161,84 @@ sensor-chain question (boundary recorded deliberately).
 - Rail budget gate for Stage 2: sensor-rail droop <= 50 mV at worst
   burst load (the #282 successor metric), verified by extraction
   before fabrication release (§10).
+
+## 5. MUX choice
+
+**TMUX1208PWR x3 (LCSC C494728) — the incumbent Wing/Matrix part.**
+One 8:1 per ADC channel, common address A0-A2: at each address step
+the three channels present three sensors simultaneously, which is
+the product's scan shape (Wing: 3 groups x 7; here 3 x 6). At 3.3 V:
+RON 9 ohm typ (#282 §3b) into the SAADC — settling stays a non-term.
+
+**CD74HC4067 (PO's earlier eval board part) — rejected for this
+board.** It is a single 16:1 (CD74HC4067M96, LCSC C496123): 18
+sensors need two of them and the readout collapses to one ADC
+channel scanned sequentially — a different timing regime from the
+product, so burst-window and settling measurements would not
+transfer. Its RON is 70 ohm typ @4.5 V (TI SCHS209D), higher again
+at 3.3 V, in series with the SAADC sampling network — a
+channel-dependent settling error inside the noise measurement the
+board exists to make. Its genuine merits (one part covers 16
+channels; PO has used it) do not offset measuring the wrong regime.
+
+**EN wiring:** EN is routed **per MUX group** (3 nets, EN_A/B/C),
+each group's 6 sensor EN pins tied to their MUX's net. Firmware can
+then emulate every candidate regime on one board: ganged (all EN
+on), per-bank (one group at a time — finer than the product's
+per-Wing split, strictly more informative), and the #282 planning
+cases in between. Cost vs a single ganged net: 2 extra GPIO (§3
+budget already carries 3 EN lines).
+
+## 6. Measurement access (Q2)
+
+Retained from the Rev.3 pattern (it was designed for exactly this):
+per-pitch raw outputs **TP_H16_CTR/N/DIAG_RAW, TP_H17_CTR/N/DIAG_RAW**
+(pre-MUX sensor OUT), MUX outputs **TP_MUXA/B/C** (post-MUX, pre-ADC),
+address **TP_A0/A1/A2**. New for the D-049 regime:
+
+- **TP_EN_A/B/C** — a scope triggers on the EN rising edge and reads
+  OUT settling on the raw TPs: tON verified against the 45 us max
+  (SBASAI5E) in the real stack, not the model.
+- **Rail access:** TP at the regulator output and one at the far end
+  of each section's rail run; a series shunt position (0-ohm jumper
+  footprint / sense pads) in the sensor rail for droop-under-burst
+  measurement with a meter or differential scope probe.
+- **Self-calibration channels:** each MUX has 2 spare inputs (6 of 8
+  used). Wire input 6 -> GND (offset reference) and input 7 -> the
+  sensor rail via a fixed divider (rail/ratiometric reference, §4).
+  Every logged sweep then carries its own offset + rail references;
+  ADC drift cannot masquerade as sensor noise.
+- **Firmware-visible signals:** all 18 raw ADC codes per sweep; the
+  6 reference-channel codes per sweep; EN-assert -> ADC-complete
+  timer counts per bank (the real burst window on nRF silicon);
+  sweep-period jitter statistics in burst modes.
+- SWD: the XIAO's UF2 flow is primary. Exposing the XIAO's underside
+  SWD pads via pogo lands is a Stage 2 option, not a gate.
+
+## 7. Assembly (Q3) — the D-049 condition-(2) vehicle
+
+- **Full PCBA at JLCPCB for everything except the XIAO**: sensors,
+  MUXes, regulator, passives, connectors — placed in one run under
+  the production-intent process (the yield question is only answered
+  by the process a Wing respin would actually use). The XIAO is
+  hand-socketed afterwards; it is a bought module on headers and is
+  not a JLCPCB SMT line item in any case.
+- **X2SON specifics:** TMAG5253BA3IQDMRR is JLCPCB **Extended** class
+  (#282 §5). Footprint = TI DMR land pattern (SBASAI5 package data:
+  1.40 x 1.10 mm body + thermal pad) — Stage 2 cites the drawing it
+  builds from (§10 gate). No-lead 1.4 mm-class parts are the known
+  yield risk (paste volume / tombstone-free but inspection-blind
+  joints); that risk is the measurement, so no hand-solder fallback
+  is designed in.
+- **Yield metric, defined now:** after assembly, the firmware
+  self-test (EN on -> OUT inside the VQ band, per sensor) counts
+  functional sensors. Yield = functional / 18 per board. At the
+  project's standard 5-board quantity that is 90 sensor sites — a
+  first yield read, not a production statistic; the Stage 2 report
+  must present it as such.
+- **Variant trap (from #282 §5):** the BA1 sibling (LCSC C22445458,
+  +/-20 mT) is stocked and adjacent; a variant slip saturates in the
+  Jade Pro field and is a hard failure, not a degradation. The BOM
+  pins **TMAG5253BA3IQDMRR** exactly, and the travel-curve self-test
+  detects a slip functionally (BA1 clips at 20 mT) — record both
+  defences in the Stage 2 package.
