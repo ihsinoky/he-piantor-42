@@ -87,3 +87,112 @@ averaging shrinks both equally. Resolution cost is real but small;
 it does not block adoption. (ADC quantization and divider Johnson
 noise are common-mode to the comparison method and excluded, as in
 the baseline record.)
+
+## 3. Architecture impact
+
+### (a) 3.3 V Hall rail vs the D-026/D-027 guarantee structure
+
+The 4.60 V farthest-point target exists for one reason: the DRV5055's
+high supply window starts at 4.5 V, so the design must deliver
+≥4.5 V (+100 mV margin) at the far end of a 127 mA/Wing chain fed
+from 5.2 V — only 0.6 V of total drop budget, hence the 50 mΩ loop
+targets and the whole conductor-resistance programme.
+
+TMAG5253's floor is **1.65 V**. On a 3.3 V rail the same recorded-class
+drops (≤0.3 V worst) leave ≥3.0 V at the far sensor — the absolute-
+floor problem **disappears**; a 3.3 V rail makes the far-point problem
+strictly easier. What replaces the guarantee metric is the
+**ratiometric mismatch**: the sensor output scales with its *local*
+VCC while the RP2040 ADC references Main's 3.3 V, so a VCC difference
+δ between Wing node and ADC reference appears as a δ/3.3 scale error.
+(The issue-165 study already recorded that this cancellation does
+not occur across the interconnect for the 5 V chain either.) A
+sensible successor guarantee: **far-point drop ≤50 mV at design load**
+(≤1.5% scale error, inside per-key endpoint calibration) — a drop
+budget, not a floor. The 5.2 V buck-boost sizing, the 127 mA/Wing
+load definition and D-027's 500 mA USB accounting are all artefacts
+of the 5 V chain and would be re-derived, not carried over.
+
+### (b) TMUX1208 at 3.3 V (TI SCDS389C)
+
+Native: supply range 1.08–5.5 V. RON rises 5 Ω typ @5 V → **9 Ω typ
+@3.3 V** (15 Ω max over temp) — immaterial into a high-impedance ADC
+node. Transition time 25 ns @3.3 V. Settling is set by the ADC-node
+RC, not the MUX: with the divider deleted (see (c)) the source
+resistance collapses from ~4 kΩ to ~10 Ω (ROUT 1.27 Ω + RON 9 Ω),
+so the 1 nF node τ falls from ~4 µs to ~10 ns and per-step settling
+stops being the scan-rate term.
+
+### (c) RP2040 ADC interface
+
+Current design (hall-acquisition §5, D-010): the DRV5055's output can
+approach the 5 V rail, above the ADC's 3.3 V domain, so each MUX
+output passes a **6.8 kΩ/10 kΩ divider (×0.595) + 1 nF** — costing
+span (0.86 V of the 1.45 V swing reaches the ADC) and setting the
+4 µs settle τ. TMAG5253 at 3.3 V is **native**: its 1.83–2.70 V swing
+lands directly in the ADC range, the divider is deleted, and the
+full 0.87 V span reaches the converter. (For the record: the
+DRV5055 also has a 3.3 V window at 15 mV/mT — issue-165 studied it —
+but it keeps the no-EN limitation and its noise density *worsens* to
+215 nT/√Hz at 3.3 V; it is not a substitute for the sensor change.)
+
+### (d) EN control options (Wing side)
+
+| Option | Routing / GPIO cost | Sensors on | Burst energy | Continuous Hall power |
+|---|---|---|---|---|
+| Ganged (EN = rail enable) | none — EN net is the existing Wing power enable | all 42 | 117 µJ | 0.360 W |
+| **Per-bank (EN = MUX_EN0/1)** | **none** — both enables already run to every Wing's MUXes (D-024); EN pins tie to the same net | 21 (active bank) | 67 µJ | **0.19 W** |
+| Per-sensor (EN decoded from A0–A2 + bank) | +1 decoder IC class per MUX group per Wing, 21 EN traces/Wing | 3 (one per MUX) | ~15 µJ (est.) | ~0.03 W |
+
+Per-bank is the sweet spot: it exploits D-024's existing independent
+enables — the very nets D-024/D-026 record as *not* reducing sensor
+load with the DRV5055 (they gate only the MUXes) become true sensor
+power gates with an EN-pin part. Its cost is one extra tON (45 µs
+max) per bank per sweep. Per-sensor buys another ~6× on sensor power
+but pays decoder parts, routing and a slower sweep (tON per address
+step); it only matters if sensor power still binds after per-bank —
+§4 shows it does not for the 7-day target.
+
+## 4. Revised power model (aa-sizing profile, unchanged)
+
+Profile (aa-sizing §2, verbatim): typing 2 h continuous; desk idle
+6 h bursts T=10 ms; away 16 h bursts T=100 ms; MCU terms identical
+(RP2040 active 0.099 W typing; 0.011 W desk; 0.002 W away; radio
+~1 mW); converter η=0.85; pack 4× AA NiMH = 8.66 Wh usable.
+
+**Burst window re-derived** (per full 14-step sweep; sources in
+brackets): sensor power-on 45 µs max [SBASAI5E tON] + per step:
+MUX transition 0.025 µs [SCDS389C] + node settling allowance 14 µs
+[divider deleted, §3b/c; conservative vs the 10 ns τ] + 3 sequential
+ADC conversions 6 µs [RP2040 single ADC core, 500 ksps class] →
+step 20 µs. **Ganged window = 45 + 14×20 = 325 µs → planning
+0.35 ms** (rail-ramp/slack absorbed, as the DRV model's 1 ms did);
+per-bank = 2×45 + 14×20 = 370 µs at half the sensors-on power.
+DRV baseline window: 1 ms (hw-impl. §2c).
+
+| Quantity | DRV5055A3 @5 V (aa-sizing) | TMAG BA3 ganged | TMAG BA3 per-bank EN |
+|---|---|---|---|
+| Hall power, continuous | 1.321 W (recorded load) | 0.360 W | 0.19 W |
+| Typing system power | 1.42 W | 0.460 W | 0.290 W |
+| Desk-idle system power | 0.143 W | 0.024 W | 0.019 W |
+| Away system power | 0.016 W | 0.004 W | 0.004 W |
+| Load energy | 3.95 Wh/day | 1.13 Wh/day | 0.76 Wh/day |
+| **Battery energy (η=0.85)** | **4.65 Wh/day** | **1.33 Wh/day** | **0.89 Wh/day** |
+| **NiMH AA×4 runtime** | **1.86 d** | **6.5 d** | **9.7 d** |
+
+**7-day test:** budget = 8.66 Wh / 7 d = 1.237 Wh/day battery
+(1.051 Wh load). Per-bank EN **reaches it with margin (9.7 d)**.
+Ganged alone falls short by 0.08 Wh load/day (6.5 d): its typing
+power would need ≤0.42 W vs 0.46 W actual. Ganged could also reach
+7 days by burst-scanning *during* typing (T=2 ms → typing 0.16 W →
+~14 d), but that destroys inter-burst travel data — the product
+change flagged in hw-impl. §2c, recorded here as a boundary, not a
+lever. Per-sensor EN (typing 0.13 W) would give ~17 d and is not
+needed for the target.
+
+**Sensitivity (invariant: check the max, not the typ):** at
+ICC max 5 mA @3.3 V, ganged battery energy rises to 2.20 Wh/day
+(3.9 d) and per-bank to 1.32 Wh/day (6.6 d) — per-bank stays at the
+7-day boundary even at datasheet-max current; the DRV model's
+recorded-load basis (254 mA vs 126–210 mA datasheet) was comparably
+conservative in the other direction.
