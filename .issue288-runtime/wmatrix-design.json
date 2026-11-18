@@ -1,0 +1,68 @@
+{
+  "issue": 288,
+  "stage": 1,
+  "kind": "design study (no KiCad implementation)",
+  "observed_date": "2026-11-19",
+  "recommendation": {
+    "field": "Rev.3 Matrix field carried over unchanged: 18 TMAG5253BA3 sites in two 3x3 sections (16 mm west, 17 mm east), 3 MUX groups x 6",
+    "sensor": "TI TMAG5253BA3IQDMRR (X2SON-4), 3.3 V rail, no divider, EN per MUX group",
+    "mux": "TMUX1208PWR x3 (LCSC C494728)",
+    "mcu": "Seeed XIAO nRF52840, socketed on 2x7 2.54 mm headers (UF2/USB-C); product-path module class remains RayTac MDBT50Q (D-052)",
+    "power": "USB 5 V bench feed -> dedicated 3.3 V sensor-rail regulator (500 mA class); D-048 NiMH AA x4 accepted on the same input node via protected 2-pin header; no on-board charging",
+    "assembly": "Full JLCPCB PCBA except XIAO (hand-socketed); doubles as D-049 condition-(2) X2SON yield vehicle"
+  },
+  "field_geometry_measured": {
+    "source_file": "hardware/kicad/qualification/issue-182-matrix-rev3/board/m1-matrix18.kicad_pcb",
+    "section_16mm": {"x": [50, 66, 82], "y": [74, 90, 106]},
+    "section_17mm": {"x": [117, 134, 151], "y": [73, 90, 107]},
+    "sensors": 18,
+    "mux_groups": 3,
+    "sensors_per_mux": 6,
+    "spare_mux_inputs_per_group": 2,
+    "pcb_thickness_mm": 1.2
+  },
+  "pitch_coverage": "One board covers both 16 mm and 17 mm pitches (two 3x3 sections), as Rev.3/Rev.4 already did; incremental cost of the second section ~9 sensors + passives + ~35 mm board width. Two single-pitch boards rejected (2x fab/assembly minimums + session confound).",
+  "key_numbers": {
+    "jade_pro_field_mT": "12 +/-0.8 (top) -> 70 +/-3 (bottom), travel 3.5 +/-0.1 mm (docs/hall-acquisition.md via issue-282)",
+    "tmag_output_V_at_3V3": "1.83 -> 2.70 (span 0.87 V), no divider",
+    "tmag_icc_mA": "2.6 typ / 5 max @3.3 V",
+    "tmag_ton_us": "20 typ / 45 max",
+    "noise_equiv_travel_um": "10.3 pp / 1.6 RMS (modelled, issue-282)",
+    "burst_window_planning_ms": 0.35,
+    "rail_droop_budget_mV": 50,
+    "worst_case_hall_draw_mA": 90
+  },
+  "rejected_alternatives": [
+    "Two single-pitch boards (cost + session confound)",
+    "Full 21-key Wing field (not the open question; no spare MUX inputs)",
+    "CD74HC4067 MUX (single 16:1 collapses 3-channel scan regime; RON 70 ohm typ @4.5 V vs TMUX1208 9 ohm @3.3 V)",
+    "Soldered MDBT50Q-1MV2 (thin sourcing channel, SWD-only flashing, effort on the non-tested part)",
+    "Custom module carrier (extra board spin before first measurement)",
+    "Bare nRF52840 chip (RF layout + own certification risk)",
+    "Battery-only feed (bench ergonomics)",
+    "Sensor rail from XIAO 3.3 V output (MCU noise couples into the measured rail)",
+    "RP2040 readout (D-050/D-052; wrong ADC - eval must characterise the nRF52840 SAADC)"
+  ],
+  "check_items": [
+    "Base XIAO nRF52840's own Japan construction-type certificate number not directly retrieved (Seeed bundle claims TELEC for the family; retrievable certificate No. 222-257139 names the Plus models). Must be pinned before any product relies on the XIAO form; does not block this bench board. MDBT50Q-1MV2 Telec pre-certification is confirmed.",
+    "XIAO GPIO budget is tight: 3 AIN + 3 address + 3 EN + 1 LED = 10 of 11 header GPIO; Stage 2 pin map is a named gate."
+  ],
+  "availability": [
+    {"part": "TMAG5253BA3IQDMRR", "sku": "LCSC C22401868", "channel": "LCSC", "stock": 1126, "price_usd_1plus": 0.628, "lifecycle": "TI ACTIVE", "observed": "2026-11-19 (page fetched)", "flag": "WATCH: 6314 observed 2026-11-18 (issue-282) -> 1126; still >=20x a 5-board run's need (<=54 pcs); re-observe at Stage 2"},
+    {"part": "TMAG5253BA3IQDMRR", "sku": "Mouser 595-MAG5253BA3IQDMRR", "channel": "Mouser", "stock": 3805, "price_usd_1plus": 0.80, "lifecycle": "TI ACTIVE", "observed": "stale crawl (~86 days old)", "flag": "second source exists; figure stale"},
+    {"part": "TMUX1208PWR", "sku": "LCSC C494728", "channel": "LCSC / DigiKey", "stock": "InStock (LCSC); ~110000 (DigiKey, recent crawls)", "price_usd_1plus": 0.2792, "lifecycle": "TI Active", "observed": "2026-11-19", "flag": "none"},
+    {"part": "CD74HC4067M96 (rejected alt)", "sku": "LCSC C496123", "channel": "LCSC", "stock": 5043, "price_usd_1plus": 0.4021, "lifecycle": "TI Active", "observed": "crawl 2 days old", "flag": "n/a - not selected"},
+    {"part": "Seeed XIAO nRF52840", "sku": "DigiKey listing 'XIAO NRF52840'", "channel": "DigiKey JP / Seeed store", "stock": 2025, "price": "JPY 1711 (DigiKey JP 1+); USD 9.99 (Seeed)", "lifecycle": "Active", "observed": "crawl 2026-11-18", "flag": "none"},
+    {"part": "RayTac MDBT50Q-1MV2 (product path, not this board)", "sku": "LCSC C5118826 / DigiKey Marketplace 3271-MDBT50Q-1MV2", "channel": "DigiKey Marketplace", "stock": 35, "price_usd_1plus": 6.15, "lifecycle": "Active; Telec pre-certified", "observed": "crawl 1 day old; LCSC zero stock per third-party report 2026-07", "flag": "THIN: Marketplace-only at DigiKey (+$25 ship, ~14 days), zero at LCSC; variant-Main sourcing question recorded early"}
+  ],
+  "stage2_gates": [
+    "DRC severity-all: 0 errors, 0 unconnected; every warning individually disclosed",
+    "ERC 0 with a native KiCad schematic (closes the Matrix line's inherited no-schematic gap)",
+    "Via-pad audit: different-net >= 0.10 mm floor, 0.125 mm target; at-floor sites disclosed with coordinates",
+    "Numerical assignment verification from built-board pads: sensor->MUX->SAADC map (18 + 6 reference channels), EN-per-group, frozen XIAO pin map vs AIN capability",
+    "Field-geometry preservation: Rev.3 sensor coordinates exact, PCB 1.2 mm; deviations justified in writing or gate fails",
+    "Power extraction: sensor-rail droop <= 50 mV at worst-case burst load before fabrication release",
+    "Manufacturing package per issue-267 conventions (BOM-jlcpcb zero unmapped, BA3 orderable character-exact, gerber-frame CPL, FABRICATION.md, DRAFT/NOT FOR ORDER); X2SON footprint cited to TI DMR land pattern",
+    "Availability re-scan at Stage 2 start"
+  ]
+}

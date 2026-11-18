@@ -279,7 +279,7 @@ change). Scope:
 | TMAG5253BA3IQDMRR | Mouser 595-MAG5253BA3IQDMRR | Mouser | ~3,805 (crawl ~86 days old — stale) | $0.80 (1) | ACTIVE | Second source exists; figure stale, re-check if needed |
 | TMUX1208PWR | LCSC **C494728** | LCSC / DigiKey | InStock (LCSC offer data); DigiKey ~110,000 (recent crawls) | $0.2792 (LCSC 1+) | TI Active | none |
 | CD74HC4067M96 (rejected alt) | LCSC **C496123** | LCSC | 5,043 (crawl 2 days old) | $0.4021 (1+) | TI Active (SCHS209D rev. 2024) | n/a — not selected (§5) |
-| Seeed XIAO nRF52840 | DigiKey 1597-102010328 family listing "XIAO NRF52840" | DigiKey JP / Seeed store | **2,025** @ DigiKey JP (crawl 2026-11-18); Seeed store in stock | JPY 1,711 (DigiKey JP 1+); $9.99 (Seeed) | Active | none |
+| Seeed XIAO nRF52840 | DigiKey listing "XIAO NRF52840" (Seeed) | DigiKey JP / Seeed store | **2,025** @ DigiKey JP (crawl 2026-11-18); Seeed store in stock | JPY 1,711 (DigiKey JP 1+); $9.99 (Seeed) | Active | none |
 | RayTac MDBT50Q-1MV2 (product path, not this board) | LCSC C5118826 / DigiKey Marketplace 3271-MDBT50Q-1MV2 | DigiKey Marketplace | **35** (crawl 1 day old), ships ~14 days + $25 fee; LCSC listed at **zero stock** (third-party report, 2026-07) | $6.15 (1+) | Active; Telec pre-cert (§3) | **THIN**: no mainstream first-party channel observed; a variant-Main sourcing question to solve at that design stage, recorded now |
 
 Variant trap restated: TMAG5253**BA1**IQDMRR (LCSC C22445458,
