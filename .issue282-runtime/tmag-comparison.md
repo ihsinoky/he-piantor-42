@@ -196,3 +196,50 @@ ICC max 5 mA @3.3 V, ganged battery energy rises to 2.20 Wh/day
 7-day boundary even at datasheet-max current; the DRV model's
 recorded-load basis (254 mA vs 126–210 mA datasheet) was comparably
 conservative in the other direction.
+
+## 5. Availability scan (observed 2026-11-18)
+
+| Part | Channel | Stock | Unit price | Class |
+|---|---|---|---|---|
+| **TMAG5253BA3IQDMRR** (X2SON-4) | LCSC **C22401868** | **6,314** | $0.566 (1+) / $0.481 (10+) / $0.346 (1000+) | **Extended** (JLCPCB SMT) |
+| TMAG5253BA3IQDMRR | Mouser 595-TMAG5253BA3IQDMRR | 3,802–4,187 | $0.80 (1) / $0.515 (10) / $0.421 (100) | — |
+| DRV5055A3QDBZR (reference) | LCSC **C266128** | 1,732 (project live check 2026-11-16) | not re-observed today | Extended (per project BOM records) |
+
+Variant-level trap check: the BA1 sibling (C-code adjacent, ±20 mT)
+is also stocked (3,835) at a similar price — ordering must pin the
+**BA3** orderable exactly; a variant slip is a saturation failure
+(§2), not a graceful degradation. Stock depth is comfortable on both
+sensors (≫10× the 42–54 pcs a build needs); TMAG5253 is a current TI
+catalogue part (datasheet rev. Apr 2026), not a legacy risk.
+
+## 6. Verdict
+
+**(a) Wireless variant sensor: ADOPT TMAG5253BA3 as the design
+input — conditional** on two items that only hardware can close:
+(1) travel-curve/noise measurement on an evaluation Wing (the
+project's standing method, hall-acquisition §7/§8 — the 1.4× noise
+penalty and the ±15% sensitivity spread are datasheet-bound, the
+actual field geometry spread is not recorded); (2) X2SON assembly
+yield at JLCPCB (Extended class, no-lead 1.4 × 1.1 mm package —
+process differs from the SOT-23 baseline). With per-bank EN wiring
+(zero-cost, §3d) the NiMH AA×4 runtime goes **1.86 d → 9.7 d** and
+the 7-day target is met with margin; even at datasheet-max sensor
+current it holds ~6.6 d.
+
+**(b) Wired design: no bearing.** Wired power is USB-supplied and
+unconstrained at these levels; the 5 V DRV5055 chain, its D-026/
+D-027 guarantees and the qualified boards stand exactly as they are.
+Nothing in this comparison argues for touching the wired product.
+
+**(c) What a sensor change would force (wireless-variant Wing
+respin, one paragraph):** new sensor footprint (SOT-23 → X2SON-4
+with EN pin) on both Wing pitches; Hall rail re-defined at 3.3 V
+(new regulator/converter tree from the battery input, replacing the
+5.2 V buck-boost sizing for the variant); TMUX1208 supply moved to
+3.3 V (same part); EN nets tied to MUX_EN0/1 on the Wing; Main-side
+ADC dividers deleted for the variant's sense path; re-qualification
+list = per-key travel curves + noise, far-point drop under the new
+≤50 mV budget metric, scan-settling measurement, X2SON assembly
+yield, and the D-024 bank-switching sequence re-verified with
+sensor wake (tON) inside it. The FFC/ZIF link, pin assignment and
+signal content are unchanged.
