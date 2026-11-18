@@ -219,3 +219,62 @@ problem the cells do not have. **Dismissed.**
 
 NiCd, for completeness: dismissed in one line — cadmium toxicity
 (RoHS-restricted); no property it offers is unavailable elsewhere.
+
+## 7. Availability scan (workflow rule, PO 2026-11-18; observed 2026-11-18)
+
+| Candidate | Distributor 1 | Distributor 2 | 3-year mainstream outlook |
+|---|---|---|---|
+| NiMH AA (eneloop) | Amazon JP — Panasonic SKUs in stock (4-pack ≈¥1,500; charger set K-KJ83MCD40 ≈¥2,557) | Every JP electronics chain (Yodobashi/Bic/Akizuki class) | Certain — the default rechargeable |
+| NiZn AA | Amazon JP — Melasta 8-pack in stock; Z-Power Cell 4-pack ¥1,639 (2026-10) | Import sellers (PKCELL) via Amazon/AliExpress; ANSMANN in EU retail | Plausible, not assured; single-channel (marketplace) dependency in JP; dedicated chargers exist (Melasta bundled, ISDT C4-class ≈¥2,600) |
+| LFP 14500 | Amazon JP marketplace (solar-light replacement cells) | AliExpress (Vapcell official store, IFR14500 650 mAh) | Stable niche (solar garden-light replacement demand); not stocked as bare cells by Akizuki/Monotaro-class JP distributors in this check |
+| LFP 18650 | AliExpress / import sellers | Amazon JP marketplace (thin) | Weakest of the LFP forms in JP retail — NMC 18650 crowds it out |
+| LFP 32700 | Amazon JP marketplace sellers (solar DIY) | AliExpress / Shopee (tens of thousands/month regionally) | Good — solar-storage DIY demand is growing; LFP chemistry itself going mainstream in JP (Elecom LFP power banks, 2026) |
+| Alkaline AA | Everywhere | Everywhere | Certain |
+| BCAP3000 | Mouser (datasheet channel) | DigiKey | Irrelevant — dismissed on energy |
+
+## 8. Verdict
+
+Ranking criteria, in order: **safety** (PO's stated first
+criterion for this question), then the standing priorities
+**cost > low rework > freedom**.
+
+1. **Recommended: NiMH AA ×4, under-case pod (c)** (×3 if the
+   pod prefers it — 1.40 d vs 1.86 d is the only difference).
+   The lowest-risk chemistry in the set by a wide margin (aqueous,
+   no runaway mechanism, unrestricted transport), the cheapest to
+   run (≈¥3/day), commodity chargers, guaranteed supply, and the
+   case answer is already designed in aa-sizing. **Single biggest
+   weakness: the ~2-day swap rhythm itself** — nothing in the
+   aqueous world fixes that, because the binding number is the
+   load (4.65 Wh/day), not the cells.
+2. **Runner-up (non-lithium): NiZn AA ×3.** Trades blows with
+   NiMH: better voltage behaviour (2-cell cold start works, 3×
+   curve is all ≥3.0 V, 1.45 d) and the same aqueous risk class,
+   at ≈¥7/day. **Single biggest weakness: longevity you cannot
+   trust** — 500 rated cycles with dendrite-driven early deaths in
+   the field, a dedicated-charger ecosystem, and Amazon-only JP
+   supply. It wins no axis by enough to pay that.
+3. **Conditional — LiFePO4 32700 ×1 (×2 for a week), under-case
+   pod +34 mm.** The *only* candidate that materially beats NiMH
+   on energy (4.26 d / 8.5 d, ≥2000 cycles, ≈¥4/day) and the only
+   one that reaches the week. **Single biggest weakness: it is a
+   lithium cell** — milder than NMC by a categorical margin in
+   abuse testing (no runaway under nail penetration at any SOC,
+   ≤132 °C vs 1220 °C), but it keeps a flammable electrolyte,
+   UN38.3 transport status, and a 0.3 kg brick under the keyboard.
+   This row exists only if the PO reads the Li-ion avoidance as
+   aimed at cobalt/NMC chemistries; read strictly, it is out, and
+   nothing else changes.
+4. LFP 18650 ×2P (2.37 d) and 14500 ×4P (1.57 d): NiMH-class
+   runtime for lithium handling and thinner supply — dominated.
+5. Alkaline AA ×4: ≈¥250/day and the KOH-leak hazard to the
+   device — emergency fallback only.
+6. Supercapacitor/hybrid: dismissed by arithmetic (§6). NiCd:
+   dismissed (cadmium).
+
+**Plainly:** within the chemistries that satisfy the safety
+requirement as stated (no lithium), **nothing beats NiMH AA ×3–4
+materially** — NiZn is a wash with worse longevity and supply,
+and every other aqueous option is worse. The single step-change
+available is LiFePO4 32700, and it is gated entirely on the PO's
+reading of the lithium exclusion, not on engineering.
