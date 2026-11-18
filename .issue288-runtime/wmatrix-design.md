@@ -242,3 +242,103 @@ address **TP_A0/A1/A2**. New for the D-049 regime:
   pins **TMAG5253BA3IQDMRR** exactly, and the travel-curve self-test
   detects a slip functionally (BA1 clips at 20 mT) — record both
   defences in the Stage 2 package.
+
+## 8. Firmware scope (Q4) — outline only, no code
+
+Platform: nRF52840 on the XIAO (NCS/Zephyr-class stack, so the scan
+engine ports to the D-052 product module without behavioural
+change). Scope:
+
+- **Scan engine:** address sequencing A0-A2; per-group EN control
+  (ganged / per-bank / held-static regimes); SAADC burst sampling
+  with configurable acquisition time per step (the nRF step-timing
+  characterisation #282 could not model); per-bank EN->complete
+  timing counters.
+- **Modes:** (i) continuous scan — travel-curve capture under a
+  pressed key; (ii) burst T=10 ms and T=100 ms — the D-049 desk/away
+  regimes, with measured (not modelled) window and jitter; (iii)
+  single-sensor held mode — one address + EN held for scope work
+  against §6 test points; (iv) assembly self-test — per-sensor VQ
+  band check feeding the §7 yield count.
+- **Data out:** USB CDC stream of per-sweep records (sweep index,
+  18 raw codes, 6 reference codes, rail-reference code, timing
+  counters) in a line-oriented CSV/JSONL form any serial logger can
+  capture; BLE NUS mirror as a convenience only. **No estimator in
+  firmware** — joint estimation / coupling-matrix fitting runs
+  host-side on the logged raw data, where it can be re-run as the
+  method evolves.
+- Out of scope: Unifying/ESB transmission (Issue #287's bench
+  proof owns the protocol risk), keymap/HID behaviour, sleep-state
+  product firmware.
+
+## 9. Availability scan (Q5) — observed 2026-11-19
+
+| Part | SKU | Channel | Stock (observed) | Price | Lifecycle | Flag |
+|---|---|---|---|---|---|---|
+| TMAG5253BA3IQDMRR | LCSC **C22401868** | LCSC | **1,126** (page fetched 2026-11-19) | $0.628 (1+) / $0.5421 (10+) | TI ACTIVE (SBASAI5) | **WATCH**: 6,314 observed 2026-11-18 (#282 §5) -> 1,126 today. Still >=20x the <=54 pcs a 5-board run needs, but re-observe at Stage 2 before BOM commit |
+| TMAG5253BA3IQDMRR | Mouser 595-MAG5253BA3IQDMRR | Mouser | ~3,805 (crawl ~86 days old — stale) | $0.80 (1) | ACTIVE | Second source exists; figure stale, re-check if needed |
+| TMUX1208PWR | LCSC **C494728** | LCSC / DigiKey | InStock (LCSC offer data); DigiKey ~110,000 (recent crawls) | $0.2792 (LCSC 1+) | TI Active | none |
+| CD74HC4067M96 (rejected alt) | LCSC **C496123** | LCSC | 5,043 (crawl 2 days old) | $0.4021 (1+) | TI Active (SCHS209D rev. 2024) | n/a — not selected (§5) |
+| Seeed XIAO nRF52840 | DigiKey 1597-102010328 family listing "XIAO NRF52840" | DigiKey JP / Seeed store | **2,025** @ DigiKey JP (crawl 2026-11-18); Seeed store in stock | JPY 1,711 (DigiKey JP 1+); $9.99 (Seeed) | Active | none |
+| RayTac MDBT50Q-1MV2 (product path, not this board) | LCSC C5118826 / DigiKey Marketplace 3271-MDBT50Q-1MV2 | DigiKey Marketplace | **35** (crawl 1 day old), ships ~14 days + $25 fee; LCSC listed at **zero stock** (third-party report, 2026-07) | $6.15 (1+) | Active; Telec pre-cert (§3) | **THIN**: no mainstream first-party channel observed; a variant-Main sourcing question to solve at that design stage, recorded now |
+
+Variant trap restated: TMAG5253**BA1**IQDMRR (LCSC C22445458,
+6,654 in stock, 6-day-old crawl) sits adjacent to the BA3 — the
+orderable must be pinned character-exact (§7).
+
+## 10. Recommendation, rejected alternatives, Stage 2 outline
+
+**Recommended architecture (one paragraph):** Rev.3's 18-site,
+two-pitch-section field carried over unchanged (16 mm west / 17 mm
+east, 3x3 each), re-sensored with TMAG5253BA3 on a dedicated 3.3 V
+sensor rail, TMUX1208PWR x3 with EN wired per MUX group, read by a
+socketed Seeed XIAO nRF52840; USB bench feed primary with the D-048
+NiMH pack accepted on the same input node; full JLCPCB PCBA (XIAO
+excepted) so the run doubles as the X2SON yield vehicle; Rev.3's
+measurement-access pattern retained and extended with EN/rail test
+points and per-MUX GND + rail-reference spare channels.
+
+Rejected alternatives, with reasons: two single-pitch boards
+(§2 — cost + session confound); full 21-key Wing field (§2 — not
+the open question); CD74HC4067 (§5 — wrong scan regime, RON);
+soldered MDBT50Q-1MV2 (§3 — thin channel, SWD-only, spends effort
+on the non-tested part); custom module carrier (§3 — a board spin
+before the first measurement); bare nRF52840 (§3 — RF/cert risk);
+battery-only feed (§4 — bench ergonomics; pack accepted as an
+option instead); sensor rail from the XIAO's 3.3 V output (§4 —
+noise coupling into the measured rail); RP2040 readout (§3 —
+D-050/D-052; wrong ADC).
+
+**Stage 2 (implementation) outline + gates.** Implementation is a
+separate GO. The implementation will be held to:
+
+1. **DRC** (KiCad, severity-all): 0 errors, 0 unconnected; every
+   warning individually disclosed in the report (Rev.4 precedent:
+   no silent warnings).
+2. **ERC: 0** — this board gets a native KiCad schematic (new
+   design), closing the Matrix line's inherited no-schematic ERC
+   gap (Rev.4 REPORT.md records it as inherited from Rev.3).
+3. **Via-pad audit:** different-net minimum >= 0.10 mm binding
+   floor, 0.125 mm project target (issue-183 yardstick); any
+   at-floor site disclosed in writing with coordinates (Rev.4's
+   at-floor 0.100 mm site is the cautionary precedent).
+4. **Assignment verification (numerical, from built-board pads):**
+   sensor -> MUX input -> SAADC channel map equals the design
+   table for all 18 + 6 reference channels; EN net per MUX group
+   verified; XIAO pin map frozen in the report and checked against
+   the module's AIN-capable pads (§3 budget: 10 GPIO).
+5. **Field-geometry preservation:** sensor coordinates identical
+   to Rev.3 (16 mm: x 50/66/82, y 74/90/106; 17 mm: x 117/134/151,
+   y 73/90/107 — measured §1); PCB thickness 1.2 mm; any deviation
+   justified in writing or the gate fails.
+6. **Power extraction:** sensor-rail droop <= 50 mV at worst-case
+   burst load (all-bank continuous 90 mA sensor draw + logic),
+   verified by resistance extraction before fabrication release.
+7. **Manufacturing package** per the issue-267 conventions:
+   BOM-jlcpcb with real LCSC codes and zero unmapped parts, the
+   BA3 orderable pinned character-exact, CPL in the gerber frame,
+   FABRICATION.md, DRAFT / NOT FOR ORDER; X2SON footprint traced to
+   the TI DMR land-pattern drawing by citation.
+8. **Availability re-scan at Stage 2 start** (TMAG stock moved
+   6,314 -> 1,126 within a day during this study; §9 flags stand
+   until re-observed).
