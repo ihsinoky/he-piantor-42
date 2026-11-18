@@ -90,3 +90,74 @@ Why this layout answers the questions:
   group, which §6 turns into per-sweep self-calibration channels.
   A full-field check belongs to the wireless Wing respin, which this
   board de-risks. Rejected for this stage.
+
+## 3. MCU form (Q-supplement: D-052 module class)
+
+The MCU is not the thing under test — the sensor chain is — so the
+form is chosen for iteration speed and zero RF risk, while keeping
+the silicon (nRF52840) and the SAADC behaviour identical to the
+product path.
+
+| Form | Radio cert (JP) | Flash/debug | Sourcing | Verdict |
+|---|---|---|---|---|
+| **Seeed XIAO nRF52840, socketed** on 2x7 2.54 mm headers | Seeed publishes a TELEC certificate in the XIAO cert bundle; the retrievable construction-type certificate (No. 222-257139, issued 2025-04-25) names the **Plus** models — see check item below | UF2 bootloader + USB-C fitted; no debugger needed | DigiKey JP 2,025 in stock @ JPY 1,711 (crawl 2026-11-18); Seeed store $9.99 | **RECOMMENDED** |
+| RayTac MDBT50Q-1MV2, soldered | **Telec (MIC) pre-certified** — confirmed (DigiKey product page; Zephyr board docs) | SWD only (no USB bootloader unless pre-flashed); needs a debugger probe | DigiKey Marketplace only: 35 pcs @ $6.15 + $25 ship, ~14 days; LCSC C5118826 listed, zero stock | Product path (variant Main), not this board |
+| MDBT50Q on a custom carrier, socketed | as above | as above | module channel as above + a second PCB project first | Rejected: spends a board spin before the first measurement |
+
+XIAO rationale: PO already holds footprint assets for it (their
+he_kbd_module project); it is hand-replaceable if a wiring mistake
+kills it, reusable across respins, and its USB-C/UF2 flow makes
+firmware iteration a cable swap. GPIO budget (to be frozen in
+Stage 2): 3 AIN (MUX outputs) + 3 address + 3 EN + 1 status LED = 10
+GPIO, inside the XIAO's 11 header GPIO with its 6 AIN-capable pads —
+feasible but tight; the Stage 2 pin map is a named gate (§10).
+Antenna: the XIAO's on-board chip antenna needs the carrier keep-out
+observed (Stage 2 layout note); BLE on this board is a logging
+convenience (§8), not a measurement path.
+
+**Check item (not assumed, per brief):** the base XIAO nRF52840's own
+Japan construction-type certificate number was not directly
+retrieved in this study — Seeed's bundle claims TELEC for the family
+and the retrievable certificate names the Plus variants. This does
+not block a bench evaluation board using the module as bought; it
+MUST be pinned before any product relies on the XIAO form. The
+MDBT50Q-1MV2's Telec status, by contrast, is confirmed above and is
+one reason it stays the recorded product-path module class (D-052).
+
+Rejected: bare nRF52840 chip on this board — RF layout + own
+certification is exactly the risk an evaluation board must not take
+on; RP2040 (PO's earlier he_kbd_es used one) — D-050/D-052 foreclose
+it, and the eval must characterise the product's SAADC, not the
+RP2040 ADC the #282 model used.
+
+## 4. Power feed
+
+The D-049 regime's electrically relevant features are: a 3.3 V rail,
+per-bank EN bursts with real tON, and droop under burst load. The
+feed design reproduces those three; converter ripple/efficiency of
+the product's buck-boost lineage is a variant-Main question, not a
+sensor-chain question (boundary recorded deliberately).
+
+- **Primary: USB 5 V bench feed** into a dedicated **sensor-rail
+  3.3 V regulator** (500 mA class LDO or buck; worst-case Hall draw =
+  18 sensors x 5 mA max = 90 mA with all banks on in continuous mode,
+  plus MUX/logic — 500 mA class gives >5x headroom). The sensor rail
+  is NOT the XIAO's 3.3 V output: coupling MCU rail noise into the
+  rail whose noise floor is the measurement would corrupt D-049
+  condition (1).
+- **Battery option on the same input node:** a 2-pin header (with
+  reverse-polarity protection) accepting the D-048 pack directly —
+  4x AA NiMH = 4.8 V nominal, ~4.0-5.8 V over discharge/charge —
+  feeding the same 5 V-class input node and the same regulator, so
+  burst behaviour can be re-checked on the real source impedance
+  without a second power tree. No on-board charging (D-048: external
+  charging only).
+- **Ratiometric observability:** the nRF ADC references the XIAO's
+  VDD while sensors sit on the sensor rail; per #282 §3a the delta
+  appears as scale error. The design therefore routes one spare MUX
+  input to the sensor rail through a fixed divider (§6), so every
+  sweep logs the rail as the ADC sees it and the mismatch is data,
+  not an unknown.
+- Rail budget gate for Stage 2: sensor-rail droop <= 50 mV at worst
+  burst load (the #282 successor metric), verified by extraction
+  before fabrication release (§10).
