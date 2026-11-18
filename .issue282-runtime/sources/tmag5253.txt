@@ -1,0 +1,2359 @@
+                                                                                                                                     TMAG5253
+                                                                                                          SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+    TMAG5253 Low-Power Linear Hall Effect Sensor With EN Pin in Ultra-Small Package
+1 Features                                                                 3 Description
+•    Industry-leading low power:                                           The TMAG5253 is a low-power linear Hall effect
+     – Supply voltage, VCC: 1.65V – 3.6V                                   sensor that responds proportionally to magnetic flux
+     – Shutdown current: < 20nA (1.8V at 25°C)                             density. The device features an enable pin to enter
+     – Active current: 2mA (1.8V at 25°C)                                  ultra-low power (nA) shutdown mode. The TMAG5253
+     – Average current: <10µA at 100Hz duty cycling                        features a fast start-up time (< 25µs and < 60µs)
+•    Dedicated enable pin                                                  designed for low-power position sensing applications.
+•    Fast power-on time                                                    The device is available in an industry-leading
+     – Bipolar: < 25µs (typ)                                               1.54mm2 ultra-small footprint for space-constrained
+     – Unipolar : < 60µs (typ)                                             applications. The device has a wide supply range and
+•    Ratiometric analog output proportional to VCC                         can operate from 1.65V to 3.6V.
+•    High impedance output during shutdown mode                            Magnetic flux perpendicular to the top of the package
+•    Low-noise output with ±1mA drive                                      is sensed by the device and the TMAG5253 is
+•    Two sensitivity polarity options                                      available in two sensitivity polarity options: bipolar
+     – TMAG5253Bx: Bipolar device option                                   and unipolar. North and south magnetic poles produce
+     – TMAG5253Ux: Unipolar device option                                  unique voltages in the bipolar option and the unipolar
+•    Bipolar Magnetic sensitivity range options:                           option is sensitive to either the south or the north
+     – BA1: ±20mT Range                                                    magnetic pole. The output changes linearly with the
+     – BA2: ±40mT Range                                                    applied magnetic flux density, and four sensitivity
+     – BA3: ±80mT Range                                                    (in bipolar) and one sensitivity (in Unipolar) options
+     – BA4: ±160mT Range                                                   enable maximal output voltage swing based on the
+•    Unipolar Magnetic sensitivity range options:                          required sensing range.
+     – UA2: 39mT Range                                                     The device uses a ratiometric architecture that can
+     – UA5: 52mT Range                                                     eliminate error from VCC tolerance when the external
+•    Sensitivity compensation to support temperature                       analog-to-digital converter (ADC) uses the same VCC
+     drift of Neodymium magnet                                             for the reference. Additionally, the device features
+•    Ultra-small X2SON 4-pin package: 1.54mm2                              magnet temperature compensation to counteract the
+•    Wide operating temperature range: –40°C to                            magnetic sensitivity drifts across a wide –40°C to
+     125°C                                                                 125°C temperature range. The device also features
+2 Applications                                                             the ability to place the output in a high impedance
+                                                                           state during shutdown mode. This enables multiple
+•    Gaming controller & peripherals                                       devices to be connected to a single ADC.
+•    Magnetic proximity sensor
+•    Mobile robot motor control                                                                   Package Information
+•    Cordless power tools                                                        PART NUMBER                PACKAGE(1)       PACKAGE SIZE(2)
+•    Vacuum robots                                                         TMAG5253                      DMR (X2SON, 4)     1.40mm × 1.10mm
+•    Drone payload control
+                                                                           (1)     For all available packages, see the orderable addendum at
+                                                                                   the end of the data sheet.
+                                                                           (2)     The package size (length × width) is a nominal value and
+                                                                                   includes pins, where applicable.
+
+                                                    Supply Voltage
+
+
+
+                                                                            Load
+                                        S   N
+                                                       VCC           OUT                        ADC
+
+                                            0.1µF         TMAG5253                         µController
+
+                                                       GND            EN               GPIO
+
+
+
+
+                                                          Typical Schematic
+
+
+      An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+      intellectual property matters and other important disclaimers. PRODUCTION DATA.
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                                         www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1     7.3 Sensitivity Temperature Compensation.................... 15
+2 Applications..................................................................... 1       7.4 Quiescent Voltage Temperature Drift........................ 16
+3 Description.......................................................................1       7.5 Power-On Time......................................................... 16
+4 Device Comparison......................................................... 3            8 Detailed Description......................................................17
+5 Pin Configuration and Functions...................................3                       8.1 Overview................................................................... 17
+6 Specifications.................................................................. 4        8.2 Functional Block Diagram......................................... 17
+  6.1 Absolute Maximum Ratings........................................ 4                    8.3 Feature Description...................................................17
+  6.2 ESD Ratings............................................................... 4          8.4 Device Functional Modes..........................................19
+  6.3 Recommended Operating Conditions.........................4                          9 Application and Implementation.................................. 20
+  6.4 Thermal Information....................................................4              9.1 Application Information............................................. 20
+  6.5 Electrical Characteristics (Bipolar,                                                  9.2 Typical Applications.................................................. 23
+    TMAG5253BAx)............................................................ 5              9.3 Best Design Practices...............................................28
+  6.6 Magnetic Characteristics (Bipolar,                                                    9.4 Power Supply Recommendations.............................29
+    TMAG5253BAx)............................................................ 5              9.5 Layout....................................................................... 29
+  6.7 Electrical Characteristics (Unipolar,                                               10 Device and Documentation Support..........................30
+    TMAG5253UAx)............................................................ 7              10.1 Documentation Support.......................................... 30
+  6.8 Magnetic Characteristics (Unipolar,                                                   10.2 Receiving Notification of Documentation Updates..30
+    TMAG5253UAx)............................................................ 7              10.3 Support Resources................................................. 30
+  6.9 Typical Characteristics (Bipolar, TMAG5253BAx).......9                                10.4 Trademarks............................................................. 30
+  6.10 Typical Characteristics (Unipolar,                                                   10.5 Electrostatic Discharge Caution..............................30
+    TMAG5253UAx).......................................................... 11               10.6 Glossary..................................................................30
+7 Parameter Measurement Information.......................... 13                          11 Revision History.......................................................... 30
+  7.1 Sensitivity Linearity................................................... 13         12 Mechanical, Packaging, and Orderable
+  7.2 Ratiometric Architecture............................................14                Information.................................................................... 31
+
+
+
+
+2       Submit Document Feedback                                                                                         Copyright © 2026 Texas Instruments Incorporated
+
+                                                                    Product Folder Links: TMAG5253
+                                                                                                                                        TMAG5253
+www.ti.com                                                                                                  SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+4 Device Comparison
+                                                         Table 4-1. Device Comparison
+                                                                             MINIMUM LINEAR
+                                     MAGNETIC RESPONSE                                                   TYPICAL SENSITIVITY TEMPERATURE
+         ORDERABLE                                                          MAGNETIC SENSING
+                                           TYPE                                                                 COEFFICIENT (%/°C)
+                                                                               RANGE (mT)
+ TMAG5253BA1                                                                            ±20                              0.12
+ TMAG5253BA2                                    Bipolar                                 ±40                              0.12
+ TMAG5253BA3                                (TMAG5253BAx)                               ±80                              0.12
+ TMAG5253BA4                                                                           ±160                              0.12
+ TMAG5253UA1                                                                            +20                              0.12
+ TMAG5253UA2                                                                            +39                              0.12
+                                               Unipolar
+ TMAG5253UA3                                                                            +80                              0.12
+                                            (TMAG5253UAx)
+ TMAG5253UA4                                                                           +160                              0.12
+ TMAG5253UA5                                                                            +52                              0.12
+
+
+
+5 Pin Configuration and Functions
+                                                                     VCC
+
+
+
+                                                                                 OUT
+                                                                     1
+
+
+
+                                                                                 4
+
+
+
+
+                                                                           Thermal
+                                                                             Pad
+                                                                     2
+
+
+
+                                                                                 3
+                                                                     GND
+
+
+
+                                                                                 EN
+
+
+
+
+                                                                                       Not to scale
+
+
+                                            Figure 5-1. DMR Package 4-Pin X2SON Top View
+
+                                                               Table 5-1. Pin Functions
+               PIN
+                                    TYPE(1)                                                       DESCRIPTION
+ NAME                X2SON
+                                                  Power supply. TI recommends connecting this pin to a ceramic capacitor to ground with a value
+ VCC                     1              P
+                                                  of at least 0.1µF.
+ GND                     2              G         Ground reference
+
+ EN                      3              I         Enable pin
+
+ OUT                     4              O         Analog output
+                                                  No connect. Leave this pin floating or tied to ground. The pin must be soldered to the board for
+ Thermal Pad             5             NC
+                                                  mechanical support.
+
+(1)    I = Input, O = Output, I/O = Input and Output, G = Ground, P = Power, NC = No Connect
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                   Submit Document Feedback           3
+                                                            Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                             www.ti.com
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+Over operating free-air temperature range (unless otherwise noted)(1)
+                                                                                                             MIN                 MAX     UNIT
+    Power supply voltage                                    VCC                                              –0.3                  5.5     V
+    Output voltage                                          OUT                                              –0.3            VCC + 0.3     V
+    Magnetic flux density, BMAX                                                                              Unlimited                     T
+    Operating junction temperature, TJ                                                                        –40                 125     °C
+    Storage temperature, Tstg                                                                                 –65                 150     °C
+
+(1)        Operation outside the Absolute Maximum Ratings may cause permanent device damage. Absolute Maximum Ratings do not imply
+           functional operation of the device at these or any other conditions beyond those listed under Recommended Operating Conditions.
+           If used outside the Recommended Operating Conditions but within the Absolute Maximum Ratings, the device may not be fully
+           functional, and this may affect device reliability, functionality, performance, and shorten the device lifetime.
+
+
+6.2 ESD Ratings
+                                                                                                                                VALUE     UNIT
+                                          Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)                                  ±2000
+    V(ESD)      Electrostatic discharge                                                                                                     V
+                                          Charged-device model (CDM), per JEDEC specification ANSI/ESDA/JEDEC JS-002(2)          ±750
+
+(1)        JEDEC document JEP155 states that 500V HBM allows safe manufacturing with a standard ESD control process.
+(2)        JEDEC document JEP157 states that 250V CDM allows safe manufacturing with a standard ESD control process.
+
+
+6.3 Recommended Operating Conditions
+Over operating free-air temperature range (unless otherwise noted)
+                                                                                                             MIN                 MAX     UNIT
+    VCC          Power supply voltage                                                                        1.65                  3.6     V
+    CLoad        Load capacitance on OUT pin                                                                                        1     nF
+    IO           Output continuous current                                                                     –1                   1     mA
+    TA           Operating ambient temperature(1)                                                             –40                 125     °C
+
+(1)        Power dissipation and thermal limits must be observed.
+
+
+6.4 Thermal Information
+                                                                                                                    TMAG5253
+                                                  THERMAL METRIC(1)                                              DMR(X2SON)              UNIT
+                                                                                                                     4 PINS
+    RθJA           Junction-to-ambient thermal resistance                                                             157.1              °C/W
+    RθJC(top)      Junction-to-case (top) thermal resistance                                                          110.9              °C/W
+    RθJB           Junction-to-board thermal resistance                                                                105               °C/W
+    YJT            Junction-to-top characterization parameter                                                          2.4               °C/W
+    YJB            Junction-to-board characterization parameter                                                       101.9              °C/W
+    RθJC(bot)      Junction-to-board (bottom) thermal resistance                                                       85.7              °C/W
+
+(1)        For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+           note.
+
+
+
+
+4           Submit Document Feedback                                                                Copyright © 2026 Texas Instruments Incorporated
+
+                                                            Product Folder Links: TMAG5253
+                                                                                                                                      TMAG5253
+www.ti.com                                                                                              SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+6.5 Electrical Characteristics (Bipolar, TMAG5253BAx)
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted)
+                    PARAMETER                                      TEST CONDITIONS(1)                     MIN          TYP          MAX     UNIT
+                                                       VCC = 1.8V                                                         2           3.3
+ ICC_ACTIVE    Operating supply current                                   BAx, EN > VIH                                                      mA
+                                                       VCC = 3.3V                                                       2.6            5
+ ICC_SHDN      Shutdown current                        VCC = 3.3V         BAx, EN < VIL                                   8                  nA
+ tON           Power-on time(2)                        VCC > VCC(min), BAx                                               20           45     µs
+ VCCramp       VCC ramp rate                           TA = 25°C                                         0.001                         1    V / µs
+ VIH           Input high voltage for EN pin                                                        0.65 × VCC                                V
+ VIL           Input low voltage for EN pin                                                                                    0.35 × VCC     V
+ Vhys          Input hysteresis voltage for EN pin                                                   0.1 × VCC                                V
+ fBW           Sensing bandwidth (-3 dB)               RLoad = 100KΩ, CLoad = 10pF                                       15                  kHz
+                                                       EN > VIH                                                        1.27                   Ω
+ ROUT          DC output resistance
+                                                       EN < VIL                                                           9                  MΩ
+
+(1)     B is the applied magnetic flux density.
+(2)     Power-On-Time section for more details
+
+
+6.6 Magnetic Characteristics (Bipolar, TMAG5253BAx)
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted)
+                  PARAMETER                                         TEST CONDITIONS(1)                       MIN        TYP         MAX     UNIT
+                                                                        Bipolar, BA1                        1.585       1.65       1.715
+                                                     VCC = 3.3V,        Bipolar, BA2                         1.61       1.65        1.69
+                                                     B = 0mT,
+                                                     TA = 25°C          Bipolar, BA3                         1.61       1.65        1.69
+
+            Quiescent voltage                                           Bipolar, BA4                         1.61       1.65        1.69
+ VQ                                                                                                                                           V
+            (Bipolar, BAx)                                              Bipolar, BA1                        0.845        0.9       0.945
+                                                     VCC = 1.8V,        Bipolar, BA2                        0.850        0.9       0.940
+                                                     B = 0mT,
+                                                     TA = 25°C          Bipolar, BA3                        0.850        0.9       0.940
+                                                                        Bipolar, BA4                        0.870        0.9       0.930
+                                                                        TA = 0°C to 85°C vs 25°C,
+                                                                                                                 -30                  30
+                                                     VCC = 3.3V,        Bipolar, BAx
+                                                     B = 0mT            TA = -40°C to 125°C vs 25°C,
+                                                                                                                 -50                  50
+                                                                        Bipolar, BAx
+                                                                        TA = 0°C to 85°C vs 25°C,
+ VQΔT       Quiescent voltage temperature drift                                                                  -25                  25     mV
+                                                                        Bipolar, BAx
+                                                     VCC = 1.8V,        TA = -40°C to 125°C vs 25°C,
+                                                                                                                 -35                  35
+                                                     B = 0mT            Bipolar, BAx
+                                                                        TA = 0°C to 50°C vs 25°C,
+                                                                                                                  -5                   5
+                                                                        Bipolar, BA4 only
+ VQRE       Quiescent voltage ratiometry error(2) Bipolar, BAx                                                          ±0.2                 %
+                                                     High-temperature operating stress for 1000 hours
+ VQΔL       Quiescent voltage lifetime drift                                                                              10                 mV
+                                                     VCC = 3.3V
+                                                                        Bipolar, BA1                             51       60          69
+
+                                                     VCC = 3.3V         Bipolar, BA2                         25.5         30        34.5
+                                                     TA = 25°C          Bipolar, BA3                        12.75         15       17.25
+
+            Sensitivity                                                 Bipolar, BA4                         6.37        7.5        8.62
+ S                                                                                                                                          mV/mT
+            (Bipolar, BAx)                                              Bipolar, BA1                         25.5         30        34.5
+
+                                                     VCC = 1.8V         Bipolar, BA2                         13.6         16        18.4
+                                                     TA = 25°C          Bipolar, BA3                             6.9    8.12        9.33
+                                                                        Bipolar, BA4                              3      3.5          4.0
+
+Copyright © 2026 Texas Instruments Incorporated                                                                  Submit Document Feedback            5
+                                                          Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                 www.ti.com
+
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted)
+                     PARAMETER                                      TEST CONDITIONS(1)                         MIN        TYP        MAX      UNIT
+                                                                         Bipolar, BA1                           ±20
+                                                                         Bipolar, BA2                           ±40
+                                                     VCC = 3.3V
+                                                                         Bipolar, BA3                           ±80
+                                                                         Bipolar, BA4                         ±160
+    BL        Linear magnetic sensing range(3) (4)                                                                                             mT
+                                                                         Bipolar, BA1                           ±20
+                                                                         Bipolar, BA2                           ±40
+                                                     VCC = 1.8V
+                                                                         Bipolar, BA3                           ±80
+                                                                         Bipolar, BA4                         ±160
+    VL        Linear range of output voltage(4)      Bipolar, BAx                                               0.2              VCC – 0.2      V
+    STC       Sensitivity temperature coefficient(5) Bipolar, BAx        TA = -40°C to 125°C vs 25°C           0.04       0.12         0.2    %/°C
+    SLE       Sensitivity linearity error(4)         VOUT is within VL                                                    ±0.1       ±0.55     %
+    SSE       Sensitivity symmetry error(4)          VOUT is within VL                                                    ±0.1                 %
+                                                                         VCC = 3V - 3.6V,
+                                                                                                                 –3                      3
+                                                                         With respect to VCC = 3.3V
+    SRE       Sensitivity ratiometry error(2)        TA = 25°C                                                                                 %
+                                                                         VCC = 1.65V - 1.9V,
+                                                                                                                 –2                      2
+                                                                         With respect to VCC = 1.8V
+    SΔL       Sensitivity lifetime drift             High-temperature operating stress for 1000 hours                      0.5                 %
+                                                     VCC = 3.3V                                                           220
+    BND       Input-referred RMS noise density                           CLoad = 100pF                                                       nT/√Hz
+                                                     VCC = 1.8V                                                           400
+                                                     VCC = 3.3V          BND × 6.6 × √fBW                                 0.17
+    BN        Input-referred peak-to-peak noise                                                                                               mTPP
+                                                     VCC = 1.8V          CLoad = 100pF                                    0.35
+                                                                         Bipolar, BA1                                      9.2
+                                                     BN × S              Bipolar, BA2                                      4.6
+    VN        Output-referred peak-to-peak noise     VCC = 3.3V                                                                               mVPP
+                                                     BW = 15kHz          Bipolar, BA3                                      2.3
+                                                                         Bipolar, BA4                                      1.2
+
+(1)       B is the applied magnetic flux density.
+(2)       Refer to the Ratiometric Architecture section
+(3)       BL describes the minimum linear sensing range at 25°C taking into account the maximum VQ and Sensitivity tolerances.
+(4)       Refer to the Sensitivity Linearity section
+(5)       STC describes the rate the device increases Sensitivity with temperature. For more information, see the Section 7.3.
+
+
+
+
+6         Submit Document Feedback                                                                      Copyright © 2026 Texas Instruments Incorporated
+
+                                                          Product Folder Links: TMAG5253
+                                                                                                                                      TMAG5253
+www.ti.com                                                                                              SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+6.7 Electrical Characteristics (Unipolar, TMAG5253UAx)
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted). Typical specifications are at TA
+= 25°C and VCC = 3.3V (unless otherwise noted).
+                    PARAMETER                                      TEST CONDITIONS(1)                     MIN          TYP          MAX     UNIT
+
+                                                       VCC = 1.8V         Unipolar, UA2                                 2.1           3.3
+                                                       EN = VCC           Unipolar, UA5                                 1.9           3.3
+ ICC_ACTIVE    Operating supply current                                                                                                      mA
+                                                       VCC = 3.3V         Unipolar, UA2                                 2.6            4
+                                                       EN = VCC           Unipolar, UA5                                 2.4            4
+ ICC_SHDN      Shutdown current                        EN = GND           VCC = 1.8V and 3.3V                             8                  nA
+ tON           Power-on time(2)                        VCC > VCC(min)                                                    55          130     µs
+ VCCramp       VCC ramp rate                           TA = 25°C                                         0.001                         1    V / µs
+ VIH           Input high voltage for EN pin                                                        0.65 × VCC                                V
+ VIL           Input low voltage for EN pin                                                                                    0.35 × VCC     V
+                                                                          Unipolar, UA2             0.09 × VCC
+ Vhys          Input hysteresis voltage for EN pin                                                                                            V
+                                                                          Unipolar, UA5              0.1 × VCC
+ fBW           Sensing bandwidth (-3 dB)               RLoad = 100KΩ, CLoad = 10pF                                       15                  kHz
+                                                       EN > VIH                                                        1.27                   Ω
+ ROUT          DC output resistance
+                                                       EN < VIL                                                           9                  MΩ
+
+(1)     B is the applied magnetic flux density.
+(2)     Power-On-Time section for more details.
+
+
+6.8 Magnetic Characteristics (Unipolar, TMAG5253UAx)
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted). Typical specifications are at TA
+= 25°C and VCC = 3.3V (unless otherwise noted).
+                   PARAMETER                                         TEST CONDITIONS(1)                      MIN        TYP         MAX     UNIT
+                                                     VCC = 3.3V,        Unipolar, UA2                        0.11        0.2        0.32
+                                                     B = 0mT,
+                                                     TA = 25°C          Unipolar, UA5                        0.11        0.2        0.32
+ VQ         Quiescent voltage                                                                                                                 V
+                                                     VCC = 1.8V,        Unipolar, UA2                        0.12        0.2        0.29
+                                                     B = 0mT,
+                                                     TA = 25°C          Unipolar, UA5                        0.14        0.2        0.29
+
+                                                                        TA = 0°C to 85°C vs 25°C,
+                                                                                                                 -50                  50
+                                                     VCC = 3.3V,        Unipolar, UA2
+                                                     B = 0mT            TA = -40°C to 125°C vs 25°C,
+                                                                                                                 -78                  78
+                                                                        Unipolar, UA2 and UA5
+ VQΔT       Quiescent voltage temperature drift                                                                                              mV
+                                                                        TA = 0°C to 85°C vs 25°C,
+                                                                                                                 -30                  30
+                                                     VCC = 1.8V,        Unipolar, UA2
+                                                     B = 0mT            TA = -40°C to 125°C vs 25°C,
+                                                                                                                 -78                  78
+                                                                        Unipolar, UA2 and UA5
+                                                     High-temperature operating stress for 1000 hours
+ VQΔL       Quiescent voltage lifetime drift                                                                              10                 mV
+                                                     VCC = 3.3V
+
+                                                     VCC = 3.3V,        Unipolar, UA2                            62       73          84
+                                                     TA = 25°C          Unipolar, UA5                        40.8         48        55.2
+ S          Sensitivity                                                                                                                     mV/mT
+                                                     VCC = 1.8V,        Unipolar, UA2                            29       35          41
+                                                     TA = 25°C          Unipolar, UA5                        21.0       24.7        28.4
+
+                                                     VCC = 3.3V,        Unipolar, UA2                            39
+                                                     TA = 25°C          Unipolar, UA5                            52
+ BL         Linear magnetic sensing range(2) (3)                                                                                             mT
+                                                     VCC = 1.8V,        Unipolar, UA2                            39
+                                                     TA = 25°C          Unipolar, UA5                            52
+ VL         Linear range of output voltage(3)        Unipolar, UAx                                               VQ             VCC – 0.2     V
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                  Submit Document Feedback            7
+                                                          Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                   www.ti.com
+
+For VCC = 1.65V to 3.6V, over operating free-air temperature range (unless otherwise noted). Typical specifications are at TA
+= 25°C and VCC = 3.3V (unless otherwise noted).
+                     PARAMETER                                         TEST CONDITIONS(1)                        MIN        TYP        MAX      UNIT
+    STC       Sensitivity temperature coefficient(4)   Unipolar, UAx       TA = -40°C to 125°C vs 25°C           0.04       0.12         0.2    %/°C
+    SLE       Sensitivity linearity error(3)           VOUT is within VL                                                    ±0.1       ±0.55     %
+                                                                           VCC = 3V - 3.6V,
+                                                                                                                   -3                      3
+                                                                           With respect to VCC = 3.3V
+    SRE       Sensitivity ratiometry error(5)          TA = 25°C                                                                                 %
+                                                                           VCC = 1.65V - 1.9V,
+                                                                                                                   -2                      2
+                                                                           With respect to VCC = 1.8V
+    SΔL       Sensitivity lifetime drift               High-temperature operating stress for 1000 hours                      0.5                 %
+
+                                                       VCC = 3.3V          Unipolar, UA2                                    150
+                                                       CLoad = 100pF       Unipolar, UA5                                    220
+    BND       Input-referred RMS noise density                                                                                                 nT/√Hz
+                                                       VCC = 1.8V          Unipolar, UA2                                    320
+                                                       CLoad = 100pF       Unipolar, UA5                                    400
+                                                       VCC = 3.3V       Unipolar, UA2                                       0.12
+                                                       CLoad = 100pF
+                                                       BW = 15kHz       Unipolar, UA5                                       0.17
+                                                       BND × 6.6 × √fBW
+    BN        Input-referred peak-to-peak noise                                                                                                 mTPP
+                                                       VCC = 1.8V       Unipolar, UA2                                       0.26
+                                                       CLoad = 100pF
+                                                       BW = 15kHz       Unipolar, UA5                                       0.35
+                                                       BND × 6.6 × √fBW
+
+                                                       VCC = 3.3V          Unipolar, UA2                                     8.5
+                                                       BN × S              Unipolar, UA5                                       9
+    VN        Output-referred peak-to-peak noise                                                                                                mVPP
+                                                       VCC = 1.8V
+                                                                           Unipolar, UA2                                       9
+                                                       BN × S
+
+(1)       B is the applied magnetic flux density.
+(2)       BL describes the minimum linear sensing range at 25°C taking into account the maximum VQ and Sensitivity tolerances.
+(3)       Refer to the Sensitivity Linearity section.
+(4)       STC describes the rate the device increases Sensitivity with temperature. For more information, see the Section 7.3.
+(5)       Refer to the Ratiometric Architecture section
+
+
+
+
+8         Submit Document Feedback                                                                        Copyright © 2026 Texas Instruments Incorporated
+
+                                                            Product Folder Links: TMAG5253
+                                                                                                                                                                                                                                                                   TMAG5253
+www.ti.com                                                                                                                                                                                                                    SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+6.9 Typical Characteristics (Bipolar, TMAG5253BAx)
+TA = 25°C (unless otherwise noted)
+
+                                                                   0.5                                                                                                                                  0.5
+                                                                                                                                    A1                                                                                                                             A2
+                                                                   0.4                                                                                                                                  0.4
+                             Sensitivity Linearity Error (%)
+
+
+
+
+                                                                                                                                                                     Sensitivity Linearity Error (%)
+                                                                   0.3                                                                                                                                  0.3
+                                                                   0.2                                                                                                                                  0.2
+                                                                   0.1                                                                                                                                  0.1
+                                                                    0                                                                                                                                        0
+                                                               -0.1                                                                                                                                    -0.1
+                                                               -0.2                                                                                                                                    -0.2
+                                                               -0.3                                                                                                                                    -0.3
+                                                               -0.4                                                                                                                                    -0.4
+                                                               -0.5                                                                                                                                    -0.5
+                                                                  -20      -15       -10         -5     0        5     10      15     20                                                                  -40    -30    -20     -10     0       10    20    30          40
+                                                                                                Magnetic Field (mT)                                                                                                             Magnetic Field (mT)
+
+                                                                                                  VCC = 3.3V                                                                                                                      VCC = 3.3V
+
+      Figure 6-1. TMAG5253BA1 Sensitivity Linearity Error vs                                                                                      Figure 6-2. TMAG5253BA2 Sensitivity Linearity Error vs
+                         Magnetic Field                                                                                                                              Magnetic Field
+                                                                   0.5                                                                                                                                  0.5
+                                                                                                                                    A3                                                                                                                             A4
+                                                                   0.4                                                                                                                                  0.4
+
+                                                                                                                                                                     Sensitivity Linearity Error (%)
+                             Sensitivity Linearity Error (%)
+
+
+
+
+                                                                   0.3                                                                                                                                  0.3
+                                                                   0.2                                                                                                                                  0.2
+                                                                   0.1                                                                                                                                  0.1
+
+                                                                    0                                                                                                                                    0
+
+                                                               -0.1                                                                                                                                    -0.1
+
+                                                               -0.2                                                                                                                                    -0.2
+
+                                                               -0.3                                                                                                                                    -0.3
+
+                                                               -0.4                                                                                                                                    -0.4
+
+                                                               -0.5                                                                                                                                    -0.5
+                                                                  -80      -60       -40        -20     0       20     40      60     80                                                                  -160   -120   -80    -40     0       40     80    120     160
+                                                                                                Magnetic Field (mT)                                                                                                            Magnetic Field (mT)
+
+                                                                                                  VCC = 3.3V                                                                                                                      VCC = 3.3V
+
+      Figure 6-3. TMAG5253BA3 Sensitivity Linearity Error vs                                                                                      Figure 6-4. TMAG5253BA4 Sensitivity Linearity Error vs
+                         Magnetic Field                                                                                                                              Magnetic Field
+                                               3.4                                                                                                                                            0.96
+
+                                               3.2                                                                                                                                            0.94
+                                                               3                                                                                                                              0.92
+                                                                                                                                                   Quiescent Voltage (V)
+       Active Current (mA)
+
+
+
+
+                                               2.8
+                                                                                                                                                                                                       0.9
+                                               2.6
+                                                                                                                                                                                              0.88
+                                               2.4
+                                                                                                                                                                                              0.86
+                                               2.2                                                                          VCC = 1.8 V
+                                                                                                                            VCC = 3.3 V                                                       0.84
+                                                               2
+
+                                               1.8                                                                                                                                            0.82
+
+                                               1.6                                                                                                                                                     0.8
+                                                 -40                     -20     0         20       40    60      80    100     120      140                                                            1.625      1.675       1.725     1.775      1.825         1.875
+                                                                                                Te mperature (oC)                                                                                                                Supply Voltage (V)
+
+                                                                                                TMAG5253BA                                                                                                                      TMAG5253BA
+
+      Figure 6-5. TMAG5253BA Active Current vs Temperature                                                                                     Figure 6-6. TMAG5253BA Quiescent Voltage vs Supply Voltage
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                                                                                                                                       Submit Document Feedback               9
+                                                                                                                              Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                                                                                                                              www.ti.com
+
+6.9 Typical Characteristics (Bipolar, TMAG5253BAx) (continued)
+TA = 25°C (unless otherwise noted)
+
+                                             1.8                                                                                                                                 40
+                             1.775                                                                                                                                                                                   A1       A2           A3       A4
+                                                                                                                                                                                 35
+                                  1.75
+                             1.725                                                                                                                                               30
+     Quiescent Voltage (V)
+
+
+
+
+                                                                                                                                                           Sensitivity (mV/mT)
+                                             1.7
+                                                                                                                                                                                 25
+                             1.675
+                                  1.65                                                                                                                                           20
+                             1.625
+                                             1.6                                                                                                                                 15
+                             1.575                                                                                                                                               10
+                                  1.55
+                             1.525                                                                                                                                               5
+                                             1.5
+                                                                                                                                                                                 0
+                                                     3       3.1         3.2      3.3       3.4            3.5              3.6
+                                                                           Supply Voltage (V)
+                                                                                                                                                                                  -40          -15       10       35        60        85          110 125
+                                                                                                                                                                                                              Te mperature (C)
+                                                                                  .
+                                                                                                                                                                                                                VCC = 1.8V
+
+  Figure 6-7. TMAG5253BA Quiescent Voltage vs Supply Voltage
+                                                                                                                                                           Figure 6-8. TMAG5253BA Sensitivity vs Temperature
+                                                    80                                                                                                                           40
+                                                                                A1       A2         A3           A4                                                                                                  A1       A2           A3        A4
+                                                    70                                                                                                                           35
+
+                                                    60                                                                                                                           30
+                             Sensitivity (mV/mT)
+
+
+
+
+                                                                                                                                                           Sensitivity (mV/mT)
+                                                    50                                                                                                                           25
+
+                                                    40                                                                                                                           20
+
+                                                    30                                                                                                                           15
+
+                                                    20                                                                                                                           10
+
+                                                    10                                                                                                                            5
+
+                                                    0                                                                                                                             0
+                                                     -40     -15    10        35        60     85          110 125                                                                1.65           1.7           1.75        1.8         1.85              1.9
+                                                                          Te mperature (C)                                                                                                                   Supply Voltage (V)
+                                                                            VCC = 3.3V                                                                                                                    VCC = 1.8V ±10%
+
+                             Figure 6-9. TMAG5253BA Sensitivity vs Temperature                                                            Figure 6-10. TMAG5253BA Sensitivity vs Supply Voltage
+                                                    80
+                                                                                 A1       A2        A3           A4                                        1.65
+                                                    70
+                                                                                                                                                           1.55
+                                                    60
+                                                                                                                                   Quiescent voltage (V)
+
+
+
+
+                                                                                                                                                           1.45                                                                                 VCC = 1.8 V
+                              Sensitivity (mV/mT)
+
+
+
+
+                                                                                                                                                                                                                                                VCC = 3.3 V
+                                                    50                                                                                                     1.35
+
+                                                    40                                                                                                     1.25
+
+                                                    30                                                                                                     1.15
+
+                                                    20                                                                                                     1.05
+
+                                                    10                                                                                                     0.95
+
+                                                                                                                                                           0.85
+                                                     0
+                                                                                                                                                              -40                        -20         0    20       40    60      80        100      120        140
+                                                         3    3.1    3.2      3.3       3.4          3.5              3.6
+                                                                                                                                                                                                               Te mperature (oC)
+                                                                       Supply Voltage (V)
+
+                                                                     VCC = 3.3V ±10%                                                                                                                          TMAG5253BA
+
+              Figure 6-11. TMAG5253BA Sensitivity vs Supply Voltage                                                               Figure 6-12. TMAG5253BA Quiescent Voltage vs Temperature
+
+
+
+
+10                       Submit Document Feedback                                                                                                                                                        Copyright © 2026 Texas Instruments Incorporated
+
+                                                                                                         Product Folder Links: TMAG5253
+                                                                                                                                                                                                                                   TMAG5253
+www.ti.com                                                                                                                                                                                   SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+6.10 Typical Characteristics (Unipolar, TMAG5253UAx)
+At TA = 25°C and VCC = 3.3V (unless otherwise noted)
+
+                                     0.5                                                                                                                     0.5
+                                                    VCC = 3.3V                                                                                                                                                                VCC = 3.3V
+                                     0.4            VCC = 1.8V                                                                                               0.4                                                              VCC = 1.8V
+
+
+
+
+                                                                                                                           Sensitivity Linearity Error (%)
+   Sensitivity Linearity Error (%)
+
+
+
+
+                                     0.3                                                                                                                     0.3
+
+                                     0.2                                                                                                                     0.2
+
+                                     0.1                                                                                                                     0.1
+
+                                       0                                                                                                                       0
+
+                                     -0.1                                                                                                                    -0.1
+
+                                     -0.2                                                                                                                    -0.2
+
+                                     -0.3                                                                                                                    -0.3
+
+                                     -0.4                                                                                                                    -0.4
+
+                                     -0.5                                                                                                                    -0.5
+                                            0       5          10         15     20      25        30          35     40                                            0   5      10       15    20 25 30 35               40    45    50   55
+                                                                         Magnetic Field (mT)                                                                                                  Magnetic Field (mT)
+
+                              Figure 6-13. TMAG5253UA2 Sensitivity Linearity Error vs                                                                 Figure 6-14. TMAG5253UA5 Sensitivity Linearity Error vs
+                                                 Magnetic Field                                                                                                          Magnetic Field
+
+                                     3.4                                                                                                                     3.2
+                                                    TA = 125C                                                                                                           TA = 125C
+                                     3.2            TA = 25C                                                                                                  3         TA = 25C
+                                                    TA = -40C                                                                                                           TA = -40C
+                                      3                                                                                                                      2.8
+                                                                                                                           Active Current (mA)
+   Active Current (mA)
+
+
+
+
+                                     2.8                                                                                                                     2.6
+
+                                     2.6                                                                                                                     2.4
+
+                                     2.4                                                                                                                     2.2
+
+                                     2.2                                                                                                                       2
+
+                                      2                                                                                                                      1.8
+
+                                     1.8                                                                                                                     1.6
+
+                                     1.6                                                                                                                     1.4
+                                        1.6       1.8      2       2.2    2.4 2.6 2.8          3        3.2    3.4   3.6                                        1.6     1.8     2       2.2    2.4 2.6 2.8          3        3.2   3.4   3.6
+                                                                         Supply Voltage (V)                                                                                                   Supply Voltage (V)
+
+  Figure 6-15. TMAG5253UA2 Supply Current vs Supply Voltage                                                                Figure 6-16. TMAG5253UA5 Supply Current vs Supply Voltage
+
+                                      3.5                                                                                                                     0.22
+                                                        VCC = 3.3V (UA2)                                                                                                      UA5
+                                     3.25               VCC = 3.3V (UA5)                                                                                                      UA2
+                                                        VCC = 1.8V (UA2)                                                                                     0.215
+                                          3             VCC = 1.8V (UA5)
+                                                                                                                           Quiescent Voltage (V)
+   Active Current (mA)
+
+
+
+
+                                     2.75                                                                                                                     0.21
+
+                                      2.5
+                                                                                                                                                             0.205
+                                     2.25
+
+                                          2                                                                                                                    0.2
+
+                                     1.75
+                                                                                                                                                             0.195
+                                      1.5                                                                                                                         1.6    1.8        2    2.2    2.4 2.6 2.8         3        3.2   3.4   3.6
+                                        -40         -20        0          20     40      60        80         100    120                                                                       Supply Voltage (V)
+                                                                           Te mperature (C)
+                                                                                                                                                               Figure 6-18. Quiescent Voltage vs Supply Voltage
+                                                Figure 6-17. Supply Current vs Temperature
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                                                                                                     Submit Document Feedback                   11
+                                                                                                        Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                                                                                   www.ti.com
+
+6.10 Typical Characteristics (Unipolar, TMAG5253UAx) (continued)
+At TA = 25°C and VCC = 3.3V (unless otherwise noted)
+
+                              0.4                                                                                                           85
+                                          VCC = 3.3V                                                                                                   UA2
+                                          VCC = 1.8V                                                                                        80         UA5
+                             0.35
+                                                                                                                                            75
+     Quiescent Voltage (V)
+
+
+
+
+                                                                                                                      Sensitivity (mV/mT)
+                              0.3                                                                                                           70
+
+                                                                                                                                            65
+                             0.25
+                                                                                                                                            60
+                              0.2                                                                                                           55
+
+                                                                                                                                            50
+                             0.15
+                                                                                                                                            45
+                              0.1
+                                                                                                                                            40
+                                -40      -20    0       20     40      60                     80      100    120
+                                                                                                                                                 3         3.1         3.2      3.3       3.4        3.5       3.6
+                                                         Te mperature (C)
+                                                                                                                                                                         Supply Voltage (V)
+                                                                                                                                                                        VCC = 3.3V ±10%
+
+     Figure 6-19. TMAG5253UA Quiescent Voltage vs Temperature
+                                                                                                                                                     Figure 6-20. Sensitivity vs Supply Voltage
+                             45                                                                                                             90
+                                        UA2
+                                        UA5
+                                                                                                                                            80
+                             40
+                                                                                                                      Sensitivity (mV/mT)
+     Sensitivity (mV/mT)
+
+
+
+
+                                                                                                                                            70
+                                                                                                                                                                                          Avg + 3 (VCC = 3.3V)
+                             35
+                                                                                                                                                                                          Avg (VCC = 3.3V)
+                                                                                                                                            60                                            Avg - 3 (VCC = 3.3V)
+                                                                                                                                                                                          Avg + 3 (VCC = 1.8V)
+                             30                                                                                                                                                           Avg (VCC = 1.8V)
+                                                                                                                                            50                                            Avg - 3 (VCC = 1.8V)
+
+                             25
+                                                                                                                                            40
+
+
+                             20                                                                                                             30
+                              1.65       1.7    1.75      1.8     1.85    1.9                         1.95     2                              -40      -20        0      20     40      60      80    100     120
+                                                       Supply Voltage (V)                                                                                                 Te mperature (C)
+                                                       VCC = 1.8V ±10%                                                                      Figure 6-22. TMAG5253UA2 Sensitivity vs Temperature
+
+                                      Figure 6-21. Sensitivity vs Supply Voltage
+                                                                                      55
+
+                                                                                      50
+
+                                                                                      45
+                                                                                                                                                 Avg + 3 (VCC = 3.3V)
+                                                                Sensitivity (mV/mT)
+
+
+
+
+                                                                                      40                                                         Avg (VCC = 3.3V)
+                                                                                                                                                 Avg - 3 (VCC = 3.3V)
+                                                                                      35                                                         Avg + 3 (VCC = 1.8V)
+                                                                                                                                                 Avg (VCC = 1.8V)
+                                                                                                                                                 Avg - 3 (VCC = 1.8V)
+                                                                                      30
+
+                                                                                      25
+
+                                                                                      20
+
+                                                                                      15
+                                                                                        -40   -20       0    20     40      60                        80         100    120
+                                                                                                              Te mperature (C)
+                                                                                      Figure 6-23. TMAG5253UA5 Sensitivity vs Temperature
+
+
+
+
+12                           Submit Document Feedback                                                                                                                  Copyright © 2026 Texas Instruments Incorporated
+
+                                                                                                    Product Folder Links: TMAG5253
+                                                                                                                               TMAG5253
+www.ti.com                                                                                        SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+7 Parameter Measurement Information
+7.1 Sensitivity Linearity
+The device produces a linear response when the output voltage is within the specified VL range. Outside
+this range, sensitivity is reduced and nonlinear. Figure 7-1 and Figure 7-2 show the linearity of the magnetic
+response for bipolar and unipolar versions.
+
+                                 VOUT (V)                                    VOUT (V)
+
+
+
+
+                                                                VNL                                                       Best fit linear
+
+
+                                            SB                                VL
+        VL                       VQ                                                         VNL                     Measured data
+                                                      Best fit linear
+                        SB-
+                                                  Measured data
+
+
+
+                                                                                   VQ
+
+
+                           -B       0             B               B(mT)             0
+                                                                                                                                    B(mT)
+                                    BL                                                              BL
+     Figure 7-1. Linearity of the Magnetic Response                          Figure 7-2. Linearity of the Magnetic Response
+                         (Bipolar)                                                              (Unipolar)
+
+
+Equation 1 calculates parameter BL, the minimum linear sensing range at 25°C, and takes the maximum
+quiescent voltage and sensitivity tolerance into account.
+
+                         VL MAX – VQ MAX
+             BL MIN =         S MAX                                                                                                 (1)
+
+Nonlinearity is the deviation of the output voltage from a linear relationship to the input current. Nonlinearity
+voltage, as shown in Figure 7-1 and Figure 7-2, is the maximum voltage deviation from the best-fit line based on
+measured parameters (see Equation 2).
+
+             VNL = VOUT – BIN × SFIT + VQ                                                                                           (2)
+
+where
+•    VOUT is the voltage output at maximum deviation from best fit
+•    BIN is the magnetic flux density at maximum deviation from best fit
+•    SFIT is the best fit sensitivity of the device
+•    VQ is quiescent voltage at zero magnetic field (= VCC/2 for bipolar and 0.2V for Unipolar)
+The parameter SLE, Sensitivity Linearity error is the nonlinearity voltage ,VNL specified as a percentage of the
+full-scale linear output range (VFS) shown in Equation 3.
+
+                     VNL
+             SLE =   VFS      × 100%                                                                                                (3)
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                          Submit Document Feedback           13
+                                                           Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                  www.ti.com
+
+
+The parameter SSE defines symmetry error as the difference in sensitivity between any positive B value, SB and
+the negative B value of the same magnitude, S–B while the output voltage is within the VL range. This error only
+applies to the bipolar device option. Use Equation 4 to calculate the symmetry error.
+
+                      SB – S–B
+          SSE =                                  × 100%                                                                                      (4)
+                  0.5 × SB + S–B
+
+
+where
+•    SB refers to the sensitivity at a positive field B
+•    S–B refers to the sensitivity at a negative field B
+7.2 Ratiometric Architecture
+The TMAG5253 has a ratiometric analog architecture that scales the quiescent voltage and sensitivity linearly
+with the power-supply voltage. For example, the quiescent voltage and sensitivity are 5% higher when VCC =
+3.465V compared to VCC = 3.3V. This ratiometric behavior enables an external ADC to digitize a consistent value
+regardless of the power-supply voltage tolerance when the ADC uses VCC as the reference.
+
+
+
+
+                                                                        SVCC
+                                      Sensitivity (mV/mT)
+
+
+
+
+                                                                                                     Ideal
+
+
+                                                                                          Actual sensor data
+
+
+
+
+                                                                           VCCNOM                     VCC (V)
+
+                                                            Figure 7-3. Sensitivity Ratiometry Error
+
+Use Equation 5 to calculate the sensitivity ratiometry error:
+
+                      S      /S
+          SRE = 1 − VVCC /VVCC, NOM                         × 100%                                                                           (5)
+                       VCC        VCC, NOM
+
+where
+•    S(VCC) is the sensitivity at the current VCC voltage
+•    S(NOM) is the sensitivity at a nominal VCC voltage
+•    VVCC is the current VCC voltage
+•    VVCC,NOM is the nominal VCC voltage that is 1.8V or 3.3V
+
+
+
+
+14     Submit Document Feedback                                                                          Copyright © 2026 Texas Instruments Incorporated
+
+                                                                   Product Folder Links: TMAG5253
+                                                                                                                          TMAG5253
+www.ti.com                                                                                     SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+
+
+                                                                  VQ_VCC
+                                                                                                Ideal
+                                   Quiescent
+                                Voltage (VQ) (V)
+                                                                                     Actual sensor data
+                                            VCC/2
+
+
+
+
+                                                                      VCCNOM                      VCC (V)
+
+                                                  Figure 7-4. Quiescent Ratiometry Error
+
+The TMAG5253 has a ratiometric architecture for the quiescent voltage of the bipolar device option. For the
+bipolar device option, at 0mT, the quiescent voltage is typically half of the supply voltage, VCC. Use Equation 6 to
+calculate the quiescent voltage ratiometry error:
+
+                          VQ VCC /VQ NOM
+           QRE = 1 − V                             × 100%                                                                     (6)
+                       VCC /VVCC, NOM
+
+where
+•    VQ(VCC) is the quiescent voltage at the current VCC voltage
+•    VQ(NOM) is the quiescent voltage at a nominal VCC voltage
+•    VCC is the current VCC voltage
+•    VVCC,NOM is the nominal VCC voltage that is 1.8V or 3.3V
+7.3 Sensitivity Temperature Compensation
+Magnets generally produce weaker fields as temperature increases. Different types of magnets have different
+sensitivity temperature coefficients. The TMAG5253 compensates by increasing sensitivity with temperature, as
+defined by the parameter STC. Use Equation 7 and Equation 8 to calculate the sensitivity at a fixed supply
+voltage.
+
+           Sensitivity = Sensitivity25℃ × 1 + STC × TA – 25℃                                                                  (7)
+
+                                    Gain at Temp − Gain at 25°C
+           STC = Gain100
+                      at 25°C ×              Temp − 25                                                                        (8)
+
+where
+•    Sensitivity(25°C) depends on the polarity (unipolar/bipolar) and the four different device options (1, 2, 3, 4) for
+     bipolar and one device option (5) for unipolar
+•    STC is the Sensitivity temperature coefficient
+•    TA is the ambient temperature
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                         Submit Document Feedback    15
+                                                        Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                  www.ti.com
+
+7.4 Quiescent Voltage Temperature Drift
+Quiescent voltage temperature drift is defined in the Magnetic Characteristic section. This can be calculated
+using the following equation:
+
+          VQΔT = VQ VCC at 25℃ – VQ VCC at Temp                                                                              (9)
+
+where
+•    VQ(VCC) is the quiescent voltage at the current VCC voltage
+7.5 Power-On Time
+After the VCC voltage is applied, the TMAG5253 requires a short initialization time before the output settles to the
+final value. The parameter TON describes the time from when VCC crosses VCC(MIN) until OUT is within 5% of the
+final value, with a constant magnetic field and a typical load of 100pF from OUT to ground. Figure 7-5 shows this
+timing diagram.
+                                                VCC
+
+                                              1.65V
+                                                                     TON
+
+
+
+                                                                                  time
+
+                                             Output
+
+                                           95% VOUT
+
+
+                                                           Invalid
+
+                                                                                  time
+
+                                              Figure 7-5. TON for VCC Ramp
+
+TON is also used to describe the time from when EN pin is pulled above VIH until OUT is within 5% of the final
+value, with a constant magnetic field and a typical load of 100pF from OUT to ground. Figure 7-5 shows this
+timing diagram.
+                                                EN
+
+                                                VIH
+                                                                      TON
+
+
+
+                                                                                  time
+
+                                               VOUT
+
+                                           95% VOUT
+
+
+
+                                                          Invalid
+
+                                                                                  time
+
+                                           Figure 7-6. TON When Using EN Pin
+
+
+
+
+16    Submit Document Feedback                                                           Copyright © 2026 Texas Instruments Incorporated
+
+                                                 Product Folder Links: TMAG5253
+                                                                                                                       TMAG5253
+www.ti.com                                                                                  SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+8 Detailed Description
+8.1 Overview
+The TMAG5253 is a 4-pin, low-power linear Hall effect sensor with fully integrated signal conditioning,
+temperature compensation circuits, mechanical stress cancellation, and output driver. The device supports wide
+supply range and can operate on 1.8V or 3.3V power supplies, measures magnetic flux density, and outputs a
+proportional analog voltage that is referenced to VCC. The device also features an enable pin that is used to
+place the device in a ultra-low power (nA) mode when needed.
+The device is offered in bipolar magnetic response version that is sensitive to both the north and the south poles.
+In addition, the device is offered in unipolar magnetic response version that is sensitive to either the south or
+the north magnetic pole. TMAG5253 is also offered in 4 different sensitivity versions (±20mT, ±40mT, ±80mT,
+or ±160mT) in bipolar version and two different sensitivity version (39mT and 52mT) in unipolar version. This
+allows the user to trade off sensitivity range and resolution to support low cost magnet selections or wider range
+wherever that is needed.
+The device is offered in magnetic temperature coefficient of 0.12%/°C to compensate for magnetic sensitivity
+temperature coefficient of Neodymium magnet type.
+8.2 Functional Block Diagram
+
+                                                                                            VCC
+                                                                   Power Management
+                     EN                                                                                 0.1µF
+                                                                                                        (minimum)
+                                                                  Clock           Memory    GND
+
+
+                                            Temperature
+                                           compensation
+                                                                                            OUT
+                                                               Precision         Output
+                                              Offset           Amplifier         Driver
+                                            cancellation
+
+                                             Hall sensor
+                                                                                                Optional Filter
+                                                Bias
+
+
+8.3 Feature Description
+8.3.1 Magnetic Flux Direction
+As shown in Figure 8-1, the TMAG5253 is sensitive to the magnetic field component that is perpendicular to the
+top of the package.
+
+                                                                           B
+
+                                                               X2SON
+
+
+
+                                                                           PCB
+
+
+                                                  Figure 8-1. Direction of Sensitivity
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                   Submit Document Feedback       17
+                                                           Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                             www.ti.com
+
+
+Magnetic flux that travels from the bottom to the top of the package is considered positive in this document. This
+condition exists when a south magnetic pole is near the top (marked-side) of the package as shown in Figure
+8-2. Magnetic flux that travels from the top to the bottom of the package results in negative millitesla values.
+
+
+
+
+                                                              N
+
+                                                               S
+
+
+
+
+                                                             PCB
+
+                                      Figure 8-2. The Flux Direction for Positive B
+
+8.3.2 Hall Element Location
+Figure 8-3 shows the location of the sensing element inside each package option along with the tolerances.
+                                            X2SON
+                                           Top View
+
+                                                                         X2SON
+                                                                        Side View
+                           centered                                                     130 µm
+                                                                                          ±15 µm
+                             ±25 µm
+
+
+
+
+                                            Figure 8-3. Hall Element Location
+
+
+
+
+18    Submit Document Feedback                                                      Copyright © 2026 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMAG5253
+                                                                                                                                TMAG5253
+www.ti.com                                                                                           SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+8.3.3 Magnetic Response
+Figure 8-4 shows the response of the bipolar device option (B), which is sensitive to both the positive and
+negative magnetic fields. Figure 8-5 shows the response of the bipolar device option (U), which is sensitive to
+only the positive magnetic fields.
+
+                               OUT                                                         OUT
+                             VCC                                                         VCC
+                                     VL(MAX)                                         VL (MAX)
+
+
+
+                              VQ
+                                                            ∆V
+                                          Sensitivity =
+                                                            ∆B                                        Sensitivity = ∆V
+                                                                                           VQ                       ∆B
+                                     VL(MIN)
+
+
+                                                                               B                                              B
+    north      -Bmax               0 mT                             Bmax   south   north   0 mT                        Bmax south
+    Figure 8-4. Magnetic Response for TMAG5253B                                    Figure 8-5. Magnetic Response for TMAG5253U
+                   (Bipolar) Version                                                             (Unipolar) Version
+
+
+At room temperature, use Equation 10 to calculate the ideal first-order transfer function of the TMAG5253, where
+the output voltage is a linear function of the input magnetic field and the supply voltage.
+
+                                                           VCC
+            VOUT = VQ + B × Sensitivity × V                                                                                       (10)
+                                                          CC, NOM
+
+where
+•    VQ is the quiescent output voltage for a field of 0mT.
+     – VQ = VCC /2 for Bipolar device option (B)
+     – VQ = 0.2V for unipolar device option (U)
+•    B is the applied magnetic flux density
+•    Sensitivity refers to the magnetic sensitivity of the device
+•    VOUT is the analog output voltage within the VL range
+•    VCC refers to the supply voltage of the device
+•    VCC,NOM is the nominal supply voltage where the sensitivity is defined, such as 1.8V or 3.3V
+As an example, consider the TMAG5253BA3, a bipolar magnetic response version with a sensitivity of 15mV/mT
+at 3.3V supply voltage and at room temperature. With VCC = 3.4V and an input field of 67mT, you can calculate
+the output voltage, VOUT for this example.
+
+                                       V
+            VOUT = 1.7V + 67mT × 0.015 mT × 3.4V
+                                            3.3V = 2.735V                                                                          (11)
+
+8.4 Device Functional Modes
+The TMAG5253 has two modes of operations that apply when the Recommended Operating Conditions are met.
+When the EN pin is connected to VCC, the part enters active mode, where the OUT pin provides an analog
+output that corresponds to the magnetic sensitivity and the supply voltage.
+When the EN pin is tied to GND, the TMAG5253 enters an ultra-low power shutdown mode that consumes only
+20nA current. During the shutdown mode, the OUT pin is driven to a high-impedance state.
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                            Submit Document Feedback       19
+                                                                 Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                         www.ti.com
+
+9 Application and Implementation
+                                                        Note
+      Information in the following applications sections is not part of the TI component specification,
+      and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+      determining suitability of components for their purposes, as well as validating and testing their design
+      implementation to confirm system functionality.
+
+9.1 Application Information
+9.1.1 Selecting the Sensitivity Option
+Select the highest TMAG5253 sensitivity option that can measure the required range of magnetic flux density so
+that the output voltage swing is maximized.
+Larger-sized magnets and farther sensing distances can generally enable better positional accuracy than very
+small magnets at close distances, because magnetic flux density increases exponentially with the proximity to
+a magnet. TI has developed online tools to provide assistance with magnetic field calculations that assist with
+magnet selections and the mechanical placement of the sensor for the most common use cases.
+9.1.2 Temperature Compensation for Magnets
+The magnetic field of magnets based on Neodymium or the Ferrite magnets have a high temperature coefficient.
+The residual induction (Br) of a magnet typically reduces by 0.12%/°C for NdFeB, and 0.20%/°C for ferrite
+material. The TMAG5253 features sensitivity temperature compensation that is designed to directly compensate
+the average drift of magnets. When the operating temperature range of a system is reduced, temperature drift
+errors are also reduced.
+For device options BA1 to BA4, UA2 and UA5, the sensitivity at TA = 125°C is typically 12% higher than at TA =
+25°C. These device options are typically used when Neodymium magnets are used along with the TMAG5253.
+These options are typically used when measuring ambient currents or when the magnetic field does not vary
+with temperature.
+9.1.3 Adding a Low-Pass Filter
+As shown in Functional Block Diagram, an RC low-pass filter can be added to the device output for the purpose
+of minimizing voltage noise when the full 15kHz bandwidth is not needed. This output filter can improve the
+signal-to-noise ratio (SNR) but at the expense of additional latency based on the external filter time constants.
+
+
+
+
+20    Submit Document Feedback                                                  Copyright © 2026 Texas Instruments Incorporated
+
+                                            Product Folder Links: TMAG5253
+                                                                                                                          TMAG5253
+www.ti.com                                                                                     SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+9.1.4 Designing With Multiple Sensors
+Some applications require multiple linear Hall sensors to detect position in different parts of the system. In
+those cases, the primary challenge is the availability of multiple ADC that are required to digitize the information
+from the sensors. In cases where the sensor is placed remotely away from the microcontroller, this also means
+multiple output lines between the sensor and microcontroller.
+With the ability to place the output in high-impedance state during shutdown mode, multiple TMAG5253s can
+share the analog output. This can minimize the system cost by using a single ADC. Figure 9-1 shows two
+devices that share the same analog output, with the respective EN pins controlled by the microcontroller. A
+pulldown resistor can be used to pull the output to ground when both the devices are placed in shutdown mode.
+                    Supply Voltage
+
+
+
+                                          VCC                                                                  VCC
+                                                    EN                                                 GPIO1
+                                         Device 1
+                                        TMAG5253                                                       GPIO2
+
+                                                  VOUT                                                 ADC
+
+                                                                                             100K
+                                                                                                         µController
+                                            GND
+
+                                                                                                               GND
+
+
+
+
+                                           VCC
+                                                     EN
+                                          Device 2
+                                         TMAG5253
+
+                                                   VOUT
+
+
+                                             GND
+
+
+
+
+                                         Figure 9-1. Multiple Sensors With Shared Output
+
+                                        B(mT)
+                                                     B1
+
+                                                          B2
+
+                                                                                               time
+                                             V
+
+                                         VGPIO1
+
+
+
+
+                                                                          tmux
+                                         VGPIO2
+
+
+                                                               ton
+                                          VOUT
+
+                                                                                                time
+                                                               Device 1           Device 2
+
+                              Figure 9-2. Timing Diagram for Multiplexing the Sensor Outputs
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                         Submit Document Feedback    21
+                                                          Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                       www.ti.com
+
+
+Figure 9-2 shows how the GPIOs of the microcontroller can be used to multiplex the outputs from the two
+sensors. When the GPIO1 goes high, Device 1 is enabled and drives the output line to the corresponding output
+after the power-on time. During this time, GPIO2 is driven low and Device 2 is placed in shutdown mode. When
+the output from the second device has to be measured, the first device must be turned off before the second
+device is enabled, indicated by tmux in the timing diagram. B1 and B2 correspond to the magnetic fields seen by
+Device 1 and Device 2, respectively.
+With the ability to support up to 1nF capacitive loads, the TMAG5253 enables multiple sensors to be connected
+to the same output. If the load capacitance on each sensor is about 20pF, this translates up to the ability of 50
+sensors sharing the same output.
+9.1.5 Duty-Cycled, Low-Power Design
+For battery-powered applications where power is critical, the sensor can be duty-cycled using the EN pin. This
+verifies that the average current consumption remains low to meet the system level power targets. In duty-cycled
+applications, the start-up time must be very fast so the external ADC can sample the signal faster and shutdown
+the device quickly to minimize average power. With very fast start-up and power-off times, the TMAG5253
+enables low average power consumption for the system.
+                                              Supply Voltage
+
+
+
+
+                                 S      N         VCC          OUT                        ADC
+
+
+                                     0.1 μF           TMAG5253                       µController
+
+                                                  GND            EN          GPIO
+
+
+
+
+                        Figure 9-3. Typical Application Diagram for Duty-Cycled Application
+
+Figure 9-3 shows the typical application diagram when the EN pin is controlled by the microcontroller. Figure 9-4
+shows the waveforms for this application where the EN pin is duty-cycled. The sampling time of the ADC must
+be scheduled after the output settles down to the required resolution. Notice that the output line is pulled down
+by the external resistor when EN is driven low. Also, if the input magnetic field is changed when the part is in
+shutdown, the device provides the new output corresponding to the field after the device enters active state.
+
+
+
+
+22    Submit Document Feedback                                                                Copyright © 2026 Texas Instruments Incorporated
+
+                                                    Product Folder Links: TMAG5253
+                                                                                                                                    TMAG5253
+www.ti.com                                                                                            SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+
+
+             B (mT)
+
+
+                                                                                                                              me
+              VVCC
+
+
+
+
+                                                                                                                              me
+                                          tsleep                                    tacve
+
+               VEN
+
+                                                                                                                              me
+
+                                                                                     Iac ve
+
+               Icc
+                                             Ishdn
+
+                                                                                                                              me
+
+
+              VOUT
+                                           HiZ                          HiZ                     HiZ                     HiZ
+
+                                                                                                                              me
+
+                                    Figure 9-4. Timing Diagram for Duty-Cycled Application
+
+Table 9-1 shows the estimated average current consumption for the TMAG5253 versus the sleep time, for VCC =
+1.8V and the EN pin is tied high for 50µs.
+                                                   Table 9-1. Average Current Consumption
+                                              SLEEP TIME (ms)                                 AVERAGE CURRENT (µA)
+
+                                                       1                                                90.5
+
+                                                       10                                               9.4
+
+                                                       50                                               1.9
+
+                                                      100                                               0.9
+
+                                                      1000                                              0.1
+
+
+9.2 Typical Applications
+Magnetic 1D sensors are very popular due to contactless and reliable measurements, especially in applications
+requiring long-term measurements in rugged environments. The TMAG5253 offers design flexibility in a wide
+range of industrial and personal electronics applications, because many possible magnet orientations and
+movements produce a usable response from the sensor. In this section three common application examples are
+discussed in detail.
+9.2.1 Slide-By Displacement Sensing
+Figure 9-5 shows one of the most common orientations, which uses the full north to south range of the sensor
+and causes a close-to-linear change in magnetic flux density as the magnet moves across.
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                Submit Document Feedback    23
+                                                             Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                           www.ti.com
+
+
+
+
+                                           Travel Direcon
+                                                                                 S     N
+
+
+                                                    Airgap
+
+
+                                                                    PCB
+
+
+
+
+                          d1                                 Travel Distance                                    d2
+
+                                      Figure 9-5. Slide-By Sensing Magnet Orientation
+
+9.2.1.1 Design Requirements
+Use the parameters listed in Table 9-2 for this design example.
+                                                   Table 9-2. Design Parameters
+                                 DESIGN PARAMETER                                       EXAMPLE VALUE
+                                           VCC                                                  3.3V
+                                                                                        5 × 5 × 5mm NdFeB
+                                         Magnet
+                                                                                            (Grade N52)
+                                 Travel distance (d2 – d1)                                     20mm
+                                                                            3.0mm (top of package to magnet) + 0.13mm
+                                          Airgap
+                                                                          (distance from top of package to sensor location)
+                               Maximum B at sensor at 25°C                                    ±80mT
+                                      Device option                                        TMAG5253BA3
+
+
+9.2.1.2 Detailed Design Procedure
+When designing a linear magnetic sensing system, always consider these three variables: the magnet, sensing
+distance, and the range of the sensor. Notice from Figure 9-5, the magnetic flux density versus distance has
+both positive and negative values as the magnet slides on top of the sensor. There is a region approximately the
+same length of the magnet which produces a linear change in field. To measure the magnetic flux density across
+the entire range, select the TMAG5253B version with the highest sensitivity that has a BL (linear magnetic
+sensing range) that is larger than the maximum magnetic flux density in the application. With this input, the user
+can monitor the change in position by measuring in the linear input region. Figure 9-6 shows the magnetic flux
+density across the three axes in the sensor location. The sensor is sensitive only to the magnetic field on Z axis,
+and Figure 9-7 shows the output voltage from the sensor, as the magnet slides on top of the sensor.
+Notice that the linear region of sensing is only around ±3.0mm, where the sensor output varies linearly with
+the position of the magnet. This linear range of operation increases linearly with the size of the magnet. Based
+on the output voltage, the sensor version with magnetic range of ±80mT is able to cover the entire magnetic
+
+
+
+24    Submit Document Feedback                                                                    Copyright © 2026 Texas Instruments Incorporated
+
+                                                      Product Folder Links: TMAG5253
+                                                                                                                                         TMAG5253
+www.ti.com                                                                                               SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+field range that is seen by the sensor. TI recommends using magnetic field simulation software and referring to
+magnet specifications and the mechanical placements to determine if the sensor with the right sensitivity.
+9.2.1.3 Application Curves
+
+                                                                                   3
+
+                                                                                  2.7
+
+                                                                                  2.4
+
+                                                                                  2.1
+
+
+
+
+                                                                        OUT (V)
+                                                                                  1.8
+
+                                                                                  1.5
+
+                                                                                  1.2
+
+                                                                                  0.9
+
+                                                                                  0.6
+
+                                                                                  0.3
+                                                                                   -12.5 -10   -7.5   -5    -2.5   0   2.5    5    7.5   10   12.5
+                                                                                                      Distance Along X Axis (mm)
+
+  Figure 9-6. Magnetic Field Across X, Y and Z Axes                     Figure 9-7. Output Voltage of TMAG5253B When
+  When The Magnet Slides by on Top of the Sensor                          The Magnet Slides by on Top of the Sensor
+
+9.2.2 Head-On Displacement Sensing
+Figure 9-8 shows another robust method for measuring linear position by using a magnet and the TMAG5253
+in a head-on configuration. For this configuration, the linear axis of measurement of the Hall position sensor is
+along the path of travel, which results in a unique mapping of distance to magnetic flux density if the magnet is
+inline with the sensing axis of the Hall position sensor.
+                                                                     N
+                                                                     S
+
+
+
+
+                                                                  PCB
+
+                                             Figure 9-8. Head-On Displacement Sensing
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                 Submit Document Feedback             25
+                                                     Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                                 www.ti.com
+
+9.2.2.1 Design Requirements
+Use the parameters listed in Table 9-3 for this design example.
+                                                        Table 9-3. Design Parameters
+                                          DESIGN PARAMETER                                          EXAMPLE VALUE
+                                                      VCC                                                    3.3V
+                                                    Magnet                                        5 × 5 × 5mm NdFeB N45
+                                                 Travel distance                                             5mm
+                      Travel distance range from magnet to sensor surfaces                            10mm to 5mm
+                            Magnetic field range at the sensor at 25°C                                80mT to 13mT
+                                                 Device option                                       TMAG5253BA3
+
+
+9.2.2.2 Detailed Design Procedure
+Unlike the Slide-By Displacement Sensing configuration, the head-on displacement configuration has a magnetic
+flux density that is either entirely positive or entirely negative, depending on whether the south or north pole of
+the magnet is closest to the sensor. As a result, the user can choose the sensors that are sensitive only to south
+field for this mechanical configuration. In cases where controlling the polarity of the magnet is not possible, the
+bipolar version (TMAG5253B) is chosen. The mapping of magnetic flux density to distance depends on various
+factors, such as the material and dimensions of the magnet. Figure 9-9 shows that the magnetic flux density is
+always positive as the magnet travels towards the sensor. Based on the magnetic field range, TMAG5253BA3
+version with ±80mT full scale range is chosen. Figure 9-9 shows the output voltage of this sensor as the
+magnet travels from a distance of 10mm to a distance of 5mm towards the sensor. The DRV5056 Distance
+Measurement Tool calculates the expected magnetic flux density to distance mapping in a head-on configuration
+for different magnet specifications.
+9.2.2.3 Application Curve
+                                         60                                                           2.64
+                                                                                              BZ (mT)
+                                         55                                                   VOUT(V) 2.56
+                                         50                                                              2.48
+                                         45                                                              2.4
+                                         40                                                              2.32
+                                                                                                                VOUT (V)
+                               BZ (mT)
+
+
+
+
+                                         35                                                              2.24
+                                         30                                                              2.16
+                                         25                                                              2.08
+                                         20                                                              2
+                                         15                                                              1.92
+                                         10                                                              1.84
+                                           4.5        5.5       6.5      7.5       8.5      9.5       10.5
+                                                         Distance from Magnet to Sensor (mm)
+
+ Figure 9-9. Magnetic Field (BZ) and the Output Voltage of the Sensor (VOUT) vs the Distance from Magnet
+                                       to the Sensor in TMAG5253B
+
+9.2.3 Remote-Sensing Applications
+For remote-sensing applications where the sensor is not physically placed on the same board as the ADC or
+the microcontroller, the ability to drive a capacitive load from the wiring harness is important. The TMAG5253
+enables remote-sensing applications with the ability to support up to 1nF capacitive load on the OUT pin. With a
+typical cable capacitance of about 100pF/m, the TMAG5253 can support up to 10m in cable length.
+
+
+
+
+26    Submit Document Feedback                                                                          Copyright © 2026 Texas Instruments Incorporated
+
+                                                            Product Folder Links: TMAG5253
+                                                                                                                 TMAG5253
+www.ti.com                                                                           SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+                      PCB
+                                                                                                       µController
+              TMAG5253                                                                      VCC
+              VCC       EN
+                       OUT                                        Cable                                    ADC
+                                                                                                VOUT
+              GND
+
+
+                           Figure 9-10. Remote-Sensing Application With Wire Break Detection
+
+Some remote-sensing applications can require a device to detect if interconnect wires open or short. The
+TMAG5253 can support this feature with the ability to drive up to ±1mA current load on the output. To design for
+wire break detection, first select a sensitivity option that causes the output voltage to stay within the VL range
+during normal operation. Second, add a pullup resistor between OUT and VCC. TI recommends a value between
+20kΩ to 100kΩ, and the current through OUT must not exceed the IO specification, including current going
+into an external ADC. Then, if the output voltage is ever measured to be within 100mV of VCC or GND, a fault
+condition exists. Figure 9-10 shows the circuit, and Table 9-4 describes fault scenarios.
+                                        Table 9-4. Fault Scenarios and the Resulting VOUT
+                            FAULT SCENARIO                                               VOUT
+                             VCC disconnects                                         Close to GND
+                             GND disconnects                                         Close to VCC
+                            VCC shorts to OUT                                        Close to VCC
+                            GND shorts to OUT                                        Close to GND
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                             Submit Document Feedback      27
+                                                    Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                         www.ti.com
+
+9.3 Best Design Practices
+The Hall element is sensitive to magnetic fields that are perpendicular to the top of the package, therefore a
+correct magnet approach must be used for the sensor to detect the field. Figure 9-11 shows correct and incorrect
+approaches.
+
+                                                         CORRECT
+
+
+
+
+                                           N                                S
+
+
+                                           S                                N
+
+
+
+
+                                                     N      S
+
+
+
+
+                                                         INCORRECT
+
+
+
+
+                                                     N      S
+
+
+
+
+                                Figure 9-11. Correct and Incorrect Magnet Approaches
+
+
+
+
+28    Submit Document Feedback                                                  Copyright © 2026 Texas Instruments Incorporated
+
+                                               Product Folder Links: TMAG5253
+                                                                                                               TMAG5253
+www.ti.com                                                                          SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+
+9.4 Power Supply Recommendations
+A decoupling capacitor close to the device must be used to provide local energy with minimal inductance. TI
+recommends using a ceramic capacitor with a value of at least 0.1µF.
+9.5 Layout
+9.5.1 Layout Guidelines
+Magnetic fields pass through most nonferromagnetic materials with no significant disturbance. Embedding Hall
+effect sensors within plastic or aluminum enclosures and sensing magnets on the outside is common practice.
+Magnetic fields also easily pass through most printed circuit boards, which makes placing the magnet on the
+opposite side possible.
+9.5.2 Layout Example
+
+
+
+
+                                                            VCC         OUT
+
+
+
+                                                                  Thermal
+                                                                    Pad
+
+
+
+                                                            GND             EN
+
+
+
+
+                                                  Figure 9-12. Layout Example
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                           Submit Document Feedback       29
+                                                   Product Folder Links: TMAG5253
+TMAG5253
+SBASAI5E – MAY 2023 – REVISED APRIL 2026                                                                                       www.ti.com
+
+10 Device and Documentation Support
+10.1 Documentation Support
+10.1.1 Related Documentation
+For related documentation see the following:
+• Texas Instruments, Absolute Angle Measurements for Rotational Motion Using Hall-Effect Sensors
+   application brief
+• Texas Instruments, Tracking Slide-By Displacement with Hall Effect Sensors application brief
+• Texas Instruments, Head-on Linear Displacement Sensing using Hall Effect Sensors application brief
+• Texas Instruments, TMAG5253EVM User's Guide
+10.2 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Notifications to register and receive a weekly digest of any product information that has changed. For change
+details, review the revision history included in any revised document.
+10.3 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+10.4 Trademarks
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+10.5 Electrostatic Discharge Caution
+                 This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                 with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                 ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                 be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                 specifications.
+
+
+10.6 Glossary
+ TI Glossary          This glossary lists and explains terms, acronyms, and definitions.
+
+11 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from February 1, 2026 to April 28, 2026 (from Revision D (February 2026) to Revision
+E (April 2026))                                                                                                     Page
+• Added TMAG5253UA2 Unipolar version device throughout the document....................................................... 1
+
+
+
+Changes from Revision C (August 2025) to Revision D (February 2026)                                                 Page
+• Added TMAG5253UA5 Unipolar version device throughout the document....................................................... 1
+
+
+
+
+30    Submit Document Feedback                                                                Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: TMAG5253
+                                                                                                                                                           TMAG5253
+www.ti.com                                                                                                             SBASAI5E – MAY 2023 – REVISED APRIL 2026
+
+Changes from Revision B (November 2023) to Revision C (August 2025)                                                                                                Page
+• Changed the minimum quiescent voltage for VCC=3.3V on the BA2, BA3, BA4 variants from: 1.585V to:
+  1.61V.................................................................................................................................................................. 5
+• Changed the maximum quiescent voltage for VCC=3.3V on the BA2, BA3, BA4 variants from: 1.715V to:
+  1.69V.................................................................................................................................................................. 5
+• Changed the maximum quiescent voltage for VCC=1.8V on the BA4 variant from 0.945V to 0.93V..................5
+• Changed the minimum quiescent voltage for VCC=1.8V on the BA2 and BA3 variants from: 0.845V to: 0.85V 5
+• Changed the maximum quiescent voltage for VCC=1.8V on the BA2 and BA3 variants from: 0.945V to:
+  0.94V.................................................................................................................................................................. 5
+• Changed the minimum quiescent voltage for VCC=1.8V on the BA4 variant from: 0.845V to: 0.87V.................5
+• Changed the maximum and minimum quiescent voltage temperature drift for VCC = 3.3V, TA = 0°C to 85°C
+  versus 25°C, TMAG5253B from: 60mV and -60mV to 30mV and -30mV, respectively..................................... 5
+• Changed the maximum and minimum quiescent voltage temperature drift for VCC = 3.3V, TA =-40°C to 125°C
+  versus 25°C, TMAG5253B from: 100mV and -100mV to: 50mV and -50mV, respectively................................ 5
+• Changed the maximum and minimum quiescent voltage temperature drift for VCC = 1.8V, TA = 0°C to 85°C
+  versus 25°C, TMAG5253B from: 30mV and -30mV to: 25mV and -25mV, respectively.................................... 5
+• Changed the maximum and minimum quiescent voltage temperature drift for VCC = 1.8V, TA = -40°C to 125°C
+  versus 25°C, TMAG5253B from: 50mV and -50mV to: 35mV and -35mV, respectively.................................... 5
+• Added quiescent voltage temperature drift parameters for the TA = 0°C to 50°C range.................................... 5
+• Changed Linear magnetic sensing range to include full temperature range...................................................... 5
+
+
+
+Changes from Revision A (September 2023) to Revision B (November 2023)                                    Page
+• Removed the preview note from the A1, A2 and A4 orderables in the Device Comparison table..................... 3
+
+
+
+Changes from Revision * (May 2023) to Revision A (September 2023)                                                    Page
+• Changed the data sheet status from: Advanced Information to: Production Data .............................................1
+
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                                 Submit Document Feedback                31
+                                                                 Product Folder Links: TMAG5253
+                                                                                                                                                                     PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    1-May-2026
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins      Package qty | Carrier       RoHS             Lead finish/               MSL rating/          Op temp (°C)               Part marking
+                                        (1)            (2)                                                            (3)            Ball material              Peak reflow                                           (6)
+                                                                                                                                          (4)                       (5)
+
+      TMAG5253BA1IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA1
+      TMAG5253BA1IQDMRR.A             Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA1
+      TMAG5253BA2IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA2
+      TMAG5253BA2IQDMRR.A             Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA2
+      TMAG5253BA3IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA3
+      TMAG5253BA3IQDMRR.A             Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA3
+      TMAG5253BA4IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA4
+      TMAG5253BA4IQDMRR.A             Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    BA4
+      TMAG5253UA2IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    UA2
+      TMAG5253UA5IQDMRR               Active      Production       X2SON (DMR) | 4       3000 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    UA5
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+
+
+                                                                                                          Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+    www.ti.com                                                                                                                                                                                            1-May-2026
+
+
+
+
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                              PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                         2-May-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                     TAPE DIMENSIONS
+                                                                                      K0         P1
+
+
+
+                                                                                                                        B0 W
+                                        Reel
+                                      Diameter
+                                                                                   Cavity             A0
+                                                               A0   Dimension designed to accommodate the component width
+                                                               B0   Dimension designed to accommodate the component length
+                                                               K0   Dimension designed to accommodate the component thickness
+                                                               W    Overall width of the carrier tape
+                                                               P1   Pitch between successive cavity centers
+
+
+                                       Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                       Sprocket Holes
+
+
+                                                 Q1       Q2          Q1    Q2
+
+                                                 Q3       Q4          Q3    Q4                    User Direction of Feed
+
+
+
+                                                           Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins             SPQ       Reel   Reel   A0                     B0         K0     P1     W     Pin1
+                               Type Drawing                            Diameter Width (mm)                   (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                         (mm) W1 (mm)
+ TMAG5253BA1IQDMRR            X2SON     DMR           4        3000        179.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+ TMAG5253BA2IQDMRR            X2SON     DMR           4        3000        179.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+ TMAG5253BA3IQDMRR            X2SON     DMR           4        3000        179.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+ TMAG5253BA4IQDMRR            X2SON     DMR           4        3000        179.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+ TMAG5253UA2IQDMRR            X2SON     DMR           4        3000        180.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+ TMAG5253UA5IQDMRR            X2SON     DMR           4        3000        180.0           8.4        1.27   1.57       0.5    4.0    8.0     Q1
+
+
+
+
+                                                                     Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              2-May-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+                      W
+
+
+
+
+                                                          L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+ TMAG5253BA1IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+ TMAG5253BA2IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+ TMAG5253BA3IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+ TMAG5253BA4IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+ TMAG5253UA2IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+ TMAG5253UA5IQDMRR              X2SON             DMR           4           3000      200.0        183.0         25.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                  GENERIC PACKAGE VIEW
+DMR 4                                                                  X2SON - 0.4 mm max height
+1.1 x 1.4, 0.5 mm pitch                                                     PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+               This image is a representation of the package family, actual package may vary.
+                             Refer to the product data sheet for package details.
+
+
+
+
+                                                                                                   4229480/A
+
+
+
+
+                                                    www.ti.com
+                                                                                                                       PACKAGE OUTLINE
+DMR0004A                                                                SCALE 9.000
+                                                                                                                 X2SON - 0.4 mm max height
+                                                                                                                       PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                       1.15                                  A
+                                  B
+                                                       1.05
+
+
+
+
+                PIN 1 INDEX AREA
+
+                                                                                            1.45
+                                                                                            1.35
+
+
+
+
+                                                                                              (0.13) TYP
+
+                                                                                                         C
+                       0.4 MAX
+
+                                                                                                              SEATING PLANE
+                           0.05                        NOTE 4
+                           0.00                                                                               0.08 C
+
+                                                      2X 0.5
+
+                                                      SYMM
+
+                                              2                     3
+                                                                                                                       NOTE 4
+
+                                                                                              EXPOSED
+                                                                                              THERMAL PAD
+
+
+                                                       5                                   SYMM
+                            0.6 0.1
+
+
+
+                                                                                                       0.25
+                                                                                                  4X
+                         PIN 1 ID                                                                      0.15
+                      (OPTIONAL)
+
+                                                  1             4
+                                                                                           0.27
+                                                                                      4X
+                                                                                           0.17
+                                                      0.8 0.1                               0.1        C B       A
+                                                                                            0.05        C
+                                                                                                                                      4222825/B 05/2022
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. The package thermal pad must be soldered to the printed circuit board for thermal and mechanical performance.
+4. Quantity and shape of side wall metal may vary.
+
+
+
+
+                                                                        www.ti.com
+                                                                                         EXAMPLE BOARD LAYOUT
+DMR0004A                                                                                          X2SON - 0.4 mm max height
+                                                                                                           PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                                    2X (0.5)
+                                              4X (0.22)
+                                                                                           (R0.05) TYP
+                                                           1                   4
+
+
+                                               4X (0.4)
+
+
+
+
+                                                                   5
+                                                                                          SYMM
+                                                 (0.6)
+                                                                                                   (1.4)
+
+
+
+
+                                        ( 0.2) VIA
+
+
+
+
+                                                               2                   3
+                                                                       SYMM
+
+                                                                       (0.8)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                                   SCALE:35X
+
+
+
+
+                   0.05 MAX                                                            0.05 MIN
+               ALL AROUND                                                          ALL AROUND
+                                                   METAL                                                           SOLDER MASK
+                                                                                                                   OPENING
+
+
+                                                     SOLDER MASK
+                                                     OPENING                                                       METAL UNDER
+                                                                                                                   SOLDER MASK
+                              NON SOLDER MASK                                                     SOLDER MASK
+                                  DEFINED                                                           DEFINED
+                                (PREFERRED)
+
+                                                          SOLDER MASK DETAILS
+
+
+
+
+                                                                                                                          4222825/B 05/2022
+NOTES: (continued)
+
+5. This package is designed to be soldered to a thermal pad on the board. For more information, see Texas Instruments literature
+   number SLUA271 (www.ti.com/lit/slua271).
+6. Vias are optional depending on application, refer to device data sheet. If all or some are implemented, recommended via locations are shown.
+   It is recommended that vias under paste be filled, plugged or tented.
+
+
+
+
+                                                                        www.ti.com
+                                                                                  EXAMPLE STENCIL DESIGN
+DMR0004A                                                                                X2SON - 0.4 mm max height
+                                                                                               PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                              2X (0.5)
+                                      4X (0.22)
+                                                                                      (R0.05) TYP
+                                                    1                     4
+
+
+
+                                        4X (0.4)
+
+
+
+
+                                                             5
+                                                                                      SYMM
+                                         (0.57)
+                                                                                              (1.4)
+
+
+
+
+                                       METAL
+                                       TYP
+
+
+
+
+                                                         2                    3
+                                                              SYMM
+
+
+                                                                 (0.76)
+
+
+                                                   SOLDER PASTE EXAMPLE
+                                                   BASED ON 0.1 mm THICK STENCIL
+
+                                                      EXPOSED PAD 5:
+                                           90% PRINTED SOLDER COVERAGE BY AREA
+                                                         SCALE:50X
+
+
+
+
+                                                                                                                  4222825/B 05/2022
+
+NOTES: (continued)
+
+7. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+
+
+
+
+                                                                   www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+
