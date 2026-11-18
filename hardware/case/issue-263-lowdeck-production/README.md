@@ -159,3 +159,44 @@ do not respect the Rev.6 floor — do not mix revisions.
   resistance BEFORE folding (acceptance ≤1.30 Ω/lane, expected
   0.075–0.10 Ω); set the S1 detent from the measured cable length;
   fold on the jig; do not crease (R2.0 formers).
+
+## Issue #275 round (2026-11-18) — symmetric Rev.10 tabs; flipped-installation pocket
+
+Main Rev.10 symmetrizes the connector tabs (the left tab is now the
+exact mirror of the right; J2 sits at the mirror of the J3 pose) and
+Wing Rev.6's left notch is the exact mirror of the Stage 2e right
+chain. Rev.10 / Rev.6-final are a MATCHED PAIR — do not mix with
+Rev.9 (whose left tab is not the mirror of its right tab). Seam
+re-verified from the saved board files: overlap 0, distance
+0.5593 mm at both pitches and both sides (B3 record in the
+Issue #275 REPORT).
+
+- Tray pocket relief (Rev.10 tabs, Z 4.70..5.90 vs the audit tray
+  bodies): left 6.305 mm3 / right 6.305 mm3 — the right
+  reproduces the Rev.9 total (6.31 mm3) since the right tab is
+  unchanged; the left becomes the mirror value. ADOPTED as the new
+  totals, replacing the Rev.9 figures above, when the trays are
+  next generated. Reliefs cut into existing tray material only;
+  the D-037 silhouette is not exceeded. (Computation:
+  case-delta-275, both pitches, identical results —
+  audit-rerun/case-delta-275.log.)
+- Flipped-installation pocket (NEW, for the Rev.10 flip
+  configuration): the flipped Main's tallest parts (C26/C27/C28,
+  2.5 mm) hang to Z2.20 against the tray floor Z1.60 — only
+  0.60 mm residual. ADOPTED delta: a 1.0 mm pocket under the
+  power-stage field, case X -6..+13, Y 28..48, floor at Z0.60,
+  restoring the residual to 1.60 mm. Measured against the audit
+  body set (both pitches, identical): the pocket box removes
+  exactly 380.00 mm3 of tray material and touches no other body;
+  the FPC channel runs north of the field and is not intersected.
+  Remaining web under the pocket: the design floor is 1.60 mm
+  (the audit body set models it at 2.00, conservative), so the
+  pocket leaves a 0.60 mm nominal web in the ribbed floor —
+  recorded as a production note for the case-print gate.
+  (Computation: case-pocket-275 — audit-rerun/case-pocket-275.log.)
+- Flipped J4 / Fly cable: the flipped plug itself fits (hangs to
+  Z2.80 over the plain floor, 1.20 mm clear). The cable path from
+  the flipped plug to the Fly receptacle is the NAMED RESIDUAL of
+  Issue #275 — see the Issue #275 REPORT for the attempted loop
+  geometry and the deciding audit. No pocket or channel for the
+  Fly cable is adopted in this round.
