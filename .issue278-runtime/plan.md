@@ -73,3 +73,13 @@ Unexpected contacts = 0 (full flipped fitted audit, cable one
 connected solid, plug envelopes in); length <= stock part; service
 motion swept or sequenced with clearances; USB-C insertion
 unaffected. Pass-with-case-change counts, quantified.
+
+## PO note 2026-11-18 (relayed via PMO)
+- The stock 170 mm EZmate<->EZmate cable is PHYSICALLY ON HAND
+  (two Fly units, each shipped with its cable). Family F is a
+  FALLBACK only - no procurement optimisation on the main line.
+- Model assumptions that a real-part measurement could decide
+  (to be named in the final report for a possible PO measurement):
+  (1) flat bundle cross-section modelled 4.5 x 1.2 mm;
+  (2) bend discipline R >= 5 mm centreline;
+  (3) plug envelope modelled 5.0 x 3.5 x 1.30 mm (Stage B box).
