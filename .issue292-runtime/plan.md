@@ -341,3 +341,16 @@ Baseline: tree board SHA 2f0b4526 (re-route round final). Items:
 - C5 manufacturing package + 3 PO drawings regenerated from
   the final board (same paths as the re-route round).
 Checkpoint-commit per stage. Never /tmp.
+
+COMPLETION ROUND OUTCOME (2026-11-19): all 6 items CLOSED by
+routing only (no outline expansion - deviation 12 in REPORT).
+VBAT_SENSE I2 trunk 22.80mm/4 vias; GND pair = 1 plane tap via
+(74.6,124.65); PAD_EN 30.05mm/2 vias (via nudged to
+(84.30,119.10) for a 0.0975->0.130 I2 clearance fix); SYS_3V3
+island bridge 13.59mm/3 vias + module bridge 16.24mm/2 vias;
+VBUS F.Cu bridge 6.90mm/0 vias. Final board SHA 509e52a7.
+Gates: ERC 0; DRC unconnected 0, shorts 0; severity-all 722 vs
+729 baseline (same method; only dangling classes changed);
+field minima unchanged (trk-pad 0.0457 untouched); via-pad no
+new sub-0.125 sites; outline delta 0; package + 3 PO drawings
+regenerated.
