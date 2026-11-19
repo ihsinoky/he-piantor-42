@@ -239,3 +239,32 @@ A-net escapes completed after band redesign; U4.2 = via-in-pad.
    authorized source -> report attempts, keep derived fp
    explicitly UNVERIFIED.
 Other 7 deviations untouched.
+
+## Fix round outcome (2026-11-19) — STOPPED at PO decision point
+
+- Official CAD obtained + triangulated (PROVENANCE.md); pad diff:
+  same 0 / moved 69 / resized 8 / added 9 (NC 70-78). Library
+  footprint replaced and reload-verified. Board swap done on
+  wmain-v28-fp.kicad_pcb (SHA b7629fe9...): centre kept, orient
+  90->0, pad-net assignment preserved exactly (verify_padnet.py;
+  datasheet 3-way function binding in PROVENANCE.md, incl. the
+  design.py ISP_PINS +2 transcription error - schematic/board
+  were always correct).
+- Re-route under 0.10/0.10 project rules is geometrically
+  impossible for the 12 interior pads (0.25mm streets < 0.30mm
+  needed). Evidence: KRT x3 configs fail identically; exact
+  A* sensitivity: 0.10/0.10 -> interior 0/12; 0.075 -> 5-8/12
+  (order-dependent); 0.05w/0.10c -> 7/12; 0.05/0.05 -> 12/12
+  (escapes_005.json). Maker TB fans out at ~0.05mm field
+  clearances (measured from its GTL).
+- REPORT.md deviation 1 updated (footprint DISCHARGED, D-057
+  condition stays open) + new deviation 9 (fanout rule wall,
+  options a/b/c). quote-handoff.md flagged. Tree board and
+  manufacturing package unchanged (not regenerated).
+- PO PNGs from the swapped working board:
+  goals/he-piantor-42-keyboard-pmo/files/wmain-2d-topview.png,
+  wmain-2d-zoom-module.png, wmain-2d-zoom-service.png
+  (module field labelled unrouted / PO decision pending).
+- Not done (gated on the deviation-9 decision): tier-2 routing,
+  GND taps (gnd_taps.py written, unrun), full gate re-run,
+  package regeneration.

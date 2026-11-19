@@ -5,6 +5,15 @@ Upload together: a zip of this directory's `gerber/` contents,
 Status: DRAFT for the D-057 adoption gate — do not order from this
 package. The U1 footprint is derived (REPORT.md deviation 1) and
 must be replaced with Insight SiP official CAD first.
+**Fix-round note (2026-11-19):** the official footprint is now in
+`wmain.pretty` and in the working board, but this package is NOT
+regenerated: the tree board is unchanged, and re-routing the
+official footprint needs a fanout-rule decision (REPORT.md
+deviation 9 — the land pattern fans out at ≈0.05 mm class in the
+module field, per the maker's own test board). At quote time,
+confirm JLCPCB's capability and pricing for the module-field
+fanout rules the PO adopts; the U1 pre-order terms below are
+unchanged.
 
 - BOM: 55 designators / 32 consolidated lines. LCSC codes are
   filled only where a repo record verifies them (TPS63070 C109322,

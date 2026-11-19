@@ -122,6 +122,45 @@ no new 3D run, because every interface dimension is inherited:
    official CAD and re-run the module-field gates before any
    order.** Precedent: D-043 carried the reconstructed FH12 MP
    land the same way. Package is DRAFT / NOT FOR ORDER.
+
+   **Fix-round status (2026-11-19): FOOTPRINT DISCHARGED —
+   RE-ROUTE BLOCKED, PO decision required (deviation 9).**
+   Insight SiP official CAD was obtained from the maker's own
+   file tree (`insightsip.com/fichiers_insightsip/pdf/ble/
+   ISP1807/`): Altium library zip (SHA-256 `14fa64eb…`),
+   Eagle library zip (`6e9409e1…`), TB gerber zip
+   (`ac1dfb31…`), datasheet DS1807 R19 (`6a1fc572…`).
+   Provenance and full tables: `.issue292-runtime/official-cad/
+   PROVENANCE.md`. Verification, all script-generated:
+   (a) geometry triangulated three ways — Altium PcbLib pads
+   == Eagle pads == TB top-copper flash cluster, 78/78 pads,
+   max error 0.000 mm; (b) pin-function binding three ways —
+   datasheet pin table (R19 pp. 9–10), the maker Eagle
+   library's connects, and this project's schematic symbol
+   agree on all 78 pins (this also exposed a transcription
+   error in the Stage 2 study's `design.py` ISP_PINS table —
+   shifted by +2 from pin 24; the schematic and board were
+   always correct, see PROVENANCE.md correction note);
+   (c) pad diff, derived vs official: **same 0, position
+   differs 69, size differs 8, added 9 (pads 70–78)** — the
+   derived footprint was wrong in both geometry and number
+   placement. The library footprint `wmain.pretty/
+   ISP1807-LR.kicad_mod` has been regenerated from the
+   official Altium library (all 78 pads incl. the south NC
+   ring as soldered mechanical pads, maker mask expansion
+   0.05 mm) and verified pad-exact on reload. The board swap
+   was performed on the working copy
+   (`.issue292-runtime/wmain-v28-fp.kicad_pcb`, SHA-256
+   `b7629fe9…`): same centre (75.1, 124.85), orientation
+   90° → 0° (official frame — pin 1 NW, antenna edge south,
+   consistent with §4.3 and the board's antenna strip);
+   pad-number→net assignment preserved exactly (script-
+   verified against the pre-swap board; only change is the
+   added NC pads 70–78, no net). **The tree board in this
+   directory is unchanged** (SHA-256 `6afa289a…`, still
+   embeds the derived footprint) because the re-route
+   cannot be completed under project rules — deviation 9.
+   The D-057 condition therefore remains OPEN.
 2. **Pin swaps for escape** (design.py, schematic regenerated,
    ERC 0): BTN pin 34 → pin 47 (P0.23); ADC_C pin 44 → pin 42
    (AIN7 — pin 44 is uniquely blocked by functional pad 45);
@@ -160,6 +199,33 @@ no new 3D run, because every interface dimension is inherited:
    measured from the module body edge (128.85), not from the
    antenna pad row — the maker's "from the antenna edge"
    wording. The rule areas on the board encode this.
+9. **Official-footprint fanout exceeds the project design
+   rules (fix round, 2026-11-19) — PO decision required.**
+   With the official land pattern, 0.4 mm pads at 0.65 mm
+   pitch leave 0.25 mm streets; a 0.10 mm track at the
+   0.10 mm clearance rule (D-019) needs 0.30 mm. Measured
+   with an exact-geometry A* (0.05 mm grid, obstacles from
+   board data) on the swapped board: the 12 edge nets escape
+   at 0.10/0.10, but the 12 interior nets (U1 pads 3, 5, 9,
+   13, 15, 17, 19, 27, 33, 47, 50, 56) escape 0/12 at
+   0.10/0.10, 5–8/12 at 0.075/0.075 (order-dependent),
+   7/12 with 0.05 mm tracks at 0.10 clearance, and 12/12
+   only at 0.05/0.05 (escape set recorded in
+   `.issue292-runtime/escapes_005.json`). KiCadRoutingTools
+   in three configurations (all-net, rip-up retry,
+   single-net) fails the same pads identically. The maker's
+   own test board (ISP1807_LR_TB_Gerber, measured from the
+   GTL) fans the same land pattern out with 0.1 mm tracks
+   at field clearances down to ≈0.05 mm — the module's land
+   pattern presumes ~0.05 mm-class fanout rules. Options
+   for the adoption gate: (a) a module-field rule exception
+   (≈0.05 mm class; JLCPCB manufacturability and cost to
+   be confirmed at quote — this is below standard-process
+   minima), (b) the D-056 fallback module MDBT50Q-1MV2
+   (castellated — no LGA fanout; re-opens the north-tab
+   outline change D-055 accepted), (c) another direction.
+   Until the PO decides, the tree board keeps the derived
+   footprint and the package stays DRAFT / NOT FOR ORDER.
 
 ## Draft adoption line (for PO, at the adoption gate)
 
@@ -174,3 +240,9 @@ ISP1807-LR footprint (deviation 1) must be replaced with
 Insight SiP official CAD and the module-field gates re-run
 before any fabrication order; the manufacturing package is
 DRAFT / NOT FOR ORDER until then.
+**Fix-round addendum (2026-11-19):** the footprint has been
+replaced with the official CAD in the library and in the
+working board (deviation 1 status), but the re-run of the
+module-field gates is blocked by the fanout rule wall
+(deviation 9). The condition stays open pending the PO's
+deviation-9 decision.

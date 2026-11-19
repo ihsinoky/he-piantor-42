@@ -50,3 +50,22 @@ was built from the §3 table and is unaffected).
 Full by-number diff: `isp1807-pad-diff-final.md` (official positions
 in the official frame; derived positions in the derived frame;
 frames differ by construction — see orientation note above).
+
+## CORRECTION (fix round, later same day): pin-function binding re-verified
+
+An early spot check in this fix round used design.py's ISP_PINS table
+(the layout study's transcription) and appeared to show pad-net
+mismatches at pins 2/24. That table is WRONG: from pin 24 onward it is
+shifted by +2 (it puts VCC at 24; the datasheet puts VCC_nRF at 26).
+Authoritative binding, three-way, all 78 pins:
+- DS1807 R19 pin table, pp.9-10 (pdftotext): 24 VSS, 25 VSS,
+  26 VCC_nRF, 27 P0.17, 28 SWDIO, 29 P0.13, 30 SWDCLK, 65-78 NC.
+- Maker Eagle library connects (eagle-pinmap.json, parsed from
+  ISP1807LR_Int.lbr XML): identical binding.
+- Project schematic symbol (wmain.kicad_sym ISP1807): identical
+  (only case differs at VCC_nRF).
+So the schematic and the board pad-net assignment were always correct;
+the earlier "SchLib vs design.py 64/64 agree" note in this file was a
+set-based comparison that masked the shift - superseded by this
+number-keyed three-way check. The footprint GEOMETRY triangulation
+(Altium/Eagle/TB gerber, number-keyed positions) is unaffected.
