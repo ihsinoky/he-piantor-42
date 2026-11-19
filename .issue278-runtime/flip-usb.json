@@ -1,0 +1,316 @@
+{
+ "basis": {
+  "J4_plug_centre": [
+   0,
+   19.18,
+   3.45
+  ],
+  "J4_plug_envelope_mm": [
+   5.0,
+   3.5,
+   1.3
+  ],
+  "cable_model": {
+   "bend_R_min_mm": 5.0,
+   "pack_mm": [
+    4.5,
+    1.2
+   ],
+   "stock_length_mm": 170
+  },
+  "fly_board_z": [
+   4.7,
+   6.29
+  ],
+  "fly_ezmate_housing": {
+   "x": [
+    -3.3,
+    3.3
+   ],
+   "y": [
+    -51.28,
+    -46.75
+   ],
+   "z": [
+    3.25,
+    4.7
+   ]
+  },
+  "fly_seat_centre": [
+   0,
+   -50.136
+  ],
+  "sheet_inner_edges_x": [
+   -2.059,
+   2.059
+  ],
+  "sheet_z": [
+   2.825,
+   3.075
+  ],
+  "tray_top_along_route_z": 2.0,
+  "tray_top_at_pocket_rim_z": 3.0
+ },
+ "date": "2026-11-18",
+ "families": {
+  "A": {
+   "case_change": {
+    "breaks_into_features": "none (posts/screws dodged in plan; splice plate top Z 1.20 untouched, cable 0.10 above it)",
+    "disclosure": "FFC formed-channel floor locally lowered to Z 1.20 in <=7.5 mm notches at 2-3 crossings; FFC sheet bridges them",
+    "floor_z": 1.2,
+    "kind": "route channel in tray-right, extension of pocket A",
+    "removed_mm3": {
+     "tray-left": 0.0,
+     "tray-right": 931.3
+    },
+    "width_mm": 7.5
+   },
+   "iterations": {
+    "A0_no_case_change": {
+     "hits_mm3": {
+      "ZIF-main-right": 0.302,
+      "joint-screw-1-12_0": 0.162,
+      "tray-right": 321.58
+     },
+     "length_mm": 148.5
+    },
+    "A1_shallow_channel_0.35": {
+     "hits_mm3": {
+      "tray-right": 296.584
+     },
+     "length_mm": 168.64
+    },
+    "A2_route_channel_floor_1.20": {
+     "hits_mm3": {},
+     "length_mm": 168.64
+    }
+   },
+   "verdict": "PASS_WITH_CASE_CHANGE"
+  },
+  "B": {
+   "binding": "over-sheet hop transition contacts the sheet fold-flat zone; sheets are exact mirrors, no east/west asymmetry (Stage B west hop: 5.385 mm3, same mechanism)",
+   "hits_mm3": {
+    "FFC-sheet-right": 3.215,
+    "tray-right": 165.253
+   },
+   "verdict": "FAIL"
+  },
+  "C": {
+   "clearance_channel_level_mm": {
+    "contact_volume": 0.0,
+    "left": 0.326,
+    "right": 0.325
+   },
+   "clearance_floor_level_mm": {
+    "contact_volume": 0.0,
+    "left": 0.032,
+    "right": 0.025
+   },
+   "note": "under-sheet crossing is the mechanism A2 uses; FFC lift service unobstructed, EZmate removal is a slide-out",
+   "verdict": "PASS_MECHANISM"
+  },
+  "D": {
+   "binding": "length (191.72 > 170); Stage B's ~30 mm loop estimate not confirmed",
+   "hits_mm3": {
+    "joint-screw-1-12_0": 2.413,
+    "joint-screw-2-12_0": 2.413,
+    "tray-right": 465.15
+   },
+   "length_mm": 191.72,
+   "stock_mm": 170,
+   "verdict": "FAIL"
+  },
+  "E": {
+   "binding": "USB-C mouth is on the Fly's north edge, 0.30 mm inside the north wall W16 opening; 180-degree rotation puts it 8.30 mm south facing the interior",
+   "verdict": "FAIL_CANNOT_ROTATE"
+  },
+  "F": {
+   "options_search_crawl_2026-11-18": [
+    {
+     "digikey_stock": 2659,
+     "length_mm": 300,
+     "part": "Molex 36920-0403",
+     "usd": 3.66
+    },
+    {
+     "digikey_stock": 4359,
+     "length_mm": 150,
+     "part": "Molex 36920-0402",
+     "usd": 3.48
+    },
+    {
+     "digikey_stock_lead": 6581,
+     "length_mm": 300,
+     "part": "Molex 79758-1010 pre-crimped lead + 78172-0004 housing",
+     "usd_lead": 1.47
+    }
+   ],
+   "verdict": "NOT_NEEDED_FALLBACK_ONLY"
+  }
+ },
+ "issue": 278,
+ "method": {
+  "artefact_correction": "basis self-test 'plug vs tray-left = 22.75' was a fail-open Shape.intersect artefact on the disjoint fragment compound tray-left (7 solids, 7.4 mm3, zmax 0.4, bbox-disjoint from all cables); no verdict depends on it (decisive.py)",
+  "audit": "repaired Common (ShapeList-aware Shape.intersect, volumes summed); all solids volume-validated > 0; bbox prefilter; own-engagement pairs reported separately",
+  "body_set": "fitlibF.bodies_at(17, -2.65), 343 bodies, Main flipped about Z=5.30, Type D FFC sheets fitted, pocket A applied; Fly-170mm (normal-pose cable model) excluded",
+  "positive_controls": {
+   "A0_cable_vs_tray_right_from_STEP_cache_mm3": 321.58,
+   "A0_cable_vs_tray_right_inprocess_mm3": 321.58,
+   "synthetic_boxes_expected_mm3": 13.5,
+   "synthetic_boxes_measured_mm3": 13.5
+  }
+ },
+ "passing_configuration": "A2",
+ "passing_configuration_A2": {
+  "centreline_control_points": [
+   [
+    0,
+    19.18,
+    3.45
+   ],
+   [
+    0,
+    22.5,
+    2.9
+   ],
+   [
+    1.5,
+    25.5,
+    2.2
+   ],
+   [
+    4,
+    28,
+    1.95
+   ],
+   [
+    11,
+    32,
+    1.9
+   ],
+   [
+    16.5,
+    38,
+    1.9
+   ],
+   [
+    17,
+    44,
+    1.9
+   ],
+   [
+    14.5,
+    50,
+    1.9
+   ],
+   [
+    9,
+    48,
+    1.9
+   ],
+   [
+    6.5,
+    41,
+    1.9
+   ],
+   [
+    6.5,
+    30,
+    1.9
+   ],
+   [
+    7.5,
+    22,
+    1.9
+   ],
+   [
+    10.5,
+    14,
+    1.9
+   ],
+   [
+    10.5,
+    5,
+    1.9
+   ],
+   [
+    20,
+    -3,
+    1.9
+   ],
+   [
+    20,
+    -9,
+    1.9
+   ],
+   [
+    10.5,
+    -15,
+    1.9
+   ],
+   [
+    2,
+    -21,
+    1.9
+   ],
+   [
+    2,
+    -27,
+    1.9
+   ],
+   [
+    10.5,
+    -33,
+    1.9
+   ],
+   [
+    8,
+    -39,
+    1.9
+   ],
+   [
+    5.5,
+    -44.5,
+    1.95
+   ],
+   [
+    1,
+    -46.6,
+    2.3
+   ],
+   [
+    0,
+    -48,
+    2.85
+   ],
+   [
+    0,
+    -49.02,
+    3.45
+   ]
+  ],
+  "centreline_length_mm": 168.64,
+  "engagement_mm3": {
+   "EZmate-Fly-plug": 22.73,
+   "Fly-official-67-instance-67": 1.552,
+   "Main-study-J4": 35.417
+  },
+  "service": "unplug either end with a straight downward pull (2.0 mm swept volume clear of all fixed bodies at both ends); slide cable out along the channel toward the Fly end; FFC ZIF board-lift consequence from #275 unchanged",
+  "under_sheet_clearance_mm": 0.314,
+  "under_sheet_clearance_note": "extrema on the final A2 cable solid vs right FFC sheet (left: 5.29); family C straight-crossing figure at the same z-stack: 0.325",
+  "unexpected_contacts_mm3": {},
+  "usb_c_insertion": "unaffected (USB reference bodies in gate set, 0 contacts)"
+ },
+ "passing_family": "A",
+ "po_measurements_requested": [
+  "flat-bundle thickness of the real 170 mm cable (modelled 1.2 mm; sets A2 under-sheet clearance 1:1)",
+  "plug envelope of the real cable (modelled 5.0 x 3.5 x 1.30 mm from the audit model)",
+  "minimum comfortable bend radius of the real bundle (modelled R >= 5 mm; dress U-turns at R 5.25-5.5 mm)"
+ ],
+ "service_sweeps_down_2mm": {
+  "Fly_plug": {},
+  "J4_plug": {}
+ },
+ "title": "Flipped-installation USB routing study",
+ "verdict": "PASS_WITH_CASE_CHANGE"
+}
