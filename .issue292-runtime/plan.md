@@ -106,3 +106,55 @@ with gate table + draft adoption line.
 - Failing gate states shown before changes.
 - Assignment/keep-out tables generated from placed board data.
 - Checkpoint-commit per stage; never /tmp.
+# Issue #292 Stage 2 RESUMED (D-055 basis) — plan addendum 2026-11-19
+
+Module basis CHANGED by D-055: Raytac MDBT50Q-1MV2. North tab
+outline addition ACCEPTED (study est. +~420mm2); symmetric holes
+unchanged. Everything else in Stage 1 stands.
+
+## Entry checks (checkpoint-commit BEFORE board work)
+- E1: MDBT50Q-1MV2 stock re-verified TODAY at DigiKey Marketplace
+  + TME; LCSC code existence for BOM (no code -> hand-fit, stated).
+- E2: Module facts from Raytac primary docs: footprint/pin table,
+  antenna keep-out rules, DCDC inductor provision, 32.768kHz
+  crystal provision, required externals, reference design followed.
+
+## Additional PO requirement (2026-11-19): SWD debug provision
+- PO owns nRF52840 DK (PCA10056); its onboard J-Link drives an
+  external board's SWD via Debug Out (P19/P20).
+- Add pads-only SWD footprint (TC2030-class 6-pin or 2x5 1.27mm
+  pad array; choice justified) wired SWDIO/SWCLK/RESET/GND/
+  VDD-sense; placed for pogo access with case open, clear of the
+  trackpad keep-out and battery pod zone; in schematic, board,
+  assignment + keep-out audits.
+- USB-C re-run with SWD as service lifeline: USB-C = bench power
+  + no-open-case FW updates (convenience). If the tab relaxes,
+  take the smaller outline and report the delta; else one line why.
+- REPORT.md notes DK Debug Out (P19/P20) as assumed programmer;
+  pad pinout follows standard SWD ordering.
+
+## Implementation (tree hardware/kicad/qualification/issue-292-wmain/)
+- Rev.10 outline + ONE change: minimal north tab derived from
+  module footprint + keep-out + USB-C placement (tab may host
+  USB-C; arrangement that keeps tab smallest wins).
+- Module antenna end toward south PETG zone if tab geometry
+  allows; else best placement + explicit antenna report.
+- TPS63070 @3.3V (forced PWM off, AP2112K deleted); J2/J3 FH12
+  3.3V assignment (pin1 HALL_3V3 via TPS22919, per-bank EN, ADC
+  returns); trackpad I2C+DR+switched supply to bay disconnect;
+  battery input + gated divider sense; dia.40 keep-out enforced.
+- Case fitted check vs case production tree; shell north-edge
+  impact stated with size; case tree NOT edited.
+
+## Gates (all numbers): ERC 0; DRC severity-all; unconnected;
+via-pad audit (0.10 floor / 0.125 target, sub-target listed);
+keep-out audit from placed data (trackpad dia.40, module antenna,
+south band, SWD zone); Wing-link assignment census (2x14 pins,
+from board data); far-Wing rail budget from routed board
+(<=50mV class @ burst peak); outline delta (tab dims + area,
+holes unchanged verified from data).
+
+## Package: manufacturing/ per #267 (BOM verified codes or
+hand-fit marks, CPL gerber frame, FABRICATION.md, quote-handoff
+DRAFT/NOT FOR ORDER) + REPORT.md (gates, antenna, shell impact,
+SWD note, deviations, draft adoption line D-056).
