@@ -30,3 +30,9 @@ Stages:
 
 Invariants: reproduce before fixing; containment gate runs on the FINAL file
 with a generated item list; never /tmp; small segments.
+
+## S2 result (case margin, measured in the #275 fitted frame; method validated by reproducing seam 0.5593 / overlap 0 exactly)
+- West of Main's dent sits the left Wing Rev.6 (fitted pose). Free gap: A-B segment 0.559mm (the fitted seam itself), B-C segment 1.99-2.11mm.
+- Copper needs the edge >=2.41mm further west at the USB corridor -> dent fill CANNOT clear the cluster (would consume the seam and hit the Wing). Partial fill gains ~0 on A-B, <=1.4mm on B-C: insufficient.
+- DECISION: west cluster fixed by RE-ROUTING (preference i). Outline stays Rev.10-identical (delta 0). Recorded in REPORT deviation entry.
+- (Note: the #198 dimensions.json wing transform is a different frame and gives a false overlap for Rev.6; do not use it for Rev.6 - the #275 fitted frame above is authoritative.)
