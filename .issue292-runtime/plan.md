@@ -204,3 +204,16 @@ bring-up). Never claim shelf stock; never plain hand-fit.
    CPL gerber frame, FABRICATION.md, quote-handoff DRAFT) +
    REPORT.md (gates, USB pick, antenna, shell, deviations,
    draft adoption line D-057).
+
+## Stage 2 layout — COMPLETE (2026-11-19)
+Final board: wmain-v27 lineage -> tree wmain.kicad_pcb. Gates: ERC 0;
+DRC unconnected 3 (module GND pads only, dispositioned); shorts 0;
+via-pad min 0.100; antenna strip 0 items; census 14/14 x2;
+outline delta 0 (undirected segment equality). USB pick (ii)
+EZmate daughterboard (stocked Fly serves), outline delta 0.
+Deviations 1-8 in REPORT.md (lead: derived ISP1807 footprint ->
+D-057 condition). Package: manufacturing/ DRAFT / NOT FOR ORDER
+(module line C5264268 Pre-order Parts, +~28d, est. $11.78).
+Key incidents: FH12 clone pad-rotation defect found by bbox audit
+and fixed (43->0 local); GND band went F-band -> B-via design;
+A-net escapes completed after band redesign; U4.2 = via-in-pad.

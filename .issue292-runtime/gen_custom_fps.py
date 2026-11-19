@@ -56,6 +56,12 @@ assert n == 78, n
 s = fp_head('ISP1807-LR', 'Insight SiP ISP1807-LR LGA-78, DERIVED JEDEC 2-row QFN grid 0.65 pitch (datasheet R19 pin table; pad map NOT maker-CAD verified)') + refval()
 s += rect_lines(0, 0, 4.0, 4.0)
 s += '\t(fp_circle\n\t\t(center -4.6 4.6)\n\t\t(end -4.3 4.6)\n\t\t(stroke (width 0.12) (type solid))\n\t\t(fill none)\n\t\t(layer "F.SilkS")\n\t)\n'
+# DRAFT DEVIATION (D-057 condition): south-inner NC ring pads 70-78 omitted
+# from the land pattern - with the ring present, the south functional row
+# (pins 34-44) has no 0.10-rule escape (0.25 mm corridors). Revisit when the
+# maker CAD lands. See REPORT.md.
+for num in range(70, 79):
+    pads.pop(num, None)
 for num, (x, y, sx, sy) in sorted(pads.items()):
     s += pad(str(num), x, y, sx, sy)
 s += ')\n'

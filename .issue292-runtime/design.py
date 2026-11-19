@@ -22,8 +22,8 @@ U1 = {1:'GND',7:'GND',14:'GND',16:'GND',18:'GND',21:'GND',23:'GND',24:'GND',
       3:'PAD_SCL',5:'MUX_A0',6:'MUX_A1',8:'USB_DP',9:'MUX_A2',10:'USB_DM',
       12:'VBUS',13:'RESET_N',15:'HALL_PWR_EN',17:'MUX_EN0',19:'MUX_EN1',
       20:'ANT_LINK',22:'ANT_LINK',26:'SYS_3V3',27:'VBAT_GATE',28:'SWDIO',
-      29:'PAD_DR',30:'SWDCLK',32:'PAD_SDA',33:'PAD_EN',34:'BTN',
-      40:'VBAT_SENSE',44:'ADC_C',46:'ADC_B',48:'ADC_A',56:'LED_DRV'}
+      50:'PAD_DR',30:'SWDCLK',32:'PAD_SDA',33:'PAD_EN',47:'BTN',
+      40:'VBAT_SENSE',42:'ADC_C',46:'ADC_B',48:'ADC_A',56:'LED_DRV'}
 for _i in range(1, 79):
     U1.setdefault(_i, None)
 
