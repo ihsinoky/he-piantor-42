@@ -6,16 +6,26 @@ Upload together: a zip of this directory's `gerber/` contents,
 **Status:** the wireless Main was **adopted as D-058** (PO decision
 2026-11-19). **No order has been placed** — ordering is a separate
 PO gate. Final board SHA-256
-`509e52a7ab1dbf0e9929eb28923a7785b6853f2fa6b6b063f8386ffc2965a46a`,
-unconnected items **0** (board electrically complete), outline
-identical to Rev.10 (the PO-authorized outline expansion was not
-needed, 0.00 mm used).
+`260726192947a0903e6e3a9268877f3b77868542bcaec29d4777eaa49f9b0689`
+— this **supersedes** the D-058-adopted board file
+(`509e52a7…`, which had copper crossing the board outline at the
+west dent; fixed by the edge-fix round, see REPORT deviation 13;
+configuration unchanged). Unconnected items **2**, both GND and
+both item-dispositioned in REPORT deviation 13 (CVCC2.2 pad;
+module GND pads U1.14+U1.16 as one pair); all signal nets are
+single-component. Outline identical to Rev.10 (the PO-authorized
+outline expansion was not needed, 0.00 mm used). The gerber zip
+in this directory was regenerated from the fixed board.
 
 **Quote obtained 2026-11-19 (quote only, cart left empty):**
 partial total **USD 76.81** (PCB $8.00 + PCBA $68.81) for the 34
 items selectable in the quote flow. Adding U1 at the pre-order
 price below gives a full-equivalent of **≈ USD 139 / 5 boards
-excl. shipping and tax**.
+excl. shipping and tax**. (This quote was run against the
+superseded board file; the edge-fix changed routing only —
+outline, parts and CPL are unchanged — so the figures are
+expected to carry, but the quote must be re-run on the fixed
+board's package at order time regardless.)
 
 ## ⚠ Order-stage DFM note — 0.05 mm module field (D-057)
 
