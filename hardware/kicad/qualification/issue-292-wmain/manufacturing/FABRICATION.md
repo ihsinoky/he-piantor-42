@@ -1,10 +1,14 @@
 # FABRICATION — DRAFT, NOT FOR ORDER
 
 Wireless Main (Issue #292), module Insight SiP ISP1807-LR (D-056).
-Status: DRAFT package for the D-057 adoption gate. NOT released for
-manufacture. The module footprint is DERIVED, not maker-verified
-(see REPORT.md deviation 1) — replace with Insight SiP official CAD
-before any order.
+Status: DRAFT package for the D-058 adoption gate. NOT released for
+manufacture. The module footprint is Insight SiP OFFICIAL CAD
+(REPORT.md deviation 1 DISCHARGED) and the module field is routed
+under the D-057 rule exception (0.05 mm class inside the
+MODULE_FIELD_FINE rule area only; REPORT.md deviation 9 RESOLVED).
+Six unconnected items remain (REPORT.md deviation 10) — the board
+is NOT electrically complete; do not order until the PO judges
+the residuals at the adoption gate.
 
 Board: 4 layers, 1.2 mm, outline identical to Main Rev.10
 (Edge.Cuts segments verified equal as undirected edges, 14/14).
