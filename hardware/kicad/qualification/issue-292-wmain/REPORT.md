@@ -32,6 +32,36 @@ hole_to_hole 0 after duplicate-via removal.
 **(Superseded by the re-route gate table above where the two
 differ; the layout-round table is retained in git history.)**
 
+## Gate table — completion round (2026-11-19; board SHA-256 `509e52a7…`)
+
+The completion round closed all 6 residual unconnected items of
+deviation 10 by routing only, inside the existing rules (D-019
+outside the field; the D-057 exception only inside
+MODULE_FIELD_FINE). **No outline expansion was used**
+(deviation 12). All gates re-run on the final file:
+
+| Gate | Result |
+|---|---|
+| ERC (native schematic, unchanged) | **0 violations** |
+| DRC unconnected | **0** — deviation 10 closed item-by-item (see its updated text). Per-net pad census from board data: GND pair tied via the new plane tap; VBUS, SYS_3V3, PAD_EN, VBAT_SENSE each a single component |
+| DRC shorting_items / tracks_crossing | **0 / 0** |
+| DRC severity-all (zone-refilled, same fill method for both boards) | **722** total on the final board vs **729** on the pre-round board by this method (the re-route round's own fill method counted 720 on the pre-round board — method difference, disclosed). Every severity class is **count-identical** to the pre-round board (clearance 502 = the inherited population; hole_clearance 42; copper_edge_clearance 114) except dangling, which improved: track_dangling 20→17, via_dangling 15→11 |
+| D-057 exception footprint | In-field minima **unchanged**: width 0.050, track–track 0.066, track–pad 0.046, via-to-copper 0.050. Exception-dependent pairs 148 → **155** (+7, all ≥ 0.050: 3× new VBAT_SENSE B tracks vs the pre-existing MUX_EN0 via at the field's east edge, 0.050–0.074; 3× new SYS_3V3 I2 tracks vs the pre-existing SWDIO via, 0.065–0.080; 1 pair re-distanced) |
+| Via-pad audit (corrected rotated-rect geometry) | Outside field min **0.100** (unchanged); inside field min **0.0536**; sub-0.125 site list **identical** to the pre-round board — no new sites from this round's copper |
+| New-copper clearance audit (this round's tracks/vias vs all other-net copper, geometric) | Outside field min **0.100** (VBAT_SENSE via (81.75, 122.85) vs SYS_3V3, I2 — at the D-019 floor); inside field min **0.050** (SYS_3V3 I2 segment vs SWDIO via — at the D-057 floor). One construction artifact found and fixed: the PAD_EN via at (84.35, 119.05) measured 0.0975 to HALL_PWR_EN copper on I2 (raster quantization); nudged to **(84.30, 119.10)**, all-layer clearance ≥ 0.130, endpoints retargeted |
+| Trackpad Ø40 keep-out | **0 pads** inside r20 at (100,118) (unchanged; no footprints added) |
+| Antenna keep-out | **0 tracks / 0 vias** in the strip x 70.3–79.9, y 128.9–137.9 — re-verified |
+| Wing-link census | J2/J3 pad-net maps **identical** to the pre-round board (14/14 each) |
+| Outline delta vs Rev.10 | **0** — Edge.Cuts edge set of the final board equals both the pre-round board and Rev.10 exactly (undirected edges). No expansion (deviation 12) |
+| Far-Wing rail budget | HALL_3V3 copper identical to the pre-round board (key-set equality) → ≤39 mV figure carries over |
+| Module GND pads | **10 of 10 plane-tied** (pads 14+16 tied by the new tap via — deviation 3 updated) |
+
+Method note (repeats deviation 11): kicad-cli 9.0.9 DRC in this
+environment does not apply the `.dru` rules, so the D-057
+exception was again verified geometrically from board data
+(`.issue292-runtime/gates.py`, `audit_completion.py`,
+`audit_new_copper.py`, `field_pairs.py`).
+
 ## USB arrangement — comparison and pick
 
 Candidates: (i) bare USB-C on a minimal north mini-tab;
@@ -180,7 +210,8 @@ no new 3D run, because every interface dimension is inherited:
    PAD_DR pin 29 → pin 50 (P1.06). All are firmware-visible
    only; no signal-content change.
 3. **Module GND pads — disposition UPDATED by the re-route
-   round (2026-11-19).** With the official footprint, pads 7
+   round (2026-11-19), and CLOSED by the completion round
+   (2026-11-19).** With the official footprint, pads 7
    and 18 are now plane-tied (tap via and the south-east F
    chain respectively), joining pads 1, 21, 23, 24, 25, 31 —
    **8 of 10 tied**. Pads 14+16 remain as a pair tied to each
@@ -190,6 +221,15 @@ no new 3D run, because every interface dimension is inherited:
    as a residual in deviation 10. The module's 10 GND pads are
    one internal common ground, so the pair is grounded through
    the module in operation.
+   **Completion round:** a plane tap via placed on the pair's
+   existing F bridge track at **(74.6, 124.65)** (0.60/0.30)
+   ties the pair directly to the I1 plane. Measured from board
+   data before placement: clearance to other-net copper
+   F 0.106 / I1 0.413 / I2 0.145 / B 0.413 mm, drill-edge to
+   nearest other via 0.712 mm — legal at D-019 everywhere (the
+   earlier "no legal tap via" conclusion had probed the NC
+   ring interior, not the bridge track itself). **10 of 10
+   GND pads are now plane-tied** (DRC unconnected 0).
 4. **J2/J3 courtyard tails vs trackpad rule area** (DRC
    items_not_allowed 2): the FH12 courtyard FFC-exit tails
    cross the Ø40 circle; bodies and pads are ≥1.35 mm clear
@@ -258,29 +298,52 @@ no new 3D run, because every interface dimension is inherited:
    footprint and the package stays DRAFT / NOT FOR ORDER.
 
 10. **Residual unconnected items — 6 (re-route round,
-    2026-11-19).** After the field routing, six items remain
-    unconnected; each was attacked with layer/waypoint/via
-    variants and, for the power nets, width relaxations down
-    to 0.15 mm (none drawn — every relaxation attempt failed
-    and was discarded, so no sub-design-width copper exists
-    for these nets): (a) **module GND pads 14+16** — tied to
-    each other; the bridge to pad 18's grounded chain is
-    crossed by the VBAT_SENSE escape stub, and no tap via is
-    legal inside the NC pad ring (deviation 3); (b) **VBUS**
-    — the module-side comp reaches a new via at (88, 119.5),
-    but the 0.30 mm band y≈110–120 toward the USB-side comp
-    is sealed on F/I2/B by the Wing-link and trackpad-west
-    routes; (c) **SYS_3V3 ×2** — the CVCC1/CVCC2 island is
-    tied together but not to the main SYS_3V3 network nor to
-    the module's SYS_3V3 escape comp (the B-end via row at
-    y≈119.3 and the field congestion block all layers at
-    0.30 mm); (d) **PAD_EN** — its escape via is trapped on
-    B and the F south corridor is sealed; (e) **VBAT_SENSE**
-    — its B-side pocket and the far I2 track are separated
-    by the sealed y≈112–119 band. These are disclosed for
-    the adoption gate: the board as it stands is NOT
-    electrically complete. Attempts log:
-    `.issue292-runtime/reroute-notes.md`.
+    2026-11-19) — ALL CLOSED by the completion round
+    (2026-11-19); DRC unconnected = 0.** Each blocker was
+    reproduced from board data (component census) before
+    routing, and each closure was proven from the final board
+    data (per-net pad census + DRC), not from router exit
+    status. As-built closures, all at the nets' design widths
+    with no frozen structure touched (module-field routing,
+    Wing census geometry and outline untouched):
+    (a) **module GND pads 14+16** — plane tap via on the
+    pair's F bridge at (74.6, 124.65); measured all-layer
+    clearances ≥ 0.106 (deviation 3 updated). The F bridge to
+    pad 18 remains blocked by the VBAT_SENSE stub, as
+    recorded; the tap makes it unnecessary.
+    (b) **VBUS** — a 0.30 mm **F.Cu bridge, 6.90 mm, 0 vias**,
+    from the module-side comp at its via (88, 119.5) north
+    through the y≈110–120 band at x≈87–88 to the USB-side
+    comp. The band was sealed at the corridors the re-route
+    round tried; an F corridor at x≈87.2–87.8 was open at
+    full width.
+    (c) **SYS_3V3 ×2** — island↔main: 0.30 mm bridge
+    13.59 mm / 3 vias (via (81.4, 113.65), (82.1, 111.7),
+    (82.1, 109.75)) from the island via (74, 116.75) to
+    COUT2.1's network; module comp↔main: 0.30 mm bridge
+    16.24 mm / 2 vias ((84.25, 121.55), (83.5, 117.65)) from
+    the module comp's B trunk end (79.65, 119.35) to the
+    (former) island's B diagonal. The net is one component
+    (all 15 pads).
+    (d) **PAD_EN** — 0.10 mm route 30.05 mm / 2 vias: B from
+    the escape via (77.4, 119.35) east, via at (84.30,
+    119.10) (nudged from the raster's (84.35, 119.05) for a
+    0.0975→≥0.130 I2 clearance fix — see the completion gate
+    table), I2/B to via (99.95, 132.5), up into the F trunk.
+    (e) **VBAT_SENSE** — 0.10 mm route 22.80 mm / 4 vias,
+    predominantly an I2 trunk: from the module comp's B end
+    (80.6, 125.45) via (81.75, 122.85), (83.0, 121.55),
+    (84.3, 112.7), (83.6, 109.0) to the far comp's I2 track
+    at (85.6, 105.5). (Item count: the re-route round's list
+    (a)–(e) carries SYS_3V3 twice, i.e. 6 DRC items.)
+    Original re-route-round text: after the field routing,
+    six items remained unconnected; each was attacked with
+    layer/waypoint/via variants and, for the power nets,
+    width relaxations down to 0.15 mm (none drawn — every
+    relaxation attempt failed and was discarded). Attempts
+    log: `.issue292-runtime/reroute-notes.md`; completion
+    routes: `.issue292-runtime/route-*.json`, method
+    `.issue292-runtime/gaproute.py`.
 11. **Verification tooling note (re-route round).** The
     D-057 `.dru` rules are NOT applied by this environment's
     kicad-cli 9.0.9 DRC (control experiments: a 0.5 mm test
@@ -294,6 +357,25 @@ no new 3D run, because every interface dimension is inherited:
     measured in-field clearance, track–pad 0.046 mm against
     no-net NC pads, sits 0.004 mm below the D-057 floor —
     disclosed here rather than hidden in the minimum table.
+    **Completion round addendum:** the same tooling caveat
+    applies; geometric verification was repeated on the final
+    board. The 0.046 mm track–pad item was **not touched** by
+    this round's routes and re-measures **0.0457 mm** in the
+    final audit — carried as-is, per the round's brief. The
+    exception footprint is now 155 pairs (completion gate
+    table).
+12. **Outline expansion — authorized (PO, 2026-11-19) but
+    NOT USED (completion round).** The PO authorized
+    expanding the outline into the available case margin for
+    items that could not close by routing, with the south
+    antenna band excluded. All 6 items of deviation 10 closed
+    by routing only, so **expansion used = 0.00 mm in every
+    direction; the final outline delta vs Rev.10 is 0**
+    (Edge.Cuts edge sets equal, verified in the completion
+    gate table). No case-side margin was consumed, so no
+    board-to-wall clearance changed and no case-record
+    measurement was needed; the trackpad Ø40 keep-out and the
+    Wing census geometry are likewise untouched.
 
 ## Draft adoption line (for PO, at the adoption gate)
 
@@ -301,19 +383,21 @@ no new 3D run, because every interface dimension is inherited:
 the wireless Main baseline: ISP1807-LR module (D-056) with the
 **official-CAD footprint** (deviation 1 DISCHARGED), Rev.10
 outline unchanged (USB via EZmate daughterboard — the stocked
-Fly can serve; outline delta 0), module field routed under
-the **D-057 rule exception** (deviation 9 RESOLVED; measured
-minima and the 114.26 mm² rule area in the gate table), power
-tree per Stage 1 (TPS63070 at 3.3 V, diode-OR USB,
-TPS22919-switched HALL_3V3 and trackpad feeds, gated battery
-divider), SWD pads (TC2030 class) for the PCA10056 Debug Out.
-CONDITIONS: (i) the 6 residual unconnected items (deviation
-10) are PO-judged — accept as-is with a documented rework/
-re-spin plan, or send back for a further routing round;
-(ii) JLCPCB confirms capability/cost for the 0.05 mm-class
-field at quotation (quote handoff flags it). The
-manufacturing package is DRAFT / NOT FOR ORDER until the PO
-adopts.
+Fly can serve; **final outline delta = 0** — the PO-authorized
+expansion of deviation 12 was not needed), module field routed
+under the **D-057 rule exception** (deviation 9 RESOLVED;
+measured minima and the 114.26 mm² rule area in the gate
+table), power tree per Stage 1 (TPS63070 at 3.3 V, diode-OR
+USB, TPS22919-switched HALL_3V3 and trackpad feeds, gated
+battery divider), SWD pads (TC2030 class) for the PCA10056
+Debug Out. **The board is electrically complete: DRC
+unconnected = 0** (completion round, 2026-11-19 — deviation
+10 CLOSED). CONDITIONS: ~~(i) the 6 residual unconnected
+items (deviation 10) are PO-judged~~ **DISCHARGED by the
+completion round**; (ii) JLCPCB confirms capability/cost for
+the 0.05 mm-class field at quotation (quote handoff flags
+it) — the sole remaining condition. The manufacturing
+package is DRAFT / NOT FOR ORDER until the PO adopts.
 **History:** the D-057 draft line and its fix-round addendum
 (footprint condition open, re-route blocked) are superseded
 by this D-058 draft; both conditions they carried are
