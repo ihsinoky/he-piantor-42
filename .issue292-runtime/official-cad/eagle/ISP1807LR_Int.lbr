@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="6.6.0">
+  <drawing>
+    <settings>
+      <setting alwaysvectorfont="no" verticaltext="up" />
+      <setting verticaltext="up" />
+    </settings>
+    <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch" />
+    <layers>
+      <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes" />
+      <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes" />
+      <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes" />
+      <layer number="18" name="Vias" color="2" fill="1" visible="no" active="yes" />
+      <layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes" />
+      <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes" />
+      <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes" />
+      <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes" />
+      <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes" />
+      <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes" />
+      <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes" />
+      <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes" />
+      <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes" />
+      <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes" />
+      <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes" />
+      <layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes" />
+      <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes" />
+      <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes" />
+      <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes" />
+      <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes" />
+      <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes" />
+      <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes" />
+      <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes" />
+      <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes" />
+      <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes" />
+      <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes" />
+      <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes" />
+      <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes" />
+      <layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes" />
+      <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes" />
+      <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes" />
+      <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes" />
+      <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes" />
+      <layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes" />
+      <layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes" />
+      <layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes" />
+      <layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes" />
+      <layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes" />
+      <layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes" />
+      <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no" />
+      <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no" />
+      <layer number="6" name="Route6" color="1" fill="8" visible="no" active="no" />
+      <layer number="7" name="Route7" color="4" fill="8" visible="no" active="no" />
+      <layer number="8" name="Route8" color="1" fill="2" visible="no" active="no" />
+      <layer number="9" name="Route9" color="4" fill="2" visible="no" active="no" />
+      <layer number="10" name="Route10" color="1" fill="7" visible="no" active="no" />
+      <layer number="11" name="Route11" color="4" fill="7" visible="no" active="no" />
+      <layer number="12" name="Route12" color="1" fill="5" visible="no" active="no" />
+      <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no" />
+      <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no" />
+      <layer number="15" name="Route15" color="4" fill="6" visible="no" active="no" />
+      <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no" />
+      <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no" />
+    </layers>
+    <library>
+      <description>Imported from Altium Designer&amp;reg; library: ISP1807LR_Int.IntLib</description>
+      <packages>
+        <package name="ISP1807-LR">
+          <smd name="47" x="1.7249978199999998" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="45" x="2.37499906" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="43" x="3.0249977599999998" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="41" x="3.6749989999999997" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="39" x="4.3249977" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="37" x="4.97499894" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="35" x="5.624997639999999" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="33" x="6.274998879999999" y="-0.95000064" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="27" x="7.050001139999999" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="29" x="7.050001139999999" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="23" x="6.27500142" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="21" x="5.62500018" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="19" x="4.9750014799999995" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="17" x="4.32500024" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="15" x="3.67500154" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="13" x="3.0250003" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="11" x="2.3750015999999996" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="9" x="1.72500036" y="-3.1499987799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="5" x="0.95000064" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="3" x="0.95000064" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="78" x="7.699999839999999" y="-4.54999852" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="77" x="7.699999839999999" y="-5.549999059999999" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="76" x="7.699999839999999" y="-6.5499996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="75" x="7.500000239999999" y="-7.500000239999999" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="74" x="6.499999699999999" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="73" x="5.49999916" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="72" x="4.4999986199999995" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="71" x="3.50000062" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="70" x="2.50000008" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="69" x="1.49999954" y="-7.7005002199999995" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="68" x="0.49999899999999997" y="-7.500000239999999" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="67" x="0.30000193999999997" y="-6.5499996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="66" x="0.30000193999999997" y="-5.5500016" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="65" x="0.30000193999999997" y="-4.55000106" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="31" x="7.500000239999999" y="-0.49999899999999997" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="25" x="7.500000239999999" y="-3.6000004199999998" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="7" x="0.49999899999999997" y="-3.6000004199999998" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="1" x="0.49999899999999997" y="-0.49999899999999997" dx="0.8000009399999999" dy="0.8000009399999999" layer="1" rot="R0.0" />
+          <smd name="48" x="1.39999974" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="46" x="2.04999844" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="44" x="2.69999968" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="42" x="3.3499983799999997" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="40" x="3.9999996199999996" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="38" x="4.64999832" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="36" x="5.29999956" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="34" x="5.949998259999999" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="32" x="6.599999499999999" y="-0.30000193999999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="30" x="7.699999839999999" y="-1.4000022799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="28" x="7.699999839999999" y="-2.0500035199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="26" x="7.699999839999999" y="-2.7000022199999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="24" x="6.599999499999999" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="22" x="5.9500008" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="20" x="5.29999956" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="18" x="4.65000086" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="16" x="3.9999996199999996" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="14" x="3.35000092" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="12" x="2.69999968" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="10" x="2.0500009799999996" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="8" x="1.39999974" y="-3.8000000199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="6" x="0.30000193999999997" y="-2.7000022199999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="4" x="0.30000193999999997" y="-2.0500035199999997" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="2" x="0.30000193999999997" y="-1.4000022799999998" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="49" x="6.274998879999999" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="50" x="5.624997639999999" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="51" x="4.97499894" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="52" x="4.3249977" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="53" x="3.6749989999999997" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="54" x="3.0249977599999998" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="55" x="2.37499906" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="56" x="1.7249978199999998" y="-1.72500036" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="64" x="1.7249978199999998" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="63" x="2.37499906" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="62" x="3.0249977599999998" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="61" x="3.6749989999999997" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="60" x="4.3249977" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="59" x="4.97499894" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="58" x="5.624997639999999" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <smd name="57" x="6.274998879999999" y="-2.3750015999999996" dx="0.39999919999999994" dy="0.39999919999999994" layer="1" rot="R0.0" />
+          <wire x1="0.0" y1="-7.999999239999999" x2="0.0" y2="0.0" layer="51" width="0.09999979999999999" />
+          <wire x1="0.0" y1="-7.999999239999999" x2="7.999999239999999" y2="-7.999999239999999" layer="51" width="0.09999979999999999" />
+          <wire x1="7.999999239999999" y1="-7.999999239999999" x2="7.999999239999999" y2="0.0" layer="51" width="0.09999979999999999" />
+          <wire x1="0.0" y1="0.0" x2="7.999999239999999" y2="0.0" layer="51" width="0.09999979999999999" />
+          <wire x1="3.50000062" y1="-5.49999916" x2="4.500001159999999" y2="-5.49999916" layer="51" width="0.09999979999999999" />
+          <wire x1="3.9999996199999996" y1="-6.000000699999999" x2="3.9999996199999996" y2="-5.00000016" layer="51" width="0.09999979999999999" />
+          <text x="0.0" y="0.0" font="vector" layer="25" size="1.2699999999999998" rot="R0.0">&gt;NAME</text>
+          <text x="0.0" y="-1.5239999999999998" font="vector" layer="27" size="1.2699999999999998" rot="R0.0">&gt;VALUE</text>
+        </package>
+      </packages>
+      <symbols>
+        <symbol name="ISP1807-LR_A">
+          <pin name="OUT_ANT" direction="io" visible="both" x="86.36" y="38.1" rot="R180" length="long" />
+          <wire x1="78.74" y1="38.1" x2="78.74" y2="38.1" layer="94" width="0.15239999999999998" />
+          <text x="30.48" y="33.019999999999996" layer="94" rot="R0" size="1.524">Outer pins</text>
+          <pin name="VBUS" direction="pwr" visible="both" x="60.96" y="91.44" rot="R270" length="long" />
+          <wire x1="60.96" y1="83.82" x2="60.96" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="D+" direction="pwr" visible="both" x="63.5" y="-7.62" rot="R90" length="long" />
+          <wire x1="63.5" y1="0.0" x2="63.5" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="D-" direction="pwr" visible="both" x="60.96" y="-7.62" rot="R90" length="long" />
+          <wire x1="60.96" y1="0.0" x2="60.96" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="VCC_NRF" direction="pwr" visible="both" x="12.7" y="-7.62" rot="R90" length="long" />
+          <wire x1="12.7" y1="0.0" x2="12.7" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P1.00" direction="io" visible="both" x="48.26" y="91.44" rot="R270" length="long" />
+          <wire x1="48.26" y1="83.82" x2="48.26" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@1" direction="pwr" visible="both" x="86.36" y="78.74" rot="R180" length="long" />
+          <wire x1="78.74" y1="78.74" x2="78.74" y2="78.74" layer="94" width="0.15239999999999998" />
+          <pin name="P1.01" direction="io" visible="both" x="45.72" y="91.44" rot="R270" length="long" />
+          <wire x1="45.72" y1="83.82" x2="45.72" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.04" direction="io" visible="both" x="38.1" y="91.44" rot="R270" length="long" />
+          <wire x1="38.1" y1="83.82" x2="38.1" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.07" direction="io" visible="both" x="30.48" y="91.44" rot="R270" length="long" />
+          <wire x1="30.48" y1="83.82" x2="30.48" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.05" direction="io" visible="both" x="35.56" y="91.44" rot="R270" length="long" />
+          <wire x1="35.56" y1="83.82" x2="35.56" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.02" direction="io" visible="both" x="43.18" y="91.44" rot="R270" length="long" />
+          <wire x1="43.18" y1="83.82" x2="43.18" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.08" direction="io" visible="both" x="27.939999999999998" y="91.44" rot="R270" length="long" />
+          <wire x1="27.939999999999998" y1="83.82" x2="27.939999999999998" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.03" direction="io" visible="both" x="40.64" y="91.44" rot="R270" length="long" />
+          <wire x1="40.64" y1="83.82" x2="40.64" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.06" direction="io" visible="both" x="33.019999999999996" y="91.44" rot="R270" length="long" />
+          <wire x1="33.019999999999996" y1="83.82" x2="33.019999999999996" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.09" direction="io" visible="both" x="25.4" y="91.44" rot="R270" length="long" />
+          <wire x1="25.4" y1="83.82" x2="25.4" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@2" direction="pwr" visible="both" x="86.36" y="5.08" rot="R180" length="long" />
+          <wire x1="78.74" y1="5.08" x2="78.74" y2="5.08" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@3" direction="pwr" visible="both" x="86.36" y="7.62" rot="R180" length="long" />
+          <wire x1="78.74" y1="7.62" x2="78.74" y2="7.62" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@4" direction="pwr" visible="both" x="86.36" y="10.16" rot="R180" length="long" />
+          <wire x1="78.74" y1="10.16" x2="78.74" y2="10.16" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@5" direction="pwr" visible="both" x="86.36" y="12.7" rot="R180" length="long" />
+          <wire x1="78.74" y1="12.7" x2="78.74" y2="12.7" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@6" direction="pwr" visible="both" x="-7.62" y="30.48" rot="R0" length="long" />
+          <wire x1="0.0" y1="30.48" x2="0.0" y2="30.48" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@7" direction="pwr" visible="both" x="-7.62" y="33.019999999999996" rot="R0" length="long" />
+          <wire x1="0.0" y1="33.019999999999996" x2="0.0" y2="33.019999999999996" layer="94" width="0.15239999999999998" />
+          <pin name="P1.12" direction="io" visible="both" x="17.78" y="91.44" rot="R270" length="long" />
+          <wire x1="17.78" y1="83.82" x2="17.78" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.15" direction="io" visible="both" x="10.16" y="91.44" rot="R270" length="long" />
+          <wire x1="10.16" y1="83.82" x2="10.16" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.10" direction="io" visible="both" x="22.86" y="91.44" rot="R270" length="long" />
+          <wire x1="22.86" y1="83.82" x2="22.86" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.14" direction="io" visible="both" x="12.7" y="91.44" rot="R270" length="long" />
+          <wire x1="12.7" y1="83.82" x2="12.7" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.11" direction="io" visible="both" x="20.32" y="91.44" rot="R270" length="long" />
+          <wire x1="20.32" y1="83.82" x2="20.32" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="P1.13" direction="io" visible="both" x="15.24" y="91.44" rot="R270" length="long" />
+          <wire x1="15.24" y1="83.82" x2="15.24" y2="83.82" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@8" direction="pwr" visible="both" x="-7.62" y="35.56" rot="R0" length="long" />
+          <wire x1="0.0" y1="35.56" x2="0.0" y2="35.56" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@9" direction="pwr" visible="both" x="86.36" y="81.28" rot="R180" length="long" />
+          <wire x1="78.74" y1="81.28" x2="78.74" y2="81.28" layer="94" width="0.15239999999999998" />
+          <pin name="VSS@10" direction="pwr" visible="both" x="-7.62" y="38.1" rot="R0" length="long" />
+          <wire x1="0.0" y1="38.1" x2="0.0" y2="38.1" layer="94" width="0.15239999999999998" />
+          <pin name="P0.19" direction="io" visible="both" x="45.72" y="-7.62" rot="R90" length="long" />
+          <wire x1="45.72" y1="0.0" x2="45.72" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.21" direction="io" visible="both" x="50.8" y="-7.62" rot="R90" length="long" />
+          <wire x1="50.8" y1="0.0" x2="50.8" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.20" direction="io" visible="both" x="48.26" y="-7.62" rot="R90" length="long" />
+          <wire x1="48.26" y1="0.0" x2="48.26" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.18/NRESET" direction="io" visible="both" x="43.18" y="-7.62" rot="R90" length="long" />
+          <wire x1="43.18" y1="0.0" x2="43.18" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.17" direction="io" visible="both" x="40.64" y="-7.62" rot="R90" length="long" />
+          <wire x1="40.64" y1="0.0" x2="40.64" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.16" direction="io" visible="both" x="38.1" y="-7.62" rot="R90" length="long" />
+          <wire x1="38.1" y1="0.0" x2="38.1" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.15" direction="io" visible="both" x="35.56" y="-7.62" rot="R90" length="long" />
+          <wire x1="35.56" y1="0.0" x2="35.56" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.24" direction="io" visible="both" x="86.36" y="30.48" rot="R180" length="long" />
+          <wire x1="78.74" y1="30.48" x2="78.74" y2="30.48" layer="94" width="0.15239999999999998" />
+          <pin name="P0.23" direction="io" visible="both" x="86.36" y="27.939999999999998" rot="R180" length="long" />
+          <wire x1="78.74" y1="27.939999999999998" x2="78.74" y2="27.939999999999998" layer="94" width="0.15239999999999998" />
+          <pin name="P0.22" direction="io" visible="both" x="86.36" y="25.4" rot="R180" length="long" />
+          <wire x1="78.74" y1="25.4" x2="78.74" y2="25.4" layer="94" width="0.15239999999999998" />
+          <pin name="SWDIO" direction="io" visible="both" x="86.36" y="22.86" rot="R180" length="long" />
+          <wire x1="78.74" y1="22.86" x2="78.74" y2="22.86" layer="94" width="0.15239999999999998" />
+          <pin name="SWDCLK" direction="in" visible="both" x="86.36" y="20.32" rot="R180" length="long" />
+          <wire x1="78.74" y1="20.32" x2="78.74" y2="20.32" layer="94" width="0.15239999999999998" />
+          <pin name="P0.31/AIN7" direction="io" visible="both" x="86.36" y="68.58" rot="R180" length="long" />
+          <wire x1="78.74" y1="68.58" x2="78.74" y2="68.58" layer="94" width="0.15239999999999998" />
+          <pin name="P0.30/AIN6" direction="io" visible="both" x="86.36" y="66.03999999999999" rot="R180" length="long" />
+          <wire x1="78.74" y1="66.03999999999999" x2="78.74" y2="66.03999999999999" layer="94" width="0.15239999999999998" />
+          <pin name="P0.29/AIN5" direction="io" visible="both" x="86.36" y="63.5" rot="R180" length="long" />
+          <wire x1="78.74" y1="63.5" x2="78.74" y2="63.5" layer="94" width="0.15239999999999998" />
+          <pin name="P0.28/AIN4" direction="io" visible="both" x="86.36" y="60.96" rot="R180" length="long" />
+          <wire x1="78.74" y1="60.96" x2="78.74" y2="60.96" layer="94" width="0.15239999999999998" />
+          <pin name="P0.27" direction="io" visible="both" x="86.36" y="58.42" rot="R180" length="long" />
+          <wire x1="78.74" y1="58.42" x2="78.74" y2="58.42" layer="94" width="0.15239999999999998" />
+          <pin name="P0.14" direction="io" visible="both" x="33.019999999999996" y="-7.62" rot="R90" length="long" />
+          <wire x1="33.019999999999996" y1="0.0" x2="33.019999999999996" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.13" direction="io" visible="both" x="30.48" y="-7.62" rot="R90" length="long" />
+          <wire x1="30.48" y1="0.0" x2="30.48" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.12" direction="io" visible="both" x="27.939999999999998" y="-7.62" rot="R90" length="long" />
+          <wire x1="27.939999999999998" y1="0.0" x2="27.939999999999998" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.11" direction="io" visible="both" x="25.4" y="-7.62" rot="R90" length="long" />
+          <wire x1="25.4" y1="0.0" x2="25.4" y2="0.0" layer="94" width="0.15239999999999998" />
+          <pin name="P0.09/NFC1" direction="io" visible="both" x="-7.62" y="45.72" rot="R0" length="long" />
+          <wire x1="0.0" y1="45.72" x2="0.0" y2="45.72" layer="94" width="0.15239999999999998" />
+          <pin name="P0.08" direction="io" visible="both" x="-7.62" y="48.26" rot="R0" length="long" />
+          <wire x1="0.0" y1="48.26" x2="0.0" y2="48.26" layer="94" width="0.15239999999999998" />
+          <pin name="P0.07" direction="io" visible="both" x="-7.62" y="50.8" rot="R0" length="long" />
+          <wire x1="0.0" y1="50.8" x2="0.0" y2="50.8" layer="94" width="0.15239999999999998" />
+          <pin name="P0.06" direction="io" visible="both" x="-7.62" y="53.339999999999996" rot="R0" length="long" />
+          <wire x1="0.0" y1="53.339999999999996" x2="0.0" y2="53.339999999999996" layer="94" width="0.15239999999999998" />
+          <pin name="P0.05/AIN3" direction="io" visible="both" x="-7.62" y="55.879999999999995" rot="R0" length="long" />
+          <wire x1="0.0" y1="55.879999999999995" x2="0.0" y2="55.879999999999995" layer="94" width="0.15239999999999998" />
+          <pin name="P0.04/AIN2" direction="io" visible="both" x="-7.62" y="58.42" rot="R0" length="long" />
+          <wire x1="0.0" y1="58.42" x2="0.0" y2="58.42" layer="94" width="0.15239999999999998" />
+          <pin name="P0.03/AIN1" direction="io" visible="both" x="-7.62" y="60.96" rot="R0" length="long" />
+          <wire x1="0.0" y1="60.96" x2="0.0" y2="60.96" layer="94" width="0.15239999999999998" />
+          <pin name="P0.02/AIN0" direction="io" visible="both" x="-7.62" y="63.5" rot="R0" length="long" />
+          <wire x1="0.0" y1="63.5" x2="0.0" y2="63.5" layer="94" width="0.15239999999999998" />
+          <pin name="P0.26" direction="io" visible="both" x="86.36" y="55.879999999999995" rot="R180" length="long" />
+          <wire x1="78.74" y1="55.879999999999995" x2="78.74" y2="55.879999999999995" layer="94" width="0.15239999999999998" />
+          <pin name="P0.25" direction="io" visible="both" x="86.36" y="53.339999999999996" rot="R180" length="long" />
+          <wire x1="78.74" y1="53.339999999999996" x2="78.74" y2="53.339999999999996" layer="94" width="0.15239999999999998" />
+          <pin name="OUT_MOD" direction="io" visible="both" x="86.36" y="35.56" rot="R180" length="long" />
+          <wire x1="78.74" y1="35.56" x2="78.74" y2="35.56" layer="94" width="0.15239999999999998" />
+          <pin name="P0.10/NFC2" direction="io" visible="both" x="-7.62" y="43.18" rot="R0" length="long" />
+          <wire x1="0.0" y1="43.18" x2="0.0" y2="43.18" layer="94" width="0.15239999999999998" />
+          <wire x1="0.0" y1="0.0" x2="78.74" y2="0.0" layer="94" width="0.15239999999999998" />
+          <wire x1="0.0" y1="0.0" x2="0.0" y2="83.82" layer="94" width="0.15239999999999998" />
+          <wire x1="78.74" y1="83.82" x2="78.74" y2="0.0" layer="94" width="0.15239999999999998" />
+          <wire x1="78.74" y1="83.82" x2="0.0" y2="83.82" layer="94" width="0.15239999999999998" />
+          <text x="68.58" y="86.36" layer="96" rot="R0" size="1.524">&gt;REF</text>
+          <text x="7.62" y="2.54" layer="95" rot="R0" size="1.27">&gt;NAME</text>
+        </symbol>
+        <symbol name="ISP1807-LR_B">
+          <pin name="NC@1" direction="pas" visible="both" x="40.64" y="7.62" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="7.62" x2="33.019999999999996" y2="7.62" layer="94" width="0.15239999999999998" />
+          <pin name="NC@2" direction="pas" visible="both" x="0.0" y="7.62" rot="R0" length="long" />
+          <wire x1="7.62" y1="7.62" x2="7.62" y2="7.62" layer="94" width="0.15239999999999998" />
+          <pin name="NC@3" direction="pas" visible="both" x="40.64" y="22.86" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="22.86" x2="33.019999999999996" y2="22.86" layer="94" width="0.15239999999999998" />
+          <pin name="NC@4" direction="pas" visible="both" x="40.64" y="10.16" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="10.16" x2="33.019999999999996" y2="10.16" layer="94" width="0.15239999999999998" />
+          <pin name="NC@5" direction="pas" visible="both" x="40.64" y="12.7" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="12.7" x2="33.019999999999996" y2="12.7" layer="94" width="0.15239999999999998" />
+          <pin name="NC@6" direction="pas" visible="both" x="40.64" y="15.24" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="15.24" x2="33.019999999999996" y2="15.24" layer="94" width="0.15239999999999998" />
+          <pin name="NC@7" direction="pas" visible="both" x="40.64" y="17.78" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="17.78" x2="33.019999999999996" y2="17.78" layer="94" width="0.15239999999999998" />
+          <pin name="NC@8" direction="pas" visible="both" x="40.64" y="20.32" rot="R180" length="long" />
+          <wire x1="33.019999999999996" y1="20.32" x2="33.019999999999996" y2="20.32" layer="94" width="0.15239999999999998" />
+          <pin name="NC@9" direction="pas" visible="both" x="0.0" y="10.16" rot="R0" length="long" />
+          <wire x1="7.62" y1="10.16" x2="7.62" y2="10.16" layer="94" width="0.15239999999999998" />
+          <pin name="NC@10" direction="pas" visible="both" x="0.0" y="12.7" rot="R0" length="long" />
+          <wire x1="7.62" y1="12.7" x2="7.62" y2="12.7" layer="94" width="0.15239999999999998" />
+          <pin name="NC@11" direction="pas" visible="both" x="0.0" y="15.24" rot="R0" length="long" />
+          <wire x1="7.62" y1="15.24" x2="7.62" y2="15.24" layer="94" width="0.15239999999999998" />
+          <pin name="NC@12" direction="pas" visible="both" x="0.0" y="17.78" rot="R0" length="long" />
+          <wire x1="7.62" y1="17.78" x2="7.62" y2="17.78" layer="94" width="0.15239999999999998" />
+          <pin name="NC@13" direction="pas" visible="both" x="0.0" y="20.32" rot="R0" length="long" />
+          <wire x1="7.62" y1="20.32" x2="7.62" y2="20.32" layer="94" width="0.15239999999999998" />
+          <pin name="NC@14" direction="pas" visible="both" x="0.0" y="22.86" rot="R0" length="long" />
+          <wire x1="7.62" y1="22.86" x2="7.62" y2="22.86" layer="94" width="0.15239999999999998" />
+          <wire x1="7.62" y1="0.0" x2="33.019999999999996" y2="0.0" layer="94" width="0.15239999999999998" />
+          <wire x1="7.62" y1="0.0" x2="7.62" y2="27.939999999999998" layer="94" width="0.15239999999999998" />
+          <wire x1="33.019999999999996" y1="27.939999999999998" x2="33.019999999999996" y2="0.0" layer="94" width="0.15239999999999998" />
+          <wire x1="33.019999999999996" y1="27.939999999999998" x2="7.62" y2="27.939999999999998" layer="94" width="0.15239999999999998" />
+          <text x="68.58" y="86.36" layer="96" rot="R0" size="1.524">&gt;REF</text>
+          <text x="7.62" y="2.54" layer="95" rot="R0" size="1.27">&gt;NAME</text>
+        </symbol>
+      </symbols>
+      <devicesets>
+        <deviceset name="ISP1807-LR" prefix="U">
+          <description>ISP Smart Bluetooth Module</description>
+          <gates>
+            <gate name="A" symbol="ISP1807-LR_A" x="0.0" y="0.0" />
+            <gate name="B" symbol="ISP1807-LR_B" x="96.52" y="0.0" />
+          </gates>
+          <devices>
+            <device name="ISP1807-LR_ISP1807-LR" package="ISP1807-LR">
+              <connects>
+                <connect gate="A" pin="OUT_ANT" pad="20" />
+                <connect gate="A" pin="VBUS" pad="12" />
+                <connect gate="A" pin="D+" pad="8" />
+                <connect gate="A" pin="D-" pad="10" />
+                <connect gate="A" pin="VCC_NRF" pad="26" />
+                <connect gate="A" pin="P1.00" pad="57" />
+                <connect gate="A" pin="VSS@1" pad="23" />
+                <connect gate="A" pin="P1.01" pad="64" />
+                <connect gate="A" pin="P1.04" pad="63" />
+                <connect gate="A" pin="P1.07" pad="62" />
+                <connect gate="A" pin="P1.05" pad="54" />
+                <connect gate="A" pin="P1.02" pad="49" />
+                <connect gate="A" pin="P1.08" pad="55" />
+                <connect gate="A" pin="P1.03" pad="58" />
+                <connect gate="A" pin="P1.06" pad="50" />
+                <connect gate="A" pin="P1.09" pad="56" />
+                <connect gate="A" pin="VSS@2" pad="14" />
+                <connect gate="A" pin="VSS@3" pad="16" />
+                <connect gate="A" pin="VSS@4" pad="18" />
+                <connect gate="A" pin="VSS@5" pad="21" />
+                <connect gate="A" pin="VSS@6" pad="31" />
+                <connect gate="A" pin="VSS@7" pad="25" />
+                <connect gate="A" pin="P1.12" pad="59" />
+                <connect gate="A" pin="P1.15" pad="51" />
+                <connect gate="A" pin="P1.10" pad="60" />
+                <connect gate="A" pin="P1.14" pad="52" />
+                <connect gate="A" pin="P1.11" pad="61" />
+                <connect gate="A" pin="P1.13" pad="53" />
+                <connect gate="A" pin="VSS@8" pad="7" />
+                <connect gate="A" pin="VSS@9" pad="24" />
+                <connect gate="A" pin="VSS@10" pad="1" />
+                <connect gate="A" pin="P0.19" pad="45" />
+                <connect gate="A" pin="P0.21" pad="11" />
+                <connect gate="A" pin="P0.20" pad="15" />
+                <connect gate="A" pin="P0.18/NRESET" pad="13" />
+                <connect gate="A" pin="P0.17" pad="27" />
+                <connect gate="A" pin="P0.16" pad="9" />
+                <connect gate="A" pin="P0.15" pad="37" />
+                <connect gate="A" pin="P0.24" pad="19" />
+                <connect gate="A" pin="P0.23" pad="47" />
+                <connect gate="A" pin="P0.22" pad="17" />
+                <connect gate="A" pin="SWDIO" pad="28" />
+                <connect gate="A" pin="SWDCLK" pad="30" />
+                <connect gate="A" pin="P0.31/AIN7" pad="42" />
+                <connect gate="A" pin="P0.30/AIN6" pad="44" />
+                <connect gate="A" pin="P0.29/AIN5" pad="46" />
+                <connect gate="A" pin="P0.28/AIN4" pad="48" />
+                <connect gate="A" pin="P0.27" pad="39" />
+                <connect gate="A" pin="P0.14" pad="5" />
+                <connect gate="A" pin="P0.13" pad="29" />
+                <connect gate="A" pin="P0.12" pad="3" />
+                <connect gate="A" pin="P0.11" pad="43" />
+                <connect gate="A" pin="P0.09/NFC1" pad="2" />
+                <connect gate="A" pin="P0.08" pad="32" />
+                <connect gate="A" pin="P0.07" pad="33" />
+                <connect gate="A" pin="P0.06" pad="34" />
+                <connect gate="A" pin="P0.05/AIN3" pad="36" />
+                <connect gate="A" pin="P0.04/AIN2" pad="35" />
+                <connect gate="A" pin="P0.03/AIN1" pad="38" />
+                <connect gate="A" pin="P0.02/AIN0" pad="40" />
+                <connect gate="A" pin="P0.26" pad="6" />
+                <connect gate="A" pin="P0.25" pad="41" />
+                <connect gate="A" pin="OUT_MOD" pad="22" />
+                <connect gate="A" pin="P0.10/NFC2" pad="4" />
+                <connect gate="B" pin="NC@1" pad="78" />
+                <connect gate="B" pin="NC@2" pad="71" />
+                <connect gate="B" pin="NC@3" pad="72" />
+                <connect gate="B" pin="NC@4" pad="77" />
+                <connect gate="B" pin="NC@5" pad="76" />
+                <connect gate="B" pin="NC@6" pad="75" />
+                <connect gate="B" pin="NC@7" pad="74" />
+                <connect gate="B" pin="NC@8" pad="73" />
+                <connect gate="B" pin="NC@9" pad="70" />
+                <connect gate="B" pin="NC@10" pad="69" />
+                <connect gate="B" pin="NC@11" pad="68" />
+                <connect gate="B" pin="NC@12" pad="67" />
+                <connect gate="B" pin="NC@13" pad="66" />
+                <connect gate="B" pin="NC@14" pad="65" />
+              </connects>
+              <technologies>
+                <technology name="">
+                  <attribute name="REF" value="ISP1807-LR" />
+                  <attribute name="ISP_PART" value="ISP1807" />
+                  <attribute name="BOI-METRIC" value="QFN 8 x 8" />
+                  <attribute name="FAB" value="Insight SiP" />
+                  <attribute name="BOI" value="QFN 8 x 8" />
+                  <attribute name="DESIG" value="BLE Module" />
+                </technology>
+              </technologies>
+            </device>
+          </devices>
+        </deviceset>
+      </devicesets>
+    </library>
+  </drawing>
+</eagle>
