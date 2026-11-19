@@ -354,3 +354,28 @@ Gates: ERC 0; DRC unconnected 0, shorts 0; severity-all 722 vs
 field minima unchanged (trk-pad 0.0457 untouched); via-pad no
 new sub-0.125 sites; outline delta 0; package + 3 PO drawings
 regenerated.
+
+ORDER-PREP ROUND PLAN (2026-11-19, after D-058 adoption):
+Package hygiene ONLY. No board geometry changes, no order.
+Board SHA must remain 509e52a7... at the end.
+- P0 plan appended + checkpoint commit.
+- P1 Read both BOMs + quote-handoff.md; list every line with
+  empty LCSC code. Measure SW1 and JBATT land patterns from
+  board data (pitch, pad size) before choosing parts.
+- P2 Assign verified codes: RFB1 C23184, RFB2 C4210 (given,
+  quote-verified). Generics: 1uF 0603 x5, 22uF 0805 x4,
+  10nF 0603, PMEG4020 x2 (ER question, task 3), LED green 0603,
+  2N7002, 6.8k x3, 4.7k x2, 1M x2, TACT for SW1 (or hand-fit
+  disposition). Each verified against listing/datasheet:
+  value, package, rating; stock observed + date-stamped.
+- P3 JBATT: measure GH land pattern; if a stocked JST GH 2-pin
+  top-entry part fits, assign code + fix BOM comment. Else
+  hand-fit disposition with evidence. NO footprint change; if
+  the right connector needs a different footprint, STOP and
+  report as a design question.
+- P4 Update both BOMs identically (line-for-line code agreement
+  check by script), update quote-handoff.md (final BOM state,
+  module sourcing: JLCPCB Pre-order C5264268 $12.2283 ea obs.
+  2026-11-19 vs DigiKey JP price/stock; DFM order-stage note).
+- P5 Re-zip gerber package (gerbers byte-identical; board
+  unchanged), verify board SHA, final commit + report.
