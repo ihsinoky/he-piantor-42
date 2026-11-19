@@ -83,3 +83,81 @@ Need: 15 GPIO / 4 AIN + SWD + RESET.
 | BT840 | **PASS** | PCB trace antenna at module edge, Fanstel layout guide keep-out; BT840E u.FL variant certified with ANT060 |
 
 **Survivors: ISP1807-LR, MDBT50Q-1MV2, BL654, BT840.**
+
+## Scored comparison (survivors only)
+
+| axis | ISP1807-LR | MDBT50Q-1MV2 | BL654 (451-00001/-02) | BT840 |
+|---|---|---|---|---|
+| Size (mm) | **8.0 x 8.0 x 1.0** | 15.5 x 10.5 x 2.05 | 10.0 wide x 2.2; length 15.0 per Mouser listing vs 22.0 in Ezurio mechanical references — **conflict, verify before any tab sizing** | 14 x 16 x 1.9 |
+| North tab implied | **NONE** — fits the Stage 1 SW pocket (9.6 x 12.9 site, >=0.5 mm margins), antenna edge on the south outline, keep-out = the pocket's already-reserved south strip | tab stays (study §4.3, ~+420 mm2): 15.5 mm exceeds every pocket span (max 13.1 mm) | tab stays under either length figure | tab stays (16 mm) |
+| DCDC provision | **integrated** (converter + loading circuit inside; datasheet publishes DCDC current figures) → the Issue #284 runtime model's DCDC-class radio terms stand, no revisit | REG1 inductor inside the module; REG0 external-optional, unused in normal-voltage mode → model stands | integrated ("no external components required", Ezurio datasheet) → model stands | inductor + 32 MHz inside (Fanstel reference design) → model stands |
+| 32.768 kHz | **integrated crystal** — zero externals | external crystal + 2 caps required (Approval Sheet §8: X2/C12/C13; remove only if RC clock accepted) | not integrated — optional external crystal or RC | not integrated — optional external crystal or RC |
+| USB on module | yes (plus realised) | yes | yes (451-00001) | yes |
+| Unit price @ prototype qty | $13.65 @1 DigiKey | **$6.15** @1 DigiKey Marketplace (+$25 flat shipping) / $8.95 SparkFun | $13.14 @1 Mouser (-0001), $14.55 (-0002) | $6.88 maker-direct; franchised extracts ~$14.99 Mouser / JPY 2,128 DigiKey JP |
+| LCSC / JLCPCB | LCSC-listed (**C5264268**); JLCPCB stock unverified → verify at quote, else hand-fit | LCSC C5118826, stock **0** → hand-fit | not LCSC-listed → hand-fit | not LCSC-listed → hand-fit |
+| Assembly risk (hand-built prototype) | **highest**: 8x8 LGA, bottom pads only, no castellation; joints not visually inspectable — mitigated by SWD/continuity bring-up and (if LCSC stock verifies) JLCPCB placement | **lowest**: castellated edge pads, iron-friendly, inspectable | LGA; larger body eases handling vs ISP1807 | castellated edge pads, iron-friendly |
+
+## Ranking (PO priorities: cost, low rework, freedom)
+
+1. **ISP1807-LR — RECOMMENDED.** The only survivor that deletes
+   the north tab: the Main outline returns to Rev.10 exactly and
+   the case north edge inherits the wired design's shell work
+   unchanged (the dominant rework term, ahead of a ~$7/unit price
+   delta at prototype quantity). Full integration (DCDC + both
+   crystals + RF matching + decoupling) removes every external-
+   parts correction class seen this project (cf. the ED2840AA2
+   gate corrections). Deepest *numbered* franchised stock
+   (DigiKey 13,850) and the TELEC number is in hand (020-200037).
+   Its one real cost is LGA assembly risk, carried as a named
+   risk with the mitigations above.
+2. **MDBT50Q-1MV2 — named fallback.** Cheapest, easiest to hand-
+   fit, full pin table already extracted, Zephyr board target
+   exists. Costs the tab (~+420 mm2) and an external LF crystal;
+   its channel is thin (35 pcs, single deep source).
+3. BL654 — best antenna freedom (MIC-listed FlexPIFA can live in
+   the south PETG zone) and deep stock, but LGA, top price class,
+   an unresolved 15 vs 22 mm length conflict, and the tab stays.
+4. BT840 — TELEC number in hand and cheap direct, but the weakest
+   availability evidence (no numeric franchised counts) and the
+   tab stays.
+
+## North tab consequence of the recommendation
+
+**Under ISP1807-LR the north tab is GONE** (delta vs the D-055
+accepted addition: −~420 mm2, back to the exact Rev.10 outline;
+symmetric holes unchanged, as in every scenario). The module sits
+in the Stage 1 SW pocket with its antenna edge on the south
+outline and the §4.3 keep-out in the reserved south strip — D-053's
+south-zone intent is met by placement, not by an outline change.
+USB placement is thereby decoupled from the module: it reverts to
+the Stage 1 §3 question (J4-seat EZmate carrier vs <=10x12 mm
+mini-tab), now with the PO's daughterboard candidate in the set —
+that comparison runs when Stage 2 resumes, and neither outcome
+reopens the module choice.
+
+## Draft decision text (for PO adoption as D-056)
+
+> **D-056: Wireless Main module = Insight SiP ISP1807-LR (Issue
+> #292 Stage 2a).** Supersedes D-055's module choice (the north
+> tab acceptance in D-055 becomes moot). Basis: TELEC 020-200037
+> in the maker's datasheet; stock observed 2026-11-19 at DigiKey
+> (13,850) and Mouser; 8x8x1.0 mm fits the Rev.10 outline's SW
+> pocket, so the Main outline and symmetric holes stay exactly as
+> Rev.10; DCDC converter and both crystals are integrated, so the
+> Issue #284 runtime model stands without revisit. Named
+> fallback: Raytac MDBT50Q-1MV2 (D-055 basis, tab returns if
+> invoked). Named risk: LGA hand-assembly — mitigations are
+> JLCPCB placement if LCSC C5264268 stock verifies at quote time,
+> otherwise hot-air hand-fit with SWD bring-up as the joint
+> verification. USB placement (bare mini-tab vs EZmate
+> daughterboard) is decided separately in Stage 2.
+
+## Verify-at-layout list (not gates)
+
+- ISP1807 land pattern + keep-out dimensions from the current
+  datasheet revision (R19) §4.3 drawing; antenna edge orientation.
+- ISP1807 SWD pad identities in its pin table; VDD/VDDH-equivalent
+  power pin handling per its reference circuit.
+- LCSC C5264268 stock at quote time (PCBA vs hand-fit branch).
+- BL654 length conflict (15 vs 22 mm) — only if the ranking is
+  reopened.
