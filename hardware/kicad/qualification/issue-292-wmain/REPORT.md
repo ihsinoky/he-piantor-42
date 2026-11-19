@@ -62,6 +62,40 @@ exception was again verified geometrically from board data
 (`.issue292-runtime/gates.py`, `audit_completion.py`,
 `audit_new_copper.py`, `field_pairs.py`).
 
+## Gate table — edge-fix round (2026-11-19; board SHA-256 `26072619…`, supersedes `509e52a7…`)
+
+A PO review of the final 2D drawings found copper sticking out
+beyond the board outline. The adopted board file was defective
+(deviation 13): exact-geometry enumeration found **72 unique
+copper items crossing the Edge.Cuts outline** (87 item-layer
+instances) plus 59 unique items closer than the 0.5 mm edge
+clearance — all introduced by the wireless design (Rev.10's
+baseline has exactly 2 CLOSE items, neither present here). The
+completion round's DRC report had listed the 114
+copper_edge_clearance violations inside its 722 "dispositioned"
+total without item-level review; this round enumerated,
+fixed, and re-gated item by item. **Fix method: re-routing
+only** — the west-dent outline fill was evaluated against the
+case record and rejected with evidence (deviation 13); the
+outline is unchanged.
+
+| Gate | Result |
+|---|---|
+| **Copper containment (NEW gate, `checks/copper_containment.py`)** | Adopted board: **FAIL** (87 crossing instances). Fixed board: **PASS — 0 crossings, 0 touchings**, 35 CLOSE instances = 17 unique items, each dispositioned in deviation 13 |
+| ERC (native schematic, unchanged) | **0 violations** |
+| DRC unconnected | **2** — both GND, both item-dispositioned in deviation 13 (CVCC2.2 pad; module GND pads U1.14+U1.16 as one pair). This supersedes the completion round's "10 of 10 / unconnected = 0": its plane tap for pads 14+16 sat in copper the edge re-route had to displace, and no legal replacement site exists (attempts enumerated in deviation 13). All signal nets — every module signal, both Wing links, USB, SWD, trackpad — are single-component |
+| DRC shorting_items | **0** (one short introduced mid-round by a re-stitch via — PAD_SDA via vs JPAD.5 pad — was found by DRC and fixed by relocating the via to (111.58, 95.75)) |
+| DRC severity-all (zone-refilled) | **704** total on the final tree board (clearance 502 = the inherited population of the #263 netclass defect; copper_edge_clearance **17** = exactly the 17 dispositioned CLOSE items, count-matched against the containment enumeration) |
+| Antenna keep-out | **0 tracks / 0 vias** in the strip — re-verified after fixing a PAD_SCL inner-layer detour through the strip that the re-route had introduced (deviation 13) |
+| Trackpad Ø40 keep-out | **0 pads** inside r20 at (100,118) |
+| Wing-link census | J2/J3 **14/14 each**, identical to the completion round (pin 8 = MUX_EN0/EN1, pin 14 = HALL_3V3, MP no-net) |
+| Via-pad audit (true pad shapes) | In-field min **0.0537** (MUX_A0 via ↔ U1.65 NC pad — the completion round's site, unchanged); no new sub-0.10 sites outside the D-057 field and the JPAD fanout rect (worst there 0.0627, this round's relocated PAD_SDA via ↔ JPAD.3 pad, inside the 0.05-class fanout rect) |
+| In-field minima (re-measured per layer) | Track width 0.050; all track–track and via-to-copper pairs ≥ 0.050 **except two item-dispositioned pairs** (deviation 13): MUX_A0 F track ↔ U1.7 GND pad **0.0413** (track–pad) and GND stitch via (70.85, 121.35) ↔ MUX_A0 I2 track **0.0424**. ADC_B V2 drill-to-copper **0.2000** vs the 0.25 netclass default — item-dispositioned (the adopted board violates that figure 52× board-wide) |
+| Outline delta vs Rev.10 | **0** — vertex sets equal; max vertex deviation 0.00002 mm (file serialization rounding). Dent fill **rejected**: fitted-frame case seam west of the dent measures 0.559 mm (rising to ~2.0 mm), the USB corridor needed the edge ≥ 2.41 mm further west — a fill is not case-compatible (deviation 13) |
+| Module GND pads | **8 of 10 plane-tied** (as the re-route round; pads 14+16 dispositioned in deviation 13). New stitches this round: via-in-pad at U1.31 (78.70, 121.50) and U1.7 (71.55, 124.55); Q1.2 and JPAD.2 gained plane vias; JPAD.6's plane via retained |
+| Manufacturing package | Regenerated from the final file (BOM/CPL 55 rows, consolidated 32; gerbers + drill re-exported). Still **DRAFT / NOT FOR ORDER** |
+| PO drawings | Regenerated (`wmain-2d-topview.png`, `wmain-2d-zoom-module.png`, `wmain-2d-zoom-service.png`); annotation overlays (trackpad circle, south band, antenna rectangle) are now **clipped to the board outline** |
+
 ## USB arrangement — comparison and pick
 
 Candidates: (i) bare USB-C on a minimal north mini-tab;
@@ -376,6 +410,138 @@ no new 3D run, because every interface dimension is inherited:
     board-to-wall clearance changed and no case-record
     measurement was needed; the trackpad Ø40 keep-out and the
     Wing census geometry are likewise untouched.
+13. **Edge defect — copper outside the board outline in the
+    D-058-adopted board file (SHA-256 `509e52a7…`), fixed by
+    re-routing; D-058 AMENDED: configuration unchanged, board
+    file superseded by SHA-256 `26072619…`.** Found by PO
+    review of the final 2D drawings ("copper is sticking out
+    beyond the outline — is this really final?"). Exact-geometry
+    enumeration (KiCad shapes + shapely, cross-validated against
+    DRC: all 114 DRC copper items contained in the enumeration,
+    0 missed) found **131 unique flagged items: 72 CROSSING,
+    59 CLOSE (< 0.5 mm), 0 TOUCHING** (167 item-layer instances).
+    Clusters: west dent / module fanout 102, north-west shoulder
+    13, north-tab east shoulder / JPAD 8, east slant 7, south
+    edge 1. Root cause: the escape machinery's field box (west
+    edge x = 69.6) was never intersected with the board outline;
+    near the dent vertex (71.064, 122.387) the outline sits at
+    x ≈ 69.7–71.1, so the box-edge exits and their beyond-field
+    corridor (x ≈ 68.4–69.6) lay outside the board — some west
+    tracks were fully external (up to 1.41 mm beyond the
+    boundary). The completion round's DRC had the evidence
+    (114 copper_edge_clearance violations) inside a
+    class-dispositioned total; no item-level review was done.
+    That review gap is the process defect; the containment gate
+    below is the countermeasure.
+    **Fix, per cluster** (preference order: re-route ≥ 0.5 mm
+    where achievable → dent fill if case-compatible →
+    item-level disposition):
+    - *West dent / module fanout (102 items):* full re-route of
+      the fanout inside the outline — module escapes now leave
+      the pad field southward on F inside the grid, hop layers
+      in the southern strip / NW tab via fields, and run north
+      on I2/B through the pad column's x-range (the dent vertex
+      pinches the west strip to 0.136 mm, so no track passes it
+      at 0.5 mm edge clearance). Two escapes (LED_DRV, ADC_B)
+      closed on second-opinion (Codex) routes applied verbatim
+      and re-verified geometrically. 75 GND items lost as
+      collateral during the re-route were key-matched against
+      the adopted board and restored (20 pruned where they
+      overlapped new routes).
+    - *Dent fill — REJECTED with evidence:* in the #275 fitted
+      frame (replication reproduced the recorded seam 0.5593 mm
+      / overlap 0 exactly), the free gap west of the dent is
+      0.559 mm on the north segment, 1.99–2.11 mm on the south
+      segment; the USB corridor needed the edge ≥ 2.41 mm
+      further west. A full straight fill moves the edge 5.02 mm
+      at the dent vertex — beyond the gap; a partial fill gains
+      ~0–1.4 mm while consuming the seam. Not case-compatible;
+      **outline delta = 0** (deviation 12's authorization again
+      unused).
+    - *N / T / E / S clusters (29 items):* component nudges
+      (CIN1, CIN2, CVS, RRST, RPD1, RPD3, CFC, JPAD, TP1 —
+      cumulative deltas in the round log) and via/track vertex
+      moves; final non-west flagged count = 0 before
+      dispositions.
+    - *Incidents inside the round, all closed:* a PAD_SCL
+      inner-layer detour through the antenna strip (introduced
+      by a restore) was cut and re-stitched via the south-east
+      I2 mesh — final strip count 0; a PAD_SDA via placed by a
+      re-stitch shorted JPAD.5's pad — relocated to
+      (111.58, 95.75), DRC shorting = 0; a dangling GND stub
+      west of JPAD was identified as Q1.2's stitch and restored
+      with its via at (107.40, 97.05).
+    **Remaining item-level dispositions** (no class waivers):
+    - *CLOSE items (17 unique; measured distance to the
+      outline, mm):* GND via (70.850, 121.350) **0.0334** —
+      U1.1's stitch via, the adopted board's own geometry
+      restored verbatim; the tightest item on the board, flagged
+      for the order gate (milling tolerance can reach the
+      annulus; it is a GND stitch via, not a signal). GND track
+      (71.600, 121.350)→(70.850, 121.350) **0.2334** — same
+      stitch. U1.1 pad **0.4364**, U1.2 pad **0.1362**, U1.4 pad
+      **0.2745** — module LGA pads, fixed by the official
+      footprint. COUT2.2 pad **0.1789** — adopted placement; a
+      +0.35 mm nudge was tried and reverted (created shorts);
+      north is the edge, south is blocked by MUX_OUT vias.
+      RPD1.2 pad **0.4864** — two-sided constraint (CHOUT
+      adjacency vs the east slant) after three nudges. Adopted
+      GND stitches: track (93.500, 83.975)→(93.280, 84.796)
+      **0.0744** + via (93.280, 84.796) **0.1944** (north edge);
+      track (131.825, 128.000)→(132.071, 128.918) **0.1548** +
+      via (132.071, 128.918) **0.2508** (east slant); via
+      (115.750, 100.475) **0.1637** + track (114.800, 100.475)→
+      (115.750, 100.475) **0.3136** (JPAD east); via
+      (85.128, 99.059) **0.2160** + track (85.800, 98.388)→
+      (85.128, 99.059) **0.3660**; via (128.675, 122.998)
+      **0.2318** + track (128.200, 122.175)→(128.675, 122.998)
+      **0.3817**. (One 0.3414 mm item seen in a mid-round DRC
+      does not exist in the final enumeration — it was a
+      transient segment removed by the PAD_SCL/LED rework.)
+    - *Unconnected GND (2 DRC items):* **CVCC2.2** — its
+      adopted via site (72.75, 117.78) is occupied by the
+      re-routed USB_DM via; every alternative (via-in-pad,
+      north-west hop, east hop at (72.75, 118.35) / (73.35,
+      118.35)) is blocked on at least one layer by
+      MUX_A0/USB_DM/MUX_A1/SYS_3V3 copper. CVCC1 remains tied;
+      the pad is a decoupling-capacitor ground. **Module GND
+      pads U1.14 + U1.16** (tied to each other) — the completion
+      round's tap via conflicts with VBAT_SENSE's re-routed
+      staircase and via (75.45, 125.20); the y-125.56 thread,
+      the y-124.325 street, via-in-pad at three offsets, and a
+      VBUS jog shift were all attempted and geometrically
+      blocked (VBAT_SENSE, VBUS, MUX_A2, BTN items). The pads
+      rely on the module's internal GND plane continuity; the
+      other 8 module GND pads are plane-tied, including both
+      0.8 × 0.8 west pads and U1.18 in the same row. Both items
+      are carried to the order gate as accepted residuals of
+      this fix, replacing the completion round's "10 of 10"
+      line.
+    - *In-field sub-floor pairs (2):* MUX_A0 F descent track ↔
+      U1.7 GND pad **0.0413** (track–pad; the descent is centred
+      in a 0.18 mm channel between the pad and USB_DP's via —
+      both neighbours re-measured ≥ 0.050 after corridor
+      balancing) and GND stitch via (70.85, 121.35) ↔ MUX_A0 I2
+      track **0.0424** (via-to-copper). Same class as deviation
+      11's adopted 0.046 track–pad item, 0.004–0.009 lower,
+      created by the forced re-route out of the illegal west
+      geometry.
+    - *ADC_B drill-to-copper **0.2000*** (V2 (75.90, 120.30)
+      drill vs the PAD_DR dogleg) vs the 0.25 hole_clearance
+      netclass default — inside the D-057 field; DFM
+      confirmation at quotation, like the D-057 items. The
+      adopted board violates the 0.25 figure 52× board-wide.
+    **New hard gate:** `checks/copper_containment.py` (this
+    tree) fails if any copper shape crosses or touches the
+    outline; it reproduces the defect on the adopted file
+    (87 crossing instances, FAIL) and passes the fixed file
+    (0 / 0). **D-058 amendment:** the adopted configuration is
+    unchanged in every particular (module, power tree, USB
+    arrangement, census, outline); only the board file was
+    defective and is superseded — SHA-256 `509e52a7…` →
+    `26072619…`. The D-058 condition (ii), JLCPCB confirmation
+    of the 0.05 mm-class field at quotation, is unchanged and
+    now also covers the ADC_B drill item above.
 
 ## Draft adoption line (for PO, at the adoption gate)
 
