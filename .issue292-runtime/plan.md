@@ -310,3 +310,34 @@ Stages:
   as a labelled outline.
 
 Checkpoint-commit per stage. Never /tmp.
+
+## COMPLETION ROUND (2026-11-19): close deviation 10's 6 residual unconnected items
+Baseline: tree board SHA 2f0b4526 (re-route round final). Items:
+(a) GND pads U1.14+16 isolated pair; (b) VBUS; (c) SYS_3V3 x2
+(CVCC island vs main net, island vs module escape comp);
+(d) PAD_EN; (e) VBAT_SENSE.
+- C0 reproduce: per-net component census from board data for the
+  5 nets (pads/tracks/vias/zones), blocker geometry re-measured
+  (gaps, sealing bands, via legality) BEFORE any edit.
+- C1 order: VBAT_SENSE first (its stub crossing blocks the GND
+  14/16 bridge), then GND pair, then VBUS / SYS_3V3 / PAD_EN.
+  Means: ordinary routing, vias, plane stitch, local geometry
+  moves that do not disturb frozen structures (module-field
+  routing, Wing census geometry, outline). A net that provably
+  cannot close without touching a frozen structure or breaking
+  a rule -> STOP on that item, report as design question with
+  measured evidence; never force.
+- C2 in-field 0.046 track-pad minimum (vs no-net NC pad): nudge
+  to >=0.050 if this round's work touches that segment; else
+  leave and re-confirm 0.046 in the final audit.
+- C3 full gates on the final file: ERC; DRC severity-all +
+  geometric verification (kicad-cli 9.0.9 does not apply .dru -
+  state again in REPORT); unconnected (target 0); via-pad
+  audit; antenna/trackpad keep-outs; Wing census 14/14 x2;
+  outline delta = 0; in-field minima re-measured. Connectivity
+  proven by per-net pad census from final data, not router exit.
+- C4 REPORT.md: deviation 10 closed item-by-item (or carried
+  with reasons), board SHA, D-058 draft updated to final state.
+- C5 manufacturing package + 3 PO drawings regenerated from
+  the final board (same paths as the re-route round).
+Checkpoint-commit per stage. Never /tmp.
