@@ -1,0 +1,369 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route.py /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-fixed.kicad_pcb /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb --nets FB_3V3 SYS_3V3 VBAT_SENSE BTN --track-width 0.1 --power-nets SYS_3V3 --power-nets-widths 0.3 --clearance 0.1 --via-size 0.6 --via-drill 0.3 --same-net-pad-clearance 0.15 --escalation board
+ENV KNOBS: none
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! NO .kicad_pro NEXT TO 'wmain-fixed.kicad_pcb' (#441)
+!!
+!! The sibling project carries the board's DRC floor. Without it this
+!! step resolves clearances from the STOCK netclass, which can be LOOSER
+!! than the copper already on the board:
+!!   - KiCad will then report phantom sub-clearance DRC on correct copper
+!!   - CLI and GUI runs will route DIFFERENT copper from this same board
+!!
+!! If this board was copied or renamed, bring its .kicad_pro along:
+!!   python3 py_router/copy_board.py src.kicad_pcb dst.kicad_pcb
+!! (Ignore only if this is a pristine board that has never been routed.)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--clearance 0.1: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [fixed default].
+--board-edge-clearance not given; using 0.0mm [fixed default].
+  WARNING: --board-edge-clearance 0.0 is below the physical fab floor 0.2 (the advanced rung, or your --fab-overrides); pinning up to 0.2. Pass --fab-overrides to declare a smaller fab capability, or raise the value to silence this.
+Loading /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-fixed.kicad_pcb to expand net patterns...
+Using all 4 copper layers: F.Cu In1.Cu In2.Cu B.Cu (override with --layers)
+Routing 4 nets: ['FB_3V3', 'SYS_3V3', 'VBAT_SENSE', 'BTN']
+Loading /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-fixed.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.15mm (from flag, #581): vias stay off same-net pads
+
+Power net width assignments (1 nets):
+  0.3mm: SYS_3V3
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 4 nets with 5 crossing conflicts detected
+MPS Round 1: 2 units: FB_3V3, VBAT_SENSE
+MPS Round 2: 1 units: SYS_3V3
+MPS Round 3: 1 units: BTN
+
+Routing 4 single-ended net(s)...
+============================================================
+Building base obstacle map...
+31 unprotected pre-existing net(s) registered as main-pass rip candidates (<=30 seg/<=6 via, custody-backed; KICAD_RIP_PREEXISTING=0 disables)
+Pour guard (#1260): GND pour on In1.Cu: islands left crossable -- 1 hold a routed net's terminal
+Base obstacle map built in 0.66s
+Found 41 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.31s (41 nets)
+Plane fragility: exact fill unavailable (no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter); using zone outlines
+Plane fragility field: 39152 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/4] Routing FB_3V3 (id=29)
+  Detected multi-point net with 3 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 2, length=8.20mm)
+    endpoint cell blocked for RFB2.1 -- seeded 32 free on-pad cell(s)
+  Phase 1 routed in 134 iterations, 9 segments
+  SUCCESS: 9 segments, 0 vias, 134 iterations, length=8.11mm (stubs=0.00mm) (0.03s)
+
+[2/4] Routing VBAT_SENSE (id=22)
+  Detected multi-point net with 4 pads (Phase 1: main route only)
+  Multi-point net Phase 1: routing longest MST edge (pads 0 and 1, length=59.15mm)
+  Phase 1 routed in 55621 iterations, 43 segments
+  SUCCESS: 43 segments, 2 vias, 55621 iterations, length=55.90mm (stubs=2.05mm) (0.06s)
+
+[3/4] Routing SYS_3V3 (id=14)
+  Detected multi-point net with 16 pads (Phase 1: main route only)
+  Existing copper joins 16 terminals into 14 group(s)
+  Multi-point net Phase 1: routing longest MST edge (pads 11 and 12, length=45.67mm)
+  Phase 1 routed in 91602 iterations, 22 segments
+  SUCCESS: 22 segments, 3 vias, 91602 iterations, length=45.36mm (stubs=0.00mm) (0.29s)
+
+[4/4] Routing BTN (id=21)
+forward stuck (2 < 5000), backward=5000  [x2]
+  forward cell (712, 1264, layer=0): ok, 8/8 neighbors blocked  [x2]
+    Blocking obstacles: GND(1 pad)  [x2]
+No route found after 5002 iterations (both directions)
+  FAILED: Could not find route (0.19s)
+  Forward direction failed fastest (2 iterations, 16 blocked cells)
+  No previously-routed nets blocking
+  Static blockers: pads: GND (U1); pre-existing tracks: PAD_SDA
+  ROUTE FAILED - no rippable blockers found
+  Hint: search exhausted after only 5002 iterations with no rippable blockers - the start/target pads are boxed in by static obstacles (neighboring pads + clearance), not by congestion. For fine-pitch parts try a finer grid and/or smaller clearance/track, e.g. --grid-step 0.05 (current: grid 0.1, clearance 0.1, track 0.1 mm)
+
+Sync pcb_data: 568 -> 494 (kept stubs) -> 568 (after adding 74)
+
+============================================================
+Multi-point Phase 3: Routing 15 tap connections
+============================================================
+Phase 3 order (boxed-in risk first): SYS_3V3, VBAT_SENSE, FB_3V3
+
+SYS_3V3 (net 14):
+  Multi-point net Phase 3: routing 12 remaining MST edges (longest first)
+    [1/15] Routing MST edge: pad 12 -> pad 13 (length=10.14mm) target=(118.16, 131.35)
+      Routed in 3063 iterations (0.02s)
+    [2/15] Routing MST edge: pad 13 -> pad 14 (length=8.70mm) target=(123.66, 128.15)
+      Routed in 16385 iterations (0.07s)
+    [3/15] Routing MST edge: pad 14 -> pad 15 (length=4.01mm) target=(126.50, 129.32)
+      Routed in 1515 iterations (0.01s)
+    [4/15] Routing MST edge: pad 11 -> pad 10 (length=3.12mm) target=(102.50, 96.50)
+      Routed in 6656 iterations (0.02s)
+    [5/15] Routing MST edge: pad 10 -> pad 8 (length=12.11mm) target=(91.89, 98.00)
+      Routed in 26559 iterations (0.08s)
+    [6/15] Routing MST edge: pad 8 -> pad 7 (length=6.41mm) target=(91.67, 91.80)
+      Routed in 9113 iterations (0.03s)
+    [7/15] Routing MST edge: pad 7 -> pad 9 (length=4.80mm) target=(92.17, 87.50)
+      Routed in 18 iterations (0.00s)
+    [8/15] Routing MST edge: pad 8 -> pad 6 (length=2.51mm) target=(89.78, 98.40)
+      Routed in 22 iterations (0.00s)
+    [9/15] Routing MST edge: pad 4 -> pad 3 (length=14.79mm) target=(81.80, 105.71)
+      Routed in 4048 iterations (0.01s)
+    [10/15] Routing MST edge: pad 3 -> pad 2 (length=18.71mm) target=(75.67, 118.30)
+      Routed in 34790 iterations (0.11s)
+    [11/15] Routing MST edge: pad 2 -> pad 1 (length=5.00mm) target=(71.80, 119.42)
+      Routed in 34 iterations (0.00s)
+    [12/15] Routing MST edge: pad 1 -> pad 0 (length=4.40mm) target=(71.20, 123.22)
+  WARNING: plane tap U1.26: dropped below the standard fab floor to the BOARD's own declared minimums; --escalation board bounds it there. Pass --fab-tier standard for a hard floor, or --escalation off to forbid the descent entirely
+  WARNING: last-resort via for net 14 (0.3/0.15mm): dropped below the standard fab floor to the BOARD's own declared minimums; --escalation board bounds it there. Pass --fab-tier standard for a hard floor, or --escalation off to forbid the descent entirely
+      Wide power route blocked - routed short edge at 0.1500mm (down from 0.3000)
+      Via-in-pad unblock: dropped 1 fab-floor via(s) to reach a boxed endpoint (1 off-pad escape stub(s), #535)
+      Routed in 20202 iterations (0.42s)
+  Phase 3 routing complete: 12 edges, 135 total segments, 15 total vias
+  Added 113 tap segments, 12 tap vias
+  Net total time: 0.98s, 214007 iterations
+
+VBAT_SENSE (net 22):
+  Multi-point net Phase 3: routing 2 remaining MST edges (longest first)
+    [13/15] Routing MST edge: pad 1 -> pad 2 (length=16.90mm) target=(102.83, 93.20)
+      Routed in 23396 iterations (0.01s)
+    [14/15] Routing MST edge: pad 2 -> pad 3 (length=2.35mm) target=(105.17, 93.20)
+      Routed in 25 iterations (0.00s)
+  Phase 3 routing complete: 2 edges, 60 total segments, 2 total vias
+  Added 17 tap segments, 0 tap vias
+  Net total time: 0.08s, 79042 iterations
+
+FB_3V3 (net 29):
+  Multi-point net Phase 3: routing 1 remaining MST edges (longest first)
+    [15/15] Routing MST edge: pad 2 -> pad 1 (length=7.55mm) target=(93.33, 91.80)
+      Routed in 20377 iterations (0.01s)
+  Phase 3 routing complete: 1 edges, 16 total segments, 2 total vias
+  Added 7 tap segments, 2 tap vias
+  Net total time: 0.06s, 20511 iterations
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing BTN (failed, 2 disconnected parts)
+    bare-ball escape: SW1.1 dogbone (11 seg(s), 1 via(s)) (#666)
+  WARNING: net rescue net_21: dropped below the standard fab floor to the BOARD's own declared minimums; --escalation board bounds it there. Pass --fab-tier standard for a hard floor, or --escalation off to forbid the descent entirely
+forward stuck (3 < 5000), backward=5000
+  forward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+forward stuck (3 < 5000), backward=5000
+  forward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+forward stuck (3 < 5000), backward=5000
+  forward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+forward stuck (3 < 5000), backward=5000
+  forward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+forward stuck (3 < 5000), backward=5000
+  forward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+    improved (2 -> 2 parts, 2.3s)
+Rescue pass: 0 recovered, 1 improved, 0 unchanged (2.3s)
+  WARNING: terminal escalation net_21: dropped below the standard fab floor to the BOARD's own declared minimums; --escalation board bounds it there. Pass --fab-tier standard for a hard floor, or --escalation off to forbid the descent entirely
+
+Terminal geometry escalation (better than shipping opens): 1 candidate net(s)
+  terminal escalation: BTN at track 0.0963 via 0.45/0.2 (rung 1/3)
+forward stuck (3 < 5000), backward=5000
+  forward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+  terminal escalation: BTN at track 0.0926 via 0.3/0.15 (rung 2/3)
+forward stuck (3 < 5000), backward=5000
+  forward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+  terminal escalation: BTN at track 0.0889 via 0.25/0.15 (rung 3/3)
+forward stuck (3 < 5000), backward=5000
+  forward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+    terminal escalation: BTN unrecovered (0.6s)
+Terminal escalation: 0 recovered, 1 unrecovered (0.6s)
+Closed 1 stub gap(s) to same-net copper
+Graze prune: removed 1 grazing segment(s) across 1 net(s)
+Cycle prune: removed 7 redundant loop segment(s) across 3 net(s)
+Octolinear smoothing: collapsed 18 staircase span(s) on 3 net(s), -2.46 mm of copper (#536)
+Merged 16 collinear joint(s) on 3 net(s): -16 redundant segment(s) (#811)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  3/4 routed (1 FAILED)
+  Multi-point:   23/23 pads connected (3 nets)
+  Total vias:    20
+  Total time:    0.56s
+  Iterations:    152,359
+  Fragility refresh (#466): 5 windows, 0.09s total
+  History congestion (#590): 0 contest + 0 rip + 1 blocked-frontier event(s) over 16 cell(s), peak 0.03mm-equiv (inc 0.1mm, cap 0.5, escalate 0.0, rip weight 1.0, frontier weight 0.25), 0.00s of field upkeep
+
+Failed single-ended nets:
+  BTN
+
+Failed multi-point connections:
+  BTN: SW1 pad ? at (101.90, 84.00) not connected
+
+============================================================
+FAILED NET HISTORIES
+============================================================
+
+BTN:
+  [0] blocked_by
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Boxed in at this geometry after 5002 iteration(s) (grid 0.1, clearance 0.1, track 0.1 mm)
+  [0] rescue_succeeded
+  [0] terminal_escalation_failed
+
+Power trace ampacity (bottleneck segment, IPC-2152):
+  SYS_3V3: 0.45A max (0.100mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 0.45A)
+JSON_SUMMARY: {"routed_single": ["FB_3V3", "VBAT_SENSE", "SYS_3V3"], "failed_single": ["BTN"], "open_single": [], "failed_multipoint": [{"net_name": "BTN", "failed_pads": [{"component_ref": "SW1", "pad_number": "?", "x": 101.9, "y": 84.0}]}], "multipoint_nets": 3, "multipoint_pads_connected": 23, "multipoint_pads_total": 23, "multipoint_edges_routed": 18, "multipoint_edges_failed": 0, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 3, "failed": 1, "total_time": 0.56, "total_iterations": 152359, "total_vias": 20, "cleanup_disconnected": [], "min_clearance_used": 0.1, "design_rules": {"escalation_policy": "board", "fab_tier": "auto", "board_floors": {}, "count": 8, "nets": [14], "narrowed": [{"net": 14, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}, {"net": 14, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.3, "site": "last-resort via-in-pad", "count": 1}], "min_delivered": {"via_diameter": 0.3, "track_width": 0.1}, "fab_tier_escalations": 6, "fab_tier_contexts": ["plane tap U1.26", "last-resort via for net 14 (0.3/0.15mm)", "net rescue net_21", "net rescue net_21", "terminal escalation net_21", "terminal escalation net_21"], "fab_tier_target": "board_floors", "unsupported_rules": []}, "plane_fragility": {"source": "zone_outlines", "islands": 0, "refill_status": "no_kicad_python", "why": "no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter", "machine_dependent": false}, "pour_guard": {"source": "zone_outlines", "why": "no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter", "pours": [{"net": "GND", "layer": "In1.Cu", "blocked_islands": 0, "blocked_mm2": 0, "crossable_islands": 1, "minor_islands": 0}]}, "rescue": {"attempted": 1, "recovered": [], "improved": ["BTN"], "unchanged": [], "pads_reconnected": 0, "widths": {"BTN": {"requested_mm": 0.1, "delivered_mm": 0.1, "rescue_min_mm": 0.1, "rescue_max_mm": 0.1, "rescue_segments_emitted": 11, "rescue_by_width": {"0.1": 11}, "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."}}, "time": 2.3}, "terminal_escalations": {"BTN": "unrecovered"}, "oracle_check": "disabled", "boxed_in": [{"verdict": "boxed_in_static", "iterations": 5002, "geometry": {"grid_step": 0.1, "clearance": 0.1, "track_width": 0.1, "via_diameter": null}, "net": "BTN"}], "pad_pairs_connected": 20, "pad_pairs_total": 21, "pad_pairs_open": [{"net": "BTN", "pairs_connected": 0, "pairs_total": 1, "outcome": "open", "open_subtype": "unrouted"}], "power_trace_ampacity": [{"net": "SYS_3V3", "bottleneck_width_mm": 0.1, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 0.45, "max_current_ipc2152_a": 0.45, "temp_rise_c": 10.0, "trace_length_mm": 137.9}], "scope": "run", "env_knobs": {}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb...
+Removed 1 dead-end input segment(s) from the output
+Successfully wrote /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb
+  Plane finalize: zone net(s) GND are OUTSIDE this route's --nets scope -- excluded from the finalize BY PLAN. Since #562 a pour alone connects nothing: unless a later route step covers these nets, their pads ship disconnected.
+
+Final reconciliation: retrying 1 incomplete/custody net(s) against the finished board: BTN
+Loading /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb...
+Using 4 routing layers: ['F.Cu', 'In1.Cu', 'In2.Cu', 'B.Cu']
+  Layer costs: F.Cu=1.0x, In1.Cu=1.0x, In2.Cu=1.0x, B.Cu=1.0x
+No BGA components detected - no exclusion zones needed
+Same-net pad via clearance 0.15mm (from flag, #581): vias stay off same-net pads
+
+Power net width assignments (1 nets):
+  0.3mm: SYS_3V3
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 1 nets with 0 crossing conflicts detected
+MPS Round 1: 1 units: BTN
+
+Routing 1 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 0.09s
+Found 41 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.13s (41 nets)
+Plane fragility: exact fill unavailable (no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter); using zone outlines
+Plane fragility field: 39152 cells near the edges of 1 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/1] Routing BTN (id=21)
+backward stuck (1 < 5000), forward=5000  [x2]
+  backward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked  [x2]
+No route found after 5001 iterations (both directions)
+  FAILED: Could not find route (0.12s)
+  ROUTE FAILED - no rippable blockers found
+  Hint: search exhausted after only 5001 iterations with no rippable blockers - the start/target pads are boxed in by static obstacles (neighboring pads + clearance), not by congestion. For fine-pitch parts try a finer grid and/or smaller clearance/track, e.g. --grid-step 0.05 (current: grid 0.1, clearance 0.1, track 0.1 mm)
+  Hint: the blocking copper belongs to 5 pre-existing net(s) committed by an earlier run/step; 5 of them this run may not rip. Retry with --rip-existing-nets 'LED_DRV' 'VBAT_SENSE' 'VBUS' 'PAD_SDA' 'PAD_EN' to rip and re-route them in this run (issue #103) -- the decisive blocker may be any of them, so start with the full set (each ripped net is re-routed and the run reports honestly if one cannot be), then bisect if you want a minimal rip. A rip lifts their tracks and vias only; their pads stay. If pads wall the failed pad, no rip frees it: check the pad first with py_tools/check_reachability.py <board> --pad <REF.PAD>, which sets the routing aside -- CAGED there is placement, not copper.
+
+Per-net fine-parameter rescue (#331/#371): 1 candidate net(s)
+  Rescuing BTN (failed, 2 disconnected parts)
+  WARNING: plane web under U1 (0.65mm pitch; GND poured at clearance 0.2, min width 0.25): no via on the fab ladder lets the plane pass between its vias -- its drops there may be islands; lower the pour's clearance
+BGA Grid Analysis for U1:
+  Pitch: 0.65 x 0.65 mm
+  Grid: 16 rows x 14 columns
+  Center: (74.80, 124.85)
+  Boundary: X[70.88, 78.73], Y[120.92, 128.77]
+  Under-pad: WARNING via 0.60mm is large for 0.65mm pitch (track 0.10, clearance 0.10); expect drops. Try via <= 0.25mm.
+  Dog-bone: 0/0 inner balls got a gap via site (0 via-in-pad fallback)
+  Dog-bone escape: 1/1 signals escaped, 0 vias, 10 plane balls skipped, 19 already-fanned skipped, 0 failed
+  Dog-bone: 0 single-ended run(s) started at a gap via (0 gap sites assigned)
+    bare-ball escape: U1.34 fanout-rescue escape (1 seg(s), 0 via(s)) (#666)
+backward stuck (3 < 5000), forward=5000
+  backward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+backward stuck (3 < 5000), forward=5000
+  backward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+backward stuck (3 < 5000), forward=5000
+  backward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+backward stuck (3 < 5000), forward=5000
+  backward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+backward stuck (3 < 5000), forward=5000
+  backward cell (1424, 2568, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+    improved (2 -> 2 parts, 2.3s)
+Rescue pass: 0 recovered, 1 improved, 0 unchanged (2.3s)
+
+Terminal geometry escalation (better than shipping opens): 1 candidate net(s)
+  terminal escalation: BTN at track 0.0963 via 0.45/0.2 (rung 1/3)
+backward stuck (3 < 5000), forward=5000
+  backward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+  terminal escalation: BTN at track 0.0926 via 0.3/0.15 (rung 2/3)
+backward stuck (3 < 5000), forward=5000
+  backward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+  terminal escalation: BTN at track 0.0889 via 0.25/0.15 (rung 3/3)
+backward stuck (3 < 5000), forward=5000
+  backward cell (712, 1284, layer=0): ok, 8/8 neighbors blocked
+No route found after 5003 iterations (both directions)
+    terminal escalation: BTN unrecovered (0.3s)
+Terminal escalation: 0 recovered, 1 unrecovered (0.3s)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Total time:    0.12s
+  Iterations:    5,001
+
+Failed single-ended nets:
+  BTN
+
+Failed multi-point connections:
+  BTN: SW1 pad ? at (101.90, 84.00) not connected
+
+============================================================
+FAILED NET HISTORIES
+============================================================
+
+BTN:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Boxed in at this geometry after 5001 iteration(s) (grid 0.1, clearance 0.1, track 0.1 mm)
+  [0] Blocked by pre-existing copper: LED_DRV, VBAT_SENSE, VBUS (+2 more)
+         Hint: the blocking copper belongs to 5 pre-existing net(s) committed by an earlier run/step; 5 of them this run may not rip. Retry with --rip-existing-nets 'LED_DRV' 'VBAT_SENSE' 'VBUS' 'PAD_SDA' 'PAD_EN' to rip and re-route them in this run (issue #103) -- the decisive blocker may be any of them, so start with the full set (each ripped net is re-routed and the run reports honestly if one cannot be), then bisect if you want a minimal rip. A rip lifts their tracks and vias only; their pads stay. If pads wall the failed pad, no rip frees it: check the pad first with py_tools/check_reachability.py <board> --pad <REF.PAD>, which sets the routing aside -- CAGED there is placement, not copper.
+  [0] rescue_succeeded
+  [0] terminal_escalation_failed
+
+Power trace ampacity (bottleneck segment, IPC-2152):
+  SYS_3V3: 0.45A max (0.100mm on F.Cu (1 oz copper, 10°C rise), IPC-2221: 0.45A)
+JSON_SUMMARY: {"routed_single": [], "failed_single": ["BTN"], "open_single": [], "failed_multipoint": [{"net_name": "BTN", "failed_pads": [{"component_ref": "SW1", "pad_number": "?", "x": 101.9, "y": 84.0}]}], "multipoint_nets": 0, "multipoint_pads_connected": 0, "multipoint_pads_total": 0, "multipoint_edges_routed": 0, "multipoint_edges_failed": 0, "ripup_success_pairs": [], "rerouted_pairs": [], "single_ended_target_swaps": [], "layer_swaps": 0, "successful": 0, "failed": 1, "total_time": 0.12, "total_iterations": 5001, "total_vias": 0, "cleanup_disconnected": [], "min_clearance_used": 0.1, "design_rules": {"escalation_policy": "board", "fab_tier": "auto", "board_floors": {}, "count": 24, "nets": [1, 14], "narrowed": [{"net": 14, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "fine-pitch tap", "count": 1}, {"net": 14, "net_name": null, "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "plane tap", "count": 1}, {"net": 14, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.3, "site": "last-resort via-in-pad", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}, {"net": 1, "net_name": null, "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via-in-pad clamp", "count": 1}], "min_delivered": {"via_diameter": 0.3, "track_width": 0.1}, "fab_tier_escalations": 10, "fab_tier_contexts": ["plane tap U1.26", "last-resort via for net 14 (0.3/0.15mm)", "net rescue net_21", "net rescue net_21", "terminal escalation net_21", "terminal escalation net_21", "net rescue net_21", "net rescue net_21", "terminal escalation net_21", "terminal escalation net_21"], "fab_tier_target": "board_floors", "unsupported_rules": []}, "plane_fragility": {"source": "zone_outlines", "islands": 0, "refill_status": "no_kicad_python", "why": "no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter", "machine_dependent": false}, "rescue": {"attempted": 1, "recovered": [], "improved": ["BTN"], "unchanged": [], "pads_reconnected": 0, "widths": {"BTN": {"requested_mm": 0.1, "delivered_mm": 0.1, "rescue_min_mm": 0.1, "rescue_max_mm": 0.1, "rescue_segments_emitted": 1, "rescue_by_width": {"0.1": 1}, "scope": "THIS RESCUE ONLY -- not the net. Counts are as EMITTED, before cycle-prune drops redundant loop segments, so the board can carry fewer. For the net's whole width profile, measure the board."}}, "time": 2.29}, "terminal_escalations": {"BTN": "unrecovered"}, "oracle_check": "skipped", "blockers": [{"net": "BTN", "stage": "preexisting", "blocked_by": [{"net": "LED_DRV", "preexisting": true}, {"net": "VBAT_SENSE", "preexisting": true}, {"net": "VBUS", "preexisting": true}, {"net": "PAD_SDA", "preexisting": true}, {"net": "PAD_EN", "preexisting": true}]}], "boxed_in": [{"verdict": "boxed_in_static", "iterations": 5001, "geometry": {"grid_step": 0.1, "clearance": 0.1, "track_width": 0.1, "via_diameter": null}, "net": "BTN"}], "pad_pairs_connected": 0, "pad_pairs_total": 1, "pad_pairs_open": [{"net": "BTN", "pairs_connected": 0, "pairs_total": 1, "outcome": "open", "open_subtype": "unrouted"}], "power_trace_ampacity": [{"net": "SYS_3V3", "bottleneck_width_mm": 0.1, "bottleneck_layer": "F.Cu", "copper_oz": 1.0000000000000002, "max_current_a": 0.45, "max_current_ipc2152_a": 0.45, "temp_rise_c": 10.0, "trace_length_mm": 137.9}], "scope": "reconciliation-subset", "board_scoped_keys": ["power_trace_ampacity", "min_clearance_used"], "env_knobs": {}}
+
+Writing output to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb...
+Successfully wrote /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pcb
+Note: the JSON_SUMMARY above covers only the reconciliation subset (it carries scope="reconciliation-subset"). The run's tally is the final re-grade of the shipped board (JSON_REGRADE, folded into JSON_SUMMARY_MIN and --json-out). Never scrape the LAST JSON_SUMMARY of a route log.
+  Strict collapse (#1063, end of run): removed 33 redundant segment(s) on 3 net(s)
+VIA_IN_PAD_JSON: {"count": 0, "sites": [], "stamped": 0, "restored": 0, "protected": 0, "unstampable": 0, "site_created": 0, "unprotected": [], "note": "via-in-pad requires IPC-4761 Type VII (filled + capped + plated); state it on the fab drawing or solder wicks into the barrel"}
+Power widths: SYS_3V3 2.6/134.6 mm under the requested 0.3 (min 0.1) -- JSON_SUMMARY power_widths
+JSON_SHIPPED_RULES: {"min_clearance_used": 0.1, "design_rules": {"escalation_policy": "board", "fab_tier": "auto", "board_floors": {}, "count": 2, "nets": [14], "narrowed": [{"net": 14, "net_name": "SYS_3V3", "kind": "track_width", "requested": 0.3, "delivered": 0.1, "site": "power copper shipped under width", "count": 1, "length_mm": 2.61}, {"net": 14, "net_name": "SYS_3V3", "kind": "via_diameter", "requested": 0.6, "delivered": 0.4, "site": "via copper shipped under size", "count": 1}], "min_delivered": {"track_width": 0.1, "via_diameter": 0.4}, "fab_tier_escalations": 10, "fab_tier_contexts": ["plane tap U1.26", "last-resort via for net 14 (0.3/0.15mm)", "net rescue net_21", "net rescue net_21", "terminal escalation net_21", "terminal escalation net_21", "net rescue net_21", "net rescue net_21", "terminal escalation net_21", "terminal escalation net_21"], "fab_tier_target": "board_floors"}}
+  Pours graded on the fill model: no KiCad refill (no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter)
+JSON_REGRADE: {"board": "file", "graded_nets": 4, "seconds": 0.09, "routed_single": ["FB_3V3", "VBAT_SENSE", "SYS_3V3"], "failed_single": ["BTN"], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 23, "multipoint_pads_connected": 23, "successful": 3, "failed": 1, "unowned_broken": [], "recovered": [], "pad_pairs": {"BTN": {"total": 1, "connected": 0, "copper": true}}, "broken_by_run": [], "pour_fill": {"graded_on": "fill_model", "why": "no python with pcbnew found; set KICAD_PYTHON to KiCad's bundled interpreter"}}
+
+============================================================
+Run complete -- whole run, re-graded on the written board (4 net(s), 0.1s)
+============================================================
+  Single-ended:  3/4 routed (1 FAILED)
+  Multi-point:   23/23 pads connected
+  Ships broken: 1 net(s) -- the `failed` count, over every net the run owns
+JSON_IMPROVEMENT_GATE: {"lost": [], "gained": ["FB_3V3", "SYS_3V3", "VBAT_SENSE"], "lost_zone": [], "gained_zone": [], "worsened": [], "disconnected_pads_before": 80, "disconnected_pads_after": 62, "nets_compared": 41, "verdict": "accept"}
+  Design rules [--escalation board, --fab-tier auto]: 2 feature(s) on 1 net(s) delivered below the requested size (smallest track width 0.1 mm, smallest via diameter 0.4 mm); 10 fab-tier escalation(s) to the board's own declared floors. Details: JSON_SUMMARY design_rules.
+JSON_SUMMARY_MIN: {"escalations": 12, "failed": 1, "failed_single": ["BTN"], "finalize_excluded_nets": ["GND"], "main_loop_time_s": 0.68, "min_clearance_used": 0.1, "multipoint_deficit": 0, "open_single": [], "pad_pairs_open": {"count": 1, "nets": ["BTN"]}, "regraded_nets": 4, "routed": 3, "scope": "merged", "terminal_restores_broken": [], "vias": 20}
+  DRC settings: wrote 10 value(s) to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pro to match the routed floors (close+reopen in KiCad if it is open). WRITES, not changes: a key the project never declared counts here, and one logical value is written once per net class:
+      rules.min_clearance: None -> 0.1 mm
+      rules.min_hole_clearance: None -> 0.1 mm
+      rules.min_hole_to_hole: None -> 0.2 mm
+      rules.min_copper_edge_clearance: None -> 0.2 mm (fab-edge pin)
+      rules.min_track_width: None -> 0.1 mm
+      rules.min_via_diameter: None -> 0.4 mm
+      rules.min_through_hole_diameter: None -> 0.25 mm
+      rules.min_via_drill: None -> 0.25 mm
+      rules.min_via_annular_width: None -> 0.075 mm
+      net_class[Default]: created (project had none), clearance 0.1 mm
+PROJECT_WRITES_JSON: {"project": "/home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-routed4.kicad_pro", "writes": ["rules.min_clearance: None -> 0.1 mm", "rules.min_hole_clearance: None -> 0.1 mm", "rules.min_hole_to_hole: None -> 0.2 mm", "rules.min_copper_edge_clearance: None -> 0.2 mm (fab-edge pin)", "rules.min_track_width: None -> 0.1 mm", "rules.min_via_diameter: None -> 0.4 mm", "rules.min_through_hole_diameter: None -> 0.25 mm", "rules.min_via_drill: None -> 0.25 mm", "rules.min_via_annular_width: None -> 0.075 mm", "net_class[Default]: created (project had none), clearance 0.1 mm"]}
+  Power-net widths (measured by board_score): 1 recorded in wmain-routed4.kicad_pro (+1 this step)
+  Same-net pad via clearance 0.15mm recorded in wmain-routed4.kicad_pro (later steps keep vias off same-net pads)
+EXIT=0
