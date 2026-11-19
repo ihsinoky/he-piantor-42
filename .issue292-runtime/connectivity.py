@@ -88,14 +88,33 @@ def pt_seg(px, py, x1, y1, x2, y2):
     return math.hypot(px - (x1 + t * dx), py - (y1 + t * dy))
 
 seglist = [s for s in segs if s[0] == 'seg']
+padsize = {}
+for f in b.GetFootprints():
+    for pad in f.Pads():
+        padsize[(str(f.GetReference()), pad.GetNumber())] = max(p.ToMM(pad.GetSize().x), p.ToMM(pad.GetSize().y)) / 2
 for (ref, net, x, y, layers) in pads:
+    thr = padsize.get(tuple(ref.rsplit('.', 1)), 0.3) + 0.12
     for L in layers:
         pk = (net, L, round(x, 2), round(y, 2))
         for s in seglist:
             if s[1] != net or s[2] != L:
                 continue
-            if pt_seg(x, y, s[3], s[4], s[5], s[6]) < 0.30:
+            if pt_seg(x, y, s[3], s[4], s[5], s[6]) < thr:
                 union(pk, (net, L, s[3], s[4]))
+
+# proximity pass: union point keys within 0.07 mm (grid-rounding joins)
+allkeys = list(parent.keys())
+buckets = {}
+for k in allkeys:
+    net, L, x, y = k
+    buckets.setdefault((net, L, round(x * 5), round(y * 5)), []).append(k)
+for (net, L, bx, by), ks in buckets.items():
+    for dx in (0, 1):
+        for dy in (0, 1):
+            for k2 in buckets.get((net, L, bx + dx, by + dy), []):
+                for k1 in ks:
+                    if math.hypot(k1[2] - k2[2], k1[3] - k2[3]) < 0.07:
+                        union(k1, k2)
 
 groups = {}
 for (ref, net, x, y, layers) in pads:

@@ -25,3 +25,12 @@
 - Action taken: preswap tree board backed up to
   wmain-tree-preswap-derived.kicad_pcb; work copy installed as
   the tree board wmain.kicad_pcb.
+
+## S3a first attempt - COLLISION (reverted)
+escapes_005.json (12 interior) and escapes.json (12 perimeter) were
+computed in separate A* runs; applied together their box-edge vias
+collide (ADC_A via (72.7,119.35) vs BTN via (72.85,119.35) etc.):
+DRC showed 24 shorting_items, unconnected 41->31 (s3a-drc.json).
+Fix: ONE unified escape run, all 24 nets, obstacle growth across
+nets; GND taps re-planned afterwards. Tree board restored to the
+S1+S2 state (FP swap + rule area) before the unified run.

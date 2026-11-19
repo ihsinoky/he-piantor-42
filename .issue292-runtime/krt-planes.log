@@ -1,0 +1,133 @@
+CMD: python3 /home/hatch/workspace/projects/he-piantor-42/.issue194-runtime/KiCadRoutingTools/py_router/route_planes.py /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-final.kicad_pcb --output /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-planes2.kicad_pcb --overwrite --nets GND --plane-layers In1.Cu --via-size 0.6 --via-drill 0.3 --track-width 0.3 --clearance 0.1
+ENV KNOBS: none
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! NO .kicad_pro NEXT TO 'wmain-v4-final.kicad_pcb' (#441)
+!!
+!! The sibling project carries the board's DRC floor. Without it this
+!! step resolves clearances from the STOCK netclass, which can be LOOSER
+!! than the copper already on the board:
+!!   - KiCad will then report phantom sub-clearance DRC on correct copper
+!!   - CLI and GUI runs will route DIFFERENT copper from this same board
+!!
+!! If this board was copied or renamed, bring its .kicad_pro along:
+!!   python3 py_router/copy_board.py src.kicad_pcb dst.kicad_pcb
+!! (Ignore only if this is a pristine board that has never been routed.)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--clearance 0.1: the Default net class at it this run; other classes honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.2mm [fixed default].
+--board-edge-clearance not given; using 0.5mm [fixed default].
+Loading PCB from /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-final.kicad_pcb...
+Zone clearance: following routed clearance 0.1mm (--zone-clearance to override)
+Found net 'GND' with ID 1
+Note: Replacing existing zone on In1.Cu for net 'GND'; what the replacement changes is listed once the new pour is built (--skip-existing-zones keeps the existing pour)
+Board bounds: (64.11, 75.73) to (135.89, 137.90)
+  Full-stack: appended 1 unrequested copper layer(s) as FORBIDDEN obstacles: In2.Cu
+  Layer costs: F.Cu=1.0x, In1.Cu=3.0x, B.Cu=3.0x, In2.Cu=-1x
+
+============================================================
+Processing net 'GND' on layer In1.Cu
+============================================================
+  57 pad(s) on 'GND' deferred to the route step, each kept as a virtual via for the split
+
+Pad analysis for net 'GND':
+  Through-hole pads (no via needed): 0
+  SMD pads on In1.Cu (no via needed): 0
+  SMD pads kept for thermal via arrays (via needed): 0
+
+  Plane Resistance Analysis (1 oz copper, 10°C rise):
+    Path length: 93.6 mm (diagonal)
+    Avg width:   46.6 mm
+    Resistance:  0.965 mΩ
+    Max current: not rated -- 2526 mils² cross-section is past the IPC-2221 chart range (700 mils²); the fit would say 19.36 A by extrapolation
+
+Results for 'GND':
+  Zone created on In1.Cu (replaced existing)
+  New vias placed: 0
+  Traces added: 0
+Replaced 'GND' pour on In1.Cu (--skip-existing-zones keeps it): 5 setting(s) changed
+    pad connection: thermal relief -> solid  [route_planes connects pads solid unless --thermal-relief (Planes tab: Thermal relief pad connections)]
+    clearance: 0.2 mm -> 0.1 mm  [this run's zone clearance: --zone-clearance, else the routed clearance]
+    minimum width: 0.25 mm -> 0.1 mm  [--min-thickness]
+    thermal gap / spoke width: 0.5 mm / 0.5 mm -> 0.2 mm / 0.2 mm  [route_planes' fixed spoke geometry; unused while pads connect solid]
+    outline: 14-vertex outline (64.11, 75.73)..(135.89, 137.90) -> 4-vertex outline (64.61, 76.23)..(135.39, 137.40)  [the board's bounding box inset 0.5 mm (--board-edge-clearance)]
+  Closed 4 soft joint(s) in plane/restored copper
+
+Writing output to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-planes2.kicad_pcb...
+Output written to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-planes2.kicad_pcb
+Note: Open in KiCad and press 'B' to refill zones
+
+============================================================
+GEOMETRIC VERIFICATION (re-parsed output)
+============================================================
+  GND: 1/57 pads connected to plane on In1.Cu
+      unconnected pad CFB on 'GND' at (124.70, 122.17) [F.Cu]
+      unconnected pad CIN2 on 'GND' at (85.80, 98.39) [F.Cu]
+      unconnected pad RPD2 on 'GND' at (117.50, 134.97) [F.Cu]
+      unconnected pad CPOUT on 'GND' at (114.80, 100.47) [F.Cu]
+      unconnected pad COUT1 on 'GND' at (92.20, 94.99) [F.Cu]
+      unconnected pad CFC on 'GND' at (128.20, 122.17) [F.Cu]
+      unconnected pad CVCC2 on 'GND' at (71.80, 117.78) [F.Cu]
+      unconnected pad CHOUT on 'GND' at (128.50, 126.67) [F.Cu]
+      unconnected pad COUT2 on 'GND' at (81.80, 103.89) [F.Cu]
+      unconnected pad CVCC1 on 'GND' at (77.33, 118.30) [F.Cu]
+      unconnected pad U1 on 'GND' at (78.70, 128.43) [F.Cu]
+      unconnected pad U1 on 'GND' at (78.70, 124.53) [F.Cu]
+      unconnected pad U1 on 'GND' at (77.38, 121.25) [F.Cu]
+      unconnected pad U1 on 'GND' at (76.08, 121.25) [F.Cu]
+      unconnected pad U1 on 'GND' at (74.78, 121.25) [F.Cu]
+      unconnected pad U1 on 'GND' at (72.83, 121.25) [F.Cu]
+      unconnected pad U1 on 'GND' at (71.50, 121.28) [F.Cu]
+      unconnected pad U1 on 'GND' at (71.50, 121.92) [F.Cu]
+      unconnected pad U1 on 'GND' at (71.50, 122.58) [F.Cu]
+      unconnected pad U1 on 'GND' at (71.50, 126.47) [F.Cu]
+      unconnected pad Q1 on 'GND' at (107.05, 96.65) [F.Cu]
+      unconnected pad CFA on 'GND' at (121.20, 122.17) [F.Cu]
+      unconnected pad CVS on 'GND' at (93.50, 83.97) [F.Cu]
+      unconnected pad J2 on 'GND' at (72.69, 113.31) [F.Cu]
+      unconnected pad J2 on 'GND' at (73.42, 112.63) [F.Cu]
+      unconnected pad J2 on 'GND' at (74.15, 111.95) [F.Cu]
+      unconnected pad J2 on 'GND' at (74.88, 111.26) [F.Cu]
+      unconnected pad J2 on 'GND' at (76.34, 109.90) [F.Cu]
+      unconnected pad J2 on 'GND' at (77.07, 109.22) [F.Cu]
+      unconnected pad RVPD on 'GND' at (122.33, 130.20) [F.Cu]
+      unconnected pad RFB2 on 'GND' at (95.53, 97.90) [F.Cu]
+      unconnected pad CVAUX on 'GND' at (86.33, 101.80) [F.Cu]
+      unconnected pad J3 on 'GND' at (122.56, 108.88) [F.Cu]
+      unconnected pad J3 on 'GND' at (123.29, 109.56) [F.Cu]
+      unconnected pad J3 on 'GND' at (124.02, 110.24) [F.Cu]
+      unconnected pad J3 on 'GND' at (124.75, 110.92) [F.Cu]
+      unconnected pad J3 on 'GND' at (126.22, 112.29) [F.Cu]
+      unconnected pad J3 on 'GND' at (126.95, 112.97) [F.Cu]
+      unconnected pad TP5 on 'GND' at (87.00, 136.30) [F.Cu]
+      unconnected pad J4 on 'GND' at (98.20, 91.88) [F.Cu]
+      unconnected pad U4 on 'GND' at (118.16, 132.00) [F.Cu]
+      unconnected pad JPAD on 'GND' at (111.75, 96.80) [F.Cu]
+      unconnected pad JPAD on 'GND' at (113.75, 96.80) [F.Cu]
+      unconnected pad CHIN on 'GND' at (126.50, 127.67) [F.Cu]
+      unconnected pad RPD3 on 'GND' at (118.50, 135.38) [F.Cu]
+      unconnected pad U2 on 'GND' at (87.85, 96.25) [F.Cu]
+      unconnected pad U2 on 'GND' at (87.85, 97.75) [F.Cu]
+      unconnected pad U2 on 'GND' at (88.78, 98.40) [F.Cu]
+      unconnected pad U2 on 'GND' at (89.42, 97.00) [F.Cu]
+      unconnected pad U2 on 'GND' at (88.28, 95.60) [F.Cu]
+      unconnected pad RPD1 on 'GND' at (131.82, 128.00) [F.Cu]
+      unconnected pad CIN1 on 'GND' at (90.00, 91.59) [F.Cu]
+      unconnected pad U3 on 'GND' at (123.66, 128.80) [F.Cu]
+      unconnected pad SW1 on 'GND' at (84.50, 132.90) [F.Cu]
+      unconnected pad DLED on 'GND' at (96.83, 83.00) [F.Cu]
+      unconnected pad JBATT on 'GND' at (124.62, 134.50) [F.Cu]
+
+  56 pad(s) are not connected to their plane by the pour alone -- EXPECTED (#562): the plane step places no taps. They are welded during the route step's normal routing (pour-launch); its in-run finalize then verifies against KiCad's exact fill and repairs any residue. Grade the board AFTER the route step, not here (see per-net breakdown above).
+  Bare pour (no track or via drawn; its 4 soft-joint bridge(s) join copper the board already carried): writing the copper clearance only -- no size or copper-to-hole floor (#1319)
+  DRC settings: wrote 8 value(s) to /home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-planes2.kicad_pro to match the routed floors (close+reopen in KiCad if it is open). WRITES, not changes: a key the project never declared counts here, and one logical value is written once per net class:
+      rules.min_clearance: None -> 0.1 mm
+      rules.min_copper_edge_clearance: None -> 0.2 mm (fab-edge pin)
+      rules.min_track_width: None -> 0.0889 mm
+      rules.min_via_diameter: None -> 0.35 mm
+      rules.min_through_hole_diameter: None -> 0.2 mm
+      rules.min_via_drill: None -> 0.2 mm
+      rules.min_via_annular_width: None -> 0.075 mm
+      net_class[Default]: created (project had none), clearance 0.1 mm
+PROJECT_WRITES_JSON: {"project": "/home/hatch/workspace/projects/he-piantor-wmain/.issue292-runtime/wmain-v4-planes2.kicad_pro", "writes": ["rules.min_clearance: None -> 0.1 mm", "rules.min_copper_edge_clearance: None -> 0.2 mm (fab-edge pin)", "rules.min_track_width: None -> 0.0889 mm", "rules.min_via_diameter: None -> 0.35 mm", "rules.min_through_hole_diameter: None -> 0.2 mm", "rules.min_via_drill: None -> 0.2 mm", "rules.min_via_annular_width: None -> 0.075 mm", "net_class[Default]: created (project had none), clearance 0.1 mm"]}
+JSON_SUMMARY: {"complete": true, "env_knobs": {}, "min_clearance_used": 0.1, "pads": {"geometric_failed": 56}, "pads_scope": "all zones in this run, summed -- not per zone; see plane_zones for what was poured", "plane_nets": ["GND"], "plane_resistance": [{"avg_width_mm": 46.557, "copper_oz": 1.0000000000000002, "max_current_a": 19.36, "max_current_ipc2152_a": 38.72, "net": "GND", "path_basis": "route", "path_length_mm": 93.55, "resistance_ohms": 0.000965, "temp_rise_c": 10.0}], "plane_zones": [{"layer": "In1.Cu", "net": "GND"}], "status": "ok", "zone_replacements": [{"changes": [{"new": "solid", "old": "thermal relief", "setting": "pad connection", "why": "route_planes connects pads solid unless --thermal-relief (Planes tab: Thermal relief pad connections)"}, {"new": "0.1 mm", "old": "0.2 mm", "setting": "clearance", "why": "this run's zone clearance: --zone-clearance, else the routed clearance"}, {"new": "0.1 mm", "old": "0.25 mm", "setting": "minimum width", "why": "--min-thickness"}, {"new": "0.2 mm / 0.2 mm", "old": "0.5 mm / 0.5 mm", "setting": "thermal gap / spoke width", "why": "route_planes' fixed spoke geometry; unused while pads connect solid"}, {"new": "4-vertex outline (64.61, 76.23)..(135.39, 137.40)", "old": "14-vertex outline (64.11, 75.73)..(135.89, 137.90)", "setting": "outline", "why": "the board's bounding box inset 0.5 mm (--board-edge-clearance)"}], "layers": ["In1.Cu"], "net": "GND", "replaced_uuid": "7435fd4b-a232-4055-b9b7-404845ab6e6a"}]}
+EXIT=0
