@@ -49,3 +49,60 @@ straightened (band 13.802 mm deep from Main wall line, case frame).
 - Every carried number cites source file/decision.
 - Certification only from maker/regulator pages; else UNVERIFIED.
 - Keep-out map from extracted Rev.10 data above, not memory.
+# Issue #292 Stage 2 — Wireless Main KiCad implementation: plan
+
+Worker: Muse (PMO-dispatched). Worktree he-piantor-wmain, branch
+issue-292-wmain, Draft PR #293. Study: .issue292-runtime/wmain-design.md.
+
+## Entry gates (BEFORE board work; FAIL = stop and report)
+- G1 Module stock TODAY: EYSKDNZWB / ED2840AA2 at >=2 channels
+  (LCSC/JLCPCB, Mouser, DigiKey, TME, Chip1Stop/Kaga FEI). Need:
+  comfortably above prototype qty (5 boards + spares).
+- G2 Model-transition pin compatibility: from Taiyo Yuden's own
+  documents, EYSKDNZWB -> ED2840AA2 pin/footprint compatibility;
+  design for the part that can actually be ordered.
+
+## Implementation (new tree hardware/kicad/qualification/issue-292-wmain/)
+- Rev.10 outline + symmetric holes UNCHANGED.
+- Module in SW pocket (x 69.5..79.1, y 118.4..131.3 KiCad), antenna
+  end south; antenna shadow (y 131.3..137.9, same x span) copper-free
+  all layers; >=0.5 mm margins to J2 body / H2 reservation / circle /
+  outline verified from placed data.
+- TPS63070 re-set 5.2 V -> 3.3 V SYS, forced PWM dropped; AP2112K
+  LDO deleted. TPS22919 -> HALL_3V3 -> J2/J3 pin 1. Trackpad load
+  switch -> PAD_3V3. Diode-OR VBUS into converter input; blocking
+  element on pack line (no back-feed by construction).
+- Battery connector at SE south edge ~(124,136) KiCad; gated 1M/1M
+  divider -> module AIN.
+- J2/J3 FH12-14S-0.5SH(55) inherited; assignment per study §5.1
+  (pin1 HALL_3V3, pin7 per-Wing EN, k->15-k absorbed in footprint).
+- Trackpad interface (I2C SDA/SCL + DR + PAD_3V3/GND) to bay
+  disconnect footprint in north sliver (study §4.2: y 98..103,
+  x 84..91 or 109..116).
+- USB-C: run study §3 placement decision — mini-tab (<=10x12 mm,
+  north apex) vs J4-footprint carrier; fitted check decides; take
+  the passing option. 16-pin receptacle, USBLC6-class ESD, 5.1k CC.
+- Trackpad keep-out: circle r20 @ KiCad (100,118) — no components.
+- SWD test pads retained (Rev.10 TP precedent). Button + LED (15-GPIO
+  budget, study §1.1).
+
+## Gates to report (all with numbers)
+Native schematic + ERC 0; DRC severity-all; unconnected 0; via-pad
+audit (diff-net min vs 0.10 floor / 0.125 target, sub-target sites
+listed); keep-out audit from placed data (trackpad dia.40, antenna
+shadow, south band); Wing-link assignment census both connectors
+(14 pins each) vs study §5.1 AND wireless Matrix/Wing signal content;
+far-Wing rail budget recomputed from routed board (branch loop
+<=250 mOhm target; far-point drop @20 mA burst vs <=50 mV);
+fitted check module + USB vs case production tree.
+
+## Package
+manufacturing/ per #267: BOM-jlcpcb.csv (module LCSC code verified
+character-exact or hand-fit with reason), CPL-jlcpcb-gerber-frame.csv,
+FABRICATION.md, quote-handoff.md (DRAFT / NOT FOR ORDER), REPORT.md
+with gate table + draft adoption line.
+
+## Invariants
+- Failing gate states shown before changes.
+- Assignment/keep-out tables generated from placed board data.
+- Checkpoint-commit per stage; never /tmp.
