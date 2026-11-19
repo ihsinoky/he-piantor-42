@@ -214,6 +214,7 @@ for L in LAYERS:
         ys, xs = np.nonzero(goal_cells[L])
         for ix, iy in zip(xs, ys):
             goals.add((LAYERS.index(L), int(ix), int(iy)))
+print('start cells', len(starts), 'goal cells', len(goals), 'via_blocked at start', [bool(via_blocked[s[2], s[1]]) for s in starts[:3]])
 assert starts and goals, 'no start/goal cells in region'
 gx, gy = JOB['goal']
 def heur(s):
