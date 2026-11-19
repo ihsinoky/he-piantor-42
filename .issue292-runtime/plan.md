@@ -165,3 +165,42 @@ SWD note, deviations, draft adoption line D-056).
 # then shortlist commit). No layout until the study reports.
 # MDBT50Q footprint data already extracted (sources/) stays as
 # candidate evidence, not as a design basis.
+# Issue #292 Stage 2 LAYOUT (D-056 basis) — plan addendum 2026-11-19
+
+Module = Insight SiP ISP1807-LR (D-056). North tab DROPPED:
+outline + symmetric holes = Rev.10 EXACTLY (zero delta is a gate).
+
+## Verified procurement fact (PMO, live 2026-11-19)
+ISP1807-LR-RS = LCSC C5264268: JLCPCB stock 0 / LCSC stock 0, but
+registered as JLCPCB **Pre-order Part** (Extended), est. $11.78,
+est. lead 28 days. BOM line = PCBA via Pre-order Parts; alternatives
+noted (DigiKey + consigned parts; hand-fit + SWD/continuity
+bring-up). Never claim shelf stock; never plain hand-fit.
+
+## Build method (repo precedent: scripted pcbnew, KiCad 9.0.9
+## extracted runtime at he-piantor-42/.issue129-runtime/kicad/usr)
+1. Extract donor data from Rev.10 board (outline, holes, J2/J3
+   FH12 footprints + pad-net assignment, power-stage footprints).
+   Extract ISP1807 footprint from sources/jrwatch.kicad_pcb;
+   cross-check pad table vs Insight SiP datasheet pin table.
+2. Netlist as data (parts/pins/nets) -> generate native schematic
+   (.kicad_sch + project .kicad_sym), ERC via kicad-cli.
+3. Board: Rev.10 outline/holes/J2/J3 carried; fresh placement
+   outside the dia.40 keep-out; module in SW pocket, antenna end
+   south, antenna keep-out (no copper all layers) in the south
+   strip; TPS63070 re-set 3.3V; TPS22919 -> HALL_3V3; trackpad
+   switch -> PAD_3V3; diode-OR VBUS (no pack back-feed); gated
+   1M/1M VBAT divider -> AIN; SWD pads (TC2030-class 6-pin);
+   trackpad conn (I2C+DR+PAD_3V3/GND) in north sliver.
+4. USB comparison (i) mini-tab bare / (ii) EZmate daughterboard
+   (stocked Fly servability from recorded spec) / (iii) bare on
+   existing outline -> pick by cost/rework/freedom; any tab is
+   THE flagged deviation in REPORT.md.
+5. Route (DSN/Freerouting or KRT per availability), DRC, audits
+   from placed data: via-pad, keep-outs, Wing-link census 2x14,
+   far-Wing budget from routed copper, outline delta = 0 check.
+6. Case fitted check vs issue-263-lowdeck-production tree.
+7. Package: manufacturing/ (BOM with C5264268 Pre-order line,
+   CPL gerber frame, FABRICATION.md, quote-handoff DRAFT) +
+   REPORT.md (gates, USB pick, antenna, shell, deviations,
+   draft adoption line D-057).
