@@ -158,3 +158,10 @@ holes unchanged verified from data).
 hand-fit marks, CPL gerber frame, FABRICATION.md, quote-handoff
 DRAFT/NOT FOR ORDER) + REPORT.md (gates, antenna, shell impact,
 SWD note, deviations, draft adoption line D-056).
+# Stage 2a (PO 2026-11-19): LAYOUT STOPPED. Module basis REOPENED.
+# D-055's Raytac choice was a fallback under old constraints; tab +
+# daughterboard-USB + DK-SWD relaxed them. New deliverable:
+# .issue292-runtime/module-selection.md + .json (survey commit,
+# then shortlist commit). No layout until the study reports.
+# MDBT50Q footprint data already extracted (sources/) stays as
+# candidate evidence, not as a design basis.
