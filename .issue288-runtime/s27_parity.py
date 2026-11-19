@@ -17,7 +17,7 @@ TREE = WT / 'hardware/kicad/qualification/issue-288-wmatrix'
 MM = 1e6
 KCLI = '/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/bin/kicad-cli'
 ENV = {'LD_LIBRARY_PATH': '/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/x86_64-linux-gnu:/home/hatch/workspace/projects/he-piantor-42/.issue129-runtime/kicad/usr/lib/kicad',
-       'PATH': '/usr/bin:/bin'}
+       'PATH': '/usr/bin:/bin', 'HOME': '/home/hatch'}
 
 netlist = TREE / 'netlist-s2.sexpr'
 subprocess.run([KCLI, 'sch', 'export', 'netlist', '--format', 'kicadsexpr',
@@ -36,7 +36,7 @@ for m in re.finditer(r'\(net\s+\(code\s+"?\d+"?\)\s+\(name\s+"([^"]*)"\)', txt):
     if nxt > 0:
         chunk = chunk[:nxt]
     for nm in re.finditer(r'\(node\s+\(ref\s+"([^"]+)"\)\s+\(pin\s+"([^"]+)"\)', chunk):
-        sch[(nm.group(1), nm.group(2))] = name
+        sch[(nm.group(1), nm.group(2))] = None if name.startswith('unconnected-') else name.lstrip('/')
 
 b = pcbnew.LoadBoard(str(TREE / 'wmatrix.kicad_pcb'))
 board = {}

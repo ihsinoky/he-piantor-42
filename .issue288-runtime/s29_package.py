@@ -66,8 +66,9 @@ def main():
     excluded = []
     for f in fps:
         ref = f.GetReference()
-        if ref.startswith(EXCLUDE_PREFIXES) or ref in ('U_XIAO', 'J_BATT'):
-            excluded.append(ref)
+        if ref.startswith(EXCLUDE_PREFIXES) or ref in ('U_XIAO', 'J_BATT') or \
+                (len(ref) == 2 and ref[0] == 'H' and ref[1].isdigit()):
+            excluded.append(ref)  # mounting NPTH H1-H4 excluded like TPs
             continue
         row = bom_row(ref)
         if row is None:
