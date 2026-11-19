@@ -116,7 +116,7 @@ artifacts record no input STEP hash, so none is cited.
 - **Measured:** 0.488 mm³ as audited; 0.016 mm³ on re-test with the approach re-run to the as-built Rev.10 J2 centre (the study ZIF envelope sits ~1.4 mm from the as-built connector centre, a pre-existing offset of the #264 lineage)
 - **Evidence:** `he-piantor-mainsym/.issue275-runtime/audit275-normal.json`; `c23-check.log` (re-test); REPORT §5 in `he-piantor-mainsym/hardware/kicad/qualification/issue-275-main-rev10/REPORT.md`; input: fitted body set `fitlibF.bodies_at(17, -2.65)`
 - **Class:** PC-2 interference (marginal envelope graze)
-- **State:** new — **Classification:** needs-PO-judgment. Basis: no D-xxx disposes this graze; the #275 REPORT classifies it "marginal envelope graze, build watch item — not a route blocker", which is a study opinion, not a PO acceptance (acceptance is a PO gate, procedure §7.4). Same-class group with R-294-05 / R-294-06.
+- **State:** accepted (build-watch) — **Classification:** accepted risk. Basis: no D-xxx disposed this graze at audit time; the #275 REPORT classified it "marginal envelope graze, build watch item — not a route blocker" (a study opinion). **PO accepted all three J-1 grazes as build-watch items on 2026-11-19** (he-piantor-42開発 chat, J-1 option a). Same-class group with R-294-05 / R-294-06.
 - **Suppression:** none — surfaced as NEW.
 - **Raw observations consolidated:** 2
 
@@ -152,7 +152,7 @@ artifacts record no input STEP hash, so none is cited.
 - **Measured:** 0.503 mm³
 - **Evidence:** `he-piantor-mainsym/.issue275-runtime/audit275-flipped.json`; `c23-check.log` (recomputation); REPORT §5; input: fitted body set `fitlibF.bodies_at(17, -2.65)`, flipped
 - **Class:** PC-2 interference (marginal graze)
-- **State:** new — **Classification:** needs-PO-judgment. Basis: REPORT §5 records "marginal grazes, recorded — gate 1 is not a literal 0 on this side"; D-046 adopts the flip qualification without naming the grazes, so no PO acceptance of this item is on record. Same-class group with R-294-02 / R-294-06.
+- **State:** accepted (build-watch) — **Classification:** accepted risk. Basis: REPORT §5 records "marginal grazes, recorded — gate 1 is not a literal 0 on this side"; D-046 adopts the flip qualification without naming the grazes. **PO accepted all three J-1 grazes as build-watch items on 2026-11-19** (he-piantor-42開発 chat, J-1 option a). Same-class group with R-294-02 / R-294-06.
 - **Suppression:** none — surfaced as NEW.
 - **Raw observations consolidated:** 1
 
@@ -164,7 +164,7 @@ artifacts record no input STEP hash, so none is cited.
 - **Measured:** 0.049 mm³
 - **Evidence:** `he-piantor-mainsym/.issue275-runtime/audit275-flipped.json`; `c23-check.log`; REPORT §5; input: fitted body set `fitlibF.bodies_at(17, -2.65)`, flipped
 - **Class:** PC-2 interference (marginal envelope graze)
-- **State:** new — **Classification:** needs-PO-judgment. Basis: as R-294-05; same-class group with R-294-02 / R-294-05.
+- **State:** accepted (build-watch) — **Classification:** accepted risk. Basis: as R-294-05; **PO accepted all three J-1 grazes as build-watch items on 2026-11-19** (he-piantor-42開発 chat, J-1 option a). Same-class group with R-294-02 / R-294-05.
 - **Suppression:** none — surfaced as NEW.
 - **Raw observations consolidated:** 1
 
