@@ -1385,3 +1385,7 @@ gates.
 - **Quote (JLCPCB, 2026-11-19, quote only):** USD 76.81 for the 34 selectable items + module USD 61.14/5 (C5264268 at $12.2283, via the Pre-order flow) + JBATT and small generics => full-equivalent approx **USD 139 for 5 boards** excl. shipping/tax.
 - **Disclosed risk carried into adoption:** the 0.05mm-class field's manufacturability at JLCPCB is NOT confirmed - the quote flow accepted the gerbers silently at standard price, while JLCPCB's JLCDFM tool flags the field (and the board's standard 0.10mm design) under its conservative default thresholds. Final confirmation occurs at JLCPCB's post-order engineering review. PO adopted with this risk stated.
 - **Order-stage preparation (PMO, before any order):** assign LCSC codes in the BOM for the generic parts (LED, 6.8k, 4.7k, 1M, TACT) and for RFB1/RFB2 (quote-verified C23184 / C4210); disposition JBATT (site matched a through-hole XH part that does not fit the GH land pattern); choose the module sourcing path (JLCPCB Pre-order into the private library vs DigiKey purchase + consignment).
+
+### D-058 Amendment (2026-11-19): adopted board file superseded by the edge-fix
+
+The board file adopted above (SHA-256 509e52a7…) was found the same day to carry copper crossing the board outline at the west dent and was superseded by the edge-fix round's fixed board (SHA-256 26072619…). The adopted **configuration is unchanged**; only the board file was corrected. Full record: REPORT.md deviation 13 in the Issue #292 tree.
