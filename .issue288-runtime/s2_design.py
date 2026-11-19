@@ -119,11 +119,12 @@ add('R_DIV2', 'R', '10k', {'1': 'REF_RAIL', '2': 'GND'})
 
 TPS = {
     'TP_VIN_SRC': 'VIN_SRC', 'TP_VIN': 'VIN', 'TP_3V3_SRC': 'HALL_3V3_SRC',
-    'TP_RAIL_W': 'HALL_3V3', 'TP_RAIL_E': 'HALL_3V3',
+    'TP_RAIL_N': 'HALL_3V3', 'TP_RAIL_E': 'HALL_3V3',
     'TP_MUXA': 'MUXA_OUT', 'TP_MUXB': 'MUXB_OUT', 'TP_MUXC': 'MUXC_OUT',
     'TP_A0': 'MUX_A0', 'TP_A1': 'MUX_A1', 'TP_A2': 'MUX_A2',
     'TP_EN_A': 'EN_A', 'TP_EN_B': 'EN_B', 'TP_EN_C': 'EN_C',
-    'TP_REF': 'REF_RAIL', 'TP_GND_A': 'GND', 'TP_GND_B': 'GND',
+    'TP_REF': 'REF_RAIL',
+    'TP_GND_A': 'GND', 'TP_GND_B': 'GND', 'TP_GND_C': 'GND', 'TP_GND_D': 'GND',
     'TP_H16_CTR': 'H_B1_RAW', 'TP_H16_N': 'H_B0_RAW', 'TP_H16_DIAG': 'H_A0_RAW',
     'TP_H17_CTR': 'H_B4_RAW', 'TP_H17_N': 'H_B3_RAW', 'TP_H17_DIAG': 'H_A3_RAW',
 }
