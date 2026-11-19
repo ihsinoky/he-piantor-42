@@ -217,3 +217,25 @@ D-057 condition). Package: manufacturing/ DRAFT / NOT FOR ORDER
 Key incidents: FH12 clone pad-rotation defect found by bbox audit
 and fixed (43->0 local); GND band went F-band -> B-via design;
 A-net escapes completed after band redesign; U4.2 = via-in-pad.
+
+## Stage 2 FIX ROUND — discharge D-057 condition (deviation 1)
+1. Obtain Insight SiP OFFICIAL CAD for ISP1807-LR (maker site /
+   official library / DigiKey-linked ECAD only). Record source,
+   version/date, SHA-256 of the downloaded file.
+2. Script-diff official vs derived footprint pad-by-pad
+   (number/position/size) -> full table in runtime notes.
+3. Swap footprint into wmain.kicad_pcb (incl. south NC pads
+   70-78 as maker specifies, if present in official CAD);
+   repair routing only where the swap disturbs it.
+4. Re-run FULL gate set: ERC, DRC severity-all, unconnected,
+   via-pad audit, antenna + trackpad keep-outs, Wing census,
+   far-Wing budget, outline delta = 0. Re-verify module
+   pad-net assignment vs selection-study pin table from
+   board data after the swap.
+5. Regenerate manufacturing package if gerber/CPL change;
+   note in quote-handoff.md. Update REPORT.md: deviation 1
+   -> DISCHARGED with diff summary; board SHA updated.
+   STOP condition: official CAD unobtainable from an
+   authorized source -> report attempts, keep derived fp
+   explicitly UNVERIFIED.
+Other 7 deviations untouched.
