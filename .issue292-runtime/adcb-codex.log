@@ -1,0 +1,1271 @@
+Reading additional input from stdin...
+OpenAI Codex v0.166.0
+--------
+workdir: /home/hatch/workspace/projects/he-piantor-wmain-fix
+model: gpt-6.2-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR] (network access enabled)
+reasoning effort: none
+reasoning summaries: none
+session id: 01a1f3b9-c4f0-7143-bca1-60283a902296
+--------
+user
+Read .issue292-runtime/adcb-second-opinion-brief.md and answer it in full. Write your route proposal (or impossibility verdict with the cheapest unblocking move) to .issue292-runtime/adcb-second-opinion-answer.md. Be concrete: coordinates, layers, clearances. Do not edit the board file.
+warning: Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: https://developers.openai.com/codex/concepts/sandboxing#prerequisites. Codex will use the bundled bubblewrap in the meantime.
+codex
+I’ll read the brief and inspect the board geometry, then write the routing answer in the requested Markdown file.
+exec
+/bin/bash -lc "git status --short; rg --files --hidden -g AGENTS.md -g '*second-opinion*' -g '*.kicad_pcb'; cat .issue292-runtime/adcb-second-opinion-brief.md" in /home/hatch/workspace/projects/he-piantor-wmain-fix
+ succeeded in 99ms:
+ M .issue292-runtime/probe_via.py
+ M .issue292-runtime/tree-drc.json
+ M .issue292-runtime/wmain-work.kicad_pcb
+?? .issue292-runtime/adcb-codex.log
+?? .issue292-runtime/adcb-second-opinion-brief.md
+?? .issue292-runtime/check_net.py
+?? .issue292-runtime/delete_region2.py
+?? .issue292-runtime/dump_net.py
+?? .issue292-runtime/edge-work3.json
+?? .issue292-runtime/edge-work4.json
+?? .issue292-runtime/edge-work5.json
+?? .issue292-runtime/edge-work6.json
+?? .issue292-runtime/edge-work7.json
+?? .issue292-runtime/edge-work8.json
+?? .issue292-runtime/extract_i2.py
+?? .issue292-runtime/extract_path.py
+?? .issue292-runtime/find_shorts.py
+?? .issue292-runtime/layer_use.py
+?? .issue292-runtime/led-codex.log
+?? .issue292-runtime/led-second-opinion-answer.md
+?? .issue292-runtime/led-second-opinion-brief.md
+?? .issue292-runtime/local_cut.py
+?? .issue292-runtime/nudge.py
+?? .issue292-runtime/place_link.py
+?? .issue292-runtime/probe_a0B.py
+?? .issue292-runtime/probe_a0comps.py
+?? .issue292-runtime/probe_a0gap.py
+?? .issue292-runtime/probe_a2.py
+?? .issue292-runtime/probe_a2f.py
+?? .issue292-runtime/probe_adca.py
+?? .issue292-runtime/probe_adcaF.py
+?? .issue292-runtime/probe_adopt_scl.py
+?? .issue292-runtime/probe_arc.py
+?? .issue292-runtime/probe_ascii.py
+?? .issue292-runtime/probe_band.py
+?? .issue292-runtime/probe_barrier.py
+?? .issue292-runtime/probe_bestvia.py
+?? .issue292-runtime/probe_big.py
+?? .issue292-runtime/probe_cell.py
+?? .issue292-runtime/probe_col.py
+?? .issue292-runtime/probe_count.py
+?? .issue292-runtime/probe_dm.py
+?? .issue292-runtime/probe_dpB.py
+?? .issue292-runtime/probe_dr.py
+?? .issue292-runtime/probe_eff.py
+?? .issue292-runtime/probe_field.py
+?? .issue292-runtime/probe_gap.py
+?? .issue292-runtime/probe_gap6.py
+?? .issue292-runtime/probe_gapband.py
+?? .issue292-runtime/probe_grid.py
+?? .issue292-runtime/probe_i2wall.py
+?? .issue292-runtime/probe_j2.py
+?? .issue292-runtime/probe_j212.py
+?? .issue292-runtime/probe_j212b.py
+?? .issue292-runtime/probe_j212c.py
+?? .issue292-runtime/probe_join.py
+?? .issue292-runtime/probe_join2.py
+?? .issue292-runtime/probe_ledB.py
+?? .issue292-runtime/probe_ledF.py
+?? .issue292-runtime/probe_led_front.py
+?? .issue292-runtime/probe_leddiag.py
+?? .issue292-runtime/probe_micro.py
+?? .issue292-runtime/probe_mini.py
+?? .issue292-runtime/probe_model.py
+?? .issue292-runtime/probe_model2.py
+?? .issue292-runtime/probe_model3.py
+?? .issue292-runtime/probe_model4.py
+?? .issue292-runtime/probe_mux.py
+?? .issue292-runtime/probe_nc.py
+?? .issue292-runtime/probe_overlap.py
+?? .issue292-runtime/probe_pads.py
+?? .issue292-runtime/probe_padsclgap.py
+?? .issue292-runtime/probe_reach2.py
+?? .issue292-runtime/probe_reachF.py
+?? .issue292-runtime/probe_reach_pt.py
+?? .issue292-runtime/probe_rect.py
+?? .issue292-runtime/probe_rled.py
+?? .issue292-runtime/probe_rm.py
+?? .issue292-runtime/probe_rm2.py
+?? .issue292-runtime/probe_rm3.py
+?? .issue292-runtime/probe_rot.py
+?? .issue292-runtime/probe_rpd1.py
+?? .issue292-runtime/probe_scl.py
+?? .issue292-runtime/probe_scl_front.py
+?? .issue292-runtime/probe_scl_south.py
+?? .issue292-runtime/probe_se.py
+?? .issue292-runtime/probe_strip.py
+?? .issue292-runtime/probe_stripF.py
+?? .issue292-runtime/probe_stripI2.py
+?? .issue292-runtime/probe_stub.py
+?? .issue292-runtime/probe_sys.py
+?? .issue292-runtime/probe_tree_adcb.py
+?? .issue292-runtime/probe_tree_adcb2.py
+?? .issue292-runtime/probe_tree_comps.py
+?? .issue292-runtime/probe_two.py
+?? .issue292-runtime/probe_u126.py
+?? .issue292-runtime/probe_viadist.py
+?? .issue292-runtime/probe_viasites.py
+?? .issue292-runtime/probe_wall.py
+?? .issue292-runtime/probe_zone.py
+?? .issue292-runtime/refill.py
+?? .issue292-runtime/restore_net.py
+?? .issue292-runtime/restore_region.py
+?? .issue292-runtime/restore_region2.py
+?? .issue292-runtime/restore_stubs.py
+?? .issue292-runtime/rip.py
+?? .issue292-runtime/shift_run.py
+?? .issue292-runtime/tree_router.py
+?? .issue292-runtime/west_router.py
+?? .issue292-runtime/work-drc1.json
+?? .issue292-runtime/work-drc2.json
+?? candidate.kicad_pro
+.issue270-runtime/seg-17mm-right2b.kicad_pcb
+.issue270-runtime/seg-17mm-left2b.kicad_pcb
+.issue270-runtime/seg-16mm-right2b.kicad_pcb
+.issue270-runtime/seg-16mm-left2b.kicad_pcb
+.issue270-runtime/rev9-2b.kicad_pcb
+.issue270-runtime/fig-17mm-right-2b.kicad_pcb
+.issue270-runtime/fig-17mm-left-2b.kicad_pcb
+hardware/tscircuit/qualification/eda-004d/evidence/processes/patched-smoke-conversion/smoke.kicad_pcb
+.issue263-runtime/wing16l-main-backup.kicad_pcb
+.issue263-runtime/wing-rev5-17mm-right-main-backup.kicad_pcb
+.issue263-runtime/wing-rev5-17mm-left-main-backup.kicad_pcb
+.issue263-runtime/wing-rev5-16mm-right-main-backup.kicad_pcb
+.issue263-runtime/routed-pre-rip.kicad_pcb
+.issue263-runtime/routed-pre-en1fix.kicad_pcb
+.issue263-runtime/routed-last-standard.kicad_pcb
+.issue263-runtime/routed-best.kicad_pcb
+.issue263-runtime/roll2-candidate.kicad_pcb
+.issue263-runtime/main-rev8-FINAL.kicad_pcb
+.issue263-runtime/final-prev/main.kicad_pcb
+.issue263-runtime/board-backup/wing-rev5-17mm-right-main.kicad_pcb
+.issue263-runtime/board-backup/wing-rev5-17mm-left-main.kicad_pcb
+.issue263-runtime/board-backup/wing-rev5-16mm-right-main.kicad_pcb
+.issue263-runtime/board-backup/wing-rev5-16mm-left-main.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-right/routed.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-right/main.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-right/input.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-left/routed.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-left/main.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-17mm-left/input.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-right/routed.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-right/main.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-right/input.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-left/routed.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-left/main.kicad_pcb
+.issue263-runtime/board-backup/respin-pre/wing-rev5-16mm-left/input.kicad_pcb
+.issue263-runtime/board-backup/16R-main-esc-pre-repair.kicad_pcb
+.issue263-runtime/board-backup/16L-main-esc-pre-repair.kicad_pcb
+.issue292-runtime/wmain-v11-routed.kicad_pcb
+.issue292-runtime/wmain-v10.kicad_pcb
+.issue292-runtime/wmain-v10-routed3.kicad_pcb
+.issue292-runtime/wmain-v10-routed2.kicad_pcb
+.issue292-runtime/wmain-v10-routed.kicad_pcb
+.issue292-runtime/wmain-tree-preswap-derived.kicad_pcb
+.issue292-runtime/wmain-stripped.kicad_pcb
+.issue292-runtime/wmain-routed5.kicad_pcb
+.issue292-runtime/wmain-routed4.kicad_pcb
+.issue292-runtime/wmain-routed3.kicad_pcb
+.issue292-runtime/wmain-routed2.kicad_pcb
+.issue292-runtime/wmain-routed.kicad_pcb
+.issue292-runtime/wmain-fixed.kicad_pcb
+.issue292-runtime/wmain-final.kicad_pcb
+.issue292-runtime/adcb-second-opinion-brief.md
+.issue292-runtime/led-second-opinion-answer.md
+.issue292-runtime/led-second-opinion-brief.md
+.issue292-runtime/probe.kicad_pcb
+.issue292-runtime/wmain-work.kicad_pcb
+.issue292-runtime/wmain-v9.kicad_pcb
+.issue292-runtime/wmain-v9-final.kicad_pcb
+.issue292-runtime/wmain-v8.kicad_pcb
+.issue292-runtime/wmain-v8-final.kicad_pcb
+.issue292-runtime/wmain-v7.kicad_pcb
+.issue292-runtime/wmain-v7-routed.kicad_pcb
+.issue292-runtime/wmain-v7-final.kicad_pcb
+.issue292-runtime/wmain-v6.kicad_pcb
+.issue292-runtime/wmain-v6-filled.kicad_pcb
+.issue292-runtime/wmain-v5-tapped.kicad_pcb
+.issue292-runtime/wmain-v5-final.kicad_pcb
+.issue292-runtime/wmain-v5-en3.kicad_pcb
+.issue292-runtime/wmain-v5-en2.kicad_pcb
+.issue292-runtime/wmain-v5-en.kicad_pcb
+.issue292-runtime/wmain-v4-stripped3.kicad_pcb
+.issue292-runtime/wmain-v4-stripped2.kicad_pcb
+.issue292-runtime/wmain-v4-stripped.kicad_pcb
+.issue292-runtime/wmain-v4-routed4.kicad_pcb
+.issue292-runtime/wmain-v4-routed3.kicad_pcb
+.issue292-runtime/wmain-v4-routed2.kicad_pcb
+.issue292-runtime/wmain-v4-routed.kicad_pcb
+.issue292-runtime/wmain-v4-planes2.kicad_pcb
+.issue292-runtime/wmain-v4-planes.kicad_pcb
+.issue292-runtime/wmain-v4-input.kicad_pcb
+.issue292-runtime/wmain-v4-gnd.kicad_pcb
+.issue292-runtime/wmain-v4-final.kicad_pcb
+.issue292-runtime/sources/jrwatch.kicad_pcb
+.issue292-runtime/wmain-v4-filled.kicad_pcb
+.issue292-runtime/wmain-v3-stripped.kicad_pcb
+.issue292-runtime/wmain-v3-routed2.kicad_pcb
+.issue292-runtime/wmain-v3-routed.kicad_pcb
+.issue292-runtime/wmain-v3-input.kicad_pcb
+.issue292-runtime/wmain-v28d.kicad_pcb
+.issue292-runtime/wmain-v28c.kicad_pcb
+.issue292-runtime/wmain-v28c-filled.kicad_pcb
+.issue292-runtime/wmain-v28b.kicad_pcb
+.issue292-runtime/wmain-v28b-filled.kicad_pcb
+.issue292-runtime/wmain-v28-routed.kicad_pcb
+.issue292-runtime/wmain-v28-fp.kicad_pcb
+.issue292-runtime/wmain-v28-filled.kicad_pcb
+.issue292-runtime/wmain-v27.kicad_pcb
+.issue292-runtime/wmain-v27-routed.kicad_pcb
+.issue292-runtime/wmain-v27-final.kicad_pcb
+.issue292-runtime/wmain-v26.kicad_pcb
+.issue292-runtime/wmain-v26-routed.kicad_pcb
+.issue292-runtime/wmain-v26-final.kicad_pcb
+.issue292-runtime/wmain-v25.kicad_pcb
+.issue292-runtime/wmain-v25-final.kicad_pcb
+.issue292-runtime/wmain-v24.kicad_pcb
+.issue292-runtime/wmain-v24-final.kicad_pcb
+.issue292-runtime/wmain-v23.kicad_pcb
+.issue292-runtime/wmain-v22.kicad_pcb
+.issue292-runtime/wmain-v22-final.kicad_pcb
+.issue292-runtime/wmain-v21.kicad_pcb
+.issue292-runtime/wmain-v21-final.kicad_pcb
+.issue292-runtime/wmain-v20.kicad_pcb
+.issue292-runtime/wmain-v20-final.kicad_pcb
+.issue292-runtime/wmain-v2-stripped.kicad_pcb
+.issue292-runtime/wmain-v2-routed3.kicad_pcb
+.issue292-runtime/wmain-v2-routed2.kicad_pcb
+.issue292-runtime/wmain-v2-routed.kicad_pcb
+.issue292-runtime/wmain-v19.kicad_pcb
+.issue292-runtime/wmain-v19-final.kicad_pcb
+.issue292-runtime/wmain-v18.kicad_pcb
+.issue292-runtime/wmain-v18-final.kicad_pcb
+.issue292-runtime/wmain-v17.kicad_pcb
+.issue292-runtime/wmain-v17-final.kicad_pcb
+.issue292-runtime/wmain-v16.kicad_pcb
+.issue292-runtime/wmain-v16-final.kicad_pcb
+.issue292-runtime/wmain-v15.kicad_pcb
+.issue292-runtime/wmain-v15-final.kicad_pcb
+.issue292-runtime/wmain-v14.kicad_pcb
+.issue292-runtime/wmain-v14-final.kicad_pcb
+.issue292-runtime/wmain-v13.kicad_pcb
+.issue292-runtime/wmain-v13-routed.kicad_pcb
+.issue292-runtime/wmain-v13-final.kicad_pcb
+.issue292-runtime/wmain-v12.kicad_pcb
+.issue292-runtime/wmain-v12-routed.kicad_pcb
+.issue292-runtime/wmain-v12-final.kicad_pcb
+.issue292-runtime/wmain-v11.kicad_pcb
+.issue292-runtime/nodru/wmain.kicad_pcb
+.issue292-runtime/locktest.kicad_pcb
+.issue292-runtime/filled-check.kicad_pcb
+.issue292-runtime/drutest/test.kicad_pcb
+.issue292-runtime/dru-test/wmain.kicad_pcb
+hardware/kicad/qualification/issue-99-fastroute-width-floor/evidence/processes/smoke-import/main.kicad_pcb
+.issue292-runtime/drcwork-final-nodru/wmain.kicad_pcb
+.issue292-runtime/drcwork-final-dru/wmain.kicad_pcb
+.issue292-runtime/completion-work.kicad_pcb
+.issue292-runtime/completion-base.kicad_pcb
+.issue292-runtime/check.kicad_pcb
+.issue292-runtime/candidate.kicad_pcb
+.issue292-runtime/board-prev.kicad_pcb
+.issue292-runtime/base.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/runs/local/out.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/runs/local/in.kicad_pcb
+.issue275-runtime/rev10-routed.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/runs/global/out.kicad_pcb
+.issue275-runtime/rev10-fullkrt.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/runs/global/in.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/runs/final/out.kicad_pcb
+hardware/kicad/qualification/issue-97-fastroute-falsification/evidence/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/local/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/local/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/global/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/global/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inspection/final/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inputs/revised/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inputs/revised/canonical-source.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inputs/local/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inputs/global/main.kicad_pcb
+hardware/kicad/qualification/issue-155-main-mounting-stage2/inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-right/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/resume-01/evidence/processes/small-ses-import/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-left/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/routed2.kicad_pcb
+hardware/kicad/qualification/issue-149-wing-silkscreen/17mm/wing-17mm-silk149.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/routed-esc.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/routed-esc2.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/routed-esc.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-270-wing-rev6/wing-rev6-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-149-wing-silkscreen/16mm/wing-16mm-silk149.kicad_pcb
+hardware/kicad/qualification/issue-270-main-rev9/main-rev9/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-right/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-left/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/routed2.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/routed-esc.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/routed-esc2.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/routed-esc.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/respin-in.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/wing-rev5-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/main-rev8/routed.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/main-rev8/repair-in.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/main-rev8/main.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/main-rev8/input.kicad_pcb
+hardware/kicad/qualification/issue-263-implementation/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/evidence/processes/via-read-short/probe.kicad_pcb
+hardware/kicad/qualification/issue-240-main-rev7/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/evidence/processes/via-read-missing-via/probe.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/out.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-17-2L-P0300/in.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/evidence/processes/via-read-connected/probe.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-16-2L-P0300/out.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/runs/KRT-16-2L-P0300/in.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/evidence/processes/spacing-drc/main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-left/round3/round2-main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-235-wing-round2/wing-rev4-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-87-native-main-routing/evidence/processes/smoke-read-before/main.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-233-wing-single-sided/wing-rev4-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/preflight/runs/KRT-16-2L-P0300/in.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/preflight/cell-inputs/KRT-16-2L-P0300/main.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/inspection/KRT-17-2L-P0300/main.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/inspection/KRT-16-2L-P0300/main.kicad_pcb
+hardware/kicad/qualification/issue-226-main-rev6/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/cell-inputs/KRT-17-2L-P0300/main.kicad_pcb
+hardware/kicad/qualification/issue-141-wing-power-integrity/cell-inputs/KRT-16-2L-P0300/main.kicad_pcb
+hardware/tscircuit/qualification/eda-004c/evidence/processes/smoke-conversion/smoke.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-17-2L-0100/out.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-17-2L-0100/in.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0127/out.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0127/in.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/out.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/runs/KRT-16-2L-0100/in.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inspection/KRT-17-2L-0100/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inspection/KRT-16-2L-0127/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inspection/KRT-16-2L-0100/main.kicad_pcb
+hardware/kicad/qualification/issue-221-main-rev5/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inputs/representative21-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inputs/representative21-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/inputs/pitch9-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/cell-inputs/KRT-17-2L-0100/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/cell-inputs/KRT-16-2L-0127/main.kicad_pcb
+hardware/kicad/qualification/issue-131-wing-condition-search/evidence/cell-inputs/KRT-16-2L-0100/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-smoke/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-smoke/in.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-17/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-17/in.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-16/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/KRT-16/in.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-smoke/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-smoke/in.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-17/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-17/in.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-16/out.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/runs/FAB-16/in.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/wing-rev3-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/panel-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-200-wing-rev3/panel-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/power01/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/paste01/reference-with-paste.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/paste01/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto04/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto04/in.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto03/in.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto02/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto02/in.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto01/out.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/runs/auto01/in.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/KRT-smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/KRT-17/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/KRT-16/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/FAB-smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/FAB-17/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inspection/FAB-16/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inputs/representative21-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inputs/representative21-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/inputs/pitch9-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/power01/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/power01/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/initial-run/inputs/representative21-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/initial-run/inputs/representative21-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-129-wing-2layer-routing/evidence/initial-run/inputs/pitch9-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inspection/main4/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inspection/main4/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inputs/smoke4/original.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inputs/smoke4/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inputs/main4/original.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/source119/inputs/main4/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/smoke-cell1/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/smoke-cell1/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/main-cell1/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/runs/main-cell1/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/paste01/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/paste01/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/final/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto04/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto04/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto02/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto02/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto01/main.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inspection/auto01/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phaseb/inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/smoke-cell1/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/smoke-cell1/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-196-main-rev4-phasea2/inputs/udb/c3.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inspection/main-cell1/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/tapped.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/power-repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/margin.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/smoke-cell4/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/smoke-cell3/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/smoke-cell2/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/power-repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/margin.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-17mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/smoke-cell1/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/routed.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/power-repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/margin.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/input.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/main-cell4/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-right/continued.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/routed.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/power-repaired.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/margin.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/input.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/main-cell3/main.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/main-cell2/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/wing-rev2-16mm-left/continued.kicad_pcb
+hardware/kicad/qualification/issue-121-full-auto-conditions/evidence/inputs/main-cell1/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/panel-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-194-wing-rev2/panel-16mm/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/inputs/main/saver-roundtrip.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/inputs/main/original.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/inputs/main/main.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/straight33/main.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/straight33/before-fill.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/amendment-01/inputs/smoke-02/saver-roundtrip.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/amendment-01/inputs/smoke-02/original.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/source-117/amendment-01/inputs/smoke-02/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/free/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/free/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke4/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke2/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/smoke2/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/free/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/free/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main4/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main2/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/runs/main2/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-292-wmain/wmain.kicad_pcb
+hardware/kicad/qualification/issue-275-main-rev10/main-rev10/main.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/local35/main.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/local35/before-fill.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-185-main-rev3/inspection/final/canonical-baseline.kicad_pcb
+hardware/lib/reference/rp2040-minimal/RP2040_minimal.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/free/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/free/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke4/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke2/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/smoke2/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/final/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/preparation-attempt-01/main/original.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-06/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/preparation-attempt-01/main/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-05/out.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-04/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/inputs/smoke/original.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/inputs/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-03/out.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-02/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/inputs/main/saver-roundtrip.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/inputs/main/original.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/inputs/main/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/LOCAL-01/out.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-03/out.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-03/in.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-02/out.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-02/in.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-01/out.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/runs/GLOBAL-01/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/free/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/free/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main4/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke-02/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke-02/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke-02/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/smoke-02/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/main/krt/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/main/krt/in.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/main/fab/out.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/runs/main/fab/in.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke-02/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke-02/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke-02/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/smoke-02/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/main/krt/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/main/krt/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/main/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inspection/main/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main2/fab/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inspection/main2/fab/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke/saver-roundtrip.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke/original.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/smoke4/original.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/smoke4/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/smoke2/original.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke-02/saver-roundtrip.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/smoke2/main.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke-02/original.kicad_pcb
+hardware/kicad/qualification/issue-117-four-layer-main/evidence/amendment-01/inputs/smoke-02/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/main4/original.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/main4/main.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/main2/original.kicad_pcb
+hardware/kicad/qualification/issue-119-promising-tools-relaxed/evidence/inputs/main2/main.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/smoke/out.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/smoke/in.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/main/out.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/runs/main/in.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/LOCAL-06/main.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/runs/smoke/out.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/runs/smoke/in.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/runs/main/out.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/runs/main/in.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inspection/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inspection/main/main.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inputs/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-115-kicad-routing-tools-escalation-off/evidence/inputs/main/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/board/m1-matrix18.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/GLOBAL-03/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/GLOBAL-02/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/LOCAL-05/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/GLOBAL-01/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/LOCAL-04/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/LOCAL-03/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/LOCAL-06/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/inspection/LOCAL-01/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/LOCAL-05/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/LOCAL-04/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/LOCAL-03/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/LOCAL-01/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/GLOBAL-03/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/GLOBAL-02/main.kicad_pcb
+hardware/kicad/qualification/issue-182-matrix-rev3/cell-inputs/GLOBAL-01/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/runs/final/out.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inspection/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/out.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/runs/KRT-M1-01/in.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inspection/main/main.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inputs/smoke/main.kicad_pcb
+hardware/kicad/qualification/issue-113-kicad-routing-tools-falsification/evidence/inputs/main/main.kicad_pcb
+hardware/kicad/qualification/issue-109-autoroute-falsification/evidence/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-110-freeroute-python-falsification/evidence/B/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-110-freeroute-python-falsification/evidence/A/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/inspection/initial-harness-error-KRT-M1-01/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-107-topola-falsification/evidence/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/inspection/final-before-library-sync/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/inspection/KRT-M1-01/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/inputs/m1-matrix18-16-17mm/main.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/runs/final/out.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/runs/final/in.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/cell-inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/cell-inputs/KRT-M1-01/main.kicad_pcb
+hardware/kicad/qualification/issue-178-m1-matrix-board/board/m1-matrix18.kicad_pcb
+hardware/kicad/qualification/issue-105-fab-router-detailed/evidence/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/inspection/final/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/inputs/candidate-2/main.kicad_pcb
+hardware/kicad/qualification/issue-175-main-dual-wing-final2/inputs/candidate-1/main.kicad_pcb
+hardware/kicad/qualification/issue-103-fab-router-falsification/evidence/processes/smoke-import/main.kicad_pcb
+hardware/kicad/qualification/eda-004e/evidence/processes/initial-reload-resave-corrected/roundtrip.kicad_pcb
+hardware/kicad/qualification/eda-004e/evidence/processes/initial-create/fixture.kicad_pcb
+hardware/kicad/qualification/issue-173-main-dual-wing-final/inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-173-main-dual-wing-final/fallback-seed-a/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-173-main-dual-wing-final/fallback-seed-a/inspection/final/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/seed-b/out.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/seed-b/in.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/seed-a/out.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/seed-a/in.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/runs/final/out.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/preflight-seed-b-1.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/seed-b/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/seed-b/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/seed-a/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/seed-a/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/final/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inspection/final/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-b/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/seed-a/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/global/main.kicad_pcb
+hardware/kicad/qualification/issue-169-main-dual-wing-followup/inputs/final/main.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/runs/local/out.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/runs/local/in.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/runs/global/out.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/runs/global/in.kicad_pcb
+hardware/kicad/qualification/eda-004g/resume-02/evidence/processes/initial-author-pcb-explicit-public-library-io/main.kicad_pcb
+hardware/kicad/qualification/eda-004g/resume-01/evidence/processes/public-pcb-empty-save-read-probe/empty.kicad_pcb
+hardware/kicad/qualification/eda-004g/resume-01/evidence/processes/initial-author-pcb-oval-paste-supported/main.kicad_pcb
+hardware/kicad/qualification/eda-004g/resume-01/evidence/processes/initial-author-pcb-layer-enums/main.kicad_pcb
+hardware/kicad/qualification/eda-004g/resume-01/evidence/processes/initial-author-pcb-iu-rounded/main.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/preflight-final-authoring.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/local/main.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/local/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/global/main.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inspection/global/canonical-input.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inputs/local/main.kicad_pcb
+hardware/kicad/qualification/issue-167-main-dual-wing-stage2/resume/inputs/global/main.kicad_pcb
+# Second opinion request: ADC_B escape on a saturated 4-layer PCB (KiCad)
+
+You are an advisor. Deliverable: a concrete, verifiable ROUTE PROPOSAL (layers, waypoint coordinates, via sites) — do NOT edit the board.
+
+## Board
+- File: /home/hatch/workspace/projects/he-piantor-wmain-fix/.issue292-runtime/wmain-work.kicad_pcb (KiCad 9, 4 layers F/In1/In2/B; In1 is a pure GND plane — never route signals on it).
+- Rules: 0.10mm track/clearance board-wide; 0.05mm clearance permitted inside the module fanout field rect (69.3,119.05)-(80.9,128.9) and the two FH12 fanout rects (70.93,107.10)-(81.97,117.89) and (118.03,107.10)-(129.07,117.89). Vias 0.6/0.3mm. All copper >=0.5mm inside the Edge.Cuts outline. Antenna keep-out rect (70.3,128.9)-(79.9,137.9) all layers. Trackpad keep-out circle centre (100,118) r20 on F/B (adopted copper exists inside; new tracks there are suspect).
+
+## Problem
+Net ADC_B is split: comp 1 = ONLY pad U1.46 (module pad, centre (73.15,121.15), 0.4x0.4, spans (72.95,120.95)-(73.35,121.35)). Comp 0 = CFB.1 + RFB.2 (east, x~124-125) with chains whose western frontiers are: In2 chain items around (85.2-86.7, 120.85-121.55) and (87.1,121.95)-(87.25,122.1), (88.3,122.5); F chains around (110.95-121.05, 127.45-133.15); vias at (110.2,121.8), (111.0,127.8), (123.7,119.0), (125.7,123.7). No B tracks in comp 0.
+
+## Verified facts about the pad's neighbourhood (module pad map, centres)
+- Pad row y=121.15: ADC_A (72.5), ADC_B (73.15), NC (73.8), ADC_C (74.45), VBAT_SENSE (75.1), NC (75.75), NC (76.4), NC (77.05), PAD_SDA (77.7); big GND pads (71.6,121.35) 0.8x0.8 and (78.6,121.35) 0.8x0.8.
+- Staggered rows: y=121.8: BTN (72.83), NC (73.47), NC (74.12), NC (74.78), NC (75.42), NC (76.08), NC (76.72), PAD_EN (77.38). y=122.58: PAD_SCL (72.05), LED_DRV (72.83), NC (73.47), NC (74.12), NC (74.78), NC (75.42), NC (76.08), PAD_DR (76.72), NC (77.38), NC (78.15). y=123.22: MUX_A0 (72.05), NC (72.83), NC (73.47), NC (74.12), NC (74.78), NC (75.42), NC (76.08), NC (76.72), NC (77.38), VBAT_GATE_M (78.15). y=123.55: MUX_A1 (71.4), SYS_3V3 (78.8). y=124.0: NC (73.47), RESET_N (74.12), HALL_PWR_EN (74.78), MUX_EN0 (75.42), MUX_EN1 (76.08). More rows continue south to ~128.5.
+- The F column x=73.15 south from the pad is FREE of pads (stagger) and of tracks down to y=123.60 (verified). At y 124.17-124.4, MUX_A2's F staircase occupies (73.0-73.6, 124.17-125.88) and dives SE to (74.53,125.88).
+- F street between rows 123.22 and 124.0 is y 123.42-123.80; it is crossed by F feeds of RESET_N, HALL_PWR_EN, MUX_EN1 (diving north from row 124.0) and by SYS_3V3's F trunk. No via (0.6 disc) fits anywhere inside the pad field (stagger holes < 0.6mm) — vias only outside the field (x>80.9 or y>~128.9, but y>128.9 x 70.3-79.9 is the antenna keep-out).
+- West of the pad: BTN's F track at x~72.85 (0.075 from pad). East: RESET_N's F picket x~73.5. The original (defective) design escaped west on B at y~123.1-123.8 to x=69.6 (outside the outline) — that corridor is now occupied by newer routes: USB_DP B run x~72.27 y 122.3-124.5, MUX_A0 In2 run (71.95,125.65)-(72.0,121.98), PAD_SCL F track (72.35,123.0)-(72.35,124.08).
+- A 0.05-grid router (F/In2/B) and single-layer BFS on F both report NO PATH for ADC_B on the current board.
+- In2 south-mid region: HALL_PWR_EN In2 vertical x=74.03 y 118.97-120.15; SYS_3V3 In2 run y=119.78 x 75.03-76.72; MUX_A2 In2 diagonal (76.75,119.38)-(77.95,120.58).
+
+## Question
+Propose a legal ADC_B connection from U1.46 to comp 0: exact layer sequence, waypoints (0.05mm grid), via sites. You may propose small moves of other nets' recently-placed stitches if you specify how that net stays connected. You may inspect the board file by parsing the .kicad_pcb s-expressions (pcbnew is NOT available in your sandbox). State the clearances you rely on. If impossible without moving a placed component, say so and name the cheapest move.
+
+exec
+/bin/bash -lc 'cd .issue292-runtime && cat probe_tree_adcb{,2}.py && head -240 tree_router.py && cat led-second-opinion-answer.md' in /home/hatch/workspace/projects/he-piantor-wmain-fix
+ succeeded in 0ms:
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+tb = p.LoadBoard('hardware/kicad/qualification/issue-292-wmain/wmain.kicad_pcb')
+for t in tb.GetTracks():
+    if t.GetNetname() != 'ADC_B': continue
+    if isinstance(t, p.PCB_VIA):
+        print('VIA', round(t.GetPosition().x/1e6, 2), round(t.GetPosition().y/1e6, 2)); continue
+    s, e = t.GetStart(), t.GetEnd()
+    x0, y0, x1, y1 = s.x/1e6, s.y/1e6, e.x/1e6, e.y/1e6
+    if max(x0, x1) <= 86 and max(y0, y1) <= 130 and min(y0, y1) >= 115:
+        print(t.GetLayerName(), (round(x0, 2), round(y0, 2)), (round(x1, 2), round(y1, 2)), 'w', round(t.GetWidth()/1e6, 2))
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+tb = p.LoadBoard('hardware/kicad/qualification/issue-292-wmain/wmain.kicad_pcb')
+n = 0
+for t in tb.GetTracks():
+    if t.GetNetname() != 'ADC_B': continue
+    n += 1
+    if isinstance(t, p.PCB_VIA):
+        print('VIA', round(t.GetPosition().x/1e6, 2), round(t.GetPosition().y/1e6, 2)); continue
+    s, e = t.GetStart(), t.GetEnd()
+    x0, y0, x1, y1 = s.x/1e6, s.y/1e6, e.x/1e6, e.y/1e6
+    if max(x0, x1) <= 90:
+        print(t.GetLayerName(), (round(x0, 2), round(y0, 2)), (round(x1, 2), round(y1, 2)), 'w', round(t.GetWidth()/1e6, 2))
+print('total ADC_B tracks+vias:', n)
+"""S3c/S3d: west-cluster re-route on the work board (model-based).
+
+KiCad SWIG in this build degrades board container iterators (GetTracks /
+GetFootprints) after mass Remove() calls, so EVERYTHING is snapshotted into
+a Python model first; the board is only mutated via Remove/Add of known
+objects, and all queries read the model.
+
+Per target net: delete model tracks/vias with any geometry west of CUT_X,
+compute remaining components (pads + tracks + vias + zone fills for GND are
+NOT modelled -- GND handled separately), reconnect components with a
+multi-source grid A* (layers F/I2/B):
+  - cell centre inside outline eroded by 0.5 + w/2 (+0.05 safety)
+  - clearance to other nets: 0.05 inside the D-057 field rect (0.05-class
+    nets only), 0.10 elsewhere; antenna strip blocked on all layers;
+    trackpad circle blocked on F/B; no diagonal corner-cutting
+  - vias 0.6/0.3, sites cleared on all layers at 0.10, never on pads,
+    centre >=0.85mm inside the outline
+Usage: kpy.sh west_router.py NET [NET...]
+"""
+import pcbnew as p, math, sys, heapq, os
+from shapely.geometry import Point, LineString, Polygon, box
+from shapely.strtree import STRtree
+
+DST = '.issue292-runtime/wmain-work.kicad_pcb'
+CUT_X = 84.5
+FIELD = (69.3, 119.05, 80.9, 128.9)
+ANT = Polygon([(70.3, 128.9), (79.9, 128.9), (79.9, 137.9), (70.3, 137.9)])
+CIRC = Point(100, 118).buffer(20.0)
+LAYERS = ['F', 'I2', 'B']
+LC = {'F': p.F_Cu, 'I2': p.In2_Cu, 'B': p.B_Cu}
+STEP = 0.05
+NETW = {
+    'SYS_3V3': (0.3, False), 'USB_DP': (0.1, False), 'USB_DM': (0.1, False),
+    'PAD_SCL': (0.05, True), 'MUX_A1': (0.1, False), 'MUX_A0': (0.05, True),
+    'MUX_A2': (0.05, True), 'LED_DRV': (0.05, True), 'HALL_PWR_EN': (0.05, True),
+    'ADC_B': (0.1, True), 'VIN_IN': (0.1, False),
+    'PAD_SDA': (0.1, False), 'PAD_DR': (0.1, False), 'PAD_3V3': (0.1, False),
+    'VBAT_GATE': (0.1, False), 'VAUX': (0.2, False), 'CONV_PG': (0.1, False),
+    'VBAT_SENSE': (0.1, True), 'LED_A': (0.1, False), 'ADC_C': (0.1, False),
+    'HALL_3V3': (0.3, False)}
+
+def mm(v): return v / 1e6
+def iu(v): return int(round(v * 1e6))
+
+b = p.LoadBoard(DST)
+
+# ---------- outline ----------
+po = p.SHAPE_POLY_SET(); b.GetBoardPolygonOutlines(po)
+_ch = po.Outline(0); _ps = p.SHAPE_POLY_SET(); _ch.TransformToPolygon(_ps, 100, False)
+_c2 = _ps.Outline(0)
+OUTLINE = Polygon([(_c2.CPoint(i).x / 1e6, _c2.CPoint(i).y / 1e6) for i in range(_c2.PointCount())])
+
+# ---------- shapes ----------
+def rect_poly(cx, cy, w, h, rot):
+    c, s = math.cos(math.radians(rot)), math.sin(math.radians(rot))
+    # KiCad orientation is CCW in y-up; board coords are y-down, so the
+    # conjugate rotation applies (verified vs GetEffectiveShape, J3.10).
+    return Polygon([(cx + dx * c + dy * s, cy - dx * s + dy * c)
+                    for dx, dy in ((-w/2, -h/2), (w/2, -h/2), (w/2, h/2), (-w/2, h/2))])
+
+def pad_shape(pad):
+    q = pad.GetPosition(); sz = pad.GetSize()
+    cx, cy, w, h = mm(q.x), mm(q.y), mm(sz.x), mm(sz.y)
+    if pad.GetShape() == p.PAD_SHAPE_CIRCLE:
+        return Point(cx, cy).buffer(w / 2, quad_segs=24)
+    return rect_poly(cx, cy, w, h, pad.GetOrientationDegrees())
+
+def seg_shape(x1, y1, x2, y2, w):
+    return LineString([(x1, y1), (x2, y2)]).buffer(w / 2, quad_segs=8)
+
+def disc_shape(x, y, d):
+    return Point(x, y).buffer(d / 2, quad_segs=24)
+
+# ---------- snapshot: pads, tracks, zones ----------
+PAD_INDEX = {}          # net -> [(layershape dict, ref)]
+PADS_BY_LAYER = {L: [] for L in LAYERS}
+OBS_STATIC = {L: [] for L in LAYERS}
+for f in b.GetFootprints():
+    for pad in f.Pads():
+        sh = pad_shape(pad); net = pad.GetNetname()
+        lay = {}
+        for L in LAYERS:
+            if pad.IsOnLayer(LC[L]):
+                lay[L] = sh; OBS_STATIC[L].append((net, sh)); PADS_BY_LAYER[L].append((net, sh))
+        if pad.GetAttribute() == p.PAD_ATTRIB_PTH:
+            for L in LAYERS:
+                if L not in lay:
+                    lay[L] = sh; OBS_STATIC[L].append((net, sh)); PADS_BY_LAYER[L].append((net, sh))
+        PAD_INDEX.setdefault(net, []).append((lay, f"{f.GetReference()}.{pad.GetNumber()}"))
+
+for zn in b.Zones():
+    if zn.GetNetname() == '':
+        for L in LAYERS:
+            if zn.IsOnLayer(LC[L]):
+                fps = zn.GetFilledPolysList(LC[L])
+                for i in range(fps.OutlineCount()):
+                    ch = fps.Outline(i); ps = p.SHAPE_POLY_SET()
+                    ch.TransformToPolygon(ps, 100, False)
+                    c2 = ps.Outline(0)
+                    pts = [(c2.CPoint(j).x / 1e6, c2.CPoint(j).y / 1e6) for j in range(c2.PointCount())]
+                    if len(pts) >= 3: OBS_STATIC[L].append(('', Polygon(pts)))
+
+MODEL = []  # {obj, net, shapes:{L:shape}, alive}
+for t in b.GetTracks():
+    net = t.GetNetname()
+    if isinstance(t, p.PCB_VIA):
+        q = t.GetPosition()
+        shapes = {L: disc_shape(mm(q.x), mm(q.y), mm(t.GetWidth(LC[L]))) for L in LAYERS}
+        MODEL.append({'obj': t, 'net': net, 'shapes': shapes, 'alive': True, 'via': True})
+    else:
+        L = {p.F_Cu: 'F', p.In2_Cu: 'I2', p.B_Cu: 'B'}.get(t.GetLayer())
+        if L is None: continue
+        s, e = t.GetStart(), t.GetEnd()
+        sh = seg_shape(mm(s.x), mm(s.y), mm(e.x), mm(e.y), mm(t.GetWidth()))
+        MODEL.append({'obj': t, 'net': net, 'shapes': {L: sh}, 'alive': True, 'via': False})
+
+# FH12 fanout rects (J2/J3 pad rows + 1.2mm): the 0.5mm-pitch pad streets are
+# 0.2mm wide, so 0.10mm tracks there sit at 0.05mm clearance -- the inherited
+# Rev.10 condition. Track clearance 0.05 applies inside these rects.
+FANOUT = []
+for _pfx in ('J2.', 'J3.', 'JPAD.'):
+    _bb = [s.bounds for net, lst in PAD_INDEX.items() for lay, ref in lst
+           if ref.startswith(_pfx) for s in lay.values()]
+    if _bb:
+        FANOUT.append((min(x[0] for x in _bb) - 1.2, min(x[1] for x in _bb) - 1.2,
+                       max(x[2] for x in _bb) + 1.2, max(x[3] for x in _bb) + 1.2))
+print('FANOUT rects:', FANOUT, flush=True)
+
+def obs_trk(L):
+    return [(m['net'], m['shapes'][L]) for m in MODEL if m['alive'] and L in m['shapes']]
+
+def all_obs(L):
+    return OBS_STATIC[L] + obs_trk(L)
+
+# ---------- components ----------
+def net_components(net):
+    elems = [(lay, ref) for lay, ref in PAD_INDEX.get(net, [])]
+    for m in MODEL:
+        if m['alive'] and m['net'] == net:
+            elems.append((m['shapes'], 'via' if m['via'] else 'trk'))
+    parent = list(range(len(elems)))
+    def find(a):
+        while parent[a] != a: parent[a] = parent[parent[a]]; a = parent[a]
+        return a
+    flat = []
+    for i, (lay, _) in enumerate(elems):
+        for L, sh in lay.items(): flat.append((i, sh))
+    tree = STRtree([sh for _, sh in flat])
+    for k, (i, sh) in enumerate(flat):
+        for j in tree.query(sh, predicate='intersects'):
+            if flat[j][0] != i: parent[find(flat[j][0])] = find(i)
+    comps = {}
+    for i, (lay, ref) in enumerate(elems): comps.setdefault(find(i), []).append((lay, ref))
+    return list(comps.values())
+
+def delete_west(net):
+    n = 0
+    for m in MODEL:
+        if not m['alive'] or m['net'] != net: continue
+        if any(sh.bounds[0] < CUT_X for sh in m['shapes'].values()):
+            b.Remove(m['obj']); m['alive'] = False; n += 1
+    return n
+
+# ---------- rasterization ----------
+def rasterize(net, w, region, via_field05=False):
+    import numpy as np
+    x0, y0, x1, y1 = region
+    nx = int((x1 - x0) / STEP) + 1; ny = int((y1 - y0) / STEP) + 1
+    xs = x0 + np.arange(nx) * STEP; ys = y0 + np.arange(ny) * STEP
+    eroded = OUTLINE.buffer(-(0.5 + w / 2 + 0.05))
+    def mark(shapes, arr):
+        if not shapes: return
+        tree = STRtree(shapes)
+        for j, y in enumerate(ys):
+            strip = box(x0 - 1, y - STEP / 2, x1 + 1, y + STEP / 2)
+            for i in tree.query(strip, predicate='intersects'):
+                inter = shapes[i].intersection(strip)
+                if not inter.is_empty:
+                    a, bq = inter.bounds[0], inter.bounds[2]
+                    i0 = max(0, int(math.ceil((a - x0) / STEP - 1e-9)))
+                    i1 = min(nx - 1, int(math.floor((bq - x0) / STEP + 1e-9)))
+                    if i0 <= i1: arr[j, i0:i1 + 1] = True
+    grids = {}
+    for L in LAYERS:
+        base = [sh for n, sh in all_obs(L) if n != net]
+        s10 = [sh.buffer(0.10 + w / 2) for sh in base] + [ANT.buffer(0.10 + w / 2)]
+        s05 = [sh.buffer(0.05 + w / 2) for sh in base] + [ANT.buffer(0.05 + w / 2)]
+        if L in ('F', 'B'):
+            s10.append(CIRC.buffer(0.10 + w / 2)); s05.append(CIRC.buffer(0.05 + w / 2))
+        g10 = np.zeros((ny, nx), dtype=bool); mark(s10, g10)
+        g05 = np.zeros((ny, nx), dtype=bool); mark(s05, g05)
+        okm = np.zeros((ny, nx), dtype=bool); mark([eroded], okm)
+        grids[L] = {'c10': g10, 'c05': g05, 'ok': okm}
+    via_ok = np.ones((ny, nx), dtype=bool)
+    via05 = np.ones((ny, nx), dtype=bool)
+    for L in LAYERS:
+        shapes = [sh.buffer(0.10 + 0.3) for n, sh in all_obs(L) if n != net]
+        shapes.append(ANT.buffer(0.10 + 0.3))
+        if L in ('F', 'B'): shapes.append(CIRC.buffer(0.10 + 0.3))
+        arr = np.zeros((ny, nx), dtype=bool); mark(shapes, arr)
+        via_ok &= ~arr
+        shapes5 = [sh.buffer(0.05 + 0.3) for n, sh in all_obs(L) if n != net]
+        shapes5.append(ANT.buffer(0.05 + 0.3))
+        if L in ('F', 'B'): shapes5.append(CIRC.buffer(0.05 + 0.3))
+        arr5 = np.zeros((ny, nx), dtype=bool); mark(shapes5, arr5)
+        via05 &= ~arr5
+    if via_field05:
+        fi0 = max(0, int((FIELD[0] - x0) / STEP)); fi1 = min(nx - 1, int((FIELD[2] - x0) / STEP))
+        fj0 = max(0, int((FIELD[1] - y0) / STEP)); fj1 = min(ny - 1, int((FIELD[3] - y0) / STEP))
+        via_ok[fj0:fj1 + 1, fi0:fi1 + 1] = via05[fj0:fj1 + 1, fi0:fi1 + 1]
+    okm = np.zeros((ny, nx), dtype=bool); mark([OUTLINE.buffer(-0.85)], okm)
+    padm = np.zeros((ny, nx), dtype=bool)
+    mark([sh for L in LAYERS for _, sh in PADS_BY_LAYER[L]], padm)
+    via_ok &= okm & ~padm
+    return grids, via_ok, (x0, y0, nx, ny)
+
+# ---------- routing ----------
+X0G = Y0G = 0.0
+def _route_pass(net, w, field05, merge_map):
+    """One Dijkstra pass. merge_map: comp index -> seed label.
+    Returns (ok, group_of_comp dict). Adds copper for each connection."""
+    import numpy as np
+    global X0G, Y0G
+    comps = net_components(net)
+    if len(comps) <= 1: return True, {0: 0}
+    allsh = [s for comp in comps for lay, _ in comp for s in lay.values()]
+    region = (max(60.0, min(s.bounds[0] for s in allsh) - 3),
+              max(70.0, min(s.bounds[1] for s in allsh) - 3),
+              min(140.0, max(s.bounds[2] for s in allsh) + 3),
+              min(140.0, max(s.bounds[3] for s in allsh) + 3))
+    grids, via_ok, (x0, y0, nx, ny) = rasterize(net, w, region, via_field05=field05)
+    X0G, Y0G = x0, y0
+    lab = {L: np.full((ny, nx), -1, dtype=np.int32) for L in LAYERS}
+    for ci, comp in enumerate(comps):
+        sl = merge_map.get(ci, ci)
+        for lay, _ref in comp:
+            for L, sh in lay.items():
+                a, bq, c, d = sh.bounds
+                i0 = max(0, int((a - x0) / STEP) - 1); i1 = min(nx - 1, int((c - x0) / STEP) + 1)
+                j0 = max(0, int((bq - y0) / STEP) - 1); j1 = min(ny - 1, int((d - y0) / STEP) + 1)
+# LED_DRV reconnection
+
+Route from the existing LED_DRV via at **(70.50, 118.00)** on **B.Cu**, add one **0.60 mm pad / 0.30 mm drill through-via at (73.20, 117.10)**, and finish on **In2.Cu** at the existing load-side stub at **(73.75, 115.85)**. Use 0.10 mm track width throughout. The connection requires zero component moves and zero changes to existing stitches, including the MUX_A0 bridge.
+
+```mermaid
+flowchart LR
+    A["U1.56 · existing via<br/>(70.50, 118.00)"]
+    V["New through-via<br/>(73.20, 117.10)"]
+    B["Load-side stub · RLED.1<br/>(73.75, 115.85)"]
+    A -->|"B.Cu · four segments"| V
+    V -->|"In2.Cu · two segments"| B
+```
+
+## Waypoints and clearances
+
+All coordinates are in board millimetres on the 0.05 mm grid. Each row is one straight segment. Clearances are copper edge to copper edge, including the round track ends and excluding the new via, which is checked separately.
+
+| Layer | From (x, y) | To (x, y) | Minimum clearance to other copper | Limiting item |
+|---|---|---|---:|---|
+| B.Cu | (70.50, 118.00) | (71.05, 117.45) | 0.371 mm | MUX_A0 via at (71.55, 116.93037) |
+| B.Cu | (71.05, 117.45) | (72.10, 117.45) | 0.169 mm | Same MUX_A0 via |
+| B.Cu | (72.10, 117.45) | (72.45, 117.10) | 0.180 mm | USB_DM via at (72.70, 117.60) |
+| B.Cu | (72.45, 117.10) | (73.20, 117.10) | 0.149 mm | Same USB_DM via |
+| In2.Cu | (73.20, 117.10) | (73.20, 116.40) | 0.357 mm | Same USB_DM via |
+| In2.Cu | (73.20, 116.40) | (73.75, 115.85) | 0.554 mm | MUX_A0 via at (73.50, 114.98037) |
+
+The B.Cu path passes on the larger-y side of the MUX_A0 via, then on the smaller-y side of the USB_DM via. It returns to In2.Cu on the load side of the braid. The last waypoint is the centerline end of the existing 0.10 mm LED_DRV stub from (73.75, 115.25) to (73.75, 115.85). The added copper uses 0.10 mm clearance throughout, including inside the FH12 fanout.
+
+At the **(73.20, 117.10)** through-via, the minimum annulus clearance on F.Cu, In2.Cu and B.Cu is **0.1069 mm**, to the USB_DM via at (72.70, 117.60). The center spacing is 0.7071 mm, giving 0.4071 mm drill-edge separation for the two 0.30 mm holes. The annulus also clears the F.Cu J2 mounting pad by **0.1127 mm** and the MUX_A1 via at (73.925, 117.175) by **0.1287 mm**. Use the exact via coordinate. Refill the In1.Cu GND plane to form its antipad. The layer change uses the through-via barrel, with no signal trace on In1.Cu or F.Cu.
+
+The minimum new copper setback from Edge.Cuts is **1.655 mm** on the first B.Cu segment. The new via annulus is **4.193 mm** from Edge.Cuts. All added copper clears the antenna and hole reservations. The new outer-layer copper clears the specified trackpad circle by more than **6.51 mm**, measured from the annulus.
+
+## Verification
+
+I checked continuous segment and via geometry against the board pads, tracks, vias and outline. I then applied the six segments and one via to a scratch copy, refilled the zones, and ran KiCad 9.0.9 DRC. The baseline had one LED_DRV unconnected item. The candidate had zero and no DRC markers referencing the seven new items under a 0.10 mm default clearance test. Other board DRC findings are open.
+
+The checked board snapshot had SHA-256 `7fa3866e03df3ee80d27c9c2448a4381c7f4be3db776a629e2b400e1bfa45016`. The working project's Default netclass lists 0.20 mm clearance and track width, so the reported rule check used the brief's 0.10 mm values in the scratch project. The board file was left untouched.
+
+exec
+/bin/bash -lc 'for p in AGENTS.md .issue292-runtime/AGENTS.md; do if test -f "$p"; then cat "$p"; fi; done; ls .issue292-runtime | rg '"'router|adcb|\\.dru|work\\.kicad_pro'; sha256sum .issue292-runtime/wmain-work.kicad_pcb; command -v kicad-cli; /usr/bin/python3 -c 'import pcbnew; print(pcbnew.Version())'" in /home/hatch/workspace/projects/he-piantor-wmain-fix
+ exited 1 in 0ms:
+adcb-codex.log
+adcb-second-opinion-brief.md
+completion-work.kicad_pro
+probe_tree_adcb.py
+probe_tree_adcb2.py
+tree_router.py
+west_router.py
+wmain-work.kicad_pro
+becd622210b609784b26c0c3ff3e3896b958e8a605a58b70964d8ad33d89deba  .issue292-runtime/wmain-work.kicad_pcb
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'pcbnew'
+
+exec
+/bin/bash -lc 'cd .issue292-runtime && for p in probe_gapband.py probe_padsclgap.py probe_viasites.py probe_model4.py probe_reachF.py probe_adcaF.py; do echo "$p"; head -90 "$p"; done' in /home/hatch/workspace/projects/he-piantor-wmain-fix
+exec
+/bin/bash -lc "ls -a; ls .issue292-runtime | rg 'kpy|check|report'; find /opt -iname '*pcbnew*' -o -name kicad-cli; python -c 'import shapely,numpy,scipy; print(shapely.__version__)'; rg -n 'keepout|\\(gr_arc|\\(gr_line|\\(gr_circle|\\(gr_rect' .issue292-runtime/wmain-work.kicad_pcb | tail -45" in /home/hatch/workspace/projects/he-piantor-wmain-fix
+ succeeded in 3ms:
+probe_gapband.py
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+for m in MODEL:
+    if not m['alive']: continue
+    sh = m['shapes'].get('F')
+    if sh is None: continue
+    x0, y0, x1, y1 = sh.bounds
+    if x1 >= 71.6 and x0 <= 72.6 and y1 >= 124.9 and y0 <= 125.8:
+        print('F', m['net'], 'via' if m['via'] else 'trk', tuple(round(v, 2) for v in sh.bounds))
+for n2, s2 in all_obs('F'):
+    x0, y0, x1, y1 = s2.bounds
+    if x1 >= 71.6 and x0 <= 72.6 and y1 >= 124.9 and y0 <= 125.8:
+        print('OBS F', n2, tuple(round(v, 2) for v in s2.bounds))
+probe_padsclgap.py
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+for m in MODEL:
+    if not m['alive'] or m['net'] != 'PAD_SCL': continue
+    for L, sh in m['shapes'].items():
+        x0, y0, x1, y1 = sh.bounds
+        cx = (x0 + x1) / 2
+        if 74 <= cx <= 100:
+            print(L, 'via' if m['via'] else 'trk', tuple(round(v, 2) for v in sh.bounds))
+probe_viasites.py
+import sys, os
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+from shapely.strtree import STRtree
+from shapely.geometry import Point
+NET = os.environ.get('P_NET', 'MUX_A0')
+X0, X1, Y0, Y1 = [float(v) for v in os.environ.get('P_BOX', '71.0,74.0,120.8,125.4').split(',')]
+trees = {}
+for L in ('F', 'I2', 'B'):
+    trees[L] = STRtree([s2.buffer(float(os.environ.get('P_BUF', '0.05'))) for n2, s2 in all_obs(L) if n2 != NET])
+sites = []
+j = Y0
+while j <= Y1:
+    i = X0
+    while i <= X1:
+        pt = Point(i, j)
+        if OUTLINE.exterior.distance(pt) >= 0.85:
+            disc = pt.buffer(0.30)
+            if all(len(trees[L].query(disc)) == 0 for L in ('F', 'I2', 'B')):
+                sites.append((round(i, 2), round(j, 2)))
+        i += 0.05
+    j += 0.05
+print(f'{NET}: {len(sites)} legal via sites in box')
+# cluster print: every site, grouped by rows
+rows = {}
+for x, y in sites: rows.setdefault(y, []).append(x)
+for y in sorted(rows): print('  y=%.2f x:' % y, ' '.join('%.2f' % x for x in rows[y]))
+probe_model4.py
+import sys
+sys.argv = ['tree_router.py']
+src = open('.issue292-runtime/tree_router.py').read().split('ok = True')[0]
+exec(compile(src, 'tree_router.py', 'exec'))
+for m in MODEL:
+    if m['net'] != 'ADC_B' or m['via']: continue
+    o = m['obj']
+    s, e = o.GetStart(), o.GetEnd()
+    x0, y0 = s.x/1e6, s.y/1e6
+    if abs(x0 - 73.15) < 0.01 and abs(y0 - 121.15) < 0.01:
+        print('track', o.GetLayerName(), (x0, y0), (e.x/1e6, e.y/1e6))
+        for L, sh in m['shapes'].items():
+            print('  shape', L, tuple(round(v, 3) for v in sh.bounds), 'area', round(sh.area, 4), 'type', sh.geom_type)
+probe_reachF.py
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+from shapely.strtree import STRtree
+from shapely.geometry import Point
+from collections import deque
+NET, REF, LAY = sys.argv[1] if len(sys.argv) > 1 else 'MUX_A0', 'U1.5', 'F'
+import os
+NET = os.environ.get('P_NET', 'MUX_A0'); REF = os.environ.get('P_REF', 'U1.5'); LAY = os.environ.get('P_LAY', 'F')
+obs = []
+for n2, s2 in all_obs(LAY):
+    if n2 != NET: obs.append(s2.buffer(0.075))
+tree_u = STRtree(obs)
+start = None
+for lay, r in PAD_INDEX[NET]:
+    if r == REF: start = list(lay.values())[0].centroid
+OUTL_E = OUTLINE.buffer(-0.575)
+STEP = 0.05
+seen = {(round(start.x / STEP), round(start.y / STEP))}
+dq = deque(seen)
+while dq:
+    i, j = dq.popleft()
+    for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        ni, nj = i + di, j + dj
+        if (ni, nj) in seen: continue
+        pt = Point(ni * STEP, nj * STEP)
+        if not OUTL_E.contains(pt): continue
+        if len(tree_u.query(pt)) > 0: continue
+        seen.add((ni, nj)); dq.append((ni, nj))
+xs = [i * STEP for i, j in seen]; ys = [j * STEP for i, j in seen]
+print(f'{REF} {LAY}-reach cells: {len(seen)} bbox x {min(xs):.2f}..{max(xs):.2f} y {min(ys):.2f}..{max(ys):.2f}')
+probe_adcaF.py
+import sys
+sys.argv = ['west_router.py']
+src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
+exec(compile(src, 'west_router.py', 'exec'))
+for n2, s2 in all_obs('F'):
+    if n2 != 'ADC_A': continue
+    x0, y0, x1, y1 = s2.bounds
+    if x1 >= 70.0 and x0 <= 73.0 and y1 >= 118.5 and y0 <= 121.5:
+        print('F ADC_A', tuple(round(v, 3) for v in s2.bounds))
+
+ succeeded in 263ms:
+.
+..
+.agents
+.aws
+.codex
+.git
+.github
+.gitignore
+.issue221-runtime
+.issue226-runtime
+.issue228-runtime
+.issue261-runtime
+.issue263-runtime
+.issue264-runtime
+.issue270-runtime
+.issue275-runtime
+.issue275gh-runtime
+.issue292-runtime
+LICENSE.md
+LICENSES
+README.md
+candidate.kicad_pro
+docs
+firmware
+hardware
+manufacturing
+mechanical
+task
+check.kicad_pcb
+check.kicad_prl
+check.kicad_pro
+check_net.py
+filled-check.kicad_pcb
+filled-check.kicad_prl
+filled-check.kicad_pro
+kpy.sh
+find: ‘/opt/hatch-image/models’: Permission denied
+/bin/bash: line 1: python: command not found
+6293:	(gr_line
+6303:	(gr_line
+6313:	(gr_line
+6323:	(gr_line
+6333:	(gr_line
+6343:	(gr_line
+6353:	(gr_line
+6363:	(gr_line
+6373:	(gr_line
+6383:	(gr_line
+6393:	(gr_line
+6403:	(gr_line
+6413:	(gr_line
+6423:	(gr_line
+35062:		(keepout
+35095:		(keepout
+35135:		(keepout
+35168:		(keepout
+35214:		(keepout
+35255:		(keepout
+35295:		(keepout
+35335:		(keepout
+35375:		(keepout
+35408:		(keepout
+35454:		(keepout
+35495:		(keepout
+35528:		(keepout
+35561:		(keepout
+35594:		(keepout
+35634:		(keepout
+35675:		(keepout
+37435:		(keepout
+37475:		(keepout
+37515:		(keepout
+37555:		(keepout
+37588:		(keepout
+37629:		(keepout
+37662:		(keepout
+
