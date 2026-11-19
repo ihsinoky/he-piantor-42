@@ -1,10 +1,13 @@
-import sys
-sys.argv = ['west_router.py']
-src = open('.issue292-runtime/west_router.py').read().split('ok = True')[0]
-exec(compile(src, 'west_router.py', 'exec'))
-for m in MODEL:
-    if not m['alive'] or m['net'] != 'PAD_SCL': continue
-    for L, sh in m['shapes'].items():
-        x0, y0, x1, y1 = sh.bounds
-        if y1 >= 123.5:
-            print(L, 'via' if m['via'] else 'trk', tuple(round(v, 2) for v in sh.bounds))
+import pcbnew as p
+def mm(v): return v / 1e6
+b = p.LoadBoard('hardware/kicad/qualification/issue-292-wmain/wmain.kicad_pcb')
+n = 0
+for t in b.GetTracks():
+    if t.GetNetname() != 'PAD_SCL': continue
+    if isinstance(t, p.PCB_VIA):
+        q = t.GetPosition()
+        if mm(q.y) > 128.9: print('SCL via south', mm(q.x), mm(q.y)); n += 1
+    else:
+        s, e = t.GetStart(), t.GetEnd()
+        if max(mm(s.y), mm(e.y)) > 128.95: print('SCL trk south L', t.GetLayer(), (mm(s.x), mm(s.y)), (mm(e.x), mm(e.y))); n += 1
+print('SCL items south of 128.9:', n)
