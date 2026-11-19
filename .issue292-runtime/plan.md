@@ -268,3 +268,45 @@ Other 7 deviations untouched.
 - Not done (gated on the deviation-9 decision): tier-2 routing,
   GND taps (gnd_taps.py written, unrun), full gate re-run,
   package regeneration.
+
+## Re-route round plan (2026-11-19, D-057 granted)
+
+Basis: D-057 (decisions.md) - rule exception ONLY inside the ISP1807-LR
+fanout field (footprint + minimal escape zone, explicit rule area);
+0.05mm class is the ceiling, use the minimum exception that routes;
+D-019 (0.10/0.10) unchanged elsewhere; all gates re-run on the
+finished tree board; adoption draft renumbered D-058.
+
+Stages:
+- S0 baseline: reproduce the unrouted state of the swapped working
+  board (wmain-v28-fp.kicad_pcb, SHA b7629fe9...) - DRC/unconnected
+  counts recorded BEFORE any edit (verification invariant 1).
+- S1 tree-board footprint swap: U1 footprint in the tree board ->
+  verified library footprint wmain.pretty/ISP1807-LR.kicad_mod;
+  pad-number->net assignment script-verified against the working
+  copy (only delta = 9 added NC pads 70-78, no net).
+- S2 rule area: explicit KiCad rule area = module footprint +
+  minimal escape zone derived from escapes_005.json geometry;
+  report boundary dimensions/area. Inside: 0.05-class netclass/rules;
+  outside: D-019 enforced.
+- S3 route module field: 12 interior pads first (escapes_005.json
+  paths as the proven-feasible seed), then remaining module nets +
+  anything the swap disturbed; largest clearance per segment;
+  record measured minima (w/w, w-pad, pad-pad) inside the field.
+  GND pads 7/14/18: retry taps in the new geometry; disposition
+  stated either way.
+- S4 gates on the finished TREE board: ERC; DRC severity-all with
+  rule area active + exception-dependence list (every clearance
+  that only passes because of the exception); unconnected;
+  via-pad audit; antenna + trackpad keep-outs; Wing census 14/14x2
+  from board data; far-Wing budget; outline delta = 0 re-verified.
+- S5 REPORT.md: deviation 1 DISCHARGED, deviation 9 RESOLVED by
+  D-057 (exception minima + rule-area size), 2-8 restated as they
+  stand, adoption draft -> D-058, board SHA updated.
+- S6 manufacturing package regenerated from the finished board;
+  quote-handoff flags the 0.05mm-class field explicitly.
+- S7 PO 2D drawings regenerated from the finished board (3 PNGs in
+  goals files/); zoom-module inset draws the rule-area boundary
+  as a labelled outline.
+
+Checkpoint-commit per stage. Never /tmp.
