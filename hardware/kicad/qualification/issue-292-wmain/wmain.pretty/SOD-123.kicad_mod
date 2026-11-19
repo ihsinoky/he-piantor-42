@@ -1,0 +1,52 @@
+(footprint "SOD-123"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "SOD-123 diode")
+	(attr smd)
+	(property "Reference" "REF**"
+		(at 0 -3 0)
+		(layer "F.SilkS")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(property "Value" ""
+		(at 0 3 0)
+		(layer "F.Fab")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(pad "1" smd rect
+		(at -1.350 0.000)
+		(size 0.900 1.100)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(pad "2" smd rect
+		(at 1.350 0.000)
+		(size 0.900 1.100)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(fp_line
+		(start -1.900 -0.900)
+		(end 1.900 -0.900)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 1.900 -0.900)
+		(end 1.900 0.900)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 1.900 0.900)
+		(end -1.900 0.900)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -1.900 0.900)
+		(end -1.900 -0.900)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+)
