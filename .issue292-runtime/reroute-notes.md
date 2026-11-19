@@ -41,3 +41,20 @@ S1+S2 state (FP swap + rule area) before the unified run.
 - RESIDUAL unconnected = 6 items / 5 nets (DRC curr10): GND pads 14+16 isolated pair (bridge to pad 18 chain blocked by VBAT_SENSE stub crossing; via taps illegal in the NC ring); VBUS (comp0 via (88,119.5) vs USB-side B track - w0.3 band y110-120 sealed on F/I2/B); SYS_3V3 x2 (CVCC island vs main network, and CVCC island vs module escape comp - B-end row + field congestion at w0.3, also fails at 0.15); PAD_EN (escape via trapped on B, F south corridor sealed); VBAT_SENSE (B pocket vs I2 far track, band y112-119 sealed).
 - No sub-design-width tracks were drawn for the residuals (all relaxation attempts failed and were not committed); VBUS/SYS_3V3 drawn legs are all at 0.3mm.
 - Shorts = 0 (DRC severity-all, zone-filled).
+
+## Round close (2026-11-19)
+- S4 gates: ERC 0; DRC (refilled) 720 viol / 6 unconnected / 0 shorts;
+  outline delta 0; antenna 0; Wing census 14/14 x2; HALL_3V3 copper
+  identical to layout round (budget <=39mV carries); via-pad min
+  0.100 outside field / 0.054 inside; in-field minima w 0.050,
+  trk-trk 0.066, trk-pad 0.046 (NC pads), via 0.050; 148
+  exception-dependent pairs. .dru NOT applied by kicad-cli 9.0.9
+  (control experiments in dru-test/) -> geometric verification.
+- S5 REPORT: gate table replaced; dev 1 DISCHARGED, dev 3 updated
+  (8/10 GND), dev 9 RESOLVED by D-057, dev 10 residuals, dev 11
+  tooling note; adoption draft = D-058.
+- S6 package regenerated (gerber 27 + drill, BOM/CPL 55/32);
+  quote-handoff flags the fine field; final board SHA 2f0b4526.
+- S7 drawings regenerated from the finished board (dump_final.py,
+  render_pngs_final.py); module zoom shows the MODULE_FIELD_FINE
+  boundary as a labelled red dashed outline.
