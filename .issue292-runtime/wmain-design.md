@@ -151,3 +151,175 @@ PETG zone" to "un-plated PETG wall zone" (the north wall is the
 same PETG, outside the aluminium plate span), or the -U1MV2 u.FL
 variant with its antenna element in the south band. Recorded here
 so the fallback is a decision, not a surprise.
+
+## 2. Power tree
+
+Pack (D-048): NiMH AA x4 — fresh ~5.8 V, nominal 4.8 V, end of
+discharge ~3.6-4.0 V. The TPS63070-class input lineage
+(2.0-16 V, cold start >=3.0 V; Issue #280 aa-sizing) covers the
+whole range with margin — the 2xAA rejection there (fresh 2.9 V
+< 3.0 V cold start) does not apply at 4 cells.
+
+```
+NiMH x4 --[battery conn, SE south edge]-->+--> TPS63070 --> SYS 3.3 V
+USB-C VBUS --[diode-OR, no back-feed]---->+   (buck-boost,    |
+                                              output re-set   +--> module VDD (direct)
+                                              5.2 V -> 3.3 V) +--> TPS22919 --> HALL_3V3 --> J2/J3 branches
+                                                              +--> load switch --> PAD_3V3 (trackpad)
+Pack + --[gated 1M/1M divider]--> module AIN (VBAT sense)
+```
+
+- **One converter, re-set.** The qualified TPS63070 stage
+  (U6 lineage) is kept; only its output setpoint changes
+  5.2 V -> 3.3 V. D-026's forced-PWM requirement is dropped —
+  it served the 5.2 V / 254 mA ripple budget; wireless loads are
+  mW-class bursts, so power-save mode is correct here and
+  protects the away-state floor.
+- **AP2112K LDO (U4 lineage) is deleted.** It existed to make
+  3.3 V for the RP2040 from the 5.2 V rail. The module runs
+  directly on SYS 3.3 V (all candidates accept 1.7-3.6 V).
+- **Wing Hall rail**: SYS -> TPS22919 (U5 lineage, default-off,
+  HALL_PWR_EN) -> two branches at the switch output (D-024
+  pattern) -> J2/J3 pin 1. Burst regime per D-049/#282: one
+  bank of 7 TMAG5253 on at a time per Wing, one Wing at a time
+  (Section 5), peak 20 mA class, window 0.35 ms class.
+- **Trackpad feed**: SYS -> its own small load switch ->
+  PAD_3V3. The pad's internal sleep (40 uA class, D-053) is the
+  normal discipline; the switch lets firmware hard-off the pad
+  in the away state, buying the favourable end of D-053's
+  runtime bounds (-0.4 d vs -0.5 d).
+- **Battery sense**: gated divider (1M/1M, GPIO-gated in the
+  XIAO READ_BAT pattern) from pack+ to a module AIN: 5.8 V max
+  -> 2.9 V at the ADC, ~0 uA when gated off. Firmware
+  thresholds: low warning 4.2 V (1.05 V/cell), critical 3.8 V
+  (0.95 V/cell); the converter still cold-starts at 3.0 V, so
+  warnings precede any brown-out by a wide margin.
+- **No charge path exists.** VBUS reaches the converter input
+  only through a diode-OR (or load-switch OR); a blocking
+  element on the pack line makes back-feed into the NiMH
+  impossible by construction (D-048: external charging only).
+- **Runtime delta vs Issue #284**: the model (B1: 0.533 Wh/day,
+  16.2 d on the pack) assumed a flat eta=0.85 converter. This
+  tree keeps the same converter family at the same assumption
+  class (TPS63070 at 4.8->3.3 V, mA-class loads: ~85-93%
+  datasheet class), so **the 16.2-day figure stands**; with the
+  trackpad's D-053 accounting, 15.7 days. No new term is
+  introduced: the deleted LDO was inside the old model's Main
+  overhead, and its removal is upside, not booked.
+
+## 3. USB-C role (Fly daughterboard deleted)
+
+**Recommendation: a bare USB-C receptacle belonging to Main** —
+the module's native USB is the product's firmware lifeline
+(DFU/UF2-class updates, bench logging), and the nRF52840's USB
+is already paid for in every candidate module.
+
+- Receptacle: 16-pin USB-C, ESD array on D+/D- (USBLC6-class),
+  5.1 kohm CC pull-downs (the keyboard is a sink/UFP), VBUS
+  into the Section 2 diode-OR. Differential routing per D-019
+  rules.
+- Placement: at Main's north apex, on a **mini-tab <=10 mm wide
+  x <=12 mm deep** (added area <=120 mm2, holes unchanged), its
+  mouth at the north wall — the wireless case (already a new
+  design: pod, straightened south, Fly seat deleted) puts its
+  USB opening there, where the Fly mouth sat in the wired case
+  (D-037/D-035 arrangement). If Stage 2's fitted audit prefers
+  zero outline change, the bounded alternative is a minimal
+  carrier at the freed Fly seat plugging the existing J4
+  EZmate footprint (D-035 interface, qualified) — one of the
+  two, decided by that audit, not by taste.
+- SWD test pads are retained (Rev.10 TP1-TP4 precedent) as the
+  recovery path if USB DFU is ever bricked.
+- Rejected: **header-only debug interface** — saves ~$0.6-1.0
+  of parts and makes every firmware update depend on a probe;
+  disproportionate for the product's lifeline. Rejected:
+  **keeping a Fly-style daughterboard** — an extra board and a
+  ~10-cycle EZmate interface (D-035 record) buying nothing now
+  that the MCU has native USB.
+
+## 5. Wing-link electricals (3.3 V design)
+
+### 5.1 Pin assignment — content invariant, rail renamed
+
+The FH12/FFC link keeps D-024's signal content exactly; only
+pin 1's rail changes identity (5.2 V design -> 3.3 V):
+
+| FH12 pin | wired (D-024) | wireless |
+|---|---|---|
+| 1 | HALL_5V | **HALL_3V3** |
+| 2,4,8,10,12,14 | GND (six returns) | unchanged |
+| 3,5,6 | MUX_A0/A1/A2 (common) | unchanged |
+| 7 | per-Wing enable (J2: MUX_EN0, J3: MUX_EN1) | unchanged |
+| 9,11,13 | MUX_OUT_A/B/C (common ADC) | unchanged |
+
+The conductor-order reversal of the stock FFC (k -> 15-k,
+D-042 amendment) is absorbed in the footprint assignment
+exactly as in Rev.8/Rev.10. The divider removal (D-049) touches
+only Main's ADC input network (the RC filter stays, the divider
+ratio goes) — it frees no link pin, and none is needed.
+**The interconnect hardware carries over unchanged**: FH12-
+14S-0.5SH(55) bottom-contact at all four sites (D-043), stock
+Molex 152660149 folded FFC + printed jig, pre-fold lane
+acceptance <=1.30 ohm (see 5.2 for why it need not tighten).
+
+### 5.2 Far-Wing rail budget (successor to the 4.60 V guarantee)
+
+Design peak: one MUX bank on = 7 x TMAG5253BA3 @ 2.6 mA typ
+(Issue #282, 3.3 V) = 18.2 mA + MUX quiescent -> **20 mA class**,
+one Wing enabled at a time (D-024 discipline retained). The old
+guarantee (farthest sensor >= 4.60 V at 127 mA continuous,
+D-026) is retired with the 5 V rail; its successor is the
+D-049 rail-drop budget <=50 mV.
+
+| element | resistance | drop @ 20 mA |
+|---|---|---|
+| FFC loop (1 supply lane + 6 return lanes in parallel; expected lane 0.075-0.10 ohm, D-042 amendment) | 0.10 x (1 + 1/6) = 0.117 ohm | 2.3 mV |
+| Main branch (Stage 2 design target, cf. Rev.10's extracted J3 branch 240.9 mOhm) | <=250 mOhm | 5.0 mV |
+| FH12 contact pair (class) | ~60 mOhm | 1.2 mV |
+| **Total, expected** | | **~8.5 mV — PASS, 6x margin** |
+| Total at the legacy lane acceptance limit (1.30 ohm) | 1.30 x 1.167 + 0.31 ohm | **36.5 mV — PASS** |
+
+The budget passes even at the acceptance limit because the
+burst peak (20 mA) is 6.4x below the wired design load
+(127 mA). Recommendation: **keep the <=1.30 ohm pre-fold lane
+acceptance unchanged** — no build-guide rework; margin at the
+limit is 1.37x, at expectation 6x. Ratiometric closure: sensor
+supply and the module's ADC reference share the 3.3 V domain,
+so the residual drop appears as <=0.26% of span (8.5 mV /
+3.3 V), inside the setup-calibration absorption already
+assumed for the TMAG's +/-15% sensitivity tolerance (#282).
+
+## 6. Stage 2 outline and gates
+
+Stage 2 = layout of this design as a new qualification tree
+(Rev.10 lineage), then the standard package (BOM/CPL per #267
+conventions, DRAFT / NOT FOR ORDER). Gates:
+
+- **G1 (before layout)**: EYSKDNZWB / ED2840AA2 channel
+  verification — stock at >=2 channels, and pin/datasheet
+  compatibility of the current-name part against the
+  EYSKDNZWB datasheet. On failure: fall back to Section 4.3
+  (MDBT50Q-1MV2 + north tab) as a recorded decision, not an
+  improvisation.
+- **G2**: fitted audit against the wireless case — trackpad
+  underside vs the dia.40 keep-out, battery pod, straightened
+  south band, USB mouth alignment, shell-lift disconnect for
+  the trackpad FFC.
+- **G3**: DRC 0 / ERC 0 / unconnected 0; via-pad minimum vs
+  the project's 0.10 mm floor yardstick, reported as a number.
+- **G4**: extracted-resistance re-computation of Section 5.2
+  from the placed board (branch loop target <=250 mOhm;
+  far-Wing drop <=50 mV at 20 mA).
+- **G5**: SW-pocket clearances re-verified from placed data
+  (module courtyard vs J2 body, H2 reservation, circle,
+  outline: each >=0.5 mm) and the antenna shadow kept copper-
+  free on all layers.
+- **G6**: power evidence — converter cold start at a 3.6 V
+  pack, VBUS-OR no-back-feed verified at test points, gated
+  divider draw ~0 in sleep.
+- **G7**: FH12/FFC carry-over re-verified by pad-net census
+  against Section 5.1 (the Rev.10 method).
+- **G8**: firmware bring-up outline only (custom board
+  definition for the module under nRF Connect SDK / ZMK;
+  Unifying device stack per Issue #280/#287) — code is not a
+  Stage 2 deliverable.
