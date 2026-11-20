@@ -17,14 +17,14 @@ outputs in `.issue299-runtime/gates-<VAR>.jsonl`.
 
 | Gate | 16L | 16R | 17L | 17R |
 |---|---|---|---|---|
-| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | — (layout blocked, see §16R) | | |
-| 2. Placed-pad assignment errors | 0 | — | | |
-| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | **BLOCKED — gate 3 cannot pass** | | |
-| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | — | | |
-| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | — | | |
-| 6. Flip-install pad-net diffs | 0 | — | | |
-| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | — | | |
-| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | — | | |
+| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | — (layout blocked, see §16R) | — (layout blocked, see §17L) | |
+| 2. Placed-pad assignment errors | 0 | — | — | |
+| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** | |
+| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | — | — | |
+| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | — | — | |
+| 6. Flip-install pad-net diffs | 0 | — | — | |
+| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | — | — | |
+| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | — | — | |
 
 ## 16L
 
@@ -157,9 +157,91 @@ is the pipeline output with the cage left open, DRC as above; the
 schematic was not generated and gates 1/2/4–8 were not run, because gate 3
 cannot pass.
 
-## 17L
+## 17L — BLOCKED (gate 3 cannot pass; stopped per the gate-failure rule)
 
-(pending)
+Pipeline converged with zero shorts/crossings. Two sites were bridged
+clean and are in the tree (HA3 RAW — all-B weave; HC2 RAW — B weave + F
+hop, after deleting two pour-redundant GND stitch pieces; GND
+unconnected count verified unchanged). Two further sites are sealed by
+the same braid class as the 16R HC1 cage, measured below; the variant
+was stopped with those pairs open rather than dispositioned around.
+
+Final DRC state of the committed tree: `clearance ×12,
+copper_sliver ×1, silk_over_copper ×22, hole_to_hole ×3,
+holes_co_located ×1, track_dangling ×31, via_dangling ×16`,
+unconnected ×8 = 3 GND-zone class + HA6 RAW + HB2 RAW + HC4 RAW +
+HC4 EN + HA5 EN pairs (the last three are long runs, not cages; they
+were not attempted once the variant was blocked). The 12 clearance
+items are route2-original grazes (itemised in the working notes);
+zero shorting / crossing items.
+
+### Seal 1 — U_HB2 pad 4 (H_B2_RAW), centre (65.06, 91.00), rot 0°
+
+Stub end (65.59, 92.50); F trunk via (64.80, 89.20). The stub is
+enclosed by: HALL stub wall SW — (64.81, 91.70) → (64.40, 92.83) →
+via (64.91, 92.29), the stub body passing through (64.49, 92.58);
+GND diagonal pair NE/SE — (64.87, 90.53) → (66.50, 92.16) → link →
+(66.60, 92.20) → (65.10, 93.70), the two diagonal centrelines crossing
+at (66.57, 92.23); WING_EN pair NE — diagonal (66.93, 92.05) →
+(65.56, 90.55) meeting the EN column (x ≈ 66.7–66.93, y ≥ 92.05) at
+the shared endpoint (66.93, 92.05), whose track bubble and the GND
+endpoint bubble (66.50, 92.16) overlap (centres 0.44 apart vs
+0.30 + 0.20 radii), so no track passes between them; C_HB2 pad 2 rect
+x [64.58, 65.53], y [93.28, 94.04] S. Every F transfer point fails by
+measurement: via at the stub end — 0.31 mm from the GND F diagonal
+(64.55, 93.73) → (69.55, 89.73) vs 0.55 required (nudged (65.57,
+92.43): 0.377, and 0.674 vs the HALL via vs 0.70); via in the B
+diagonal channel — the feasible y-interval from {HALL F ≥ 0.55,
+GND diag1 ≥ 0.55, GND F diag2 ≥ 0.55} is empty by ≈ 0.08 mm at every
+x in [65.40, 66.20]; via NE (67.50, 92.20) / (67.60, 93.30) /
+(67.70, 92.75) / (68.60, 91.20) — B connectors cross the EN diagonal /
+EN column / GND diagonals or graze the (66.93, 92.05) endpoint at
+0.02–0.23 mm, and (68.60, 91.20)'s F completion then fails in the
+U_HC2 HALL fan (column x 82.10 passes 0.034 mm from HALL via
+(82.13, 82.51); x 82.60 gives 0.242 mm vs the fan diagonal); F west
+column x 64.40–64.55 — channel between the HALL via bubble
+(64.91, 92.29) and the H_B4_RAW F wall x 64.00 is negative/marginal;
+SW via (63.50, 95.50) — B connector sealed by the HALL endpoint
+(64.00, 94.20) + GND diagonal channel ≈ 0.4 mm < 0.60 needed.
+≈ 20 hand designs were iterated through the offline shape checker
+(true pad polygons, real track widths) and every one violated a
+measured constraint; the corridor A* router fails on this job too.
+Deleting the two GND stitch pieces (66.50, 92.16) → (66.60, 92.20)
+and (66.60, 92.20) → (65.10, 93.70) does not open a passing design
+(the EN pair and HALL F diagonal still bind).
+
+### Seal 2 — U_HA6 pad 4 (H_A6_RAW), centre (111.33, 117.00), rot +5°
+
+Stub end (111.87, 118.18); F trunk via (110.20, 115.40). The stub sits
+in a pocket bounded E by the GND ring piece (112.04, 117.32) →
+(112.30, 118.30), S by the GND piece (111.30, 119.30) → (112.30,
+118.30) whose west end lands on C_HA6 pad 2's north edge, W by the
+HALL chain (111.15, 117.72) → (110.84, 118.88) → (110.40, 119.90) →
+(111.70, 121.20), N by the EP rect and the ring piece (111.29,
+116.82) → (112.04, 117.32). The only exit channel, between the HALL
+leg (110.84, 118.88) → (110.40, 119.90) and C_HA6 pad 2's west edge,
+pinches at y 119.35: leg centreline x 110.637, pad edge x 111.109 —
+span 0.472 mm vs 0.50 mm needed (0.30 track clearance + 0.15 pad
+clearance + 0.05 half-width), short by 0.028 mm; where the channel
+does open (y ≥ 119.50, span 0.522 mm), the exit south is closed by
+the HALL leg (110.40, 119.90) → (111.70, 121.20): every via candidate
+in the exit fails the 0.55 mm via-to-track rule against that leg
+(best (110.45, 120.85) at 0.64 mm is unreachable — its B connector
+crosses the leg at (110.73, 120.23)). The east F hop (via (112.85,
+117.00), F side clean) is unreachable on B: crossing the ring piece's
+line south of (112.04, 117.32) passes 0.016–0.06 mm from that
+endpoint; crossing north of (112.30, 118.30) is blocked by C_HA6
+pad 2 (x [111.05, 112.07], y [119.23, 120.07]). ≈ 13 hand designs
+iterated through the shape checker; corridor A* fails on this job
+too.
+
+What would unblock 17L: the same local re-route class as 16R —
+re-place the route2 local fans around U_HB2 and U_HA6 (GND ring /
+HALL stub geometry) instead of bridging over them, or a 4-layer /
+smaller-via stackup for this variant. The 17L tree in this PR is the
+pipeline output with HA3/HC2 bridged and the two sealed sites open;
+the schematic was not generated and gates 1/2/4–8 were not run,
+because gate 3 cannot pass.
 
 ## 17R
 
