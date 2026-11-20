@@ -66,23 +66,29 @@ E (114.31,136.866). All vias 0.6/0.3 except RESET up-via 0.45/0.3.
   (100.5,134.95)->(100.5,136.9)->(107.96,136.9)->pad 1;
   B.Cu w0.3 (100.5,134.95)->(115.2,134.95)->(115.2,131.0)
   joining the existing B.Cu SYS run.
-- P2 SWDIO: F.Cu w0.1 (109.4,134.0)->(108.85,134.0)->
-  (108.85,136.485)->pad 2.
-- P3 GND: F.Cu stub (110.5,136.485)->(110.9,137.05); via
-  (110.9,137.05) [web to outline 0.55; drill clears pad circle].
-- P4 SWDCLK: F.Cu (110.0,133.5)->(110.0,133.95); via A
-  (110.0,133.95); B.Cu (110.0,133.95)->(110.0,136.95)->
-  (112.15,136.95); via B (112.15,136.95); F.Cu
-  (112.15,136.95)->(112.15,136.485)->pad 4.
+- P2 SWDIO: F.Cu w0.1 (109.4,134.0)->(109.0,134.0)->
+  (109.0,136.485)->pad 2.
+- P3 GND: F.Cu stub (110.5,136.485)->(110.5,137.05); via
+  (110.5,137.05) [web to outline 0.55; drill clears pad circle].
+- P4 SWDCLK: ALL F.Cu w0.1 (v2 — the B.Cu detour died against
+  SYS's B.Cu highway, which crosses any N-S B.Cu run; F.Cu works
+  once P9 takes its own via and the y=134.55 highway is gone):
+  (110.0,133.5)->(110.5,133.5) extension of the existing run;
+  (110.5,133.5)->(110.5,134.4); (110.5,134.4)->(111.05,134.4);
+  (111.05,134.4)->(111.05,136.9); (111.05,136.9)->(111.77,136.9);
+  (111.77,136.9)->pad 4. [Legs clear P9 via annulus 0.25, pad 7/4
+  west edges 0.276, P3 via annulus 0.27.]
 - P5 GND: F.Cu stub (113.04,136.485)->(113.04,137.05); via
   (113.04,137.05) [web 0.55; SE hole clearance 0.51]. (The
   earlier channel/gap idea is DEAD: the SE hole's drill disc +
   0.25 clearance reaches Y 137.611, sealing the south channel.)
-- P9 GND: F.Cu stub (109.23,135.215)->(109.23,134.55); highway
-  (109.23,134.55)->(115.72,134.55); drop (115.72,134.55)->
-  (115.72,135.565) into the existing GND via. [Highway clears
-  N-row pad edges 0.221, via A annulus 0.25, RESET down-via
-  annulus 0.225.]
+- P9 GND: own via (v2 — replaces the y=134.55 highway, which
+  blocked SWDCLK's F.Cu descent): F.Cu w0.2 stub
+  (109.23,135.215)->(109.9,134.9)->(109.9,134.55); via
+  (109.9,134.55). [F.Cu clearances: SWDIO via 0.74, pad 8 0.20,
+  pad 9 0.25. Its In2 annulus sits over the MUX_EN0 y=134.3
+  segment's latitude — flagged: DRC arbitrates; the baseline
+  itself carries comparable via/In2 adjacencies.]
 - P10 RESET_N: stub re-laid (113.5,133.4)->(113.5,133.75)->
   (113.2,133.75); down-via (113.2,133.75); B.Cu
   (113.2,133.75)->(108.3,133.75)->(108.3,133.975); up-via
@@ -98,3 +104,22 @@ Iteration rule: after the scripted edit, DRC on the filled work
 copy; every NEW violation inside X 100..118 / Y 130..139.5 gets
 fixed by local adjustment or itemised for the REPORT delta
 table; no violation outside the box may change at all.
+
+## As built (v3 final, 2026-11-20)
+
+Centre (110.5, 135.99), rotation +1.35° (in this build +rot
+moves the W hole south / E holes north — verified from the
+placed footprint read-back). The rotation is load-bearing:
+unrotated, the W hole's Ø0.99 drill severs the 0.05 mm-wide
+In2 PAD_SCL track (disc crosses its full width over ~0.58 mm);
+rotated, no hole touches any track. Final hole clearances
+(measured): W×PAD_SCL +0.060, E-N×MUX_EN0 +0.039,
+E-N×SYS B.Cu +0.140, SE×SYS B.Cu +0.071, SE web to outline
+0.489. Routes as built are recorded in the tree REPORT's
+respin section; scripts swd_board_edit.py + swd_fix_padnets.py
+(pad nets assigned by position — number-keyed assignment on a
+plugin-loaded footprint landed on the wrong pads in this
+build). DRC (drc2 method): baseline 704/2 → respin 709–711/2
+across runs (marginal-pair reporting unstable in this build;
+shorting 0 and the unconnected pair identical in every run).
+Pad audit vs maker geometry: max error 0.0000 mm.
