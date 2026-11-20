@@ -35,8 +35,8 @@ Baseline board SHA-256: 260726192947a090... (edge-fixed D-058)
 
 ## Stages
 
-0. [ ] this plan + checkpoint commit
-1. [ ] Baseline gates re-run on UNMODIFIED board: containment,
+0. [x] this plan + checkpoint commit
+1. [x] Baseline gates re-run on UNMODIFIED board: containment,
        ERC, DRC (JSON, full violation list saved for the diff)
 2. [ ] Official TC2050 footprint obtained from Tag-Connect
        (datasheet/CAD), provenance saved; KiCad footprint built
