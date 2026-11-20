@@ -568,3 +568,123 @@ package is DRAFT / NOT FOR ORDER until the PO adopts.
 (footprint condition open, re-route blocked) are superseded
 by this D-058 draft; both conditions they carried are
 discharged above.
+
+## SWD respin — TC2050 conversion (2026-11-20; awaits D-061)
+
+PO decision 2026-11-20: convert JSWD from the TC2030-NL-class
+6-pad field to Tag-Connect's official **TC2050** footprint.
+Scope was the SWD field ONLY. The same session's outline
+extension / JBATT relocation was **stopped at the margin gate**
+(`.issue292-runtime/margin-budget.md` on this branch): with the
+real Wing Rev.6 outlines placed in the case frame, Main's north
+diagonals face the Wings across a 2.00 mm FFC channel; the
+balanced extension is capped at d = 1.0 mm and no JBATT site
+exists. **JBATT stays at the south edge; its cable drape is
+fixed case-side (Issue #296). Outline delta = 0 (Edge.Cuts
+verified item-identical, 14/14).**
+
+### The new field
+
+- Footprint `wmain:TC2050-IDC-NL`, from the maker's own
+  datasheet drawing **DWG TC2050-IDC-NL-FP REV A (12/2/10)**,
+  cross-checked against the KiCad library footprint — max
+  disagreement 0.001 mm (rounding). Provenance:
+  `.issue292-runtime/tc2050/PROVENANCE.md`.
+- 10 contact pads Ø0.7874 mm, **no solder paste** (datasheet
+  note 3 — the old TC2030 field had paste; corrected), and the
+  **3 alignment NPTH Ø0.9906 mm** the old field omitted.
+- Placed centre **board (110.5, 135.99), rotation +1.35°** —
+  case frame (+10.5, 148.39). The desk-study centre
+  (111.5, 136.2) does not survive the official footprint: its
+  east-south hole left a 0.189 mm web to the outline and its
+  east-north hole drilled the In2.Cu PAD_SCL jog. The shift
+  (−1.0, −0.21) plus the rotation keep all three holes clear of
+  PAD_SCL and MUX_EN0 with **no drill contact** (residual
+  clearances +0.04…+0.10 mm vs the 0.25 mm hole-clearance
+  floor — inherent to the maker hole pattern against the
+  pre-existing In2.Cu tracks; moving those tracks is outside
+  this respin's invariants). RPD2/RPD3 clear the field by
+  ~4.1 mm, the plug body by ~1.5 mm. Top face; usable in-case
+  with the cover off and on the bench, as before.
+- **Signal mapping = Cortex 10-pin debug order** (cable is
+  straight-through, datasheet sheet 2): 1 VTref→SYS_3V3,
+  2 SWDIO, 3 GND, 4 SWDCLK, 5 GND, 6 SWO→NC, 7 KEY→NC,
+  8 TDI→NC, 9 GNDDetect→GND, 10 nRESET→RESET_N.
+- **Cable correction to the study record:** the plain
+  TC2050-IDC-NL terminates in a 0.1″ 2×5 IDC, which does NOT
+  mate with the nRF52840 DK. The chain is **DK debug-out →
+  TC2050-IDC-NL-050-ALL (1.27 mm Cortex end) → board**, no
+  adapter. (Study §E.2's table conflated the two variants.)
+- Escapes re-routed inside the field box only: SYS_3V3 via a
+  south-edge F.Cu channel + B.Cu return to the existing run;
+  SWDIO/SWDCLK on F.Cu 0.1 mm; GND pads 3/5 via the south
+  channel, pad 9 via a Ø0.45 via in the In2 window; RESET_N
+  via B.Cu jog + Ø0.45 up-via. Pads 6/7/8 carry no tracks.
+
+### Gate results (respin)
+
+| Gate | Baseline (D-058 board) | After respin |
+|---|---|---|
+| Copper containment | PASS | **PASS** (SE hole CLOSE note 0.489 mm web) |
+| ERC | 0 | **0** |
+| DRC total (drc2 method) | 704 / 2 unconnected | **709–711 / 2 unconnected** (see note) |
+| DRC shorting_items | 0 | **0** |
+| Unconnected | CVCC2.2 GND; module GND pair | **identical pair** (item-diff verified) |
+| Pad audit vs maker geometry | — | **max error 0.0000 mm** (10 pads + 3 holes) |
+| Footprint census | 55 | 55; **only JSWD moved** |
+| Track census outside field box | — | **0 diffs** |
+| Edge.Cuts | — | **identical (14/14 items)** |
+
+DRC delta, itemised (in-field): annular_width +2 and
+via_diameter +2 = the two Ø0.45/0.3 vias (same class as the
+design's existing Ø0.45 GND-via precedent); via_dangling +2 =
+the SYS_3V3 (112.2,133.3) and GND (115.72,135.565) vias whose
+F.Cu stubs were deleted with the old field — both remain
+connected on inner/back layers (unconnected pair unchanged
+proves it); items_not_allowed +1 = the field's NW corner
+intrudes ≤~1.0 mm into the TRACKPAD_KEEP_OUT rim — the field
+is planar (pads + holes, zero height), which is what the
+keep-out protects against, and J2/J3 already carry the same
+class at the same keep-out; hole_clearance: +2 listed (maker
+holes vs the new SYS_3V3 B.Cu route, +0.14 / +0.07, no
+contact), −2 net class change; two further no-contact
+proximities (W hole × PAD_SCL +0.06, E-N hole × MUX_EN0
++0.04) are at this build's DRC reporting threshold and flip
+between runs. **Note on totals:** this KiCad build's DRC
+reporting of marginal pairs is run-unstable — three runs of
+the identical final file gave 709/709/711, with the variance
+confined to far-field fine-field decomposition items; the
+load-bearing results (shorting 0, unconnected identical,
+containment PASS) are stable in every run. No new violation
+classes.
+
+### Manufacturing
+
+Gerbers + drill regenerated (28 files, same set);
+`wmain-gerber.zip` rebuilt. CPL: only the JSWD row changed
+(new position/rotation). **BOM: no purchasable line changes**
+— JSWD is a pad/hole field with no part; its two descriptive
+placeholder rows were renamed TC2030-IDC-NL → TC2050-IDC-NL.
+Package remains DRAFT / NOT FOR ORDER. The JLCPCB quote
+re-run stays an order-stage item (the ≈$139 quote of
+2026-11-19 predates both the edge fix and this respin).
+
+## Adoption (final)
+
+**D-061 (adopted by PO 2026-11-20; recorded in
+`docs/decisions.md`):** Wireless Main SWD respin adopted:
+JSWD converted to the official Tag-Connect TC2050 footprint
+(10 pads Ø0.79mm on a 1.27 × 1.27mm grid, no paste, 3
+alignment holes Ø0.99mm) at board (110.5, 135.99) rot
++1.35°, Cortex pin order, cable = TC2050-IDC-NL-050-ALL
+from the PCA10056 debug-out. Outline, JBATT and all other
+features unchanged from the D-058 board (SHA-256
+`26072619…` → `6dfbcb954e57b1a19fdbbf526f956c00c3c59a756c1a60b7a5e2e4ebf095ecd7`).
+D-061 also adopts the standing guideline: the TC2050
+footprint is the standard SWD pad field for future ARM
+boards, and the standard DIY jig head is a Mill-Max
+855-22-010-10-001101 integrated block + 3 guide pins.
+The outline extension / JBATT relocation examined in the same
+round is **not adopted** (margin gate: 2.00 mm Wing FFC
+channel); JBATT's cable management is a case-side item for
+Issue #296.
