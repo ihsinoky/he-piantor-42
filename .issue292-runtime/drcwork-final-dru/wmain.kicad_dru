@@ -1,0 +1,14 @@
+(version 1)
+
+; D-057 (Issue #292): design-rule exception ONLY inside the
+; ISP1807-LR fanout field (rule area MODULE_FIELD_FINE =
+; footprint + minimal escape zone, 69.3..80.9 x 119.05..128.9).
+; Trace width / clearance may go to the 0.05 mm class inside the
+; area; the rest of the board stays under D-019 (0.10/0.10).
+(rule "module_field_clearance"
+	(condition "A.InsideArea('MODULE_FIELD_FINE') && B.InsideArea('MODULE_FIELD_FINE')")
+	(constraint clearance (min 0.05mm)))
+
+(rule "module_field_track_width"
+	(condition "A.InsideArea('MODULE_FIELD_FINE')")
+	(constraint track_width (min 0.05mm)))

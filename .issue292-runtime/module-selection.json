@@ -1,0 +1,197 @@
+{
+ "study": "Issue #292 Stage 2a module selection",
+ "date": "2026-11-19",
+ "chip_fixed": "nRF52840 (D-052)",
+ "signal_need": {
+  "gpio": 15,
+  "ain": 4,
+  "swd": true,
+  "usb": "plus, not a gate"
+ },
+ "survey_out": [
+  "Minew MS88SF2-class",
+  "Fujitsu FWM7BLZ-class",
+  "Holyiot 1807-class"
+ ],
+ "gates": {
+  "ISP1807-LR": {
+   "cert": {
+    "verdict": "PASS",
+    "mic": "020-200037",
+    "source": "Insight SiP datasheet S8.1"
+   },
+   "availability": {
+    "verdict": "PASS",
+    "channels": {
+     "DigiKey": 13850,
+     "Mouser": "In Stock"
+    },
+    "price_usd_1": 13.65
+   },
+   "signals": {
+    "verdict": "PASS",
+    "gpio": 46,
+    "ain": 8
+   },
+   "antenna": {
+    "verdict": "PASS",
+    "type": "built-in, keep-out to board edge (DS S4.3)"
+   }
+  },
+  "MDBT50Q-1MV2": {
+   "cert": {
+    "verdict": "PASS",
+    "mic": "TELEC cert in Raytac Approval Sheet Ver.L S9.3 (digits to record from certificate image at layout)",
+    "fcc": "SH6MDBT50Q"
+   },
+   "availability": {
+    "verdict": "PASS (thin)",
+    "channels": {
+     "DigiKey Marketplace": 35,
+     "SparkFun WRL-21605": "In Stock",
+     "TME": 0,
+     "LCSC C5118826": 0
+    },
+    "price_usd_1": 6.15
+   },
+   "signals": {
+    "verdict": "PASS",
+    "gpio": 48,
+    "ain": 8,
+    "swdio_pin": 51,
+    "swdclk_pin": 53,
+    "reset_pin": 40
+   },
+   "antenna": {
+    "verdict": "PASS",
+    "type": "chip antenna, no-ground all layers (DS S2.3); -U1MV2 u.FL variant"
+   }
+  },
+  "BL654": {
+   "cert": {
+    "verdict": "PASS",
+    "mic": "201-180112",
+    "source": "Ezurio Regulatory Information v2.3 S5"
+   },
+   "availability": {
+    "verdict": "PASS",
+    "channels": {
+     "Mouser 451-00001": 15850,
+     "Mouser 451-00002": 1209
+    },
+    "price_usd_1": 13.14
+   },
+   "signals": {
+    "verdict": "PASS",
+    "gpio": 48
+   },
+   "antenna": {
+    "verdict": "PASS",
+    "type": "451-00001 printed; 451-00002 MHF4 + MIC-listed FlexPIFA for south zone"
+   }
+  },
+  "BT840": {
+   "cert": {
+    "verdict": "PASS",
+    "mic": "201-190710/00",
+    "source": "Fanstel Product Specifications Ver.1.28"
+   },
+   "availability": {
+    "verdict": "PASS (weak evidence)",
+    "channels": {
+     "DigiKey": "In Stock",
+     "Mouser": "In Stock"
+    },
+    "price_usd_1_direct": 6.88
+   },
+   "signals": {
+    "verdict": "PASS",
+    "gpio": 48
+   },
+   "antenna": {
+    "verdict": "PASS",
+    "type": "PCB trace at edge; BT840E u.FL + ANT060"
+   }
+  },
+  "NINA-B306-00B": {
+   "cert": {
+    "verdict": "FAIL",
+    "reason": "MIC listed by u-blox summary, certificate number not recordable from maker documents"
+   }
+  },
+  "ED2840AA2": {
+   "availability": {
+    "verdict": "FAIL",
+    "reason": "Stage 2 gate G1 2026-11-19: no stock figure at any channel"
+   }
+  },
+  "XIAO nRF52840 Plus": {
+   "availability": {
+    "verdict": "FAIL",
+    "reason": "DigiKey US 0 / CA 5, no second stocked channel"
+   }
+  },
+  "PAN1780": {
+   "cert": {
+    "verdict": "FAIL",
+    "reason": "Panasonic pre-certification list = FCC/ISED/CE only, no MIC"
+   }
+  }
+ },
+ "scored": {
+  "ISP1807-LR": {
+   "size_mm": [
+    8.0,
+    8.0,
+    1.0
+   ],
+   "tab": "none - fits SW pocket",
+   "dcdc": "integrated",
+   "lf_xtal": "integrated",
+   "usb": true,
+   "lcsc": "C5264268 (stock unverified)",
+   "assembly": "LGA, highest risk"
+  },
+  "MDBT50Q-1MV2": {
+   "size_mm": [
+    15.5,
+    10.5,
+    2.05
+   ],
+   "tab": "stays, ~+420mm2",
+   "dcdc": "REG1 internal; REG0 unused in NV mode",
+   "lf_xtal": "external required",
+   "usb": true,
+   "lcsc": "C5118826 stock 0 -> hand-fit",
+   "assembly": "castellated, lowest risk"
+  },
+  "BL654": {
+   "size_mm": "10 wide x 2.2; length 15 (Mouser) vs 22 (Ezurio) CONFLICT",
+   "tab": "stays",
+   "dcdc": "integrated",
+   "lf_xtal": "optional external",
+   "usb": true,
+   "lcsc": "not listed -> hand-fit",
+   "assembly": "LGA"
+  },
+  "BT840": {
+   "size_mm": [
+    14,
+    16,
+    1.9
+   ],
+   "tab": "stays",
+   "dcdc": "integrated",
+   "lf_xtal": "optional external",
+   "usb": true,
+   "lcsc": "not listed -> hand-fit",
+   "assembly": "castellated"
+  }
+ },
+ "recommendation": {
+  "first": "ISP1807-LR",
+  "fallback": "MDBT50Q-1MV2",
+  "tab_under_first": "GONE - outline returns to Rev.10 exactly",
+  "draft_decision": "D-056"
+ }
+}
