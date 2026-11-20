@@ -21,33 +21,33 @@ Study of record: hidden_files/wmain-jbatt-relocation-2026-11-20.md
 
 ## Stages
 0. [x] worktree + this plan
-1. [ ] Baseline gates on UNMODIFIED board: containment PASS,
+1. [x] Baseline gates on UNMODIFIED board: containment PASS,
        ERC 0, DRC baseline counts recorded (delta attribution)
-2. [ ] Case margin measurement (geometry17 bodies + case296 2D):
+2. [x] Case margin measurement — SEE margin-budget.md: Wing channel is 2.00mm; STOP (geometry17 bodies + case296 2D):
        bay north wall, slope cover underside, plate patches +
        tilted install motion (stack2), Wing/FFC envelopes.
        Margin budget line by line; extension taken; residual
        clearance to bay wall >= 1.0mm class (else STOP+report)
-3. [ ] New outline: both north diagonals keep angles, extended
+3. [STOPPED] New outline — not executed (margin forces d<=1.0, no JBATT site): both north diagonals keep angles, extended
        equally (symmetric about X=100); rest of outline identical
-4. [ ] JBATT -> new north edge, mating faces north (tray);
+4. [STOPPED] JBATT — N-TAB refuted (inside Wing, 201.60 mm3); stays south (study Option 1) -> new north edge, mating faces north (tray);
        plug envelope + cable bend vs case in placed pose;
        VBAT+/GND re-route to OR node; VBAT_SENSE tap stays valid;
        downstream of OR untouched; new cable length (case frame)
-5. [ ] SWD: add 3 alignment holes to TC2030 field; evaluate
+5. [DESK-VERIFIED, not executed] SWD — TC2050 site clean; awaits PO decision on an SWD-only respin: add 3 alignment holes to TC2030 field; evaluate
        TC2050 at shifted site — adopt TC2050 only if it fits
        cleanly with verified clearances; else TC2030+holes.
        Signals unchanged, no SWO.
-6. [ ] Full re-verification (measured): containment, ERC, DRC
+6. [n/a] Full re-verification — no board change to verify (measured): containment, ERC, DRC
        (item-level dispositions only), J2/J3 census 14/14,
        module fine-field minima, trackpad D40 keep-out, antenna
        keep-out, far-Wing budget, board-vs-case audit of new
        outline region (bay wall / plate incl. tilt / cover /
        Fly) interference volumes = 0 expected
-7. [ ] Manufacturing package regen (gerbers; BOM delta stated),
+7. [n/a] Manufacturing package — unchanged; no quote re-run needed (gerbers; BOM delta stated),
        REPORT update, quote re-run handoff note (prepare only,
        DO NOT run/order)
-8. [ ] Checkpoint commits + push; Draft PR (title: respin JBATT
+8. [x] Checkpoint commits + push of evidence branch; NO Draft PR (no board change) (title: respin JBATT
        north + balanced outline extension; refs #292; PR body
        records coupled case item: bay needs matching recess,
        #296 absorbs; new outline case-frame coords as input)
