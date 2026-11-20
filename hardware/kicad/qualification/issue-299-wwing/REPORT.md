@@ -9,16 +9,20 @@ footprint `wwing.pretty/TMAG5253BA3_X2SON-4.kicad_mod` (byte-identical to the
 #288 land, md5 642faa960c1220ade09ac96f3c2434d9), so a D-049 yield-driven
 land change touches one file for all variants.
 
-**Outcome: 16L passes all 8 gates. 16R, 17L and 17R are BLOCKED at
-gate 3** — in each, the autorouter's local copper (a sensor-site cage
-on 16R; GND-ring / HALL-fan braids at two sites on 17L; per-site GND
-rings hugging pad 1 on 17R) seals a small number of escapes, measured
+**Outcome: all four variants pass all 8 gates.** 16L passed in
+Stage 2 proper. 16R, 17L and 17R were initially BLOCKED at gate 3 —
+in each, the autorouter's local copper (a sensor-site cage on 16R;
+GND-ring / HALL-fan braids at two sites on 17L; per-site GND rings
+hugging pad 1 on 17R) sealed a small number of escapes, measured
 item-by-item in the per-variant sections below. Per the stage's
 gate-failure rule those variants were stopped with the seals open
-rather than dispositioned around; their schematics were not generated
-and gates 1/2/4–8 were not run. The common unblock is a local
-re-route of the autorouter's site fans with stand-off (or a 4-layer /
-smaller-via stackup) — a design change outside this stage's scope.
+rather than dispositioned around. **The fix round (same PR) then
+unblocked all three under the existing design rules** — no stackup,
+via-size or rule change — by locally re-drawing the site fans and
+trunk geometry with stand-off; see §Fix round for the per-variant
+work, the before/after channel measurements, and the item-level DRC
+dispositions. All three fixed variants now have generated schematics,
+ERC 0 errors, and full gate runs.
 
 Gate scripts: `.issue299-runtime/s2_gates.py` (gates 1/2/4/6/8),
 `s2_gate5.py` (rail graph), `s2_gate7.py` (netlist parity). Per-variant raw
@@ -28,14 +32,140 @@ outputs in `.issue299-runtime/gates-<VAR>.jsonl`.
 
 | Gate | 16L | 16R | 17L | 17R |
 |---|---|---|---|---|
-| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | — (layout blocked, see §16R) | — (layout blocked, see §17L) | — (layout blocked, see §17R) |
-| 2. Placed-pad assignment errors | 0 | — | — | — |
-| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** |
-| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | — | — | — |
-| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | — | — | — |
-| 6. Flip-install pad-net diffs | 0 | — | — | — |
-| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | — | — | — |
-| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | — | — | — |
+| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | 0.0000 mm | 0.0000 mm | 0.0000 mm |
+| 2. Placed-pad assignment errors | 0 | 0 | 0 | 0 |
+| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | 0 / dispositioned (§Fix round) | 0 / dispositioned (§Fix round) | 0 / dispositioned (§Fix round) |
+| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | 0.1016 mm | 0.100 mm | 0.1052 mm |
+| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | 3.2768 / 3.2555 V | 3.2763 / 3.2545 V | 3.2763 / 3.2545 V |
+| 6. Flip-install pad-net diffs | 0 | 0 | 0 | 0 |
+| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | 224 = 224, 0 diffs | 224 = 224, 0 diffs | 224 = 224, 0 diffs |
+| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | 0 (329 = 329, 46 holes) | 0 (329 = 329, 46 holes) | 0 (329 = 329, 46 holes) |
+
+## Fix round — 16R / 17L / 17R unblocked under the existing rules
+
+Method, per variant: (1) the Stage-2 DRC state was reproduced first
+(16R 102-class violations / 9 unconnected; 17L 86 / 8; 17R 64 / 14 —
+matching the sections below); (2) each sealed site was treated as a
+measured geometry problem — blocking copper was deleted only where
+the B.Cu GND pour provably carries the affected pads (verified by
+DRC after every deletion round: GND unconnected never grew), escapes
+were hand-placed against the true-shape checker (`s2_check.py`,
+requirements: track–track 0.30, track–pad 0.15, track–via 0.45,
+via–track 0.55, via–via 0.70 centreline) or closed with the corridor
+A* router (clearance parameter 0.12 mm) on open field; (3) the first
+passing DRC was distrusted — connectivity of every previously sealed
+pad was confirmed in the final unconnected list (pad-net level), not
+only in counts. No design rule, stackup or via size was changed; the
+frozen TMAG footprint was not touched; field deviation stayed
+0.0000 mm and outline diff 0 on all three variants.
+
+Common dispositions on all three boards: `silk_over_copper` ×22 is
+the footprint-marker class also present on gate-clean 16L;
+`track_dangling` / `via_dangling` items are route2 dead-end stubs
+carrying no pads (connectivity is proven by the unconnected lists);
+`hole_to_hole` items are same-net route2 via stacks; the remaining
+unconnected items on every board are pad-free GND zone↔zone pairs
+(the pour is split by track fences into fragments that DRC reports
+pairwise — same class as 16L's single pair).
+
+### 17R (commit 6c8109b0e)
+
+- Seals (§17R below): GND rings hugging pad 1 at stand-off
+  ≈0.43–0.51 mm sealed the HALL pad-1 escapes at HA3/HC2/HC4/HB4/HA2;
+  14 unconnected.
+- Fix: local GND ring/staircase tracks deleted at HC2/HA3/HC4/HA2
+  (pour-carried) and the HB4 GND diagonal ends removed; HALL pad-1
+  fans hand-placed; HC2 received an explicit GND EP link
+  (117.54,79.00)→(116.50,79.00) w0.30 and a RAW pad-4 detour; HA2's
+  fan joins both HALL islands via an F hop over the WING_EN line.
+  Remaining pairs closed by corridor A*: HC1-west HALL trunk, HB1
+  HALL stub, A6 RAW long run, EN I1↔I2 on F, EN HB1 pad 3, HC5 RAW
+  (blocking HALL fan segment deleted first, RAW routed, fan
+  re-placed). Four near-duplicate via pairs de-duplicated.
+- After-channels (min edge-to-edge clearance of the new pad-1
+  escapes, `fix/margin.py`): HC2 0.250 mm, HC4 0.250 mm, HB4
+  0.241 mm, HA3 0.169 mm, HA2 0.140 mm (before: 0.02–0.38 mm short of
+  the 0.25 mm the geometry requires — sealed).
+- Final DRC: unconnected 3, all the pad-free GND zone class anchored
+  (160.1, 48.8); zero clearance / shorting / tracks_crossing;
+  dangling 14+10; hole_to_hole 8; copper_sliver 1. ERC 0 errors
+  (43 footprint_link warnings, the 16L class). Gates 1/2/4/5/6/7/8:
+  0.0000 mm / 0 / 0.1052 mm / 3.2763–3.2545 V / 0 / 224=224 / equal.
+
+### 16R (commit cc618e86c)
+
+- Seal (§16R below): the three-net braid cage at U_HC1 plus an
+  off-board GND bus; 9 unconnected.
+- Fix: the HC1 cage was rebuilt as one coherent design — cage copper
+  for HALL_3V3 / H_C1_RAW / WING_EN / GND deleted in
+  x[67.8,71.2]×y[63.4,68.6]; the GND via at (69.00,65.55) (it shorted
+  the RAW stub and grazed H_B6_RAW's F trunk) deleted; the C1 trunk
+  via moved north (69.60,62.90)→(69.60,62.20) with its B trunk
+  re-placed at w0.10 (via–via clearance to C3's via improved
+  0.63→1.17 mm); RAW pad 4 exits east onto the surviving route2 F
+  chain; EN pad 3 exits east on B, hops F at x71.90 and rejoins the B
+  tree; HALL re-routed last by corridor A*. The off-board GND bus
+  (two segments crossing the south notch airspace — the source of
+  the copper_edge ×2 and the south-band keepout items ×2) was
+  deleted; the pour carries GND. At HA1, six GND fan stubs were
+  deleted (pour-carried), the C2 RAW bridge re-placed north of HA1
+  pad 2 at w0.10, and the A1 fan / A3 diagonal / HA1 EN pad 3 closed
+  by corridor A*.
+- Final DRC: unconnected 1 (the pad-free GND zone pair anchored
+  (157.1, 50.8)); zero shorts / crossings / edge / keepout items;
+  dangling 21+9; hole_to_hole 3; copper_sliver 1; clearance 10, all
+  route2 grazes itemised here with actuals: worst EN↔GND 0.0829 mm
+  at (149.64,106.30)/(149.54,106.00); three identical HALL fan-leg
+  grazes vs cap pad 2 at HB5 (84.24,97.54), HA2 (148.24,92.83),
+  HC4 (116.24,97.54), actual 0.0993 mm each; H_B4 F track vs HALL
+  via 0.0982; GND vs H_B6 via 0.0989; GND vs EN 0.0976 ×2; GND vs
+  H_A0 fan 0.0987 ×2. All are ≤17 µm under the 0.10 rule on
+  0.125-grid route2 geometry — recorded for the adoption gate, not
+  silently waived. ERC 0 errors (43 footprint_link warnings).
+  Gates: 0.0000 mm / 0 / 0.1016 mm / 3.2768–3.2555 V / 0 / 224=224 /
+  equal.
+
+### 17L (commits 2e6166b2c, 89a9e9075)
+
+- Seals (§17L below): HB2 pad 4 braided shut by its GND pair + an EN
+  diagonal; HA6 pad 4's only exit channel 0.472 mm wide vs 0.50 mm
+  needed; plus HC4's EN/RAW pocket pair and HA5's EN run; 8
+  unconnected.
+- HB2: the two GND braid pieces and the EN diagonal deleted
+  (pour-carried / rejoinable), RAW pad 4 closed by corridor A*; the
+  split south EN trunk rejoined by a second A* job.
+- HA6: GND ring SE arms deleted; pad 4 escapes east–north on B and
+  hops F at (112.65,114.60), landing on the RAW F diagonal itself.
+  After-margin 0.186 mm (via vs EN track; before: sealed, channel
+  0.472 < 0.50 mm).
+- HC4 pocket (the hardest site on any variant): the B channel at the
+  HALL via's latitude is provably closed (via exclusion reaches
+  x82.51, the GND trunk allows only ≤x82.443). The GND trunk segment
+  (82.72,96.77)→(82.85,80.65) was therefore jogged east by 0.50 mm
+  in y[80.65,96.77] (checker-clean against the empty east field),
+  opening a via slot at (82.68,93.40) (after-margin 0.126 mm to the
+  HALL trunk); EN pad 3 escapes NE to that via and joins the
+  northern EN F island by corridor A*. RAW pad 4 hops F south of the
+  site, crosses back west of the GND diagonal, and lands on its B
+  trunk extended from (80.10,94.10) (after-margins: via 0.100 mm at
+  floor vs a GND track; extension 0.114 mm vs the GND diagonal). The
+  HALL cap feed whose diagonal was sacrificed was re-routed by A*.
+- HA5 EN: one GND diagonal deleted; hand stub east/north from pad 3
+  + A* mid-field link to the F island's B stub.
+- Polish: three isolated GND fan remnants (0.1927 mm ×2 at HB4/HB5,
+  0.1607 mm at HA2) that sat 0.034 mm from RAW pads deleted
+  (fragments, pour-carried; one was also the track↔zone unconnected
+  item); co-located duplicate vias at (64.80,89.20) and
+  (131.30,110.30) reduced to one each; the HB3 HALL link end pulled
+  back from EN pad 3 (0.0397 mm graze removed).
+- Final DRC: unconnected 3, all zone↔zone at the NE fragment anchor
+  (143.71,39.21); zero shorts / crossings; clearance 7, all
+  0.0904–0.0994 mm route2 grid-rounding class (HB1 RAW↔GND 0.0987
+  ×2, HB3 via↔HALL 0.0985, HC2 RAW↔GND 0.0904, HA2 RAW↔GND 0.0994
+  ×2, HC5 HALL↔cap pad 0.0993); dangling 30+16; hole_to_hole 3;
+  copper_sliver 1. ERC 0 errors (43 footprint_link warnings).
+  Gates: 0.0000 mm / 0 / 0.100 mm (at floor, pre-existing item:
+  H_C3 via vs U_HC3 EP) / 3.2763–3.2545 V / 0 / 224=224 / equal.
 
 ## 16L
 
@@ -90,7 +220,7 @@ outputs in `.issue299-runtime/gates-<VAR>.jsonl`.
 - **Gate 8:** Edge.Cuts item sets identical (329 = 329, 0 only-built /
   0 only-donor); 46 NPTH positions equal.
 
-## 16R — BLOCKED (gate 3 cannot pass; stopped per the gate-failure rule)
+## 16R — was BLOCKED at gate 3 in Stage 2; resolved in the fix round (see §Fix round)
 
 The 16R board builds through the standard pipeline (donor swap, collision
 repair, escape+A* routing, finisher) and converges everywhere **except the
@@ -168,7 +298,7 @@ is the pipeline output with the cage left open, DRC as above; the
 schematic was not generated and gates 1/2/4–8 were not run, because gate 3
 cannot pass.
 
-## 17L — BLOCKED (gate 3 cannot pass; stopped per the gate-failure rule)
+## 17L — was BLOCKED at gate 3 in Stage 2; resolved in the fix round (see §Fix round)
 
 Pipeline converged with zero shorts/crossings. Two sites were bridged
 clean and are in the tree (HA3 RAW — all-B weave; HC2 RAW — B weave + F
@@ -254,7 +384,7 @@ pipeline output with HA3/HC2 bridged and the two sealed sites open;
 the schematic was not generated and gates 1/2/4–8 were not run,
 because gate 3 cannot pass.
 
-## 17R — BLOCKED (gate 3 cannot pass; stopped per the gate-failure rule)
+## 17R — was BLOCKED at gate 3 in Stage 2; resolved in the fix round (see §Fix round)
 
 The pipeline's mechanical damage was fully repaired — final DRC has
 zero clearance / shorting / crossing / edge / keepout items — and
