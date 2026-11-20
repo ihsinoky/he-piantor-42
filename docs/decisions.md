@@ -907,8 +907,6 @@ zero, plus the all-via pad audit, before regenerating manufacturing data.
 The [Rev.3 report](issue-182-matrix-rev3.md) records the qualified result and
 manufacturing evidence. Manufacturer DFM and assembly orientation review remain
 later release tasks. This decision authorizes no order, charge or merge.
-=======
->>>>>>> origin/main
 
 ## D-030 - Main Rev.3 via relocation to remove the POFV design requirement
 
