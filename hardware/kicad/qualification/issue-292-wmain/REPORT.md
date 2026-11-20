@@ -669,15 +669,21 @@ Package remains DRAFT / NOT FOR ORDER. The JLCPCB quote
 re-run stays an order-stage item (the ≈$139 quote of
 2026-11-19 predates both the edge fix and this respin).
 
-## Draft adoption line (for PO, at the adoption gate)
+## Adoption (final)
 
-**D-061 (draft):** Wireless Main SWD respin (Issue #292
-follow-up) adopted: JSWD converted to the official Tag-Connect
-TC2050 footprint (10 pads, no paste, 3 alignment holes) at
-board (110.5, 135.99) rot +1.35°, Cortex pin order, cable =
-TC2050-IDC-NL-050-ALL from the PCA10056 debug-out. Outline,
-JBATT and all other features unchanged from the D-058 board
-(SHA-256 `26072619…` → new SHA recorded in the respin PR).
+**D-061 (adopted by PO 2026-11-20; recorded in
+`docs/decisions.md`):** Wireless Main SWD respin adopted:
+JSWD converted to the official Tag-Connect TC2050 footprint
+(10 pads Ø0.79mm on a 1.27 × 1.27mm grid, no paste, 3
+alignment holes Ø0.99mm) at board (110.5, 135.99) rot
++1.35°, Cortex pin order, cable = TC2050-IDC-NL-050-ALL
+from the PCA10056 debug-out. Outline, JBATT and all other
+features unchanged from the D-058 board (SHA-256
+`26072619…` → `6dfbcb954e57b1a19fdbbf526f956c00c3c59a756c1a60b7a5e2e4ebf095ecd7`).
+D-061 also adopts the standing guideline: the TC2050
+footprint is the standard SWD pad field for future ARM
+boards, and the standard DIY jig head is a Mill-Max
+855-22-010-10-001101 integrated block + 3 guide pins.
 The outline extension / JBATT relocation examined in the same
 round is **not adopted** (margin gate: 2.00 mm Wing FFC
 channel); JBATT's cable management is a case-side item for
