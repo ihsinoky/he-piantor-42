@@ -1,13 +1,24 @@
 # Issue #299 Stage 2 — Wireless Wing: schematic + layout report
 
-Four variants (16L, 16R, 17L, 17R), each a native KiCad schematic + board
-derived from its Wing Rev.6 donor: 21× TMAG5253BA3 channels (the #288 block
-verbatim: VCC ∥ 100 nF, OUT direct to the MUX S pin, EP→GND), 3× TMUX1208PWR
-with the Rev.6 address map, all TMAG EN pins on the existing WING_EN net,
-rail net renamed HALL_3V3 from FH12 pin 1. The TMAG land is the single shared
+Four variants (16L, 16R, 17L, 17R), each derived from its Wing Rev.6
+donor: 21× TMAG5253BA3 channels (the #288 block verbatim: VCC ∥ 100 nF,
+OUT direct to the MUX S pin, EP→GND), 3× TMUX1208PWR with the Rev.6
+address map, all TMAG EN pins on the existing WING_EN net, rail net
+renamed HALL_3V3 from FH12 pin 1. The TMAG land is the single shared
 footprint `wwing.pretty/TMAG5253BA3_X2SON-4.kicad_mod` (byte-identical to the
 #288 land, md5 642faa960c1220ade09ac96f3c2434d9), so a D-049 yield-driven
 land change touches one file for all variants.
+
+**Outcome: 16L passes all 8 gates. 16R, 17L and 17R are BLOCKED at
+gate 3** — in each, the autorouter's local copper (a sensor-site cage
+on 16R; GND-ring / HALL-fan braids at two sites on 17L; per-site GND
+rings hugging pad 1 on 17R) seals a small number of escapes, measured
+item-by-item in the per-variant sections below. Per the stage's
+gate-failure rule those variants were stopped with the seals open
+rather than dispositioned around; their schematics were not generated
+and gates 1/2/4–8 were not run. The common unblock is a local
+re-route of the autorouter's site fans with stand-off (or a 4-layer /
+smaller-via stackup) — a design change outside this stage's scope.
 
 Gate scripts: `.issue299-runtime/s2_gates.py` (gates 1/2/4/6/8),
 `s2_gate5.py` (rail graph), `s2_gate7.py` (netlist parity). Per-variant raw
@@ -17,14 +28,14 @@ outputs in `.issue299-runtime/gates-<VAR>.jsonl`.
 
 | Gate | 16L | 16R | 17L | 17R |
 |---|---|---|---|---|
-| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | — (layout blocked, see §16R) | — (layout blocked, see §17L) | |
-| 2. Placed-pad assignment errors | 0 | — | — | |
-| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** | |
-| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | — | — | |
-| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | — | — | |
-| 6. Flip-install pad-net diffs | 0 | — | — | |
-| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | — | — | |
-| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | — | — | |
+| 1. Sensor field deviation vs Rev.6 | 0.0000 mm | — (layout blocked, see §16R) | — (layout blocked, see §17L) | — (layout blocked, see §17R) |
+| 2. Placed-pad assignment errors | 0 | — | — | — |
+| 3. ERC errors / DRC (see per-variant notes) | 0 / dispositioned | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** | **BLOCKED — gate 3 cannot pass** |
+| 4. Via–pad different-net min (floor 0.10 / target 0.125) | 0.100 mm | — | — | — |
+| 5. Far-sensor VCC typ / max (study 3.276 / 3.253 V) | 3.2765 / 3.2549 V | — | — | — |
+| 6. Flip-install pad-net diffs | 0 | — | — | — |
+| 7. Schematic↔board parity (nodes) | 224 = 224, 0 diffs | — | — | — |
+| 8. Outline / mounting deltas vs Rev.6 | 0 (329 = 329 items, 46 holes) | — | — | — |
 
 ## 16L
 
@@ -243,9 +254,69 @@ pipeline output with HA3/HC2 bridged and the two sealed sites open;
 the schematic was not generated and gates 1/2/4–8 were not run,
 because gate 3 cannot pass.
 
-## 17R
+## 17R — BLOCKED (gate 3 cannot pass; stopped per the gate-failure rule)
 
-(pending)
+The pipeline's mechanical damage was fully repaired — final DRC has
+zero clearance / shorting / crossing / edge / keepout items — and
+several feeds were restored (HB1 pad 1 via a checker-validated F hop,
+HA4 pad 1 and HB2 pad 1 by rerouting their fan stubs clear of the EP,
+the HB4 cap-side B chain linked to its F trunk by a new via at
+(133.90, 111.90), the U_HC2 GND L-staircase re-routed into C_HC2
+pad 2). The A6 short (route2 B stub ending on the WING_EN via at
+(87.70, 105.40)) was removed. The 47.6 mm GND diagonal crossing the
+south reserved band (copper-edge + keepout violations) was deleted;
+GND unconnected verified unchanged (pour-backed).
+
+What remains is one repeated structure, measured at U_HC2 pad 1 and
+confirmed at U_HA3, U_HC4, U_HB4 and U_HA2 pad 1: **route2's per-site
+GND ring hugs pad 1 at ≈ 0.43–0.51 mm, so wherever the HALL seed
+route failed, pad 1's escape is sealed on both layers.** Exemplar —
+U_HC2 pad 1 (117.69, 79.70), target via (116.40, 80.70): N exit is
+the EP gap, 0.20 mm (pad-1 north edge 79.50 vs EP south edge 79.30)
+against a 0.25 mm centreline requirement; W exit crosses the GND
+staircase (117.69, 78.30) → (117.32, 79.42) → (117.32, 80.05), whose
+two corner bubbles (r 0.40 vs a w0.30 track) sit 0.51 mm from pad 1 —
+every westward heading passes 0.02–0.38 mm from a corner (best
+perpendicular headings are blocked by the EP and by the GND vertical
+x 117.90); S exit crosses the GND horizontal (117.57, 80.17) →
+(117.90, 80.20), whose endpoint bubble and pad 4's SW-corner bubble
+(118.08, 79.90, r 0.25) overlap (centres 0.35 mm apart, radii sum
+0.65); E exit is pad 4 itself; every F via candidate fails the
+0.55 mm via rule against the same pieces (best (118.40, 81.20) is
+0.08 mm from C_HC2 pad 2's rect; (117.85, 81.20) B approach passes
+0.405 mm from the staircase endpoint only to fail against the cap
+pad at 0.20 mm). Deleting and re-routing the GND L-staircase (done,
+see above) did not open the site: the seal is the ring itself.
+U_HC4 pad 1: all exits fail by 0.02–0.29 mm against its GND chain
+(117.51, 94.78) → (117.26, 97.03) → (117.51, 97.16) → (117.76, 97.16)
+and the L at (117.90, 97.20). U_HB4 pad 1: north bridge best attempt
+passes 0.390 mm vs the GND diagonal (118.63, 96.87) → (134.26,
+108.96) (0.40 required) and 0.243 mm vs the EP rect (0.25 required);
+south exits pass 0.016–0.019 mm from that diagonal's endpoint
+(134.26, 108.96), 0.50 mm from pad 1. U_HA3 pad 1: west/south exits
+cross its GND chain (100.51, 72.78) → (100.26, 75.03) → (100.51,
+75.16) → (100.90, 75.20) → (100.90, 76.70) and C_HA3 pad 2's rect.
+
+Final DRC state of the committed tree: `silk_over_copper ×22,
+track_dangling ×17, via_dangling ×15, hole_to_hole ×8,
+copper_sliver ×1, holes_co_located ×1`, unconnected ×14 = 1 GND
+zone↔zone pair (same dispositionable class as 16L) + 13 signal
+pairs: the sealed pad-1 escapes (HA3, HC2, HC4, HB4, HA2 ×2
+fragments), the west HALL trunk pair at U_HC1, the F/B stub pair at
+(79.20, 60.50), H_A6_RAW, H_C2_RAW pad 4, H_C5_RAW pad 4, and two
+WING_EN chain pairs. The corridor A* router fails on the sealed
+escapes as well. hole_to_hole ×8 are route2 via stacks (EN via
+clusters at (101.80, 90.55–90.73), (135.32, 73.05), (135.32–135.57,
+90.17), (118.69–118.90, 77.40), (67.69–67.71, 96.30–96.56), a HALL
+pair at (82.90–83.15, 79.20–79.45)) plus one co-located H_B2_RAW
+via pair at (132.70, 90.30) — mechanical, not blocking.
+
+What would unblock 17R: the same local re-route class as 16R/17L —
+re-place route2's site GND rings with stand-off from pad 1 (the ring
+is the seal in every case), or a 4-layer / smaller-via stackup. The
+17R tree in this PR is the repaired pipeline output with the sealed
+escapes open; the schematic was not generated and gates 1/2/4–8 were
+not run, because gate 3 cannot pass.
 
 ## Notes for Stage 3 (not part of this stage)
 
