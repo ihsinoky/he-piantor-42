@@ -112,6 +112,35 @@ in [governance](governance.md#repository-settings-po-manual-action).
 - Stock figures are snapshots, not reservations: re-check when quoting and
   again before ordering.
 
+## Availability scan during configuration exploration
+
+- Availability is a property of the CONFIGURATION, not only of the part:
+  contact face (same/opposite side), cable length, entry direction and
+  mounting pose can each select a different SKU with very different stock.
+  Precedent (2026-11-18, Issue #275): the adopted FFC's normal-pose variant
+  had 8 units at the distributor while the flipped-pose variant of the same
+  cable family had 557 - discovered only after the design was built.
+- Every configuration exploration (connector system, cable/harness, mounting
+  pose, case architecture) MUST include an availability scan per candidate,
+  at the same stage as the geometry and cost comparison - not after
+  selection:
+  - exact-SKU stock at two or more distributors (JLCPCB/LCSC plus
+    DigiKey/Mouser), with the observation date recorded;
+  - lifecycle status (active / NRND / obsolete) and the manufacturer's
+    standard lead time;
+  - substitution freedom: second sources, compatible variants within the
+    family, and what configuration change a substitution would force;
+  - the variant-level trap: when a candidate's feasibility depends on one
+    specific variant (contact face, length, handedness), scan THAT variant,
+    not the family headline part.
+- Report the scan as a per-candidate column in the study deliverable. A
+  candidate that wins on geometry but depends on a thin-stock single SKU is
+  flagged at exploration time, not at the order gate. (PO instruction
+  2026-11-18; rationale: a late availability discovery is rework, and low
+  rework is PO priority 2.)
+- The scan is a snapshot like any stock figure: re-check at quote and order
+  time per the Part selection rules above.
+
 ## Verification evidence
 
 These checks supply evidence for the Merge gates above. The implementer / Codex
