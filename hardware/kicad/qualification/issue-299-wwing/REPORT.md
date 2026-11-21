@@ -455,3 +455,89 @@ not run, because gate 3 cannot pass.
 - The wireless FFC lane acceptance (≤ 0.30 Ω/lane) is a build-guide action.
 - TMAG5253BA3 (LCSC C22401868) stock pacing for the full 20-board run is a
   Stage-3 re-check item (Stage-1 availability note).
+
+## Redesign round (2026-11-21) — centre-3 deep path (options C/D): 17R executed, δ=0 disproven on routability
+
+Scope (PO decision 2026-11-21): squeeze the centre-3 Wing separation δ
+from D-062's 14.0 toward 0 by notching the Wing outline and re-laying
+out the inner region. Frame proof first: the wing-shape study's
+per-body ladder was reproduced from the pre-redesign tree before any
+change (plate 14.1, board slab 9.1, J_WING mating envelope 8.2,
+U_MUX_C 6.2, C_MUX_C 4.8; study values 14.0 / 9.2 / 8.3 / ~6.3; all
+within 0.1 mm).
+
+17R was executed in full:
+
+- Outline: notch cut to the δ=0 line (asm X = 22.09); Edge.Cuts items
+  329 → 47 (gate 8 below). J_WING recessed +8.50 mm in asm X (measured
+  envelope clear at +8.2, plus 0.3 margin); the west MP pad, which
+  entered the δ=0 zone by 0.24 mm, sits at asm X ≈ 30.35 after the
+  recess. Link definition unchanged (D-024 pin order, FH12
+  bottom-contact; gate 6: 0 diffs). FFC consequence: the connector
+  recess lengthens the Wing-side FFC hop by ≈8.5 mm against the
+  δ=0-baseline span (≈2.0 → ≈10.5 mm), still shorter than the 16.0 mm
+  channel implied by D-062's δ=14.
+- Relocations: U_MUX_C (63.62, 36.52) → (72.46, 48.70), rotation
+  unchanged (150°); C_MUX_C → (66.50, 56.10); TP_W_A0/A1/A2/EN moved
+  out of the cut zone. Sensors did not move (gate 1). The #288 TMAG
+  land pattern is unchanged (footprint md5 642faa960c1220ade09ac96f3c2434d9).
+- δ proof (the study's method: redesigned bodies placed in the
+  geometry17 frame against the centre-3 block = floor box + 3
+  cylinders; clear = intersection ≤ 0.05 mm³, 0.1 mm steps):
+  notched slab clears at δ=0.0 (residual 0.002 mm³ at δ=0), recessed
+  J_WING envelope clears at 0.0, relocated U_MUX_C clears at 0.0,
+  plate with the option-A notch clears at 0.0. **Board-side δ = 0 and
+  combined δ (with the case-side plate notch) = 0, geometrically.**
+- Gates (17R): G1 PASS (0.0000 mm × 21); G2 PASS (0 errors); G4 PASS
+  (via-pad min 0.1052 mm — the redesign did not worsen the floor);
+  G5 PASS (far VCC 3.2768 V typ / 3.2554 V max, Stage-1 class);
+  G6 PASS (0 diffs); G7 PASS (224 = 224); G8 PASS under this round's
+  definition (edge-item delta = exactly the designed notch, mounting
+  holes 46 = 46); ERC 0 errors (43 inherited footprint_link warnings).
+- **Gate 3 (DRC) does NOT pass: 3 unconnected pairs remain open** —
+  MUX_A0 (U_MUX_C pad 1 ↔ the A0 F stub track), H_B4_RAW (MUX island
+  via ↔ sensor F track), GND (U_MUX_A pad 14 ↔ the GND F staircase
+  track). Also open: 14 pad-free pairs (12 zone↔zone + 2 GND track
+  islands), the established dispositionable class. Two sub-floor
+  clearances were introduced by the GND stitch that closed the
+  U_MUX_C.14 pair: 0.0992 mm (GND track vs MUX_A2 via at (68.66,
+  47.06)) and 0.0908 mm (GND track vs U_MUX_C pad 12) — the same
+  graze class as the fix round's recorded 16R/17L caveats. DRC
+  counts: shorting 0, tracks_crossing 0, solder_mask_bridge 0,
+  clearance 2 (the two grazes above), copper_sliver 3 (baseline 1),
+  hole_to_hole 21 (baseline 8), track_dangling 52 (baseline 14),
+  via_dangling 19 (baseline 10), silk_over_copper 22 (= baseline).
+- Why the 3 pairs are open (evidence, not assertion): every corridor
+  out of the relocated-MUX_C pocket and the recessed-J_WING GND
+  fragment is sealed at true-shape geometry — the MUX pad rows
+  (adjacent-pad channel 0.37 mm admits no legal track), the H_B2 B
+  diagonal + its escape via, the H_A5 B vertical, the HALL B trunk
+  weave, the A1/A2 B segment pair (the F-layer gate between the A2
+  endpoint (75.00, 42.50) and the EN diagonal endpoint (75.05,
+  42.89) measures 0.39 mm against 0.40 mm required), the EN F
+  fanout cluster around (81.10, 44.20), and for H_B4 the HALL F
+  trunk + H_A2 F diagonals + OUT_A B corner. Attempts on record:
+  ~40 hand-designed routes (each rejected by the true-shape checker
+  or DRC with the blocker named), the fenced finisher (8 rounds,
+  bridged 0 of 4), manual A* jobs for all three pairs (all fail),
+  and two sealer re-routes (MUX_A2 B detour shorted U_MUX_A.14 —
+  reverted; H_B2 B detour blocked by the WING_EN B fan — reverted).
+  Attempt artefacts: `.issue299-runtime/s3_*` specs and logs
+  (`finish3-17r-r6.log`, `drc3-17R.json`).
+- Conclusion: **δ=0 is geometrically achievable but is NOT routable
+  on 17R under the project design rules (0.10 mm track/clearance,
+  0.60/0.30 vias) with the sensor field and the TMAG land pattern
+  frozen. The binding constraint is inner-region routability at the
+  δ=0 notch, not block clearance.** The δ=0-notched 17R on this
+  branch is an evidence state, not an adoptable board. The smallest
+  fully-gated δ is therefore NOT 0: option A (plate notch only, no
+  board change; the four Stage-2 boards already pass all gates)
+  stands proven at the study's δ=9.5. A shallower-notch round
+  (option B δ=8.5: slab-edge cut only, no component moves; or
+  option C δ≈6.3: plus a +2.0 mm J_WING recess) is the remaining
+  path below 9.5 and needs a fresh surgery round per variant.
+  17L / 16R / 16L were not executed in this round: they share the
+  same inner-region topology (the sealed pocket is congruent), so
+  the δ=0 routability verdict is expected to carry over; their
+  redesign is deferred until the target δ for the shallower round
+  is chosen.
