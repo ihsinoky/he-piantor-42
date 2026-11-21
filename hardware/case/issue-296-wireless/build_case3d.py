@@ -15,6 +15,9 @@ ASM = os.path.expanduser("~/workspace/projects/he-piantor-case296b/.issue296-run
 os.makedirs(OUT, exist_ok=True)
 os.makedirs(ASM, exist_ok=True)
 ZC = 2.65
+RT = "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime"
+CAPS = json.load(open(RT + "/caps.json"))   # keycap envelopes (extract_caps.py)
+FLUSH_Y = -64.37                            # north outline limit (Stage B)
 
 def load(name, dx=0.0):
     s = bd.import_brep(f"{G17}/{pos[name]}.brep")
@@ -124,6 +127,34 @@ def build_tray(side):
 tray_r = build_tray(+1)
 tray_l = build_tray(-1)
 
+# ================================================================ NORTH FLUSH FILL
+# PO 2026-11-21: the north face must be flush (tsuraichi) at the outline
+# limit Y = -64.37. The g17 tray north face is vertical but traces a plan
+# arc (sag up to ~8.9 mm at |X| ~32, meeting the plane at |X| ~118;
+# measured in measure_north4.py). Fill the tray face forward to the
+# plane, Z -2.65..10.90, in 2 mm columns hugging the measured face
+# (+0.30 embed). Columns on the angled end edge (|centre| > 117) and
+# zero-sag columns (bay wall) are left alone.
+def north_fill(t):
+    fills = []
+    for xi in range(-120, 120, 2):
+        if abs(xi + 1) > 117:
+            continue
+        cells = t.intersect(box(xi, xi + 2, -70, -30, -2.65, 10.90))
+        cells = list(cells) if isinstance(cells, (list, bd.ShapeList)) else [cells]
+        cells = [c for c in cells if c is not None and c.volume > 1e-6]
+        if not cells:
+            continue
+        face = min(c.bounding_box().min.Y for c in cells)
+        if face - FLUSH_Y > 0.05:
+            fills.append(box(xi, xi + 2, FLUSH_Y, face + 0.30, -2.65, 10.90))
+    if fills:
+        t = fuse(t, *fills)
+    return t
+
+tray_r = report("tray-right+flush", north_fill(tray_r))
+tray_l = report("tray-left+flush", north_fill(tray_l))
+
 # ================================================================ INFILL
 def build_infill():
     xa, xb = -6.0, 13.0
@@ -174,14 +205,147 @@ def build_shell():
 shell = build_shell()
 
 # ================================================================ STRIPS
-def build_strip(side):
+def build_strip_old(side):
     sgn = 1 if side > 0 else -1
     s = load(f"strip-{'right' if sgn>0 else 'left'}", dx=9.5 * sgn)
     s = cut(s, box(-BAY["x"], BAY["x"], BAY["yn"], BAY["ys"], 0.0, 30.0))
-    return report(f"strip-{'right' if sgn>0 else 'left'}", s)
+    return report(f"strip-old-{'right' if sgn>0 else 'left'}", s)
 
-strip_r = build_strip(+1)
-strip_l = build_strip(-1)
+strip_r_old = build_strip_old(+1)
+strip_l_old = build_strip_old(-1)
+
+# ================================================================ NORTH BAND (PO profile 2026-11-21)
+# The strips are REPLACED by band plateaus: top at the keytop datum
+# 22.00, from the flush north face south to just before the keys.
+# South edge per 1 mm column = keycap capline (caps.json, 16.5 mm cap
+# envelopes at each key's own angle) - 1.0 mm clearance; cap-free
+# columns take the nearest cap column's line. Z 10.90..22.00 (bottom =
+# plate top). North edge: the flush plane for |X| <= 116; beyond, the
+# tray's own outline sampled at the column's outer sub-column (no
+# overhang past the angled end edge).
+def build_plateau(tray, side):
+    sgn = 1 if side > 0 else -1
+    caps = CAPS["right" if sgn > 0 else "left"]["capline"]
+    capcols = sorted(int(k) for k in caps)
+    def south_edge(xa, xb):
+        ks = [k for k in range(int(xa // 1), int(xb // 1) + 1) if str(k) in caps]
+        if ks:
+            return min(caps[str(k)] for k in ks) - 1.0
+        near = min(capcols, key=lambda c: abs(c - (xa + xb) / 2))
+        return caps[str(near)] - 1.0
+    boxes = []
+    e = 30.25
+    while e < 154.5:
+        xa, xb = (e, e + 1.0) if sgn > 0 else (-e - 1.0, -e)
+        if sgn < 0:
+            xa, xb = -e - 1.0, -e
+        if abs((xa + xb) / 2) <= 116:
+            yn = FLUSH_Y
+        else:
+            # sample the tray outline over the outer half of the column
+            sxa = xb - 0.5 if sgn > 0 else xa
+            cells = tray.intersect(box(sxa, sxa + 0.5, -70, 90, -2.65, 10.90))
+            cells = list(cells) if isinstance(cells, (list, bd.ShapeList)) else [cells]
+            cells = [c for c in cells if c is not None and c.volume > 1e-6]
+            if not cells:
+                e += 1.0
+                continue
+            yn = min(c.bounding_box().min.Y for c in cells)
+        ys = south_edge(xa, xb)
+        if ys - yn >= 1.0:
+            boxes.append(box(xa, xb, yn, ys, 10.90, 22.00))
+        e += 1.0
+    p = fuse(*boxes)
+    return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
+
+strip_r = build_plateau(tray_r, +1)
+strip_l = build_plateau(tray_l, -1)
+
+# ================================================================ SHELL REVISION (PO profile)
+# Centre + south go to plate height 10.90 with a slope transition from
+# the band: profile (Y,Z) — 22.00 at the bay south wall face (-0.37),
+# linear to 10.90 at Y 20.0, flat 10.90 south of it. Applied as a
+# Y-Z profile cut over X +-41.5 to shell-central fused with the old
+# strips' south lobes (transferred here). Trackpad island exempted
+# (D-053: keep-disc r 23.5 at (0,48)). DLED hole re-cut afterwards
+# (the slope fuse/cut crosses it); the SW1 hole survives the top cut.
+def as_solid(sh):
+    if isinstance(sh, (list, bd.ShapeList)):
+        ss = [s for s in sh if s is not None and hasattr(s, "volume") and s.volume > 1e-6]
+        return fuse(*ss) if ss else None
+    return sh
+
+lobe_r = as_solid(strip_r_old.intersect(box(10.0, 30.25, -0.37, 30.0, 0.0, 23.0)))
+lobe_l = as_solid(strip_l_old.intersect(box(-30.25, -10.0, -0.37, 30.0, 0.0, 23.0)))
+for lb in (lobe_r, lobe_l):
+    if lb is not None:
+        shell = fuse(shell, lb)
+prof_pts = [(0, -0.37, 22.00), (0, 20.0, 10.90), (0, 95.0, 10.90),
+            (0, 95.0, 23.5), (0, -0.37, 23.5)]
+prof_wire = bd.Wire.make_polygon([bd.Vector(*p) for p in prof_pts] +
+                                 [bd.Vector(*prof_pts[0])])
+prof_face = bd.Face(prof_wire)
+prof_cut = bd.extrude(prof_face, 83.0)
+_pbb = prof_cut.bounding_box()
+prof_cut = prof_cut.moved(bd.Location((-41.5 - _pbb.min.X, 0, 0)))
+prof_cut = prof_cut.cut(cyl(0.0, 48.0, 23.5, 0.0, 23.5))
+shell_pre = shell
+shell = cut(shell, prof_cut)
+
+# SLOPE SHEET (successor fix, 2026-11-21): the profile cut alone
+# deletes the centre skin wherever its underside (~2.1 under the old
+# ridge top) sits above the new profile — measured hole along the
+# spine |X| <= ~9, Y 6..27, plus the apron widening Y 21..30 and the
+# lobe bands (diag_grid.py vs the Stage-3D shell). Add a sheet whose
+# top IS the profile (2.0 thick), limited to the pre-cut shell's plan
+# footprint (its downward sweep), so the slope surface exists.
+# Zone A |X| <= 22.4 (spine + apron; plate-free). Zone B: the lobe
+# bands 22.4 < |X| <= 30.25, sheet floored at the plate top 10.90
+# (it lands on the plate field, never inside it).
+low_pts = [(0, -0.37, 20.00), (0, 20.0, 8.90), (0, 95.0, 8.90),
+           (0, 95.0, 23.5), (0, -0.37, 23.5)]
+low_wire = bd.Wire.make_polygon([bd.Vector(*p) for p in low_pts] +
+                                [bd.Vector(*low_pts[0])])
+slab_low = bd.extrude(bd.Face(low_wire), 83.0)
+_lbb = slab_low.bounding_box()
+slab_low = slab_low.moved(bd.Location((-41.5 - _lbb.min.X, 0, 0)))
+slab_low = slab_low.cut(cyl(0.0, 48.0, 23.5, 0.0, 23.5))
+
+def sweep_down(src, steps=14):
+    r = src
+    for dz in range(1, steps + 1):
+        r = fuse(r, src.moved(bd.Location((0, 0, -float(dz)))))
+    return r
+
+def sheet_from(src):
+    if src is None:
+        return None
+    sh = as_solid(sweep_down(src).intersect(slab_low))
+    if sh is not None:
+        sh = as_solid(sh.cut(prof_cut))
+    return sh
+
+zone_a = as_solid(shell_pre.intersect(box(-22.4, 22.4, -0.37, 40.0, 0.0, 23.0)))
+sheet_a = sheet_from(zone_a)
+if sheet_a is not None:
+    shell = fuse(shell, sheet_a)
+for sgn in (+1, -1):
+    zb = box(22.4, 30.25, -0.37, 30.0, 0.0, 23.0) if sgn > 0 else \
+        box(-30.25, -22.4, -0.37, 30.0, 0.0, 23.0)
+    sheet_b = sheet_from(as_solid(shell_pre.intersect(zb)))
+    if sheet_b is not None:
+        sheet_b = as_solid(sheet_b.intersect(
+            box(-31.0, 31.0, -1.0, 31.0, 10.90, 23.5)))
+    if sheet_b is not None:
+        shell = fuse(shell, sheet_b)
+
+# SW1 boss cap: the trackpad keep-disc (r 23.5 at (0,48)) also
+# exempts the SW1 boss (centre distance 22.6) from the profile cut,
+# leaving its top at the pre-revision 11.10 (measured); the
+# re-trimmed plunger rests on a 10.90 surface -> cap the boss.
+shell = cut(shell, box(-19.0, -12.0, 60.0, 69.0, 10.90, 23.5))
+shell = cut(shell, cyl(-4.0, 13.00, 1.05, 5.0, 23.0))   # DLED hole re-cut
+shell = report("shell-central rev", shell)
 
 # ================================================================ PLATES
 def build_plate(side):
@@ -200,8 +364,11 @@ plate_l = build_plate(-1)
 # ================================================================ COVER
 def build_cover():
     parts = []
-    # lid plate over walls: X +-30.25, Y -64.37..-0.37, top 16.65 / underside 15.15
-    parts.append(box(-BAY["x"], BAY["x"], BAY["yn"], BAY["ys"], 15.15, 16.65))
+    # lid plate over walls: X +-30.25, Y -64.37..-0.37.
+    # PO profile 2026-11-21: lid top raised to the keytop datum 22.00
+    # (was 16.65) so the north band is continuous over the bay;
+    # underside stays 15.15 (cell clearance unchanged).
+    parts.append(box(-BAY["x"], BAY["x"], BAY["yn"], BAY["ys"], 15.15, 22.00))
     # E/W skirts: bottom 11.15 (plate top 10.90 + 0.25) — the plate tips,
     # Wing tabs and Fly all pass under the skirt line; the side closure is
     # wall + plate + skirt in sandwich (see case-3d.md).
@@ -214,36 +381,48 @@ def build_cover():
     # north skirt over the capped (7.80) middle span of the north wall
     parts.append(box(-7.50, 7.50, BAY["yn"], CAV["yn"], 7.80, 15.15))
     c = fuse(*parts)
-    # cover screw holes over the north wall pilots (±24.25, -63.37)
-    c = cut(c, cyl(24.25, -63.37, 1.5, 14.0, 17.0), cyl(-24.25, -63.37, 1.5, 14.0, 17.0))
+    # cover screw holes over the north wall pilots (±24.25, -63.37);
+    # lengthened through the raised lid (14.0..22.5)
+    c = cut(c, cyl(24.25, -63.37, 1.5, 14.0, 22.5), cyl(-24.25, -63.37, 1.5, 14.0, 22.5))
     return report("cover", c)
 
 cover = build_cover()
 
 # ================================================================ SMALL PARTS
-# SW1 plunger pin: Ø2.9 stem + Ø5 head; length set from shell column at
-# (-15.5, 64.50): shell material Z 8.9..12.6 (measured) -> pin spans
-# switch top (~7.4) to above shell top; head rests on shell top.
-plunger = fuse(cyl(-15.5, 64.50, 1.45, 7.2, 12.9),
-               cyl(-15.5, 64.50, 2.5, 12.9, 14.1))
+# SW1 plunger pin: Ø2.9 stem + Ø5 head. PO profile: the shell top at
+# (-15.5, 64.50) is now the plate-height field 10.90 (was ~12.6), so
+# the pin is re-trimmed: stem 7.2..10.9 (bottom still 1.3 above the
+# Main top 5.90, over the future tact switch ~7.4), head 10.9..12.1
+# resting on the 10.90 surface.
+plunger = fuse(cyl(-15.5, 64.50, 1.45, 7.2, 10.9),
+               cyl(-15.5, 64.50, 2.5, 10.9, 12.1))
 report("plunger", plunger)
 # DLED light pipe: Ø2 rod from above the LED (Main top 5.90) to the
-# shell top surface at (-4, 13) (measured top 19.55; rod proud-cut at 20.5
-# is trimmed in verification note; here: to 19.55).
-pipe = cyl(-4.0, 13.00, 1.0, 6.4, 19.55)
+# shell surface at (-4, 13) — now the centre slope: profile Z at
+# Y=13 is 22 - (13.37)*(11.10/20.37) = 14.71.
+pipe = cyl(-4.0, 13.00, 1.0, 6.4, 14.71)
 report("light-pipe", pipe)
 
 # ================================================================ FLY POCKET (tray-right)
-# Decision (measured): shift Fly 1.8 north -> centre (38, -51.94);
-# mouth lands 0.16 proud of the wall outer face (-56.04 at X=38).
-# Pocket cut into tray-right + USB-C opening through the wall.
-pocket = box(38 - 13.3, 38 + 13.3, -56.6, -47.6, 2.9, 10.0)
-usb_open = box(38 - 4.6, 38 + 4.6, -57.5, -54.0, 6.1, 9.5)
+# Stage 3D decision: shift Fly 1.8 north -> centre (38, -51.94), mouth
+# 0.16 proud of the (then arc) wall face. PO north-flush revision
+# 2026-11-21: the face at X=38 moves to the plane -64.37, so the Fly
+# shifts a further ~8.06 north -> centre (38, -60.00) and the mouth
+# lands exactly flush with the new face (0.00 proud; 0.16 proud is
+# impossible at the outline limit). The first pass used centre
+# -60.11 from a wall-face datum and measured +0.11 proud on the
+# fused official body; corrected by the measured mouth position.
+# EZmate route ~96.7 mm total, still << the 170 mm stock cable.
+# Pocket cut into tray-right + USB-C opening through the (now
+# filled) wall; both shift with it.
+pocket = box(38 - 13.3, 38 + 13.3, -64.66, -55.66, 2.9, 10.0)
+usb_open = box(38 - 4.6, 38 + 4.6, -65.56, -62.06, 6.1, 9.5)
 tray_r = report("tray-right+fly", cut(tray_r, pocket, usb_open))
 # plate-right USB rim notch: raise underside over the USB shell footprint
-# (Y extended to -48.5: the Fly top sliver reaches Y -49.01, measured)
+# (Y extended to -56.56: the Fly top sliver, at Y -49.01 in the old
+# pose, reaches Y -57.07 at the new pose)
 plate_r = report("plate-right+notch",
-                 cut(plate_r, box(38 - 6.0, 38 + 6.0, -57.5, -48.5, 9.40, 9.78)))
+                 cut(plate_r, box(38 - 6.0, 38 + 6.0, -65.56, -56.56, 9.40, 9.78)))
 
 # ================================================================ EXPORTS
 parts = {
@@ -257,4 +436,4 @@ for name, s in parts.items():
     bd.export_stl(s, f"{OUT}/{name}.stl")
     bd.export_brep(s, f"{ASM}/{name}.brep")
 print("exported", len(parts), "parts to", OUT)
-json.dump({"fly_centre": [38, -51.94]}, open(f"{ASM}/params.json", "w"))
+json.dump({"fly_centre": [38, -60.00]}, open(f"{ASM}/params.json", "w"))

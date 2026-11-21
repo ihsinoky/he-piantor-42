@@ -1,0 +1,45 @@
+== A. north face flatness (fused north parts) ==
+max |Ymin - (-64.37)| over |X|<=117 columns: 0.000 mm
+end columns (angled end edge, informational):
+  X 118..120: Ymin -64.37
+  X -120..-118: Ymin -64.37
+
+== B. outline / tops ==
+assembly bbox X -155.02..155.02 (W 310.04)  Y -64.37..81.70 (D 146.07)  Z -2.65..22.00
+cover bbox Zmax 22.00 (lid top, expect 22.00)
+strip-right band top at sample columns: [22.0, 22.0, 22.0, 22.0] (expect 22.00)
+strip-left band top at sample columns: [22.0, 22.0, 22.0, 22.0] (expect 22.00)
+
+== C. keycap clearance ==
+caps unpressed (top 22.00): vs case 0.000 mm3 (expect 0.000)
+caps pressed model (top 19.00): vs case 0.000 mm3 (expect 0.000)
+strip-right: south faces 0, min clearance to capline 99.00 mm (design 1.00)
+strip-left: south faces 0, min clearance to capline 99.00 mm (design 1.00)
+
+== D. lid lift path ==
+lid + 2.0 Z vs rest of case: 0.000 mm3
+lid + 5.0 Z vs rest of case: 0.000 mm3
+lid +10.0 Z vs rest of case: 0.000 mm3
+lid +25.0 Z vs rest of case: 0.000 mm3
+
+== E. Fly / plug vs band ==
+Fly bbox Y -64.48..-55.96  Z 3.25..9.60  -> mouth protrusion vs face: +0.11 mm (0.00 = flush)
+Fly vs strip-right (band): 0.000 mm3
+plug vs strip-right (band): 0.000 mm3
+plug vs tray-right: 0.000 mm3
+plug vs plate-right: 0.000 mm3
+
+== F. shell centre profile audit (X -1..1 slab) ==
+  Y 0..2: shell top 21.80  (profile at band north edge 21.80)
+  Y 2..4: shell top 20.71  (profile at band north edge 20.71)
+  Y 4..6: shell top 19.62  (profile at band north edge 19.62)
+  X~20, Y 20..35: shell top 12.55  (expect 10.90, outside island)
+
+== G. plunger / pipe audit ==
+plunger vs shell: 0.211 mm3 (expect 0.000)
+pipe vs shell: 0.000 mm3 (expect 0.000)
+pipe top 14.71 (slope profile at Y=13: 14.71)
+
+== H. old-strip disposition ==
+strip-right: old vol 1.45k, inside new strip+shell 1.42k, removed 0.02k
+strip-left: old vol 1.45k, inside new strip+shell 1.42k, removed 0.02k

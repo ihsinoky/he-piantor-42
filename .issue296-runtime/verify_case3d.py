@@ -11,6 +11,10 @@ idx = json.load(open(G17 + "/index.json"))
 pos = {e["name"]: i for i, e in enumerate(idx)}
 ASM = os.path.expanduser("~/workspace/projects/he-piantor-case296b/.issue296-runtime/asm3d")
 ZC = 2.65
+# Fly pose: build writes the centre to asm3d/params.json; the g17
+# record centre is (0, -50.14), so the move is centre - record.
+FLY_C = json.load(open(f"{ASM}/params.json"))["fly_centre"]
+FLYMOVE = (FLY_C[0], FLY_C[1] + 50.14)
 
 def g17(name, dx=0.0):
     s = bd.import_brep(f"{G17}/{pos[name]}.brep")
@@ -110,7 +114,7 @@ for e in idx:
     if e["name"].startswith("Fly-official"):
         s = g17(e["name"])
         fly = s if fly is None else fly.fuse(s)
-fly = fly.moved(bd.Location((38, -1.80, 0)))   # centre -> (38, -51.94) per record datum
+fly = fly.moved(bd.Location((FLYMOVE[0], FLYMOVE[1], 0)))   # centre per asm3d/params.json
 trackpad = bd.Solid.make_cylinder(22, 1.5, bd.Plane(origin=(0, 48, 11.20)))
 
 internals = {"Main": main, "Wings+underside": wings, "cells": cells,
@@ -230,7 +234,7 @@ for n in ("USB-reference-shell", "USB-reference-overmold", "USB-reference-cable-
 pbb = plug.bounding_box()
 print(f"plug g17 bbox X {pbb.min.X:.2f}..{pbb.max.X:.2f} Y {pbb.min.Y:.2f}..{pbb.max.Y:.2f}"
       f" Z(case) {pbb.min.Z:.2f}..{pbb.max.Z:.2f}")
-plug2 = plug.moved(bd.Location((38, -1.80, 0)))
+plug2 = plug.moved(bd.Location((FLYMOVE[0], FLYMOVE[1], 0)))
 print(f"plug at new pose vs tray-right: {inter_vol(tray_r, plug2):.3f} mm3")
 print(f"plug at new pose vs plate-right: {inter_vol(plate_r, plug2):.3f} mm3")
 print(f"Fly vs tray-right (pocket): {inter_vol(tray_r, fly):.3f} mm3")

@@ -1,0 +1,70 @@
+Main (D-063 outline) vol k: 3.17
+
+== A. case (with cover) vs internals ==
+cover+case vs Main              :     223.85 mm3
+cover+case vs Wings+underside   :     512.20 mm3
+cover+case vs cells             :       0.00 mm3
+cover+case vs power board       :      10.09 mm3
+cover+case vs Fly               :      12.85 mm3
+cover+case vs trackpad          :    1226.22 mm3
+cover+case vs switch envelopes  :       0.00 mm3
+
+== B. per-part detail (nonzero only) ==
+tray-left    vs Main              :      84.03 mm3
+tray-left    vs Wings+underside   :     238.28 mm3
+tray-right   vs Main              :      84.03 mm3
+tray-right   vs Wings+underside   :     262.24 mm3
+tray-right   vs power board       :      10.09 mm3
+infill       vs Main              :      55.79 mm3
+infill       vs Wings+underside   :       1.20 mm3
+shell        vs trackpad          :    1226.22 mm3
+plate-right  vs Fly               :       0.99 mm3
+cover        vs Wings+underside   :      10.48 mm3
+cover        vs Fly               :      11.86 mm3
+
+== C. case vs case ==
+tray-left    vs plate-left  :      44.55 mm3
+tray-right   vs plate-right :      44.55 mm3
+plate-left   vs cover       :     134.43 mm3
+plate-right  vs cover       :     134.43 mm3
+
+== D. outline scans ==
+south Ymax at X -50: 81.7
+south Ymax at X -40: 81.7
+south Ymax at X -30: 81.7
+south Ymax at X -20: 81.7
+south Ymax at X -10: 81.7
+south Ymax at X 0: 81.7
+south Ymax at X 10: 81.7
+south Ymax at X 20: 81.7
+south Ymax at X 30: 81.7
+south Ymax at X 40: 81.7
+south Ymax at X 50: 81.7
+assembly bbox X -155.02..155.02 (W 310.04)  Y -64.37..81.70 (D 146.07)  Z -2.65..22.00
+
+== E. removal envelope (cover off) ==
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime/verify_case3d.py", line 173, in <module>
+    v_case = inter_vol(case_nocover, sw)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime/verify_case3d.py", line 33, in inter_vol
+    r = a.intersect(b)
+        ^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/shape_core.py", line 1723, in intersect
+    result = obj._intersect(other, tolerance, include_touched)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/three_d.py", line 508, in _intersect
+    intersection = self._bool_op_list((self,), (other,), BRepAlgoAPI_Common())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/shape_core.py", line 2891, in _bool_op_list
+    result = self._bool_op(args, tools, operation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/shape_core.py", line 2836, in _bool_op
+    topo_result = downcast(operation.Shape())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/shape_core.py", line 4106, in downcast
+    f_downcast: Any = Shape.downcast_LUT[shapetype(obj)]
+                                         ^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/tools/cad-venv/lib/python3.12/site-packages/build123d/topology/shape_core.py", line 4177, in shapetype
+    raise ValueError("Null TopoDS_Shape object")
+ValueError: Null TopoDS_Shape object
