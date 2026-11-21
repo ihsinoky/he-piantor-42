@@ -275,3 +275,19 @@ the offset is **−70.000**: board H2 (68.11, 134.4) / H3 (131.89,
 - pilotb-coords.json / pilotb-report.md carry the old offset and
   need a correction pass (PMO to disposition; not silently edited
   here beyond this flag).
+
+## PMO disposition of the Pilot B transform flag (2026-11-21)
+
+ACCEPTED. The corrected asm transform (Y offset -70.000, anchored on
+board mounting holes H1/H2/H3 against the case washer centres, three
+anchors in agreement) supersedes the Pilot B two-anchor value
+(-66.602). Corrected case-frame coordinates: JBATT (+24.0, +64.50),
+DLED (-4.0, +13.00), SW1 (-15.5, +64.50) - all 3.40mm further north
+than the Pilot B report stated. The light-pipe and plunger positions
+move with them; the JBATT cable route becomes ~86mm (the ~100mm-class
+conclusion stands). Stage B headline numbers are unaffected (Main
+south edge +67.90 and the 13.80 antenna band hold under the corrected
+transform). pilotb-coords.json / pilotb-report.md remain as originally
+written; this disposition is the correction of record for their
+coordinate values, and the review ledger entries R-294-44..47 inherit
+it.
