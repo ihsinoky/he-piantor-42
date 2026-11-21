@@ -688,3 +688,99 @@ The outline extension / JBATT relocation examined in the same
 round is **not adopted** (margin gate: 2.00 mm Wing FFC
 channel); JBATT's cable management is a case-side item for
 Issue #296.
+
+## Fix round (2026-11-21) — cross-model review follow-up
+
+A Codex cross-model review of the D-061 board (raw-artifact
+review, producer conclusions withheld until after measurement;
+report in the review worktree, `codex-review-report.md`)
+confirmed the adoption record's load-bearing claims (SHA
+identity, containment, the 17 CLOSE items, ERC 0, the
+unconnected pair, footprint vs maker CAD, pin censuses,
+antenna keep-out, outline equality) and raised one major
+defect plus several record inaccuracies. This round fixes
+what is fixable without touching the adopted configuration.
+Full evidence: `.issue292-runtime/fix-report.md` (fix-round
+worktree). Final board SHA-256:
+`75db72bc993a2e98a08b10df9c01e6d7a91fc4f9251ef173187ec200396b0d21`
+(supersedes `6dfbcb95…` as the file of record; configuration
+unchanged — see draft D-063).
+
+- **F1 (MAJOR) stale zone fill — FIXED.** The stored In1.Cu
+  GND fill predated the SWD respin routing and, as saved,
+  covered the annuli of the RESET_N vias at (112.9, 133.75)
+  and (108.3, 133.975) and the SYS_3V3 via at (100.5, 134.95)
+  (up to 100% of the ring), and overlapped all three JSWD
+  guide-hole drill disks: fabricated as saved, the plane
+  would have shorted RESET_N and SYS_3V3 to GND. DRC could
+  not see it (connectivity is computed on the netlist, not
+  the stored fill). Fix = refill all zones; the fill change
+  is exactly six clearance rings (−7.015151 mm², nothing
+  added). Verified on the reloaded saved file WITHOUT
+  refill: annulus coverage 0/0/0, guide-hole overlap 0,
+  as-saved DRC shorting 0 / unconnected = the known GND
+  pair, containment PASS; Gerbers re-exported and
+  geometrically verified (In1.Cu 2212.579804 mm², overlaps 0).
+- **F2** JBATT value text corrected to the placed connector
+  (B2B-XH-A → BM02B-GHS-TBT, board + schematic; ERC 0).
+- **F3** Board general thickness field 1.6 → 1.2 mm (the
+  stackup sums to 1.200; the exported job file now agrees).
+- **F4** FABRICATION.md now calls JSWD a TC2050 footprint.
+  (TC2030 mentions elsewhere in this report are the
+  historical D-058 record.)
+- **F5** The review's duplicate-JSWD BOM observation does
+  not reproduce: `BOM-jlcpcb.csv` holds exactly one JSWD
+  row; designator sets BOM↔board are exactly equal (55=55)
+  here and at origin/main. No edit.
+- **S-A** TC2050 drawing notes 1–2 are not literally met by
+  the fanout: 10 F.Cu segments (the field's own escapes)
+  enter the drawing's shaded keep-out rectangle; 14 foreign
+  pairs sit within 0.508 mm of a contact pad (tightest
+  0.091340). Clearing them inside the SWD work box without
+  moving any pad/via/hole is not feasible (fixed via
+  endpoints; 0.039 mm-class hole clearances). Disposition
+  proposed: accept as a recorded deviation (all entering
+  tracks carry the field's own nets, under solder mask,
+  inside the jig's verified compression margin); route
+  escapes radially outward at the next respin.
+- **S-B** The trackpad keep-out has ONE definition: the
+  file's rule area is the intended Ø40 circle at KiCad
+  (100, 118). The operative gate was DRC items_not_allowed
+  (footprint level); JSWD pads 9/10 centres and 4 pad bodies
+  cross the rim (max pad-edge intrusion 1.252 mm) — the
+  intrusion the respin section above dispositioned in
+  substance (planar field, zero height). Two figures in
+  this report do not reproduce and are corrected here:
+  J2/J3 pad-edge clearance to the circle is ≈0.96 mm
+  (not "≥1.35 mm", deviation 4), and the JSWD intrusion is
+  1.252 mm by pad edge (not "≤~1.0 mm"). Disposition
+  proposed: accept as recorded deviations; JSWD not moved.
+- **S-C** Definitive different-net sub-0.100 mm census
+  outside the module field (exact geometry, D-019
+  definition): 166 pairs (473 board-wide). Verified: JPAD
+  via↔JPAD.3 = 0.062493 (record 0.0627, dispositioned);
+  RPD2.1↔RPD3.1 = 0.050 (deviation 6); NEW: GND via
+  (129.543, 127.330) ↔ RPD1.1 = 0.075000 and CHOUT.1 ↔
+  RPD1.1 pad–pad = 0.020, neither previously itemised; the
+  bulk is the J2/J3 fanout graze class (tightest 0.005,
+  B.Cu via–track). No routing changed; itemisation at the
+  D-063 gate is recommended.
+- **S-D** Via census reconciled: 286 vias (0.60/0.30 ×263,
+  0.50/0.30 ×18, 0.45/0.30 ×4, 0.35/0.20 ×1); 23 vias are
+  below 0.60/0.30 by diameter-or-drill vs KiCad's
+  via_diameter DRC count of 5 — different rule definitions,
+  both correct. The single drill < 0.30 via is SYS_3V3
+  0.35/0.20 at (123.7, 127.6).
+- **S-E** The three co-located via pairs are same-net
+  double vias (BTN, MUX_EN1, SYS_3V3) — benign. 13 routing
+  UUIDs are each shared by two records (7 segments, 6
+  vias) — file-format wart, no electrical effect, left
+  as-is.
+
+Final gates on the final saved file: F1 acceptance 0/0/0;
+DRC as-saved shorting 0, unconnected = the known GND pair;
+ERC 0; containment PASS; Gerber bundle regenerated
+(BoardThickness 1.2; zip structure unchanged, byte-identical
+to the gerber directory). Package remains DRAFT / NOT FOR
+ORDER; the quote re-run stays an order-stage item (its basis
+is now this file, SHA `75db72bc…`).
