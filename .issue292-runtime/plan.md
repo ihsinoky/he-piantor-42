@@ -379,3 +379,53 @@ Board SHA must remain 509e52a7... at the end.
   2026-11-19 vs DigiKey JP price/stock; DFM order-stage note).
 - P5 Re-zip gerber package (gerbers byte-identical; board
   unchanged), verify board SHA, final commit + report.
+
+# FIX ROUND (2026-11-21, from Codex cross-model review) — plan
+
+Brief: .issue292-runtime/fix-brief.md. Defect list:
+~/workspace/projects/he-piantor-wmain-review/.issue292-runtime/codex-review-report.md
+Worktree he-piantor-wmain-fix2, branch issue-292-wmain-fix2, base
+d3c834d46. Baseline board SHA verified 6dfbcb95... (D-061 file).
+
+Order (checkpoint commit after each fix):
+0. Read review report; baseline state recorded.
+1. F1 reproduce: own annulus-coverage measurement on UNMODIFIED saved
+   file (no refill) at RESET_N (112.9,133.75), RESET_N (108.3,133.975),
+   SYS_3V3 (100.5,134.95); snapshot ALL zone fills (all layers, polygon
+   area + geometry hash) for the before/after enumeration.
+2. F1 fix: refill ALL zones (pcbnew ZONE_FILLER), save. Diff fills ->
+   enumerate every geometry change. Verify on reloaded SAVED file,
+   NO refill: annulus coverage = 0 (3 vias); kicad-cli DRC as-saved
+   (shorting 0; unconnected = known GND pair CVCC2.2 + U1.14/16);
+   containment gate PASS; ERC 0. Regenerate Gerber bundle from saved
+   file; verify new In1.Cu Gerber annulus coverage = 0; record new SHA.
+3. F2: JBATT value text B2B-XH-A -> BM02B-GHS-TBT (.kicad_pcb + .kicad_sch).
+   ERC stays 0. No footprint/connectivity change.
+4. F3: verify stackup sum = 1.200 from .kicad_pcb setup; set general
+   thickness 1.600 -> 1.200.
+5. F4: FABRICATION.md "TC2030-class" prose -> TC2050.
+6. F5: remove duplicate JSWD line from per-reference BOM; BOM<->board
+   designator sets equal (script check).
+7. S-A: TC2050 contact-field rectangle: list foreign F.Cu tracks;
+   attempt re-route strictly inside SWD work box (no pad/via/hole
+   moves); gates re-run if changed; else disposition proposal.
+8. S-B: trackpad keep-out: rule area in board file vs case-frame
+   centre (trackpad circle r20 @ KiCad (100,118) per Stage 2 plan /
+   D-053). Measure JSWD pads vs both definitions; state which one the
+   Stage 2 gate used; disposition proposal only, JSWD NOT moved.
+9. S-C: definitive different-net sub-0.100 pair list outside module
+   field (D-019 definitions); verify JPAD 0.0625, east GND via
+   (129.543,127.33)->RPD1.1 0.075000, PAD_SDA via->JPAD.5 0.099249;
+   classify known-dispositioned / new. No routing changes.
+10. S-D: via census: KiCad via_diameter-check definition vs
+    diameter-or-drill < 0.60/0.30 count; itemise drill < 0.30 vias.
+11. S-E: co-located via pairs: same-net or different-net; duplicate
+    UUID census note. No changes.
+12. Deliverables: fix-report.md; REPORT.md section appended;
+    d063-draft.md; push branch; Draft PR; Issue #292 comment;
+    GOAL.md line.
+
+Invariants: F1 acceptance on SAVED file WITHOUT refill; no outline /
+footprint / netlist change beyond F2 value text; silk items report
+only; a fix that breaks an invariant -> STOP that item, record
+evidence, continue with the rest.
