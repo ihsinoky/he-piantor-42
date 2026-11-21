@@ -30,7 +30,7 @@ Fabrication notes:
 - U4 pin 2 (TPS22919 GND) is connected by a 0.45/0.30 via-in-pad.
   Require the via plugged and tented (or filled) so the pad solders
   flat.
-- JSWD is a pads-only TC2030-class footprint (no part fitted);
+- JSWD is a pads-only TC2050 footprint (official Tag-Connect pattern, D-061; no part fitted);
   pogo access with the case open, nothing above it.
 - JBATT is a JST GH (BM02B-GHS-TB class, 1.25 mm pitch, 2.9 mm
   tall) 2-pin land; LCSC code to be confirmed at quote.
