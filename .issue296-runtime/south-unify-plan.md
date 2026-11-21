@@ -24,12 +24,20 @@ Base: branch `issue-296-stageb` tip `d8b687d4b`.
    from the built plates' measured profile. Skin extends south to S(X)
    and is fused into tray-left / centre-infill / tray-right in their X
    slices, with 0.30 gaps at the part seams X = −6 / +13 (§3-4).
-3. **Shell-central south edge** → one straight line Y = 69.700:
-   slice-translate — slice = shell ∩ box(|X| ≤ 41.25, Y 68.876..69.288,
-   full Z), fused back shifted +0.412 in Y. Centre edge moves
-   69.288 → 69.700; corners (already 69.700) unchanged; the 0.412 step
-   at |X| ≈ 39.5 is filled by the same operation. Joint shell↔skin
-   = 70.000 − 69.700 = 0.300 ✓.
+3. **Shell-central south edge** → one straight line Y = 69.700.
+   AMENDED after probing (probe_shell.py, 0.25 mm sampling): the
+   centre face is **69.202** flat for |X| ≤ ~39.25 (the coordinator's
+   69.288 exists only as a ~0.3-wide ridge at |X| ≈ 39.4; corners
+   69.700 from |X| ≈ 39.6). A slice-translate would copy the wavy
+   face (+0.412 → 69.614..69.700), NOT one line — so the shell uses
+   the same face-following fill as the trays: prism Z 8.90..10.90
+   (the face's measured Z range), south boundary exactly 69.700,
+   north boundary min(C_shell, 69.700) − 0.30 embed, |X| ≤ 41.0.
+   Extension actually needed: 0.498 (not 0.412). Target line
+   69.700 unchanged. Joint shell↔skin = 70.000 − 69.700 = 0.300 ✓.
+   Residual: at |X| ≤ ~3.5 the trackpad seat floor (Z 11.10) keeps
+   its own edge at 69.202 above the fill (0.10-high sliver under
+   the pad rim, inside the seat recess — measured, recorded).
 4. **C0.5 chamfer** along the south top edge, continuous over the
    unified edge (straight + both arcs, ending at the arc/diagonal
    tangent points): straight zone = triangular prism cutter

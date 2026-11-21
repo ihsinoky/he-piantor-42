@@ -547,6 +547,206 @@ for sx in (55.0, 85.0):
 tray_r = report("tray-right+inserts", tray_r)
 tray_l = report("tray-left+inserts", tray_l)
 
+# ================================================================ SOUTH UNIFICATION (plan A, PO 2026-11-22)
+# Opus proposal files/case296-south-unify-opus-2026-11-22.md §3,
+# adopted by the PO. All measured inputs are re-derived here from
+# the built solids (the north_fill pattern): tray south face C(X),
+# plate south profile, shell south face. Constants of record:
+#   Y_S = 81.700 (81.702 abolished), R = 4.0 arc, skin Z 9.30..10.90,
+#   shell edge 69.700, band north boundary B(X) per §3-2.
+# Diagonal fitted by least squares on the tray face samples
+# |X| 61..70 (probe: Y = 128.49 - 0.784|X|, resid <= 0.018);
+# intersection / tangent points recomputed from the fit per §3-1's
+# own instruction. Probe values: Xi 59.68, Xt1 58.30, Xt2 60.77.
+import math
+
+YS = 81.700
+R_ARC = 4.0
+
+def _cells(r):
+    if r is None:
+        return []
+    items = list(r) if isinstance(r, (list, bd.ShapeList)) else [r]
+    return [c for c in items if c is not None and hasattr(c, "volume")
+            and c.volume > 1e-9]
+
+def southmost(solid, xa, xb, z0, z1, y0=40.0, y1=95.0):
+    cs = _cells(solid.intersect(box(xa, xb, y0, y1, z0, z1)))
+    return max((c.bounding_box().max.Y for c in cs), default=None)
+
+def sample_face(solid, sgn, x_from, x_to, z0, z1, y0=40.0, y1=95.0):
+    """{|X| station centre (0.5 grid, offset .25): southmost Y},
+    sampled in the columns at sgn * |X|."""
+    out = {}
+    k = int(round((x_from - 0.25) / 0.5))
+    while True:
+        xc = 0.25 + 0.5 * k
+        if xc > x_to:
+            break
+        xa, xb = (xc - 0.25, xc + 0.25) if sgn > 0 else (-xc - 0.25, -xc + 0.25)
+        out[xc] = southmost(solid, xa, xb, z0, z1, y0, y1)
+        k += 1
+    return out
+
+# --- measured faces (BEFORE any south modification) ---
+face_r = sample_face(tray_r, +1, 44.0, 76.0, -2.65, 10.90)
+face_l = sample_face(tray_l, -1, 44.0, 76.0, -2.65, 10.90)
+plate_r_s = sample_face(plate_r, +1, 40.0, 61.0, -3.0, 23.0)
+plate_l_s = sample_face(plate_l, -1, 40.0, 61.0, -3.0, 23.0)
+shell_f = {}
+for sgn in (+1, -1):
+    for xc, v in sample_face(shell, sgn, 0.0, 41.5, -3.0, 23.0,
+                             55.0, 75.0).items():
+        shell_f[sgn * xc] = v
+
+# --- diagonal fit + arc constants (right tray; L/R faces identical) ---
+_fp = [(x, c) for x, c in face_r.items() if 61.0 <= x <= 70.0 and c is not None]
+_n = len(_fp)
+_sx = sum(p[0] for p in _fp); _sy = sum(p[1] for p in _fp)
+_sxx = sum(p[0] ** 2 for p in _fp); _sxy = sum(p[0] * p[1] for p in _fp)
+MD = (_n * _sxy - _sx * _sy) / (_n * _sxx - _sx ** 2)     # slope (< 0)
+AD = (_sy - MD * _sx) / _n                                 # intercept
+XI = (YS - AD) / MD                                        # line meets Y_S
+TH = math.atan(-MD)
+TL = R_ARC * math.tan(TH / 2.0)                            # tangent length
+XT1 = XI - TL                                              # tangent pt, straight
+CY = YS - R_ARC                                            # arc centre Y
+XT2 = XI + TL * math.cos(TH)                               # tangent pt, diagonal
+print(f"south: diagonal Y = {AD:.4f} {MD:+.4f}|X|; Xi {XI:.3f}, "
+      f"Xt1 {XT1:.3f}, Xt2 {XT2:.3f}, arc centre Y {CY:.3f}")
+
+def S_of(x):
+    """New south outline S(|X|): straight, R4 arc, then the diagonal."""
+    if x <= XT1:
+        return YS
+    if x >= XT2:
+        return AD + MD * x
+    return CY + math.sqrt(max(R_ARC ** 2 - (x - XT1) ** 2, 0.0))
+
+def outline_stations(x_from, x_to):
+    """Fine |X| stations along S: 1.0 on the straight, 0.25 on the arc."""
+    xs = [x_from]
+    x = x_from + 1.0
+    while x < min(XT1, x_to):
+        xs.append(round(x, 3)); x += 1.0
+    if XT1 < x_to:
+        xs.append(round(XT1, 3))
+        x = XT1 + 0.25
+        while x < min(XT2, x_to):
+            xs.append(round(x, 3)); x += 0.25
+        xs.append(round(min(XT2, x_to), 3))
+    else:
+        xs.append(round(x_to, 3))
+    return sorted(set(xs))
+
+# --- tray outline: face-following fill + overshoot clip, per side ---
+def unify_tray(t, sgn, face):
+    xs = outline_stations(44.0, XT2)
+    south = [(sgn * x, S_of(x)) for x in xs]
+    north = []
+    for xc in sorted(face, reverse=True):
+        if not (44.0 <= xc <= XT2 + 0.25) or face[xc] is None:
+            continue
+        north.append((sgn * xc, min(face[xc], S_of(xc)) - 0.30))
+    fill = prism2d(south + north, -2.65, 10.90)
+    t = fuse(t, fill)
+    clip = prism2d(south + [(sgn * XT2, 95.0), (sgn * 44.0, 95.0)],
+                   -3.0, 11.60)
+    t = cut(t, clip)
+    return report(f"tray-{'right' if sgn > 0 else 'left'}+south", t)
+
+tray_r = unify_tray(tray_r, +1, face_r)
+tray_l = unify_tray(tray_l, -1, face_l)
+
+# --- shell south edge -> one straight line at 69.700 (face fill) ---
+_sh_xs = sorted(shell_f)
+_sh_south = [(-41.0, 69.700), (41.0, 69.700)]
+_sh_north = [(x, min(shell_f[x], 69.700) - 0.30)
+             for x in reversed(_sh_xs)
+             if shell_f[x] is not None and abs(x) <= 41.0]
+shell = fuse(shell, prism2d(_sh_south + _sh_north, 8.90, 10.90))
+shell = report("shell-central+south", shell)
+
+# --- south band skin (Z 9.30..10.90, hollow below), per part slice ---
+def B_of(x, plate_face):
+    """Band north boundary B(|X|) per proposal §3-2; the plate
+    profile is looked up at the nearest sampled station."""
+    if x <= 41.01:
+        return 70.000
+    if not plate_face:
+        return 70.000
+    pf = plate_face[min(plate_face, key=lambda kk: abs(kk - x))]
+    if pf is None:
+        return 70.000
+    return max(70.000, pf + 0.30)
+
+def skin_prism(x_lo, x_hi, plate_face):
+    """Skin prism over one part slice; the slice bounds are explicit
+    polygon stations so the seams at the part boundaries come out
+    at exactly 0.30 (bounds are set seam -/+ 0.15 by the caller)."""
+    xs = {round(x_lo, 2), round(x_hi, 2)}
+    k = int(math.ceil((x_lo - 0.25) / 0.5))
+    while 0.25 + 0.5 * k <= x_hi:
+        xs.add(round(0.25 + 0.5 * k, 2)); k += 1
+    pts_n, pts_s = [], []
+    for x in sorted(xs):
+        b = B_of(abs(x), plate_face)
+        if S_of(abs(x)) - b >= 0.5:
+            pts_n.append((x, b))
+            pts_s.append((x, S_of(abs(x))))
+    if len(pts_n) < 2:
+        return None
+    return prism2d(pts_n + pts_s[::-1], 9.30, 10.90)
+
+_sk = skin_prism(-60.5, -6.15, plate_l_s)
+if _sk is not None:
+    tray_l = fuse(tray_l, _sk)
+_sk = skin_prism(-5.85, 12.85, plate_r_s)
+if _sk is not None:
+    infill = fuse(infill, _sk)
+_sk = skin_prism(13.15, 60.5, plate_r_s)
+if _sk is not None:
+    tray_r = fuse(tray_r, _sk)
+tray_l = report("tray-left+skin", tray_l)
+infill = report("infill+skin", infill)
+tray_r = report("tray-right+skin", tray_r)
+
+# --- C0.5 chamfer on the south top edge (straight + arcs) ---
+_tri_pts = [bd.Vector(0, YS - 0.50, 10.90), bd.Vector(0, YS, 10.40),
+            bd.Vector(0, YS, 10.90)]
+_tri_w = bd.Wire.make_polygon(_tri_pts + [_tri_pts[0]])
+_tri = bd.extrude(bd.Face(_tri_w), 2 * XT1)
+_tri = _tri.moved(bd.Location((-XT1 - _tri.bounding_box().min.X, 0, 0)))
+tray_r = cut(tray_r, _tri)
+tray_l = cut(tray_l, _tri)
+infill = cut(infill, _tri)
+
+def arc_chamfer_cutter(sgn):
+    cx, cy = sgn * XT1, CY
+    outer = cyl(cx, cy, 6.0, 10.40, 11.60)
+    keep = bd.Solid.make_cone(4.0, 2.8, 1.2,
+                              bd.Plane(origin=(cx, cy, 10.40)))
+    a1, a2 = (50.0, 91.0) if sgn > 0 else (89.0, 130.0)
+    wp = [(cx, cy),
+          (cx + 9 * math.cos(math.radians(a1)),
+           cy + 9 * math.sin(math.radians(a1))),
+          (cx + 9 * math.cos(math.radians(a2)),
+           cy + 9 * math.sin(math.radians(a2)))]
+    wedge = prism2d(wp, 10.40, 11.60)
+    r = as_solid(outer.cut(keep).intersect(wedge))
+    return r
+
+for sgn, _t in ((+1, "r"), (-1, "l")):
+    _cc = arc_chamfer_cutter(sgn)
+    if _cc is not None:
+        if sgn > 0:
+            tray_r = cut(tray_r, _cc)
+        else:
+            tray_l = cut(tray_l, _cc)
+tray_r = report("tray-right+chamfer", tray_r)
+tray_l = report("tray-left+chamfer", tray_l)
+infill = report("infill+chamfer", infill)
+
 # ================================================================ EXPORTS
 # PO 2026-11-21: the lid is INTEGRAL with the north band — one
 # removable north shelf; battery swap = remove the shelf, swap
