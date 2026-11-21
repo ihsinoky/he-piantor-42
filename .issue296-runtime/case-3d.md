@@ -231,3 +231,162 @@ and re-run — the final numbers above are from the corrected run).
   the slots prove unroutable, the case fixing falls back to
   corner features in the reserved zones. Parent to route.
 - SW1 tact switch itself remains a Main respin item (D-063).
+
+## North-flush + PO-profile revision (2026-11-21)
+
+PO instructions: (1) north edge flush — a straight flat face at the
+outline limit Y −64.37, the curve removed; (2) north band at the
+keytop datum Z22.00 across the full width, continuing south to just
+before the keys; (3) centre (trackpad surround) and south at plate
+top Z10.90, D-053 trackpad geometry intact; (4) transition slope
+where space allows, cliff acceptable. This revision supersedes the
+Stage-3D north slope cover and the 16.65 battery lid.
+
+### What the curve was (measured, BREP slab sampling)
+
+The tray north wall + old strip form ONE vertical face (tray
+−2.65..10.90, strip 10.90..22.00, identical Y at every station)
+whose PLAN trace is a circular arc: centre ≈ (0, −768), R ≈ 713;
+sag vs the −64.37 plane: 8.9 mm at |X|=32, 5.6 at |X|=77, 0 at
+|X|≈118; beyond that the outline is the angled end edge. The old
+strip was a thin rim band (material within ~3 mm of the face, top
+flat 22.00); the visible slope south of it was the tray's moulded
+top. Shell-central's north boundary was a V of two straight
+diagonals from (0, −0.37) — not curved; its centre ridge descended
+22.00 (Y≈0) → 15.11 (Y=27) → 11.10 (Y≥32).
+
+### Profile mapping onto parts
+
+- Trays: north face filled forward to the plane in 2 mm columns
+  (Z −2.65..10.90, +0.30 embed into the measured face). Result:
+  flatness deviation 0.000 over |X| ≤ 117 (verify_north A).
+- Strips REPLACED by band plateaus (Z 10.90..22.00): from the flush
+  face south to the key line. South edge per 1 mm column = keycap
+  capline − 1.0 mm clearance (caps.json: 16.5 mm cap envelopes at
+  each key's own angle, extracted from the built plates, 21
+  keys/side); cap-free columns take the nearest cap column's line.
+  Transition on the halves is therefore a CLIFF at the key line —
+  the run available is the 1.0 mm clearance only, no room for a
+  slope (recorded choice per PO item 4).
+- Battery lid: top raised 16.65 → 22.00 so the band is continuous
+  over the bay; underside 15.15 and all skirts unchanged (cell
+  clearance unchanged); screw holes lengthened. Lid lift path
+  verified 0.000 at +2/+5/+10/+25 (the lid is independent of the
+  band plateaus: its footprint |X| ≤ 30.25 meets the plateaus at
+  |X| ≥ 30.25 face-to-face).
+- Shell-central: centre profile applied — 22.00 at the bay south
+  wall face (Y −0.37), linear slope to 10.90 at Y 20.0 (run 20.37,
+  28.6°), flat 10.90 south of it; trackpad island exempted by the
+  Ø47 keep-disc at (0, 48). SLOPE chosen for the centre (space
+  allows: 20.37 run), landing 5.7 mm north of the island edge.
+- Fly: shifted north to centre (38, −60.00) — a further 8.06 from
+  the Stage-3D pose — mouth exactly flush with the new face
+  (measured protrusion +0.00; a first pass at −60.11 measured
+  +0.11 proud on the fused official body and was corrected).
+  Pocket / USB opening / plate rim notch shifted with it.
+  EZmate ≈ 96.7 mm ≪ 170 stock. Fly vs Wings now 0.000 (the
+  Stage-3D 4.893 item is closed by this shift at the case side;
+  the #299 north-edge notch stands as built there).
+- Forced local adjustments: DLED light pipe re-trimmed to the
+  slope surface at (−4, 13) → top 14.71 (= profile at Y 13);
+  SW1 plunger re-trimmed to the 10.90 surface (stem 7.2..10.9,
+  head 10.9..12.1); DLED hole re-cut after the slope work.
+
+### Successor fixes (the partial build was NOT trusted as-is)
+
+The predecessor's checkpoint (65a0a8fbb) plus dirty tree was
+assessed: its verify-out2.txt is internally inconsistent (fin-box
+breakdown ≠ totals; tongue overlap vanished) and came from a
+partial build — discarded. The build was re-run from the scripts;
+two real defects in the revised design were then found by
+measurement and fixed in build_case3d.py:
+
+1. **Centre slope hole.** The profile cut alone deletes the
+   centre skin wherever its underside (~2.1 under the old ridge
+   top) sits above the new profile: measured hole along the spine
+   |X| ≤ ~9, Y 6..27, plus the apron widening (diag_grid.py, old
+   vs new top-Z maps). Fix: a slope SHEET whose top is the
+   profile (2.0 thick), limited to the pre-cut shell's plan
+   footprint (downward sweep): zone A |X| ≤ 22.4 full 2.0
+   thickness; zone B (lobe bands 22.4 < |X| ≤ 30.25) floored at
+   the plate top 10.90. After the fix the spine slab audit
+   (verify_north F) shows shell top = profile at every 2 mm bin
+   Y 0..22. Zone B produced no surviving sheet — the old shell
+   had only a ≤1.94 mm-deep strip sliver along the bay wall
+   there; that region's surface is now the plate top 10.90,
+   which matches the centre = plate-height reading.
+2. **SW1 boss left at 11.10.** The trackpad keep-disc (r 23.5 at
+   (0,48)) also exempts the SW1 boss (centre distance 22.6) from
+   the profile cut; the re-trimmed plunger intersected it
+   (0.211 mm³). Fix: local cap cut over the boss → shell top at
+   the SW1 column 10.90, plunger vs shell 0.000.
+
+### Verification (final runs: verify-rev2.txt, verify-north-rev2.txt, audit-rev.txt)
+
+| Check | Result |
+|---|---|
+| Case (with cover) vs Main / cells / power board / Fly / trackpad / switch envelopes | 0.000 (all) |
+| Case vs Wings+underside | 84.76 = 2 × 42.38, the accepted J_WING envelope ∩ E/W sill artifact (physical FH12 clears by 0.25), unchanged |
+| Case vs case | 0.000 (no nonzero pair) |
+| Removal sweeps ×3 (cover off) vs case | exactly each cell's own spring-fin box (175.806 / 176.803 / 175.806); vs Wings 0.000; vs switch env 0.000 |
+| Power-board vertical drop | 12.000 = the 4 tongue snap overlaps, by design |
+| Outline | 310.04 × 146.07; Z max 22.00; south Ymax 81.70 for |X| ≤ 50 |
+| North face flatness | max deviation from −64.37 = 0.000 over |X| ≤ 117 |
+| Band tops / lid top | 22.00 at all sample columns / 22.00 |
+| Keycap clearance | cap solids vs case 0.000 unpressed (top 22.00) AND pressed model (top 19.00, 3.0 travel — plan-invariant, verified with solids at both heights) |
+| Lid lift path | 0.000 at +2 / +5 / +10 / +25 |
+| Fly mouth protrusion | +0.00 (flush); Fly/plug vs tray, plate, band 0.000 |
+| Shell centre profile (spine slab) | top = profile at every bin Y 0..22; DLED pipe top 14.71 = profile at Y 13; pipe/plunger vs shell 0.000 |
+| Finger zones (full, Z 7.40..16.65) vs case | E 1261.330 / W 1263.904 — changed from Stage 3D (661/693), see disposition 4 |
+| Trackpad island probe | shell vs pad disc 0.000 |
+
+### Open dispositions (PO confirmation pending; defaults used and stated)
+
+1. **Key clearance value.** Design offset = capline − 1.0 mm per
+   1 mm column. Because the plateau south edge is a 1 mm
+   staircase and the caps are rotated rectangles, the true
+   minimum solid-to-solid distance measures **0.571 mm** (both
+   sides, audit_rev §3) — positive everywhere, no contact in
+   either key state (solids check above). Default: accept
+   1.0 mm nominal / 0.571 mm true minimum. Cap size itself is
+   assumed 16.5 mm (17-pitch class; g17 switch envelope 15.8);
+   the Junana physical cap measurement is still open and would
+   shift these numbers by the cap-size delta.
+2. **Lid independence.** The battery lid is a separate part from
+   the band plateaus and lifts vertically clear of them
+   (verified). Its top is part of the band surface (22.00) when
+   seated. Default: keep independent (battery access does not
+   disturb the band).
+3. **Centre-height reading.** "Centre at plate height" is read
+   as the shell field at plate top 10.90 around the trackpad and
+   to the south. The battery lid over the bay is NOT at 10.90 —
+   it sits at the band height 22.00 (it is part of the north
+   band, and its underside must clear the 14.65 cell tops).
+   Default: bay lid = band (22.00); trackpad surround + south
+   field = 10.90.
+4. **Finger-zone bounds.** The full-zone volume vs case rose
+   (661/693 → 1261/1264) because the band plateaus now occupy
+   the zone slice above the plate top outboard of the bay
+   (X 30.25..32.25), and the working band Z 7.40..9.40 gained
+   32.822 (E) / 34.802 (W) of tray-right/left deck outboard of
+   the bay wall, south of the relocated Fly pocket. Inboard of
+   the bay walls (|X| ≤ 30.25) the working band remains
+   **0.000 both sides** (diag_band.py) — the grip criterion
+   holds where fingers actually reach the cells. Recorded as
+   the zone's real bounds in the final configuration.
+5. **Keep-disc exemptions.** Inside the Ø47 keep-disc the D-053
+   island keeps pre-revision heights: island apron top 12.55
+   measured at X~20, Y 20..35 (old 13.85 — partially trimmed),
+   and one spine-foot land at top 15.15 in the ring
+   22.3 < dist((0,48)) < 23.5 (audit_rev §5). Both are island
+   seat structure, below/around the pad (pad top 12.70);
+   the shell slab at X ±3, Y 26..30 is the pad seat opening —
+   empty in the Stage-3D shell too, not a regression.
+6. **Old strips.** 1.42k of each old strip's 1.45k lies inside
+   the new strip+shell; 0.02k/side removed (the slivers south of
+   the key line not absorbed by the plateau/lobe transfer).
+
+Renders: case296-3d-top.png / case296-3d-persp-open.png /
+case296-3d-persp.png overwritten; case296-3d-section-centre.png
+added (Y-Z at X=0: band 22.00 over the bay, slope to the trackpad
+field at 10.90, pad at 12.70).

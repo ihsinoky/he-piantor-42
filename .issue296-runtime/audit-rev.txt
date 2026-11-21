@@ -1,0 +1,15 @@
+== 1. slope surface audit ==
+  spine X -3..3: Y24..26 top 15.15 vs profile 10.90; Y26..28 EMPTY; Y28..30 EMPTY
+  lobe R X 24..28: Y0..2 EMPTY; Y2..4 EMPTY; Y4..6 EMPTY; Y6..8 EMPTY; Y8..10 EMPTY; Y10..12 EMPTY; Y12..14 EMPTY; Y14..16 EMPTY; Y16..18 EMPTY; Y18..20 EMPTY; Y20..22 EMPTY; Y22..24 EMPTY; Y24..26 EMPTY; Y26..28 EMPTY; Y28..30 EMPTY; Y30..32 EMPTY; Y32..34 EMPTY
+  lobe L X -28..-24: Y0..2 EMPTY; Y2..4 EMPTY; Y4..6 EMPTY; Y6..8 EMPTY; Y8..10 EMPTY; Y10..12 EMPTY; Y12..14 EMPTY; Y14..16 EMPTY; Y16..18 EMPTY; Y18..20 EMPTY; Y20..22 EMPTY; Y22..24 EMPTY; Y24..26 EMPTY; Y26..28 EMPTY; Y28..30 EMPTY; Y30..32 EMPTY; Y32..34 EMPTY
+== 2. SW1 ==
+  shell top near SW1 column: 10.9 (expect 10.90)
+  plunger vs shell: 0.000 mm3 (expect 0.000)
+== 3. plateau vs keycaps: minimum distance ==
+  strip-right: min distance to cap solids 0.571 mm (design clearance 1.00 plan)
+  strip-left: min distance to cap solids 0.571 mm (design clearance 1.00 plan)
+== 4. finger-zone working band Z 7.40..9.40 ==
+  east: 32.822 mm3 (Stage-3 criterion: 0.000)  first piece X 30.25..32.25 Y -55.66..-46.87 Z 7.40..9.40
+  west: 34.802 mm3 (Stage-3 criterion: 0.000)  first piece X -32.25..-30.25 Y -59.62..-46.87 Z 7.40..9.40
+== 5. keep-disc ring above profile ==
+  ring pieces above 10.90: 1  max top 15.15
