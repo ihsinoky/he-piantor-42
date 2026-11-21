@@ -504,3 +504,29 @@ report (inside the recorded caveat class; GND-track nudges
 deferred to the (b)/(d) round). 16R's duplicate WING_EN segment
 left as instructed. Full evidence: .issue299-runtime/
 gndfix-report.md on this branch.
+
+## Addendum 2026-11-21 — GND respin round (PO decisions (b) + (d) + corner trim)
+
+Executed on this branch after the repair round above. All four
+variants are now **79/79 pad-level GND on the saved files** with
+HALL_3V3 integrity 50/50: sensor pockets (16R HA2, 17R HA2, 17L
+HB5) closed with 0.60/0.30 stitch-via pairs + 0.30 mm F.Cu tracks
+on the 16L pattern, the HALL_3V3 fill carving rings at refill;
+cap islands (17R C_HC2 pre-staged design, 17L C_HB5) closed the
+same way. 17L HC5 had no via site at any via size (EN-pad corner
+to RAW centreline 0.617 mm total), so its pocket was respun: the
+F.Cu H_C5_RAW segment was jogged clear (v3, after v1/v2 failed
+DRC) and the stitch placed. Wing south-inner corners trimmed per
+Issue #296 (14.515 mm² per variant, fills refilled and receding;
+rim-roll sweep vs trimmed outlines 0.000 mm³ ×4).
+
+Invariants re-verified on the finals: field deviation 0.0000;
+via-pad minima unchanged (0.100 / 0.1016 / 0.100 / 0.1052); Gate 5
+far-VCC within +2.5 mV of the Stage-2 study on every carved
+variant; parity 224 = 224; Gate 8 diff = the trim only (334 vs
+329 edges, holes 46/46); census vs the repair-round files shows
+no non-GND change except the HC5 jog; pairscan sub-0.100 lists
+unchanged; DRC shorting 0 and **unconnected 0 on all four**;
+ERC 0. Final SHAs: 16L 5a700316…, 16R a2131e1a…, 17L a6aa72a1…,
+17R f43b2286…. Full evidence: .issue299-runtime/respin-report.md.
+Next: Codex re-review of the fixed set, then Stage 3.
