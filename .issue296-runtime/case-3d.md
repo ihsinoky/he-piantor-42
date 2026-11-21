@@ -390,3 +390,58 @@ Renders: case296-3d-top.png / case296-3d-persp-open.png /
 case296-3d-persp.png overwritten; case296-3d-section-centre.png
 added (Y-Z at X=0: band 22.00 over the bay, slope to the trackpad
 field at 10.90, pad at 12.70).
+
+## Lid-integral north shelf (PO decision 2026-11-21) — implemented + verified
+
+**PO decision of record (2026-11-21):** 「天地蓋部分は北辺棚と一体で作ってくれ。電池交換の時は北辺棚を外して交換する」 — the battery lid is made INTEGRAL with the north band/shelf as ONE removable part; battery replacement = remove the whole north shelf and swap the cells. This supersedes open disposition 2 of the north-flush revision above ("keep the lid an independent part").
+
+### Part boundary (defined and measured)
+
+The new part **`north-shelf`** = fuse(previous `battery-cover`, `strip-left`, `strip-right`), minus the new screw holes. One solid (verified: solids = 1), bbox X −152.25..152.25, Y −64.37..−0.37, Z 7.80..22.00, vol 99.22k mm³.
+
+- North boundary: the flush plane Y −64.37; the ends follow the tray outline (plateau columns to |X| = 152.25).
+- South boundary: the lid's south edge Y −0.37 at centre — meeting the shell slope's TOP edge, so the centre slope (22.00 → 10.90) stays with `shell-central` unchanged — and the key line (capline − 1.0 mm per column) on the halves, exactly as built in the profile revision.
+- Underside: centre = the lid underside (Z 15.15) + the E/W bay skirts (bottom 11.15); outboard = the plateau underside (10.90).
+- **Bridge over the bay E/W sills, measured:** in the wall bands (|X| 22.50..30.25) the shelf's lowest point is the skirt bottom **Z 11.15**; the plate below tops at **10.90 → clearance 0.25**; the Wing board below tops at **5.90 → clearance 5.25**. Shelf vs Wings+underside (incl. J_WING envelopes) = **0.000**; shelf vs plates = **0.000**. (The Wing boards do not pass under the shelf in the removal path either — see trajectory below.)
+
+### Fixing — decided: 4× flat-head M3 in the plateaus; the centre wall pair is REMOVED
+
+The as-built lid pair (±24.25, −63.37, into the tray north wall top) **cannot be retained in any standard form**: its axis sits 1.00 mm from the flush north face, so any screw head of radius > 1.0 stands proud of the outline (a Ø5.5 flat head by 1.75 mm; even a Ø3.0 clearance hole breaks the face by 0.50 mm). The earlier stages never modelled heads — the pair only ever worked as bare holes. The pair is removed from both the shelf and the tray wall (the wall pilots are filled back).
+
+**New fixing: 4× flat-head M3, countersunk flush in the band plateaus, all on one line Y = −61.37, pairs at X ±55 and ±85.**
+- Head rim at Y −64.12 — 0.25 inside the flush face; head top flush at Z 22.00 (verified with an undersize-modelled head envelope: top Z 22.00, rim −64.07 at r 2.70, vs shelf/caps 0.000).
+- Pilots Ø2.7 into the tray north fill, Z 4.0..10.90; **pilot fill fraction 100.0 %** at all four positions (the fill under the plateau is solid there — no arc voids); pilot shaft cylinders vs Wings/plates = 0.000. Ø2.7 pilots into printed PETG for M3 self-tap/form, same practice as the previous lid fixing.
+- Span justification: the old pair alone left 130.8 mm cantilevers to each end; the new layout gives centre span 110, side spans 30, end cantilevers 70 — and the lid portion additionally rests on the bay walls (N wall top 15.15; S wall top 15.15 for |X| ≤ 10.90; E/W skirts over the sills) and is located by the skirt/wall sandwich, so the screws clamp, they do not locate.
+- **Driver access, assembled:** vertical Ø6.35 bit cylinders from Z 22 to 55 vs keycap solids = **0.000** in BOTH cap states (unpressed and pressed) at all four screws; axis-to-capline distance 21.36 mm (worst, +85), 21.89 (−85), 32.90 (+55), 33.43 (−55).
+- Alternatives measured and rejected (plan note `shelf-plan.md`): relocating the centre pair into the lid top (bosses foul the power-board drop path and the cells' tilted-insertion arc); south-wall centre screws (intersect the shell slope); grub/set screws from the north face (no clamp, wall too thin); keeping the centre holes as pure locators (unnecessary — skirts locate).
+
+### Fly / USB — undisturbed
+
+The Fly stays in the tray-right pocket (unchanged); shelf vs Fly = **0.000**; the shelf's removal path never touches it (trajectory below includes the Fly and a seated plug envelope: both 0.000 at every lift step). USB opening (X 33.4..42.6, Z 6.1..9.5, in the tray wall below the shelf) is fully usable with the shelf on AND off: plug envelope vs shelf = 0.000, vs the shelf-less case = 0.000. Fly mouth protrusion re-measured **+0.00** (flush).
+
+### Removal motion and verification (`verify_shelf.py`)
+
+Removal motion assumed: remove the 4 screws, then a **pure vertical (+Z) lift** of the shelf (no tilt, no slide). Battery swap then proceeds with the shelf OFF, using the established cell motion (slide 2.0 toward the spring end + tip 35°).
+
+| Check | Result |
+|---|---|
+| Shelf = 1 solid; bbox / Z ≤ 22.00 | 1 solid; X ±152.25, Y −64.37..−0.37, Z 7.80..22.00 ✓ |
+| Shelf vs old 3-part union | shelf-minus-old 86.2 mm³ (≈ the filled centre holes, 96.8 nominal), old-minus-shelf 351.5 (≈ the 4 new holes+countersinks, 386.6 nominal); residual ≤ 0.03 % = cross-build boolean noise |
+| Fixing voids (pilot / hole / countersink), 4 screws | 0.000 / 0.000 / 0.000 at all four |
+| Head envelopes: top / rim / vs shelf / vs caps | 22.00 / −64.07 / 0.000 / 0.000 (both cap states) |
+| Driver bit Ø6.35 vs caps | 0.000 unpressed and pressed, all four |
+| Bridge: skirt-to-plate / skirt-to-Wing-board | 0.25 / 5.25 |
+| **Shelf lift trajectory** (+2/+5/+10/+25) vs rest of case, caps (un+pressed), trackpad, Fly, plug, Wings+underside, Main, cells, power board, switch envs | **0.000 everywhere, all steps** |
+| Battery sweeps, shelf OFF (slide 2.0 + tip 35°) | vs case = own-fin box only (175.806 / 176.803 / 175.806); vs Wings 0.000; vs switch env 0.000 |
+| Finger zones, shelf OFF | outboard relief 0.000 both; inboard working band (Z 7.40..9.40) **0.000 both** (the full-height zone still contains the known plate-tip occupation 509.080 above the band, Z 9.40..10.90 — unchanged) |
+| Case vs Main / cells / power board / Fly / switch envs | 0.000 |
+| Case vs Wings+underside | 84.760 = 2 × 42.38, trays only (accepted J_WING envelope artifact, re-confirmed; shelf contributes 0) |
+| Case vs case | none > 0.01 |
+| Power-board drop re-check (after the tray pilot changes) | 12.000 = tongue snaps only ✓ |
+| Outline / north flatness | 310.04 × 146.07, Z −2.65..22.00; flatness deviation 0.000 over \|X\| ≤ 117 |
+
+**Carried observation (pre-existing, NOT a shelf regression):** the table now computes plunger-sw1 vs the trackpad probe disc (Ø44 envelope) = **5.806 mm³** — earlier tables never included the plunger in the case set, so this pair was never computed before. The plunger is untouched by this revision. Against the real Ø40 Cirque module the plunger head (Ø5, centre 22.64 from the pad centre) clears by 0.14 mm in plan; the 5.806 is against the Ø44 island-envelope probe only. Flagged for the record; no change made (out of this revision's scope).
+
+### Parts / files
+
+Parts 11 → **9**: `north-shelf.step/.stl` replaces `battery-cover` + `strip-left` + `strip-right` (removed from the tree). Renders: `case296-3d-top.png` and `case296-3d-persp-open.png` overwritten, `case296-3d-persp.png` refreshed, **`case296-3d-shelf-off.png` added** (shelf lifted 95 mm above its seat, bay open with cells — the battery-swap state).
