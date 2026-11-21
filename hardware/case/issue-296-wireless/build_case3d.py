@@ -219,12 +219,59 @@ strip_l_old = build_strip_old(-1)
 # ================================================================ NORTH BAND (PO profile 2026-11-21)
 # The strips are REPLACED by band plateaus: top at the keytop datum
 # 22.00, from the flush north face south to just before the keys.
-# South edge per 1 mm column = keycap capline (caps.json, 16.5 mm cap
-# envelopes at each key's own angle) - 1.0 mm clearance; cap-free
-# columns take the nearest cap column's line. Z 10.90..22.00 (bottom =
-# plate top). North edge: the flush plane for |X| <= 116; beyond, the
+# P0/P1 revision (Opus review, PO 2026-11-21): the south edge is no
+# longer the 1.0 mm staircase (true min gap was 0.571). Boxes now
+# extend to capline - 0.05 and are trimmed by per-cap DISC-OFFSET
+# keep-out prisms (radius GAP below), so the edge is the true
+# offset curve of the cap rectangles — uniform perpendicular gap.
+# GAP = 1.30 nominal from the P0-1 tolerance stack-up (worst-case
+# sum 0.95 -> residual +0.35; see case-3d.md addendum). Cap-free
+# columns take the nearest cap column's line. Z 11.10..22.00
+# (underside raised 0.20 = the P1 mating gap over plate/tray top
+# 10.90). North edge: the flush plane for |X| <= 116; beyond, the
 # tray's own outline sampled at the column's outer sub-column (no
 # overhang past the angled end edge).
+GAP = 1.30
+
+def prism2d(pts, z0, z1):
+    """Vertical prism of a 2D polygon loop (points re-ordered CCW
+    so bd.extrude goes +Z), spanning Z z0..z1."""
+    area = 0.0
+    for i in range(len(pts)):
+        x0, y0 = pts[i]
+        x1, y1 = pts[(i + 1) % len(pts)]
+        area += x0 * y1 - x1 * y0
+    if area < 0:
+        pts = pts[::-1]
+    w = bd.Wire.make_polygon([bd.Vector(x, y, 0) for (x, y) in pts] +
+                             [bd.Vector(*pts[0], 0)])
+    s = bd.extrude(bd.Face(w), z1 - z0)
+    return s.moved(bd.Location((0, 0, z0)))
+
+def cap_keepout(poly, g, z0, z1):
+    """Disc-offset (Minkowski with radius g) prism of one cap
+    polygon: base prism + one outward quad per edge + one cylinder
+    per vertex. Exact for convex polygons (caps are rectangles)."""
+    pts = [(p[0], p[1]) for p in poly]
+    n = len(pts)
+    cen = (sum(p[0] for p in pts) / n, sum(p[1] for p in pts) / n)
+    solids = [prism2d(pts, z0, z1)]
+    for i in range(n):
+        ax, ay = pts[i]
+        bx, by = pts[(i + 1) % n]
+        ex, ey = bx - ax, by - ay
+        ln = (ex * ex + ey * ey) ** 0.5
+        nx, ny = ey / ln, -ex / ln
+        mx, my = (ax + bx) / 2 + nx, (ay + by) / 2 + ny
+        if (mx - cen[0]) ** 2 + (my - cen[1]) ** 2 < \
+           ((ax + bx) / 2 - cen[0]) ** 2 + ((ay + by) / 2 - cen[1]) ** 2:
+            nx, ny = -nx, -ny
+        quad = [(ax, ay), (bx, by), (bx + g * nx, by + g * ny),
+                (ax + g * nx, ay + g * ny)]
+        solids.append(prism2d(quad, z0, z1))
+        solids.append(cyl(ax, ay, g, z0, z1))
+    return fuse(*solids)
+
 def build_plateau(tray, side):
     sgn = 1 if side > 0 else -1
     caps = CAPS["right" if sgn > 0 else "left"]["capline"]
@@ -232,9 +279,9 @@ def build_plateau(tray, side):
     def south_edge(xa, xb):
         ks = [k for k in range(int(xa // 1), int(xb // 1) + 1) if str(k) in caps]
         if ks:
-            return min(caps[str(k)] for k in ks) - 1.0
+            return min(caps[str(k)] for k in ks) - 0.05
         near = min(capcols, key=lambda c: abs(c - (xa + xb) / 2))
-        return caps[str(near)] - 1.0
+        return caps[str(near)] - 0.05
     boxes = []
     e = 30.25
     while e < 154.5:
@@ -255,18 +302,38 @@ def build_plateau(tray, side):
             yn = min(c.bounding_box().min.Y for c in cells)
         ys = south_edge(xa, xb)
         if ys - yn >= 1.0:
-            boxes.append(box(xa, xb, yn, ys, 10.90, 22.00))
+            boxes.append(box(xa, xb, yn, ys, 11.10, 22.00))
         e += 1.0
     p = fuse(*boxes)
-    # shelf fixing (PO lid-integral decision 2026-11-21): flat-head
-    # M3 at (sgn*55, -61.37) and (sgn*85, -61.37) — through hole
-    # O3.0 + 90-deg countersink (head O5.5 x 1.25, top flush at
-    # 22.00; head rim at Y -64.12, 0.25 inside the flush face).
+    # trim by the per-cap offset keep-outs (only caps whose offset
+    # bbox can reach the plateau)
+    pbb = p.bounding_box()
+    for poly in CAPS["right" if sgn > 0 else "left"]["cap_polys"]:
+        xs = [q[0] for q in poly]
+        ys = [q[1] for q in poly]
+        if max(xs) + GAP < pbb.min.X or min(xs) - GAP > pbb.max.X:
+            continue
+        if max(ys) + GAP < pbb.min.Y or min(ys) - GAP > pbb.max.Y:
+            continue
+        p = cut(p, cap_keepout(poly, GAP, 10.5, 22.5))
+    # shelf fixing (P0-2/P1: row moved south to Y -60.37 so the
+    # countersink head rim is 1.25 inside the flush face; clearance
+    # hole O3.4 for an M3 machine screw into a heat-set insert —
+    # through hole O3.4 + 90-deg countersink (head O5.5, cone
+    # r1.7 -> r2.75 over 1.05, top flush at 22.00; head rim at
+    # Y -63.12, 1.25 inside the flush face).
     for sx in (55.0, 85.0):
         cx = sgn * sx
-        p = cut(p, cyl(cx, -61.37, 1.5, 10.40, 22.50))
-        p = cut(p, bd.Solid.make_cone(1.5, 2.75, 1.25,
-                                      bd.Plane(origin=(cx, -61.37, 20.75))))
+        p = cut(p, cyl(cx, -60.37, 1.7, 10.60, 22.50))
+        p = cut(p, bd.Solid.make_cone(1.7, 2.75, 1.05,
+                                      bd.Plane(origin=(cx, -60.37, 20.95))))
+    # pry notches (P1): one per end at the angled end face, band
+    # X 121..129 (outline leaves the flush plane at |X| ~119.5 —
+    # measured), cut Z 11.10..14.60 across the local plateau depth:
+    # a finger/tool recess at the shelf underside seam. The north
+    # face plane region |X| <= 117 is untouched.
+    nx0, nx1 = (121.0, 129.0) if sgn > 0 else (-129.0, -121.0)
+    p = cut(p, box(nx0, nx1, -70.0, -20.0, 11.10, 14.60))
     return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
 
 strip_r = build_plateau(tray_r, +1)
@@ -375,22 +442,27 @@ plate_l = build_plate(-1)
 # ================================================================ COVER
 def build_cover():
     parts = []
-    # lid plate over walls: X +-30.25, Y -64.37..-0.37.
+    # lid plate over walls: X +-30.25, Y -64.37..-0.57.
     # PO profile 2026-11-21: lid top raised to the keytop datum 22.00
-    # (was 16.65) so the north band is continuous over the bay;
-    # underside stays 15.15 (cell clearance unchanged).
-    parts.append(box(-BAY["x"], BAY["x"], BAY["yn"], BAY["ys"], 15.15, 22.00))
+    # (was 16.65) so the north band is continuous over the bay.
+    # P1 mating gaps (Opus review): underside 15.15 -> 15.35 (0.20
+    # over the wall tops 15.15) and the south edge -0.37 -> -0.57
+    # (0.20 from the shell slope's top edge).
+    parts.append(box(-BAY["x"], BAY["x"], BAY["yn"], -0.57, 15.35, 22.00))
     # E/W skirts: bottom 11.15 (plate top 10.90 + 0.25) — the plate tips,
     # Wing tabs and Fly all pass under the skirt line; the side closure is
-    # wall + plate + skirt in sandwich (see case-3d.md).
+    # wall + plate + skirt in sandwich (see case-3d.md). Tops extended
+    # to the raised lid underside 15.35; south ends follow the lid
+    # edge -0.57.
     for sgn in (+1, -1):
         wx0, wx1 = (CAV["x"], BAY["x"]) if sgn > 0 else (-BAY["x"], -CAV["x"])
-        parts.append(box(wx0, wx1, CAV["yn"], BAY["ys"], 11.15, 15.15))
+        parts.append(box(wx0, wx1, CAV["yn"], -0.57, 11.15, 15.35))
         # south skirts over the 4.45 S-wall sill spans (|X| 10.90..28.25)
         q0, q1 = (10.90, CAV["x"]) if sgn > 0 else (-CAV["x"], -10.90)
-        parts.append(box(q0, q1, CAV["ys"], BAY["ys"], 11.15, 15.15))
-    # north skirt over the capped (7.80) middle span of the north wall
-    parts.append(box(-7.50, 7.50, BAY["yn"], CAV["yn"], 7.80, 15.15))
+        parts.append(box(q0, q1, CAV["ys"], -0.57, 11.15, 15.35))
+    # north skirt over the capped (7.80) middle span of the north wall;
+    # bottom raised to 8.00 = 0.20 mating gap over the wall top 7.80
+    parts.append(box(-7.50, 7.50, BAY["yn"], CAV["yn"], 8.00, 15.35))
     c = fuse(*parts)
     # No screw holes in the lid portion: in the shelf design the
     # fixing lives in the plateaus (see build_plateau); the Stage-3D
@@ -401,13 +473,14 @@ def build_cover():
 cover = build_cover()
 
 # ================================================================ SMALL PARTS
-# SW1 plunger pin: Ø2.9 stem + Ø5 head. PO profile: the shell top at
-# (-15.5, 64.50) is now the plate-height field 10.90 (was ~12.6), so
-# the pin is re-trimmed: stem 7.2..10.9 (bottom still 1.3 above the
-# Main top 5.90, over the future tact switch ~7.4), head 10.9..12.1
-# resting on the 10.90 surface.
+# SW1 plunger pin: Ø2.9 stem + Ø4 head (P1: head Ø5 -> Ø4, plan
+# clearance to the real Ø40 trackpad module 0.14 -> 0.64). PO
+# profile: the shell top at (-15.5, 64.50) is now the plate-height
+# field 10.90 (was ~12.6), so the pin is re-trimmed: stem 7.2..10.9
+# (bottom still 1.3 above the Main top 5.90, over the future tact
+# switch ~7.4), head 10.9..12.1 resting on the 10.90 surface.
 plunger = fuse(cyl(-15.5, 64.50, 1.45, 7.2, 10.9),
-               cyl(-15.5, 64.50, 2.5, 10.9, 12.1))
+               cyl(-15.5, 64.50, 2.0, 10.9, 12.1))
 report("plunger", plunger)
 # DLED light pipe: Ø2 rod from above the LED (Main top 5.90) to the
 # shell surface at (-4, 13) — now the centre slope: profile Z at
@@ -436,16 +509,43 @@ tray_r = report("tray-right+fly", cut(tray_r, pocket, usb_open))
 plate_r = report("plate-right+notch",
                  cut(plate_r, box(38 - 6.0, 38 + 6.0, -65.56, -56.56, 9.40, 9.78)))
 
-# ================================================================ SHELF FIXING (tray pilots)
-# Pilots for the shelf's flat-head M3 screws: O2.7 into the tray
-# north fill at (±55, -61.37) and (±85, -61.37), Z 4.0..10.90
-# (pilot fill fraction 100% measured — diag_shelf2.py; the fill is
-# solid there and the shaft cylinders clear Wings/plates by 0.000).
+# ================================================================ SHELF FIXING (tray inserts)
+# P1 (Opus review): the Ø2.7 self-tap pilots are replaced by
+# heat-set inserts on the moved row Y -60.37 (P0-2). Insert holes
+# O4.2, Z 5.0..10.90 (depth 5.9) for M3 x 5.7-class inserts, top
+# flush with the tray top 10.90. Pre-change measurement
+# (diag_p0p1.py, pilot void restored): at (±55, -60.37) the hole
+# is 100% in tray material, min wall >= 1.50/1.75, floor solid —
+# no boss needed. At (±85, -60.37) a 0.207 mm3 sliver of the hole's
+# top south rim (Z 9.40..10.90) opens into the tray's plate-seat
+# step, so a boss cylinder r4.6 (Z 4.0..10.90) is fused in first,
+# trimmed by the plate solid (the plate edge backs the rim there);
+# boss min wall around the hole = 2.5 by construction.
+# the boss is trimmed to the flush plane: its raw cylinder would
+# reach Y -64.97, 0.60 proud of the north face. It is also trimmed
+# by the Wing bodies: the board's north corner sits in a tray
+# recess at (85, -56.1, Z 4.70..5.90) and the raw boss filled
+# 0.611 mm3 of that recess (found by verify_p0p1 section G,
+# fixed here — the trim leaves >= 1.92 of boss wall south of the
+# hole in the board's Z band).
+_wings_b = fuse(load("wing_right", dx=9.5), load("wing_left", dx=-9.5),
+                *[load(e["name"], dx=-9.5)
+                  for e in idx if e["name"].startswith("underside-left")],
+                *[load(e["name"], dx=9.5)
+                  for e in idx if e["name"].startswith("underside-right")])
+boss_r = cut(cyl(85.0, -60.37, 4.6, 4.0, 10.90),
+             box(60.0, 110.0, -70.0, FLUSH_Y, 3.0, 11.5), _wings_b)
+boss_l = cut(cyl(-85.0, -60.37, 4.6, 4.0, 10.90),
+             box(-110.0, -60.0, -70.0, FLUSH_Y, 3.0, 11.5), _wings_b)
+tray_r = fuse(tray_r, boss_r)
+tray_r = cut(tray_r, plate_r)
+tray_l = fuse(tray_l, boss_l)
+tray_l = cut(tray_l, plate_l)
 for sx in (55.0, 85.0):
-    tray_r = cut(tray_r, cyl(sx, -61.37, 1.35, 4.0, 10.90))
-    tray_l = cut(tray_l, cyl(-sx, -61.37, 1.35, 4.0, 10.90))
-tray_r = report("tray-right+pilots", tray_r)
-tray_l = report("tray-left+pilots", tray_l)
+    tray_r = cut(tray_r, cyl(sx, -60.37, 2.1, 5.0, 10.90))
+    tray_l = cut(tray_l, cyl(-sx, -60.37, 2.1, 5.0, 10.90))
+tray_r = report("tray-right+inserts", tray_r)
+tray_l = report("tray-left+inserts", tray_l)
 
 # ================================================================ EXPORTS
 # PO 2026-11-21: the lid is INTEGRAL with the north band — one

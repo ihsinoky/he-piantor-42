@@ -1,0 +1,45 @@
+== 1. insert-hole material at Y -60.37 (pilot void restored) ==
+X  +55: hole material fraction 1.000, min wall >= 1.50 mm, floor (Z 2.5..5.0) fraction 1.000
+X  -55: hole material fraction 1.000, min wall >= 1.75 mm, floor (Z 2.5..5.0) fraction 1.000
+X  +85: hole material fraction 0.997, min wall >= 0.00 mm, floor (Z 2.5..5.0) fraction 1.000
+X  -85: hole material fraction 0.997, min wall >= 0.00 mm, floor (Z 2.5..5.0) fraction 1.000
+
+== 2. shelf outline + bed fit ==
+hull vertices: 12
+   ( -152.25,    -6.75)
+   ( -138.25,   -31.00)
+   ( -119.25,   -63.91)
+   ( -118.25,   -64.37)
+   (  118.25,   -64.37)
+   (  119.25,   -63.91)
+   (  138.25,   -31.00)
+   (  152.25,    -6.75)
+   (  152.25,    -4.23)
+   (   30.25,    -0.37)
+   (  -30.25,    -0.37)
+   ( -152.25,    -4.23)
+bed 220: best slack -14.18 mm at theta 45.00 deg (rotated bbox 234.2 x 234.2)
+bed 256: best slack +21.82 mm at theta 45.00 deg (rotated bbox 234.2 x 234.2)
+bed 300: best slack +65.82 mm at theta 45.00 deg (rotated bbox 234.2 x 234.2)
+
+== 3. notch band probe: shelf min Y per 2 mm X band (right end) ==
+X 112..114: shelf material min Y  -64.37, vol    171.1
+X 114..116: shelf material min Y  -64.37, vol    162.8
+X 116..118: shelf material min Y  -64.37, vol    154.2
+X 118..120: shelf material min Y  -64.37, vol    137.5
+X 120..122: shelf material min Y  -62.18, vol    105.0
+X 122..124: shelf material min Y  -58.71, vol     70.5
+X 124..126: shelf material min Y  -55.25, vol     38.3
+X 126..128: shelf material min Y  -51.79, vol     21.2
+X 128..130: shelf material min Y  -48.32, vol     19.5
+X 130..132: shelf material min Y  -44.86, vol     19.7
+X 132..134: shelf material min Y  -41.39, vol     19.7
+X 134..136: shelf material min Y  -37.93, vol     19.4
+X 136..138: shelf material min Y  -34.46, vol     19.2
+X 138..140: shelf material min Y  -31.00, vol     20.2
+
+== 4. joint cross-section at X = +-30.25 ==
+sgn +1 X   30.25..  42.25 (Z>=15 slab): Y  -64.37.. -5.88  Z 15.00..22.00  vol    4690.9
+sgn +1 X   18.25..  30.25 (Z>=15 slab): Y  -64.37.. -0.37  Z 15.00..22.00  vol    5282.4
+sgn -1 X  -42.25.. -30.25 (Z>=15 slab): Y  -64.37.. -5.88  Z 15.00..22.00  vol    4690.9
+sgn -1 X  -30.25.. -18.25 (Z>=15 slab): Y  -64.37.. -0.37  Z 15.00..22.00  vol    5282.4
