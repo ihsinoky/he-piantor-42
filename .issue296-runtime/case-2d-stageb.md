@@ -220,3 +220,58 @@ figures use 146.1.
 - Unverified in this package: Fly/Wing sliver volume at δ=9.5
   (item 3, 3D stage); 16 mm FFC centre distance (item 4); board
   fixing method (checklist 2).
+
+## Addendum (2026-11-21) — v2 figures redrawn from real geometry
+
+PO rejected the v1 figures as schematic ("draw the actual outline").
+`case296b-topview-v2.png` / `case296b-sections-v2.png` (goal files/)
+replace them as the approval figures; every Stage B number above is
+unchanged except the flagged item below. Scripts:
+`.issue296-runtime/extract_v2.py`, `extract_main_v2.py`,
+`render_v2.py`; extracted data `geom_v2.json`,
+`main-outline-asm.json`.
+
+Geometry source per drawn shape:
+- Case silhouette + section profiles: geometry17 BREP bodies
+  (issue-232-final 17mm assembly body set,
+  `he-piantor-raise/.issue248-runtime/phaseb/geometry17/`): tray-left /
+  tray-right / shell-central / strip-left / strip-right, halves shifted
+  ±9.5 in X (δ=9.5). Top view = all edges projected; sections = slab
+  intersects at Y=−34.37 (A) and X=0 (B), faces on the cut plane.
+- Switch plates: plate-left / plate-right top-face outer wires from
+  the same body set, shifted ±9.5, tip notch applied as the
+  wing-shape study defines it (clip at |X|=22.47; removed tip shown
+  red-dashed).
+- Main outline: Edge.Cuts of the D-063 board file (SHA 75db72bc…),
+  14 segments chained into the true trapezoid loop.
+- Wing outlines: `wing17r-outline-asm.json` (17R Edge.Cuts at the
+  recorded fit, δ=0 pose) shifted +9.5; left mirrored.
+- Fly: Fly-official-00 body edges, translated to centre (38, −50.14).
+- Cells: true AA cylinder projection (Ø14.5 × 50.5 total) at the
+  Stage B centres; sections show the true circle (A) / axial
+  rectangle (B). Power board, bay walls and the battery cover are
+  Stage B-defined outlines/profiles (no solid exists yet) drawn at
+  the note's dimensions; the centre-north case edge is re-formed to
+  −64.37 across the bay span per item 1/2 (the existing gable valley
+  at the centre is superseded there).
+
+### ⚠ FLAGGED CONFLICT — Pilot B asm transform Y offset is wrong by 3.398 mm
+
+Pilot B (item 7) used Y = by − 66.602. The board file's mounting
+holes against the case assembly's washer bodies (geometry17) prove
+the offset is **−70.000**: board H2 (68.11, 134.4) / H3 (131.89,
+134.4) → washer centres asm (∓31.89, 64.40); H1 (100, 79.27) →
+(0, 9.27) = washer-main-H1 centre. All three anchors agree at
+−70.000 exactly (X = bx − 100 confirmed likewise). Consequences:
+- The v2 Main outline is drawn with the corrected transform; its
+  south edge lands at asm **+67.90**, exactly as items 1/6/9 state —
+  those numbers stand (the antenna band 13.80 / PETG 11.8 stand).
+- Item 7's asm Y coordinates are all 3.398 too far south. Corrected:
+  **JBATT (+24.0, +64.50), DLED (−4.0, +13.00), SW1 (−15.5, +64.50)**.
+  The light-pipe and plunger positions in item 7 move 3.40 north
+  with them (same relative placement logic).
+- Item 5's JBATT route shortens by ≈3.4 (≈86 mm with allowance);
+  the ~100 mm cable class conclusion is unchanged.
+- pilotb-coords.json / pilotb-report.md carry the old offset and
+  need a correction pass (PMO to disposition; not silently edited
+  here beyond this flag).

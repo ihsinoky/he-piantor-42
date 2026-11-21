@@ -32,3 +32,8 @@ Main board→asm: X = bx−100, Y = by−66.602 (anchors: JBATT (124,134.5)→
 5. Pilot B ledger entries in docs/review-ledger.md (new Pilot B section)
    + pilotb-report.md (procedure §6 shape, reconciliation arithmetic).
 6. Issue #296 comment; GOAL.md line; checkpoint commits + push.
+
+## v2 redraw (PO: figures must show the real outline, not schematic boxes)
+- Top view: projected edges of the real geometry17 solids (tray L/R shifted ±9.5, shell-central, strips), plate top-face outlines shifted ±9.5 with the tip notch clipped at |X|=22.47, Main Edge.Cuts from the D-063 board file, Wing outlines from wing17r-outline-asm.json (+mirror), Fly body translated to (38,-50.14), cells as true cylinder projections, island Ø44.
+- Sections: slab-intersect the real solids at Y=-34.37 (E-W) and X=0 (N-S); faces on the cut plane become the filled profiles. Cells/power-board/cover drawn from Stage B stack dims (cover = Stage B-defined profile, labelled as such).
+- Geometry extraction in cad-venv (build123d) -> JSON; board outlines via pcbnew; render with system matplotlib. No Stage B number changes; conflicts flagged, not fixed.
