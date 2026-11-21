@@ -611,3 +611,66 @@ artifacts record no input STEP hash, so none is cited.
 - **State:** accepted — **Classification:** as-designed. Basis: adopted by D-046 with this figure in the decision text.
 - **Suppression:** accepted by D-046.
 - **Raw observations consolidated:** 1
+
+---
+
+## Part C — Pilot B findings (wireless set, run with Issue #296 Stage B, 2026-11-21)
+
+Pilot B scope: board-vs-case coordinate audit of the wireless set at
+the files of record. Input identity: wireless Main `wmain.kicad_pcb`
+on origin/main, SHA-256
+`75db72bc993a2e98a08b10df9c01e6d7a91fc4f9251ef173187ec200396b0d21`
+(D-063). Board→asm transform X = bx − 100, Y = by − 66.602, validated
+on two recorded anchors (JBATT asm (+24.0, +67.9) in the centre study;
+Main south edge 67.900 in the south-notch record) — both reproduced.
+Report: `.issue296-runtime/pilotb-report.md` (Issue #296 Stage B
+worktree, branch issue-296-stageb). Raw observations 4 = new 1 +
+resolved-confirmed 3 + duplicates-merged 0.
+
+### R-294-44 — Wireless Main JBATT: exact case-frame coordinate
+
+- **Fingerprint:** coordinate × JBATT × wireless-Main @case-frame × unclassified
+- **Rule:** case design consumes board coordinates from the board file of record, not from study estimates
+- **Target:** JBATT (JST BM02B-GHS-TBT), wireless Main
+- **Measured:** board (124.0, 134.5), rotation 0 → asm (+24.0, +67.898); pads pin1 VBAT+ / pin2 GND
+- **Evidence:** `.issue296-runtime/pilotb-coords.json` (+ `extract_main.py`), Issue #296 Stage B worktree; input: wmain.kicad_pcb SHA 75db72bc… (D-063)
+- **Class:** unclassified (coordinate record)
+- **State:** resolved — **Classification:** as-designed. Basis: reproduces the centre study's recorded asm (+24.0, +67.9); consumed by the Stage B JBATT route (77.6 mm centreline, ~100 mm cable class).
+- **Suppression:** resolved-confirmed.
+- **Raw observations consolidated:** 1
+
+### R-294-45 — Wireless Main DLED: exact case-frame coordinate
+
+- **Fingerprint:** coordinate × DLED × wireless-Main @case-frame × unclassified
+- **Rule:** as R-294-44
+- **Target:** DLED (KT-0603G class, 0603), wireless Main north area
+- **Measured:** board (96.0, 83.0), rotation 0 → asm (−4.0, +16.398); pads LED_A / GND
+- **Evidence:** `.issue296-runtime/pilotb-coords.json`, Issue #296 Stage B worktree; input as R-294-44
+- **Class:** unclassified (coordinate record)
+- **State:** resolved — **Classification:** as-designed. Basis: Stage 1 case note's board-frame (95, 83) was the footprint's approximate position; the file value (96.0, 83.0) governs. Consumed by the Stage B light-pipe placement (Ø2 pipe from asm (−4.0, +16.398)).
+- **Suppression:** resolved-confirmed.
+- **Raw observations consolidated:** 1
+
+### R-294-46 — Wireless Main SW1: south-edge position contradicts the Stage 1 case premise; part unfitted
+
+- **Fingerprint:** service-escape × SW1-pairing-button × wireless-Main @case-frame × PC-4
+- **Rule:** case access must be designed against the part's actual placed position and fitted state
+- **Target:** SW1 (tact, BTN/GND), wireless Main
+- **Measured:** board (84.5, 134.5), rotation 90 → asm (−15.5, +67.898) — on Main's SOUTH edge, beside JBATT; footprint value is the generic placeholder `TACT`; the part is DNP / hand-fit in the adopted configuration (#292 order-prep disposition)
+- **Evidence:** `.issue296-runtime/pilotb-coords.json`, Issue #296 Stage B worktree; input as R-294-44; Stage 1 premise in `he-piantor-case296/.issue296-runtime/case-2d.md` ("SW1's land is on the wireless Main (centre bay…)") — contradicted by the file
+- **Class:** PC-4 assembly-escape-shortfall
+- **State:** in-progress — **Classification:** true problem. Basis: the Stage 1 spine-plunger proposal was sited on a wrong position; Stage B relocates the Ø3 plunger hole to the shell south slope above asm (−15.5, +67.898). The fitted-part question (a real tact switch vs case switch + test pads) is a Main respin item, carried in Issue #296.
+- **Suppression:** in-progress under Issue #296.
+- **Raw observations consolidated:** 1
+
+### R-294-47 — Wireless FFC channel at δ=9.5: measured channel and connector spans
+
+- **Fingerprint:** service-escape × FFC-channel × Wing-Main-link @δ=9.5 × PC-4
+- **Rule:** the link's cable solution must be qualified for the channel it actually runs in (D-042 qualification was premised on the 2.00 mm hop)
+- **Target:** Main J2/J3 ↔ Wing J_WING (FH12-14S both ends), δ=9.5 configuration
+- **Measured:** channel (perpendicular board-edge gap) 11.5 mm (D-062 amendment: 2.00 + 9.5); connector-centre distance from the board files: right pair J3 asm (+24.255, +45.222) ↔ 17R J_WING asm (+36.502, −38.906) = 85.01 mm; left pair mirror = 85.01 mm. Wing fit validated (17R outline bbox reproduced exactly). 16 mm variants' centre distance: MISSING (not extracted this run)
+- **Evidence:** `.issue296-runtime/pilotb-coords.json` (Main J2/J3), `.issue296-runtime/wing-conn.json` + `wing17r-outline-asm.json` (Wing @ PR #300 3fcad246f), Issue #296 Stage B worktree
+- **Class:** PC-4 assembly-escape-shortfall (qualification-scope aspect)
+- **State:** resolved (facts) — **Classification:** as-designed. Basis: D-062 amendment sets δ=9.5 / channel 11.5 with the FFC re-selection named as a follow-up; Stage B names it precisely as follow-up FFC-1 (per-side 100 mm-class FFC or D-042 custom-FPC fallback, ≤0.30 Ω/lane acceptance re-run). The re-selection itself is open work under Issue #296, not a ledger finding.
+- **Suppression:** resolved-confirmed.
+- **Raw observations consolidated:** 1
