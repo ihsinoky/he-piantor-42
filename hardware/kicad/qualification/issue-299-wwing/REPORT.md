@@ -455,3 +455,52 @@ not run, because gate 3 cannot pass.
 - The wireless FFC lane acceptance (≤ 0.30 Ω/lane) is a build-guide action.
 - TMAG5253BA3 (LCSC C22401868) stock pacing for the full 20-board run is a
   Stage-3 re-check item (Stage-1 availability note).
+
+## GND repair round (2026-11-21, branch issue-299-wwing-gndfix)
+
+The Codex cross-model review of this set at 3fcad246f found the
+Stage-2 Gate-3 disposition WRONG: the saved GND fills are
+fragmented and functional GND pads sit on isolated islands (16L 3,
+16R 2, 17L 5, 17R 4 pads off the J_WING return). A pad-level
+checker written for this round (walks saved fills + tracks + vias +
+pads; NOT DRC zone endpoints) reproduces the review's table
+exactly on the base files (negative control), and on the repaired
+files reports:
+
+- 16L: 79/79 — REPAIRED. GND zone refill with min_thickness
+  0.30 -> 0.05 (clearance unchanged 0.15); the HB2 island's
+  existing stitch landed back on its own fill lobe, and the fill
+  now keeps a ~=0.248 mm neck through the corridor the 0.30 rule
+  pruned. DRC unconnected 1 -> 0, slivers unchanged 2.
+- 17R: 76/79 — C_HB3 bypass return REPAIRED with one B.Cu GND
+  track 0.25 mm, (84.6687, 82.9995) -> (84.6687, 83.7995).
+  U_HA2 and C_HC2 islands remain (below).
+- 16R: 77/79, 17L: 74/79 — files unchanged; islands remain.
+
+The remaining islands are PROVEN unrepairable within the
+GND-only envelope: exact free-space tests show every pocket
+sealed on B.Cu (all ring slots < 0.30 mm; best 0.28 vs the 0.30
+a 0.10 track needs at the 0.100 floor), and the F.Cu HALL_3V3
+fill covers every pocket, leaving zero valid 0.60/0.30 stitch-via
+sites (exhaustive 0.05-grid tallies). Even a 0.10-clearance /
+0.05-min-thickness refill leaves them disconnected. Closing
+them needs a PO decision: (b) authorise stitch vias + a
+HALL_3V3-only refill (pre-staged in scratch on 17R: C_HC2 closes,
+fill delta -1.662 mm2; sensor pockets additionally need a
+hand-routed F.Cu egress), or (d) a local pocket respin on the
+16L pattern. These boards must not be ordered as-is: the
+islanded channels (HA2 on 16R/17R; HB5/HC5 on 17L) have no ground
+return.
+
+Invariants held on all four: non-GND geometry identical to
+3fcad246f (diff census 0), object counts unchanged, gates
+1/2/4/6/7/8 re-run unchanged (field dev 0.0000; via-pad minima
+0.100 / 0.1016 / 0.100 / 0.1052; parity 224 = 224; outline
+329/329 + 46/46), DRC shorting 0, ERC 0 errors, recorded
+clearance caveats not worsened (pair scan base -> final:
+sub-0.100 B.Cu counts 0->0, 9->9, 9->9, 0->0). 17L's two extra
+review pairs (0.098958 / 0.099503) are dispositioned in the fix
+report (inside the recorded caveat class; GND-track nudges
+deferred to the (b)/(d) round). 16R's duplicate WING_EN segment
+left as instructed. Full evidence: .issue299-runtime/
+gndfix-report.md on this branch.
