@@ -527,6 +527,53 @@ variant; parity 224 = 224; Gate 8 diff = the trim only (334 vs
 329 edges, holes 46/46); census vs the repair-round files shows
 no non-GND change except the HC5 jog; pairscan sub-0.100 lists
 unchanged; DRC shorting 0 and **unconnected 0 on all four**;
-ERC 0. Final SHAs: 16L 5a700316…, 16R a2131e1a…, 17L a6aa72a1…,
+ERC 0. Final SHAs: 16L 5a700316…, 16R a2131e1a…, 17L a6aa72a…,
 17R f43b2286…. Full evidence: .issue299-runtime/respin-report.md.
 Next: Codex re-review of the fixed set, then Stage 3.
+
+### Errata to the respin addendum (Stage 3, 2026-11-21 — Codex re-review)
+
+The Codex cross-model re-review of the fixed set (tip da56b7eff;
+report in the review worktree, `.issue299-runtime/codex-rereview-report.md`)
+AGREES with every headline claim above — SHA identity ×4, saved GND
+79/79 and HALL_3V3 50/50 on all four variants (negative controls
+reproduce the pre-respin islands 76/77/74/75), corner trim
+14.515 mm² ×4 with zero pad/track/via intersections, rim-roll sweep
+independently bounded over the continuous 0–35° range with
+≥ 0.0578 mm separation, field deviation 0.0000, DRC shorting /
+unconnected 0, ERC 0, project files intact. Four numbers in the
+respin record are corrected here and supersede the earlier text
+(the boards are unaffected):
+
+1. **Corner-only refill delta (16L).** The respin report's
+   "fill delta −15.4249 mm² each, all four variants" is not exact
+   per layer. On 16L — the variant with no new stitch copper, so
+   the corner refill is isolated — the repair→final change is
+   **−15.424725 mm² on F.Cu and −15.422336 mm² on B.Cu** (the B.Cu
+   loss is 0.002564 mm² smaller than stated).
+2. **Gate 5 delta bound.** "far-VCC within +2.5 mV of the Stage-2
+   study" overstates the resolvable precision. The solver's typ/max
+   pairs reproduce to 0.0001 V, but against the study reference
+   (3.253 V, itself published to 1 mV) the max-case deltas are
+   16L +1.93, **16R +2.52**, 17L +1.46, 17R +1.51 mV — 16R sits
+   0.02 mV above the strict +2.5 mV wording, a margin the 1 mV
+   reference cannot resolve physically. Budget class unchanged.
+3. **17L H_C5_RAW jog length.** "net grows ≈3 mm" is wrong: the
+   replaced section measured 3.135 mm and the finished jog
+   3.429 mm, so the net length growth is **+0.294 mm**.
+4. **Pairscan worst values.** The respin pairscan's worst
+   sub-0.100 values are **0.082886 mm (16R)** and **0.090410 mm
+   (17L)**, not 0.082892 / 0.091075. The 17L figure matches the
+   original Stage-2 record (0.0904 mm). No disposition changes:
+   both remain in the recorded caveat class.
+
+**Gate 5 solver caveat (re-review NEW FINDING, recorded alongside
+Gate 5).** In `gate5_respin.py` each via's F.Cu and B.Cu terminals
+are unioned *before* the stated 1 mΩ via-resistance edge is added,
+so that edge is then skipped (both ends already share a cluster
+ID) — the 1 mΩ via term never applies. The same-layer 0.65 mm
+clustering also uses centre distance without checking actual
+copper contact. The reproduced voltages therefore establish the
+model's reported output only; physical far-sensor VCC remains
+NOT VERIFIABLE from this model alone. This caveat carries to the
+adoption gate.
