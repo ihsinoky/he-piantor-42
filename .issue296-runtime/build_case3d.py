@@ -698,15 +698,30 @@ def skin_prism(x_lo, x_hi, plate_face):
         return None
     return prism2d(pts_n + pts_s[::-1], 9.30, 10.90)
 
+def plate_clearance(plate):
+    """The plate's plan region dilated by exactly 0.30 (2D offset of
+    its top face, extruded over the skin's Z range). The station
+    chords of B(X) alone cut across the plate's step corner at
+    |X| ~ 50 (first build measured a 0.043 gap there); carving the
+    skin with this solid makes the joint a true 0.30 offset."""
+    top = [f for f in plate.faces() if abs(f.center().Z - 10.90) < 0.01][0]
+    sol = None
+    for f in bd.offset(top, 0.30).faces():
+        p = bd.extrude(f, 1.80).moved(bd.Location((0, 0, -1.70)))
+        sol = p if sol is None else sol.fuse(p)
+    return sol
+
+_clr_r = plate_clearance(plate_r)
+_clr_l = plate_clearance(plate_l)
 _sk = skin_prism(-60.5, -6.15, plate_l_s)
 if _sk is not None:
-    tray_l = fuse(tray_l, _sk)
+    tray_l = fuse(tray_l, cut(_sk, _clr_l))
 _sk = skin_prism(-5.85, 12.85, plate_r_s)
 if _sk is not None:
     infill = fuse(infill, _sk)
 _sk = skin_prism(13.15, 60.5, plate_r_s)
 if _sk is not None:
-    tray_r = fuse(tray_r, _sk)
+    tray_r = fuse(tray_r, cut(_sk, _clr_r))
 tray_l = report("tray-left+skin", tray_l)
 infill = report("infill+skin", infill)
 tray_r = report("tray-right+skin", tray_r)
