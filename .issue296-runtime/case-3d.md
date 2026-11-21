@@ -445,3 +445,125 @@ Removal motion assumed: remove the 4 screws, then a **pure vertical (+Z) lift** 
 ### Parts / files
 
 Parts 11 → **9**: `north-shelf.step/.stl` replaces `battery-cover` + `strip-left` + `strip-right` (removed from the tree). Renders: `case296-3d-top.png` and `case296-3d-persp-open.png` overwritten, `case296-3d-persp.png` refreshed, **`case296-3d-shelf-off.png` added** (shelf lifted 95 mm above its seat, bay open with cells — the battery-swap state).
+
+## Addendum 2026-11-21 (evening) — P0/P1 revision (Opus design review fold-in)
+
+PO decision: 「P0/P1を反映した改訂を回す」. Review of record:
+`files/case296-design-review-opus-2026-11-21.md`. Plan:
+`.issue296-runtime/p0p1-plan.md`; scripts `diag_p0p1*.py`,
+`verify_p0p1.py` (+ `verify_p0p1b.py`), `render_p0p1.py`,
+`export_caps_stl.py`. The shelf stays ONE part: bbox
+X −153.25..153.25, Y −64.37..−0.57, Z 8.00..22.00, vol 96.64k mm³,
+1 solid. Assembly invariants unchanged: 310.04 × 146.07,
+Z ≤ 22.00, north flatness deviation 0.000.
+
+### P0-1 — tolerance stack-up, shelf south edge (nominal gap 1.30)
+
+| term | value | basis |
+|---|---|---|
+| cap northern-extent growth | ≤ 0.20 | cap 16.5 × 16.5 ASSUMED, size tolerance ±0.25/dimension (ASSUMED); worst northern-row key angle 60° |
+| cap seating play | 0.15 | assumed |
+| shelf edge print tolerance (FDM PETG) | 0.20 | assumed |
+| shelf placement play (southward) | 0.30 | 0.2 design mating gap + screw radial play, combined bound |
+| plate placement | 0.10 | assumed |
+
+Worst-case sum 0.95 → nominal 1.30 leaves **+0.35**; RSS typical
+0.45 → typical gap ≈ 0.85. **PRINT GATE (PO-side, NOT done): the
+Junana keycap physical measurement — the Z22.00 datum and the
+16.5 cap assumption stay provisional until then.** Implemented
+edge: per-cap-rectangle disc-offset keep-out (radius 1.30) — the
+1.0 staircase is gone. Measured: shelf↔caps min distance **1.300**
+in BOTH cap states, intersections 0.000. Side effect: the −0.05
+pre-trim south limit lets one more end column pass the ≥1.0 depth
+rule, so the shelf X extent grows 152.25 → 153.25, still inside
+the tray outline (overhang probe `diag_p0p1c.py`: the only shelf
+points without tray below are 5/side on the diagonal end edge —
+the established column-step approximation, unchanged in kind;
+none in the new column).
+
+### P0-2 — screw row Y −60.37, rim 1.25 + heat-set inserts
+
+Row −61.37 → −60.37. Countersink Ø5.5 top flush at Z22.00; rim
+= 64.37 − 60.37 − 2.75 = **1.25 nominal** (undersize-head
+envelope Ø5.4: 1.30 measured); head envelope vs shelf and vs caps
+0.000 both states. Axis-to-capline: +55 → 31.90, −55 → 32.43,
++85 → 20.36, −85 → 20.89 (the trade-off the review warned of;
+Ø6.35 driver bit vs caps 0.000 everywhere, pressed and
+unpressed). Insert landings: at ±55 the tray material at the hole
+is solid (fraction 1.000), min wall ≥ 1.50 (+55) / ≥ 1.75 (−55)
+by ring grow test. At ±85 a 0.207 mm³ sliver void sat at the
+hole's top south rim (the plate-seat step) → boss r4.6,
+Z 4.0..10.90 added; ring fraction 1.000 after the plate trim
+(clipped to the outline). Two boss trims: the flush plane (the
+raw cylinder would stand 0.60 proud of the north face) and the
+Wing bodies — the board's north corner sits in a tray recess at
+(±85, −56.1, Z 4.70..5.90) and the raw boss filled 0.611 mm³ of
+it; caught by the verification interference table (the
+plan-stage probe had not tested the wings), fixed by trimming
+the boss with the Wing solids; boss wall south of the hole in
+the board's Z band ≥ 1.92. **Fixing spec of record (changed):
+M3 × 5.7-class heat-set inserts, hole Ø4.2 × depth 5.9, insert
+top flush with tray top 10.90 (bottom 5.2); screws M3 × 14
+flat-head machine screws (DIN 965 class), engagement ≈ 4.0 in
+the insert. Shelf holes Ø3.4 clearance + countersink. The
+direct-tap pilots are gone.**
+
+### P0-3 — bed fit: ONE PIECE, 45° diagonal on a 256-class bed
+
+Measured on the FINAL shelf outline hull (12 vertices): rotated
+bbox 235.6 × 235.6 at 45°. Slack: 220-class **−15.56 (no fit)**,
+256-class **+20.44** (≈10.2/side, brim fits), 300-class +64.44.
+A single-piece path exists → no 3-piece split. Bed classes are
+standard sizes (design assumption per the task rule); the PO's
+actual printer bed is not recorded — on a 220-class the split
+fallback applies (joint cross-section at |X| 30.25 measured
+anyway: common material Y −64.37..−5.88 in the Z≥15 slab).
+
+### P1 dispositions
+
+- **Offset south edge** — done (P0-1).
+- **Inserts + machine screws** — done (P0-2).
+- **Mating gaps 0.2** — plateau underside 11.10 vs plate top
+  10.90 = 0.20; lid underside 15.35 vs N wall top 15.15 = 0.20;
+  N skirt bottom 8.00 vs capped wall top 7.80 = 0.20;
+  shelf↔shell min distance 0.200. (E/W skirt bottoms already had
+  0.25 over the plate — left.) Bridge clearances unchanged:
+  skirt↔plate 0.25, skirt↔Wing board top 5.25.
+- **Pry notches ×2** — X [121, 129] / [−129, −121] on the angled
+  end edges (the outline leaves the flush plane at |X| ≈ 119.5),
+  cut Z 11.10..14.60; shelf material inside the notch boxes
+  0.000; the flush plane in the bands is untouched (0.000) — the
+  notch opens on the end edge only (the review's own fallback
+  for its P2-13 conflict).
+- **Plunger head Ø5 → Ø4** — plan clearance to the real Ø40
+  module 0.14 → **0.638 measured**; vs the Ø44 PROBE disc the
+  intersection is 3.305 (was 5.806).
+- **Renders** — redrawn WITH keycaps fitted (42 caps), top view
+  NORTH-UP (`files/case296-3d-top.png`; persp / persp-open /
+  shelf-off refreshed; centre section refreshed). The first
+  perspective set came out blank (camera rotation-mode bug after
+  the roll fix) — caught on read-back, fixed, re-rendered.
+- **Verbalisation doc** — caveat header added to
+  `files/case296-cover-design-2026-11-21.md` (coordinate error /
+  inverted PO preference order / invented requirement / stale
+  premises, pointer to the review). Body untouched.
+
+### Full re-verification (`verify_p0p1.py` + `verify_p0p1b.py`)
+
+Shelf lift +2/+5/+10/+25: 0.000 vs everything. Battery sweeps
+shelf-OFF: vs Wings 0.000 (own-fin boxes only; the finger working
+band Z 7.40..9.40 = 0.000; the full-height finger-zone figure
+509.080 is the known plate-tip occupation above the band,
+unchanged). Interference table: all 0.000 except case vs
+trackpad 3.305 (plunger vs the Ø44 PROBE disc; vs the real Ø40
+module 0.638 clear) and trays vs the J_WING study envelope
+42.380/side — the accepted artifact, back at the pre-revision
+value after the boss trim. Power-board drop re-check: 12.000 =
+tongue snaps only. Fly: mouth protrusion +0.00; plug 0.000 in
+both shelf states.
+
+Assumption register: the review's general claims are treated as
+design assumptions — extrusion width ~0.4 (enters only via the
+rim ≥ 1.25 requirement), bed classes 220/256/300, cap size
+tolerance ±0.25. Everything measurable from the model was
+measured (bed fit included, on the final outline).
