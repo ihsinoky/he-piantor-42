@@ -35,20 +35,33 @@ the band", PMO default).
 2. **Bridge over the bay E/W sills**: unchanged geometry (skirt
    bottom 11.15 over wall band X ±(28.25..30.25)); measure shelf
    vs Wing boards / plate tips underneath and report clearances.
-3. **Fixing**: 4× flat-head M3, heads countersunk flush (head top
-   ≤ 22.00 — a pan head would break the Z datum now that the part
-   top IS 22.00). Retained pair (±24.25, −63.37) into the existing
-   wall pilots. NEW outboard pair in the plateaus at (±XS, −63.37)
-   with Ø2.7 pilots cut into the tray north fill (fill is solid
-   Z −2.65..10.90 there). XS chosen by measurement: plateau depth
-   ≥ ~8 mm at the column, fill backing south of the pilot's south
-   edge (arc face south of −62.02 → |XS| ≲ 100), right side clear
-   of the Fly pocket (X ≤ 51.3) — candidates ±80 / ±90.
-   Justification: the part now spans the full 310 mm width; the
-   centre pair alone leaves ~124 mm cantilever per end.
-   Driver access: vertical; verify bit cylinder (Ø6.35) from each
-   head upward vs keycap solids (both states) + report plan
-   distance screw axis → nearest capline.
+3. **Fixing** — DECIDED by measurement (diag_shelf.py /
+   diag_shelf2.py, 2026-11-21):
+   - The as-built centre pair (±24.25, −63.37) CANNOT be retained
+     with any standard screw head: the axis is 1.00 mm from the
+     flush north face, so any head of radius > 1.0 stands proud of
+     the outline (a Ø5.5 flat head by 1.75). The pair is REMOVED
+     (shelf holes + tray wall pilots), superseding the Stage-3D
+     fixing. (The Ø3.0 hole itself already broke the face by 0.50;
+     heads were never modelled in earlier stages.)
+   - NEW: 4× flat-head M3, all in the plateaus, on one line
+     Y = −61.37 (head rim −64.12, 0.25 inside the face; heads
+     countersunk flush, head top = 22.00): pairs at **±55 and
+     ±85**. Ø2.7 pilots into the tray north fill, Z 4.0..10.90.
+     Measured: pilot fill fraction 100.0% at all four positions;
+     shaft cylinders (r1.5, Z 3.0..10.9) vs Wings / plates 0.000;
+     plateau depth at the columns 42.8 (X55) / 23.0 (X90 class,
+     X85 = 25.6); right pair clear of the Fly pocket (pocket east
+     face 51.3 vs pilot west edge 53.65).
+   - Span justification: shelf spans 310.04; screws at ±55/±85
+     give centre span 110, side spans 30, end cantilevers 70 —
+     vs 130.8 cantilever per end for the old centre pair alone.
+     The lid portion additionally rests on the bay walls (N wall
+     top 15.15, S wall top 15.15 at |X| ≤ 10.90, E/W skirts over
+     the sills) and is located by the skirt/wall sandwich.
+   - Driver access: vertical; verify bit cylinder (Ø6.35) from
+     each head upward vs keycap solids (both states) + report
+     plan distance screw axis → nearest capline (expect ≥ 26).
 4. **Fly**: untouched (stays in the tray). Shelf removal is a pure
    vertical lift — the plateau over the Fly (underside 10.90 vs
    Fly top 9.60) only gains clearance. USB opening is in the tray

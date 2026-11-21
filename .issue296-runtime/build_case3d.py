@@ -114,8 +114,10 @@ def build_tray(side):
         tx0, tx1 = (25.75, CAV["x"]) if sgn > 0 else (-CAV["x"], -25.75)
         for ty in (-50.0, -20.0):
             t = fuse(t, box(tx0, tx1, ty - 3.0, ty + 3.0, PB["top"], 1.15))
-        # --- cover screw pilot into the north wall top (this half's side)
-        t = cut(t, cyl(sgn * 24.25, -63.37, 1.35, 10.0, 15.15))
+        # --- (removed 2026-11-21) the Stage-3D cover screw pilot at
+        # (sgn*24.25, -63.37) is superseded by the shelf fixing: the
+        # axis sits 1.00 from the flush face, so no standard screw
+        # head fits inside the outline there. See SHELF FIXING.
     # --- south dent wall removal + straightening fill (this half's slice)
     sx0, sx1 = max(-50.0, xa), min(50.0, xb)
     if sx1 > sx0:
@@ -256,6 +258,15 @@ def build_plateau(tray, side):
             boxes.append(box(xa, xb, yn, ys, 10.90, 22.00))
         e += 1.0
     p = fuse(*boxes)
+    # shelf fixing (PO lid-integral decision 2026-11-21): flat-head
+    # M3 at (sgn*55, -61.37) and (sgn*85, -61.37) — through hole
+    # O3.0 + 90-deg countersink (head O5.5 x 1.25, top flush at
+    # 22.00; head rim at Y -64.12, 0.25 inside the flush face).
+    for sx in (55.0, 85.0):
+        cx = sgn * sx
+        p = cut(p, cyl(cx, -61.37, 1.5, 10.40, 22.50))
+        p = cut(p, bd.Solid.make_cone(1.5, 2.75, 1.25,
+                                      bd.Plane(origin=(cx, -61.37, 20.75))))
     return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
 
 strip_r = build_plateau(tray_r, +1)
@@ -381,9 +392,10 @@ def build_cover():
     # north skirt over the capped (7.80) middle span of the north wall
     parts.append(box(-7.50, 7.50, BAY["yn"], CAV["yn"], 7.80, 15.15))
     c = fuse(*parts)
-    # cover screw holes over the north wall pilots (±24.25, -63.37);
-    # lengthened through the raised lid (14.0..22.5)
-    c = cut(c, cyl(24.25, -63.37, 1.5, 14.0, 22.5), cyl(-24.25, -63.37, 1.5, 14.0, 22.5))
+    # No screw holes in the lid portion: in the shelf design the
+    # fixing lives in the plateaus (see build_plateau); the Stage-3D
+    # centre pair at (±24.25, -63.37) is removed — no standard head
+    # fits 1.00 from the flush face.
     return report("cover", c)
 
 cover = build_cover()
@@ -424,11 +436,28 @@ tray_r = report("tray-right+fly", cut(tray_r, pocket, usb_open))
 plate_r = report("plate-right+notch",
                  cut(plate_r, box(38 - 6.0, 38 + 6.0, -65.56, -56.56, 9.40, 9.78)))
 
+# ================================================================ SHELF FIXING (tray pilots)
+# Pilots for the shelf's flat-head M3 screws: O2.7 into the tray
+# north fill at (±55, -61.37) and (±85, -61.37), Z 4.0..10.90
+# (pilot fill fraction 100% measured — diag_shelf2.py; the fill is
+# solid there and the shaft cylinders clear Wings/plates by 0.000).
+for sx in (55.0, 85.0):
+    tray_r = cut(tray_r, cyl(sx, -61.37, 1.35, 4.0, 10.90))
+    tray_l = cut(tray_l, cyl(-sx, -61.37, 1.35, 4.0, 10.90))
+tray_r = report("tray-right+pilots", tray_r)
+tray_l = report("tray-left+pilots", tray_l)
+
 # ================================================================ EXPORTS
+# PO 2026-11-21: the lid is INTEGRAL with the north band — one
+# removable north shelf; battery swap = remove the shelf, swap
+# cells, refit. Replaces battery-cover + strip-left + strip-right
+# (11 -> 9 parts). The shell keeps the centre slope; the shelf's
+# centre south edge (Y -0.37) meets the slope's top edge.
+shelf = report("north-shelf", fuse(cover, strip_l, strip_r))
 parts = {
     "tray-left": tray_l, "tray-right": tray_r, "centre-infill": infill,
-    "shell-central": shell, "strip-left": strip_l, "strip-right": strip_r,
-    "plate-left": plate_l, "plate-right": plate_r, "battery-cover": cover,
+    "shell-central": shell, "north-shelf": shelf,
+    "plate-left": plate_l, "plate-right": plate_r,
     "plunger-sw1": plunger, "light-pipe-dled": pipe,
 }
 for name, s in parts.items():
