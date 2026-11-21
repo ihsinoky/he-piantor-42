@@ -577,3 +577,63 @@ copper contact. The reproduced voltages therefore establish the
 model's reported output only; physical far-sensor VCC remains
 NOT VERIFIABLE from this model alone. This caveat carries to the
 adoption gate.
+
+## Addendum — Fly north-edge notch (2026-11-21, Issue #296 case-3D follow-up)
+
+The Issue #296 case 3D stage found a residual interference the respin
+batch could not see (it closed before the case stage landed): the
+relocated Fly daughterboard (dx=+38, shifted 1.8 north, centre asm
+(38, −51.94)) grazed the right Wing boards' north edge. The case side
+is final as built; the fix is this Wing-side notch, applied to the
+Stage-3 finals (16R / 17R only).
+
+**Reproduction (from the final KiCad outlines, not the case model).**
+The case figure (4.893 mm³, asm X 38.39..45.96, Y −49.11..−47.79,
+Z 4.70..5.90) was computed against the geometry17 Wing body. Rebuilt
+from the final `.kicad_pcb` Edge.Cuts outlines — mapped board→asm by
+the established transforms plus the +9.5 delta shift the transforms
+predate (they map to the geometry17 native pose; the case pose adds
+±9.5 in X) — and intersected with the case-placed Fly solid: **17R
+4.942 mm³** (bbox X 38.360..45.964, Y −49.118..−47.786, Z 4.70..5.90;
+the +0.049 mm³ / ~0.03 mm against the case figure is the g17-body vs
+KiCad-outline representation delta), **16R 1.495 mm³** (bbox
+X 40.799..45.390, Y −48.483..−47.786 — the 16 mm north edge reaches
+less far), **16L / 17L 0.000**. The case figure itself reproduces
+exactly (4.893, same bbox) against the g17 body it was measured on.
+
+**Cut.** Rectangular notch in final-asm terms: the prescribed span
+X 38.39..45.96 × depth 1.32 (Wing edge −49.11 → Fly south edge
+−47.79), expanded by this project's 0.25 mm margin pattern (as the
+corner trim): **X 38.14..46.21, Y −49.36..−47.54**, so the notch floor
+sits 0.25 south of the Fly's south edge. Emptiness verified per
+variant before cutting: no pads, tracks or vias inside the expanded
+cut polygon, and no feature within 1.0 mm of it — only the two
+blanket zone fills reached in (HALL_3V3 F.Cu, GND B.Cu). Surgical
+Edge.Cuts edit (one long north-edge segment replaced by the detour
+chain per variant); zones then refilled per-zone in full project
+context and recede by their 0.15 clearance. Removed board area:
+16R 3.7538 mm², 17R 7.3788 mm²; fill deltas −4.0413 mm² (16R) /
+−7.8577 mm² (17R), identical on both zones per variant.
+
+**Re-verification (saved files).** Pad-level checkers: GND 79/79 and
+HALL_3V3 50/50 on both touched variants (negative controls: the
+pre-respin base still reproduces the old islands 75/79 and 77/79;
+the pre-notch finals read 79/79). Footprints / pads / tracks / vias
+provably identical base→new (110 / 278 / 1139+1130 / 253+255) — no
+copper moved, field deviation 0.0000 by construction. Edge.Cuts diff
+= notch only (334 → 337 / 338 segments; saved outline equals the
+intended polygon difference, symdiff ≤ 0.000012 mm² of nm-rounding
+hairlines). Fill containment 0.000000 mm² outside the new outline,
+both layers. Pairscan structures byte-identical base→new (sub-0.100
+census unchanged). DRC totals identical to the pre-notch finals
+(16R 66 with clearance 10, 17R 55 with clearance 0; shorting 0,
+unconnected 0); ERC 0 errors. `.kicad_pro` files byte-identical
+throughout (hash-guarded at every save). **Residual Fly∩Wing with
+the new outlines: 0.000 mm³ on all four variants.** 16L / 17L files
+are byte-untouched.
+
+**New final SHAs:** 16R `d7ec349e…`, 17R `5e62589c…` (16L `5a700316…`
+and 17L `a6aa72a1…` stand). Manufacturing package regenerated for
+16R / 17R (Gerber content diffs confined to F_Cu / B_Cu fills and
+Edge_Cuts; drill content identical — timestamps aside; BOM / CPL
+unchanged). Full evidence: `.issue299-runtime/flynotch-report.md`.

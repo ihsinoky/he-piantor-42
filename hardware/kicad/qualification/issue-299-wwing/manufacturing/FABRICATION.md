@@ -7,9 +7,9 @@ Qualified board SHA-256 (verified 2026-11-21, before package generation;
 identical to the independent Codex re-review's M1 table):
 
 - 16L: `5a7003167b50b147ed0ecb7b6972c53f840556ffd3efd520e64d4cd6fffd711c`
-- 16R: `a2131e1aeb419367241915e0d33ec8e5a430e15f99279f7e28bd58536585a855`
+- 16R: `d7ec349e6b2aa4eeb2a711b8dc85ed4ffe28185cf1cb297ab62cabbacd69de44` (Fly notch, 2026-11-21 — see REPORT.md addendum)
 - 17L: `a6aa72a1df2848aa6ecd7e14645887bf59784d07af18a04ed75234b652907a03`
-- 17R: `f43b22869365a048d9f0433fab4b2401c43836a7d08bfb9206d312afaacdc840`
+- 17R: `5e62589c6cbb51521ebb6b6077e94833c63d644bc5db12aeb9bc8b934743572a` (Fly notch, 2026-11-21 — see REPORT.md addendum)
 
 See `../REPORT.md` (including the GND repair/respin addenda and the
 Stage-3 errata) for the full gate record.
