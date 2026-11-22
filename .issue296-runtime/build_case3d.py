@@ -961,12 +961,106 @@ slider = report("latch-slider", sl)
 shell = cut(shell, tray_l, tray_r, infill)
 shell = report("shell-central+trim", shell)
 
+# ================================================================ TRACKPAD COVER (PO 2026-11-22)
+# PO: 「トラックパッド周りの上蓋も設計して」 — a bezel finishing
+# the trackpad surround. Measured starting state (probe_padcover*):
+# module Cirque TM040040 Ø40 body / Ø38 sensing, centre (0,48),
+# top Z12.70, bottom 11.20; seat = Ø44.6 recess, floor 11.10 where
+# the slab is thick, 10.90 patches elsewhere; the island leftovers
+# preserved by the old keep-disc exemption (E/W rim bumps 12.55,
+# north rise to ~15.1 at r<=23.5) poke into the cover's footprint;
+# shell slab is uniformly 10.90..8.90 at all four screw points;
+# shell south edge at Y 69.70 = 21.7 from the pad centre (the
+# cover's cone foot cannot close toward S); SW1 plunger centre
+# (-15.5, 64.50) is 22.64 from the pad centre, head Ø4 top 12.10.
+#
+# Shell changes:
+# (1) Island trim: within r25.6 of (0,48) the shell is cut to
+#     Z <= 11.25 — the exemption leftovers go, completing the
+#     slope-removal flattening inside the cover footprint; the
+#     seat rim becomes uniform (floor 11.10 / rim 11.25).
+# (2) Four screw bosses under the field at r25.5, angles
+#     30/150/210/330 deg from the pad centre: Ø6.0, Z 7.30..9.60
+#     (fused into the 8.90 slab underside; bottom 7.30 = 1.40
+#     above the Main top 5.90), with Ø1.6 pilot holes through
+#     boss + slab. Boss x tray/infill measured 0.000 beforehand;
+#     the seat opening (X +-3, Y 26..30) and the whole
+#     below-shell connector zone are untouched.
+import math as _math
+PAD_C = (0.0, 48.0)
+SCREW_PTS = []
+for _a in (30, 150, 210, 330):
+    _t = _math.radians(_a)
+    SCREW_PTS.append((PAD_C[0] + 25.5 * _math.cos(_t),
+                      PAD_C[1] + 25.5 * _math.sin(_t)))
+shell = cut(shell, cyl(PAD_C[0], PAD_C[1], 25.6, 11.25, 30.0))
+shell = report("shell-central+padtrim", shell)
+for (sx, sy) in SCREW_PTS:
+    shell = fuse(shell, cyl(sx, sy, 3.0, 7.30, 9.60))
+for (sx, sy) in SCREW_PTS:
+    shell = cut(shell, cyl(sx, sy, 0.8, 7.0, 11.2))
+shell = report("shell-central+padboss", shell)
+
+# Cover (built in local frame, axis = Z through the pad centre,
+# then moved to (0,48)): revolved annulus profile (r, Z):
+#   window wall r20.20 (0.20 clear of the Ø40 module; NO overlap
+#   of the module at any height -> the cover cannot pinch it),
+#   window top edge chamfer 0.32x0.32, top ring at Z12.70 = flush
+#   with the pad surface, outer cone 34.7 deg down to a foot ring
+#   resting on the 10.90 field (r24.40..25.60), underside 11.35
+#   (0.25 over the seat floor, 0.10 over the trimmed rim), inner
+#   skirt r20.20..21.00 down to 11.25 (0.15 over the floor)
+#   dipping into the annular gap.
+_prof = [(20.20, 11.25), (20.20, 12.38), (20.52, 12.70),
+         (23.00, 12.70), (25.60, 10.90), (24.40, 10.90),
+         (24.40, 11.35), (21.00, 11.35), (21.00, 11.25)]
+_wire = bd.Wire.make_polygon(
+    [bd.Vector(r, 0, z) for (r, z) in _prof] +
+    [bd.Vector(_prof[0][0], 0, _prof[0][1])])
+cover = bd.revolve(bd.Face(_wire), bd.Axis.Z, 360)
+cover = cover.moved(bd.Location((PAD_C[0], PAD_C[1], 0)))
+# Screw ears: flat pads (top 11.90) on the cone at the 4 screw
+# angles, radial span r22.8..28.2, tangential width 9.0, foot on
+# the field; Ø2.2 clearance hole + flat-head countersink
+# (r1.1 -> r1.7 over Z 11.20..11.90) at r25.5.
+for _a in (30, 150, 210, 330):
+    _t = _math.radians(_a)
+    _u = bd.Vector(_math.cos(_t), _math.sin(_t), 0)
+    _v = bd.Vector(-_math.sin(_t), _math.cos(_t), 0)
+    _org = (bd.Vector(PAD_C[0], PAD_C[1], 10.90)
+            + _u * 22.8 + _v * (-4.5))
+    _pl = bd.Plane(origin=_org, x_dir=_u, z_dir=(0, 0, 1))
+    cover = fuse(cover, bd.Solid.make_box(5.4, 9.0, 1.0, _pl))
+for (sx, sy) in SCREW_PTS:
+    cover = cut(cover, cyl(sx, sy, 1.1, 10.80, 11.95),
+                bd.Solid.make_cone(1.1, 1.7, 0.7,
+                                   bd.Plane(origin=(sx, sy, 11.20))))
+# South: the shell edge (Y 69.70) truncates the cone; the cover
+# is clipped at Y 69.00 (0.70 inside the edge) and the top corner
+# gets a dimensioned 45 deg chamfer (67.90,12.70)->(69.00,11.60);
+# below it the clipped face drops to the underside (0.35 shadow
+# gap over the field — an intended joint, no upward catch).
+cover = cut(cover, box(-40, 40, 69.0, 95.0, 0.0, 30.0))
+_wedge = bd.Face(bd.Wire.make_polygon(
+    [bd.Vector(0, 67.90, 12.70), bd.Vector(0, 72.00, 8.60),
+     bd.Vector(0, 72.00, 20.00), bd.Vector(0, 67.90, 20.00),
+     bd.Vector(0, 67.90, 12.70)]))
+cover = cut(cover, bd.extrude(_wedge, 17.0).moved(
+    bd.Location((-17.0, 0, 0))))
+# SW1 plunger notch: Ø5.2 clearance cylinder at the plunger
+# centre through the whole cover (head r2.0 -> 0.60 plan
+# clearance at every height, rest or pressed; the notch opens
+# through the cone, so the head stays side-accessible and
+# pressable exactly as on the open field).
+cover = cut(cover, cyl(-15.5, 64.50, 2.6, 5.0, 23.0))
+cover = report("trackpad-cover", cover)
+
 parts = {
     "tray-left": tray_l, "tray-right": tray_r, "centre-infill": infill,
     "shell-central": shell, "north-shelf": shelf,
     "plate-left": plate_l, "plate-right": plate_r,
     "plunger-sw1": plunger, "light-pipe-dled": pipe,
-    "latch-slider": slider,
+    "latch-slider": slider, "trackpad-cover": cover,
 }
 for name, s in parts.items():
     bd.export_step(s, f"{OUT}/{name}.step")
