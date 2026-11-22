@@ -1185,8 +1185,12 @@ def build_wing_band(plate, sgn):
         pts = [(20.0, -0.40), (-34.0, -0.40), (-56.0, 72.0),
                (20.0, 72.0)]
     b = as_solid(b.intersect(prism2d(pts, 8.0, 11.50)))
-    # conform to the neighbouring parts (face contact, no overlap)
-    b = cut(b, shell, infill)
+    # conform to the neighbouring parts (face contact, no
+    # overlap). The trackpad cover is included: its screw pads
+    # were designed to bridge over the old slot, so the band
+    # dips under them (verify_lap caught 27.04 mm3/side before
+    # this cut).
+    b = cut(b, shell, infill, cover)
     return b
 
 
