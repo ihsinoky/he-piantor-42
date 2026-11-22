@@ -75,4 +75,65 @@ grows — shell edge and plate edge are parallel diagonals).
   gap (the neighbour there is the shelf above the band and the
   bay below — profile scan follows).
 
-Full row profiles (probe_wingprofile.py) follow before design.
+Full row profiles (probe_wingprofile.py, wingprofile.json):
+
+- Y −64..−2 (bay stretch): the plate's inner strip lies over the
+  bay E/W wall (sills 9.15/7.40/2.45/4.45); west of the tip is
+  the battery bay opening, covered by the shelf when closed
+  (skirt bottom 11.15). **Functional opening — stays open.**
+- Y −0.4..~17 (tip/valley segment): slot between the plate tip
+  and the centre valley (Main board below at 4.70..~6.3); width
+  to the shell edge up to ~14 at Y 10, tray island at 10.90 on
+  the left (X −17.7..−16.0); floor −0.65.
+- Y ~17..66 (centre segment): the 9.21 slot; under it the tray
+  valley shoulder at **8.90** over most stations (Y 20/25/50/
+  55/60), deep wells at Y 40 (4.70) and Y 45 (−0.65).
+- Y 66..72 (SE corner): shell corner recedes (39.16 at Y 66),
+  slot widens to ~10.5 with the 8.90 shoulder under it and a
+  tray island at 10.90 at the plate edge (48.32..50.05 at Y 66);
+  at Y 70 the tray field at 10.90 takes over (residual ~2.15
+  slot at the corner station).
+- Y 72..82: south skin / tray field at 10.90 — closed already.
+
+## Lap design decision
+
+Candidates (plate kept plain; all work case-side):
+
+- **A — case flange laps OVER the plate edge: REJECTED.**
+  Best appearance (seam inset on the plate) and total gap
+  immunity, but the flange would sit on the plate's top edge:
+  the plate installs vertically after the PCB and must lift
+  straight out — an over-lap blocks both. Assembly kills it.
+- **B — flush filler + under-tongue lap: CHOSEN.** A case-side
+  filler rib fills the slot with its top flush at **10.90**,
+  ending **0.30** from the plate edge (the south skin's seam
+  idiom). Below, a **tongue** (Z 8.65..9.15, i.e. 0.25 under
+  the plate bottom 9.40) reaches **1.50 under the plate edge**.
+  *Appearance*: one hairline at the plate edge, field and plate
+  coplanar — the trench is gone. *Assembly*: nothing crosses
+  the plate's plan above its bottom plane; drop-in and lift-out
+  are exactly as before; Wing PCB (top ~6.3) and the FFC pass
+  under the rib (underside 8.65) with ≥ 2.3 clearance; power-
+  board-before-Wings order untouched. *Rigidity*: the rib is
+  integral with the tray, fused along the valley shoulder
+  (tongue merges into the 8.90 shoulder where present) and
+  face-seated against the shell edge; section 9.15..10.90 plus
+  the tongue. *Tolerance*: plate placement ±0.30 → hairline
+  0.0..0.60, tongue reach ≥ 1.20 always; case print ±0.20 →
+  hairline 0.10..0.50; tongue top worst corner 9.35 < 9.40 —
+  a vertical sight line through any widened hairline lands on
+  the tongue: **no through-gap at any corner**.
+- **C — rabbet/reveal (stepped-down channel): REJECTED.** It
+  tolerates everything but leaves a deliberate 0.85 × 0.55
+  channel — a shallow groove, against the PO's levelling ask.
+- **D — reverse lap (plate over a case tongue): REJECTED.**
+  Needs a step on the manufactured plate (outlines unchanged
+  per the brief) and risks drop-in collision.
+
+**Band geometry**: plan = plate outline (outer wire only)
+dilated +10.30 minus dilated +0.30, Z 9.15..10.90; tongue =
+dilated +0.30 minus eroded −1.50, Z 8.65..9.15; clipped to the
+inner-edge mask, Y −0.40..72; conform-cut against shell-central
+and centre-infill; fused into tray-right / tray-left. North
+hairline (0.13–0.18, blind, floor 9.40) and the south skin are
+already flush — untouched.
