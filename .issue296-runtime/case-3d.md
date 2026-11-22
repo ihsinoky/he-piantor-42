@@ -1210,3 +1210,149 @@ NEW tight centre close-up `files/case296-padcover-closeup.png`
 (pad + bezel + ears + plunger notch, module fitted, cover in
 a contrasting tone); standing top view refreshed
 `files/case296-3d-top.png`. Script: render_padcover.py.
+
+---
+
+## Addendum — trackpad lap round (PO 2026-11-22): groove levelled, seam = shiplap
+
+PO: 「パットの周りに溝ができてるので、プレートと高さが合うように
+して。継ぎ目は厳密には揃わないと思うので、どう重なる（重ねる）と
+良いか（見栄え、組み立て手順、剛性など）を考えてくれ」. Plan note:
+`.issue296-runtime/trackpad-lap-plan.md` (committed first,
+`0f9969183`); probes `probe_groove2/3.py`; verification
+`verify_lap.py` (+ `verify_corr.py` regression).
+
+### The groove, measured (before)
+
+Assembled radial profiles (24 azimuths) and a 0.5 mm mesh grid
+over the pad region: **no depression below the 10.90 field
+anywhere around the pad** (the only sub-field readings, 9.60,
+are the boss tops seen through the open Ø2.2 screw holes). The
+"groove" is a seam/pan system of three parts:
+
+1. **South shadow slot** — the cover's clipped south face
+   bottomed at 11.25/11.35 over the 10.90 field: an open slot
+   0.35..0.45 tall × ≈29 wide under the face.
+2. **Butt seam at the foot ring** (r24.4..25.6) — a
+   zero-overlap contact line; any print deviation opens it
+   into a circular groove, and the cover rocks on a line
+   contact.
+3. **Raised pan** — the seat floor sits +0.20 over the field
+   and the trim plateau r22.3..~23.5 at +0.35 (shell annulus
+   histogram: 11.25 band = 202 cells); the pad sits in a
+   shallow raised pan whose rim step coincides with the foot
+   radius, doubling the seam line.
+
+### Lap candidates
+
+- **A — cover skirt laps over a shell lip: REJECTED.** Lap
+  length = lip height only (0.35); the lip is a fragile
+  ~1.2-wide raised ring that itself breaks the levelling; no
+  screw clamping through the lap; the visible seam stays a
+  field-level butt line at the skirt's bottom edge.
+- **Reverse lap (shell over a cover tongue): REJECTED** —
+  the cover could not be installed from above.
+- **B — shiplap rabbet + flush flange: CHOSEN.** The shell
+  receives an annular rabbet and the cover's cone ends in a
+  flange whose top is flush with the field and whose bottom
+  seats on the rabbet floor. Judged on the PO's axes:
+  *appearance* — one hairline at the rabbet's outer step
+  corner (0.45 nominal), backed by the 0.60-tall flange face,
+  no through-gap at any tolerance corner (ray test below);
+  *assembly* — cover still installs last from above, module
+  still replaceable, 4-screw concept kept; *rigidity* — seat
+  annulus 1.95 wide (vs a line contact), screws clamp through
+  the lap stack into bosses under the rabbet floor, pads
+  bridge the outer wall (a second lap at the screw points);
+  *tolerance* — radial clearances 0.45 nominal absorb the
+  ±0.20/part print tolerance with ≥0.25 to spare at the lap
+  itself (below).
+
+### Implemented geometry
+
+- **Shell**: annulus r22.3..24.6 levelled to Z ≤ 10.90 (the
+  11.25 rim plateau is gone; seat floor r<22.3 untouched);
+  rabbet annulus r24.6..28.0, floor 10.30, clipped to Y ≤ 69.0
+  like the cover (south band skin beyond keeps 10.90). Both
+  cutters exclude a r3.2 disc at the SW1 plunger centre — the
+  plunger boss cap stays at 10.90 (verified: cap material
+  present, plunger checks unchanged); the rabbet therefore
+  has a 10.90 island at the SW1 sector and the cover's
+  conform cut trims its flange there — the lap is locally
+  interrupted at the SW1 sector, as the notch already
+  interrupts the cone (recorded deviation, by geometry).
+- **Cover profile** (r, Z): … cone (25.00, 11.31) → shoulder
+  (26.30, 10.90) → flange top (27.55, 10.90) = flush with the
+  field → outer edge → lead chamfer → flange bottom
+  (25.60, 10.30) seating on the rabbet floor → descent
+  crossing 10.90 at r25.05 → underside 11.35 → skirt as
+  before. Window Ø40.4, top ring 12.70 (glide step 0.00),
+  notch Ø5.2 — all unchanged.
+- **Screws r25.5 → r26.7** (single source `SCREW_PTS`;
+  bosses Ø6.0 Z7.30..9.60 and Ø1.6 pilots move with it);
+  pads r24.8..28.6 × 9.0, top 11.90, bridging the rabbet's
+  outer wall onto the field.
+- **South apron**: no lap is possible on the south (shell
+  edge at r21.7), so the clipped face is extended down to the
+  field — an annular sector (Y 68.55..69.0) top-limited by a
+  cap solid revolved from the cover's own top chain, bottom
+  conform-cut onto the shell: face min Z = 10.90 measured,
+  the 0.35..0.45 shadow slot is closed.
+- **Bug caught by verification**: the first build's screw
+  clearance holes started at Z10.80 (first-round value) and
+  left the new flange web (10.30..10.80) unpierced —
+  modelled screw × cover read 1.457 mm³. Hole cut extended
+  to Z10.20; re-check reads 0.000 at all 4 points.
+
+### Verification (verify_lap.py; verify_corr.py regression)
+
+- **Profiles after**: shell annulus histogram — the 11.25
+  band is GONE (0 cells); the surround is the 10.90 field
+  everywhere. Remaining sub-field features, all by design:
+  the seam channel at the rabbet step (0.45 wide, floor
+  10.30, backed by the flange face) and the Ø2.2 screw holes
+  (boss tops 9.60 through them, as any screwed cover).
+- **Lap audits**: shell above 10.90 in r22.3..24.6 = 0.000;
+  shell above 10.31 in the rabbet = 0.000; rabbet floor
+  present; cover × shell = 0.000 (face contacts only).
+- **Through-path ray test** (probes r23.5..29.5 × 4 bands
+  Z10.32..10.88 × 19 lap azimuths; the south clip sector is
+  covered by the apron checks): no open path anywhere —
+  worst free ratio 0.803 at a screw azimuth, where the probe
+  threads the screw hole itself (the modelled screw fills
+  it; screw × cover/Main/module/plunger all 0.000, shank
+  engagement 3.054/2.441 mm³).
+- **Tolerance corners** (±0.20/part): radial shifts ±0.20
+  X/Y — the lap proper (flange/walls/floor) shows ZERO
+  interference (clearances 0.45 → ≥0.25 remain); the only
+  overlaps (≤1.01 mm³ total) sit at the zero-clearance
+  conformed faces (SW1 island trim, apron seat, south clip
+  face — localised by probe_shift.py), the same conform
+  idiom as previous rounds: in print they become light press
+  contacts, and the 4 screws locate the cover (real
+  placement error ≪ ±0.20). Z: the cover seats on the
+  rabbet floor under screw clamping; a floor printed ±0.20
+  off moves the flange top ∓/±0.20 against the field while
+  the flange face still overlaps the outer wall by ≥0.40 —
+  no through-gap (a hypothetical +0.20 unseated lift opens a
+  0.20 slit at the lowest band only; seating is the clamped
+  state, as designed).
+- **Regression**: closed pairwise worst 0.0000; case vs
+  internals 0.000 except accepted artifacts (42.380/side,
+  plunger vs Ø44 envelope 3.672); cover × module 0.000;
+  cover × plunger rest/pressed 0.000, min dist 0.600;
+  cover × caps 0.000 (min dist 20.161); hinge arc sweep vs
+  cover 0.000; full verify_corr identical to the
+  correction-round baseline (cell sweeps, latch proof
+  0.840/0.000, stop contact 95.0°, shelf span ±152.30);
+  invariants: outline 310.04 × 146.07, Z max 22.00, north
+  face probe 12.1550 = baseline.
+
+### Renders
+
+Updated close-up `files/case296-padcover-closeup.png`; NEW
+section through the pad centre `files/case296-padsection.png`
+(Y=48 half-section, south half kept: flange seated in the
+rabbet on both sides, module sectioned in its seat); top view
+refreshed `files/case296-3d-top.png`. Scripts:
+make_section.py + render_lap.py.

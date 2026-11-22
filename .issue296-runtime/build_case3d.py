@@ -979,21 +979,52 @@ shell = report("shell-central+trim", shell)
 #     Z <= 11.25 — the exemption leftovers go, completing the
 #     slope-removal flattening inside the cover footprint; the
 #     seat rim becomes uniform (floor 11.10 / rim 11.25).
-# (2) Four screw bosses under the field at r25.5, angles
-#     30/150/210/330 deg from the pad centre: Ø6.0, Z 7.30..9.60
-#     (fused into the 8.90 slab underside; bottom 7.30 = 1.40
-#     above the Main top 5.90), with Ø1.6 pilot holes through
-#     boss + slab. Boss x tray/infill measured 0.000 beforehand;
-#     the seat opening (X +-3, Y 26..30) and the whole
-#     below-shell connector zone are untouched.
+# (2) Four screw bosses under the field at r26.7 (r25.5 in the
+#     first cover round; moved out by the lap round below),
+#     angles 30/150/210/330 deg from the pad centre: Ø6.0,
+#     Z 7.30..9.60 (fused into the 8.90 slab underside; bottom
+#     7.30 = 1.40 above the Main top 5.90), with Ø1.6 pilot
+#     holes through boss + slab. Boss x tray/infill measured
+#     0.000 beforehand; the seat opening (X +-3, Y 26..30) and
+#     the whole below-shell connector zone are untouched.
+#
+# LAP ROUND (PO 2026-11-22: level the surround to the plate
+# height; the seam must be a deliberate overlap, not a butt
+# joint). Measured groove (probe_groove2/3, plan note): no
+# depression below the 10.90 field anywhere; the "groove" is
+# a seam/pan system — the south shadow slot (0.35..0.45 tall),
+# the zero-overlap butt seam at the foot ring, and the raised
+# pan (seat floor +0.20, rim plateau +0.35 over the field).
+# Chosen joint: shiplap. Shell side:
+# (3) Levelling: the annulus r22.3..24.6 is cut to Z <= 10.90
+#     (the 11.25 rim plateau goes; the seat floor r<22.3 and
+#     the SW1 plunger boss cap are untouched — both cutters
+#     exclude a r3.2 disc at the plunger centre).
+# (4) Rabbet: annulus r24.6..28.0 cut down to a floor at
+#     10.30 (0.60 deep), clipped to Y <= 69.0 like the cover
+#     (beyond the clip the south band skin keeps its 10.90).
+#     Outer wall at r28.0 stays inside the measured shell
+#     extent (slot at |X| ~ 28.5 at Y=48).
 import math as _math
 PAD_C = (0.0, 48.0)
 SCREW_PTS = []
 for _a in (30, 150, 210, 330):
     _t = _math.radians(_a)
-    SCREW_PTS.append((PAD_C[0] + 25.5 * _math.cos(_t),
-                      PAD_C[1] + 25.5 * _math.sin(_t)))
+    SCREW_PTS.append((PAD_C[0] + 26.7 * _math.cos(_t),
+                      PAD_C[1] + 26.7 * _math.sin(_t)))
 shell = cut(shell, cyl(PAD_C[0], PAD_C[1], 25.6, 11.25, 30.0))
+
+
+def _annulus(r0, r1, z0):
+    return cut(cyl(PAD_C[0], PAD_C[1], r1, z0, 30.0),
+               cyl(PAD_C[0], PAD_C[1], r0, z0, 30.0),
+               cyl(-15.5, 64.50, 3.2, z0, 30.0))
+
+
+shell = cut(shell, _annulus(22.3, 24.6, 10.90))
+_rabbet = as_solid(_annulus(24.6, 28.0, 10.30).intersect(
+    box(-40, 40, 0.0, 69.0, 0.0, 30.0)))
+shell = cut(shell, _rabbet)
 shell = report("shell-central+padtrim", shell)
 for (sx, sy) in SCREW_PTS:
     shell = fuse(shell, cyl(sx, sy, 3.0, 7.30, 9.60))
@@ -1006,40 +1037,55 @@ shell = report("shell-central+padboss", shell)
 #   window wall r20.20 (0.20 clear of the Ø40 module; NO overlap
 #   of the module at any height -> the cover cannot pinch it),
 #   window top edge chamfer 0.32x0.32, top ring at Z12.70 = flush
-#   with the pad surface, outer cone 34.7 deg down to a foot ring
-#   resting on the 10.90 field (r24.40..25.60), underside 11.35
-#   (0.25 over the seat floor, 0.10 over the trimmed rim), inner
-#   skirt r20.20..21.00 down to 11.25 (0.15 over the floor)
-#   dipping into the annular gap.
+#   with the pad surface, outer cone 34.7 deg down to a shoulder
+#   at (26.30, 10.90), then the LAP FLANGE: top at 10.90 = flush
+#   with the surrounding field, bottom at 10.30 seating on the
+#   shell's rabbet floor (seat annulus r25.60..27.55), outer
+#   edge r27.55 (0.45 clear of the rabbet's outer wall r28.0),
+#   lead chamfer on the outer-bottom corner; the cone's descent
+#   crosses the 10.90 plane at r25.05 (0.45 clear of the
+#   rabbet's inner wall r24.60); underside 11.35 (0.25 over the
+#   seat floor), inner skirt r20.20..21.00 down to 11.25.
+#   The visible seam is one hairline at the rabbet's outer
+#   step corner, backed by the 0.60-tall flange face.
 _prof = [(20.20, 11.25), (20.20, 12.38), (20.52, 12.70),
-         (23.00, 12.70), (25.60, 10.90), (24.40, 10.90),
-         (24.40, 11.35), (21.00, 11.35), (21.00, 11.25)]
+         (23.00, 12.70), (25.00, 11.31), (26.30, 10.90),
+         (27.55, 10.90), (27.55, 10.55), (27.20, 10.30),
+         (25.60, 10.30), (25.05, 10.90), (24.60, 11.35),
+         (21.00, 11.35), (21.00, 11.25)]
 _wire = bd.Wire.make_polygon(
     [bd.Vector(r, 0, z) for (r, z) in _prof] +
     [bd.Vector(_prof[0][0], 0, _prof[0][1])])
 cover = bd.revolve(bd.Face(_wire), bd.Axis.Z, 360)
 cover = cover.moved(bd.Location((PAD_C[0], PAD_C[1], 0)))
-# Screw ears: flat pads (top 11.90) on the cone at the 4 screw
-# angles, radial span r22.8..28.2, tangential width 9.0, foot on
-# the field; Ø2.2 clearance hole + flat-head countersink
-# (r1.1 -> r1.7 over Z 11.20..11.90) at r25.5.
+# Screw pads: flat pads (top 11.90, as the first round's ears)
+# at the 4 screw angles, radial span r24.8..28.6, tangential
+# width 9.0 — they sit on the flange and bridge the rabbet's
+# outer wall onto the field (a second lap at the screw
+# points); Ø2.2 clearance hole + flat-head countersink
+# (r1.1 -> r1.7 over Z 11.20..11.90) at r26.7.
 for _a in (30, 150, 210, 330):
     _t = _math.radians(_a)
     _u = bd.Vector(_math.cos(_t), _math.sin(_t), 0)
     _v = bd.Vector(-_math.sin(_t), _math.cos(_t), 0)
     _org = (bd.Vector(PAD_C[0], PAD_C[1], 10.90)
-            + _u * 22.8 + _v * (-4.5))
+            + _u * 24.8 + _v * (-4.5))
     _pl = bd.Plane(origin=_org, x_dir=_u, z_dir=(0, 0, 1))
-    cover = fuse(cover, bd.Solid.make_box(5.4, 9.0, 1.0, _pl))
+    cover = fuse(cover, bd.Solid.make_box(3.8, 9.0, 1.0, _pl))
 for (sx, sy) in SCREW_PTS:
-    cover = cut(cover, cyl(sx, sy, 1.1, 10.80, 11.95),
+    # clearance hole pierces the whole cover stack (flange
+    # bottom 10.30 -> pad top): cut from 10.20 (the first
+    # round's 10.80 start left the flange web unpierced —
+    # caught by verify_lap's modelled-screw check)
+    cover = cut(cover, cyl(sx, sy, 1.1, 10.20, 11.95),
                 bd.Solid.make_cone(1.1, 1.7, 0.7,
                                    bd.Plane(origin=(sx, sy, 11.20))))
 # South: the shell edge (Y 69.70) truncates the cone; the cover
 # is clipped at Y 69.00 (0.70 inside the edge) and the top corner
-# gets a dimensioned 45 deg chamfer (67.90,12.70)->(69.00,11.60);
-# below it the clipped face drops to the underside (0.35 shadow
-# gap over the field — an intended joint, no upward catch).
+# gets a dimensioned 45 deg chamfer (67.90,12.70)->(69.00,11.60).
+# (First round: below the chamfer the clipped face stopped at
+# the underside, leaving a 0.35 shadow gap over the field; the
+# lap round closes it with the apron below.)
 cover = cut(cover, box(-40, 40, 69.0, 95.0, 0.0, 30.0))
 _wedge = bd.Face(bd.Wire.make_polygon(
     [bd.Vector(0, 67.90, 12.70), bd.Vector(0, 72.00, 8.60),
@@ -1049,6 +1095,27 @@ _w = bd.extrude(_wedge, 34.0)
 _wbb = _w.bounding_box()
 _w = _w.moved(bd.Location((-(_wbb.min.X + _wbb.max.X) / 2.0, 0, 0)))
 cover = cut(cover, _w)
+# South apron (lap round): no lap is possible on the south
+# (the shell edge truncates the flange), so instead the
+# clipped face is extended down to the field: an annular
+# sector (r20.20..27.55, Z 10.55..11.60, Y 68.55..69.00,
+# |X| <= 17.8) whose top is limited by a cap solid revolved
+# from the cover's own top chain, so it can never poke above
+# the cone/flange; the conform cut below then trims its
+# bottom exactly onto the shell surface — the 0.35..0.45
+# shadow slot under the south face is closed.
+_cap = bd.revolve(bd.Face(bd.Wire.make_polygon(
+    [bd.Vector(r, 0, z) for (r, z) in
+     [(0.0, 12.70), (23.00, 12.70), (25.00, 11.31),
+      (26.30, 10.90), (30.00, 10.90), (30.00, 30.00),
+      (0.0, 30.00), (0.0, 12.70)]])), bd.Axis.Z, 360)
+_cap = _cap.moved(bd.Location((PAD_C[0], PAD_C[1], 0)))
+_apron = cut(cyl(PAD_C[0], PAD_C[1], 27.55, 10.55, 11.60),
+             cyl(PAD_C[0], PAD_C[1], 20.20, 10.55, 11.60))
+_apron = as_solid(_apron.intersect(
+    box(-17.8, 17.8, 68.55, 69.0, 10.0, 12.0)))
+_apron = cut(_apron, _cap)
+cover = fuse(cover, _apron)
 # SW1 plunger notch: Ø5.2 clearance cylinder at the plunger
 # centre through the whole cover (head r2.0 -> 0.60 plan
 # clearance at every height, rest or pressed; the notch opens
@@ -1056,11 +1123,12 @@ cover = cut(cover, _w)
 # pressable exactly as on the open field).
 cover = cut(cover, cyl(-15.5, 64.50, 2.6, 5.0, 23.0))
 # Conform the underside to the finished shell (the project's
-# own idiom, cf. the shell's tray trim): the north ears' flat
-# 10.90 bottoms otherwise cut 2 x 1.750 mm3 into the trimmed
-# island shoulder, which still rises to 11.25 inside r25.6.
-# Face contacts (foot ring, ear seats at the screw points,
-# where the field is a flat 10.90) are zero-volume and stay.
+# own idiom, cf. the shell's tray trim): it trims the flange
+# where the SW1 plunger boss island interrupts the rabbet,
+# seats the south apron's bottom exactly on the shell, and
+# clears the pads' undersides over the rabbet walls. Face
+# contacts (flange seat on the rabbet floor, pad seats) are
+# zero-volume and stay.
 cover = cut(cover, shell)
 cover = report("trackpad-cover", cover)
 
