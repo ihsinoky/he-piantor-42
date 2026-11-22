@@ -679,3 +679,194 @@ Renders: top (north-up, keycaps fitted), persp, persp-open and
 shelf-off refreshed; NEW south-side view
 `files/case296-3d-south.png` — the south wall reads as one
 straight line with a continuous top edge.
+
+## Hinge + latch (A) and centre-slope removal (B) — addendum (2026-11-22)
+
+PO decisions of 2026-11-22, one round. Plan note:
+`.issue296-runtime/hinge-plan.md` (committed first, c0831653c);
+build `build_case3d.py`; verification `verify_hinge.py`
+(final run `verify-hinge3.log`); renders refreshed + NEW
+open-state view `files/case296-hinge-open.png`.
+
+### (A) Premise change
+
+The shelf no longer comes off; it stays attached and OPENS.
+This supersedes the removal half of the 2026-11-21 lid-integral
+decision; the lid stays integral with the band — one part —
+either way. The 4-screw fixing is abolished (below).
+
+### (B) Centre slope removed
+
+PO verbatim: 「中央の傾斜は無しで。無駄に複雑になるだけだ」.
+The shell-central's sloped transition (22.00 → 10.90 over
+Y −0.37..20) is replaced by a straight step: the profile cut is
+flat at 10.90 for Y ≥ −0.37 (trackpad keep-disc exempt, as
+before), and the slope sheet is replaced by a flat sheet
+(Z 8.90..10.90, same footprint machinery) restoring any skin
+the flat cut deletes. This makes the cliff the design — it
+supersedes the slope element of the 2026-11-21 profile (whose
+text had allowed a cliff). Dispositions: the DLED light pipe
+at (−4, +13) is re-trimmed 14.71 → 10.90 (it now meets the flat
+field; pipe∩shell = 0.000); the shelf's south edge at centre
+now meets the vertical step (0.20 gap disposition unchanged);
+SW1 boss/plunger re-verified (plunger∩shell = 0.000, rest
+surface 10.90); trackpad seat unchanged. Audit (`audit_flat.py`):
+centre-field top = 10.90 at every sampled column outside the
+trackpad disc, no skin holes. One fix during (A) verification:
+the flat sheet overlapped tray-left's top by 3.993 mm³ at the
+shell's north-west (the south-tip pair measured 0.000) — the
+shell is now trimmed by the final trays/infill at the end of
+the build; pairwise is 0.000 again.
+
+### Hinge placement — measured, not assumed
+
+- The only straight southern boundary of the shelf is the
+  lid's south edge (Y −0.570): plateau south edges measure
+  −10.219 (X ±40), −29.849 (±60), −33.313 (±100). The Opus
+  spec's knuckle candidates at X ±40/±100 cannot reach a
+  straight axis there. Axis A = (Y −0.57, Z 19.30) on the lid
+  edge line, wrap radius 2.70 (cylinder top exactly 22.00).
+  (The spec of record's own geometry argument puts the axis on
+  the south edge; a north-edge axis lands inside the flush
+  north face — deviation from the round brief's "north edge"
+  phrase, per the spec.)
+- Wall posts at the spec-scale spans (X 14..18 / 25..28) are
+  impossible: the Wing boards' south edges cross the bay south
+  wall band (Y −2.37..−0.37, Z 4.70..5.90) at every |X| ≥ 11.14
+  (measured post∩Wing 9.47 / 7.20 mm³); the shell does not
+  reach the hinge line at those X either (north edge Y 22.71
+  at X16, 29.64 at X20). The hinge groups therefore sit
+  centrally on the board-free wall span (|X| ≤ 10.90, top
+  15.15): per side boss X ±(0.5..4.0), shelf knuckle
+  ±(4.3..8.6), boss ±(8.9..10.9).
+
+### Hinge design (numbers)
+
+- Bosses: post (Y −2.37..−0.37, Z 4.0..19.30, on the wall) +
+  wrap cylinder r 2.70 on A. Infill carries both boss1s and
+  boss2-right; tray-left carries boss2-left.
+- Pins: TWO, one per side, Ø2.0 non-magnetic (SUS316/brass —
+  ferromagnetic parts near the Wing Hall sensors are
+  prohibited). Shaft from the boss1 inner face (|X| 0.5) to
+  tip |X| 10.80 in the boss2 blind hole (floor 10.85); head
+  flange Ø3.4 × 0.4 at the centre (X 0.1..0.5 / −0.5..−0.1 —
+  the 1.0 centre gap takes both flanges side by side). Each
+  pin is inserted from the bay centre outward after the
+  plates are on, captive between head and blind floor. (A
+  single centre-spanning pin measured 0.628 mm³ into the
+  lid's south edge at the centre gap — the axis lies on the
+  edge line — hence two pins.) Holes Ø2.1; knuckle holes
+  slotted +0.3 in Y, so closed positioning is by the north
+  sandwich + underside, not the pin. Knuckle wall
+  (5.4 − 2.1)/2 = 1.65. Pin fit measured: 0.000 vs infill,
+  tray-left and shelf.
+- Shelf notches at the boss spans (boss ±0.3; boss1 notch from
+  X 0.0 so the pin heads sit inside): lid notch
+  Y −3.5..+2.4, Z 15.0..22.3; skirt notch Y −2.67..−0.17,
+  Z 10.9..15.6.
+- Opening stop: a post on the shell-central (X −0.45..+0.45,
+  Y +1.88..+3.38, top Z 19.10) in the gap between the boss1
+  wraps (a first site at X −2.6..−0.8 measured 0.255 mm³ into
+  the west wrap). The standing shelf's lid top edge lands on
+  it. **Final opening angle: 95.0°** (first shelf×shell
+  contact in the arc sweep, exactly on target).
+- Arc-sweep finding, fixed: the E/W skirt fins
+  (X ±(28.25..30.25), Z 11.15..15.35) hang with their north
+  faces coplanar with the north wall's inner face (Y −62.37);
+  their bottom corners (radius 62.33 > 61.80 from A) clipped
+  the wall's top inner corner (0.700 mm³/side at 2.5°). The
+  fins' low north ends are trimmed to Y −61.57 (max radius
+  61.54 < 61.80); the lid above is untouched.
+
+### Latch design (numbers)
+
+One finger latch, right side (per spec), line Y = −61.00.
+NEW printed part `latch-slider` (10 parts total): body
+X 72..92, Y −61.3..−55.7, Z 19.8..22.0 in a groove cut into
+the plateau top (X 67.7..96.3, Y −61.8..−55.2, floor 19.8;
+grip grooves on the slider's top, top stays flush 22.00);
+stem X 81..83, Y −62..−60 down a web slot in the plateau
+(X 76.2..87.8, Y −62.2..−59.8); collar Ø4.4 at (82, −61),
+Z 9.30..10.00. Receiver (cuts in tray-right under the +85
+boss): pocket X 75..89, Y −63.3..−58.7, Z 9.25..10.00;
+keyhole entries Ø5.0 elongated +0.3 north at stem X 78.2 and
+85.8, Z 10.00..10.95; neck X 80.2..83.8, Y −62.15..−59.85,
+Z 10.00..10.95. Locked = slider centred: collar trapped in
+the pocket under the tray web (collar top 10.00, tray top
+10.90; retention overlap (4.4 − 3.6)/2 = 0.4/side in plan).
+Release = slide ±3.8 to either entry. Centring: one PETG
+finger under the slider body (arm ~7 × 0.6, tooth into a dip
+in the groove floor) — unloaded in the dip at centre
+(locked), deflection 0.75 at full travel, strain ≈ 1.3%,
+return ≈ 0.5 N vs the 0.28k mm³ slider. Proof (rigid model):
+slider centred + pair lifted 1 mm → collar×tray 3.202 mm³
+(ENGAGED); at either entry → 0.000 (RELEASED); slider vs
+tray/plate/shelf = 0.000 at centre; at the slid positions the
+only intersection is the finger tooth's 1.125 mm³ = its
+working deflection volume, by design. (First build had the
+collar 0.30 too tall — 1.601 mm³ beside the neck; collar top
+set to 10.00, stem extended into it.)
+
+### Abolished fixings — dispositions
+
+The 4 plateau screw holes + countersinks: removed. The 4
+tray insert holes (Ø4.2 at (±55/±85, −60.37)): removed. The
+pry notches (X 121..129): removed (the shelf is never pried
+off; it opens). The ±85 tray bosses stay as geometry: −85
+plain, +85 hosts the latch receiver.
+
+### New swap step list — 12 actions (baseline 20)
+
+1. Slide the latch to an entry (finger, ~4 mm).
+2. Raise the shelf to the 95° stop.
+3–11. Cells (9, unchanged motions: slide 2.0 toward the
+   spring end, tip 35°, lift; reverse to fit).
+12. Lower the shelf holding the slider at the entry; release
+    → the finger centres it → locked.
+Tool-less; no driver, no ~90 screw rotations.
+
+### Durability (assumptions with numbers)
+
+Weekly opening ≈ 50 cycles/year. Hinge: Ø2 metal pins in
+Ø2.1 holes, full-circumference PETG knuckles/bosses (wall
+1.65) — at ~100 open/close cycles/year the bearing stress is
+negligible and wear is not life-limiting; the pins are
+captive (head + blind floor, 0.05 axial play). Latch: collar
+engagement as above; the centring finger is unloaded in the
+locked state (creep-safe by the spec's rule), peak strain
+≈ 1.3% only during the slide. Stop post: the shelf's
+tip-over moment at 95° is small (CoM ≈ 3.6 mm south of the
+axis vertical); the post's contact face is 0.9 × 1.5.
+
+### Verification (verify_hinge.py, final run)
+
+- Closed: case parts pairwise 0.000 (all 10 parts); case vs
+  internals 0.000 except the two accepted artifacts (J_WING
+  envelope 42.380/side; plunger vs Ø44 probe disc 3.672, real
+  Ø40 module clearance 0.638 unchanged). Pin fit 0.000.
+- Closed cell sweeps (shelf off): exactly the recorded
+  baseline — each cell's own spring-fin working space
+  175.806 / 176.803 / 175.806, plus the 0.014 graze vs the
+  synthetic power-board tongue (unchanged model, unchanged
+  sweep). Power-board drop overlap 12.000 (tongue) unchanged
+  — the hinge parts are all north of the board.
+- Arc sweep 0..100° (2.5° steps, 0.5° over 88..100) vs caps
+  pressed AND unpressed, trackpad Ø44, real Fly, real
+  plugged USB-C plug (g17 reference solids), desk plane, pin,
+  and every fixed case part: the ONLY contact is the stop,
+  first at 95.0°. (An earlier draft obstacle — a hand-made
+  plug box at Z 12..20 — reported 15.02 mm³ at 2.5°; the
+  project's real plug reference sits at Z 5.02..11.02 and
+  measures 0.000 at every angle.)
+- Open state at 95°: all 3 cells extract on the established
+  motions with 0.000 vs the open shelf (+slider riding with
+  it) and every fixed part — the Opus objection (opened shelf
+  = a ~64 mm wall cramping the middle cell) does not bite:
+  the wall stands SOUTH of the bay and the middle cell's
+  sweep clears it completely (0.000).
+- Invariants: outline 310.04 × 146.07; Z max 22.00; north
+  face at Y −64.370 exactly (deviation 0.000 — the 12.155 in
+  the raw log is the probe band's own 0.005 slice of the face
+  plane); south unification, antenna band, Wing/plate
+  positions unchanged; battery sweeps and power-board fixing
+  unchanged in the closed state.

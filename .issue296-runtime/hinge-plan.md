@@ -163,6 +163,60 @@ sweeps and power-board fixing unchanged in the closed state.
   same footprint machinery) restoring any deleted skin; DLED pipe
   top 14.71 → 10.90.
 
+## As-built revision (2026-11-22, after probe_hinge3 + follow-up probes)
+
+The per-side boss placement above (X 14..18 / 25..28 on the bay
+south wall) proved impossible: the Wing boards' south edges
+cross the wall band (Y −2.37..−0.37, Z 4.70..5.90) at every
+|X| ≥ 11.14 — measured intersections of the planned posts with
+the Wing bodies: 9.47 mm³ (X 14..18) and 7.20 mm³ (X 25..28),
+both sides; a trimmed post would be severed by the board. The
+shell-central does not reach the hinge line either at those X
+(its north edge recedes to Y 22.71 at X16, 29.64 at X20). The
+design was therefore re-placed, same axis A and radius:
+
+- **Hinge groups central**, on the wall span |X| ≤ 10.90 (top
+  15.15, board-free): per side boss X ±(0.5..4.0), shelf knuckle
+  ±(4.3..8.6), boss ±(8.9..10.9) — posts Y −2.37..−0.37,
+  Z 4.0..19.3 on the wall (infill carries both boss1s + boss2
+  right; tray-left carries boss2 left). Shelf notches at the boss
+  spans widened ±0.3: ±(0.2..4.3) and ±(8.6..11.2), same notch
+  boxes as above.
+- **Two pins**, one per side, each inserted from the bay centre
+  outward (as the spec requires): Ø2.0, shaft from the boss1
+  inner face (|X| 0.5) to tip |X| 10.80 in the boss2 blind hole
+  (floor 10.85), head flange Ø3.4 × 0.4 at the centre
+  (X 0.1..0.5 / −0.5..−0.1 — the 1.0 centre gap takes both
+  flanges side by side); captive between head and blind floor.
+  (A single centre-spanning pin measured 0.628 mm³ into the
+  lid's south edge at the centre gap — the axis lies on the
+  edge line — hence two pins. Boss1 notches start at X 0.0 so
+  the heads sit inside them.)
+- **Stopper**: the wrap-lug idea died with the boss placement
+  (at the boss spans the shelf is notched away — nothing sweeps
+  toward a lug). Built instead: a post on the shell-central,
+  X −0.45..+0.45, Y +1.88..+3.38, top Z 19.10 — the standing
+  shelf's lid top edge lands on it. (A first site at
+  X −2.6..−0.8 measured 0.255 mm³ into the west boss1 wrap —
+  the post moved to the 1.0 gap between the wraps.) It stands
+  on the shell (top 10.90); the Main board is below the shell
+  there. Contact angle sweep-verified (target ~95°).
+- **Centring**: one PETG finger under the slider (arm ~7 long ×
+  0.6 thick, tooth dropping into a dip in the groove floor) —
+  unloaded in the dip at centre (locked), max deflection 0.75,
+  strain ≈ 1.3%, return force ≈ 0.5 N vs the 0.29k mm³ slider.
+  (Replaces the two end-fingers + ramps of the earlier sketch:
+  same function, one feature, no groove-end geometry.)
+- **Verification fixes (first verify run)**: slider collar top
+  10.30 → 10.00 with the stem extended down to Z 9.60 (the
+  collar's top sliver measured 1.601 mm³ into the tray beside
+  the neck); the (B) flat sheet overlapped tray-left's top by
+  3.993 mm³ at the shell's north-west (the south-tip pair
+  measured 0.000) — the shell is now trimmed by the final
+  trays/infill at the end of the build. The closed cell sweeps
+  reproduced the recorded baseline exactly (175.8 / 176.8 /
+  175.8 mm³ = each cell's own spring-fin working space).
+
 ## Stages
 
 1. This plan (commit).

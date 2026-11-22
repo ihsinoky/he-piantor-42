@@ -316,24 +316,21 @@ def build_plateau(tray, side):
         if max(ys) + GAP < pbb.min.Y or min(ys) - GAP > pbb.max.Y:
             continue
         p = cut(p, cap_keepout(poly, GAP, 10.5, 22.5))
-    # shelf fixing (P0-2/P1: row moved south to Y -60.37 so the
-    # countersink head rim is 1.25 inside the flush face; clearance
-    # hole O3.4 for an M3 machine screw into a heat-set insert —
-    # through hole O3.4 + 90-deg countersink (head O5.5, cone
-    # r1.7 -> r2.75 over 1.05, top flush at 22.00; head rim at
-    # Y -63.12, 1.25 inside the flush face).
-    for sx in (55.0, 85.0):
-        cx = sgn * sx
-        p = cut(p, cyl(cx, -60.37, 1.7, 10.60, 22.50))
-        p = cut(p, bd.Solid.make_cone(1.7, 2.75, 1.05,
-                                      bd.Plane(origin=(cx, -60.37, 20.95))))
-    # pry notches (P1): one per end at the angled end face, band
-    # X 121..129 (outline leaves the flush plane at |X| ~119.5 —
-    # measured), cut Z 11.10..14.60 across the local plateau depth:
-    # a finger/tool recess at the shelf underside seam. The north
-    # face plane region |X| <= 117 is untouched.
-    nx0, nx1 = (121.0, 129.0) if sgn > 0 else (-129.0, -121.0)
-    p = cut(p, box(nx0, nx1, -70.0, -20.0, 11.10, 14.60))
+    # (A) hinge round (PO 2026-11-22): the P0/P1 screw fixing is
+    # ABOLISHED — no screw holes, no countersinks, no pry notches.
+    # The shelf is held by the central south-edge hinge + the
+    # X+85 slide latch (HINGE + LATCH section below). On the
+    # right plateau: the latch slider groove, the centring dip
+    # in its floor and the stem web slot.
+    if sgn > 0:
+        # slider groove: X 67.7..96.3 (slider 20 long, travel
+        # +-3.8, end margins), Y -61.8..-55.2, floor Z 19.8
+        p = cut(p, box(67.7, 96.3, -61.8, -55.2, 19.8, 22.5))
+        # centring dip for the slider's finger tooth
+        p = cut(p, box(81.0, 83.0, -59.7, -57.8, 19.05, 19.8))
+        # stem web slot through the plateau: X 76.2..87.8,
+        # Y -62.2..-59.8 (stem 2.0 in X and Y, travel +-3.8)
+        p = cut(p, box(76.2, 87.8, -62.2, -59.8, 10.5, 22.5))
     return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
 
 strip_r = build_plateau(tray_r, +1)
@@ -545,11 +542,11 @@ tray_r = fuse(tray_r, boss_r)
 tray_r = cut(tray_r, plate_r)
 tray_l = fuse(tray_l, boss_l)
 tray_l = cut(tray_l, plate_l)
-for sx in (55.0, 85.0):
-    tray_r = cut(tray_r, cyl(sx, -60.37, 2.1, 5.0, 10.90))
-    tray_l = cut(tray_l, cyl(-sx, -60.37, 2.1, 5.0, 10.90))
-tray_r = report("tray-right+inserts", tray_r)
-tray_l = report("tray-left+inserts", tray_l)
+# (A) hinge round: the four heat-set insert holes are ABOLISHED
+# with the screw fixing — the bosses stay as plain geometry
+# (-85 plain, +85 hosts the latch receiver, HINGE + LATCH below).
+tray_r = report("tray-right+bosses", tray_r)
+tray_l = report("tray-left+bosses", tray_l)
 
 # ================================================================ SOUTH UNIFICATION (plan A, PO 2026-11-22)
 # Opus proposal files/case296-south-unify-opus-2026-11-22.md §3,
@@ -773,11 +770,153 @@ infill = report("infill+chamfer", infill)
 # (11 -> 9 parts). The shell keeps the centre slope; the shelf's
 # centre south edge (Y -0.37) meets the slope's top edge.
 shelf = report("north-shelf", fuse(cover, strip_l, strip_r))
+
+# ============================================================ HINGE + LATCH (A)
+# PO 2026-11-22, battery-swap idea 2 of the Opus study: the shelf
+# no longer comes off — it OPENS on a hinge and is held by ONE
+# finger latch. Premise change recorded: this supersedes the
+# removal half of the 2026-11-21 lid-integral decision (the lid
+# stays integral with the band — one part — either way).
+# Placement by measurement (probe_hinge*.py): the only straight
+# southern boundary of the shelf is the lid's south edge, and the
+# bay south wall is board-free only for |X| <= 10.90 (the Wing
+# boards' south edges cross the wall band from |X| 11.14 out,
+# measured intersections 9.47 / 7.20 mm3 against wall posts at
+# X 14..18 / 25..28) — so the hinge groups sit centrally on the
+# wall: per side boss X +-(0.5..4.0), shelf knuckle +-(4.3..8.6),
+# boss +-(8.9..10.9). Axis A = (Y -0.57, Z 19.30) on the lid's
+# south edge line; wrap radius 2.70 (cylinder top exactly 22.00 —
+# nothing above Z22, nothing past the north face). TWO pins,
+# one per side: O2.0 non-magnetic (SUS316/brass — ferromagnetic
+# parts near the Wing Hall sensors are prohibited), shaft from
+# the boss1 inner face (|X| 0.5) to tip |X| 10.80 in the boss2
+# blind hole (floor 10.85), head flange O3.4 x 0.4 at the centre
+# (X 0.1..0.5 / -0.5..-0.1 — the 1.0 centre gap takes both
+# flanges side by side); each pin is inserted from the bay
+# centre outward after the plates are on and is captive between
+# its head and the blind floor. (A single centre-spanning pin
+# measured 0.628 mm3 into the lid's south edge at the centre
+# gap — the axis lies on the edge line — hence two pins.)
+# Holes O2.1; the knuckle holes are slotted +0.3 in Y so closed
+# positioning is by the north sandwich + underside, not the pin.
+# Knuckle wall (5.4-2.1)/2 = 1.65. Boss posts stand on the wall
+# (top 15.15), embedded from Z 4.0; the shelf is notched at the
+# boss spans (boss1 notch from X 0.0 so the pin heads sit in it).
+AX_Y, AX_Z, AX_R = -0.57, 19.30, 2.70
+
+
+def xcyl(x0, x1, r, cy=AX_Y, cz=AX_Z):
+    """Cylinder along +X from x0 to x1, axis at (cy, cz)."""
+    return bd.Solid.make_cylinder(
+        r, x1 - x0, bd.Plane(origin=(x0, cy, cz),
+                             x_dir=(0, 1, 0), z_dir=(1, 0, 0)))
+
+
+def boss(part, xa, xb, hole_xa, hole_xb):
+    """One hinge boss: post on the bay wall + pin wrap + hole."""
+    part = fuse(part, box(xa, xb, -2.37, -0.37, 4.0, AX_Z),
+                xcyl(xa, xb, AX_R))
+    return cut(part, xcyl(hole_xa, hole_xb, 1.05))
+
+
+# boss1 both sides + boss2 right on the infill (its wall span);
+# boss2 left on tray-left (the infill ends at X -6). The boss2
+# holes are blind, floor at |X| 10.85 (pin tips at 10.80).
+infill = boss(infill, 0.5, 4.0, 0.2, 4.3)
+infill = boss(infill, -4.0, -0.5, -4.3, -0.2)
+infill = boss(infill, 8.9, 10.9, 8.6, 10.85)
+tray_l = boss(tray_l, -10.9, -8.9, -10.85, -8.6)
+infill = report("infill+hinge", infill)
+tray_l = report("tray-left+hinge", tray_l)
+
+# Opening stop: a post on the shell-central at X -0.45..+0.45 —
+# the gap between the two boss1 wraps (a wider post at
+# X -2.6..-0.8 measured 0.255 mm3 into the west wrap). It stands
+# on the shell (top 10.90; the Main board is below the shell
+# here, so its centre tongue is irrelevant). The standing
+# shelf's lid top edge lands on its top (Z 19.10); the contact
+# angle is sweep-verified (target ~95 deg).
+shell = fuse(shell, box(-0.45, 0.45, 1.88, 3.38, 10.0, 19.10))
+shell = report("shell-central+stop", shell)
+
+# Shelf knuckles + pin slots + boss notches.
+for sgn in (+1, -1):
+    def X(a, b, s=sgn):
+        return (a, b) if s > 0 else (-b, -a)
+    xa, xb = X(4.3, 8.6)
+    shelf = fuse(shelf, xcyl(xa, xb, AX_R))
+    shelf = cut(shelf, xcyl(xa, xb, 1.05, cy=AX_Y - 0.15),
+                xcyl(xa, xb, 1.05, cy=AX_Y + 0.15),
+                box(xa, xb, AX_Y - 0.15, AX_Y + 0.15,
+                    AX_Z - 1.05, AX_Z + 1.05))
+    for (a, b) in ((0.0, 4.3), (8.6, 11.2)):
+        xa, xb = X(a, b)
+        shelf = cut(shelf, box(xa, xb, -3.5, 2.4, 15.0, 22.3),
+                    box(xa, xb, -2.67, -0.17, 10.9, 15.6))
+# E/W skirt fin north-end trim (arc-sweep finding): the fins
+# (X +-(28.25..30.25), Z 11.15..15.35) hang with their north
+# faces coplanar with the bay north wall's inner face
+# (Y -62.37); rotating about the south axis, their bottom
+# corners (rel dy -61.80, dz -8.15, radius 62.33 > 61.80) swing
+# north and clip the wall's top inner corner (measured
+# 0.700 mm3/side at 2.5 deg). Shortening the fins' low north
+# ends to Y -61.57 (rel dy -61.00, max radius 61.54 < 61.80)
+# clears the swing; the lid above is untouched.
+for sgn in (+1, -1):
+    xa, xb = (28.25, 30.25) if sgn > 0 else (-30.25, -28.25)
+    shelf = cut(shelf, box(xa, xb, -62.37, -61.57, 11.0, 15.35))
+shelf = report("north-shelf+hinge", shelf)
+
+# Latch receiver in tray-right under the +85 boss (line
+# Y = -61.00, stem centre (82, -61)): pocket for the collar,
+# keyhole entries at the two slide positions (stem X 78.2 /
+# 85.8), neck between them. Locked = slider centred: the collar
+# (O4.4) sits in the pocket under the tray top, the stem in the
+# neck — a 1 mm lift test is the proof. Release = slide +-3.8.
+tray_r = cut(tray_r,
+             box(75.0, 89.0, -63.3, -58.7, 9.25, 10.00),
+             cyl(78.2, -61.0, 2.5, 10.00, 10.95),
+             cyl(78.2, -60.7, 2.5, 10.00, 10.95),
+             box(75.7, 80.7, -61.0, -60.7, 10.00, 10.95),
+             cyl(85.8, -61.0, 2.5, 10.00, 10.95),
+             cyl(85.8, -60.7, 2.5, 10.00, 10.95),
+             box(83.3, 88.3, -61.0, -60.7, 10.00, 10.95),
+             box(80.2, 83.8, -62.15, -59.85, 10.00, 10.95))
+tray_r = report("tray-right+latch", tray_r)
+
+# Latch slider (new printed part, built at the centred/locked
+# position): body in the plateau groove, grip grooves on top
+# (top stays flush 22.00), stem down the web slot, collar under
+# the tray top. A PETG finger under the body (arm 7 long x 0.6
+# thick, tooth into the groove-floor dip) centres the slider on
+# release — unloaded in the dip (locked), max strain ~1.3% at
+# full travel; return force ~0.5 N against a 0.3 g slider.
+sl = box(72.0, 92.0, -61.3, -55.7, 19.8, 22.0)
+for gx in (75.5, 80.5, 85.5):
+    sl = cut(sl, box(gx, gx + 1.2, -61.3, -55.7, 21.5, 22.5))
+sl = cut(sl, box(81.5, 91.0, -59.5, -58.0, 19.8, 20.7))
+sl = fuse(sl,
+          box(89.5, 92.0, -59.5, -58.0, 19.85, 20.55),
+          box(82.3, 89.5, -59.5, -58.0, 19.90, 20.50),
+          box(81.9, 82.9, -59.5, -58.0, 19.05, 20.00),
+          box(81.0, 83.0, -62.0, -60.0, 9.60, 20.2),
+          cyl(82.0, -61.0, 2.2, 9.30, 10.00))
+slider = report("latch-slider", sl)
+
+# Trim the shell by the fixed trays/infill: the (B) flat sheet
+# (Z 8.90..10.90 over the pre-revision footprint) overlaps
+# tray-left's top by 3.993 mm3 at its north-west (measured);
+# wherever a tray already provides the 10.90 surface the sheet
+# is redundant. Coincident resting faces are unaffected.
+shell = cut(shell, tray_l, tray_r, infill)
+shell = report("shell-central+trim", shell)
+
 parts = {
     "tray-left": tray_l, "tray-right": tray_r, "centre-infill": infill,
     "shell-central": shell, "north-shelf": shelf,
     "plate-left": plate_l, "plate-right": plate_r,
     "plunger-sw1": plunger, "light-pipe-dled": pipe,
+    "latch-slider": slider,
 }
 for name, s in parts.items():
     bd.export_step(s, f"{OUT}/{name}.step")
