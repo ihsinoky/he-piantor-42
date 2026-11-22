@@ -50,6 +50,15 @@ def rep(label, v):
     return v
 
 
+def inter_vol(a, b, c=None):
+    r = a.intersect(b)
+    items = list(r) if isinstance(r, (list, bd.ShapeList)) else [r]
+    items = [x for x in items if x is not None and x.volume > 1e-9]
+    if c is None:
+        return sum(x.volume for x in items)
+    return sum(vol(x.intersect(c)) for x in items)
+
+
 plate_r, plate_l = load("plate-right"), load("plate-left")
 tray_r, tray_l = load("tray-right"), load("tray-left")
 shell, infill = load("shell-central"), load("centre-infill")
@@ -64,7 +73,7 @@ print("== tray solidity ==")
 for nm, t in (("tray-right", tray_r), ("tray-left", tray_l)):
     print(f"  {nm}: {len(t.solids())} solid(s), vol {t.volume/1000:.2f}k")
 
-print("== 1. re-profile inner edges (rows) ==")
+print("== 1. re-profile inner edges (thin-slab rows) ==")
 
 
 def subs(s, slab):
@@ -77,7 +86,7 @@ def subs(s, slab):
 
 worst_gap = 0.0
 for y in range(0, 73, 4):
-    slab = box(-56.0, 56.0, y - 0.25, y + 0.25, 9.90, 10.95)
+    slab = box(-56.0, 56.0, y - 0.1, y + 0.1, 9.90, 10.95)
     runs = []
     for name, s in ALL.items():
         for c in subs(s, slab):
@@ -88,6 +97,11 @@ for y in range(0, 73, 4):
     for i in range(len(runs) - 1):
         r0, r1 = runs[i], runs[i + 1]
         if {r0[2], r1[2]} == {"PLATE", "CASE"} and r1[0] - r0[1] > 0.05:
+            # spanned by a third run (e.g. the tray band under a
+            # shell sub-run's bbox)? then it is not an open seam
+            if any(o[0] < r1[0] - 0.01 and o[1] > r0[1] + 0.01
+                   for o in runs if o is not r0 and o is not r1):
+                continue
             w = r1[0] - r0[1]
             worst_gap = max(worst_gap, w)
             print(f"  Y={y}: seam {r0[1]}..{r1[0]} w={w:.2f} "
@@ -133,12 +147,18 @@ for sgn, plate, tray in ((+1, plate_r, tray_r), (-1, plate_l, tray_l)):
               f"tongue={tv:8.3f} bandtop={bv:8.3f} seamblock={blocked:8.3f}")
 
 print("== 4. tolerance corners (plate shifted) ==")
+# NOTE: a shifted plate overlaps the tray recess walls anywhere
+# (the recess was cut by the plate solid itself - nominal zero
+# fit, pre-existing). The band-specific figure restricts the
+# intersection to the band region box per side.
+BANDBOX = {+1: box(9.0, 58.0, -0.4, 72.0, 8.60, 10.95),
+           -1: box(-58.0, -9.0, -0.4, 72.0, 8.60, 10.95)}
 for dx, dy, tag in ((0.30, 0, "away +X"), (-0.30, 0, "toward -X"),
                     (0, 0.30, "+Y"), (0, -0.30, "-Y")):
     for sgn, plate, tray in ((+1, plate_r, tray_r), (-1, plate_l, tray_l)):
         ps = plate.moved(bd.Location((dx * sgn, dy, 0)))
-        rep(f"plate{sgn:+d} shift {tag} x tray",
-            vol(ps.intersect(tray)))
+        rep(f"plate{sgn:+d} shift {tag} x tray (band region)",
+            inter_vol(ps, tray, BANDBOX[sgn]))
         rep(f"plate{sgn:+d} shift {tag} x shell",
             vol(ps.intersect(shell)))
 # widened-hairline tongue cover: plate shifted 0.30 away (+X right)
@@ -151,13 +171,14 @@ for sgn, plate, tray in ((+1, plate_r, tray_r), (-1, plate_l, tray_l)):
         print(f"  away-shift sgn={sgn:+d} Y={y}: tongue under widened "
               f"hairline = {tv:.3f} (must be > 0)")
 
-print("== 5. assembly: plate lift path ==")
-others = [tray_r, tray_l, shell, infill, shelf, cover]
+print("== 5. assembly: plate lift path (shelf off - the service "
+      "state; plate x shelf is unchanged by this round) ==")
+others = [tray_r, tray_l, shell, infill, cover]
 for dz in (2.5, 5.0):
     for sgn, plate in ((+1, plate_r), (-1, plate_l)):
         ps = plate.moved(bd.Location((0, 0, dz)))
         v = sum(vol(ps.intersect(o)) for o in others)
-        rep(f"plate{sgn:+d} at +{dz} vs case", v)
+        rep(f"plate{sgn:+d} at +{dz} vs case (no shelf)", v)
 
 print("== 6. tray x caps ==")
 CAPS_J = json.load(open("./caps.json"))

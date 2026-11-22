@@ -1,0 +1,124 @@
+== closed: case parts pairwise ==
+  pairwise worst: 0.0000
+== closed: case vs internals ==
+  tray-left x main                                           0.0000 mm3
+  tray-left x wings                                         42.3800 mm3
+  tray-left x power board                                    0.0000 mm3
+  tray-left x fly-real                                       0.0000 mm3
+  tray-left x usb-plug-real                                  0.0000 mm3
+  tray-left x module40                                       0.0000 mm3
+  tray-right x main                                          0.0000 mm3
+  tray-right x wings                                        42.3800 mm3
+  tray-right x power board                                   0.0000 mm3
+  tray-right x fly-real                                      0.0000 mm3
+  tray-right x usb-plug-real                                 0.0000 mm3
+  tray-right x module40                                      0.0000 mm3
+  centre-infill x main                                       0.0000 mm3
+  centre-infill x wings                                      0.0000 mm3
+  centre-infill x power board                                0.0000 mm3
+  centre-infill x fly-real                                   0.0000 mm3
+  centre-infill x usb-plug-real                              0.0000 mm3
+  centre-infill x module40                                   0.0000 mm3
+  shell-central x main                                       0.0000 mm3
+  shell-central x wings                                      0.0000 mm3
+  shell-central x power board                                0.0000 mm3
+  shell-central x fly-real                                   0.0000 mm3
+  shell-central x usb-plug-real                              0.0000 mm3
+  shell-central x module40                                   0.0000 mm3
+  north-shelf x main                                         0.0000 mm3
+  north-shelf x wings                                        0.0000 mm3
+  north-shelf x power board                                  0.0000 mm3
+  north-shelf x fly-real                                     0.0000 mm3
+  north-shelf x usb-plug-real                                0.0000 mm3
+  north-shelf x module40                                     0.0000 mm3
+  plate-left x main                                          0.0000 mm3
+  plate-left x wings                                         0.0000 mm3
+  plate-left x power board                                   0.0000 mm3
+  plate-left x fly-real                                      0.0000 mm3
+  plate-left x usb-plug-real                                 0.0000 mm3
+  plate-left x module40                                      0.0000 mm3
+  plate-right x main                                         0.0000 mm3
+  plate-right x wings                                        0.0000 mm3
+  plate-right x power board                                  0.0000 mm3
+  plate-right x fly-real                                     0.0000 mm3
+  plate-right x usb-plug-real                                0.0000 mm3
+  plate-right x module40                                     0.0000 mm3
+  plunger-sw1 x main                                         0.0000 mm3
+  plunger-sw1 x wings                                        0.0000 mm3
+  plunger-sw1 x power board                                  0.0000 mm3
+  plunger-sw1 x fly-real                                     0.0000 mm3
+  plunger-sw1 x usb-plug-real                                0.0000 mm3
+  plunger-sw1 x module40                                     0.0000 mm3
+  light-pipe-dled x main                                     0.0000 mm3
+  light-pipe-dled x wings                                    0.0000 mm3
+  light-pipe-dled x power board                              0.0000 mm3
+  light-pipe-dled x fly-real                                 0.0000 mm3
+  light-pipe-dled x usb-plug-real                            0.0000 mm3
+  light-pipe-dled x module40                                 0.0000 mm3
+  latch-slider x main                                        0.0000 mm3
+  latch-slider x wings                                       0.0000 mm3
+  latch-slider x power board                                 0.0000 mm3
+  latch-slider x fly-real                                    0.0000 mm3
+  latch-slider x usb-plug-real                               0.0000 mm3
+  latch-slider x module40                                    0.0000 mm3
+  trackpad-cover x main                                      0.0000 mm3
+  trackpad-cover x wings                                     0.0000 mm3
+  trackpad-cover x power board                               0.0000 mm3
+  trackpad-cover x fly-real                                  0.0000 mm3
+  trackpad-cover x usb-plug-real                             0.0000 mm3
+  trackpad-cover x module40                                  0.0000 mm3
+  cover x legacy Ø44 envelope (by design: fills the gap)     279.8068 mm3
+== cover-specific ==
+  cover x module40                                           0.0000 mm3
+  cover x plunger (rest)                                     0.0000 mm3
+  cover x plunger (pressed -1.0)                             0.0000 mm3
+  min dist cover <-> plunger: 0.600
+  cover x caps-unpressed                                     0.0000 mm3
+  min dist cover <-> caps-unpressed: 20.161
+  cover x caps-pressed                                       0.0000 mm3
+  min dist cover <-> caps-pressed: 20.161
+  cover x sensing disc Ø38 (must be 0 = fully exposed)       0.0000 mm3
+  cover bbox X -27.55..27.55  Y 20.45..69.00  Z 10.30..12.70  vol 927.0
+  cover x shell (face contacts only, expect 0.000)           0.0000 mm3
+  min dist cover <-> shell: 0.000
+== lap audits ==
+  shell above 10.90 in annulus r22.3..24.6 (excl plunger)       0.0000 mm3
+  shell above 10.31 in rabbet r24.6..28.0 (excl plunger)       0.0000 mm3
+  shell material at rabbet floor level r26..27 (>0)          9.7918 mm3
+  plunger rest cap: shell in cyl r2.0 @10.89..10.91 (>0)       0.0550 mm3
+  cover material in south face slab Z10.90..11.35 (>0)       1.0800 mm3
+  cover min Z at the south face (expect <= 10.92): 10.899999999999999
+== through-path / tolerance corners ==
+  through-path ray test [nominal]: worst free ratio 0.803 at (210.0, 10.32) (1.000 = open path)
+  cover +0.20 X: cover x shell (interference)                0.3476 mm3
+  through-path ray test [cover +0.20 X]: worst free ratio 0.802 at (330.0, 10.32) (1.000 = open path)
+  cover -0.20 X: cover x shell (interference)                0.0315 mm3
+  through-path ray test [cover -0.20 X]: worst free ratio 0.802 at (210.0, 10.32) (1.000 = open path)
+  cover +0.20 Y: cover x shell (interference)                1.0061 mm3
+  through-path ray test [cover +0.20 Y]: worst free ratio 0.800 at (330.0, 10.32) (1.000 = open path)
+  cover -0.20 Y: cover x shell (interference)                0.4352 mm3
+  through-path ray test [cover -0.20 Y]: worst free ratio 0.800 at (210.0, 10.32) (1.000 = open path)
+  cover +0.20 Z lift: cover x shell (interference)           0.0000 mm3
+  through-path ray test [cover +0.20 Z lift]: worst free ratio 0.976 at (195.0, 10.32) (1.000 = open path)
+== hinge arc sweep vs cover ==
+  arc sweep worst (shelf+slider vs cover): 0.0000
+== fixing (modelled M2 screws, r26.7) ==
+  screw @(23.12,61.35): shank x shell (engagement) 3.054; screw x main 0.000; x module 0.000; x plunger 0.000; x cover 0.000
+    boss material in shell (boss cyl minus pilot): 55.782
+  screw @(-23.12,61.35): shank x shell (engagement) 3.054; screw x main 0.000; x module 0.000; x plunger 0.000; x cover 0.000
+    boss material in shell (boss cyl minus pilot): 55.782
+  screw @(-23.12,34.65): shank x shell (engagement) 2.441; screw x main 0.000; x module 0.000; x plunger 0.000; x cover 0.000
+    boss material in shell (boss cyl minus pilot): 55.782
+  screw @(23.12,34.65): shank x shell (engagement) 2.441; screw x main 0.000; x module 0.000; x plunger 0.000; x cover 0.000
+    boss material in shell (boss cyl minus pilot): 55.782
+== connector zone / trim audits ==
+  cover x connector-zone box                                 0.0000 mm3
+  boss cyl @(23.1,61.3) x connector-zone box                 0.0000 mm3
+  boss cyl @(-23.1,61.3) x connector-zone box                0.0000 mm3
+  boss cyl @(-23.1,34.6) x connector-zone box                0.0000 mm3
+  boss cyl @(23.1,34.6) x connector-zone box                 0.0000 mm3
+  shell above 11.25 within r25.6 of pad (trim audit)         0.0000 mm3
+== invariants ==
+  outline X 310.04  Y 146.07  Z max 22.00
+  shelf material north of Y -64.365: 12.1550
+done

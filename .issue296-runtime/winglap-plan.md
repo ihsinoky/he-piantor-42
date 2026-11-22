@@ -137,3 +137,21 @@ inner-edge mask, Y −0.40..72; conform-cut against shell-central
 and centre-infill; fused into tray-right / tray-left. North
 hairline (0.13–0.18, blind, floor 9.40) and the south skin are
 already flush — untouched.
+
+## Outcome (2026-11-22)
+
+Candidate B implemented as `build_wing_band()` in
+build_case3d.py (fused into both trays; trays stay single
+solids). After-profile: worst PLATE<->CASE seam along the
+inner perimeter 0.30 (tip) / 0.23 (diagonal) / 0.12 (SE
+corner) — the open 9.21–9.36 slot is gone. Tongue verified
+at all stations; away-shift (+0.30) leaves tongue under the
+widened hairline (no through-gap); toward-shift presses
+1.12/2.66 mm3 locally (same class as the plate<->recess
+zero-nominal fit). Plate lift (shelf off) 0.000 at +2.5/+5.0.
+Verification caught one real defect: the band overlapped
+the trackpad cover's bridging screw pads (27.04 mm3/side) —
+fixed by conform-cutting the band against the cover too.
+verify_lap pairwise worst back to 0.0000; verify_corr
+regression identical to the correction-round baseline.
+Full record: case-3d.md addendum "Wing lap round".

@@ -1356,3 +1356,135 @@ section through the pad centre `files/case296-padsection.png`
 rabbet on both sides, module sectioned in its seat); top view
 refreshed `files/case296-3d-top.png`. Scripts:
 make_section.py + render_lap.py.
+
+## Addendum — Wing lap round (PO 2026-11-22, corrected referent): the Wing<->case groove closed with a flush filler rib + under-tongue lap
+
+PO correction: 「溝はwing側との溝を指してた」, with an annotated
+render — the red loops mark the perimeter slot between each
+Wing plate and the surrounding case/centre structure (right
+Wing's inner edge; left side between the shelf/hinge structure
+and the left Wing). The previous round's pad shiplap stands
+(it fixed real defects) but was not this referent. Plan note:
+`.issue296-runtime/winglap-plan.md`; probes
+`probe_winggroove.py` / `probe_wingprofile.py` /
+`probe_seam2.py`; verification `verify_winglap.py` +
+`verify_lap.py` + `verify_corr.py` regression.
+
+### The groove, measured (before)
+
+Plate: top 10.90, bottom 9.40, tip edge |X| = 22.47, inner
+long edge diagonal (drifts ~0.58 in X per 1 in Y).
+
+- **Centre segment, Y ≈ 17..66 (both sides)** — a constant
+  **9.21–9.36 wide open slot** between the shell-central edge
+  and the plate's inner edge; depth 2.0 (tray valley shoulder
+  at 8.90 under most stations), 6.2 at Y 40 (boss tops 4.70),
+  **11.55 at Y 45 (floor −0.65, open to the interior)**.
+- **Tip/valley segment, Y ≈ −0.4..17** — slot west/east of the
+  plate tips over the centre valley (Main below): width 4.90
+  (Y 10) / 2.01 (Y 15) to the first case material, up to ~14
+  to the shell edge; floor −0.65.
+- **SE corner, Y 66..72** — shell corner recedes; slot widens
+  to ~10.5 (shoulder 8.90 under it, tray island at 10.90 at
+  the plate edge); at Y 70 the tray field at 10.90 takes over
+  with a ~2.15 residual at the corner station.
+- **North edge** — hairline only (0.13–0.18 wide, floor 9.40,
+  blind): already flush, untouched.
+- **South edge** — no groove: the south-unification skin
+  already holds a true 0.30 offset at 10.90. Untouched.
+- **Bay stretch, Y −64..−2** — the plate's inner strip lies
+  over the bay E/W wall; west of the tip is the battery bay
+  opening, covered by the shelf when closed. Functional
+  opening — stays open by design.
+
+### Lap candidates
+
+- **A — case flange laps OVER the plate edge: REJECTED.** Best
+  appearance and total gap immunity, but the plate installs
+  vertically after the PCB and must lift straight out; an
+  over-lap blocks both.
+- **B — flush filler rib + under-tongue lap: CHOSEN** (below).
+- **C — rabbet/reveal channel: REJECTED** — leaves a deliberate
+  0.85 × 0.55 channel; a shallow groove, against the
+  levelling ask.
+- **D — reverse lap (plate over a case tongue): REJECTED** —
+  needs a step on the manufactured plate (outlines unchanged)
+  and risks drop-in collision.
+
+### Implemented geometry (candidate B)
+
+Per side, a tray-owned filler rib along the plate's inner
+edge, Y −0.40..72: plan = plate outline (outer wire only)
+dilated +10.30 minus dilated +0.30, Z 8.65..10.90 (top flush
+with the plate at 10.90); plus a **tongue** Z 8.65..9.15
+reaching **1.50 under the plate edge** (plate bottom 9.40 —
+0.25 clear). The band's bottom (8.65) overlaps the tray
+valley shoulder (top 8.90) by 0.25 wherever the shoulder runs
+under the slot, which fuses the rib to the tray (both trays
+remain single solids); over the deep stations it is a
+2.25-tall rib face-seated against the shell edge. Conform-cut
+against shell-central, centre-infill and the trackpad cover
+(its screw pads bridged the old slot — see verification).
+Judged on the PO's axes: *appearance* — field and plate
+coplanar, one hairline at the plate edge; *assembly* —
+nothing crosses the plate's plan above its bottom plane, so
+drop-in/lift-out are unchanged (Wing PCB top ~6.3 and the FFC
+pass under the rib, underside 8.65); power-board-before-Wings
+untouched; *rigidity* — case-integral rib, shoulder-fused,
+tongue-stiffened edge; *tolerance* — below.
+
+**Measured seam** (thin-slab rows, after): **0.30** at the
+tip edge (Y −0.4..16), **0.23** along the diagonal, **0.12**
+at the SE-corner stations (Y 64..72) — the OCC face offset
+returns slightly less than the nominal 0.30 on the diagonal/
+corner; every value is still looser than the plate<->recess
+fit itself (nominal zero — the recess was cut by the plate
+solid), so the band is never the tightest fit in the
+assembly. Recorded as measured, not as the nominal.
+
+### Verification (verify_winglap.py; verify_lap.py + verify_corr.py regression)
+
+- **Re-profile after**: worst PLATE<->CASE seam along the
+  inner perimeter = **0.30** (was 9.21–9.36 over Y 17..66).
+  The 9.38 readings in the first pass were a detector artifact
+  (a shell sub-run pairing across the spanning tray run) —
+  fixed in the detector and re-run clean.
+- **Tongue/through-path**: tongue present at all 18 probed
+  stations (full columns); seam-centre columns blocked by
+  plate/band or tongue at every station.
+- **Tolerance corners**: plate shifted 0.30 AWAY — band-region
+  interference 0.000, and the widened 0.60 hairline still has
+  tongue under it at all probed stations (reach 1.20 ≥ 0.60):
+  **no through-gap**. Shifted 0.30 TOWARD — 1.12 (R) / 2.66
+  (L) mm³ in the band region, i.e. a light press where the
+  local seam (0.12..0.23) is under the shift; the same class
+  as the plate<->recess fit (a 0.30 toward-shift presupposes
+  the full print clearance on the opposite recess wall).
+  ±Y shifts: 0.000 except 0.37 at the band's north end face.
+- **Assembly**: plate lifted +2.5 / +5.0 (shelf off — the
+  service state; plate x shelf is unchanged by this round)
+  vs tray/shell/infill/cover = **0.000** both plates.
+- **Defect caught by verification**: the first band build
+  overlapped the trackpad cover's screw pads (27.04 mm³/side
+  in verify_lap's pairwise — the pads were designed to bridge
+  the old slot). The band is now conform-cut against the
+  cover as well; pairwise worst back to **0.0000**.
+- **Regression**: verify_corr identical to the correction-
+  round baseline (pairwise worst 0.0000; case vs internals
+  0.000 except the accepted J_WING envelope artifact
+  42.380/side, unchanged; hinge arc stop contact first at
+  95.0°; latch proof 0.840/0.000; shelf span ±152.30; cell
+  sweeps unchanged); verify_lap green (pad shiplap intact,
+  band dips under the cover pads by conform cut); tray x caps
+  (pressed/unpressed) 0.000; invariants: outline
+  310.04 × 146.07, Z max 22.00, north face probe 12.1550.
+
+### Renders
+
+Perspective in the PO's annotated framing (from the
+south-west) `files/case296-winglap-persp.png`; NEW section at
+Y=44 through the Wing<->case seam `files/case296-wingsection.png`
+(Y=44 slab, from the south: band flush at 10.90, seam,
+tongue under the plate edge, Wing board below); top view
+refreshed `files/case296-3d-top.png`. Scripts:
+make_section_wing.py + render_winglap.py.
