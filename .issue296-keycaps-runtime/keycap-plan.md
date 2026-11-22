@@ -171,3 +171,46 @@ full travel with no contact (feeler/paper drag at bottom-out);
 - Renders: single-cap close-up, a row on the Wing 17 pitch, caps-in-
   case top view (goal files dir).
 - Issue #296 comment; GOAL.md one-liner; commits on this branch.
+
+## Round 2 — dish rework (PO 2026-11-22: bring out what feels good in the Junana)
+
+PO's stated Junana likes: (1) a cylindrical dish in which the
+left-right finger position is graspable; (2) the dish radius fits
+the finger. PMO comparison: the current design has the right axis
+(cylinder ∥ Y, curving in X) but at depth 0.20 / R 170 it is nearly
+flat, and the dish runs edge-to-edge with no rim. Junana publishes
+no R/depth; targets below are derived from fingertip geometry,
+not copied. This note is written BEFORE the model change.
+
+### Targets
+- Rim land RIM_W = 1.50 mm per side at TOP_Z (11.10; the case
+  Z 22.00 datum is preserved exactly — only the pocket floor
+  lowers). Pocket half-chord a = W/2 − 1.50 → chord 13.50 (17 mm)
+  / 12.50 (16 mm). The trough stays open front/back, as a
+  cylindrical dish ∥ Y must; the rim is on the left/right sides.
+- Fingertip basis: the typing contact patch of a finger pad is
+  ≈ 10–12 mm wide. A 13.5 mm chord admits the pad with ≈ 1 mm to
+  spare per side, so both pad edges ride the cylinder's rising
+  flanks and a lateral offset unbalances the slope/pressure left
+  vs right — that is the position cue. The old dish (s 0.20 over
+  half-chord 8.25, R 170, edge slope 2.8°, depth only 2× the FDM
+  Z tolerance ±0.10) is below tactile registration after print.
+- Depth variants (brackets for a by-feel pick; socket/skirt/
+  cavity identical): shallow 0.35 / primary 0.50 / deep 0.60.
+  R from (a² + s²)/2s at 17 mm: 65.3 / 45.8 / 38.3 (edge slope
+  5.9° / 8.5° / 10.1°); at 16 mm: 56.0 / 39.3 / 32.9.
+- Wall cap (hard constraint): material over the socket ceiling
+  at the pocket centre = (TOP_Z − s) − SOCKET_CEIL_Z = 0.95 − s.
+  Minimum accepted 0.35 (≈3 layers @0.12 over the 4.24 cross
+  ceiling; over the cavity ceiling the wall is then ≥ 0.50).
+  An uncapped deep wish of 0.80 (R ≈ 28.9) would leave 0.15 —
+  rejected; the deep bracket is capped at 0.60 (wall 0.35).
+  Primary 0.50 leaves 0.45 / 0.60 — 5× the Z print tolerance of
+  depth, wall above the FDM comfort line over the cavity.
+- Implementation: dish cutter = cylinder ∩ box |x| ≤ a (the
+  cylinder crosses TOP_Z exactly at |x| = a), so the rim is never
+  cut. The top-perimeter chamfer selection must exclude the new
+  pocket-boundary edges (restrict to edges near the plan outline).
+- Re-verify: wall thickness over socket ceiling measured from
+  solids per variant; socket/gap/|X|/shelf/bottom-out unchanged
+  (outer dimensions do not move); both pitches regenerate.
