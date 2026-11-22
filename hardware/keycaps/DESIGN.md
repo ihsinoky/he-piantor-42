@@ -197,6 +197,10 @@ that pick closes the round-2 variant bracket.
 - Pitch decision (D-015) still open — this design is parametric in
   it; the 16 mm wall deficit above is one of its inputs.
 - Legends: blank by design; legend process undecided.
-- F1 (stem tip 10.10 vs record 9.60): PMO to disposition — the
-  case's cap placement and #255's keytop figures carry the 0.50.
+- F1 (stem tip 10.10 vs record 9.60): **dispositioned 2026-11-22** —
+  Issue #255 corrected by comment
+  (https://github.com/ihsinoky/he-piantor-42/issues/255#issuecomment-7078689880;
+  issue body untouched, study stays open); findings-ledger entry F-016
+  added via PR #307. No design change — this design already uses the
+  corrected value, and no adopted board/case geometry used 9.60.
 - Bore geometry undimensioned on the drawing → print gate (b).
