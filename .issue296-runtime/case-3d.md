@@ -870,3 +870,128 @@ axis vertical); the post's contact face is 0.9 × 1.5.
   plane); south unification, antenna band, Wing/plate
   positions unchanged; battery sweeps and power-board fixing
   unchanged in the closed state.
+
+## Addendum — shelf trim round (PO 2026-11-22)
+
+PO verbatim: 「wingの両端側に伸びてる細い部分は省略して。
+面を合わせるのは北側だけでいいよ」 — the shelf's thin
+extensions toward both Wing ends are OMITTED; the flush/height
+matching matters only on the north side. This supersedes the
+"full width" element of the 2026-11-21 profile (the band
+plateaus at Z22.00 across the Wing key fields). The decision
+is a simplification: the strips carried no function besides
+the band look and the original screw/latch seats, both of
+which had already moved off them once (hinge round) — except
+the latch, see below.
+
+### What was removed; final shelf
+
+- The shelf is now the COVER ALONE (lid plate + E/W skirts +
+  S skirts + N skirt + hinge knuckles): X −30.25..+30.25
+  (60.5 wide — the lid span, incl. the skirt/bridge structure
+  over the bay sills at |X| 28.25..30.25), Y −64.37..2.13
+  (knuckle wrap), Z 8.00..22.00, 1 solid, 26.42k mm³
+  (was 96.52k with the strips). The end faces are the cover's
+  own faces at X ±30.25 — no new cut faces were created.
+- build_plateau is no longer called; its groove/dip/slot for
+  the old latch died with the right strip.
+- North face over the shelf's span: flush at Y −64.370
+  (deviation 0.000 — the 2.563 in the raw probe is the probe
+  band's own 0.005 slice of the face plane, same reading as
+  the hinge round's 12.155 over the wider shelf), top at
+  Z22.00. The keycap-gap rule (1.30 nominal) where the shelf
+  remains: closed shelf vs caps pressed AND unpressed 0.000;
+  shelf vs the 1.30 cap keep-out prisms 0.000.
+
+### Latch — seat relocated (forced consequence, mechanism kept)
+
+The hinge-round latch sat ON the right strip (slider X
+72..92, receiver in tray-right at X 75..89): cutting the arms
+removed its seat. The mechanism is unchanged — slider in a
+top groove, stem through a web slot, collar in a pocket under
+a fixed web, keyhole entries at the two slide positions
+(±3.8), PETG centring finger, 1 mm lift proof — but the seat
+moved to the bay north wall rib inside the lid span, and two
+shapes adapted to that seat (probe_trim*.py):
+
+- Rib geometry: top 15.15, Y −64.37..−62.0, lid underside
+  15.35 (0.20 gap). The corridor between the north face
+  (−64.37) and the middle-cell face (−59.37) is 4.99 wide and
+  the rib is ~2.4 of it, so the round Ø4.4 collar cannot be
+  pocketed: the collar is now a BAR 4.4 (X) × 2.2 (Y) × 0.75
+  at Z 13.35..14.10, and the stem is 2.0 (X) × 1.2 (Y).
+- Stem centre (12, −62.55). Bar Y −63.65..−61.45: pocket
+  north wall 0.57 of rib-face material, cell-face clearance
+  1.92. Pocket X 5.6..18.4, Y −63.80..−61.40, Z 13.30..14.15
+  in the rib (hosts: centre-infill + tray-right). Web = rib
+  top 14.15..15.15; neck slot Y −63.25..−61.85 (stem width);
+  entries Y −64.37..−61.40 at stem X 12±3.8, opened to the
+  north face so the bar's arc drift (northward, 0.16 by web
+  exit) cannot jam. Retention is over the bar's north chord:
+  the web strip Y −63.65..−63.25 (0.40) × X 10.6..13.4 —
+  lift proof below.
+- FIRST SEAT FAILED, recorded honestly: the receiver was
+  first placed at X 0 and the lift proof read 0.000 — the
+  wall's middle span (|X| ≤ 7.5, the cover skirt's span) is
+  capped at 7.80 and has NO web at pocket height; the probes
+  had sampled the rib at |X| 12..28 only. The seat moved to
+  X +12, where the rib top 15.15 is measured. A second defect
+  of the first build — the bar's travel sweep (X ±6.0)
+  clipped the north skirt by 0.960 mm³ at full slide — was
+  fixed by widening the lid stem slot to the sweep (centre
+  ±6.2). (The remaining slider-vs-shelf 1.125 at the entries
+  is the centring finger's tooth riding out of its dip —
+  rigid-model reading of a designed flex, identical value at
+  the original X+85 site in the hinge round.)
+- The slider's other numbers carry over: body 20 long in the
+  lid-top groove (X −2.3..26.3, floor 19.8), top flush
+  22.00, finger strain ~1.3% at full travel.
+- The OLD receiver in tray-right (pocket + keyholes at
+  X 75..89) is REMOVED: tray-right material in the old pocket
+  box measures 48.300 mm³ = the full box volume (was 0.000
+  with the pocket cut). The ±85 bosses are plain geometry
+  again on both sides.
+
+### Exposed-tray audit (where the strips sat)
+
+- Tray material above the 10.90 tray top in either strip
+  footprint (|X| 30.25..154, Y −64.4..0): 0.000 — the trays
+  present a clean 10.90 surface; nothing floated on, hung
+  from, or was supported by the strips. The Fly (top 9.60)
+  and the plates were already independent of them.
+- Nothing else referenced the strips: the shell's south
+  lobes came from the OLD strips in the profile round and
+  are shell parts, untouched.
+
+### Verification (verify_trim.py, final run)
+
+- Closed: case parts pairwise 0.000 (all 10 parts); case vs
+  internals 0.000 except the two accepted artifacts (J_WING
+  envelope 42.380/side; plunger vs Ø44 probe disc 3.672,
+  real Ø40 clearance 0.638 unchanged). Pin fit 0.000.
+- Closed cell sweeps (shelf off): exactly the recorded
+  baselines (each cell's own spring-fin space 175.806 /
+  176.803 / 175.806 + the 0.014 tongue graze). The
+  power-board drop test was not re-run: its parts (board,
+  trays, tongues) are untouched by this round and the board
+  model reads 0.000 vs every case part above.
+- Arc sweep 0..100°, shelf + slider fused with the slider at
+  the EAST ENTRY (the opening configuration — a stronger
+  check than the hinge round's shelf-only sweep): the ONLY
+  contact is the stop, first at 95.0°; caps pressed and
+  unpressed, trackpad Ø44, real Fly, real plugged USB-C plug,
+  desk plane, pin, every fixed part otherwise 0.000 — the
+  relocated bar exits through its entry cleanly.
+- Open state at 95°: all 3 cells extract with 0.000 vs the
+  open shelf+slider and every fixed part.
+- Latch proof (relocated seat): at rest, slider vs receiver
+  0.000 at all 3 positions; lifted 1 mm — locked (centred):
+  0.840 (ENGAGED, the web strip over the bar's north chord);
+  east/west entries: 0.000 (released). Engagement is smaller
+  than the original site's 3.202 (full collar) — recorded as
+  the chord-engagement trade of the rib seat; the latch's
+  load case is incidental lift only.
+- Invariants: outline 310.04 × 146.07; Z max 22.00; north
+  face flush over the shelf span; south unification,
+  slope-free centre step, antenna band, Wing/plate positions
+  unchanged.
