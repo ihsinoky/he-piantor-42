@@ -40,7 +40,15 @@ SLOT_BIAS = -0.02           # nominal interference bias on arm slots
 TOP_Z = 11.10               # cap top: case Z 22.00 datum preserved
 SKIRT_BOTTOM_Z = 4.40       # >= travel max + flange top 0.50 + 0.20
 CORNER_R = 2.0
-DISH_DEPTH = 0.20
+# Dish (round 2, Junana-feel): cylindrical pocket, axis // Y, inside
+# a rim land RIM_W wide per side that stays at TOP_Z. The pocket
+# half-chord is a = W/2 - RIM_W; R follows from a and the depth.
+# Depth is capped by the wall over the socket ceiling:
+# (TOP_Z - s) - SOCKET_CEIL_Z >= MIN_TOP_WALL  ->  s <= 0.60.
+RIM_W = 1.50                # rim land per side (left/right)
+DISH_DEPTH = 0.50           # primary variant
+DISH_VARIANTS = (0.35, 0.50, 0.60)  # shallow / primary / deep(cap)
+MIN_TOP_WALL = 0.35         # min material over the socket ceiling
 TOP_CHAMFER = 0.30
 GAP_NOMINAL = 0.50          # D-002 rationale: 16.5 cap at 17 pitch
 
@@ -82,34 +90,57 @@ def _cross_prism(span, slot_x, slot_y, z0, z1):
     return a.fuse(b)
 
 
-def build_cap(pitch=17.0, socket_offset=0.0):
+def dish_radius(pitch, dish_depth):
+    """Cylinder R for the pocket: half-chord a = W/2 - RIM_W, depth s."""
+    a = (pitch - GAP_NOMINAL) / 2 - RIM_W
+    return (a * a + dish_depth * dish_depth) / (2 * dish_depth)
+
+
+def build_cap(pitch=17.0, socket_offset=0.0, dish_depth=DISH_DEPTH):
     """Return the keycap solid for the given pitch (mm).
 
     socket_offset is added to both arm-slot widths; it is the
     printer-calibration parameter set by the fit coupon (see
     DESIGN.md). The cross span (arm-tip clearance) is not offset.
+    dish_depth selects the top-pocket variant (DISH_VARIANTS).
     """
+    assert dish_depth <= TOP_Z - SOCKET_CEIL_Z - MIN_TOP_WALL + 1e-9, (
+        f"dish_depth {dish_depth} leaves < {MIN_TOP_WALL} mm over the "
+        f"socket ceiling")
     W = pitch - GAP_NOMINAL
     height = TOP_Z - SKIRT_BOTTOM_Z
 
     # outer shell
     cap = _prism(W, CORNER_R, SKIRT_BOTTOM_Z, TOP_Z)
 
-    # top dish: cylinder axis // Y, surface at TOP_Z on the rim
-    # (x = +/- W/2) and TOP_Z - DISH_DEPTH at centre.
-    a = W / 2
-    s = DISH_DEPTH
+    # top dish: cylindrical pocket, axis // Y, floor at TOP_Z - s at
+    # centre, rising to TOP_Z at |x| = a = W/2 - RIM_W. The cutter is
+    # the cylinder clipped to |x| <= a, so the rim land at TOP_Z is
+    # never cut. The trough stays open front/back (cylinder // Y).
+    a = W / 2 - RIM_W
+    s = dish_depth
     R = (a * a + s * s) / (2 * s)
     zc = (TOP_Z - s) + R  # cylinder centre height
-    dish = bd.Solid.make_cylinder(R, W + 10,
-                                  bd.Plane(origin=(0, -(W + 10) / 2, zc),
-                                           x_dir=(1, 0, 0), z_dir=(0, 1, 0)))
+    cyl = bd.Solid.make_cylinder(R, W + 10,
+                                 bd.Plane(origin=(0, -(W + 10) / 2, zc),
+                                          x_dir=(1, 0, 0), z_dir=(0, 1, 0)))
+    clip = bd.Solid.make_box(2 * a, W + 10, s + 2.0,
+                             bd.Plane(origin=(-a, -(W + 10) / 2,
+                                              TOP_Z - s - 1.0)))
+    dish_parts = cyl.intersect(clip)
+    dish = dish_parts[0]
+    for extra in dish_parts[1:]:
+        dish = dish.fuse(extra)
     cap = cap.cut(dish)
 
-    # top perimeter chamfer (best effort; geometry is valid without it)
+    # top perimeter chamfer (best effort; geometry is valid without
+    # it). Restricted to edges near the plan outline so the new
+    # pocket-boundary edges at TOP_Z are NOT chamfered.
     try:
         top_edges = [e for e in cap.edges()
-                     if abs(e.center().Z - TOP_Z) < 0.35 and e.length > 1.0]
+                     if abs(e.center().Z - TOP_Z) < 0.35 and e.length > 1.0
+                     and (abs(e.center().X) > W / 2 - 0.6
+                          or abs(e.center().Y) > W / 2 - 0.6)]
         if top_edges:
             cap = bd.chamfer(top_edges, TOP_CHAMFER)
     except Exception:
@@ -182,12 +213,19 @@ def build_coupon(offsets=(-0.05, 0.0, 0.05, 0.10, 0.15)):
 def export_all(outdir):
     os.makedirs(outdir, exist_ok=True)
     for pitch in (17.0, 16.0):
-        cap = build_cap(pitch)
         tag = f"p{int(pitch)}"
-        bd.export_step(cap, os.path.join(outdir, f"keycap-{tag}.step"))
-        bd.export_stl(cap, os.path.join(outdir, f"keycap-{tag}.stl"))
-        print(f"{tag}: W={pitch - GAP_NOMINAL:.2f} vol={cap.volume:.1f} mm^3 "
-              f"bbox={cap.bounding_box().min} .. {cap.bounding_box().max}")
+        for s in DISH_VARIANTS:
+            cap = build_cap(pitch, dish_depth=s)
+            suffix = "" if s == DISH_DEPTH else f"-dish{int(round(s * 100)):03d}"
+            bd.export_step(cap, os.path.join(
+                outdir, f"keycap-{tag}{suffix}.step"))
+            bd.export_stl(cap, os.path.join(
+                outdir, f"keycap-{tag}{suffix}.stl"))
+            print(f"{tag}{suffix or ' (primary)'}: W="
+                  f"{pitch - GAP_NOMINAL:.2f} dish={s:.2f} "
+                  f"R={dish_radius(pitch, s):.1f} vol={cap.volume:.1f} mm^3 "
+                  f"bbox={cap.bounding_box().min} .. "
+                  f"{cap.bounding_box().max}")
     cpn = build_coupon()
     bd.export_step(cpn, os.path.join(outdir, "socket-coupon.step"))
     bd.export_stl(cpn, os.path.join(outdir, "socket-coupon.stl"))
