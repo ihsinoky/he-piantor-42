@@ -995,3 +995,86 @@ shapes adapted to that seat (probe_trim*.py):
   face flush over the shelf span; south unification,
   slope-free centre step, antenna band, Wing/plate positions
   unchanged.
+
+## Addendum — shelf CORRECTION round (PO 2026-11-22)
+
+PO verbatim: 「北側はキーの近くまで棚にするよ。削除したかった
+のはキーボードの東西のハジ側にあったやつだよ」 — the shelf
+DOES run along the north, reaching close to the keys, across
+the key fields; what should be removed is only the shelf
+portions at the far east/west ENDS of the keyboard, beyond
+the outermost keys.
+
+### The trim round overshot (recorded honestly)
+
+The trim round above cut the shelf back to the cover alone
+(|X| <= 30.25, 26.42k mm³). That was PMO's misreading of the
+PO's trim instruction: "omit the thin parts toward the Wing
+ends" was executed as removing the whole band over the Wing
+key fields, when the PO meant only the end portions beyond
+the outermost keys. This round restores the band over the
+keys and removes only the ends. The trim round's latch
+relocation (below) is NOT undone — it stays.
+
+### What was restored; final shelf
+
+- The band plateaus are built again (build_plateau, the
+  pre-trim geometry: band at Z22.00 north of the keys, south
+  edge = per-cap offset polyline) and the shelf is again
+  fuse(cover, strip_l, strip_r), one solid, 96.61k mm³.
+- Measured outermost keycap extents (probe_corr.py, from
+  caps.json cap_polys — the actual cap outlines): |X| =
+  151.001 on BOTH sides (the outer Wing cap's east/west
+  corner at Y -3.234; the pre-trim shelf ran to +-153.25,
+  i.e. 2.249 past the last cap, ending in a tapering tail —
+  the 153.0..153.25 column held only 3.0 mm³/side).
+- Shelf end: outermost cap extent + 1.30 = X +-152.30 — the
+  project's own cap-gap rule applied at the end face. Each
+  strip is clipped there; the end faces are clean vertical
+  planes. Removed vs pre-trim: 0.95 of X per side (the tail
+  beyond the last key).
+- NOT restored: the hinge round's X+85 latch seat features
+  in the right plateau (slider groove, centring dip, stem
+  web slot). That seat was abolished in the trim round; the
+  band is the plain P0/P1 band there. Audit: the old stem
+  slot box (X 76.2..87.8, Y -62.2..-59.8, Z 10.5..22.5)
+  holds 303.456 mm³ of solid band (it was a through-slot in
+  the hinge round), and the old tray-right receiver pocket
+  box still reads the full 48.300 mm³ of plain fill.
+
+### Latch — disposition
+
+Unchanged from the trim round: seat on the bay north-wall
+rib at stem (12, -62.55), bar collar, mechanism and numbers
+identical (proof below re-reads locked 0.840 engaged /
+entries 0.000 — byte-for-byte the trim round's values, so
+the restored band provably does not touch the latch: the
+slider also reads 0.000 vs the shelf at rest in all 3
+positions, and the closed pairwise suite is 0.000).
+
+### Verification (verify_corr.py, final run)
+
+- Closed: case parts pairwise 0.000 (all 10 parts); case vs
+  internals 0.000 except the two accepted artifacts (J_WING
+  envelope 42.380/side; plunger vs Ø44 probe disc 3.672).
+  Pin fit 0.000. Shelf vs caps (pressed and unpressed)
+  0.000; shelf vs the 1.30 cap keep-outs 0.000.
+- Cap gap at the ends: minimum distance shelf <-> caps
+  (unpressed) = 1.300 overall, and 1.300 to EACH outermost
+  cap — the end faces keep exactly the band's gap rule.
+- Closed cell sweeps (shelf off): exactly the recorded
+  baselines (own spring-fin spaces 175.806 / 176.803 /
+  175.806 + the 0.014 tongue graze).
+- Arc sweep 0..100°, shelf + slider at the EAST ENTRY: no
+  contact with caps (pressed/unpressed), trackpad Ø44, real
+  Fly, real plugged USB-C plug, desk plane, pin or any fixed
+  part; the only contact is the stop at 95.0°, as in the
+  hinge and trim rounds.
+- Open state at 95°: all 3 cells extract with 0.000 vs the
+  open shelf+slider and every fixed part.
+- Invariants: outline 310.04 × 146.07; Z max 22.00; shelf
+  bbox Y min exactly -64.370 (north face flush over the
+  shelf span, deviation 0.000); south unification,
+  slope-free centre step, antenna band, Wing/plate
+  positions unchanged. Centre lid, hinge and latch are
+  untouched geometry from the previous rounds.
