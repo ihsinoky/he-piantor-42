@@ -4,7 +4,7 @@ Parametric FDM keycap replacing the assumed commercial cap (Junana /
 MT165 class, 16.5 mm ±0.25 ASSUMED, physical measurement an open
 print gate). Model: `keycap.py` (build123d); verification:
 `verify_keycaps.py` (full output in
-`.issue296-keycaps-runtime/verify-out.txt`). All 42 keys are 1u —
+`.issue296-keycaps-runtime/verify-out2.txt`, round 2). All 42 keys are 1u —
 verified from the case's caps.json (42 polygons, every one a
 16.5 × 16.5 square at its own angle).
 
@@ -51,21 +51,62 @@ cap-to-cap gap 0.50, D-002's rationale).
 | Cap top z | 11.10 | 11.10 | case Z 22.00 datum preserved |
 | Skirt bottom z | 4.40 | 4.40 | travel max 3.7 + flange 0.50 + 0.20 |
 | Total height | 6.70 | 6.70 | |
-| Volume | 590.7 mm³ | 393.2 mm³ | from the solid |
+| Volume (primary dish) | 553.9 mm³ | 361.7 mm³ | from the solid |
 
 Fixed by the switch: cavity width 14.45 (housing max 14.05 +
 0.20/side for seating play + print tolerance), cavity corner R1.0
 (diagonal clearance +0.283 against an R1.0 housing corner, +0.076
 against R0.5 — the corner radii, not the sides, set the diagonal);
 cavity ceiling z 10.00 (ledge 6.10 + travel 3.7 + 0.20); socket
-ceiling z 10.15 (stem tip 10.10 + 0.05); top wall 0.95 at the rim,
-0.75 at the dish centre.
+ceiling z 10.15 (stem tip 10.10 + 0.05); top wall at the rim land
+1.10 over the cavity ceiling; at the pocket centre see round 2.
 
-Top surface: shallow cylindrical dish, depth 0.20, axis ∥ local Y
-(the finger travels along the column), 0.30 chamfer on the top
-perimeter, plan corner radius R2.0, vertical skirt — the plan
-outline stays inside the 16.5 square the case verified. Legends:
-**blank** (legend process is a separate open item).
+Top surface: cylindrical pocket, axis ∥ local Y (curving in X, so
+the finger reads its left-right position), inside a rim land that
+stays at TOP_Z — round 2 below. 0.30 chamfer on the top perimeter
+(the pocket boundary is deliberately NOT chamfered: it is the edge
+the finger reads), plan corner radius R2.0, vertical skirt — the
+plan outline stays inside the 16.5 square the case verified.
+Legends: **blank** (legend process is a separate open item).
+
+### Round 2 — dish rework for the Junana feel (PO 2026-11-22)
+The PO's stated Junana likes: a cylindrical dish in which the
+left-right position is graspable, and a dish radius that fits the
+finger. Round 1 had the right axis but depth 0.20 over the full
+16.5 width → R 170, edge slope 2.8°, and no rim: nearly flat, and
+its depth only 2× the FDM Z tolerance (±0.10). Junana publishes
+no R/depth, so the targets are derived from fingertip geometry:
+the typing contact patch of a finger pad is ≈ 10–12 mm wide; the
+pocket chord (13.50 at 17 mm) admits the pad with ≈ 1 mm spare
+per side, so both pad edges ride the cylinder's rising flanks and
+a lateral offset unbalances slope/pressure left vs right — the
+position cue. The rim land is the boundary the finger reads.
+
+- Rim land **1.50 mm per side** at TOP_Z (pocket half-chord
+  a = W/2 − 1.50; chord 13.50 / 12.50 at 17 / 16 mm). The trough
+  stays open front/back, as a cylinder ∥ Y must.
+- R from the pocket chord and depth, R = (a² + s²)/2s — tens of
+  mm now, not 170.
+- Three depth variants (everything else identical) for a by-feel
+  pick at the print gate:
+
+| Dish depth s | R (17 mm) | R (16 mm) | Edge slope (17 mm) | Wall over socket ceiling | Files |
+|---|---|---|---|---|---|
+| 0.35 (shallow) | 65.3 | 56.0 | 5.9° | 0.60 | `keycap-p{17,16}-dish035` |
+| **0.50 (primary)** | **45.8** | **39.3** | **8.5°** | **0.45** | `keycap-p{17,16}` |
+| 0.60 (deep, capped) | 38.3 | 32.9 | 10.1° | 0.35 | `keycap-p{17,16}-dish060` |
+
+- Wall cap (hard constraint): material over the socket ceiling
+  at the pocket centre = (TOP_Z − s) − 10.15 = 0.95 − s; minimum
+  accepted **0.35** (≈3 layers @0.12 over the 4.24 cross ceiling;
+  over the cavity ceiling the wall is ≥ 0.50 in all variants).
+  An uncapped deep variant at s = 0.80 (R ≈ 28.9) would leave
+  0.15 — rejected; the deep bracket is capped at 0.60. The model
+  asserts the cap. Measured from the solids (verify §6): pocket
+  floors exact (10.75 / 10.60 / 10.50), walls 0.60 / 0.45 / 0.35,
+  rim tops and bbox zmax at 11.100 in every variant — the case
+  Z 22.00 datum is preserved exactly; only the pocket floor
+  lowers, so the shelf stack is untouched.
 
 ### Socket + fit strategy (coupon-calibrated)
 Socket cross opening 4.24 (arm-tip clearance ≥ 0.095/side against
@@ -117,6 +158,12 @@ assumption, stated rather than hidden.
   pressed — the case's Z22.00 datum is preserved exactly. (The
   case's own pressed model used 3.0 travel; this design uses the
   drawing's 3.5 ± 0.2 throughout.)
+- Dish variants (verify §6, from the solids): all three depths ×
+  both pitches are single solids with the pocket floor, rim top
+  and wall over the socket ceiling as tabulated in round 2;
+  sections 1–5 re-run on the primary are unchanged from round 1
+  (gap 0.500, |X| 150.269, shelf remainder +0.409, bottom-out
+  0.000 / 37.861 no-bore).
 
 ## Manufacturability (FDM PETG)
 Print upright (skirt down). Dish prints as the last layers (0.12
@@ -136,13 +183,17 @@ itself leaves ≈ 0 at 16 mm under tolerance. The 17 mm variant has
 no such deficit.
 
 ## Print gate (PO-side; replaces the Junana measurement gate)
-Print the coupon + one 17 mm cap; on a real Jade Pro:
-(a) pick `socket_offset` (seats by hand, pulls off with a puller,
-no cracks) and confirm the cross orientation; (b) boss enters the
-cover bore over the full travel with no contact (paper-drag at
-bottom-out); (c) printed width within ±0.20 of 16.50.
+Print the coupon + one 17 mm cap per dish variant; on a real
+Jade Pro: (a) pick `socket_offset` (seats by hand, pulls off with
+a puller, no cracks) and confirm the cross orientation; (b) boss
+enters the cover bore over the full travel with no contact
+(paper-drag at bottom-out); (c) printed width within ±0.20 of
+16.50; (d) pick the dish depth (0.35 / 0.50 / 0.60) by feel —
+that pick closes the round-2 variant bracket.
 
 ## Open items
+- Dish depth pick (0.35 / 0.50 / 0.60) by feel at the print gate;
+  0.50 is the model's default until then.
 - Pitch decision (D-015) still open — this design is parametric in
   it; the 16 mm wall deficit above is one of its inputs.
 - Legends: blank by design; legend process undecided.

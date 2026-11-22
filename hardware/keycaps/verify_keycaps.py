@@ -247,5 +247,32 @@ print(f" boss bottom at press z = {kc.BOSS_BOTTOM_Z - kc.TRAVEL_MAX:.2f} "
       f"-> bore entry below ledge {kc.LEDGE_Z - (kc.BOSS_BOTTOM_Z - kc.TRAVEL_MAX):.2f} mm")
 print(f" cap top (case Z): rest {10.90 + kc.TOP_Z:.2f}, pressed "
       f"{10.90 + kc.TOP_Z - kc.TRAVEL_MAX:.2f} (datum 22.00 preserved)")
+
+print("=" * 72)
+print("6. DISH VARIANTS (round 2: rim land + deepened pocket, from solids)")
+def _col_segs(cap, x, y=0.0, w=0.1):
+    col = bd.Solid.make_box(w, w, 3.0, bd.Plane(origin=(x - w / 2,
+                                                       y - w / 2, 9.0)))
+    return [(s.bounding_box().min.Z, s.bounding_box().max.Z)
+            for s in cap.intersect(col).solids()]
+for pitch in (17.0, 16.0):
+    W = pitch - kc.GAP_NOMINAL
+    a = W / 2 - kc.RIM_W
+    for s in kc.DISH_VARIANTS:
+        capv = kc.build_cap(pitch, dish_depth=s)
+        centre = _col_segs(capv, 0.0)
+        rim = _col_segs(capv, a + kc.RIM_W / 2)
+        floor_m = max(z1 for _, z1 in centre)
+        wall_m = floor_m - kc.SOCKET_CEIL_Z
+        rim_top = max(z1 for _, z1 in rim)
+        print(f" pitch {pitch:.0f} dish {s:.2f}: R "
+              f"{kc.dish_radius(pitch, s):.1f}, pocket floor measured "
+              f"{floor_m:.3f} (target {kc.TOP_Z - s:.2f}), wall over "
+              f"socket ceiling {wall_m:.3f} (min accepted "
+              f"{kc.MIN_TOP_WALL}) -> "
+              f"{'OK' if wall_m >= kc.MIN_TOP_WALL - 1e-6 else 'FAIL'}, "
+              f"rim top {rim_top:.3f} (TOP_Z {kc.TOP_Z}), bbox zmax "
+              f"{capv.bounding_box().max.Z:.3f}, solids "
+              f"{len(capv.solids())}, vol {capv.volume:.1f}")
 print("=" * 72)
 print("DONE")

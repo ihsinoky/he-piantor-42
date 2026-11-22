@@ -57,6 +57,17 @@ bd.export_stl(_fuse_all(row_caps), os.path.join(OUT, "row-caps.stl"))
 bd.export_stl(_fuse_all(row_sws), os.path.join(OUT, "row-switches.stl"))
 bd.export_stl(plate_slab(6 * 17 + 14, 34), os.path.join(OUT, "row-plate.stl"))
 
+# dish section: three dish variants half-sectioned at y=0 (keep
+# y <= 0), in a row — the XZ profile shows pocket / rim / R.
+half = bd.Solid.make_box(80, 40, 30, bd.Plane(origin=(-40, -40, -2)))
+secs = []
+for i, s in enumerate(kc.DISH_VARIANTS):
+    loc = bd.Location(bd.Vector((i - 1) * 21.0, 0, 0))
+    for p in kc.build_cap(17.0, dish_depth=s).intersect(half).solids():
+        secs.append(p.moved(loc))
+bd.export_stl(_fuse_all(secs), os.path.join(OUT, "cap-sections.stl"))
+print("dish sections exported", kc.DISH_VARIANTS)
+
 # in-case: caps at caps.json poses, case frame
 caps = json.load(open(os.path.join(RT, "caps.json")))
 for side in ("left", "right"):
