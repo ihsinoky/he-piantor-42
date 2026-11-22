@@ -1132,6 +1132,73 @@ cover = cut(cover, cyl(-15.5, 64.50, 2.6, 5.0, 23.0))
 cover = cut(cover, shell)
 cover = report("trackpad-cover", cover)
 
+# ================================================================ WING LAP
+# PO 2026-11-22 (corrected referent): the groove is the Wing<->
+# case perimeter slot along each Wing plate's inner edge —
+# measured 9.21 wide x up to 11.55 deep (open to the interior)
+# over Y ~17..66, a tip/valley slot Y -0.4..17, widening to
+# ~10.5 at the SE corner (Y 66..72). Chosen lap (winglap-plan.md):
+# a tray-owned filler rib, top flush at 10.90, ending 0.30 from
+# the plate edge (the south skin's seam idiom), plus a tongue
+# Z 8.65..9.15 reaching 1.50 UNDER the plate edge (plate bottom
+# 9.40) so no tolerance corner opens a through-gap, while the
+# plate's vertical drop-in / lift-out stays exactly as before.
+# Plan geometry comes from the plate top face's OUTER wire only
+# (a clean face, no switch-hole artifacts), dilated/eroded.
+def _outer_face(plate):
+    top = [f for f in plate.faces()
+           if abs(f.center().Z - 10.90) < 0.01][0]
+    w = max(top.wires(), key=lambda ww: ww.length)
+    return bd.Face(w)
+
+
+def _offset_prism(face, d, z0, z1):
+    """Offset-face prism spanning exactly Z z0..z1 (the extrude
+    direction of an offset face is not relied on: the result is
+    normalised by its bounding box)."""
+    sol = None
+    for f in bd.offset(face, d).faces():
+        p = bd.extrude(f, z1 - z0)
+        dz = z0 - p.bounding_box().min.Z
+        p = p.moved(bd.Location((0, 0, dz)))
+        sol = p if sol is None else sol.fuse(p)
+    return sol
+
+
+def build_wing_band(plate, sgn):
+    face = _outer_face(plate)
+    # main band bottom 8.65: it overlaps the tray valley shoulder
+    # (top 8.90) by 0.25 wherever the shoulder runs under the
+    # slot, which is what fuses the rib to the tray; over the
+    # deep stations it is simply a 2.25-tall rib.
+    band = cut(_offset_prism(face, 10.30, 8.65, 10.90),
+               _offset_prism(face, 0.30, 8.65, 10.90))
+    tongue = cut(_offset_prism(face, 0.30, 8.65, 9.15),
+                 _offset_prism(face, -1.50, 8.65, 9.15))
+    b = fuse(band, tongue)
+    # inner-edge mask: Y -0.40..72, west of a diagonal line
+    # ~11.5 east of the plate's inner edge (mirrored for left)
+    if sgn > 0:
+        pts = [(-20.0, -0.40), (34.0, -0.40), (56.0, 72.0),
+               (-20.0, 72.0)]
+    else:
+        pts = [(20.0, -0.40), (-34.0, -0.40), (-56.0, 72.0),
+               (20.0, 72.0)]
+    b = as_solid(b.intersect(prism2d(pts, 8.0, 11.50)))
+    # conform to the neighbouring parts (face contact, no overlap)
+    b = cut(b, shell, infill)
+    return b
+
+
+band_r = build_wing_band(plate_r, +1)
+band_l = build_wing_band(plate_l, -1)
+report("wing-band-right", band_r)
+report("wing-band-left", band_l)
+tray_r = report("tray-right+wingband", fuse(tray_r, band_r))
+tray_l = report("tray-left+wingband", fuse(tray_l, band_l))
+print("tray solids after band fuse: R", len(tray_r.solids()),
+      " L", len(tray_l.solids()))
+
 parts = {
     "tray-left": tray_l, "tray-right": tray_r, "centre-infill": infill,
     "shell-central": shell, "north-shelf": shelf,
