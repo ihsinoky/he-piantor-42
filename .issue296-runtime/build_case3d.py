@@ -333,8 +333,11 @@ def build_plateau(tray, side):
         p = cut(p, box(76.2, 87.8, -62.2, -59.8, 10.5, 22.5))
     return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
 
-strip_r = build_plateau(tray_r, +1)
-strip_l = build_plateau(tray_l, -1)
+# TRIM round (PO 2026-11-22): the band plateaus are NO LONGER
+# BUILT — the shelf's thin extensions toward both Wing ends are
+# omitted ("face matching matters only on the north side").
+# build_plateau above is retained as the historical record of
+# the P0/P1 band design; the shelf is the cover alone (below).
 
 # ================================================================ SHELL REVISION (PO profile)
 # Centre + south go to plate height 10.90. (B) PO 2026-11-22: the
@@ -543,8 +546,10 @@ tray_r = cut(tray_r, plate_r)
 tray_l = fuse(tray_l, boss_l)
 tray_l = cut(tray_l, plate_l)
 # (A) hinge round: the four heat-set insert holes are ABOLISHED
-# with the screw fixing — the bosses stay as plain geometry
-# (-85 plain, +85 hosts the latch receiver, HINGE + LATCH below).
+# with the screw fixing — the bosses stay as plain geometry.
+# TRIM round: +85 hosted the latch receiver in the hinge round;
+# the latch moved to the bay north rib (LATCH, RELOCATED below)
+# and the +85 boss is plain again, like -85.
 tray_r = report("tray-right+bosses", tray_r)
 tray_l = report("tray-left+bosses", tray_l)
 
@@ -765,11 +770,14 @@ infill = report("infill+chamfer", infill)
 
 # ================================================================ EXPORTS
 # PO 2026-11-21: the lid is INTEGRAL with the north band — one
-# removable north shelf; battery swap = remove the shelf, swap
-# cells, refit. Replaces battery-cover + strip-left + strip-right
-# (11 -> 9 parts). The shell keeps the centre slope; the shelf's
-# centre south edge (Y -0.37) meets the slope's top edge.
-shelf = report("north-shelf", fuse(cover, strip_l, strip_r))
+# north shelf (11 -> 9 parts). TRIM round (PO 2026-11-22): the
+# shelf is the COVER ALONE — the band plateaus toward both Wing
+# ends are omitted; the shelf spans the lid span |X| <= 30.25
+# (plus its skirts over the bay sills, which are cover parts).
+# The end faces are the cover's own faces at X +-30.25. The
+# north face stays flush at Y -64.37 over the shelf's span,
+# top at the keytop datum 22.00.
+shelf = report("north-shelf", cover)
 
 # ============================================================ HINGE + LATCH (A)
 # PO 2026-11-22, battery-swap idea 2 of the Opus study: the shelf
@@ -867,40 +875,69 @@ for sgn in (+1, -1):
     shelf = cut(shelf, box(xa, xb, -62.37, -61.57, 11.0, 15.35))
 shelf = report("north-shelf+hinge", shelf)
 
-# Latch receiver in tray-right under the +85 boss (line
-# Y = -61.00, stem centre (82, -61)): pocket for the collar,
-# keyhole entries at the two slide positions (stem X 78.2 /
-# 85.8), neck between them. Locked = slider centred: the collar
-# (O4.4) sits in the pocket under the tray top, the stem in the
-# neck — a 1 mm lift test is the proof. Release = slide +-3.8.
-tray_r = cut(tray_r,
-             box(75.0, 89.0, -63.3, -58.7, 9.25, 10.00),
-             cyl(78.2, -61.0, 2.5, 10.00, 10.95),
-             cyl(78.2, -60.7, 2.5, 10.00, 10.95),
-             box(75.7, 80.7, -61.0, -60.7, 10.00, 10.95),
-             cyl(85.8, -61.0, 2.5, 10.00, 10.95),
-             cyl(85.8, -60.7, 2.5, 10.00, 10.95),
-             box(83.3, 88.3, -61.0, -60.7, 10.00, 10.95),
-             box(80.2, 83.8, -62.15, -59.85, 10.00, 10.95))
-tray_r = report("tray-right+latch", tray_r)
+# ============================================================ LATCH, RELOCATED (trim round)
+# TRIM round (PO 2026-11-22): the latch's original seat — slider
+# at X +85 on the right plateau, receiver in tray-right — sat ON
+# the right arm the PO cut removes, so the seat is relocated
+# into the remaining shelf span. The MECHANISM is unchanged
+# (slider in a top groove + stem through a web slot + collar in
+# a pocket under a fixed web, keyhole entries at the two slide
+# positions, PETG centring finger; 1 mm lift test is the proof;
+# release = slide +-3.8). The old receiver cuts in tray-right
+# are REMOVED (the +85 tray area returns to plain fill).
+# New seat (probe_trim*.py): the bay north wall rib inside the
+# lid span (top 15.15, Y -64.37..-62.0, lid underside 15.35).
+# The rib is only ~2.4 wide in Y and the middle-cell face
+# (Y -59.37) is 4.99 from the north face, so the round O4.4
+# collar cannot be pocketed there; the collar becomes a BAR
+# (4.4 in X x 2.2 in Y x 0.75) and the stem narrows to 1.2 in Y.
+# Stem centre (12, -62.55): bar spans Y -63.65..-61.45 (pocket
+# north wall 0.57 of rib face material; cell-face clearance
+# 1.92); the web (rib top 14.15..15.15) retains the bar over a
+# 1.28 Y-chord; the keyhole entries open to the north face so
+# the bar's arc drift (northward, 0.16 by web exit) cannot jam.
+# X = +12, NOT the centre: the wall's middle span (|X| <= 7.5)
+# is capped at 7.80 (the cover skirt's span) and has no web at
+# pocket height — the first build sat the receiver at X 0 and
+# the lift proof read 0.000 (nothing to engage); the rib top
+# 15.15 is measured at |X| 12..20 (probe_trim). The receiver
+# straddles centre-infill (X ..13) and tray-right (13..) — cut
+# from both. The lid stem slot spans the bar's full travel
+# sweep (centre +-6.2) so the bar clears the north skirt.
+shelf = cut(shelf,
+            box(-2.3, 26.3, -63.35, -56.75, 19.8, 22.5),
+            box(11.0, 13.0, -61.25, -59.35, 19.05, 19.8),
+            box(5.8, 18.2, -63.80, -61.80, 12.90, 22.5))
+shelf = report("north-shelf+latch", shelf)
+for _host in ("infill", "tray_r"):
+    _p = infill if _host == "infill" else tray_r
+    _p = cut(_p,
+             box(5.6, 18.4, -63.80, -61.40, 13.30, 14.15),
+             box(5.8, 18.2, -63.25, -61.85, 14.15, 15.20),
+             box(13.4, 18.2, -64.37, -61.40, 14.15, 15.20),
+             box(5.8, 10.6, -64.37, -61.40, 14.15, 15.20))
+    if _host == "infill":
+        infill = report("infill+latch", _p)
+    else:
+        tray_r = report("tray-right+latch", _p)
 
-# Latch slider (new printed part, built at the centred/locked
-# position): body in the plateau groove, grip grooves on top
-# (top stays flush 22.00), stem down the web slot, collar under
-# the tray top. A PETG finger under the body (arm 7 long x 0.6
+# Latch slider (printed part, built at the centred/locked
+# position): body in the lid groove, grip grooves on top (top
+# stays flush 22.00), stem down the web slot, bar collar in the
+# rib pocket. The PETG finger under the body (arm 7 long x 0.6
 # thick, tooth into the groove-floor dip) centres the slider on
 # release — unloaded in the dip (locked), max strain ~1.3% at
-# full travel; return force ~0.5 N against a 0.3 g slider.
-sl = box(72.0, 92.0, -61.3, -55.7, 19.8, 22.0)
-for gx in (75.5, 80.5, 85.5):
-    sl = cut(sl, box(gx, gx + 1.2, -61.3, -55.7, 21.5, 22.5))
-sl = cut(sl, box(81.5, 91.0, -59.5, -58.0, 19.8, 20.7))
+# full travel (as the original site).
+sl = box(2.0, 22.0, -62.85, -57.25, 19.8, 22.0)
+for gx in (5.5, 10.5, 15.5):
+    sl = cut(sl, box(gx, gx + 1.2, -62.85, -57.25, 21.5, 22.5))
+sl = cut(sl, box(11.5, 21.0, -61.05, -59.55, 19.8, 20.7))
 sl = fuse(sl,
-          box(89.5, 92.0, -59.5, -58.0, 19.85, 20.55),
-          box(82.3, 89.5, -59.5, -58.0, 19.90, 20.50),
-          box(81.9, 82.9, -59.5, -58.0, 19.05, 20.00),
-          box(81.0, 83.0, -62.0, -60.0, 9.60, 20.2),
-          cyl(82.0, -61.0, 2.2, 9.30, 10.00))
+          box(19.5, 22.0, -61.05, -59.55, 19.85, 20.55),
+          box(12.3, 19.5, -61.05, -59.55, 19.90, 20.50),
+          box(11.9, 12.9, -61.05, -59.55, 19.05, 20.00),
+          box(11.0, 13.0, -63.15, -61.95, 14.10, 20.2),
+          box(9.8, 14.2, -63.65, -61.45, 13.35, 14.10))
 slider = report("latch-slider", sl)
 
 # Trim the shell by the fixed trays/infill: the (B) flat sheet
