@@ -1,0 +1,37 @@
+========================================================================
+1. MODEL SANITY + WALL (from solids)
+ pitch 17: solids=1 vol=590.7 bbox X -8.250..8.250 Z 4.400..11.086
+   section@z6 wire widths=[0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 12.45, 12.45, 12.5, 12.5, 14.45, 14.45, 16.5, 16.5] (outer W=16.50, cavity 14.45) -> skirt wall analytic 1.025 OK
+ pitch 16: solids=1 vol=393.2 bbox X -7.750..7.750 Z 4.400..11.085
+   section@z6 wire widths=[0.0, 0.0, 0.0, 0.0, 0.07, 0.07, 0.07, 0.07, 0.525, 0.525, 0.525, 0.525, 0.525, 0.525, 0.525, 0.525, 11.5, 11.5, 11.64, 11.64, 11.64, 11.64, 11.64, 11.64] (outer W=15.50, cavity 14.45) -> skirt wall analytic 0.525 BELOW FDM FLOOR 0.8
+========================================================================
+2. SOCKET vs STEM CROSS (drawing: cross 4.00+/-0.05, arms 1.30+/-0.04 / 1.10+/-0.04)
+ cross span 4.24: arm-tip clearance/side vs stem max 4.05 = 0.095; vs stem min 3.95 = 0.145
+ offset -0.05: slotX 1.23 vs arm 1.26..1.34 -> fit +0.11..+0.03 (+ = interference) | slotY 1.03 vs arm 1.06..1.14 -> fit +0.11..+0.03
+ offset +0.00: slotX 1.28 vs arm 1.26..1.34 -> fit +0.06..-0.02 (+ = interference) | slotY 1.08 vs arm 1.06..1.14 -> fit +0.06..-0.02
+ offset +0.05: slotX 1.33 vs arm 1.26..1.34 -> fit +0.01..-0.07 (+ = interference) | slotY 1.13 vs arm 1.06..1.14 -> fit +0.01..-0.07
+ offset +0.10: slotX 1.38 vs arm 1.26..1.34 -> fit -0.04..-0.12 (+ = interference) | slotY 1.18 vs arm 1.06..1.14 -> fit -0.04..-0.12
+ offset +0.15: slotX 1.43 vs arm 1.26..1.34 -> fit -0.09..-0.17 (+ = interference) | slotY 1.23 vs arm 1.06..1.14 -> fit -0.09..-0.17
+ (nominal-only design cannot guarantee the fit: stem tol +/-0.04 against FDM +/-0.20 -> coupon calibration, DESIGN.md)
+========================================================================
+3. PLAN VIEW, REAL POSES (caps.json, 17 mm class)
+ rotation convention: outline rotated by +1 x keys angle (asserted against caps.json polygons)
+ cap-to-cap min distance (designed outline, nominal): 0.500 (pair (1, 6)); nominal gap target 0.50
+ outermost |X| of designed caps: 150.269 (case record with square caps: 151.001; shelf end at 152.30)
+ northern growth term: designed (tol +/-0.20) 0.141 | case's assumed (tol +/-0.25) 0.176
+ shelf stack remainder [designed]: 1.30 - (growth 0.141 + play 0.15 + shelf tol 0.20 + placement 0.30 + plate 0.10) = +0.409  (case record with assumed cap: +0.35)
+ shelf stack remainder [assumed]: 1.30 - (growth 0.176 + play 0.15 + shelf tol 0.20 + placement 0.30 + plate 0.10) = +0.374  (case record with assumed cap: +0.35)
+ cap-to-cap tolerance stack: nominal 0.50, worst-case -0.20 (touch at the extreme corner), RSS-typical +0.09
+========================================================================
+4. 16 mm VARIANT, LOCAL GRID
+ adjacent-pair gap at 16 mm pitch: 0.500 nominal; skirt wall 0.525 < FDM floor 0.8 -> prototype-only (DESIGN.md)
+========================================================================
+5. BOTTOM-OUT (solid intersections, descent = 3.7 worst)
+ cavity corner diagonal clearance: +0.283 vs R1.0 housing corner, +0.076 vs R0.5 (side clearance 0.20)
+ envelope with assumed bore: intersection at rest 0.000 mm^3, at full press 0.000 mm^3
+ envelope NO bore (solid ledge): intersection at rest 0.000 mm^3, at full press 37.861 mm^3
+ cap vs plate at full press: 0.000 mm^3; skirt bottom at press z = 0.70
+ boss bottom at press z = 4.40 -> bore entry below ledge 1.70 mm
+ cap top (case Z): rest 22.00, pressed 18.30 (datum 22.00 preserved)
+========================================================================
+DONE
