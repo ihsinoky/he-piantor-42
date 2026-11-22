@@ -1,0 +1,23 @@
+== F1. wall inner face below the skin ==
+wall inner face at X=0 (Z 0..9.0): 79.700 -> band depth 11.800 (expect 79.700 / 11.800)
+
+== F2. added material vs plate ==
+added material (tray-right): 1 cells, volume 848.2 mm3
+added vs plate-right: intersection 0.000, min distance 0.043 (expect ~0.300)
+
+== F3. arc vs build constants (slab west edge) ==
+  col  58.75: profile 81.693, arc at west edge 58.50: 81.694, diff -0.001
+  col  59.25: profile 81.633, arc at west edge 59.00: 81.634, diff -0.001
+  col  59.75: profile 81.507, arc at west edge 59.50: 81.508, diff -0.001
+  col  60.25: profile 81.308, arc at west edge 60.00: 81.309, diff -0.001
+  col  60.75: profile 81.023, arc at west edge 60.50: 81.024, diff -0.001
+
+== F4. junction step at Xt2 ==
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime/verify_south_fix.py", line 74, in <module>
+    face = dict((x, y) for x, y in probe["tray_face"]["R"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime/verify_south_fix.py", line 74, in <genexpr>
+    face = dict((x, y) for x, y in probe["tray_face"]["R"])
+                           ^^^^
+ValueError: too many values to unpack (expected 2)

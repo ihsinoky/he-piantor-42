@@ -318,26 +318,37 @@ def build_plateau(tray, side):
         p = cut(p, cap_keepout(poly, GAP, 10.5, 22.5))
     # (A) hinge round (PO 2026-11-22): the P0/P1 screw fixing is
     # ABOLISHED — no screw holes, no countersinks, no pry notches.
-    # The shelf is held by the central south-edge hinge + the
-    # X+85 slide latch (HINGE + LATCH section below). On the
-    # right plateau: the latch slider groove, the centring dip
-    # in its floor and the stem web slot.
-    if sgn > 0:
-        # slider groove: X 67.7..96.3 (slider 20 long, travel
-        # +-3.8, end margins), Y -61.8..-55.2, floor Z 19.8
-        p = cut(p, box(67.7, 96.3, -61.8, -55.2, 19.8, 22.5))
-        # centring dip for the slider's finger tooth
-        p = cut(p, box(81.0, 83.0, -59.7, -57.8, 19.05, 19.8))
-        # stem web slot through the plateau: X 76.2..87.8,
-        # Y -62.2..-59.8 (stem 2.0 in X and Y, travel +-3.8)
-        p = cut(p, box(76.2, 87.8, -62.2, -59.8, 10.5, 22.5))
+    # The shelf is held by the central south-edge hinge + ONE
+    # slide latch. The latch's first seat was on THIS plateau
+    # (slider groove X 67.7..96.3, centring dip, stem web slot,
+    # receiver in tray-right at X +85); the trim round abolished
+    # that seat and relocated the latch to the bay north rib at
+    # X +12 (LATCH, RELOCATED below). CORRECTION round: the band
+    # is restored but the X+85 seat is NOT — the plateau is the
+    # plain P0/P1 band, no groove, no dip, no slot.
     return report(f"strip-{'right' if sgn>0 else 'left'} (band)", p)
 
-# TRIM round (PO 2026-11-22): the band plateaus are NO LONGER
-# BUILT — the shelf's thin extensions toward both Wing ends are
-# omitted ("face matching matters only on the north side").
-# build_plateau above is retained as the historical record of
-# the P0/P1 band design; the shelf is the cover alone (below).
+# CORRECTION round (PO 2026-11-22): the band plateaus ARE built
+# again. The trim round cut the shelf back to the cover alone —
+# an overshoot (PMO misread the PO's trim instruction): the PO
+# wanted only the shelf portions at the far east/west ENDS of
+# the keyboard removed, i.e. beyond the outermost keys; the band
+# over the Wing key fields stays, reaching close to the keys.
+# Shelf end (probe_corr.py, from caps.json cap_polys + the
+# pre-trim shelf at 99478610a): the outermost keycap extent is
+# |X| = 151.001 (the outer Wing cap's east/west corner, both
+# sides symmetric); the pre-trim shelf ran to +-153.25. The end
+# is set at the outermost cap extent + 1.30 — the project's own
+# cap-gap rule applied at the end face — X_END = 152.30, a clean
+# vertical face. The strips are clipped there; the cover
+# (|X| <= 30.25) is unaffected.
+SHELF_END = 152.30
+strip_r = cut(build_plateau(tray_r, +1),
+              box(SHELF_END, 200.0, -70.0, 90.0, 0.0, 30.0))
+strip_r = report("strip-right+endclip", strip_r)
+strip_l = cut(build_plateau(tray_l, -1),
+              box(-200.0, -SHELF_END, -70.0, 90.0, 0.0, 30.0))
+strip_l = report("strip-left+endclip", strip_l)
 
 # ================================================================ SHELL REVISION (PO profile)
 # Centre + south go to plate height 10.90. (B) PO 2026-11-22: the
@@ -770,14 +781,16 @@ infill = report("infill+chamfer", infill)
 
 # ================================================================ EXPORTS
 # PO 2026-11-21: the lid is INTEGRAL with the north band — one
-# north shelf (11 -> 9 parts). TRIM round (PO 2026-11-22): the
-# shelf is the COVER ALONE — the band plateaus toward both Wing
-# ends are omitted; the shelf spans the lid span |X| <= 30.25
-# (plus its skirts over the bay sills, which are cover parts).
-# The end faces are the cover's own faces at X +-30.25. The
-# north face stays flush at Y -64.37 over the shelf's span,
+# north shelf (11 -> 9 parts). CORRECTION round (PO 2026-11-22):
+# the shelf is cover + both band plateaus again (the trim
+# round's cover-only shelf overshot the PO's instruction); the
+# bands end at X +-152.30 (outermost keycap extent 151.001 +
+# the 1.30 cap-gap margin), clean vertical end faces — only the
+# portions beyond the outermost keys are removed. The north
+# face stays flush at Y -64.37 over the shelf's span (for
+# |X| > ~118 the north edge follows the tray outline, as built),
 # top at the keytop datum 22.00.
-shelf = report("north-shelf", cover)
+shelf = report("north-shelf", fuse(cover, strip_l, strip_r))
 
 # ============================================================ HINGE + LATCH (A)
 # PO 2026-11-22, battery-swap idea 2 of the Opus study: the shelf

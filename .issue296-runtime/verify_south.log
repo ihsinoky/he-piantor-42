@@ -1,0 +1,48 @@
+== S1. south profile (0.5 mm slabs, full Z) ==
+straight zone |X|<=58.25: min 81.700 max 81.700 (expect 81.700 / 81.700)
+  profile |X|= 50.25: 81.700   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 54.25: 81.700   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 57.25: 81.700   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 58.75: 81.693   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 59.25: 81.633   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 59.75: 81.507   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 60.25: 81.308   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 60.75: 81.023   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+  profile |X|= 61.25: 80.446   (pre-change R1 bottom was 74.286 at 50.25; shoulder peak 81.702 at ~57.75)
+refit diagonal Y = 128.4730 -0.7837|X| -> Xi 59.681, Xt1 58.301
+  arc zone |X|= 58.75: profile 81.693 vs arc 81.675 (diff +0.018)
+  arc zone |X|= 59.25: profile 81.633 vs arc 81.586 (diff +0.047)
+  arc zone |X|= 59.75: profile 81.507 vs arc 81.428 (diff +0.079)
+  arc zone |X|= 60.25: profile 81.308 vs arc 81.193 (diff +0.115)
+arc zone max |diff| (profile is a 0.5-slab max, arc is the centreline value): 0.115
+
+-- shell south edge (R2) --
+  shell |X|=  0.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 10.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 20.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 30.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 38.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 39.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 40.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+  shell |X|= 41.25: 69.7   (expect 69.700; pre-change 69.202 centre / 69.700 corners)
+
+== S2. chamfer (top slab Z 10.85..10.95) ==
+  top-slab southmost |X|=-30.25: 81.25   (chamfer line at slab bottom Z=10.85 gives 81.250)
+  top-slab southmost |X|=  0.25: 81.25   (chamfer line at slab bottom Z=10.85 gives 81.250)
+  top-slab southmost |X|= 30.25: 81.25   (chamfer line at slab bottom Z=10.85 gives 81.250)
+  top-slab southmost |X|= 55.25: 81.25   (chamfer line at slab bottom Z=10.85 gives 81.250)
+
+== S3. band surface / cavity / Main gaps ==
+  band top Z at X=0.0: [10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9] (expect 10.90 throughout Y 70..81.7; pre-change trench floor -0.65 at X=0/30/45)
+  band top Z at X=30.0: [10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9] (expect 10.90 throughout Y 70..81.7; pre-change trench floor -0.65 at X=0/30/45)
+  band top Z at X=45.0: [10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9, 10.9] (expect 10.90 throughout Y 70..81.7; pre-change trench floor -0.65 at X=0/30/45)
+  antenna cavity X=0, Y 70..79.7, Z 0..9.30: material volume 0.000 mm3 (expect 0 = hollow)
+  skin slab X=0, Y 70..79.7, Z 9..11.5: Z range 9.30..10.90 (expect 9.30..10.90)
+  Main south edge Y = 67.900 at X [-33.89, 33.89]
+  wall inner face at X=0: 75.000 -> antenna band depth 7.100 (expect 11.80)
+  Main south edge -> outer line: 13.800 (expect 13.80); shell edge 69.700 -> plan gap 1.800; skin boundary 70.000 -> gap 2.100
+
+== S4. skin joints ==
+  shell <-> centre skin min distance 0.300 (expect 0.300)
+  plate-R <-> skin-R min distance 0.000 (expect ~0.300)
+verify_south done

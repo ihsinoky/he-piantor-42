@@ -1,0 +1,85 @@
+== A. shelf identity + bed fit ==
+shelf solids: 1 (expect 1)
+shelf bbox X -153.25..153.25  Y -64.37..-0.57  Z 8.00..22.00   vol 96.64k mm3
+outline hull: 12 vertices
+bed 220: best slack -15.56 mm at theta 45.00 deg (rotated bbox 235.6 x 235.6)
+bed 256: best slack +20.44 mm at theta 45.00 deg (rotated bbox 235.6 x 235.6)
+bed 300: best slack +64.44 mm at theta 45.00 deg (rotated bbox 235.6 x 235.6)
+
+== B. fixing (row Y -60.37, heat-set inserts) ==
+screw X  +55: insert-hole void in tray   0.000 (expect ~0), shelf hole void   0.000, countersink void   0.000
+          insert min wall in tray material >= 0.00 mm
+screw X  -55: insert-hole void in tray   0.000 (expect ~0), shelf hole void   0.000, countersink void   0.000
+          insert min wall in tray material >= 0.00 mm
+screw X  +85: insert-hole void in tray   0.000 (expect ~0), shelf hole void   0.000, countersink void   0.000
+          boss ring (r4.6 minus hole, plate-trimmed): tray material fraction 0.961 (expect ~1.0)
+screw X  -85: insert-hole void in tray   0.000 (expect ~0), shelf hole void   0.000, countersink void   0.000
+          boss ring (r4.6 minus hole, plate-trimmed): tray material fraction 0.961 (expect ~1.0)
+head X  +55: top Z 22.00 (expect 22.00), undersize rim 1.30 inside face (nominal r2.75 rim 1.25), vs shelf 0.000, vs caps un 0.000, vs caps pr 0.000
+          driver bit O6.35 vs caps un 0.000, pressed 0.000; axis-to-capline 31.90 mm
+head X  -55: top Z 22.00 (expect 22.00), undersize rim 1.30 inside face (nominal r2.75 rim 1.25), vs shelf 0.000, vs caps un 0.000, vs caps pr 0.000
+          driver bit O6.35 vs caps un 0.000, pressed 0.000; axis-to-capline nan mm
+head X  +85: top Z 22.00 (expect 22.00), undersize rim 1.30 inside face (nominal r2.75 rim 1.25), vs shelf 0.000, vs caps un 0.000, vs caps pr 0.000
+          driver bit O6.35 vs caps un 0.000, pressed 0.000; axis-to-capline 20.36 mm
+head X  -85: top Z 22.00 (expect 22.00), undersize rim 1.30 inside face (nominal r2.75 rim 1.25), vs shelf 0.000, vs caps un 0.000, vs caps pr 0.000
+          driver bit O6.35 vs caps un 0.000, pressed 0.000; axis-to-capline nan mm
+
+== C. clearances ==
+shelf <-> caps unpressed: min distance 1.300 mm (expect ~1.30 = nominal gap)
+shelf <-> caps pressed:   min distance 1.300 mm
+shelf vs caps un 0.000 / pressed 0.000 mm3 (expect 0)
+E band: skirt bottom 11.15, plate top 10.90 -> clearance 0.25
+        wing board top 5.90 -> skirt-to-board 5.25
+W band: skirt bottom 11.15, plate top 10.90 -> clearance 0.25
+        wing board top 5.90 -> skirt-to-board 5.25
+shelf vs Wings+underside: 0.000 mm3; shelf vs plates: 0.000 mm3
+plateau underside 11.10 vs plate top 10.90 -> mating gap 0.20 (expect 0.20)
+lid underside 15.35 vs N wall top 15.15 -> mating gap 0.20 (expect 0.20)
+N skirt bottom 8.00 vs capped wall top 7.80 -> mating gap 0.20 (expect 0.20)
+shelf <-> shell min distance 0.200 mm (expect ~0.20 at the centre south edge / slope top edge)
+plunger head bbox X 4.00 (expect O4.00); plunger <-> real O40 module min distance 0.638 (expect 0.64); vs O44 probe disc inter 3.305 mm3
+
+== D. pry notches ==
+notch R: shelf material inside notch box 0.000 (expect 0 = cut applied)
+          shelf material at the flush plane in the notch band: 0.000 (expect 0 = band is on the end edge, face untouched)
+notch L: shelf material inside notch box 0.000 (expect 0 = cut applied)
+          shelf material at the flush plane in the notch band: 0.000 (expect 0 = band is on the end edge, face untouched)
+
+== E. shelf removal trajectory (pure +Z lift, screws removed) ==
++ 2.0: rest of case 0.000  caps unpressed 0.000  caps pressed 0.000  trackpad 0.000  Fly 0.000  plug 0.000  Wings+underside 0.000  Main 0.000  cells 0.000  power board 0.000  switch envelopes 0.000  slide switch env 0.000
++ 5.0: rest of case 0.000  caps unpressed 0.000  caps pressed 0.000  trackpad 0.000  Fly 0.000  plug 0.000  Wings+underside 0.000  Main 0.000  cells 0.000  power board 0.000  switch envelopes 0.000  slide switch env 0.000
++10.0: rest of case 0.000  caps unpressed 0.000  caps pressed 0.000  trackpad 0.000  Fly 0.000  plug 0.000  Wings+underside 0.000  Main 0.000  cells 0.000  power board 0.000  switch envelopes 0.000  slide switch env 0.000
++25.0: rest of case 0.000  caps unpressed 0.000  caps pressed 0.000  trackpad 0.000  Fly 0.000  plug 0.000  Wings+underside 0.000  Main 0.000  cells 0.000  power board 0.000  switch envelopes 0.000  slide switch env 0.000
+
+== F. battery removal sweeps, shelf OFF ==
+cell cx -15 (S): vs case(no shelf)   175.806  vs wings     0.000  (own-fin box   175.806)  vs switch env     0.000
+cell cx  +0 (N): vs case(no shelf)   176.803  vs wings     0.000  (own-fin box   176.803)  vs switch env     0.000
+cell cx +15 (S): vs case(no shelf)   175.806  vs wings     0.000  (own-fin box   175.806)  vs switch env     0.000
+finger zone east (inboard, to X 30.25): vs case(no shelf)   509.080  vs wings     0.000
+finger zone west (inboard, to X 30.25): vs case(no shelf)   509.080  vs wings     0.000
+
+== G. interference table (shelf on) + outline + flatness ==
+case vs Main              :      0.000 mm3
+case vs Wings+underside   :     84.760 mm3
+case vs cells             :      0.000 mm3
+case vs power board       :      0.000 mm3
+case vs Fly               :      0.000 mm3
+case vs trackpad          :      3.305 mm3
+case vs switch envelopes  :      0.000 mm3
+case vs slide switch env  :      0.000 mm3
+-- per-part nonzero detail --
+tray-left    vs Wings+underside   :     42.380 mm3
+tray-right   vs Wings+underside   :     42.380 mm3
+plunger      vs trackpad          :      3.305 mm3
+-- case vs case (nonzero only) --
+assembly bbox X -155.02..155.02 (W 310.04)  Y -64.37..81.70 (D 146.07)  Z -2.65..22.00
+north flatness: max |Ymin - (-64.37)| over |X|<=117: 0.000 mm
+
+== H. Fly / USB ==
+Fly bbox Y -64.37..-55.85 Z 3.25..9.60 -> mouth protrusion +0.00 (0.00 = flush)
+Fly vs shelf 0.000   plug vs shelf 0.000
+plug vs case(no shelf) 0.000   Fly vs tray-right 0.000   Fly vs Wings 0.000
+
+== I. power-board drop re-check (wings NOT seated) ==
+drop sweep vs trays+infill: 12.000 mm3 (expect 12.000 = tongue snap overlaps)
+drop sweep vs tongue boxes only: 12.000 mm3

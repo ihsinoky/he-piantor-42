@@ -1,0 +1,80 @@
+== closed: case parts pairwise ==
+  tray-left x shell-central                                  3.9934 mm3
+  tray-right x latch-slider                                  1.6009 mm3
+  centre-infill x shell-central                              0.2546 mm3
+  pairwise worst: 3.9934
+== closed: case vs internals ==
+  tray-left x main                                           0.0000 mm3
+  tray-left x wings                                         42.3800 mm3
+  tray-left x power board                                    0.0000 mm3
+  tray-left x fly-env                                        0.0000 mm3
+  tray-left x usb-plug-env                                   0.0000 mm3
+  tray-left x trackpad44                                     0.0000 mm3
+  tray-right x main                                          0.0000 mm3
+  tray-right x wings                                        42.3800 mm3
+  tray-right x power board                                   0.0000 mm3
+  tray-right x fly-env                                      38.1259 mm3
+  tray-right x usb-plug-env                                  0.0000 mm3
+  tray-right x trackpad44                                    0.0000 mm3
+  centre-infill x main                                       0.0000 mm3
+  centre-infill x wings                                      0.0000 mm3
+  centre-infill x power board                                0.0000 mm3
+  centre-infill x fly-env                                    0.0000 mm3
+  centre-infill x usb-plug-env                               0.0000 mm3
+  centre-infill x trackpad44                                 0.0000 mm3
+  shell-central x main                                       0.0000 mm3
+  shell-central x wings                                      0.0000 mm3
+  shell-central x power board                                0.0000 mm3
+  shell-central x fly-env                                    0.0000 mm3
+  shell-central x usb-plug-env                               0.0000 mm3
+  shell-central x trackpad44                                 0.0000 mm3
+  north-shelf x main                                         0.0000 mm3
+  north-shelf x wings                                        0.0000 mm3
+  north-shelf x power board                                  0.0000 mm3
+  north-shelf x fly-env                                      0.0000 mm3
+  north-shelf x usb-plug-env                                 0.0000 mm3
+  north-shelf x trackpad44                                   0.0000 mm3
+  plate-left x main                                          0.0000 mm3
+  plate-left x wings                                         0.0000 mm3
+  plate-left x power board                                   0.0000 mm3
+  plate-left x fly-env                                       0.0000 mm3
+  plate-left x usb-plug-env                                  0.0000 mm3
+  plate-left x trackpad44                                    0.0000 mm3
+  plate-right x main                                         0.0000 mm3
+  plate-right x wings                                        0.0000 mm3
+  plate-right x power board                                  0.0000 mm3
+  plate-right x fly-env                                      0.0000 mm3
+  plate-right x usb-plug-env                                 0.0000 mm3
+  plate-right x trackpad44                                   0.0000 mm3
+  plunger-sw1 x main                                         0.0000 mm3
+  plunger-sw1 x wings                                        0.0000 mm3
+  plunger-sw1 x power board                                  0.0000 mm3
+  plunger-sw1 x fly-env                                      0.0000 mm3
+  plunger-sw1 x usb-plug-env                                 0.0000 mm3
+  plunger-sw1 x trackpad44                                   3.6724 mm3
+  light-pipe-dled x main                                     0.0000 mm3
+  light-pipe-dled x wings                                    0.0000 mm3
+  light-pipe-dled x power board                              0.0000 mm3
+  light-pipe-dled x fly-env                                  0.0000 mm3
+  light-pipe-dled x usb-plug-env                             0.0000 mm3
+  light-pipe-dled x trackpad44                               0.0000 mm3
+  latch-slider x main                                        0.0000 mm3
+  latch-slider x wings                                       0.0000 mm3
+  latch-slider x power board                                 0.0000 mm3
+  latch-slider x fly-env                                     0.0000 mm3
+  latch-slider x usb-plug-env                                0.0000 mm3
+  latch-slider x trackpad44                                  0.0000 mm3
+== closed (shelf off): cell extraction sweeps ==
+  cell W (cx -15, spring S): tray-left 175.806, tray-right 0.000, centre-infill 0.000, shell-central 0.000, plate-left 0.000, plate-right 0.000, plunger-sw1 0.000, light-pipe-dled 0.000, wings 0.000, power board 0.014, switch env 0.000
+  cell M (cx +0, spring N): tray-left 9.866, tray-right 0.000, centre-infill 166.937, shell-central 0.000, plate-left 0.000, plate-right 0.000, plunger-sw1 0.000, light-pipe-dled 0.000, wings 0.000, power board 0.014, switch env 0.000
+  cell E (cx +15, spring S): tray-left 0.000, tray-right 115.683, centre-infill 60.123, shell-central 0.000, plate-left 0.000, plate-right 0.000, plunger-sw1 0.000, light-pipe-dled 0.000, wings 0.000, power board 0.014, switch env 0.000
+== hinge pin fit (closed) ==
+  pin x centre-infill                                        0.9425 mm3
+  pin x tray-left                                            0.0000 mm3
+  pin x north-shelf                                          2.8981 mm3
+  rot sanity: shelf at 90 deg: Y -11.9..2.1 Z 16.6..83.1 (north edge should be UP)
+Traceback (most recent call last):
+  File "/home/hatch/workspace/projects/he-piantor-case296b/.issue296-runtime/verify_hinge.py", line 185, in <module>
+    [box(c["x0"], c["x1"], c["y0"], c["y1"],
+         ~^^^^^^
+TypeError: string indices must be integers, not 'str'
