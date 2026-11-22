@@ -615,3 +615,32 @@ Raw logs live in the linked Issues/PRs and are not duplicated here.
   `3d-check.json`, and the Phase C sections of the Issue #228 run report.
 - **Promoted to:** D-037 (PO accepted the qualification limit at the merge
   gate, 2026-11-13).
+
+### F-016 — Jade Pro stem tip is plate + 10.10, not plate + 9.60 (Issue #255 premise corrected)
+
+- **Conclusion:** The stem tip of the Gateron Magnetic Jade Pro HE sits at
+  plate + 10.10 ± 0.15, not plate + 9.60 as derived in Issue #255. The 9.60
+  derivation (11.10 + 3.50 − 5.00) equated the drawing's 11.10 dimension with
+  the stem-block top; 11.10 actually ends at the switch cover ledge, 0.53
+  below the block top (block top = PCB + 11.63). Stem protrusion above the
+  block measures 3.46 ≈ the 3.50 travel figure. Confidence: high for the
+  drawing value.
+- **Conditions tried:** Pixel measurement of the signed switch drawing
+  SPEC-KS-20T-041 at 300 dpi during the Issue #296 keycap design; scale
+  cross-checked on two dimensioned spans in the same view (30.1 px/mm).
+  Recorded as finding F1 in `hardware/keycaps/DESIGN.md` (branch
+  `issue-296-keycaps`).
+- **Validity scope:** Jade Pro drawing value only; physical measurement of a
+  real switch is still pending at the keycap print gate. This entry corrects
+  the Issue #255 premise: the keytop formula becomes plate + 10.10 + q, so
+  any minimum keytop derived from the old premise rises by 0.50; the
+  below-plate stack decomposition in #255 is unaffected. No adopted board or
+  case geometry used 9.60 (the case datum rests on the designed cap top,
+  plate + 11.10), and the designed keycap already uses the corrected value
+  (socket ceiling 10.15), so no design geometry changes.
+- **Evidence:** `hardware/keycaps/DESIGN.md` §F1 (branch
+  `issue-296-keycaps`); correction comment on Issue #255:
+  https://github.com/ihsinoky/he-piantor-42/issues/255#issuecomment-7078689880
+- **Promoted to:** Record correction only — Issue #255 premise corrected by
+  comment (issue body untouched; the study itself stays open) and keycap
+  DESIGN.md F1 dispositioned 2026-11-22. No decision change.
