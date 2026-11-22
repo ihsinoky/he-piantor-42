@@ -108,6 +108,61 @@ Outline 310.04 × 146.07; Z ≤ 22.00; north face flush deviation
 11.8 deep, cavity empty; Wing/plate positions; battery removal
 sweeps and power-board fixing unchanged in the closed state.
 
+## Stage-2 measurements (probe_hinge.py / probe_hinge2.py, 2026-11-22)
+
+- Shelf south edge: only the lid (|X| ≤ 30.25) reaches Y −0.57.
+  Plateau edges: X ±40 → −10.219; ±60 → −29.849; ±100 → −33.313.
+  → A straight hinge axis can only sit on the lid edge line; the
+  spec's ±40/±100 knuckle candidates cannot reach it (arms would
+  sweep the caps/plate). Knuckles go on the lid edge (deviation
+  from the spec's candidate sites, forced by these numbers).
+- No cap solids at |X| < 32 → the open shelf's sweep zone over the
+  centre field is cap-free.
+- Latch zone: plate-right north edge Y −57.2 (X76) .. −58.75 (X89);
+  tray top = 10.90 across X 75..89, Y −63..−59 (except the existing
+  insert hole). Latch line set at Y −61.00 so the collar (Ø4.4,
+  south extent −58.8) clears the plate edge (≥0.45 at X 85.8).
+
+## Design of record for this round (numbers)
+
+- **Axis** A = (Y −0.57, Z 19.30) — the lid's south edge line;
+  knuckle/boss wrap radius 2.70 (top exactly 22.00). Pin Ø2.0,
+  non-magnetic (SUS316/brass); holes Ø2.1 (boss round; shelf
+  knuckle slotted +0.3 in Y per spec).
+- **Per side** (mirrored): tray boss segments X 14..18 and 25..28 —
+  post (Y −2.37..−0.37, Z 4.0..19.3, on the bay south wall) + wrap
+  cylinder + pin hole (outer boss blind, floor X 27.8). Shelf
+  knuckle X 18.3..24.7 (0.3 side play). Shelf notches at the boss
+  spans (X ±0.3): lid-edge notch Y −3.5..+2.4, Z 15.0..22.3; skirt
+  notch Y −2.67..−0.17, Z 10.9..15.6.
+- **Pin** per side: shaft X 13.4..27.6, head flange Ø3.4 at
+  X 12.6..13.4; inserted from the centre (bay side) outward after
+  plate assembly; captive between head and blind hole.
+- **Stopper**: radial lug on the inner boss wrap, centre at
+  rel (dy +1.55, dz −2.94) (world angle −60°), tip r ≈ 3.4; it is
+  contacted by the shelf notch's south wall at θ ≈ 95°. Contact
+  angle tuned numerically in verification (target 95 ± 1°).
+- **Latch** (right side only, per spec): line Y −61.00. Slider
+  (new part) X 72..92, Y −61.3..−55.7, Z 19.8..22.0 in a groove
+  cut into the plateau top (groove X 67.7..96.3, Y −61.8..−55.2);
+  stem X 81..83, Y −62..−60, Z 10.0..19.8 through a web slot
+  (X 76.2..87.8, Y −62.2..−59.8); collar Ø4.4 at (82, −61),
+  Z 9.30..10.00. Receiver (tray): pocket X 75..89, Y −63.3..−58.7,
+  Z 9.25..10.00; entries Ø5.0 elongated +0.3 north at (78.2, −61)
+  and (85.8, −61), Z 10.00..10.95; neck X 80.2..83.8,
+  Y −62.15..−59.85, Z 10.00..10.95. Locked = slider centred
+  (stem in the neck, collar trapped under the tray top); release
+  = slide ±3.8 to either entry. Centring: PETG flexure fingers at
+  both slider ends (arm 10 × 1.1 × 1.8, end-wall ramps 20°,
+  max deflection 1.38, strain ≈ 2.3%, unloaded at centre).
+- **Abolished**: the 4 plateau screw holes + countersinks, the 4
+  tray insert holes, the pry notches. The −85 tray boss stays as
+  plain geometry; the +85 boss hosts the receiver.
+- **(B)**: profile cut flat at 10.90 for Y ≥ −0.37 (trackpad disc
+  exempt); slope sheet replaced by a flat sheet (Z 8.90..10.90,
+  same footprint machinery) restoring any deleted skin; DLED pipe
+  top 14.71 → 10.90.
+
 ## Stages
 
 1. This plan (commit).

@@ -340,13 +340,16 @@ strip_r = build_plateau(tray_r, +1)
 strip_l = build_plateau(tray_l, -1)
 
 # ================================================================ SHELL REVISION (PO profile)
-# Centre + south go to plate height 10.90 with a slope transition from
-# the band: profile (Y,Z) — 22.00 at the bay south wall face (-0.37),
-# linear to 10.90 at Y 20.0, flat 10.90 south of it. Applied as a
+# Centre + south go to plate height 10.90. (B) PO 2026-11-22: the
+# centre slope is REMOVED ("the slope is needless complexity") —
+# the profile is a STEP: flat 10.90 for all Y >= -0.37 (the shell
+# steps straight down from the shelf's south edge). Applied as a
 # Y-Z profile cut over X +-41.5 to shell-central fused with the old
 # strips' south lobes (transferred here). Trackpad island exempted
-# (D-053: keep-disc r 23.5 at (0,48)). DLED hole re-cut afterwards
-# (the slope fuse/cut crosses it); the SW1 hole survives the top cut.
+# (D-053: keep-disc r 23.5 at (0,48)). DLED hole re-cut afterwards;
+# the SW1 hole survives the top cut. (Supersedes the 2026-11-21
+# slope element of the PO profile; the cliff was the PO's allowed
+# fallback in the original text and is now the design.)
 def as_solid(sh):
     if isinstance(sh, (list, bd.ShapeList)):
         ss = [s for s in sh if s is not None and hasattr(s, "volume") and s.volume > 1e-6]
@@ -358,7 +361,7 @@ lobe_l = as_solid(strip_l_old.intersect(box(-30.25, -10.0, -0.37, 30.0, 0.0, 23.
 for lb in (lobe_r, lobe_l):
     if lb is not None:
         shell = fuse(shell, lb)
-prof_pts = [(0, -0.37, 22.00), (0, 20.0, 10.90), (0, 95.0, 10.90),
+prof_pts = [(0, -0.37, 10.90), (0, 95.0, 10.90),
             (0, 95.0, 23.5), (0, -0.37, 23.5)]
 prof_wire = bd.Wire.make_polygon([bd.Vector(*p) for p in prof_pts] +
                                  [bd.Vector(*prof_pts[0])])
@@ -370,17 +373,17 @@ prof_cut = prof_cut.cut(cyl(0.0, 48.0, 23.5, 0.0, 23.5))
 shell_pre = shell
 shell = cut(shell, prof_cut)
 
-# SLOPE SHEET (successor fix, 2026-11-21): the profile cut alone
-# deletes the centre skin wherever its underside (~2.1 under the old
-# ridge top) sits above the new profile — measured hole along the
-# spine |X| <= ~9, Y 6..27, plus the apron widening Y 21..30 and the
-# lobe bands (diag_grid.py vs the Stage-3D shell). Add a sheet whose
-# top IS the profile (2.0 thick), limited to the pre-cut shell's plan
-# footprint (its downward sweep), so the slope surface exists.
+# FLAT SHEET (was SLOPE SHEET, 2026-11-21; flattened by (B)
+# 2026-11-22): the profile cut alone deletes the centre skin
+# wherever its underside sits above 10.90 — the same spine/apron/
+# lobe zones measured for the slope. Add a flat sheet whose top IS
+# the new profile (Z 8.90..10.90, 2.0 thick), limited to the
+# pre-cut shell's plan footprint (its downward sweep), so the
+# 10.90 surface exists everywhere the cut removed it.
 # Zone A |X| <= 22.4 (spine + apron; plate-free). Zone B: the lobe
 # bands 22.4 < |X| <= 30.25, sheet floored at the plate top 10.90
-# (it lands on the plate field, never inside it).
-low_pts = [(0, -0.37, 20.00), (0, 20.0, 8.90), (0, 95.0, 8.90),
+# (zero thickness under the flat profile -> no sheet there).
+low_pts = [(0, -0.37, 8.90), (0, 95.0, 8.90),
            (0, 95.0, 23.5), (0, -0.37, 23.5)]
 low_wire = bd.Wire.make_polygon([bd.Vector(*p) for p in low_pts] +
                                 [bd.Vector(*low_pts[0])])
@@ -483,9 +486,10 @@ plunger = fuse(cyl(-15.5, 64.50, 1.45, 7.2, 10.9),
                cyl(-15.5, 64.50, 2.0, 10.9, 12.1))
 report("plunger", plunger)
 # DLED light pipe: Ø2 rod from above the LED (Main top 5.90) to the
-# shell surface at (-4, 13) — now the centre slope: profile Z at
-# Y=13 is 22 - (13.37)*(11.10/20.37) = 14.71.
-pipe = cyl(-4.0, 13.00, 1.0, 6.4, 14.71)
+# shell surface at (-4, 13) — (B) 2026-11-22: the slope is gone,
+# the surface there is the flat 10.90 field; pipe re-trimmed from
+# 14.71 to 10.90.
+pipe = cyl(-4.0, 13.00, 1.0, 6.4, 10.90)
 report("light-pipe", pipe)
 
 # ================================================================ FLY POCKET (tray-right)
