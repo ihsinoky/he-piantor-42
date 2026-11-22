@@ -1045,14 +1045,23 @@ _wedge = bd.Face(bd.Wire.make_polygon(
     [bd.Vector(0, 67.90, 12.70), bd.Vector(0, 72.00, 8.60),
      bd.Vector(0, 72.00, 20.00), bd.Vector(0, 67.90, 20.00),
      bd.Vector(0, 67.90, 12.70)]))
-cover = cut(cover, bd.extrude(_wedge, 17.0).moved(
-    bd.Location((-17.0, 0, 0))))
+_w = bd.extrude(_wedge, 34.0)
+_wbb = _w.bounding_box()
+_w = _w.moved(bd.Location((-(_wbb.min.X + _wbb.max.X) / 2.0, 0, 0)))
+cover = cut(cover, _w)
 # SW1 plunger notch: Ø5.2 clearance cylinder at the plunger
 # centre through the whole cover (head r2.0 -> 0.60 plan
 # clearance at every height, rest or pressed; the notch opens
 # through the cone, so the head stays side-accessible and
 # pressable exactly as on the open field).
 cover = cut(cover, cyl(-15.5, 64.50, 2.6, 5.0, 23.0))
+# Conform the underside to the finished shell (the project's
+# own idiom, cf. the shell's tray trim): the north ears' flat
+# 10.90 bottoms otherwise cut 2 x 1.750 mm3 into the trimmed
+# island shoulder, which still rises to 11.25 inside r25.6.
+# Face contacts (foot ring, ear seats at the screw points,
+# where the field is a flat 10.90) are zero-volume and stay.
+cover = cut(cover, shell)
 cover = report("trackpad-cover", cover)
 
 parts = {

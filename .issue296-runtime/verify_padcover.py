@@ -191,13 +191,15 @@ cbb = cover.bounding_box()
 print(f"  cover bbox X {cbb.min.X:.2f}..{cbb.max.X:.2f}  "
       f"Y {cbb.min.Y:.2f}..{cbb.max.Y:.2f}  "
       f"Z {cbb.min.Z:.2f}..{cbb.max.Z:.2f}  vol {cover.volume:.1f}")
-# south chamfer: cover top at the south edge column (0, 68.9)
+# south chamfer: cover top at the south edge column (0, 68.9);
+# the 45 deg chamfer line puts the top there at ~12.10 (pin
+# r0.4 reaches Y 68.5, line Z 12.10), vs 12.70 on the ring
 hit = cells_of(cover.intersect(cyl(0.0, 68.9, 0.4, 10.0, 23.0)))
 top_s = max((c.bounding_box().max.Z for c in hit), default=None)
 print(f"  cover top at (0,68.9) [south chamfer zone]: {top_s}")
-hit = cells_of(cover.intersect(cyl(0.0, 67.0, 0.4, 10.0, 23.0)))
+hit = cells_of(cover.intersect(cyl(0.0, 26.5, 0.4, 10.0, 23.0)))
 top_s2 = max((c.bounding_box().max.Z for c in hit), default=None)
-print(f"  cover top at (0,67.0) [ring, expect 12.70]: {top_s2}")
+print(f"  cover top at (0,26.5) [north ring, expect 12.70]: {top_s2}")
 report("cover x shell (face contacts only, expect 0.000)",
        vol(cover.intersect(shell)))
 
