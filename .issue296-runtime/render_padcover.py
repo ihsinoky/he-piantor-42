@@ -39,7 +39,7 @@ def mat(name, color, rough=0.55, metallic=0.0):
     bsdf = m.node_tree.nodes["Principled BSDF"]
     bsdf.inputs["Base Color"].default_value = (*color, 1)
     bsdf.inputs["Roughness"].default_value = rough
-    bsdf.inputs["Metallic"] = metallic
+    bsdf.inputs["Metallic"].default_value = metallic
     return m
 
 

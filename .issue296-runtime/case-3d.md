@@ -1078,3 +1078,135 @@ positions, and the closed pairwise suite is 0.000).
   slope-free centre step, antenna band, Wing/plate
   positions unchanged. Centre lid, hinge and latch are
   untouched geometry from the previous rounds.
+
+---
+
+## Trackpad cover round (PO 2026-11-22: 「トラックパッド周りの
+上蓋も設計して」) — DONE
+
+New part `trackpad-cover` (11th case part): a bezel finishing
+the Cirque module's seat. Plan note:
+`.issue296-runtime/trackpad-cover-plan.md` (committed first,
+0f586b8f7). Probes: probe_padcover{,2,3}.py, probe_boss.py.
+
+### Measured starting state
+
+- Module Ø40 / sensing Ø38, centre (0, 48), top Z 12.70,
+  bottom 11.20, in the Ø44.6 seat (floor 11.10 where the slab
+  is thick, 10.90 patches elsewhere — the floor is NOT
+  uniform). Annular gap r20..r22.3.
+- The keep-disc (r23.5) island exemption left leftovers
+  around the seat: E/W rim bumps at 12.55 (r≈22.5) and a
+  north rise to 15.09 (r22.3..23) — both ABOVE the pad
+  surface, i.e. finger-catching edges around the pad.
+- Field is 10.90 at r≥24 in all directions; the shell south
+  edge (Y 69.70) is only 21.7 from the pad centre, so a full
+  circular foot cannot close toward the south.
+- SW1 plunger: centre (−15.5, +64.50), 22.64 from the pad
+  centre; head Ø4.0 spans pad-radial 20.64..24.64 in the SW
+  sector; stem Ø2.9 Z7.2..10.9, head Z10.9..12.1 on the
+  field. Nearest keycap vertex 48.949 from the pad centre.
+- Shell slab uniformly 10.90/8.90 and continuous at all four
+  candidate screw points (boss/pilot probes).
+
+### Cover geometry (revolved annulus about the pad axis)
+
+Profile (r, Z): window edge r20.20 at 11.25..12.38 →
+0.32×0.32 chamfer to the top ring at (20.52, 12.70) → top
+ring flat at **12.70 = the pad surface (glide step 0.00)**
+out to r23.00 → outer cone 34.7° down to the foot ring at
+(25.60, 10.90) → foot ring on the 10.90 field → underside at
+11.35 (0.25 over the seat floor, 0.10 over the trimmed rim)
+→ inner skirt r20.20..21.00, bottom edge 11.25.
+
+- **Window Ø40.4 (r20.2)**: 0.20 radial clearance from the
+  Ø40 module at EVERY height — the cover never overlaps the
+  module, so it cannot pinch it; the Ø38 sensing disc is
+  fully exposed (cover × sensing disc 0.000). The window
+  edge's 0.32 chamfer sits over the module's outer
+  non-sensing rim only in plan; there is no contact.
+- Bbox X −26.67..26.67, Y 22.40..69.00, Z 10.90..12.70,
+  volume 784.9 mm³. **Cover top Z = 12.70.**
+
+### Fixing (module stays replaceable; no adhesive)
+
+4× M2 flat-head screws FROM ABOVE through ear pads on the
+cover (ears at r22.8..28.2, tangential width 9.0, top 11.90,
+at 30/150/210/330°), Ø2.2 clearance + countersink cone
+(r1.1→1.7, Z11.20..11.90) at r25.5, into NEW shell bosses:
+Ø6.0 cylinders Z7.30..9.60 fused under the slab at the four
+points (22.06, 60.75), (−22.06, 60.75), (22.06, 35.25),
+(−22.06, 35.25), with Ø1.6 pilot holes. Modelled screws:
+shank∩shell engagement 3.73 (south pair) / 3.11 (north
+pair) mm³ > 0 at all four; screw × main/module/plunger/
+cover 0.000; boss bottom 7.30 = 1.40 above the Main top
+(5.90); boss cylinders × tray-left/tray-right/centre-infill
+0.000 (they land in shell material only). Removal: 4 screws
+from above → cover lifts off → module lifts out of its
+seat. The seat opening (X ±3, Y 26..30) and the below-shell
+connector zone are untouched (cover and bosses × zone box
+0.000) — the electrical connection spec stays a separate
+open item, and nothing the cover adds blocks its space.
+
+### Shell changes (shell-central)
+
+1. **Island trim**: shell cut to Z ≤ 11.25 within r25.6 of
+   the pad centre (removes the 12.55 E/W bumps and the
+   ≤15.09 north rise; completes the slope-removal flattening
+   inside the cover footprint; the seat rim becomes a
+   uniform 11.25 max). Audit: shell above 11.25 within
+   r25.6 = 0.000.
+2. The four bosses + pilot holes above.
+3. The cover's underside is conformed to the finished shell
+   (the project's own idiom): the north ears' flat 10.90
+   bottoms otherwise cut 2 × 1.750 mm³ into the trimmed
+   island shoulder (found in the first verify run, fixed).
+
+### South edge and SW1 notch
+
+- The cone foot cannot close toward the south (edge 21.7
+  away), so the cover is clipped at Y 69.00 (0.70 inside the
+  shell edge) with a 45° top chamfer from (67.90, 12.70) to
+  (69.00, 11.60) — verified: cover top at (0, 68.9) = 12.10
+  (the chamfer line), ring at (0, 26.5) = 12.70. Below the
+  chamfer the clipped face drops to the underside (0.35
+  shadow gap over the field = the intended joint line, no
+  upward catch). No south apron (deliberate simplification).
+- **Plunger notch**: Ø5.2 clearance cylinder at the plunger
+  centre through the whole cover — head r2.0 → 0.60 plan
+  clearance at every height; the notch opens through the
+  cone, so the head stays side-accessible and pressable
+  exactly as on the open field. Notch's closest approach to
+  the pad centre 20.04 > module r20 (module edge not
+  exposed).
+
+### Verification (verify_padcover.py + verify_corr.py regression)
+
+- Closed: all 11 case parts pairwise 0.000 (worst 0.0000);
+  case vs internals 0.000 except the accepted artifacts
+  (J_WING envelope 42.380/side; plunger vs Ø44 probe disc
+  3.672 — the probe disc is Ø44, the real Ø40 module reads
+  cover × module 0.000 and module clearance to the seat
+  0.638 as before).
+- Cover × the legacy Ø44 study envelope = 278.44 mm³ —
+  BY DESIGN: filling that annular gap is the cover's job;
+  against the REAL module solid the interference is 0.000.
+- Cover × plunger at rest and pressed (−1.0): 0.000, min
+  distance 0.600. Cover × caps pressed/unpressed: 0.000,
+  min distance 20.541.
+- Hinge arc sweep (shelf + latch slider at east entry,
+  0..100°) vs cover: 0.000. Full verify_corr regression
+  identical to the correction-round baseline (cell sweeps,
+  latch proof 0.840/0.000, stop contact at 95.0° only).
+- Invariants: outline 310.04 × 146.07; Z max 22.00; north
+  face unchanged (the "north of −64.365" probe reads
+  12.1550, identical to the pre-round baseline — the probe
+  plane sits 0.005 inside the nominal face; the shelf was
+  not touched this round).
+
+### Renders
+
+NEW tight centre close-up `files/case296-padcover-closeup.png`
+(pad + bezel + ears + plunger notch, module fitted, cover in
+a contrasting tone); standing top view refreshed
+`files/case296-3d-top.png`. Script: render_padcover.py.
