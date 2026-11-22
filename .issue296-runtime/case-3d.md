@@ -567,3 +567,115 @@ design assumptions — extrusion width ~0.4 (enters only via the
 rim ≥ 1.25 requirement), bed classes 220/256/300, cap size
 tolerance ±0.25. Everything measurable from the model was
 measured (bed fit included, on the final outline).
+
+## South unification — plan A addendum (2026-11-22)
+
+Implementation of the Opus proposal
+`files/case296-south-unify-opus-2026-11-22.md` §3 (plan A, PO
+adoption 2026-11-22), as a new SOUTH UNIFICATION section in
+`build_case3d.py` (after the inserts, before exports). All inputs
+re-measured from the built solids in-build (the north_fill
+pattern). Probes: `probe_south.py` / `probe_shell.py`.
+Verification: `verify_south.py` + `verify_south_fix.py` +
+`verify_south_loc.py`; regression `verify_p0p1.py` unchanged.
+
+### New outline numbers
+
+- Diagonal refit on the built trays (least squares over the tray
+  face, |X| 61..70): Y = 128.2161 − 0.7798|X|. Intersection with
+  Y_S: Xi 59.650 (proposal 59.636). R4.0 tangent points:
+  **Xt1 58.275** (proposal 58.247), **Xt2 60.735** (proposal
+  60.726); arc centre (±58.275, 77.700). S(X): 81.700 straight for
+  |X| ≤ 58.275; arc to (60.735, 80.855); existing diagonal beyond.
+- Post-change profile (0.5 mm slabs on the fused case): straight
+  zone min = max = **81.700**; arc zone matches the built arc to
+  −0.001 at every sampled column (slab west-edge comparison);
+  junction step at Xt2 **+0.023** (arc endpoint vs the pre-change
+  face interpolated at Xt2 — the diagonal-fit residual, recorded).
+- Assembly outline unchanged: **310.04 × 146.07**, Z −2.65..22.00;
+  north flatness deviation 0.000 (north side untouched).
+
+### Per-item disposition (proposal §3)
+
+1. **§3-1 outline S(X)** — DONE as specified. R1 closed: profile
+   at |X| 50.25 = 81.700 (was 74.286; notch depth 7.414 → 0).
+   Shoulder peak 81.702 abolished (clip at S(X)); the −0.88 dip
+   is inside the arc/fill region.
+2. **§3-2 south band** — DONE. Skin Z 9.30..10.90 (1.6 top skin,
+   underside 9.30), top measured flush 10.90 across Y 70..81.7
+   at X = 0/30/45 (was trench floor −0.65). North boundary
+   70.000 for |X| ≤ 41.01 and over the 41..50 run; plate + 0.30
+   beyond — built as station chords, then carved with the plate
+   plan dilated by exactly 0.30 (2D offset of the plate top
+   face): the first build's chords cut across the plate's step
+   corner at |X| ≈ 50 (measured added-material↔plate gap
+   0.043); after the carve the gap is **0.300** with
+   intersection 0.000. Skin split at the part boundaries with
+   exact 0.30 seams (X −6.15..−5.85 and 12.85..13.15). Antenna
+   cavity preserved: material in the trench box (X=0, Y
+   70..79.7, Z 0..9.30) = 0.000; wall inner face (measured
+   below the skin) 79.700 → **band depth 11.800** (Main south
+   edge 67.900); Main plan gaps: shell edge 1.80, skin boundary
+   2.10, outer line 13.80; case vs Main 0.000 (full table).
+3. **§3-3 shell south edge** — DONE, method changed on measured
+   evidence. Probing at 0.25 mm showed the centre face is
+   **69.202** flat for |X| ≤ ~39.25 (the coordinator's 69.288
+   exists only as a ~0.3-wide ridge at |X| ≈ 39.4; corners
+   69.700 from |X| ≈ 39.6). A slice-translate would have copied
+   the step (69.614..69.700), so the edge was built with a
+   face-following fill to exactly **69.700** (prism Z
+   8.90..10.90, 0.30 embed), measured 69.700 at every sampled
+   station |X| ≤ 41.25. Extension actually required: 0.498
+   (not 0.412). Residual: at |X| ≤ ~3.5 the trackpad seat floor
+   (Z 11.10) keeps its own edge at 69.202 above the fill — a
+   0.10-high sliver inside the seat recess under the pad rim;
+   the field edge (the proposal's subject) is the straight
+   69.700 line.
+4. **§3-4 south face by the trays only / infill retreat to
+   79.500** — NOT implemented, with measured reason: neither
+   tray reaches X −6..+13 (tray-left ends at −6.0, tray-right
+   starts at +13.0), so the centre wall segment is necessarily
+   infill-formed; retreating it to 79.500 would open a
+   19.0 × 2.2 through-slot in the south wall. The centre
+   segment stays flush at 81.700 and the C0.5 chamfer runs
+   across it continuously, so the one-line intent holds. The
+   wall butt seams at X = −6/+13 also stay (a 0.30 through-slot
+   in the outer wall would be a hole, not a joint); the 0.30
+   joint rule is applied on the band surface where §3-2/§3-3
+   define joints — shell↔skin 0.300 measured, plate↔skin
+   0.300 measured, skin slice seams 0.30.
+5. **C0.5 chamfer** — DONE along the unified edge: triangular
+   cutter on the straight, annular-cone cutters about the arc
+   centres (keep radius 4.0 @ Z 10.40 → 3.5 @ Z 10.90). Top
+   slab profile (Z 10.85..10.95) reads **81.250** at
+   X = −30/0/+30/+55 = the C0.5 line at the slab bottom.
+   Range scoped to straight + arcs (the proposal's "unified
+   south top edge"); the diagonals beyond Xt2 keep their
+   existing edge, with a ≤0.3 blend where the cone cutter
+   fades at the tangent point.
+6. **Unchanged items** — north side (flatness 0.000; shelf,
+   fixing, cap clearances re-verified identical), Wing
+   positions / δ, wedge groove (skin starts at Y 70.000, the
+   groove is Y < 70), plate seams (plates untouched), Fly/USB
+   (mouth +0.00, plug 0.000 in both shelf states), Z ≤ 22.00.
+
+### Full re-verification (final models)
+
+`verify_p0p1.py` output byte-identical to the pre-change run:
+shelf lift +2/+5/+10/+25 all 0.000; battery sweeps shelf-OFF =
+own-fin boxes exactly (175.806/176.803/175.806); power-board
+drop 12.000; interference table all 0.000 except the two
+accepted artifacts — case vs Wings+underside **84.760 =
+42.380/side** (J_WING study envelope) and plunger vs the Ø44
+probe disc **3.305** (vs the real Ø40 module 0.638 clear);
+case-vs-case no nonzero pairs; shelf↔caps 1.300 both states.
+Note: `verify_south.py` S3's "wall inner face 75.000 / depth
+7.100" line is a contaminated measurement (the skin slab fell
+inside its own probe box) — superseded by `verify_south_fix.py`
+F1 (79.700 / 11.800). F2–F4: plate gap 0.300, arc −0.001,
+junction step +0.023, as above.
+
+Renders: top (north-up, keycaps fitted), persp, persp-open and
+shelf-off refreshed; NEW south-side view
+`files/case296-3d-south.png` — the south wall reads as one
+straight line with a continuous top edge.
